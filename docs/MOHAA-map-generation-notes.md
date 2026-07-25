@@ -898,6 +898,57 @@ Revision 9 artifact fingerprints:
 - source ZIP: 450,472 bytes, SHA-256
   `1EBCE36B4A5534EC36C4DFB479E7199D0CAB252CF7B1209E7954CFFD44589601`
 
+### Lighting study: stock AA and Breakthrough's Monte Cassino
+
+The revision 9 Dust II lighting is structurally wrong even though it is no
+longer black. Its generator sets `ambientlight` to `15 15 16`, `ambient` to
+`42`, `suncolor` to `92 84 68`, and adds 20 warm spawn-area fill lights at
+550 intensity. It also clamps every retained Source point light to at least
+450. Those large omnidirectional fills flatten surfaces, tint the whole level
+tan, and erase the directional contrast that makes stock Medal of Honor maps
+read well.
+
+Stock AA maps do not require one fixed lighting recipe, and `obj_team2` should
+be treated only as a useful data point rather than a target to copy. Across the
+ten retail AA multiplayer sources, median point-light intensities are generally
+between 5 and 80. `obj_team2` has 181 point lights with median 80 and average
+88; `obj_team4` has 176 with median 50 and average 56.8. The AA sources also
+prove that `sundiffuse`, `sundiffusecolor`, `farplane_color`, and low global
+ambient values are valid AA techniques.
+
+The user's Breakthrough reference is almost certainly
+`mp_montecassino_tow.map`, whose worldspawn message is `Monte Cassino`. Its
+distinctive outdoor look is produced by separation of lighting roles:
+
+- warm direct sun: `suncolor "100 60 20"`;
+- cool sky fill: `sundiffusecolor "70 70 90"` with `sundiffuse "1.1"`;
+- low neutral/cool floor: `ambientlight "8 8 10"`;
+- dark violet atmospheric distance:
+  `farplane_color ".036 .024 .036"` at `farplane "4000"`;
+- a dedicated `ep2sky/cassino` sky material;
+- 291 local point lights whose median is only 15 and average is 61.6. Of
+  those, 224 are intensity 20 or lower. Three exceptional 2500-intensity
+  lights exist, but they are special accents rather than the baseline.
+
+The transferable lesson is the warm-sun/cool-shadow relationship, low ambient,
+restrained fixture lights, and a sky/farplane palette designed as part of the
+same scene. Dust II should receive its own AA-compatible profile rather than
+copying either Monte Cassino or `obj_team2`: clear Mediterranean daylight,
+cream-to-neutral direct sun, slightly cool diffuse fill, visible but not black
+shadows, mild distance haze, and warm local lights only where an actual
+fixture or interior requires them. Spawn-following fill lights should be
+removed. Retained Source lights should be selected by purpose and translated
+into the normal AA intensity range instead of being globally clamped to 450.
+
+Breakthrough-only sky assets must not be referenced by an AA package unless
+they are intentionally redistributed. The underlying worldspawn techniques
+are nevertheless AA-compatible because the same keys appear in retail AA map
+sources. The safe approach is to use an AA sky (or a new bundled sky) and
+reproduce the lighting composition with the AA compiler. Lighting changes
+should be compiled as an isolated visual revision and playtested at outdoor
+lanes, deep interiors, transitions, and player-model visibility before any
+geometry changes are mixed in.
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -961,3 +1012,8 @@ Revision 9 artifact fingerprints:
   corrected rectangular AA patch dimension ordering, grade-snapped four rusted
   cars from verified retail TIKI bounds, and validated 296 meshes with eight
   fighting OpenMoHAA bots and eight automated viewpoints.
+- 2026-07-25, lighting study: diagnosed revision 9's oversized global and
+  spawn-fill lights, compared the retail AA multiplayer corpus, identified the
+  Breakthrough reference as Monte Cassino, and recorded an original
+  AA-compatible warm-sun/cool-fill direction for the next Dust II lighting
+  build.
