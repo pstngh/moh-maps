@@ -130,6 +130,11 @@ const targetMaterials = {
     contentFlags: 0,
     surfaceFlags: 0,
   },
+  rock: {
+    texture: "wilderness/wldrrckset1_1",
+    contentFlags: 0,
+    surfaceFlags: 0,
+  },
   floor: {
     texture: "algiers/whsflrset1_1b",
     contentFlags: 0,
@@ -142,6 +147,11 @@ const targetMaterials = {
   },
   wood: {
     texture: "general_structure/beam_wood1",
+    contentFlags: 0,
+    surfaceFlags: 16384,
+  },
+  shutter: {
+    texture: "central_europe/shutter_set2",
     contentFlags: 0,
     surfaceFlags: 16384,
   },
@@ -207,7 +217,8 @@ function materialFor(sourceMaterial) {
   if (/(metal|iron|rust|steel|roof|trim)/.test(material)) return targetMaterials.metal;
   if (/(pipe|vent|duct)/.test(material)) return targetMaterials.pipe;
   if (/(ground|sand|road|floor|tile|step)/.test(material)) return targetMaterials.floor;
-  if (/(rock|stone)/.test(material)) return targetMaterials.stone;
+  if (/rock/.test(material)) return targetMaterials.rock;
+  if (/stone/.test(material)) return targetMaterials.stone;
   if (/(wall|brick|plaster|concrete|crete|temple|resid|siteb)/.test(material)) {
     return targetMaterials.wall;
   }
@@ -523,7 +534,45 @@ function convertSolid(solid, isDetail, stats) {
     stats.displacementPatches += rebuilt.length;
     stats.displacementTriangles += rebuiltTriangles;
     stats.displacementWindingFlipped += rebuiltFlipped;
-    return rebuilt.join("\n");
+
+    // A Source displacement belongs to a backing brush. Emitting only its
+    // curved face leaves the underside and perimeter open in the AA BSP,
+    // exposing sky or the one-sided back of the patch. Preserve the source
+    // brush as a support hull: caulk the displaced base plane and texture
+    // helper-only perimeter faces with the displacement material so exposed
+    // edges remain visually closed.
+    const displacementSideSet = new Set(displacementSides);
+    const supportMaterial = materialFor(
+      value(displacementSides[0].children, "material")
+    );
+    const supportLines = ["{"];
+    for (const side of sides) {
+      const plane = parsePlane(value(side.children, "plane"));
+      if (!plane) {
+        stats.invalid++;
+        return null;
+      }
+      const sourceMaterial = value(side.children, "material");
+      const material = displacementSideSet.has(side)
+        ? targetMaterials.caulk
+        : helperMaterial.test(sourceMaterial)
+          ? supportMaterial
+          : materialFor(sourceMaterial);
+      const detailSuffix =
+        isDetail && material !== targetMaterials.sky
+          ? " +surfaceparm detail"
+          : "";
+      supportLines.push(
+        `${plane.map(formatPoint).join(" ")} ${material.texture} 0 0 0 0.5 0.5 ${
+          material.contentFlags
+        } ${material.surfaceFlags} 0${detailSuffix}`
+      );
+    }
+    supportLines.push("}");
+    stats.converted++;
+    stats.displacementSupports++;
+    if (isDetail) stats.detail++;
+    return `${supportLines.join("\n")}\n${rebuilt.join("\n")}`;
   }
 
   const lines = ["{"];
@@ -547,37 +596,84 @@ function convertSolid(solid, isDetail, stats) {
   return lines.join("\n");
 }
 
-function face(points, materialOrTexture, isDetail = true) {
+function face(
+  points,
+  materialOrTexture,
+  isDetail = true,
+  surfaceParms = ""
+) {
   const material =
     typeof materialOrTexture === "string"
       ? targetByTexture.get(materialOrTexture) || targetMaterials.concrete
       : materialOrTexture;
+  const suffix = [
+    isDetail ? "+surfaceparm detail" : "",
+    surfaceParms,
+  ]
+    .filter(Boolean)
+    .join(" ");
   return `${points.map(formatPoint).join(" ")} ${material.texture} 0 0 0 0.5 0.5 ${
     material.contentFlags
-  } ${material.surfaceFlags} 0${
-    isDetail ? " +surfaceparm detail" : ""
-  }`;
+  } ${material.surfaceFlags} 0${suffix ? ` ${suffix}` : ""}`;
 }
 
-function boxBrush(min, max, material) {
+function boxBrush(min, max, material, surfaceParms = "") {
   const [minX, minY, minZ] = min;
   const [maxX, maxY, maxZ] = max;
   return [
     "{",
-    face([[minX, -16, 16], [minX, 0, 0], [minX, 16, 16]], material),
-    face([[maxX, 16, 16], [maxX, 0, 0], [maxX, -16, 16]], material),
-    face([[16, minY, -16], [0, minY, 0], [16, minY, 16]], material),
-    face([[16, maxY, 16], [0, maxY, 0], [16, maxY, -16]], material),
-    face([[-16, 16, minZ], [0, 0, minZ], [16, 16, minZ]], material),
-    face([[16, 16, maxZ], [0, 0, maxZ], [-16, 16, maxZ]], material),
+    face(
+      [[minX, -16, 16], [minX, 0, 0], [minX, 16, 16]],
+      material,
+      true,
+      surfaceParms
+    ),
+    face(
+      [[maxX, 16, 16], [maxX, 0, 0], [maxX, -16, 16]],
+      material,
+      true,
+      surfaceParms
+    ),
+    face(
+      [[16, minY, -16], [0, minY, 0], [16, minY, 16]],
+      material,
+      true,
+      surfaceParms
+    ),
+    face(
+      [[16, maxY, 16], [0, maxY, 0], [16, maxY, -16]],
+      material,
+      true,
+      surfaceParms
+    ),
+    face(
+      [[-16, 16, minZ], [0, 0, minZ], [16, 16, minZ]],
+      material,
+      true,
+      surfaceParms
+    ),
+    face(
+      [[16, 16, maxZ], [0, 0, maxZ], [-16, 16, maxZ]],
+      material,
+      true,
+      surfaceParms
+    ),
     "}",
   ].join("\n");
 }
 
-function verticalPanelBrush(origin, yaw, width, height, material) {
+function verticalPanelBrush(
+  origin,
+  yaw,
+  width,
+  height,
+  material,
+  thickness = 4,
+  surfaceParms = ""
+) {
   const halfWidth = width / 2;
   const halfHeight = height / 2;
-  const halfThickness = 2;
+  const halfThickness = thickness / 2;
   const quarterTurns = ((Math.round(yaw / 90) % 4) + 4) % 4;
   if (quarterTurns % 2 === 0) {
     return boxBrush(
@@ -591,7 +687,8 @@ function verticalPanelBrush(origin, yaw, width, height, material) {
         origin[1] + halfWidth,
         origin[2] + halfHeight,
       ],
-      material
+      material,
+      surfaceParms
     );
   }
   return boxBrush(
@@ -605,7 +702,8 @@ function verticalPanelBrush(origin, yaw, width, height, material) {
       origin[1] + halfThickness,
       origin[2] + halfHeight,
     ],
-    material
+    material,
+    surfaceParms
   );
 }
 
@@ -615,6 +713,14 @@ function windowDimensions(model) {
   const encodedSize = model.match(/du_window_(\d+)x(\d+)/);
   if (!encodedSize) return null;
   return [Number(encodedSize[1]) * 8, Number(encodedSize[2]) * 8];
+}
+
+function windowBackingDimensions(model) {
+  if (model.includes("du_window_bridge")) return [96, 128];
+  if (model.includes("du_window_palace")) return [240, 160];
+  const encodedSize = model.match(/du_window_(\d+)x(\d+)/);
+  if (!encodedSize) return null;
+  return [Number(encodedSize[1]) * 16, Number(encodedSize[2]) * 16];
 }
 
 function cylinderBrush(origin, minZ, maxZ, radius, material, sides = 8) {
@@ -689,11 +795,13 @@ const stats = {
   displacementPatches: 0,
   displacementTriangles: 0,
   displacementWindingFlipped: 0,
+  displacementSupports: 0,
   displacementSkipped: 0,
   unsupportedPropsSkipped: 0,
   coverBrushes: 0,
   decorBrushes: 0,
   facadePanels: 0,
+  facadeBackings: 0,
   stockProps: 0,
   sourceLights: 0,
   fillLights: 0,
@@ -732,15 +840,30 @@ for (const entity of sourceEntities) {
   let material = targetMaterials.crate;
   const facadeWindow = windowDimensions(model);
   if (facadeWindow) {
+    const facadeBacking = windowBackingDimensions(model);
+    worldBrushes.push(
+      verticalPanelBrush(
+        origin,
+        yaw,
+        facadeBacking[0],
+        facadeBacking[1],
+        targetMaterials.wall,
+        2,
+        "-surfaceparm solid"
+      )
+    );
     worldBrushes.push(
       verticalPanelBrush(
         origin,
         yaw,
         facadeWindow[0],
         facadeWindow[1],
-        targetMaterials.wood
+        targetMaterials.shutter,
+        4,
+        "-surfaceparm solid"
       )
     );
+    stats.facadeBackings++;
     stats.facadePanels++;
     continue;
   } else if (model.includes("du_crate_64x64")) {
@@ -826,7 +949,6 @@ for (const entity of sourceEntities) {
       continue;
     }
     const carOrigin = [...origin];
-    carOrigin[2] -= 28;
     stockPropEntities.push(
       pointEntity("static_vehicle_europe_car-rusted", {
         origin: carOrigin.map(fmt).join(" "),

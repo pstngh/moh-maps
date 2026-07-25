@@ -40,16 +40,19 @@ and related industrial maps:
 - `general_structure/jh_conc512b`
 - `normandy/bunker_conc3`
 - `normandy/bunk_ceiling`
+- `wilderness/wldrrckset1_1`
 - `algiers/whsflrset1_1b`
 - `das_boot/ironwall1`
 - `german/rusty_iron`
+- `central_europe/shutter_set2`
 - stock wood, crate, grate, and pipe materials
 
 The rebuilt version also substitutes a small set of stock AA props for Source
 props that cannot be transferred: four level rusted cars, eight palm trees,
 and one wagon. Crates and cover remain simple generated brushes so their
 collision is deterministic. The 112 omitted Dust facade-window models receive
-simple inset stock-wood panels instead of exposing black or sky-colored holes.
+large inset `bunker_wall` visual backings plus modest stock AA shutter faces
+instead of exposing black or sky-colored holes.
 Unsupported domes, antennas, steeply tilted cars, stone teeth, baskets, tipped
 cans/buckets, and tilted drums are omitted because the available AA stand-ins
 cannot preserve their placement.
@@ -62,26 +65,32 @@ cars. The converter now applies these rules:
 
 - reconstruct all 61 playable displacement grids as 61 midpoint-expanded
   patch meshes;
+- retain the 60 original displacement-bearing brush hulls behind those patches,
+  caulking the displaced base plane and texturing exposed perimeter faces so
+  the patch undersides and boundaries cannot reveal the void;
 - orient MOHAA's one-sided patch winding toward playable air using the source
   solid center;
 - use real `common/caulk` for Source nodraw/helper faces;
 - place generated crates from `origin.z - height / 2`;
-- remove the Source car model-origin offset by lowering level AA car
-  substitutes 28 units;
+- retain Source Z for level AA car substitutes; direct engine inspection and
+  stock `obj_team4` placement both show that the model's raised entity origin
+  is intentional;
 - omit cars with more than five degrees of Source pitch or roll;
 - lower `palm_tree_trunk.mdl` replacements by 536 units for AA's complete palm;
-- back omitted window models with yaw-aligned stock-wood panels;
+- back omitted window models with yaw-aligned non-solid masonry slabs and
+  separately sized `central_europe/shutter_set2` faces;
 - omit unsupported dome and antenna stand-ins;
 - omit tipped clutter instead of replacing it with an upright model.
 
-The corrected final build contains 2,218 ordinary world brushes, 61 terrain
-patches, and 140 entities. Q3map emitted 6,185 brush faces from 6,676 input
-faces with no leak or invalid-brush error. Fast VIS processed 602 clusters,
-1,898 portals, and 2,344 faces, with 549 clusters visible on average. MOHlight
+The corrected final build contains 2,330 ordinary world-brush records, 61
+terrain patches, and 140 entities. Q3map emitted 6,801 brush faces from 7,316
+input faces with no leak or invalid-brush error. Fast VIS processed 599
+clusters, 1,913 portals, and 2,326 faces, with 547 clusters visible on average.
+MOHlight
 lit all 13 retained stock models; its old patch-lighting path reported 22
-non-fatal potential-hash-mismatch warnings. OpenMoHAA loaded 6,124 brush
-faces and 61 meshes from the exact final PK3, generated Recast navigation in
-1.689 seconds, and ran four bots that navigated and fought successfully.
+non-fatal potential-hash-mismatch warnings. OpenMoHAA loaded 6,740 brush faces
+and 61 meshes from the exact final PK3, generated Recast navigation in 2.265
+seconds, and ran eight bots that navigated and fought successfully.
 
 ## Regenerating
 
@@ -118,6 +127,11 @@ Do not compile this map against an empty staging directory. Q3map and MOHlight
 need the retail shader scripts to resolve `common/caulk`, `sky/mohday1`, and
 the stock material flags. Without them, the BSP can compile without a hard
 error but render with a black sky and apparently missing surfaces.
+
+Use a clean, retail-only compile root. A mod-heavy game directory can add
+enough shader and surface definitions to overflow this old toolchain with
+`MAX_SURFACE_INFO`, even though the generated map itself is within the BSP
+limits.
 
 Then package it:
 

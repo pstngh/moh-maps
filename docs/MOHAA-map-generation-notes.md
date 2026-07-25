@@ -759,6 +759,73 @@ Revision 7 artifact fingerprints:
 - PK3: 1,252,297 bytes, SHA-256
   `B18E5C6466ABD7C19B742CF835DA0D48DDE76AE931724CB339BAD21D0C9A5A17`
 
+### Sixth Dust II playtest: displacement backings and layered facades
+
+Eleven more screenshots (`shot0000` through `shot0010`) confirm that revision 7
+made the terrain continuous and restored active bot combat. They also reveal
+the next visual defects:
+
+- the terrain and rock-wall perimeter can still expose black void or brightly
+  shaded undersides because the converter emitted only the displacement skin;
+- `normandy` concrete is a poor substitute for Dust's rough rock boundary;
+- one oversized replacement panel makes the missing facade models obvious,
+  while a small panel alone leaves cream or black gaps around the opening;
+- the revision 7 car correction buries the AA car's wheels.
+
+A Source displacement belongs to a solid. Reconstructing only its displaced
+face loses the brush volume behind the skin, including the side and bottom
+surfaces that close the world wherever the terrain perimeter is visible. The
+revision 8 converter therefore emits the 61 joined midpoint-expanded patches
+and restores the 60 original displacement-bearing brush hulls behind them. The
+displaced base plane is caulked; exposed helper-only perimeter faces use the
+same visible material as the displacement. This keeps the accurate patch
+surface while sealing its underside and boundary.
+
+Facade repair works better as two independent visual layers. The generator now
+places a large, two-unit-thick `general_structure/bunker_wall` backing across
+each of the 112 missing model footprints, then adds a smaller four-unit-thick
+`central_europe/shutter_set2` decorative face. Both are non-solid. The large
+neutral backing closes the unwanted black/cream field without turning the
+entire opening into a giant wooden shutter, while the modest shutter retains
+the architectural cue. Keeping these visual replacements non-solid preserves
+the routes generated from the Source brush layout; eight-bot runtime testing
+confirmed traversal and combat.
+
+The rough terrain boundary now uses `wilderness/wldrrckset1_1`, a stock texture
+family already used by `obj_team2`. This matches the requested AA asset palette
+more closely than bunker concrete.
+
+Direct engine inspection corrected another model-origin assumption. The
+revision 7 `-28` Z adjustment buries the wheels of the AA rusted-car model. A
+retail `obj_team4` placement also keeps this model's entity origin roughly 28
+units above its contact floor, proving that the raised origin is part of the
+model contract rather than a Source offset that should be removed. Revision 8
+retains the Source Z for the four level cars and continues to omit the two
+steeply tilted cars that an upright AA static model cannot reproduce.
+
+Compilation should use a clean retail-only game root. Compiling the same source
+against a mod-heavy installation exhausted the old MOHTools surface table with
+`MAX_SURFACE_INFO`; hardlinking only retail Pak0 through Pak6 into a staging
+root removed the unrelated shader/surface pressure and produced a valid build.
+
+The revision 8 generator emits 2,330 ordinary world-brush records, 61 terrain
+patches, 112 facade backings, 112 decorative shutter panels, and 140 entities.
+Q3map emitted 6,801 brush faces from 7,316 input faces with no leak or invalid
+brush. Fast VIS processed 599 clusters, 1,913 portals, and 2,326 faces, with 547
+clusters visible on average. MOHlight lit all 13 retained stock models and
+reported 22 non-fatal `potential hash mismatch` warnings.
+
+OpenMoHAA 0.82.1 loaded the exact PK3 with 6,740 brush faces and 61 meshes,
+generated Recast navigation in 2.265 seconds, and ran eight bots that navigated
+and killed one another.
+
+Revision 8 artifact fingerprints:
+
+- BSP: 5,565,188 bytes, SHA-256
+  `A82B29231DEC86668ABEADE559F1D0B85A716076997106EF91BFD97D6C7063B5`
+- PK3: 1,303,606 bytes, SHA-256
+  `51604126DEFE362D6E3E2A0E407306622D32BCE29CFA1D26B47CDABF8E3826BB`
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -812,3 +879,8 @@ Revision 7 artifact fingerprints:
   terrain to 61 continuous meshes, backed 112 omitted facade-window props,
   grounded level car substitutions, omitted incompatible tilted cars and
   clutter, and validated the exact PK3 with four fighting OpenMoHAA bots.
+- 2026-07-25, revision 8: analyzed eleven additional screenshots, restored 60
+  displacement support hulls, layered 112 non-solid facade backings with 112
+  decorative shutters, corrected the rock material and car Z placement, used a
+  clean retail compile root, and validated the exact PK3 with eight fighting
+  OpenMoHAA bots.
