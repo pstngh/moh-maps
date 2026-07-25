@@ -29,9 +29,19 @@ bilinear base plane plus `offset + normal * distance`. It inserts arithmetic
 midpoints between neighboring samples and emits one joined MoHAA patch per
 retained displacement face. This makes every Source cell a bilinear Bezier
 span, preventing the quadratic bowing caused by treating raw samples as
-Bezier handles. The 61 patches preserve all 6,944 measured source-grid
-triangles without the void seams produced by touching micro-brushes. The
-result is still not a byte-identical CS2 port.
+Bezier handles. The 61 surface patches preserve all 6,944 measured source-grid
+triangles without the void seams produced by touching micro-brushes.
+
+The surface alone is not enough at a displacement perimeter: displaced edge
+points can move away from the original support hull and expose the void. The
+converter therefore adds 235 quadratic boundary-skirt patches joining every
+moved surface edge back to its undisplaced base edge. Long edges are divided
+at the same Source-cell boundaries as the main mesh. The result has 296 terrain
+meshes in total: 61 measured surfaces plus 235 skirts representing 3,480
+additional sealing triangles. AA's legacy patch parser expects dimensions in
+row-record-first order (`rows columns`); this matters for rectangular skirts
+and was hidden while all earlier patches were square. The result is still not
+a byte-identical CS2 port.
 
 The stock texture palette is drawn from the same families used by MoHAA's V2
 and related industrial maps:
@@ -59,22 +69,29 @@ cannot preserve their placement.
 
 ## Screenshot-driven repairs
 
-The two playtest batches found floating props, visible nodraw rectangles,
-layered displacement supports, missing terrain, triangular voids, and buried
-cars. The converter now applies these rules:
+Successive playtest batches found floating props, visible nodraw rectangles,
+layered displacement supports, missing terrain, triangular voids, buried
+cars, and finally open bands between displaced surfaces and their support
+hulls. The converter now applies these rules:
 
 - reconstruct all 61 playable displacement grids as 61 midpoint-expanded
   patch meshes;
 - retain the 60 original displacement-bearing brush hulls behind those patches,
   caulking the displaced base plane and texturing exposed perimeter faces so
-  the patch undersides and boundaries cannot reveal the void;
+  the patch undersides have a closed volume;
+- add 235 material-matched patch skirts between moved displacement boundaries
+  and their corresponding base-hull edges so neither large wall bands nor
+  small triangular wedges can reveal the void;
 - orient MOHAA's one-sided patch winding toward playable air using the source
   solid center;
 - use real `common/caulk` for Source nodraw/helper faces;
 - place generated crates from `origin.z - height / 2`;
-- retain Source Z for level AA car substitutes; direct engine inspection and
-  stock `obj_team4` placement both show that the model's raised entity origin
-  is intentional;
+- snap the four retained AA car substitutes to the nearest 64-unit local grade
+  when the Source origin is within 32 units of it; the retail
+  `vehicle_car_rusted.tik` Quaked bounds and collision maps both begin at
+  model Z=0, so the entity origin is the contact plane;
+- preserve each retained car's Source pitch, yaw, and roll, and start its
+  generated collision volume at the same grounded entity Z;
 - omit cars with more than five degrees of Source pitch or roll;
 - lower `palm_tree_trunk.mdl` replacements by 536 units for AA's complete palm;
 - back omitted window models with yaw-aligned non-solid masonry slabs and
@@ -82,15 +99,16 @@ cars. The converter now applies these rules:
 - omit unsupported dome and antenna stand-ins;
 - omit tipped clutter instead of replacing it with an upright model.
 
-The corrected final build contains 2,330 ordinary world-brush records, 61
-terrain patches, and 140 entities. Q3map emitted 6,801 brush faces from 7,316
+The corrected final build contains 2,330 ordinary world-brush records, 296
+terrain patches, and 140 entities. Q3map emitted 7,036 brush faces from 7,551
 input faces with no leak or invalid-brush error. Fast VIS processed 599
 clusters, 1,913 portals, and 2,326 faces, with 547 clusters visible on average.
-MOHlight
-lit all 13 retained stock models; its old patch-lighting path reported 22
-non-fatal potential-hash-mismatch warnings. OpenMoHAA loaded 6,740 brush faces
-and 61 meshes from the exact final PK3, generated Recast navigation in 2.265
-seconds, and ran eight bots that navigated and fought successfully.
+MOHlight lit all 13 retained stock models; its old patch-lighting path reported
+58 non-fatal potential-hash-mismatch warnings. OpenMoHAA loaded 6,740 brush
+faces and all 296 meshes from the exact package, stitched 92 patch LoD cracks,
+generated Recast navigation in 3.309 seconds, and ran eight bots that navigated
+and fought successfully. Eight automated viewpoints showed lit continuous
+terrain at the tested routes without the former black boundary bands.
 
 ## Regenerating
 

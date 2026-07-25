@@ -330,6 +330,10 @@ function bilinearPoint(p00, p10, p01, p11, u, v) {
   );
 }
 
+function linearPoint(start, end, amount) {
+  return add(scale(start, 1 - amount), scale(end, amount));
+}
+
 function displacementPatch(
   grid,
   startRow,
@@ -371,6 +375,79 @@ function displacementPatch(
       );
       controlPoints.push(
         `( ${point.map(fmt).join(" ")} ${fmt(column / 2)} ${fmt(row / 2)} )`
+      );
+    }
+    lines.push(`( ${controlPoints.join(" ")} )`);
+  }
+  lines.push(")", "}", "}");
+  return lines.join("\n");
+}
+
+function displacementSkirtPatch(
+  displacedEdge,
+  baseEdge,
+  visibleMaterial,
+  solidCenter
+) {
+  const maxGapSquared = displacedEdge.reduce((maximum, point, index) => {
+    const delta = subtract(point, baseEdge[index]);
+    return Math.max(maximum, dot(delta, delta));
+  }, 0);
+  if (maxGapSquared < 0.25) return null;
+
+  let patchNormal = null;
+  for (let index = 0; index < displacedEdge.length - 1; index++) {
+    const along = subtract(displacedEdge[index + 1], displacedEdge[index]);
+    const across = subtract(baseEdge[index], displacedEdge[index]);
+    patchNormal = normalized(cross(along, across));
+    if (patchNormal) break;
+  }
+  if (!patchNormal) return null;
+
+  const outward = subtract(
+    centroid([...displacedEdge, ...baseEdge]),
+    solidCenter
+  );
+  // As with the main terrain patch, AA draws the side opposite the
+  // mathematical cross-product normal.
+  const reverseColumns = dot(patchNormal, outward) > 0;
+  const controlWidth = 2 * (displacedEdge.length - 1) + 1;
+  const lines = [
+    "{",
+    "patchDef2",
+    "{",
+    visibleMaterial.texture,
+    // MOHAA's legacy parser treats the first dimension as the number of
+    // row records and the second as the points in each row.
+    `( 3 ${controlWidth} 0 0 0 )`,
+    "(",
+  ];
+
+  function sampleEdge(edge, samplePosition) {
+    const first = Math.floor(samplePosition);
+    const second = Math.ceil(samplePosition);
+    return linearPoint(
+      edge[first],
+      edge[second],
+      samplePosition - first
+    );
+  }
+
+  for (let rowOffset = 0; rowOffset < 3; rowOffset++) {
+    const acrossAmount = rowOffset / 2;
+    const controlPoints = [];
+    for (let columnOffset = 0; columnOffset < controlWidth; columnOffset++) {
+      const orientedPosition = columnOffset / 2;
+      const samplePosition = reverseColumns
+        ? displacedEdge.length - 1 - orientedPosition
+        : orientedPosition;
+      const displaced = sampleEdge(displacedEdge, samplePosition);
+      const base = sampleEdge(baseEdge, samplePosition);
+      const point = linearPoint(displaced, base, acrossAmount);
+      controlPoints.push(
+        `( ${point.map(fmt).join(" ")} ${fmt(samplePosition / 2)} ${fmt(
+          acrossAmount
+        )} )`
       );
     }
     lines.push(`( ${controlPoints.join(" ")} )`);
@@ -430,6 +507,7 @@ function displacementBrushes(side, solidCenter) {
       return {
         row: rowIndex,
         column: columnIndex,
+        base,
         point: add(
           base,
           offsets[rowIndex][columnIndex],
@@ -478,7 +556,43 @@ function displacementBrushes(side, solidCenter) {
       );
     }
   }
+  const surfacePatchCount = patches.length;
+  const skirtEdges = [
+    grid[0],
+    grid[gridSize - 1],
+    grid.map((row) => row[0]),
+    grid.map((row) => row[gridSize - 1]),
+  ];
+  let skirtPatchCount = 0;
+  let skirtTriangleCount = 0;
+  for (const edge of skirtEdges) {
+    for (
+      let startIndex = 0;
+      startIndex < edge.length - 1;
+      startIndex += maxSourceSpan
+    ) {
+      const endIndex = Math.min(
+        startIndex + maxSourceSpan,
+        edge.length - 1
+      );
+      const segment = edge.slice(startIndex, endIndex + 1);
+      const skirt = displacementSkirtPatch(
+        segment.map((sample) => sample.point),
+        segment.map((sample) => sample.base),
+        visibleMaterial,
+        solidCenter
+      );
+      if (!skirt) continue;
+      patches.push(skirt);
+      skirtPatchCount++;
+      skirtTriangleCount += 2 * (segment.length - 1);
+    }
+  }
+
+  patches.surfacePatchCount = surfacePatchCount;
+  patches.skirtPatchCount = skirtPatchCount;
   patches.triangleCount = 2 * (gridSize - 1) ** 2;
+  patches.skirtTriangleCount = skirtTriangleCount;
   patches.reversed = reverseColumns;
   return patches;
 }
@@ -514,6 +628,9 @@ function convertSolid(solid, isDetail, stats) {
     const rebuilt = [];
     let rebuiltSides = 0;
     let rebuiltTriangles = 0;
+    let rebuiltSurfacePatches = 0;
+    let rebuiltSkirtPatches = 0;
+    let rebuiltSkirtTriangles = 0;
     let rebuiltFlipped = 0;
     for (const side of displacementSides) {
       const brushes = displacementBrushes(side, center);
@@ -524,6 +641,9 @@ function convertSolid(solid, isDetail, stats) {
       rebuilt.push(...brushes);
       rebuiltSides++;
       rebuiltTriangles += brushes.triangleCount;
+      rebuiltSurfacePatches += brushes.surfacePatchCount;
+      rebuiltSkirtPatches += brushes.skirtPatchCount;
+      rebuiltSkirtTriangles += brushes.skirtTriangleCount;
       if (brushes.reversed) rebuiltFlipped++;
     }
     if (!rebuilt.length) {
@@ -532,7 +652,10 @@ function convertSolid(solid, isDetail, stats) {
     }
     stats.displacementRebuilt += rebuiltSides;
     stats.displacementPatches += rebuilt.length;
+    stats.displacementSurfacePatches += rebuiltSurfacePatches;
+    stats.displacementSkirtPatches += rebuiltSkirtPatches;
     stats.displacementTriangles += rebuiltTriangles;
+    stats.displacementSkirtTriangles += rebuiltSkirtTriangles;
     stats.displacementWindingFlipped += rebuiltFlipped;
 
     // A Source displacement belongs to a backing brush. Emitting only its
@@ -793,7 +916,10 @@ const stats = {
   invalid: 0,
   displacementRebuilt: 0,
   displacementPatches: 0,
+  displacementSurfacePatches: 0,
+  displacementSkirtPatches: 0,
   displacementTriangles: 0,
+  displacementSkirtTriangles: 0,
   displacementWindingFlipped: 0,
   displacementSupports: 0,
   displacementSkipped: 0,
@@ -802,6 +928,7 @@ const stats = {
   decorBrushes: 0,
   facadePanels: 0,
   facadeBackings: 0,
+  carsGroundSnapped: 0,
   stockProps: 0,
   sourceLights: 0,
   fillLights: 0,
@@ -949,10 +1076,15 @@ for (const entity of sourceEntities) {
       continue;
     }
     const carOrigin = [...origin];
+    const gradeZ = Math.round(carOrigin[2] / 64) * 64;
+    if (Math.abs(carOrigin[2] - gradeZ) <= 32) {
+      carOrigin[2] = gradeZ;
+      stats.carsGroundSnapped++;
+    }
     stockPropEntities.push(
       pointEntity("static_vehicle_europe_car-rusted", {
         origin: carOrigin.map(fmt).join(" "),
-        angle: fmt(yaw),
+        angles: [pitch, yaw, roll].map(fmt).join(" "),
         model: "static//vehicle_car_rusted.tik",
         scale: "1.0",
         testanim: "idle",
@@ -960,8 +1092,8 @@ for (const entity of sourceEntities) {
     );
     worldBrushes.push(
       boxBrush(
-        [carOrigin[0] - 70, carOrigin[1] - 32, carOrigin[2] - 24],
-        [carOrigin[0] + 70, carOrigin[1] + 32, carOrigin[2] + 36],
+        [carOrigin[0] - 70, carOrigin[1] - 32, carOrigin[2]],
+        [carOrigin[0] + 70, carOrigin[1] + 32, carOrigin[2] + 60],
         targetMaterials.caulk
       )
     );

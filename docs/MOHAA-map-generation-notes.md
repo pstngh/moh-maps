@@ -826,6 +826,78 @@ Revision 8 artifact fingerprints:
 - PK3: 1,303,606 bytes, SHA-256
   `51604126DEFE362D6E3E2A0E407306622D32BCE29CFA1D26B47CDABF8E3826BB`
 
+### Seventh Dust II playtest: boundary skirts and grade-snapped cars
+
+Seven more screenshots (`shot0011` through `shot0017`) confirm that the
+revision 8 layered facade treatment fixed the empty windows. They also isolate
+two remaining conversion errors:
+
+- cars whose Source origins are about 24 to 29 units above their local grade
+  still visibly float;
+- displacement edges can leave large black wall bands and smaller triangular
+  wedges even though both the displaced patch and original support hull are
+  present.
+
+The second defect is a boundary-connectivity problem. A Source displacement
+starts on a solid face, but its stored offsets and distances can move any
+perimeter sample away from that face's undeformed edge. Restoring the original
+brush hull closes the volume behind the base plane; it does not fill the space
+between a moved patch perimeter and the base perimeter. That explains both the
+large missing-wall-looking spans in `shot0012` through `shot0014` and the
+smaller black rock wedges in `shot0015` and `shot0016`.
+
+Revision 9 emits a material-matched quadratic patch skirt along each moved
+boundary. Every skirt has three control rows: the reconstructed displaced
+edge, arithmetic midpoint controls, and the original base edge. Long edges are
+split at the same maximum eight-Source-cell span used by the main surface.
+Winding is selected relative to the original solid center so the playable side
+is visible. Edges whose displaced and base samples are effectively identical
+are omitted. The 61 measured displacement surfaces require 235 skirts, adding
+3,480 sealing triangles and bringing the runtime terrain total to 296 meshes.
+
+The first skirt compile also exposed a legacy syntax rule that square patches
+had hidden: AA Q3map interprets the first `patchDef2` dimension as the number
+of row records and the second as the number of points in each row. A rectangular
+skirt written as `(17 3)` while supplying three row records fails parsing; the
+correct declaration for those records is `(3 17)`. Generators should treat the
+dimension pair as `(rows columns)`, regardless of conventions used by other
+Q3-family tools.
+
+Direct inspection of retail `models/static/vehicle_car_rusted.tik` corrects
+the revision 8 car-origin inference. Its Quaked bounds are
+`(-128 -56 0) (128 48 96)`, and its collision maps also bottom out at model
+Z=0. The entity origin is therefore the contact plane. Retaining Source car Z
+values of `27.91`, `28.91`, `24`, and `144` necessarily suspends the AA
+replacement. Revision 9 snaps a retained car to the nearest 64-unit grade when
+it is within 32 units, producing Z values `0`, `0`, `0`, and `128`. It
+preserves the small Source pitch, yaw, and roll through the entity `angles`
+key and starts the extra caulk collision volume at the same grounded Z. The
+two cars tilted by more than five degrees remain omitted.
+
+The revision 9 generator emits 2,330 ordinary world-brush records, 61
+midpoint-expanded terrain surfaces, 235 boundary skirts, 112 facade backings,
+112 decorative shutter panels, and 140 entities. Q3map emitted 7,036 brush
+faces from 7,551 input faces with no leak or invalid brush. Fast VIS processed
+599 clusters, 1,913 portals, and 2,326 faces, with 547 clusters visible on
+average. MOHlight lit all 13 retained stock models and reported 58 non-fatal
+`potential hash mismatch` warnings from its old curved-patch lighting path.
+
+OpenMoHAA 0.82.1 loaded the exact package with 6,740 brush faces and all 296
+meshes and stitched 92 patch LoD cracks. It generated Recast navigation in
+3.339 seconds in the first visual run and 3.309 seconds in the final
+clean-retail package run, then ran eight bots. The bots traversed the map and
+killed one another; eight automated viewpoints rendered lit, continuous
+geometry on the sampled routes without the former black boundary bands.
+
+Revision 9 artifact fingerprints:
+
+- BSP: 6,213,732 bytes, SHA-256
+  `47FB6DDED8B3A458B6867CCF53563D24575CB5F995AB435F08E760C03D3CE447`
+- PK3: 1,546,408 bytes, SHA-256
+  `7E0AD4C676091D192458F0EB2B305BEA0B0870F20F9B70221BAE1A18A8F640DD`
+- source ZIP: 450,472 bytes, SHA-256
+  `1EBCE36B4A5534EC36C4DFB479E7199D0CAB252CF7B1209E7954CFFD44589601`
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -884,3 +956,8 @@ Revision 8 artifact fingerprints:
   decorative shutters, corrected the rock material and car Z placement, used a
   clean retail compile root, and validated the exact PK3 with eight fighting
   OpenMoHAA bots.
+- 2026-07-25, revision 9: analyzed seven additional screenshots, sealed all
+  moved displacement boundaries with 235 material-matched patch skirts,
+  corrected rectangular AA patch dimension ordering, grade-snapped four rusted
+  cars from verified retail TIKI bounds, and validated 296 meshes with eight
+  fighting OpenMoHAA bots and eight automated viewpoints.
