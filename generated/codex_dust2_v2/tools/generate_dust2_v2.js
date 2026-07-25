@@ -322,27 +322,42 @@ function bilinearPoint(p00, p10, p01, p11, u, v) {
 function displacementPatch(
   grid,
   startRow,
+  endRow,
   startColumn,
+  endColumn,
   visibleMaterial,
   reverseColumns
 ) {
+  const controlHeight = 2 * (endRow - startRow) + 1;
+  const controlWidth = 2 * (endColumn - startColumn) + 1;
   const lines = [
     "{",
     "patchDef2",
     "{",
     visibleMaterial.texture,
-    "( 3 3 0 0 0 )",
+    `( ${controlWidth} ${controlHeight} 0 0 0 )`,
     "(",
   ];
-  for (let rowOffset = 0; rowOffset < 3; rowOffset++) {
+  for (let rowOffset = 0; rowOffset < controlHeight; rowOffset++) {
     const controlPoints = [];
-    for (let columnOffset = 0; columnOffset < 3; columnOffset++) {
-      const row = startRow + rowOffset;
-      const outputColumn = startColumn + columnOffset;
+    for (let columnOffset = 0; columnOffset < controlWidth; columnOffset++) {
+      const row = startRow + rowOffset / 2;
+      const orientedColumn = startColumn + columnOffset / 2;
       const column = reverseColumns
-        ? grid.length - 1 - outputColumn
-        : outputColumn;
-      const point = grid[row][column].point;
+        ? grid.length - 1 - orientedColumn
+        : orientedColumn;
+      const row0 = Math.floor(row);
+      const row1 = Math.ceil(row);
+      const column0 = Math.floor(column);
+      const column1 = Math.ceil(column);
+      const point = bilinearPoint(
+        grid[row0][column0].point,
+        grid[row0][column1].point,
+        grid[row1][column0].point,
+        grid[row1][column1].point,
+        column - column0,
+        row - row0
+      );
       controlPoints.push(
         `( ${point.map(fmt).join(" ")} ${fmt(column / 2)} ${fmt(row / 2)} )`
       );
@@ -427,13 +442,25 @@ function displacementBrushes(side, solidCenter) {
   // points out of the source solid so the rendered side faces playable air.
   const reverseColumns = dot(patchNormal, outward) > 0;
   const patches = [];
-  for (let rowIndex = 0; rowIndex < gridSize - 1; rowIndex += 2) {
-    for (let columnIndex = 0; columnIndex < gridSize - 1; columnIndex += 2) {
+  const maxSourceSpan = 8;
+  for (let rowIndex = 0; rowIndex < gridSize - 1; rowIndex += maxSourceSpan) {
+    const endRow = Math.min(rowIndex + maxSourceSpan, gridSize - 1);
+    for (
+      let columnIndex = 0;
+      columnIndex < gridSize - 1;
+      columnIndex += maxSourceSpan
+    ) {
+      const endColumn = Math.min(
+        columnIndex + maxSourceSpan,
+        gridSize - 1
+      );
       patches.push(
         displacementPatch(
           grid,
           rowIndex,
+          endRow,
           columnIndex,
+          endColumn,
           visibleMaterial,
           reverseColumns
         )
@@ -547,6 +574,49 @@ function boxBrush(min, max, material) {
   ].join("\n");
 }
 
+function verticalPanelBrush(origin, yaw, width, height, material) {
+  const halfWidth = width / 2;
+  const halfHeight = height / 2;
+  const halfThickness = 2;
+  const quarterTurns = ((Math.round(yaw / 90) % 4) + 4) % 4;
+  if (quarterTurns % 2 === 0) {
+    return boxBrush(
+      [
+        origin[0] - halfThickness,
+        origin[1] - halfWidth,
+        origin[2] - halfHeight,
+      ],
+      [
+        origin[0] + halfThickness,
+        origin[1] + halfWidth,
+        origin[2] + halfHeight,
+      ],
+      material
+    );
+  }
+  return boxBrush(
+    [
+      origin[0] - halfWidth,
+      origin[1] - halfThickness,
+      origin[2] - halfHeight,
+    ],
+    [
+      origin[0] + halfWidth,
+      origin[1] + halfThickness,
+      origin[2] + halfHeight,
+    ],
+    material
+  );
+}
+
+function windowDimensions(model) {
+  if (model.includes("du_window_bridge")) return [56, 64];
+  if (model.includes("du_window_palace")) return [96, 120];
+  const encodedSize = model.match(/du_window_(\d+)x(\d+)/);
+  if (!encodedSize) return null;
+  return [Number(encodedSize[1]) * 8, Number(encodedSize[2]) * 8];
+}
+
 function cylinderBrush(origin, minZ, maxZ, radius, material, sides = 8) {
   const [centerX, centerY] = origin;
   const vertices = Array.from({ length: sides }, (_, index) => {
@@ -623,6 +693,7 @@ const stats = {
   unsupportedPropsSkipped: 0,
   coverBrushes: 0,
   decorBrushes: 0,
+  facadePanels: 0,
   stockProps: 0,
   sourceLights: 0,
   fillLights: 0,
@@ -659,7 +730,20 @@ for (const entity of sourceEntities) {
   let size = null;
   let height = null;
   let material = targetMaterials.crate;
-  if (model.includes("du_crate_64x64")) {
+  const facadeWindow = windowDimensions(model);
+  if (facadeWindow) {
+    worldBrushes.push(
+      verticalPanelBrush(
+        origin,
+        yaw,
+        facadeWindow[0],
+        facadeWindow[1],
+        targetMaterials.wood
+      )
+    );
+    stats.facadePanels++;
+    continue;
+  } else if (model.includes("du_crate_64x64")) {
     size = 64;
     height = 64;
   } else if (model.includes("du_crate_96x96")) {
@@ -690,20 +774,10 @@ for (const entity of sourceEntities) {
     size = 32;
     height = 24;
   } else if (model.includes("stoneblock")) {
-    size = 56;
-    height = 56;
-    material = targetMaterials.stone;
+    stats.unsupportedPropsSkipped++;
+    continue;
   } else if (model.includes("dustteeth_")) {
-    const halfX = 24;
-    const halfY = 14;
-    worldBrushes.push(
-      boxBrush(
-        [origin[0] - halfX, origin[1] - halfY, origin[2]],
-        [origin[0] + halfX, origin[1] + halfY, origin[2] + 36],
-        targetMaterials.stone
-      )
-    );
-    stats.decorBrushes++;
+    stats.unsupportedPropsSkipped++;
     continue;
   } else if (
     model.includes("du_dome_") ||
@@ -747,7 +821,12 @@ for (const entity of sourceEntities) {
     stats.coverBrushes++;
     continue;
   } else if (/models\/props_vehicles\/car\d{3}[a-z]?\.mdl$/i.test(model)) {
+    if (Math.abs(pitch) > 5 || Math.abs(roll) > 5) {
+      stats.unsupportedPropsSkipped++;
+      continue;
+    }
     const carOrigin = [...origin];
+    carOrigin[2] -= 28;
     stockPropEntities.push(
       pointEntity("static_vehicle_europe_car-rusted", {
         origin: carOrigin.map(fmt).join(" "),
@@ -771,10 +850,7 @@ for (const entity of sourceEntities) {
     stats.unsupportedPropsSkipped++;
     continue;
   } else if (model.includes("grainbasket")) {
-    worldBrushes.push(
-      cylinderBrush(origin, origin[2], origin[2] + 44, 24, targetMaterials.wood)
-    );
-    stats.decorBrushes++;
+    stats.unsupportedPropsSkipped++;
     continue;
   }
 

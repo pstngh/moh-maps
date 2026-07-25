@@ -701,6 +701,64 @@ Revision 6 artifact fingerprints:
 - PK3: 1,003,791 bytes, SHA-256
   `BCEBCE2B542CAFD7EA32EC2C04512DDF2F5D95787B112443DC93A065B683B44C`
 
+### Fifth Dust II playtest: quadratic terrain and missing facade props
+
+Eleven follow-up screenshots (`shot0015` through `shot0025`) show that revision
+6 removed the triangular terrain holes, but three defect classes remain:
+
+- rock-wall displacements bow into oversized curtain-like ridges because raw
+  VMF samples were used directly as quadratic Bezier control points;
+- all six AA rusted-car substitutions remain about one Source-origin offset
+  above the ground, and the larger AA silhouette collides visually with nearby
+  crate substitutions;
+- dozens of Source window facade models were omitted, leaving stark black or
+  sky-colored rectangles in otherwise solid masonry.
+
+A quadratic Bezier span does not pass through its middle control point. Using
+three consecutive Source displacement samples as a 3x3 patch therefore changes
+the measured terrain even though the patch edges meet. The better translation
+is to preserve every Source sample as a Bezier endpoint and insert arithmetic
+midpoints between adjacent samples. A 9x9 Source grid becomes a 17x17 patch;
+each individual Source cell is then a bilinear span with no overshoot. This
+also reduces the Dust II terrain from 868 separately lit patches to one joined
+patch per retained displacement face.
+
+The facade analysis also explains many apparent world holes. The reference
+contains 27 `du_window_bridge` props, 13 `du_window_palace` props, and dozens
+of dimension-named Dust window/shutter variants. Their surrounding wall
+brushes were retained but the models themselves were skipped. Simple inset
+stock-wood panels, oriented from each prop yaw and sized from the encoded
+window dimensions, are a safer AA fallback than exposing the outside of the
+map. Unsupported stone teeth, baskets, and loose stone-block stand-ins should
+be omitted until their Source bounds are reproduced.
+
+The final repair lowers level AA car replacements by 28 units and omits the
+two Source cars whose pitch or roll exceeds five degrees. A static AA model
+entity retains yaw but cannot reproduce those cars' steep compound tilt; the
+previous upright substitutions therefore floated and overlapped nearby
+geometry. Four level cars remain.
+
+The corrected build contains 2,218 ordinary world brushes, 61 midpoint-
+expanded terrain patches, 112 facade panels, and 140 entities. Q3map emitted
+6,185 brush faces from 6,676 input faces with no leak or invalid-brush error.
+Fast VIS processed 602 clusters, 1,898 portals, and 2,344 faces, with 549
+clusters visible on average. MOHlight lit all 13 retained stock models. Its
+old patch-lighting path emitted 22 non-fatal `potential hash mismatch`
+warnings.
+
+OpenMoHAA 0.82.1 loaded the exact final PK3 with 6,124 brush faces and 61
+meshes, generated Recast navigation in 1.689 seconds, and ran four bots that
+successfully navigated and killed one another. The runtime screenshot showed
+a continuous floor and stock-wood backing panels in openings that were
+previously black.
+
+Revision 7 artifact fingerprints:
+
+- BSP: 5,212,212 bytes, SHA-256
+  `67F75242F7B3897088C48DE78FE2231046DE090CCB99D4812DFBE4295B616780`
+- PK3: 1,252,297 bytes, SHA-256
+  `B18E5C6466ABD7C19B742CF835DA0D48DDE76AE931724CB339BAD21D0C9A5A17`
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -749,3 +807,8 @@ Revision 6 artifact fingerprints:
   that touching triangle prisms lose faces in AA Q3map, replaced them with 868
   joined and correctly wound patch meshes, omitted unsupported rooftop
   stand-ins, and verified continuous terrain in OpenMoHAA.
+- 2026-07-25, revision 7: analyzed eleven additional screenshots, replaced raw
+  quadratic patch controls with midpoint-expanded bilinear spans, reduced the
+  terrain to 61 continuous meshes, backed 112 omitted facade-window props,
+  grounded level car substitutions, omitted incompatible tilted cars and
+  clutter, and validated the exact PK3 with four fighting OpenMoHAA bots.
