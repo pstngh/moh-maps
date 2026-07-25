@@ -1,0 +1,15 @@
+main:
+
+setcvar "g_obj_alliedtext1" "Codex Cobblestone"
+setcvar "g_obj_alliedtext2" "Castle deathmatch"
+setcvar "g_obj_alliedtext3" "OpenMoHAA bot layout study"
+setcvar "g_obj_axistext1" ""
+setcvar "g_obj_axistext2" ""
+setcvar "g_obj_axistext3" ""
+
+level waittill prespawn
+exec global/DMprecache.scr
+level.script = maps/dm/codex_cobblestone.scr
+level waittill spawn
+
+end

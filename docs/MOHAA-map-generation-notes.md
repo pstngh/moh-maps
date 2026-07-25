@@ -1011,6 +1011,132 @@ Revision 10 artifact fingerprints:
 - source ZIP: 450,874 bytes, SHA-256
   `347B86765F960DB98F98C5CD674C03E1D6903D52CB351F2ECD30B417FB3A2A0E`
 
+## Cobblestone conversion: choosing the tractable CS reference
+
+The decompiled CSGO references make Cobblestone the better next target than
+Cache. The measured VMFs differ substantially:
+
+| Measurement | Cache | Cobblestone |
+| --- | ---: | ---: |
+| File size | 45,755,859 bytes | 12,794,064 bytes |
+| World solids | 13,227 | 3,047 |
+| Total solids | 16,508 | 5,841 |
+| Sides | 99,612 | 37,344 |
+| Displacements | 10,952 | 854 |
+| Entities | 7,643 | 4,229 |
+| Prop instances | 4,170 | 1,246 |
+| Unique prop models | 647 | 135 |
+| Unique materials | 154 | 75 |
+
+Cobblestone is not small by AA standards, but it has roughly one quarter of
+Cache's world brushes and fewer than one tenth as many displacements. It also
+maps naturally onto stock AA stone, timber, roof, cobble, grass, door,
+shutter, and vegetation assets.
+
+### Reading ordinary BSPSource displacement data
+
+The Cobblestone VMF established that BSPSource does not always write
+`vertices_plus`, and an ordinary decompiled `dispinfo` block may omit
+`offsets`. A converter must therefore:
+
+1. intersect the convex backing brush's planes to recover its vertices;
+2. select the four vertices lying on the displacement side;
+3. order the quad from `startposition`;
+4. treat missing offsets as zero vectors;
+5. combine the bilinear base point, per-sample offset, and
+   `normal * distance`;
+6. reverse patch columns when the generated draw side faces into the backing
+   solid.
+
+That reconstruction succeeded for 839 of 840 candidate sides in the full
+experimental mode; one degenerate surface had no usable normal. It produced
+839 visible surface patches. Restricting boundary skirts to traversable
+terrain reduced skirt meshes from 2,273 to 1,231 without removing roof or
+timber surfaces.
+
+The geometry was nevertheless impractical for the original compiler. A
+3,112-patch build and a reduced 2,070-patch build each spent ten minutes in
+Q3map without completing. This is a compiler-scale limit rather than invalid
+VMF data. The reproducible generator retains the curved implementation behind
+`--full-displacements`, while its default first-playable mode renders and
+collides against the original planar backing brushes.
+
+### Q3 portal limits and the structural-shell solution
+
+A planar 2,721-brush import compiled its geometry quickly but failed while
+loading portals:
+
+```text
+LoadPortals: NumVisBytes 2406176 exceeds 2097152
+```
+
+Disabling 1024-unit block chopping increased the failed portal data to
+2,726,120 bytes. A large Source layout cannot let every imported wall and trim
+become a structural Q3 split plane.
+
+The working conversion encloses the playable bounds in six structural
+`sky/mohday1` brushes and flags imported interior geometry as detail. Detail
+brushes retain collision and lightmapped surfaces but do not recursively
+partition visibility. This reduced the final VIS problem to 90 clusters, 161
+portals, and 1,448 bytes of visibility data.
+
+Importing none of the original `func_detail` solids compiled in 126 seconds,
+but engine QA showed conspicuously absent building sections. Importing all
+2,735 caused Q3map to exceed a ten-minute bound. Bounding-box volume was a
+useful first-pass fidelity heuristic:
+
+- below 4,096 cubic units: 364 solids;
+- 4,096–16,383: 454;
+- 16,384–65,535: 696;
+- 65,536–262,143: 561;
+- 262,144–1,048,575: 347;
+- at least 1,048,576: 313.
+
+The selected baseline omits the 1,514 solids below 65,536 cubic units and
+keeps 1,221 larger `func_detail` solids. Q3map completed this 3,938-brush map
+in 323 seconds, emitting 18,610 faces from 19,998 inputs. The threshold is a
+practical initial-build policy, not an art rule: later revisions should bring
+back selected long/thin façade elements by material, model context, or visible
+importance instead of reducing the threshold globally.
+
+### Cobblestone first-playable content and validation
+
+The first compiled revision uses only AA-native assets. Its prop translation
+creates non-solid stone arch/port frames, shutter/door/grate façade panels,
+upright barrel cylinders, hay/coffin/crate cover, and a reduced set of stock
+trees and bushes. The conversion report records:
+
+- 3,140 converted source solids and 840 planarized displacement brushes;
+- 44 neutral DM spawns, 22 Axis spawns, and 22 Allied spawns;
+- 65 translated Source fixture lights and no spawn-following fills;
+- 123 cover brushes, 193 arch or port replacements, and 90 façade panels;
+- 26 stock trees and 48 stock bushes;
+- 1,128 helper-only brushes and 18 distant-skybox brushes omitted.
+
+Lighting follows the warm-direct/cool-fill lesson from the Dust study:
+`ambientlight "9 10 12"`, `suncolor "112 101 84"`,
+`sundiffusecolor "58 65 78"`, and `sundiffuse "1.2"`. Source fixtures are
+translated with `clamp(b * 0.9 + 15, 10, 200)` and
+`overbright_range "0.2"`. Full MOHlight completed in 239 seconds.
+
+OpenMoHAA 0.82.1 loaded the exact final PK3. An initial QA mistake showed that
+`bot_enable` alone does not create bots: the engine requires `sv_maxbots` and
+`sv_numbots`. With both set to eight, bots spawned, moved, fought, traversed
+outdoor grades, and used interior corridors. Eight followed-player
+screenshots confirmed coherent castle walls, roofs, vegetation, exterior and
+interior lighting, and working player collision. Known first-revision visual
+debt remains: planar rather than sculpted terrain, omitted thin trim, and a
+small number of floating or incomplete façade/prop fragments.
+
+Artifact fingerprints:
+
+- BSP: 14,511,848 bytes, SHA-256
+  `8C7404BA4C21B45906D623208845AB7C498BF96662CCA39A4F8F953F9DF3AA7C`
+- PK3: 2,857,786 bytes, SHA-256
+  `C3F0455695E71001948743348C86659033D43512DA6899CDB8BDC3C517A50E7E`
+- source ZIP: 312,239 bytes, SHA-256
+  `BE57F404A38607406E8D9FCC504AF4BE967D89CD490F1DEB9A4A601542586DA4`
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -1084,3 +1210,9 @@ Revision 10 artifact fingerprints:
   lights, translated 25 real Source fixtures into the AA intensity range,
   iterated against two eight-viewpoint OpenMoHAA runs, and validated the exact
   final PK3 with eight fighting bots.
+- 2026-07-25, Cobblestone revision 1: measured Cache versus Cobblestone and
+  selected the smaller reference; added ordinary BSPSource displacement
+  reconstruction; diagnosed patch-time and 2 MiB portal limits; introduced a
+  structural sky shell, planar displacement baseline, and volume-selected
+  detail import; compiled 18,610 faces; and validated the exact final package
+  with eight fighting OpenMoHAA bots across eight followed-player viewpoints.
