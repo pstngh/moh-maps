@@ -1,0 +1,16 @@
+main:
+
+// Scoreboard labels.
+setcvar "g_obj_alliedtext1" "Codex Arena 01"
+setcvar "g_obj_alliedtext2" "Compact bot-friendly deathmatch"
+setcvar "g_obj_alliedtext3" ""
+setcvar "g_obj_axistext1" ""
+setcvar "g_obj_axistext2" ""
+setcvar "g_obj_axistext3" ""
+
+level waittill prespawn
+exec global/DMprecache.scr
+level.script = maps/dm/codex_arena01.scr
+level waittill spawn
+
+end
