@@ -1,20 +1,27 @@
 # MoHAA/OpenMoHAA map generation notes
 
-Living research document — revision 1, 2026-07-24
+Living research document — revision 5, 2026-07-24
+
+## Maintenance rule
+
+This is the canonical living knowledge file for the map-generation work. Every
+map iteration must update it with new format discoveries, compiler behavior,
+runtime results, visual defects, fixes, and reusable production rules. A map
+change is not complete until the corresponding knowledge has been recorded
+here.
 
 ## Goal and current result
 
-The immediate target is an original, compiled Medal of Honor: Allied Assault
-deathmatch map that also plays under OpenMoHAA and is easy for its bots to
-navigate.
+The immediate target is a compiled Medal of Honor: Allied Assault deathmatch
+map that also plays under OpenMoHAA and is easy for its bots to navigate.
 
 That target is now technically proven. `codex_arena01` was generated as text,
 compiled with the original Allied Assault Q3map/VIS/MOHlight tools, loaded by
 OpenMoHAA 0.82.1, and accepted by OpenMoHAA's automatic Recast navigation
 builder.
 
-The delivered map is deliberately an asset-minimal gray-box prototype. It
-proves the production path; it is not yet an art-complete, play-balanced level.
+That path has now produced both an original gray-box arena and a much larger
+Dust II brush-layout study using stock Allied Assault materials and props.
 
 ## Sources inspected
 
@@ -462,6 +469,150 @@ scripts and game assets.
 5. Add a theme, richer materials, soundscape, loading image, and scoreboard art
    only after the gray-box plays well.
 
+## Dust II to V2 translation study
+
+The second generated map tests whether the pipeline can preserve a documented
+layout rather than inventing a small arena. Dust II was selected because its
+route structure is recognizable, its scale is suitable for multiplayer bots,
+and an editor-format VMF could be parsed as a geometric measurement source.
+
+The reference contained 973 world solids and 1,093 entities. Including entity
+brushes, it represented 2,281 solids, 14,462 sides, 69 displacement-bearing
+sides, 20 Terrorist starts, and 20 Counter-Terrorist starts. The converter:
+
+- preserved the original brush planes for the playable world and detail solids;
+- skipped editor-only clips, hints, triggers, areaportals, and helper volumes;
+- removed the distant Source 3D skybox;
+- replaced Source displacements and selected prop cover with simple brushes;
+- mapped every material to a stock MoHAA texture family;
+- translated the Source sky shell to AA's real `sky/mohday1` shader;
+- emitted 20 Axis, 20 Allied, and 40 neutral DM spawn entities;
+- retained useful point lights and added evenly distributed fill lighting.
+
+The corrected AA map contains 2,294 world brushes and 165 entities. Q3map
+produced a version-19 BSP, fast VIS processed 599 clusters and 1,913 portals,
+and MOHlight lit 38 stock static models. OpenMoHAA loaded the packaged map,
+generated its Recast navigation mesh, and accepted two bots into the battle in
+a full-data server smoke test.
+
+This is a measured brush-layout translation, not a byte-identical CS2 port.
+Source and Allied Assault use different BSP capabilities, collision behavior,
+props, displacements, lighting, and player movement. The current CS2 release
+also distributes a compiled `de_dust2.vmap_c`, not the editable source VMF used
+by this experiment. The source VMF and all Valve art assets are excluded from
+the deliverables. The playable package contains only the compiled MoHAA BSP and
+scripts and uses stock MoHAA materials/models at runtime.
+
+### Visual-correctness repair after the first playtest
+
+The first Dust II package passed structural compile, load, and navigation tests
+but failed visually. A user screenshot showed a black sky, large black voids,
+and architecture that appeared to float.
+
+The root cause was the compile environment rather than absent source brushes.
+The BSP had been built against an isolated staging root without the retail
+`Pak0.pk3` shader scripts. Q3map therefore gave named materials default flags:
+`common/caulk` was not treated like stock caulk and the sky substitute was not
+a sky shader. At runtime, hidden-face treatment and the sky no longer agreed
+with what the compiler had encoded, exposing black gaps even though the
+corresponding Source sky shell and brush geometry were present.
+
+Correct production rule:
+
+1. Generate source anywhere convenient.
+2. Run Q3map, VIS, and MOHlight with `-gamedir` pointing to a real retail AA
+   installation containing its normal `main/Pak0.pk3` data.
+3. Package only the generated BSP and scripts; do not redistribute retail PK3s.
+
+The repair also:
+
+- maps Source sky directly to `sky/mohday1`;
+- gives exposed Source nodraw faces a visible stock masonry fallback when they
+  belong to an otherwise visible brush;
+- reserves `common/caulk` for faces and collision brushes that are genuinely
+  safe to hide;
+- restores recognizable silhouette detail with 163 generated decor brushes;
+- substitutes 38 stock AA props: eight palms, six rusted cars, one wagon, and
+  scaled buckets/cans;
+- lowers and strengthens fill lighting while retaining warm V2-style color;
+- narrows prop matching so car parts do not become whole cars and milk cartons
+  do not become full-size buckets.
+
+The final compile reported no leak or invalid-brush error. An in-engine
+live-player screenshot confirmed a rendered sky, continuous floors and walls,
+lit routes, stock vehicles, cover, and architectural detail. The dark
+triangular region seen from the first repaired spectator camera was verified
+from a player spawn to be a lower route in perspective, not a missing surface.
+
+### Second Dust II playtest: displacement and prop-origin defects
+
+A six-screenshot bot playtest exposed defects that the initial spawn-area
+visual check did not cover:
+
+- crates and rusted cars floated above their intended floors;
+- all eight substituted palms were suspended above the skyline;
+- a group of large layered slabs blocked a route;
+- several ground areas showed overlapping triangular strips and z-fighting;
+- isolated black floor gaps remained near displaced terrain;
+- rectangular masonry patches appeared where hidden Source faces should be.
+
+The VMF analysis confirmed 68 retained world solids with displacement faces.
+Copying those solids as ordinary AA brushes exposes the displacement support
+volume rather than the deformed Source surface. Mapping every mixed-solid
+nodraw face to visible masonry made those support sides and other hidden faces
+visible, producing the slab piles, triangular slivers, and rectangular wall
+patches.
+
+The prop defects come from incompatible model origins:
+
+- Dust crate origins are at their vertical centers; generated boxes must start
+  at `origin.z - height / 2`.
+- Source vehicle origins sit roughly 28 units above the ground, while the stock
+  AA rusted-car model expects a ground-level origin.
+- `palm_tree_trunk.mdl` origins are approximately 536 units above the ground
+  because the Source trunk model extends downward from its origin. A complete
+  stock AA palm uses a root origin and therefore needs that offset removed.
+- Most Source cans and buckets are tipped clutter objects. Replacing them with
+  upright AA buckets loses their orientation and should be omitted.
+
+The corrective conversion rule is to rebuild each displacement face as a thin
+convex slab extruded into the original solid, render only its outer face, and
+caulk the inner and edge faces. Regular Source nodraw/helper faces can return to
+real `common/caulk` now that every compile uses the retail shader scripts.
+
+### Corrected-build validation
+
+Revision 5 implemented the rule for all 61 playable displacement faces. The
+generator emitted 2,289 world brushes and 142 entities, skipped no retained
+displacement, omitted 28 unsupported/tipped clutter props, and retained 15
+stock models (eight palms, six rusted cars, and one wagon). Generated crates
+are now bottom-aligned from their center origins; cars are lowered 28 units;
+and Source palm-trunk replacements are lowered 536 units.
+
+The retail-data compile completed without a leak or invalid-brush error. Q3map
+reduced 7,388 input faces to 6,905, fast VIS processed 633 clusters, 2,003
+portals, and 2,490 faces with 550 clusters visible on average, and MOHlight lit
+all 15 retained models. The final BSP is 4,971,888 bytes with SHA-256
+`2CF6FBEA7D8B97282E0AA1A4F80B258529409A1FEF03C011E9DDFC12FB6D8B73`.
+The packaged PK3 is 937,829 bytes with SHA-256
+`645D437B108CDD5CE41892BB42F0A3775D8915DA4BC5B50F0EEBB2132C645667`.
+
+An exact-package OpenMoHAA 0.82.1 dedicated test loaded the three-file PK3,
+built Recast navigation in 0.839 seconds, and admitted two bots into the
+battle. The bot server requires both `sv_maxbots` and `sv_numbots`; `addbot`
+cannot increase the count when `sv_maxbots` remains at its default zero.
+
+Automated visual-QA note: OpenMoHAA's `wait` command advances one command
+buffer frame and ignores a numeric count, so timed capture configs need
+repeated `wait` lines. The `tele` and `face` player events require the latched
+`cheats` cvar. A failed cheat/teleport sweep can still write screenshots from
+the unchanged spawn and must not be counted as coverage of the requested
+coordinates. The successful ordinary-spawn capture showed continuous
+caulk-corrected surfaces and grounded palms, while the displacement and
+prop-origin repairs above were validated structurally and through compile and
+runtime checks; the next human playtest remains the decisive visual check for
+all six reported viewpoints.
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -493,3 +644,14 @@ scripts and game assets.
 - 2026-07-24, revision 2: full-data user playtest confirmed rendering, bot
   spawning, and traversal; recorded the first visual findings and underlighting
   correction target.
+- 2026-07-24, revision 3: measured Dust II brush-layout translator, V2/stock
+  material remap, final BSP/VIS/light compile, 40 neutral DM spawns, and
+  successful OpenMoHAA Recast navigation generation.
+- 2026-07-24, revision 4: diagnosed the black-void playtest failure, required
+  retail shader data during compile, restored real sky and stock props, refined
+  lighting/material fallbacks, and added in-engine visual QA.
+- 2026-07-24, revision 5: analyzed the six-screenshot extended playtest,
+  implemented thin-slab reconstruction for 61 playable displacement faces,
+  restored real caulk, grounded or omitted incompatible prop substitutions,
+  rebuilt the final PK3, and validated exact-package Recast navigation with two
+  bots.

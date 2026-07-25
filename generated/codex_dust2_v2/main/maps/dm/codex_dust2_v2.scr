@@ -1,0 +1,15 @@
+main:
+
+setcvar "g_obj_alliedtext1" "Codex Dust II"
+setcvar "g_obj_alliedtext2" "V2 Facility"
+setcvar "g_obj_alliedtext3" "Layout study for OpenMoHAA bots"
+setcvar "g_obj_axistext1" ""
+setcvar "g_obj_axistext2" ""
+setcvar "g_obj_axistext3" ""
+
+level waittill prespawn
+exec global/DMprecache.scr
+level.script = maps/dm/codex_dust2_v2.scr
+level waittill spawn
+
+end
