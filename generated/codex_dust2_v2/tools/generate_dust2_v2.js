@@ -1126,12 +1126,14 @@ const worldspawn = [
   "{",
   `"classname" "worldspawn"`,
   `"message" "Codex Dust II - V2 Facility"`,
-  `"ambientlight" "15 15 16"`,
-  `"ambient" "42"`,
-  `"suncolor" "92 84 68"`,
-  `"sundirection" "315 58 0"`,
-  `"_color" "1.0 0.92 0.80"`,
-  `"farplane" "12000"`,
+  `"ambientlight" "8 9 11"`,
+  `"suncolor" "135 116 88"`,
+  `"sundirection" "325 225 0"`,
+  `"sundiffusecolor" "58 66 84"`,
+  `"sundiffuse" "1.15"`,
+  `"_color" "1.0 0.94 0.84"`,
+  `"farplane" "8000"`,
+  `"farplane_color" "0.43 0.45 0.48"`,
   ...worldBrushes.map((brush, index) => `// brush ${index}\n${brush}`),
   "}",
 ].join("\n");
@@ -1186,31 +1188,22 @@ for (const source of sourceEntities) {
   const origin = parseVector(value(source.children, "origin", "0 0 -9999"));
   if (!inPlayableArea(origin)) continue;
   const sourceLight = parseVector(value(source.children, "_light", "255 230 200 400"));
-  const brightness = Math.max(450, Math.min(1200, (sourceLight[3] || 400) * 1.5));
+  const sourceBrightness = sourceLight[3] || 400;
+  // Source and MOHlight use very different practical intensity ranges. Keep
+  // real fixtures, but translate them into the restrained range used by
+  // retail AA maps instead of flooding every retained light to at least 450.
+  const brightness = Math.max(10, Math.min(200, sourceBrightness * 0.9 + 15));
   entities.push(
     pointEntity("light", {
       origin: origin.map(fmt).join(" "),
       light: fmt(brightness),
+      overbright_range: "0.2",
       _color: `${fmt((sourceLight[0] || 255) / 255)} ${fmt(
         (sourceLight[1] || 230) / 255
       )} ${fmt((sourceLight[2] || 200) / 255)}`,
     })
   );
   stats.sourceLights++;
-}
-
-const allSpawns = [...terroristSpawns, ...counterSpawns];
-for (let index = 0; index < allSpawns.length; index += 2) {
-  const lightOrigin = [...allSpawns[index].origin];
-  lightOrigin[2] += 96;
-  entities.push(
-    pointEntity("light", {
-      origin: lightOrigin.map(fmt).join(" "),
-      light: "550",
-      _color: "1 0.88 0.68",
-    })
-  );
-  stats.fillLights++;
 }
 
 const mapText = `${entities

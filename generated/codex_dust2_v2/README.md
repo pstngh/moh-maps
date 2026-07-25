@@ -67,6 +67,22 @@ Unsupported domes, antennas, steeply tilted cars, stone teeth, baskets, tipped
 cans/buckets, and tilted drums are omitted because the available AA stand-ins
 cannot preserve their placement.
 
+## Lighting
+
+The lighting is an original AA-compatible Mediterranean daylight profile. It
+uses a warm cream directional sun (`135 116 88`) against cooler diffuse sky
+fill (`58 66 84`), low cool ambient (`8 9 11`), and a neutral blue-gray
+farplane. This gives outdoor geometry directional shape without copying the
+lighting of V2, `obj_team2`, or a Breakthrough map.
+
+Earlier builds forced all 25 retained Source fixtures to at least 450 intensity
+and placed 20 additional 550-intensity lights over multiplayer spawns. That
+made the level uniformly tan and flattened the architecture. The generator now
+removes all spawn-following lights and translates only the real Source fixtures
+into AA's practical range. The final 25 lights range from 24 to 150 intensity,
+with median 60 and average 72.4. Interiors remain darker than courtyards but
+retain readable surfaces and player silhouettes.
+
 ## Screenshot-driven repairs
 
 Successive playtest batches found floating props, visible nodraw rectangles,
@@ -100,15 +116,15 @@ hulls. The converter now applies these rules:
 - omit tipped clutter instead of replacing it with an upright model.
 
 The corrected final build contains 2,330 ordinary world-brush records, 296
-terrain patches, and 140 entities. Q3map emitted 7,036 brush faces from 7,551
+terrain patches, and 120 entities. Q3map emitted 7,036 brush faces from 7,551
 input faces with no leak or invalid-brush error. Fast VIS processed 599
 clusters, 1,913 portals, and 2,326 faces, with 547 clusters visible on average.
 MOHlight lit all 13 retained stock models; its old patch-lighting path reported
-58 non-fatal potential-hash-mismatch warnings. OpenMoHAA loaded 6,740 brush
-faces and all 296 meshes from the exact package, stitched 92 patch LoD cracks,
-generated Recast navigation in 3.309 seconds, and ran eight bots that navigated
-and fought successfully. Eight automated viewpoints showed lit continuous
-terrain at the tested routes without the former black boundary bands.
+58 non-fatal potential-hash-mismatch warnings. OpenMoHAA loaded 6,740 faces
+and all 296 meshes from the exact lighting-revision package, generated Recast
+navigation in 3.171 seconds, and ran eight bots that navigated and fought
+successfully. Two eight-viewpoint lighting passes covered sunlit routes,
+shadow transitions, and the darkest retained-fixture interior.
 
 ## Regenerating
 

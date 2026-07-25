@@ -949,6 +949,68 @@ should be compiled as an isolated visual revision and playtested at outdoor
 lanes, deep interiors, transitions, and player-model visibility before any
 geometry changes are mixed in.
 
+### Dust II revision 10: original Mediterranean daylight
+
+Revision 10 applies the lighting study without changing geometry, props,
+spawns, or collision. The worldspawn now uses:
+
+```text
+ambientlight     8 9 11
+suncolor         135 116 88
+sundirection     325 225 0
+sundiffusecolor  58 66 84
+sundiffuse       1.15
+_color           1.0 0.94 0.84
+farplane         8000
+farplane_color   0.43 0.45 0.48
+```
+
+This is an original clear Mediterranean profile rather than a copy of V2,
+`obj_team2`, or Monte Cassino. The sun is cream rather than orange, while the
+diffuse and ambient components are cooler so shadows separate from the warm
+surfaces. The blue-gray farplane coordinates distance haze with the sky
+without importing a Breakthrough-only sky asset.
+
+The converter deletes the loop that placed a 550-intensity point light over
+every second multiplayer spawn. It retains all 25 real Source `light` and
+`light_spot` entities, but maps Source brightness `b` to
+`clamp(b * 0.9 + 15, 10, 200)` and adds `overbright_range 0.2`. In the current
+playable bounds that produces 25 AA point lights from 24 to 150 intensity,
+with median 60 and average 72.4. Their original colors and origins remain
+intact. The conversion report consequently drops from 140 to 120 entities and
+records zero fill lights.
+
+Two in-engine bakes were useful. The first used `ambientlight "6 7 9"` and a
+weaker `clamp(b * 0.55 + 10, 10, 180)` fixture translation. It immediately
+removed the former tan wash and restored directional outdoor shading, but an
+automated tunnel viewpoint was too close to black. Raising ambient to
+`8 9 11` and strengthening only the real fixtures made that interior readable
+without reintroducing global or spawn-following fill. This illustrates why
+lighting QA must sample both the attractive courtyard view and the least-lit
+playable route.
+
+The final isolated build retained the revision 9 geometry counts. Q3map emitted
+7,036 faces from 7,551 inputs without a leak or invalid brush. Fast VIS
+processed 599 clusters, 1,913 portals, and 2,326 faces, with 547 clusters
+visible on average. MOHlight lit all 13 stock models and emitted the same 58
+non-fatal curved-patch hash warnings as revision 9.
+
+OpenMoHAA 0.82.1 loaded the exact final PK3 with 6,740 faces and 296 meshes,
+generated Recast navigation in 3.171 seconds, and ran eight bots that traversed
+and killed one another. The final eight-viewpoint run sampled sunlit
+courtyards, shadowed lanes, indoor/outdoor transitions, and the darkest
+retained-fixture tunnel. Player silhouettes and surface shapes remained
+readable while interiors stayed intentionally darker than outdoor routes.
+
+Revision 10 artifact fingerprints:
+
+- BSP: 6,111,568 bytes, SHA-256
+  `05E0F1E96B2ABA73F2326330A42F6CD3D30D19599E6BB44E039925AA994CE442`
+- PK3: 1,550,872 bytes, SHA-256
+  `9B113BC0A20B26A2DFD7E89AAC56AA87712E76B37FBA2D9246968EE43686DDA9`
+- source ZIP: 450,874 bytes, SHA-256
+  `347B86765F960DB98F98C5CD674C03E1D6903D52CB351F2ECD30B417FB3A2A0E`
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -1017,3 +1079,8 @@ geometry changes are mixed in.
   Breakthrough reference as Monte Cassino, and recorded an original
   AA-compatible warm-sun/cool-fill direction for the next Dust II lighting
   build.
+- 2026-07-25, revision 10: replaced the tan-wash lighting with an original
+  warm-sun/cool-fill Mediterranean profile, removed all 20 spawn-following
+  lights, translated 25 real Source fixtures into the AA intensity range,
+  iterated against two eight-viewpoint OpenMoHAA runs, and validated the exact
+  final PK3 with eight fighting bots.

@@ -3,7 +3,7 @@
   "reference": "de_dust2_reference.vmf",
   "output": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\generated_dust2_v2\\main\\maps\\dm\\codex_dust2_v2.map",
   "worldBrushes": 2330,
-  "entities": 140,
+  "entities": 120,
   "terroristSpawns": 20,
   "counterSpawns": 20,
   "neutralSpawns": 40,
@@ -30,6 +30,6 @@
     "carsGroundSnapped": 4,
     "stockProps": 13,
     "sourceLights": 25,
-    "fillLights": 20
+    "fillLights": 0
   }
 }
