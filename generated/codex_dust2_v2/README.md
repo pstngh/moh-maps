@@ -23,12 +23,14 @@ The converter preserves ordinary source brush planes and source spawn
 coordinates. It translates Source detail brushes into MoHAA world brushes,
 skips editor-only helper volumes and the distant 3D skybox, and reconstructs
 selected prop cover as simple collision brushes. A Source displacement cannot
-be transferred directly to the Allied Assault BSP format, so each retained
-displacement face is rebuilt as a thin 16-unit convex slab: the source outer
-quad is visible and its inner/edge faces are caulked. This preserves a clean,
-playable surface without exposing the large Source support solid, but it does
-not reproduce the displaced vertex deformation. The result is therefore a
-measured brush-layout replica rather than a byte-identical CS2 port.
+be transferred directly to the Allied Assault BSP format. For each of the 61
+retained faces, the converter now reconstructs every VMF grid point from the
+bilinear base plane plus `offset + normal * distance`, then emits joined 3x3
+MoHAA patch meshes. The 868 patches share all three control points along each
+common edge, eliminating the void seams produced by thousands of touching
+micro-brushes. Q3 patches interpolate quadratically rather than using Source's
+linear triangle tessellation, so the result preserves the measured terrain
+shape closely but is still not a byte-identical CS2 port.
 
 The stock texture palette is drawn from the same families used by MoHAA's V2
 and related industrial maps:
@@ -44,31 +46,39 @@ and related industrial maps:
 
 The rebuilt version also substitutes a small set of stock AA props for Source
 props that cannot be transferred: six rusted cars, eight palm trees, and one
-wagon. Domes, upright drums, baskets, antennas, crates, and cover remain simple
-generated brushes so their collision is deterministic. Tipped Source
-cans/buckets and tilted drums are omitted because an upright AA substitute
-would not preserve their placement.
+wagon. Crates and cover remain simple generated brushes so their collision is
+deterministic. Unsupported domes and antennas are omitted because the earlier
+brush stand-ins floated where their Source support models were absent. Tipped
+Source cans/buckets and tilted drums are also omitted because an upright AA
+substitute would not preserve their placement.
 
-## Extended-playtest repairs
+## Screenshot-driven repairs
 
-The six-view bot playtest found floating props, visible nodraw rectangles,
-layered displacement supports, and triangular ground overlaps. The converter
-now applies these rules:
+The two playtest batches found floating props, visible nodraw rectangles,
+layered displacement supports, missing terrain, triangular voids, and buried
+cars. The converter now applies these rules:
 
-- rebuild all 61 playable displacement faces as thin slabs and discard their
-  original support volumes;
+- reconstruct all 61 playable displacement grids as 868 joined patch meshes;
+- orient MOHAA's one-sided patch winding toward playable air using the source
+  solid center;
 - use real `common/caulk` for Source nodraw/helper faces;
 - place generated crates from `origin.z - height / 2`;
-- lower Source car origins by 28 units for AA's ground-rooted rusted car;
+- retain Source car Z origins instead of applying the incorrect fixed -28
+  offset;
 - lower `palm_tree_trunk.mdl` replacements by 536 units for AA's complete palm;
+- omit unsupported dome and antenna stand-ins;
 - omit tipped clutter instead of replacing it with an upright model.
 
-The corrected final build contains 2,289 world brushes and 142 entities.
-Q3map emitted 6,905 faces from 7,388 input faces with no leak or invalid-brush
-error. Fast VIS processed 633 clusters, 2,003 portals, and 2,490 faces, with
-550 clusters visible on average. MOHlight lit all 15 retained stock models.
-OpenMoHAA 0.82.1 generated Recast navigation in 0.839 seconds and admitted two
-bots from the exact packaged PK3.
+The corrected final build contains 2,171 ordinary world brushes, 868 terrain
+patches, and 142 entities. Q3map emitted 6,725 brush faces from 7,216 input
+faces with no leak or invalid-brush error. Fast VIS processed 602 clusters,
+1,898 portals, and 2,344 faces, with 549 clusters visible on average. MOHlight
+lit all 15 retained stock models; its old patch-lighting path reported four
+non-fatal potential-hash-mismatch warnings. OpenMoHAA 0.82.1 loaded 5,857
+brush faces and all 868 meshes, and the automated screenshot check showed a
+continuous, walkable floor without the prior black triangular holes.
+An exact-package dedicated-server check built Recast navigation in 0.884
+seconds and admitted `bot1` and `bot2`.
 
 ## Regenerating
 

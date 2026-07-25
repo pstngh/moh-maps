@@ -613,6 +613,94 @@ prop-origin repairs above were validated structurally and through compile and
 runtime checks; the next human playtest remains the decisive visual check for
 all six reported viewpoints.
 
+### Third Dust II playtest: why thin base-plane slabs are insufficient
+
+An eight-screenshot follow-up confirmed that center-aligned crates now rest on
+the ground, but it also exposed major regressions:
+
+- broad bright/sky-colored gaps appeared below walls and across missing terrain;
+- the replacement displacement planes overlapped into layered ramps and ridges;
+- generated dome stand-ins floated above the map in large clusters;
+- at least one rusted-car substitute was buried deeply in an intact floor;
+- black rectangular surfaces and unsealed openings remained in several routes.
+
+The earlier fixed `-28` car-origin correction was based on an incorrect visual
+inference: missing terrain below the first cars made them appear suspended.
+Where an intact floor is visible, subtracting 28 units places the AA car below
+the surface. The stock model should retain the Source car origin; only its
+simple collision brush should extend downward around the wheels.
+
+The larger regression proves that a Source displacement's undeformed support
+face cannot stand in for its rendered surface, even when that face is extruded
+as a thin slab. The `dispinfo` block stores a `(2^power + 1)` square vertex
+grid. Each rendered vertex starts at a bilinear point on the original face and
+then applies its stored offset plus `normal * distance`. Correct conversion
+therefore requires tessellating that final grid and emitting the resulting
+triangles as thin AA detail prisms. Using only the four base corners discards
+the terrain shape, creates overlap between neighboring supports, and exposes
+the bright world outside through the missing displaced surface.
+
+The dome and antenna brush approximations are decorative rather than
+gameplay-significant. Their Source placement depends on the original model
+bounds and on roof geometry that may itself be displaced or model-based.
+When that support is not reproduced exactly, a fabricated cylinder stack
+becomes conspicuous floating geometry. These stand-ins should be omitted until
+their support surface can be proven.
+
+### Fourth Dust II repair: joined patch meshes, not micro-brushes
+
+Reconstructing all displacement grid points fixed the missing terrain shape,
+but representing its 6,944 grid triangles as individual eight-unit brush
+prisms was not stable in the Allied Assault Q3map compiler. In-engine
+wireframe and lightmap diagnostics proved that the remaining black polygons
+were absent faces, not dark lightmaps or texture defects. Texturing the
+perimeter sides did not help. Giving every triangle a local extrusion normal
+made the gaps larger because adjacent solid prisms no longer shared the same
+back volume.
+
+The reliable representation is a set of joined `patchDef2` surfaces:
+
+1. Reconstruct each VMF point as `bilinearBase + offset + normal * distance`.
+2. Divide each odd-sized displacement grid into overlapping 3x3 control
+   patches, advancing two samples per patch.
+3. Reuse all three control points on every shared patch edge.
+4. Determine playable-side winding from the original Source solid center.
+5. Reverse the patch columns when the mathematical
+   `cross(columnAdvance, rowAdvance)` normal points toward playable air,
+   because MOHAA/Q3 patch draw winding uses the opposite visible side.
+
+For the Dust II reference, this converts 61 displacement faces into 868 joined
+patches while preserving the 6,944 source-grid triangle samples. Q3's patch
+interpolation is quadratic, whereas Source renders a linear triangle grid, so
+this is not byte-identical topology. It is visually continuous, collision is
+present, and it avoids both the flat-support regression and the micro-brush
+seams.
+
+The final corrected build contains 2,171 ordinary world brushes, 868 patches,
+and 142 entities. Q3map reduced 7,216 input brush faces to 6,725 in 28 seconds
+with no leak or invalid-brush error. Fast VIS processed 602 clusters, 1,898
+portals, and 2,344 faces with 549 clusters visible on average. MOHlight lit all
+15 retained stock models in 17 seconds. It emitted four non-fatal
+`potential hash mismatch` warnings while lighting curved patches.
+
+OpenMoHAA 0.82.1 loaded 5,857 brush faces and all 868 meshes. The automated
+player-spawn screenshot showed a continuous, lit, walkable floor without any
+of the former black triangular holes. The test also confirmed that Source car
+Z origins should be retained, crates should remain bottom-aligned, palms need
+the measured -536 root correction, and unsupported dome/antenna stand-ins
+should stay omitted.
+
+The exact final three-file PK3 also passed a dedicated-server bot smoke test:
+OpenMoHAA parsed the BSP in 0.040 seconds, generated Recast navigation in 0.884
+seconds, and admitted `bot1` and `bot2`.
+
+Revision 6 artifact fingerprints:
+
+- BSP: 4,956,168 bytes, SHA-256
+  `BBA2E073D632E10BA4794E017135CDE989886B9749800BA664A0576979F352E4`
+- PK3: 1,003,791 bytes, SHA-256
+  `BCEBCE2B542CAFD7EA32EC2C04512DDF2F5D95787B112443DC93A065B683B44C`
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -630,6 +718,7 @@ all six reported viewpoints.
 
 - [OpenMoHAA repository](https://github.com/openmoh/openmohaa)
 - [OpenMoHAA bot/configuration documentation](https://docs.openmohaa.org/md_docs_2markdown_203-configuration_201-configuration.html)
+- [Valve Map Format displacement documentation](https://developer.valvesoftware.com/wiki/VMF_%28Valve_Map_Format%29#Dispinfo)
 - [pstngh/moh-maps](https://github.com/pstngh/moh-maps)
 - [pstngh/netradiant-custom](https://github.com/pstngh/netradiant-custom)
 - [pstngh/MOHTools](https://github.com/pstngh/MOHTools)
@@ -655,3 +744,8 @@ all six reported viewpoints.
   restored real caulk, grounded or omitted incompatible prop substitutions,
   rebuilt the final PK3, and validated exact-package Recast navigation with two
   bots.
+- 2026-07-24, revision 6: analyzed the eight-screenshot regression, corrected
+  the car-origin inference, reconstructed every VMF displacement grid, proved
+  that touching triangle prisms lose faces in AA Q3map, replaced them with 868
+  joined and correctly wound patch meshes, omitted unsupported rooftop
+  stand-ins, and verified continuous terrain in OpenMoHAA.

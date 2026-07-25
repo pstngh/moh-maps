@@ -245,6 +245,16 @@ function subtract(a, b) {
   return a.map((component, axis) => component - b[axis]);
 }
 
+function add(...vectors) {
+  return vectors[0].map((_, axis) =>
+    vectors.reduce((sum, vector) => sum + vector[axis], 0)
+  );
+}
+
+function scale(vector, amount) {
+  return vector.map((component) => component * amount);
+}
+
 function cross(a, b) {
   return [
     a[1] * b[2] - a[2] * b[1],
@@ -272,41 +282,167 @@ function orientedPlane(points, interiorPoint) {
   return result;
 }
 
-function displacementBrush(side) {
+function parseDisplacementRows(dispInfo, blockName, gridSize, tupleSize) {
+  const block = children(dispInfo.children, blockName)[0];
+  if (!block) return null;
+  const rows = [];
+  for (let rowIndex = 0; rowIndex < gridSize; rowIndex++) {
+    const numbers = value(block.children, `row${rowIndex}`)
+      .trim()
+      .split(/\s+/)
+      .map(Number);
+    if (
+      numbers.length < gridSize * tupleSize ||
+      numbers.some((number) => !Number.isFinite(number))
+    ) {
+      return null;
+    }
+    if (tupleSize === 1) {
+      rows.push(numbers.slice(0, gridSize));
+    } else {
+      rows.push(
+        Array.from({ length: gridSize }, (_, columnIndex) =>
+          numbers.slice(columnIndex * tupleSize, (columnIndex + 1) * tupleSize)
+        )
+      );
+    }
+  }
+  return rows;
+}
+
+function bilinearPoint(p00, p10, p01, p11, u, v) {
+  return add(
+    scale(p00, (1 - u) * (1 - v)),
+    scale(p10, u * (1 - v)),
+    scale(p01, (1 - u) * v),
+    scale(p11, u * v)
+  );
+}
+
+function displacementPatch(
+  grid,
+  startRow,
+  startColumn,
+  visibleMaterial,
+  reverseColumns
+) {
+  const lines = [
+    "{",
+    "patchDef2",
+    "{",
+    visibleMaterial.texture,
+    "( 3 3 0 0 0 )",
+    "(",
+  ];
+  for (let rowOffset = 0; rowOffset < 3; rowOffset++) {
+    const controlPoints = [];
+    for (let columnOffset = 0; columnOffset < 3; columnOffset++) {
+      const row = startRow + rowOffset;
+      const outputColumn = startColumn + columnOffset;
+      const column = reverseColumns
+        ? grid.length - 1 - outputColumn
+        : outputColumn;
+      const point = grid[row][column].point;
+      controlPoints.push(
+        `( ${point.map(fmt).join(" ")} ${fmt(column / 2)} ${fmt(row / 2)} )`
+      );
+    }
+    lines.push(`( ${controlPoints.join(" ")} )`);
+  }
+  lines.push(")", "}", "}");
+  return lines.join("\n");
+}
+
+function displacementBrushes(side, solidCenter) {
   const verticesBlock = children(side.children, "vertices_plus")[0];
-  if (!verticesBlock) return null;
+  const dispInfo = children(side.children, "dispinfo")[0];
+  if (!verticesBlock || !dispInfo) return null;
   const outer = verticesBlock.children
     .filter((entry) => entry.key === "v")
     .map((entry) => parseVector(entry.value));
-  if (outer.length < 3) return null;
+  if (outer.length !== 4) return null;
 
-  const inward = normalized(
-    cross(subtract(outer[1], outer[0]), subtract(outer[2], outer[0]))
-  );
-  if (!inward) return null;
+  const power = Number(value(dispInfo.children, "power"));
+  const gridSize = 2 ** power + 1;
+  if (![5, 9, 17].includes(gridSize)) return null;
 
-  const thickness = 16;
-  const inner = outer.map((point) =>
-    point.map((component, axis) => component + inward[axis] * thickness)
-  );
-  const center = centroid([...outer, ...inner]);
-  const visibleMaterial = materialFor(value(side.children, "material"));
-  const lines = ["{"];
-
-  lines.push(face(orientedPlane(outer.slice(0, 3), center), visibleMaterial, false));
-  lines.push(face(orientedPlane(inner.slice(0, 3), center), targetMaterials.caulk, false));
-  for (let index = 0; index < outer.length; index++) {
-    const next = (index + 1) % outer.length;
-    lines.push(
-      face(
-        orientedPlane([outer[index], outer[next], inner[next]], center),
-        targetMaterials.caulk,
-        false
-      )
-    );
+  const startPosition = parseVector(value(dispInfo.children, "startposition"));
+  if (startPosition.length !== 3 || startPosition.some((number) => !Number.isFinite(number))) {
+    return null;
   }
-  lines.push("}");
-  return lines.join("\n");
+  const startIndex = outer.reduce(
+    (best, point, index) => {
+      const distanceSquared = point.reduce(
+        (sum, component, axis) =>
+          sum + (component - startPosition[axis]) ** 2,
+        0
+      );
+      return distanceSquared < best.distanceSquared
+        ? { index, distanceSquared }
+        : best;
+    },
+    { index: -1, distanceSquared: Number.POSITIVE_INFINITY }
+  );
+  if (startIndex.index < 0 || startIndex.distanceSquared > 1) return null;
+
+  // VMF rows begin at startposition. With the side's cyclic vertex order,
+  // columns advance toward the previous corner and rows toward the next one.
+  const p00 = outer[startIndex.index];
+  const p10 = outer[(startIndex.index + 3) % 4];
+  const p01 = outer[(startIndex.index + 1) % 4];
+  const p11 = outer[(startIndex.index + 2) % 4];
+  const normals = parseDisplacementRows(dispInfo, "normals", gridSize, 3);
+  const distances = parseDisplacementRows(dispInfo, "distances", gridSize, 1);
+  const offsets = parseDisplacementRows(dispInfo, "offsets", gridSize, 3);
+  if (!normals || !distances || !offsets) return null;
+
+  const grid = Array.from({ length: gridSize }, (_, rowIndex) =>
+    Array.from({ length: gridSize }, (_, columnIndex) => {
+      const u = columnIndex / (gridSize - 1);
+      const v = rowIndex / (gridSize - 1);
+      const base = bilinearPoint(p00, p10, p01, p11, u, v);
+      return {
+        row: rowIndex,
+        column: columnIndex,
+        point: add(
+          base,
+          offsets[rowIndex][columnIndex],
+          scale(normals[rowIndex][columnIndex], distances[rowIndex][columnIndex])
+        ),
+      };
+    })
+  );
+
+  const visibleMaterial = materialFor(value(side.children, "material"));
+  const patchNormal = normalized(
+    cross(
+      subtract(grid[0][1].point, grid[0][0].point),
+      subtract(grid[1][0].point, grid[0][0].point)
+    )
+  );
+  if (!patchNormal) return null;
+  const outward = subtract(centroid(outer), solidCenter);
+  // MOHAA/Q3 patch draw winding is opposite the mathematical normal formed
+  // by cross(columnAdvance, rowAdvance). Reverse columns when that normal
+  // points out of the source solid so the rendered side faces playable air.
+  const reverseColumns = dot(patchNormal, outward) > 0;
+  const patches = [];
+  for (let rowIndex = 0; rowIndex < gridSize - 1; rowIndex += 2) {
+    for (let columnIndex = 0; columnIndex < gridSize - 1; columnIndex += 2) {
+      patches.push(
+        displacementPatch(
+          grid,
+          rowIndex,
+          columnIndex,
+          visibleMaterial,
+          reverseColumns
+        )
+      );
+    }
+  }
+  patches.triangleCount = 2 * (gridSize - 1) ** 2;
+  patches.reversed = reverseColumns;
+  return patches;
 }
 
 function convertSolid(solid, isDetail, stats) {
@@ -337,13 +473,29 @@ function convertSolid(solid, isDetail, stats) {
     (side) => children(side.children, "dispinfo").length > 0
   );
   if (displacementSides.length) {
-    const rebuilt = displacementSides.map(displacementBrush).filter(Boolean);
+    const rebuilt = [];
+    let rebuiltSides = 0;
+    let rebuiltTriangles = 0;
+    let rebuiltFlipped = 0;
+    for (const side of displacementSides) {
+      const brushes = displacementBrushes(side, center);
+      if (!brushes?.length) {
+        stats.displacementSkipped++;
+        continue;
+      }
+      rebuilt.push(...brushes);
+      rebuiltSides++;
+      rebuiltTriangles += brushes.triangleCount;
+      if (brushes.reversed) rebuiltFlipped++;
+    }
     if (!rebuilt.length) {
       stats.invalid++;
-      stats.displacementSkipped++;
       return null;
     }
-    stats.displacementRebuilt += rebuilt.length;
+    stats.displacementRebuilt += rebuiltSides;
+    stats.displacementPatches += rebuilt.length;
+    stats.displacementTriangles += rebuiltTriangles;
+    stats.displacementWindingFlipped += rebuiltFlipped;
     return rebuilt.join("\n");
   }
 
@@ -464,6 +616,9 @@ const stats = {
   skyboxSkipped: 0,
   invalid: 0,
   displacementRebuilt: 0,
+  displacementPatches: 0,
+  displacementTriangles: 0,
+  displacementWindingFlipped: 0,
   displacementSkipped: 0,
   unsupportedPropsSkipped: 0,
   coverBrushes: 0,
@@ -550,26 +705,12 @@ for (const entity of sourceEntities) {
     );
     stats.decorBrushes++;
     continue;
-  } else if (model.includes("du_dome_") || model.includes("dome_star")) {
-    worldBrushes.push(
-      cylinderBrush(origin, origin[2], origin[2] + 24, 56, targetMaterials.ceiling)
-    );
-    worldBrushes.push(
-      cylinderBrush(origin, origin[2] + 24, origin[2] + 44, 42, targetMaterials.ceiling)
-    );
-    worldBrushes.push(
-      cylinderBrush(origin, origin[2] + 44, origin[2] + 60, 26, targetMaterials.ceiling)
-    );
-    worldBrushes.push(
-      cylinderBrush(origin, origin[2] + 60, origin[2] + 72, 10, targetMaterials.metal)
-    );
-    stats.decorBrushes += 4;
-    continue;
-  } else if (model.includes("antenna")) {
-    worldBrushes.push(
-      cylinderBrush(origin, origin[2], origin[2] + 96, 3, targetMaterials.pipe, 6)
-    );
-    stats.decorBrushes++;
+  } else if (
+    model.includes("du_dome_") ||
+    model.includes("dome_star") ||
+    model.includes("antenna")
+  ) {
+    stats.unsupportedPropsSkipped++;
     continue;
   } else if (model.includes("palm_tree") || model.includes("palm")) {
     const palmOrigin = [...origin];
@@ -607,7 +748,6 @@ for (const entity of sourceEntities) {
     continue;
   } else if (/models\/props_vehicles\/car\d{3}[a-z]?\.mdl$/i.test(model)) {
     const carOrigin = [...origin];
-    carOrigin[2] -= 28;
     stockPropEntities.push(
       pointEntity("static_vehicle_europe_car-rusted", {
         origin: carOrigin.map(fmt).join(" "),
@@ -619,8 +759,8 @@ for (const entity of sourceEntities) {
     );
     worldBrushes.push(
       boxBrush(
-        [carOrigin[0] - 70, carOrigin[1] - 32, carOrigin[2]],
-        [carOrigin[0] + 70, carOrigin[1] + 32, carOrigin[2] + 42],
+        [carOrigin[0] - 70, carOrigin[1] - 32, carOrigin[2] - 24],
+        [carOrigin[0] + 70, carOrigin[1] + 32, carOrigin[2] + 36],
         targetMaterials.caulk
       )
     );
