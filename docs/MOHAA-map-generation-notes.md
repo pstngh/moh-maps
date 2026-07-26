@@ -1137,6 +1137,61 @@ Artifact fingerprints:
 - source ZIP: 312,239 bytes, SHA-256
   `BE57F404A38607406E8D9FCC504AF4BE967D89CD490F1DEB9A4A601542586DA4`
 
+### Cobblestone revision 2: restore thin architecture
+
+The first user playtest supplied four screenshots that exposed a systematic
+failure rather than unrelated local bugs:
+
+- large exterior wall areas opened directly to sky;
+- window, door, arch, and port replacements floated without supporting walls;
+- interior floors and ceilings ended abruptly;
+- bridge and passage shells contained bright holes.
+
+The cause was revision 1's bounding-box volume filter. A small-volume Source
+`func_detail` solid is not necessarily cosmetic: wall skins, floor plates, and
+ceiling slabs can have a large visible area but very little thickness. Leaving
+their attached prop replacements in place made the failure especially
+conspicuous.
+
+Revision 2 removes the filter and retains all 2,735 `func_detail` solids. The
+structural six-brush sky shell remains essential: all 4,653 imported source
+solids are detail geometry, so restoring them increases compile time and face
+count without returning to the 2 MiB portal overflow. Q3map completed the
+5,471-brush final map in 731 seconds, emitting 25,873 faces from 27,605 inputs.
+Fast VIS remained at 90 clusters. Full MOHlight completed in 388 seconds.
+
+Cobblestone also uses modular castle models as architecture. Placement
+measurement showed that `port_a` and `port_b` instances repeat at 256-unit
+intervals, while `port_sect_a` repeats at roughly 128 units. The earlier
+universal 112-unit approximation left rows of unsupported uprights. Revision
+2 uses non-solid 256-unit major port modules, 128-unit port sections,
+32-to-48-unit depth, and heavier stone surrounds. Fourteen omitted
+`arch_g_pillar` instances now receive generated stone pillars. These visual
+modules do not change navigation collision.
+
+The final conversion report records 5,471 generated brushes, 4,653 converted
+source solids, 840 planarized displacement backing brushes, 195 arch/port
+modules, 137 cover brushes, and zero skipped detail solids. The package still
+uses 44 neutral DM spawns, 22 Axis spawns, 22 Allied spawns, 65 translated
+fixture lights, and 74 stock vegetation entities.
+
+Two eight-bot OpenMoHAA runs were inspected. The first proved that complete
+detail import restored continuous walls, floors, ceilings, and interior
+shells. The second validated the measured port widths. Bots spawned, moved,
+fought, and traversed both interior and exterior routes. Remaining fidelity
+debt is now narrower: planar rather than sculpted displacement terrain and
+some simplified distant arcades whose original surfaces exist only in Source
+model files, not VMF brush data.
+
+Revision 2 artifact fingerprints:
+
+- BSP: 18,722,768 bytes, SHA-256
+  `89A9FD5A42C0D3F4E998455A609764E9EA75080C66358AC6865FB768ADAE23F9`
+- PK3: 3,694,818 bytes, SHA-256
+  `B63199BB5A044D9ADA1A21F665D819DF899CBDA200EE722745806E97A15E99C5`
+- source ZIP: 441,353 bytes, SHA-256
+  `B1B9F5ABEE8933564EBF082E2797B0F66065B41128E17C128AB7DDAB5F6EFC87`
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -1216,3 +1271,8 @@ Artifact fingerprints:
   structural sky shell, planar displacement baseline, and volume-selected
   detail import; compiled 18,610 faces; and validated the exact final package
   with eight fighting OpenMoHAA bots across eight followed-player viewpoints.
+- 2026-07-26, Cobblestone revision 2: diagnosed four user screenshots as a
+  thin-architecture filtering failure; restored all 2,735 `func_detail`
+  solids; measured and widened modular port replacements; added missing stone
+  pillars; compiled 25,873 faces; and validated continuous interior/exterior
+  architecture with two eight-bot OpenMoHAA runs.

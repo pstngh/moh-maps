@@ -1162,6 +1162,15 @@ const stats = {
     under1m: 0,
     atLeast1m: 0,
   },
+  detailSecondExtentBuckets: {
+    under16: 0,
+    under32: 0,
+    under48: 0,
+    under64: 0,
+    under96: 0,
+    under128: 0,
+    atLeast128: 0,
+  },
 };
 
 const worldBrushes = [];
@@ -1265,10 +1274,21 @@ for (const entity of sourceEntities) {
       else if (volume < 262144) stats.detailVolumeBuckets.under256k++;
       else if (volume < 1048576) stats.detailVolumeBuckets.under1m++;
       else stats.detailVolumeBuckets.atLeast1m++;
-      if (volume < 65536) {
-        stats.detailSolidsSkipped++;
-        continue;
-      }
+      const orderedExtents = extents ? [...extents].sort((a, b) => a - b) : [0, 0, 0];
+      const secondExtent = orderedExtents[1];
+      if (secondExtent < 16) stats.detailSecondExtentBuckets.under16++;
+      else if (secondExtent < 32) stats.detailSecondExtentBuckets.under32++;
+      else if (secondExtent < 48) stats.detailSecondExtentBuckets.under48++;
+      else if (secondExtent < 64) stats.detailSecondExtentBuckets.under64++;
+      else if (secondExtent < 96) stats.detailSecondExtentBuckets.under96++;
+      else if (secondExtent < 128) stats.detailSecondExtentBuckets.under128++;
+      else stats.detailSecondExtentBuckets.atLeast128++;
+      // Keep every architectural detail solid in repair builds. The earlier
+      // volume threshold removed thin wall skins, floors, and ceilings along
+      // with cosmetic trim, leaving open sky holes and unsupported facade
+      // props. The structural sky shell keeps these brushes from splitting
+      // the visibility tree, so the tradeoff is compile time rather than BSP
+      // portal overflow.
     }
     const converted = convertSolid(solid, true, stats);
     if (converted) worldBrushes.push(converted);
@@ -1296,19 +1316,35 @@ for (const entity of sourceEntities) {
 
   if (model.includes("/arch_") && !model.includes("pillar")) {
     worldBrushes.push(
-      ...archFrameBrushes(origin, yaw, 128, 160, targetMaterials.stone)
+      ...archFrameBrushes(origin, yaw, 128, 160, targetMaterials.stone, 36, 32)
     );
     stats.archFrames++;
     continue;
   } else if (
     model.includes("/port_a/") ||
     model.includes("/port_b/") ||
-    model.includes("/port_sect_a/")
+    model.includes("/port_c/")
   ) {
     worldBrushes.push(
-      ...archFrameBrushes(origin, yaw, 112, 144, targetMaterials.darkStone, 18)
+      ...archFrameBrushes(origin, yaw, 256, 160, targetMaterials.darkStone, 56, 48)
     );
     stats.archFrames++;
+    continue;
+  } else if (model.includes("/port_sect_a/")) {
+    worldBrushes.push(
+      ...archFrameBrushes(origin, yaw, 128, 144, targetMaterials.darkStone, 40, 48)
+    );
+    stats.archFrames++;
+    continue;
+  } else if (model.includes("arch_g_pillar")) {
+    worldBrushes.push(
+      boxBrush(
+        [origin[0] - 20, origin[1] - 20, origin[2]],
+        [origin[0] + 20, origin[1] + 20, origin[2] + 160],
+        targetMaterials.stone
+      )
+    );
+    stats.coverBrushes++;
     continue;
   } else if (model.includes("/window_")) {
     const panelOrigin = [origin[0], origin[1], origin[2] + 40];

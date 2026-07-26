@@ -1,13 +1,13 @@
-# Codex Cobblestone — initial playable conversion
+# Codex Cobblestone - revision 2 repair
 
 `codex_cobblestone` is an Allied Assault/OpenMoHAA deathmatch translation of
 the classic Counter-Strike Cobblestone layout. It uses only stock Allied
 Assault textures and models.
 
-## What this first build preserves
+## What this build preserves
 
-The generator converts ordinary world, selected `func_detail`, and
-`func_brush` solids and preserves all 44 original team spawn coordinates. A
+The generator converts ordinary world, all `func_detail`, and `func_brush`
+solids and preserves all 44 original team spawn coordinates. A
 structural six-brush AA sky shell encloses the imported layout; imported
 geometry is flagged detail so it remains solid without exceeding Q3map's fixed
 2 MiB portal-data limit.
@@ -18,38 +18,44 @@ planar, textured collision. Exact displacement reconstruction exists behind
 surfaces, backing hulls, and terrain-only boundary skirts, but the complete
 839-surface result is currently too expensive for the legacy Q3map compiler.
 
-Source `func_detail` brushes with a bounding-box volume below 65,536 cubic
-units are omitted. This removes 1,514 thin trim fragments while preserving
-1,221 larger detail solids such as walls, roofs, stairs, and major façade
-sections. The distant Source 3D skybox, editor helpers, gameplay systems that
-have no AA equivalent, and most cosmetic Source props are also omitted.
+Revision 1 filtered 1,514 small `func_detail` solids to shorten Q3map compile
+time. User screenshots proved that some were thin wall skins, floors, and
+ceilings rather than cosmetic trim. Revision 2 retains all 2,735 source detail
+solids; the resulting Q3map stage takes about 12-14 minutes on the validation
+machine but restores the missing building shells. The distant Source 3D
+skybox, editor helpers, gameplay systems that have no AA equivalent, and most
+cosmetic Source props remain omitted.
 
 Important castle props receive deliberately simple AA-native replacements:
 
-- arches and ports become non-solid three-piece stone frames;
+- arches and ports become non-solid three-piece stone wall modules;
 - windows, doors, and grates become non-solid stock-textured panels;
 - upright barrels, hay bales, coffins, and crates become generated cover;
 - a reduced selection of trees and bushes uses stock AA static models.
 
 This is a layout translation, not a byte-identical CS map. The reference VMF
-is intentionally not redistributed. Some thin Source-only frames and prop
-fragments are visibly absent or floating in this initial revision; terrain is
-angular where the original uses displacement sculpting.
+is intentionally not redistributed. Terrain remains angular where the original
+uses displacement sculpting. Some distant arcade and decorative architecture
+is simplified because the original surfaces exist only in Source model files,
+not in the decompiled VMF brush data.
 
 ## Current build
 
-- 3,938 generated world/detail/prop brushes
-- 3,140 converted source solids
+- 5,471 generated world/detail/prop brushes
+- 4,653 converted source solids
+- all 2,735 source `func_detail` solids retained
 - 840 planarized displacement backing brushes
 - 44 neutral deathmatch spawns, plus 22 Axis and 22 Allied spawns
 - 65 translated Source fixture lights; no spawn-following fill lights
 - 74 stock-AA tree and bush entities
-- 123 generated cover brushes, 193 arch/port replacements, and 90 façade panels
-- 18,610 final BSP faces and 90 fast-VIS clusters
+- 137 generated cover brushes, 195 arch/port replacements, and 90 facade panels
+- 25,873 final BSP faces and 90 fast-VIS clusters
 
 OpenMoHAA 0.82.1 loaded the final PK3 and ran eight bots that moved, fought,
 used corridors, and traversed exterior routes. Eight spectator viewpoints
-were inspected after the bot test.
+were inspected after the bot test. The revision specifically removes the
+large open-sky wall fields, floating door/window groups, interior shell holes,
+and missing floor/ceiling surfaces visible in the first user playtest.
 
 ## Regenerating
 
@@ -117,7 +123,7 @@ map dm/codex_cobblestone
 
 ## Artifact fingerprints
 
-- BSP: 14,511,848 bytes; SHA-256
-  `8C7404BA4C21B45906D623208845AB7C498BF96662CCA39A4F8F953F9DF3AA7C`
-- PK3: 2,857,786 bytes; SHA-256
-  `C3F0455695E71001948743348C86659033D43512DA6899CDB8BDC3C517A50E7E`
+- BSP: 18,722,768 bytes; SHA-256
+  `89A9FD5A42C0D3F4E998455A609764E9EA75080C66358AC6865FB768ADAE23F9`
+- PK3: 3,694,818 bytes; SHA-256
+  `B63199BB5A044D9ADA1A21F665D819DF899CBDA200EE722745806E97A15E99C5`

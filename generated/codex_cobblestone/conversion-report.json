@@ -3,16 +3,16 @@
   "displacementMode": "planar",
   "reference": "de_cbble_reference.vmf",
   "output": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\generated_cobblestone\\main\\maps\\dm\\codex_cobblestone.map",
-  "worldBrushes": 3938,
+  "worldBrushes": 5471,
   "entities": 229,
   "terroristSpawns": 22,
   "counterSpawns": 22,
   "neutralSpawns": 44,
   "stats": {
-    "converted": 3140,
-    "detail": 3140,
-    "helperSkipped": 1128,
-    "detailSolidsSkipped": 1514,
+    "converted": 4653,
+    "detail": 4653,
+    "helperSkipped": 1129,
+    "detailSolidsSkipped": 0,
     "skyboxSkipped": 18,
     "invalid": 0,
     "displacementRebuilt": 0,
@@ -31,9 +31,9 @@
     "displacementFailureStart": 0,
     "displacementFailureRows": 0,
     "displacementFailureNormal": 0,
-    "unsupportedPropsSkipped": 751,
-    "coverBrushes": 123,
-    "archFrames": 193,
+    "unsupportedPropsSkipped": 735,
+    "coverBrushes": 137,
+    "archFrames": 195,
     "facadePanels": 90,
     "barrels": 52,
     "hayBales": 42,
@@ -59,6 +59,15 @@
       "under256k": 561,
       "under1m": 347,
       "atLeast1m": 313
+    },
+    "detailSecondExtentBuckets": {
+      "under16": 558,
+      "under32": 489,
+      "under48": 638,
+      "under64": 355,
+      "under96": 245,
+      "under128": 133,
+      "atLeast128": 317
     }
   }
 }
