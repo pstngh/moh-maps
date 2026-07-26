@@ -1290,6 +1290,77 @@ A clean regeneration into a separate output directory produced a
 byte-identical `.map`, closing the reproducibility gate independently of the
 compile and runtime checks.
 
+### Cobblestone revision 4: planar seams and source collision intent
+
+Nine additional screenshots, `shot0019.tga` through `shot0027.tga`, confirmed
+that revision 3 was a large improvement while exposing two narrower conversion
+failures. Bright triangular or ribbon-like gaps remained between planar
+terrain faces, and bots could reach exterior terrain islands where vegetation
+floated against the sky.
+
+The seam failure is different from revision 3's nodraw failure. A
+material-matched brush side cannot cover XY area that existed only because a
+Source displacement sample moved horizontally beyond its backing polygon.
+Full curved reconstruction remains outside the practical Q3map patch budget.
+Revision 4 therefore generates one simple visual underlay beneath each
+traversable planar displacement: 24 units of outward expansion and 12 units of
+downward offset. The original backing brush remains the collision surface.
+Only 311 terrain surfaces qualify, avoiding the thousands of patches created
+by the full-displacement experiment.
+
+The helper audit also disproved the assumption that all tool-only solids are
+editor noise. Of 1,129 skipped helper brushes, three use
+`toolsplayerclip`, while 46 `toolsclip` brushes have at least one 512-unit
+extent. Revision 4 preserves those measured large collision volumes as stock
+AA `common/playerclip` or `common/clip`, while continuing to omit 1,080 hints,
+skips, areaportals, ladders, and small helper volumes. This preserves source
+route intent without importing every helper blindly.
+
+Finally, when a vegetation origin lies over a planar displacement but requires
+more than the verified grounding correction, the substitute is now omitted
+instead of left floating. The candidate retains 31 grounded stock vegetation
+entities and omits 128 incompatible source instances before decorative
+thinning.
+
+The same playtest noted that visible doors do not open. This matches the
+reference entity data: it contains zero `func_door` or
+`func_door_rotating` entities and 33 static door-model references. Interactive
+AA doors should therefore be treated as a deliberate gameplay enhancement,
+not assumed conversion fidelity. They require verified bounds, pivots, swing
+clearance, route value, and bot testing before introduction.
+
+The revision-4 candidate emits 5,142 brushes or patches, converts 4,702 Source
+solids, retains all spawns and 65 fixture lights, and keeps the revision-3
+architectural-model omission and material rules. Compile and isolated runtime
+measurements are recorded in the map-specific revision report. Q3map compiled
+29,258 input faces to 27,373 output faces in 1,172 seconds; fast VIS remained
+at 90 clusters, 161 portals, and 1,448 visibility bytes.
+
+Full MOHlight completed in 487 seconds and produced a 20,422,536-byte BSP. It
+reported two per-leaf clamps to the 60-light limit and four `potential hash
+mismatch` warnings. The build still loaded and rendered, but warning-bearing
+light passes must be documented by coordinate rather than labeled clean.
+
+The exact three-entry PK3 passed an isolated OpenMoHAA 0.82.1 run. Recast
+navigation generated in 6.575 seconds; eight bots moved, fought, respawned,
+and produced ten recorded kills during six automated bot-follow views. The
+sampled views showed no recurrence of the incompatible floating vegetation.
+They also disproved the stronger containment hypothesis: restoring the 49
+measured player/general clip brushes alone does not prevent bots from reaching
+all exterior terrain and edge routes. The omitted Source 3D skybox and
+incomplete exterior boundary remain separate topology debt.
+
+Automated fixed-camera work exposed a QA-specific lesson. Setting an entity's
+ordinary `angles` does not set an OpenMoHAA player's rendered view; a player
+uses the `viewangles` event, and client input can overwrite it before a delayed
+screenshot. A reliable scripted camera harness must set `viewangles`
+immediately before capture or use a dedicated camera entity. Survey views that
+do not reproduce the user's exact ground-level angle are regression evidence,
+not proof that every reported seam is gone.
+
+A separate regeneration produced a byte-identical 4,237,412-byte `.map`,
+closing the deterministic-source gate for revision 4.
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -1379,6 +1450,13 @@ compile and runtime checks.
   faces; grounded retained props against planar displacement supports; added
   verified stock window glass and source-family stone mappings; and repeated
   isolated visual and eight-bot QA.
+- 2026-07-26, Cobblestone revision 4: analyzed nine additional screenshots;
+  distinguished planar XY seams from exposed nodraw faces; added bounded
+  material-matched terrain underlays; preserved measured large Source clip
+  volumes; omitted vegetation that could not be grounded safely; completed
+  Q3map/VIS/MOHlight and exact-package eight-bot QA; documented four lighting
+  hash warnings; disproved complete containment; and verified byte-identical
+  source regeneration.
 - 2026-07-26, knowledge-system revision: separated the mandatory production
   workflow from this chronological evidence log; added repository-level
   instructions, a documentation index, a verified stock-AA asset catalog, a

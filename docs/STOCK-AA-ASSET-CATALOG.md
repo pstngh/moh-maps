@@ -18,7 +18,7 @@ supplies the retail AA data.
 | --- | --- | --- |
 | Hidden face | `common/caulk` | Requires retail shader definitions during compile |
 | Day sky | `sky/mohday1` | AA-compatible sky used by current conversions |
-| Player/solid clipping | `common/clip`, `common/playerclip` | Use intentionally; do not render |
+| Player/solid clipping | `common/clip`, `common/playerclip` | Use intentionally; Cobblestone preserves explicit player clips and measured large Source collision volumes |
 | Material clipping | `common/metalclip`, `common/stoneclip` | Match collision sound/behavior where appropriate |
 
 ## Castle and European materials

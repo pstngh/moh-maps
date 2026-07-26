@@ -215,6 +215,16 @@ const targetMaterials = {
     contentFlags: 0,
     surfaceFlags: 160,
   },
+  playerClip: {
+    texture: "common/playerclip",
+    contentFlags: 0,
+    surfaceFlags: 0,
+  },
+  clip: {
+    texture: "common/clip",
+    contentFlags: 0,
+    surfaceFlags: 0,
+  },
 };
 
 const targetByTexture = new Map(
@@ -592,6 +602,60 @@ function displacementNeedsSkirts(sourceMaterial) {
   );
 }
 
+function planarSeamUnderlayPatch(surface) {
+  const expansion = 24;
+  const depth = 12;
+  const center = centroid(surface.vertices);
+  const expanded = surface.vertices.map((point) => {
+    const deltaX = point[0] - center[0];
+    const deltaY = point[1] - center[1];
+    const length = Math.hypot(deltaX, deltaY) || 1;
+    return [
+      point[0] + (deltaX / length) * expansion - surface.normal[0] * depth,
+      point[1] + (deltaY / length) * expansion - surface.normal[1] * depth,
+      point[2] - surface.normal[2] * depth,
+    ];
+  });
+
+  let p00 = expanded[0];
+  let p10 = expanded[1];
+  let p01 = expanded[3];
+  let p11 = expanded[2];
+  const mathematicalNormal = normalized(
+    cross(subtract(p10, p00), subtract(p01, p00))
+  );
+  if (!mathematicalNormal) return null;
+  // AA draws the side opposite the patch's mathematical normal.
+  if (dot(mathematicalNormal, surface.normal) > 0) {
+    [p00, p10] = [p10, p00];
+    [p01, p11] = [p11, p01];
+  }
+
+  const material = materialFor(surface.sourceMaterial);
+  const lines = [
+    "{",
+    "patchDef2",
+    "{",
+    material.texture,
+    "( 3 3 0 0 0 )",
+    "(",
+  ];
+  for (let row = 0; row < 3; row++) {
+    const v = row / 2;
+    const controls = [];
+    for (let column = 0; column < 3; column++) {
+      const u = column / 2;
+      const point = bilinearPoint(p00, p10, p01, p11, u, v);
+      controls.push(
+        `( ${point.map(fmt).join(" ")} ${fmt(u)} ${fmt(v)} )`
+      );
+    }
+    lines.push(`( ${controls.join(" ")} )`);
+  }
+  lines.push(")", "}", "}");
+  return lines.join("\n");
+}
+
 function displacementBrushes(side, solidCenter, solidSides, stats) {
   const verticesBlock = children(side.children, "vertices_plus")[0];
   const dispInfo = children(side.children, "dispinfo")[0];
@@ -776,7 +840,44 @@ function convertSolid(solid, isDetail, stats) {
     stats.sourceSkySkipped++;
     return null;
   }
-  if (sourceMaterials.every((material) => helperMaterial.test(material))) {
+  const allHelper = sourceMaterials.every((material) =>
+    helperMaterial.test(material)
+  );
+  const sourcePlayerClip =
+    allHelper &&
+    sourceMaterials.some((material) =>
+      /tools\/toolsplayerclip/i.test(material)
+    );
+  const sourceClipMaterial =
+    allHelper &&
+    sourceMaterials.some((material) =>
+      /tools\/toolsclip(?:_|$)/i.test(material)
+    );
+  let sourceLargeClip = false;
+  let sourceLargeClipBounds = null;
+  if (sourceClipMaterial) {
+    const helperPoints = pointsForSolid(solid);
+    if (helperPoints.length) {
+      const helperMin = [0, 1, 2].map((axis) =>
+        Math.min(...helperPoints.map((point) => point[axis]))
+      );
+      const helperMax = [0, 1, 2].map((axis) =>
+        Math.max(...helperPoints.map((point) => point[axis]))
+      );
+      const helperExtents = helperMax.map(
+        (component, axis) => component - helperMin[axis]
+      );
+      sourceLargeClip = Math.max(...helperExtents) >= 512;
+      if (sourceLargeClip) {
+        sourceLargeClipBounds = { min: helperMin, max: helperMax };
+      }
+    }
+  }
+  if (allHelper && !sourcePlayerClip && !sourceLargeClip) {
+    for (const material of new Set(sourceMaterials.map((item) => item.toLowerCase()))) {
+      stats.helperBrushesByMaterial[material] =
+        (stats.helperBrushesByMaterial[material] || 0) + 1;
+    }
     stats.helperSkipped++;
     return null;
   }
@@ -790,6 +891,21 @@ function convertSolid(solid, isDetail, stats) {
   if (center[0] > 4000 || center[2] < -1200) {
     stats.skyboxSkipped++;
     return null;
+  }
+  if (sourcePlayerClip) {
+    stats.sourcePlayerClipBrushes++;
+    stats.sourcePlayerClipBounds.push({
+      min: [0, 1, 2].map((axis) =>
+        Math.min(...solidPoints.map((point) => point[axis]))
+      ),
+      max: [0, 1, 2].map((axis) =>
+        Math.max(...solidPoints.map((point) => point[axis]))
+      ),
+    });
+  }
+  if (sourceLargeClip) {
+    stats.sourceLargeClipBrushes++;
+    stats.sourceLargeClipBounds.push(sourceLargeClipBounds);
   }
 
   // Source commonly exposes only one or two faces of a convex construction
@@ -903,9 +1019,13 @@ function convertSolid(solid, isDetail, stats) {
     const sourceMaterial = value(side.children, "material");
     const useNodrawFallback =
       nodrawFallback && nodrawMaterial.test(sourceMaterial);
-    const material = useNodrawFallback
-      ? nodrawFallback
-      : materialFor(sourceMaterial);
+    const material = sourcePlayerClip
+      ? targetMaterials.playerClip
+      : sourceLargeClip
+        ? targetMaterials.clip
+        : useNodrawFallback
+          ? nodrawFallback
+          : materialFor(sourceMaterial);
     if (useNodrawFallback) stats.nodrawFallbackFaces++;
     const detailSuffix = isDetail && material !== targetMaterials.sky ? " +surfaceparm detail" : "";
     lines.push(
@@ -1175,6 +1295,7 @@ function collectPlanarDisplacementSupports(solid, surfaces) {
       vertices,
       normal: plane.normal,
       distance: plane.distance,
+      sourceMaterial: value(side.children, "material"),
       minX: Math.min(...vertices.map((point) => point[0])),
       maxX: Math.max(...vertices.map((point) => point[0])),
       minY: Math.min(...vertices.map((point) => point[1])),
@@ -1185,6 +1306,7 @@ function collectPlanarDisplacementSupports(solid, surfaces) {
 
 function snapOriginToPlanarSupport(origin, surfaces, stats) {
   let best = null;
+  let closest = null;
   for (const surface of surfaces) {
     if (
       origin[0] < surface.minX - 0.1 ||
@@ -1201,16 +1323,30 @@ function snapOriginToPlanarSupport(origin, surfaces, stats) {
         surface.normal[1] * origin[1]) /
       surface.normal[2];
     const drop = origin[2] - z;
+    if (!closest || Math.abs(drop) < Math.abs(closest.drop)) {
+      closest = { z, drop };
+    }
     if (drop < -8 || drop > 64) continue;
     if (!best || Math.abs(drop) < Math.abs(best.drop)) best = { z, drop };
   }
-  if (!best || Math.abs(best.drop) < 0.5) return [...origin];
+  if (!best) {
+    return {
+      origin: [...origin],
+      excessiveCorrection: Boolean(closest),
+    };
+  }
+  if (Math.abs(best.drop) < 0.5) {
+    return { origin: [...origin], excessiveCorrection: false };
+  }
   stats.propsGroundSnapped++;
   stats.maximumPropGroundAdjustment = Math.max(
     stats.maximumPropGroundAdjustment,
     Math.abs(best.drop)
   );
-  return [origin[0], origin[1], best.z];
+  return {
+    origin: [origin[0], origin[1], best.z],
+    excessiveCorrection: false,
+  };
 }
 
 function isUnsafeArchitecturalPlaceholder(model) {
@@ -1266,6 +1402,13 @@ const stats = {
   displacementFailureNormal: 0,
   nodrawFallbackFaces: 0,
   unsupportedPropsSkipped: 0,
+  helperBrushesByMaterial: {},
+  sourcePlayerClipBrushes: 0,
+  sourcePlayerClipBounds: [],
+  sourceLargeClipBrushes: 0,
+  sourceLargeClipBounds: [],
+  planarSeamUnderlays: 0,
+  vegetationOmittedForGrounding: 0,
   unsafeArchitecturalPropsSkipped: 0,
   displacementSupportSurfaces: 0,
   propsGroundSnapped: 0,
@@ -1403,6 +1546,16 @@ const skyShell = [
 worldBrushes.push(...skyShell);
 stats.structuralSkyBrushes = skyShell.length;
 
+if (displacementMode === "planar") {
+  for (const surface of planarDisplacementSupports) {
+    if (!displacementNeedsSkirts(surface.sourceMaterial)) continue;
+    const underlay = planarSeamUnderlayPatch(surface);
+    if (!underlay) continue;
+    worldBrushes.push(underlay);
+    stats.planarSeamUnderlays++;
+  }
+}
+
 for (const entity of sourceEntities) {
   const classname = value(entity.children, "classname");
   if (!["func_detail", "func_brush"].includes(classname)) continue;
@@ -1466,9 +1619,20 @@ for (const entity of sourceEntities) {
     stats.unsafeArchitecturalPropsSkipped++;
     continue;
   }
-  const groundedOrigin = receivesGroundedSubstitute(model)
+  const grounding = receivesGroundedSubstitute(model)
     ? snapOriginToPlanarSupport(origin, planarDisplacementSupports, stats)
-    : [...origin];
+    : { origin: [...origin], excessiveCorrection: false };
+  const groundedOrigin = grounding.origin;
+  if (
+    grounding.excessiveCorrection &&
+    (model.includes("/pine_a/") ||
+      model.includes("urban_bush") ||
+      model.includes("mall_fern") ||
+      model.includes("balcony_planter"))
+  ) {
+    stats.vegetationOmittedForGrounding++;
+    continue;
+  }
   let size = null;
   let height = null;
   let material = targetMaterials.crate;

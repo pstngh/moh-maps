@@ -122,6 +122,10 @@ when fidelity value is otherwise similar.
   If the Source model, displacement, or overlay that covered a support face is
   omitted, that nodraw face may become a literal sky hole and needs a
   material-matched fallback.
+- Classify helper brushes by gameplay role before omission. Preserve explicit
+  player clips and measured large collision volumes when they define routes
+  or containment; editor hints, skips, areaportals, and triggers are not
+  equivalent to collision.
 - Record every skipped class and count in the conversion report.
 
 ## Phase 2: geometry construction
@@ -162,6 +166,12 @@ correct but impractical for the legacy compiler. If simplification is needed,
 prioritize traversable terrain, preserve collision, and document exactly which
 surfaces remain planar.
 
+When full displacement patches exceed that budget, a lowered,
+material-matched visual underlay may cover narrow XY seams between traversable
+planar backing faces. Keep the original backing brushes as collision, expand
+the underlay only enough to cover the measured gap, and validate that it does
+not bridge an intentional opening.
+
 ### Architectural Source models
 
 VMF prop entities name model files but do not contain the model geometry.
@@ -174,6 +184,11 @@ Before substituting an architectural model:
 - use non-solid visual substitutes only when visual dimensions are measured
   but the collision role remains uncertain;
 - validate the longest repeated row from a distant viewpoint.
+
+Do not infer interactivity from a model name. A static prop whose path contains
+`door` is not a functional door entity. Add AA door behavior only after
+verifying source entity intent, pivot, travel or swing clearance, collision,
+and bot route value.
 
 One generic arch size is not adequate for every `arch_*`, `port_*`, or façade
 model. Cobblestone proved that major ports repeat at 256 units while port
@@ -358,6 +373,13 @@ Run at least one controlled before/after comparison from the same viewpoint
 for every visual repair. Random bot-follow screenshots are useful coverage but
 do not replace deterministic regression views.
 
+For scripted OpenMoHAA player cameras, `origin` sets position but ordinary
+entity `angles` is not the rendered player view. Use the player `viewangles`
+event immediately before capture, because a later client input frame can
+overwrite it, or use a dedicated camera entity. Log `viewpos` during harness
+development. A survey that misses the reported ground-level angle is useful
+regression coverage, not proof that the reported defect is fixed.
+
 Bot acceptance:
 
 - all requested bots enter;
@@ -380,8 +402,10 @@ Bot acceptance:
 | Bowed terrain | Raw samples used as quadratic controls | Generate midpoint-expanded bilinear controls |
 | Open displacement edges | Patch without backing/skirt | Preserve hull and material-matched boundaries |
 | Triangular sky cuts in floors/walls | Exposed Source nodraw support face | Material-match only the exposed support of mixed brushes |
+| Bright ribbons between planar terrain faces | Horizontal Source offsets exceed the backing polygons | Use a lowered material-matched seam underlay or reconstruct that bounded terrain group |
 | Portal overflow | Source walls imported as structural BSP | Structural sky shell plus internal detail |
 | Floating ribs and malformed arcades | Generic placeholder used for unrelated Source model families | Require per-family mesh/bounds/opening measurements or omit |
+| Bots reach exterior terrain islands | Collision helpers omitted with editor helpers, or exterior boundary topology is incomplete | Preserve explicit player clips and measured route clips, then verify containment; clips alone do not replace a missing boundary |
 | Flat tan scene | Oversized global/spawn lights | Low ambient, warm direct, cool fill, real fixtures |
 | No bots despite bot support | Only `bot_enable` set | Set `sv_maxbots` and `sv_numbots` |
 | Eight identical QA frames | No bots available to follow | Verify bot creation before screenshot cycling |

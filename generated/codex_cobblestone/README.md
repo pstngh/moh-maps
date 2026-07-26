@@ -1,4 +1,4 @@
-# Codex Cobblestone - revision 3 visual repair
+# Codex Cobblestone - revision 4 seam and collision repair
 
 `codex_cobblestone` is an Allied Assault/OpenMoHAA deathmatch translation of
 the classic Counter-Strike Cobblestone layout. It uses only stock Allied
@@ -25,16 +25,23 @@ detail solids. Revision 3 keeps that structural repair while removing 299
 unmeasured architectural placeholders that caused floating arches, ribs,
 shutters, doors, and facade panels.
 
+Revision 4 preserves the source's explicit player clips and 46 measured large
+collision volumes, adds low-detail material-matched underlays beneath
+traversable planar terrain, and omits vegetation that cannot be grounded
+safely. This targets source route fidelity and bright terrain seams without
+reintroducing speculative Source-model geometry.
+
 Important Source-model architecture is now omitted unless its real mesh,
 bounds, pivot, or a measured per-family reconstruction is available. Repeated
 instance spacing alone is not enough evidence to synthesize a replacement.
 The old diagnostic geometry remains available only through
 `--legacy-architectural-placeholders`; it is not release geometry.
 
-The distant Source 3D skybox, editor helpers, gameplay systems that have no AA
-equivalent, and most cosmetic Source props remain omitted. Upright barrels,
-hay bales, coffins, and crates still become generated cover, while a reduced
-selection of trees and bushes uses stock AA static models.
+The distant Source 3D skybox, non-collision editor helpers, gameplay systems
+that have no AA equivalent, and most cosmetic Source props remain omitted.
+Upright barrels, hay bales, coffins, and crates still become generated cover,
+while a reduced selection of grounded trees and bushes uses stock AA static
+models.
 
 This is a layout translation, not a byte-identical CS map. The reference VMF
 is intentionally not redistributed. Terrain remains angular where the original
@@ -42,30 +49,42 @@ uses displacement sculpting. Some distant arcade and decorative architecture
 is omitted because the original surfaces exist only in Source model files,
 not in the decompiled VMF brush data.
 
+Visible doors are static by source intent. The reference has 33 door-model
+props but no `func_door` or `func_door_rotating` entity. Interactive AA doors
+would be a gameplay enhancement requiring measured pivots, swing clearance,
+and separate bot testing.
+
 ## Current build
 
-- 4,782 generated world/detail/prop brushes
-- 4,653 converted source solids
+- 5,142 generated brushes or patches
+- 4,702 converted source solids
 - all 2,735 source `func_detail` solids retained
 - 840 planarized displacement backing brushes
 - 44 neutral deathmatch spawns, plus 22 Axis and 22 Allied spawns
 - 65 translated Source fixture lights; no spawn-following fill lights
-- 74 stock-AA tree and bush entities
+- 31 grounded stock-AA tree and bush entities
 - 123 generated cover brushes
+- 311 material-matched planar terrain seam underlays
+- 3 source player-clip and 46 measured large collision brushes
 - 299 unmeasured architectural model substitutions omitted
 - 5,682 exposed nodraw faces assigned a material-matched fallback
 - 448 planar displacement supports considered for grounding; 117 retained
   prop origins adjusted by no more than 64 units
-- 27,062 final BSP faces and 90 fast-VIS clusters
+- 27,373 final BSP faces and 90 fast-VIS clusters
 
-OpenMoHAA 0.82.1 loaded the exact final revision-3 PK3 and ran eight bots that
-moved, fought, used corridors, and traversed exterior routes. Eight bot-follow
-and ten fixed-camera viewpoints were inspected. The revision removes the
-repeated U-frame/rib fields, floating shutter and door groups, black facade
-panels, and tested floor/support cuts visible across the 19-screenshot user
-playtest. The final material pass maps Cobblestone's `outwall02` and
-`trimwall01` families to the established stock stone instead of bright
-plaster.
+OpenMoHAA 0.82.1 loaded the exact final revision-4 PK3, generated Recast
+navigation in 6.575 seconds, and ran eight bots that moved, fought, respawned,
+used corridors, and traversed exterior routes. The six-view bot-follow run
+recorded ten kills. Automated fixed-camera and high-altitude surveys found no
+giant underlay or architecture regression, though they did not reproduce
+every exact ground-level user camera.
+
+The revision removes incompatible floating vegetation and adds bounded visual
+coverage beneath the diagnosed planar terrain seams. Restoring the measured
+Source clip volumes improves collision fidelity but does not fully contain
+bots; some exterior terrain and edge routes remain reachable. The omitted
+Source 3D skybox and incomplete exterior boundary are now the principal
+visible and routing debt.
 
 ## Regenerating
 
@@ -144,10 +163,15 @@ map dm/codex_cobblestone
 
 ## Artifact fingerprints
 
-- BSP: 19,716,348 bytes; SHA-256
-  `43BF77D445D00842165CBD9C62DA9FBFE36E30CD2F575E6F263CDE0894203A69`
-- PK3: 3,877,188 bytes; SHA-256
-  `A0452E095D4E7A0AFC82A6DDCFAFF211A223C16A5FD9D54F273B4499B9CB4651`
+- generated MAP: 4,237,412 bytes; SHA-256
+  `8C05CCEEF9A3E91C53FC08A9E3BC698231DB994D943792B45494B91221193E58`
+- BSP: 20,422,536 bytes; SHA-256
+  `BEB92C96CBCDB6CB7F00755F97EBFACADBA4E184E7CC1FCFF48B80515E7DB8E6`
+- PK3: 3,916,777 bytes; SHA-256
+  `22862E336C2C1CF8014AF7CBE1984CF07B7F6FD1CAD76F5E953728179394D32F`
+- source ZIP: 452,664 bytes; SHA-256
+  `EC4B11984FD58540FBD32DAEF819F1B816ACEF7C5B70235605D3AA3E46282CE2`
 
-The repository's revision-3 report records the complete compile measurements,
-visual evidence, source-bundle fingerprint, and remaining limitations.
+The repository's [revision-4 report](REVISION-4.md) records the compile
+diagnostics, exact runtime evidence, door-entity audit, reproducibility check,
+and remaining limitations.
