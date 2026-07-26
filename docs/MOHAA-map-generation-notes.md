@@ -1,14 +1,39 @@
-# MoHAA/OpenMoHAA map generation notes
+# MOHAA/OpenMoHAA map-generation research log
 
-Living research document — revision 5, 2026-07-24
+Status: chronological evidence and case studies
+
+Last updated: 2026-07-26
+
+The normative workflow is
+[`MAP-GENERATION-PLAYBOOK.md`](MAP-GENERATION-PLAYBOOK.md). Start at
+[`docs/README.md`](README.md) when beginning new map work.
 
 ## Maintenance rule
 
-This is the canonical living knowledge file for the map-generation work. Every
-map iteration must update it with new format discoveries, compiler behavior,
-runtime results, visual defects, fixes, and reusable production rules. A map
-change is not complete until the corresponding knowledge has been recorded
-here.
+This file preserves experiments, measurements, compiler behavior, runtime
+results, visual defects, fixes, and map-specific case studies. Every material
+map iteration must add its evidence here.
+
+Confirmed reusable rules must also be promoted into the playbook. Current
+map-specific status belongs in `generated/<map>/README.md`, verified asset
+behavior belongs in `STOCK-AA-ASSET-CATALOG.md`, and repeatable revision data
+should follow `templates/MAP-REVISION-REPORT.md`.
+
+Historical results remain even when a later revision supersedes them. This is
+intentional: failed approaches are evidence that prevents repeated mistakes.
+
+## Research-log index
+
+- Format and toolchain fundamentals: text map grammar, BSP/runtime format,
+  compiler recipe, entities, scripts, packaging, and bot navigation.
+- Original prototype: `codex_arena01` specification and first in-engine result.
+- Dust II case study: source conversion, displacements, props, façades,
+  collision, regression repair, and ten revisions.
+- Lighting study: stock AA corpus, Monte Cassino reference, and the final
+  warm-direct/cool-fill Dust profile.
+- Cobblestone case study: source selection, displacement parsing, structural
+  sky shell, portal limits, detail restoration, and modular architecture.
+- Revision log: compact chronological summary at the end of this file.
 
 ## Goal and current result
 
@@ -1276,3 +1301,8 @@ Revision 2 artifact fingerprints:
   solids; measured and widened modular port replacements; added missing stone
   pillars; compiled 25,873 faces; and validated continuous interior/exterior
   architecture with two eight-bot OpenMoHAA runs.
+- 2026-07-26, knowledge-system revision: separated the mandatory production
+  workflow from this chronological evidence log; added repository-level
+  instructions, a documentation index, a verified stock-AA asset catalog, a
+  repeatable map-revision report, explicit evidence labels, and release gates
+  so future map work starts from the strongest proven process.
