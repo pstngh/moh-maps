@@ -1361,6 +1361,106 @@ not proof that every reported seam is gone.
 A separate regeneration produced a byte-identical 4,237,412-byte `.map`,
 closing the deterministic-source gate for revision 4.
 
+## Nuke preproduction: VPK, embedded autocombines, and original modern art
+
+The Nuke decompile is structurally healthy but establishes a stronger source
+completeness rule than the earlier ports. The 19,262,971-byte VMF contains
+8,039 solids, 48,098 sides, 761 displacement faces, 6,891 static props, and
+471 ordinary/spot lights. Its brush geometry is substantial, but it is not the
+complete industrial silhouette.
+
+**OBSERVED:** all 121 visible brush materials resolve from the local Source 1
+VPK. In contrast, only 695 of 1,405 unique referenced MDLs live in that VPK.
+The remaining 710 are `models/props/autocombine/de_nuke/...` entries generated
+into the map. Reading the BSP's embedded pak resolves all 710, and every one of
+the 1,405 studio headers supplies a measurable local bounds envelope.
+
+This separates three kinds of reference evidence:
+
+1. VMF brush planes define primary structural geometry.
+2. VPK materials/models define reusable source roles, dimensions, and ordinary
+   prop families.
+3. BSP-embedded autocombines define map-specific assembled geometry that a
+   VMF-only importer otherwise misses.
+
+**PROVEN audit rule:** inspect both VPK and BSP pak before calling a Source
+reference complete. Do not redistribute either archive's contents. Derived
+counts, dimensions, placements, material roles, and original reconstructions
+are acceptable production inputs.
+
+The source's 121 visible materials reduce to a much smaller legacy-engine
+palette: light/dark/painted concrete, interior concrete floor, blue/gray
+corrugated cladding, smooth trim, asphalt, ground, grating, ceiling tile,
+glass, chain-link, maintained grass, and compact gravel. Six original raster
+bases were generated without Valve pixel input, then a deterministic build
+made fourteen 512×512 TGA materials with
+mechanically continuous edges. This is a better modern-Nuke direction than
+forcing stock Allied Assault stone, plaster, or Second World War props onto
+the layout.
+
+Nuke also corrects the door assumption learned from Cobblestone. The reference
+contains four actual `prop_door_rotating` entities, including a paired set.
+Future conversion must either recreate their measured swing behavior and test
+bots, or deliberately leave a route open. A closed decorative panel that never
+moves would change source flow without documenting the change.
+
+The playable and distant clusters are measurably separate. Most solid centers
+sit between Y -3,072 and 1,023, while 900 sit between Y 7,168 and 12,360.
+Spawn-expanded classification identifies 7,010 candidate playable solids and
+1,029 outliers. This is a starting classifier; boundary solids still require
+inspection before the skybox cluster is omitted.
+
+The first generator applies the audit conservatively. It converts 5,639
+playable source solids, including fourteen `func_breakable` solids retained as
+static first-playable architecture; planarizes 604 displacement faces; keeps
+source player/large clip volumes; and replaces 638 simple props from parsed
+studio-header bounds. It emits four real AA `func_rotatingdoor` entities with
+origin brushes rather than closed decorative panels.
+
+Twenty hero industrial models are simple enough to reconstruct from name,
+bounds, placement, and the local reference preview: ten medium silos, seven
+water tanks, two reactor/silo forms, and one process silo. Thirty-four original
+16-sided cylinder/frustum brushes restore those forms. They deliberately
+remove solid collision so a broad visual envelope cannot cut through playable
+interiors; source brush/clip geometry remains the collision authority.
+
+The 710 autocombines remain explicit debt. Their names divide into pipes,
+wires, web joists, HVAC ducts, curbs, railings, roof trim, ladders, fence, and
+catwalk supports. A family name plus one combined AABB does not justify a full
+solid box. Those assemblies require mesh-informed or screenshot-guided
+procedural templates in later revisions.
+
+### Nuke revision 1: compiled modern palette, doors, and bot proof
+
+The final generator emits 6,949 world brushes and 541 entities. Its
+5,221,665-byte map regenerates byte-identically with SHA-256
+`22D39A6E47E657F4F6B2A0FC4E9AD008DB36695E6B2119C13EC219A3C9EA91C0`.
+Static validation resolves all fourteen custom materials, counts four rotating
+doors, and finds 16 Axis, 16 Allied, and 32 neutral DM spawns.
+
+Q3map compiled 35,149 input faces to 32,140 output faces in 2,115 seconds with
+no missing-image, malformed-brush, or fatal warning. Fast VIS completed with
+154 clusters, 283 portals, and 3,704 visibility bytes. Full MOHlight finished
+in 976 seconds and produced a 23,422,268-byte lit BSP. It also reported fifteen
+`potential hash mismatch` coordinates and clamped the entity-light list to 60
+lights in 33 leaves.
+
+**PROVEN lighting rule:** a restrained intensity transform is not sufficient
+when the Source map contains a dense fixture field. Nuke translated all 471
+ordinary/spot fixtures, and MOHlight's clamp count shows that the legacy engine
+cannot retain every local light association. A later pass must spatially
+cluster or deduplicate fixtures and compare the darkest interiors rather than
+merely lowering every light.
+
+The 7,059,297-byte final PK3 contains eighteen entries and SHA-256
+`3E577D3711C2B3ACFA9D7665D8D7968581C90615071D145C475B221AE71AF014`.
+OpenMoHAA 0.82.1 loaded that exact package, parsed the BSP in 0.118 seconds,
+built Recast navigation in 10.509 seconds, admitted eight bots, and logged 27
+kills during a 30-second smoke test. This proves first-playable navigation,
+movement, combat, death, and respawn. It does not prove final visual fidelity
+or the visible alignment/swing clearance of the four doors; those remain
+human-client checks.
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -1462,3 +1562,13 @@ closing the deterministic-source gate for revision 4.
   instructions, a documentation index, a verified stock-AA asset catalog, a
   repeatable map-revision report, explicit evidence labels, and release gates
   so future map work starts from the strongest proven process.
+- 2026-07-26, Nuke preproduction: audited the VMF, Source 1 VPK, and BSP
+  embedded pak; resolved all 121 visible materials and all 1,405 referenced
+  models; identified 710 BSP-only autocombines and four functional-door
+  candidates; separated the likely playable/skybox clusters; and created a
+  provenance-recorded fourteen-material original clean-industrial palette.
+- 2026-07-26, Nuke revision 1: generated a deterministic full-layout map,
+  compiled BSP/VIS/full lighting, packaged fourteen original textures,
+  preserved four functional door entities, validated the exact PK3 with eight
+  fighting bots, and promoted dense-Source-fixture budgeting into the shared
+  playbook.

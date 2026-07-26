@@ -65,6 +65,11 @@ Passing Q3map alone satisfies only part of gate 3.
 - Use forward slashes in ZIP/PK3 entry names.
 - Keep reference VMFs, retail textures, and Source model files out of the
   repository and package.
+- For Source maps, audit both the game VPK and the BSP's embedded pak. Generated
+  `autocombine` models may be absent from the ordinary VPK even when the VMF
+  references them; treating the VMF as complete can remove major architecture.
+- Record source asset metadata and visual roles, but never place extracted
+  commercial texture/model bytes in the repository or distributable PK3.
 - Do not choose a stock palette merely because a previous map used it.
 - Do not use a geometric volume threshold to classify Source detail as
   cosmetic. Thin walls, floors, and ceilings can have small volume and large
@@ -201,6 +206,12 @@ measured surrounding opening, omit it from the release build. Keep guessed
 placeholders behind an explicit diagnostic flag; never emit one generic
 three-brush frame for an entire `arch_*` or `port_*` class.
 
+Hero-scale skyline models are a distinct case. If the source name, full local
+bounds, placement, and reference view all establish a simple industrial form,
+an original cylinder/frustum/dome reconstruction may preserve recognition.
+Keep it non-blocking until source collision or route interaction is proven;
+never use one enormous model AABB as player collision through an interior.
+
 ### Props and bot collision
 
 - Ground props from verified model bounds or nearby support surfaces.
@@ -210,6 +221,8 @@ three-brush frame for an entire `arch_*` or `port_*` class.
 - Avoid vehicles and dynamic obstacles in narrow circulation paths unless bot
   behavior is explicitly tested.
 - A decorative panel may be non-solid, but its supporting wall must exist.
+- Prefer explicit Source clip brushes for collision around non-solid hero
+  reconstructions. Validate the silhouette and the route boundary separately.
 
 ## Phase 3: materials and original textures
 
@@ -236,6 +249,16 @@ When stock AA has no close match, create original game-ready art:
 - alpha masks only where the shader requires them;
 - original or redistributable content only;
 - in-engine scale and seam validation.
+
+Keep original texture generation reproducible:
+
+- retain original raster sources and exact prompts/provenance;
+- build final power-of-two assets through a deterministic script;
+- guarantee edge continuity mechanically rather than trusting a visual claim
+  of seamlessness;
+- use source-game textures only as local role/scale references;
+- validate diffuse contrast under MOHlight, because modern PBR response does
+  not transfer to MOHAA.
 
 MOHAA primarily needs diffuse/color textures and shader behavior, not a modern
 PBR set.
@@ -295,6 +318,13 @@ restrained AA range, preserve colors/origins, and inspect the darkest playable
 interior. A formula that worked in the current conversions is
 `clamp(source * 0.9 + 15, 10, 200)`, but it is an example to validate, not a
 universal constant.
+
+Do not translate a dense Source fixture field one-for-one merely because every
+light parses. Cluster or deduplicate co-located fixtures, budget lights per
+room/zone, and inspect MOHlight's entity-light diagnostics. Repeated
+`Num lights per leaf clamped ... to 60` messages prove that the AA runtime
+cannot preserve the intended local-light list; record them as open lighting
+debt and reduce the fixture set in the next measured pass.
 
 Lighting QA must cover:
 
