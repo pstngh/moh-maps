@@ -1217,6 +1217,79 @@ Revision 2 artifact fingerprints:
 - source ZIP: 441,353 bytes, SHA-256
   `B1B9F5ABEE8933564EBF082E2797B0F66065B41128E17C128AB7DDAB5F6EFC87`
 
+### Cobblestone revision 3: remove unmeasured model guesses
+
+A 19-screenshot playtest, `shot0000.tga` through `shot0018.tga`, showed that
+revision 2 had repaired the missing brush shells but introduced a different
+systematic failure. Repeated floating U-shaped frames, ribs, arcades,
+shutters, doors, black panels, and pillars came from 299 generated stand-ins
+for Source architectural models. The generator knew instance origins, angles,
+and repeated spacing, but did not have the source meshes, bounds, pivot
+conventions, or per-family opening measurements.
+
+Repeated spacing is not evidence of a model's shape, bounds, pivot, depth, or
+architectural role. A generic three-brush frame was therefore not a measured
+translation even where its width matched the distance between instances. The
+release rule is now:
+
+- retain an architectural model only when the mesh can be converted directly,
+  verified bounds and pivot are available, or the receiving opening is
+  measured and reconstructed per model family;
+- otherwise omit it cleanly;
+- keep guessed placeholders only behind an explicit diagnostic flag and never
+  ship them as release geometry.
+
+Several bright triangular floor and support cuts had a separate cause.
+Source's `tools/toolsnodraw` marks a face that is expected to be hidden by an
+adjacent model, displacement, or brush. Translating every such face to AA
+caulk exposes holes when that expected cover is omitted or planarized.
+Revision 3 gives mixed-material brushes a fallback derived from the same
+brush's visible material. This repairs 5,682 potentially exposed support
+faces without rendering dedicated all-nodraw helper solids.
+
+Planar displacement conversion also changes the surface height under props.
+Revision 3 extracts 448 usable displacement support quads and grounds retained
+cover and foliage to them when the correction is no more than 64 units. This
+adjusts 117 origins while avoiding large, speculative teleports. Cobwebs are
+omitted, Source glass uses verified stock `mohcommon/window5`, and
+`de_cbble/outwall02` plus `de_cbble/trimwall01` map to stock stone rather than
+the overly bright generic plaster fallback.
+
+The revision-3 generator emits:
+
+- 4,782 world/detail/prop brushes;
+- all 4,653 converted source solids and all 2,735 `func_detail` solids;
+- 840 planar displacement backing brushes;
+- 123 generated cover brushes and 74 stock vegetation entities;
+- 44 neutral, 22 Axis, and 22 Allied spawns;
+- 65 translated fixture lights;
+- zero release arch frames or facade panels and 299 explicitly omitted
+  architectural props.
+
+The first structural candidate compiled to 27,079 faces, 90 fast-VIS
+clusters, and a 19,726,656-byte lit BSP. OpenMoHAA 0.82.1 loaded the exact
+three-entry package, generated Recast navigation in 5.098 seconds, and ran
+eight bots that moved and fought. Eight bot-follow and ten fixed-camera
+screenshots confirmed that the repeated frame fields, floating facade panels,
+and tested support holes were gone. That QA also identified the final
+`outwall02`/`trimwall01` material correction described above.
+
+The final stone-material pass compiled 28,947 input faces to 27,062 output
+faces in 1,056 seconds. Fast VIS remained at 90 clusters, 161 portals, and
+1,448 visibility bytes. Full MOHlight completed in 449 seconds, producing a
+19,716,348-byte lit BSP with empty stderr and only two benign per-leaf light
+clamps.
+
+The exact final three-entry PK3 then passed a new isolated OpenMoHAA 0.82.1
+run. Its package hash matched the tested copy, Recast navigation generated in
+4.971 seconds, eight bots produced seven recorded kills, and eight bot-follow
+plus ten fixed-camera views showed no return of the diagnosed placeholder,
+support-hole, or pale-facade failures.
+
+A clean regeneration into a separate output directory produced a
+byte-identical `.map`, closing the reproducibility gate independently of the
+compile and runtime checks.
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -1301,6 +1374,11 @@ Revision 2 artifact fingerprints:
   solids; measured and widened modular port replacements; added missing stone
   pillars; compiled 25,873 faces; and validated continuous interior/exterior
   architecture with two eight-bot OpenMoHAA runs.
+- 2026-07-26, Cobblestone revision 3: analyzed nineteen screenshots; removed
+  299 unsafe architectural-model guesses; repaired exposed mixed-brush nodraw
+  faces; grounded retained props against planar displacement supports; added
+  verified stock window glass and source-family stone mappings; and repeated
+  isolated visual and eight-bot QA.
 - 2026-07-26, knowledge-system revision: separated the mandatory production
   workflow from this chronological evidence log; added repository-level
   instructions, a documentation index, a verified stock-AA asset catalog, a

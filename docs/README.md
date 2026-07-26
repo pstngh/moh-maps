@@ -48,4 +48,4 @@ merely accumulating a long diary.
 | --- | --- | --- |
 | `codex_arena01` | Original compiled DM prototype; OpenMoHAA navigation and bot movement proven | Prototype art and lighting |
 | `codex_dust2_v2` | Revision 10; full compile, displacement repair, Mediterranean relight, eight-bot QA | Port fidelity and remaining Source-to-AA art substitutions |
-| `codex_cobblestone` | Revision 2; all detail solids restored, modular ports measured, eight-bot QA | Planar displacements and simplified Source-model arcades |
+| `codex_cobblestone` | Revision 3; all detail solids retained, unsafe model guesses removed, exposed support faces repaired, eight-bot QA | Planar displacements and omitted Source-only decorative architecture |

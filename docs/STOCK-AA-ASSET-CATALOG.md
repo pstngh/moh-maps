@@ -35,6 +35,7 @@ supplies the retail AA data.
 | Wood beam | `general_structure/beam_wood1` | Beams and wood fallback |
 | Shutter | `central_europe/shutter_set2` | Non-solid façade panels |
 | Wood door | `central_europe/frenchdoor_wood1` | Door panels |
+| Window glass | `mohcommon/window5` | Compiled and rendered as stock translucent glass in Cobblestone revision 3 |
 | Reinforced crate | `german/crate_reinforced1_side` | Generated cover |
 | Rusted iron | `german/rusty_iron` | Barrels/metal accents |
 | Iron wall | `das_boot/ironwall1` | Generic metal |
@@ -77,6 +78,12 @@ Before finalizing a map material:
 6. Record the winner, rejected alternatives, and reason.
 
 Do not infer visual suitability from a filename alone.
+
+Cobblestone revision 3 also established that the source families
+`de_cbble/outwall02` and `de_cbble/trimwall01` read as castle masonry in this
+layout. Mapping them to `general_structure/stonebricks1` is more coherent than
+the broad European-plaster fallback. This is a source-family decision, not a
+rule that every material containing `wall` or `trim` should become stone.
 
 ## Catalog backlog
 

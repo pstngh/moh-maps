@@ -11,6 +11,11 @@ const mapName = process.argv[4] || "codex_cobblestone";
 const displacementMode = process.argv.includes("--full-displacements")
   ? "full"
   : "planar";
+const architecturalPlaceholderMode = process.argv.includes(
+  "--legacy-architectural-placeholders"
+)
+  ? "legacy"
+  : "omit";
 const mainDir = path.join(outputRoot, "main");
 const mapDir = path.join(mainDir, "maps", "dm");
 fs.mkdirSync(mapDir, { recursive: true });
@@ -165,6 +170,11 @@ const targetMaterials = {
     contentFlags: 0,
     surfaceFlags: 16384,
   },
+  window: {
+    texture: "mohcommon/window5",
+    contentFlags: 0,
+    surfaceFlags: 4194304,
+  },
   door: {
     texture: "central_europe/frenchdoor_wood1",
     contentFlags: 0,
@@ -228,6 +238,11 @@ function materialFor(sourceMaterial) {
   }
 
   if (/tools\/toolsblack/i.test(material)) return targetMaterials.darkStone;
+  if (/(cobweb)/.test(material)) return targetMaterials.caulk;
+  if (/(stain_glass|glass)/.test(material)) return targetMaterials.window;
+  if (/de_cbble\/(outwall02|trimwall01)/.test(material)) {
+    return targetMaterials.stone;
+  }
   if (/(grass|foliage|blendgrass|dirt)/.test(material)) return targetMaterials.grass;
   if (/(cobble|flagstone|stone_floor|floor_0|road|path)/.test(material)) {
     return targetMaterials.floor;
@@ -246,6 +261,7 @@ function materialFor(sourceMaterial) {
 }
 
 const helperMaterial = /tools\/(toolsclip|toolshint|toolsskip|toolstrigger|toolsareaportal|toolsplayerclip|toolsblockbullets|toolsinvisibleladder)/i;
+const nodrawMaterial = /tools\/toolsnodraw/i;
 
 function pointsForSolid(solid) {
   const points = [];
@@ -776,6 +792,22 @@ function convertSolid(solid, isDetail, stats) {
     return null;
   }
 
+  // Source commonly exposes only one or two faces of a convex construction
+  // brush and marks the remaining faces nodraw. When the covering Source
+  // displacement/model is unavailable, leaving those faces as AA caulk makes
+  // literal sky holes. Reuse the brush's own visible material on nodraw faces;
+  // buried/shared faces are still removed by Q3map, while genuinely exposed
+  // support faces remain closed.
+  const fallbackSourceMaterial = sourceMaterials.find(
+    (material) =>
+      !nodrawMaterial.test(material) &&
+      !helperMaterial.test(material) &&
+      !/skybox/i.test(material)
+  );
+  const nodrawFallback = fallbackSourceMaterial
+    ? materialFor(fallbackSourceMaterial)
+    : null;
+
   const displacementSides = sides.filter(
     (side) => children(side.children, "dispinfo").length > 0
   );
@@ -868,7 +900,13 @@ function convertSolid(solid, isDetail, stats) {
       stats.invalid++;
       return null;
     }
-    const material = materialFor(value(side.children, "material"));
+    const sourceMaterial = value(side.children, "material");
+    const useNodrawFallback =
+      nodrawFallback && nodrawMaterial.test(sourceMaterial);
+    const material = useNodrawFallback
+      ? nodrawFallback
+      : materialFor(sourceMaterial);
+    if (useNodrawFallback) stats.nodrawFallbackFaces++;
     const detailSuffix = isDetail && material !== targetMaterials.sky ? " +surfaceparm detail" : "";
     lines.push(
       `${plane.map(formatPoint).join(" ")} ${material.texture} 0 0 0 0.5 0.5 ${
@@ -1106,6 +1144,99 @@ function inPlayableArea(origin) {
   return origin[0] < 4000 && origin[0] > -4500 && origin[2] > -1200;
 }
 
+function pointInConvexPolygonXY(point, vertices) {
+  let hasPositive = false;
+  let hasNegative = false;
+  for (let index = 0; index < vertices.length; index++) {
+    const start = vertices[index];
+    const end = vertices[(index + 1) % vertices.length];
+    const crossZ =
+      (end[0] - start[0]) * (point[1] - start[1]) -
+      (end[1] - start[1]) * (point[0] - start[0]);
+    if (crossZ > 0.05) hasPositive = true;
+    if (crossZ < -0.05) hasNegative = true;
+    if (hasPositive && hasNegative) return false;
+  }
+  return true;
+}
+
+function collectPlanarDisplacementSupports(solid, surfaces) {
+  const sides = children(solid.children, "side");
+  const points = pointsForSolid(solid);
+  if (sides.length < 4 || !points.length) return;
+  const center = centroid(points);
+  for (const side of sides) {
+    if (!children(side.children, "dispinfo").length) continue;
+    const vertices = reconstructedFaceVertices(sides, side, center);
+    const planePoints = parsePlane(value(side.children, "plane"));
+    const plane = planePoints ? brushPlane(planePoints, center) : null;
+    if (!vertices || !plane || plane.normal[2] < 0.2) continue;
+    surfaces.push({
+      vertices,
+      normal: plane.normal,
+      distance: plane.distance,
+      minX: Math.min(...vertices.map((point) => point[0])),
+      maxX: Math.max(...vertices.map((point) => point[0])),
+      minY: Math.min(...vertices.map((point) => point[1])),
+      maxY: Math.max(...vertices.map((point) => point[1])),
+    });
+  }
+}
+
+function snapOriginToPlanarSupport(origin, surfaces, stats) {
+  let best = null;
+  for (const surface of surfaces) {
+    if (
+      origin[0] < surface.minX - 0.1 ||
+      origin[0] > surface.maxX + 0.1 ||
+      origin[1] < surface.minY - 0.1 ||
+      origin[1] > surface.maxY + 0.1 ||
+      !pointInConvexPolygonXY(origin, surface.vertices)
+    ) {
+      continue;
+    }
+    const z =
+      (surface.distance -
+        surface.normal[0] * origin[0] -
+        surface.normal[1] * origin[1]) /
+      surface.normal[2];
+    const drop = origin[2] - z;
+    if (drop < -8 || drop > 64) continue;
+    if (!best || Math.abs(drop) < Math.abs(best.drop)) best = { z, drop };
+  }
+  if (!best || Math.abs(best.drop) < 0.5) return [...origin];
+  stats.propsGroundSnapped++;
+  stats.maximumPropGroundAdjustment = Math.max(
+    stats.maximumPropGroundAdjustment,
+    Math.abs(best.drop)
+  );
+  return [origin[0], origin[1], best.z];
+}
+
+function isUnsafeArchitecturalPlaceholder(model) {
+  return (
+    /models\/props\/de_cbble\/arch_[^/]+\//.test(model) ||
+    /models\/props\/de_cbble\/port_(a|b|c|sect_a)\//.test(model) ||
+    /models\/props\/de_cbble\/window_[^/]+\//.test(model) ||
+    model.includes("/door_a/") ||
+    model.includes("metal_grate")
+  );
+}
+
+function receivesGroundedSubstitute(model) {
+  return (
+    model.includes("barrel_a") ||
+    model.includes("oildrum") ||
+    model.includes("hay_bail") ||
+    model.includes("/coffin/") ||
+    model.includes("/pine_a/") ||
+    model.includes("urban_bush") ||
+    model.includes("mall_fern") ||
+    model.includes("balcony_planter") ||
+    model.includes("crate")
+  );
+}
+
 const vmfText = fs.readFileSync(referencePath, "utf8");
 const rootEntries = parseEntries(tokenize(vmfText), { index: 0 });
 const world = children(rootEntries, "world")[0];
@@ -1133,7 +1264,12 @@ const stats = {
   displacementFailureStart: 0,
   displacementFailureRows: 0,
   displacementFailureNormal: 0,
+  nodrawFallbackFaces: 0,
   unsupportedPropsSkipped: 0,
+  unsafeArchitecturalPropsSkipped: 0,
+  displacementSupportSurfaces: 0,
+  propsGroundSnapped: 0,
+  maximumPropGroundAdjustment: 0,
   coverBrushes: 0,
   archFrames: 0,
   facadePanels: 0,
@@ -1172,6 +1308,19 @@ const stats = {
     atLeast128: 0,
   },
 };
+
+const planarDisplacementSupports = [];
+for (const solid of children(world.children, "solid")) {
+  collectPlanarDisplacementSupports(solid, planarDisplacementSupports);
+}
+for (const entity of sourceEntities) {
+  const classname = value(entity.children, "classname");
+  if (!["func_detail", "func_brush"].includes(classname)) continue;
+  for (const solid of children(entity.children, "solid")) {
+    collectPlanarDisplacementSupports(solid, planarDisplacementSupports);
+  }
+}
+stats.displacementSupportSurfaces = planarDisplacementSupports.length;
 
 const worldBrushes = [];
 const stockPropEntities = [];
@@ -1310,6 +1459,16 @@ for (const entity of sourceEntities) {
   const yaw = Number.isFinite(angles[1]) ? angles[1] : 0;
   const pitch = Number.isFinite(angles[0]) ? angles[0] : 0;
   const roll = Number.isFinite(angles[2]) ? angles[2] : 0;
+  if (
+    architecturalPlaceholderMode === "omit" &&
+    isUnsafeArchitecturalPlaceholder(model)
+  ) {
+    stats.unsafeArchitecturalPropsSkipped++;
+    continue;
+  }
+  const groundedOrigin = receivesGroundedSubstitute(model)
+    ? snapOriginToPlanarSupport(origin, planarDisplacementSupports, stats)
+    : [...origin];
   let size = null;
   let height = null;
   let material = targetMaterials.crate;
@@ -1400,9 +1559,9 @@ for (const entity of sourceEntities) {
     }
     worldBrushes.push(
       cylinderBrush(
-        origin,
-        origin[2],
-        origin[2] + 48,
+        groundedOrigin,
+        groundedOrigin[2],
+        groundedOrigin[2] + 48,
         22,
         targetMaterials.rustyMetal
       )
@@ -1432,7 +1591,7 @@ for (const entity of sourceEntities) {
     }
     stockPropEntities.push(
       pointEntity("static_natural_tree_commontree", {
-        origin: origin.map(fmt).join(" "),
+        origin: groundedOrigin.map(fmt).join(" "),
         angle: fmt(yaw),
         model: "static//tree_commontree.tik",
         scale: "0.7",
@@ -1454,7 +1613,7 @@ for (const entity of sourceEntities) {
     }
     stockPropEntities.push(
       pointEntity("static_natural_bush_regularbush", {
-        origin: origin.map(fmt).join(" "),
+        origin: groundedOrigin.map(fmt).join(" "),
         angle: fmt(yaw),
         model: "static//bush_regularbush.tik",
         scale: "0.8",
@@ -1476,8 +1635,16 @@ for (const entity of sourceEntities) {
     const half = size / 2;
     worldBrushes.push(
       boxBrush(
-        [origin[0] - half, origin[1] - half, origin[2]],
-        [origin[0] + half, origin[1] + half, origin[2] + height],
+        [
+          groundedOrigin[0] - half,
+          groundedOrigin[1] - half,
+          groundedOrigin[2],
+        ],
+        [
+          groundedOrigin[0] + half,
+          groundedOrigin[1] + half,
+          groundedOrigin[2] + height,
+        ],
         material
       )
     );
@@ -1599,6 +1766,7 @@ fs.writeFileSync(
 const report = {
   mapName,
   displacementMode,
+  architecturalPlaceholderMode,
   reference: path.basename(referencePath),
   output: path.join(mapDir, `${mapName}.map`),
   worldBrushes: worldBrushes.length,

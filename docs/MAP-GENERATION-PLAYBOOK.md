@@ -118,6 +118,10 @@ when fidelity value is otherwise similar.
   MOHAA's fixed portal-data limit.
 - Preserve all architectural detail initially. Optimize only after identifying
   specific cosmetic classes by material, role, placement, or visibility.
+- Audit mixed-material brushes before preserving Source nodraw as AA caulk.
+  If the Source model, displacement, or overlay that covered a support face is
+  omitted, that nodraw face may become a literal sky hole and needs a
+  material-matched fallback.
 - Record every skipped class and count in the conversion report.
 
 ## Phase 2: geometry construction
@@ -167,12 +171,20 @@ Before substituting an architectural model:
 - measure repeated center spacing and orientation;
 - infer base/top origin convention from neighbors and nearby brush surfaces;
 - distinguish a complete wall module from decorative trim;
-- use non-solid visual substitutes when dimensions are uncertain;
+- use non-solid visual substitutes only when visual dimensions are measured
+  but the collision role remains uncertain;
 - validate the longest repeated row from a distant viewpoint.
 
 One generic arch size is not adequate for every `arch_*`, `port_*`, or façade
 model. Cobblestone proved that major ports repeat at 256 units while port
 sections repeat near 128.
+
+Revision-3 evidence narrows that rule further: repeated center spacing does
+not establish a model's width, height, pivot, shape, or architectural role.
+If a model family cannot be reconstructed from its mesh, verified bounds, or
+measured surrounding opening, omit it from the release build. Keep guessed
+placeholders behind an explicit diagnostic flag; never emit one generic
+three-brush frame for an entire `arch_*` or `port_*` class.
 
 ### Props and bot collision
 
@@ -367,7 +379,9 @@ Bot acceptance:
 | Missing displacement triangles | Touching micro-brushes/shared faces | Use joined patches plus collision backing |
 | Bowed terrain | Raw samples used as quadratic controls | Generate midpoint-expanded bilinear controls |
 | Open displacement edges | Patch without backing/skirt | Preserve hull and material-matched boundaries |
+| Triangular sky cuts in floors/walls | Exposed Source nodraw support face | Material-match only the exposed support of mixed brushes |
 | Portal overflow | Source walls imported as structural BSP | Structural sky shell plus internal detail |
+| Floating ribs and malformed arcades | Generic placeholder used for unrelated Source model families | Require per-family mesh/bounds/opening measurements or omit |
 | Flat tan scene | Oversized global/spawn lights | Low ambient, warm direct, cool fill, real fixtures |
 | No bots despite bot support | Only `bot_enable` set | Set `sv_maxbots` and `sv_numbots` |
 | Eight identical QA frames | No bots available to follow | Verify bot creation before screenshot cycling |
