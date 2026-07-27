@@ -212,6 +212,41 @@ an original cylinder/frustum/dome reconstruction may preserve recognition.
 Keep it non-blocking until source collision or route interaction is proven;
 never use one enormous model AABB as player collision through an interior.
 
+### Screenshot-guided missing-family reconstruction
+
+Human screenshots can prove that an omitted model family is architectural
+debt even when its original mesh cannot be distributed. Treat the screenshots
+as defect evidence, then build an original bounded family template only when
+model name, parsed bounds, placement, orientation, and repeated role agree.
+
+Good candidates include:
+
+- railings represented by top/mid rails and sparse posts;
+- ladders represented by two rails and a capped rung count;
+- long pipes, joists, curbs, roof trim, and ducts represented by their
+  principal measured run;
+- chain-link represented by a non-solid alpha panel plus sparse supports;
+- catwalk supports represented by a small skeletal frame.
+
+Keep these templates nonblocking unless verified Source collision proves
+otherwise. Filling a visual hole is permission to restore enclosure and
+silhouette, not permission to add arbitrary cover or change a route.
+
+Repeated detail is a compiler budget. Preserve the full family inventory but
+cap intermediate posts, rungs, and secondary cross-runs. Nuke revision 2
+proved that 1,361 dense fill brushes could push Q3map beyond one hour, while
+803 silhouette-preserving brushes reconstructed the same 419 placements and
+compiled cleanly.
+
+For every screenshot pass, record a compact matrix:
+
+- image number or viewpoint;
+- observed defect;
+- inferred source class;
+- implemented response;
+- whether the response is technically proven or still awaits visual
+  confirmation.
+
 ### Props and bot collision
 
 - Ground props from verified model bounds or nearby support surfaces.
@@ -326,6 +361,17 @@ room/zone, and inspect MOHlight's entity-light diagnostics. Repeated
 cannot preserve the intended local-light list; record them as open lighting
 debt and reduce the fixture set in the next measured pass.
 
+Assign an explicit lightmap policy to reconstructed cosmetic geometry. Narrow
+rails, pipes, ladders, trim, fixtures, and window dressings usually read well
+with vertex lighting and should use `surfaceparm nolightmap`. Reserve baked
+lightmaps for primary walls, floors, terrain, doors, and large surfaces whose
+shading defines the room.
+
+`MAX_MAP_LIGHTING exceeded from N lightmaps` is a hard failure, not a warning.
+Nuke revision 2 hit it at 180 lightmaps. Marking 6,126 cosmetic sides
+non-lightmapped preserved identical face counts and allowed full MOHlight to
+complete.
+
 Lighting QA must cover:
 
 - full-sun exterior;
@@ -354,6 +400,7 @@ Interpret failures by stage:
 | Missing/black materials | Shader data absent or wrong name | Compile against retail data and verify asset |
 | Portal-data overflow | Too many structural split planes | Structural shell plus internal detail; do not hide geometry |
 | BSP compile stalls | Excessive structural brushes or patches | Measure cost by class; simplify selectively |
+| `MAX_MAP_LIGHTING` | Too many baked-lightmap surfaces | Vertex-light narrow cosmetic detail; preserve lightmaps for primary architecture |
 | Patch hash warnings with correct render | Legacy tool limitation | Record and verify visually; do not assume fatal |
 
 Record input/output face counts, clusters, portals, compile duration, warnings,

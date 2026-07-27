@@ -2,6 +2,7 @@ textures/codex_nuke/chainlink
 {
 	qer_editorimage textures/codex_nuke/chainlink.tga
 	surfaceparm trans
+	surfaceparm nonsolid
 	surfaceparm alphashadow
 	surfaceparm nomarks
 	cull none
@@ -15,6 +16,18 @@ textures/codex_nuke/chainlink
 		map $lightmap
 		blendFunc GL_DST_COLOR GL_ZERO
 		depthFunc equal
+	}
+}
+
+textures/codex_nuke/window_backing
+{
+	qer_editorimage textures/codex_nuke/window_backing.tga
+	surfaceparm nolightmap
+	surfaceparm nonsolid
+	surfaceparm nomarks
+	{
+		map textures/codex_nuke/window_backing.tga
+		rgbGen identity
 	}
 }
 

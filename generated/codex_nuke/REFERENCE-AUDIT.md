@@ -78,6 +78,25 @@ map assets, not reusable public-package content. A VMF-only port that ignores
 them will omit parts of ventilation systems, façades, roof assemblies, trim,
 and other industrial silhouettes.
 
+Revision-2 screenshot evidence authorizes bounded original templates for
+families whose name, parsed hull bounds, placement, orientation, and repeated
+role agree. The accepted conversion reconstructs 419 placements as 803
+nonblocking skeletal brushes across railings, pipes, ladders, web joists,
+curbs, HVAC ducts, roof trim, chain-link, and catwalk supports. It does not
+copy the embedded meshes. The remaining 291 placements and all wire families
+stay omitted because their measured envelopes do not prove a safe shape.
+
+This establishes the conversion policy:
+
+- use the full measured model envelope to orient and bound a family template;
+- preserve a recognizable long run, not every Source sub-element;
+- keep uncertain model substitutes nonblocking and retain Source clips as
+  collision authority;
+- cap repeated posts, rungs, and cross-runs for the legacy compiler;
+- vertex-light narrow cosmetic reconstruction instead of consuming fixed
+  lightmap pages;
+- keep any family without sufficient evidence explicitly omitted.
+
 ## Dominant material roles
 
 The top visible material references are:
@@ -130,6 +149,11 @@ First-playable priority is:
 4. **Cosmetic omission:** outlets, wires, extinguisher details, chairs,
    rubbish, foliage cards, signs, decals, and small clutter until release gates
    are otherwise satisfied.
+
+The user also permits filling visually missing areas with original geometry.
+That permission does not authorize arbitrary route changes: additions should
+restore enclosure, safety edges, supports, and silhouette first; new solid
+cover or blockers still require source collision evidence and bot testing.
 
 The user explicitly does not require graffiti, warning signs, or similar
 surface storytelling. Excluding them improves clarity and avoids needless

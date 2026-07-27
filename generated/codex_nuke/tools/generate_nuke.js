@@ -187,6 +187,11 @@ const targetMaterials = {
     contentFlags: 0,
     surfaceFlags: 4194304,
   },
+  windowBacking: {
+    texture: "codex_nuke/window_backing",
+    contentFlags: 0,
+    surfaceFlags: 4194304,
+  },
   chainlink: {
     texture: "codex_nuke/chainlink",
     contentFlags: 0,
@@ -218,7 +223,7 @@ const targetMaterials = {
     surfaceFlags: 32768,
   },
   sky: {
-    texture: "sky/mohday1",
+    texture: "sky/m5l2",
     contentFlags: 0,
     surfaceFlags: 276,
   },
@@ -264,10 +269,12 @@ function materialFor(sourceMaterial) {
     return targetMaterials.caulk;
   }
 
-  if (/tools\/toolsblack/i.test(material)) return targetMaterials.concreteDark;
+  if (/(tools\/toolsblack|cs_italy\/black|window_illum)/i.test(material)) {
+    return targetMaterials.windowBacking;
+  }
   if (/(cobweb|overlay|hanging_wires|dev_measure)/.test(material)) return targetMaterials.caulk;
   if (/(chainlink|railing_001_card)/.test(material)) return targetMaterials.chainlink;
-  if (/(stain_glass|glass|window_illum)/.test(material)) return targetMaterials.glass;
+  if (/(stain_glass|glass)/.test(material)) return targetMaterials.glass;
   if (/(water|liquid|river)/.test(material)) return targetMaterials.caulk;
   if (/(grass|foliage|blendgrass)/.test(material)) return targetMaterials.grass;
   if (/(dirt|mulch|ground|gravel|farm)/.test(material)) return targetMaterials.gravel;
@@ -633,8 +640,14 @@ function displacementNeedsSkirts(sourceMaterial) {
 }
 
 function planarSeamUnderlayPatch(surface) {
-  const expansion = 24;
-  const depth = 12;
+  const expansion = Math.max(
+    24,
+    Math.min(
+      384,
+      Math.ceil((surface.maximumHorizontalDisplacement || 0) + 16)
+    )
+  );
+  const depth = 4;
   const center = centroid(surface.vertices);
   const expanded = surface.vertices.map((point) => {
     const deltaX = point[0] - center[0];
@@ -1442,22 +1455,69 @@ function pointInConvexPolygonXY(point, vertices) {
   return true;
 }
 
-function collectPlanarDisplacementSupports(solid, surfaces) {
+function collectPlanarDisplacementSupports(solid, surfaces, stats) {
   const sides = children(solid.children, "side");
   const points = pointsForSolid(solid);
   if (sides.length < 4 || !points.length) return;
   const center = centroid(points);
   for (const side of sides) {
-    if (!children(side.children, "dispinfo").length) continue;
+    const dispInfo = children(side.children, "dispinfo")[0];
+    if (!dispInfo) continue;
     const vertices = reconstructedFaceVertices(sides, side, center);
     const planePoints = parsePlane(value(side.children, "plane"));
     const plane = planePoints ? brushPlane(planePoints, center) : null;
     if (!vertices || !plane || plane.normal[2] < 0.2) continue;
+    const power = Number(value(dispInfo.children, "power"));
+    const gridSize = 2 ** power + 1;
+    const normals = [5, 9, 17].includes(gridSize)
+      ? parseDisplacementRows(dispInfo, "normals", gridSize, 3)
+      : null;
+    const distances = [5, 9, 17].includes(gridSize)
+      ? parseDisplacementRows(dispInfo, "distances", gridSize, 1)
+      : null;
+    const offsets = children(dispInfo.children, "offsets").length
+      ? parseDisplacementRows(dispInfo, "offsets", gridSize, 3)
+      : normals
+        ? Array.from({ length: gridSize }, () =>
+            Array.from({ length: gridSize }, () => [0, 0, 0])
+          )
+        : null;
+    let maximumHorizontalDisplacement = 0;
+    if (normals && distances && offsets) {
+      for (let row = 0; row < gridSize; row++) {
+        for (let column = 0; column < gridSize; column++) {
+          const displacement = add(
+            offsets[row][column],
+            scale(normals[row][column], distances[row][column])
+          );
+          maximumHorizontalDisplacement = Math.max(
+            maximumHorizontalDisplacement,
+            Math.hypot(displacement[0], displacement[1])
+          );
+        }
+      }
+    }
+    stats.maximumPlanarHorizontalDisplacement = Math.max(
+      stats.maximumPlanarHorizontalDisplacement,
+      maximumHorizontalDisplacement
+    );
+    if (maximumHorizontalDisplacement < 8) {
+      stats.planarHorizontalDisplacementBuckets.under8++;
+    } else if (maximumHorizontalDisplacement < 24) {
+      stats.planarHorizontalDisplacementBuckets.under24++;
+    } else if (maximumHorizontalDisplacement < 64) {
+      stats.planarHorizontalDisplacementBuckets.under64++;
+    } else if (maximumHorizontalDisplacement < 128) {
+      stats.planarHorizontalDisplacementBuckets.under128++;
+    } else {
+      stats.planarHorizontalDisplacementBuckets.atLeast128++;
+    }
     surfaces.push({
       vertices,
       normal: plane.normal,
       distance: plane.distance,
       sourceMaterial: value(side.children, "material"),
+      maximumHorizontalDisplacement,
       minX: Math.min(...vertices.map((point) => point[0])),
       maxX: Math.max(...vertices.map((point) => point[0])),
       minY: Math.min(...vertices.map((point) => point[1])),
@@ -1563,6 +1623,424 @@ function measuredModelBrush(
   return boxBrush(bounds.min, bounds.max, material, surfaceParms, isDetail);
 }
 
+// Reconstructed cosmetic model substitutes must neither affect movement nor
+// consume MOHAA's small fixed lightmap budget. Vertex lighting is adequate for
+// narrow rails, pipes, ladders, trim, fixtures, and window dressings.
+const nonBlockingDetail =
+  "+surfaceparm nolightmap -surfaceparm solid";
+
+function worldBoundsForModel(model, origin, yaw) {
+  const header = modelHeaderByPath.get(model);
+  const snappedYaw = orthogonalYaw(yaw);
+  if (!header || snappedYaw === null) return null;
+  return rotatedLocalBounds(origin, snappedYaw, header.hullMin, header.hullMax);
+}
+
+function boundsCenter(bounds) {
+  return bounds.min.map(
+    (coordinate, axis) => (coordinate + bounds.max[axis]) / 2
+  );
+}
+
+function validBox(min, max) {
+  return min.every(
+    (coordinate, axis) =>
+      Number.isFinite(coordinate) &&
+      Number.isFinite(max[axis]) &&
+      max[axis] - coordinate >= 1
+  );
+}
+
+function filledBox(brushes, min, max, material) {
+  if (!validBox(min, max)) return;
+  brushes.push(
+    boxBrush(min, max, material, nonBlockingDetail, true)
+  );
+}
+
+function addHorizontalRun(
+  brushes,
+  axis,
+  start,
+  end,
+  fixed,
+  z,
+  material,
+  thickness = 4
+) {
+  const half = thickness / 2;
+  if (end - start < 2) return;
+  if (axis === 0) {
+    filledBox(
+      brushes,
+      [start, fixed - half, z - half],
+      [end, fixed + half, z + half],
+      material
+    );
+  } else {
+    filledBox(
+      brushes,
+      [fixed - half, start, z - half],
+      [fixed + half, end, z + half],
+      material
+    );
+  }
+}
+
+function addVerticalPost(
+  brushes,
+  x,
+  y,
+  minZ,
+  maxZ,
+  material,
+  thickness = 4
+) {
+  const half = thickness / 2;
+  filledBox(
+    brushes,
+    [x - half, y - half, minZ],
+    [x + half, y + half, maxZ],
+    material
+  );
+}
+
+function addRailingRun(brushes, bounds, axis, fixed, material) {
+  const start = bounds.min[axis];
+  const end = bounds.max[axis];
+  const length = end - start;
+  if (length < 32) return;
+  const baseZ = bounds.min[2];
+  const height = Math.max(34, Math.min(48, bounds.max[2] - baseZ));
+  const topZ = baseZ + height;
+  addHorizontalRun(brushes, axis, start, end, fixed, topZ, material, 4);
+  addHorizontalRun(
+    brushes,
+    axis,
+    start,
+    end,
+    fixed,
+    baseZ + height * 0.52,
+    material,
+    3
+  );
+  // Autocombine bounds often cover several adjacent Source railing models.
+  // End posts preserve the silhouette without multiplying overlapping detail
+  // brushes enough to make Q3map's face classification pathological.
+  const segments = 1;
+  for (let index = 0; index <= segments; index++) {
+    const coordinate = start + (length * index) / segments;
+    const x = axis === 0 ? coordinate : fixed;
+    const y = axis === 1 ? coordinate : fixed;
+    addVerticalPost(brushes, x, y, baseZ, topZ, material, 4);
+  }
+}
+
+function railingFillBrushes(bounds) {
+  const brushes = [];
+  const extentX = bounds.max[0] - bounds.min[0];
+  const extentY = bounds.max[1] - bounds.min[1];
+  const extentZ = bounds.max[2] - bounds.min[2];
+  if (Math.max(extentX, extentY) < 32 || extentZ > 220) return brushes;
+  const axis = extentX >= extentY ? 0 : 1;
+  const minor = axis === 0 ? 1 : 0;
+  const center = boundsCenter(bounds);
+  const minorExtent = bounds.max[minor] - bounds.min[minor];
+  if (minorExtent <= 96) {
+    addRailingRun(
+      brushes,
+      bounds,
+      axis,
+      center[minor],
+      targetMaterials.metalTrim
+    );
+  } else {
+    addRailingRun(
+      brushes,
+      bounds,
+      axis,
+      bounds.min[minor],
+      targetMaterials.metalTrim
+    );
+    addRailingRun(
+      brushes,
+      bounds,
+      axis,
+      bounds.max[minor],
+      targetMaterials.metalTrim
+    );
+  }
+  return brushes;
+}
+
+function planarRunFillBrushes(
+  bounds,
+  material,
+  thickness,
+  height,
+  longestOnly = false
+) {
+  const brushes = [];
+  const center = boundsCenter(bounds);
+  const extentX = bounds.max[0] - bounds.min[0];
+  const extentY = bounds.max[1] - bounds.min[1];
+  const z = Math.min(
+    bounds.max[2] - height / 2,
+    Math.max(bounds.min[2] + height / 2, center[2])
+  );
+  if (extentX >= 32 && (!longestOnly || extentX >= extentY)) {
+    filledBox(
+      brushes,
+      [bounds.min[0], center[1] - thickness / 2, z - height / 2],
+      [bounds.max[0], center[1] + thickness / 2, z + height / 2],
+      material
+    );
+  }
+  if (extentY >= 32 && (!longestOnly || extentY > extentX)) {
+    filledBox(
+      brushes,
+      [center[0] - thickness / 2, bounds.min[1], z - height / 2],
+      [center[0] + thickness / 2, bounds.max[1], z + height / 2],
+      material
+    );
+  }
+  return brushes;
+}
+
+function chainlinkFillBrushes(bounds) {
+  const brushes = [];
+  const center = boundsCenter(bounds);
+  const extentX = bounds.max[0] - bounds.min[0];
+  const extentY = bounds.max[1] - bounds.min[1];
+  const height = Math.min(192, bounds.max[2] - bounds.min[2]);
+  if (height < 24) return brushes;
+  const minZ = bounds.min[2];
+  const maxZ = minZ + height;
+  const axis = extentX >= extentY ? 0 : 1;
+  const start = bounds.min[axis];
+  const end = bounds.max[axis];
+  const fixed = center[axis === 0 ? 1 : 0];
+  if (axis === 0) {
+    filledBox(
+      brushes,
+      [start, fixed - 2, minZ],
+      [end, fixed + 2, maxZ],
+      targetMaterials.chainlink
+    );
+    addVerticalPost(
+      brushes,
+      start,
+      fixed,
+      minZ,
+      maxZ,
+      targetMaterials.metalTrim,
+      5
+    );
+    addVerticalPost(
+      brushes,
+      end,
+      fixed,
+      minZ,
+      maxZ,
+      targetMaterials.metalTrim,
+      5
+    );
+  } else {
+    filledBox(
+      brushes,
+      [fixed - 2, start, minZ],
+      [fixed + 2, end, maxZ],
+      targetMaterials.chainlink
+    );
+    addVerticalPost(
+      brushes,
+      fixed,
+      start,
+      minZ,
+      maxZ,
+      targetMaterials.metalTrim,
+      5
+    );
+    addVerticalPost(
+      brushes,
+      fixed,
+      end,
+      minZ,
+      maxZ,
+      targetMaterials.metalTrim,
+      5
+    );
+  }
+  return brushes;
+}
+
+function ladderFillBrushes(bounds) {
+  const brushes = [];
+  const center = boundsCenter(bounds);
+  const extentX = bounds.max[0] - bounds.min[0];
+  const extentY = bounds.max[1] - bounds.min[1];
+  const minZ = bounds.min[2];
+  const maxZ = bounds.max[2];
+  if (maxZ - minZ < 48) return brushes;
+  const planeAxis = extentX <= extentY ? 0 : 1;
+  const rungAxis = planeAxis === 0 ? 1 : 0;
+  const halfWidth = Math.min(
+    20,
+    Math.max(10, (bounds.max[rungAxis] - bounds.min[rungAxis]) / 2)
+  );
+  const fixed = center[planeAxis];
+  const first = center[rungAxis] - halfWidth;
+  const second = center[rungAxis] + halfWidth;
+  const post = (coordinate) => {
+    const x = planeAxis === 0 ? fixed : coordinate;
+    const y = planeAxis === 1 ? fixed : coordinate;
+    addVerticalPost(
+      brushes,
+      x,
+      y,
+      minZ,
+      maxZ,
+      targetMaterials.metalTrim,
+      4
+    );
+  };
+  post(first);
+  post(second);
+  // Five evenly spaced rungs are enough to read as a ladder at MOHAA scale.
+  // The original 32-unit cadence added little visually but made this repeated
+  // family disproportionately expensive to compile.
+  const rungs = Math.min(5, Math.floor((maxZ - minZ) / 32));
+  for (let index = 0; index <= rungs; index++) {
+    const z = minZ + ((maxZ - minZ) * index) / Math.max(1, rungs);
+    addHorizontalRun(
+      brushes,
+      rungAxis,
+      first,
+      second,
+      fixed,
+      z,
+      targetMaterials.metalTrim,
+      3
+    );
+  }
+  return brushes;
+}
+
+function catwalkSupportFillBrushes(bounds) {
+  const brushes = [];
+  const center = boundsCenter(bounds);
+  const extentZ = bounds.max[2] - bounds.min[2];
+  if (extentZ >= 48) {
+    for (const x of [bounds.min[0], bounds.max[0]]) {
+      for (const y of [bounds.min[1], bounds.max[1]]) {
+        addVerticalPost(
+          brushes,
+          x,
+          y,
+          bounds.min[2],
+          bounds.max[2],
+          targetMaterials.metalTrim,
+          8
+        );
+      }
+    }
+  }
+  brushes.push(
+    ...planarRunFillBrushes(bounds, targetMaterials.metalTrim, 8, 8)
+  );
+  if (!brushes.length) {
+    addVerticalPost(
+      brushes,
+      center[0],
+      center[1],
+      bounds.min[2],
+      bounds.max[2],
+      targetMaterials.metalTrim,
+      8
+    );
+  }
+  return brushes;
+}
+
+function autocombineFillBrushes(model, bounds) {
+  if (model.includes("_autocombine_metal_railing_")) {
+    return { family: "metal_railing", brushes: railingFillBrushes(bounds) };
+  }
+  if (model.includes("_autocombine_chainlink_fence_001_")) {
+    return { family: "chainlink", brushes: chainlinkFillBrushes(bounds) };
+  }
+  if (model.includes("_autocombine_metal_ladder_")) {
+    return { family: "metal_ladder", brushes: ladderFillBrushes(bounds) };
+  }
+  if (model.includes("_autocombine_catwalk_support_")) {
+    return {
+      family: "catwalk_support",
+      brushes: catwalkSupportFillBrushes(bounds),
+    };
+  }
+  if (model.includes("_autocombine_web_joist_")) {
+    return {
+      family: "web_joist",
+      brushes: planarRunFillBrushes(
+        bounds,
+        targetMaterials.metalTrim,
+        8,
+        8,
+        true
+      ),
+    };
+  }
+  if (model.includes("_autocombine_airduct_hvac_")) {
+    return {
+      family: "airduct_hvac",
+      brushes: planarRunFillBrushes(
+        bounds,
+        targetMaterials.corrugatedGray,
+        32,
+        28,
+        true
+      ),
+    };
+  }
+  if (model.includes("_autocombine_metal_pipe_")) {
+    return {
+      family: "metal_pipe",
+      brushes: planarRunFillBrushes(
+        bounds,
+        targetMaterials.metalTrim,
+        9,
+        9,
+        true
+      ),
+    };
+  }
+  if (model.includes("_autocombine_metal_roof_trim_")) {
+    return {
+      family: "metal_roof_trim",
+      brushes: planarRunFillBrushes(
+        bounds,
+        targetMaterials.metalTrim,
+        7,
+        10,
+        true
+      ),
+    };
+  }
+  if (model.includes("_autocombine_curbs_")) {
+    return {
+      family: "curbs",
+      brushes: planarRunFillBrushes(
+        bounds,
+        targetMaterials.concreteFloor,
+        10,
+        8,
+        true
+      ),
+    };
+  }
+  return null;
+}
+
 function brushEntity(classname, properties, brushes) {
   const lines = ["{", `"classname" "${classname}"`];
   for (const [key, propertyValue] of Object.entries(properties)) {
@@ -1608,7 +2086,16 @@ const stats = {
   sourceLargeClipBrushes: 0,
   sourceLargeClipBounds: [],
   planarSeamUnderlays: 0,
+  maximumPlanarUnderlayExpansion: 0,
   displacementSupportSurfaces: 0,
+  maximumPlanarHorizontalDisplacement: 0,
+  planarHorizontalDisplacementBuckets: {
+    under8: 0,
+    under24: 0,
+    under64: 0,
+    under128: 0,
+    atLeast128: 0,
+  },
   propsGroundSnapped: 0,
   maximumPropGroundAdjustment: 0,
   measuredPropBrushes: 0,
@@ -1616,11 +2103,17 @@ const stats = {
   nonOrthogonalPropsSkipped: 0,
   tiltedPropsSkipped: 0,
   embeddedAutocombinesOmitted: 0,
+  embeddedAutocombinesReconstructed: 0,
+  embeddedAutocombinesSkyboxSkipped: 0,
+  autocombineFillBrushes: 0,
+  autocombineFillFamilies: {},
   heroIndustrialBrushes: 0,
   heroIndustrialModels: {},
   rotatingDoors: 0,
   doorFrames: 0,
   sourceLights: 0,
+  sourceLightCandidates: 0,
+  sourceLightsDeduplicated: 0,
   sourceSkySkipped: 0,
   structuralSkyBrushes: 0,
   detailSizeBuckets: {
@@ -1652,13 +2145,13 @@ const stats = {
 
 const planarDisplacementSupports = [];
 for (const solid of children(world.children, "solid")) {
-  collectPlanarDisplacementSupports(solid, planarDisplacementSupports);
+  collectPlanarDisplacementSupports(solid, planarDisplacementSupports, stats);
 }
 for (const entity of sourceEntities) {
   const classname = value(entity.children, "classname");
   if (!["func_detail", "func_brush", "func_breakable"].includes(classname)) continue;
   for (const solid of children(entity.children, "solid")) {
-    collectPlanarDisplacementSupports(solid, planarDisplacementSupports);
+    collectPlanarDisplacementSupports(solid, planarDisplacementSupports, stats);
   }
 }
 stats.displacementSupportSurfaces = planarDisplacementSupports.length;
@@ -1751,6 +2244,16 @@ if (displacementMode === "planar") {
     if (!underlay) continue;
     worldBrushes.push(underlay);
     stats.planarSeamUnderlays++;
+    stats.maximumPlanarUnderlayExpansion = Math.max(
+      stats.maximumPlanarUnderlayExpansion,
+      Math.max(
+        24,
+        Math.min(
+          384,
+          Math.ceil((surface.maximumHorizontalDisplacement || 0) + 16)
+        )
+      )
+    );
   }
 }
 
@@ -1871,7 +2374,18 @@ for (const entity of sourceEntities) {
   if (!["prop_static", "prop_dynamic"].includes(classname)) continue;
   const model = value(entity.children, "model").toLowerCase();
   const origin = parseVector(value(entity.children, "origin", "0 0 -9999"));
-  if (!inPlayableArea(origin)) continue;
+  const angles = parseVector(value(entity.children, "angles", "0 0 0"));
+  const pitch = Number.isFinite(angles[0]) ? angles[0] : 0;
+  const yaw = Number.isFinite(angles[1]) ? angles[1] : 0;
+  const roll = Number.isFinite(angles[2]) ? angles[2] : 0;
+  const modelBounds = worldBoundsForModel(model, origin, yaw);
+  const placementCenter = modelBounds ? boundsCenter(modelBounds) : origin;
+  if (!inPlayableArea(placementCenter)) {
+    if (model.includes("/autocombine/")) {
+      stats.embeddedAutocombinesSkyboxSkipped++;
+    }
+    continue;
+  }
 
   let heroBrushes = null;
   let heroFamily = null;
@@ -1967,14 +2481,23 @@ for (const entity of sourceEntities) {
   }
 
   if (model.includes("/autocombine/")) {
-    stats.embeddedAutocombinesOmitted++;
+    const fill =
+      modelBounds && Math.abs(pitch) <= 0.05 && Math.abs(roll) <= 0.05
+        ? autocombineFillBrushes(model, modelBounds)
+        : null;
+    if (fill?.brushes.length) {
+      worldBrushes.push(...fill.brushes);
+      stats.embeddedAutocombinesReconstructed++;
+      stats.autocombineFillBrushes += fill.brushes.length;
+      stats.autocombineFillFamilies[fill.family] =
+        (stats.autocombineFillFamilies[fill.family] || 0) +
+        fill.brushes.length;
+    } else {
+      stats.embeddedAutocombinesOmitted++;
+    }
     continue;
   }
 
-  const angles = parseVector(value(entity.children, "angles", "0 0 0"));
-  const pitch = Number.isFinite(angles[0]) ? angles[0] : 0;
-  const yaw = Number.isFinite(angles[1]) ? angles[1] : 0;
-  const roll = Number.isFinite(angles[2]) ? angles[2] : 0;
   if (Math.abs(pitch) > 0.05 || Math.abs(roll) > 0.05) {
     stats.tiltedPropsSkipped++;
     continue;
@@ -2047,15 +2570,42 @@ for (const entity of sourceEntities) {
     stats.unsupportedPropsSkipped++;
     continue;
   }
-  const brush = measuredModelBrush(model, origin, yaw, rule.material);
-  if (!brush) {
+  const specializedBrushes =
+    rule.family === "railing" && modelBounds
+      ? railingFillBrushes(modelBounds)
+      : rule.family === "web_joist" && modelBounds
+        ? planarRunFillBrushes(
+            modelBounds,
+            targetMaterials.metalTrim,
+            8,
+            8
+          )
+        : null;
+  const brush = specializedBrushes?.length
+    ? null
+    : measuredModelBrush(
+        model,
+        origin,
+        yaw,
+        rule.material,
+        ["fluorescent_fixture", "roof_trim", "window"].includes(rule.family)
+          ? nonBlockingDetail
+          : ""
+      );
+  if (!brush && !specializedBrushes?.length) {
     stats.nonOrthogonalPropsSkipped++;
     continue;
   }
-  worldBrushes.push(brush);
-  stats.measuredPropBrushes++;
+  if (specializedBrushes?.length) {
+    worldBrushes.push(...specializedBrushes);
+    stats.measuredPropBrushes += specializedBrushes.length;
+  } else {
+    worldBrushes.push(brush);
+    stats.measuredPropBrushes++;
+  }
   stats.measuredPropFamilies[rule.family] =
-    (stats.measuredPropFamilies[rule.family] || 0) + 1;
+    (stats.measuredPropFamilies[rule.family] || 0) +
+    (specializedBrushes?.length || 1);
 }
 
 // Nuke has four genuine rotating doors. Recreate their measured panel bounds
@@ -2105,14 +2655,14 @@ const worldspawn = [
   "{",
   `"classname" "worldspawn"`,
   `"message" "Codex Nuke"` ,
-  `"ambientlight" "10 12 15"`,
-  `"suncolor" "122 115 98"`,
+  `"ambientlight" "14 16 20"`,
+  `"suncolor" "132 128 118"`,
   `"sundirection" "300 130 0"`,
-  `"sundiffusecolor" "63 73 91"`,
-  `"sundiffuse" "1.25"`,
-  `"_color" "1.0 0.97 0.90"`,
-  `"farplane" "10000"`,
-  `"farplane_color" "0.43 0.50 0.58"`,
+  `"sundiffusecolor" "76 84 100"`,
+  `"sundiffuse" "1.35"`,
+  `"_color" "0.97 0.99 1.0"`,
+  `"farplane" "8000"`,
+  `"farplane_color" "0.34 0.39 0.46"`,
   ...worldBrushes.map((brush, index) => `// brush ${index}\n${brush}`),
   "}",
 ].join("\n");
@@ -2161,6 +2711,7 @@ for (const spawn of counterSpawns) {
   entities.push(pointEntity("info_player_deathmatch", properties));
 }
 
+const sourceLightCells = new Map();
 for (const source of sourceEntities) {
   const classname = value(source.children, "classname");
   if (!["light", "light_spot"].includes(classname)) continue;
@@ -2168,12 +2719,45 @@ for (const source of sourceEntities) {
   if (!inPlayableArea(origin)) continue;
   const sourceLight = parseVector(value(source.children, "_light", "255 230 200 400"));
   const sourceBrightness = sourceLight[3] || 400;
-  // Nuke has hundreds of fixtures. Preserve their spatial intent without
-  // applying Source's numeric intensity directly or flattening the interiors.
-  const brightnessScale = classname === "light_spot" ? 0.18 : 0.26;
+  stats.sourceLightCandidates++;
+  // Source often stacks a dim point light, a bright spotlight, and a sprite at
+  // one fixture. MOHAA has no equivalent clustered-light model and clamps
+  // entity-light lists at 60, so retain only the strongest light in each
+  // compact fixture cell.
+  const cell = [
+    Math.round(origin[0] / 128),
+    Math.round(origin[1] / 128),
+    Math.round(origin[2] / 96),
+  ].join(":");
+  const score = sourceBrightness + (classname === "light_spot" ? 32 : 0);
+  const existing = sourceLightCells.get(cell);
+  if (!existing || score > existing.score) {
+    sourceLightCells.set(cell, {
+      classname,
+      origin,
+      sourceLight,
+      sourceBrightness,
+      score,
+    });
+  }
+}
+
+stats.sourceLightsDeduplicated =
+  stats.sourceLightCandidates - sourceLightCells.size;
+for (const candidate of sourceLightCells.values()) {
+  const {
+    classname,
+    origin,
+    sourceLight,
+    sourceBrightness,
+  } = candidate;
+  const brightnessScale = classname === "light_spot" ? 0.42 : 0.62;
   const brightness = Math.max(
-    12,
-    Math.min(classname === "light_spot" ? 75 : 110, sourceBrightness * brightnessScale)
+    classname === "light_spot" ? 28 : 18,
+    Math.min(
+      classname === "light_spot" ? 145 : 155,
+      sourceBrightness * brightnessScale + 8
+    )
   );
   entities.push(
     pointEntity("light", {

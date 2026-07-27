@@ -41,7 +41,11 @@ for (const material of customMaterials) {
   expect(fs.existsSync(imagePath), `Missing custom image: ${imagePath}`);
 }
 
-for (const shaderName of ["textures/codex_nuke/chainlink", "textures/codex_nuke/glass"]) {
+for (const shaderName of [
+  "textures/codex_nuke/chainlink",
+  "textures/codex_nuke/glass",
+  "textures/codex_nuke/window_backing",
+]) {
   expect(shader.includes(shaderName), `Missing shader definition: ${shaderName}`);
 }
 
@@ -72,8 +76,31 @@ expect(
   "Conversion report did not retain all four doors"
 );
 expect(
-  report.stats.embeddedAutocombinesOmitted === 710,
-  "Embedded-autocombine debt changed; re-audit before accepting"
+  report.stats.embeddedAutocombinesReconstructed > 0,
+  "No embedded-autocombine families were reconstructed"
+);
+expect(
+  report.stats.embeddedAutocombinesReconstructed +
+      report.stats.embeddedAutocombinesOmitted +
+      report.stats.embeddedAutocombinesSkyboxSkipped ===
+    710,
+  "Embedded-autocombine inventory changed; re-audit before accepting"
+);
+expect(
+  report.stats.autocombineFillBrushes >= 750,
+  "Too few bounded fill brushes were generated for the audited missing families"
+);
+expect(
+  report.stats.maximumPlanarUnderlayExpansion >= 100,
+  "Terrain underlay no longer covers the measured displacement excursion"
+);
+expect(
+  report.stats.sourceLights < report.stats.sourceLightCandidates,
+  "Source fixture clustering is no longer reducing overlapping lights"
+);
+expect(
+  count(/\+surfaceparm nolightmap/g) >= 6000,
+  "Reconstructed cosmetic detail is no longer protected from the lightmap budget"
 );
 
 const result = {
@@ -81,6 +108,12 @@ const result = {
   worldBrushes: report.worldBrushes,
   entities: report.entities,
   customMaterials: [...customMaterials].sort(),
+  reconstructedAutocombines: report.stats.embeddedAutocombinesReconstructed,
+  omittedAutocombines: report.stats.embeddedAutocombinesOmitted,
+  autocombineFillBrushes: report.stats.autocombineFillBrushes,
+  sourceLights: report.stats.sourceLights,
+  sourceLightCandidates: report.stats.sourceLightCandidates,
+  noLightmapSides: count(/\+surfaceparm nolightmap/g),
   rotatingDoors: report.stats.rotatingDoors,
   spawnCounts: {
     axis: 16,
@@ -92,4 +125,3 @@ const result = {
 
 process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
 if (failures.length) process.exitCode = 1;
-

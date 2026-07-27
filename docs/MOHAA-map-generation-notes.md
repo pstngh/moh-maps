@@ -1461,6 +1461,76 @@ movement, combat, death, and respawn. It does not prove final visual fidelity
 or the visible alignment/swing clearance of the four doors; those remain
 human-client checks.
 
+### Nuke revision 2: screenshot-driven fill, lighting budget, and exact-package proof
+
+Twenty user screenshots established five recurring visual classes: exposed
+yellow/black terrain and horizon gaps, missing railing/catwalk assemblies,
+dark industrial interiors, black window placeholders, and overly blue glass.
+The user authorized original fill geometry where the decompile or Source-only
+model set left the map visibly incomplete.
+
+Measured displacement normals/distances now control planar seam-underlay
+expansion. The accepted terrain set emits 632 material-matched underlays and
+needs at most 117 units of horizontal expansion. This replaces an arbitrary
+constant with a source-derived bound. The yellow `sky/mohday1` lower
+hemisphere is replaced by stock `sky/m5l2`, and former black window materials
+map to a new original non-solid window backing.
+
+The 710 BSP-only autocombines are divided by family and evidence. The accepted
+generator reconstructs 419 placements as 803 original nonblocking brushes:
+308 railing, 149 pipe, 123 ladder, 66 web-joist, 54 curb, 40 HVAC, 33
+roof-trim, 18 chain-link, and 12 catwalk-support brushes. The remaining 291
+placements and all wires stay omitted.
+
+The first reconstruction used 1,361 fill brushes and 8,314 total brushes.
+Q3map exceeded a 3,604-second bound without a clean return. Capping repeated
+posts, rungs, and secondary cross-runs preserved all 419 placement families
+while reducing the final source to 803 fills and 7,755 total brushes.
+
+**PROVEN family-fill rule:** preserve the measured long silhouette and sparse
+recognizable sub-elements; do not reproduce every repeated Source-model
+component with separate legacy brushes.
+
+Revision 2 clusters the 471 Source point/spot candidates into 259 retained
+lights using 128×128×96 cells. MOHlight later clamped 28 entity-light lists,
+down from 33 in revision 1. This is an improvement, not final proof of the
+visual result.
+
+The first optimized BSP compiled with the final 39,985 input and 36,976 output
+faces, but MOHlight rejected it:
+
+```text
+MAX_MAP_LIGHTING exceeded from 180 lightmaps
+```
+
+The generator now adds `surfaceparm nolightmap` to 6,126 sides belonging to
+nonblocking cosmetic rails, ladders, pipes, trim, fixtures, and window
+dressings. Their visible geometry remains vertex-lit. Primary architecture
+keeps baked lightmaps. A repeat Q3map produced the identical face counts, and
+full MOHlight completed successfully.
+
+**PROVEN lightmap-budget rule:** every reconstructed Source-model family needs
+an explicit lighting policy. Narrow cosmetic detail should default to vertex
+lighting so the fixed AA lightmap pool remains available to walls, floors,
+terrain, and doors.
+
+The final 6,043,387-byte map regenerates byte-identically with SHA-256
+`71AC5923FDA30A6D7E067FC625F4B6CC1F1C9267D44A50C153A3EA8541347369`.
+Q3map took 2,886 seconds; fast VIS retained 154 clusters, 283 portals, and
+3,704 visibility bytes; MOHlight took 1,116 seconds, emitted 16 non-fatal hash
+warnings and 28 clamp messages, and wrote a 25,315,896-byte BSP.
+
+The 19-entry, 7,278,310-byte PK3 has SHA-256
+`A08EF1D4A109D2465249A116566D17CFF802B4EB0CC5214A42B6408826F632EF`.
+An isolated OpenMoHAA 0.82.1 homepath loaded that exact package, generated
+Recast navigation in 14.754 seconds, admitted eight bots, and logged 60 combat
+events with zero runtime errors.
+
+These results prove compile, visibility, lighting, package, navigation, and
+combat readiness. They do not prove that every screenshot defect is visually
+closed or that the four doors align and swing correctly in a human client.
+Those remain the next evidence pass.
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -1572,3 +1642,10 @@ human-client checks.
   preserved four functional door entities, validated the exact PK3 with eight
   fighting bots, and promoted dense-Source-fixture budgeting into the shared
   playbook.
+- 2026-07-26, Nuke revision 2: analyzed twenty user screenshots; added
+  measured terrain underlays, a neutral stock sky, original window backing,
+  lighter glass, clustered fixtures, and bounded nonblocking templates for 419
+  embedded-model placements; rejected an over-dense one-hour compile;
+  discovered and fixed the 180-lightmap MOHlight limit with vertex-lit
+  cosmetic detail; completed Q3map/VIS/full lighting; and validated the exact
+  19-entry PK3 with eight bots and 60 combat events.

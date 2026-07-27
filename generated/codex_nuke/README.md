@@ -5,8 +5,9 @@ conversion. Its target is the recognizable classic Nuke layout with a clean
 modern industrial art direction, not an Allied Assault or Second World War
 reskin.
 
-Revision 1 is compiled and bot-tested. It is ready for the first human visual
-and route review, but is not yet a visual-fidelity release.
+Revision 2 is compiled, full-lit, packaged, and eight-bot tested. It applies
+the first 20-image human visual review and is ready for a new screenshot and
+door-interaction pass, but is not yet a final visual-fidelity release.
 
 ## Design brief
 
@@ -32,7 +33,7 @@ and route review, but is not yet a visual-fidelity release.
   - 710 generated `autocombine` models resolve from the BSP's embedded pak.
 - The 710 embedded models explain why a VMF-only conversion would lose large
   ventilation, façade, trim, and industrial assemblies.
-- Nuke contains four real rotating-door entities. Revision 1 recreates all
+- Nuke contains four real rotating-door entities. Revision 2 recreates all
   four as interactive AA doors instead of silently making them static.
 - Geometry centered around Source Y 7,168-12,360 is a separate distant/skybox
   cluster and must not be imported into the playable AA shell.
@@ -41,34 +42,43 @@ See [`REFERENCE-AUDIT.md`](REFERENCE-AUDIT.md) for the evidence and conversion
 policy. The machine-readable derived manifest is
 [`reference-audit.json`](reference-audit.json).
 
-## First-playable implementation
+## Revision-2 implementation
 
 The deterministic generator:
 
 - converts 5,639 measured playable Source solids;
 - planarizes 604 Source displacement faces and adds 632 material-matched seam
-  underlays;
+  underlays expanded from measured displacement excursion, up to 117 units;
 - retains two explicit player clips and 86 measured large Source clip volumes;
-- reconstructs 638 simple prop footprints from measured model bounds;
+- reconstructs 642 simple prop brushes from measured model bounds;
 - restores the large Nuke silhouette with 34 nonblocking original
   cylinder/frustum brushes for tanks and silos;
+- reconstructs 419 BSP-only autocombine placements with 803 nonblocking
+  skeletal brushes for railings, pipes, ladders, joists, curbs, HVAC, roof
+  trim, chain-link, and catwalk supports;
 - creates four real `func_rotatingdoor` entities with hinge-origin brushes;
 - emits 16 Axis, 16 Allied, and 32 neutral DM spawns;
-- translates 471 restrained source fixture lights beneath an original
-  neutral-warm sun and cool environment fill.
+- clusters 471 Source fixture candidates to 259 purposeful local lights;
+- uses stock `sky/m5l2`, a neutral-warm sun, cool environment fill, and low
+  ambient instead of the yellow `mohday1` horizon;
+- maps black window placeholders to an original non-solid backing material
+  and reduces the original glass texture's blue cast and opacity.
 
-The 710 map-specific Source `autocombine` models remain explicitly omitted.
-Their combined bounding boxes are not safe substitutes for their real shapes.
+The remaining 291 map-specific autocombines and all wires stay explicitly
+omitted. Combined bounding boxes are not safe substitutes for ambiguous
+shapes. The converted Source brushes and clips remain collision authority for
+all reconstructed cosmetic families.
 
 ## Original texture palette
 
-The first palette contains fourteen original 512×512 TGA materials:
+The palette contains fifteen original 512×512 TGA materials:
 
 - painted concrete, blue-painted concrete, smooth floor, and dark concrete;
 - blue and gray corrugated cladding;
 - asphalt, metal trim, ceiling tile, and metal grating;
 - maintained grass and compact industrial gravel;
-- alpha-capable glass and chain-link artwork.
+- alpha-capable glass and chain-link artwork;
+- a restrained blue-gray window backing for former black placeholder panes.
 
 Six base surfaces were generated as original raster sources, then made
 deterministically tileable and converted into game-ready variants. Precise
@@ -82,24 +92,29 @@ not copied to this repository or the PK3.
 
 ## Validation
 
-- Deterministic regeneration reproduced the exact 5,221,665-byte `.map`,
+- Deterministic regeneration reproduced the exact 6,043,387-byte `.map`,
   SHA-256
-  `22D39A6E47E657F4F6B2A0FC4E9AD008DB36695E6B2119C13EC219A3C9EA91C0`.
-- Q3map compiled 35,149 input faces to 32,140 output faces in 2,115 seconds
+  `71AC5923FDA30A6D7E067FC625F4B6CC1F1C9267D44A50C153A3EA8541347369`.
+- Static validation resolves all 15 custom materials, balances the complete
+  710-autocombine inventory, and protects 6,126 cosmetic sides from the fixed
+  lightmap budget.
+- Q3map compiled 39,985 input faces to 36,976 output faces in 2,886 seconds
   without missing-image, malformed-brush, or fatal warnings.
 - Fast VIS completed with 154 clusters, 283 portals, and 3,704 visibility
   bytes.
-- Full MOHlight completed in 976 seconds. It reported 15 potential hash
-  mismatches and clamped entity-light lists in 33 leaves; those diagnostics
-  are open lighting debt.
-- OpenMoHAA 0.82.1 loaded the exact 18-entry PK3, generated Recast navigation
-  in 10.509 seconds, admitted eight bots, and logged sustained movement and
-  combat.
+- Full MOHlight completed in 1,116 seconds. It reported 16 potential hash
+  mismatches and clamped entity-light lists in 28 leaves; those diagnostics
+  remain open visual-correlation debt.
+- OpenMoHAA 0.82.1 loaded the exact 19-entry PK3, generated Recast navigation
+  in 14.754 seconds, admitted eight bots, and logged 60 combat events with
+  zero runtime errors.
 - The lit BSP contains all four `func_rotatingdoor` classnames. A human client
   still needs to verify panel alignment, activation, swing direction, and
   clearance.
 
-See [`REVISION-1.md`](REVISION-1.md) for the full evidence and known debt.
+See [`REVISION-2.md`](REVISION-2.md) for the screenshot matrix, rejected
+candidates, full evidence, and known debt. Revision-1 evidence remains in
+[`REVISION-1.md`](REVISION-1.md).
 
 ## Re-running the audit
 
@@ -169,9 +184,9 @@ map dm/codex_nuke
 
 ## Artifact fingerprints
 
-- BSP: 23,422,268 bytes; SHA-256
-  `88EB02194D6074C429670E0B3B57E80B4D100043EFC9C3469FC987CE2601F2D4`
-- PK3: 7,059,297 bytes; SHA-256
-  `3E577D3711C2B3ACFA9D7665D8D7968581C90615071D145C475B221AE71AF014`
+- BSP: 25,315,896 bytes; SHA-256
+  `59BE0F7E9A2C5E8F173934A791C9521D4D9CDAEEFCB5DB827BE8A6914DCF5C12`
+- PK3: 7,278,310 bytes; SHA-256
+  `A08EF1D4A109D2465249A116566D17CFF802B4EB0CC5214A42B6408826F632EF`
 - derived reference audit: 1,899,007 bytes; SHA-256
   `427443BC161C5F07D8E440FFA653D4CBFC1DA751BF3C4E17FDD270B12723987D`

@@ -1,6 +1,6 @@
 # Nuke original-art provenance
 
-Status: original revision-1 assets
+Status: original revision-2 assets
 
 Date: 2026-07-26
 
@@ -17,6 +17,11 @@ continuous by mirrored tiling, closes the mathematically periodic edges of the
 precision-pattern materials, converts everything to 512×512 TGA, creates
 controlled color variants, validates exact stored edge continuity, and emits
 `texture-contact-sheet.png`.
+
+Revision 2 retains the same six generated raster sources. It adjusts the
+deterministic glass color/alpha and adds one fully procedural
+`window_backing.tga`; no additional generated-image source and no Valve pixels
+were used.
 
 ## Generated source prompts
 
@@ -108,8 +113,9 @@ Constraints: seamless on all four edges; original design; no large rocks, dirt p
 | `metal_trim.tga` | Cool neutral fine-grain grade |
 | `ceiling_tile.tga` | Deterministic original grid drawing |
 | `metal_grating.tga` | Deterministic original cross-grating drawing |
-| `glass.tga` | Deterministic original translucent blue-gray RGBA |
+| `glass.tga` | Deterministic original translucent neutral blue-gray RGBA, revised to alpha 42 |
 | `chainlink.tga` | Deterministic original chain-link RGBA |
+| `window_backing.tga` | Deterministic original blue-gray vertical reflection field |
 
-These are first-pass materials. Final acceptance requires in-engine scale,
+These are revision-2 materials. Final acceptance requires in-engine scale,
 tiling, lightmap, alpha-shader, and long-surface repetition checks.

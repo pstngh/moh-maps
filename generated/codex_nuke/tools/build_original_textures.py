@@ -62,7 +62,19 @@ def generated_grating() -> Image.Image:
 
 
 def generated_glass() -> Image.Image:
-    return Image.new("RGBA", (SIZE, SIZE), (111, 148, 165, 76))
+    return Image.new("RGBA", (SIZE, SIZE), (128, 158, 172, 42))
+
+
+def generated_window_backing() -> Image.Image:
+    backing = Image.new("RGB", (SIZE, SIZE), (58, 78, 91))
+    draw = ImageDraw.Draw(backing)
+    for x in range(SIZE):
+        reflection = int(12 * (1 - abs((x % 192) - 96) / 96))
+        draw.line(
+            (x, 0, x, SIZE),
+            fill=(58 + reflection, 78 + reflection, 91 + reflection),
+        )
+    return backing
 
 
 def generated_chainlink() -> Image.Image:
@@ -112,6 +124,7 @@ def main() -> None:
     save_tga(matching_edges(generated_ceiling_tile()), "ceiling_tile.tga")
     save_tga(matching_edges(generated_grating()), "metal_grating.tga")
     save_tga(generated_glass(), "glass.tga")
+    save_tga(matching_edges(generated_window_backing()), "window_backing.tga")
     save_tga(matching_edges(generated_chainlink()), "chainlink.tga")
 
     for output_path in sorted(OUTPUT.glob("*.tga")):
