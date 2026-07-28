@@ -1596,6 +1596,89 @@ This revision is a regression-recovery build. It proves removal of the
 machine-generated regression and technical playability; the next human
 screenshot/door pass must confirm appearance and interaction.
 
+## Cache revision 1: three-axis filtering and omission-first conversion
+
+Cache is substantially denser than Cobblestone: the 45,755,859-byte decompile
+contains 16,508 solids, 99,612 sides, 10,952 displacement sides, 7,643
+entities, 4,170 ordinary prop placements, and 647 unique prop models. Its
+486,323,964-byte Source BSP contains a 446,865,276-byte embedded pak.
+
+An unchanged Cobblestone-style probe retained 14,099 brush entries because its
+playable filter checked only X and Z. Cache has distant construction at
+negative Y that overlaps the playable X/Z ranges. The corrected Cache filter
+uses X, Y, and Z together and excludes 3,800 solids. The surrounding AA sky
+shell uses complete retained-brush extrema rather than center cutoffs because
+some accepted brushes extend to X 4,565 or Z 3,258.
+
+Cache also proves that dedicated Source deathmatch spawns must be treated as
+their own set. The decompile contains 20 Terrorist, 20 Counter-Terrorist, and
+24 `info_deathmatch_spawn` entities. Revision 1 emits 20 Axis, 20 Allied, and
+the actual 24 neutral DM spawns instead of duplicating both teams into a
+40-spawn neutral set.
+
+The first deterministic baseline emits 10,876 world-brush entries and 268
+entities. It preserves 10,787 measured playable solids, planarizes 8,165
+displacement sides, adds 83 material-matched terrain seam underlays, keeps 138
+measured large clip volumes, and skips 1,379 small helper brushes. Static
+validation reports zero invalid brushes.
+
+The Source map has no autocombines, but its ordinary prop inventory is still
+not permission to infer topology. Revision 1 explicitly omits 2,588 playable
+prop placements. The single true `prop_door_rotating` is an exception because
+its source entity intent, hinge origin, yaw, and embedded IDST-v49 hull bounds
+are directly measured. It becomes one AA `func_rotatingdoor`; static prop
+filenames containing `door` remain non-interactive evidence.
+
+The modern palette contains 19 original 512×512 TGA surfaces. Three new
+image-generated project sources provide industrial brick, weathered
+plywood/planks, and cool blue-gray painted steel. Six project-owned sources
+are shared from Nuke, five surfaces are procedural, and derived colorways
+complete the set. All images are deterministically mirrored, stored-edge
+verified, and documented; no Valve image bytes are packaged.
+
+**PROVEN cluster-filter rule:** Source playable-space classification must use
+all relevant axes, and the structural shell must enclose full retained-brush
+extents rather than accepted centers.
+
+**PROVEN spawn rule:** preserve a reference’s dedicated deathmatch positions
+as neutral spawns. Duplicate team spawns only as an explicit fallback when no
+dedicated set exists.
+
+Normal Q3map proved the first hard compile boundary. It merged 63,578 input
+faces to 57,622, added 84,040 T-junction vertices, reached 314,846 total
+vertices, and failed `MAX_MAP_DRAWINDEXES` after 11,057 seconds. An optional
+source-budget probe retained 9,058 brush entries but still failed the same
+limit after merging 52,576 faces to 47,381.
+
+The complete 10,876-brush source compiled successfully with `-notjunc` in
+10,895 seconds. This preserved all 57,622 merged faces but deliberately
+skipped the insertion that overflowed AA's fixed index array. Fast VIS wrote
+56 clusters, 97 portals, and 456 visibility bytes. Full MOHlight completed in
+1,743 seconds with one potential hash warning and six entity-light leaf clamps
+from 63-103 lights down to the engine cap of 60.
+
+The lit BSP is 32,125,316 bytes with SHA-256
+`653AEF5E9AE82FEA5FD68307CD67F1842E424DC611758875CB8EA779E16EE94C`.
+The 23-entry PK3 is 10,127,241 bytes with SHA-256
+`90477F688E4115400813B119A2061434A1F62324381B3CC864FA7BAB29084C53`.
+
+A fresh OpenMoHAA home contained only this package and used a clean base with
+only retail Pak0-Pak6. OpenMoHAA parsed the BSP in 0.180 seconds, generated
+Recast navigation in 3.567 seconds, admitted eight bots, and logged 55 combat
+events with zero Cache content/runtime error matches.
+
+The original texture contact sheet passed visual art inspection. Automated
+client capture was not usable: the targetable client produced only black
+frames and its cursor, including after console/Escape checks. No map-view
+visual gate is claimed. Human screenshot and door review must specifically
+inspect T-junction cracks, because `-notjunc` is a technical fallback rather
+than a proven visual-quality setting.
+
+**OBSERVED draw-index fallback:** `-notjunc` can preserve a dense measured
+brush set when normal T-junction insertion exceeds `MAX_MAP_DRAWINDEXES`.
+Until representative in-engine edge views pass, it carries explicit
+crack/seam debt and must not become the default compiler recipe.
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -1721,3 +1804,10 @@ screenshot/door pass must confirm appearance and interaction.
   validators and shared playbook rules; completed Q3map/VIS/full lighting with
   normal lightmaps; and validated the exact 19-entry PK3 with eight bots and
   119 combat events.
+- 2026-07-27, Cache revision 1: audited the playable Source cluster; preserved
+  10,787 measured solids, one verified rotating door, and 64 multiplayer
+  spawns; bundled nineteen original clean-industrial textures; rejected an
+  ineffective reduced-detail compile probe; compiled the complete
+  57,622-face layout with a documented `-notjunc` draw-index fallback;
+  completed VIS/full lighting; and validated the exact 23-entry PK3 with eight
+  fighting bots while retaining explicit crack/seam and human-visual debt.

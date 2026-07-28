@@ -5,7 +5,7 @@ Status: normative production standard
 Compatibility default: Medal of Honor: Allied Assault BSP version 19 and
 OpenMoHAA
 
-Last updated: 2026-07-26
+Last updated: 2026-07-27
 
 ## Mission
 
@@ -117,10 +117,12 @@ when fidelity value is otherwise similar.
 - Separate world brushes, `func_detail`, `func_brush`, displacements, gameplay
   helpers, point entities, and model props.
 - Exclude the distant 3D skybox by verified bounds, not an arbitrary visual
-  guess.
+  guess. Classify the playable cluster on all three axes; a one-axis cutoff
+  can retain distant construction whose X/Z happen to overlap the main map.
 - For large Source layouts, use an explicit structural sky shell and import
   internal geometry as detail. This preserves collision while avoiding
-  MOHAA's fixed portal-data limit.
+  MOHAA's fixed portal-data limit. Size the shell from complete retained-brush
+  extents rather than brush centers alone.
 - Preserve all architectural detail initially. Optimize only after identifying
   specific cosmetic classes by material, role, placement, or visibility.
 - Audit mixed-material brushes before preserving Source nodraw as AA caulk.
@@ -316,6 +318,10 @@ For ordinary DM/TDM compatibility include:
 
 Stock maps commonly use roughly 11-25 neutral DM spawns. Count is not enough:
 
+- If the reference provides dedicated deathmatch spawns, preserve those
+  positions as neutral AA spawns. Do not manufacture neutral spawns by
+  duplicating both teams unless the source truly has no DM set.
+
 - raise origins above the floor;
 - keep hull clearance from walls and props;
 - prevent immediate mutual sight where possible;
@@ -409,8 +415,22 @@ Interpret failures by stage:
 | Missing/black materials | Shader data absent or wrong name | Compile against retail data and verify asset |
 | Portal-data overflow | Too many structural split planes | Structural shell plus internal detail; do not hide geometry |
 | BSP compile stalls | Excessive structural brushes or patches | Measure cost by class; simplify selectively |
+| `MAX_MAP_DRAWINDEXES` | Too many merged polygon indexes, often amplified by T-junction insertion | Measure faces/inserted vertices; reduce evidenced detail first; use `-notjunc` only as a documented visual-debt fallback |
 | `MAX_MAP_LIGHTING` | Too many baked-lightmap surfaces | Vertex-light narrow cosmetic detail; preserve lightmaps for primary architecture |
 | Patch hash warnings with correct render | Legacy tool limitation | Record and verify visually; do not assume fatal |
+
+`-notjunc` can avoid a fixed draw-index overflow without deleting measured
+brushes, but it transfers compiler work into a possible in-game crack/seam
+defect. Cache revision 1 is the first evidence: normal Q3map added 84,040
+T-junction vertices to a 57,622-face map and failed at 314,846 vertices;
+`-notjunc` compiled the same faces. Treat this as a map-specific fallback, not
+a default. It requires representative edge/seam screenshots before release.
+
+Compiler flags do not replace source budgeting. Cache probes showed that
+`-fast`, `-nosubdivide`, and `-notjunc` did not materially shorten early brush
+processing, and a 9,058-brush/47,381-face normal build still exceeded the
+draw-index cap. Any later reduction must classify detail by proven role and
+re-check missing walls, floors, ceilings, cover, and routes.
 
 Record input/output face counts, clusters, portals, compile duration, warnings,
 and final BSP size.
