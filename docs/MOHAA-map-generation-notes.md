@@ -1463,6 +1463,12 @@ human-client checks.
 
 ### Nuke revision 2: screenshot-driven fill, lighting budget, and exact-package proof
 
+**Superseded by revision 3:** The following section records what revision 2
+implemented and what the compiler/runtime proved at the time. The next
+13-image human review rejected its aggregate-hull geometry and broad
+`nolightmap` policy. Its two bold "PROVEN" conclusions below are retained as
+historical evidence but explicitly corrected in the revision-3 section.
+
 Twenty user screenshots established five recurring visual classes: exposed
 yellow/black terrain and horizon gaps, missing railing/catwalk assemblies,
 dark industrial interiors, black window placeholders, and overly blue glass.
@@ -1487,9 +1493,9 @@ Q3map exceeded a 3,604-second bound without a clean return. Capping repeated
 posts, rungs, and secondary cross-runs preserved all 419 placement families
 while reducing the final source to 803 fills and 7,755 total brushes.
 
-**PROVEN family-fill rule:** preserve the measured long silhouette and sparse
-recognizable sub-elements; do not reproduce every repeated Source-model
-component with separate legacy brushes.
+**THEN-CONCLUSION, NOW DISPROVEN:** preserve the measured long silhouette and
+sparse recognizable sub-elements. Revision 3 established that an aggregate
+hull does not prove that silhouette in the first place.
 
 Revision 2 clusters the 471 Source point/spot candidates into 259 retained
 lights using 128×128×96 cells. MOHlight later clamped 28 entity-light lists,
@@ -1509,10 +1515,9 @@ dressings. Their visible geometry remains vertex-lit. Primary architecture
 keeps baked lightmaps. A repeat Q3map produced the identical face counts, and
 full MOHlight completed successfully.
 
-**PROVEN lightmap-budget rule:** every reconstructed Source-model family needs
-an explicit lighting policy. Narrow cosmetic detail should default to vertex
-lighting so the fixed AA lightmap pool remains available to walls, floors,
-terrain, and doors.
+**THEN-CONCLUSION, NOW SUPERSEDED:** every reconstructed Source-model family
+needs an explicit lighting policy, but narrow detail must not default to
+vertex lighting without in-engine visual proof.
 
 The final 6,043,387-byte map regenerates byte-identically with SHA-256
 `71AC5923FDA30A6D7E067FC625F4B6CC1F1C9267D44A50C153A3EA8541347369`.
@@ -1530,6 +1535,66 @@ These results prove compile, visibility, lighting, package, navigation, and
 combat readiness. They do not prove that every screenshot defect is visually
 closed or that the four doors align and swing correctly in a human client.
 Those remain the next evidence pass.
+
+### Nuke revision 3: human screenshots disprove aggregate-hull topology
+
+The user's `shot0000.tga` through `shot0012.tga` review showed revision 2's
+inferred geometry as giant white floating bars, crossed beams, false ladders,
+rail-like runs, and arbitrary frames throughout exterior and interior spaces.
+The result was not a minor alignment problem. It invalidated the construction
+rule itself.
+
+An embedded autocombine studio hull is the union envelope around potentially
+many separated meshes. It does not reveal which axis contains geometry, how
+many runs exist, where those runs sit inside the box, or how they connect.
+Filename plus AABB was therefore insufficient evidence even for apparently
+simple families such as railings, pipes, ladders, joists, curbs, and ducts.
+
+Revision 3 removes all 803 autocombine fill brushes and all smaller
+ordinary-prop principal-run substitutions. All 710 autocombines return to
+explicit omission. The validator now fails if any autocombine reconstruction
+or fill brush returns.
+
+The screenshots also showed why broad `surfaceparm nolightmap` was the wrong
+response to the 180-lightmap overflow: it made invalid detail render as
+dominant white/fullbright clutter. Revision 3 removes all 6,126 such sides.
+With the invalid fills gone, the normal-lightmapped 6,949-brush source
+compiled and full MOHlight completed within budget.
+
+**PROVEN topology rule:** a combined model hull is only an outer envelope. Use
+it as a containment check after topology is independently established; never
+derive an internal run or skeletal template from the hull alone.
+
+**PROVEN lighting-correction rule:** when added detail causes a lightmap-budget
+failure, first remove or reduce unproven geometry. Do not conceal geometry debt
+with broad `nolightmap`; vertex-lit appearance requires representative
+in-engine proof.
+
+Revision 3 preserves only independent revision-2 changes: the measured
+117-unit maximum terrain-underlay expansion, original window backing,
+neutralized glass, provisional `sky/m5l2`, four rotating doors, and clustering
+of 471 fixture candidates to 259 lights. Remaining exterior terrain cracks
+and the flat gray sky stay open rather than receiving another broad,
+unverified fill.
+
+The deterministic map is 5,218,048 bytes with SHA-256
+`9C9EAB05034C35600547F805348D0C71C1A903A5D527E3776D5AB301417838F4`.
+Q3map compiled 35,149 input faces to 32,140 output faces in 2,077 seconds.
+Fast VIS retained 154 clusters, 283 portals, and 3,704 visibility bytes. Full
+MOHlight finished in 1,083 seconds with empty stderr, 16 non-fatal hash
+warnings, and 28 entity-light-list clamps. The 23,494,100-byte BSP has
+SHA-256
+`F79BF2BDA45CA188A09A2C3D63646E3BEAD8CC1D43D4975685C7E5881B51ED97`.
+
+The 19-entry PK3 is 7,093,663 bytes with SHA-256
+`4790A691A592DAA7B6D35DD5BD658E02760EB994EC691152F8601D84D7FFCF63`.
+An isolated OpenMoHAA homepath loaded that exact package, generated Recast
+navigation in 9.515 seconds, admitted all eight bots, logged 119 combat events
+in two minutes, and emitted zero engine/map/script error matches.
+
+This revision is a regression-recovery build. It proves removal of the
+machine-generated regression and technical playability; the next human
+screenshot/door pass must confirm appearance and interaction.
 
 ## Next generation-system steps
 
@@ -1649,3 +1714,10 @@ Those remain the next evidence pass.
   discovered and fixed the 180-lightmap MOHlight limit with vertex-lit
   cosmetic detail; completed Q3map/VIS/full lighting; and validated the exact
   19-entry PK3 with eight bots and 60 combat events.
+- 2026-07-27, Nuke revision 3: analyzed thirteen rejection screenshots;
+  disproved aggregate-hull topology inference and broad vertex-lighting as
+  defaults; removed all 803 inferred fills and 6,126 `nolightmap` sides;
+  restored explicit omission of all 710 autocombines; added permanent
+  validators and shared playbook rules; completed Q3map/VIS/full lighting with
+  normal lightmaps; and validated the exact 19-entry PK3 with eight bots and
+  119 combat events.

@@ -215,28 +215,32 @@ never use one enormous model AABB as player collision through an interior.
 ### Screenshot-guided missing-family reconstruction
 
 Human screenshots can prove that an omitted model family is architectural
-debt even when its original mesh cannot be distributed. Treat the screenshots
-as defect evidence, then build an original bounded family template only when
-model name, parsed bounds, placement, orientation, and repeated role agree.
+debt even when its original mesh cannot be distributed. It does not prove what
+geometry belongs in that hole.
 
-Good candidates include:
+**Hard rule:** an aggregate model AABB or hull is only an outer envelope. It
+does not prove a principal run axis, internal offsets, number of elements, or
+connectivity. Never generate rails, pipes, ladders, joists, curbs, ducts,
+trim, fences, or supports from that box alone—even when the filename names the
+family.
 
-- railings represented by top/mid rails and sparse posts;
-- ladders represented by two rails and a capped rung count;
-- long pipes, joists, curbs, roof trim, and ducts represented by their
-  principal measured run;
-- chain-link represented by a non-solid alpha panel plus sparse supports;
-- catwalk supports represented by a small skeletal frame.
+Nuke revision 2 is the counterexample. Its 419 aggregate-hull placements
+compiled and passed bot QA, but the next human review showed 803 inferred
+brushes as giant floating bars, crossed beams, false ladders, and arbitrary
+frames. Technical success did not validate visual topology.
 
-Keep these templates nonblocking unless verified Source collision proves
-otherwise. Filling a visual hole is permission to restore enclosure and
-silhouette, not permission to add arbitrary cover or change a route.
+A missing-family template requires at least one independent topology source:
 
-Repeated detail is a compiler budget. Preserve the full family inventory but
-cap intermediate posts, rungs, and secondary cross-runs. Nuke revision 2
-proved that 1,361 dense fill brushes could push Q3map beyond one hour, while
-803 silhouette-preserving brushes reconstructed the same 419 placements and
-compiled cleanly.
+- parsed mesh vertices/indices;
+- verified per-instance endpoints and local axes;
+- a manually authored reconstruction tied to reference views and coordinates;
+- or an equivalent source that proves the internal arrangement.
+
+Use hull bounds afterward as a containment sanity check. Keep uncertain
+substitutes omitted. When a template is proven, keep it nonblocking unless
+verified collision says otherwise, and cap repeated elements for the legacy
+compiler. Filling a visual hole is permission to restore evidenced enclosure
+and silhouette, not permission to add arbitrary cover or change a route.
 
 For every screenshot pass, record a compact matrix:
 
@@ -361,16 +365,21 @@ room/zone, and inspect MOHlight's entity-light diagnostics. Repeated
 cannot preserve the intended local-light list; record them as open lighting
 debt and reduce the fixture set in the next measured pass.
 
-Assign an explicit lightmap policy to reconstructed cosmetic geometry. Narrow
-rails, pipes, ladders, trim, fixtures, and window dressings usually read well
-with vertex lighting and should use `surfaceparm nolightmap`. Reserve baked
-lightmaps for primary walls, floors, terrain, doors, and large surfaces whose
-shading defines the room.
+Assign an explicit lightmap policy to reconstructed cosmetic geometry, but do
+not apply `surfaceparm nolightmap` by family name or size alone. Vertex-lit
+brushes can render as bright/fullbright shapes when their shader, normals, or
+environmental lighting does not supply the expected modulation. Prove the
+policy in engine on representative exterior, interior, and shadowed examples.
+Reserve baked lightmaps for primary walls, floors, terrain, doors, and large
+surfaces whose shading defines the room; prefer baked lighting for new detail
+until both the budget and vertex-lit appearance are measured.
 
 `MAX_MAP_LIGHTING exceeded from N lightmaps` is a hard failure, not a warning.
-Nuke revision 2 hit it at 180 lightmaps. Marking 6,126 cosmetic sides
-non-lightmapped preserved identical face counts and allowed full MOHlight to
-complete.
+Nuke revision 2 hit it at 180 lightmaps after adding 803 invalid fill brushes.
+Marking 6,126 sides non-lightmapped let MOHlight finish but caused visually
+dominant white clutter. Revision 3 removed the invalid fills, restored normal
+lighting, and full MOHlight completed within budget. First reduce or remove
+unproven geometry; do not hide geometry debt with a broad lighting override.
 
 Lighting QA must cover:
 

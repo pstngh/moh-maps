@@ -1623,423 +1623,10 @@ function measuredModelBrush(
   return boxBrush(bounds.min, bounds.max, material, surfaceParms, isDetail);
 }
 
-// Reconstructed cosmetic model substitutes must neither affect movement nor
-// consume MOHAA's small fixed lightmap budget. Vertex lighting is adequate for
-// narrow rails, pipes, ladders, trim, fixtures, and window dressings.
-const nonBlockingDetail =
-  "+surfaceparm nolightmap -surfaceparm solid";
-
-function worldBoundsForModel(model, origin, yaw) {
-  const header = modelHeaderByPath.get(model);
-  const snappedYaw = orthogonalYaw(yaw);
-  if (!header || snappedYaw === null) return null;
-  return rotatedLocalBounds(origin, snappedYaw, header.hullMin, header.hullMax);
-}
-
-function boundsCenter(bounds) {
-  return bounds.min.map(
-    (coordinate, axis) => (coordinate + bounds.max[axis]) / 2
-  );
-}
-
-function validBox(min, max) {
-  return min.every(
-    (coordinate, axis) =>
-      Number.isFinite(coordinate) &&
-      Number.isFinite(max[axis]) &&
-      max[axis] - coordinate >= 1
-  );
-}
-
-function filledBox(brushes, min, max, material) {
-  if (!validBox(min, max)) return;
-  brushes.push(
-    boxBrush(min, max, material, nonBlockingDetail, true)
-  );
-}
-
-function addHorizontalRun(
-  brushes,
-  axis,
-  start,
-  end,
-  fixed,
-  z,
-  material,
-  thickness = 4
-) {
-  const half = thickness / 2;
-  if (end - start < 2) return;
-  if (axis === 0) {
-    filledBox(
-      brushes,
-      [start, fixed - half, z - half],
-      [end, fixed + half, z + half],
-      material
-    );
-  } else {
-    filledBox(
-      brushes,
-      [fixed - half, start, z - half],
-      [fixed + half, end, z + half],
-      material
-    );
-  }
-}
-
-function addVerticalPost(
-  brushes,
-  x,
-  y,
-  minZ,
-  maxZ,
-  material,
-  thickness = 4
-) {
-  const half = thickness / 2;
-  filledBox(
-    brushes,
-    [x - half, y - half, minZ],
-    [x + half, y + half, maxZ],
-    material
-  );
-}
-
-function addRailingRun(brushes, bounds, axis, fixed, material) {
-  const start = bounds.min[axis];
-  const end = bounds.max[axis];
-  const length = end - start;
-  if (length < 32) return;
-  const baseZ = bounds.min[2];
-  const height = Math.max(34, Math.min(48, bounds.max[2] - baseZ));
-  const topZ = baseZ + height;
-  addHorizontalRun(brushes, axis, start, end, fixed, topZ, material, 4);
-  addHorizontalRun(
-    brushes,
-    axis,
-    start,
-    end,
-    fixed,
-    baseZ + height * 0.52,
-    material,
-    3
-  );
-  // Autocombine bounds often cover several adjacent Source railing models.
-  // End posts preserve the silhouette without multiplying overlapping detail
-  // brushes enough to make Q3map's face classification pathological.
-  const segments = 1;
-  for (let index = 0; index <= segments; index++) {
-    const coordinate = start + (length * index) / segments;
-    const x = axis === 0 ? coordinate : fixed;
-    const y = axis === 1 ? coordinate : fixed;
-    addVerticalPost(brushes, x, y, baseZ, topZ, material, 4);
-  }
-}
-
-function railingFillBrushes(bounds) {
-  const brushes = [];
-  const extentX = bounds.max[0] - bounds.min[0];
-  const extentY = bounds.max[1] - bounds.min[1];
-  const extentZ = bounds.max[2] - bounds.min[2];
-  if (Math.max(extentX, extentY) < 32 || extentZ > 220) return brushes;
-  const axis = extentX >= extentY ? 0 : 1;
-  const minor = axis === 0 ? 1 : 0;
-  const center = boundsCenter(bounds);
-  const minorExtent = bounds.max[minor] - bounds.min[minor];
-  if (minorExtent <= 96) {
-    addRailingRun(
-      brushes,
-      bounds,
-      axis,
-      center[minor],
-      targetMaterials.metalTrim
-    );
-  } else {
-    addRailingRun(
-      brushes,
-      bounds,
-      axis,
-      bounds.min[minor],
-      targetMaterials.metalTrim
-    );
-    addRailingRun(
-      brushes,
-      bounds,
-      axis,
-      bounds.max[minor],
-      targetMaterials.metalTrim
-    );
-  }
-  return brushes;
-}
-
-function planarRunFillBrushes(
-  bounds,
-  material,
-  thickness,
-  height,
-  longestOnly = false
-) {
-  const brushes = [];
-  const center = boundsCenter(bounds);
-  const extentX = bounds.max[0] - bounds.min[0];
-  const extentY = bounds.max[1] - bounds.min[1];
-  const z = Math.min(
-    bounds.max[2] - height / 2,
-    Math.max(bounds.min[2] + height / 2, center[2])
-  );
-  if (extentX >= 32 && (!longestOnly || extentX >= extentY)) {
-    filledBox(
-      brushes,
-      [bounds.min[0], center[1] - thickness / 2, z - height / 2],
-      [bounds.max[0], center[1] + thickness / 2, z + height / 2],
-      material
-    );
-  }
-  if (extentY >= 32 && (!longestOnly || extentY > extentX)) {
-    filledBox(
-      brushes,
-      [center[0] - thickness / 2, bounds.min[1], z - height / 2],
-      [center[0] + thickness / 2, bounds.max[1], z + height / 2],
-      material
-    );
-  }
-  return brushes;
-}
-
-function chainlinkFillBrushes(bounds) {
-  const brushes = [];
-  const center = boundsCenter(bounds);
-  const extentX = bounds.max[0] - bounds.min[0];
-  const extentY = bounds.max[1] - bounds.min[1];
-  const height = Math.min(192, bounds.max[2] - bounds.min[2]);
-  if (height < 24) return brushes;
-  const minZ = bounds.min[2];
-  const maxZ = minZ + height;
-  const axis = extentX >= extentY ? 0 : 1;
-  const start = bounds.min[axis];
-  const end = bounds.max[axis];
-  const fixed = center[axis === 0 ? 1 : 0];
-  if (axis === 0) {
-    filledBox(
-      brushes,
-      [start, fixed - 2, minZ],
-      [end, fixed + 2, maxZ],
-      targetMaterials.chainlink
-    );
-    addVerticalPost(
-      brushes,
-      start,
-      fixed,
-      minZ,
-      maxZ,
-      targetMaterials.metalTrim,
-      5
-    );
-    addVerticalPost(
-      brushes,
-      end,
-      fixed,
-      minZ,
-      maxZ,
-      targetMaterials.metalTrim,
-      5
-    );
-  } else {
-    filledBox(
-      brushes,
-      [fixed - 2, start, minZ],
-      [fixed + 2, end, maxZ],
-      targetMaterials.chainlink
-    );
-    addVerticalPost(
-      brushes,
-      fixed,
-      start,
-      minZ,
-      maxZ,
-      targetMaterials.metalTrim,
-      5
-    );
-    addVerticalPost(
-      brushes,
-      fixed,
-      end,
-      minZ,
-      maxZ,
-      targetMaterials.metalTrim,
-      5
-    );
-  }
-  return brushes;
-}
-
-function ladderFillBrushes(bounds) {
-  const brushes = [];
-  const center = boundsCenter(bounds);
-  const extentX = bounds.max[0] - bounds.min[0];
-  const extentY = bounds.max[1] - bounds.min[1];
-  const minZ = bounds.min[2];
-  const maxZ = bounds.max[2];
-  if (maxZ - minZ < 48) return brushes;
-  const planeAxis = extentX <= extentY ? 0 : 1;
-  const rungAxis = planeAxis === 0 ? 1 : 0;
-  const halfWidth = Math.min(
-    20,
-    Math.max(10, (bounds.max[rungAxis] - bounds.min[rungAxis]) / 2)
-  );
-  const fixed = center[planeAxis];
-  const first = center[rungAxis] - halfWidth;
-  const second = center[rungAxis] + halfWidth;
-  const post = (coordinate) => {
-    const x = planeAxis === 0 ? fixed : coordinate;
-    const y = planeAxis === 1 ? fixed : coordinate;
-    addVerticalPost(
-      brushes,
-      x,
-      y,
-      minZ,
-      maxZ,
-      targetMaterials.metalTrim,
-      4
-    );
-  };
-  post(first);
-  post(second);
-  // Five evenly spaced rungs are enough to read as a ladder at MOHAA scale.
-  // The original 32-unit cadence added little visually but made this repeated
-  // family disproportionately expensive to compile.
-  const rungs = Math.min(5, Math.floor((maxZ - minZ) / 32));
-  for (let index = 0; index <= rungs; index++) {
-    const z = minZ + ((maxZ - minZ) * index) / Math.max(1, rungs);
-    addHorizontalRun(
-      brushes,
-      rungAxis,
-      first,
-      second,
-      fixed,
-      z,
-      targetMaterials.metalTrim,
-      3
-    );
-  }
-  return brushes;
-}
-
-function catwalkSupportFillBrushes(bounds) {
-  const brushes = [];
-  const center = boundsCenter(bounds);
-  const extentZ = bounds.max[2] - bounds.min[2];
-  if (extentZ >= 48) {
-    for (const x of [bounds.min[0], bounds.max[0]]) {
-      for (const y of [bounds.min[1], bounds.max[1]]) {
-        addVerticalPost(
-          brushes,
-          x,
-          y,
-          bounds.min[2],
-          bounds.max[2],
-          targetMaterials.metalTrim,
-          8
-        );
-      }
-    }
-  }
-  brushes.push(
-    ...planarRunFillBrushes(bounds, targetMaterials.metalTrim, 8, 8)
-  );
-  if (!brushes.length) {
-    addVerticalPost(
-      brushes,
-      center[0],
-      center[1],
-      bounds.min[2],
-      bounds.max[2],
-      targetMaterials.metalTrim,
-      8
-    );
-  }
-  return brushes;
-}
-
-function autocombineFillBrushes(model, bounds) {
-  if (model.includes("_autocombine_metal_railing_")) {
-    return { family: "metal_railing", brushes: railingFillBrushes(bounds) };
-  }
-  if (model.includes("_autocombine_chainlink_fence_001_")) {
-    return { family: "chainlink", brushes: chainlinkFillBrushes(bounds) };
-  }
-  if (model.includes("_autocombine_metal_ladder_")) {
-    return { family: "metal_ladder", brushes: ladderFillBrushes(bounds) };
-  }
-  if (model.includes("_autocombine_catwalk_support_")) {
-    return {
-      family: "catwalk_support",
-      brushes: catwalkSupportFillBrushes(bounds),
-    };
-  }
-  if (model.includes("_autocombine_web_joist_")) {
-    return {
-      family: "web_joist",
-      brushes: planarRunFillBrushes(
-        bounds,
-        targetMaterials.metalTrim,
-        8,
-        8,
-        true
-      ),
-    };
-  }
-  if (model.includes("_autocombine_airduct_hvac_")) {
-    return {
-      family: "airduct_hvac",
-      brushes: planarRunFillBrushes(
-        bounds,
-        targetMaterials.corrugatedGray,
-        32,
-        28,
-        true
-      ),
-    };
-  }
-  if (model.includes("_autocombine_metal_pipe_")) {
-    return {
-      family: "metal_pipe",
-      brushes: planarRunFillBrushes(
-        bounds,
-        targetMaterials.metalTrim,
-        9,
-        9,
-        true
-      ),
-    };
-  }
-  if (model.includes("_autocombine_metal_roof_trim_")) {
-    return {
-      family: "metal_roof_trim",
-      brushes: planarRunFillBrushes(
-        bounds,
-        targetMaterials.metalTrim,
-        7,
-        10,
-        true
-      ),
-    };
-  }
-  if (model.includes("_autocombine_curbs_")) {
-    return {
-      family: "curbs",
-      brushes: planarRunFillBrushes(
-        bounds,
-        targetMaterials.concreteFloor,
-        10,
-        8,
-        true
-      ),
-    };
-  }
-  return null;
-}
+// A few measured cosmetic boxes should not obstruct players. Keep them
+// lightmapped: broad `nolightmap` use made the revision-2 substitutes render
+// as dominant white/fullbright shapes in the user's screenshots.
+const nonBlockingDetail = "-surfaceparm solid";
 
 function brushEntity(classname, properties, brushes) {
   const lines = ["{", `"classname" "${classname}"`];
@@ -2374,18 +1961,11 @@ for (const entity of sourceEntities) {
   if (!["prop_static", "prop_dynamic"].includes(classname)) continue;
   const model = value(entity.children, "model").toLowerCase();
   const origin = parseVector(value(entity.children, "origin", "0 0 -9999"));
+  if (!inPlayableArea(origin)) continue;
   const angles = parseVector(value(entity.children, "angles", "0 0 0"));
   const pitch = Number.isFinite(angles[0]) ? angles[0] : 0;
   const yaw = Number.isFinite(angles[1]) ? angles[1] : 0;
   const roll = Number.isFinite(angles[2]) ? angles[2] : 0;
-  const modelBounds = worldBoundsForModel(model, origin, yaw);
-  const placementCenter = modelBounds ? boundsCenter(modelBounds) : origin;
-  if (!inPlayableArea(placementCenter)) {
-    if (model.includes("/autocombine/")) {
-      stats.embeddedAutocombinesSkyboxSkipped++;
-    }
-    continue;
-  }
 
   let heroBrushes = null;
   let heroFamily = null;
@@ -2481,20 +2061,12 @@ for (const entity of sourceEntities) {
   }
 
   if (model.includes("/autocombine/")) {
-    const fill =
-      modelBounds && Math.abs(pitch) <= 0.05 && Math.abs(roll) <= 0.05
-        ? autocombineFillBrushes(model, modelBounds)
-        : null;
-    if (fill?.brushes.length) {
-      worldBrushes.push(...fill.brushes);
-      stats.embeddedAutocombinesReconstructed++;
-      stats.autocombineFillBrushes += fill.brushes.length;
-      stats.autocombineFillFamilies[fill.family] =
-        (stats.autocombineFillFamilies[fill.family] || 0) +
-        fill.brushes.length;
-    } else {
-      stats.embeddedAutocombinesOmitted++;
-    }
+    // The MDL hull is the aggregate envelope of an autocombined model, not a
+    // description of its internal topology. Revision 2 proved that deriving
+    // rail/pipe/ladder runs from this box creates arbitrary beams through the
+    // level. Omit the family until its actual mesh or verified endpoints can
+    // be read.
+    stats.embeddedAutocombinesOmitted++;
     continue;
   }
 
@@ -2570,42 +2142,23 @@ for (const entity of sourceEntities) {
     stats.unsupportedPropsSkipped++;
     continue;
   }
-  const specializedBrushes =
-    rule.family === "railing" && modelBounds
-      ? railingFillBrushes(modelBounds)
-      : rule.family === "web_joist" && modelBounds
-        ? planarRunFillBrushes(
-            modelBounds,
-            targetMaterials.metalTrim,
-            8,
-            8
-          )
-        : null;
-  const brush = specializedBrushes?.length
-    ? null
-    : measuredModelBrush(
-        model,
-        origin,
-        yaw,
-        rule.material,
-        ["fluorescent_fixture", "roof_trim", "window"].includes(rule.family)
-          ? nonBlockingDetail
-          : ""
-      );
-  if (!brush && !specializedBrushes?.length) {
+  const brush = measuredModelBrush(
+    model,
+    origin,
+    yaw,
+    rule.material,
+    ["fluorescent_fixture", "roof_trim", "window"].includes(rule.family)
+      ? nonBlockingDetail
+      : ""
+  );
+  if (!brush) {
     stats.nonOrthogonalPropsSkipped++;
     continue;
   }
-  if (specializedBrushes?.length) {
-    worldBrushes.push(...specializedBrushes);
-    stats.measuredPropBrushes += specializedBrushes.length;
-  } else {
-    worldBrushes.push(brush);
-    stats.measuredPropBrushes++;
-  }
+  worldBrushes.push(brush);
+  stats.measuredPropBrushes++;
   stats.measuredPropFamilies[rule.family] =
-    (stats.measuredPropFamilies[rule.family] || 0) +
-    (specializedBrushes?.length || 1);
+    (stats.measuredPropFamilies[rule.family] || 0) + 1;
 }
 
 // Nuke has four genuine rotating doors. Recreate their measured panel bounds

@@ -2,7 +2,17 @@
 
 Date: 2026-07-26
 
-Status: compiled, full-lit, packaged, and exact-PK3 eight-bot tested
+Status: technically validated, visually rejected, and superseded by revision 3
+
+> **Post-review correction (2026-07-27):** The user's 13-image revision-2
+> review disproved the accepted geometry policy below. Aggregate autocombine
+> hulls did not establish internal topology or run direction. The resulting
+> 803 fills produced giant floating bars, crossed beams, false ladders, and
+> arbitrary frames throughout exterior and interior spaces. Broad
+> `surfaceparm nolightmap` use made those errors render as dominant
+> white/fullbright shapes. Revision 3 removes this entire reconstruction class,
+> restores ordinary lightmapping, and changes the shared playbook. Compile and
+> bot success did not prove visual correctness.
 
 Revision 2 responds to the first 20-image human visual review of
 `codex_nuke`. The user explicitly authorized filling missing decompile/model
@@ -120,8 +130,10 @@ The accepted optimization keeps all 419 reconstructed placements but reduces
 repeated intermediate rail posts, ladder rungs, and secondary cross-runs. It
 emits 7,755 total brushes and 803 fill brushes.
 
-**PROVEN:** preserving the family silhouette is affordable; reproducing every
-repeated sub-element can make AA Q3map disproportionately expensive.
+**Compiler-only finding:** the reduced candidate compiled, while the dense
+candidate did not finish within its bound. Human screenshots later rejected
+the reduced candidate's inferred silhouettes, so this is not evidence that
+aggregate-hull family reconstruction is visually valid.
 
 ### Fixed lightmap budget
 
@@ -135,9 +147,11 @@ Marking nonblocking cosmetic reconstruction as `nolightmap` preserved the
 same 39,985 input and 36,976 output faces while allowing full MOHlight to
 complete.
 
-**PROVEN:** Source-model replacement detail must be assigned an explicit
-lightmap policy. Narrow cosmetic brush families should default to vertex
-lighting unless screenshots prove they require baked lightmaps.
+**Superseded conclusion:** Source-model replacement detail needs an explicit
+lightmap policy, but broad vertex lighting is not a safe default. Revision-2
+screenshots showed the `nolightmap` substitutes as bright white/fullbright
+clutter. Revision 3 proved that removing the invalid fills allows normal baked
+lighting to fit the fixed budget again.
 
 ## Deterministic source validation
 
@@ -228,5 +242,5 @@ quality.
 - [x] Full MOHlight completed after fixing the lightmap budget.
 - [x] Exact final PK3 contents and hashes verified.
 - [x] Exact final PK3 passed eight-bot OpenMoHAA QA.
-- [ ] Human visual review of revision 2.
+- [x] Human visual review of revision 2: rejected.
 - [ ] Human door interaction review.

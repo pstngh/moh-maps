@@ -76,19 +76,16 @@ expect(
   "Conversion report did not retain all four doors"
 );
 expect(
-  report.stats.embeddedAutocombinesReconstructed > 0,
-  "No embedded-autocombine families were reconstructed"
+  report.stats.embeddedAutocombinesReconstructed === 0,
+  "Unsafe embedded-autocombine inference was re-enabled"
 );
 expect(
-  report.stats.embeddedAutocombinesReconstructed +
-      report.stats.embeddedAutocombinesOmitted +
-      report.stats.embeddedAutocombinesSkyboxSkipped ===
-    710,
-  "Embedded-autocombine inventory changed; re-audit before accepting"
+  report.stats.embeddedAutocombinesOmitted === 710,
+  "Embedded-autocombine debt changed; re-audit before accepting"
 );
 expect(
-  report.stats.autocombineFillBrushes >= 750,
-  "Too few bounded fill brushes were generated for the audited missing families"
+  report.stats.autocombineFillBrushes === 0,
+  "Unsafe autocombine fill brushes were generated"
 );
 expect(
   report.stats.maximumPlanarUnderlayExpansion >= 100,
@@ -99,8 +96,8 @@ expect(
   "Source fixture clustering is no longer reducing overlapping lights"
 );
 expect(
-  count(/\+surfaceparm nolightmap/g) >= 6000,
-  "Reconstructed cosmetic detail is no longer protected from the lightmap budget"
+  count(/\+surfaceparm nolightmap/g) === 0,
+  "Broad nolightmap policy was re-enabled"
 );
 
 const result = {

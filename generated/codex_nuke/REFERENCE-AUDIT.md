@@ -69,32 +69,33 @@ Model resolution is exact:
 | BSP-embedded `autocombine` entries | 710 |
 | Total | 1,405 / 1,405 |
 
-All 1,405 studio headers parse. Their local hull/view bounds can establish
-scale and orientation envelopes. Bounds alone do not prove a mesh's shape, so
-they authorize measured family templates, not arbitrary box replacement.
+All 1,405 studio headers parse. Their local hull/view bounds establish only
+scale and orientation envelopes. They do not prove a mesh's internal shape,
+principal run, sub-element count, or placement inside the aggregate box.
 
 The embedded autocombines are essential reference evidence. They are generated
 map assets, not reusable public-package content. A VMF-only port that ignores
 them will omit parts of ventilation systems, façades, roof assemblies, trim,
 and other industrial silhouettes.
 
-Revision-2 screenshot evidence authorizes bounded original templates for
-families whose name, parsed hull bounds, placement, orientation, and repeated
-role agree. The accepted conversion reconstructs 419 placements as 803
-nonblocking skeletal brushes across railings, pipes, ladders, web joists,
-curbs, HVAC ducts, roof trim, chain-link, and catwalk supports. It does not
-copy the embedded meshes. The remaining 291 placements and all wire families
-stay omitted because their measured envelopes do not prove a safe shape.
+Revision 2 attempted bounded original templates for 419 placements using model
+name, aggregate hull bounds, placement, orientation, and repeated role. The
+next 13-image human review rejected that result: 803 generated brushes became
+giant floating bars, crossed beams, false ladders, and arbitrary frames.
+Revision 3 therefore omits all 710 autocombine placements. A family becomes
+eligible only when actual mesh topology, verified per-instance endpoints, or a
+manually authored reference reconstruction proves its internal arrangement.
 
 This establishes the conversion policy:
 
-- use the full measured model envelope to orient and bound a family template;
-- preserve a recognizable long run, not every Source sub-element;
+- never infer a principal axis or internal run from an aggregate hull;
+- use a hull only as an outer rejection/containment check after topology is
+  established independently;
 - keep uncertain model substitutes nonblocking and retain Source clips as
   collision authority;
 - cap repeated posts, rungs, and cross-runs for the legacy compiler;
-- vertex-light narrow cosmetic reconstruction instead of consuming fixed
-  lightmap pages;
+- choose baked versus vertex lighting per proven material/template and confirm
+  it visually in engine;
 - keep any family without sufficient evidence explicitly omitted.
 
 ## Dominant material roles
