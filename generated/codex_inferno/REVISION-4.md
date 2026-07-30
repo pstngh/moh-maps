@@ -112,3 +112,24 @@ If recognition passes, repair visible planar displacement, omitted-prop,
 material, lighting, door, and T-junction seam issues in that order of observed
 impact. If a location still fails recognition, inspect its source brush/entity
 class and conversion filter before inventing replacement geometry.
+
+## Human screenshot verdict: shots 0039-0051
+
+The user described revision 4 as “much better,” establishing direct VMF brush
+conversion as the first recognizable Inferno baseline. The same thirteen views
+show that it is not a finished visual candidate.
+
+| Views | Confirmed improvement | Remaining defect class |
+| --- | --- | --- |
+| `shot0039`-`shot0041` | real street/building composition and sightlines read coherently | hollow facades, missing doors, roof supports, trim, and ordinary street detail |
+| `shot0042`-`shot0046` | roofs, stairs, openings, and courtyard scale follow the source | black/white empty window and door openings; missing shutters, frames, balcony pieces, and facade fittings |
+| `shot0047`-`shot0051` | sites and broad village massing are recognizable rather than inferred trenches | sparse sites/courtyards; missing cover, fountain/well assemblies, pillars, chimneys, and roof overlays |
+| all views | direct brush geometry solves the layout/architecture failure of revisions 1-3 | the blanket omission of 6,200 playable Source model props removes visually structural set dressing |
+
+The corrective method is not another layout rewrite. Revision 5 must preserve
+revision 4 brush geometry and restore only high-impact prop families using
+verified Source entity origins, angles, scale, and parsed IDST hull bounds.
+Facade and roof substitutes remain non-solid so approximate art cannot close a
+route. Collision is allowed only for measured gameplay cover and landmark
+bodies. Unknown, highly irregular, foliage, wire, and cosmetic micro-props stay
+omitted until their value and target-engine representation are proven.

@@ -116,3 +116,44 @@ documented separately in [`ART-PROVENANCE.md`](ART-PROVENANCE.md).
 
 The older collision graph and radar transform remain useful independent
 validators. They are no longer used to generate architecture.
+
+## Revision 5 measured model manifest
+
+The reusable auditor in `tools/audit_inferno_reference.js` reads the private
+VMF entity inventory, resolves referenced MDLs from the private BSP pak and VPK,
+and parses IDST version 49 headers. The compact builder
+`tools/build_inferno_model_bounds.js` then emits
+`inferno-model-bounds.json`, containing only model paths, reference counts,
+local `hullMin`/`hullMax` values, header versions, resolution source labels,
+and input fingerprints.
+
+| Manifest evidence | Value |
+| --- | ---: |
+| Source model references | 7,036 |
+| Unique model paths | 308 |
+| Resolved and parsed headers | 308 |
+| Playable prop candidates evaluated | 6,200 |
+| Candidates with parsed bounds | 6,200 |
+| Measured substitutes emitted | 1,176 |
+| Substitute brushes | 1,431 |
+| Explicitly omitted remainder | 5,024 |
+
+The manifest is 96,951 bytes with SHA-256
+`D4B93C2D3ACA66F9EBDB94061026C406A7925DD9E0A6BE5725E5C91635C678F7`.
+A second full private-source audit and compact-manifest build reproduced it
+byte-for-byte.
+
+The selected high-impact families are 202 windows, 87 shutters, 99 doors, 65
+door frames, 46 arches, 69 roof surfaces/overhangs, 202 pillars, 70 chimneys,
+191 wood supports, 47 balcony supports, 90 cover props, and four landmark
+assemblies. Four duplicate multi-part landmark records are retained in the
+per-instance audit with zero emitted brushes after their shared fountain/well
+body is generated.
+
+This metadata does not reconstruct commercial meshes. Revision 5 converts the
+bounds into conservative original brush boxes, oriented prisms, cylinders, or
+rings at the original entity transforms. Facade and roof pieces are non-solid;
+only measured cover and simple landmark bodies collide. Strongly tilted,
+irregular, foliage, wire, vehicle, and cosmetic models remain omitted. The
+complete per-instance substitution record is stored in
+`codex_inferno-conversion-report.json`.

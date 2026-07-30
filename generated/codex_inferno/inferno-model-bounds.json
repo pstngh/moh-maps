@@ -1,0 +1,4955 @@
+{
+  "formatVersion": 1,
+  "purpose": "Reference-only Source MDL hull metadata for measured AA-native substitutes; contains no model bytes.",
+  "method": "IDST v49 header hullMin/hullMax parsed with the proven Source VPK/BSP-pak audit.",
+  "source": {
+    "vmf": {
+      "file": "de_inferno_d.vmf",
+      "bytes": 20869971,
+      "sha256": "c37a3d3cb4ea813b0cc1b36205234a9f9ccff258b7d69fba8ca5c448628505d5"
+    },
+    "bsp": {
+      "file": "de_inferno.bsp",
+      "bytes": 102233048,
+      "sha256": "4c29b4b6ae35ce1dca3f56439876014e09baecdc25ad0146a865da6072fc60e6"
+    },
+    "vpkDirectory": {
+      "file": "pak01_dir.vpk",
+      "bytes": 15920251,
+      "sha256": "a9ffaa07380d70e1b4362007cf50351c25844905e200c0e6c20c7d10cfe1364a"
+    }
+  },
+  "modelReferences": 7036,
+  "uniqueModels": 308,
+  "parsedHeaders": 308,
+  "models": [
+    {
+      "model": "models/props/de_inferno/hr_i/tile_cap_a/tile_cap_a.mdl",
+      "references": 377,
+      "hullMin": [
+        -63.9869,
+        -5.4093,
+        -0.1043
+      ],
+      "hullMax": [
+        0,
+        5.4093,
+        5.2348
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/flower_set_a/flower_set_a.mdl",
+      "references": 237,
+      "hullMin": [
+        -18.2399,
+        -11.8107,
+        0
+      ],
+      "hullMax": [
+        14.1092,
+        14.9124,
+        22.2468
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wood_supports_a/wood_supports_a.mdl",
+      "references": 236,
+      "hullMin": [
+        -76.0596,
+        -15.1436,
+        -3.2159
+      ],
+      "hullMax": [
+        75.0163,
+        17.9264,
+        3.1791
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/flower_set_a/flower_set_a_leaf.mdl",
+      "references": 183,
+      "hullMin": [
+        -16.3505,
+        -16.4622,
+        -0.1015
+      ],
+      "hullMax": [
+        15.5792,
+        16.3263,
+        20.1326
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/tile_cap_a/tile_cap_c.mdl",
+      "references": 163,
+      "hullMin": [
+        -17.0213,
+        0,
+        -2.3498
+      ],
+      "hullMax": [
+        1.4561,
+        127.1055,
+        2.3498
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/stone_trim_b/stone_trim_b.mdl",
+      "references": 162,
+      "hullMin": [
+        -11.8524,
+        -64.1686,
+        -5.8869
+      ],
+      "hullMax": [
+        11.5292,
+        64.1761,
+        5.2766
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_concrete_trim/inferno_concrete_trim_corner_out.mdl",
+      "references": 155,
+      "hullMin": [
+        -8,
+        0,
+        -8
+      ],
+      "hullMax": [
+        0.6406,
+        8.6094,
+        0.375
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wall_brick/inferno_brick_d1.mdl",
+      "references": 151,
+      "hullMin": [
+        -7.1269,
+        -7.6029,
+        0
+      ],
+      "hullMax": [
+        0.7505,
+        0.6687,
+        122.875
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/window_b/window_b.mdl",
+      "references": 135,
+      "hullMin": [
+        -25.125,
+        -12.25,
+        -29.25
+      ],
+      "hullMax": [
+        25.125,
+        0,
+        29.4375
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/gutters/gutters_128.mdl",
+      "references": 124,
+      "hullMin": [
+        -0.1977,
+        -10.7691,
+        -3.5762
+      ],
+      "hullMax": [
+        128.2737,
+        0.2737,
+        3.4272
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_concrete_trim/inferno_concrete_trim_128.mdl",
+      "references": 118,
+      "hullMin": [
+        -5.2813,
+        -64,
+        -8
+      ],
+      "hullMax": [
+        0.8906,
+        64,
+        0.3446
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_concrete_trim/inferno_concrete_trim_16.mdl",
+      "references": 109,
+      "hullMin": [
+        -5.25,
+        -8,
+        -8.1406
+      ],
+      "hullMax": [
+        0.3965,
+        8,
+        0.2813
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/gutters/gutters_drains_d.mdl",
+      "references": 108,
+      "hullMin": [
+        -3.0669,
+        -3.0766,
+        -127.1419
+      ],
+      "hullMax": [
+        3.122,
+        3.0508,
+        0.0019
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_folding_shutters/inferno_folding_shutters.mdl",
+      "references": 90,
+      "hullMin": [
+        -0.25,
+        -24.322,
+        -44.4375
+      ],
+      "hullMax": [
+        1.8767,
+        24.322,
+        43.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_planter/inferno_planter.mdl",
+      "references": 85,
+      "hullMin": [
+        0,
+        -23.3906,
+        -5.5
+      ],
+      "hullMax": [
+        15.7298,
+        23.3906,
+        5.89
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_planter/inferno_planter_flowers.mdl",
+      "references": 84,
+      "hullMin": [
+        0,
+        -26.4243,
+        0
+      ],
+      "hullMax": [
+        17.6123,
+        24.843,
+        16.633
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_planter/inferno_planter_leaves.mdl",
+      "references": 84,
+      "hullMin": [
+        0,
+        -28.1721,
+        0
+      ],
+      "hullMax": [
+        21.1034,
+        26.7614,
+        17.2029
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/pillar_a/pillar_a.mdl",
+      "references": 84,
+      "hullMin": [
+        -14.1658,
+        -13.9274,
+        -89.802
+      ],
+      "hullMax": [
+        14.1658,
+        13.9274,
+        41.9522
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/pillar_a/pillar_a_top.mdl",
+      "references": 82,
+      "hullMin": [
+        -14.2481,
+        -14.1319,
+        0
+      ],
+      "hullMax": [
+        14.2892,
+        14.2892,
+        48.555
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_02_corner_out.mdl",
+      "references": 78,
+      "hullMin": [
+        -4,
+        0,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        4.75,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_concrete_trim/inferno_concrete_trim_32.mdl",
+      "references": 76,
+      "hullMin": [
+        -5.1875,
+        -16,
+        -8.2813
+      ],
+      "hullMax": [
+        0.5469,
+        16,
+        0.3125
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/gutters/gutters_drains_b.mdl",
+      "references": 75,
+      "hullMin": [
+        0,
+        -3.0766,
+        -7.947
+      ],
+      "hullMax": [
+        11.9065,
+        3.0766,
+        3.0647
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_planter/inferno_planter_holder.mdl",
+      "references": 75,
+      "hullMin": [
+        0,
+        -22.9557,
+        -7
+      ],
+      "hullMax": [
+        16.7261,
+        22.9557,
+        9
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/foliage/short_grass_04.mdl",
+      "references": 73,
+      "hullMin": [
+        -31.8255,
+        -15.5145,
+        -2.1109
+      ],
+      "hullMax": [
+        24.8895,
+        13.7047,
+        18.1
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wall_trim_a/wall_trim_a.mdl",
+      "references": 64,
+      "hullMin": [
+        -20.9753,
+        -8.1592,
+        -53.485
+      ],
+      "hullMax": [
+        8.0328,
+        28.1006,
+        73.9127
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/hr_massive/standing_rock_3/standing_rock_3.mdl",
+      "references": 64,
+      "hullMin": [
+        -69.4033,
+        -146.2664,
+        -11.6667
+      ],
+      "hullMax": [
+        84.5927,
+        120.0766,
+        89.4807
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_01_corner_in.mdl",
+      "references": 62,
+      "hullMin": [
+        0,
+        -4,
+        0
+      ],
+      "hullMax": [
+        4,
+        0,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_concrete_trim/inferno_concrete_trim_8.mdl",
+      "references": 62,
+      "hullMin": [
+        -5.1875,
+        -4,
+        -8.3125
+      ],
+      "hullMax": [
+        0.4219,
+        4,
+        0.2813
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/curb_set_b/curb_set_b.mdl",
+      "references": 60,
+      "hullMin": [
+        -64.2507,
+        -14.1296,
+        -0.25
+      ],
+      "hullMax": [
+        63.9997,
+        14.0728,
+        11.8111
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_02_16.mdl",
+      "references": 59,
+      "hullMin": [
+        0,
+        -8,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        8,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/anchor_plate/anchor_plate.mdl",
+      "references": 57,
+      "hullMin": [
+        -9.8383,
+        -7.4144,
+        0
+      ],
+      "hullMax": [
+        9.8667,
+        7.368,
+        7.1882
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/window_collection/window_c.mdl",
+      "references": 57,
+      "hullMin": [
+        -6.0924,
+        -23.012,
+        -29.8836
+      ],
+      "hullMax": [
+        1.3324,
+        22.4915,
+        32.2456
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_01_128.mdl",
+      "references": 56,
+      "hullMin": [
+        0,
+        -64,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        64,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_02_corner_in.mdl",
+      "references": 55,
+      "hullMin": [
+        0,
+        -4,
+        0
+      ],
+      "hullMax": [
+        4,
+        0,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_concrete_trim/inferno_concrete_trim_64.mdl",
+      "references": 55,
+      "hullMin": [
+        -5.2813,
+        -64,
+        -8
+      ],
+      "hullMax": [
+        0.4746,
+        0,
+        0.375
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_01_32.mdl",
+      "references": 54,
+      "hullMin": [
+        0,
+        -16,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        16,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_01_64.mdl",
+      "references": 53,
+      "hullMin": [
+        0,
+        -32,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        32,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_metal_railing_cap/inferno_metal_railing_128.mdl",
+      "references": 52,
+      "hullMin": [
+        -1.9355,
+        -64.25,
+        -0.25
+      ],
+      "hullMax": [
+        1.9355,
+        64.25,
+        45.3463
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/stone_trim_b/stone_trim_b_01.mdl",
+      "references": 51,
+      "hullMin": [
+        -11.8524,
+        -64.1686,
+        -5.8869
+      ],
+      "hullMax": [
+        11.5292,
+        13.62,
+        5.2766
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/lily_pad/lily_pad.mdl",
+      "references": 50,
+      "hullMin": [
+        -16.5762,
+        -14.6345,
+        0
+      ],
+      "hullMax": [
+        18.9563,
+        37.165,
+        0.4015
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/lily_pad/lily.mdl",
+      "references": 50,
+      "hullMin": [
+        -6.1088,
+        -6.7248,
+        0
+      ],
+      "hullMax": [
+        5.203,
+        6.6857,
+        5.6417
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_01_16.mdl",
+      "references": 49,
+      "hullMin": [
+        0,
+        -8,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        8,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_02_32.mdl",
+      "references": 47,
+      "hullMin": [
+        0,
+        -16,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        16,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/ivy_a/ivy_a.mdl",
+      "references": 46,
+      "hullMin": [
+        -17.0539,
+        -32.7946,
+        -2.4119
+      ],
+      "hullMax": [
+        10.7052,
+        54.9824,
+        94.8286
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_metal_railing_cap/inferno_metal_railing_32.mdl",
+      "references": 45,
+      "hullMin": [
+        -1.9355,
+        -16.25,
+        -0.25
+      ],
+      "hullMax": [
+        1.9355,
+        16.25,
+        45.3463
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_01_corner_out.mdl",
+      "references": 42,
+      "hullMin": [
+        -4,
+        0,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        4.75,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/barrel_a/barrel_a_full.mdl",
+      "references": 42,
+      "hullMin": [
+        -17.0608,
+        -17.0608,
+        -0.25
+      ],
+      "hullMax": [
+        17.4353,
+        17.0608,
+        48.6875
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/concrete_bag_a/concrete_bag_a.mdl",
+      "references": 42,
+      "hullMin": [
+        -20.6348,
+        -11.1816,
+        -4.344
+      ],
+      "hullMax": [
+        12.3364,
+        12.839,
+        4.0513
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/ornate_lamp/ornate_lamp.mdl",
+      "references": 42,
+      "hullMin": [
+        -7.1138,
+        -0.2614,
+        -17.9343
+      ],
+      "hullMax": [
+        7.1138,
+        17.8998,
+        17.9343
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/tile_set_a/tile_set_a.mdl",
+      "references": 40,
+      "hullMin": [
+        -64,
+        -63.5837,
+        -1.2081
+      ],
+      "hullMax": [
+        64,
+        63.6907,
+        2.1799
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/mail_box_a/mail_box_a.mdl",
+      "references": 39,
+      "hullMin": [
+        -0.25,
+        -6.9901,
+        -9.85
+      ],
+      "hullMax": [
+        7.4555,
+        6.9901,
+        9.85
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/pillar_b/pillar_b.mdl",
+      "references": 38,
+      "hullMin": [
+        -18.8307,
+        -17.6894,
+        -0.25
+      ],
+      "hullMax": [
+        18.8675,
+        17.8582,
+        125.8803
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_02_64.mdl",
+      "references": 37,
+      "hullMin": [
+        0,
+        -32,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        32,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_01_8.mdl",
+      "references": 36,
+      "hullMin": [
+        0,
+        -4,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        4,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_skybox/inferno_skybox_tree_card01.mdl",
+      "references": 36,
+      "hullMin": [
+        -10.4548,
+        -47.3373,
+        -0.0627
+      ],
+      "hullMax": [
+        2.1538,
+        57.7482,
+        52.9845
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wall_brick/inferno_brick_a.mdl",
+      "references": 36,
+      "hullMin": [
+        -7.1269,
+        -7.6029,
+        0
+      ],
+      "hullMax": [
+        0.8443,
+        0.7031,
+        122.875
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wall_trim_b/wall_trim_b.mdl",
+      "references": 36,
+      "hullMin": [
+        -28.5137,
+        -2.519,
+        -39.917
+      ],
+      "hullMax": [
+        1.8706,
+        19.8811,
+        56.0831
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/gutters/gutters_drains_e.mdl",
+      "references": 35,
+      "hullMin": [
+        -3.0669,
+        -3.0766,
+        -40
+      ],
+      "hullMax": [
+        3.122,
+        3.0508,
+        0.0019
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_02_128.mdl",
+      "references": 34,
+      "hullMin": [
+        0,
+        -64,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        64,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/brick_corner_b/brick_corner_b.mdl",
+      "references": 34,
+      "hullMin": [
+        -22.826,
+        -19.8717,
+        -32.562
+      ],
+      "hullMax": [
+        0.8705,
+        1.3091,
+        32.562
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_02_8.mdl",
+      "references": 33,
+      "hullMin": [
+        0,
+        -4,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        4,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/curb_set_c/curb_set_c_b.mdl",
+      "references": 33,
+      "hullMin": [
+        -4.2056,
+        -32.3493,
+        -3.0079
+      ],
+      "hullMax": [
+        40.2815,
+        12.6492,
+        3.5984
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_skybox/inferno_skybox_bush_card02.mdl",
+      "references": 31,
+      "hullMin": [
+        -3.13,
+        -24.0272,
+        0
+      ],
+      "hullMax": [
+        0,
+        20.3667,
+        15.659
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_metal_railing_cap/inferno_metal_railing_pole.mdl",
+      "references": 30,
+      "hullMin": [
+        -1.9355,
+        -1.9355,
+        -0.25
+      ],
+      "hullMax": [
+        1.9355,
+        1.9355,
+        45.3463
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_fruit_container/inferno_fruit_container.mdl",
+      "references": 29,
+      "hullMin": [
+        -10.25,
+        -16.25,
+        -0.25
+      ],
+      "hullMax": [
+        10.25,
+        16.25,
+        8
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/electric_wires/electric_cond_b.mdl",
+      "references": 28,
+      "hullMin": [
+        -0.0002,
+        -1.1888,
+        -1
+      ],
+      "hullMax": [
+        1.481,
+        1.248,
+        65
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_phone_pole/inferno_phone_pole.mdl",
+      "references": 28,
+      "hullMin": [
+        -5.95,
+        -26.25,
+        -33.741
+      ],
+      "hullMax": [
+        5.95,
+        23,
+        33.3789
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_scaffolding_system/inferno_scaffolding_system_03.mdl",
+      "references": 28,
+      "hullMin": [
+        -1.3438,
+        -2.3075,
+        -0.25
+      ],
+      "hullMax": [
+        1.3438,
+        2.3075,
+        146.8711
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wine_crate_a/wine_crate_b.mdl",
+      "references": 28,
+      "hullMin": [
+        -42.1266,
+        -40.4641,
+        -0.2501
+      ],
+      "hullMax": [
+        42.1266,
+        40.4641,
+        62.3234
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/foliage/bushes_barberry_02.mdl",
+      "references": 28,
+      "hullMin": [
+        -53.5507,
+        -47.1714,
+        -7.7329
+      ],
+      "hullMax": [
+        50.0049,
+        50.7486,
+        110.7124
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/arch_a/arch_a.mdl",
+      "references": 27,
+      "hullMin": [
+        -132.4023,
+        -11.6746,
+        -42.25
+      ],
+      "hullMax": [
+        132.6418,
+        10.6747,
+        43.0574
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/curb_set_c/curb_set_c_d.mdl",
+      "references": 27,
+      "hullMin": [
+        -4.5055,
+        -64.25,
+        -3.0577
+      ],
+      "hullMax": [
+        4.5656,
+        64.25,
+        3.5984
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inverno_balcony_door/inferno_balcony_door_01.mdl",
+      "references": 27,
+      "hullMin": [
+        -0.25,
+        -32.5277,
+        -0.25
+      ],
+      "hullMax": [
+        2.5473,
+        32.5277,
+        112.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/tile_cap_a/tile_cap_a1.mdl",
+      "references": 27,
+      "hullMin": [
+        -32.3734,
+        -5.4093,
+        -0.1043
+      ],
+      "hullMax": [
+        0,
+        5.4093,
+        5.2348
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/pillar_b/pillar_b_top.mdl",
+      "references": 26,
+      "hullMin": [
+        -28.7774,
+        -28.8422,
+        0
+      ],
+      "hullMax": [
+        29.1488,
+        29.1794,
+        139.6888
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/barrel_b/barrel_b.mdl",
+      "references": 24,
+      "hullMin": [
+        -14.3763,
+        -14.4199,
+        -0.2
+      ],
+      "hullMax": [
+        14.5942,
+        14.573,
+        42.5722
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/door_frame/door_frame.mdl",
+      "references": 24,
+      "hullMin": [
+        -1.0813,
+        -34.25,
+        -58.2188
+      ],
+      "hullMax": [
+        9.0188,
+        34.25,
+        58.2813
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_balcony/inferno_balcony_support01.mdl",
+      "references": 24,
+      "hullMin": [
+        -0.25,
+        -52.0625,
+        -12.25
+      ],
+      "hullMax": [
+        32.25,
+        52.0625,
+        0.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_potted_plant/inferno_potted_plant.mdl",
+      "references": 24,
+      "hullMin": [
+        -13.7383,
+        -15.1842,
+        0
+      ],
+      "hullMax": [
+        11.1202,
+        11.4265,
+        32.9639
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wood_pole_a/wood_pole_a.mdl",
+      "references": 24,
+      "hullMin": [
+        -4.3898,
+        -5.589,
+        -70.9579
+      ],
+      "hullMax": [
+        6.4966,
+        5.0084,
+        70.9579
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/foliage/short_grass_02.mdl",
+      "references": 24,
+      "hullMin": [
+        -8.4001,
+        -10.5127,
+        -1.8007
+      ],
+      "hullMax": [
+        12.2382,
+        11.4132,
+        15.125
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_foliage/mall_bigleaves_plant01_medium.mdl",
+      "references": 23,
+      "hullMin": [
+        -31.3485,
+        -33.5973,
+        -0.9945
+      ],
+      "hullMax": [
+        35.6262,
+        34.5581,
+        78.0002
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/flower_pots/barrel_planter_wood_full.mdl",
+      "references": 23,
+      "hullMin": [
+        -16.9835,
+        -17.0782,
+        -0.25
+      ],
+      "hullMax": [
+        16.9231,
+        16.49,
+        23.3831
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_scaffolding_system/inferno_scaffolding_system_02.mdl",
+      "references": 23,
+      "hullMin": [
+        -1.87,
+        -1.87,
+        -0.25
+      ],
+      "hullMax": [
+        2.75,
+        4.75,
+        128.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/foliage/bushes_barberry_01.mdl",
+      "references": 23,
+      "hullMin": [
+        -47.64,
+        -41.9946,
+        0
+      ],
+      "hullMax": [
+        44.502,
+        45.1603,
+        50.6394
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_lighting/lightbulb01a.mdl",
+      "references": 22,
+      "hullMin": [
+        -7,
+        -32.0204,
+        0
+      ],
+      "hullMax": [
+        7,
+        32.25,
+        49.0398
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/hay_bale/hay_bale_a.mdl",
+      "references": 22,
+      "hullMin": [
+        -26.4764,
+        -15.5861,
+        -12.8046
+      ],
+      "hullMax": [
+        26.2074,
+        15.4582,
+        12.1714
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/weapon_crate_a/weapon_crate_a_metal.mdl",
+      "references": 22,
+      "hullMin": [
+        -46.5,
+        -33.4149,
+        -2.0858
+      ],
+      "hullMax": [
+        46.4656,
+        30.0499,
+        24.9578
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/weapon_crate_a/weapon_crate_a_plastic.mdl",
+      "references": 22,
+      "hullMin": [
+        -48.224,
+        -31.9762,
+        -0.25
+      ],
+      "hullMax": [
+        48.2071,
+        32.1467,
+        24.2622
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/door_a/door_a.mdl",
+      "references": 21,
+      "hullMin": [
+        -11.1988,
+        -43.2188,
+        -80.25
+      ],
+      "hullMax": [
+        10.6182,
+        43,
+        80.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/tile_cap_a/tile_cap_b.mdl",
+      "references": 21,
+      "hullMin": [
+        -49.0125,
+        0,
+        -3.0814
+      ],
+      "hullMax": [
+        0.3345,
+        128.2907,
+        3.3141
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wall_trim_a/wall_trim_a_32.mdl",
+      "references": 21,
+      "hullMin": [
+        -19.3768,
+        -8.1592,
+        -0.0743
+      ],
+      "hullMax": [
+        8.0328,
+        27.8818,
+        32
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_exteriors/chimney4.mdl",
+      "references": 20,
+      "hullMin": [
+        -14.8016,
+        -37.665,
+        -94.6911
+      ],
+      "hullMax": [
+        15.4046,
+        37.6088,
+        69.7861
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/chimney/chimney_b.mdl",
+      "references": 20,
+      "hullMin": [
+        -11.0949,
+        -11.6976,
+        0
+      ],
+      "hullMax": [
+        11.9607,
+        11.358,
+        57.1784
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_balcony/inferno_balcony_support01_single.mdl",
+      "references": 20,
+      "hullMin": [
+        -0.25,
+        -4.0625,
+        -12.25
+      ],
+      "hullMax": [
+        32.25,
+        4.0625,
+        0.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/pillar_b/pillar_b_top_c.mdl",
+      "references": 20,
+      "hullMin": [
+        -24.213,
+        -24.2674,
+        0
+      ],
+      "hullMax": [
+        24.525,
+        24.5107,
+        117.3786
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/cypress_a/cypress_a_medium.mdl",
+      "references": 19,
+      "hullMin": [
+        -62.4179,
+        -63.8104,
+        -260.1825
+      ],
+      "hullMax": [
+        65.3649,
+        60.2886,
+        352.7009
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_building_skybox/inferno_building_skybox_cheap01.mdl",
+      "references": 19,
+      "hullMin": [
+        -14.3,
+        -32.2119,
+        0
+      ],
+      "hullMax": [
+        14.3,
+        20.3278,
+        20.3028
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_foliage/urban_tree_giant01_medium.mdl",
+      "references": 18,
+      "hullMin": [
+        -344.9183,
+        -332.8726,
+        -0.3851
+      ],
+      "hullMax": [
+        370.8049,
+        364.3947,
+        552.5168
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_02_4.mdl",
+      "references": 18,
+      "hullMin": [
+        0,
+        -2,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        2,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/gutters/gutters_64.mdl",
+      "references": 18,
+      "hullMin": [
+        -0.1977,
+        -10.7691,
+        -3.5762
+      ],
+      "hullMax": [
+        63.8726,
+        0.2737,
+        3.4272
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_door_single/inferno_door_single.mdl",
+      "references": 18,
+      "hullMin": [
+        -3.8905,
+        -25.75,
+        -0.25
+      ],
+      "hullMax": [
+        3.8905,
+        26.75,
+        111.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_scaffolding_system/inferno_scaffolding_system_01.mdl",
+      "references": 18,
+      "hullMin": [
+        -6.5419,
+        -24,
+        -0.25
+      ],
+      "hullMax": [
+        6.5419,
+        24.8032,
+        128.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/pillar_b/pillar_b_top_a.mdl",
+      "references": 18,
+      "hullMin": [
+        -17.3665,
+        -17.4053,
+        0
+      ],
+      "hullMax": [
+        17.5893,
+        17.5076,
+        83.9133
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/tile_cap_a/tile_cap_c1.mdl",
+      "references": 18,
+      "hullMin": [
+        -17.0213,
+        0,
+        -2.3149
+      ],
+      "hullMax": [
+        1.4561,
+        64.4862,
+        2.3498
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_rooftop/antenna01a.mdl",
+      "references": 17,
+      "hullMin": [
+        -77.1036,
+        -101.2149,
+        -122.1476
+      ],
+      "hullMax": [
+        77.7175,
+        64.6171,
+        136.4579
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/bench/bench.mdl",
+      "references": 17,
+      "hullMin": [
+        -44.2419,
+        -14.4668,
+        -13.021
+      ],
+      "hullMax": [
+        44.2419,
+        14.4668,
+        12.2461
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/door_collection/door_collection_trim_b.mdl",
+      "references": 17,
+      "hullMin": [
+        -2.2478,
+        -38.25,
+        -33.25
+      ],
+      "hullMax": [
+        5.9326,
+        38.25,
+        93.0056
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/electric_box_a/electric_box_a.mdl",
+      "references": 16,
+      "hullMin": [
+        -0.25,
+        -7.6626,
+        -7.9753
+      ],
+      "hullMax": [
+        6.1751,
+        7.9957,
+        7.9753
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/foliage/weed_cluster_08a.mdl",
+      "references": 16,
+      "hullMin": [
+        -47.5791,
+        -12.383,
+        -2.9
+      ],
+      "hullMax": [
+        47.5791,
+        12.383,
+        15.077
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/chimney/chimney_a.mdl",
+      "references": 15,
+      "hullMin": [
+        -27.974,
+        -20,
+        0
+      ],
+      "hullMax": [
+        27.9741,
+        20,
+        40.0151
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/cypress_a/cypress_a.mdl",
+      "references": 15,
+      "hullMin": [
+        -78.0223,
+        -79.7629,
+        -325.1657
+      ],
+      "hullMax": [
+        81.7061,
+        75.3607,
+        440.8762
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_scaffolding_system/inferno_scaffolding_system_04.mdl",
+      "references": 15,
+      "hullMin": [
+        -68.25,
+        -18.625,
+        -0.25
+      ],
+      "hullMax": [
+        68.25,
+        18.25,
+        1.5
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/stone_trim_b/stone_trim_b_02.mdl",
+      "references": 15,
+      "hullMin": [
+        -11.3145,
+        -26.8769,
+        -3.4612
+      ],
+      "hullMax": [
+        11.5292,
+        0,
+        2.1063
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_foliage/urban_tree01.mdl",
+      "references": 14,
+      "hullMin": [
+        -63.7756,
+        -71.8857,
+        -0.25
+      ],
+      "hullMax": [
+        98.7761,
+        75.8386,
+        289.8884
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/curb_set_c/curb_set_c_a.mdl",
+      "references": 14,
+      "hullMin": [
+        -4.5055,
+        -32.2935,
+        -2.9917
+      ],
+      "hullMax": [
+        4.5656,
+        32.2537,
+        3.5984
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/door_collection/door_collection_d.mdl",
+      "references": 14,
+      "hullMin": [
+        -1.2969,
+        -29.707,
+        -25.1563
+      ],
+      "hullMax": [
+        1.0505,
+        34.614,
+        87.3281
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/door_collection/door_collection_trim_a.mdl",
+      "references": 14,
+      "hullMin": [
+        -0.4124,
+        -43.8438,
+        -24.9122
+      ],
+      "hullMax": [
+        5.7483,
+        45.5985,
+        142.3948
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/electric_wires/electric_cond_c.mdl",
+      "references": 14,
+      "hullMin": [
+        -0.0002,
+        -1.3309,
+        -1
+      ],
+      "hullMax": [
+        1.481,
+        1.3039,
+        129
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_balcony/inferno_balcony_railing01.mdl",
+      "references": 14,
+      "hullMin": [
+        0,
+        -69.9759,
+        -2
+      ],
+      "hullMax": [
+        53.9517,
+        69.9759,
+        37.1125
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_chimney/inferno_chimney_03.mdl",
+      "references": 14,
+      "hullMin": [
+        -6.9231,
+        -9.2582,
+        -0.25
+      ],
+      "hullMax": [
+        9.6432,
+        7.3082,
+        69.1247
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_gardening_tools/inferno_gardening_bucket.mdl",
+      "references": 14,
+      "hullMin": [
+        -8.1513,
+        -7.97,
+        -0.25
+      ],
+      "hullMax": [
+        8.1513,
+        7.97,
+        15.8292
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wood_beam_a/wood_beam_a2.mdl",
+      "references": 14,
+      "hullMin": [
+        -57.4466,
+        -4.1158,
+        -5.8325
+      ],
+      "hullMax": [
+        61.5149,
+        3.4809,
+        5.634
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/foliage/weed_cluster_03b.mdl",
+      "references": 14,
+      "hullMin": [
+        -40.3827,
+        -26.67,
+        -0.25
+      ],
+      "hullMax": [
+        40.3827,
+        26.67,
+        3.025
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_c17/light_domelight02_on.mdl",
+      "references": 13,
+      "hullMin": [
+        -9,
+        -9.2942,
+        -7.2627
+      ],
+      "hullMax": [
+        9,
+        9.2942,
+        0.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/chimney/chimney_d.mdl",
+      "references": 13,
+      "hullMin": [
+        -12.9533,
+        -8.581,
+        -0.0941
+      ],
+      "hullMax": [
+        6.145,
+        8.1971,
+        42.1145
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/curb_set_c/curb_set_c_c.mdl",
+      "references": 13,
+      "hullMin": [
+        -4.3697,
+        -16.25,
+        -2.9948
+      ],
+      "hullMax": [
+        4.4634,
+        16.25,
+        3.5047
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/door_collection/door_collection_b.mdl",
+      "references": 13,
+      "hullMin": [
+        -2.4219,
+        -29.7118,
+        -25.1719
+      ],
+      "hullMax": [
+        1.1141,
+        34.7335,
+        87.3359
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_gardening_tools/inferno_watering_can.mdl",
+      "references": 13,
+      "hullMin": [
+        -12.9868,
+        -5.47,
+        -0.25
+      ],
+      "hullMax": [
+        27.1765,
+        5.47,
+        25.2055
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_light_switch/inferno_light_switch.mdl",
+      "references": 13,
+      "hullMin": [
+        0,
+        -3.9273,
+        -2.27
+      ],
+      "hullMax": [
+        0.5,
+        3.9273,
+        2.77
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/coop_cementplant/coop_wooden_pallet/coop_wooden_pallet.mdl",
+      "references": 12,
+      "hullMin": [
+        -26.336,
+        -31.3985,
+        -0.25
+      ],
+      "hullMax": [
+        28.164,
+        31.1015,
+        7.125
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/apartment_trims/apartment_trim_01_4.mdl",
+      "references": 12,
+      "hullMin": [
+        0,
+        -2,
+        0
+      ],
+      "hullMax": [
+        0.75,
+        2,
+        6
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/arch_b/arch_b.mdl",
+      "references": 12,
+      "hullMin": [
+        -9.7572,
+        -64.2341,
+        -34.0152
+      ],
+      "hullMax": [
+        9.5722,
+        64.2341,
+        30.6218
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/church_pillar/church_pillar_a_base.mdl",
+      "references": 12,
+      "hullMin": [
+        -22.5009,
+        -22.5009,
+        -0.25
+      ],
+      "hullMax": [
+        22.5009,
+        22.5009,
+        23.2557
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/church_pillar/church_pillar_a.mdl",
+      "references": 12,
+      "hullMin": [
+        -12.8817,
+        -13.0765,
+        0
+      ],
+      "hullMax": [
+        12.8817,
+        13.0765,
+        261.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_broom/inferno_broom.mdl",
+      "references": 12,
+      "hullMin": [
+        -3.895,
+        -11.6097,
+        0
+      ],
+      "hullMax": [
+        3.4677,
+        6.8067,
+        68.3863
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_curtain_closed/inferno_curtain_closed.mdl",
+      "references": 12,
+      "hullMin": [
+        -35.3536,
+        0,
+        -63.5445
+      ],
+      "hullMax": [
+        35.3536,
+        6.8943,
+        44
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/lattice_a/lattice_a1.mdl",
+      "references": 12,
+      "hullMin": [
+        -85,
+        -42.6854,
+        -0.8687
+      ],
+      "hullMax": [
+        85.5718,
+        42.8578,
+        1.99
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/palace_capital_a/palace_capital_a.mdl",
+      "references": 12,
+      "hullMin": [
+        -27.3739,
+        -26.2392,
+        -23.992
+      ],
+      "hullMax": [
+        26.7746,
+        27.0146,
+        23.7421
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wall_trim_b/wall_trim_b1.mdl",
+      "references": 12,
+      "hullMin": [
+        -28.5137,
+        -2.519,
+        -39.917
+      ],
+      "hullMax": [
+        1.8706,
+        18.9146,
+        17.4994
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wine_vines/wine_vines_cards_a.mdl",
+      "references": 12,
+      "hullMin": [
+        -377.4086,
+        -100.6258,
+        0
+      ],
+      "hullMax": [
+        35.3759,
+        95.4667,
+        123.2948
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_skybox/inferno_pole_skybox.mdl",
+      "references": 11,
+      "hullMin": [
+        -0.4886,
+        -4.6935,
+        0
+      ],
+      "hullMax": [
+        0.4124,
+        4.6935,
+        35.112
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/roll_up_door/roll_up_door_b_full.mdl",
+      "references": 11,
+      "hullMin": [
+        -116.25,
+        -0.9375,
+        -0.25
+      ],
+      "hullMax": [
+        116.25,
+        20.25,
+        220.75
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/lightbulb01a.mdl",
+      "references": 10,
+      "hullMin": [
+        -6.945,
+        -32,
+        0
+      ],
+      "hullMax": [
+        6.945,
+        32.25,
+        49.1749
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_intercom/inferno_intercom_02.mdl",
+      "references": 10,
+      "hullMin": [
+        0,
+        -4.5629,
+        -9.4206
+      ],
+      "hullMax": [
+        0.518,
+        4.5629,
+        9.4206
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_metal_railing_cap/inferno_metal_railing_corner.mdl",
+      "references": 10,
+      "hullMin": [
+        -1.9355,
+        -1.9355,
+        -0.25
+      ],
+      "hullMax": [
+        16.25,
+        16.25,
+        45.3463
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_window_overhang/inferno_window_overhang_03.mdl",
+      "references": 10,
+      "hullMin": [
+        -0.25,
+        -46.7455,
+        -20.3981
+      ],
+      "hullMax": [
+        18.8482,
+        46.7455,
+        9.5491
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_wine_crate/inferno_wine_crate_01.mdl",
+      "references": 10,
+      "hullMin": [
+        -9.75,
+        -10.75,
+        -0.25
+      ],
+      "hullMax": [
+        9.75,
+        10.75,
+        6.875
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/large_gate_a/inferno_large_gate_02.mdl",
+      "references": 10,
+      "hullMin": [
+        -3.0708,
+        -42,
+        0
+      ],
+      "hullMax": [
+        3.4174,
+        42,
+        140
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/pillar_b/pillar_b_top_b.mdl",
+      "references": 10,
+      "hullMin": [
+        -11.661,
+        -11.6869,
+        0
+      ],
+      "hullMax": [
+        11.8095,
+        11.6717,
+        56.0255
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/foliage/weed_cluster_05b.mdl",
+      "references": 10,
+      "hullMin": [
+        -32.1122,
+        -22.6681,
+        -2.5967
+      ],
+      "hullMax": [
+        32.1122,
+        22.668,
+        10.678
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/arch_d/arch_d.mdl",
+      "references": 9,
+      "hullMin": [
+        -10.0129,
+        -197.2733,
+        -34.0248
+      ],
+      "hullMax": [
+        8.7018,
+        172.8486,
+        101.0424
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/broken_wall_bricks/broken_wall_brick_01.mdl",
+      "references": 9,
+      "hullMin": [
+        -7.75,
+        -8.25,
+        -2.75
+      ],
+      "hullMax": [
+        7.7507,
+        8.25,
+        2.75
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/coffin/inferno_coffin_lid.mdl",
+      "references": 9,
+      "hullMin": [
+        -1.2625,
+        -21.6414,
+        -49.6
+      ],
+      "hullMax": [
+        3.25,
+        21.7164,
+        49.975
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/coffin/inferno_coffin.mdl",
+      "references": 9,
+      "hullMin": [
+        -19.45,
+        -21.6026,
+        -49.6385
+      ],
+      "hullMax": [
+        0,
+        21.6026,
+        49.9895
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/concrete_bag_a/concrete_bags_stack_a.mdl",
+      "references": 9,
+      "hullMin": [
+        -31.9521,
+        -22.7996,
+        -12.521
+      ],
+      "hullMax": [
+        31.9521,
+        22.7996,
+        12.521
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/gutters/gutters_drains_c.mdl",
+      "references": 9,
+      "hullMin": [
+        -2.7841,
+        -3.0766,
+        -16.1012
+      ],
+      "hullMax": [
+        122.0705,
+        2.8857,
+        0.0001
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_balcony/inferno_balcony_support02.mdl",
+      "references": 9,
+      "hullMin": [
+        0,
+        -3,
+        -20
+      ],
+      "hullMax": [
+        37.2901,
+        3,
+        0
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_gardening_tools/inferno_rake_01.mdl",
+      "references": 9,
+      "hullMin": [
+        -41.8117,
+        -10.5959,
+        0
+      ],
+      "hullMax": [
+        35.6805,
+        10.5959,
+        7.8057
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_window_overhang/inferno_window_overhang_01.mdl",
+      "references": 9,
+      "hullMin": [
+        0,
+        -34.5,
+        -14.8943
+      ],
+      "hullMax": [
+        13.8,
+        34.5,
+        6.9
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/lamp_floor.mdl",
+      "references": 8,
+      "hullMin": [
+        -12.279,
+        -12.279,
+        -0.25
+      ],
+      "hullMax": [
+        12.279,
+        12.279,
+        86
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_urban/telephone_pole002.mdl",
+      "references": 8,
+      "hullMin": [
+        -9.0625,
+        -65.25,
+        -0.25
+      ],
+      "hullMax": [
+        30.875,
+        65.25,
+        480.2499
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/door_frame/door_frame_b.mdl",
+      "references": 8,
+      "hullMin": [
+        -1.25,
+        -56.125,
+        -58.25
+      ],
+      "hullMax": [
+        9.25,
+        56.125,
+        58.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_balcony/inferno_balcony_railing02.mdl",
+      "references": 8,
+      "hullMin": [
+        0,
+        -39.7405,
+        0
+      ],
+      "hullMax": [
+        27.7405,
+        39.7405,
+        44.7685
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_building_skybox/inferno_building_skybox_cheap02.mdl",
+      "references": 8,
+      "hullMin": [
+        -11.385,
+        -25.1609,
+        0
+      ],
+      "hullMax": [
+        18.975,
+        25.1609,
+        28.1531
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/large_gate_a/inferno_large_gate.mdl",
+      "references": 8,
+      "hullMin": [
+        -90.2188,
+        -5.9531,
+        -0.25
+      ],
+      "hullMax": [
+        90.2188,
+        5.8906,
+        143.8125
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/missile/missile_02.mdl",
+      "references": 8,
+      "hullMin": [
+        -6.907,
+        -40.5,
+        -6.907
+      ],
+      "hullMax": [
+        6.907,
+        40.3651,
+        6.907
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/tile_set_a/tile_set_a3.mdl",
+      "references": 8,
+      "hullMin": [
+        -64,
+        -63.5837,
+        -1.2081
+      ],
+      "hullMax": [
+        64,
+        0,
+        2.1799
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/broken_wall_bricks/broken_wall_brick_02.mdl",
+      "references": 7,
+      "hullMin": [
+        -9.875,
+        -8.25,
+        -7.25
+      ],
+      "hullMax": [
+        9.875,
+        8.25,
+        7.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/broken_wall_bricks/broken_wall_brick_03.mdl",
+      "references": 7,
+      "hullMin": [
+        -8.75,
+        -8.2435,
+        -3.5
+      ],
+      "hullMax": [
+        8.75,
+        8.2431,
+        3.5
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/church_bricks/church_bricks_02.mdl",
+      "references": 7,
+      "hullMin": [
+        -40.5598,
+        -10.604,
+        0
+      ],
+      "hullMax": [
+        40.5598,
+        10.604,
+        46.9188
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/concrete_bag_a/concrete_bag_b.mdl",
+      "references": 7,
+      "hullMin": [
+        -16.9362,
+        -12.1047,
+        -7.1036
+      ],
+      "hullMax": [
+        16.4884,
+        12.3108,
+        7.4032
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_circular_window/inferno_circular_window.mdl",
+      "references": 7,
+      "hullMin": [
+        -0.25,
+        -28.8475,
+        -28.8475
+      ],
+      "hullMax": [
+        4.8019,
+        28.8475,
+        28.8475
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wood_pile_a/wood_pile_a.mdl",
+      "references": 7,
+      "hullMin": [
+        -32.6266,
+        -95.2862,
+        -48.5337
+      ],
+      "hullMax": [
+        10.0841,
+        97.6562,
+        47.5147
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_cemetery/crypts_oneoff01.mdl",
+      "references": 6,
+      "hullMin": [
+        -66.5233,
+        -40.8588,
+        -1.2436
+      ],
+      "hullMax": [
+        66.5233,
+        40.8588,
+        157.7469
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_bike/inferno_bike_02.mdl",
+      "references": 6,
+      "hullMin": [
+        -16.1474,
+        -39.5724,
+        -0.2671
+      ],
+      "hullMax": [
+        12.2426,
+        39.0516,
+        54.1185
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_chair/inferno_chair.mdl",
+      "references": 6,
+      "hullMin": [
+        -15.9432,
+        -12.5625,
+        -0.25
+      ],
+      "hullMax": [
+        12.3375,
+        12.5625,
+        47.0625
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_window_guard/inferno_window_guard.mdl",
+      "references": 6,
+      "hullMin": [
+        -28.7048,
+        0,
+        -39.7073
+      ],
+      "hullMax": [
+        28.7048,
+        9.6211,
+        8.2344
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_cemetery/crypts_wall.mdl",
+      "references": 5,
+      "hullMin": [
+        -73,
+        -105,
+        -1.0306
+      ],
+      "hullMax": [
+        10.6786,
+        105,
+        181
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/side_table_square.mdl",
+      "references": 5,
+      "hullMin": [
+        -13.9938,
+        -13.9895,
+        -1.9426
+      ],
+      "hullMax": [
+        13.9938,
+        13.9895,
+        31.9887
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/furniture_couch02a.mdl",
+      "references": 5,
+      "hullMin": [
+        -18.8216,
+        -23.339,
+        -21.725
+      ],
+      "hullMax": [
+        18.7201,
+        23.339,
+        21.8702
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/anchor_plate/anchor_plate_b.mdl",
+      "references": 5,
+      "hullMin": [
+        0,
+        -9.8888,
+        -9.9222
+      ],
+      "hullMax": [
+        3.1841,
+        9.9624,
+        9.9289
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/arch_b/arch_b_large.mdl",
+      "references": 5,
+      "hullMin": [
+        -12.1965,
+        -80.2927,
+        -42.519
+      ],
+      "hullMax": [
+        11.9652,
+        80.2927,
+        38.2773
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/book_set/book_set_a.mdl",
+      "references": 5,
+      "hullMin": [
+        -8.5167,
+        -32.75,
+        -31.625
+      ],
+      "hullMax": [
+        3.1155,
+        33.5625,
+        33.4375
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/book_set/book_set_b.mdl",
+      "references": 5,
+      "hullMin": [
+        -5.904,
+        -16.5,
+        0
+      ],
+      "hullMax": [
+        2.3513,
+        16.5625,
+        33.125
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/book_shelf_a/book_shelf_a.mdl",
+      "references": 5,
+      "hullMin": [
+        -13.7479,
+        -24.9947,
+        -47.3529
+      ],
+      "hullMax": [
+        13.7481,
+        24.9322,
+        47.0831
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/book_shelf_a/book_shelf_a1.mdl",
+      "references": 5,
+      "hullMin": [
+        -13.8438,
+        -41,
+        -47.3437
+      ],
+      "hullMax": [
+        13.9688,
+        41.1563,
+        47.1563
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/gutters/gutters_drains_a.mdl",
+      "references": 5,
+      "hullMin": [
+        -7.1681,
+        -12.0444,
+        0
+      ],
+      "hullMax": [
+        7.1664,
+        3.125,
+        39.6605
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/rug_set/rug_set_a.mdl",
+      "references": 5,
+      "hullMin": [
+        -35,
+        -65,
+        0
+      ],
+      "hullMax": [
+        35,
+        65,
+        1.633
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/tile_cap_a/tile_cap_b1.mdl",
+      "references": 5,
+      "hullMin": [
+        -48.0588,
+        0,
+        -3.0814
+      ],
+      "hullMax": [
+        0,
+        66.4699,
+        2.0436
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wall_brick/inferno_plaster_e.mdl",
+      "references": 5,
+      "hullMin": [
+        -7.1269,
+        -7.6029,
+        0
+      ],
+      "hullMax": [
+        0.688,
+        0.7156,
+        122.875
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_cemetery/crypts_oneoff02.mdl",
+      "references": 4,
+      "hullMin": [
+        -87.753,
+        -44.3174,
+        -1
+      ],
+      "hullMax": [
+        86.7531,
+        44.3174,
+        204
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_exteriors/fence002.mdl",
+      "references": 4,
+      "hullMin": [
+        -9.6294,
+        -291.8795,
+        -0.8562
+      ],
+      "hullMax": [
+        14.2263,
+        293.0435,
+        110.3486
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_junk/garbage_coffeemug001a_fullsheet.mdl",
+      "references": 4,
+      "hullMin": [
+        -2.6762,
+        -3.768,
+        -2.9151
+      ],
+      "hullMax": [
+        2.6762,
+        3.9405,
+        2.9629
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/arch_e/arch_e.mdl",
+      "references": 4,
+      "hullMin": [
+        -12.4097,
+        -118.9075,
+        -24.9255
+      ],
+      "hullMax": [
+        12.8569,
+        119.9472,
+        29.9932
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/church_pillar/church_pillar_b_base.mdl",
+      "references": 4,
+      "hullMin": [
+        -15.6257,
+        -15.6257,
+        -0.25
+      ],
+      "hullMax": [
+        15.6257,
+        15.6257,
+        16.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/church_pillar/church_pillar_b.mdl",
+      "references": 4,
+      "hullMin": [
+        -9.0922,
+        -9.2286,
+        0
+      ],
+      "hullMax": [
+        9.0922,
+        9.2286,
+        182.95
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/church_window/church_window_a.mdl",
+      "references": 4,
+      "hullMin": [
+        -3.5,
+        -59,
+        -122.25
+      ],
+      "hullMax": [
+        7.0946,
+        59,
+        116.3941
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/curtains_pulled/curtains_pulled_rod.mdl",
+      "references": 4,
+      "hullMin": [
+        -6,
+        -20.5456,
+        0
+      ],
+      "hullMax": [
+        0.9428,
+        20,
+        41.1011
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/curtains_pulled/curtains_pulled.mdl",
+      "references": 4,
+      "hullMin": [
+        -2.3229,
+        -13.4048,
+        -41.1693
+      ],
+      "hullMax": [
+        2.3229,
+        13.4048,
+        41.1693
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/door_c/door_c.mdl",
+      "references": 4,
+      "hullMin": [
+        -3.5846,
+        -0.25,
+        -64.0206
+      ],
+      "hullMax": [
+        3.5846,
+        46.1939,
+        64.2706
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_apc/inferno_apc_wheel.mdl",
+      "references": 4,
+      "hullMin": [
+        -25.4844,
+        -0.25,
+        -25.45
+      ],
+      "hullMax": [
+        25.4844,
+        17.5792,
+        25.45
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_concrete_trim/inferno_concrete_trim_corner_in.mdl",
+      "references": 4,
+      "hullMin": [
+        -8.3125,
+        -0.3438,
+        -8
+      ],
+      "hullMax": [
+        0,
+        8,
+        0.2987
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_paintings/inferno_paintings_01.mdl",
+      "references": 4,
+      "hullMin": [
+        -0.1191,
+        -26.175,
+        -20.9688
+      ],
+      "hullMax": [
+        1.7621,
+        26.2813,
+        20.7209
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_paintings/inferno_paintings_04.mdl",
+      "references": 4,
+      "hullMin": [
+        -0.2343,
+        -18.5741,
+        -14.7635
+      ],
+      "hullMax": [
+        1.5414,
+        18.8645,
+        14.9931
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_trashbin/inferno_trashbin.mdl",
+      "references": 4,
+      "hullMin": [
+        0,
+        -9.5652,
+        -0.25
+      ],
+      "hullMax": [
+        29.5652,
+        9.5652,
+        54.505
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_vespa/inferno_vespa.mdl",
+      "references": 4,
+      "hullMin": [
+        -14.7408,
+        -43.892,
+        -0.3789
+      ],
+      "hullMax": [
+        14.7408,
+        45.1793,
+        51.8188
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/palace_capital_a/palace_capital_b.mdl",
+      "references": 4,
+      "hullMin": [
+        -14.8103,
+        -14.1964,
+        -12.8454
+      ],
+      "hullMax": [
+        14.6008,
+        14.6159,
+        13.1412
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/roof_a/roof_a.mdl",
+      "references": 4,
+      "hullMin": [
+        -0.2261,
+        -283.9714,
+        -76.0927
+      ],
+      "hullMax": [
+        284.2952,
+        0.0009,
+        107.0105
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/stone_bench.mdl",
+      "references": 4,
+      "hullMin": [
+        -17.6022,
+        -60.25,
+        -0.25
+      ],
+      "hullMax": [
+        17.25,
+        60.25,
+        53.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/lamp_table02.mdl",
+      "references": 3,
+      "hullMin": [
+        -7.8944,
+        -7.9222,
+        -0.1899
+      ],
+      "hullMax": [
+        7.8944,
+        7.9222,
+        29
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/prison_heater001a_new.mdl",
+      "references": 3,
+      "hullMin": [
+        -8.6811,
+        -20.5494,
+        -19.375
+      ],
+      "hullMax": [
+        9,
+        20.0046,
+        19.375
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_junk/garbage_sodacup01a.mdl",
+      "references": 3,
+      "hullMin": [
+        -3.8741,
+        -3.8936,
+        -7.1391
+      ],
+      "hullMax": [
+        3.8324,
+        3.8129,
+        6.1391
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/coop_cementplant/furniture/coop_wooden_table.mdl",
+      "references": 3,
+      "hullMin": [
+        -18.25,
+        -40.25,
+        -0.25
+      ],
+      "hullMax": [
+        18.25,
+        40.25,
+        37.125
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/furniture_couch01a.mdl",
+      "references": 3,
+      "hullMin": [
+        -21.3876,
+        -39.0131,
+        -21.6139
+      ],
+      "hullMax": [
+        18.4947,
+        39.0131,
+        21.613
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/clothes_a/clothes_b.mdl",
+      "references": 3,
+      "hullMin": [
+        -2.0512,
+        -128.2527,
+        -82.1447
+      ],
+      "hullMax": [
+        1.422,
+        128.187,
+        81.4929
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/electric_wires/electric_cond_curve_a.mdl",
+      "references": 3,
+      "hullMin": [
+        -0.0083,
+        -2.6244,
+        0
+      ],
+      "hullMax": [
+        1.553,
+        0.7509,
+        32.7329
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_ceiling_fan/inferno_ceiling_fan.mdl",
+      "references": 3,
+      "hullMin": [
+        -40,
+        -40,
+        -26.0938
+      ],
+      "hullMax": [
+        40,
+        40,
+        0
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_door_bell/inferno_door_bell.mdl",
+      "references": 3,
+      "hullMin": [
+        -5.8421,
+        0,
+        -23.1054
+      ],
+      "hullMax": [
+        5.8421,
+        23.3682,
+        17.5001
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_drinking_fountain/inferno_drinking_fountain.mdl",
+      "references": 3,
+      "hullMin": [
+        -14.2,
+        -34.65,
+        -0.25
+      ],
+      "hullMax": [
+        14.0875,
+        13.975,
+        84.7375
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_gardening_tools/inferno_hand_shovel.mdl",
+      "references": 3,
+      "hullMin": [
+        -9.2696,
+        -2.7,
+        0
+      ],
+      "hullMax": [
+        9.2934,
+        2.7,
+        1.4862
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_intercom/inferno_intercom_01.mdl",
+      "references": 3,
+      "hullMin": [
+        0,
+        -4.5811,
+        -9.5699
+      ],
+      "hullMax": [
+        0.947,
+        4.5811,
+        9.5699
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_metal_railing_cap/inferno_metal_railing_cap.mdl",
+      "references": 3,
+      "hullMin": [
+        -1.9355,
+        -65.9355,
+        -0.25
+      ],
+      "hullMax": [
+        1.9355,
+        65.9355,
+        109.375
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_paintings/inferno_paintings_02.mdl",
+      "references": 3,
+      "hullMin": [
+        -0.2343,
+        -19.1583,
+        -23.0403
+      ],
+      "hullMax": [
+        1.5414,
+        19.4527,
+        23.0915
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_sign_street_01/inferno_sign_street_01.mdl",
+      "references": 3,
+      "hullMin": [
+        -3.2872,
+        -8.65,
+        -0.0013
+      ],
+      "hullMax": [
+        13.4143,
+        15.1279,
+        1.4486
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_stair_railing/inferno_stair_railing.mdl",
+      "references": 3,
+      "hullMin": [
+        -87.1963,
+        -0.0013,
+        -43.6238
+      ],
+      "hullMax": [
+        86.4265,
+        3.2669,
+        44.2027
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_stair_railing/inferno_stair_railing02.mdl",
+      "references": 3,
+      "hullMin": [
+        -87.1963,
+        -3.2748,
+        -43.6238
+      ],
+      "hullMax": [
+        86.4265,
+        0,
+        44.2027
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_vintage_radio/inferno_vintage_radio.mdl",
+      "references": 3,
+      "hullMin": [
+        -6.25,
+        -10.25,
+        0
+      ],
+      "hullMax": [
+        6.25,
+        10.25,
+        12.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_c17/metalpot001a.mdl",
+      "references": 2,
+      "hullMin": [
+        -9.5917,
+        -7.8754,
+        -7.0722
+      ],
+      "hullMax": [
+        10.0212,
+        8.002,
+        7.0607
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_furniture/cafe_barstool1.mdl",
+      "references": 2,
+      "hullMin": [
+        -10.7183,
+        -10.7297,
+        -0.1314
+      ],
+      "hullMax": [
+        10.7478,
+        10.6546,
+        34.8381
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/bucket_tools02.mdl",
+      "references": 2,
+      "hullMin": [
+        -20.7032,
+        -25.6742,
+        -0.3284
+      ],
+      "hullMax": [
+        24.3595,
+        18.2038,
+        12.7429
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_junk/garbage_frenchfrycup01a_fullsheet.mdl",
+      "references": 2,
+      "hullMin": [
+        -3.0612,
+        -4.5978,
+        -3.8136
+      ],
+      "hullMax": [
+        2.7727,
+        4.6587,
+        4.7447
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_junk/garbage256_composite001b.mdl",
+      "references": 2,
+      "hullMin": [
+        -26.4797,
+        -130.1979,
+        -4.25
+      ],
+      "hullMax": [
+        26.4164,
+        127.2173,
+        4.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/bomb_tanks.mdl",
+      "references": 2,
+      "hullMin": [
+        -28.7131,
+        -51.8234,
+        -0.25
+      ],
+      "hullMax": [
+        28.5897,
+        51.8234,
+        123.7385
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/arch_c/arch_c.mdl",
+      "references": 2,
+      "hullMin": [
+        -87.917,
+        -28.4405,
+        -0.25
+      ],
+      "hullMax": [
+        92.7616,
+        8.9405,
+        42.2689
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/broken_wall_bricks/broken_wall_brick_05.mdl",
+      "references": 2,
+      "hullMin": [
+        -11.75,
+        -8.5,
+        -7.25
+      ],
+      "hullMax": [
+        11.75,
+        8.5,
+        7.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/car_a/car_a_details.mdl",
+      "references": 2,
+      "hullMin": [
+        -97.2084,
+        -39.2354,
+        -30.5046
+      ],
+      "hullMax": [
+        98.8111,
+        43.345,
+        47.3121
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/car_a/car_a_glass.mdl",
+      "references": 2,
+      "hullMin": [
+        -30.5183,
+        -31.0504,
+        0
+      ],
+      "hullMax": [
+        91.833,
+        35.2306,
+        40.1093
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/car_a/car_a.mdl",
+      "references": 2,
+      "hullMin": [
+        -96.6159,
+        -37.4251,
+        -19.538
+      ],
+      "hullMax": [
+        97.3747,
+        42.0668,
+        42.4092
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/electric_wires/electric_cond_a.mdl",
+      "references": 2,
+      "hullMin": [
+        0,
+        -0.7422,
+        -1
+      ],
+      "hullMax": [
+        1.481,
+        0.8383,
+        33
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/flower_pots/flower_planter_b.mdl",
+      "references": 2,
+      "hullMin": [
+        -29.4063,
+        -14.3459,
+        0
+      ],
+      "hullMax": [
+        31.2812,
+        15.25,
+        25.4687
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/flower_pots/flower_planter_c.mdl",
+      "references": 2,
+      "hullMin": [
+        -16.1194,
+        -15.0179,
+        0
+      ],
+      "hullMax": [
+        16.0163,
+        17.1178,
+        43.2976
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_bell_tower/inferno_bell_tower_skybox.mdl",
+      "references": 2,
+      "hullMin": [
+        -10.3536,
+        -10.3717,
+        -0.25
+      ],
+      "hullMax": [
+        10.3684,
+        10.3381,
+        68.295
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_chimney/inferno_chimney_02.mdl",
+      "references": 2,
+      "hullMin": [
+        -9.3649,
+        -9.3649,
+        -0.25
+      ],
+      "hullMax": [
+        9.3649,
+        9.3649,
+        83.8496
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_folding_shutters/inferno_folding_shutters_interior.mdl",
+      "references": 2,
+      "hullMin": [
+        -0.25,
+        -24.322,
+        -44.4375
+      ],
+      "hullMax": [
+        2.1196,
+        24.322,
+        43.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_fuse_box/inferno_fuse_box.mdl",
+      "references": 2,
+      "hullMin": [
+        -0.25,
+        -15.5,
+        -11.25
+      ],
+      "hullMax": [
+        1.5156,
+        15.5,
+        11.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_gardening_tools/inferno_hand_fork.mdl",
+      "references": 2,
+      "hullMin": [
+        -9.5735,
+        -2.5716,
+        0
+      ],
+      "hullMax": [
+        9.2177,
+        2.5716,
+        1.4408
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_paintings/inferno_paintings_03.mdl",
+      "references": 2,
+      "hullMin": [
+        -0.2343,
+        -17.7506,
+        -14.7507
+      ],
+      "hullMax": [
+        1.5414,
+        18.0806,
+        14.8725
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_storm_drain/inferno_storm_drain.mdl",
+      "references": 2,
+      "hullMin": [
+        -43.25,
+        -28.25,
+        -5.25
+      ],
+      "hullMax": [
+        43.25,
+        28.25,
+        28.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_window_overhang/inferno_window_overhang_02.mdl",
+      "references": 2,
+      "hullMin": [
+        -0.25,
+        -41.95,
+        -18.32
+      ],
+      "hullMax": [
+        16.93,
+        41.95,
+        8.59
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inverno_balcony_door/inferno_balcony_door_02.mdl",
+      "references": 2,
+      "hullMin": [
+        -0.0911,
+        -32.5436,
+        -0.25
+      ],
+      "hullMax": [
+        11.6563,
+        32.5762,
+        112.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/lattice_a/lattice_a.mdl",
+      "references": 2,
+      "hullMin": [
+        -84.9282,
+        -85.7455,
+        -0.5019
+      ],
+      "hullMax": [
+        85.5718,
+        85.5718,
+        1.99
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/ornate_door_frame/ornate_door_frame.mdl",
+      "references": 2,
+      "hullMin": [
+        -0.25,
+        -78.1518,
+        -0.3075
+      ],
+      "hullMax": [
+        21.1907,
+        75.9496,
+        237.1668
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/rug_set/rug_set_b.mdl",
+      "references": 2,
+      "hullMin": [
+        -52.5,
+        -97.5,
+        0
+      ],
+      "hullMax": [
+        52.5,
+        97.5,
+        2.4494
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/sewer_arc_trim/sewer_arc_trim.mdl",
+      "references": 2,
+      "hullMin": [
+        -2.5228,
+        -29.9665,
+        -12.2213
+      ],
+      "hullMax": [
+        2.5228,
+        29.9352,
+        12.1271
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/store_front/store_front_a.mdl",
+      "references": 2,
+      "hullMin": [
+        -37.0445,
+        -134.5378,
+        -77.313
+      ],
+      "hullMax": [
+        38.6286,
+        123.4325,
+        72.6057
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/store_front/store_front_door.mdl",
+      "references": 2,
+      "hullMin": [
+        -0.25,
+        -29,
+        -0.25
+      ],
+      "hullMax": [
+        8.304,
+        29,
+        128.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/window_d/window_d.mdl",
+      "references": 2,
+      "hullMin": [
+        -13.398,
+        -34.8606,
+        -46.3132
+      ],
+      "hullMax": [
+        3.3818,
+        34.8606,
+        67.6524
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/window_frame_a/window_frame_a.mdl",
+      "references": 2,
+      "hullMin": [
+        -26.5137,
+        -10.25,
+        -37.7363
+      ],
+      "hullMax": [
+        26.4863,
+        2.25,
+        37.7363
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_vostok/ducttape01.mdl",
+      "references": 2,
+      "hullMin": [
+        -4.028,
+        -4.1316,
+        -0.2413
+      ],
+      "hullMax": [
+        4.0397,
+        4.1307,
+        3.404
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_vostok/wrenchgripper01.mdl",
+      "references": 2,
+      "hullMin": [
+        -1.5832,
+        -5.8875,
+        -0.2514
+      ],
+      "hullMax": [
+        1.6625,
+        5.9386,
+        0.8004
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_c17/metalpot002a.mdl",
+      "references": 1,
+      "hullMin": [
+        -13.2244,
+        -7.2601,
+        -1.6939
+      ],
+      "hullMax": [
+        14.0561,
+        7.1802,
+        1.904
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_downtown/door_interior_112_01.mdl",
+      "references": 1,
+      "hullMin": [
+        -4.2947,
+        0,
+        -0.01
+      ],
+      "hullMax": [
+        4.2947,
+        55.5151,
+        111.621
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/coffee_maker.mdl",
+      "references": 1,
+      "hullMin": [
+        -9.6637,
+        -5.79,
+        -0.2491
+      ],
+      "hullMax": [
+        7.0335,
+        5.4444,
+        18.5409
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/dish_soap.mdl",
+      "references": 1,
+      "hullMin": [
+        -4.8913,
+        -6.163,
+        -3.2634
+      ],
+      "hullMax": [
+        4.8816,
+        6.2012,
+        20.4144
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/sinkkitchen01a.mdl",
+      "references": 1,
+      "hullMin": [
+        -11.9269,
+        -13.9446,
+        -17.8071
+      ],
+      "hullMax": [
+        11.8882,
+        14.0456,
+        17.8071
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_interiors/stove02.mdl",
+      "references": 1,
+      "hullMin": [
+        -12.6597,
+        -18.3857,
+        -0.0842
+      ],
+      "hullMax": [
+        14.8405,
+        18.3857,
+        47.1139
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_junk/garbage_plasticbottle001a_fullsheet.mdl",
+      "references": 1,
+      "hullMin": [
+        -7.1033,
+        -6.6556,
+        -11.0691
+      ],
+      "hullMax": [
+        7.1033,
+        7.551,
+        11.0691
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_lab/monitor02.mdl",
+      "references": 1,
+      "hullMin": [
+        -14.4581,
+        -13.056,
+        -2.1869
+      ],
+      "hullMax": [
+        14.0579,
+        13.214,
+        26.8041
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_office/office_keyboard.mdl",
+      "references": 1,
+      "hullMin": [
+        -9.9486,
+        -3.7512,
+        0
+      ],
+      "hullMax": [
+        9.9486,
+        3.7512,
+        2.2816
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_urban/boat002.mdl",
+      "references": 1,
+      "hullMin": [
+        -72.5,
+        -34.6971,
+        -16.9741
+      ],
+      "hullMax": [
+        70.4405,
+        34.6971,
+        18.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_urban/fridge_door003.mdl",
+      "references": 1,
+      "hullMin": [
+        -7.25,
+        -20.2889,
+        -30.75
+      ],
+      "hullMax": [
+        6.7874,
+        20.2889,
+        30.75
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props_urban/fridge002.mdl",
+      "references": 1,
+      "hullMin": [
+        -14.25,
+        -20.625,
+        -0.25
+      ],
+      "hullMax": [
+        14.25,
+        20.625,
+        78.5
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/goldfish.mdl",
+      "references": 1,
+      "hullMin": [
+        -10.088,
+        -0.909,
+        -3.5074
+      ],
+      "hullMax": [
+        3.3487,
+        1.0129,
+        4.2401
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/handrailstairs03.mdl",
+      "references": 1,
+      "hullMin": [
+        -101.1032,
+        -3.4662,
+        -70.7993
+      ],
+      "hullMax": [
+        101.3618,
+        93.5601,
+        100.089
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/door_frame/door_frame_c.mdl",
+      "references": 1,
+      "hullMin": [
+        -4.1938,
+        -38.125,
+        -55.1563
+      ],
+      "hullMax": [
+        4.2563,
+        38.125,
+        55.1562
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/fire_place/fire_place.mdl",
+      "references": 1,
+      "hullMin": [
+        -33.3876,
+        -39.7135,
+        0
+      ],
+      "hullMax": [
+        37.7476,
+        39.053,
+        129.6092
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/fountain_a_basin/fountain_a_basin_metal.mdl",
+      "references": 1,
+      "hullMin": [
+        -155.949,
+        -155.9472,
+        -10.5337
+      ],
+      "hullMax": [
+        155.949,
+        155.9472,
+        13.415
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/fountain_a_basin/fountain_a_basin_tiles.mdl",
+      "references": 1,
+      "hullMin": [
+        -130.7196,
+        -130.7198,
+        -11.5901
+      ],
+      "hullMax": [
+        130.7206,
+        130.7198,
+        10.8724
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/fountain_a_basin/fountain_a_basin.mdl",
+      "references": 1,
+      "hullMin": [
+        -154.9459,
+        -155.75,
+        -15.0589
+      ],
+      "hullMax": [
+        156.9375,
+        155.75,
+        14.2526
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/fountain_a/fountain_a_water.mdl",
+      "references": 1,
+      "hullMin": [
+        -43.7788,
+        -42.9544,
+        0
+      ],
+      "hullMax": [
+        44.126,
+        43.6149,
+        131.8151
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/fountain_a/fountain_a.mdl",
+      "references": 1,
+      "hullMin": [
+        -42.4562,
+        -41.6928,
+        -1.6842
+      ],
+      "hullMax": [
+        42.8143,
+        42.2823,
+        133.0751
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_apc/inferno_apc.mdl",
+      "references": 1,
+      "hullMin": [
+        -142.2722,
+        -65.7128,
+        0
+      ],
+      "hullMax": [
+        144.2581,
+        65.7128,
+        176.0614
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_bike/inferno_bike_03.mdl",
+      "references": 1,
+      "hullMin": [
+        -24.2346,
+        -38.9186,
+        -0.1283
+      ],
+      "hullMax": [
+        17.9606,
+        30.7611,
+        48.6567
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_blackboard/inferno_blackboard.mdl",
+      "references": 1,
+      "hullMin": [
+        -13.4883,
+        -12.375,
+        -0.25
+      ],
+      "hullMax": [
+        13.2734,
+        12.4063,
+        46.9375
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_building_skybox/inferno_building_skybox.mdl",
+      "references": 1,
+      "hullMin": [
+        -31.7267,
+        -20.0841,
+        -0.1504
+      ],
+      "hullMax": [
+        31.7267,
+        20.0841,
+        20.5994
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_clock/inferno_clock.mdl",
+      "references": 1,
+      "hullMin": [
+        -10.5647,
+        -12.5114,
+        -0.25
+      ],
+      "hullMax": [
+        10.5647,
+        12.5114,
+        87.75
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_water_heater/inferno_water_heater.mdl",
+      "references": 1,
+      "hullMin": [
+        -15.3407,
+        -15.3407,
+        -0.037
+      ],
+      "hullMax": [
+        15.4665,
+        15.3407,
+        86.7407
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inferno_wine_crate/inferno_wine_crate_02.mdl",
+      "references": 1,
+      "hullMin": [
+        -9.75,
+        -16.1673,
+        -0.25
+      ],
+      "hullMax": [
+        22.6618,
+        10.75,
+        9.7357
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inverno_balcony_door/inferno_balcony_door_left.mdl",
+      "references": 1,
+      "hullMin": [
+        -0.25,
+        -0.5277,
+        -0.25
+      ],
+      "hullMax": [
+        2.5473,
+        32.25,
+        112.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/inverno_balcony_door/inferno_balcony_door_right.mdl",
+      "references": 1,
+      "hullMin": [
+        -0.25,
+        -32.25,
+        -0.25
+      ],
+      "hullMax": [
+        2.5473,
+        0.5277,
+        112.25
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/roll_up_door/roll_up_door_b_02.mdl",
+      "references": 1,
+      "hullMin": [
+        -112.25,
+        -0.9375,
+        0
+      ],
+      "hullMax": [
+        112.25,
+        4.7815,
+        199.45
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/roll_up_door/roll_up_door_b_frame.mdl",
+      "references": 1,
+      "hullMin": [
+        -116.25,
+        -0.25,
+        -0.25
+      ],
+      "hullMax": [
+        116.25,
+        20.25,
+        220.75
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/store_front/store_front_add_detail.mdl",
+      "references": 1,
+      "hullMin": [
+        0,
+        -22.5927,
+        0
+      ],
+      "hullMax": [
+        7.7041,
+        22.5927,
+        123.2874
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/store_front/store_front_add_detail02.mdl",
+      "references": 1,
+      "hullMin": [
+        0,
+        -22.5927,
+        0
+      ],
+      "hullMax": [
+        7.7041,
+        22.5927,
+        123.2874
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/table_a/table_a.mdl",
+      "references": 1,
+      "hullMin": [
+        -25.3613,
+        -50.6317,
+        0
+      ],
+      "hullMax": [
+        25.3601,
+        47.6548,
+        33.2983
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wagon/wagon_metal.mdl",
+      "references": 1,
+      "hullMin": [
+        -55.0671,
+        -79.8115,
+        -32.8078
+      ],
+      "hullMax": [
+        56.6633,
+        81.4389,
+        32.8844
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wagon/wagon.mdl",
+      "references": 1,
+      "hullMin": [
+        -52.9292,
+        -85.8035,
+        -31.9475
+      ],
+      "hullMax": [
+        51.6909,
+        85.8035,
+        40.3823
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/wall_brick/inferno_plaster_b.mdl",
+      "references": 1,
+      "hullMin": [
+        -7.1269,
+        -7.6029,
+        0
+      ],
+      "hullMax": [
+        0.7505,
+        0.7156,
+        122.875
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/water_wheel/water_wheel.mdl",
+      "references": 1,
+      "hullMin": [
+        -1.0453,
+        -112.5738,
+        -112.5738
+      ],
+      "hullMax": [
+        49.7514,
+        112.5738,
+        112.5738
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/well/well_base.mdl",
+      "references": 1,
+      "hullMin": [
+        -59.3586,
+        -58.0074,
+        0
+      ],
+      "hullMax": [
+        59.3586,
+        58.6645,
+        39.9975
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/well/well_tile.mdl",
+      "references": 1,
+      "hullMin": [
+        -48.1771,
+        -66.0604,
+        0
+      ],
+      "hullMax": [
+        58.4085,
+        69.4607,
+        147.8666
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/hr_i/well/well_wood.mdl",
+      "references": 1,
+      "hullMin": [
+        -49.1694,
+        -71.8673,
+        0
+      ],
+      "hullMax": [
+        54.1887,
+        74.7996,
+        141.3148
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_inferno/monument_new.mdl",
+      "references": 1,
+      "hullMin": [
+        -36.808,
+        -38.125,
+        -0.25
+      ],
+      "hullMax": [
+        37,
+        38.125,
+        166.125
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/nuke_skydome_001/nuke_skydome_001.mdl",
+      "references": 1,
+      "hullMin": [
+        -2047.9983,
+        -2048.0017,
+        0
+      ],
+      "hullMax": [
+        2048.0017,
+        2047.9983,
+        2630.3289
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/nuke_skydome_001/nuke_skydome_002.mdl",
+      "references": 1,
+      "hullMin": [
+        -3529.5513,
+        -3584,
+        0
+      ],
+      "hullMax": [
+        3529.5513,
+        3584,
+        409.071
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_nuke/hr_nuke/nuke_skydome_001/nuke_skydome_003.mdl",
+      "references": 1,
+      "hullMin": [
+        -3529.5513,
+        -3584,
+        0
+      ],
+      "hullMax": [
+        3529.5513,
+        3584,
+        768
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    },
+    {
+      "model": "models/props/de_vostok/hammer01.mdl",
+      "references": 1,
+      "hullMin": [
+        -3.2374,
+        -7.461,
+        -0.2353
+      ],
+      "hullMax": [
+        2.8448,
+        7.3648,
+        1.4888
+      ],
+      "mdlVersion": 49,
+      "source": "vpk"
+    }
+  ]
+}

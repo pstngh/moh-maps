@@ -654,3 +654,47 @@ more useful for the first recognition gate than a smaller unrecognizable map.
 After human review, optimize only feature classes whose visual and gameplay
 role is understood, then repeat compile, runtime, and fixed-view screenshot
 checks.
+
+### Measured prop-fill pass after direct conversion
+
+When human screenshots recognize the direct brush architecture but show hollow
+facades, empty sites, or a missing skyline, preserve the accepted brush layer.
+Restore the visually structural model layer by measured class instead of
+rewriting the layout or filling every omitted model.
+
+1. Parse every referenced model header and persist its local hull bounds,
+   reference count, source fingerprint, and parser result.
+2. Place substitutes from the original entity origin, Source angles, uniform
+   scale, and parsed local bounds. Keep a machine-readable record for every
+   substituted instance.
+3. Prioritize windows, shutters, doors and frames, arches, roof overlays,
+   chimneys, structural supports, gameplay cover, and defining landmarks.
+4. Make approximate facade, trim, roof, and support pieces non-solid. Give
+   collision only to measured cover and simple landmark bodies whose gameplay
+   role is clear.
+5. Collapse duplicate multi-part landmark collision where several source
+   models describe one physical body.
+6. Omit foliage, wires, tiny clutter, highly irregular meshes, unknown pivot
+   conventions, and strongly pitched or rolled props until a target-engine
+   representation is proven.
+7. Gate the pass by candidate count, bounds-resolution count, per-class
+   substitutions, brush totals, compile/runtime evidence, and a new human
+   screenshot set. Do not claim a visual fix from metadata alone.
+
+**PROVEN Inferno prop-layer rule:** a direct brush conversion can be
+architecturally recognizable while still appearing broken because model props
+carry windows, shutters, roof edges, pillars, chimneys, cover, and site
+landmarks. Parsed model bounds are sufficient for conservative box/prism
+substitutes, but not for arbitrary mesh reconstruction. Keep these substitutes
+separate from accepted architecture and preserve an auditable omitted set.
+
+Generated MAP preflight must also reject literal escaped newline sequences in
+brush blocks. A JavaScript `join("\\n")` emits two characters, not a line
+break, and can make Q3map report an apparently unrelated incomplete line.
+
+A clean compiler stage must also contain every authored shader image before BSP
+generation. Q3map may emit a BSP after `Couldn't find image` warnings, but it
+has already used fallback texture dimensions and may bake visibly wrong UV scale.
+Compare staged custom-image names, counts, and hashes against the canonical
+asset set before launching the expensive compile; treat any missing-image warning
+as a failed build even when geometry succeeds.

@@ -1,2 +1,2 @@
-// Revisions 1-3 were visually rejected. The supported generator is revision 4.
-require("./generate_inferno_rev4.js");
+// Revision 4 established the recognized brush baseline; revision 5 adds measured prop fill.
+require("./generate_inferno_rev5.js");

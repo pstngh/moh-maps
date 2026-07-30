@@ -2068,3 +2068,80 @@ when necessary.
 does not automatically solve displacements, model props, material translation,
 lighting, moving-door behavior, or T-junction cracks. Those are explicit
 follow-up classes after the user confirms recognizable callouts.
+
+## Inferno revision 5: measured structural prop fill
+
+Date: 2026-07-30
+
+The user's screenshots `shot0039.tga` through `shot0051.tga` described revision
+4 as “much better.” Streets, roofs, stairs, openings, courtyards, and site
+massing were recognizable, so direct VMF brush conversion became the accepted
+geometry baseline. The same views exposed a different failure class: empty
+window and door openings, hollow facades, sparse sites, and missing roof trim,
+supports, pillars, chimneys, fountain/well pieces, and ordinary cover.
+
+The private Inferno input references 7,036 model instances and 308 unique model
+paths. A reproducible VPK/BSP/MDL audit resolves and parses all 308 IDST version
+49 headers. Revision 5 persists only metadata—model paths, reference counts,
+local hull bounds, versions, and source fingerprints—in
+`inferno-model-bounds.json`; no commercial model, texture, sound, radar, BSP,
+VMF, VPK, or embedded-pak bytes enter the repository or PK3.
+
+Revision 5 leaves all 5,533 accepted source brush solids unchanged. It evaluates
+the 6,200 playable prop candidates against measured bounds and conservatively
+substitutes 1,176 high-impact instances with 1,431 authored brushes. The fill
+includes windows, shutters, doors and frames, arches, roof surfaces, pillars,
+chimneys, wood and balcony supports, barrels, crates, hay, coffins, the B
+fountain, and the CT well. Every placement records its source model path,
+origin, angles, scale, and emitted brush count.
+
+A direct brush-stream comparison proves that rev5 preserves the complete rev4
+foundation: the first 5,696 world brush blocks in both maps have the same
+normalized SHA-256,
+`2B3EB8EC13E6C9B229C842D98E446C22FEE53DA62103C1861233170C4BD56CDB`.
+
+Facade, roof, trim, and structural-detail substitutes are non-solid so an
+approximation cannot close a route. Collision is limited to measured gameplay
+cover and simple landmark bodies. Four duplicate multi-part landmark records
+are deliberately collapsed into their shared physical assemblies. The
+remaining 5,024 props—principally irregular meshes, foliage, wires, vehicles,
+and cosmetic clutter—remain explicitly omitted.
+
+The first generated candidate exposed a generator syntax defect before any
+geometry diagnosis was attempted: three helper functions joined brush lines
+with a literal `\n` escape sequence. Q3map reported `Line 51753 is incomplete`.
+Changing those helpers to emit actual newline characters repaired the MAP.
+This adds a reusable preflight rule: generated maps must check balanced braces
+and reject literal escaped newlines before launching a long compile.
+
+The next full geometry pass completed in 3,815 seconds with 33,441 faces
+from 37,116 inputs and zero stderr diagnostics. It was nevertheless rejected
+before promotion: the isolated stage contained no authored Inferno images, and
+Q3map reported thirteen `Couldn't find image` warnings. Because fallback image
+dimensions can bake the wrong texture scale, a valid BSP is not sufficient.
+The candidate BSP was discarded, all sixteen authored textures were copied and
+hash-checked against the canonical set, and the BSP compile was repeated.
+
+**PROVEN stage-parity rule:** verify custom texture filenames, counts, and hashes
+inside the exact compile root before BSP generation. Missing-image warnings are
+a failed visual build, even when Q3map emits a geometrically valid BSP.
+The corrected texture-complete pass compiled 33,439 faces from 37,116 inputs
+with 3,677 removed in 3,841 seconds and no warning/stderr error. Fast VIS kept
+49 clusters and 400 visibility bytes. Full MOHlight finished in 339 seconds
+without a warning or stderr error. Q3map `-info` reports 6,971 brushes, 33,445
+draw surfaces, 108 lightmaps, 55 entity lights, and a valid 16.55 MB BSP—6.55
+MB above the legacy nominal display.
+
+The deterministic 19-entry PK3 loaded in isolated OpenMoHAA 0.82.1. BSP parse
+took 0.127 seconds, Recast generation took 5.444 seconds, all eight bots joined,
+22 combat/death events occurred, and no fatal map error appeared. The test
+server was stopped afterward. This proves technical playability, not the
+visual correctness of approximate substitutes.
+
+**PROVEN staged-fill rule:** once direct architecture passes human recognition,
+repair its measured structural prop layer without rewriting the brush
+foundation. Derive placement from parsed bounds plus entity transforms, keep
+approximate facade/roof art non-solid, grant collision only to clearly measured
+cover, count every substitution, and preserve the omitted set. Metadata and
+compile/runtime gates still do not prove the visual result; a new screenshot
+pass remains mandatory.
