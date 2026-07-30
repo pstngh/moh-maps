@@ -145,6 +145,17 @@ when fidelity value is otherwise similar.
   shader resolution.
 - Use detail flags for internal geometry that should not split the BSP tree.
 - Keep collision simpler than decorative surfaces.
+- Do not assume an ordinary Quake `func_detail` brush entity survives MOHAA
+  Q3map. The tested AA compiler stripped those brush entities and produced only
+  the structural shell. Emit required authored geometry in `worldspawn`, or use a
+  separately proven MOHAA-specific detail representation, and compare input
+  versus emitted face/brush counts after every compiler-policy change.
+- For original maps whose reference depends heavily on props, define the
+  playable air/route grid first and greedily merge its complement into complete
+  building masses. Add facades, windows, roofs, and trim onto those closed
+  volumes. This makes omitted reference props incapable of becoming structural
+  holes. Keep the authored brush budget small enough that worldspawn splitting
+  remains practical.
 
 ### Displacements and curved terrain
 
@@ -510,6 +521,7 @@ Bot acceptance:
 | Triangular sky cuts in floors/walls | Exposed Source nodraw support face | Material-match only the exposed support of mixed brushes |
 | Bright ribbons between planar terrain faces | Horizontal Source offsets exceed the backing polygons | Use a lowered material-matched seam underlay or reconstruct that bounded terrain group |
 | Portal overflow | Source walls imported as structural BSP | Structural sky shell plus internal detail |
+| Empty authored detail despite a valid `.map` | Ordinary Quake `func_detail` brush entities stripped by MOHAA Q3map | Put required authored brushes in `worldspawn` or prove a MOHAA-specific detail form; validate emitted counts |
 | Floating ribs and malformed arcades | Generic placeholder used for unrelated Source model families | Require per-family mesh/bounds/opening measurements or omit |
 | Bots reach exterior terrain islands | Collision helpers omitted with editor helpers, or exterior boundary topology is incomplete | Preserve explicit player clips and measured route clips, then verify containment; clips alone do not replace a missing boundary |
 | Flat tan scene | Oversized global/spawn lights | Low ambient, warm direct, cool fill, real fixtures |

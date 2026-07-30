@@ -1679,6 +1679,72 @@ brush set when normal T-junction insertion exceeds `MAX_MAP_DRAWINDEXES`.
 Until representative in-engine edge views pass, it carries explicit
 crack/seam debt and must not become the default compiler recipe.
 
+## Inferno revision 1: authored air first, complete mass second
+
+Inferno deliberately reversed the conversion-first workflow used for
+Cobblestone, Nuke, and Cache. The reference decompile contains 7,921 solids,
+2,223 displacement sides, 9,934 entities, and 6,974 static props. Roof caps,
+window/shutter families, supports, trim, railings, vegetation, and terrain are
+so prop-dependent that preserving ordinary brushes while omitting those
+families would reproduce a measured but visibly incomplete result.
+
+The VMF was therefore used only as route-and-scale evidence. Dedicated DM
+spawns bound the likely playable cluster, and the classic Mid/Alt Mid/A,
+Apartments, CT, and Banana/B roles informed the circulation graph. The
+generator imports zero Source solids, props, and displacements.
+
+Revision 1 defines 20 named combat areas on a 128-unit occupancy grid. A flood
+fill proves all 362 playable cells connected. The 534-cell complement is
+greedily merged into 21 complete building masses. Facades, 71 inset windows,
+20 flat roofs, two gables, arches, stairs, site cover, fountain, coffins, and
+bell tower are authored onto that closed massing. This is the central
+structural guarantee: an omitted reference model cannot create a wall or roof
+hole because non-playable space already exists as a complete solid volume.
+
+An initial compile exposed a MOHAA-specific trap. Ordinary Quake
+`func_detail` brush entities were silently stripped, leaving only the shell
+and 81 faces. Re-emitting all required authored brushes into `worldspawn`
+produced 464 compiled world brushes and 2,050 faces. The resulting map remains
+small enough for ordinary BSP splitting, so no `-notjunc` or portal-budget
+fallback is needed.
+
+The art set contains 16 original 512x512 diffuse TGAs. Four Mediterranean
+source images—cream plaster, cobblestone, terracotta roof tile, and brick—were
+made with the built-in image-generation workflow. Four project-owned sources
+were reused from Cache, and deterministic mirrored derivation supplied the
+remaining variants. Stored-edge assertions guarantee the packaged textures
+tile exactly. No Valve image or mesh bytes are included.
+
+Ordinary Q3map emitted 2,050 of 2,052 input faces. Fast VIS completed in 1.0
+second with 1,127 clusters, 4,086 portals, and 3,725 faces. Full MOHlight
+completed in 3.0 seconds using ambient `8 9 11`. Seven interior light origins
+produced non-fatal leaf diagnostics; the BSP entity lump retains all eight
+light entities and full lighting succeeds.
+
+The exact 19-entry, 4,670,179-byte PK3 has SHA-256
+`30FBE96874CC8BB2ECA4C80B047CE67E2FA3E67EE42C5153D99222ACDC82B8A2`.
+A fresh OpenMoHAA 0.82.1-beta+5 home backed only by retail Pak0-Pak6 parsed the
+BSP in 0.008 seconds, built Recast navigation in 0.173 seconds, admitted eight
+bots, and logged 15 combat deaths in the final short sample. Explicit health
+box and bazooka-explosion caches removed all runtime precache suggestions.
+The stock-only environment reports absent optional `global/bot_run.scr`, but
+native bots demonstrably navigate and fight.
+
+Automated Windows visual control was blocked by the local ACL sandbox, so no
+human map-view gate is claimed. Revision 2 must begin from exterior, interior,
+overview, transition, sightline, and map-edge screenshots rather than assuming
+the structural/runtime proof also establishes visual polish.
+
+**PROVEN authored-mass rule:** for an original layout, define connected
+playable air first and make its complement complete solid architecture before
+adding decoration. This prevents omitted reference-only assets from becoming
+structural gaps.
+
+**PROVEN compiler-count rule:** valid `.map` syntax does not prove brush
+entities survived Q3map. Compare input and output face/brush counts whenever
+changing entity/detail policy; required geometry belongs in a compiler form
+proven by the target AA toolchain.
+
 ## Next generation-system steps
 
 - Separate topology from theme so one layout can receive multiple material and
@@ -1811,3 +1877,9 @@ crack/seam debt and must not become the default compiler recipe.
   57,622-face layout with a documented `-notjunc` draw-index fallback;
   completed VIS/full lighting; and validated the exact 23-entry PK3 with eight
   fighting bots while retaining explicit crack/seam and human-visual debt.
+- 2026-07-30, Inferno revision 1: rejected direct Source conversion; authored a
+  connected 20-area occupancy layout and 21 complete building masses; created
+  sixteen original Mediterranean textures; discovered that ordinary Quake
+  `func_detail` brush entities are stripped by MOHAA Q3map; completed ordinary
+  BSP/VIS/full lighting; and validated the exact 19-entry PK3 with Recast and
+  eight fighting bots while recording the pending human visual gate.

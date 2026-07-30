@@ -1,0 +1,3 @@
+exec global/DMprecache.scr
+cache models/items/dm_50_healthbox.tik
+cache models/fx/bazookaexplosion_dm.tik

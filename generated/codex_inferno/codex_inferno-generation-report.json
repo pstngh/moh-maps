@@ -1,0 +1,59 @@
+{
+  "map": "codex_inferno",
+  "revision": 1,
+  "construction": "authored-from-scratch",
+  "referencePolicy": "route-and-scale-inspiration-only",
+  "bounds": {
+    "minX": -1792,
+    "maxX": 1792,
+    "minY": -2048,
+    "maxY": 2048,
+    "floorZ": 0,
+    "skyZ": 704
+  },
+  "grid": {
+    "cellSize": 128,
+    "columns": 28,
+    "rows": 32,
+    "openCells": 362,
+    "blockedCells": 534
+  },
+  "routeNames": [
+    "T Spawn",
+    "Lower Mid",
+    "Mid",
+    "Top Mid",
+    "Short",
+    "A Site",
+    "A Porch",
+    "A Pit",
+    "Library",
+    "Arch",
+    "CT Spawn",
+    "Ruins",
+    "B Site",
+    "Banana Start",
+    "Banana Bend",
+    "Banana",
+    "Alt Mid Start",
+    "Alt Mid",
+    "Second Mid",
+    "Apartments"
+  ],
+  "worldBrushes": 27,
+  "authoredDetailBrushes": 437,
+  "compiledWorldBrushes": 464,
+  "buildingMasses": 21,
+  "facadeWindows": 71,
+  "gableRoofs": 2,
+  "flatRoofs": 20,
+  "spawns": {
+    "axis": 16,
+    "allied": 16,
+    "neutral": 24
+  },
+  "pointLights": 8,
+  "sourceSolidsImported": 0,
+  "sourcePropsImported": 0,
+  "sourceDisplacementsImported": 0
+}
