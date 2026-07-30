@@ -1890,6 +1890,14 @@ proven by the target AA toolchain.
   scale from parsed model envelopes; completed Q3map/VIS/full lighting under
   the original BSP budget; and validated the exact PK3 with eight fighting
   bots while retaining the human visual gate.
+- 2026-07-30, Inferno revision 4: recorded the user's complete visual rejection
+  of inferred massing; directly converted 5,533 playable VMF brush solids;
+  planarized 1,969 displacement sides; omitted 6,200 unverified props;
+  translated one measured door and 55 clustered lights; completed a documented
+  `-notjunc` BSP, VIS, and full-light build; and validated the exact PK3 with
+  Recast plus eight fighting bots while preserving human recognition and
+  nominal BSP-budget debt.
+
 ## Inferno revision 2: measured clone after a rejected invented layout
 
 Date: 2026-07-30
@@ -2008,3 +2016,55 @@ acceptance.
 not a claimed release. Facade windows, several slopes/roof shapes, omitted
 Source-only props/displacements, and the one dynamic door remain explicit debt
 until the user supplies a new screenshot pass.
+
+## Inferno revision 4: direct VMF architecture after massing rejection
+
+Date: 2026-07-30
+
+The user's screenshots `shot0022.tga` through `shot0038.tga` rejected revision
+3 more strongly than its predecessor. The route-aligned village dilation
+created broad, nearly uniform roof fields around trench-like passages. The
+method reproduced neither Inferno's facade composition nor its courtyards,
+openings, and skyline. This proved that a semantic zone label plus a measured
+route graph still does not contain enough information to infer architecture.
+
+The user explicitly authorized direct conversion from the original VMF.
+Revision 4 therefore reconstructs convex Source solids from their planes and
+emits all playable world, `func_detail`, `func_brush`, and `func_breakable`
+architecture. It preserves 5,533 source solids with zero invalid conversions.
+A structural sky shell plus internal `+surfaceparm detail` controls portals.
+The distant 3D skybox and 632 brushes are excluded; 1,476 helper-only brushes
+are excluded while verified player/large clips remain.
+
+Source raster/model assets are still not packaged. Material roles map to the
+original project-owned Inferno texture palette. The generator planarizes 1,969
+displacement-bearing sides and audits 6,200 unverified model props as omitted.
+It translates all 20/20/67 team/DM spawns, clusters 75 playable light
+candidates into 55 AA lights, and creates the one verified 90-degree rotating
+door from its parsed local bounds. A clean temporary run reproduced the MAP,
+both scripts, and machine-independent conversion report byte-for-byte.
+
+The full direct MAP contains 5,696 world brushes. The ordinary compiler was
+manually stopped after more than five CPU minutes with no actual error;
+revision 4 then used the already documented `-notjunc` fallback to preserve the
+architecture for visual review. That build completed in 1,910 seconds with
+24,633 faces from 28,310 inputs. VIS produced 49 clusters/400 visibility bytes,
+and full MOHlight completed in 222 seconds. Q3map `-info` reports a valid
+14,221,508-byte BSP using 12.34 MB against the old nominal 10 MB display.
+
+OpenMoHAA parsed the exact 19-entry PK3 BSP in 0.097 seconds, generated Recast
+in 3.858 seconds, admitted all eight bots, and logged 23 combat/death events
+with zero fatal map errors.
+
+**PROVEN escalation rule:** after multiple measured/inferred reauthoring passes
+remain unrecognizable, and the user authorizes direct conversion, preserve the
+playable brush architecture first. Do not optimize away source classes until a
+human visual gate establishes which geometry is essential. Route graphs and
+radar alignment become validators only. Compile duration without an error is
+not itself a geometry failure; document the duration and use a proven fallback
+when necessary.
+
+**PENDING visual verdict:** direct conversion maximizes geometric evidence but
+does not automatically solve displacements, model props, material translation,
+lighting, moving-door behavior, or T-junction cracks. Those are explicit
+follow-up classes after the user confirms recognizable callouts.

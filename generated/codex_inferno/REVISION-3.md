@@ -2,8 +2,9 @@
 
 Date: 2026-07-30
 
-Status: **technically accepted playable candidate; human visual review
-pending**
+Status: **visually rejected by the user after screenshots `shot0022.tga` through
+`shot0038.tga`; technical evidence remains valid but this is not a fidelity
+baseline**
 
 ## Why this revision exists
 
@@ -113,3 +114,28 @@ omitted Source-only props/displacements, and an intentionally omitted dynamic
 door. The next decisive evidence is the user's ground-level and high-overview
 screenshot set. Fix architecture first; add windows, shutters, and trim only
 after the callouts are recognizable.
+
+## Human screenshot rejection: shots 0022-0038
+
+The full screenshot set rejects revision 3 as completely unrecognizable. This
+is not a facade-detail problem and cannot be repaired by adding windows,
+shutters, props, or better textures.
+
+| Views | Observed failure | Root cause |
+| --- | --- | --- |
+| `shot0022` | near-black void/occluder above a bright planar surface | inferred mass/shell geometry creates invalid or unreadable enclosure |
+| `shot0023`-`shot0030` | repeated roof slabs surround narrow trench-like routes | ten-cell dilation and greedy mass merging do not reproduce real street/facade geometry |
+| `shot0031`-`shot0038` | almost uniform roof field with small rectangular cuts and no readable callouts | zoned height/material families erase the original building hierarchy, courtyards, and skyline |
+| all views | no immediate recognition of T, Mid, Apartments, A, CT, Banana, or B | radar/route alignment was mistaken for architectural fidelity |
+
+The decisive visual signatures are excessive contiguous roof coverage,
+repeated shallow gables, tall blank walls, narrow slot-like streets, and an
+absence of the original facade/opening composition. The procedural village
+massing is therefore a failed method, not a reusable starting point.
+
+**Replacement requirement:** revision 4 must directly convert the original
+VMF's playable world and architectural brush solids. Preserve `func_detail`,
+`func_brush`, and `func_breakable` geometry; omit helper/skybox classes by
+explicit policy; translate only verified entities; and document every Source
+feature that cannot survive the AA toolchain. The route graph and radar remain
+validators only.

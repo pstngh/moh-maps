@@ -1,6 +1,6 @@
 # Inferno reference audit
 
-The supplied/restored CS:GO files are private measurement and comparison
+The supplied/restored CS:GO files are private conversion and comparison
 inputs. The VMF, BSP, logs, radar image, Valve textures, Valve models, and
 embedded content are not included in the repository or PK3.
 
@@ -59,9 +59,10 @@ Verified landmark model envelopes used to size original AA-native substitutes:
 
 The audit found one genuine `prop_door_rotating` at Source origin
 `(300.25,-324,96)`, yaw 270, speed 200, distance 90. Its model envelope is
-approximately 8.6 x 55.5 x 111.6 units. Revision 3 does not translate it into
-an AA door because pivot, route clearance, and bot behavior still require an
-in-engine proof.
+approximately 8.6 x 55.5 x 111.6 units. Revision 4 uses those verified local
+bounds and properties to translate one AA `func_rotatingdoor`. The exact PK3
+loads with bot navigation and combat; human swing/clearance review remains
+pending.
 
 ## Collision-aware blueprint
 
@@ -91,23 +92,27 @@ blueprint. Its SHA-256 is
 `D5C30783387415C9C57CDB1608B07F8C04CC5DF4A460A8BD4ED3ADD5F8AFF8B0`.
 `inferno-walk-grid-reference.svg` is its clean plan view.
 
-## What is and is not copied
+## Revision 4 direct-conversion scope
 
-Copied as measurements:
+After revisions 1-3 remained unrecognizable, the user explicitly authorized a
+direct conversion from the original VMF. Revision 4:
 
-- route coordinates, connectivity, scale, and floor elevations;
-- spawn and bomb-target positions;
-- source material roles, not Source raster content;
-- selected landmark origins and verified model envelopes;
-- official overview transform and callout relationships.
+- reconstructs and emits 5,533 playable Source brush solids;
+- preserves world architecture and solids owned by `func_detail`,
+  `func_brush`, and `func_breakable`;
+- retains verified large/player clips while excluding 1,476 helper-only
+  brushes;
+- excludes 632 distant 3D-skybox brushes;
+- planarizes 1,969 displacement-bearing sides for the first fidelity baseline;
+- maps Source material roles to original project-owned Inferno textures;
+- translates spawns, clustered light coordinates, and one verified rotating
+  door;
+- omits 6,200 unverified Source model props.
 
-Not copied:
+Geometry, coordinates, and topology are therefore derived directly from the
+private VMF. The package still contains no Source texture, model, sound, radar,
+VMF, VPK, BSP, or embedded-pak bytes. The original texture provenance is
+documented separately in [`ART-PROVENANCE.md`](ART-PROVENANCE.md).
 
-- Source brushes as output brushes;
-- displacements;
-- textures, materials, models, sounds, radar pixels, or embedded files;
-- prop meshes or Valve-authored raster art.
-
-Revision 3 builds new MOHAA-native floors, complete semantic village masses,
-landmark substitutes, and original project-owned textures from those
-measurements.
+The older collision graph and radar transform remain useful independent
+validators. They are no longer used to generate architecture.

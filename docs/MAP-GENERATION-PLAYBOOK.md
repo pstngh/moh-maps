@@ -426,6 +426,7 @@ Interpret failures by stage:
 | Missing/black materials | Shader data absent or wrong name | Compile against retail data and verify asset |
 | Portal-data overflow | Too many structural split planes | Structural shell plus internal detail; do not hide geometry |
 | BSP compile stalls | Excessive structural brushes or patches | Measure cost by class; simplify selectively |
+| Long brush processing without an error | Large faithful brush set or expensive T-junction work | Record CPU time and progress; do not call duration alone a map failure or delete architecture blindly |
 | `MAX_MAP_DRAWINDEXES` | Too many merged polygon indexes, often amplified by T-junction insertion | Measure faces/inserted vertices; reduce evidenced detail first; use `-notjunc` only as a documented visual-debt fallback |
 | `MAX_MAP_LIGHTING` | Too many baked-lightmap surfaces | Vertex-light narrow cosmetic detail; preserve lightmaps for primary architecture |
 | Patch hash warnings with correct render | Legacy tool limitation | Record and verify visually; do not assume fatal |
@@ -570,12 +571,14 @@ the construction method, not the topology target.
 - Reauthor native target-engine geometry while preserving the requested map's
   actual routes, scale, elevations, site placement, openings, and defining
   landmarks.
-- A reference VMF/BSP may be used as a measurement drawing without directly
-  converting its brushes or shipping its assets.
+- A reference VMF/BSP may be used as a measurement drawing. Direct brush
+  conversion is also valid when the user authorizes it; never ship private
+  source files or commercial texture/model/sound/radar bytes.
 - Do not substitute an analogous, inspired-by, compacted, or optimized route
   graph unless the user explicitly authorizes a redesign.
-- Before building facades, create a collision-aware route blueprint and show
-  that all supplied spawns connect to it.
+- For native reauthoring, create a collision-aware route blueprint before
+  facades and show that all supplied spawns connect. For direct conversion,
+  keep that blueprint as an independent connectivity validator.
 - Treat user rejection for non-recognition as a failed brief, not ordinary art
   debt. Mark the revision rejected and replace the public generator baseline.
 
@@ -624,3 +627,30 @@ For simple hero landmarks, parsed source-model bounds can establish original
 substitute dimensions without copying a mesh. Combine local bounds, entity
 origin/orientation, nearby support geometry, and a reference view. Bounds alone
 still do not prove complex topology, pivot behavior, or collision.
+
+### Direct-conversion escalation rule
+
+Inferno revisions 1-3 prove that measured topology, official-radar alignment,
+and semantic massing can all pass while the rendered architecture remains
+unrecognizable. If repeated inferred/native reauthoring passes fail recognition
+and the user authorizes direct conversion:
+
+1. reconstruct the playable VMF/BSP brush architecture before optimizing it;
+2. define and count included world/brush/detail/breakable classes;
+3. explicitly count excluded helpers, skybox geometry, displacements, props,
+   and unsupported entities;
+4. substitute only original/redistributable textures and target-engine assets;
+5. retain the route graph, spawns, and radar transform as independent
+   validators rather than geometry generators;
+6. compile the fidelity-first candidate even when it is slow, provided the
+   compiler continues progressing and emits no error;
+7. accept `-notjunc` only as documented seam debt when it preserves measured
+   architecture and the ordinary build is impractical or exceeds fixed limits;
+8. require human callout screenshots before class-based brush reduction.
+
+**PROVEN preservation rule:** do not solve a nominal BSP-budget overage by
+preemptively filtering architecture. A valid, running over-budget candidate is
+more useful for the first recognition gate than a smaller unrecognizable map.
+After human review, optimize only feature classes whose visual and gameplay
+role is understood, then repeat compile, runtime, and fixed-view screenshot
+checks.
