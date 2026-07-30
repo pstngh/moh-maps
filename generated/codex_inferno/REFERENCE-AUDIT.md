@@ -1,61 +1,69 @@
 # Inferno reference audit
 
-The local CS:GO files are measurement and visual-role references only. The
-VMF, BSP, Valve textures, and Valve models are not repository or PK3 content.
+The supplied `de_inferno_d.vmf` is a private measurement/reference input. The
+VMF, BSP, log, Valve textures, Valve models, and embedded content are not
+included in the repository or PK3.
 
-## Files inspected
-
-| File | Size | Use |
-| --- | ---: | --- |
-| `de_inferno_d.vmf` | 20,869,971 bytes | Counts, spawn distribution, material roles, route scale |
-| `de_inferno.bsp` | 102,233,048 bytes | Confirms the decompile's source identity |
-| `de_inferno_d.log` | 888 bytes | BSPSource record |
-
-## Source complexity
+## Source measurements
 
 | Measurement | Value |
 | --- | ---: |
+| VMF bytes | 20,869,971 |
 | World solids | 5,510 |
-| Total solids | 7,921 |
-| Sides | 47,260 |
-| Displacement sides | 2,223 |
+| Total reconstructed solids | 7,921 |
+| Failed solid reconstructions | 0 |
+| Floor-like faces | 2,654 |
 | Entities | 9,934 |
-| `func_detail` entities | 2,252 |
-| Static props | 6,974 |
-| Terrorist spawns | 20 |
-| Counter-Terrorist spawns | 20 |
-| Dedicated deathmatch spawns | 67 |
-| Point/spot lights | 75 |
+| Static props in reference | 6,974 |
+| T / CT / dedicated-DM spawns | 20 / 20 / 67 |
+| A target bounds | `(1792,160,160)` to `(2160,708,200)` |
+| B target bounds | `(144,2544,160)` to `(592,3008,224)` |
 
-The decompile spans `(-8208 -11072 -464)` to `(13680 9232 3280)`, including
-non-playable and skybox construction. Dedicated deathmatch origins occupy a
-much narrower playable cluster, roughly X `-849..2656`, Y `-768..3576`, and Z
-`-16..272`.
+The measured spawn/play cluster is approximately X `-849..2656`, Y
+`-768..3576`, Z `-16..272`. T is west, A southeast, CT east, and B north.
 
-## Why a direct conversion is rejected
+## Collision-aware blueprint
 
-The visible Source result depends heavily on content outside ordinary brushes:
+The audit does not treat every horizontal Source face as playable. It:
 
-- 2,223 displacement sides;
-- 6,974 static-prop placements;
-- repeated roof caps, flowers, wood supports, stone/concrete trim, windows,
-  gutters, shutters, pillars, railings, and foliage models;
-- high-resolution blended plaster, brick, cobble, roof, wood, and terrain
-  materials.
+- intersects brush planes to recover convex solids;
+- buckets collision volumes spatially;
+- samples 32-unit floor nodes;
+- rejects nodes without player-sized headroom;
+- rejects neighbor transitions cut by a collision plane;
+- seeds traversal from all team and DM spawns;
+- retains only spawn-connected nodes and edges.
 
-Importing the brushes while omitting those dependencies would reproduce the
-failure mode seen in earlier dense conversions: structurally compilable but
-visually incomplete streets, facades, roofs, and boundaries. Revision 1 uses
-none of the Source solids. The reference instead informs:
+| Grid evidence | Value |
+| --- | ---: |
+| Candidate XY cells | 12,485 |
+| Candidate nodes | 13,372 |
+| Rejected headroom nodes | 5,397 |
+| Collision buckets | 2,602 |
+| Seed nodes | 107 |
+| Connected nodes | 6,997 |
+| Connected edges | 13,420 |
+| Unmatched spawns | 0 |
 
-- the two-team plus dedicated-DM spawn scale;
-- the connected Mid/Alt Mid/Apartments/A and Banana/B/CT route graph;
-- the importance of plaster facades, terracotta roofs, cobble streets, arches,
-  shutters, a fountain, and a bell-tower silhouette;
-- restrained exterior vertical range suitable for AA movement.
+`inferno-layout-reference-audit.json` is the durable machine-readable blueprint.
+`inferno-walk-grid-reference.svg` is its clean plan view.
 
-## Legal/content boundary
+## What is and is not copied
 
-No source-game image, mesh, sound, VMF, BSP, or embedded file is copied into
-the generated map. New art is original project-owned material, and the stock
-sky reference resolves from the player's retail AA installation.
+Copied as measurements:
+
+- route coordinates and connectivity;
+- floor elevations and source material roles;
+- spawn and bomb-target positions;
+- selected landmark origins such as the B fountain and coffins.
+
+Not copied:
+
+- Source brushes as output brushes;
+- displacements;
+- textures, materials, models, sounds, or embedded files;
+- prop meshes or Valve-authored raster art.
+
+Revision 2 builds new axis-aligned MOHAA floor/facade masses and original
+project-owned textures from those measurements. This produces a recognizable
+clone without repeating the incomplete raw-conversion failure mode.

@@ -51,12 +51,22 @@ try {
     )
     try {
         foreach ($item in $entries) {
-            [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile(
-                $archive,
-                $item.Source,
+            $entry = $archive.CreateEntry(
                 $item.Entry,
                 [System.IO.Compression.CompressionLevel]::Optimal
-            ) | Out-Null
+            )
+            $entry.LastWriteTime = [DateTimeOffset]::new(
+                2026, 1, 1, 0, 0, 0, [TimeSpan]::Zero
+            )
+            $inputStream = [System.IO.File]::OpenRead($item.Source)
+            $outputStream = $entry.Open()
+            try {
+                $inputStream.CopyTo($outputStream)
+            }
+            finally {
+                $outputStream.Dispose()
+                $inputStream.Dispose()
+            }
         }
     }
     finally {

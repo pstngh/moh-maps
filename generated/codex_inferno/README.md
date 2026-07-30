@@ -1,34 +1,51 @@
 # Codex Inferno
 
-`codex_inferno` is an authored-from-scratch Allied Assault/OpenMoHAA
-deathmatch map inspired by the classic Inferno circulation graph. It is not a
-Source brush conversion: no Valve geometry, textures, models, sounds, VMF, or
-BSP content is included.
+`codex_inferno` revision 2 is a manually reauthored Allied Assault/OpenMoHAA
+clone of the supplied CS:GO Inferno layout. “From scratch” describes how the
+geometry is built, not permission to invent a different map: the VMF is used as
+a measurement/reference drawing while the output remains MOHAA-native.
 
-Revision 1 is compiled, fully lit, packaged, and validated with eight
-OpenMoHAA bots. Its first human map-view review is still pending, so it should
-be treated as a strong first playable rather than a finished visual replica.
+Revision 1's generic Inferno-like arena was rejected after the user's first
+screenshots because it was not recognizable as Inferno. Revision 2 replaces it
+under the same map and package name.
 
-## Design and inventory
+## Current build
 
-- DM/TDM for roughly 2-8 players or bots;
-- 20 named connected combat areas across Mid/A, Apartments, CT, and Banana/B;
-- 464 world brushes, including 21 complete building masses;
-- 71 authored facade windows, 20 flat roofs, and two gable roofs;
-- 16 Axis, 16 Allied, and 24 neutral deathmatch spawns;
-- eight local interior lights plus warm sun, cool sky fill, and low ambient;
-- 16 original 512x512 diffuse textures with exact stored-edge tiling;
-- zero imported Source solids, props, or displacements.
+- actual measured T, Mid/Alt Mid/Apartments, A, Arch/Library, CT, Banana, and B
+  footprint;
+- 6,997 collision-verified 32-unit walk cells and 13,420 permitted route edges;
+- 479 merged floor plates, 1,058 wall runs, 77 enclosed wood-route ceiling
+  plates, and 2,683 total worldspawn brushes;
+- measured A/B target positions, B fountain/coffins/barrels, A hay/boxes, ten
+  passage arches, four balconies, and a bell-tower silhouette;
+- 20 Axis, 20 Allied, and 67 neutral DM spawns derived from supplied origins;
+- sixteen original bundled 512x512 textures; no Source texture/model content;
+- warm Mediterranean sun, cool environment fill, low ambient, and fourteen
+  interior lights;
+- compiled below the original 10 MB Q3map BSP budget and validated with eight
+  OpenMoHAA bots.
 
-The 128-unit occupancy grid defines playable streets. Its complement is merged
-into complete building volumes, which prevents omitted Source models from
-becoming holes. See [`DESIGN-BRIEF.md`](DESIGN-BRIEF.md),
-[`REFERENCE-AUDIT.md`](REFERENCE-AUDIT.md), and
-[`ART-PROVENANCE.md`](ART-PROVENANCE.md).
+See [`REVISION-2.md`](REVISION-2.md) for exact evidence and
+[`REFERENCE-AUDIT.md`](REFERENCE-AUDIT.md) for the reconstruction method.
 
-## Regenerating
+## Install and play
 
-From the repository root:
+Copy `codex_inferno.pk3` into the game's `main` directory, then run:
+
+```text
+g_gametype 1
+sv_maxbots 8
+sv_numbots 4
+map dm/codex_inferno
+```
+
+The map targets simple DM/TDM play against bots. Doors are represented as open
+route geometry or static facade detail; revision 2 does not add interactive
+door logic.
+
+## Regenerate
+
+From the repository root, using the committed measured blueprint:
 
 ```powershell
 python generated/codex_inferno/tools/build_original_textures.py
@@ -36,8 +53,13 @@ node generated/codex_inferno/tools/generate_inferno.js
 node generated/codex_inferno/tools/validate_inferno_build.js
 ```
 
-The VMF is not needed. It was used only to audit broad route roles, scale, and
-the failure risk of a direct conversion.
+`generate_inferno.js` and `validate_inferno_build.js` are stable entry points
+for revision 2. The source VMF is only required to reproduce the audit itself:
+
+```powershell
+node generated/codex_inferno/tools/audit_inferno_layout.js `
+  "path/to/de_inferno_d.vmf" generated/codex_inferno
+```
 
 Compile against a clean Allied Assault root containing retail Pak0-Pak6:
 
@@ -55,60 +77,39 @@ powershell -ExecutionPolicy Bypass `
   -File generated/codex_inferno/tools/package_inferno.ps1
 ```
 
-Use ordinary Q3map. The authored detail is intentionally emitted into
-`worldspawn`; this MOHAA Q3map build stripped ordinary Quake `func_detail`
-brush entities during testing.
-
-## Playing
-
-Copy `codex_inferno.pk3` into the game's `main` directory:
-
-```text
-g_gametype 1
-sv_maxbots 8
-sv_numbots 4
-map dm/codex_inferno
-```
+The six sky-shell brushes are structural. Internal route/facade geometry is in
+worldspawn with `+surfaceparm detail`, which preserves collision and lighting
+without exceeding Q3map's fixed portal-data limit.
 
 ## Validation evidence
 
-- Static validation passes all material, route, spawn, lighting, source-path,
-  and no-Source-import assertions.
-- Q3map emitted 2,050 faces from 2,052 and wrote a valid portal file.
-- Fast VIS completed with 1,127 clusters, 4,086 portals, and 3,725 faces.
-- Full MOHlight completed with ambient `8 9 11`.
-- The exact 19-entry PK3 loaded from a fresh OpenMoHAA home backed only by
-  retail Pak0-Pak6.
-- OpenMoHAA 0.82.1-beta+5 parsed the BSP in 0.008 seconds, generated Recast
-  navigation in 0.173 seconds, admitted eight bots, and logged 15 combat
-  deaths in the final short sample.
-- The final run produced zero precache suggestions and zero fatal map-loading
-  errors.
+- all 7,921 reference solids reconstructed with zero failures;
+- all 107 supplied spawns matched to the collision-verified route graph;
+- static revision-2 validator passes with no failures;
+- Q3map: 15,717 faces from 16,111 inputs in 98 seconds;
+- fast VIS: 36 clusters, 60 portals, 296 visibility bytes;
+- full MOHlight: ambient `8 9 12`;
+- Q3map `-info`: 9.69 MB of the original 10.00 MB BSP budget;
+- exact-PK3 OpenMoHAA load: BSP parse 0.054 seconds, Recast 1.916 seconds;
+- eight bots admitted and 8 combat deaths in 38 seconds;
+- zero fatal runtime errors.
 
-The runtime reports an absent optional `global/bot_run.scr` in the stock-only
-test environment, but all eight native bots still navigate and fight. This is
-not map content and is recorded rather than hidden.
+## Remaining debt
 
-## Known debt
+The first human visual pass of revision 2 is still required. Runtime evidence
+does not prove that every facade, elevation transition, prop substitute, or
+sightline looks correct. Future work must use callout/location-specific
+screenshots and preserve the measured route graph unless a photographed defect
+proves the graph itself is wrong.
 
-- Human exterior, interior, overview, transition, sightline, and map-edge
-  screenshots still need review.
-- Visual fidelity is intentionally interpretive; the route graph and landmark
-  roles are the target, not one-to-one Source geometry.
-- Interior lights in Apartments and Library produced non-fatal Q3map
-  leaf-leak diagnostics; all eight light entities remain in the BSP and full
-  lighting succeeds.
-- Doors are static architecture in revision 1.
-- Dense vegetation, signs, graffiti, small clutter, curved displacement
-  terrain, and a distant 3D skybox are intentionally omitted.
+Revision 1 is historical/rejected evidence, not a fallback release. See
+[`REVISION-1.md`](REVISION-1.md).
 
 ## Artifact fingerprints
 
-- MAP: 271,270 bytes; SHA-256
-  `40A7B86994757E80D127EFEAECA1FA044E0F742DFFF3DDC2A19895625F9A53B6`
-- generation report: 1,075 bytes; SHA-256
-  `8ED42FAA344A6F0178C44AFB66E396F838006B71B70F4D669F5AF2A8EA2EA543`
-- BSP: 1,933,728 bytes; SHA-256
-  `F2DECC307875AE9725D991DEE6DD969A818F0F80B8CD99F49C711B788ECBA223`
-- PK3: 4,670,179 bytes; SHA-256
-  `30FBE96874CC8BB2ECA4C80B047CE67E2FA3E67EE42C5153D99222ACDC82B8A2`
+- MAP: 1,825,136 bytes; SHA-256
+  `117DDF45E264A87DEC64D094E0720B08016D265EC8A33EA4E3689B1489E85414`
+- BSP: 10,982,668 bytes; SHA-256
+  `FA8E27CC0D00D5D1EA17A1E64E4795A04A68B4EDA26F8E0858346DC126A0C1F9`
+- PK3: 6,007,217 bytes; SHA-256
+  `D5F31886CB7390F9DAB7D7FE418079CB91A2FF2E5745FE61BEAC36384F8D8777`

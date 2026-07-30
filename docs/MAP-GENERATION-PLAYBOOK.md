@@ -561,3 +561,31 @@ These are the highest-value improvements for better first builds:
 - compare before/after screenshots at fixed cameras;
 - build a reusable library of measured AA-native prop bounds;
 - separate layout/topology generation from theme/material application.
+
+## Clone-from-scratch interpretation gate
+
+When a user asks to clone an existing map "from scratch," the phrase describes
+the construction method, not the topology target.
+
+- Reauthor native target-engine geometry while preserving the requested map's
+  actual routes, scale, elevations, site placement, openings, and defining
+  landmarks.
+- A reference VMF/BSP may be used as a measurement drawing without directly
+  converting its brushes or shipping its assets.
+- Do not substitute an analogous, inspired-by, compacted, or optimized route
+  graph unless the user explicitly authorizes a redesign.
+- Before building facades, create a collision-aware route blueprint and show
+  that all supplied spawns connect to it.
+- Treat user rejection for non-recognition as a failed brief, not ordinary art
+  debt. Mark the revision rejected and replace the public generator baseline.
+
+**PROVEN Inferno rule:** a raw overhead floor projection is insufficient. It
+can include rooftops, exterior pads, and stacked surfaces. Recover walkable
+space by checking player headroom, testing neighbor transitions against solid
+planes, and flood-filling from real spawns. Persist both the connected nodes
+and permitted edges; wall generation must consume the edge graph so it cannot
+close a real passage or invent a shortcut.
+
+For large native reauthorings, merge visual facade runs aggressively enough to
+stay within the original BSP budget, but never simplify the measured floor or
+route graph merely to save brushes.

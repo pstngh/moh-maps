@@ -1,5 +1,11 @@
 # Codex Inferno revision 1
 
+> **Rejected fidelity baseline.** The user's first in-game screenshots showed
+> that this revision is a generic rectangular Inferno-like arena, not a
+> recognizable clone of Inferno. It remains only as failure evidence. Do not
+> regenerate, package, or use it as the starting point for later revisions.
+> Revision 2 replaces it under the same map name.
+
 ## Identity
 
 - Map: `codex_inferno`

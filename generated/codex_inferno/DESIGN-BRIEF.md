@@ -1,6 +1,6 @@
 # Codex Inferno design brief
 
-Status: authored revision 1 plan
+Status: revision 2 measured clone, awaiting first human visual pass
 
 Date: 2026-07-30
 
@@ -11,52 +11,49 @@ Date: 2026-07-30
 | Game target | Allied Assault BSP 19 and OpenMoHAA |
 | Modes | DM and TDM |
 | Player/bot count | 2-8 players/bots |
-| Layout source | Original authored layout inspired by classic Inferno circulation |
-| Fidelity target | Recognizable route graph and landmarks, not a brush conversion |
+| Layout source | Supplied CS:GO Inferno VMF used as a measurement/reference drawing |
+| Fidelity target | Same recognizable topology, scale, elevations, sites, openings, and major landmarks |
+| Construction policy | New MOHAA-native geometry; no direct Source brush or asset import |
 | Asset policy | Original bundled diffuse art plus stock AA sky/utility shaders |
 | Lighting | Clear Mediterranean afternoon; warm direct sun, cool fill, low ambient |
-| Performance budget | Under 1,200 authored brushes, no patches, under 32 point lights |
-| Explicit omissions | Valve geometry/art/models, graffiti, signs, objective logic, dense clutter |
+| Engine budget | At or below Q3map's original 10 MB BSP budget |
+| Explicit omissions | Graffiti, warning signs, objective logic, dense foliage/clutter, Valve art/models |
 
-## Authored circulation graph
+## Interpretation of “from scratch”
+
+From scratch means manual reauthoring of the requested map. It does not mean an
+original design inspired by that map. Revision 1 violated this requirement and
+is rejected.
+
+The committed collision-aware blueprint is the topology contract. Its 6,997
+walk cells and 13,420 route edges define where movement exists and where a wall
+must remain. Art, facade mass, cover, and lighting may improve around that
+contract. Route changes require measured or screenshot evidence.
+
+## Actual orientation
 
 ```text
-                        +------- B site -------+
-                        |          |           |
-T spawn -- Banana ------+       Ruins/CT ------+
-   |                               |           |
-   +-- Lower mid -- Mid -- Top mid/Arch -------+
-          |            |            |
-          +-- Alt mid --+-- Short -- A site
-                 |
-                 +-- Apartments/Balcony --+
+west                         center/east                       north
+
+T spawn -- Alt/Second Mid -- Mid -- Arch/Library -- CT -------+
+   |                            \                    |          |
+   +-- Apartments --------------+-- A site          +-- B site
+                                                  Banana   Fountain
 ```
 
-Every primary combat space has at least two exits. The long Banana sightline
-is broken twice with authored bends and cover. A site can be approached from
-Short, Library/CT, or Apartments. B site can be approached from Banana or CT.
+The schematic is descriptive only; `layout-plan.svg` and
+`inferno-walk-grid-reference.svg` are the measured plan views.
 
 ## Construction strategy
 
-The map is not generated from Source solids.
-
-- A 128-unit occupancy grid describes only authored playable streets.
-- The complement is greedily merged into complete solid building masses.
-- Building heights, facade palettes, roofs, windows, and trim are generated
-  deterministically.
-- Apartments and Library are intentionally enclosed authored corridors.
-- Site cover, arches, stairs, the B fountain, coffins, and the bell tower are
-  manually placed landmarks.
-- A sealed stock-AA sky shell surrounds the full layout.
-
-This approach makes missing Source models incapable of creating holes:
-non-playable space is a complete solid building or the sealed sky boundary.
-
-## Revision-1 visual priorities
-
-1. Readable route silhouettes and complete enclosure.
-2. Recognizable A/B site proportions and approach directions.
-3. Mediterranean plaster, brick, cobble, wood, and terracotta palette.
-4. Strong warm-sun/cool-shadow separation.
-5. Simple static collision for OpenMoHAA bots.
-6. Decoration only after the route shell remains visually sound.
+1. Reconstruct convex source solids from plane intersections for measurement.
+2. Sample floor candidates on a 32-unit grid.
+3. Reject cells without player headroom.
+4. Test neighbor transitions against collision planes.
+5. Flood-fill from all 107 supplied spawns.
+6. Greedily merge connected floor cells by height/material role.
+7. Author a wall only when the measured route graph forbids that edge.
+8. Add complete facade masses, roofs, interiors, and landmark substitutes.
+9. Keep the sky shell structural and mark internal worldspawn brushes as MOHAA
+   detail to stay within portal limits.
+10. Compile, light, package, validate, then use human screenshots for revision.

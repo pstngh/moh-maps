@@ -1640,7 +1640,7 @@ verified, and documented; no Valve image bytes are packaged.
 all relevant axes, and the structural shell must enclose full retained-brush
 extents rather than accepted centers.
 
-**PROVEN spawn rule:** preserve a reference’s dedicated deathmatch positions
+**PROVEN spawn rule:** preserve a reference's dedicated deathmatch positions
 as neutral spawns. Duplicate team spawns only as an explicit fallback when no
 dedicated set exists.
 
@@ -1883,3 +1883,46 @@ proven by the target AA toolchain.
   `func_detail` brush entities are stripped by MOHAA Q3map; completed ordinary
   BSP/VIS/full lighting; and validated the exact 19-entry PK3 with Recast and
   eight fighting bots while recording the pending human visual gate.
+## Inferno revision 2: measured clone after a rejected invented layout
+
+Date: 2026-07-30
+
+The user's first screenshots of Inferno revision 1 proved a brief failure: the
+map was a complete, playable Mediterranean arena but was not recognizable as
+Inferno. The error was semantic, not merely visual. "From scratch" had been
+misread as permission to invent an Inferno-like route graph.
+
+Revision 2 retained original target-engine authorship but measured the actual
+supplied VMF. Plane intersection reconstructed all 7,921 solids with zero
+failures. A naive floor projection still contained rooftops and exterior pads,
+so the audit added spatial collision buckets, player-headroom rejection,
+neighbor-transition collision tests, and a 107-spawn flood fill. The resulting
+blueprint contains 6,997 connected 32-unit cells, 13,420 permitted edges, and
+zero unmatched spawns. It clearly recovers T west, A southeast, CT east, and
+Banana/B north.
+
+The generator greedily merges cells by elevation/material role into 479 floor
+rectangles. It creates facade/wall geometry only on graph edges without a
+permitted transition. Wood-route components receive 77 ceiling rectangles.
+Measured landmark positions drive the B fountain, coffins/barrels, A hay/box
+cluster, major arches, balconies, and tower silhouette. No Source brush or
+asset is shipped.
+
+The first structural compile failed with `LoadPortals: NumVisBytes 4116968
+exceeds 2097152`. The proven six-brush structural shell plus MOHAA
+`+surfaceparm detail` on internal worldspawn geometry reduced VIS to 36
+clusters, 60 portals, and 296 bytes. The initial faithful facade build was
+12.81 MB against Q3map's 10 MB budget. Merging facade materials/heights and
+removing short redundant trim/roof splits reduced it from 3,595 to 2,683
+brushes and from 20,827 to 15,717 draw surfaces without changing the measured
+floor graph. Final Q3map `-info` reports 9.69 MB used.
+
+Full lighting completed with ambient `8 9 12`. In a fresh home backed only by
+retail Pak0-Pak6, OpenMoHAA parsed the exact packaged BSP in 0.054 seconds,
+built Recast navigation in 1.916 seconds, admitted eight bots, and logged 8
+combat deaths in 38 seconds with zero fatal errors.
+
+**PROVEN brief rule:** a completed playable map can still be the wrong output.
+When recognition is part of the request, topology fidelity is a release gate.
+Persist a rejected revision as evidence, replace its public generator entry
+point, and do not call later polish a continuation of that baseline.
