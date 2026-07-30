@@ -1883,6 +1883,13 @@ proven by the target AA toolchain.
   `func_detail` brush entities are stripped by MOHAA Q3map; completed ordinary
   BSP/VIS/full lighting; and validated the exact 19-entry PK3 with Recast and
   eight fighting bots while recording the pending human visual gate.
+- 2026-07-30, Inferno revision 3: restored and audited the original CS:GO BSP,
+  VPK, radar, overview metadata, and private VMF; aligned the authored plan to
+  the official radar; replaced rejected graph-edge extrusion with 455 complete
+  callout-zoned village masses and 26 gable roofs; corrected fountain/well
+  scale from parsed model envelopes; completed Q3map/VIS/full lighting under
+  the original BSP budget; and validated the exact PK3 with eight fighting
+  bots while retaining the human visual gate.
 ## Inferno revision 2: measured clone after a rejected invented layout
 
 Date: 2026-07-30
@@ -1947,3 +1954,57 @@ connectivity oracle. The replacement must hand-author each major callout as a
 coherent scene, fill bounded non-route regions with complete building masses,
 and use the graph afterward to verify that openings and elevations remain
 faithful.
+
+## Inferno revision 3: route oracle plus complete semantic massing
+
+Date: 2026-07-30
+
+Restoring the CS:GO game files supplied a stronger private reference set than
+the VMF alone: the original BSP, VPK index, embedded pak, radar DDS, and
+overview transform. The VMF contains 7,921 reconstructed solids, 9,934
+entities, 6,974 static props, 2,252 detail entities, 82 unique visible
+materials, and 308 unique model paths. Every visible VMT and model path
+resolved in the restored data. None of those commercial bytes is committed or
+packaged.
+
+The overview transform (`pos_x -2087`, `pos_y 3870`, `scale 4.9`) provides an
+independent macro-layout check. When the semantic plan is placed in that frame,
+its route footprint and T/A/B/CT anchors align with the official radar. This
+supports topology/scale, but cannot prove elevations, wall composition,
+interiors, or ground-level recognition.
+
+Revision 3 keeps all 6,997 connected walk cells and 13,420 transitions only as
+a connectivity oracle. It dilates the route footprint by ten cells,
+flood-fills exterior air, fills bounded non-route pockets, assigns semantic
+height/material zones for every major callout, and greedily merges the result
+into 455 complete village masses. It renders zero outdoor graph-edge wall
+runs, retains 222 measured indoor separation runs, and caps the village with
+455 roofs including 26 gables. The output is 1,805 brushes rather than revision
+2's 2,683 fragmented brushes.
+
+Parsed model envelopes supplied a safer hero-landmark scale check. The B
+fountain basin measures about 156 units in radius, the center about 43 units in
+radius and 133 units high, and the CT well about 59 units in base radius with a
+roughly 104 x 147 x 141 wood assembly. Revision 3 uses original AA-native
+brush substitutes at those measured origins/dimensions. The audit also proves
+one real Source rotating door, but does not yet prove an AA pivot/swing/bot
+implementation; the route remains open in this revision.
+
+A clean retail compile emitted 10,457 faces from 10,824, fast VIS used 36
+clusters and 296 bytes, and full MOHlight completed in 73 seconds. Q3map
+`-info` reports 7.45 MB of the original 10 MB budget. OpenMoHAA loaded the
+exact 19-entry PK3, parsed the BSP in 0.035 seconds, generated Recast in 0.611
+seconds, admitted eight bots, and logged 11 combat/death events with zero fatal
+map errors.
+
+**PROVEN method:** a collision graph and an official radar solve different
+parts of recognition. Use the graph to preserve passability and openings. Use
+the radar/overview transform to check macro scale, outline, and callout
+relationships. Author complete buildings, streets, and silhouettes separately
+at human-perceived scale, then require ground-level screenshots before
+acceptance.
+
+**PENDING visual verdict:** this revision is a playable recognition candidate,
+not a claimed release. Facade windows, several slopes/roof shapes, omitted
+Source-only props/displacements, and the one dynamic door remain explicit debt
+until the user supplies a new screenshot pass.

@@ -1,7 +1,7 @@
 {
   "map": "codex_inferno",
-  "revision": 2,
-  "construction": "manually-reauthored-clone-from-measured-topology",
+  "revision": 3,
+  "construction": "callout-zoned-complete-village-massing-over-measured-routes",
   "referencePolicy": "source VMF used as measurement/reference drawing; no Source brushes or assets imported",
   "blueprint": {
     "file": "inferno-layout-reference-audit.json",
@@ -20,17 +20,67 @@
     "minZ": -224,
     "skyZ": 768
   },
+  "privateReferenceEvidence": {
+    "officialOverview": {
+      "posX": -2087,
+      "posY": 3870,
+      "scale": 4.9,
+      "purpose": "macro-layout comparison only; radar pixels are not distributed"
+    },
+    "verifiedLandmarkDimensions": {
+      "bFountain": {
+        "origin": [
+          352,
+          2768
+        ],
+        "basinRadius": 156,
+        "basinHeight": 29,
+        "centerRadius": 43,
+        "sourceCenterHeight": 133,
+        "authoredCenterHeight": 136
+      },
+      "ctWell": {
+        "origin": [
+          1952,
+          2562
+        ],
+        "baseRadius": 59,
+        "baseHeight": 40,
+        "woodEnvelope": [
+          104,
+          147,
+          141
+        ]
+      },
+      "largeArchEnvelope": [
+        24,
+        160,
+        81
+      ],
+      "coffinEnvelope": [
+        19,
+        43,
+        100
+      ]
+    },
+    "verifiedDynamicDoors": 1
+  },
   "geometry": {
     "floorRectangles": 479,
+    "massColumns": 9750,
+    "buildingMassRectangles": 455,
+    "gableRoofs": 26,
+    "renderedOutdoorWallRuns": 0,
+    "renderedIndoorWallRuns": 222,
     "wallSegmentsBeforeMerge": 2843,
     "wallRuns": 1058,
     "ceilingRectangles": 77,
     "siteSurfaceBrushes": 37,
-    "worldBrushes": 1620,
-    "authoredBrushes": 1063,
-    "totalWorldspawnBrushes": 2683,
-    "facadeWindows": 123,
-    "roofMasses": 294,
+    "worldBrushes": 1239,
+    "authoredBrushes": 566,
+    "totalWorldspawnBrushes": 1805,
+    "facadeWindows": 0,
+    "roofMasses": 455,
     "measuredArches": 10
   },
   "spawns": {

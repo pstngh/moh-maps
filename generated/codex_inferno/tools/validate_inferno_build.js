@@ -1,2 +1,2 @@
 // Validate the current supported Inferno build.
-require("./validate_inferno_rev2.js");
+require("./validate_inferno_rev3.js");

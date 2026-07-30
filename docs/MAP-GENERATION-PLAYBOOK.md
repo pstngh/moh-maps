@@ -611,3 +611,16 @@ facade or extend each edge into a shallow building strip.
 fidelity are separate gates. Compile/navigation success proves none of the
 visual gates. A generator may consume a measured graph for validation, but its
 rendered building grammar must be authored at the scale humans perceive.
+
+**PROVEN radar-comparison rule:** when a source map provides an overview image
+and `pos_x`/`pos_y`/`scale` metadata, transform the authored semantic plan into
+that frame and compare the route outline plus spawn/site anchors before a full
+compile. This independently checks macro scale and callout relationships. It
+does not prove elevation, interiors, facade massing, or ground-level
+recognition, and commercial radar pixels remain private reference data rather
+than repository/package content.
+
+For simple hero landmarks, parsed source-model bounds can establish original
+substitute dimensions without copying a mesh. Combine local bounds, entity
+origin/orientation, nearby support geometry, and a reference view. Bounds alone
+still do not prove complex topology, pivot behavior, or collision.

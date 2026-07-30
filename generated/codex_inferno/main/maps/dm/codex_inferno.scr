@@ -1,7 +1,7 @@
 main:
 
 setcvar "g_obj_alliedtext1" "Codex Inferno"
-setcvar "g_obj_alliedtext2" "Measured reconstruction - revision 2"
+setcvar "g_obj_alliedtext2" "Recognition-first reconstruction - revision 3"
 setcvar "g_obj_alliedtext3" ""
 setcvar "g_obj_axistext1" ""
 setcvar "g_obj_axistext2" ""

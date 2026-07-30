@@ -1,26 +1,67 @@
 # Inferno reference audit
 
-The supplied `de_inferno_d.vmf` is a private measurement/reference input. The
-VMF, BSP, log, Valve textures, Valve models, and embedded content are not
-included in the repository or PK3.
+The supplied/restored CS:GO files are private measurement and comparison
+inputs. The VMF, BSP, logs, radar image, Valve textures, Valve models, and
+embedded content are not included in the repository or PK3.
+
+## Restored source set
+
+| Source | Evidence |
+| --- | --- |
+| `de_inferno_d.vmf` | 20,869,971 bytes; SHA-256 `C37A3D3CB4EA813B0CC1B36205234A9F9CCFF258B7D69FBA8CA5C448628505D5` |
+| `de_inferno.bsp` | 102,233,048 bytes; Source BSP version 21; SHA-256 `4C29B4B6AE35CE1DCA3F56439876014E09BAECDC25AD0146A865DA6072FC60E6` |
+| `de_inferno_radar.dds` | SHA-256 `A91896C4C51E2F9379DCB6EC0DC778B429C798CD39F4A0D335A24A70B1F47948` |
+| overview transform | `pos_x -2087`, `pos_y 3870`, `scale 4.9` |
+| overview anchors | CT `(0.90,0.35)`, T `(0.10,0.67)`, A `(0.81,0.69)`, B `(0.49,0.22)` |
+| `pak01_dir.vpk` | version 2; 133,676 indexed entries |
+| BSP embedded pak | 78,122,090 bytes; 7,309 entries |
+
+The semantic plan was compared against the official radar using its overview
+transform. The route outline and T/A/B/CT placement align strongly; this is a
+reference-comparison gate, not permission to ship radar pixels.
 
 ## Source measurements
 
 | Measurement | Value |
 | --- | ---: |
-| VMF bytes | 20,869,971 |
 | World solids | 5,510 |
 | Total reconstructed solids | 7,921 |
 | Failed solid reconstructions | 0 |
-| Floor-like faces | 2,654 |
+| Total sides | 47,260 |
+| Displacement sides | 2,223 |
 | Entities | 9,934 |
-| Static props in reference | 6,974 |
+| `prop_static` entities | 6,974 |
+| `func_detail` entities | 2,252 |
 | T / CT / dedicated-DM spawns | 20 / 20 / 67 |
+| Light-related entities selected | 109 |
 | A target bounds | `(1792,160,160)` to `(2160,708,200)` |
 | B target bounds | `(144,2544,160)` to `(592,3008,224)` |
 
 The measured spawn/play cluster is approximately X `-849..2656`, Y
 `-768..3576`, Z `-16..272`. T is west, A southeast, CT east, and B north.
+
+## Material and model resolution
+
+The VMF contains 47,260 material references, 102 unique material names, and 82
+unique visible materials. All 82 visible VMTs resolve through the restored
+game data. The source contains 7,036 model references and 308 unique model
+paths; all 308 resolve and parse. These results are audit evidence only. None
+of those commercial assets is copied to the authored map.
+
+Verified landmark model envelopes used to size original AA-native substitutes:
+
+- B fountain basin radius about 156 units and height about 29;
+- B fountain center radius about 43 units and height about 133;
+- CT well base radius about 59 units and height about 40;
+- CT well wood assembly about 104 x 147 x 141 units;
+- large arch about 24 x 160 x 81 units;
+- coffin about 19 x 43 x 100 units.
+
+The audit found one genuine `prop_door_rotating` at Source origin
+`(300.25,-324,96)`, yaw 270, speed 200, distance 90. Its model envelope is
+approximately 8.6 x 55.5 x 111.6 units. Revision 3 does not translate it into
+an AA door because pivot, route clearance, and bot behavior still require an
+in-engine proof.
 
 ## Collision-aware blueprint
 
@@ -45,25 +86,28 @@ The audit does not treat every horizontal Source face as playable. It:
 | Connected edges | 13,420 |
 | Unmatched spawns | 0 |
 
-`inferno-layout-reference-audit.json` is the durable machine-readable blueprint.
+`inferno-layout-reference-audit.json` is the durable machine-readable
+blueprint. Its SHA-256 is
+`D5C30783387415C9C57CDB1608B07F8C04CC5DF4A460A8BD4ED3ADD5F8AFF8B0`.
 `inferno-walk-grid-reference.svg` is its clean plan view.
 
 ## What is and is not copied
 
 Copied as measurements:
 
-- route coordinates and connectivity;
-- floor elevations and source material roles;
+- route coordinates, connectivity, scale, and floor elevations;
 - spawn and bomb-target positions;
-- selected landmark origins such as the B fountain and coffins.
+- source material roles, not Source raster content;
+- selected landmark origins and verified model envelopes;
+- official overview transform and callout relationships.
 
 Not copied:
 
 - Source brushes as output brushes;
 - displacements;
-- textures, materials, models, sounds, or embedded files;
+- textures, materials, models, sounds, radar pixels, or embedded files;
 - prop meshes or Valve-authored raster art.
 
-Revision 2 builds new axis-aligned MOHAA floor/facade masses and original
-project-owned textures from those measurements. This produces a recognizable
-clone without repeating the incomplete raw-conversion failure mode.
+Revision 3 builds new MOHAA-native floors, complete semantic village masses,
+landmark substitutes, and original project-owned textures from those
+measurements.
