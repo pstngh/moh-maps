@@ -1,15 +1,20 @@
 # Codex Inferno
 
-`codex_inferno` revision 2 is a manually reauthored Allied Assault/OpenMoHAA
-clone of the supplied CS:GO Inferno layout. “From scratch” describes how the
-geometry is built, not permission to invent a different map: the VMF is used as
-a measurement/reference drawing while the output remains MOHAA-native.
+> **Current status: visually rejected.** Revision 2 compiles, loads, navigates,
+> and supports bot combat, but the user's `shot0021.tga` review still does not
+> look recognizable as Inferno. Do not treat this PK3 or generator as a release
+> baseline.
 
-Revision 1's generic Inferno-like arena was rejected after the user's first
-screenshots because it was not recognizable as Inferno. Revision 2 replaces it
-under the same map and package name.
+`codex_inferno` revision 2 attempted a manually reauthored Allied
+Assault/OpenMoHAA clone of the supplied CS:GO Inferno layout. The measured walk
+graph is useful, but converting its blocked 32-unit edges into walls and short
+roof masses produced a dense architectural maze rather than Inferno's
+continuous streets and complete building blocks.
 
-## Current build
+Revision 1 and revision 2 are both rejected fidelity baselines. Revision 3
+must be a callout-by-callout architectural reconstruction.
+
+## Rejected build's technical inventory
 
 - actual measured T, Mid/Alt Mid/Apartments, A, Arch/Library, CT, Banana, and B
   footprint;
@@ -94,16 +99,17 @@ without exceeding Q3map's fixed portal-data limit.
 - eight bots admitted and 8 combat deaths in 38 seconds;
 - zero fatal runtime errors.
 
-## Remaining debt
+## Why recognition failed
 
-The first human visual pass of revision 2 is still required. Runtime evidence
-does not prove that every facade, elevation transition, prop substitute, or
-sightline looks correct. Future work must use callout/location-specific
-screenshots and preserve the measured route graph unless a photographed defect
-proves the graph itself is wrong.
+Revision 2's generator creates 1,058 wall runs and 294 shallow roof masses from
+the collision grid. In the user's overhead screenshot these read as narrow,
+hollow, fragmented strips. The visual composition lacks the large coherent
+houses, courtyards, streets, and landmark silhouettes that make Inferno
+immediately recognizable.
 
-Revision 1 is historical/rejected evidence, not a fallback release. See
-[`REVISION-1.md`](REVISION-1.md).
+Revision 1 and revision 2 are historical/rejected evidence, not fallback
+releases. See [`REVISION-1.md`](REVISION-1.md) and
+[`REVISION-2.md`](REVISION-2.md).
 
 ## Artifact fingerprints
 

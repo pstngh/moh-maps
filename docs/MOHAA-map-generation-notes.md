@@ -1926,3 +1926,24 @@ combat deaths in 38 seconds with zero fatal errors.
 When recognition is part of the request, topology fidelity is a release gate.
 Persist a rejected revision as evidence, replace its public generator entry
 point, and do not call later polish a continuation of that baseline.
+
+### Inferno revision 2 human-review rejection
+
+The user's `shot0021.tga` overview invalidated revision 2 as a fidelity
+baseline. Although the recovered walk footprint looked plausible in a clean
+2D plan and the exact PK3 passed compile, Recast, spawn, and combat tests, the
+rendered map remained unrecognizable.
+
+The screenshot shows why: 1,058 merged boundary-wall runs, 112-unit exterior
+mass depth, and 294 short roof caps form a dense hollow maze. Inferno's broad
+continuous streets and complete village blocks are replaced by fragmented
+parallel strips, internal sky gaps, and noisy sampled elevations. Landmark
+props cannot repair architecture whose massing and street composition are
+wrong.
+
+**FAILED method:** collision-grid boundary extrusion is not an architectural
+reconstruction strategy. Keep the 6,997-node/13,420-edge graph only as a
+connectivity oracle. The replacement must hand-author each major callout as a
+coherent scene, fill bounded non-route regions with complete building masses,
+and use the graph afterward to verify that openings and elevations remain
+faithful.

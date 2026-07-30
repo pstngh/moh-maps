@@ -589,3 +589,25 @@ close a real passage or invent a shortcut.
 For large native reauthorings, merge visual facade runs aggressively enough to
 stay within the original BSP budget, but never simplify the measured floor or
 route graph merely to save brushes.
+
+### Route graph is not architecture
+
+Inferno revision 2 proves that a collision-correct walk graph can still produce
+an unrecognizable map. Do not render every blocked occupancy-cell edge as a
+facade or extend each edge into a shallow building strip.
+
+- Use the route graph only to verify connectivity, widths, and openings.
+- Author continuous callout-scale streets rather than visible grid cells.
+- Fill non-playable space with complete semantic building/courtyard volumes,
+  not hollow boundary extrusions.
+- Group elevations into intentional stairs, ramps, floors, and roofs; do not
+  expose every sampled 8-unit height change as architectural segmentation.
+- Establish recognizable silhouettes and landmark compositions at each major
+  callout before generating secondary windows, trim, roofs, or clutter.
+- Require human ground-level and overview recognition gates before calling a
+  technically playable clone a baseline.
+
+**PROVEN recognition rule:** topology fidelity, architecture fidelity, and art
+fidelity are separate gates. Compile/navigation success proves none of the
+visual gates. A generator may consume a measured graph for validation, but its
+rendered building grammar must be authored at the scale humans perceive.

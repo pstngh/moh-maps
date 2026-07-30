@@ -2,8 +2,30 @@
 
 Date: 2026-07-30
 
-Status: compiled, packaged, statically validated, and eight-bot runtime
-validated; awaiting the user's first in-game visual review
+Status: **visually rejected by the user** after screenshot `shot0021.tga`;
+compile/runtime evidence remains valid but this is not a recognizable Inferno
+clone and must not be treated as a release baseline
+
+## Human review verdict
+
+The overhead screenshot shows a dense maze of narrow roof and wall strips,
+hollow gaps, fragmented elevations, and no readable continuous Inferno
+streets/building blocks. The user still could not recognize the map.
+
+The root cause is architectural generation, not lighting or texture polish:
+
+- the 32-unit walk graph was rendered too literally;
+- almost every blocked cell edge became a wall run;
+- exterior masses extend only 112 units instead of becoming complete semantic
+  buildings;
+- 294 short roof masses cap those boundary strips rather than forming coherent
+  rooftops;
+- small height/material changes fragment facades and destroy the visual rhythm
+  of T spawn, Mid, Apartments, A, CT, Banana, and B.
+
+The collision-aware graph remains useful measurement evidence, but it is not a
+renderable architectural blueprint. Passing compile, navigation, and bot QA
+did not establish visual fidelity.
 
 ## Why revision 2 exists
 
@@ -110,9 +132,10 @@ That warning is not map content; native bots nevertheless navigate and fight.
 The blueprint SHA-256 is
 `D5C30783387415C9C57CDB1608B07F8C04CC5DF4A460A8BD4ED3ADD5F8AFF8B0`.
 
-## Remaining gate
+## Replacement requirement
 
-Runtime validation proves loading, collision-derived navigation, spawning, and
-combat. It does not prove human visual fidelity. The next revision must start
-from the user's in-game screenshots and record each visible defect by
-location/callout before changing geometry.
+Revision 3 must not extrude the walk-cell boundary into architecture. It must
+hand-reconstruct continuous callout-scale streets and complete building
+volumes, using the VMF and walk graph only for measurements and connectivity
+checks. It should be reviewed at T spawn, Mid, Apartments, A, CT, Banana, and B
+before a full-map package is called recognizable.
