@@ -34,7 +34,7 @@ here.
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | `aa/` MP (`mohdm*`, `obj_team*`) | 10 | 6,574 | 34,120 | 1,946 | 35 | Real numeric values |
 | `aa/` SP campaign (`m1l1`-`m6l3e`, `training`) | 35 | 64,205 | 161,390 | 15,599 | 5,972 | All zero |
-| `aa_custom/` (community objective maps) | 5 | 3,019 | 15,121 | 883 | 15 | Real numeric values |
+| `aa_custom/` (community objective maps) | 9 | 10,763 | 31,033 | 3,956 | 28 | Real numeric values |
 | `bt/` MP | 24 | 21,477 | 129,805 | 11,312 | 1,657 | All zero |
 | `bt/` SP campaign (`e1l1`-`e3l4`) | 11 | 34,932 | 82,005 | 6,840 | 4,522 | All zero |
 | `sh/` MP | 13 | 11,217 | 70,158 | 5,410 | 1,047 | All zero |
@@ -562,3 +562,7 @@ spawners, not MP spawn classes).
 | `sh/t2l4.map` | 4,663 | 10,908 | 249 | 564 | 0/0/0 | Bastogne |
 | `sh/t3l1.map` | 2,855 | 6,982 | 1,028 | 0 | 0/0/0 | Berlin |
 | `sh/t3l2.map` | 2,476 | 6,792 | 1,066 | 0 | 0/0/0 | Berlin |
+| `aa_custom/obj_entre_pots.map` | 410 | 2,504 | 216 | 0 | 16/16/16 | |
+| `aa_custom/obj_hrad_mpai.map` | 5,955 | 6,173 | 140 | 12 | 0/0/0 (AI-bot map: pathnode-driven) | |
+| `aa_custom/obj_BaseUBoat_2.map` | 1,131 | 6,469 | 2,717 | 0 | 3/35/52 | |
+| `aa_custom/obj_compound_dust.map` | 248 | 766 | 0 | 1 | 0/19/19 | Fnd The Switch To Open This Gate = In & Out |
