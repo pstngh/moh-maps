@@ -398,6 +398,20 @@ dominant white clutter. Revision 3 removed the invalid fills, restored normal
 lighting, and full MOHlight completed within budget. First reduce or remove
 unproven geometry; do not hide geometry debt with a broad lighting override.
 
+Nuke revision 4 also proves a tool-version trap: the bundled MOHTools 1.48
+compiler does not implement modern `q3map_lightmapSampleSize` shader control,
+and passing `-samplesize` to its light stage can leave a zero-CPU process
+waiting indefinitely. Do not copy q3map2/OpenMoHAA-source options into the
+retail AA toolchain without proving that the actual executable accepts them.
+
+A narrow non-lightmapped exception can be tested for large alpha-cutout detail
+whose shading does not define the room: foliage cross-cards or the mesh panel
+inside a fence whose posts remain baked. Gate this by exact face count and an
+allow-list of alpha materials, retain normal baked lighting on architecture,
+machinery, vehicles, furniture, cover, and support posts, and use an explicit
+dark shader tint so a missing lightmap cannot turn the card white. The policy
+is not accepted until full MOHlight and bright/shadowed screenshot checks pass.
+
 Lighting QA must cover:
 
 - full-sun exterior;
@@ -674,9 +688,11 @@ rewriting the layout or filling every omitted model.
    role is clear.
 5. Collapse duplicate multi-part landmark collision where several source
    models describe one physical body.
-6. Omit foliage, wires, tiny clutter, highly irregular meshes, unknown pivot
+6. Omit wires, tiny clutter, highly irregular meshes, unknown pivot
    conventions, and strongly pitched or rolled props until a target-engine
-   representation is proven.
+   representation is proven. Restore foliage only with an original non-solid
+   alpha-card representation at measured placements; never use its hull as a
+   solid volume.
 7. Gate the pass by candidate count, bounds-resolution count, per-class
    substitutions, brush totals, compile/runtime evidence, and a new human
    screenshot set. Do not claim a visual fix from metadata alone.
@@ -687,6 +703,48 @@ carry windows, shutters, roof edges, pillars, chimneys, cover, and site
 landmarks. Parsed model bounds are sufficient for conservative box/prism
 substitutes, but not for arbitrary mesh reconstruction. Keep these substitutes
 separate from accepted architecture and preserve an auditable omitted set.
+
+**OBSERVED Nuke ordinary-prop rule:** first separate playable-envelope model
+instances from the distant/skybox cluster, then restore only named semantic
+families with family-specific primitives at measured origins and angles. Use
+sparse beams for cranes and frames, cylinders/frustums for vessels, multi-box
+silhouettes for vehicles, and non-solid alpha cross-cards for foliage.
+Source `solid`/clip evidence decides collision. BSP-embedded autocombines remain
+omitted because their aggregate hulls do not establish internal topology.
+Compile and bot success prove technical viability, not visual acceptance; the
+human screenshot gate remains mandatory.
+
+### Lossless BSP lightmap-atlas repacking
+
+A dense but otherwise valid BSP can exceed Allied Assault's 180-page lightmap
+limit because the original compiler sorts allocations by shader before its
+skyline pass. That ordering can fragment the atlas even when the exact
+rectangles fit below the limit. Do not respond by broadly removing baked
+lighting from opaque architecture or by deleting accepted visual detail.
+
+After BSP and VIS, a deterministic repacker may globally repack the existing
+surface rectangles while preserving every rectangle's width and height:
+
+1. read BSP 19 draw-surface and draw-vertex lumps and collect every surface
+   with a nonnegative lightmap page;
+2. reject shared draw-vertex ranges, invalid rectangles, out-of-range UVs, and
+   any rectangle too large for the 128x128 page plus the selected gutter;
+3. sort rectangles deterministically and skyline-pack them across the allowed
+   page count, reserving at least a one-pixel gutter on every side;
+4. update each draw surface's page, X, and Y fields;
+5. translate each owned draw vertex's normalized lightmap UV by the exact
+   atlas-coordinate delta divided by 128; and
+6. re-read the output and prove unchanged surface dimensions, valid UVs,
+   deterministic hash, and a page count at or below 180 before running
+   MOHlight.
+
+**PROVEN Nuke atlas rule:** revision 4 preserved 42,815 baked surfaces and
+repacked the compiler's 194 allocated pages into 166 pages with one-pixel
+gutters. The method changes atlas placement only; it does not resample geometry
+or lightmaps and it does not convert opaque surfaces to fullbright/vertex-lit
+ones. A shader-level `nolightmap` flag by itself does not remove a surface's
+already allocated rectangle, so inspect draw-surface allocation fields rather
+than inferring the budget from shader records.
 
 Generated MAP preflight must also reject literal escaped newline sequences in
 brush blocks. A JavaScript `join("\\n")` emits two characters, not a line

@@ -89,6 +89,37 @@ def generated_chainlink() -> Image.Image:
     return fence
 
 
+def generated_foliage() -> Image.Image:
+    foliage = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(foliage)
+    draw.line((256, 500, 246, 92), fill=(55, 68, 39, 255), width=14)
+    draw.line((250, 332, 116, 185), fill=(55, 68, 39, 255), width=9)
+    draw.line((252, 300, 394, 142), fill=(55, 68, 39, 255), width=9)
+    palette = [
+        (66, 93, 48, 255),
+        (80, 109, 58, 255),
+        (98, 124, 66, 255),
+        (50, 76, 42, 255),
+    ]
+    for row, y in enumerate(range(84, 452, 46)):
+        for column, x in enumerate(range(62, 466, 52)):
+            wobble_x = ((row * 17 + column * 29) % 23) - 11
+            wobble_y = ((row * 31 + column * 13) % 19) - 9
+            width = 34 + (row * 7 + column * 5) % 24
+            height = 20 + (row * 3 + column * 11) % 20
+            color = palette[(row + column) % len(palette)]
+            draw.ellipse(
+                (
+                    x + wobble_x - width,
+                    y + wobble_y - height,
+                    x + wobble_x + width,
+                    y + wobble_y + height,
+                ),
+                fill=color,
+            )
+    return foliage
+
+
 def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
 
@@ -118,6 +149,30 @@ def main() -> None:
         "corrugated_gray.tga",
     )
     save_tga(
+        colorize_gray(corrugated, (95, 103, 106), (229, 232, 229)),
+        "clean_white_metal.tga",
+    )
+    save_tga(
+        colorize_gray(corrugated, (83, 61, 8), (232, 194, 52)),
+        "safety_yellow.tga",
+    )
+    save_tga(
+        colorize_gray(corrugated, (68, 18, 18), (194, 62, 54)),
+        "safety_red.tga",
+    )
+    save_tga(
+        colorize_gray(corrugated, (24, 51, 64), (84, 139, 154)),
+        "equipment_blue.tga",
+    )
+    save_tga(
+        colorize_gray(floor, (11, 13, 14), (53, 56, 57)),
+        "rubber.tga",
+    )
+    save_tga(
+        colorize_gray(floor, (26, 34, 38), (98, 120, 123)),
+        "control_panel.tga",
+    )
+    save_tga(
         colorize_gray(floor, (49, 55, 59), (167, 174, 176)),
         "metal_trim.tga",
     )
@@ -126,6 +181,7 @@ def main() -> None:
     save_tga(generated_glass(), "glass.tga")
     save_tga(matching_edges(generated_window_backing()), "window_backing.tga")
     save_tga(matching_edges(generated_chainlink()), "chainlink.tga")
+    save_tga(matching_edges(generated_foliage()), "foliage.tga")
 
     for output_path in sorted(OUTPUT.glob("*.tga")):
         with Image.open(output_path) as built:

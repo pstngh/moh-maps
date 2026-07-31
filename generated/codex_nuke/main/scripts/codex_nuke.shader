@@ -10,7 +10,7 @@ textures/codex_nuke/chainlink
 		map textures/codex_nuke/chainlink.tga
 		alphaFunc GE128
 		depthWrite
-		rgbGen identity
+		rgbGen const ( 0.62 0.62 0.62 )
 	}
 	{
 		map $lightmap
@@ -42,5 +42,26 @@ textures/codex_nuke/glass
 		map textures/codex_nuke/glass.tga
 		blendFunc GL_SRC_ALPHA GL_ONE_MINUS_SRC_ALPHA
 		rgbGen identity
+	}
+}
+
+textures/codex_nuke/foliage
+{
+	qer_editorimage textures/codex_nuke/foliage.tga
+	surfaceparm trans
+	surfaceparm nonsolid
+	surfaceparm alphashadow
+	surfaceparm nomarks
+	cull none
+	{
+		map textures/codex_nuke/foliage.tga
+		alphaFunc GE128
+		depthWrite
+		rgbGen const ( 0.68 0.68 0.68 )
+	}
+	{
+		map $lightmap
+		blendFunc GL_DST_COLOR GL_ZERO
+		depthFunc equal
 	}
 }

@@ -1,16 +1,15 @@
 # Codex Nuke
 
-`codex_nuke` is a first-playable Allied Assault/OpenMoHAA deathmatch
-conversion. Its target is the recognizable classic Nuke layout with a clean
-modern industrial art direction, not an Allied Assault or Second World War
-reskin.
+`codex_nuke` is a layout-faithful Allied Assault/OpenMoHAA DM/TDM conversion
+of the CS:GO-era Nuke layout. Its art direction is clean modern industrial,
+not an Allied Assault or Second World War reskin.
 
-Revision 3 is compiled, full-lit, packaged, and eight-bot tested. It is a
-regression-recovery build based on the second 13-image human review. It removes
-revision 2's visually rejected inferred beams, rails, ladders, and trim while
-retaining the independently supported window, terrain-underlay, sky, glass,
-and light-clustering changes. It is ready for another screenshot and
-door-interaction pass, but is not a final visual-fidelity release.
+Revision 4 responds to the human finding that the stable revision 3 still felt
+very empty. It preserves the measured Source brush layout and adds a derived
+inventory plus family-specific original reconstructions for the machinery,
+site vessels, supports, ventilation, fencing, vehicles, furniture, control
+rooms, and exterior dressing that make Nuke recognizable. It does not package
+Valve textures, meshes, models, or other Source assets.
 
 ## Design brief
 
@@ -18,110 +17,141 @@ door-interaction pass, but is not a final visual-fidelity release.
 | --- | --- |
 | Game target | Allied Assault BSP 19 and OpenMoHAA |
 | Modes | DM/TDM first; 4-10 bots |
-| Layout source | Measured CS:GO Nuke reference |
-| Fidelity target | Layout-faithful, with recognizable industrial silhouette |
+| Layout source | Measured CS:GO Nuke VMF/BSP facts |
+| Fidelity target | Recognizable rooms, routes, industrial landmarks, exterior silhouette, and clean institutional readability |
 | Asset policy | Original bundled art plus stock AA utility shaders; no Valve assets distributed |
-| Lighting | Neutral-warm daylight, cool sky fill, clean purposeful interior fixtures |
-| Performance | Preserve primary architecture first; budget Source detail and prop replacements deliberately |
-| Explicit omissions | Graffiti, logos, warning placards, minor signs, clutter, Source 3D skybox |
+| Lighting | Neutral-warm daylight, cool sky fill, purposeful interior fixtures, baked shading on all opaque architecture and dressing |
+| Explicit low-priority omissions | Graffiti, logos, warning placards, minor signs, switches/outlets, paperwork, and similar clutter |
+| Known structural debt | Planarized displacement curvature, distant 3D skybox, and selected Source autocombines whose topology is not proven |
 
-## What the audit proved
+## What the reference audit proves
 
 - The BSPSource 1.4.8 decompile completed without errors.
 - The VMF contains 8,039 solids, 48,098 sides, 761 displacement faces, 10,488
   entities, 6,891 static props, and 471 ordinary/spot lights.
-- All 121 visible brush materials resolve to VMT files in the local CS:GO VPK.
-- All 1,405 referenced model files are locally measurable:
-  - 695 ordinary models resolve from `pak01`;
-  - 710 generated `autocombine` models resolve from the BSP's embedded pak.
-- The 710 embedded models explain why a VMF-only conversion would lose large
-  ventilation, facade, trim, and industrial assemblies. Their aggregate hull
-  bounds do not reveal the mesh's internal topology or run direction.
-- Nuke contains four real rotating-door entities. Revision 3 recreates all
-  four as interactive AA doors instead of silently making them static.
-- Geometry centered around Source Y 7,168-12,360 is a separate distant/skybox
-  cluster and must not be imported into the playable AA shell.
+- All 121 visible brush materials resolve in the user's local CS:GO data.
+- All 1,405 referenced model files are locally measurable: 695 ordinary models
+  resolve from `pak01`, and 710 generated `autocombine` models resolve from the
+  BSP embedded pak.
+- Four real Source rotating-door entities exist and are converted to AA
+  `func_rotatingdoor` entities.
+- The distant Source Y 7,168-12,360 cluster is skybox scenery and is excluded
+  from the playable AA shell.
 
-See [`REFERENCE-AUDIT.md`](REFERENCE-AUDIT.md) for the evidence and conversion
-policy. The machine-readable derived manifest is
+See [`REFERENCE-AUDIT.md`](REFERENCE-AUDIT.md) and the derived
 [`reference-audit.json`](reference-audit.json).
 
-## Revision-3 implementation
+## Revision-4 fidelity layer
 
-The deterministic generator:
+[`fidelity-manifest.json`](fidelity-manifest.json) records derived facts for
+4,687 model instances in the playable envelope: model-family identifier,
+entity class, transform, scale, Source solid setting, and measured studio
+header bounds. Bounds remain envelopes, not proof that the model is a filled
+box.
 
-- converts 5,639 measured playable Source solids;
-- planarizes 604 Source displacement faces and adds 632 material-matched seam
-  underlays expanded from measured displacement excursion, up to 117 units;
-- retains two explicit player clips and 86 measured large Source clip volumes;
-- reconstructs 638 simple prop brushes from measured model bounds;
-- restores the large Nuke silhouette with 34 nonblocking original
-  cylinder/frustum brushes for tanks and silos;
-- explicitly omits all 710 BSP-only autocombine placements until actual mesh
-  topology or manually verified endpoints are available;
-- creates four real `func_rotatingdoor` entities with hinge-origin brushes;
-- emits 16 Axis, 16 Allied, and 32 neutral DM spawns;
-- clusters 471 Source fixture candidates to 259 purposeful local lights;
-- uses stock `sky/m5l2`, a neutral-warm sun, cool environment fill, and low
-  ambient instead of the yellow `mohday1` horizon;
-- maps black window placeholders to an original non-solid backing material
-  and reduces the original glass texture's blue cast and opacity.
+The generator restores 1,932 ordinary placements using 2,855 original
+family-specific brushes. Major groups include:
 
-All map-specific autocombines and wires stay explicitly omitted. Revision-2
-screenshots proved that a combined model's bounding box is only an envelope:
-it cannot establish which axes contain geometry, how many runs exist, or where
-they sit inside the box. The converted Source brushes and clips remain the
-collision authority.
+- 242 foliage placements, 236 chain-link components, and 216 ventilation
+  pieces;
+- 178 cover pieces, 137 structural supports, 137 furniture pieces, 83
+  electrical assemblies, and 76 windows;
+- 59 control-room displays, 44 static doors, 35 chairs, 24 industrial rails,
+  22 transformers, 17 cars, 8 forklifts, and 8 cargo-crane components;
+- the defining A-site silo/vessel, upper crane, B-site reactor head and fuel
+  racks, core crane/computers, platforms, columns, consoles, and equipment.
+
+Frame-like machinery uses sparse beams, vessels use cylinders/frustums,
+vehicles use recognizable multi-box silhouettes, and foliage uses non-solid
+alpha cross-cards. Collision comes only from measured Source solid intent or
+existing brush/clip geometry. All 710 autocombines remain explicitly omitted;
+revision 2 proved that their aggregate bounding boxes do not reveal internal
+mesh topology.
+
+The deterministic source contains 9,448 world brushes, 329 entities, 16 Axis,
+16 Allied, and 32 neutral DM spawns. It converts 5,639 measured playable
+Source solids, planarizes 604 displacement faces, retains measured clip
+volumes, adds 632 bounded seam underlays, keeps four interactive doors, and
+clusters 471 Source fixture candidates to 259 local lights.
 
 ## Original texture palette
 
-The palette contains fifteen original 512×512 TGA materials:
+The package contains 22 original 512x512 TGA materials. Revision 4 adds clean
+white machinery metal, yellow/red safety paint, blue equipment, rubber,
+control-panel material, and alpha-tested foliage to the previous concrete,
+cladding, floor, asphalt, metal, grass/gravel, glass, chain-link, and window
+materials.
 
-- painted concrete, blue-painted concrete, smooth floor, and dark concrete;
-- blue and gray corrugated cladding;
-- asphalt, metal trim, ceiling tile, and metal grating;
-- maintained grass and compact industrial gravel;
-- alpha-capable glass and chain-link artwork;
-- a restrained blue-gray window backing for former black placeholder panes.
+Precise creation and derivation records are in
+[`ART-PROVENANCE.md`](ART-PROVENANCE.md); the generated visual inventory is
+[`texture-contact-sheet.png`](texture-contact-sheet.png). Valve files are read
+locally only for material roles, dimensions, transforms, pivots, and repeated
+placement families.
 
-Six base surfaces were generated as original raster sources, then made
-deterministically tileable and converted into game-ready variants. Precise
-prompts and derivation are recorded in
-[`ART-PROVENANCE.md`](ART-PROVENANCE.md). A visual QA sheet is
-[`texture-contact-sheet.png`](texture-contact-sheet.png).
+## Lighting-budget policy
 
-Valve VMT/VTF/MDL files are read locally only to identify material roles,
-dimensions, model bounds, pivots, and repeated placement families. They are
-not copied to this repository or the PK3.
+The first full revision-4 BSP was valid, but MOHlight requested 210 lightmap
+pages against Allied Assault's hard limit of 180. The bundled MOHTools 1.48
+executables do not implement modern `q3map_lightmapSampleSize`, and a
+`-samplesize` light probe waits at zero CPU instead of changing the atlas.
 
-## Validation
+The corrected source excludes exactly 4,320 alpha-detail sides from the
+lightmap atlas: 2,904 foliage-card sides and 1,416 chain-link-panel sides.
+Fence posts and every opaque architectural, machinery, vehicle, furniture,
+cover, and support face retain baked lighting. Static validation enforces the
+exact count and material allow-list. Renderer-supported constant tint keeps
+the two alpha materials deliberately dark when no lightmap is present.
 
-- Deterministic regeneration produced the exact 5,218,048-byte `.map`,
-  SHA-256
-  `9C9EAB05034C35600547F805348D0C71C1A903A5D527E3776D5AB301417838F4`.
-- Static validation resolves all 15 custom materials, balances the complete
-  710-autocombine inventory as explicitly omitted, and fails if inferred
-  autocombine fills or broad `nolightmap` sides return.
-- Q3map compiled 35,149 input faces to 32,140 output faces in 2,077 seconds
-  without missing-image, malformed-brush, or fatal warnings.
-- Fast VIS completed with 154 clusters, 283 portals, and 3,704 visibility
-  bytes.
-- Full MOHlight completed in 1,083 seconds. It reported 16 potential hash
-  mismatches and clamped entity-light lists in 28 leaves; those diagnostics
-  remain open visual-correlation debt.
-- OpenMoHAA 0.82.1 loaded the exact 19-entry PK3, generated Recast navigation
-  in 9.515 seconds, admitted eight bots, and logged 119 combat events with
-  zero runtime errors.
-- The lit BSP contains all four `func_rotatingdoor` classnames. A human client
-  still needs to verify panel alignment, activation, swing direction, and
-  clearance.
+That targeted change reduced the compiler allocation to 194 pages but did not
+clear the hard gate. Adding a shader-level `nolightmap` flag to already
+allocated glass changed neither the 194 pages nor MOHlight's result, proving
+that page ownership lives in each draw surface's allocation fields.
 
-See [`REVISION-3.md`](REVISION-3.md) for the screenshot matrix, regression
-analysis, rollback evidence, and known debt. [`REVISION-2.md`](REVISION-2.md)
-is retained as a technically successful but visually rejected experiment.
-Revision-1 evidence remains in [`REVISION-1.md`](REVISION-1.md).
+Revision 4 therefore adds a deterministic post-VIS BSP 19 atlas repacker. It
+preserves all 42,815 baked-surface rectangles and their original dimensions,
+globally skyline-packs them with a one-pixel gutter, updates each draw
+surface's page/X/Y, and translates its owned draw vertices' normalized
+lightmap UVs by the exact placement delta. It reduced 194 pages to 166 without
+removing baked lighting from opaque detail. The BSP inspector verifies both
+the allocated and written page counts before and after MOHlight.
 
-## Re-running the audit
+See [`REVISION-4.md`](REVISION-4.md) for the complete evidence and visual
+regression matrix.
+
+## Current validation
+
+- Deterministic MAP: 8,195,795 bytes; SHA-256
+  `5DB889B73F2214F3675FA73EAD8412EF8A938623203C43C76FDDF1F476868040`.
+- Static validation resolves all 22 custom materials, balances all 710
+  autocombines as omitted, requires at least 1,900 fidelity instances and
+  2,800 fidelity brushes, rejects aggregate fill, gates all four doors and the
+  complete spawn set, and verifies the exact alpha-lighting policy.
+- Canonical Q3map: 50,669 input faces, 47,591 output faces, 3,078 removed,
+  5,285 seconds, and empty stderr.
+- Fast VIS: 154 clusters, 283 portals, 3,704 visibility bytes, one second, and
+  empty stderr.
+- Alpha-only MOHlight candidate: correctly rejected at 194 allocated pages.
+- Lossless atlas repack: all 42,815 baked surfaces retained; 194 pages reduced
+  to 166 with one-pixel gutters.
+- Final MOHlight: succeeded in 1,581 seconds with empty stderr. Twenty-eight
+  entity-light leaves were clamped to the retail maximum of 60 lights; this is
+  recorded density debt, not a BSP/lightmap failure.
+- Final BSP: version 19, 47,615 draw surfaces, 166 allocated/written lightmap
+  pages, 31,236,136 bytes, and SHA-256
+  `675E457505389837F6F2BAA99B44A818701BA3BB9D9E68380E9D689556E2CA95`.
+- Exact isolated 26-entry PK3: OpenMoHAA parsed the BSP in 0.158-0.166 seconds,
+  generated Recast in 16.404-17.370 seconds across three match cycles,
+  admitted eight bots per cycle, logged 263 combat/death events, and emitted
+  zero fatal markers.
+- Fifteen fixed-camera frames were generated in the exact-package client. The
+  usable views confirm the filled Outside/yard silhouette and lower-site
+  crane/platform/equipment layer; obstructed camera placements, the
+  provisional sky, and conservative blocky substitutes remain human-review
+  debt rather than claimed pixel-perfect fidelity.
+
+Revision 3 remains a smaller safe fallback, but revision 4 is now the current
+compiled, packaged, and bot-proven candidate.
+## Rebuilding derived inputs
 
 Run from the repository root with legally obtained local CS:GO files:
 
@@ -131,20 +161,19 @@ node generated/codex_nuke/tools/audit_nuke_reference.js `
   --vpk "path\to\csgo\pak01_dir.vpk" `
   --bsp "path\to\csgo\maps\de_nuke.bsp" `
   --out generated/codex_nuke/reference-audit.json
-```
 
-The audit commits only derived facts. It never extracts or writes Valve
-assets.
+node generated/codex_nuke/tools/build_nuke_fidelity_manifest.js `
+  "path\to\de_nuke_d.vmf" `
+  generated/codex_nuke/reference-audit.json `
+  generated/codex_nuke/fidelity-manifest.json
 
-To rebuild the original TGA palette:
-
-```powershell
 python generated/codex_nuke/tools/build_original_textures.py
 ```
 
-## Regenerating
+These tools commit only derived facts and original project art. They do not
+extract Valve assets into the repository.
 
-Run from the repository root:
+## Regenerating and compiling
 
 ```powershell
 node generated/codex_nuke/tools/generate_nuke.js `
@@ -153,25 +182,32 @@ node generated/codex_nuke/tools/generate_nuke.js `
   codex_nuke
 
 node generated/codex_nuke/tools/validate_nuke_build.js
-```
 
-Compile `main/maps/dm/codex_nuke.map` against a clean retail Allied Assault
-installation in this order:
-
-```powershell
 Q3map.exe -threads 4 -gamedir "path\to\retail-stage" -moddir main `
   "path\to\retail-stage\main\maps\dm\codex_nuke.map"
 
 Q3map.exe -vis -fast -threads 4 -gamedir "path\to\retail-stage" -moddir main `
-  "path\to\retail-stage\main\maps\dm\codex_nuke.map"
+  "path\to\retail-stage\main\maps\dm\codex_nuke.bsp"
+
+Copy-Item `
+  "path\to\retail-stage\main\maps\dm\codex_nuke.bsp" `
+  "path\to\retail-stage\main\maps\dm\codex_nuke-pre-repack.bsp"
+
+node generated/codex_nuke/tools/repack_nuke_bsp_lightmaps.js `
+  "path\to\retail-stage\main\maps\dm\codex_nuke-pre-repack.bsp" `
+  "path\to\retail-stage\main\maps\dm\codex_nuke.bsp"
+
+node generated/codex_nuke/tools/inspect_nuke_bsp.js `
+  "path\to\retail-stage\main\maps\dm\codex_nuke.bsp" `
+  --require-revision-4 --allow-unlit
 
 MOHlight.exe -threads 4 -gamedir "path\to\retail-stage" -moddir main `
   "path\to\retail-stage\main\maps\dm\codex_nuke.map"
-```
 
-Then copy the lit BSP back into this tree and run:
+node generated/codex_nuke/tools/inspect_nuke_bsp.js `
+  "path\to\retail-stage\main\maps\dm\codex_nuke.bsp" `
+  --require-revision-4
 
-```powershell
 powershell -ExecutionPolicy Bypass `
   -File generated/codex_nuke/tools/package_nuke.ps1
 ```
@@ -183,15 +219,19 @@ Copy [`codex_nuke.pk3`](codex_nuke.pk3) into the game's `main` directory:
 ```text
 g_gametype 1
 sv_maxbots 8
-sv_numbots 4
+sv_numbots 8
 map dm/codex_nuke
 ```
 
 ## Artifact fingerprints
 
-- BSP: 23,494,100 bytes; SHA-256
-  `F79BF2BDA45CA188A09A2C3D63646E3BEAD8CC1D43D4975685C7E5881B51ED97`
-- PK3: 7,093,663 bytes; SHA-256
-  `4790A691A592DAA7B6D35DD5BD658E02760EB994EC691152F8601D84D7FFCF63`
-- derived reference audit: 1,899,007 bytes; SHA-256
-  `427443BC161C5F07D8E440FFA653D4CBFC1DA751BF3C4E17FDD270B12723987D`
+- MAP: 8,195,795 bytes; SHA-256
+  `5DB889B73F2214F3675FA73EAD8412EF8A938623203C43C76FDDF1F476868040`
+- derived fidelity manifest: 2,931,826 bytes; SHA-256
+  `F232A9DC88703F7A09446DAB2650FDBA51C21BF139F8C4123EF2652C323976C4`
+- texture contact sheet: 837,518 bytes; SHA-256
+  `A663EC4E7A9CDCF94C797B35075CDFB508E5543C665206B63E3D9D86A21A4C62`
+- BSP: 31,236,136 bytes; SHA-256
+  `675E457505389837F6F2BAA99B44A818701BA3BB9D9E68380E9D689556E2CA95`
+- PK3: 9,567,575 bytes; SHA-256
+  `214F0EAD023D754F5FA199A9C9F8E5A66E6C0AC9F89EF0A6DA6B53A1834E067F`

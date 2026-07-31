@@ -1,8 +1,8 @@
 # Nuke original-art provenance
 
-Status: original revision-2 assets
+Status: original revision-4 assets
 
-Date: 2026-07-26
+Date: 2026-07-30
 
 ## Policy
 
@@ -18,10 +18,10 @@ precision-pattern materials, converts everything to 512×512 TGA, creates
 controlled color variants, validates exact stored edge continuity, and emits
 `texture-contact-sheet.png`.
 
-Revision 2 retains the same six generated raster sources. It adjusts the
-deterministic glass color/alpha and adds one fully procedural
-`window_backing.tga`; no additional generated-image source and no Valve pixels
-were used.
+Revision 4 retains the same six generated raster sources. It adds five
+deterministic color grades for clean machinery, safety paint, equipment, and
+rubber/control surfaces plus one fully procedural alpha-tested foliage card.
+No additional generated-image source and no Valve pixels were used.
 
 ## Generated source prompts
 
@@ -116,6 +116,14 @@ Constraints: seamless on all four edges; original design; no large rocks, dirt p
 | `glass.tga` | Deterministic original translucent neutral blue-gray RGBA, revised to alpha 42 |
 | `chainlink.tga` | Deterministic original chain-link RGBA |
 | `window_backing.tga` | Deterministic original blue-gray vertical reflection field |
+| `clean_white_metal.tga` | Clean neutral grade of the original corrugated source |
+| `safety_yellow.tga` | Yellow safety-paint grade of the original corrugated source |
+| `safety_red.tga` | Red safety-paint grade of the original corrugated source |
+| `equipment_blue.tga` | Blue equipment grade of the original corrugated source |
+| `rubber.tga` | Near-black rubber grade of the original smooth-floor source |
+| `control_panel.tga` | Blue-gray control-surface grade of the original smooth-floor source |
+| `foliage.tga` | Deterministic original stem-and-leaf RGBA drawing, edge-matched for alpha cross-cards |
 
-These are revision-2 materials. Final acceptance requires in-engine scale,
-tiling, lightmap, alpha-shader, and long-surface repetition checks.
+These revision-4 materials passed automated exact-package scale, lightmap, and
+alpha-shader screenshot checks. The user's next screenshot pass remains the final
+gate for repetition, alignment, and artistic acceptance.

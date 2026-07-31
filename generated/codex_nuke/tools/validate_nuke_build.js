@@ -4,11 +4,13 @@ const path = require("path");
 const root = path.resolve(__dirname, "..");
 const mapPath = path.join(root, "main", "maps", "dm", "codex_nuke.map");
 const reportPath = path.join(root, "codex_nuke-conversion-report.json");
+const manifestPath = path.join(root, "fidelity-manifest.json");
 const textureRoot = path.join(root, "main", "textures");
 const shaderPath = path.join(root, "main", "scripts", "codex_nuke.shader");
 
 const map = fs.readFileSync(mapPath, "utf8");
 const report = JSON.parse(fs.readFileSync(reportPath, "utf8"));
+const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 const shader = fs.readFileSync(shaderPath, "utf8");
 const failures = [];
 
@@ -45,9 +47,30 @@ for (const shaderName of [
   "textures/codex_nuke/chainlink",
   "textures/codex_nuke/glass",
   "textures/codex_nuke/window_backing",
+  "textures/codex_nuke/foliage",
 ]) {
   expect(shader.includes(shaderName), `Missing shader definition: ${shaderName}`);
 }
+expect(
+  !/q3map_lightmapSampleSize/i.test(shader),
+  "Unsupported q3map_lightmapSampleSize directive was reintroduced"
+);
+for (const [shaderName, tint] of [
+  ["chainlink", "0.62 0.62 0.62"],
+  ["foliage", "0.68 0.68 0.68"],
+]) {
+  const pattern = new RegExp(
+    `textures/codex_nuke/${shaderName}\\s*\\{[\\s\\S]*?rgbGen\\s+const\\s+\\(\\s*${tint.replaceAll(" ", "\\s+")}\\s*\\)`
+  );
+  expect(pattern.test(shader), `Missing bounded alpha-detail tint: ${shaderName}`);
+}
+expect(
+  !/surfaceparm\s+nolightmap/i.test(
+    shader
+      .replace(/[\s\S]*?textures\/codex_nuke\/window_backing\s*\{([\s\S]*?)\n\}/, "")
+  ),
+  "Unexpected shader-level nolightmap outside the proven window backing"
+);
 
 expect(count(/"classname" "worldspawn"/g) === 1, "Expected one worldspawn");
 expect(
@@ -96,8 +119,56 @@ expect(
   "Source fixture clustering is no longer reducing overlapping lights"
 );
 expect(
-  count(/\+surfaceparm nolightmap/g) === 0,
-  "Broad nolightmap policy was re-enabled"
+  manifest.counts.instances === 4687 && manifest.counts.measuredInstances === 4687,
+  "Playable Source prop manifest changed; re-audit the Nuke fidelity layer"
+);
+expect(
+  report.stats.fidelityInstances >= 1900,
+  "Fidelity reconstruction no longer handles the expected prop inventory"
+);
+expect(
+  report.stats.fidelityBrushes >= 2800,
+  "Fidelity reconstruction brush count regressed"
+);
+expect(
+  report.stats.unsupportedPropsSkipped <= 1600,
+  "Too many understood Nuke props were dropped"
+);
+for (const [family, minimum] of Object.entries({
+  vehicle: 17,
+  truck: 6,
+  forklift: 8,
+  cargo_crane: 8,
+  chainlink: 230,
+  structural_column: 130,
+  control_room_display: 55,
+  furniture: 130,
+  a_site_silo: 1,
+  reactor_head: 1,
+  upper_crane: 1,
+  core_crane: 1,
+})) {
+  expect(
+    (report.stats.fidelityFamilies[family] || 0) >= minimum,
+    `Fidelity family ${family} fell below ${minimum}`
+  );
+}
+const noLightmapFaceLines = map
+  .split(/\r?\n/)
+  .filter((line) => line.includes("+surfaceparm nolightmap"));
+expect(
+  noLightmapFaceLines.length === 4320,
+  `Expected 4,320 targeted alpha-detail nolightmap faces, got ${noLightmapFaceLines.length}`
+);
+for (const line of noLightmapFaceLines) {
+  expect(
+    /\s(?:codex_nuke\/chainlink|codex_nuke\/foliage)\s/.test(line),
+    `Non-alpha material received nolightmap: ${line}`
+  );
+}
+expect(
+  report.stats.alphaDetailNoLightmapFaces === noLightmapFaceLines.length,
+  "Report alpha-detail lightmap count does not match the generated MAP"
 );
 
 const result = {
@@ -110,7 +181,11 @@ const result = {
   autocombineFillBrushes: report.stats.autocombineFillBrushes,
   sourceLights: report.stats.sourceLights,
   sourceLightCandidates: report.stats.sourceLightCandidates,
-  noLightmapSides: count(/\+surfaceparm nolightmap/g),
+  fidelityInstances: report.stats.fidelityInstances,
+  fidelityBrushes: report.stats.fidelityBrushes,
+  fidelityFamilies: report.stats.fidelityFamilies,
+  unsupportedPropsSkipped: report.stats.unsupportedPropsSkipped,
+  noLightmapSides: noLightmapFaceLines.length,
   rotatingDoors: report.stats.rotatingDoors,
   spawnCounts: {
     axis: 16,

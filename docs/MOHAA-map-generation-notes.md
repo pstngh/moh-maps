@@ -1596,6 +1596,94 @@ This revision is a regression-recovery build. It proves removal of the
 machine-generated regression and technical playability; the next human
 screenshot/door pass must confirm appearance and interaction.
 
+### Nuke revision 4: measured ordinary-prop fidelity without aggregate fill
+
+The user found the technically stable revision 3 recognizably Nuke but "very
+empty" and asked for the structures, machinery, furnishings, vehicles, and
+silhouette visible across the Nuke location gallery—not merely new textures.
+The cause was measurable: revision 3 omitted 3,065 ordinary prop instances in
+the playable cluster after correctly removing revision 2's unsafe aggregate
+fills.
+
+Revision 4 creates `fidelity-manifest.json`, a derived-fact inventory of all
+4,687 model entities inside the playable envelope. Each record preserves the
+entity class, model-family name, origin, angles, scale, Source `solid` setting,
+and parsed studio-header envelope without copying any Source mesh or texture.
+
+The new family-specific layer restores 1,932 ordinary instances with 2,855
+original brushes. High-impact groups include 242 foliage placements, 236
+chain-link components, 216 ventilation pieces, 178 cover pieces, 137
+structural supports, 137 furniture pieces, 83 electrical assemblies, 76
+windows, 59 control-room displays, 44 static doors, 35 chairs, 24 industrial
+rails, 22 transformers, 17 cars, 8 forklifts, and the defining A/B-site
+vessels, cranes, platforms, consoles, and reactor machinery.
+
+**OBSERVED family-template rule:** ordinary model identity plus measured
+transform/bounds can justify a conservative family silhouette, but not an
+arbitrary filled hull. Use sparse beams for frame-like cranes, cylinders or
+frustums for vessels, multi-box silhouettes for vehicles, and non-solid alpha
+cross-cards for foliage. Collision comes only from the Source entity `solid`
+flag or existing measured clips. All 710 BSP-only autocombines remain omitted
+with zero inferred fill brushes.
+
+Seven additional deterministic original materials bring the palette to 22:
+clean white machinery metal, yellow/red safety paint, blue equipment, rubber,
+control-panel material, and alpha-tested foliage. No Valve pixels or model
+payload enter the repository or PK3.
+
+The corrected deterministic revision-4 source contains 9,448 brushes and is
+8,195,795 bytes with SHA-256
+`5DB889B73F2214F3675FA73EAD8412EF8A938623203C43C76FDDF1F476868040`.
+Static validation reports 1,546 still-unsupported ordinary props, zero invalid
+converted brushes, four rotating doors, and the full 16 Axis / 16 Allied / 32
+neutral spawn set.
+
+The added density made MOHlight request 210 lightmap pages against AA's hard
+180-page limit. The bundled MOHTools 1.48 executables do not implement the
+newer `q3map_lightmapSampleSize` shader directive, and a `-samplesize` light
+probe waits at zero CPU instead of changing the atlas. The corrected source
+applies `+surfaceparm nolightmap` only to 4,320 sides belonging to large
+foliage cards and chain-link mesh panels; posts and every opaque architecture
+or dressing family remain baked. That narrow change reduced the allocation to
+194 pages but still failed the hard gate. A controlled shader-level glass flag
+also left 194 pages, proving that the budget is controlled by per-surface
+allocation fields rather than shader records alone.
+
+Revision 4 therefore adds a deterministic post-VIS BSP 19 lightmap repacker
+based on the actual MOHAA Q3map allocator semantics. It preserves all 42,815
+baked rectangles and their dimensions, globally skyline-packs them with
+one-pixel gutters, updates draw-surface page/X/Y fields, and translates owned
+draw-vertex normalized lightmap UVs by the exact atlas delta. The result is 166
+pages instead of 194, with 53.98% exact texel utilization and 96.12% reserved
+rectangle-plus-gutter utilization. The final inspector reports 166 allocated
+and 166 written pages; full MOHlight completed in 1,581 seconds with empty
+stderr. Twenty-eight entity-light leaves were clamped to the retail 60-light
+limit and remain documented density debt.
+
+The canonical ordinary Q3map pass completed in 5,285 seconds with 47,591 faces
+from 50,669 inputs and zero stderr errors. Fast VIS retained 154 clusters and
+3,704 visibility bytes. The final BSP is 31,236,136 bytes. Its exact 26-entry,
+9,567,575-byte PK3 loaded in isolated OpenMoHAA, parsed the BSP in
+0.158-0.166 seconds, generated Recast in 16.404-17.370 seconds over three match
+cycles, admitted eight bots each cycle, and logged 263 combat/death events with
+zero fatal markers.
+
+Two scripted client sweeps generated fifteen fixed-camera frames. Usable views
+confirm that Outside is no longer the empty revision-3 shell and that lower
+industrial spaces contain the intended yellow crane beams, platforms, stairs,
+equipment masses, ceiling modules, and clean institutional palette. Several
+measured-camera offsets landed against walls, ceilings, or black
+window-backing volumes and cannot support room-level acceptance. The
+provisional sky, conservative blocky substitutes, remaining autocombines, and
+any alignment defects found by the user's next screenshot pass remain explicit
+debt.
+
+**PROVEN lightmap-atlas rule:** when a valid BSP exceeds AA's page ceiling due
+to shader-group skyline fragmentation, do not broadly discard baked lighting
+or accepted geometry. A deterministic global rectangle repack may preserve
+surface dimensions and lightmap content if it validates ownership, UV bounds,
+gutters, page fields, written pages, and exact output invariants before and
+after MOHlight.
 ## Cache revision 1: three-axis filtering and omission-first conversion
 
 Cache is substantially denser than Cobblestone: the 45,755,859-byte decompile
@@ -1897,6 +1985,14 @@ proven by the target AA toolchain.
   `-notjunc` BSP, VIS, and full-light build; and validated the exact PK3 with
   Recast plus eight fighting bots while preserving human recognition and
   nominal BSP-budget debt.
+- 2026-07-30, Nuke revision 4: recorded the user's "very empty" verdict;
+  inventoried 4,687 playable model placements; restored 1,932 ordinary
+  instances with 2,855 family-specific brushes and seven new original
+  materials; retained all 710 autocombines as omissions; compiled 47,591
+  faces; proved a deterministic 194-to-166-page lossless lightmap repack while
+  preserving 42,815 baked surfaces; completed full lighting; generated fifteen
+  renderer screenshots; and validated the exact 26-entry PK3 through three
+  Recast/eight-bot match cycles and 263 combat events.
 
 ## Inferno revision 2: measured clone after a rejected invented layout
 

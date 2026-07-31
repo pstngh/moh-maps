@@ -3,7 +3,13 @@
 Date: 2026-07-27
 
 Status: compiled, full-lit, packaged, and exact-PK3 eight-bot tested; human
-visual confirmation pending
+visual confirmation received on 2026-07-30
+
+Post-revision verdict: the user found the regression cleanup stable enough to
+continue from, but judged the map **very empty** compared with original Nuke.
+Revision 3 therefore remains the safe geometry baseline, not an acceptable
+visual-fidelity release. Revision 4 addresses the omitted ordinary-prop class
+without restoring the rejected aggregate-autocombine fills.
 
 Revision 3 responds to the user's 13-image review of revision 2
 (`shot0000.tga` through `shot0012.tga`). The review showed that a technically

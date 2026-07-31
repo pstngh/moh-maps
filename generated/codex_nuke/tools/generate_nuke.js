@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { createNukeFidelityBuilder } = require("./nuke_fidelity");
 
 const referencePath = path.resolve(
   process.argv[2] || path.join("work", "references", "de_nuke_reference.vmf")
@@ -171,6 +172,41 @@ const targetMaterials = {
     texture: "codex_nuke/corrugated_gray",
     contentFlags: 0,
     surfaceFlags: 32768,
+  },
+  cleanWhiteMetal: {
+    texture: "codex_nuke/clean_white_metal",
+    contentFlags: 0,
+    surfaceFlags: 32768,
+  },
+  safetyYellow: {
+    texture: "codex_nuke/safety_yellow",
+    contentFlags: 0,
+    surfaceFlags: 32768,
+  },
+  safetyRed: {
+    texture: "codex_nuke/safety_red",
+    contentFlags: 0,
+    surfaceFlags: 32768,
+  },
+  equipmentBlue: {
+    texture: "codex_nuke/equipment_blue",
+    contentFlags: 0,
+    surfaceFlags: 32768,
+  },
+  rubber: {
+    texture: "codex_nuke/rubber",
+    contentFlags: 0,
+    surfaceFlags: 32768,
+  },
+  controlPanel: {
+    texture: "codex_nuke/control_panel",
+    contentFlags: 0,
+    surfaceFlags: 32768,
+  },
+  foliage: {
+    texture: "codex_nuke/foliage",
+    contentFlags: 0,
+    surfaceFlags: 262176,
   },
   metalTrim: {
     texture: "codex_nuke/metal_trim",
@@ -1687,6 +1723,11 @@ const stats = {
   maximumPropGroundAdjustment: 0,
   measuredPropBrushes: 0,
   measuredPropFamilies: {},
+  fidelityInstances: 0,
+  fidelityBrushes: 0,
+  fidelityFamilies: {},
+  fidelityHandledComponents: 0,
+  fidelityGroundCandidates: 0,
   nonOrthogonalPropsSkipped: 0,
   tiltedPropsSkipped: 0,
   embeddedAutocombinesOmitted: 0,
@@ -1886,8 +1927,16 @@ for (const entity of sourceEntities) {
 }
 
 // Rebuild only model families whose studio-header bounds and architectural
-// role are understood. Decorative cables, signs, outlets, foliage, and all
+// role are understood. Decorative cables, signs, outlets, and all
 // autocombines remain omitted until a family-specific reconstruction exists.
+const fidelityBuilder = createNukeFidelityBuilder({
+  face,
+  cylinderBrush,
+  frustumBrush,
+  materials: targetMaterials,
+  nonBlockingDetail,
+});
+
 const measuredPropRules = [
   {
     family: "railing",
@@ -1966,6 +2015,48 @@ for (const entity of sourceEntities) {
   const pitch = Number.isFinite(angles[0]) ? angles[0] : 0;
   const yaw = Number.isFinite(angles[1]) ? angles[1] : 0;
   const roll = Number.isFinite(angles[2]) ? angles[2] : 0;
+  const fidelityHeader = modelHeaderByPath.get(model);
+  let fidelityOrigin = origin;
+  if (
+    fidelityHeader &&
+    /\/(?:nuke_cars|nuke_forklift|nuke_cargo_crane|metal_crate_001|nuke_recycling_bins|nuke_office_chair|nuke_chair|nuke_locker|nuke_locker_bench|nuke_vending_machine|current_transformer|substation_transformer|transformer_add_01)\//.test(model)
+  ) {
+    const baseProbe = [
+      origin[0],
+      origin[1],
+      origin[2] + fidelityHeader.hullMin[2],
+    ];
+    const snapped = snapOriginToPlanarSupport(
+      baseProbe,
+      planarDisplacementSupports,
+      stats
+    );
+    if (!snapped.excessiveCorrection) {
+      fidelityOrigin = [
+        origin[0],
+        origin[1],
+        snapped.origin[2] - fidelityHeader.hullMin[2],
+      ];
+      stats.fidelityGroundCandidates++;
+    }
+  }
+  const fidelityResult = fidelityBuilder.build({
+    model,
+    origin: fidelityOrigin,
+    angles,
+    header: fidelityHeader,
+    sourceSolid: value(entity.children, "solid", ""),
+    skin: value(entity.children, "skin", ""),
+  });
+  if (fidelityResult) {
+    worldBrushes.push(...fidelityResult.brushes);
+    stats.fidelityInstances++;
+    stats.fidelityBrushes += fidelityResult.brushes.length;
+    stats.fidelityFamilies[fidelityResult.family] =
+      (stats.fidelityFamilies[fidelityResult.family] || 0) + 1;
+    if (!fidelityResult.brushes.length) stats.fidelityHandledComponents++;
+    continue;
+  }
 
   let heroBrushes = null;
   let heroFamily = null;
@@ -2328,6 +2419,9 @@ for (const candidate of sourceLightCells.values()) {
 const mapText = `${entities
   .map((entity, index) => `// entity ${index}\n${entity}`)
   .join("\n")}\n`;
+stats.alphaDetailNoLightmapFaces = [
+  ...mapText.matchAll(/\+surfaceparm nolightmap/g),
+].length;
 fs.writeFileSync(path.join(mapDir, `${mapName}.map`), mapText);
 
 const scriptText = `main:

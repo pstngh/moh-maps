@@ -86,6 +86,13 @@ Revision 3 therefore omits all 710 autocombine placements. A family becomes
 eligible only when actual mesh topology, verified per-instance endpoints, or a
 manually authored reference reconstruction proves its internal arrangement.
 
+Revision 4 separately inventories 4,687 model entities inside the playable
+envelope in `fidelity-manifest.json`. It restores 1,932 ordinary instances
+using family-specific original brush templates at measured transforms while
+leaving all 710 autocombines untouched. Ordinary model identity plus measured
+bounds can establish conservative family silhouettes; it still cannot prove
+the topology of a combined model.
+
 This establishes the conversion policy:
 
 - never infer a principal axis or internal run from an aggregate hull;
@@ -147,9 +154,10 @@ First-playable priority is:
    major exterior equipment.
 3. **Lighting cues:** fluorescent/recessed/bell fixtures paired with real AA
    lights.
-4. **Cosmetic omission:** outlets, wires, extinguisher details, chairs,
-   rubbish, foliage cards, signs, decals, and small clutter until release gates
-   are otherwise satisfied.
+4. **Cosmetic omission:** outlets, wires, extinguisher details, rubbish,
+   signs, decals, and small clutter until release gates are otherwise satisfied.
+   Measured furniture and original non-solid foliage cards are eligible when
+   their target-engine representation is conservative and auditable.
 
 The user also permits filling visually missing areas with original geometry.
 That permission does not authorize arbitrary route changes: additions should
