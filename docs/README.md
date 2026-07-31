@@ -6,7 +6,7 @@ without losing the experiments that established it.
 | Document | Role | Read when |
 | --- | --- | --- |
 | [`MAP-GENERATION-PLAYBOOK.md`](MAP-GENERATION-PLAYBOOK.md) | Normative production workflow and release gates | Before every map task |
-| [`MAP-SOURCE-FORMAT.md`](MAP-SOURCE-FORMAT.md) | Measured `.map` format reference: grammar, flag decodes, entity vocabulary, retail-corpus inventory, and generator emission conventions | When reading retail sources, writing or changing a generator, or debugging compile rejections |
+| [`MAP-SOURCE-FORMAT.md`](MAP-SOURCE-FORMAT.md) | Measured `.map` format reference for the retail AA/SH/BT sources: grammar, flag decodes, entity vocabulary, and corpus inventory | When reading the retail sources or debugging how a format construct behaves |
 | [`STOCK-AA-ASSET-CATALOG.md`](STOCK-AA-ASSET-CATALOG.md) | Verified stock texture/model names and selection policy | Before material or prop work |
 | [`templates/MAP-REVISION-REPORT.md`](templates/MAP-REVISION-REPORT.md) | Repeatable record for a map revision | During every material iteration |
 | [`MOHAA-map-generation-notes.md`](MOHAA-map-generation-notes.md) | Chronological evidence, measurements, experiments, and case studies | When diagnosing or extending a rule |
