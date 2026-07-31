@@ -34,7 +34,7 @@ here.
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | `aa/` MP (`mohdm*`, `obj_team*`) | 10 | 6,574 | 34,120 | 1,946 | 35 | Real numeric values |
 | `aa/` SP campaign (`m1l1`-`m6l3e`, `training`) | 35 | 64,205 | 161,390 | 15,599 | 5,972 | All zero |
-| `aa_custom/` (community maps) | 23 | 23,243 | 130,798 | 11,177 | 49 | Real numeric values |
+| `aa_custom/` (community maps) | 28 | 27,554 | 159,366 | 12,929 | 54 | Real numeric values |
 | `bt/` MP | 24 | 21,477 | 129,805 | 11,312 | 1,657 | All zero |
 | `bt/` SP campaign (`e1l1`-`e3l4`) | 11 | 34,932 | 82,005 | 6,840 | 4,522 | All zero |
 | `sh/` MP | 13 | 11,217 | 70,158 | 5,410 | 1,047 | All zero |
@@ -580,3 +580,8 @@ spawners, not MP spawn classes).
 | `aa_custom/mohdm76.map` | 1,644 | 7,881 | 602 | 3 | 43/43/43 | |
 | `aa_custom/leuna.map` | 793 | 5,730 | 1,316 | 0 | 18/8/8 | The truck is on it |
 | `aa_custom/uks_remagen.map` | 1,279 | 6,664 | 300 | 8 | 12/13/13 | poke it with a stick |
+| `aa_custom/thetoyroom_AA.map` | 226 | 5,029 | 30 | 0 | 25/18/18 | |
+| `aa_custom/containerz.map` | 1,002 | 4,975 | 555 | 0 | 45/8/7 (AI layer present, ignored) | |
+| `aa_custom/Tobruk_bdbcorrect.map` | 1,008 | 6,024 | 326 | 2 | 33/26/26 (revision pair with below) | |
+| `aa_custom/Tobrukcorrect.map` | 960 | 6,006 | 326 | 2 | 33/20/20 (revision pair with above) | |
+| `aa_custom/algiers_again.map` | 1,115 | 6,534 | 515 | 1 | 18/18/18 | |
