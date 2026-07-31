@@ -12,6 +12,9 @@ Future map work must improve the system as well as the individual map.
    [`docs/MOHAA-map-generation-notes.md`](docs/MOHAA-map-generation-notes.md).
 5. Consult [`docs/STOCK-AA-ASSET-CATALOG.md`](docs/STOCK-AA-ASSET-CATALOG.md)
    before choosing textures or stock models.
+6. Consult [`docs/MAP-SOURCE-FORMAT.md`](docs/MAP-SOURCE-FORMAT.md) for the
+   measured `.map` grammar, flag decodes, and emission conventions before
+   reading retail sources or changing a generator.
 
 Do not begin by copying the most recent generator blindly. Identify which
 rules are general, which are map-specific, and which remain experiments.

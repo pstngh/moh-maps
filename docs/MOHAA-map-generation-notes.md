@@ -2042,6 +2042,18 @@ proven by the target AA toolchain.
   non-sky face onto it; proved a byte-precise diff, zero unlit non-sky faces
   under the new inspector gate, and an unchanged shader/tint result; retracted
   the constant-tint-makes-nolightmap-safe assumption; repackaged the PK3.
+- 2026-07-31, `.map` corpus analysis: programmatically parsed all 54 map
+  sources (10 retail AA, 1 community, 24 Breakthrough, 13 Spearhead — the
+  13 SH files are byte-identical to their BT counterparts — and 6
+  generated); proved that SH/BT sources zero every per-side contents/flag
+  integer while retail AA keeps compiled values, confirming the columns are
+  editor cache re-derived from shaders at compile time; decoded every
+  observed contents/surfaceFlags value against the MOHAA SDK bit tables;
+  documented `patchDef2`'s real-flag header (including the negative
+  `SURF_PATCH` sign) and the retail-only `terrainDef` grammar; inventoried
+  the worldspawn-key, entity, and `common/*` utility-material vocabulary per
+  corpus; and published the complete reference as
+  `docs/MAP-SOURCE-FORMAT.md`.
 
 ## Inferno revision 2: measured clone after a rejected invented layout
 
