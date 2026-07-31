@@ -34,7 +34,7 @@ here.
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | `aa/` MP (`mohdm*`, `obj_team*`) | 10 | 6,574 | 34,120 | 1,946 | 35 | Real numeric values |
 | `aa/` SP campaign (`m1l1`-`m6l3e`, `training`) | 35 | 64,205 | 161,390 | 15,599 | 5,972 | All zero |
-| `aa_custom/` (community objective maps) | 13 | 13,491 | 45,489 | 4,272 | 32 | Real numeric values |
+| `aa_custom/` (community maps) | 18 | 17,676 | 94,843 | 8,315 | 38 | Real numeric values |
 | `bt/` MP | 24 | 21,477 | 129,805 | 11,312 | 1,657 | All zero |
 | `bt/` SP campaign (`e1l1`-`e3l4`) | 11 | 34,932 | 82,005 | 6,840 | 4,522 | All zero |
 | `sh/` MP | 13 | 11,217 | 70,158 | 5,410 | 1,047 | All zero |
@@ -570,3 +570,8 @@ spawners, not MP spawn classes).
 | `aa_custom/obj_mandrilux.map` | 803 | 3,780 | 182 | 0 | 0/20/21 | Mandrilux |
 | `aa_custom/obj_st_floretes_3.map` | 449 | 2,488 | 41 | 4 | 0/36/36 | mew map |
 | `aa_custom/obj_straphael.map` | 1,123 | 6,378 | 93 | 0 | 0/24/22 | |
+| `aa_custom/snowhill.map` | 1,115 | 8,523 | 421 | 1 | 9/0/0 | |
+| `aa_custom/sieger.map` | 794 | 14,127 | 664 | 5 | 20/8/9 | Weeeeeeeeeeeeeeeeeeeeee! |
+| `aa_custom/fox.map` | 80 | 11,148 | 115 | 0 | 0/0/0 (no MP spawn classes) | |
+| `aa_custom/dm_BaseUBoat_2.map` | 1,329 | 6,456 | 2,717 | 0 | 103/103/103 | |
+| `aa_custom/dogscastleTDM.map` | 867 | 9,100 | 126 | 0 | 0/26/22 | |
