@@ -224,14 +224,18 @@ but they lack the compiled-artifact data (lightmap pages, VIS, draw
 surfaces) their parent BSP has — so the parent pk3/BSP is strictly more
 useful and the decompile adds nothing beyond it.
 
-Caveat on the single-player corpora: the AA/SH/BT campaign files sit
-between the two profiles (m1l1: 8.3% nonzero shifts but 818 distinct
-scales and 32 `vis_leafgroup` entities; t1l1: 0.2% shifts, 52 scales).
-They contain editor-only constructs, so they are not simple decompiles,
-but their alignment statistics differ sharply from the MP mapsource drops
-and their exact provenance is unverified. Treat their brush/texturing
-style as a weaker idiom reference than the MP sources until provenance is
-confirmed.
+Caveat on export lineages: only the AA MP sources and the community maps
+show the full authored profile (66-77% nonzero shifts, hand flag values,
+hints/groups/vis present). The SH/BT MP sources and all SP campaign
+corpora measure much lower alignment (SH/BT MP: 1.9-8.2% shifts but
+311-519 distinct scales, hint brushes in several maps, terrainDef
+throughout; SP: 0.2-8.3% shifts but up to 818 scales, `vis_leafgroup`
+entities present). Editor-only constructs prove these are authored
+lineage, not decompiles — they would reopen and recompile — but they
+passed through an export that zeroed the cached flag columns and lost or
+canonicalized most shift alignment. Consequence: entity, brush, hint, and
+terrain structure is trustworthy across the whole corpus; texture-
+alignment idiom is trustworthy only in the AA MP and community sources.
 
 ### 4.5 Inline per-side tokens
 
