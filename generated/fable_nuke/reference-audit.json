@@ -1,0 +1,81 @@
+{
+  "reference": "8b5307bf-de_nuke_d.vmf",
+  "worldSolids": 5282,
+  "sides": 48098,
+  "displacementSides": 761,
+  "funcDetailSolids": 2567,
+  "entities": 10488,
+  "classnames": {
+    "prop_static": 6891,
+    "func_detail": 2567,
+    "light": 249,
+    "light_spot": 222,
+    "keyframe_rope": 144,
+    "func_brush": 94,
+    "env_sprite": 79,
+    "env_soundscape": 67,
+    "move_rope": 40,
+    "info_player_counterterrorist": 16,
+    "info_player_terrorist": 16,
+    "func_breakable": 14,
+    "info_target": 14,
+    "point_devshot_camera": 12,
+    "trigger_multiple": 12,
+    "logic_script": 6,
+    "skybox_swapper": 5,
+    "prop_door_rotating": 4,
+    "info_particle_system": 3,
+    "prop_dynamic": 3,
+    "point_viewcontrol": 3,
+    "func_clip_vphysics": 2,
+    "func_bomb_target": 2,
+    "logic_auto": 2,
+    "func_buyzone": 2
+  },
+  "materials": {
+    "tools/toolsnodraw": 20662,
+    "tools/toolsclip": 4627,
+    "concrete/hr_c/hr_concrete_wall_001": 2596,
+    "metal/hr_metal/hr_metal_corrugated_001": 1444,
+    "tools/toolsskip": 1358,
+    "tools/toolsclip_metal": 1205,
+    "metal/hr_metal/hr_metal_trim_002": 1095,
+    "concrete/hr_c/hr_concrete_wall_006": 914,
+    "tools/toolsgrenadeclip": 857,
+    "asphalt/hr_c/hr_asphalt_001": 855,
+    "concrete/hr_c/hr_concrete_floor_05_blend": 846,
+    "concrete/hr_c/hr_concrete_stair_001": 782,
+    "concrete/hr_c/hr_concrete_trim_001": 708,
+    "metal/hr_metal/hr_metal_trim_003": 541,
+    "metal/hr_metal/hr_metal_corrugated_001b": 425,
+    "ground/hr_g/hr_gravel_grass_001_blend": 384,
+    "concrete/hr_c/hr_concrete_floor_001": 349,
+    "asphalt/hr_c/hr_asphalt_gravel_blend_001": 336,
+    "concrete/hr_c/hr_concrete_wall_005": 326,
+    "tools/toolsskybox": 316,
+    "concrete/hr_c/hr_concrete_wall_painted_001": 314,
+    "tools/toolshint": 292,
+    "de_nuke/hr_nuke/chainlink_fence_001_card": 277,
+    "tools/toolsareaportal": 276,
+    "glass/hr_g/hr_glass_window_frame_001": 260
+  },
+  "models": 1407,
+  "spawns": {
+    "terrorist": 16,
+    "counter": 16
+  },
+  "lights": 472,
+  "bounds": [
+    [
+      -6240,
+      -5408,
+      -6400
+    ],
+    [
+      6560,
+      12360,
+      3456
+    ]
+  ],
+  "materialCount": 142
+}
