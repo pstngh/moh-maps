@@ -224,12 +224,19 @@ not human acceptance.
   offices, roofline, fences, and repeated facility modules.
 - Unchanged: Source displacement curvature, distant 3D skybox, and provisional
   stock sky.
-- Regressed: none found by compile, runtime, or the usable automated frames; the
-  user screenshot verdict is still pending.
+- Human playtest verdict on 2026-07-31: failed visual acceptance. Eighteen
+  screenshots show that the family-hull layer remains conspicuously blocky and
+  incomplete, especially in exterior facades, roof plant, yard machinery, and
+  model-heavy interiors.
+- Runtime-material regressions exposed by the human test: unrelated
+  photographic/font-atlas imagery appears on some display surfaces, and lower
+  industrial floors show large mismatched panels. These are tracked separately
+  from the missing-geometry class in `REVISION-4-PLAYTEST.md`.
 - Newly exposed: the remaining 710 autocombines are now a more isolated detail
   debt rather than the majority of visible scene content.
-- Remaining known debt: user screenshot review, any family-specific alignment
-  fixes, and topology-backed reconstruction of selected autocombines only.
+- Remaining known debt: clean-client material diagnosis, family-specific
+  alignment fixes, and topology-backed reconstruction of selected ordinary
+  models and autocombines.
   The 1,546 omitted ordinary instances are now concentrated in low-priority
   signage, light cables/attachments, switches, outlets, alarms, sprinklers,
   binders, helmets, and similar small clutter; promote any of them only when a
