@@ -714,6 +714,23 @@ omitted because their aggregate hulls do not establish internal topology.
 Compile and bot success prove technical viability, not visual acceptance; the
 human screenshot gate remains mandatory.
 
+**PROVEN Nuke hull-proxy limit:** family-specific boxes, prisms, and cylinders
+can restore occupancy and rough scale, but they cannot carry a model-dominant
+map's architecture. Revision 4 remained recognizably incomplete because Source
+models define major exterior facades, roof plant, catwalks, pipes, window
+assemblies, yard machinery, and landmark silhouettes. Once these omissions are
+visible at callout scale, stop adding more hull proxies. Reconstruct selected
+source-model topology or author topology-backed replacements, retaining the
+measured transforms and collision policy as validators.
+
+**OBSERVED unrelated-image rule:** a surface displaying recognizable unrelated
+photography, a font atlas, or other package imagery is not an ordinary lighting
+or palette defect. Check the exact runtime package, image/shader resolution,
+fallback behavior, and package load order before changing geometry or
+lightmaps. A correct generated source image does not prove that the renderer
+resolved that image in the user's session. Require the client log from the
+matching run and a clean single-package test.
+
 ### Lossless BSP lightmap-atlas repacking
 
 A dense but otherwise valid BSP can exceed Allied Assault's 180-page lightmap
