@@ -407,10 +407,20 @@ retail AA toolchain without proving that the actual executable accepts them.
 A narrow non-lightmapped exception can be tested for large alpha-cutout detail
 whose shading does not define the room: foliage cross-cards or the mesh panel
 inside a fence whose posts remain baked. Gate this by exact face count and an
-allow-list of alpha materials, retain normal baked lighting on architecture,
-machinery, vehicles, furniture, cover, and support posts, and use an explicit
-dark shader tint so a missing lightmap cannot turn the card white. The policy
-is not accepted until full MOHlight and bright/shadowed screenshot checks pass.
+allow-list of alpha materials, and retain normal baked lighting on
+architecture, machinery, vehicles, furniture, cover, and support posts.
+
+**PROVEN unlit-world-face rule (Nuke revision 5):** a shader-level constant
+tint does not make an unlit world face shippable. The target renderer binds
+undefined texture state for world draw surfaces whose `lightmapNum` is `-1`
+— user screenshots show stale lightmap pages on fence panels, the console
+character set on window backings, and model skins on foliage cards, while
+identically-shadered lit faces render correctly. Only sky legitimately ships
+unlit. Every other face excluded from MOHlight sampling must still receive a
+valid lightmap reference before packaging, e.g. a shared constant-white
+appended page (see the relight step below). The policy is not accepted until
+full MOHlight, the unlit-surface inspector gate, and bright/shadowed
+screenshot checks pass.
 
 Lighting QA must cover:
 
@@ -442,7 +452,7 @@ Interpret failures by stage:
 | BSP compile stalls | Excessive structural brushes or patches | Measure cost by class; simplify selectively |
 | Long brush processing without an error | Large faithful brush set or expensive T-junction work | Record CPU time and progress; do not call duration alone a map failure or delete architecture blindly |
 | `MAX_MAP_DRAWINDEXES` | Too many merged polygon indexes, often amplified by T-junction insertion | Measure faces/inserted vertices; reduce evidenced detail first; use `-notjunc` only as a documented visual-debt fallback |
-| `MAX_MAP_LIGHTING` | Too many baked-lightmap surfaces | Vertex-light narrow cosmetic detail; preserve lightmaps for primary architecture |
+| `MAX_MAP_LIGHTING` | Too many baked-lightmap surfaces | Vertex-light narrow cosmetic detail; preserve lightmaps for primary architecture; relight any shipped unlit face onto a constant page before packaging |
 | Patch hash warnings with correct render | Legacy tool limitation | Record and verify visually; do not assume fatal |
 
 `-notjunc` can avoid a fixed draw-index overflow without deleting measured
@@ -745,6 +755,26 @@ or lightmaps and it does not convert opaque surfaces to fullbright/vertex-lit
 ones. A shader-level `nolightmap` flag by itself does not remove a surface's
 already allocated rectangle, so inspect draw-surface allocation fields rather
 than inferring the budget from shader records.
+
+### Constant-page relight for unlit alpha detail
+
+When faces were excluded from the atlas with `+surfaceparm nolightmap`, the
+final lit BSP still contains world draw surfaces with `lightmapNum = -1`, and
+the renderer binds undefined texture state for them (Nuke revision 5). After
+the final MOHlight pass, a deterministic BSP edit must:
+
+1. append one constant-white 128x128 page to the lightmap lump, keeping the
+   total at or below 180 pages;
+2. point every unlit non-sky draw surface at a shared rectangle on that page
+   and set each owned draw vertex's lightmap UV to the rectangle center;
+3. refuse unlit surfaces that share draw vertices with lit surfaces or are
+   not planar faces, and leave sky surfaces untouched; and
+4. re-inspect the output for zero unlit non-sky surfaces and unchanged bytes
+   everywhere except the intended records.
+
+Sampling constant white through an existing `$lightmap` multiply stage
+reproduces a shader's constant tint exactly, so shaders and lit surfaces need
+no change. The appended page costs 48 KiB and one atlas slot.
 
 Generated MAP preflight must also reject literal escaped newline sequences in
 brush blocks. A JavaScript `join("\\n")` emits two characters, not a line

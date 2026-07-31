@@ -11,6 +11,12 @@ site vessels, supports, ventilation, fencing, vehicles, furniture, control
 rooms, and exterior dressing that make Nuke recognizable. It does not package
 Valve textures, meshes, models, or other Source assets.
 
+Revision 5 repairs the revision-4 regression exposed by the user's in-game
+screenshots: the 4,747 world faces shipped without a lightmap (chain-link
+panels, foliage cards, window backings) rendered arbitrary wrong textures in
+the target renderer. Every non-sky world face now carries a valid constant
+lightmap sample; see [`REVISION-5.md`](REVISION-5.md).
+
 ## Design brief
 
 | Decision | Current answer |
@@ -115,8 +121,19 @@ lightmap UVs by the exact placement delta. It reduced 194 pages to 166 without
 removing baked lighting from opaque detail. The BSP inspector verifies both
 the allocated and written page counts before and after MOHlight.
 
-See [`REVISION-4.md`](REVISION-4.md) for the complete evidence and visual
-regression matrix.
+Revision 5 proves the missing final step: the renderer does not reliably
+support world faces with no lightmap at all — the user's screenshots show
+those faces binding stale texture state (lightmap smears on fences, the
+console character set on windows, model skins on foliage cards) while
+identically-shadered lit fence posts render correctly. After the final
+MOHlight pass, `relight_nuke_unlit_surfaces.js` appends one constant-white
+lightmap page (167 total, below the 180 limit) and points every unlit
+non-sky face at it. Sampling constant white through the existing `$lightmap`
+stage reproduces the intended `0.62`/`0.68` constant tints exactly, so the
+shader file is unchanged and lit surfaces keep their baked shading.
+
+See [`REVISION-4.md`](REVISION-4.md) and [`REVISION-5.md`](REVISION-5.md) for
+the complete evidence and visual regression matrices.
 
 ## Current validation
 
@@ -136,21 +153,30 @@ regression matrix.
 - Final MOHlight: succeeded in 1,581 seconds with empty stderr. Twenty-eight
   entity-light leaves were clamped to the retail maximum of 60 lights; this is
   recorded density debt, not a BSP/lightmap failure.
-- Final BSP: version 19, 47,615 draw surfaces, 166 allocated/written lightmap
-  pages, 31,236,136 bytes, and SHA-256
+- Revision-4 BSP: version 19, 47,615 draw surfaces, 166 allocated/written
+  lightmap pages, 31,236,136 bytes, and SHA-256
   `675E457505389837F6F2BAA99B44A818701BA3BB9D9E68380E9D689556E2CA95`.
-- Exact isolated 26-entry PK3: OpenMoHAA parsed the BSP in 0.158-0.166 seconds,
-  generated Recast in 16.404-17.370 seconds across three match cycles,
-  admitted eight bots per cycle, logged 263 combat/death events, and emitted
-  zero fatal markers.
-- Fifteen fixed-camera frames were generated in the exact-package client. The
-  usable views confirm the filled Outside/yard silhouette and lower-site
-  crane/platform/equipment layer; obstructed camera placements, the
-  provisional sky, and conservative blocky substitutes remain human-review
-  debt rather than claimed pixel-perfect fidelity.
+- Revision-4 exact isolated 26-entry PK3: OpenMoHAA parsed the BSP in
+  0.158-0.166 seconds, generated Recast in 16.404-17.370 seconds across three
+  match cycles, admitted eight bots per cycle, logged 263 combat/death events,
+  and emitted zero fatal markers. Revision 5 changes no geometry, collision,
+  entity, or navigation input, so this runtime evidence carries over; the
+  revision-5 package itself has not been runtime-tested yet.
+- Revision-5 relight: 4,747 unlit non-sky faces (1,408 chain-link panels,
+  2,904 foliage cards, 435 window backings) now reference an appended
+  constant-white page; 167 allocated/written pages; byte-precise diff proves
+  every other lump and all lit surfaces are unchanged; sky faces stay on the
+  dedicated sky path.
+- Revision-5 inspector gate (`--require-revision-5`): zero unlit non-sky draw
+  surfaces in the shipped BSP; the gate fails the revision-4 BSP with count
+  4,747.
+- The revision-4 fifteen-frame automated sweep predates the repair. The
+  user's next in-game screenshot pass is the acceptance gate for the repaired
+  fence, foliage, and window rendering.
 
-Revision 3 remains a smaller safe fallback, but revision 4 is now the current
-compiled, packaged, and bot-proven candidate.
+Revision 3 remains a smaller safe fallback, but revision 5 is now the current
+packaged candidate: revision 4's compiled and bot-proven artifact plus the
+deterministic unlit-surface repair.
 ## Rebuilding derived inputs
 
 Run from the repository root with legally obtained local CS:GO files:
@@ -208,6 +234,18 @@ node generated/codex_nuke/tools/inspect_nuke_bsp.js `
   "path\to\retail-stage\main\maps\dm\codex_nuke.bsp" `
   --require-revision-4
 
+Copy-Item `
+  "path\to\retail-stage\main\maps\dm\codex_nuke.bsp" `
+  "path\to\retail-stage\main\maps\dm\codex_nuke-pre-relight.bsp"
+
+node generated/codex_nuke/tools/relight_nuke_unlit_surfaces.js `
+  "path\to\retail-stage\main\maps\dm\codex_nuke-pre-relight.bsp" `
+  "path\to\retail-stage\main\maps\dm\codex_nuke.bsp"
+
+node generated/codex_nuke/tools/inspect_nuke_bsp.js `
+  "path\to\retail-stage\main\maps\dm\codex_nuke.bsp" `
+  --require-revision-5
+
 powershell -ExecutionPolicy Bypass `
   -File generated/codex_nuke/tools/package_nuke.ps1
 ```
@@ -231,7 +269,7 @@ map dm/codex_nuke
   `F232A9DC88703F7A09446DAB2650FDBA51C21BF139F8C4123EF2652C323976C4`
 - texture contact sheet: 837,518 bytes; SHA-256
   `A663EC4E7A9CDCF94C797B35075CDFB508E5543C665206B63E3D9D86A21A4C62`
-- BSP: 31,236,136 bytes; SHA-256
-  `675E457505389837F6F2BAA99B44A818701BA3BB9D9E68380E9D689556E2CA95`
-- PK3: 9,567,575 bytes; SHA-256
-  `214F0EAD023D754F5FA199A9C9F8E5A66E6C0AC9F89EF0A6DA6B53A1834E067F`
+- BSP: 31,285,288 bytes; SHA-256
+  `B4DB8BCD1D07A277F072BC283A82E4E7425F67D4918139455A517FF8F2E4CACA`
+- PK3: 9,299,991 bytes; SHA-256
+  `D95D477163C553B050408DA28F609D08720BDDF83B7FF44F2D5BFA320830A59F`

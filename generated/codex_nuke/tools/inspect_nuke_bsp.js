@@ -8,7 +8,9 @@ const bspPath = path.resolve(
   process.argv.find((argument) => !argument.startsWith("--") && argument !== process.argv[0] && argument !== process.argv[1]) ||
     path.join(root, "main", "maps", "dm", "codex_nuke.bsp")
 );
-const requireRevision4 = process.argv.includes("--require-revision-4");
+const requireRevision5 = process.argv.includes("--require-revision-5");
+const requireRevision4 =
+  process.argv.includes("--require-revision-4") || requireRevision5;
 const allowUnlit = process.argv.includes("--allow-unlit");
 
 const BSP_IDENT = 0x35313032;
@@ -81,7 +83,9 @@ for (let index = 0; index < shaderLump.length / DSHADER_BYTES; index++) {
 }
 
 const surfaceCountsByShader = new Map();
+const unlitSurfacesByShader = new Map();
 let allocatedLightmapPages = 0;
+let unlitNonSkySurfaces = 0;
 for (let index = 0; index < surfaceLump.length / DSURFACE_BYTES; index++) {
   const offset = surfaceLump.offset + index * DSURFACE_BYTES;
   const shaderIndex = buffer.readInt32LE(offset);
@@ -91,6 +95,13 @@ for (let index = 0; index < surfaceLump.length / DSURFACE_BYTES; index++) {
     shaderIndex,
     (surfaceCountsByShader.get(shaderIndex) || 0) + 1
   );
+  if (lightmapNum < 0 && !shaders[shaderIndex].name.startsWith("textures/sky/")) {
+    unlitNonSkySurfaces++;
+    unlitSurfacesByShader.set(
+      shaders[shaderIndex].name,
+      (unlitSurfacesByShader.get(shaders[shaderIndex].name) || 0) + 1
+    );
+  }
 }
 
 const lightmapPages = lightmapLump.length / LIGHTMAP_BYTES;
@@ -122,6 +133,12 @@ const result = {
   lightmapPages,
   allocatedLightmapPages,
   visibilityBytes: visibilityLump.length,
+  unlitNonSkySurfaces,
+  unlitSurfacesByShader: Object.fromEntries(
+    [...unlitSurfacesByShader.entries()].sort((left, right) =>
+      left[0].localeCompare(right[0])
+    )
+  ),
   noLightmapShaders: noLightmapShaders.map((shader) => ({
     index: shader.index,
     name: shader.name,
@@ -138,6 +155,12 @@ if (allocatedLightmapPages > 180) {
 if (lightmapPages > 180) fail(`BSP exceeds AA's 180-page lightmap limit: ${lightmapPages}`);
 if (unexpectedNoLightmap.length) {
   fail(`Unexpected non-lightmapped shaders: ${unexpectedNoLightmap.map((shader) => shader.name).join(", ")}`);
+}
+if (requireRevision5 && unlitNonSkySurfaces > 0) {
+  fail(
+    `Revision 5 forbids unlit non-sky draw surfaces; found ${unlitNonSkySurfaces}. ` +
+      "Run relight_nuke_unlit_surfaces.js after the final MOHlight pass."
+  );
 }
 if (requireRevision4) {
   for (const name of [

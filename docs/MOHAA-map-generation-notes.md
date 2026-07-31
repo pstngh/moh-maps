@@ -1684,6 +1684,46 @@ or accepted geometry. A deterministic global rectangle repack may preserve
 surface dimensions and lightmap content if it validates ownership, UV bounds,
 gutters, page fields, written pages, and exact output invariants before and
 after MOHlight.
+
+### Nuke revision 5: unlit world faces bind undefined textures
+
+The user's eighteen revision-4 in-game screenshots exposed a severe rendering
+regression that the automated OpenMoHAA sweep had not: chain-link fence
+panels drew as solid black slabs with bright white lightmap smears, foliage
+cross-cards drew the console character set, character-skin, and vehicle-skin
+textures, and window backings drew the mirrored console font. Interiors,
+machinery, ramps, rails, and every lit surface rendered correctly.
+
+Diagnosis was fully measurable from the shipped BSP. The broken families are
+exactly the draw surfaces packaged with `lightmapNum = -1`: 1,408 chain-link
+panels, 2,904 foliage cards, and 435 window backings (4,747 total, next to
+53 legitimately unlit sky faces). The decisive control group is the 423 lit
+chain-link fence posts: same shader, same texture, same package, rendered
+correctly. The garbage also differed per surface and view, which is the
+signature of undefined texture binding rather than one wrong asset. Revision
+3 had already shipped 171 unlit window backings; revision 4 spread the unlit
+class across every fence line and bush and made it unmissable.
+
+**OBSERVED renderer rule:** the retail-targeted renderer does not reliably
+support world faces without lightmaps. Retail-compiled maps never contain
+them, because MOHlight bakes every world face and only sky uses `-1`.
+Revision 4's assumption that a constant `rgbGen` tint makes an unlit world
+face safe is retracted.
+
+The repair is a deterministic post-light BSP edit
+(`relight_nuke_unlit_surfaces.js`): append one constant-white 128x128 page
+(166 to 167 pages, still under 180), point all 4,747 unlit non-sky faces at
+a shared 126x126 rectangle on it, and center their draw-vertex lightmap UVs.
+Shaders are unchanged: white through the existing `$lightmap` multiply stage
+reproduces the intended 0.62/0.68 constant tints exactly, and lit posts keep
+baked shading. A byte-precise diff proved only the intended records changed;
+the extended inspector gate (`--require-revision-5`) fails the revision-4
+BSP with 4,747 unlit faces and passes the repaired BSP with zero. No
+recompile was needed or performed; geometry, collision, entities, and baked
+lighting are bit-identical, so revision 4's bot-combat evidence carries
+over. The repaired package still requires the user's screenshot acceptance
+pass, which this environment cannot substitute.
+
 ## Cache revision 1: three-axis filtering and omission-first conversion
 
 Cache is substantially denser than Cobblestone: the 45,755,859-byte decompile
@@ -1993,6 +2033,15 @@ proven by the target AA toolchain.
   preserving 42,815 baked surfaces; completed full lighting; generated fifteen
   renderer screenshots; and validated the exact 26-entry PK3 through three
   Recast/eight-bot match cycles and 263 combat events.
+- 2026-07-31, Nuke revision 5: diagnosed the user's eighteen-screenshot
+  verdict on revision 4 — chain-link panels, foliage cards, and window
+  backings binding undefined textures — as the 4,747 world faces shipped with
+  `lightmapNum = -1`, using the 423 correctly rendered lit fence posts as the
+  control group; repaired the final BSP deterministically by appending one
+  constant-white lightmap page (167 total) and relighting every unlit
+  non-sky face onto it; proved a byte-precise diff, zero unlit non-sky faces
+  under the new inspector gate, and an unchanged shader/tint result; retracted
+  the constant-tint-makes-nolightmap-safe assumption; repackaged the PK3.
 
 ## Inferno revision 2: measured clone after a rejected invented layout
 
