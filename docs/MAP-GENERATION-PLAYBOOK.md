@@ -773,3 +773,165 @@ has already used fallback texture dimensions and may bake visibly wrong UV scale
 Compare staged custom-image names, counts, and hashes against the canonical
 asset set before launching the expensive compile; treat any missing-image warning
 as a failed build even when geometry succeeds.
+
+An isolated compiler root must also expose the target game's retail packs:
+custom images alone do not provide `common` clip/caulk/origin or stock sky
+shaders. Prove a nonzero retail PK3 file count and explicitly resolve
+representative common and sky materials before starting a multi-hour compile.
+Do not exempt full-width fallback rectangles from the lightmap gutter rule; fix
+the missing retail stage and rebuild the BSP.
+
+## Local commercial-topology conversion gate
+
+When the user owns a source game's files and explicitly authorizes local
+conversion, the repository may contain reproducible converters, resource
+identifiers, hashes, allow-lists, and derived measurements. Commercial mesh,
+image, sound, compiled-map, and locally enhanced package bytes must remain in
+an ignored local root and must not be committed or published.
+
+Treat conversion as a sequence of independent proofs:
+
+1. pin and hash the extractor/converter version and input containers;
+2. export an explicit resource allow-list rather than an entire archive;
+3. prove the source coordinate space from bounds and transforms;
+4. convert one model and load it through the original target compiler;
+5. combine every selected model in one isolated compiler probe;
+6. add models to the accepted brush map without changing collision;
+7. suppress an old proxy only when a manifest explicitly names the covered
+   family and the replacement is present;
+8. verify the public build is byte-identical when the local manifest is absent;
+9. compile, package, runtime-test, and visually review the local candidate; and
+10. publish tools and evidence only, never payloads.
+
+When several GLBs are deliberately assembled into one target model, retain a
+source-file index on every material. Resolve its image relative to that exact
+GLB, not the first input's directory, and reject two different source images
+that would map to the same target shader name.
+
+The texture-conversion report is also a build input: hash every canonical
+converted image and its staged copy against the recorded output hash, and
+reject report shaders that are missing, duplicated, or no longer referenced.
+
+### Retail MOHAA static-model requirements
+
+For static geometry accepted by original Allied Assault tools:
+
+- emit SKD version 5 (`SKMD`) with a POSROT `ORIGIN` root bone parented to
+  `worldbone`;
+- keep each SKD surface below 1,000 vertices and 2,000 triangles;
+- write both zero-filled per-vertex collapse arrays expected by original
+  Q3map; omitting them can crash the loader even when a permissive parser reads
+  the file;
+- emit SKC version 13 (`SKAN`) with one identity frame for the static bone;
+- keep TIKI surface identifiers under 32 characters, with a conservative
+  28-character generator limit;
+- keep each TIKI at or below 24 setup surfaces; the original parser allocates a
+  fixed 24-entry setup array, and overflowing it can report false repeated-skin
+  errors before crashing; partition larger resources across multiple models;
+  and
+- test all converted models together in original Q3map before a long map
+  compile.
+
+Expected animation-format downgrade messages and missing optional model
+collision `.map` helpers may be accepted only when the compiler exits zero,
+all named surfaces bind, and existing brush/clip geometry is the documented
+collision authority.
+
+### MOHlight cumulative static-vertex budget
+
+Original MOHlight 1.48 has a fixed cumulative buffer for static-model vertex
+lighting. Treat 75,000 statically lit vertices as the conservative production
+ceiling until a lower limit is proven for a different asset mix.
+
+The CS2 Nuke isolation sequence distinguishes this from a model-definition
+limit:
+
+- 10 models / 68,570 vertices passed with 207,382 bytes of model-light data;
+- 11 models / 75,555 vertices passed with 228,513 bytes;
+- 12 full models / 81,002 vertices crashed with access violation
+  `-1073741819`;
+- 12 lightweight definitions / 10,464 vertices passed with 33,360 bytes; and
+- lossless welding reduced the full set to 76,733 vertices but still crossed
+  the buffer boundary.
+
+Count the post-split SKD vertices for every static model before full Q3map.
+First weld vertices that have identical position, normal, and UV. If the total
+still exceeds 75,000, keep the highest-value geometry static and emit a
+non-collision visual aggregate as a runtime `script_model` with `testanim
+idle`; retain the accepted brush/clip layer as collision authority.
+
+Every runtime model must also appear once as `cache models/.../*.tik` in the
+map's `_precache.scr`. Prove the exact runtime path in OpenMoHAA: the model's
+SKC load should be visible, the engine must not request a missing precache
+line, and no model-specific TIKI/Skeletor load diagnostic may remain.
+
+Run bots long enough to exercise pickup and weapon-effect paths as well as map
+startup. Stock `DMprecache.scr` may omit assets that OpenMoHAA bots can spawn;
+promote each engine-requested cache line into generator-owned precache output,
+rebuild the exact package, and require a clean repeat. Classify diagnostics by
+asset/path and behavior rather than treating a nonempty Windows stderr stream
+as failure: OpenMoHAA writes ordinary console output there, and a stock
+environment warning is not a candidate-map error when the relevant bot
+behavior demonstrably succeeds.
+
+### Deterministic PK3 packaging gate
+
+Build the final archive twice from the same staged sources and require
+identical bytes and SHA-256. Sort normalized forward-slash entry names, reject
+duplicates and traversal, use fixed ZIP calendar timestamps, reopen the
+archive, and hash every decompressed entry against its staged source.
+
+In PowerShell, represent package rows as `PSCustomObject`, not raw hashtables,
+before `Sort-Object` or `Group-Object` by a named property. When verifying ZIP
+timestamps, compare the stored calendar `DateTime` fields: DOS ZIP timestamps
+do not preserve a UTC offset, so direct `DateTimeOffset` equality can falsely
+reject a deterministic archive in another timezone.
+
+Do not leave a world-space aggregate at entity origin zero when converting it
+to a runtime model. OpenMoHAA samples the lighting grid for a dynamic model at
+the entity origin. Recenter the converted vertices around a meaningful local
+origin (the source bounds center is a safe deterministic default), place the
+`script_model` at that world origin, and prove that local bounds plus entity
+origin reconstruct the source world bounds exactly. An entity-only Q3map pass
+is acceptable for this origin-only correction after the static/runtime
+classification has already been established by a full Q3map pass; compare BSP
+lumps to prove that baked/static geometry did not change.
+
+Changing `static_*` versus `script_model` classification requires a full
+Q3map pass. Q3map `-onlyents` updates entity text but leaves the old BSP static-
+model definition/index lumps intact, so it is not a valid shortcut for this
+change.
+### Source 2 aggregate coordinate-space gate
+
+Do not assume every map-embedded Source 2 aggregate uses world-space vertices.
+For CS2 Nuke, inspected `agg_merge` and `agg_nomerge` world-node resources
+reproduce Source world bounds after applying the full glTF node transform and
+mapping VRF metres/Y-up back to Source units/Z-up; those models can be placed
+at origin zero. Inspected `agg_prop` resources are instance-local and require
+their instance transforms. Exclude them until that transform table is parsed.
+
+**PROVEN topology rule:** bounds are useful for validation and conservative
+collision, but mesh topology must come from actual vertices/indices. A
+world-space aggregate can replace a bounds-backed visual proxy while the
+accepted Source brush/clip layer remains collision authority. Coordinate-space
+classification and explicit proxy suppression are release gates, not
+assumptions.
+
+### Aggregate inventory and expansion gate
+
+List the complete source-map model inventory before choosing the next visual
+replacement set. Group identifiers by `agg_merge`, `agg_nomerge`, `agg_prop`,
+other world-node, and entity resources. Treat merge/nomerge names as candidates,
+not automatic proof of origin-zero placement: verify converted bounds and node
+transforms for each family. Rank candidates by visible landmark value, not file
+size alone, and conversion-probe them before changing the map.
+
+A resource that exceeds the original 24-surface TIKI setup limit must not be
+silently simplified or allowed to overflow the parser. Record its measured
+surface count and partition it into multiple independently validated TIKIs.
+Small overages matter: CS2 Nuke's two silo aggregates require 25 and 27 surfaces,
+while an office-chair group needs 41, a roll-up-door group 53, and a large HVAC
+aggregate 224. Conversely, six additional high-impact Nuke families between 5
+and 18 surfaces loaded together in original Q3map without unexpected warnings.
+This isolated combined proof is required before those families enter an
+expensive full-map compile.

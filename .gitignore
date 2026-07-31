@@ -1,0 +1,4 @@
+# Local-only Valve-derived conversion outputs. The extraction/conversion tools
+# are tracked; GLB/PNG/TGA/SKD/SKC/TIKI and enhanced packages are not.
+generated/codex_nuke/.local-source2/
+generated/codex_nuke/codex_nuke-source2-local.pk3

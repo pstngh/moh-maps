@@ -12,6 +12,68 @@ const mapName = process.argv[4] || "codex_nuke";
 const displacementMode = process.argv.includes("--full-displacements")
   ? "full"
   : "planar";
+
+function optionValue(name) {
+  const index = process.argv.indexOf(name);
+  if (index === -1) return null;
+  if (index + 1 >= process.argv.length) {
+    throw new Error(`Missing value after ${name}`);
+  }
+  return process.argv[index + 1];
+}
+
+const source2StaticManifestOption = optionValue("--source2-static-manifest");
+const source2StaticManifestPath = source2StaticManifestOption
+  ? path.resolve(source2StaticManifestOption)
+  : null;
+const source2StaticManifest = source2StaticManifestPath
+  ? JSON.parse(fs.readFileSync(source2StaticManifestPath, "utf8"))
+  : null;
+const source2StaticAssets = source2StaticManifest?.assets || [];
+if (!Array.isArray(source2StaticAssets)) {
+  throw new Error("--source2-static-manifest assets must be an array");
+}
+const source2StaticIds = new Set();
+for (const asset of source2StaticAssets) {
+  const tiki = String(asset.tiki || "").replace(/\\/g, "/");
+  const compileMode = String(asset.compileMode || "static");
+  const suppressPatterns = asset.suppressSource1ModelPatterns || [];
+  const origin = asset.origin || [0, 0, 0];
+  const expectedTiki = `models/codex_nuke/source2/${asset.id}/${asset.id}.tik`;
+  if (
+    !/^[a-z0-9_]+$/.test(asset.id || "") ||
+    tiki !== expectedTiki ||
+    !["static", "runtime"].includes(compileMode) ||
+    !Array.isArray(origin) ||
+    origin.length !== 3 ||
+    origin.some((value) => !Number.isFinite(Number(value))) ||
+    (compileMode === "static" &&
+      origin.some((value) => Math.abs(Number(value)) > 1e-6)) ||
+    !Array.isArray(suppressPatterns) ||
+    suppressPatterns.some(
+      (pattern) =>
+        typeof pattern !== "string" ||
+        pattern.length < 4 ||
+        pattern.length > 256 ||
+        !/^\/[a-z0-9_-]+(?:\/[a-z0-9_-]+)?\/?$/i.test(pattern),
+    ) ||
+    source2StaticIds.has(asset.id)
+  ) {
+    throw new Error("Invalid or duplicate asset record in --source2-static-manifest");
+  }
+  asset.tiki = tiki;
+  asset.compileMode = compileMode;
+  asset.origin = origin.map(Number);
+  source2StaticIds.add(asset.id);
+}
+
+const source2SuppressPatterns = [
+  ...new Set(
+    source2StaticAssets
+      .flatMap((asset) => asset.suppressSource1ModelPatterns || [])
+      .map((pattern) => String(pattern).toLowerCase()),
+  ),
+];
 const mainDir = path.join(outputRoot, "main");
 const mapDir = path.join(mainDir, "maps", "dm");
 fs.mkdirSync(mapDir, { recursive: true });
@@ -1728,6 +1790,15 @@ const stats = {
   fidelityFamilies: {},
   fidelityHandledComponents: 0,
   fidelityGroundCandidates: 0,
+  source2Models: source2StaticAssets.length,
+  source2StaticModels: source2StaticAssets.filter(
+    (asset) => asset.compileMode === "static",
+  ).length,
+  source2RuntimeModels: source2StaticAssets.filter(
+    (asset) => asset.compileMode === "runtime",
+  ).length,
+  source2ProxyInstancesSuppressed: 0,
+  source2SuppressedPatterns: {},
   nonOrthogonalPropsSkipped: 0,
   tiltedPropsSkipped: 0,
   embeddedAutocombinesOmitted: 0,
@@ -2011,6 +2082,15 @@ for (const entity of sourceEntities) {
   const model = value(entity.children, "model").toLowerCase();
   const origin = parseVector(value(entity.children, "origin", "0 0 -9999"));
   if (!inPlayableArea(origin)) continue;
+  const source2ReplacementPattern = source2SuppressPatterns.find((pattern) =>
+    model.includes(pattern),
+  );
+  if (source2ReplacementPattern) {
+    stats.source2ProxyInstancesSuppressed++;
+    stats.source2SuppressedPatterns[source2ReplacementPattern] =
+      (stats.source2SuppressedPatterns[source2ReplacementPattern] || 0) + 1;
+    continue;
+  }
   const angles = parseVector(value(entity.children, "angles", "0 0 0"));
   const pitch = Number.isFinite(angles[0]) ? angles[0] : 0;
   const yaw = Number.isFinite(angles[1]) ? angles[1] : 0;
@@ -2312,6 +2392,26 @@ const worldspawn = [
 ].join("\n");
 
 const entities = [worldspawn, ...generatedBrushEntities];
+for (const asset of source2StaticAssets) {
+  const modelQpath = String(asset.tiki)
+    .replace(/\\/g, "/")
+    .replace(/^models\//i, "");
+  entities.push(
+    pointEntity(
+      asset.compileMode === "runtime"
+        ? "script_model"
+        : `static_codex_nuke_${asset.id}`,
+      {
+        model: modelQpath,
+        ...(asset.compileMode === "runtime" ? { testanim: "idle" } : {}),
+        origin: asset.origin.join(" "),
+        angles: "0 0 0",
+        scale: "1",
+        angle: "0",
+      },
+    ),
+  );
+}
 const terroristSpawns = [];
 const counterSpawns = [];
 
@@ -2441,14 +2541,27 @@ level waittill spawn
 end
 `;
 fs.writeFileSync(path.join(mapDir, `${mapName}.scr`), scriptText);
+const precacheLines = [
+  "exec global/DMprecache.scr",
+  // OpenMoHAA bots can spawn the 50-health pickup and DM bazooka effect.
+  // Retail DMprecache.scr does not cover either asset.
+  "cache models/items/dm_50_healthbox.tik",
+  "cache models/fx/bazookaexplosion_dm.tik",
+];
+for (const asset of source2StaticAssets.filter(
+  (candidate) => candidate.compileMode === "runtime",
+)) {
+  precacheLines.push(`cache ${asset.tiki}`);
+}
 fs.writeFileSync(
   path.join(mapDir, `${mapName}_precache.scr`),
-  "exec global/DMprecache.scr\n"
+  `${precacheLines.join("\n")}\n`
 );
 
 const report = {
   mapName,
   displacementMode,
+  source2StaticManifest: source2StaticManifestPath,
   reference: path.basename(referencePath),
   output: `main/maps/dm/${mapName}.map`,
   worldBrushes: worldBrushes.length,

@@ -2241,3 +2241,292 @@ approximate facade/roof art non-solid, grant collision only to clearly measured
 cover, count every substitution, and preserve the omitted set. Metadata and
 compile/runtime gates still do not prove the visual result; a new screenshot
 pass remains mandatory.
+
+## Nuke revision 5: CS2 topology-backed local pilot
+
+Date: 2026-07-31
+
+The user's revision-4 feedback asked for CS2 over CS:GO whenever possible and
+for Nuke's missing machinery, objects, and clean modern appearance to be
+restored. A local CS2 installation contains
+`game/csgo/maps/de_nuke.vpk`; its SHA-256 is
+`616286bdfba283f8026cb719321e4c2d0986f04ce925cb13b0ff7ff913c33007`.
+The accompanying `pak01_dir.vpk` SHA-256 is
+`f9c82be3724ee2938ef8b1538efb56b7bc252800d47d00c5da32d214ca8e7f4f`.
+These commercial inputs and every derived mesh/image/package payload remain
+local and ignored.
+
+ValveResourceFormat CLI 19.2 was pinned by archive SHA-256
+`53e7e8dac1ddd876078346de709c8dbe613a967e94cd0c969aa34c61ec07680d`
+and executable SHA-256
+`36d8c9208eefa61dd695bd577e49618bb161569941318f629294a4e4af00edc0`.
+Its per-resource GLB export emits shader bytecode-version warnings because this
+release recognizes versions 59-70 while the local files contain version 71.
+For the selected resources it nevertheless exits zero and emits the requested
+GLB plus base-color images. The pipeline therefore treats that warning as
+nonfatal only when the requested output exists and passes subsequent parsing
+and compiler validation.
+
+Applying the complete glTF node transform and then mapping
+`[gltf.z, gltf.x, gltf.y] / 0.025399996` produces bounds identical to the
+original Source world coordinates for inspected `agg_merge` and
+`agg_nomerge` world-node resources. Their models are correctly placed at
+MOHAA origin zero. Inspected `agg_prop` resources instead have instance-local
+bounds; a control display and forklift-wheel group appeared around their local
+origins rather than their Nuke world positions. Those resources are marked
+`requires-instance-transforms` and excluded rather than incorrectly stacked at
+the map origin.
+
+The retail static converter writes SKD v5 `SKMD`, SKC v13 `SKAN`, and TIKI.
+Each SKD has one POSROT `ORIGIN` bone parented to `worldbone`; vertices carry
+one full-weight root influence. Surfaces split at 999 vertices and 1,999
+triangles. The first original-Q3map probe crashed with exit
+`-1073741819`: although an older OpenMoHAA writer suggested otherwise, the
+original loader requires two zero-filled int32 collapse arrays after each
+surface's variable vertex/triangle data. Adding them fixed the crash. The next
+probe exposed a separate binding failure at a 32-character surface name.
+Limiting generated TIKI/SKD identifiers to 28 characters removed that
+failure. One isolated map then loaded all twelve pilot models with Q3map exit
+zero and no fatal or surface-binding diagnostic.
+
+A follow-up extended-tier probe found a third independent retail limit. The
+large airduct aggregate becomes 224 surfaces after enforcing 999 vertices and
+1,999 triangles per surface. Q3map's TIKI parser allocates only 24 setup-
+surface records (`dloadsurface_t loadsurfaces[24]`) and does not bounds-check
+before adding another. At surface 25 the array overflow eventually presents as
+`Too many skins defined` on otherwise unique surface names and then crashes
+with exit `-1073741819`. The converter and inspector now reject a single TIKI
+above 24 surfaces, and the airduct resource is classified
+`requires-model-partitioning`. Before the two related catwalk resources were
+combined into one TIKI, the remaining three extended roof-HVAC resources plus
+the pilot produced 15 definitions and 13 textures; one combined original-Q3map
+proof wrote exactly 15 unique origin-zero static-model BSP definitions and
+reported no unexpected warning. This is historical format/loader evidence,
+not the current manifest's model count.
+
+The expected loader output contains one old-animation-format downgrade per
+static model and missing `models/.../*.map` collision-helper warnings. These
+are accepted for this pilot because the SKC cross-loaded with a known retail
+crate, all model surfaces bind, and the existing measured Source brush/clip
+layer remains the sole collision authority.
+
+The local payload retains topology from twelve world aggregates covering
+forklift bodies, forks and wheels; cargo-crane bases, carts and winches; the
+B-site reactor vessel head; catwalk decks and supports; control-room tables;
+and merge-safe control-display geometry. The two related catwalk resources are
+combined into one TIKI, so the final manifest contains eleven models and eleven
+unique referenced base-color images. Ten are static-lit; the control-room table
+is retained as a runtime `script_model`. The manifest suppresses only 23
+explicitly covered Source 1 brush-proxy instances and deliberately keeps
+control-display proxies not proven covered by the world-space meshes.
+
+All twelve material bindings in that composition are `OPAQUE`, single-sided,
+and reference a base-color image. Direct TGA bindings therefore do not hide an
+unimplemented alpha-test/double-sided shader case for this pilot.
+
+The enhanced local MAP contains 9,407 world brushes and 340 entities, including
+all four rotating doors, 16 Axis spawns, 16 Allied spawns, and 32 neutral DM
+spawns. A top-level entity comparison proved that all four
+`func_rotatingdoor` blocks and the complete 32/16/16 neutral/Axis/Allied
+spawn sets remain byte-identical to the public revision-4 generation.
+It is 8,151,345 bytes with SHA-256
+`F89E7C99B2BC3AE501E06EA76982EE60D27BE778E8646D0AE1138815650934A7`
+and retains 2,814 family-specific fidelity brushes after suppression. Without
+the manifest, regenerating the public MAP reproduces the revision-4 SHA-256
+exactly:
+`5DB889B73F2214F3675FA73EAD8412EF8A938623203C43C76FDDF1F476868040`.
+
+A full VRF identifier listing counted 806 `vmdl_c` entries in the CS2 Nuke
+container: 238 `agg_merge`, 41 `agg_nomerge`, 73 `agg_prop`, 353 other world-
+node entries, 100 entity entries, and one world-physics entry. This changes the
+next-pass strategy from guessing individual props to ranking the 279 merge/
+nomerge world aggregates, then proving coordinate space and retail surface
+count per candidate.
+
+Ten high-impact candidates were exported and converted in a local-only probe.
+Six stayed below the 24-surface TIKI limit: tank-top geometry (5 surfaces,
+5,208 triangles), ventilation exhausts (9/3,476), office desks (15/10,796),
+metal ladders (18/17,716), window assemblies (11/3,230), and the secondary HVAC
+duct set (10/4,194). Original Q3map loaded all six together, wrote six unique
+origin-zero BSP static-model definitions, and emitted only the six expected
+animation-downgrade plus six missing optional collision-helper warnings. Silo
+sets 1 and 2 require 25 and 27 surfaces; office chairs require 41; the large
+roll-up-door group requires 53. Those four are not malformed assets: they are
+measured inputs for a future converter feature that partitions one Source 2
+resource into multiple <=24-surface TIKIs.
+
+The hardened local pipeline also rejects empty/broad proxy-suppression
+patterns, noncanonical per-ID TIKI paths, duplicate BSP model definitions,
+non-finite transforms, and custom local output roots anywhere inside the Git
+worktree except the exact ignored `.local-source2` root. Package creation sorts
+entries, fixes ZIP timestamps, rejects duplicate/traversal names, and re-hashes
+every decompressed entry against its staged source before promotion.
+
+A converter audit found that a multi-GLB assembly originally resolved every
+material image relative to the first GLB. The current catwalk pair shares one
+export directory, so its pixels were already correct, but that assumption was
+not reusable. Conversion manifests now retain each material's source-GLB index;
+the texture stage resolves that exact source and rejects target-shader name
+collisions with different pixels. A two-GLB catwalk regression retained source
+indices 0 and 1, converted both textures, and reproduced the accepted
+SKD/SKC/TIKI hashes byte-for-byte.
+
+Local validation now treats `texture-conversion.json` as authoritative rather
+than checking names alone. All eleven canonical/staged TGA hashes pass; a
+temporary one-byte mutation of `catwalk_support_001.tga` was rejected with a
+base-color hash mismatch and the test fixture was restored.
+
+The first full local compile completed geometry in 5,998 seconds and VIS with
+154 clusters/3,704 bytes, but it was rejected before lighting. Its isolated
+compiler root contained zero retail PK3 files, so Q3map could not resolve five
+stock shader images: common clip, caulk, playerclip, the `sky/m5l2` sky, and
+origin. Fallback shader dimensions produced 22 lightmapped caulk/sky surfaces
+whose 128-pixel width could not retain the repacker's mandatory one-pixel
+border. This is stage-parity failure, not an atlas-packing exception; the
+pre-repack BSP remains local negative evidence and is not packaged.
+
+The corrected builder requires an Allied Assault root with Pak0-Pak6 and
+stages hard links (copy fallback) into its ignored `main` compile directory.
+A short original-Q3map proof then loaded 18,294 files from the seven packs and
+resolved both `common/caulk` and `sky/m5l2` with no missing-image warning. The
+full compile must be repeated because fallback dimensions may already have
+changed UV/lightmap allocation; reusing the rejected BSP would violate the
+proven stage-parity rule.
+
+The promoted `-PreflightOnly` path now runs that retail resolution check plus
+one combined Q3map/VIS/MOHlight probe containing every manifest asset. On the
+final composition it completed in eight seconds, wrote exactly ten Source 2
+static definitions, and lit exactly 71,507 of the enforced 75,000 static-
+vertex budget before allowing the long full-map compile.
+
+The corrected full Q3map pass then completed in 5,572 seconds against all
+18,294 retail-pack files. It reduced 50,407 input faces to 47,329 output faces
+(3,078 removed), emitted exactly ten expected animation-downgrade and ten
+missing optional collision-helper warnings, and emitted zero unexpected
+warnings. Fast VIS reproduced 154 clusters, 283 portals, and 3,704 visibility
+bytes. The lossless atlas repack retained 42,559 lightmapped surfaces and
+1,457,986 exact texels, reducing 192 initially allocated pages to 165 with a
+one-pixel gutter. Prelight BSP inspection found 47,353 total draw surfaces,
+ten unique static Source 2 definitions, 43 static-model indexes, and no
+unexpected non-lightmapped surface.
+
+A later original-MOHlight isolation found a fourth, independent retail limit.
+Ten models with 68,570 post-split vertices succeeded and wrote 207,382 bytes of
+static-model light data. Eleven models with 75,555 vertices also succeeded at
+228,513 bytes. Adding the twelfth model raised the set to 81,002 vertices and
+crashed MOHlight with access violation `-1073741819`. This was not a definition-
+count ceiling: twelve unique lightweight definitions totaling 10,464 vertices
+succeeded and wrote 33,360 bytes. Lossless welding of vertices with identical
+position, normal, and UV reduced the complete set to 76,733 vertices, but it
+still crossed the buffer boundary.
+
+The hardened builder therefore totals `verticesAfterSplitting` from every
+static conversion manifest and rejects totals above a conservative 75,000-
+vertex ceiling before long Q3map. The final Nuke composition statically lights
+10 models / 71,507 vertices / 63,724 triangles and retains the 5,226-
+vertex control-room table as a runtime `script_model` with `testanim idle`.
+The exact all-static probe succeeded with 216,227 bytes of model-light data and
+112 vertices in solid leaves. All 67,766 converted triangles remain present;
+brush/clip geometry remains collision authority.
+
+Q3map `-onlyents` cannot apply this classification change. A disposable probe
+showed that it updated the entity text but retained the stale 11-definition
+static-model lumps; a full Q3map pass on the same MAP correctly produced ten.
+Any switch between `static_*` and `script_model` therefore requires full Q3map,
+not an entity-only shortcut.
+
+An isolated OpenMoHAA probe then exercised the ten-static/one-runtime
+composition. The first run loaded the control-room table but requested an
+explicit `_precache.scr` entry. The generator now emits one `cache
+models/.../*.tik` line per runtime manifest asset, and the validator rejects
+missing, duplicate, or static-model cache lines. With that line present,
+OpenMoHAA loaded the table's SKC with only the expected old-animation downgrade,
+reported no source-model TIKI/Skeletor or precache error, initialized the map,
+generated Recast in 0.035 seconds, and admitted `bot1`.
+The probe used OpenMoHAA `0.82.1-beta+5.a72bc15`; `omohaaded.exe` SHA-256 was
+`DDB7D12666560701D914FF0D26B5082D686C1CC027407A929FB4950D24FBDAFB`.
+
+Renderer-source inspection then found a runtime-only lighting defect in that
+otherwise valid probe: `R_SetupEntityLightingGrid` samples at
+`ent->e.origin`. The table mesh contained world-space vertices around
+`(1066, -512, -620)` but its `script_model` origin was zero. The converter now
+supports deterministic bounds recentering for runtime aggregates. The table's
+source bounds are
+`[1047.9999237060415, -616.1351289748931, -640.0000729859001]` through
+`[1084.0952640683483, -407.86458730104613, -599.805411346164]`; its emitted
+entity origin is
+`[1066.047593887195, -511.99985813796957, -619.9027421660321]`, and its local
+bounds are
+`[-18.047670181153535, -104.1352708369235, -20.097330819868034]` through
+`[18.047670181153308, 104.13527083692344, 20.097330819868148]`.
+Adding the local bounds to the entity origin reconstructs the source bounds
+exactly. Static aggregates remain origin-zero. The recentered table's SKD,
+SKC, and TIKI SHA-256 values are respectively
+`FC06596696659F051A98D7C75AD2E31DCE031FF67BAD4F4ABEC1BE6375D0DBAA`,
+`BF5E5124DCF9E4C5EFC88D874C26CA3427627B69E106C357DE7819CDC7582FE5`,
+and
+`CA53FF4F6EECD3CA3961FA06732FC75A81010E71268E109FA719D0FF302ED5BA`.
+A fresh exact 70-entry probe PK3
+(`492FF7F6144397B9191BC3E93398F5558CA3BD97346721F232B42EF578B822A5`,
+9,541,281 bytes) then loaded this recentered table, initialized the server,
+generated Recast in 0.035 seconds, and admitted `bot1`, with zero
+table-specific TIKI/Skeletor/precache diagnostics. This OpenMoHAA Windows
+build writes its ordinary engine console to the process stderr stream, so
+stderr byte count is not itself an error gate; classify fatal and
+asset-specific diagnostics from the combined console content.
+The BSP inspector now requires the runtime model's exact origin and can hash
+all 27 non-entity version-19 lumps across an entity-only update. A wrong-origin
+negative and a one-byte shader-lump mutation were both rejected; an identical
+comparison passed. The strengthened retail/all-model preflight then repeated
+original Q3map, VIS, and MOHlight in six seconds and accepted the exact runtime
+origin alongside ten static definitions and 71,507 static vertices.
+
+The corrected production build then completed original Q3map in 5,572 seconds,
+VIS in under one second, and original MOHlight in 4,749 seconds. Q3map reduced
+50,407 input faces to 47,329 output faces, with exactly ten expected
+old-animation downgrades and ten missing optional collision-helper warnings.
+VIS wrote 154 clusters, 283 portals, and 3,704 bytes. The deterministic atlas
+repack retained 42,559 lightmapped surfaces and reduced 192 pages to 165.
+MOHlight lit ten models / 71,507 vertices, found zero static-model vertices in
+solid leaves, wrote 216,247 bytes of model-light data, and clamped 28 dense
+entity-light leaves to the retail limit of 60.
+
+After that full lighting pass, only the already-proven runtime table origin
+changed. Q3map `-onlyents` produced final BSP SHA-256
+`150E6E27A3969493706130C82591E27E346E52CB7426D8F3F490CB207F9A7CF0`
+at 31,279,504 bytes. The inspector found the exact table origin, ten static
+Source2 definitions, 165 lightmap pages, and byte-identical hashes for all 27
+non-entity lumps versus the pre-update lit BSP. This is the narrow condition
+under which an entity-only pass is safe.
+
+The deterministic packager exposed two reusable PowerShell/ZIP traps. Raw
+hashtables do not provide stable named-property grouping for `Sort-Object` /
+`Group-Object`; package records must be `PSCustomObject` instances. ZIP's DOS
+timestamp preserves calendar fields but not a UTC offset, so reopen
+verification must compare the stored `DateTime` fields rather than direct
+`DateTimeOffset` equality. After both fixes, two package builds reproduced the
+same 70-entry, 14,877,947-byte PK3 with SHA-256
+`5391F57425E3E27F271876F90E42433EF58DE369A3B11F23D8A2B379DE2B7C0D`.
+Every decompressed entry was re-hashed against its staged source.
+
+The first sustained eight-bot run requested two additional stock assets not
+covered by retail `DMprecache.scr`: `models/items/dm_50_healthbox.tik` and
+`models/fx/bazookaexplosion_dm.tik`. Those exact cache lines now come from the
+generator. The rebuilt package then ran for 180.591 seconds in an isolated root
+containing exactly Pak0-Pak6 plus the one candidate. OpenMoHAA completed two
+server/map cycles, parsed the BSP in 0.157 and 0.183 seconds, generated Recast
+in 17.136 and 17.304 seconds, admitted all eight bots twice, and logged 154
+combat/death events. Candidate-specific Source2 model, table, fatal-map, and
+precache diagnostics were all zero. The retail-only environment's missing
+`global/bot_run.scr` messages were recorded separately because the bots still
+navigated and fought; do not misclassify unrelated stock-environment warnings
+as candidate failures.
+
+**PROVEN local-topology rule:** keep commercial payloads behind an ignored,
+opt-in manifest; pin the extraction tool and inputs; classify aggregate
+coordinate space before placement; prove the exact retail model encoding with
+original Q3map; preserve accepted brush collision; suppress only named proxies
+covered by a present replacement; prove deterministic packaging and exact
+isolated bot runtime; and prove that the redistributable public build is
+byte-identical when the manifest is absent. Compile and model-loader success
+still require a new human screenshot verdict before visual fidelity is claimed.
