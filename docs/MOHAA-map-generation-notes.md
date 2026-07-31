@@ -102,6 +102,13 @@ the runtime `.pk3`.
 
 ## Text `.map` grammar
 
+> Superseded as reference: this primer records what was known when the first
+> generator was written. The measured, corpus-verified format reference —
+> decoded flag values, `patchDef2`/`terrainDef` structure, worldspawn-key
+> and entity vocabulary, and the per-file retail inventory — is
+> [`MAP-SOURCE-FORMAT.md`](MAP-SOURCE-FORMAT.md). Consult that document
+> first; this section remains as chronological evidence.
+
 ### Entities
 
 A map is a sequence of top-level entity blocks. The first entity is

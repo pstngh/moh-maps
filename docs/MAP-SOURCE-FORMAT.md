@@ -9,8 +9,17 @@ constructs are quoted from the corpus verbatim. Numeric flag decodes come
 from the MOHAA SDK-compatible `code/qcommon/surfaceflags.h` in the
 OpenMoHAA source tree.
 
-Use this document when reading the retail sources for reference or when
-debugging how a construct in them is meant to behave. Normative production
+This document supersedes the early format primer at the top of the research
+log's "Text `.map` grammar" section, which remains in place as chronological
+evidence. Use this document when reading the retail sources for reference or
+when debugging how a construct in them is meant to behave.
+
+Confidence labeling: everything presented as a count, a duplication check,
+or a decoded bit value is script-reproducible measurement. The handful of
+interpretive readings — the `terrainDef` header fields, the exact modes of
+`farplane_cull`/`farplane_bias`, and `map_time` as a save timestamp — are
+worded as observations ("observed", "editor semantics not documented") and
+should not be treated as engine-verified until someone tests them. Normative production
 rules for this repository's own maps stay in
 [`MAP-GENERATION-PLAYBOOK.md`](MAP-GENERATION-PLAYBOOK.md), and each
 generated map documents itself under `generated/<map>/`; neither is covered
