@@ -34,7 +34,7 @@ here.
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | `aa/` MP (`mohdm*`, `obj_team*`) | 10 | 6,574 | 34,120 | 1,946 | 35 | Real numeric values |
 | `aa/` SP campaign (`m1l1`-`m6l3e`, `training`) | 35 | 64,205 | 161,390 | 15,599 | 5,972 | All zero |
-| `aa_custom/` (community maps) | 18 | 17,676 | 94,843 | 8,315 | 38 | Real numeric values |
+| `aa_custom/` (community maps) | 23 | 23,243 | 130,798 | 11,177 | 49 | Real numeric values |
 | `bt/` MP | 24 | 21,477 | 129,805 | 11,312 | 1,657 | All zero |
 | `bt/` SP campaign (`e1l1`-`e3l4`) | 11 | 34,932 | 82,005 | 6,840 | 4,522 | All zero |
 | `sh/` MP | 13 | 11,217 | 70,158 | 5,410 | 1,047 | All zero |
@@ -575,3 +575,8 @@ spawners, not MP spawn classes).
 | `aa_custom/fox.map` | 80 | 11,148 | 115 | 0 | 0/0/0 (no MP spawn classes) | |
 | `aa_custom/dm_BaseUBoat_2.map` | 1,329 | 6,456 | 2,717 | 0 | 103/103/103 | |
 | `aa_custom/dogscastleTDM.map` | 867 | 9,100 | 126 | 0 | 0/26/22 | |
+| `aa_custom/Titanic.map` | 931 | 6,580 | 169 | 0 | 0/13/11 (AI layer present, ignored) | |
+| `aa_custom/nirgends.map` | 920 | 9,100 | 475 | 0 | 24/12/12 | |
+| `aa_custom/mohdm76.map` | 1,644 | 7,881 | 602 | 3 | 43/43/43 | |
+| `aa_custom/leuna.map` | 793 | 5,730 | 1,316 | 0 | 18/8/8 | The truck is on it |
+| `aa_custom/uks_remagen.map` | 1,279 | 6,664 | 300 | 8 | 12/13/13 | poke it with a stick |
