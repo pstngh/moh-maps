@@ -1,0 +1,15 @@
+main:
+
+setcvar "g_obj_alliedtext1" "Fable Nuke"
+setcvar "g_obj_alliedtext2" "Clean-room CS Nuke conversion"
+setcvar "g_obj_alliedtext3" "One-shot benchmark build"
+setcvar "g_obj_axistext1" ""
+setcvar "g_obj_axistext2" ""
+setcvar "g_obj_axistext3" ""
+
+level waittill prespawn
+exec global/DMprecache.scr
+level.script = maps/dm/fable_nuke.scr
+level waittill spawn
+
+end
