@@ -59,6 +59,10 @@ change. Do not leave a known-bad rule as the primary instruction.
 
 - Target AA BSP version 19 and AA assets unless the user explicitly requests
   Spearhead or Breakthrough dependencies.
+- Build multiplayer maps only. The single-player campaign sources in
+  `aa/`, `bt/`, and `sh/` are reference material for format semantics and
+  entity vocabulary; never produce single-player maps or SP-only entities
+  (AI spawners, pathnodes, campaign objectives) in generated output.
 - Do not redistribute retail PK3 contents, Valve/CS textures, reference VMFs,
   or Source models.
 - Stock AA asset references are allowed because the player supplies the retail

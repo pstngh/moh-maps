@@ -739,7 +739,10 @@ or palette defect. Check the exact runtime package, image/shader resolution,
 fallback behavior, and package load order before changing geometry or
 lightmaps. A correct generated source image does not prove that the renderer
 resolved that image in the user's session. Require the client log from the
-matching run and a clean single-package test.
+matching run and a clean single-package test. Nuke revision 5 subsequently
+identified the root cause for that instance: world draw surfaces shipped
+with `lightmapNum = -1` bind undefined texture state (see the proven
+unlit-world-face rule in Phase 5 and the constant-page relight below).
 
 ### Lossless BSP lightmap-atlas repacking
 

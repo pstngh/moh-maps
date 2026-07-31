@@ -2062,6 +2062,17 @@ proven by the target AA toolchain.
   published the reference as `docs/MAP-SOURCE-FORMAT.md`. Per user
   direction, the reference covers the retail corpora only; the generated
   maps stay documented under `generated/<map>/`.
+- 2026-07-31, single-player corpus extension: the user added the retail AA
+  (35), Breakthrough (11), and Spearhead (9) campaign sources plus four
+  community objective maps; analysis extended the format reference with
+  them. Key findings: the AA SP export zeroes the per-side flag integers
+  exactly like SH/BT (zeroing is an export-batch property, not an expansion
+  property); the SP corpora carry 52,607 hand-placed `info_pathnode`
+  entities and 14,040 of the corpus's 16,794 `terrainDef` grids; and SP-only
+  vocabulary (ProjectileGenerator, ThrobbingBox, vehicle/waypoint/grenade
+  hints, `skybox_speed`/`skybox_farplane`) is now cataloged. Standing user
+  direction recorded in `AGENTS.md`: production output is multiplayer maps
+  only; SP sources are reference, never targets.
 
 ## Inferno revision 2: measured clone after a rejected invented layout
 

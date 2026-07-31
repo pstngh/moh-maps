@@ -2,8 +2,11 @@
 
 This document is a measured reference for the original `.map` sources
 stored in this repository — the retail Allied Assault, Spearhead, and
-Breakthrough multiplayer map sources plus one community map: what the
-format's constructs mean and which conventions those sources actually use.
+Breakthrough multiplayer and single-player campaign sources plus five
+community maps: what the format's constructs mean and which conventions
+those sources actually use. The repository's production target is
+multiplayer maps only; the single-player sources are reference material for
+format semantics and vocabulary, never build targets.
 All counts were produced by parsing the current files programmatically;
 constructs are quoted from the corpus verbatim. Numeric flag decodes come
 from the MOHAA SDK-compatible `code/qcommon/surfaceflags.h` in the
@@ -29,10 +32,13 @@ here.
 
 | Corpus | Files | Entities | Brushes | `patchDef2` | `terrainDef` | Trailing flag columns |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| `aa/` (retail Allied Assault MP sources) | 10 | 6,574 | 34,120 | 1,946 | 35 | Real numeric values |
-| `aa_custom/` (community `obj_pipeline`) | 1 | 670 | 2,970 | 288 | 1 | Real numeric values |
-| `bt/` (Breakthrough MP sources) | 24 | 21,477 | 129,805 | 11,312 | 1,657 | All zero |
-| `sh/` (Spearhead MP sources) | 13 | 11,217 | 70,158 | 5,410 | 1,047 | All zero |
+| `aa/` MP (`mohdm*`, `obj_team*`) | 10 | 6,574 | 34,120 | 1,946 | 35 | Real numeric values |
+| `aa/` SP campaign (`m1l1`-`m6l3e`, `training`) | 35 | 64,205 | 161,390 | 15,599 | 5,972 | All zero |
+| `aa_custom/` (community objective maps) | 5 | 3,019 | 15,121 | 883 | 15 | Real numeric values |
+| `bt/` MP | 24 | 21,477 | 129,805 | 11,312 | 1,657 | All zero |
+| `bt/` SP campaign (`e1l1`-`e3l4`) | 11 | 34,932 | 82,005 | 6,840 | 4,522 | All zero |
+| `sh/` MP | 13 | 11,217 | 70,158 | 5,410 | 1,047 | All zero |
+| `sh/` SP campaign (`t1l1`-`t3l2`) | 9 | 24,920 | 70,894 | 4,704 | 3,546 | All zero |
 
 Provenance notes:
 
@@ -43,11 +49,17 @@ Provenance notes:
   (verified with `cmp` across all 13 pairs). `bt/` additionally contains the
   11 Breakthrough-only maps. Analysis of `bt/` therefore covers `sh/`
   entirely.
-- The Spearhead/Breakthrough sources were exported with all per-side
-  contents/surface-flag integers zeroed; the retail AA sources kept the
-  compiled values. Both compile, which proves the compiler re-derives these
-  flags from shader `surfaceparm` records and treats the stored integers as
-  editor cache, not authority (see section 4.3).
+- The per-side contents/surface-flag integers are zeroed in every SH/BT
+  source and in the AA single-player campaign drop; only the AA MP sources
+  and the community maps kept the compiled values. The zeroing is therefore
+  an export-batch property, not an expansion property. All variants
+  compile, which proves the compiler re-derives these flags from shader
+  `surfaceparm` records and treats the stored integers as editor cache, not
+  authority (see section 4.3).
+- The single-player sources were added expressly as reference material:
+  they carry the AI/vehicle/objective vocabulary and the overwhelming
+  majority of the corpus's terrain (14,040 of 16,794 `terrainDef`
+  instances). Production work in this repository targets MP only.
 - A complete per-file table is in the appendix (section 10).
 
 ## 2. File anatomy
@@ -346,6 +358,36 @@ fittings, and hand-placed clutter down to individual mugs and books.
 partition space for the compiler's clustering; chained via
 `targetname`/`target`.
 
+### 7.7 Single-player-only vocabulary (reference)
+
+The campaign sources add classes the MP corpus barely touches. None of
+these are production targets here (MP-only policy); they are cataloged
+because they pin down format semantics and show how the retail designers
+budgeted hand-authored data:
+
+- **`info_pathnode` at scale** — 52,607 instances across the SP corpora
+  (26,432 in AA SP alone; `m4l3` has thousands by itself). Retail AI
+  navigation is entirely hand-placed nodes; MP maps for OpenMoHAA bots need
+  none of this because Recast builds navigation at load.
+- **AI support points** — `info_waypoint` (3,102), `info_aispawnpoint`,
+  `info_grenadehint` (grenade-throw targets), `info_vehiclepoint` /
+  `trigger_vehicle` (vehicle routes), plus dense `ai_*` spawner entities
+  whose keys (`gun`, `accuracy`, `sight`, `hearing`, `leash`,
+  `disguise_*`) form the AI tuning surface.
+- **Scripted-sequence plumbing** — thousands of `script_object` /
+  `script_origin` / `script_model` instances, `trigger_once`, and
+  `info_splinepath` chains for flyovers and vehicle runs.
+- **SH/BT gameplay devices** — `ProjectileGenerator_*` (288: mortar/shell
+  barrage volumes), `ThrobbingBox_*` (104: plantable-explosive interaction
+  boxes), `item_*` pickups (ammo boxes, health) which also appear in two
+  community MP maps.
+- **Worldspawn extras** — SH campaign maps add `skybox_speed` /
+  `skybox_farplane` and `overbright_range` beyond the MP key set.
+- **Terrain density** — SP maps average hundreds of `terrainDef` grids per
+  map (`e3l4`: 803, `t1l1`: 458, `m4l3`: 440); outdoor campaign spaces are
+  terrain-first, brush-second. This is the corpus to read when pinning
+  down `terrainDef` semantics experimentally.
+
 ## 8. Utility materials (`common/*`)
 
 Usage across `aa/` + `aa_custom/`, most frequent first (BT/SH use the same
@@ -420,3 +462,70 @@ identically in both `bt/` and `sh/` are listed once and marked.
 | `bt/mp_tunisia_lib.map` | 784 | 4,397 | 802 | 91 | 18/40/33 | Tunisian Desert |
 | `bt/mp_unterseite_dm.map` (= `sh/MP_Unterseite_DM.map`) | 420 | 3,215 | 278 | 19 | 14/8/8 | |
 | `bt/mp_verschneit_dm.map` (= `sh/MP_Verschneit_DM.map`) | 438 | 5,644 | 130 | 0 | 15/9/8 | |
+
+### 10.1 Single-player campaign and community additions
+
+Spawn columns are near-zero for SP maps by design (campaign maps use AI
+spawners, not MP spawn classes).
+
+| File | Entities | Brushes | patchDef2 | terrainDef | DM/Allied/Axis spawns | `message` |
+| --- | ---: | ---: | ---: | ---: | :---: | --- |
+| `aa/m1l1.map` | 1,099 | 2,782 | 615 | 18 | 0/0/0 | Rangers Lead the Way |
+| `aa/m1l2a.map` | 2,738 | 5,781 | 556 | 146 | 0/0/0 | The Rescue Mission |
+| `aa/m1l2b.map` | 1,601 | 3,935 | 327 | 8 | 0/0/0 | Sabotage the Motorpool |
+| `aa/m1l3a.map` | 1,027 | 1,208 | 348 | 265 | 0/0/0 | Lighting the Torch - Desert Road |
+| `aa/m1l3b.map` | 1,291 | 1,243 | 254 | 488 | 0/0/0 | Grounding the Airfield |
+| `aa/m1l3c.map` | 1,226 | 3,772 | 437 | 0 | 0/0/0 | Lighting The Torch - Lighthouse |
+| `aa/m2l1.map` | 2,178 | 5,524 | 570 | 0 | 0/0/0 | Secret Documents of the Kriegsmarine |
+| `aa/m2l2a.map` | 1,825 | 5,656 | 707 | 0 | 0/0/0 | Scuttling the U-529 - Naxos Prototype |
+| `aa/m2l2b.map` | 1,327 | 4,998 | 554 | 0 | 0/0/0 | Scuttling the U-529 - Inside the U-529 |
+| `aa/m2l2c.map` | 1,484 | 3,828 | 488 | 0 | 0/0/0 | Scuttling the U-529 - Cover Blown |
+| `aa/m2l3.map` | 1,338 | 5,714 | 921 | 0 | 0/0/0 | Escape from Trondheim |
+| `aa/m3l1a.map` | 2,305 | 1,665 | 56 | 273 | 0/0/0 | Omaha Beach - The Landing |
+| `aa/m3l1b.map` | 1,288 | 3,047 | 265 | 426 | 0/0/0 | Omaha Beach - Inside the Bunker |
+| `aa/m3l2.map` | 2,827 | 4,681 | 536 | 165 | 0/0/0 | Battle in the Bocage |
+| `aa/m3l3.map` | 4,078 | 4,834 | 435 | 391 | 0/0/0 | The Nebelwerfer Hunt |
+| `aa/m4l0.map` | 1,662 | 2,654 | 133 | 591 | 0/0/0 |  |
+| `aa/m4l1.map` | 1,312 | 5,020 | 1,543 | 8 | 0/0/0 | Rendezvous with the Resistance |
+| `aa/m4l2.map` | 1,918 | 5,578 | 599 | 187 | 0/0/0 | Diverting the Enemy |
+| `aa/m4l3.map` | 4,374 | 6,993 | 399 | 440 | 0/0/0 | The Command Post |
+| `aa/m5l1a.map` | 1,038 | 3,684 | 69 | 161 | 0/0/0 | Sniper's Last Stand - Outskirts |
+| `aa/m5l1b.map` | 2,391 | 6,506 | 171 | 212 | 0/0/0 | Sniper's Last Stand - City Hall |
+| `aa/m5l2a.map` | 1,861 | 2,929 | 114 | 308 | 0/0/0 | The Hunt for the King Tiger - Destroyed Village |
+| `aa/m5l2b.map` | 2,301 | 4,285 | 95 | 518 | 0/0/0 | The Hunt for the King Tiger - Country Road |
+| `aa/m5l3.map` | 1,366 | 4,799 | 122 | 56 | 0/0/0 | The Bridge |
+| `aa/m6l1a.map` | 3,156 | 9,166 | 36 | 460 | 0/0/0 | The Siegfried Forest - Flak Guns |
+| `aa/m6l1b.map` | 2,515 | 7,380 | 93 | 388 | 0/0/0 | The Siegfried Forest - Bunker Hill |
+| `aa/m6l1c.map` | 1,822 | 6,451 | 829 | 83 | 0/0/0 | Die Sturmgewehr |
+| `aa/m6l2a.map` | 2,469 | 9,035 | 227 | 42 | 0/0/0 | The Communications Blackout |
+| `aa/m6l2b.map` | 3,410 | 6,748 | 157 | 127 | 0/0/0 | The Schmerzen Express |
+| `aa/m6l3a.map` | 1,629 | 5,503 | 860 | 80 | 0/0/0 | Storming Fort Schmerzen |
+| `aa/m6l3b.map` | 872 | 4,660 | 797 | 0 | 0/0/0 | Storming Fort Schmerzen - Inner Facility |
+| `aa/m6l3c.map` | 1,281 | 5,422 | 834 | 0 | 0/0/0 | Storming Fort Schmerzen - Final Run |
+| `aa/m6l3d.map` | 343 | 2,195 | 610 | 0 | 0/0/0 | Storming Fort Schmerzen - Chemical Plant |
+| `aa/m6l3e.map` | 414 | 1,844 | 54 | 51 | 0/0/0 | Storming Fort Schmerzen - Conclusion |
+| `aa/training.map` | 439 | 1,870 | 788 | 80 | 0/0/0 | Training |
+| `aa_custom/Tirtagaine-Kechtat_obj.map` | 330 | 1,921 | 0 | 0 | 10/16/16 |  |
+| `aa_custom/complex_obj.map` | 407 | 3,155 | 111 | 0 | 17/16/16 |  |
+| `aa_custom/obj_El_alamein_final.map` | 605 | 1,876 | 270 | 9 | 29/16/17 |  |
+| `aa_custom/obj_moharg_team4.map` | 1,007 | 5,199 | 214 | 5 | 0/25/24 | Clave incorrecta! |
+| `bt/e1l1.map` | 3,525 | 7,262 | 589 | 527 | 0/0/0 | Tunisia - Battle of Kasserine Pass I |
+| `bt/e1l2.map` | 2,892 | 7,824 | 374 | 304 | 0/0/0 | Tunisia - Battle of Kasserine Pass II |
+| `bt/e1l3.map` | 2,119 | 8,755 | 1,002 | 85 | 0/0/0 | Tunisia - Bizerte Canal |
+| `bt/e1l4.map` | 3,607 | 12,578 | 1,108 | 119 | 0/0/0 | Tunisia - Bizerte Harbor |
+| `bt/e2l1.map` | 2,314 | 4,042 | 361 | 514 | 0/0/0 | Sicily - Glider Landing |
+| `bt/e2l2.map` | 3,477 | 7,589 | 603 | 635 | 0/0/0 | Sicily - The Airfield at Caltagirone |
+| `bt/e2l3.map` | 3,497 | 7,278 | 554 | 613 | 0/0/0 | Sicily - Gela |
+| `bt/e3l1.map` | 2,946 | 4,500 | 383 | 276 | 0/0/0 | Italy - Monte Cassino I |
+| `bt/e3l2.map` | 2,583 | 7,494 | 583 | 172 | 0/0/0 | Italy - Monte Cassino II |
+| `bt/e3l3.map` | 2,480 | 5,797 | 557 | 474 | 0/0/0 | Italy - Anzio |
+| `bt/e3l4.map` | 5,492 | 8,886 | 726 | 803 | 0/0/0 | Italy - Monte Battaglia |
+| `sh/t1l1.map` | 1,992 | 6,666 | 40 | 458 | 0/0/0 | Normandy |
+| `sh/t1l2.map` | 2,203 | 5,951 | 176 | 469 | 0/0/0 | Normandy |
+| `sh/t1l3.map` | 2,583 | 8,331 | 136 | 410 | 0/0/0 | Normandy |
+| `sh/t2l1.map` | 4,072 | 10,725 | 874 | 601 | 0/0/0 | Bastogne |
+| `sh/t2l2.map` | 2,025 | 9,904 | 1,039 | 582 | 0/0/0 | Bastogne |
+| `sh/t2l3.map` | 2,051 | 4,635 | 96 | 462 | 0/0/0 | Bastogne |
+| `sh/t2l4.map` | 4,663 | 10,908 | 249 | 564 | 0/0/0 | Bastogne |
+| `sh/t3l1.map` | 2,855 | 6,982 | 1,028 | 0 | 0/0/0 | Berlin |
+| `sh/t3l2.map` | 2,476 | 6,792 | 1,066 | 0 | 0/0/0 | Berlin |
