@@ -204,7 +204,36 @@ MOHRadiant cached from the shaders it had loaded. A stored value cannot
 override a shader — inline `+/-surfaceparm` tokens (below) are the
 supported per-side override channel.
 
-### 4.4 Inline per-side tokens
+### 4.4 Detecting decompiled `.map` files
+
+BSP-to-MAP decompiles must stay out of the reference corpus (they teach
+machine idioms no mapper wrote). They are detectable by measurement; five
+community files checked in 2026-07 (`Warehouse`, `dm_rockbound`,
+`obj_canal`, `obj_rockbound`, `stlo`) all matched the decompile
+fingerprint:
+
+| Signal | Authored sources (measured) | Decompiles (measured) |
+| --- | --- | --- |
+| Sides with nonzero texture shift | 19-77% (MP retail/community) | 0.4-3.3% |
+| Distinct scale pairs per map | 350-1,900 | exactly 2 |
+| Plane points | real face windings (`( 1280 2560 32 ) ( 1312 2560 32 ) ...`) | canonical plane triples (`( X -16 16 ) ( X 0 0 ) ( X 16 16 )`) |
+| Editor-only constructs (`func_group`, `vis_leafgroup`, `common/hint`) | routinely present | absent or trace |
+
+Decompiles still carry intact entity lumps and measurable layout geometry,
+but they lack the compiled-artifact data (lightmap pages, VIS, draw
+surfaces) their parent BSP has — so the parent pk3/BSP is strictly more
+useful and the decompile adds nothing beyond it.
+
+Caveat on the single-player corpora: the AA/SH/BT campaign files sit
+between the two profiles (m1l1: 8.3% nonzero shifts but 818 distinct
+scales and 32 `vis_leafgroup` entities; t1l1: 0.2% shifts, 52 scales).
+They contain editor-only constructs, so they are not simple decompiles,
+but their alignment statistics differ sharply from the MP mapsource drops
+and their exact provenance is unverified. Treat their brush/texturing
+style as a weaker idiom reference than the MP sources until provenance is
+confirmed.
+
+### 4.5 Inline per-side tokens
 
 After the three integers, sides may append token sequences:
 
