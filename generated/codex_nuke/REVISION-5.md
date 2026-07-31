@@ -256,4 +256,4 @@ complete. Human screenshot comparison remains a separate visual-fidelity gate.
 - [x] Known debt is documented honestly.
 - [x] Final hashes are recorded.
 - [x] Documentation is updated.
-- [ ] Commit is pushed.
+- [x] Commit is pushed.
