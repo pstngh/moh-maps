@@ -1,0 +1,33 @@
+{
+  "mapName": "fable_nuke",
+  "reference": "de_nuke_d.vmf",
+  "stats": {
+    "worldSolids": 5282,
+    "converted": 5088,
+    "skyboxSkipped": 890,
+    "helperSkipped": 970,
+    "clipPreserved": 1066,
+    "invalid": 0,
+    "displacementPlanarized": 706,
+    "unknownMaterialFaces": 149,
+    "funcDetailConverted": 2342,
+    "funcBrushConverted": 121,
+    "propsSkipped": 6891,
+    "lightsIn": 471,
+    "lightsOut": 163,
+    "doors": 4,
+    "spawnsPerTeam": 16,
+    "shellBounds": {
+      "lo": [
+        -6272,
+        -5504,
+        -6352
+      ],
+      "hi": [
+        6576,
+        2288,
+        1360
+      ]
+    }
+  }
+}
