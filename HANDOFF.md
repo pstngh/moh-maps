@@ -85,6 +85,24 @@ policy blocked — a local session can reach both). Agreed approach:
   shader/material usage. Purpose: empirical budget distributions to
   calibrate roadmap item 2, plus entity-convention statistics.
 
+## Requested experiment: from-scratch Nuke rebuild
+
+The user asked for a clean-room rebuild of Nuke from the CS reference as a
+one-shot benchmark. Rules of the experiment:
+
+- Input: the user's local `de_nuke_d.vmf` (and CS files) — ask for the
+  path; never commit them.
+- Write a NEW generator from scratch (do not copy `generate_nuke.js`);
+  reuse only the documented knowledge: `docs/MAP-SOURCE-FORMAT.md`, the
+  playbook, and the research log's case law (winding, detail policy,
+  displacement planarization, prop-evidence rules, lighting budgets,
+  unlit-face relight, atlas repack).
+- Output a complete MP package under a NEW map name (do not overwrite
+  `codex_nuke`): .map, original textures, shaders, .scr files, validator.
+- Compile/light/package on the user's Windows MOHTools setup, then bot QA
+  per the playbook gates. Measure how far one generation attempt gets
+  before human screenshots are needed — that gap is the roadmap metric.
+
 ## Cautions for the next session
 
 - Follow `AGENTS.md` gates: no map change is "complete" without compile,
