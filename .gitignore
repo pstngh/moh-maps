@@ -2,3 +2,5 @@
 # are tracked; GLB/PNG/TGA/SKD/SKC/TIKI and enhanced packages are not.
 generated/codex_nuke/.local-source2/
 generated/codex_nuke/codex_nuke-source2-local.pk3
+# Local-only Reactor compiler staging and logs.
+generated/codex_reactor/.build/

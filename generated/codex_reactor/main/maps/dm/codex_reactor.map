@@ -1,0 +1,1691 @@
+// entity 0
+{
+"classname" "worldspawn"
+"message" "Codex Reactor"
+"ambientlight" "18 20 24"
+"suncolor" "130 112 84"
+"sundirection" "300 220 0"
+"sundiffusecolor" "62 72 92"
+"sundiffuse" "1.05"
+"_color" "1.0 0.94 0.84"
+"farplane" "5000"
+"farplane_color" "0.36 0.40 0.46"
+// brush 0 shell_floor
+{
+( -1536 -16 16 ) ( -1536 0 0 ) ( -1536 16 16 ) codex_nuke/concrete_dark 0 0 0 1 1 0 0 0
+( 1536 16 16 ) ( 1536 0 0 ) ( 1536 -16 16 ) codex_nuke/concrete_dark 0 0 0 1 1 0 0 0
+( 16 -1280 -16 ) ( 0 -1280 0 ) ( 16 -1280 16 ) codex_nuke/concrete_dark 0 0 0 1 1 0 0 0
+( 16 1280 16 ) ( 0 1280 0 ) ( 16 1280 -16 ) codex_nuke/concrete_dark 0 0 0 1 1 0 0 0
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) codex_nuke/concrete_dark 0 0 0 1 1 0 0 0
+( 16 16 0 ) ( 0 0 0 ) ( -16 16 0 ) codex_nuke/concrete_dark 0 0 0 1 1 0 0 0
+}
+// brush 1 outer_wall
+{
+( -1536 -16 16 ) ( -1536 0 0 ) ( -1536 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -1472 16 16 ) ( -1472 0 0 ) ( -1472 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -1280 -16 ) ( 0 -1280 0 ) ( 16 -1280 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 1280 16 ) ( 0 1280 0 ) ( 16 1280 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 512 ) ( 0 0 512 ) ( -16 16 512 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 2 outer_wall
+{
+( 1472 -16 16 ) ( 1472 0 0 ) ( 1472 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 1536 16 16 ) ( 1536 0 0 ) ( 1536 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -1280 -16 ) ( 0 -1280 0 ) ( 16 -1280 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 1280 16 ) ( 0 1280 0 ) ( 16 1280 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 512 ) ( 0 0 512 ) ( -16 16 512 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 3 outer_wall
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -1280 -16 ) ( 0 -1280 0 ) ( 16 -1280 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 512 ) ( 0 0 512 ) ( -16 16 512 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 4 outer_wall
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 1216 -16 ) ( 0 1216 0 ) ( 16 1216 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 1280 16 ) ( 0 1280 0 ) ( 16 1280 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 512 ) ( 0 0 512 ) ( -16 16 512 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 5 sky_ceiling
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) sky/mohday1 0 0 0 1 1 0 0 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) sky/mohday1 0 0 0 1 1 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) sky/mohday1 0 0 0 1 1 0 0 0
+( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) sky/mohday1 0 0 0 1 1 0 0 0
+( -16 16 512 ) ( 0 0 512 ) ( 16 16 512 ) sky/mohday1 0 0 0 1 1 0 0 0
+( 16 16 576 ) ( 0 0 576 ) ( -16 16 576 ) sky/mohday1 0 0 0 1 1 0 0 0
+}
+// brush 6 yard_floor
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) codex_nuke/asphalt 0 0 0 0.750 0.750 0 0 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) codex_nuke/asphalt 0 0 0 0.750 0.750 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) codex_nuke/asphalt 0 0 0 0.750 0.750 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/asphalt 0 0 0 0.750 0.750 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) codex_nuke/asphalt 0 0 0 0.750 0.750 0 0 0
+( 16 16 16 ) ( 0 0 16 ) ( -16 16 16 ) codex_nuke/asphalt 0 0 0 0.750 0.750 0 0 0
+}
+// brush 7 interior_floor
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) codex_nuke/concrete_floor 0 0 0 0.750 0.750 0 0 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) codex_nuke/concrete_floor 0 0 0 0.750 0.750 0 0 0
+( 16 -256 -16 ) ( 0 -256 0 ) ( 16 -256 16 ) codex_nuke/concrete_floor 0 0 0 0.750 0.750 0 0 0
+( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) codex_nuke/concrete_floor 0 0 0 0.750 0.750 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) codex_nuke/concrete_floor 0 0 0 0.750 0.750 0 0 0
+( 16 16 16 ) ( 0 0 16 ) ( -16 16 16 ) codex_nuke/concrete_floor 0 0 0 0.750 0.750 0 0 0
+}
+// brush 8 front_wall
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -1152 16 16 ) ( -1152 0 0 ) ( -1152 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -256 16 ) ( 0 -256 0 ) ( 16 -256 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 9 front_wall
+{
+( -896 -16 16 ) ( -896 0 0 ) ( -896 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -160 16 16 ) ( -160 0 0 ) ( -160 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -256 16 ) ( 0 -256 0 ) ( 16 -256 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 10 front_wall
+{
+( 160 -16 16 ) ( 160 0 0 ) ( 160 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 896 16 16 ) ( 896 0 0 ) ( 896 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -256 16 ) ( 0 -256 0 ) ( 16 -256 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 11 front_wall
+{
+( 1152 -16 16 ) ( 1152 0 0 ) ( 1152 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -256 16 ) ( 0 -256 0 ) ( 16 -256 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 12 entrance_lintel
+{
+( -1152 -16 16 ) ( -1152 0 0 ) ( -1152 16 16 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( -896 16 16 ) ( -896 0 0 ) ( -896 -16 16 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -256 16 ) ( 0 -256 0 ) ( 16 -256 -16 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 256 ) ( 0 0 256 ) ( 16 16 256 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 13 entrance_lintel
+{
+( -160 -16 16 ) ( -160 0 0 ) ( -160 16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 160 16 16 ) ( 160 0 0 ) ( 160 -16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -256 16 ) ( 0 -256 0 ) ( 16 -256 -16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -16 16 256 ) ( 0 0 256 ) ( 16 16 256 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+}
+// brush 14 entrance_lintel
+{
+( 896 -16 16 ) ( 896 0 0 ) ( 896 16 16 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( 1152 16 16 ) ( 1152 0 0 ) ( 1152 -16 16 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -256 16 ) ( 0 -256 0 ) ( 16 -256 -16 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 256 ) ( 0 0 256 ) ( 16 16 256 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 15 building_roof
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.750 0.750 0 0 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.750 0.750 0 0 0
+( 16 -256 -16 ) ( 0 -256 0 ) ( 16 -256 16 ) codex_nuke/corrugated_gray 0 0 0 0.750 0.750 0 0 0
+( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) codex_nuke/corrugated_gray 0 0 0 0.750 0.750 0 0 0
+( -16 16 384 ) ( 0 0 384 ) ( 16 16 384 ) codex_nuke/corrugated_gray 0 0 0 0.750 0.750 0 0 0
+( 16 16 416 ) ( 0 0 416 ) ( -16 16 416 ) codex_nuke/corrugated_gray 0 0 0 0.750 0.750 0 0 0
+}
+// brush 16 interior_ceiling
+{
+( -1440 -16 16 ) ( -1440 0 0 ) ( -1440 16 16 ) codex_nuke/ceiling_tile 0 0 0 0.750 0.750 0 0 0
+( 1440 16 16 ) ( 1440 0 0 ) ( 1440 -16 16 ) codex_nuke/ceiling_tile 0 0 0 0.750 0.750 0 0 0
+( 16 -224 -16 ) ( 0 -224 0 ) ( 16 -224 16 ) codex_nuke/ceiling_tile 0 0 0 0.750 0.750 0 0 0
+( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) codex_nuke/ceiling_tile 0 0 0 0.750 0.750 0 0 0
+( -16 16 376 ) ( 0 0 376 ) ( 16 16 376 ) codex_nuke/ceiling_tile 0 0 0 0.750 0.750 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/ceiling_tile 0 0 0 0.750 0.750 0 0 0
+}
+// brush 17 reactor_side_wall
+{
+( -624 -16 16 ) ( -624 0 0 ) ( -624 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -592 16 16 ) ( -592 0 0 ) ( -592 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -256 -16 ) ( 0 -256 0 ) ( 16 -256 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -64 16 ) ( 0 -64 0 ) ( 16 -64 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 18 reactor_side_wall
+{
+( -624 -16 16 ) ( -624 0 0 ) ( -624 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -592 16 16 ) ( -592 0 0 ) ( -592 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 192 -16 ) ( 0 192 0 ) ( 16 192 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 400 16 ) ( 0 400 0 ) ( 16 400 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 19 reactor_side_wall
+{
+( -624 -16 16 ) ( -624 0 0 ) ( -624 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -592 16 16 ) ( -592 0 0 ) ( -592 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 656 -16 ) ( 0 656 0 ) ( 16 656 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 768 16 ) ( 0 768 0 ) ( 16 768 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 20 reactor_side_wall
+{
+( 592 -16 16 ) ( 592 0 0 ) ( 592 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 624 16 16 ) ( 624 0 0 ) ( 624 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -256 -16 ) ( 0 -256 0 ) ( 16 -256 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 -64 16 ) ( 0 -64 0 ) ( 16 -64 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 21 reactor_side_wall
+{
+( 592 -16 16 ) ( 592 0 0 ) ( 592 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 624 16 16 ) ( 624 0 0 ) ( 624 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 192 -16 ) ( 0 192 0 ) ( 16 192 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 400 16 ) ( 0 400 0 ) ( 16 400 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 22 reactor_side_wall
+{
+( 592 -16 16 ) ( 592 0 0 ) ( 592 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 624 16 16 ) ( 624 0 0 ) ( 624 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 656 -16 ) ( 0 656 0 ) ( 16 656 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 768 16 ) ( 0 768 0 ) ( 16 768 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 23 reactor_rear_wall
+{
+( -624 -16 16 ) ( -624 0 0 ) ( -624 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -400 16 16 ) ( -400 0 0 ) ( -400 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 800 16 ) ( 0 800 0 ) ( 16 800 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 24 reactor_rear_wall
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 128 16 16 ) ( 128 0 0 ) ( 128 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 800 16 ) ( 0 800 0 ) ( 16 800 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 25 reactor_rear_wall
+{
+( 400 -16 16 ) ( 400 0 0 ) ( 400 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 624 16 16 ) ( 624 0 0 ) ( 624 -16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 800 16 ) ( 0 800 0 ) ( 16 800 -16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) codex_nuke/painted_concrete 0 0 0 0.500 0.500 0 0 0
+}
+// brush 26 facade_pier
+{
+( -1348 -16 16 ) ( -1348 0 0 ) ( -1348 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -1308 16 16 ) ( -1308 0 0 ) ( -1308 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -304 -16 ) ( 0 -304 0 ) ( 16 -304 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 27 facade_pier
+{
+( -1044 -16 16 ) ( -1044 0 0 ) ( -1044 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -1004 16 16 ) ( -1004 0 0 ) ( -1004 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -304 -16 ) ( 0 -304 0 ) ( 16 -304 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 28 facade_pier
+{
+( -548 -16 16 ) ( -548 0 0 ) ( -548 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -508 16 16 ) ( -508 0 0 ) ( -508 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -304 -16 ) ( 0 -304 0 ) ( 16 -304 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 29 facade_pier
+{
+( 508 -16 16 ) ( 508 0 0 ) ( 508 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 548 16 16 ) ( 548 0 0 ) ( 548 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -304 -16 ) ( 0 -304 0 ) ( 16 -304 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 30 facade_pier
+{
+( 1004 -16 16 ) ( 1004 0 0 ) ( 1004 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 1044 16 16 ) ( 1044 0 0 ) ( 1044 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -304 -16 ) ( 0 -304 0 ) ( 16 -304 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 31 facade_pier
+{
+( 1308 -16 16 ) ( 1308 0 0 ) ( 1308 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 1348 16 16 ) ( 1348 0 0 ) ( 1348 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -304 -16 ) ( 0 -304 0 ) ( 16 -304 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 32 facade_panel
+{
+( -1440 -16 16 ) ( -1440 0 0 ) ( -1440 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( -1184 16 16 ) ( -1184 0 0 ) ( -1184 -16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -300 -16 ) ( 0 -300 0 ) ( 16 -300 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 280 ) ( 0 0 280 ) ( 16 16 280 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 33 facade_panel
+{
+( -864 -16 16 ) ( -864 0 0 ) ( -864 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -192 16 16 ) ( -192 0 0 ) ( -192 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -300 -16 ) ( 0 -300 0 ) ( 16 -300 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 280 ) ( 0 0 280 ) ( 16 16 280 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 34 facade_panel
+{
+( 192 -16 16 ) ( 192 0 0 ) ( 192 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 864 16 16 ) ( 864 0 0 ) ( 864 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -300 -16 ) ( 0 -300 0 ) ( 16 -300 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 280 ) ( 0 0 280 ) ( 16 16 280 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 35 facade_panel
+{
+( 1184 -16 16 ) ( 1184 0 0 ) ( 1184 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 1440 16 16 ) ( 1440 0 0 ) ( 1440 -16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -300 -16 ) ( 0 -300 0 ) ( 16 -300 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 280 ) ( 0 0 280 ) ( 16 16 280 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 36 reactor_plinth
+{
+( 147.821 381.229 16 ) ( 160 320 16 ) ( 160 320 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( 113.137 433.137 16 ) ( 147.821 381.229 16 ) ( 147.821 381.229 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( 61.229 467.821 16 ) ( 113.137 433.137 16 ) ( 113.137 433.137 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( 0 480 16 ) ( 61.229 467.821 16 ) ( 61.229 467.821 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( -61.229 467.821 16 ) ( 0 480 16 ) ( 0 480 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( -113.137 433.137 16 ) ( -61.229 467.821 16 ) ( -61.229 467.821 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( -147.821 381.229 16 ) ( -113.137 433.137 16 ) ( -113.137 433.137 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( -160 320 16 ) ( -147.821 381.229 16 ) ( -147.821 381.229 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( -147.821 258.771 16 ) ( -160 320 16 ) ( -160 320 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( -113.137 206.863 16 ) ( -147.821 258.771 16 ) ( -147.821 258.771 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( -61.229 172.179 16 ) ( -113.137 206.863 16 ) ( -113.137 206.863 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( 0 160 16 ) ( -61.229 172.179 16 ) ( -61.229 172.179 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( 61.229 172.179 16 ) ( 0 160 16 ) ( 0 160 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( 113.137 206.863 16 ) ( 61.229 172.179 16 ) ( 61.229 172.179 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( 147.821 258.771 16 ) ( 113.137 206.863 16 ) ( 113.137 206.863 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( 160 320 16 ) ( 147.821 258.771 16 ) ( 147.821 258.771 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( -16 336 16 ) ( 0 320 16 ) ( 16 336 16 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+( 16 336 48 ) ( 0 320 48 ) ( -16 336 48 ) codex_nuke/rubber 0 0 0 0.500 0.500 0 0 0
+}
+// brush 37 reactor_body
+{
+( 103.475 362.861 48 ) ( 112 320 48 ) ( 112 320 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 79.196 399.196 48 ) ( 103.475 362.861 48 ) ( 103.475 362.861 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 42.861 423.475 48 ) ( 79.196 399.196 48 ) ( 79.196 399.196 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 0 432 48 ) ( 42.861 423.475 48 ) ( 42.861 423.475 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -42.861 423.475 48 ) ( 0 432 48 ) ( 0 432 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -79.196 399.196 48 ) ( -42.861 423.475 48 ) ( -42.861 423.475 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -103.475 362.861 48 ) ( -79.196 399.196 48 ) ( -79.196 399.196 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -112 320 48 ) ( -103.475 362.861 48 ) ( -103.475 362.861 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -103.475 277.139 48 ) ( -112 320 48 ) ( -112 320 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -79.196 240.804 48 ) ( -103.475 277.139 48 ) ( -103.475 277.139 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -42.861 216.525 48 ) ( -79.196 240.804 48 ) ( -79.196 240.804 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 0 208 48 ) ( -42.861 216.525 48 ) ( -42.861 216.525 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 42.861 216.525 48 ) ( 0 208 48 ) ( 0 208 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 79.196 240.804 48 ) ( 42.861 216.525 48 ) ( 42.861 216.525 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 103.475 277.139 48 ) ( 79.196 240.804 48 ) ( 79.196 240.804 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 112 320 48 ) ( 103.475 277.139 48 ) ( 103.475 277.139 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 336 48 ) ( 0 320 48 ) ( 16 336 48 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 336 248 ) ( 0 320 248 ) ( -16 336 248 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 38 reactor_band
+{
+( 116.409 368.218 88 ) ( 126 320 88 ) ( 126 320 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 89.095 409.095 88 ) ( 116.409 368.218 88 ) ( 116.409 368.218 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 48.218 436.409 88 ) ( 89.095 409.095 88 ) ( 89.095 409.095 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 0 446 88 ) ( 48.218 436.409 88 ) ( 48.218 436.409 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -48.218 436.409 88 ) ( 0 446 88 ) ( 0 446 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -89.095 409.095 88 ) ( -48.218 436.409 88 ) ( -48.218 436.409 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -116.409 368.218 88 ) ( -89.095 409.095 88 ) ( -89.095 409.095 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -126 320 88 ) ( -116.409 368.218 88 ) ( -116.409 368.218 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -116.409 271.782 88 ) ( -126 320 88 ) ( -126 320 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -89.095 230.905 88 ) ( -116.409 271.782 88 ) ( -116.409 271.782 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -48.218 203.591 88 ) ( -89.095 230.905 88 ) ( -89.095 230.905 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 0 194 88 ) ( -48.218 203.591 88 ) ( -48.218 203.591 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 48.218 203.591 88 ) ( 0 194 88 ) ( 0 194 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 89.095 230.905 88 ) ( 48.218 203.591 88 ) ( 48.218 203.591 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 116.409 271.782 88 ) ( 89.095 230.905 88 ) ( 89.095 230.905 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 126 320 88 ) ( 116.409 271.782 88 ) ( 116.409 271.782 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -16 336 88 ) ( 0 320 88 ) ( 16 336 88 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 336 116 ) ( 0 320 116 ) ( -16 336 116 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+}
+// brush 39 reactor_band
+{
+( 116.409 368.218 176 ) ( 126 320 176 ) ( 126 320 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 89.095 409.095 176 ) ( 116.409 368.218 176 ) ( 116.409 368.218 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 48.218 436.409 176 ) ( 89.095 409.095 176 ) ( 89.095 409.095 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 0 446 176 ) ( 48.218 436.409 176 ) ( 48.218 436.409 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -48.218 436.409 176 ) ( 0 446 176 ) ( 0 446 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -89.095 409.095 176 ) ( -48.218 436.409 176 ) ( -48.218 436.409 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -116.409 368.218 176 ) ( -89.095 409.095 176 ) ( -89.095 409.095 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -126 320 176 ) ( -116.409 368.218 176 ) ( -116.409 368.218 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -116.409 271.782 176 ) ( -126 320 176 ) ( -126 320 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -89.095 230.905 176 ) ( -116.409 271.782 176 ) ( -116.409 271.782 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -48.218 203.591 176 ) ( -89.095 230.905 176 ) ( -89.095 230.905 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 0 194 176 ) ( -48.218 203.591 176 ) ( -48.218 203.591 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 48.218 203.591 176 ) ( 0 194 176 ) ( 0 194 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 89.095 230.905 176 ) ( 48.218 203.591 176 ) ( 48.218 203.591 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 116.409 271.782 176 ) ( 89.095 230.905 176 ) ( 89.095 230.905 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 126 320 176 ) ( 116.409 271.782 176 ) ( 116.409 271.782 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -16 336 176 ) ( 0 320 176 ) ( 16 336 176 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 16 336 204 ) ( 0 320 204 ) ( -16 336 204 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+}
+// brush 40 reactor_cap
+{
+( 88.692 356.738 248 ) ( 96 320 248 ) ( 96 320 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 67.882 387.882 248 ) ( 88.692 356.738 248 ) ( 88.692 356.738 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 36.738 408.692 248 ) ( 67.882 387.882 248 ) ( 67.882 387.882 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 0 416 248 ) ( 36.738 408.692 248 ) ( 36.738 408.692 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -36.738 408.692 248 ) ( 0 416 248 ) ( 0 416 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -67.882 387.882 248 ) ( -36.738 408.692 248 ) ( -36.738 408.692 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -88.692 356.738 248 ) ( -67.882 387.882 248 ) ( -67.882 387.882 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -96 320 248 ) ( -88.692 356.738 248 ) ( -88.692 356.738 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -88.692 283.262 248 ) ( -96 320 248 ) ( -96 320 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -67.882 252.118 248 ) ( -88.692 283.262 248 ) ( -88.692 283.262 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -36.738 231.308 248 ) ( -67.882 252.118 248 ) ( -67.882 252.118 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 0 224 248 ) ( -36.738 231.308 248 ) ( -36.738 231.308 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 36.738 231.308 248 ) ( 0 224 248 ) ( 0 224 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 67.882 252.118 248 ) ( 36.738 231.308 248 ) ( 36.738 231.308 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 88.692 283.262 248 ) ( 67.882 252.118 248 ) ( 67.882 252.118 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 96 320 248 ) ( 88.692 283.262 248 ) ( 88.692 283.262 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -16 336 248 ) ( 0 320 248 ) ( 16 336 248 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 336 288 ) ( 0 320 288 ) ( -16 336 288 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 41 reactor_cover
+{
+( -336 -16 16 ) ( -336 0 0 ) ( -336 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -240 16 16 ) ( -240 0 0 ) ( -240 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 272 -16 ) ( 0 272 0 ) ( 16 272 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 368 16 ) ( 0 368 0 ) ( 16 368 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 42 reactor_cover
+{
+( 240 -16 16 ) ( 240 0 0 ) ( 240 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 336 16 16 ) ( 336 0 0 ) ( 336 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 272 -16 ) ( 0 272 0 ) ( 16 272 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 368 16 ) ( 0 368 0 ) ( 16 368 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 43 reactor_cover
+{
+( -48 -16 16 ) ( -48 0 0 ) ( -48 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 48 16 16 ) ( 48 0 0 ) ( 48 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 24 -16 ) ( 0 24 0 ) ( 16 24 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 120 16 ) ( 0 120 0 ) ( 16 120 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 44 reactor_cover
+{
+( -48 -16 16 ) ( -48 0 0 ) ( -48 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 48 16 16 ) ( 48 0 0 ) ( 48 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 520 -16 ) ( 0 520 0 ) ( 16 520 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 616 16 ) ( 0 616 0 ) ( 16 616 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 45 reactor_column
+{
+( -508 -16 16 ) ( -508 0 0 ) ( -508 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -452 16 16 ) ( -452 0 0 ) ( -452 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 4 -16 ) ( 0 4 0 ) ( 16 4 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 60 16 ) ( 0 60 0 ) ( 16 60 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 46 reactor_column
+{
+( 452 -16 16 ) ( 452 0 0 ) ( 452 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 508 16 16 ) ( 508 0 0 ) ( 508 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 4 -16 ) ( 0 4 0 ) ( 16 4 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 60 16 ) ( 0 60 0 ) ( 16 60 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 47 reactor_column
+{
+( -508 -16 16 ) ( -508 0 0 ) ( -508 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -452 16 16 ) ( -452 0 0 ) ( -452 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 612 -16 ) ( 0 612 0 ) ( 16 612 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 668 16 ) ( 0 668 0 ) ( 16 668 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 48 reactor_column
+{
+( 452 -16 16 ) ( 452 0 0 ) ( 452 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 508 16 16 ) ( 508 0 0 ) ( 508 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 612 -16 ) ( 0 612 0 ) ( 16 612 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 668 16 ) ( 0 668 0 ) ( 16 668 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 49 equipment
+{
+( -1384 -16 16 ) ( -1384 0 0 ) ( -1384 16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -1240 16 16 ) ( -1240 0 0 ) ( -1240 -16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -96 -16 ) ( 0 -96 0 ) ( 16 -96 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 96 16 ) ( 0 96 0 ) ( 16 96 -16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 120 ) ( 0 0 120 ) ( -16 16 120 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 50 equipment
+{
+( -984 -16 16 ) ( -984 0 0 ) ( -984 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -792 16 16 ) ( -792 0 0 ) ( -792 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 -40 -16 ) ( 0 -40 0 ) ( 16 -40 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 120 16 ) ( 0 120 0 ) ( 16 120 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 104 ) ( 0 0 104 ) ( -16 16 104 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 51 equipment
+{
+( -920 -16 16 ) ( -920 0 0 ) ( -920 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( -736 16 16 ) ( -736 0 0 ) ( -736 -16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 464 -16 ) ( 0 464 0 ) ( 16 464 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 608 16 ) ( 0 608 0 ) ( 16 608 -16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 52 equipment
+{
+( -1376 -16 16 ) ( -1376 0 0 ) ( -1376 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -1168 16 16 ) ( -1168 0 0 ) ( -1168 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 872 -16 ) ( 0 872 0 ) ( 16 872 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 1088 16 ) ( 0 1088 0 ) ( 16 1088 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 53 equipment
+{
+( 1240 -16 16 ) ( 1240 0 0 ) ( 1240 16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 1384 16 16 ) ( 1384 0 0 ) ( 1384 -16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -96 -16 ) ( 0 -96 0 ) ( 16 -96 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 96 16 ) ( 0 96 0 ) ( 16 96 -16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 120 ) ( 0 0 120 ) ( -16 16 120 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 54 equipment
+{
+( 792 -16 16 ) ( 792 0 0 ) ( 792 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 984 16 16 ) ( 984 0 0 ) ( 984 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 -40 -16 ) ( 0 -40 0 ) ( 16 -40 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 120 16 ) ( 0 120 0 ) ( 16 120 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 104 ) ( 0 0 104 ) ( -16 16 104 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 55 equipment
+{
+( 736 -16 16 ) ( 736 0 0 ) ( 736 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 920 16 16 ) ( 920 0 0 ) ( 920 -16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 464 -16 ) ( 0 464 0 ) ( 16 464 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 608 16 ) ( 0 608 0 ) ( 16 608 -16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 56 equipment
+{
+( 1168 -16 16 ) ( 1168 0 0 ) ( 1168 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 1376 16 16 ) ( 1376 0 0 ) ( 1376 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 872 -16 ) ( 0 872 0 ) ( 16 872 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 1088 16 ) ( 0 1088 0 ) ( 16 1088 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 57 equipment
+{
+( -224 -16 16 ) ( -224 0 0 ) ( -224 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 224 16 16 ) ( 224 0 0 ) ( 224 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 880 -16 ) ( 0 880 0 ) ( 16 880 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 1168 16 ) ( 0 1168 0 ) ( 16 1168 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 144 ) ( 0 0 144 ) ( -16 16 144 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 58 control_console
+{
+( -1360 -16 16 ) ( -1360 0 0 ) ( -1360 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -1304 16 16 ) ( -1304 0 0 ) ( -1304 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 200 -16 ) ( 0 200 0 ) ( 16 200 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 672 16 ) ( 0 672 0 ) ( 16 672 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 88 ) ( 0 0 88 ) ( -16 16 88 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 59 control_console
+{
+( 1304 -16 16 ) ( 1304 0 0 ) ( 1304 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 1360 16 16 ) ( 1360 0 0 ) ( 1360 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 200 -16 ) ( 0 200 0 ) ( 16 200 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 672 16 ) ( 0 672 0 ) ( 16 672 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 88 ) ( 0 0 88 ) ( -16 16 88 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 60 control_console
+{
+( -1040 -16 16 ) ( -1040 0 0 ) ( -1040 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -752 16 16 ) ( -752 0 0 ) ( -752 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 704 -16 ) ( 0 704 0 ) ( 16 704 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 760 16 ) ( 0 760 0 ) ( 16 760 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 88 ) ( 0 0 88 ) ( -16 16 88 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 61 control_console
+{
+( 752 -16 16 ) ( 752 0 0 ) ( 752 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 1040 16 16 ) ( 1040 0 0 ) ( 1040 -16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 704 -16 ) ( 0 704 0 ) ( 16 704 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 760 16 ) ( 0 760 0 ) ( 16 760 -16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+( 16 16 88 ) ( 0 0 88 ) ( -16 16 88 ) codex_nuke/control_panel 0 0 0 0.500 0.500 0 0 0
+}
+// brush 62 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -160 -16 ) ( 0 -160 0 ) ( 16 -160 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -128 16 ) ( 0 -128 0 ) ( 16 -128 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 32 ) ( 0 0 32 ) ( -16 16 32 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 63 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -128 -16 ) ( 0 -128 0 ) ( 16 -128 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -96 16 ) ( 0 -96 0 ) ( 16 -96 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 64 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -96 -16 ) ( 0 -96 0 ) ( 16 -96 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -64 16 ) ( 0 -64 0 ) ( 16 -64 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 65 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -32 16 ) ( 0 -32 0 ) ( 16 -32 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 80 ) ( 0 0 80 ) ( -16 16 80 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 66 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -32 -16 ) ( 0 -32 0 ) ( 16 -32 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 0 16 ) ( 0 0 0 ) ( 16 0 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 67 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 0 -16 ) ( 0 0 0 ) ( 16 0 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 32 16 ) ( 0 32 0 ) ( 16 32 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 68 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 32 -16 ) ( 0 32 0 ) ( 16 32 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 64 16 ) ( 0 64 0 ) ( 16 64 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 69 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 64 -16 ) ( 0 64 0 ) ( 16 64 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 96 16 ) ( 0 96 0 ) ( 16 96 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 144 ) ( 0 0 144 ) ( -16 16 144 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 70 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 96 -16 ) ( 0 96 0 ) ( 16 96 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 128 16 ) ( 0 128 0 ) ( 16 128 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 71 mezzanine_stair
+{
+( -1248 -16 16 ) ( -1248 0 0 ) ( -1248 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 128 -16 ) ( 0 128 0 ) ( 16 128 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 160 16 ) ( 0 160 0 ) ( 16 160 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 72 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -160 -16 ) ( 0 -160 0 ) ( 16 -160 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -128 16 ) ( 0 -128 0 ) ( 16 -128 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 32 ) ( 0 0 32 ) ( -16 16 32 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 73 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -128 -16 ) ( 0 -128 0 ) ( 16 -128 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -96 16 ) ( 0 -96 0 ) ( 16 -96 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 74 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -96 -16 ) ( 0 -96 0 ) ( 16 -96 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -64 16 ) ( 0 -64 0 ) ( 16 -64 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 75 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -32 16 ) ( 0 -32 0 ) ( 16 -32 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 80 ) ( 0 0 80 ) ( -16 16 80 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 76 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 -32 -16 ) ( 0 -32 0 ) ( 16 -32 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 0 16 ) ( 0 0 0 ) ( 16 0 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 77 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 0 -16 ) ( 0 0 0 ) ( 16 0 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 32 16 ) ( 0 32 0 ) ( 16 32 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 78 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 32 -16 ) ( 0 32 0 ) ( 16 32 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 64 16 ) ( 0 64 0 ) ( 16 64 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 79 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 64 -16 ) ( 0 64 0 ) ( 16 64 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 96 16 ) ( 0 96 0 ) ( 16 96 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 144 ) ( 0 0 144 ) ( -16 16 144 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 80 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 96 -16 ) ( 0 96 0 ) ( 16 96 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 128 16 ) ( 0 128 0 ) ( 16 128 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 81 mezzanine_stair
+{
+( 1024 -16 16 ) ( 1024 0 0 ) ( 1024 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1248 16 16 ) ( 1248 0 0 ) ( 1248 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 128 -16 ) ( 0 128 0 ) ( 16 128 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 160 16 ) ( 0 160 0 ) ( 16 160 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 82 west_mezzanine
+{
+( -1408 -16 16 ) ( -1408 0 0 ) ( -1408 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -672 16 16 ) ( -672 0 0 ) ( -672 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 160 -16 ) ( 0 160 0 ) ( 16 160 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 736 16 ) ( 0 736 0 ) ( 16 736 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 83 east_mezzanine
+{
+( 672 -16 16 ) ( 672 0 0 ) ( 672 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 1408 16 16 ) ( 1408 0 0 ) ( 1408 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 160 -16 ) ( 0 160 0 ) ( 16 160 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 736 16 ) ( 0 736 0 ) ( 16 736 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 84 west_balcony
+{
+( -576 -16 16 ) ( -576 0 0 ) ( -576 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -400 16 16 ) ( -400 0 0 ) ( -400 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 400 -16 ) ( 0 400 0 ) ( 16 400 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 736 16 ) ( 0 736 0 ) ( 16 736 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 85 east_balcony
+{
+( 400 -16 16 ) ( 400 0 0 ) ( 400 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 576 16 16 ) ( 576 0 0 ) ( 576 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 400 -16 ) ( 0 400 0 ) ( 16 400 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 736 16 ) ( 0 736 0 ) ( 16 736 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 86 west_balcony_link
+{
+( -672 -16 16 ) ( -672 0 0 ) ( -672 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -400 16 16 ) ( -400 0 0 ) ( -400 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 432 -16 ) ( 0 432 0 ) ( 16 432 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 624 16 ) ( 0 624 0 ) ( 16 624 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 87 east_balcony_link
+{
+( 400 -16 16 ) ( 400 0 0 ) ( 400 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 672 16 16 ) ( 672 0 0 ) ( 672 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 432 -16 ) ( 0 432 0 ) ( 16 432 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 624 16 ) ( 0 624 0 ) ( 16 624 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 88 west_rear_link
+{
+( -864 -16 16 ) ( -864 0 0 ) ( -864 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -672 16 16 ) ( -672 0 0 ) ( -672 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 736 -16 ) ( 0 736 0 ) ( 16 736 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 992 16 ) ( 0 992 0 ) ( 16 992 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 89 east_rear_link
+{
+( 672 -16 16 ) ( 672 0 0 ) ( 672 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 864 16 16 ) ( 864 0 0 ) ( 864 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 736 -16 ) ( 0 736 0 ) ( 16 736 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 992 16 ) ( 0 992 0 ) ( 16 992 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 90 rear_catwalk
+{
+( -864 -16 16 ) ( -864 0 0 ) ( -864 16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 864 16 16 ) ( 864 0 0 ) ( 864 -16 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 1024 16 ) ( 0 1024 0 ) ( 16 1024 -16 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) codex_nuke/metal_grating 0 0 0 0.500 0.500 0 0 0
+}
+// brush 91 catwalk_support
+{
+( -1380 -16 16 ) ( -1380 0 0 ) ( -1380 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -1340 16 16 ) ( -1340 0 0 ) ( -1340 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 236 -16 ) ( 0 236 0 ) ( 16 236 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 276 16 ) ( 0 276 0 ) ( 16 276 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 92 catwalk_support
+{
+( -740 -16 16 ) ( -740 0 0 ) ( -740 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -700 16 16 ) ( -700 0 0 ) ( -700 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 652 -16 ) ( 0 652 0 ) ( 16 652 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 692 16 ) ( 0 692 0 ) ( 16 692 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 93 catwalk_support
+{
+( 1340 -16 16 ) ( 1340 0 0 ) ( 1340 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 1380 16 16 ) ( 1380 0 0 ) ( 1380 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 236 -16 ) ( 0 236 0 ) ( 16 236 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 276 16 ) ( 0 276 0 ) ( 16 276 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 94 catwalk_support
+{
+( 700 -16 16 ) ( 700 0 0 ) ( 700 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 740 16 16 ) ( 740 0 0 ) ( 740 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 652 -16 ) ( 0 652 0 ) ( 16 652 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 692 16 ) ( 0 692 0 ) ( 16 692 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 95 catwalk_support
+{
+( -740 -16 16 ) ( -740 0 0 ) ( -740 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -700 16 16 ) ( -700 0 0 ) ( -700 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 908 -16 ) ( 0 908 0 ) ( 16 908 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 948 16 ) ( 0 948 0 ) ( 16 948 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 96 catwalk_support
+{
+( 700 -16 16 ) ( 700 0 0 ) ( 700 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 740 16 16 ) ( 740 0 0 ) ( 740 -16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 908 -16 ) ( 0 908 0 ) ( 16 908 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 948 16 ) ( 0 948 0 ) ( 16 948 -16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/metal_trim 0 0 0 0.500 0.500 0 0 0
+}
+// brush 97 yard_container
+{
+( -1120 -16 16 ) ( -1120 0 0 ) ( -1120 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( -768 16 16 ) ( -768 0 0 ) ( -768 -16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -1088 -16 ) ( 0 -1088 0 ) ( 16 -1088 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -896 16 ) ( 0 -896 0 ) ( 16 -896 -16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 98 yard_container
+{
+( -984 -16 16 ) ( -984 0 0 ) ( -984 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -664 16 16 ) ( -664 0 0 ) ( -664 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -824 -16 ) ( 0 -824 0 ) ( 16 -824 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -656 16 ) ( 0 -656 0 ) ( 16 -656 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 144 ) ( 0 0 144 ) ( -16 16 144 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 99 yard_container
+{
+( 720 -16 16 ) ( 720 0 0 ) ( 720 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 1064 16 16 ) ( 1064 0 0 ) ( 1064 -16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -1080 -16 ) ( 0 -1080 0 ) ( 16 -1080 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -888 16 ) ( 0 -888 0 ) ( 16 -888 -16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) codex_nuke/corrugated_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 100 yard_container
+{
+( 536 -16 16 ) ( 536 0 0 ) ( 536 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 856 16 16 ) ( 856 0 0 ) ( 856 -16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -816 -16 ) ( 0 -816 0 ) ( 16 -816 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 -648 16 ) ( 0 -648 0 ) ( 16 -648 -16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+( 16 16 144 ) ( 0 0 144 ) ( -16 16 144 ) codex_nuke/corrugated_gray 0 0 0 0.500 0.500 0 0 0
+}
+// brush 101 yard_container
+{
+( -1456 -16 16 ) ( -1456 0 0 ) ( -1456 16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -1248 16 16 ) ( -1248 0 0 ) ( -1248 -16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -720 -16 ) ( 0 -720 0 ) ( 16 -720 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -520 16 ) ( 0 -520 0 ) ( 16 -520 -16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 102 yard_container
+{
+( 1192 -16 16 ) ( 1192 0 0 ) ( 1192 16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 1408 16 16 ) ( 1408 0 0 ) ( 1408 -16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -696 -16 ) ( 0 -696 0 ) ( 16 -696 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 -488 16 ) ( 0 -488 0 ) ( 16 -488 -16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) codex_nuke/equipment_blue 0 0 0 0.500 0.500 0 0 0
+}
+// brush 103 yard_barrier
+{
+( -448 -16 16 ) ( -448 0 0 ) ( -448 16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -192 16 16 ) ( -192 0 0 ) ( -192 -16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -768 -16 ) ( 0 -768 0 ) ( 16 -768 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -704 16 ) ( 0 -704 0 ) ( 16 -704 -16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 16 80 ) ( 0 0 80 ) ( -16 16 80 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+}
+// brush 104 yard_barrier
+{
+( 192 -16 16 ) ( 192 0 0 ) ( 192 16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 448 16 16 ) ( 448 0 0 ) ( 448 -16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -768 -16 ) ( 0 -768 0 ) ( 16 -768 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -704 16 ) ( 0 -704 0 ) ( 16 -704 -16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 16 80 ) ( 0 0 80 ) ( -16 16 80 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+}
+// brush 105 yard_barrier
+{
+( -256 -16 16 ) ( -256 0 0 ) ( -256 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -192 16 16 ) ( -192 0 0 ) ( -192 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 -1056 -16 ) ( 0 -1056 0 ) ( 16 -1056 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 -896 16 ) ( 0 -896 0 ) ( 16 -896 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 88 ) ( 0 0 88 ) ( -16 16 88 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 106 yard_barrier
+{
+( 192 -16 16 ) ( 192 0 0 ) ( 192 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 256 16 16 ) ( 256 0 0 ) ( 256 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 -1040 -16 ) ( 0 -1040 0 ) ( 16 -1040 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 -880 16 ) ( 0 -880 0 ) ( 16 -880 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 88 ) ( 0 0 88 ) ( -16 16 88 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 107 yard_barrier
+{
+( -1280 -16 16 ) ( -1280 0 0 ) ( -1280 16 16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -1168 16 16 ) ( -1168 0 0 ) ( -1168 -16 16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 16 -384 -16 ) ( 0 -384 0 ) ( 16 -384 16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+}
+// brush 108 yard_barrier
+{
+( 1168 -16 16 ) ( 1168 0 0 ) ( 1168 16 16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 1280 16 16 ) ( 1280 0 0 ) ( 1280 -16 16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 16 -384 -16 ) ( 0 -384 0 ) ( 16 -384 16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) codex_nuke/safety_red 0 0 0 0.500 0.500 0 0 0
+}
+// brush 109 light_fixture
+{
+( -432 -16 16 ) ( -432 0 0 ) ( -432 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -336 16 16 ) ( -336 0 0 ) ( -336 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 36 -16 ) ( 0 36 0 ) ( 16 36 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 60 16 ) ( 0 60 0 ) ( 16 60 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 338 ) ( 0 0 338 ) ( 16 16 338 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 350 ) ( 0 0 350 ) ( -16 16 350 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 110 light_fixture
+{
+( 336 -16 16 ) ( 336 0 0 ) ( 336 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 432 16 16 ) ( 432 0 0 ) ( 432 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 36 -16 ) ( 0 36 0 ) ( 16 36 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 60 16 ) ( 0 60 0 ) ( 16 60 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 338 ) ( 0 0 338 ) ( 16 16 338 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 350 ) ( 0 0 350 ) ( -16 16 350 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 111 light_fixture
+{
+( -432 -16 16 ) ( -432 0 0 ) ( -432 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -336 16 16 ) ( -336 0 0 ) ( -336 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 580 -16 ) ( 0 580 0 ) ( 16 580 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 604 16 ) ( 0 604 0 ) ( 16 604 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 338 ) ( 0 0 338 ) ( 16 16 338 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 350 ) ( 0 0 350 ) ( -16 16 350 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 112 light_fixture
+{
+( 336 -16 16 ) ( 336 0 0 ) ( 336 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 432 16 16 ) ( 432 0 0 ) ( 432 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 580 -16 ) ( 0 580 0 ) ( 16 580 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 604 16 ) ( 0 604 0 ) ( 16 604 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 338 ) ( 0 0 338 ) ( 16 16 338 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 350 ) ( 0 0 350 ) ( -16 16 350 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 113 light_fixture
+{
+( -1232 -16 16 ) ( -1232 0 0 ) ( -1232 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -1136 16 16 ) ( -1136 0 0 ) ( -1136 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 52 -16 ) ( 0 52 0 ) ( 16 52 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 76 16 ) ( 0 76 0 ) ( 16 76 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 114 light_fixture
+{
+( -1232 -16 16 ) ( -1232 0 0 ) ( -1232 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -1136 16 16 ) ( -1136 0 0 ) ( -1136 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 564 -16 ) ( 0 564 0 ) ( 16 564 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 588 16 ) ( 0 588 0 ) ( 16 588 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 115 light_fixture
+{
+( -880 -16 16 ) ( -880 0 0 ) ( -880 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -784 16 16 ) ( -784 0 0 ) ( -784 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 52 -16 ) ( 0 52 0 ) ( 16 52 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 76 16 ) ( 0 76 0 ) ( 16 76 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 116 light_fixture
+{
+( -880 -16 16 ) ( -880 0 0 ) ( -880 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -784 16 16 ) ( -784 0 0 ) ( -784 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 564 -16 ) ( 0 564 0 ) ( 16 564 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 588 16 ) ( 0 588 0 ) ( 16 588 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 117 light_fixture
+{
+( 784 -16 16 ) ( 784 0 0 ) ( 784 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 880 16 16 ) ( 880 0 0 ) ( 880 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 52 -16 ) ( 0 52 0 ) ( 16 52 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 76 16 ) ( 0 76 0 ) ( 16 76 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 118 light_fixture
+{
+( 784 -16 16 ) ( 784 0 0 ) ( 784 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 880 16 16 ) ( 880 0 0 ) ( 880 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 564 -16 ) ( 0 564 0 ) ( 16 564 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 588 16 ) ( 0 588 0 ) ( 16 588 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 119 light_fixture
+{
+( 1136 -16 16 ) ( 1136 0 0 ) ( 1136 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 1232 16 16 ) ( 1232 0 0 ) ( 1232 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 52 -16 ) ( 0 52 0 ) ( 16 52 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 76 16 ) ( 0 76 0 ) ( 16 76 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 120 light_fixture
+{
+( 1136 -16 16 ) ( 1136 0 0 ) ( 1136 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 1232 16 16 ) ( 1232 0 0 ) ( 1232 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 564 -16 ) ( 0 564 0 ) ( 16 564 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 588 16 ) ( 0 588 0 ) ( 16 588 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 121 light_fixture
+{
+( -944 -16 16 ) ( -944 0 0 ) ( -944 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -848 16 16 ) ( -848 0 0 ) ( -848 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 1044 -16 ) ( 0 1044 0 ) ( 16 1044 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 1068 16 ) ( 0 1068 0 ) ( 16 1068 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 122 light_fixture
+{
+( -368 -16 16 ) ( -368 0 0 ) ( -368 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -272 16 16 ) ( -272 0 0 ) ( -272 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 1044 -16 ) ( 0 1044 0 ) ( 16 1044 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 1068 16 ) ( 0 1068 0 ) ( 16 1068 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 123 light_fixture
+{
+( 272 -16 16 ) ( 272 0 0 ) ( 272 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 368 16 16 ) ( 368 0 0 ) ( 368 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 1044 -16 ) ( 0 1044 0 ) ( 16 1044 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 1068 16 ) ( 0 1068 0 ) ( 16 1068 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 124 light_fixture
+{
+( 848 -16 16 ) ( 848 0 0 ) ( 848 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 944 16 16 ) ( 944 0 0 ) ( 944 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 1044 -16 ) ( 0 1044 0 ) ( 16 1044 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 1068 16 ) ( 0 1068 0 ) ( 16 1068 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 330 ) ( 0 0 330 ) ( 16 16 330 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 342 ) ( 0 0 342 ) ( -16 16 342 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 125 under_mezzanine_fixture
+{
+( -1236 -16 16 ) ( -1236 0 0 ) ( -1236 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -1164 16 16 ) ( -1164 0 0 ) ( -1164 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 310 -16 ) ( 0 310 0 ) ( 16 310 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 330 16 ) ( 0 330 0 ) ( 16 330 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 146 ) ( 0 0 146 ) ( 16 16 146 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 154 ) ( 0 0 154 ) ( -16 16 154 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 126 under_mezzanine_fixture
+{
+( -836 -16 16 ) ( -836 0 0 ) ( -836 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -764 16 16 ) ( -764 0 0 ) ( -764 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 630 -16 ) ( 0 630 0 ) ( 16 630 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 650 16 ) ( 0 650 0 ) ( 16 650 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 146 ) ( 0 0 146 ) ( 16 16 146 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 154 ) ( 0 0 154 ) ( -16 16 154 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 127 under_mezzanine_fixture
+{
+( 1164 -16 16 ) ( 1164 0 0 ) ( 1164 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 1236 16 16 ) ( 1236 0 0 ) ( 1236 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 310 -16 ) ( 0 310 0 ) ( 16 310 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 330 16 ) ( 0 330 0 ) ( 16 330 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 146 ) ( 0 0 146 ) ( 16 16 146 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 154 ) ( 0 0 154 ) ( -16 16 154 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 128 under_mezzanine_fixture
+{
+( 764 -16 16 ) ( 764 0 0 ) ( 764 16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 836 16 16 ) ( 836 0 0 ) ( 836 -16 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 630 -16 ) ( 0 630 0 ) ( 16 630 16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 650 16 ) ( 0 650 0 ) ( 16 650 -16 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( -16 16 146 ) ( 0 0 146 ) ( 16 16 146 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+( 16 16 154 ) ( 0 0 154 ) ( -16 16 154 ) codex_nuke/clean_white_metal 0 0 0 0.500 0.500 0 0 0
+}
+// brush 129 entry_fixture
+{
+( -1064 -16 16 ) ( -1064 0 0 ) ( -1064 16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -984 16 16 ) ( -984 0 0 ) ( -984 -16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -312 -16 ) ( 0 -312 0 ) ( 16 -312 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -296 16 ) ( 0 -296 0 ) ( 16 -296 -16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+}
+// brush 130 entry_fixture
+{
+( -40 -16 16 ) ( -40 0 0 ) ( -40 16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 40 16 16 ) ( 40 0 0 ) ( 40 -16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -312 -16 ) ( 0 -312 0 ) ( 16 -312 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -296 16 ) ( 0 -296 0 ) ( 16 -296 -16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+}
+// brush 131 entry_fixture
+{
+( 984 -16 16 ) ( 984 0 0 ) ( 984 16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 1064 16 16 ) ( 1064 0 0 ) ( 1064 -16 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -312 -16 ) ( 0 -312 0 ) ( 16 -312 16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 -296 16 ) ( 0 -296 0 ) ( 16 -296 -16 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) codex_nuke/safety_yellow 0 0 0 0.500 0.500 0 0 0
+}
+}
+// entity 1
+{
+"classname" "info_player_start"
+"origin" "0 -1100 64"
+"angle" "90"
+}
+// entity 2
+{
+"classname" "info_player_deathmatch"
+"origin" "-1320 -1080 48"
+"angle" "37"
+}
+// entity 3
+{
+"classname" "info_player_deathmatch"
+"origin" "-560 -1080 48"
+"angle" "52"
+}
+// entity 4
+{
+"classname" "info_player_deathmatch"
+"origin" "0 -1120 48"
+"angle" "90"
+}
+// entity 5
+{
+"classname" "info_player_deathmatch"
+"origin" "560 -1080 48"
+"angle" "128"
+}
+// entity 6
+{
+"classname" "info_player_deathmatch"
+"origin" "1320 -1060 48"
+"angle" "142"
+}
+// entity 7
+{
+"classname" "info_player_deathmatch"
+"origin" "-1320 -416 48"
+"angle" "38"
+}
+// entity 8
+{
+"classname" "info_player_deathmatch"
+"origin" "1320 -416 48"
+"angle" "142"
+}
+// entity 9
+{
+"classname" "info_player_deathmatch"
+"origin" "-1280 128 48"
+"angle" "0"
+}
+// entity 10
+{
+"classname" "info_player_deathmatch"
+"origin" "-760 336 48"
+"angle" "0"
+}
+// entity 11
+{
+"classname" "info_player_deathmatch"
+"origin" "1280 128 48"
+"angle" "180"
+}
+// entity 12
+{
+"classname" "info_player_deathmatch"
+"origin" "760 336 48"
+"angle" "180"
+}
+// entity 13
+{
+"classname" "info_player_deathmatch"
+"origin" "-416 -144 48"
+"angle" "39"
+}
+// entity 14
+{
+"classname" "info_player_deathmatch"
+"origin" "416 -144 48"
+"angle" "141"
+}
+// entity 15
+{
+"classname" "info_player_deathmatch"
+"origin" "-416 560 48"
+"angle" "328"
+}
+// entity 16
+{
+"classname" "info_player_deathmatch"
+"origin" "416 560 48"
+"angle" "212"
+}
+// entity 17
+{
+"classname" "info_player_deathmatch"
+"origin" "-1032 1088 48"
+"angle" "342"
+}
+// entity 18
+{
+"classname" "info_player_deathmatch"
+"origin" "1032 1088 48"
+"angle" "198"
+}
+// entity 19
+{
+"classname" "info_player_deathmatch"
+"origin" "-1248 320 208"
+"angle" "25"
+}
+// entity 20
+{
+"classname" "info_player_deathmatch"
+"origin" "1248 320 208"
+"angle" "155"
+}
+// entity 21
+{
+"classname" "info_player_deathmatch"
+"origin" "0 944 208"
+"angle" "270"
+}
+// entity 22
+{
+"classname" "info_player_allied"
+"origin" "-1320 -1080 48"
+"angle" "37"
+}
+// entity 23
+{
+"classname" "info_player_allied"
+"origin" "-560 -1080 48"
+"angle" "52"
+}
+// entity 24
+{
+"classname" "info_player_allied"
+"origin" "0 -1120 48"
+"angle" "90"
+}
+// entity 25
+{
+"classname" "info_player_allied"
+"origin" "-1320 -416 48"
+"angle" "38"
+}
+// entity 26
+{
+"classname" "info_player_allied"
+"origin" "-1280 128 48"
+"angle" "0"
+}
+// entity 27
+{
+"classname" "info_player_allied"
+"origin" "-760 336 48"
+"angle" "0"
+}
+// entity 28
+{
+"classname" "info_player_allied"
+"origin" "-416 -144 48"
+"angle" "39"
+}
+// entity 29
+{
+"classname" "info_player_allied"
+"origin" "-416 560 48"
+"angle" "328"
+}
+// entity 30
+{
+"classname" "info_player_allied"
+"origin" "-1032 1088 48"
+"angle" "342"
+}
+// entity 31
+{
+"classname" "info_player_allied"
+"origin" "-1248 320 208"
+"angle" "25"
+}
+// entity 32
+{
+"classname" "info_player_axis"
+"origin" "1320 -1060 48"
+"angle" "142"
+}
+// entity 33
+{
+"classname" "info_player_axis"
+"origin" "560 -1080 48"
+"angle" "128"
+}
+// entity 34
+{
+"classname" "info_player_axis"
+"origin" "0 -880 48"
+"angle" "90"
+}
+// entity 35
+{
+"classname" "info_player_axis"
+"origin" "1320 -416 48"
+"angle" "142"
+}
+// entity 36
+{
+"classname" "info_player_axis"
+"origin" "1280 128 48"
+"angle" "180"
+}
+// entity 37
+{
+"classname" "info_player_axis"
+"origin" "760 336 48"
+"angle" "180"
+}
+// entity 38
+{
+"classname" "info_player_axis"
+"origin" "416 -144 48"
+"angle" "141"
+}
+// entity 39
+{
+"classname" "info_player_axis"
+"origin" "416 560 48"
+"angle" "212"
+}
+// entity 40
+{
+"classname" "info_player_axis"
+"origin" "1032 1088 48"
+"angle" "198"
+}
+// entity 41
+{
+"classname" "info_player_axis"
+"origin" "1248 320 208"
+"angle" "155"
+}
+// entity 42
+{
+"classname" "light"
+"origin" "-384 48 200"
+"light" "190"
+"_color" "0.82 0.90 1.0"
+"overbright_range" "0.2"
+}
+// entity 43
+{
+"classname" "light"
+"origin" "384 48 200"
+"light" "190"
+"_color" "0.82 0.90 1.0"
+"overbright_range" "0.2"
+}
+// entity 44
+{
+"classname" "light"
+"origin" "-384 592 200"
+"light" "190"
+"_color" "0.82 0.90 1.0"
+"overbright_range" "0.2"
+}
+// entity 45
+{
+"classname" "light"
+"origin" "384 592 200"
+"light" "190"
+"_color" "0.82 0.90 1.0"
+"overbright_range" "0.2"
+}
+// entity 46
+{
+"classname" "light"
+"origin" "-1184 64 200"
+"light" "165"
+"_color" "0.88 0.93 1.0"
+"overbright_range" "0.2"
+}
+// entity 47
+{
+"classname" "light"
+"origin" "-1184 576 200"
+"light" "165"
+"_color" "0.88 0.93 1.0"
+"overbright_range" "0.2"
+}
+// entity 48
+{
+"classname" "light"
+"origin" "-832 64 200"
+"light" "165"
+"_color" "0.88 0.93 1.0"
+"overbright_range" "0.2"
+}
+// entity 49
+{
+"classname" "light"
+"origin" "-832 576 200"
+"light" "165"
+"_color" "0.88 0.93 1.0"
+"overbright_range" "0.2"
+}
+// entity 50
+{
+"classname" "light"
+"origin" "832 64 200"
+"light" "165"
+"_color" "0.88 0.93 1.0"
+"overbright_range" "0.2"
+}
+// entity 51
+{
+"classname" "light"
+"origin" "832 576 200"
+"light" "165"
+"_color" "0.88 0.93 1.0"
+"overbright_range" "0.2"
+}
+// entity 52
+{
+"classname" "light"
+"origin" "1184 64 200"
+"light" "165"
+"_color" "0.88 0.93 1.0"
+"overbright_range" "0.2"
+}
+// entity 53
+{
+"classname" "light"
+"origin" "1184 576 200"
+"light" "165"
+"_color" "0.88 0.93 1.0"
+"overbright_range" "0.2"
+}
+// entity 54
+{
+"classname" "light"
+"origin" "-896 1056 200"
+"light" "145"
+"_color" "0.80 0.88 1.0"
+"overbright_range" "0.2"
+}
+// entity 55
+{
+"classname" "light"
+"origin" "-320 1056 200"
+"light" "145"
+"_color" "0.80 0.88 1.0"
+"overbright_range" "0.2"
+}
+// entity 56
+{
+"classname" "light"
+"origin" "320 1056 200"
+"light" "145"
+"_color" "0.80 0.88 1.0"
+"overbright_range" "0.2"
+}
+// entity 57
+{
+"classname" "light"
+"origin" "896 1056 200"
+"light" "145"
+"_color" "0.80 0.88 1.0"
+"overbright_range" "0.2"
+}
+// entity 58
+{
+"classname" "light"
+"origin" "-1200 320 112"
+"light" "130"
+"_color" "0.78 0.88 1.0"
+"overbright_range" "0.2"
+}
+// entity 59
+{
+"classname" "light"
+"origin" "-800 640 112"
+"light" "130"
+"_color" "0.78 0.88 1.0"
+"overbright_range" "0.2"
+}
+// entity 60
+{
+"classname" "light"
+"origin" "1200 320 112"
+"light" "130"
+"_color" "0.78 0.88 1.0"
+"overbright_range" "0.2"
+}
+// entity 61
+{
+"classname" "light"
+"origin" "800 640 112"
+"light" "130"
+"_color" "0.78 0.88 1.0"
+"overbright_range" "0.2"
+}
+// entity 62
+{
+"classname" "light"
+"origin" "-1024 -352 208"
+"light" "100"
+"_color" "1.0 0.76 0.52"
+"overbright_range" "0.2"
+}
+// entity 63
+{
+"classname" "light"
+"origin" "0 -352 208"
+"light" "100"
+"_color" "1.0 0.76 0.52"
+"overbright_range" "0.2"
+}
+// entity 64
+{
+"classname" "light"
+"origin" "1024 -352 208"
+"light" "100"
+"_color" "1.0 0.76 0.52"
+"overbright_range" "0.2"
+}

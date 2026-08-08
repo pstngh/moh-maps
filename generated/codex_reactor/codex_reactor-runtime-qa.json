@@ -1,0 +1,19 @@
+{
+    "schemaVersion":  1,
+    "qaRoot":  "C:\\tmp\\codex-reactor-final-runtime",
+    "exactPk3Count":  8,
+    "candidateSha256":  "3287d9c12ad1311f7cc871aff551431e7d7fbdc911d20195dc41b453c429f6e1",
+    "bspParse":  [
+                     "[2026-08-08 18:17:05 UTC-5.000] BSP file loaded and parsed in 0.003 seconds"
+                 ],
+    "recast":  [
+                   "[2026-08-08 18:17:05 UTC-5.000] Recast navigation mesh(es) generated in 0.190 seconds"
+               ],
+    "botsEntered":  8,
+    "combatEvents":  11,
+    "fatalCandidateDiagnostics":  0,
+    "missingCandidateDiagnostics":  0,
+    "expectedRetailBotRunDiagnostics":  8,
+    "sampleSeconds":  30,
+    "log":  "C:\\tmp\\codex-reactor-final-runtime\\home\\main\\qconsole.log"
+}

@@ -2530,3 +2530,79 @@ covered by a present replacement; prove deterministic packaging and exact
 isolated bot runtime; and prove that the redistributable public build is
 byte-identical when the manifest is absent. Compile and model-loader success
 still require a new human screenshot verdict before visual fidelity is claimed.
+
+## Codex Reactor revision 1: original close-range bot arena
+
+Date: 2026-08-08
+
+The requested follow-up was a Nuke-inspired map authored from scratch for
+close-range bot action, with lanes broad enough to avoid becoming a corridor
+maze. `codex_reactor` is therefore an original 3,072 by 2,560-unit industrial
+arena rather than another Source conversion. Its 132 brushes form an open
+loading yard, three wide reactor-hall entrances, two lower service loops, a
+rear crossover, two 224-unit stairs, and an upper U-shaped combat loop. The
+declared route graph contains eight zones and 17 connections; its minimum
+declared width is 192 units, while the main lower openings range from 256 to
+416 units. It deliberately has no moving doors. Twenty neutral DM starts, ten
+Allied starts, ten Axis starts, and one intermission/start entity distribute
+combat across both floors.
+
+The generator owns the source layout and copies 16 clean, project-owned
+industrial TGAs from the earlier `codex_nuke` art set. No Valve geometry,
+texture, model, or other asset bytes enter the package. Two clean generation
+roots reproduced the canonical MAP byte-for-byte: 90,402 bytes with SHA-256
+`889A84E7A4A7712502AB9B186AC27760100A197168386B6D6025BB606055339F`.
+The validator checks structural brush closure, material names, spawn clearance,
+route width, route connectivity, and source counts before compilation.
+
+Validation caught two spawn boxes intersecting the broad stair volumes and
+moved them to clear floor positions. The first compile also exposed five faces
+using an undefined control-panel material alias. Replacing the alias with the
+generated panel material removed those warnings. Sixteen high indoor point
+lights were then reported as leaking by original Q3map. Controlled variants
+showed that the same layout at z=200 compiled without the diagnostics, so the
+generator now pins the affected origins to that proven height instead of
+silencing the compiler output.
+
+The first fixed-camera visual survey found two spatial problems that numeric
+validation did not: a decorative center pier split a 320-unit front entrance
+into cramped lanes, and the lower service loops were unreadably dark because
+their main fixtures sat above solid mezzanine slabs. The pier was removed and
+four dedicated under-mezzanine fixtures were added at z=112. The final eight
+fixed views covered the yard, threshold, reactor core, both lower loops, rear
+crossover, upper loop, and overview. They confirmed readable floor boundaries,
+continuous broad routes, supported props, and a clean warm-sun/cool-fill
+industrial presentation.
+
+The final retail toolchain completed Q3map in 0.454 seconds, full fast VIS in
+0.412 seconds, and MOHlight in 1.332 seconds with zero Q3map warnings, zero
+coordinate clamps, and zero light hash-table warnings. The version-19 BSP has
+662 surfaces, six lightmap pages, 39,536 visibility bytes, and is 774,508 bytes
+with SHA-256
+`4A7EDE5D74338D01E26C0CC0AE3BEBA2462EDE46BAEC3F63A7C36A943F540D57`.
+
+The deterministic packager emitted exactly 19 entries: the BSP, map script,
+precache script, and 16 TGA textures. It reopened the archive and verified every
+entry hash, then reproduced the same 3,290,168-byte PK3 twice with SHA-256
+`3287D9C12AD1311F7CC871AFF551431E7D7FBDC911D20195DC41B453C429F6E1`.
+
+The exact package was tested in an isolated AA root containing retail Pak0-Pak6
+and no other add-on PK3. OpenMoHAA 0.82.1-beta loaded the BSP, built Recast in
+0.190 seconds, admitted all eight bots, and recorded 11 combat/death events in
+30 seconds with zero candidate-specific fatal or missing-asset diagnostics.
+A second instrumented run sampled all eight bot positions every two seconds.
+All eight designed route zones were observed, every bot moved, each bot reached
+two to five zones, sampled travel ranged from roughly 4,000 to 8,500 units, and
+15 combat events occurred. The instrumentation was a loose temporary script;
+the BSP and candidate PK3 were the exact final release artifacts.
+
+**PROVEN close-range topology rule:** use a compact loop graph instead of a
+single central room; provide at least two ways around each major obstruction;
+keep primary openings at least 256 units where crossfire is expected; seed
+spawns across every loop; and validate actual bot zone coverage rather than
+inferring navigation quality from a successful Recast build.
+
+**PROVEN stacked-route lighting rule:** a light above a solid mezzanine does not
+make the route below it readable. Treat each stacked walkable layer as its own
+lighting problem, add local fixtures beneath overhead slabs, then inspect fixed
+views from ordinary player height before raising global ambient.

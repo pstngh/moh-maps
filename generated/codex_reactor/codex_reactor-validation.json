@@ -1,0 +1,41 @@
+﻿{
+  "mapName": "codex_reactor",
+  "mapBytes": 90402,
+  "mapSha256": "889a84e7a4a7712502ab9b186ac27760100a197168386b6d6025bb606055339f",
+  "worldBrushes": 132,
+  "entities": {
+    "total": 65,
+    "neutralSpawns": 20,
+    "alliedSpawns": 10,
+    "axisSpawns": 10,
+    "spectatorStarts": 1,
+    "lights": 23
+  },
+  "routeZones": 8,
+  "routeEdges": 17,
+  "minimumRouteWidth": 192,
+  "spawnClearance": {
+    "testedHulls": 40,
+    "collisions": [],
+    "passed": true
+  },
+  "customMaterials": [
+    "codex_nuke/asphalt",
+    "codex_nuke/ceiling_tile",
+    "codex_nuke/clean_white_metal",
+    "codex_nuke/concrete_dark",
+    "codex_nuke/concrete_floor",
+    "codex_nuke/control_panel",
+    "codex_nuke/corrugated_blue",
+    "codex_nuke/corrugated_gray",
+    "codex_nuke/equipment_blue",
+    "codex_nuke/metal_grating",
+    "codex_nuke/metal_trim",
+    "codex_nuke/painted_concrete",
+    "codex_nuke/painted_concrete_blue",
+    "codex_nuke/rubber",
+    "codex_nuke/safety_red",
+    "codex_nuke/safety_yellow"
+  ],
+  "bundledTextures": 16
+}

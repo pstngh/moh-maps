@@ -1,0 +1,15 @@
+main:
+
+setcvar "g_obj_alliedtext1" "Codex Reactor"
+setcvar "g_obj_alliedtext2" "Close-range industrial deathmatch"
+setcvar "g_obj_alliedtext3" ""
+setcvar "g_obj_axistext1" ""
+setcvar "g_obj_axistext2" ""
+setcvar "g_obj_axistext3" ""
+
+level waittill prespawn
+exec global/DMprecache.scr
+level.script = maps/dm/codex_reactor.scr
+level waittill spawn
+
+end

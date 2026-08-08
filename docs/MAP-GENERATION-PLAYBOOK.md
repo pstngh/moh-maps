@@ -412,6 +412,15 @@ machinery, vehicles, furniture, cover, and support posts, and use an explicit
 dark shader tint so a missing lightmap cannot turn the card white. The policy
 is not accepted until full MOHlight and bright/shadowed screenshot checks pass.
 
+Treat every playable route beneath a solid mezzanine, bridge, or catwalk as a
+separate lighting zone. Ceiling lights above the deck do not prove readability
+below it because the structural brush occludes them. Add purposeful underslung
+fixtures with point origins inside the lower navigable leaf, then repeat the
+deep-interior fixed view and the compiler leak/clamp gates. `codex_reactor`
+revision 1 is the first controlled evidence: four under-deck lights repaired
+both broad service loops without increasing global ambient or producing a
+Q3map/MOHlight warning.
+
 Lighting QA must cover:
 
 - full-sun exterior;

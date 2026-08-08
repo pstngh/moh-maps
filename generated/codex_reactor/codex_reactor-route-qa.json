@@ -1,0 +1,114 @@
+{
+    "schemaVersion":  1,
+    "method":  "QA-only loose script sampled all eight native bot origins every two seconds; candidate BSP/textures/package bytes remained exact",
+    "candidateSha256":  "3287d9c12ad1311f7cc871aff551431e7d7fbdc911d20195dc41b453c429f6e1",
+    "samplesPerBot":  12,
+    "sampleIntervalSeconds":  2,
+    "totalPositionSamples":  96,
+    "zonesObserved":  [
+                          "east_control",
+                          "east_mezzanine",
+                          "loading_yard",
+                          "reactor_hall",
+                          "rear_catwalk",
+                          "rear_service",
+                          "west_mezzanine",
+                          "west_service"
+                      ],
+    "zoneCount":  8,
+    "bots":  [
+                 {
+                     "bot":  1,
+                     "samples":  12,
+                     "zones":  [
+                                   "loading_yard",
+                                   "west_service"
+                               ],
+                     "zoneCount":  2,
+                     "sampledTravelUnits":  5844.1
+                 },
+                 {
+                     "bot":  2,
+                     "samples":  12,
+                     "zones":  [
+                                   "loading_yard",
+                                   "reactor_hall",
+                                   "rear_service",
+                                   "west_service"
+                               ],
+                     "zoneCount":  4,
+                     "sampledTravelUnits":  5282.8
+                 },
+                 {
+                     "bot":  3,
+                     "samples":  12,
+                     "zones":  [
+                                   "loading_yard",
+                                   "rear_catwalk",
+                                   "rear_service",
+                                   "west_mezzanine",
+                                   "west_service"
+                               ],
+                     "zoneCount":  5,
+                     "sampledTravelUnits":  5380.1
+                 },
+                 {
+                     "bot":  4,
+                     "samples":  12,
+                     "zones":  [
+                                   "east_control",
+                                   "loading_yard"
+                               ],
+                     "zoneCount":  2,
+                     "sampledTravelUnits":  5137.6
+                 },
+                 {
+                     "bot":  5,
+                     "samples":  12,
+                     "zones":  [
+                                   "loading_yard",
+                                   "reactor_hall",
+                                   "west_mezzanine",
+                                   "west_service"
+                               ],
+                     "zoneCount":  4,
+                     "sampledTravelUnits":  4031.2
+                 },
+                 {
+                     "bot":  6,
+                     "samples":  12,
+                     "zones":  [
+                                   "loading_yard",
+                                   "rear_catwalk",
+                                   "west_mezzanine"
+                               ],
+                     "zoneCount":  3,
+                     "sampledTravelUnits":  5112.7
+                 },
+                 {
+                     "bot":  7,
+                     "samples":  12,
+                     "zones":  [
+                                   "east_control",
+                                   "east_mezzanine",
+                                   "loading_yard",
+                                   "rear_catwalk"
+                               ],
+                     "zoneCount":  4,
+                     "sampledTravelUnits":  8566.7
+                 },
+                 {
+                     "bot":  8,
+                     "samples":  12,
+                     "zones":  [
+                                   "east_mezzanine",
+                                   "rear_catwalk",
+                                   "west_service"
+                               ],
+                     "zoneCount":  3,
+                     "sampledTravelUnits":  4818.8
+                 }
+             ],
+    "combatEvents":  15,
+    "fatalCandidateDiagnostics":  0
+}

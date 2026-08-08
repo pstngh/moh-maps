@@ -1,0 +1,495 @@
+{
+  "schemaVersion": 1,
+  "mapName": "codex_reactor",
+  "title": "Codex Reactor",
+  "originalDesign": true,
+  "designBrief": {
+    "target": "Allied Assault BSP 19 and OpenMoHAA",
+    "modes": [
+      "DM",
+      "TDM"
+    ],
+    "intendedPlayers": {
+      "minimum": 4,
+      "maximum": 16,
+      "botQa": 8
+    },
+    "fidelity": "original Nuke-inspired modern industrial reactor annex",
+    "assetPolicy": "project-owned original Nuke diffuse textures plus stock AA sky/scripts",
+    "combatTarget": "predominantly close range with 256+ unit primary lanes",
+    "lighting": "warm daylight yard, cool restrained industrial interior fixtures",
+    "omissions": [
+      "moving doors",
+      "Valve geometry",
+      "Valve textures",
+      "narrow vents",
+      "dynamic obstacles"
+    ]
+  },
+  "bounds": {
+    "min": [
+      -1536,
+      -1280,
+      -64
+    ],
+    "max": [
+      1536,
+      1280,
+      576
+    ]
+  },
+  "topology": {
+    "lowerZones": 5,
+    "upperZones": 3,
+    "routeGraph": {
+      "zones": [
+        "loading_yard",
+        "west_service",
+        "reactor_hall",
+        "east_control",
+        "rear_service",
+        "west_mezzanine",
+        "east_mezzanine",
+        "rear_catwalk"
+      ],
+      "edges": [
+        [
+          "loading_yard",
+          "west_service",
+          256,
+          "west bay"
+        ],
+        [
+          "loading_yard",
+          "reactor_hall",
+          320,
+          "decon entrance"
+        ],
+        [
+          "loading_yard",
+          "east_control",
+          256,
+          "east bay"
+        ],
+        [
+          "west_service",
+          "reactor_hall",
+          256,
+          "south side opening"
+        ],
+        [
+          "west_service",
+          "reactor_hall",
+          256,
+          "north side opening"
+        ],
+        [
+          "reactor_hall",
+          "east_control",
+          256,
+          "south side opening"
+        ],
+        [
+          "reactor_hall",
+          "east_control",
+          256,
+          "north side opening"
+        ],
+        [
+          "west_service",
+          "rear_service",
+          416,
+          "west rear opening"
+        ],
+        [
+          "reactor_hall",
+          "rear_service",
+          272,
+          "west rear reactor opening"
+        ],
+        [
+          "reactor_hall",
+          "rear_service",
+          272,
+          "east rear reactor opening"
+        ],
+        [
+          "east_control",
+          "rear_service",
+          416,
+          "east rear opening"
+        ],
+        [
+          "west_service",
+          "west_mezzanine",
+          224,
+          "west stairs"
+        ],
+        [
+          "east_control",
+          "east_mezzanine",
+          224,
+          "east stairs"
+        ],
+        [
+          "west_mezzanine",
+          "rear_catwalk",
+          192,
+          "west upper connector"
+        ],
+        [
+          "east_mezzanine",
+          "rear_catwalk",
+          192,
+          "east upper connector"
+        ],
+        [
+          "west_mezzanine",
+          "reactor_hall",
+          192,
+          "west balcony opening"
+        ],
+        [
+          "east_mezzanine",
+          "reactor_hall",
+          192,
+          "east balcony opening"
+        ]
+      ]
+    },
+    "minimumPrimaryRouteWidth": 192,
+    "sightlineTarget": "approximately 256-1050 units; reactor/equipment/container masses block map-wide shots",
+    "movingDoors": 0,
+    "stairSpecs": [
+      {
+        "centerX": -1136,
+        "width": 224,
+        "tread": 32,
+        "rise": 16,
+        "steps": 10
+      },
+      {
+        "centerX": 1136,
+        "width": 224,
+        "tread": 32,
+        "rise": 16,
+        "steps": 10
+      }
+    ]
+  },
+  "geometry": {
+    "worldBrushes": 132,
+    "brushesByRole": {
+      "building_roof": 1,
+      "catwalk_support": 6,
+      "control_console": 4,
+      "east_balcony": 1,
+      "east_balcony_link": 1,
+      "east_mezzanine": 1,
+      "east_rear_link": 1,
+      "entrance_lintel": 3,
+      "entry_fixture": 3,
+      "equipment": 9,
+      "facade_panel": 4,
+      "facade_pier": 6,
+      "front_wall": 4,
+      "interior_ceiling": 1,
+      "interior_floor": 1,
+      "light_fixture": 16,
+      "mezzanine_stair": 20,
+      "outer_wall": 4,
+      "reactor_band": 2,
+      "reactor_body": 1,
+      "reactor_cap": 1,
+      "reactor_column": 4,
+      "reactor_cover": 4,
+      "reactor_plinth": 1,
+      "reactor_rear_wall": 3,
+      "reactor_side_wall": 6,
+      "rear_catwalk": 1,
+      "shell_floor": 1,
+      "sky_ceiling": 1,
+      "under_mezzanine_fixture": 4,
+      "west_balcony": 1,
+      "west_balcony_link": 1,
+      "west_mezzanine": 1,
+      "west_rear_link": 1,
+      "yard_barrier": 6,
+      "yard_container": 6,
+      "yard_floor": 1
+    },
+    "cylinders": 5,
+    "collisionBoxes": 123
+  },
+  "entities": {
+    "total": 65,
+    "neutralSpawns": 20,
+    "alliedSpawns": 10,
+    "axisSpawns": 10,
+    "spectatorStarts": 1,
+    "lights": 23
+  },
+  "spawnOrigins": {
+    "neutral": [
+      [
+        -1320,
+        -1080,
+        48
+      ],
+      [
+        -560,
+        -1080,
+        48
+      ],
+      [
+        0,
+        -1120,
+        48
+      ],
+      [
+        560,
+        -1080,
+        48
+      ],
+      [
+        1320,
+        -1060,
+        48
+      ],
+      [
+        -1320,
+        -416,
+        48
+      ],
+      [
+        1320,
+        -416,
+        48
+      ],
+      [
+        -1280,
+        128,
+        48
+      ],
+      [
+        -760,
+        336,
+        48
+      ],
+      [
+        1280,
+        128,
+        48
+      ],
+      [
+        760,
+        336,
+        48
+      ],
+      [
+        -416,
+        -144,
+        48
+      ],
+      [
+        416,
+        -144,
+        48
+      ],
+      [
+        -416,
+        560,
+        48
+      ],
+      [
+        416,
+        560,
+        48
+      ],
+      [
+        -1032,
+        1088,
+        48
+      ],
+      [
+        1032,
+        1088,
+        48
+      ],
+      [
+        -1248,
+        320,
+        208
+      ],
+      [
+        1248,
+        320,
+        208
+      ],
+      [
+        0,
+        944,
+        208
+      ]
+    ],
+    "allied": [
+      [
+        -1320,
+        -1080,
+        48
+      ],
+      [
+        -560,
+        -1080,
+        48
+      ],
+      [
+        0,
+        -1120,
+        48
+      ],
+      [
+        -1320,
+        -416,
+        48
+      ],
+      [
+        -1280,
+        128,
+        48
+      ],
+      [
+        -760,
+        336,
+        48
+      ],
+      [
+        -416,
+        -144,
+        48
+      ],
+      [
+        -416,
+        560,
+        48
+      ],
+      [
+        -1032,
+        1088,
+        48
+      ],
+      [
+        -1248,
+        320,
+        208
+      ]
+    ],
+    "axis": [
+      [
+        1320,
+        -1060,
+        48
+      ],
+      [
+        560,
+        -1080,
+        48
+      ],
+      [
+        0,
+        -880,
+        48
+      ],
+      [
+        1320,
+        -416,
+        48
+      ],
+      [
+        1280,
+        128,
+        48
+      ],
+      [
+        760,
+        336,
+        48
+      ],
+      [
+        416,
+        -144,
+        48
+      ],
+      [
+        416,
+        560,
+        48
+      ],
+      [
+        1032,
+        1088,
+        48
+      ],
+      [
+        1248,
+        320,
+        208
+      ]
+    ]
+  },
+  "spawnClearance": {
+    "testedHulls": 40,
+    "collisions": [],
+    "passed": true
+  },
+  "materials": {
+    "referenced": [
+      "codex_nuke/asphalt",
+      "codex_nuke/ceiling_tile",
+      "codex_nuke/clean_white_metal",
+      "codex_nuke/concrete_dark",
+      "codex_nuke/concrete_floor",
+      "codex_nuke/control_panel",
+      "codex_nuke/corrugated_blue",
+      "codex_nuke/corrugated_gray",
+      "codex_nuke/equipment_blue",
+      "codex_nuke/metal_grating",
+      "codex_nuke/metal_trim",
+      "codex_nuke/painted_concrete",
+      "codex_nuke/painted_concrete_blue",
+      "codex_nuke/rubber",
+      "codex_nuke/safety_red",
+      "codex_nuke/safety_yellow",
+      "common/caulk",
+      "sky/mohday1"
+    ],
+    "bundledOriginalTextures": [
+      "asphalt.tga",
+      "ceiling_tile.tga",
+      "clean_white_metal.tga",
+      "concrete_dark.tga",
+      "concrete_floor.tga",
+      "control_panel.tga",
+      "corrugated_blue.tga",
+      "corrugated_gray.tga",
+      "equipment_blue.tga",
+      "metal_grating.tga",
+      "metal_trim.tga",
+      "painted_concrete.tga",
+      "painted_concrete_blue.tga",
+      "rubber.tga",
+      "safety_red.tga",
+      "safety_yellow.tga"
+    ],
+    "stockReferences": [
+      "common/caulk",
+      "sky/mohday1"
+    ],
+    "provenance": "generated/codex_nuke/ART-PROVENANCE.md"
+  },
+  "map": {
+    "relativePath": "main/maps/dm/codex_reactor.map",
+    "bytes": 90402,
+    "sha256": "889a84e7a4a7712502ab9b186ac27760100a197168386b6d6025bb606055339f"
+  }
+}

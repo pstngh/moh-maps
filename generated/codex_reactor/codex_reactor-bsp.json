@@ -1,0 +1,20 @@
+﻿{
+  "bsp": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\moh-maps\\generated\\codex_reactor\\main\\maps\\dm\\codex_reactor.bsp",
+  "bytes": 774508,
+  "sha256": "4a7ede5d74338d01e26c0cc0ae3beba2462ede46baec3f63a7c36a943f540d57",
+  "ident": "0x35313032",
+  "version": 19,
+  "checksum": "0x6c57df98",
+  "shaders": 17,
+  "surfaces": 662,
+  "lightmapPages": 6,
+  "allocatedLightmapPages": 6,
+  "visibilityBytes": 39536,
+  "entities": {
+    "info_player_deathmatch": 20,
+    "info_player_allied": 10,
+    "info_player_axis": 10,
+    "info_player_start": 1,
+    "light": 23
+  }
+}
