@@ -1,5 +1,5 @@
 {
-  "source": "aa/obj_team2.map",
+  "source": "generated/codex_obj_team2_expanded/main/maps/obj/codex_obj_team2_expanded.map",
   "zone": {
     "min": [
       3200,
@@ -15,7 +15,7 @@
   "entities": [
     {
       "number": 17,
-      "line": 66947,
+      "line": 69483,
       "origin": [
         4271,
         2034,
@@ -29,7 +29,7 @@
     },
     {
       "number": 101,
-      "line": 68190,
+      "line": 70726,
       "origin": [
         3257,
         2492,
@@ -43,7 +43,7 @@
     },
     {
       "number": 102,
-      "line": 68198,
+      "line": 70734,
       "origin": [
         3260,
         2796,
@@ -57,7 +57,7 @@
     },
     {
       "number": 103,
-      "line": 68205,
+      "line": 70741,
       "origin": [
         3255,
         2820,
@@ -71,7 +71,7 @@
     },
     {
       "number": 104,
-      "line": 68212,
+      "line": 70748,
       "origin": [
         3264,
         2556,
@@ -85,7 +85,7 @@
     },
     {
       "number": 222,
-      "line": 69072,
+      "line": 71608,
       "origin": [
         3312,
         2256,
@@ -99,7 +99,7 @@
     },
     {
       "number": 247,
-      "line": 69382,
+      "line": 71918,
       "origin": [
         3254,
         2768,
@@ -113,7 +113,7 @@
     },
     {
       "number": 248,
-      "line": 69390,
+      "line": 71926,
       "origin": [
         3258,
         2531,
@@ -127,7 +127,7 @@
     },
     {
       "number": 249,
-      "line": 69399,
+      "line": 71935,
       "origin": [
         3258,
         2530,
@@ -141,7 +141,7 @@
     },
     {
       "number": 256,
-      "line": 69564,
+      "line": 72100,
       "origin": [
         3259,
         2304,
@@ -155,7 +155,7 @@
     },
     {
       "number": 262,
-      "line": 69625,
+      "line": 72161,
       "origin": [
         3257,
         2492,
@@ -169,7 +169,7 @@
     },
     {
       "number": 281,
-      "line": 69824,
+      "line": 72360,
       "origin": [
         3712,
         896,
@@ -183,7 +183,7 @@
     },
     {
       "number": 285,
-      "line": 69871,
+      "line": 72407,
       "origin": [
         4855,
         2034,
@@ -197,7 +197,7 @@
     },
     {
       "number": 287,
-      "line": 69896,
+      "line": 72432,
       "origin": [
         4288,
         768,
@@ -211,7 +211,7 @@
     },
     {
       "number": 383,
-      "line": 73897,
+      "line": 76433,
       "origin": [
         3258,
         2474,
@@ -225,7 +225,7 @@
     },
     {
       "number": 582,
-      "line": 75834,
+      "line": 77898,
       "origin": [
         3248.2,
         2767.2,
@@ -238,134 +238,8 @@
       "targetname": null
     },
     {
-      "number": 687,
-      "line": 76990,
-      "origin": [
-        3678.2,
-        546.2,
-        -529.2
-      ],
-      "classname": "static_natural_tree_oak",
-      "model": "static//tree_oak.tik",
-      "angle": "225",
-      "scale": "1.30",
-      "targetname": null
-    },
-    {
-      "number": 688,
-      "line": 77000,
-      "origin": [
-        3542.2,
-        1442.2,
-        -489.2
-      ],
-      "classname": "static_natural_tree_oak",
-      "model": "static//tree_oak.tik",
-      "angle": "180",
-      "scale": "1.30",
-      "targetname": null
-    },
-    {
-      "number": 689,
-      "line": 77010,
-      "origin": [
-        4888.6,
-        2332.6,
-        -415.6
-      ],
-      "classname": "static_natural_tree_oak",
-      "model": "static//tree_oak.tik",
-      "angle": "90",
-      "scale": "1.40",
-      "targetname": null
-    },
-    {
-      "number": 690,
-      "line": 77020,
-      "origin": [
-        4939.8,
-        1487.8,
-        -434.8
-      ],
-      "classname": "static_natural_tree_oak",
-      "model": "static//tree_oak.tik",
-      "angle": "90",
-      "scale": "1.20",
-      "targetname": null
-    },
-    {
-      "number": 692,
-      "line": 77040,
-      "origin": [
-        4616.6,
-        572.6,
-        -527.6
-      ],
-      "classname": "static_natural_tree_oak",
-      "model": "static//tree_oak.tik",
-      "angle": "90",
-      "scale": "1.40",
-      "targetname": null
-    },
-    {
-      "number": 693,
-      "line": 77050,
-      "origin": [
-        4152.6,
-        1036.6,
-        -543.6
-      ],
-      "classname": "static_natural_tree_oak",
-      "model": "static//tree_oak.tik",
-      "angle": "315",
-      "scale": "1.40",
-      "targetname": null
-    },
-    {
-      "number": 699,
-      "line": 77109,
-      "origin": [
-        3866,
-        1955,
-        -524
-      ],
-      "classname": "static_natural_tree_commontree",
-      "model": "static//tree_commontree.tik",
-      "angle": "180",
-      "scale": "2.00",
-      "targetname": null
-    },
-    {
-      "number": 702,
-      "line": 77136,
-      "origin": [
-        3420,
-        1912,
-        -509
-      ],
-      "classname": "static_natural_bush_full",
-      "model": "static//bush_full.tik",
-      "angle": "45",
-      "scale": "1.50",
-      "targetname": null
-    },
-    {
-      "number": 704,
-      "line": 77154,
-      "origin": [
-        4286.2,
-        2658.2,
-        -425.2
-      ],
-      "classname": "static_natural_tree_oak",
-      "model": "static//tree_oak.tik",
-      "angle": "270",
-      "scale": "1.30",
-      "targetname": null
-    },
-    {
       "number": 705,
-      "line": 77164,
+      "line": 78523,
       "origin": [
         3259,
         2304,
@@ -379,7 +253,7 @@
     },
     {
       "number": 706,
-      "line": 77172,
+      "line": 78531,
       "origin": [
         3253.2,
         2304.2,
@@ -393,7 +267,7 @@
     },
     {
       "number": 707,
-      "line": 77181,
+      "line": 78540,
       "origin": [
         3255,
         2768,
@@ -407,7 +281,7 @@
     },
     {
       "number": 713,
-      "line": 77230,
+      "line": 78589,
       "origin": [
         3258.2,
         2470.2,
@@ -421,7 +295,7 @@
     },
     {
       "number": 714,
-      "line": 77239,
+      "line": 78598,
       "origin": [
         3258.2,
         2470.2,
@@ -435,7 +309,7 @@
     },
     {
       "number": 715,
-      "line": 77248,
+      "line": 78607,
       "origin": [
         3258,
         2474,
@@ -446,27 +320,1109 @@
       "angle": null,
       "scale": "1.0",
       "targetname": null
+    },
+    {
+      "number": 752,
+      "line": 79620,
+      "origin": [
+        3280,
+        512,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "0",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 753,
+      "line": 79626,
+      "origin": [
+        3808,
+        864,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "90",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 754,
+      "line": 79632,
+      "origin": [
+        4160,
+        864,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "180",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 755,
+      "line": 79638,
+      "origin": [
+        3408,
+        1168,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "0",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 756,
+      "line": 79644,
+      "origin": [
+        4160,
+        1856,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "180",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 757,
+      "line": 79650,
+      "origin": [
+        3680,
+        2256,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "0",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 758,
+      "line": 79656,
+      "origin": [
+        3784,
+        2320,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "225",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 759,
+      "line": 79662,
+      "origin": [
+        4512,
+        832,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "90",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 760,
+      "line": 79668,
+      "origin": [
+        4928,
+        1376,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "180",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 761,
+      "line": 79674,
+      "origin": [
+        4560,
+        2336,
+        -336
+      ],
+      "classname": "info_player_deathmatch",
+      "model": null,
+      "angle": "270",
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 764,
+      "line": 79692,
+      "origin": [
+        3920,
+        2080,
+        -384
+      ],
+      "classname": "static_vehicle_german_opeltruck",
+      "model": "static//vehicle_opeltruck.tik",
+      "angle": "90",
+      "scale": "1.10",
+      "targetname": null
+    },
+    {
+      "number": 765,
+      "line": 79701,
+      "origin": [
+        3672,
+        912,
+        -384
+      ],
+      "classname": "static_item_nazicrate",
+      "model": "static//nazi_crate.tik",
+      "angle": "20",
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 766,
+      "line": 79710,
+      "origin": [
+        4064,
+        912,
+        -384
+      ],
+      "classname": "static_item_nazicrate",
+      "model": "static//nazi_crate.tik",
+      "angle": "340",
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 767,
+      "line": 79719,
+      "origin": [
+        3504,
+        2016,
+        -384
+      ],
+      "classname": "static_item_nazicrate",
+      "model": "static//nazi_crate.tik",
+      "angle": "90",
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 768,
+      "line": 79728,
+      "origin": [
+        4192,
+        1984,
+        -384
+      ],
+      "classname": "static_item_nazicrate",
+      "model": "static//nazi_crate.tik",
+      "angle": "180",
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 769,
+      "line": 79737,
+      "origin": [
+        4480,
+        1088,
+        -384
+      ],
+      "classname": "static_item_nazicrate",
+      "model": "static//nazi_crate.tik",
+      "angle": "0",
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 770,
+      "line": 79746,
+      "origin": [
+        4992,
+        1040,
+        -384
+      ],
+      "classname": "static_item_nazicrate",
+      "model": "static//nazi_crate.tik",
+      "angle": "270",
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 771,
+      "line": 79755,
+      "origin": [
+        4480,
+        2240,
+        -384
+      ],
+      "classname": "static_item_nazicrate",
+      "model": "static//nazi_crate.tik",
+      "angle": "90",
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 772,
+      "line": 79764,
+      "origin": [
+        4992,
+        2464,
+        -384
+      ],
+      "classname": "static_item_nazicrate",
+      "model": "static//nazi_crate.tik",
+      "angle": "180",
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 773,
+      "line": 79773,
+      "origin": [
+        4800,
+        1472,
+        -64
+      ],
+      "classname": "static_item_nazicrate",
+      "model": "static//nazi_crate.tik",
+      "angle": "90",
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 777,
+      "line": 79809,
+      "origin": [
+        4342,
+        888,
+        -112
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "0",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 778,
+      "line": 79818,
+      "origin": [
+        4336,
+        888,
+        -115
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 779,
+      "line": 79826,
+      "origin": [
+        4280,
+        888,
+        -112
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 780,
+      "line": 79834,
+      "origin": [
+        4342,
+        1384,
+        -112
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "0",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 781,
+      "line": 79843,
+      "origin": [
+        4336,
+        1384,
+        -115
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 782,
+      "line": 79851,
+      "origin": [
+        4280,
+        1384,
+        -112
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 783,
+      "line": 79859,
+      "origin": [
+        4342,
+        1880,
+        -112
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "0",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 784,
+      "line": 79868,
+      "origin": [
+        4336,
+        1880,
+        -115
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 785,
+      "line": 79876,
+      "origin": [
+        4280,
+        1880,
+        -112
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 786,
+      "line": 79884,
+      "origin": [
+        4342,
+        2376,
+        -112
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "0",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 787,
+      "line": 79893,
+      "origin": [
+        4336,
+        2376,
+        -115
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 788,
+      "line": 79901,
+      "origin": [
+        4280,
+        2376,
+        -112
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 789,
+      "line": 79909,
+      "origin": [
+        4800,
+        768,
+        196
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 790,
+      "line": 79918,
+      "origin": [
+        4800,
+        768,
+        190
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 791,
+      "line": 79926,
+      "origin": [
+        4800,
+        768,
+        128
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 792,
+      "line": 79934,
+      "origin": [
+        4800,
+        1104,
+        196
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 793,
+      "line": 79943,
+      "origin": [
+        4800,
+        1104,
+        190
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 794,
+      "line": 79951,
+      "origin": [
+        4800,
+        1104,
+        128
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 795,
+      "line": 79959,
+      "origin": [
+        4800,
+        1456,
+        196
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 796,
+      "line": 79968,
+      "origin": [
+        4800,
+        1456,
+        190
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 797,
+      "line": 79976,
+      "origin": [
+        4800,
+        1456,
+        128
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 798,
+      "line": 79984,
+      "origin": [
+        4800,
+        1824,
+        196
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 799,
+      "line": 79993,
+      "origin": [
+        4800,
+        1824,
+        190
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 800,
+      "line": 80001,
+      "origin": [
+        4800,
+        1824,
+        128
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 801,
+      "line": 80009,
+      "origin": [
+        4800,
+        2176,
+        196
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 802,
+      "line": 80018,
+      "origin": [
+        4800,
+        2176,
+        190
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 803,
+      "line": 80026,
+      "origin": [
+        4800,
+        2176,
+        128
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 804,
+      "line": 80034,
+      "origin": [
+        4800,
+        2512,
+        196
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 805,
+      "line": 80043,
+      "origin": [
+        4800,
+        2512,
+        190
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 806,
+      "line": 80051,
+      "origin": [
+        4800,
+        2512,
+        128
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 807,
+      "line": 80059,
+      "origin": [
+        3712,
+        1392,
+        68
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 808,
+      "line": 80068,
+      "origin": [
+        3712,
+        1392,
+        62
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 809,
+      "line": 80076,
+      "origin": [
+        3712,
+        1392,
+        0
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 810,
+      "line": 80084,
+      "origin": [
+        3920,
+        1392,
+        68
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 811,
+      "line": 80093,
+      "origin": [
+        3920,
+        1392,
+        62
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 812,
+      "line": 80101,
+      "origin": [
+        3920,
+        1392,
+        0
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 813,
+      "line": 80109,
+      "origin": [
+        4128,
+        1392,
+        68
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 814,
+      "line": 80118,
+      "origin": [
+        4128,
+        1392,
+        62
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 815,
+      "line": 80126,
+      "origin": [
+        4128,
+        1392,
+        0
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 816,
+      "line": 80134,
+      "origin": [
+        3520,
+        768,
+        132
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 817,
+      "line": 80143,
+      "origin": [
+        3520,
+        768,
+        126
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 818,
+      "line": 80151,
+      "origin": [
+        3520,
+        768,
+        64
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 819,
+      "line": 80159,
+      "origin": [
+        3840,
+        768,
+        132
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 820,
+      "line": 80168,
+      "origin": [
+        3840,
+        768,
+        126
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 821,
+      "line": 80176,
+      "origin": [
+        3840,
+        768,
+        64
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 822,
+      "line": 80184,
+      "origin": [
+        4128,
+        768,
+        132
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 823,
+      "line": 80193,
+      "origin": [
+        4128,
+        768,
+        126
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 824,
+      "line": 80201,
+      "origin": [
+        4128,
+        768,
+        64
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 825,
+      "line": 80209,
+      "origin": [
+        3520,
+        2112,
+        132
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 826,
+      "line": 80218,
+      "origin": [
+        3520,
+        2112,
+        126
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 827,
+      "line": 80226,
+      "origin": [
+        3520,
+        2112,
+        64
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 828,
+      "line": 80234,
+      "origin": [
+        3840,
+        2112,
+        132
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 829,
+      "line": 80243,
+      "origin": [
+        3840,
+        2112,
+        126
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 830,
+      "line": 80251,
+      "origin": [
+        3840,
+        2112,
+        64
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
+    },
+    {
+      "number": 831,
+      "line": 80259,
+      "origin": [
+        4128,
+        2112,
+        132
+      ],
+      "classname": "static_lamp_lightbulb-caged",
+      "model": "static//lightbulb_caged.tik",
+      "angle": "-2",
+      "scale": "1.40",
+      "targetname": null
+    },
+    {
+      "number": 832,
+      "line": 80268,
+      "origin": [
+        4128,
+        2112,
+        126
+      ],
+      "classname": "static_corona_orange",
+      "model": "static//corona_orange.tik",
+      "angle": null,
+      "scale": "1.0",
+      "targetname": null
+    },
+    {
+      "number": 833,
+      "line": 80276,
+      "origin": [
+        4128,
+        2112,
+        64
+      ],
+      "classname": "light",
+      "model": null,
+      "angle": null,
+      "scale": null,
+      "targetname": null
     }
   ],
   "entityClassCounts": [
     {
       "classname": "light",
-      "count": 9
-    },
-    {
-      "classname": "static_natural_tree_oak",
-      "count": 7
-    },
-    {
-      "classname": "info_splinepath",
-      "count": 4
+      "count": 28
     },
     {
       "classname": "static_corona_orange",
-      "count": 4
+      "count": 23
     },
     {
       "classname": "static_lamp_lightbulb-caged",
+      "count": 23
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "count": 10
+    },
+    {
+      "classname": "static_item_nazicrate",
+      "count": 9
+    },
+    {
+      "classname": "info_splinepath",
       "count": 4
     },
     {
@@ -474,11 +1430,7 @@
       "count": 1
     },
     {
-      "classname": "static_natural_bush_full",
-      "count": 1
-    },
-    {
-      "classname": "static_natural_tree_commontree",
+      "classname": "static_vehicle_german_opeltruck",
       "count": 1
     }
   ],
@@ -599,7 +1551,7 @@
     },
     {
       "number": 982,
-      "line": 9560,
+      "line": 9524,
       "min": [
         3356,
         2208,
@@ -618,7 +1570,7 @@
     },
     {
       "number": 983,
-      "line": 9569,
+      "line": 9533,
       "min": [
         3356,
         2208,
@@ -637,7 +1589,7 @@
     },
     {
       "number": 984,
-      "line": 9578,
+      "line": 9542,
       "min": [
         3152,
         2208,
@@ -656,7 +1608,7 @@
     },
     {
       "number": 987,
-      "line": 9605,
+      "line": 9569,
       "min": [
         3152,
         2192,
@@ -675,7 +1627,7 @@
     },
     {
       "number": 988,
-      "line": 9614,
+      "line": 9578,
       "min": [
         3152,
         2192,
@@ -694,7 +1646,7 @@
     },
     {
       "number": 1081,
-      "line": 10861,
+      "line": 10825,
       "min": [
         3648,
         2944,
@@ -713,7 +1665,7 @@
     },
     {
       "number": 1082,
-      "line": 10870,
+      "line": 10834,
       "min": [
         3648,
         2560,
@@ -732,7 +1684,7 @@
     },
     {
       "number": 1095,
-      "line": 15825,
+      "line": 15789,
       "min": [
         3136,
         2128,
@@ -751,7 +1703,7 @@
     },
     {
       "number": 1101,
-      "line": 15879,
+      "line": 15843,
       "min": [
         3648,
         -128,
@@ -770,7 +1722,7 @@
     },
     {
       "number": 1103,
-      "line": 15897,
+      "line": 15861,
       "min": [
         5184,
         -1664,
@@ -789,7 +1741,7 @@
     },
     {
       "number": 1147,
-      "line": 16293,
+      "line": 16113,
       "min": [
         1632,
         -128,
@@ -808,7 +1760,7 @@
     },
     {
       "number": 1148,
-      "line": 16302,
+      "line": 16122,
       "min": [
         3136,
         384,
@@ -827,7 +1779,7 @@
     },
     {
       "number": 4130,
-      "line": 48829,
+      "line": 48528,
       "min": [
         1472,
         -128,
@@ -845,8 +1797,3447 @@
       ]
     },
     {
+      "number": 5904,
+      "line": 66316,
+      "min": [
+        3232,
+        320,
+        -560
+      ],
+      "max": [
+        5152,
+        2208,
+        -384
+      ],
+      "size": [
+        1920,
+        1888,
+        176
+      ]
+    },
+    {
+      "number": 5905,
+      "line": 66325,
+      "min": [
+        3584,
+        2208,
+        -560
+      ],
+      "max": [
+        5152,
+        2496,
+        -384
+      ],
+      "size": [
+        1568,
+        288,
+        176
+      ]
+    },
+    {
+      "number": 5910,
+      "line": 66370,
+      "min": [
+        3168,
+        384,
+        -560
+      ],
+      "max": [
+        3200,
+        2208,
+        -400
+      ],
+      "size": [
+        32,
+        1824,
+        160
+      ]
+    },
+    {
+      "number": 5911,
+      "line": 66379,
+      "min": [
+        3200,
+        384,
+        -560
+      ],
+      "max": [
+        3232,
+        2208,
+        -384
+      ],
+      "size": [
+        32,
+        1824,
+        176
+      ]
+    },
+    {
+      "number": 5912,
+      "line": 66388,
+      "min": [
+        3360,
+        384,
+        -384
+      ],
+      "max": [
+        3392,
+        800,
+        144
+      ],
+      "size": [
+        32,
+        416,
+        528
+      ]
+    },
+    {
+      "number": 5913,
+      "line": 66397,
+      "min": [
+        4224,
+        384,
+        -384
+      ],
+      "max": [
+        4256,
+        800,
+        144
+      ],
+      "size": [
+        32,
+        416,
+        528
+      ]
+    },
+    {
+      "number": 5914,
+      "line": 66406,
+      "min": [
+        3392,
+        384,
+        -384
+      ],
+      "max": [
+        4224,
+        416,
+        144
+      ],
+      "size": [
+        832,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5915,
+      "line": 66415,
+      "min": [
+        3392,
+        768,
+        -384
+      ],
+      "max": [
+        3456,
+        800,
+        144
+      ],
+      "size": [
+        64,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5916,
+      "line": 66424,
+      "min": [
+        3712,
+        768,
+        -384
+      ],
+      "max": [
+        3760,
+        800,
+        144
+      ],
+      "size": [
+        48,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5917,
+      "line": 66433,
+      "min": [
+        4000,
+        768,
+        -384
+      ],
+      "max": [
+        4048,
+        800,
+        144
+      ],
+      "size": [
+        48,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5918,
+      "line": 66442,
+      "min": [
+        4192,
+        768,
+        -384
+      ],
+      "max": [
+        4224,
+        800,
+        144
+      ],
+      "size": [
+        32,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5919,
+      "line": 66451,
+      "min": [
+        3456,
+        768,
+        -64
+      ],
+      "max": [
+        3712,
+        800,
+        144
+      ],
+      "size": [
+        256,
+        32,
+        208
+      ]
+    },
+    {
+      "number": 5920,
+      "line": 66460,
+      "min": [
+        3456,
+        760,
+        -80
+      ],
+      "max": [
+        3472,
+        808,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5921,
+      "line": 66469,
+      "min": [
+        3696,
+        760,
+        -80
+      ],
+      "max": [
+        3712,
+        808,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5922,
+      "line": 66478,
+      "min": [
+        3760,
+        768,
+        -64
+      ],
+      "max": [
+        4000,
+        800,
+        144
+      ],
+      "size": [
+        240,
+        32,
+        208
+      ]
+    },
+    {
+      "number": 5923,
+      "line": 66487,
+      "min": [
+        3760,
+        760,
+        -80
+      ],
+      "max": [
+        3776,
+        808,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5924,
+      "line": 66496,
+      "min": [
+        3984,
+        760,
+        -80
+      ],
+      "max": [
+        4000,
+        808,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5925,
+      "line": 66505,
+      "min": [
+        4048,
+        768,
+        -64
+      ],
+      "max": [
+        4192,
+        800,
+        144
+      ],
+      "size": [
+        144,
+        32,
+        208
+      ]
+    },
+    {
+      "number": 5926,
+      "line": 66514,
+      "min": [
+        4048,
+        760,
+        -80
+      ],
+      "max": [
+        4064,
+        808,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5927,
+      "line": 66523,
+      "min": [
+        4176,
+        760,
+        -80
+      ],
+      "max": [
+        4192,
+        808,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5928,
+      "line": 66532,
+      "min": [
+        3744,
+        416,
+        -384
+      ],
+      "max": [
+        3768,
+        768,
+        -64
+      ],
+      "size": [
+        24,
+        352,
+        320
+      ]
+    },
+    {
+      "number": 5929,
+      "line": 66541,
+      "min": [
+        4032,
+        416,
+        -384
+      ],
+      "max": [
+        4056,
+        768,
+        -64
+      ],
+      "size": [
+        24,
+        352,
+        320
+      ]
+    },
+    {
+      "number": 5930,
+      "line": 66550,
+      "min": [
+        3360,
+        384,
+        144
+      ],
+      "max": [
+        4256,
+        800,
+        176
+      ],
+      "size": [
+        896,
+        416,
+        32
+      ]
+    },
+    {
+      "number": 5931,
+      "line": 66559,
+      "min": [
+        3360,
+        384,
+        176
+      ],
+      "max": [
+        3376,
+        800,
+        224
+      ],
+      "size": [
+        16,
+        416,
+        48
+      ]
+    },
+    {
+      "number": 5932,
+      "line": 66568,
+      "min": [
+        4240,
+        384,
+        176
+      ],
+      "max": [
+        4256,
+        800,
+        224
+      ],
+      "size": [
+        16,
+        416,
+        48
+      ]
+    },
+    {
+      "number": 5933,
+      "line": 66577,
+      "min": [
+        3376,
+        384,
+        176
+      ],
+      "max": [
+        4240,
+        400,
+        224
+      ],
+      "size": [
+        864,
+        16,
+        48
+      ]
+    },
+    {
+      "number": 5934,
+      "line": 66586,
+      "min": [
+        3376,
+        784,
+        176
+      ],
+      "max": [
+        4240,
+        800,
+        224
+      ],
+      "size": [
+        864,
+        16,
+        48
+      ]
+    },
+    {
+      "number": 5935,
+      "line": 66595,
+      "min": [
+        3584,
+        2080,
+        -384
+      ],
+      "max": [
+        3616,
+        2464,
+        144
+      ],
+      "size": [
+        32,
+        384,
+        528
+      ]
+    },
+    {
+      "number": 5936,
+      "line": 66604,
+      "min": [
+        4224,
+        2080,
+        -384
+      ],
+      "max": [
+        4256,
+        2464,
+        144
+      ],
+      "size": [
+        32,
+        384,
+        528
+      ]
+    },
+    {
+      "number": 5937,
+      "line": 66613,
+      "min": [
+        3616,
+        2432,
+        -384
+      ],
+      "max": [
+        4224,
+        2464,
+        144
+      ],
+      "size": [
+        608,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5938,
+      "line": 66622,
+      "min": [
+        3616,
+        2080,
+        -384
+      ],
+      "max": [
+        3648,
+        2112,
+        144
+      ],
+      "size": [
+        32,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5939,
+      "line": 66631,
+      "min": [
+        3808,
+        2080,
+        -384
+      ],
+      "max": [
+        3840,
+        2112,
+        144
+      ],
+      "size": [
+        32,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5940,
+      "line": 66640,
+      "min": [
+        4000,
+        2080,
+        -384
+      ],
+      "max": [
+        4032,
+        2112,
+        144
+      ],
+      "size": [
+        32,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5941,
+      "line": 66649,
+      "min": [
+        4192,
+        2080,
+        -384
+      ],
+      "max": [
+        4224,
+        2112,
+        144
+      ],
+      "size": [
+        32,
+        32,
+        528
+      ]
+    },
+    {
+      "number": 5942,
+      "line": 66658,
+      "min": [
+        3648,
+        2080,
+        -64
+      ],
+      "max": [
+        3808,
+        2112,
+        144
+      ],
+      "size": [
+        160,
+        32,
+        208
+      ]
+    },
+    {
+      "number": 5943,
+      "line": 66667,
+      "min": [
+        3648,
+        2072,
+        -80
+      ],
+      "max": [
+        3664,
+        2120,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5944,
+      "line": 66676,
+      "min": [
+        3792,
+        2072,
+        -80
+      ],
+      "max": [
+        3808,
+        2120,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5945,
+      "line": 66685,
+      "min": [
+        3840,
+        2080,
+        -64
+      ],
+      "max": [
+        4000,
+        2112,
+        144
+      ],
+      "size": [
+        160,
+        32,
+        208
+      ]
+    },
+    {
+      "number": 5946,
+      "line": 66694,
+      "min": [
+        3840,
+        2072,
+        -80
+      ],
+      "max": [
+        3856,
+        2120,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5947,
+      "line": 66703,
+      "min": [
+        3984,
+        2072,
+        -80
+      ],
+      "max": [
+        4000,
+        2120,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5948,
+      "line": 66712,
+      "min": [
+        4032,
+        2080,
+        -64
+      ],
+      "max": [
+        4192,
+        2112,
+        144
+      ],
+      "size": [
+        160,
+        32,
+        208
+      ]
+    },
+    {
+      "number": 5949,
+      "line": 66721,
+      "min": [
+        4032,
+        2072,
+        -80
+      ],
+      "max": [
+        4048,
+        2120,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5950,
+      "line": 66730,
+      "min": [
+        4176,
+        2072,
+        -80
+      ],
+      "max": [
+        4192,
+        2120,
+        -64
+      ],
+      "size": [
+        16,
+        48,
+        16
+      ]
+    },
+    {
+      "number": 5951,
+      "line": 66739,
+      "min": [
+        3824,
+        2112,
+        -384
+      ],
+      "max": [
+        3848,
+        2432,
+        -64
+      ],
+      "size": [
+        24,
+        320,
+        320
+      ]
+    },
+    {
+      "number": 5952,
+      "line": 66748,
+      "min": [
+        4016,
+        2112,
+        -384
+      ],
+      "max": [
+        4040,
+        2432,
+        -64
+      ],
+      "size": [
+        24,
+        320,
+        320
+      ]
+    },
+    {
+      "number": 5953,
+      "line": 66757,
+      "min": [
+        3584,
+        2080,
+        144
+      ],
+      "max": [
+        4256,
+        2464,
+        176
+      ],
+      "size": [
+        672,
+        384,
+        32
+      ]
+    },
+    {
+      "number": 5954,
+      "line": 66766,
+      "min": [
+        3584,
+        2080,
+        176
+      ],
+      "max": [
+        3600,
+        2464,
+        224
+      ],
+      "size": [
+        16,
+        384,
+        48
+      ]
+    },
+    {
+      "number": 5955,
+      "line": 66775,
+      "min": [
+        4240,
+        2080,
+        176
+      ],
+      "max": [
+        4256,
+        2464,
+        224
+      ],
+      "size": [
+        16,
+        384,
+        48
+      ]
+    },
+    {
+      "number": 5956,
+      "line": 66784,
+      "min": [
+        3600,
+        2080,
+        176
+      ],
+      "max": [
+        4240,
+        2096,
+        224
+      ],
+      "size": [
+        640,
+        16,
+        48
+      ]
+    },
+    {
+      "number": 5957,
+      "line": 66793,
+      "min": [
+        3600,
+        2448,
+        176
+      ],
+      "max": [
+        4240,
+        2464,
+        224
+      ],
+      "size": [
+        640,
+        16,
+        48
+      ]
+    },
+    {
+      "number": 5958,
+      "line": 66802,
+      "min": [
+        5088,
+        544,
+        -384
+      ],
+      "max": [
+        5120,
+        2464,
+        208
+      ],
+      "size": [
+        32,
+        1920,
+        592
+      ]
+    },
+    {
+      "number": 5959,
+      "line": 66811,
+      "min": [
+        4352,
+        544,
+        -384
+      ],
+      "max": [
+        5088,
+        576,
+        208
+      ],
+      "size": [
+        736,
+        32,
+        592
+      ]
+    },
+    {
+      "number": 5960,
+      "line": 66820,
+      "min": [
+        4352,
+        2432,
+        -384
+      ],
+      "max": [
+        5088,
+        2464,
+        208
+      ],
+      "size": [
+        736,
+        32,
+        592
+      ]
+    },
+    {
+      "number": 5961,
+      "line": 66829,
+      "min": [
+        4352,
+        544,
+        -384
+      ],
+      "max": [
+        4384,
+        672,
+        208
+      ],
+      "size": [
+        32,
+        128,
+        592
+      ]
+    },
+    {
+      "number": 5962,
+      "line": 66838,
+      "min": [
+        4352,
+        960,
+        -384
+      ],
+      "max": [
+        4384,
+        1088,
+        208
+      ],
+      "size": [
+        32,
+        128,
+        592
+      ]
+    },
+    {
+      "number": 5963,
+      "line": 66847,
+      "min": [
+        4352,
+        1376,
+        -384
+      ],
+      "max": [
+        4384,
+        1504,
+        208
+      ],
+      "size": [
+        32,
+        128,
+        592
+      ]
+    },
+    {
+      "number": 5964,
+      "line": 66856,
+      "min": [
+        4352,
+        1792,
+        -384
+      ],
+      "max": [
+        4384,
+        1920,
+        208
+      ],
+      "size": [
+        32,
+        128,
+        592
+      ]
+    },
+    {
+      "number": 5965,
+      "line": 66865,
+      "min": [
+        4352,
+        2304,
+        -384
+      ],
+      "max": [
+        4384,
+        2464,
+        208
+      ],
+      "size": [
+        32,
+        160,
+        592
+      ]
+    },
+    {
+      "number": 5966,
+      "line": 66874,
+      "min": [
+        4352,
+        672,
+        -64
+      ],
+      "max": [
+        4384,
+        960,
+        208
+      ],
+      "size": [
+        32,
+        288,
+        272
+      ]
+    },
+    {
+      "number": 5967,
+      "line": 66883,
+      "min": [
+        4336,
+        672,
+        -384
+      ],
+      "max": [
+        4352,
+        688,
+        -64
+      ],
+      "size": [
+        16,
+        16,
+        320
+      ]
+    },
+    {
+      "number": 5968,
+      "line": 66892,
+      "min": [
+        4336,
+        944,
+        -384
+      ],
+      "max": [
+        4352,
+        960,
+        -64
+      ],
+      "size": [
+        16,
+        16,
+        320
+      ]
+    },
+    {
+      "number": 5969,
+      "line": 66901,
+      "min": [
+        4336,
+        672,
+        -80
+      ],
+      "max": [
+        4352,
+        960,
+        -64
+      ],
+      "size": [
+        16,
+        288,
+        16
+      ]
+    },
+    {
+      "number": 5970,
+      "line": 66910,
+      "min": [
+        4288,
+        696,
+        -64
+      ],
+      "max": [
+        4352,
+        936,
+        -32
+      ],
+      "size": [
+        64,
+        240,
+        32
+      ]
+    },
+    {
+      "number": 5971,
+      "line": 66919,
+      "min": [
+        4352,
+        1088,
+        -64
+      ],
+      "max": [
+        4384,
+        1376,
+        208
+      ],
+      "size": [
+        32,
+        288,
+        272
+      ]
+    },
+    {
+      "number": 5972,
+      "line": 66928,
+      "min": [
+        4336,
+        1088,
+        -384
+      ],
+      "max": [
+        4352,
+        1104,
+        -64
+      ],
+      "size": [
+        16,
+        16,
+        320
+      ]
+    },
+    {
+      "number": 5973,
+      "line": 66937,
+      "min": [
+        4336,
+        1360,
+        -384
+      ],
+      "max": [
+        4352,
+        1376,
+        -64
+      ],
+      "size": [
+        16,
+        16,
+        320
+      ]
+    },
+    {
+      "number": 5974,
+      "line": 66946,
+      "min": [
+        4336,
+        1088,
+        -80
+      ],
+      "max": [
+        4352,
+        1376,
+        -64
+      ],
+      "size": [
+        16,
+        288,
+        16
+      ]
+    },
+    {
+      "number": 5975,
+      "line": 66955,
+      "min": [
+        4288,
+        1112,
+        -64
+      ],
+      "max": [
+        4352,
+        1352,
+        -32
+      ],
+      "size": [
+        64,
+        240,
+        32
+      ]
+    },
+    {
+      "number": 5976,
+      "line": 66964,
+      "min": [
+        4352,
+        1504,
+        -64
+      ],
+      "max": [
+        4384,
+        1792,
+        208
+      ],
+      "size": [
+        32,
+        288,
+        272
+      ]
+    },
+    {
+      "number": 5977,
+      "line": 66973,
+      "min": [
+        4336,
+        1504,
+        -384
+      ],
+      "max": [
+        4352,
+        1520,
+        -64
+      ],
+      "size": [
+        16,
+        16,
+        320
+      ]
+    },
+    {
+      "number": 5978,
+      "line": 66982,
+      "min": [
+        4336,
+        1776,
+        -384
+      ],
+      "max": [
+        4352,
+        1792,
+        -64
+      ],
+      "size": [
+        16,
+        16,
+        320
+      ]
+    },
+    {
+      "number": 5979,
+      "line": 66991,
+      "min": [
+        4336,
+        1504,
+        -80
+      ],
+      "max": [
+        4352,
+        1792,
+        -64
+      ],
+      "size": [
+        16,
+        288,
+        16
+      ]
+    },
+    {
+      "number": 5980,
+      "line": 67000,
+      "min": [
+        4288,
+        1528,
+        -64
+      ],
+      "max": [
+        4352,
+        1768,
+        -32
+      ],
+      "size": [
+        64,
+        240,
+        32
+      ]
+    },
+    {
+      "number": 5981,
+      "line": 67009,
+      "min": [
+        4352,
+        1920,
+        -64
+      ],
+      "max": [
+        4384,
+        2304,
+        208
+      ],
+      "size": [
+        32,
+        384,
+        272
+      ]
+    },
+    {
+      "number": 5982,
+      "line": 67018,
+      "min": [
+        4336,
+        1920,
+        -384
+      ],
+      "max": [
+        4352,
+        1936,
+        -64
+      ],
+      "size": [
+        16,
+        16,
+        320
+      ]
+    },
+    {
+      "number": 5983,
+      "line": 67027,
+      "min": [
+        4336,
+        2288,
+        -384
+      ],
+      "max": [
+        4352,
+        2304,
+        -64
+      ],
+      "size": [
+        16,
+        16,
+        320
+      ]
+    },
+    {
+      "number": 5984,
+      "line": 67036,
+      "min": [
+        4336,
+        1920,
+        -80
+      ],
+      "max": [
+        4352,
+        2304,
+        -64
+      ],
+      "size": [
+        16,
+        384,
+        16
+      ]
+    },
+    {
+      "number": 5985,
+      "line": 67045,
+      "min": [
+        4288,
+        1944,
+        -64
+      ],
+      "max": [
+        4352,
+        2280,
+        -32
+      ],
+      "size": [
+        64,
+        336,
+        32
+      ]
+    },
+    {
+      "number": 5986,
+      "line": 67054,
+      "min": [
+        4352,
+        544,
+        208
+      ],
+      "max": [
+        5120,
+        2464,
+        240
+      ],
+      "size": [
+        768,
+        1920,
+        32
+      ]
+    },
+    {
+      "number": 5987,
+      "line": 67063,
+      "min": [
+        4352,
+        544,
+        240
+      ],
+      "max": [
+        4368,
+        2464,
+        288
+      ],
+      "size": [
+        16,
+        1920,
+        48
+      ]
+    },
+    {
+      "number": 5988,
+      "line": 67072,
+      "min": [
+        5104,
+        544,
+        240
+      ],
+      "max": [
+        5120,
+        2464,
+        288
+      ],
+      "size": [
+        16,
+        1920,
+        48
+      ]
+    },
+    {
+      "number": 5989,
+      "line": 67081,
+      "min": [
+        4368,
+        544,
+        240
+      ],
+      "max": [
+        5104,
+        560,
+        288
+      ],
+      "size": [
+        736,
+        16,
+        48
+      ]
+    },
+    {
+      "number": 5990,
+      "line": 67090,
+      "min": [
+        4368,
+        2448,
+        240
+      ],
+      "max": [
+        5104,
+        2464,
+        288
+      ],
+      "size": [
+        736,
+        16,
+        48
+      ]
+    },
+    {
+      "number": 5991,
+      "line": 67099,
+      "min": [
+        4384,
+        640,
+        160
+      ],
+      "max": [
+        5088,
+        656,
+        192
+      ],
+      "size": [
+        704,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 5992,
+      "line": 67108,
+      "min": [
+        4384,
+        896,
+        160
+      ],
+      "max": [
+        5088,
+        912,
+        192
+      ],
+      "size": [
+        704,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 5993,
+      "line": 67117,
+      "min": [
+        4384,
+        1152,
+        160
+      ],
+      "max": [
+        5088,
+        1168,
+        192
+      ],
+      "size": [
+        704,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 5994,
+      "line": 67126,
+      "min": [
+        4384,
+        1408,
+        160
+      ],
+      "max": [
+        5088,
+        1424,
+        192
+      ],
+      "size": [
+        704,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 5995,
+      "line": 67135,
+      "min": [
+        4384,
+        1664,
+        160
+      ],
+      "max": [
+        5088,
+        1680,
+        192
+      ],
+      "size": [
+        704,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 5996,
+      "line": 67144,
+      "min": [
+        4384,
+        1920,
+        160
+      ],
+      "max": [
+        5088,
+        1936,
+        192
+      ],
+      "size": [
+        704,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 5997,
+      "line": 67153,
+      "min": [
+        4384,
+        2176,
+        160
+      ],
+      "max": [
+        5088,
+        2192,
+        192
+      ],
+      "size": [
+        704,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 5998,
+      "line": 67162,
+      "min": [
+        4384,
+        2400,
+        160
+      ],
+      "max": [
+        5088,
+        2416,
+        192
+      ],
+      "size": [
+        704,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 5999,
+      "line": 67171,
+      "min": [
+        4384,
+        1408,
+        -384
+      ],
+      "max": [
+        4688,
+        1432,
+        64
+      ],
+      "size": [
+        304,
+        24,
+        448
+      ]
+    },
+    {
+      "number": 6000,
+      "line": 67180,
+      "min": [
+        4896,
+        1408,
+        -384
+      ],
+      "max": [
+        5088,
+        1432,
+        64
+      ],
+      "size": [
+        192,
+        24,
+        448
+      ]
+    },
+    {
+      "number": 6001,
+      "line": 67189,
+      "min": [
+        4688,
+        1408,
+        32
+      ],
+      "max": [
+        4896,
+        1432,
+        64
+      ],
+      "size": [
+        208,
+        24,
+        32
+      ]
+    },
+    {
+      "number": 6002,
+      "line": 67198,
+      "min": [
+        4384,
+        1920,
+        -384
+      ],
+      "max": [
+        4688,
+        1944,
+        64
+      ],
+      "size": [
+        304,
+        24,
+        448
+      ]
+    },
+    {
+      "number": 6003,
+      "line": 67207,
+      "min": [
+        4896,
+        1920,
+        -384
+      ],
+      "max": [
+        5088,
+        1944,
+        64
+      ],
+      "size": [
+        192,
+        24,
+        448
+      ]
+    },
+    {
+      "number": 6004,
+      "line": 67216,
+      "min": [
+        4688,
+        1920,
+        32
+      ],
+      "max": [
+        4896,
+        1944,
+        64
+      ],
+      "size": [
+        208,
+        24,
+        32
+      ]
+    },
+    {
+      "number": 6005,
+      "line": 67225,
+      "min": [
+        4608,
+        704,
+        -384
+      ],
+      "max": [
+        4752,
+        736,
+        -368
+      ],
+      "size": [
+        144,
+        32,
+        16
+      ]
+    },
+    {
+      "number": 6006,
+      "line": 67234,
+      "min": [
+        4608,
+        736,
+        -384
+      ],
+      "max": [
+        4752,
+        768,
+        -352
+      ],
+      "size": [
+        144,
+        32,
+        32
+      ]
+    },
+    {
+      "number": 6007,
+      "line": 67243,
+      "min": [
+        4608,
+        768,
+        -384
+      ],
+      "max": [
+        4752,
+        800,
+        -336
+      ],
+      "size": [
+        144,
+        32,
+        48
+      ]
+    },
+    {
+      "number": 6008,
+      "line": 67252,
+      "min": [
+        4608,
+        800,
+        -384
+      ],
+      "max": [
+        4752,
+        832,
+        -320
+      ],
+      "size": [
+        144,
+        32,
+        64
+      ]
+    },
+    {
+      "number": 6009,
+      "line": 67261,
+      "min": [
+        4608,
+        832,
+        -384
+      ],
+      "max": [
+        4752,
+        864,
+        -304
+      ],
+      "size": [
+        144,
+        32,
+        80
+      ]
+    },
+    {
+      "number": 6010,
+      "line": 67270,
+      "min": [
+        4608,
+        864,
+        -384
+      ],
+      "max": [
+        4752,
+        896,
+        -288
+      ],
+      "size": [
+        144,
+        32,
+        96
+      ]
+    },
+    {
+      "number": 6011,
+      "line": 67279,
+      "min": [
+        4608,
+        896,
+        -384
+      ],
+      "max": [
+        4752,
+        928,
+        -272
+      ],
+      "size": [
+        144,
+        32,
+        112
+      ]
+    },
+    {
+      "number": 6012,
+      "line": 67288,
+      "min": [
+        4608,
+        928,
+        -384
+      ],
+      "max": [
+        4752,
+        960,
+        -256
+      ],
+      "size": [
+        144,
+        32,
+        128
+      ]
+    },
+    {
+      "number": 6013,
+      "line": 67297,
+      "min": [
+        4608,
+        960,
+        -384
+      ],
+      "max": [
+        4752,
+        992,
+        -240
+      ],
+      "size": [
+        144,
+        32,
+        144
+      ]
+    },
+    {
+      "number": 6014,
+      "line": 67306,
+      "min": [
+        4608,
+        992,
+        -384
+      ],
+      "max": [
+        4752,
+        1024,
+        -224
+      ],
+      "size": [
+        144,
+        32,
+        160
+      ]
+    },
+    {
+      "number": 6015,
+      "line": 67315,
+      "min": [
+        4608,
+        1024,
+        -384
+      ],
+      "max": [
+        4752,
+        1056,
+        -208
+      ],
+      "size": [
+        144,
+        32,
+        176
+      ]
+    },
+    {
+      "number": 6016,
+      "line": 67324,
+      "min": [
+        4608,
+        1056,
+        -384
+      ],
+      "max": [
+        4752,
+        1088,
+        -192
+      ],
+      "size": [
+        144,
+        32,
+        192
+      ]
+    },
+    {
+      "number": 6017,
+      "line": 67333,
+      "min": [
+        4608,
+        1088,
+        -384
+      ],
+      "max": [
+        4752,
+        1120,
+        -176
+      ],
+      "size": [
+        144,
+        32,
+        208
+      ]
+    },
+    {
+      "number": 6018,
+      "line": 67342,
+      "min": [
+        4608,
+        1120,
+        -384
+      ],
+      "max": [
+        4752,
+        1152,
+        -160
+      ],
+      "size": [
+        144,
+        32,
+        224
+      ]
+    },
+    {
+      "number": 6019,
+      "line": 67351,
+      "min": [
+        4608,
+        1152,
+        -384
+      ],
+      "max": [
+        4752,
+        1184,
+        -144
+      ],
+      "size": [
+        144,
+        32,
+        240
+      ]
+    },
+    {
+      "number": 6020,
+      "line": 67360,
+      "min": [
+        4608,
+        1184,
+        -384
+      ],
+      "max": [
+        4752,
+        1216,
+        -128
+      ],
+      "size": [
+        144,
+        32,
+        256
+      ]
+    },
+    {
+      "number": 6021,
+      "line": 67369,
+      "min": [
+        4608,
+        1216,
+        -384
+      ],
+      "max": [
+        4752,
+        1248,
+        -112
+      ],
+      "size": [
+        144,
+        32,
+        272
+      ]
+    },
+    {
+      "number": 6022,
+      "line": 67378,
+      "min": [
+        4608,
+        1248,
+        -384
+      ],
+      "max": [
+        4752,
+        1280,
+        -96
+      ],
+      "size": [
+        144,
+        32,
+        288
+      ]
+    },
+    {
+      "number": 6023,
+      "line": 67387,
+      "min": [
+        4608,
+        1280,
+        -384
+      ],
+      "max": [
+        4752,
+        1312,
+        -80
+      ],
+      "size": [
+        144,
+        32,
+        304
+      ]
+    },
+    {
+      "number": 6024,
+      "line": 67396,
+      "min": [
+        4608,
+        1312,
+        -384
+      ],
+      "max": [
+        4752,
+        1344,
+        -64
+      ],
+      "size": [
+        144,
+        32,
+        320
+      ]
+    },
+    {
+      "number": 6025,
+      "line": 67405,
+      "min": [
+        4752,
+        704,
+        -80
+      ],
+      "max": [
+        5088,
+        1536,
+        -64
+      ],
+      "size": [
+        336,
+        832,
+        16
+      ]
+    },
+    {
+      "number": 6026,
+      "line": 67414,
+      "min": [
+        4736,
+        736,
+        -64
+      ],
+      "max": [
+        4752,
+        752,
+        48
+      ],
+      "size": [
+        16,
+        16,
+        112
+      ]
+    },
+    {
+      "number": 6027,
+      "line": 67423,
+      "min": [
+        4736,
+        928,
+        -64
+      ],
+      "max": [
+        4752,
+        944,
+        48
+      ],
+      "size": [
+        16,
+        16,
+        112
+      ]
+    },
+    {
+      "number": 6028,
+      "line": 67432,
+      "min": [
+        4736,
+        1120,
+        -64
+      ],
+      "max": [
+        4752,
+        1136,
+        48
+      ],
+      "size": [
+        16,
+        16,
+        112
+      ]
+    },
+    {
+      "number": 6029,
+      "line": 67441,
+      "min": [
+        4736,
+        1440,
+        -64
+      ],
+      "max": [
+        4752,
+        1456,
+        48
+      ],
+      "size": [
+        16,
+        16,
+        112
+      ]
+    },
+    {
+      "number": 6030,
+      "line": 67450,
+      "min": [
+        4736,
+        1512,
+        -64
+      ],
+      "max": [
+        4752,
+        1528,
+        48
+      ],
+      "size": [
+        16,
+        16,
+        112
+      ]
+    },
+    {
+      "number": 6031,
+      "line": 67459,
+      "min": [
+        4736,
+        704,
+        -8
+      ],
+      "max": [
+        4752,
+        1280,
+        0
+      ],
+      "size": [
+        16,
+        576,
+        8
+      ]
+    },
+    {
+      "number": 6032,
+      "line": 67468,
+      "min": [
+        4736,
+        704,
+        48
+      ],
+      "max": [
+        4752,
+        1280,
+        56
+      ],
+      "size": [
+        16,
+        576,
+        8
+      ]
+    },
+    {
+      "number": 6033,
+      "line": 67477,
+      "min": [
+        4736,
+        1408,
+        -8
+      ],
+      "max": [
+        4752,
+        1536,
+        0
+      ],
+      "size": [
+        16,
+        128,
+        8
+      ]
+    },
+    {
+      "number": 6034,
+      "line": 67486,
+      "min": [
+        4736,
+        1408,
+        48
+      ],
+      "max": [
+        4752,
+        1536,
+        56
+      ],
+      "size": [
+        16,
+        128,
+        8
+      ]
+    },
+    {
+      "number": 6035,
+      "line": 67495,
+      "min": [
+        4736,
+        768,
+        -384
+      ],
+      "max": [
+        4776,
+        800,
+        -80
+      ],
+      "size": [
+        40,
+        32,
+        304
+      ]
+    },
+    {
+      "number": 6036,
+      "line": 67504,
+      "min": [
+        4736,
+        1088,
+        -384
+      ],
+      "max": [
+        4776,
+        1120,
+        -80
+      ],
+      "size": [
+        40,
+        32,
+        304
+      ]
+    },
+    {
+      "number": 6037,
+      "line": 67513,
+      "min": [
+        4736,
+        1456,
+        -384
+      ],
+      "max": [
+        4776,
+        1488,
+        -80
+      ],
+      "size": [
+        40,
+        32,
+        304
+      ]
+    },
+    {
+      "number": 6038,
+      "line": 67522,
+      "min": [
+        3616,
+        1088,
+        -384
+      ],
+      "max": [
+        3648,
+        1120,
+        80
+      ],
+      "size": [
+        32,
+        32,
+        464
+      ]
+    },
+    {
+      "number": 6039,
+      "line": 67531,
+      "min": [
+        3616,
+        1664,
+        -384
+      ],
+      "max": [
+        3648,
+        1696,
+        80
+      ],
+      "size": [
+        32,
+        32,
+        464
+      ]
+    },
+    {
+      "number": 6040,
+      "line": 67540,
+      "min": [
+        3904,
+        1088,
+        -384
+      ],
+      "max": [
+        3936,
+        1120,
+        80
+      ],
+      "size": [
+        32,
+        32,
+        464
+      ]
+    },
+    {
+      "number": 6041,
+      "line": 67549,
+      "min": [
+        3904,
+        1664,
+        -384
+      ],
+      "max": [
+        3936,
+        1696,
+        80
+      ],
+      "size": [
+        32,
+        32,
+        464
+      ]
+    },
+    {
+      "number": 6042,
+      "line": 67558,
+      "min": [
+        4192,
+        1088,
+        -384
+      ],
+      "max": [
+        4224,
+        1120,
+        80
+      ],
+      "size": [
+        32,
+        32,
+        464
+      ]
+    },
+    {
+      "number": 6043,
+      "line": 67567,
+      "min": [
+        4192,
+        1664,
+        -384
+      ],
+      "max": [
+        4224,
+        1696,
+        80
+      ],
+      "size": [
+        32,
+        32,
+        464
+      ]
+    },
+    {
+      "number": 6044,
+      "line": 67576,
+      "min": [
+        3592,
+        1064,
+        80
+      ],
+      "max": [
+        4248,
+        1720,
+        112
+      ],
+      "size": [
+        656,
+        656,
+        32
+      ]
+    },
+    {
+      "number": 6045,
+      "line": 67585,
+      "min": [
+        3592,
+        1064,
+        48
+      ],
+      "max": [
+        4248,
+        1080,
+        80
+      ],
+      "size": [
+        656,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 6046,
+      "line": 67594,
+      "min": [
+        3592,
+        1704,
+        48
+      ],
+      "max": [
+        4248,
+        1720,
+        80
+      ],
+      "size": [
+        656,
+        16,
+        32
+      ]
+    },
+    {
+      "number": 6047,
+      "line": 67603,
+      "min": [
+        3360,
+        944,
+        -384
+      ],
+      "max": [
+        3392,
+        976,
+        16
+      ],
+      "size": [
+        32,
+        32,
+        400
+      ]
+    },
+    {
+      "number": 6048,
+      "line": 67612,
+      "min": [
+        3360,
+        1248,
+        -384
+      ],
+      "max": [
+        3392,
+        1280,
+        16
+      ],
+      "size": [
+        32,
+        32,
+        400
+      ]
+    },
+    {
+      "number": 6049,
+      "line": 67621,
+      "min": [
+        3360,
+        1552,
+        -384
+      ],
+      "max": [
+        3392,
+        1584,
+        16
+      ],
+      "size": [
+        32,
+        32,
+        400
+      ]
+    },
+    {
+      "number": 6050,
+      "line": 67630,
+      "min": [
+        3360,
+        1856,
+        -384
+      ],
+      "max": [
+        3392,
+        1888,
+        16
+      ],
+      "size": [
+        32,
+        32,
+        400
+      ]
+    },
+    {
+      "number": 6051,
+      "line": 67639,
+      "min": [
+        3360,
+        2160,
+        -384
+      ],
+      "max": [
+        3392,
+        2192,
+        16
+      ],
+      "size": [
+        32,
+        32,
+        400
+      ]
+    },
+    {
+      "number": 6052,
+      "line": 67648,
+      "min": [
+        3336,
+        920,
+        16
+      ],
+      "max": [
+        3520,
+        2208,
+        48
+      ],
+      "size": [
+        184,
+        1288,
+        32
+      ]
+    },
+    {
+      "number": 6053,
+      "line": 67657,
+      "min": [
+        3520,
+        880,
+        -384
+      ],
+      "max": [
+        3664,
+        944,
+        -272
+      ],
+      "size": [
+        144,
+        64,
+        112
+      ]
+    },
+    {
+      "number": 6054,
+      "line": 67666,
+      "min": [
+        3936,
+        880,
+        -384
+      ],
+      "max": [
+        4080,
+        944,
+        -272
+      ],
+      "size": [
+        144,
+        64,
+        112
+      ]
+    },
+    {
+      "number": 6055,
+      "line": 67675,
+      "min": [
+        3520,
+        1888,
+        -384
+      ],
+      "max": [
+        3664,
+        1952,
+        -272
+      ],
+      "size": [
+        144,
+        64,
+        112
+      ]
+    },
+    {
+      "number": 6056,
+      "line": 67684,
+      "min": [
+        4048,
+        1904,
+        -384
+      ],
+      "max": [
+        4192,
+        1968,
+        -272
+      ],
+      "size": [
+        144,
+        64,
+        112
+      ]
+    },
+    {
+      "number": 6057,
+      "line": 67693,
+      "min": [
+        3744,
+        1264,
+        -384
+      ],
+      "max": [
+        3840,
+        1488,
+        -272
+      ],
+      "size": [
+        96,
+        224,
+        112
+      ]
+    },
+    {
+      "number": 6058,
+      "line": 67702,
+      "min": [
+        4000,
+        1424,
+        -384
+      ],
+      "max": [
+        4096,
+        1648,
+        -272
+      ],
+      "size": [
+        96,
+        224,
+        112
+      ]
+    },
+    {
+      "number": 6059,
+      "line": 67711,
+      "min": [
+        3296,
+        1984,
+        -384
+      ],
+      "max": [
+        3440,
+        2048,
+        -272
+      ],
+      "size": [
+        144,
+        64,
+        112
+      ]
+    },
+    {
+      "number": 6060,
+      "line": 67720,
+      "min": [
+        4216,
+        1040,
+        -384
+      ],
+      "max": [
+        4280,
+        1184,
+        -272
+      ],
+      "size": [
+        64,
+        144,
+        112
+      ]
+    },
+    {
+      "number": 6061,
+      "line": 67729,
+      "min": [
+        3488,
+        1008,
+        -384
+      ],
+      "max": [
+        3504,
+        1024,
+        -256
+      ],
+      "size": [
+        16,
+        16,
+        128
+      ]
+    },
+    {
+      "number": 6062,
+      "line": 67738,
+      "min": [
+        3488,
+        2112,
+        -384
+      ],
+      "max": [
+        3504,
+        2128,
+        -256
+      ],
+      "size": [
+        16,
+        16,
+        128
+      ]
+    },
+    {
+      "number": 6063,
+      "line": 67747,
+      "min": [
+        4256,
+        992,
+        -384
+      ],
+      "max": [
+        4272,
+        1008,
+        -256
+      ],
+      "size": [
+        16,
+        16,
+        128
+      ]
+    },
+    {
+      "number": 6064,
+      "line": 67756,
+      "min": [
+        4256,
+        2080,
+        -384
+      ],
+      "max": [
+        4272,
+        2096,
+        -256
+      ],
+      "size": [
+        16,
+        16,
+        128
+      ]
+    },
+    {
+      "number": 6065,
+      "line": 67765,
+      "min": [
+        3712,
+        1824,
+        -384
+      ],
+      "max": [
+        3728,
+        1840,
+        -256
+      ],
+      "size": [
+        16,
+        16,
+        128
+      ]
+    },
+    {
+      "number": 6066,
+      "line": 67774,
+      "min": [
+        4128,
+        1792,
+        -384
+      ],
+      "max": [
+        4144,
+        1808,
+        -256
+      ],
+      "size": [
+        16,
+        16,
+        128
+      ]
+    },
+    {
+      "number": 6067,
+      "line": 67783,
+      "min": [
+        4448,
+        720,
+        240
+      ],
+      "max": [
+        4544,
+        912,
+        320
+      ],
+      "size": [
+        96,
+        192,
+        80
+      ]
+    },
+    {
+      "number": 6068,
+      "line": 67792,
+      "min": [
+        4440,
+        712,
+        320
+      ],
+      "max": [
+        4552,
+        920,
+        336
+      ],
+      "size": [
+        112,
+        208,
+        16
+      ]
+    },
+    {
+      "number": 6069,
+      "line": 67801,
+      "min": [
+        4800,
+        1008,
+        240
+      ],
+      "max": [
+        4896,
+        1200,
+        304
+      ],
+      "size": [
+        96,
+        192,
+        64
+      ]
+    },
+    {
+      "number": 6070,
+      "line": 67810,
+      "min": [
+        4792,
+        1000,
+        304
+      ],
+      "max": [
+        4904,
+        1208,
+        320
+      ],
+      "size": [
+        112,
+        208,
+        16
+      ]
+    },
+    {
+      "number": 6071,
+      "line": 67819,
+      "min": [
+        4464,
+        1728,
+        240
+      ],
+      "max": [
+        4560,
+        1920,
+        320
+      ],
+      "size": [
+        96,
+        192,
+        80
+      ]
+    },
+    {
+      "number": 6072,
+      "line": 67828,
+      "min": [
+        4456,
+        1720,
+        320
+      ],
+      "max": [
+        4568,
+        1928,
+        336
+      ],
+      "size": [
+        112,
+        208,
+        16
+      ]
+    },
+    {
+      "number": 6073,
+      "line": 67837,
+      "min": [
+        4800,
+        2240,
+        240
+      ],
+      "max": [
+        4896,
+        2432,
+        304
+      ],
+      "size": [
+        96,
+        192,
+        64
+      ]
+    },
+    {
+      "number": 6074,
+      "line": 67846,
+      "min": [
+        4792,
+        2232,
+        304
+      ],
+      "max": [
+        4904,
+        2440,
+        320
+      ],
+      "size": [
+        112,
+        208,
+        16
+      ]
+    },
+    {
+      "number": 6075,
+      "line": 67855,
+      "min": [
+        3440,
+        448,
+        -384
+      ],
+      "max": [
+        3568,
+        544,
+        -240
+      ],
+      "size": [
+        128,
+        96,
+        144
+      ]
+    },
+    {
+      "number": 6076,
+      "line": 67864,
+      "min": [
+        3712,
+        448,
+        -384
+      ],
+      "max": [
+        3840,
+        544,
+        -272
+      ],
+      "size": [
+        128,
+        96,
+        112
+      ]
+    },
+    {
+      "number": 6077,
+      "line": 67873,
+      "min": [
+        4000,
+        448,
+        -384
+      ],
+      "max": [
+        4128,
+        544,
+        -240
+      ],
+      "size": [
+        128,
+        96,
+        144
+      ]
+    },
+    {
+      "number": 6078,
+      "line": 67882,
+      "min": [
+        3648,
+        2304,
+        -384
+      ],
+      "max": [
+        3760,
+        2400,
+        -240
+      ],
+      "size": [
+        112,
+        96,
+        144
+      ]
+    },
+    {
+      "number": 6079,
+      "line": 67891,
+      "min": [
+        3856,
+        2304,
+        -384
+      ],
+      "max": [
+        3968,
+        2400,
+        -272
+      ],
+      "size": [
+        112,
+        96,
+        112
+      ]
+    },
+    {
+      "number": 6080,
+      "line": 67900,
+      "min": [
+        4064,
+        2304,
+        -384
+      ],
+      "max": [
+        4176,
+        2400,
+        -240
+      ],
+      "size": [
+        112,
+        96,
+        144
+      ]
+    },
+    {
+      "number": 6081,
+      "line": 67909,
+      "min": [
+        4448,
+        1120,
+        -384
+      ],
+      "max": [
+        4544,
+        1216,
+        -240
+      ],
+      "size": [
+        96,
+        96,
+        144
+      ]
+    },
+    {
+      "number": 6082,
+      "line": 67918,
+      "min": [
+        4936,
+        1120,
+        -384
+      ],
+      "max": [
+        5032,
+        1216,
+        -272
+      ],
+      "size": [
+        96,
+        96,
+        112
+      ]
+    },
+    {
+      "number": 6083,
+      "line": 67927,
+      "min": [
+        4448,
+        2304,
+        -384
+      ],
+      "max": [
+        4544,
+        2400,
+        -240
+      ],
+      "size": [
+        96,
+        96,
+        144
+      ]
+    },
+    {
+      "number": 6084,
+      "line": 67936,
+      "min": [
+        4936,
+        2304,
+        -384
+      ],
+      "max": [
+        5032,
+        2400,
+        -272
+      ],
+      "size": [
+        96,
+        96,
+        112
+      ]
+    },
+    {
+      "number": 6085,
+      "line": 67945,
+      "min": [
+        5008,
+        624,
+        48
+      ],
+      "max": [
+        5072,
+        1504,
+        112
+      ],
+      "size": [
+        64,
+        880,
+        64
+      ]
+    },
+    {
+      "number": 6086,
+      "line": 67954,
+      "min": [
+        4984,
+        768,
+        32
+      ],
+      "max": [
+        5080,
+        784,
+        128
+      ],
+      "size": [
+        96,
+        16,
+        96
+      ]
+    },
+    {
+      "number": 6087,
+      "line": 67963,
+      "min": [
+        4984,
+        1056,
+        32
+      ],
+      "max": [
+        5080,
+        1072,
+        128
+      ],
+      "size": [
+        96,
+        16,
+        96
+      ]
+    },
+    {
+      "number": 6088,
+      "line": 67972,
+      "min": [
+        4984,
+        1344,
+        32
+      ],
+      "max": [
+        5080,
+        1360,
+        128
+      ],
+      "size": [
+        96,
+        16,
+        96
+      ]
+    },
+    {
       "number": 2,
-      "line": 71369,
+      "line": 73905,
       "min": [
         3240,
         2606,
@@ -865,7 +5256,7 @@
     },
     {
       "number": 5,
-      "line": 71395,
+      "line": 73931,
       "min": [
         3245,
         2777,
@@ -884,7 +5275,7 @@
     },
     {
       "number": 9,
-      "line": 71431,
+      "line": 73967,
       "min": [
         3160,
         2784,
@@ -903,7 +5294,7 @@
     },
     {
       "number": 10,
-      "line": 71440,
+      "line": 73976,
       "min": [
         3160,
         2756,
@@ -922,7 +5313,7 @@
     },
     {
       "number": 11,
-      "line": 71449,
+      "line": 73985,
       "min": [
         3160,
         2784,
@@ -941,7 +5332,7 @@
     },
     {
       "number": 12,
-      "line": 71458,
+      "line": 73994,
       "min": [
         3268,
         2756,
@@ -960,7 +5351,7 @@
     },
     {
       "number": 14,
-      "line": 71476,
+      "line": 74012,
       "min": [
         3164,
         2722,
@@ -979,7 +5370,7 @@
     },
     {
       "number": 15,
-      "line": 71485,
+      "line": 74021,
       "min": [
         3240,
         2722,
@@ -998,7 +5389,7 @@
     },
     {
       "number": 16,
-      "line": 71494,
+      "line": 74030,
       "min": [
         3240,
         2694,
@@ -1017,7 +5408,7 @@
     },
     {
       "number": 17,
-      "line": 71503,
+      "line": 74039,
       "min": [
         3164,
         2694,
@@ -1036,7 +5427,7 @@
     },
     {
       "number": 20,
-      "line": 71530,
+      "line": 74066,
       "min": [
         3164,
         2666,
@@ -1055,7 +5446,7 @@
     },
     {
       "number": 21,
-      "line": 71539,
+      "line": 74075,
       "min": [
         3240,
         2666,
@@ -1074,7 +5465,7 @@
     },
     {
       "number": 22,
-      "line": 71548,
+      "line": 74084,
       "min": [
         3240,
         2638,
@@ -1093,7 +5484,7 @@
     },
     {
       "number": 23,
-      "line": 71557,
+      "line": 74093,
       "min": [
         3164,
         2638,
@@ -1112,7 +5503,7 @@
     },
     {
       "number": 26,
-      "line": 71584,
+      "line": 74120,
       "min": [
         3160,
         2722,
@@ -1131,7 +5522,7 @@
     },
     {
       "number": 27,
-      "line": 71593,
+      "line": 74129,
       "min": [
         3240,
         2722,
@@ -1150,7 +5541,7 @@
     },
     {
       "number": 28,
-      "line": 71602,
+      "line": 74138,
       "min": [
         3240,
         2694,
@@ -1169,7 +5560,7 @@
     },
     {
       "number": 29,
-      "line": 71611,
+      "line": 74147,
       "min": [
         3160,
         2694,
@@ -1188,7 +5579,7 @@
     },
     {
       "number": 32,
-      "line": 71638,
+      "line": 74174,
       "min": [
         3160,
         2666,
@@ -1207,7 +5598,7 @@
     },
     {
       "number": 33,
-      "line": 71647,
+      "line": 74183,
       "min": [
         3240,
         2666,
@@ -1226,7 +5617,7 @@
     },
     {
       "number": 34,
-      "line": 71656,
+      "line": 74192,
       "min": [
         3240,
         2638,
@@ -1245,7 +5636,7 @@
     },
     {
       "number": 35,
-      "line": 71665,
+      "line": 74201,
       "min": [
         3160,
         2638,
@@ -1264,7 +5655,7 @@
     },
     {
       "number": 38,
-      "line": 71692,
+      "line": 74228,
       "min": [
         3160,
         2610,
@@ -1283,7 +5674,7 @@
     },
     {
       "number": 39,
-      "line": 71701,
+      "line": 74237,
       "min": [
         3240,
         2610,
@@ -1302,7 +5693,7 @@
     },
     {
       "number": 40,
-      "line": 71710,
+      "line": 74246,
       "min": [
         3240,
         2582,
@@ -1321,7 +5712,7 @@
     },
     {
       "number": 41,
-      "line": 71719,
+      "line": 74255,
       "min": [
         3160,
         2582,
@@ -1340,7 +5731,7 @@
     },
     {
       "number": 43,
-      "line": 71737,
+      "line": 74273,
       "min": [
         3348,
         2722,
@@ -1359,7 +5750,7 @@
     },
     {
       "number": 44,
-      "line": 71746,
+      "line": 74282,
       "min": [
         3268,
         2722,
@@ -1378,7 +5769,7 @@
     },
     {
       "number": 45,
-      "line": 71755,
+      "line": 74291,
       "min": [
         3264,
         2722,
@@ -1397,7 +5788,7 @@
     },
     {
       "number": 46,
-      "line": 71764,
+      "line": 74300,
       "min": [
         3264,
         2694,
@@ -1416,7 +5807,7 @@
     },
     {
       "number": 47,
-      "line": 71773,
+      "line": 74309,
       "min": [
         3268,
         2694,
@@ -1435,7 +5826,7 @@
     },
     {
       "number": 48,
-      "line": 71782,
+      "line": 74318,
       "min": [
         3348,
         2694,
@@ -1454,7 +5845,7 @@
     },
     {
       "number": 49,
-      "line": 71791,
+      "line": 74327,
       "min": [
         3348,
         2666,
@@ -1473,7 +5864,7 @@
     },
     {
       "number": 50,
-      "line": 71800,
+      "line": 74336,
       "min": [
         3268,
         2666,
@@ -1492,7 +5883,7 @@
     },
     {
       "number": 51,
-      "line": 71809,
+      "line": 74345,
       "min": [
         3264,
         2666,
@@ -1511,7 +5902,7 @@
     },
     {
       "number": 52,
-      "line": 71818,
+      "line": 74354,
       "min": [
         3264,
         2638,
@@ -1530,7 +5921,7 @@
     },
     {
       "number": 53,
-      "line": 71827,
+      "line": 74363,
       "min": [
         3268,
         2638,
@@ -1549,7 +5940,7 @@
     },
     {
       "number": 54,
-      "line": 71836,
+      "line": 74372,
       "min": [
         3348,
         2638,
@@ -1568,7 +5959,7 @@
     },
     {
       "number": 55,
-      "line": 71845,
+      "line": 74381,
       "min": [
         3348,
         2610,
@@ -1587,7 +5978,7 @@
     },
     {
       "number": 56,
-      "line": 71854,
+      "line": 74390,
       "min": [
         3268,
         2610,
@@ -1606,7 +5997,7 @@
     },
     {
       "number": 57,
-      "line": 71863,
+      "line": 74399,
       "min": [
         3264,
         2610,
@@ -1625,7 +6016,7 @@
     },
     {
       "number": 58,
-      "line": 71872,
+      "line": 74408,
       "min": [
         3264,
         2582,
@@ -1644,7 +6035,7 @@
     },
     {
       "number": 59,
-      "line": 71881,
+      "line": 74417,
       "min": [
         3268,
         2582,
@@ -1663,7 +6054,7 @@
     },
     {
       "number": 60,
-      "line": 71890,
+      "line": 74426,
       "min": [
         3348,
         2582,
@@ -1682,7 +6073,7 @@
     },
     {
       "number": 61,
-      "line": 71899,
+      "line": 74435,
       "min": [
         3160,
         2544,
@@ -1701,7 +6092,7 @@
     },
     {
       "number": 62,
-      "line": 71908,
+      "line": 74444,
       "min": [
         3268,
         2544,
@@ -1720,7 +6111,7 @@
     },
     {
       "number": 63,
-      "line": 71917,
+      "line": 74453,
       "min": [
         3268,
         2544,
@@ -1739,7 +6130,7 @@
     },
     {
       "number": 64,
-      "line": 71926,
+      "line": 74462,
       "min": [
         3160,
         2544,
@@ -1758,7 +6149,7 @@
     },
     {
       "number": 65,
-      "line": 71935,
+      "line": 74471,
       "min": [
         3268,
         2756,
@@ -1777,7 +6168,7 @@
     },
     {
       "number": 66,
-      "line": 71944,
+      "line": 74480,
       "min": [
         3160,
         2784,
@@ -1796,7 +6187,7 @@
     },
     {
       "number": 67,
-      "line": 71953,
+      "line": 74489,
       "min": [
         3160,
         2756,
@@ -1815,7 +6206,7 @@
     },
     {
       "number": 68,
-      "line": 71962,
+      "line": 74498,
       "min": [
         3348,
         2582,
@@ -1834,7 +6225,7 @@
     },
     {
       "number": 69,
-      "line": 71971,
+      "line": 74507,
       "min": [
         3268,
         2582,
@@ -1853,7 +6244,7 @@
     },
     {
       "number": 70,
-      "line": 71980,
+      "line": 74516,
       "min": [
         3264,
         2582,
@@ -1872,7 +6263,7 @@
     },
     {
       "number": 71,
-      "line": 71989,
+      "line": 74525,
       "min": [
         3264,
         2610,
@@ -1891,7 +6282,7 @@
     },
     {
       "number": 72,
-      "line": 71998,
+      "line": 74534,
       "min": [
         3268,
         2610,
@@ -1910,7 +6301,7 @@
     },
     {
       "number": 73,
-      "line": 72007,
+      "line": 74543,
       "min": [
         3348,
         2610,
@@ -1929,7 +6320,7 @@
     },
     {
       "number": 74,
-      "line": 72016,
+      "line": 74552,
       "min": [
         3348,
         2638,
@@ -1948,7 +6339,7 @@
     },
     {
       "number": 75,
-      "line": 72025,
+      "line": 74561,
       "min": [
         3268,
         2638,
@@ -1967,7 +6358,7 @@
     },
     {
       "number": 76,
-      "line": 72034,
+      "line": 74570,
       "min": [
         3264,
         2638,
@@ -1986,7 +6377,7 @@
     },
     {
       "number": 77,
-      "line": 72043,
+      "line": 74579,
       "min": [
         3264,
         2666,
@@ -2005,7 +6396,7 @@
     },
     {
       "number": 78,
-      "line": 72052,
+      "line": 74588,
       "min": [
         3268,
         2666,
@@ -2024,7 +6415,7 @@
     },
     {
       "number": 79,
-      "line": 72061,
+      "line": 74597,
       "min": [
         3348,
         2666,
@@ -2043,7 +6434,7 @@
     },
     {
       "number": 80,
-      "line": 72070,
+      "line": 74606,
       "min": [
         3348,
         2694,
@@ -2062,7 +6453,7 @@
     },
     {
       "number": 81,
-      "line": 72079,
+      "line": 74615,
       "min": [
         3268,
         2694,
@@ -2081,7 +6472,7 @@
     },
     {
       "number": 82,
-      "line": 72088,
+      "line": 74624,
       "min": [
         3264,
         2694,
@@ -2100,7 +6491,7 @@
     },
     {
       "number": 83,
-      "line": 72097,
+      "line": 74633,
       "min": [
         3264,
         2722,
@@ -2119,7 +6510,7 @@
     },
     {
       "number": 84,
-      "line": 72106,
+      "line": 74642,
       "min": [
         3268,
         2722,
@@ -2138,7 +6529,7 @@
     },
     {
       "number": 85,
-      "line": 72115,
+      "line": 74651,
       "min": [
         3348,
         2722,
@@ -2157,7 +6548,7 @@
     },
     {
       "number": 87,
-      "line": 72133,
+      "line": 74669,
       "min": [
         3160,
         2582,
@@ -2176,7 +6567,7 @@
     },
     {
       "number": 88,
-      "line": 72142,
+      "line": 74678,
       "min": [
         3240,
         2582,
@@ -2195,7 +6586,7 @@
     },
     {
       "number": 89,
-      "line": 72151,
+      "line": 74687,
       "min": [
         3240,
         2610,
@@ -2214,7 +6605,7 @@
     },
     {
       "number": 90,
-      "line": 72160,
+      "line": 74696,
       "min": [
         3160,
         2610,
@@ -2233,7 +6624,7 @@
     },
     {
       "number": 93,
-      "line": 72187,
+      "line": 74723,
       "min": [
         3160,
         2638,
@@ -2252,7 +6643,7 @@
     },
     {
       "number": 94,
-      "line": 72196,
+      "line": 74732,
       "min": [
         3240,
         2638,
@@ -2271,7 +6662,7 @@
     },
     {
       "number": 95,
-      "line": 72205,
+      "line": 74741,
       "min": [
         3240,
         2666,
@@ -2290,7 +6681,7 @@
     },
     {
       "number": 96,
-      "line": 72214,
+      "line": 74750,
       "min": [
         3160,
         2666,
@@ -2309,7 +6700,7 @@
     },
     {
       "number": 99,
-      "line": 72241,
+      "line": 74777,
       "min": [
         3160,
         2694,
@@ -2328,7 +6719,7 @@
     },
     {
       "number": 100,
-      "line": 72250,
+      "line": 74786,
       "min": [
         3240,
         2694,
@@ -2347,7 +6738,7 @@
     },
     {
       "number": 101,
-      "line": 72259,
+      "line": 74795,
       "min": [
         3240,
         2722,
@@ -2366,7 +6757,7 @@
     },
     {
       "number": 102,
-      "line": 72268,
+      "line": 74804,
       "min": [
         3160,
         2722,
@@ -2385,7 +6776,7 @@
     },
     {
       "number": 104,
-      "line": 72286,
+      "line": 74822,
       "min": [
         3160,
         2756,
@@ -2404,7 +6795,7 @@
     },
     {
       "number": 105,
-      "line": 72295,
+      "line": 74831,
       "min": [
         3351,
         2777,
@@ -2423,7 +6814,7 @@
     },
     {
       "number": 106,
-      "line": 72304,
+      "line": 74840,
       "min": [
         3247,
         2777,
@@ -2442,7 +6833,7 @@
     },
     {
       "number": 108,
-      "line": 72322,
+      "line": 74858,
       "min": [
         3245,
         2752,
@@ -2461,7 +6852,7 @@
     },
     {
       "number": 116,
-      "line": 72390,
+      "line": 74926,
       "min": [
         3245,
         2616,
@@ -2480,7 +6871,7 @@
     },
     {
       "number": 117,
-      "line": 72399,
+      "line": 74935,
       "min": [
         3247,
         2549,
@@ -2499,7 +6890,7 @@
     },
     {
       "number": 118,
-      "line": 72408,
+      "line": 74944,
       "min": [
         3261,
         2551,
@@ -2518,7 +6909,7 @@
     },
     {
       "number": 121,
-      "line": 72435,
+      "line": 74971,
       "min": [
         3261,
         2576,
@@ -2537,7 +6928,7 @@
     },
     {
       "number": 122,
-      "line": 72444,
+      "line": 74980,
       "min": [
         3261,
         2549,
@@ -2556,7 +6947,7 @@
     },
     {
       "number": 123,
-      "line": 72453,
+      "line": 74989,
       "min": [
         3245,
         2551,
@@ -2575,7 +6966,7 @@
     },
     {
       "number": 124,
-      "line": 72462,
+      "line": 74998,
       "min": [
         3245,
         2549,
@@ -2594,7 +6985,7 @@
     },
     {
       "number": 126,
-      "line": 72480,
+      "line": 75016,
       "min": [
         3245,
         2748,
@@ -2613,7 +7004,7 @@
     },
     {
       "number": 131,
-      "line": 72525,
+      "line": 75061,
       "min": [
         3261,
         2578,
@@ -2632,7 +7023,7 @@
     },
     {
       "number": 133,
-      "line": 72543,
+      "line": 75079,
       "min": [
         3261,
         2777,
@@ -2651,7 +7042,7 @@
     },
     {
       "number": 134,
-      "line": 72552,
+      "line": 75088,
       "min": [
         3261,
         2768,
@@ -2670,7 +7061,7 @@
     },
     {
       "number": 135,
-      "line": 72561,
+      "line": 75097,
       "min": [
         3245,
         2777,
@@ -2689,7 +7080,7 @@
     },
     {
       "number": 136,
-      "line": 72570,
+      "line": 75106,
       "min": [
         3245,
         2750,
@@ -2708,7 +7099,7 @@
     },
     {
       "number": 138,
-      "line": 72588,
+      "line": 75124,
       "min": [
         3245,
         2752,
@@ -2727,7 +7118,7 @@
     },
     {
       "number": 139,
-      "line": 72597,
+      "line": 75133,
       "min": [
         3247,
         2777,
@@ -2746,7 +7137,7 @@
     },
     {
       "number": 140,
-      "line": 72606,
+      "line": 75142,
       "min": [
         3247,
         2777,
@@ -2765,7 +7156,7 @@
     },
     {
       "number": 141,
-      "line": 72615,
+      "line": 75151,
       "min": [
         3245,
         2752,
@@ -2784,7 +7175,7 @@
     },
     {
       "number": 144,
-      "line": 72642,
+      "line": 75178,
       "min": [
         3245,
         2750,
@@ -2803,7 +7194,7 @@
     },
     {
       "number": 145,
-      "line": 72651,
+      "line": 75187,
       "min": [
         3245,
         2777,
@@ -2822,7 +7213,7 @@
     },
     {
       "number": 146,
-      "line": 72660,
+      "line": 75196,
       "min": [
         3261,
         2768,
@@ -2841,7 +7232,7 @@
     },
     {
       "number": 147,
-      "line": 72669,
+      "line": 75205,
       "min": [
         3261,
         2777,
@@ -2860,7 +7251,7 @@
     },
     {
       "number": 149,
-      "line": 72687,
+      "line": 75223,
       "min": [
         3261,
         2578,
@@ -2879,7 +7270,7 @@
     },
     {
       "number": 156,
-      "line": 72750,
+      "line": 75286,
       "min": [
         3245,
         2748,
@@ -2898,7 +7289,7 @@
     },
     {
       "number": 158,
-      "line": 72768,
+      "line": 75304,
       "min": [
         3245,
         2549,
@@ -2917,7 +7308,7 @@
     },
     {
       "number": 159,
-      "line": 72777,
+      "line": 75313,
       "min": [
         3245,
         2750,
@@ -2936,7 +7327,7 @@
     },
     {
       "number": 160,
-      "line": 72786,
+      "line": 75322,
       "min": [
         3245,
         2551,
@@ -2955,7 +7346,7 @@
     },
     {
       "number": 202,
-      "line": 73156,
+      "line": 75692,
       "min": [
         3261,
         2549,
@@ -2974,7 +7365,7 @@
     },
     {
       "number": 203,
-      "line": 73165,
+      "line": 75701,
       "min": [
         3261,
         2576,
@@ -2993,7 +7384,7 @@
     },
     {
       "number": 212,
-      "line": 73243,
+      "line": 75779,
       "min": [
         3261,
         2551,
@@ -3012,7 +7403,7 @@
     },
     {
       "number": 213,
-      "line": 73252,
+      "line": 75788,
       "min": [
         3247,
         2549,
@@ -3031,7 +7422,7 @@
     },
     {
       "number": 215,
-      "line": 73270,
+      "line": 75806,
       "min": [
         3160,
         2472,
@@ -3050,7 +7441,7 @@
     },
     {
       "number": 220,
-      "line": 73315,
+      "line": 75851,
       "min": [
         3160,
         2472,
@@ -3070,7 +7461,7 @@
   ],
   "terrains": [
     {
-      "line": 10550,
+      "line": 10514,
       "dimensions": [
         9,
         17
@@ -3864,7 +8255,7 @@
       ]
     },
     {
-      "line": 10890,
+      "line": 10854,
       "dimensions": [
         65,
         73

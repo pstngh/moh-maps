@@ -3,7 +3,7 @@
     "mapName":  "codex_obj_team2_expanded",
     "qaRoot":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual",
     "exactPk3Count":  8,
-    "candidateSha256":  "93390daf91f49b03712685539eb194ff4db15629d78ada9bbfa95031d87c9394",
+    "candidateSha256":  "4b85f8ede35726bbb6ea5f6f71480e2b8a2b10e47930f490c7082156e2833918",
     "looseOverride":  "maps/obj/codex_obj_team2_expanded.scr only; BSP/assets remain from exact candidate PK3",
     "requestedViews":  [
                            "reported_stock_side",
@@ -13,132 +13,202 @@
                            "annex_courtyard",
                            "south_workshop",
                            "north_workshop",
-                           "west_arcade",
                            "canopy_center",
                            "hall_south",
                            "hall_middle",
                            "hall_north",
                            "hall_catwalk",
                            "annex_overhead",
-                           "allied_gate_inside",
-                           "allied_gate_outside",
-                           "allied_outer_lane",
-                           "allied_rear_turn"
+                           "allied_spawn_open_perimeter",
+                           "allied_forest_court",
+                           "allied_forest_layby",
+                           "west_forest_descent",
+                           "west_forest_climb",
+                           "west_ridge",
+                           "central_bridge_west",
+                           "central_bridge_east",
+                           "central_facade",
+                           "east_ridge_shelter",
+                           "east_forest_descent",
+                           "east_forest_lower",
+                           "east_open_perimeter",
+                           "forest_loop_west_overhead",
+                           "forest_loop_east_overhead"
                        ],
     "viewMarkers":  [
-                        "[2026-08-09 16:35:43 UTC-5.000] CODEX_VISUAL_QA reported_stock_side",
-                        "[2026-08-09 16:35:44 UTC-5.000] CODEX_VISUAL_QA full_open_frontage",
-                        "[2026-08-09 16:35:45 UTC-5.000] CODEX_VISUAL_QA frontage_south",
-                        "[2026-08-09 16:35:46 UTC-5.000] CODEX_VISUAL_QA frontage_north",
-                        "[2026-08-09 16:35:47 UTC-5.000] CODEX_VISUAL_QA annex_courtyard",
-                        "[2026-08-09 16:35:48 UTC-5.000] CODEX_VISUAL_QA south_workshop",
-                        "[2026-08-09 16:35:49 UTC-5.000] CODEX_VISUAL_QA north_workshop",
-                        "[2026-08-09 16:35:50 UTC-5.000] CODEX_VISUAL_QA west_arcade",
-                        "[2026-08-09 16:35:51 UTC-5.000] CODEX_VISUAL_QA canopy_center",
-                        "[2026-08-09 16:35:52 UTC-5.000] CODEX_VISUAL_QA hall_south",
-                        "[2026-08-09 16:35:53 UTC-5.000] CODEX_VISUAL_QA hall_middle",
-                        "[2026-08-09 16:35:54 UTC-5.000] CODEX_VISUAL_QA hall_north",
-                        "[2026-08-09 16:35:55 UTC-5.000] CODEX_VISUAL_QA hall_catwalk",
-                        "[2026-08-09 16:35:56 UTC-5.000] CODEX_VISUAL_QA annex_overhead",
-                        "[2026-08-09 16:35:57 UTC-5.000] CODEX_VISUAL_QA allied_gate_inside",
-                        "[2026-08-09 16:35:58 UTC-5.000] CODEX_VISUAL_QA allied_gate_outside",
-                        "[2026-08-09 16:35:59 UTC-5.000] CODEX_VISUAL_QA allied_outer_lane",
-                        "[2026-08-09 16:36:00 UTC-5.000] CODEX_VISUAL_QA allied_rear_turn"
+                        "[2026-08-09 18:26:21 UTC-5.000] CODEX_VISUAL_QA reported_stock_side",
+                        "[2026-08-09 18:26:22 UTC-5.000] CODEX_VISUAL_QA full_open_frontage",
+                        "[2026-08-09 18:26:23 UTC-5.000] CODEX_VISUAL_QA frontage_south",
+                        "[2026-08-09 18:26:24 UTC-5.000] CODEX_VISUAL_QA frontage_north",
+                        "[2026-08-09 18:26:25 UTC-5.000] CODEX_VISUAL_QA annex_courtyard",
+                        "[2026-08-09 18:26:26 UTC-5.000] CODEX_VISUAL_QA south_workshop",
+                        "[2026-08-09 18:26:27 UTC-5.000] CODEX_VISUAL_QA north_workshop",
+                        "[2026-08-09 18:26:28 UTC-5.000] CODEX_VISUAL_QA canopy_center",
+                        "[2026-08-09 18:26:29 UTC-5.000] CODEX_VISUAL_QA hall_south",
+                        "[2026-08-09 18:26:30 UTC-5.000] CODEX_VISUAL_QA hall_middle",
+                        "[2026-08-09 18:26:31 UTC-5.000] CODEX_VISUAL_QA hall_north",
+                        "[2026-08-09 18:26:32 UTC-5.000] CODEX_VISUAL_QA hall_catwalk",
+                        "[2026-08-09 18:26:33 UTC-5.000] CODEX_VISUAL_QA annex_overhead",
+                        "[2026-08-09 18:26:34 UTC-5.000] CODEX_VISUAL_QA allied_spawn_open_perimeter",
+                        "[2026-08-09 18:26:35 UTC-5.000] CODEX_VISUAL_QA allied_forest_court",
+                        "[2026-08-09 18:26:36 UTC-5.000] CODEX_VISUAL_QA allied_forest_layby",
+                        "[2026-08-09 18:26:37 UTC-5.000] CODEX_VISUAL_QA west_forest_descent",
+                        "[2026-08-09 18:26:38 UTC-5.000] CODEX_VISUAL_QA west_forest_climb",
+                        "[2026-08-09 18:26:39 UTC-5.000] CODEX_VISUAL_QA west_ridge",
+                        "[2026-08-09 18:26:40 UTC-5.000] CODEX_VISUAL_QA central_bridge_west",
+                        "[2026-08-09 18:26:41 UTC-5.000] CODEX_VISUAL_QA central_bridge_east",
+                        "[2026-08-09 18:26:42 UTC-5.000] CODEX_VISUAL_QA central_facade",
+                        "[2026-08-09 18:26:43 UTC-5.000] CODEX_VISUAL_QA east_ridge_shelter",
+                        "[2026-08-09 18:26:44 UTC-5.000] CODEX_VISUAL_QA east_forest_descent",
+                        "[2026-08-09 18:26:45 UTC-5.000] CODEX_VISUAL_QA east_forest_lower",
+                        "[2026-08-09 18:26:46 UTC-5.000] CODEX_VISUAL_QA east_open_perimeter",
+                        "[2026-08-09 18:26:47 UTC-5.000] CODEX_VISUAL_QA forest_loop_west_overhead",
+                        "[2026-08-09 18:26:48 UTC-5.000] CODEX_VISUAL_QA forest_loop_east_overhead"
                     ],
-    "screenshotCount":  18,
+    "screenshotCount":  28,
     "screenshots":  [
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0000.tga",
                             "bytes":  2764818,
-                            "sha256":  "e6ce26f5e7839f5f569fb0b2eb9e9458cf3ae9292ab6443547fc7b48e5494607"
+                            "sha256":  "137740fb42572c74e2c526bde32d12590a844c6af5ead35d36b3aa47f75faa0f"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0001.tga",
                             "bytes":  2764818,
-                            "sha256":  "af1bb0a3ea54f5e5716c48889455e232222d1fc6e06d0607b81d0978da773cd9"
+                            "sha256":  "ed948942b2d19767cf2e910a5b41414292f3b16ea2f131b6b105cdb7c2b7e354"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0002.tga",
                             "bytes":  2764818,
-                            "sha256":  "b85edcdb5965d914bae55150b4d1f45656e4a22c75a6b5128e7fefa1de7f7352"
+                            "sha256":  "3bedbd3041645bc924b3292b36a886ea7c9c9cc1a1d1f409935beed5da0f710c"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0003.tga",
                             "bytes":  2764818,
-                            "sha256":  "f2b75f101ccd5e037585aab8998bc00943fe21601ae5e80a6bced782dff207e2"
+                            "sha256":  "8dc671343eefe3557b00d330e13b2530302e444d04a3ce0a30c5647c83a0b48f"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0004.tga",
                             "bytes":  2764818,
-                            "sha256":  "3ffd3bd578f55166bf141f89e65adfc85923ee7109db8f42e7c118c7eef94068"
+                            "sha256":  "a05d9d7b28af893154ca1339acefb4a04f89052029c62a1332bd37db28d7e6e1"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0005.tga",
                             "bytes":  2764818,
-                            "sha256":  "cd4868df961aa63ccf80ecceb64fbd50eb2905fd1198b9e80caefa37677e8051"
+                            "sha256":  "b0570cf76ac534fa5799f2d25c365136751a737fcb62059cc6a90935711ee13a"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0006.tga",
                             "bytes":  2764818,
-                            "sha256":  "57e010e0d842b276dde8b9a4d4d3d4be220bcef69563f20c6a74b4c63c635424"
+                            "sha256":  "946d805e35deb2099f6394644a06c4f5e296ba61999205ae531355d612c1755d"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0007.tga",
                             "bytes":  2764818,
-                            "sha256":  "de7e60d8cb903dc0cb6670afa0a494becffaeb4b19cf1f8baa3f5c2c0092f082"
+                            "sha256":  "0a066fdfa0af9df48510e3e590f920528b175940867b7d2b4260ba26b6183dd8"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0008.tga",
                             "bytes":  2764818,
-                            "sha256":  "9230be55d4563451b78b62253a16561c529db0a8c743721fd183e52c48b0f617"
+                            "sha256":  "fa4fdff7b5c7005d21d0dae1eee8ddb65c737afc85afef5c596199a6012e845f"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0009.tga",
                             "bytes":  2764818,
-                            "sha256":  "b293baadd81820548f265a8bf3d77870eaf8fdb93f74acb6cd572436dbcc823d"
+                            "sha256":  "b24f31c0f4888d7f8a001745282c85e611631145c085d3f718b902a416411d14"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0010.tga",
                             "bytes":  2764818,
-                            "sha256":  "f115eacf4c186404a22a9609e357eeb7073157cb2352ba16f171014941d864ac"
+                            "sha256":  "b2f070948d3c3ffc648976151d96ed9b0e7d901aad95e5d34c7cba08d0c116f1"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0011.tga",
                             "bytes":  2764818,
-                            "sha256":  "ba639bf9c1d80b5559088a1e7bf837fa4c3eb5cef69424495ca9b58ae3d5af78"
+                            "sha256":  "06c4451b9a93a93b7127c35c34f63d4b6b476deb072befe7b371289786a16eec"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0012.tga",
                             "bytes":  2764818,
-                            "sha256":  "ea145a209ae09f40c5f5be68d68d95c1b8910ebcf82acef794e5e6943fe5aab5"
+                            "sha256":  "d1b483d22828103ec99f8eac1b97330c528a602479fa60da5b2cf40d481f3dbb"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0013.tga",
                             "bytes":  2764818,
-                            "sha256":  "892f92e850049e67f16c0e2193cb7c2828ce351e1b108ee61c9f915ac43b9818"
+                            "sha256":  "bae5cd5952959f7b68bcaab4e0cb93b4bbe7083f055f4610f2e50dbae91447da"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0014.tga",
                             "bytes":  2764818,
-                            "sha256":  "4e23574995479549ae2ec7e3befa33ba5db14815c6d5828c705c16f81a98fd1c"
+                            "sha256":  "d7ab1dc7564dd7eb0445542474a7f1dba86b0cbe5eb0c4227385b3bd4a597353"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0015.tga",
                             "bytes":  2764818,
-                            "sha256":  "da5a4398259d5874d1b927e17f713d8d2c5498c29f72ab475e759a315c01c241"
+                            "sha256":  "6584abb42235574c23e58a5fd3e4f7b6b7c35d7265140ddb7a4911183440f769"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0016.tga",
                             "bytes":  2764818,
-                            "sha256":  "5c1f257d004ed305e80ca646daad39e1dad3b2b10052762c606909220468ec2e"
+                            "sha256":  "216efda5ecd2e78cc2f6a87e6f6e2f0464dc8b5588036c0be48a6b0daeea0e68"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0017.tga",
                             "bytes":  2764818,
-                            "sha256":  "23bfb3fb112a8b30221aebbb31a906eae8093d7732ec9c1ed56a5779a89ca3bc"
+                            "sha256":  "c886fc1ce48deadc2bb66d45eef8cf3186dfe62d64af3749789c5f240b512da6"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0018.tga",
+                            "bytes":  2764818,
+                            "sha256":  "0873dffab37cd2c4df85b0c5f816168ed7e2c52efe3db889b06cb0b85c6571e9"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0019.tga",
+                            "bytes":  2764818,
+                            "sha256":  "93d2810698d9d5f10c734cdc5f6e1c6380948894e8d4e044620c68c7f29f56f1"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0020.tga",
+                            "bytes":  2764818,
+                            "sha256":  "79c240909dc4f9220dabdaed7f364ba5332aa9cc43cdf4edcb760978ae6895c8"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0021.tga",
+                            "bytes":  2764818,
+                            "sha256":  "b4a4efc4000850b9d9ca4e5eb87417da5a0d96ca74180d3dacc015fac94fd088"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0022.tga",
+                            "bytes":  2764818,
+                            "sha256":  "5252ec534f7520e0d796863bff09837e34e08c524cb04f168309512290042e97"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0023.tga",
+                            "bytes":  2764818,
+                            "sha256":  "12bce6a3202c40fa4869073c71faec231090a40a54e1bd9a177eafd243a8bc10"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0024.tga",
+                            "bytes":  2764818,
+                            "sha256":  "afa22b7fd0204504beca868500bc61355dfaa44e3c1b1c6f7a9de93fa42e0579"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0025.tga",
+                            "bytes":  2764818,
+                            "sha256":  "1fbcb21ae432f9b07fd1a11611740edb52fb3506b243a5212b3b9f50b4e29b68"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0026.tga",
+                            "bytes":  2764818,
+                            "sha256":  "53bd447ff951e6b8feb9cdb041f573326a67088ea77594add797a9361da0aaa8"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0027.tga",
+                            "bytes":  2764818,
+                            "sha256":  "3691e0ae454933b5353a9d44fbf99f915a90c4f83f804d54d5ed94632162d46d"
                         }
                     ],
     "scriptErrorCount":  0,
-    "elapsedSeconds":  61.328,
+    "elapsedSeconds":  61.301,
     "log":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\qconsole.log"
 }

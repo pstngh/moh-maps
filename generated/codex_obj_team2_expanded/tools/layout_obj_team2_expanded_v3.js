@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function buildRevision3Layout({ addBox, addUtility, M }) {
+module.exports = function buildRevision3Layout({ addBox, addUtility, M, includeAlliedBoundary = true }) {
   const allFaces = (spec) => ({ xMin: spec, xMax: spec, yMin: spec, yMax: spec, zMin: spec, zMax: spec });
   const concreteBox = (role, min, max, detail = false) => addBox(role, min, max, {
     xMin: M.concreteB,
@@ -164,18 +164,22 @@ module.exports = function buildRevision3Layout({ addBox, addUtility, M }) {
   // Allied exterior route: rebuild the source fence curb as two finished
   // segments around a 326-unit gate, then wrap a broad L-shaped lane around
   // the west wall into the already existing rear-bunker yard.
-  concreteBox("allied_fence_base_south", [-2026, 0, -560], [-1944, 344, -432]);
-  concreteBox("allied_fence_base_north", [-2026, 670, -560], [-1944, 1056, -432]);
-  for (const [yMin, yMax] of [[12, 344], [670, 1000]]) {
-    metalBox("allied_fence_lower_rail", [-2014, yMin, -432], [-2006, yMax, -428]);
-    metalBox("allied_fence_upper_rail", [-2014, yMin, -244], [-2006, yMax, -240]);
+  if (includeAlliedBoundary) {
+    concreteBox("allied_fence_base_south", [-2026, 0, -560], [-1944, 344, -432]);
+    concreteBox("allied_fence_base_north", [-2026, 670, -560], [-1944, 1056, -432]);
+    for (const [yMin, yMax] of [[12, 344], [670, 1000]]) {
+      metalBox("allied_fence_lower_rail", [-2014, yMin, -432], [-2006, yMax, -428]);
+      metalBox("allied_fence_upper_rail", [-2014, yMin, -244], [-2006, yMax, -240]);
+    }
   }
   concreteBox("allied_gate_apron", [-2400, 344, -560], [-1944, 670, -464]);
   concreteBox("allied_outer_lane", [-2400, 320, -560], [-2080, 1344, -464]);
   concreteBox("allied_rear_link", [-2400, 1056, -560], [-1280, 1344, -464]);
-  concreteBox("allied_outer_guard", [-2432, 320, -464], [-2400, 1344, -288]);
-  concreteBox("allied_south_guard", [-2400, 320, -464], [-2026, 352, -288]);
-  concreteBox("allied_north_guard", [-2400, 1312, -464], [-1760, 1344, -320]);
+  if (includeAlliedBoundary) {
+    concreteBox("allied_outer_guard", [-2432, 320, -464], [-2400, 1344, -288]);
+    concreteBox("allied_south_guard", [-2400, 320, -464], [-2026, 352, -288]);
+    concreteBox("allied_north_guard", [-2400, 1312, -464], [-1760, 1344, -320]);
+  }
   for (const box of [
     [[-2320, 736, -464], [-2240, 896, -352]],
     [[-2176, 928, -464], [-2096, 1088, -352]],

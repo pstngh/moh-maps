@@ -62,14 +62,15 @@ mandatory palette:
 | Role | Stock model | Notes |
 | --- | --- | --- |
 | Common tree | `static//tree_commontree.tik` | Used in Cobblestone at reduced scale |
+| Oak tree | `static//tree_oak.tik` | Revision-4 `obj_team2` forest-loop planters; rendered at 0.90-1.06 scale with grounded planter origins |
 | Regular bush | `static//bush_regularbush.tik` | Used in Cobblestone |
 | Caged lamp | `static//lightbulb_caged.tik` | Present in `obj_team2`; pair with a purposeful light |
 | Orange corona | `static//corona_orange.tik` | Decorative light effect; not illumination by itself |
 | Opel truck | `static//vehicle_opeltruck.tik` | Grounded yard dressing rendered in the `obj_team2` east-annex exact-candidate visual pass |
 | Nazi crate | `static//nazi_crate.tik` | Grounded cover/dressing rendered in the `obj_team2` east-annex exact-candidate visual pass |
 
-The `codex_obj_team2_expanded` revision-3 annex also proves the stock caged-lamp plus
-static-corona combination in an Objective derivative at 23 new fixture groups. Each
+The `codex_obj_team2_expanded` revision-4 forest-loop visual pass proves grounded stock oak trees,
+the Opel, crates, and the caged-lamp plus static-corona combination. Each
 new `static//corona_orange.tik` placement adds an optional missing editor-helper
 `.map` notice during original Q3map. The models rendered successfully in all annex
 and Allied-route zones and runtime emitted no candidate diagnostic, so this is a

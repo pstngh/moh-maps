@@ -7964,24 +7964,6 @@
 ( -1761 1005 -236 ) ( -1761 1001 -236 ) ( -1761 1001 -844 ) common/stoneclip 0 0 0.00 0.500000 0.500000 536870912 160 0 
 ( -1766 1011 -236 ) ( -1764 1011 -236 ) ( -1764 1011 -844 ) common/stoneclip 0 0 0.00 0.500000 0.500000 536870912 160 0 
 }
-// brush 811
-{
-( 1648 384 -552 ) ( 1632 384 -552 ) ( 1632 368 -552 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 1624 376 256 ) ( 1624 392 256 ) ( 1640 392 256 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 3176 320 -536 ) ( 3176 320 -664 ) ( 1640 320 -664 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 3160 360 -664 ) ( 3160 360 -536 ) ( 3128 392 -536 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 1648 384 -560 ) ( 1632 384 -560 ) ( 1632 384 -664 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 1632 384 -560 ) ( 1632 368 -560 ) ( 1632 368 -664 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-}
-// brush 812
-{
-( 3160 432 -552 ) ( 3136 432 -552 ) ( 3136 384 -552 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 3152 380 256 ) ( 3152 428 256 ) ( 3176 428 256 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 3168 352 -536 ) ( 3168 352 -664 ) ( 3136 384 -664 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 3200 352 -664 ) ( 3200 352 -536 ) ( 3200 432 -536 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 3168 2112 -536 ) ( 3144 2112 -536 ) ( 3144 2112 -664 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( 3136 432 -536 ) ( 3136 384 -536 ) ( 3136 384 -664 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-}
 // brush 813
 {
 ( -944 1328 -208 ) ( -976 1328 -208 ) ( -976 1312 -208 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
@@ -8035,15 +8017,6 @@
 ( -1328 1016 192 ) ( -1328 1016 -208 ) ( -1316 992 -208 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
 ( -1328 1016 -208 ) ( -1328 1016 192 ) ( -1992 1016 192 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
 ( -1992 1016 192 ) ( -1992 992 192 ) ( -1992 992 -440 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-}
-// brush 820
-{
-( -1040 32 -440 ) ( -1040 8 -440 ) ( -1024 8 -440 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( -1024 8 -440 ) ( -1024 32 -440 ) ( -1024 32 -456 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( -1024 32 -424 ) ( -1040 32 -424 ) ( -1040 32 -440 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( -1208 0 -440 ) ( -1192 0 -440 ) ( -1192 0 -456 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( -2030 -4 -440 ) ( -1998 28 -440 ) ( -2014 12 -328 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
-( -2026 -4 192 ) ( -2026 28 192 ) ( -1024 12 192 ) common/playerclip 0 0 0.00 0.500000 0.500000 65536 2193 0 
 }
 // brush 821
 {
@@ -15938,78 +15911,6 @@
 ( 992 1632 -320 ) ( 992 88 -320 ) ( 992 88 -424 ) common/nodraw 0 0 0.00 0.500000 0.500000 536870912 2224 0 
 ( 1024 -136 -888 ) ( 1024 1408 -888 ) ( 1024 -136 -992 ) misc_outside/treeline_center -32 -81 0.00 -2 2 8192 33554944 0 
 ( 1008 -128 -192 ) ( 1024 -128 -192 ) ( 1016 -128 480 ) common/nodraw 0 0 0.00 0.500000 0.500000 536870912 2224 0 
-}
-// brush 1116
-{
-( 3168 356 -480 ) ( 3164 356 -480 ) ( 3164 352 -480 ) common/nodraw -22 11 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 3164 352 -296 ) ( 3164 356 -296 ) ( 3168 356 -296 ) common/nodraw -22 11 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 3164 348 -296 ) ( 3168 348 -296 ) ( 3168 348 -480 ) common/nodraw -22 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 3172 352 -296 ) ( 3172 356 -296 ) ( 3172 356 -480 ) common/nodraw 42 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 3168 356 -296 ) ( 3164 356 -296 ) ( 3164 356 -480 ) das_boot/ironwall1 -32 48 0.00 0.250000 0.250000 0 32768 0 +surfaceparm detail 
-( 3164 356 -296 ) ( 3164 352 -296 ) ( 3164 352 -480 ) das_boot/ironwall1 -32 48 0.00 0.250000 0.250000 0 32768 0 +surfaceparm detail 
-}
-// brush 1117
-{
-( 2944 348 -484 ) ( 2952 348 -484 ) ( 2952 356 -484 ) mohtest/slatewldrty1 6 -69 -180.00 1 1 0 0 0 +surfaceparm detail 
-( 2952 356 -296 ) ( 2952 348 -296 ) ( 2944 348 -296 ) common/nodraw -16 32 0.00 0.500000 0.500000 536870912 2224 0 +surfaceparm detail 
-( 2952 356 -420 ) ( 2944 356 -420 ) ( 2944 356 -444 ) das_boot/ironwall1 -32 48 0.00 0.250000 0.250000 0 32768 0 
-( 2946 356 -296 ) ( 2946 348 -296 ) ( 2946 348 -320 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2944 348 -420 ) ( 2952 348 -420 ) ( 2952 348 -444 ) common/nodraw -20 27 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( 2952 348 -460 ) ( 2952 356 -460 ) ( 2952 356 -484 ) das_boot/ironwall1 -32 48 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 1118
-{
-( 1632 348 -480 ) ( 1640 348 -480 ) ( 1640 356 -480 ) mohtest/slatewldrty1 -57 -69 -180.00 1 1 0 0 0 +surfaceparm detail 
-( 1640 356 -296 ) ( 1640 348 -296 ) ( 1632 348 -296 ) mohtest/slatewldrty1 -57 -69 -180.00 1 1 0 0 0 +surfaceparm detail 
-( 1640 356 -420 ) ( 1632 356 -420 ) ( 1632 356 -444 ) das_boot/ironwall1 32 48 0.00 0.250000 0.250000 0 32768 0 
-( 1634 356 -296 ) ( 1634 348 -296 ) ( 1634 348 -320 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1544 348 -420 ) ( 1552 348 -420 ) ( 1552 348 -444 ) common/nodraw -4 27 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( 1638 348 -460 ) ( 1638 356 -460 ) ( 1638 356 -484 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 1119
-{
-( 1958 348 -480 ) ( 1966 348 -480 ) ( 1966 356 -480 ) mohtest/slatewldrty1 -19 -69 -180.00 1 1 0 0 0 +surfaceparm detail 
-( 1966 356 -296 ) ( 1966 348 -296 ) ( 1958 348 -296 ) mohtest/slatewldrty1 -19 -69 -180.00 1 1 0 0 0 +surfaceparm detail 
-( 1966 356 -420 ) ( 1958 356 -420 ) ( 1958 356 -444 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-( 1960 356 -296 ) ( 1960 348 -296 ) ( 1960 348 -320 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1870 348 -420 ) ( 1878 348 -420 ) ( 1878 348 -444 ) common/nodraw -10 27 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( 1964 348 -460 ) ( 1964 356 -460 ) ( 1964 356 -484 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 1120
-{
-( 2286 348 -480 ) ( 2294 348 -480 ) ( 2294 356 -480 ) common/nodraw 22 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2294 356 -296 ) ( 2294 348 -296 ) ( 2286 348 -296 ) common/nodraw 22 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2294 356 -420 ) ( 2286 356 -420 ) ( 2286 356 -444 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-( 2288 356 -296 ) ( 2288 348 -296 ) ( 2288 348 -320 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2198 348 -420 ) ( 2206 348 -420 ) ( 2206 348 -444 ) common/nodraw 22 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2292 348 -460 ) ( 2292 356 -460 ) ( 2292 356 -484 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 1121
-{
-( 2366 356 -296 ) ( 2366 348 -296 ) ( 2622 348 -296 ) das_boot/ironwall1 8 64 0.00 0.250000 0.250000 0 32768 0 
-( 2366 348 -292 ) ( 2366 356 -292 ) ( 2622 356 -292 ) das_boot/ironwall1 8 -16 0.00 0.250000 0.250000 0 32768 0 
-( 2374 356 -292 ) ( 2374 356 -296 ) ( 2630 356 -296 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-( 1634 365 -292 ) ( 1634 357 -292 ) ( 1634 357 -296 ) common/nodraw -28 27 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( 3172 348 -292 ) ( 3172 348 -296 ) ( 1634 348 -296 ) common/nodraw -10 27 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( 3172 348 -296 ) ( 3172 348 -292 ) ( 3164 356 -292 ) common/nodraw -10 27 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1122
-{
-( 2614 348 -484 ) ( 2622 348 -484 ) ( 2622 356 -484 ) mohtest/slatewldrty1 60 -69 -180.00 1 1 0 0 0 +surfaceparm detail 
-( 2622 356 -296 ) ( 2622 348 -296 ) ( 2614 348 -296 ) common/nodraw 4 32 0.00 0.500000 0.500000 536870912 2224 0 +surfaceparm detail 
-( 2622 356 -420 ) ( 2614 356 -420 ) ( 2614 356 -444 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-( 2616 356 -296 ) ( 2616 348 -296 ) ( 2616 348 -320 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2614 348 -420 ) ( 2622 348 -420 ) ( 2622 348 -444 ) common/nodraw -10 27 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( 2622 348 -460 ) ( 2622 356 -460 ) ( 2622 356 -484 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 1123
-{
-( 1640 384 -496 ) ( 1624 384 -496 ) ( 1624 368 -496 ) common/caulk 0 0 0.00 0.500000 0.500000 0 160 0 +surfaceparm detail 
-( 1632 368 -480 ) ( 1632 384 -480 ) ( 1648 384 -480 ) general_structure/concretewall2 0 0 0.00 0.500000 0.500000 0 0 0 +surfaceparm detail 
-( 3160 360 -664 ) ( 3160 360 -536 ) ( 3128 392 -536 ) common/caulk 0 32 0.00 0.500000 0.500000 0 160 0 +surfaceparm detail 
-( 1632 384 -560 ) ( 1632 368 -560 ) ( 1632 368 -664 ) common/caulk 0 32 0.00 0.500000 0.500000 0 160 0 +surfaceparm detail 
-( 1632 320 -496 ) ( 1632 336 -480 ) ( 3200 328 -488 ) general_structure/concretewall2 0 0 0.00 0.500000 0.500000 0 0 0 +surfaceparm detail 
-( 1632 368 -480 ) ( 1632 384 -496 ) ( 3200 376 -488 ) general_structure/concretewall2 0 0 0.00 0.500000 0.500000 0 0 0 +surfaceparm detail 
 }
 // brush 1125
 {
@@ -40190,98 +40091,6 @@
 ( -936 2432 680 ) ( -1840 2432 680 ) ( -1840 2432 168 ) common/nodraw -11 20 0.00 8 8 536870912 2224 0 
 ( -2216 2480 680 ) ( -2216 2448 680 ) ( -2216 2448 168 ) common/nodraw 0 20 -180.00 0.250000 -8 536870912 2224 0 
 ( -1840 2424 680 ) ( -936 2424 680 ) ( -936 2424 168 ) misc_outside/bocage_treerow1rev -337 80 -180.00 0.500000 -0.500000 8192 33554944 0 
-}
-// brush 3217
-{
-( -1032 12 -432 ) ( -1024 12 -432 ) ( -1024 20 -432 ) mohtest/slatewldrty1 62 75 -180.00 1 1 0 0 0 +surfaceparm detail 
-( -1024 20 -240 ) ( -1024 12 -240 ) ( -1032 12 -240 ) common/nodraw 0 0 0.00 0.500000 0.500000 536870912 2224 0 +surfaceparm detail 
-( -1024 20 -368 ) ( -1032 20 -368 ) ( -1032 20 -392 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1030 20 -244 ) ( -1030 12 -244 ) ( -1030 12 -268 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1032 12 -368 ) ( -1024 12 -368 ) ( -1024 12 -392 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -1024 12 -408 ) ( -1024 20 -408 ) ( -1024 20 -432 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 3218
-{
-( -1280 20 -244 ) ( -1280 12 -244 ) ( -1024 12 -244 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1280 12 -240 ) ( -1280 20 -240 ) ( -1024 20 -240 ) common/nodraw 0 0 0.00 0.500000 0.500000 536870912 2224 0 +surfaceparm detail 
-( -1272 20 -240 ) ( -1272 20 -244 ) ( -1016 20 -244 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2014 30 -240 ) ( -2014 22 -240 ) ( -2014 22 -244 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -1280 12 -244 ) ( -1280 12 -240 ) ( -1024 12 -240 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -1030 8 -240 ) ( -1030 16 -240 ) ( -1030 16 -244 ) mohtest/slatewldrty1 -75 13 -180.00 1 -1 0 0 0 +surfaceparm detail 
-}
-// brush 3219
-{
-( -1280 20 -432 ) ( -1280 12 -432 ) ( -1024 12 -432 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -1280 12 -428 ) ( -1280 20 -428 ) ( -1024 20 -428 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1272 20 -428 ) ( -1272 20 -432 ) ( -1016 20 -432 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2014 26 -428 ) ( -2014 18 -428 ) ( -2014 18 -432 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -1280 12 -432 ) ( -1280 12 -428 ) ( -1024 12 -428 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -1030 8 -428 ) ( -1030 16 -428 ) ( -1030 16 -432 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 3220
-{
-( -1360 12 -428 ) ( -1352 12 -428 ) ( -1352 20 -428 ) common/nodraw 24 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1352 20 -244 ) ( -1352 12 -244 ) ( -1360 12 -244 ) common/nodraw 24 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1352 20 -368 ) ( -1360 20 -368 ) ( -1360 20 -392 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1358 20 -244 ) ( -1358 12 -244 ) ( -1358 12 -268 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1448 12 -368 ) ( -1440 12 -368 ) ( -1440 12 -392 ) common/nodraw 24 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1354 12 -408 ) ( -1354 20 -408 ) ( -1354 20 -432 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 3221
-{
-( -1688 12 -428 ) ( -1680 12 -428 ) ( -1680 20 -428 ) mohtest/slatewldrty1 79 75 -180.00 1 1 0 0 0 +surfaceparm detail 
-( -1680 20 -244 ) ( -1680 12 -244 ) ( -1688 12 -244 ) mohtest/slatewldrty1 79 75 -180.00 1 1 0 0 0 +surfaceparm detail 
-( -1680 20 -368 ) ( -1688 20 -368 ) ( -1688 20 -392 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1686 20 -244 ) ( -1686 12 -244 ) ( -1686 12 -268 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1776 12 -368 ) ( -1768 12 -368 ) ( -1768 12 -392 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -1682 12 -408 ) ( -1682 20 -408 ) ( -1682 20 -432 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 3222
-{
-( -2014 12 -428 ) ( -2006 12 -428 ) ( -2006 20 -428 ) mohtest/slatewldrty1 41 75 -180.00 1 1 0 0 0 +surfaceparm detail 
-( -2006 20 -244 ) ( -2006 12 -244 ) ( -2014 12 -244 ) mohtest/slatewldrty1 41 75 -180.00 1 1 0 0 0 +surfaceparm detail 
-( -2006 20 -368 ) ( -2014 20 -368 ) ( -2014 20 -392 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2012 20 -244 ) ( -2012 12 -244 ) ( -2012 12 -268 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2102 14 -368 ) ( -2094 14 -368 ) ( -2094 14 -392 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 12 -408 ) ( -2006 20 -408 ) ( -2006 20 -432 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 3223
-{
-( -1040 32 -544 ) ( -1040 8 -544 ) ( -1024 8 -544 ) general_structure/jh_conc512b -62 0 90.00 0.500000 0.500000 0 0 0 +surfaceparm detail 
-( -1024 8 -432 ) ( -1040 8 -432 ) ( -1040 32 -432 ) general_structure/concretewall2 0 0 0.00 0.500000 0.500000 0 0 0 
-( -1024 8 -544 ) ( -1024 32 -544 ) ( -1024 32 -560 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -1024 32 -528 ) ( -1040 32 -528 ) ( -1040 32 -544 ) general_structure/concretewall2 0 0 0.00 0.500000 0.500000 0 0 0 
-( -1208 0 -544 ) ( -1192 0 -544 ) ( -1192 0 -560 ) common/caulk 0 0 0.00 0.500000 0.500000 0 160 0 +surfaceparm detail 
-( -1024 24 -432 ) ( -2048 28 -436 ) ( -1024 32 -440 ) general_structure/concretewall2 0 0 0.00 0.500000 0.500000 0 0 0 
-( -1024 0 -440 ) ( -2048 4 -436 ) ( -1024 8 -432 ) general_structure/jh_conc512b -62 0 90.00 0.500000 0.500000 0 0 0 +surfaceparm detail 
-( -2030 -4 -544 ) ( -1998 28 -544 ) ( -2014 12 -432 ) general_structure/jh_conc512b 288 96 0.00 0.500000 0.500000 0 0 0 +surfaceparm detail 
-}
-// brush 3225
-{
-( -2014 1002 -428 ) ( -2014 994 -428 ) ( -2006 994 -428 ) mohtest/slatewldrty1 93 -10 90.00 1 1 0 0 0 +surfaceparm detail 
-( -2006 994 -244 ) ( -2014 994 -244 ) ( -2014 1002 -244 ) mohtest/slatewldrty1 93 -10 90.00 1 1 0 0 0 +surfaceparm detail 
-( -2006 994 -368 ) ( -2006 1002 -368 ) ( -2006 1002 -392 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2006 1000 -244 ) ( -2014 1000 -244 ) ( -2014 1000 -268 ) common/nodraw 0 0 0.00 0.500000 0.500000 536870912 2224 0 +surfaceparm detail 
-( -2014 1088 -368 ) ( -2014 1080 -368 ) ( -2014 1080 -392 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2014 996 -408 ) ( -2006 996 -408 ) ( -2006 996 -432 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 3226
-{
-( -2014 676 -428 ) ( -2014 668 -428 ) ( -2006 668 -428 ) mohtest/slatewldrty1 34 -10 90.00 1 1 0 0 0 +surfaceparm detail 
-( -2006 668 -244 ) ( -2014 668 -244 ) ( -2014 676 -244 ) mohtest/slatewldrty1 34 -10 90.00 1 1 0 0 0 +surfaceparm detail 
-( -2006 668 -368 ) ( -2006 676 -368 ) ( -2006 676 -392 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2006 674 -244 ) ( -2014 674 -244 ) ( -2014 674 -268 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2014 764 -368 ) ( -2014 756 -368 ) ( -2014 756 -392 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2014 670 -408 ) ( -2006 670 -408 ) ( -2006 670 -432 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-// brush 3227
-{
-( -2014 348 -428 ) ( -2014 340 -428 ) ( -2006 340 -428 ) mohtest/slatewldrty1 75 -10 90.00 1 1 0 0 0 +surfaceparm detail 
-( -2006 340 -244 ) ( -2014 340 -244 ) ( -2014 348 -244 ) mohtest/slatewldrty1 75 -10 90.00 1 1 0 0 0 +surfaceparm detail 
-( -2006 340 -368 ) ( -2006 348 -368 ) ( -2006 348 -392 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2006 346 -244 ) ( -2014 346 -244 ) ( -2014 346 -268 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2014 436 -368 ) ( -2014 428 -368 ) ( -2014 428 -392 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2014 342 -408 ) ( -2006 342 -408 ) ( -2006 342 -432 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
 }
 // brush 3230
 {
@@ -68171,60 +67980,6 @@
 }
 // brush 6089
 {
-( -2026 -16 16 ) ( -2026 0 0 ) ( -2026 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -1944 16 16 ) ( -1944 0 0 ) ( -1944 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 0 -16 ) ( 0 0 0 ) ( 16 0 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 16 344 16 ) ( 0 344 0 ) ( 16 344 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( -16 16 -560 ) ( 0 0 -560 ) ( 16 16 -560 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-( 16 16 -432 ) ( 0 0 -432 ) ( -16 16 -432 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-}
-// brush 6090
-{
-( -2026 -16 16 ) ( -2026 0 0 ) ( -2026 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -1944 16 16 ) ( -1944 0 0 ) ( -1944 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 670 -16 ) ( 0 670 0 ) ( 16 670 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 16 1056 16 ) ( 0 1056 0 ) ( 16 1056 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( -16 16 -560 ) ( 0 0 -560 ) ( 16 16 -560 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-( 16 16 -432 ) ( 0 0 -432 ) ( -16 16 -432 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-}
-// brush 6091
-{
-( -2014 -16 16 ) ( -2014 0 0 ) ( -2014 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -2006 16 16 ) ( -2006 0 0 ) ( -2006 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 12 -16 ) ( 0 12 0 ) ( 16 12 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 344 16 ) ( 0 344 0 ) ( 16 344 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -432 ) ( 0 0 -432 ) ( 16 16 -432 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 16 -428 ) ( 0 0 -428 ) ( -16 16 -428 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-}
-// brush 6092
-{
-( -2014 -16 16 ) ( -2014 0 0 ) ( -2014 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -2006 16 16 ) ( -2006 0 0 ) ( -2006 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 12 -16 ) ( 0 12 0 ) ( 16 12 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 344 16 ) ( 0 344 0 ) ( 16 344 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -244 ) ( 0 0 -244 ) ( 16 16 -244 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-}
-// brush 6093
-{
-( -2014 -16 16 ) ( -2014 0 0 ) ( -2014 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -2006 16 16 ) ( -2006 0 0 ) ( -2006 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 670 -16 ) ( 0 670 0 ) ( 16 670 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1000 16 ) ( 0 1000 0 ) ( 16 1000 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -432 ) ( 0 0 -432 ) ( 16 16 -432 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 16 -428 ) ( 0 0 -428 ) ( -16 16 -428 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-}
-// brush 6094
-{
-( -2014 -16 16 ) ( -2014 0 0 ) ( -2014 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -2006 16 16 ) ( -2006 0 0 ) ( -2006 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 670 -16 ) ( 0 670 0 ) ( 16 670 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1000 16 ) ( 0 1000 0 ) ( 16 1000 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -244 ) ( 0 0 -244 ) ( 16 16 -244 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-}
-// brush 6095
-{
 ( -2400 -16 16 ) ( -2400 0 0 ) ( -2400 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -1944 16 16 ) ( -1944 0 0 ) ( -1944 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 344 -16 ) ( 0 344 0 ) ( 16 344 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
@@ -68232,7 +67987,7 @@
 ( -16 16 -560 ) ( 0 0 -560 ) ( 16 16 -560 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -464 ) ( 0 0 -464 ) ( -16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 6096
+// brush 6090
 {
 ( -2400 -16 16 ) ( -2400 0 0 ) ( -2400 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -2080 16 16 ) ( -2080 0 0 ) ( -2080 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
@@ -68241,7 +67996,7 @@
 ( -16 16 -560 ) ( 0 0 -560 ) ( 16 16 -560 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -464 ) ( 0 0 -464 ) ( -16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 6097
+// brush 6091
 {
 ( -2400 -16 16 ) ( -2400 0 0 ) ( -2400 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -1280 16 16 ) ( -1280 0 0 ) ( -1280 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
@@ -68250,34 +68005,7 @@
 ( -16 16 -560 ) ( 0 0 -560 ) ( 16 16 -560 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -464 ) ( 0 0 -464 ) ( -16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 6098
-{
-( -2432 -16 16 ) ( -2432 0 0 ) ( -2432 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -2400 16 16 ) ( -2400 0 0 ) ( -2400 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 320 -16 ) ( 0 320 0 ) ( 16 320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 16 1344 16 ) ( 0 1344 0 ) ( 16 1344 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-( 16 16 -288 ) ( 0 0 -288 ) ( -16 16 -288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-}
-// brush 6099
-{
-( -2400 -16 16 ) ( -2400 0 0 ) ( -2400 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -2026 16 16 ) ( -2026 0 0 ) ( -2026 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 320 -16 ) ( 0 320 0 ) ( 16 320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 16 352 16 ) ( 0 352 0 ) ( 16 352 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-( 16 16 -288 ) ( 0 0 -288 ) ( -16 16 -288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-}
-// brush 6100
-{
-( -2400 -16 16 ) ( -2400 0 0 ) ( -2400 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -1760 16 16 ) ( -1760 0 0 ) ( -1760 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 1312 -16 ) ( 0 1312 0 ) ( 16 1312 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 16 1344 16 ) ( 0 1344 0 ) ( 16 1344 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-( 16 16 -320 ) ( 0 0 -320 ) ( -16 16 -320 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-}
-// brush 6101
+// brush 6092
 {
 ( -2320 -16 16 ) ( -2320 0 0 ) ( -2320 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -2240 16 16 ) ( -2240 0 0 ) ( -2240 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
@@ -68286,7 +68014,7 @@
 ( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -352 ) ( 0 0 -352 ) ( -16 16 -352 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 6102
+// brush 6093
 {
 ( -2176 -16 16 ) ( -2176 0 0 ) ( -2176 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -2096 16 16 ) ( -2096 0 0 ) ( -2096 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
@@ -68295,7 +68023,7 @@
 ( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -352 ) ( 0 0 -352 ) ( -16 16 -352 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 6103
+// brush 6094
 {
 ( -2000 -16 16 ) ( -2000 0 0 ) ( -2000 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -1840 16 16 ) ( -1840 0 0 ) ( -1840 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
@@ -68304,7 +68032,7 @@
 ( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -352 ) ( 0 0 -352 ) ( -16 16 -352 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 6104
+// brush 6095
 {
 ( -1600 -16 16 ) ( -1600 0 0 ) ( -1600 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -1440 16 16 ) ( -1440 0 0 ) ( -1440 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
@@ -68313,7 +68041,7 @@
 ( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -352 ) ( 0 0 -352 ) ( -16 16 -352 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 6105
+// brush 6096
 {
 ( -2384 -16 16 ) ( -2384 0 0 ) ( -2384 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( -2368 16 16 ) ( -2368 0 0 ) ( -2368 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
@@ -68322,7 +68050,7 @@
 ( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -160 ) ( 0 0 -160 ) ( -16 16 -160 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 6106
+// brush 6097
 {
 ( -2384 -16 16 ) ( -2384 0 0 ) ( -2384 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( -2368 16 16 ) ( -2368 0 0 ) ( -2368 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
@@ -68331,7 +68059,7 @@
 ( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -160 ) ( 0 0 -160 ) ( -16 16 -160 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 6107
+// brush 6098
 {
 ( -2208 -16 16 ) ( -2208 0 0 ) ( -2208 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( -2192 16 16 ) ( -2192 0 0 ) ( -2192 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
@@ -68340,7 +68068,7 @@
 ( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -160 ) ( 0 0 -160 ) ( -16 16 -160 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 6108
+// brush 6099
 {
 ( -1792 -16 16 ) ( -1792 0 0 ) ( -1792 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( -1776 16 16 ) ( -1776 0 0 ) ( -1776 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
@@ -68348,6 +68076,1248 @@
 ( 16 1336 16 ) ( 0 1336 0 ) ( 16 1336 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -160 ) ( 0 0 -160 ) ( -16 16 -160 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6100
+{
+( -2400 -16 16 ) ( -2400 0 0 ) ( -2400 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -960 16 16 ) ( -960 0 0 ) ( -960 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 320 16 ) ( 0 320 0 ) ( 16 320 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -560 ) ( 0 0 -560 ) ( 16 16 -560 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -464 ) ( 0 0 -464 ) ( -16 16 -464 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6101
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -352 -16 ) ( 0 -352 0 ) ( 16 -352 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -512 ) ( 0 0 -512 ) ( 16 16 -512 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -448 ) ( 0 0 -448 ) ( -16 16 -448 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6102
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -384 -16 ) ( 0 -384 0 ) ( 16 -384 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -352 16 ) ( 0 -352 0 ) ( 16 -352 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -496 ) ( 0 0 -496 ) ( 16 16 -496 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -432 ) ( 0 0 -432 ) ( -16 16 -432 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6103
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -416 -16 ) ( 0 -416 0 ) ( 16 -416 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -384 16 ) ( 0 -384 0 ) ( 16 -384 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -480 ) ( 0 0 -480 ) ( 16 16 -480 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -416 ) ( 0 0 -416 ) ( -16 16 -416 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6104
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1024 -16 ) ( 0 -1024 0 ) ( 16 -1024 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -416 16 ) ( 0 -416 0 ) ( 16 -416 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -496 ) ( 0 0 -496 ) ( 16 16 -496 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -416 ) ( 0 0 -416 ) ( -16 16 -416 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6105
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1056 -16 ) ( 0 -1056 0 ) ( 16 -1056 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1024 16 ) ( 0 -1024 0 ) ( 16 -1024 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -400 ) ( 0 0 -400 ) ( -16 16 -400 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6106
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1088 -16 ) ( 0 -1088 0 ) ( 16 -1088 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1056 16 ) ( 0 -1056 0 ) ( 16 -1056 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -448 ) ( 0 0 -448 ) ( 16 16 -448 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -384 ) ( 0 0 -384 ) ( -16 16 -384 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6107
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1120 -16 ) ( 0 -1120 0 ) ( 16 -1120 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1088 16 ) ( 0 -1088 0 ) ( 16 -1088 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -432 ) ( 0 0 -432 ) ( 16 16 -432 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -368 ) ( 0 0 -368 ) ( -16 16 -368 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6108
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1152 -16 ) ( 0 -1152 0 ) ( 16 -1152 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1120 16 ) ( 0 -1120 0 ) ( 16 -1120 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -352 ) ( 0 0 -352 ) ( -16 16 -352 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6109
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1184 -16 ) ( 0 -1184 0 ) ( 16 -1184 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1152 16 ) ( 0 -1152 0 ) ( 16 -1152 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -400 ) ( 0 0 -400 ) ( 16 16 -400 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -336 ) ( 0 0 -336 ) ( -16 16 -336 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6110
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -320 ) ( 0 0 -320 ) ( -16 16 -320 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6111
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -368 ) ( 0 0 -368 ) ( 16 16 -368 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -304 ) ( 0 0 -304 ) ( -16 16 -304 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6112
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1280 -16 ) ( 0 -1280 0 ) ( 16 -1280 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1248 16 ) ( 0 -1248 0 ) ( 16 -1248 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -352 ) ( 0 0 -352 ) ( 16 16 -352 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -288 ) ( 0 0 -288 ) ( -16 16 -288 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6113
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1312 -16 ) ( 0 -1312 0 ) ( 16 -1312 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1280 16 ) ( 0 -1280 0 ) ( 16 -1280 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -336 ) ( 0 0 -336 ) ( 16 16 -336 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6114
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1344 -16 ) ( 0 -1344 0 ) ( 16 -1344 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1312 16 ) ( 0 -1312 0 ) ( 16 -1312 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -320 ) ( 0 0 -320 ) ( 16 16 -320 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6115
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1376 -16 ) ( 0 -1376 0 ) ( 16 -1376 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1344 16 ) ( 0 -1344 0 ) ( 16 -1344 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6116
+{
+( -2048 -16 16 ) ( -2048 0 0 ) ( -2048 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -960 16 16 ) ( -960 0 0 ) ( -960 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1376 16 ) ( 0 -1376 0 ) ( 16 -1376 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6117
+{
+( -192 -16 16 ) ( -192 0 0 ) ( -192 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -128 16 16 ) ( -128 0 0 ) ( -128 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -288 ) ( 0 0 -288 ) ( 16 16 -288 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -224 ) ( 0 0 -224 ) ( -16 16 -224 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6118
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -64 16 16 ) ( -64 0 0 ) ( -64 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -272 ) ( 0 0 -272 ) ( 16 16 -272 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -208 ) ( 0 0 -208 ) ( -16 16 -208 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6119
+{
+( -64 -16 16 ) ( -64 0 0 ) ( -64 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 0 16 16 ) ( 0 0 0 ) ( 0 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -256 ) ( 0 0 -256 ) ( 16 16 -256 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -192 ) ( 0 0 -192 ) ( -16 16 -192 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6120
+{
+( 0 -16 16 ) ( 0 0 0 ) ( 0 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 64 16 16 ) ( 64 0 0 ) ( 64 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6121
+{
+( 64 -16 16 ) ( 64 0 0 ) ( 64 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1088 16 16 ) ( 1088 0 0 ) ( 1088 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -224 ) ( 0 0 -224 ) ( 16 16 -224 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6122
+{
+( 1088 -16 16 ) ( 1088 0 0 ) ( 1088 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1152 16 16 ) ( 1152 0 0 ) ( 1152 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -256 ) ( 0 0 -256 ) ( 16 16 -256 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -192 ) ( 0 0 -192 ) ( -16 16 -192 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6123
+{
+( 1152 -16 16 ) ( 1152 0 0 ) ( 1152 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1216 16 16 ) ( 1216 0 0 ) ( 1216 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -272 ) ( 0 0 -272 ) ( 16 16 -272 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -208 ) ( 0 0 -208 ) ( -16 16 -208 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6124
+{
+( 1216 -16 16 ) ( 1216 0 0 ) ( 1216 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1280 16 16 ) ( 1280 0 0 ) ( 1280 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -288 ) ( 0 0 -288 ) ( 16 16 -288 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -224 ) ( 0 0 -224 ) ( -16 16 -224 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6125
+{
+( 1280 -16 16 ) ( 1280 0 0 ) ( 1280 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1344 16 16 ) ( 1344 0 0 ) ( 1344 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6126
+{
+( 1632 -16 16 ) ( 1632 0 0 ) ( 1632 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 2944 16 16 ) ( 2944 0 0 ) ( 2944 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 -16 ) ( 0 -1536 0 ) ( 16 -1536 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6127
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -320 ) ( 0 0 -320 ) ( 16 16 -320 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6128
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1184 -16 ) ( 0 -1184 0 ) ( 16 -1184 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1152 16 ) ( 0 -1152 0 ) ( 16 -1152 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -336 ) ( 0 0 -336 ) ( 16 16 -336 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6129
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1152 -16 ) ( 0 -1152 0 ) ( 16 -1152 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1120 16 ) ( 0 -1120 0 ) ( 16 -1120 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -352 ) ( 0 0 -352 ) ( 16 16 -352 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -288 ) ( 0 0 -288 ) ( -16 16 -288 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6130
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1120 -16 ) ( 0 -1120 0 ) ( 16 -1120 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1088 16 ) ( 0 -1088 0 ) ( 16 -1088 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -368 ) ( 0 0 -368 ) ( 16 16 -368 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -304 ) ( 0 0 -304 ) ( -16 16 -304 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6131
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1088 -16 ) ( 0 -1088 0 ) ( 16 -1088 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1056 16 ) ( 0 -1056 0 ) ( 16 -1056 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -320 ) ( 0 0 -320 ) ( -16 16 -320 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6132
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1056 -16 ) ( 0 -1056 0 ) ( 16 -1056 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1024 16 ) ( 0 -1024 0 ) ( 16 -1024 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -400 ) ( 0 0 -400 ) ( 16 16 -400 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -336 ) ( 0 0 -336 ) ( -16 16 -336 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6133
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1024 -16 ) ( 0 -1024 0 ) ( 16 -1024 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -992 16 ) ( 0 -992 0 ) ( 16 -992 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -352 ) ( 0 0 -352 ) ( -16 16 -352 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6134
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -992 -16 ) ( 0 -992 0 ) ( 16 -992 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -960 16 ) ( 0 -960 0 ) ( 16 -960 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -432 ) ( 0 0 -432 ) ( 16 16 -432 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -368 ) ( 0 0 -368 ) ( -16 16 -368 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6135
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -960 -16 ) ( 0 -960 0 ) ( 16 -960 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -928 16 ) ( 0 -928 0 ) ( 16 -928 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -448 ) ( 0 0 -448 ) ( 16 16 -448 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -384 ) ( 0 0 -384 ) ( -16 16 -384 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6136
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -928 -16 ) ( 0 -928 0 ) ( 16 -928 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -896 16 ) ( 0 -896 0 ) ( 16 -896 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -400 ) ( 0 0 -400 ) ( -16 16 -400 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6137
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -896 -16 ) ( 0 -896 0 ) ( 16 -896 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -864 16 ) ( 0 -864 0 ) ( 16 -864 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -480 ) ( 0 0 -480 ) ( 16 16 -480 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -416 ) ( 0 0 -416 ) ( -16 16 -416 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6138
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -864 -16 ) ( 0 -864 0 ) ( 16 -864 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -832 16 ) ( 0 -832 0 ) ( 16 -832 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -496 ) ( 0 0 -496 ) ( 16 16 -496 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -432 ) ( 0 0 -432 ) ( -16 16 -432 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6139
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -832 -16 ) ( 0 -832 0 ) ( 16 -832 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -800 16 ) ( 0 -800 0 ) ( 16 -800 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -512 ) ( 0 0 -512 ) ( 16 16 -512 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -448 ) ( 0 0 -448 ) ( -16 16 -448 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6140
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -800 -16 ) ( 0 -800 0 ) ( 16 -800 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -768 16 ) ( 0 -768 0 ) ( 16 -768 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -528 ) ( 0 0 -528 ) ( 16 16 -528 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -464 ) ( 0 0 -464 ) ( -16 16 -464 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6141
+{
+( 2560 -16 16 ) ( 2560 0 0 ) ( 2560 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -768 -16 ) ( 0 -768 0 ) ( 16 -768 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 256 16 ) ( 0 256 0 ) ( 16 256 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -464 ) ( 0 0 -464 ) ( -16 16 -464 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6142
+{
+( 1536 -16 16 ) ( 1536 0 0 ) ( 1536 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 256 -16 ) ( 0 256 0 ) ( 16 256 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 448 16 ) ( 0 448 0 ) ( 16 448 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -560 ) ( 0 0 -560 ) ( 16 16 -560 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -464 ) ( 0 0 -464 ) ( -16 16 -464 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6143
+{
+( -960 -16 16 ) ( -960 0 0 ) ( -960 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1632 16 16 ) ( 1632 0 0 ) ( 1632 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1792 -16 ) ( 0 -1792 0 ) ( 16 -1792 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1040 16 ) ( 0 -1040 0 ) ( 16 -1040 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -960 ) ( 0 0 -960 ) ( 16 16 -960 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6144
+{
+( -368 -16 16 ) ( -368 0 0 ) ( -368 16 16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 1632 16 16 ) ( 1632 0 0 ) ( 1632 -16 16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 16 -1824 -16 ) ( 0 -1824 0 ) ( 16 -1824 16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 16 -1792 16 ) ( 0 -1792 0 ) ( 16 -1792 -16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( -16 16 -960 ) ( 0 0 -960 ) ( 16 16 -960 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 16 16 960 ) ( 0 0 960 ) ( -16 16 960 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+}
+// brush 6145
+{
+( -368 -16 16 ) ( -368 0 0 ) ( -368 16 16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 960 16 16 ) ( 960 0 0 ) ( 960 -16 16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 16 -1040 -16 ) ( 0 -1040 0 ) ( 16 -1040 16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 16 -1008 16 ) ( 0 -1008 0 ) ( 16 -1008 -16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( -16 16 -960 ) ( 0 0 -960 ) ( 16 16 -960 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 16 16 960 ) ( 0 0 960 ) ( -16 16 960 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+}
+// brush 6146
+{
+( -960 -16 16 ) ( -960 0 0 ) ( -960 16 16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 1632 16 16 ) ( 1632 0 0 ) ( 1632 -16 16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 16 -1792 -16 ) ( 0 -1792 0 ) ( 16 -1792 16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 16 -1008 16 ) ( 0 -1008 0 ) ( 16 -1008 -16 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( -16 16 832 ) ( 0 0 832 ) ( 16 16 832 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+( 16 16 992 ) ( 0 0 992 ) ( -16 16 992 ) sky/mohday1 22 -36 -180 30.750 -14.250 0 276 0
+}
+// brush 6147
+{
+( -896 -16 16 ) ( -896 0 0 ) ( -896 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1568 16 16 ) ( 1568 0 0 ) ( 1568 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1744 -16 ) ( 0 -1744 0 ) ( 16 -1744 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1696 16 ) ( 0 -1696 0 ) ( 16 -1696 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 32 ) ( 0 0 32 ) ( -16 16 32 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6148
+{
+( -832 -16 16 ) ( -832 0 0 ) ( -832 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -768 16 16 ) ( -768 0 0 ) ( -768 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1760 -16 ) ( 0 -1760 0 ) ( 16 -1760 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1680 16 ) ( 0 -1680 0 ) ( 16 -1680 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6149
+{
+( -384 -16 16 ) ( -384 0 0 ) ( -384 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -320 16 16 ) ( -320 0 0 ) ( -320 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1760 -16 ) ( 0 -1760 0 ) ( 16 -1760 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1680 16 ) ( 0 -1680 0 ) ( 16 -1680 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6150
+{
+( 64 -16 16 ) ( 64 0 0 ) ( 64 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 128 16 16 ) ( 128 0 0 ) ( 128 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1760 -16 ) ( 0 -1760 0 ) ( 16 -1760 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1680 16 ) ( 0 -1680 0 ) ( 16 -1680 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6151
+{
+( 512 -16 16 ) ( 512 0 0 ) ( 512 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 576 16 16 ) ( 576 0 0 ) ( 576 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1760 -16 ) ( 0 -1760 0 ) ( 16 -1760 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1680 16 ) ( 0 -1680 0 ) ( 16 -1680 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6152
+{
+( 960 -16 16 ) ( 960 0 0 ) ( 960 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1024 16 16 ) ( 1024 0 0 ) ( 1024 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1760 -16 ) ( 0 -1760 0 ) ( 16 -1760 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1680 16 ) ( 0 -1680 0 ) ( 16 -1680 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6153
+{
+( 1408 -16 16 ) ( 1408 0 0 ) ( 1408 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1760 -16 ) ( 0 -1760 0 ) ( 16 -1760 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1680 16 ) ( 0 -1680 0 ) ( 16 -1680 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6154
+{
+( -800 -16 16 ) ( -800 0 0 ) ( -800 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -560 16 16 ) ( -560 0 0 ) ( -560 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1696 -16 ) ( 0 -1696 0 ) ( 16 -1696 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1584 16 ) ( 0 -1584 0 ) ( 16 -1584 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6155
+{
+( -352 -16 16 ) ( -352 0 0 ) ( -352 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -112 16 16 ) ( -112 0 0 ) ( -112 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1696 -16 ) ( 0 -1696 0 ) ( 16 -1696 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1584 16 ) ( 0 -1584 0 ) ( 16 -1584 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6156
+{
+( 96 -16 16 ) ( 96 0 0 ) ( 96 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 336 16 16 ) ( 336 0 0 ) ( 336 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1696 -16 ) ( 0 -1696 0 ) ( 16 -1696 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1584 16 ) ( 0 -1584 0 ) ( 16 -1584 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6157
+{
+( 544 -16 16 ) ( 544 0 0 ) ( 544 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 784 16 16 ) ( 784 0 0 ) ( 784 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1696 -16 ) ( 0 -1696 0 ) ( 16 -1696 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1584 16 ) ( 0 -1584 0 ) ( 16 -1584 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6158
+{
+( 992 -16 16 ) ( 992 0 0 ) ( 992 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1232 16 16 ) ( 1232 0 0 ) ( 1232 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1696 -16 ) ( 0 -1696 0 ) ( 16 -1696 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1584 16 ) ( 0 -1584 0 ) ( 16 -1584 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6159
+{
+( -160 -16 16 ) ( -160 0 0 ) ( -160 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 1280 16 16 ) ( 1280 0 0 ) ( 1280 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -560 ) ( 0 0 -560 ) ( 16 16 -560 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 -384 ) ( 0 0 -384 ) ( -16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6160
+{
+( -160 -16 16 ) ( -160 0 0 ) ( -160 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 1280 16 16 ) ( 1280 0 0 ) ( 1280 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1184 -16 ) ( 0 -1184 0 ) ( 16 -1184 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1152 16 ) ( 0 -1152 0 ) ( 16 -1152 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6161
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -80 16 16 ) ( -80 0 0 ) ( -80 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6162
+{
+( 320 -16 16 ) ( 320 0 0 ) ( 320 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 368 16 16 ) ( 368 0 0 ) ( 368 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6163
+{
+( 768 -16 16 ) ( 768 0 0 ) ( 768 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 816 16 16 ) ( 816 0 0 ) ( 816 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6164
+{
+( 1216 -16 16 ) ( 1216 0 0 ) ( 1216 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 1264 16 16 ) ( 1264 0 0 ) ( 1264 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6165
+{
+( 64 -16 16 ) ( 64 0 0 ) ( 64 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 256 16 16 ) ( 256 0 0 ) ( 256 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1232 -16 ) ( 0 -1232 0 ) ( 16 -1232 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -32 ) ( 0 0 -32 ) ( -16 16 -32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6166
+{
+( 48 -16 16 ) ( 48 0 0 ) ( 48 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 272 16 16 ) ( 272 0 0 ) ( 272 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1240 -16 ) ( 0 -1240 0 ) ( 16 -1240 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -32 ) ( 0 0 -32 ) ( 16 16 -32 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 16 ) ( 0 0 16 ) ( -16 16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6167
+{
+( 512 -16 16 ) ( 512 0 0 ) ( 512 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 704 16 16 ) ( 704 0 0 ) ( 704 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1232 -16 ) ( 0 -1232 0 ) ( 16 -1232 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -32 ) ( 0 0 -32 ) ( -16 16 -32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6168
+{
+( 496 -16 16 ) ( 496 0 0 ) ( 496 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 720 16 16 ) ( 720 0 0 ) ( 720 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1240 -16 ) ( 0 -1240 0 ) ( 16 -1240 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -32 ) ( 0 0 -32 ) ( 16 16 -32 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 16 ) ( 0 0 16 ) ( -16 16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6169
+{
+( 960 -16 16 ) ( 960 0 0 ) ( 960 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1152 16 16 ) ( 1152 0 0 ) ( 1152 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1232 -16 ) ( 0 -1232 0 ) ( 16 -1232 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -32 ) ( 0 0 -32 ) ( -16 16 -32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6170
+{
+( 944 -16 16 ) ( 944 0 0 ) ( 944 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 1168 16 16 ) ( 1168 0 0 ) ( 1168 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1240 -16 ) ( 0 -1240 0 ) ( 16 -1240 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -32 ) ( 0 0 -32 ) ( 16 16 -32 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 16 ) ( 0 0 16 ) ( -16 16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6171
+{
+( -160 -16 16 ) ( -160 0 0 ) ( -160 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 1280 16 16 ) ( 1280 0 0 ) ( 1280 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1232 -16 ) ( 0 -1232 0 ) ( 16 -1232 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 64 ) ( 0 0 64 ) ( 16 16 64 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6172
+{
+( -160 -16 16 ) ( -160 0 0 ) ( -160 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 32 16 16 ) ( 32 0 0 ) ( 32 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6173
+{
+( 288 -16 16 ) ( 288 0 0 ) ( 288 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 480 16 16 ) ( 480 0 0 ) ( 480 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6174
+{
+( 736 -16 16 ) ( 736 0 0 ) ( 736 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 928 16 16 ) ( 928 0 0 ) ( 928 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6175
+{
+( 1184 -16 16 ) ( 1184 0 0 ) ( 1184 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 1280 16 16 ) ( 1280 0 0 ) ( 1280 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6176
+{
+( 32 -16 16 ) ( 32 0 0 ) ( 32 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 288 16 16 ) ( 288 0 0 ) ( 288 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -32 ) ( 0 0 -32 ) ( 16 16 -32 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6177
+{
+( 48 -16 16 ) ( 48 0 0 ) ( 48 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 272 16 16 ) ( 272 0 0 ) ( 272 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -48 ) ( 0 0 -48 ) ( 16 16 -48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -16 ) ( 0 0 -16 ) ( -16 16 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6178
+{
+( 480 -16 16 ) ( 480 0 0 ) ( 480 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 736 16 16 ) ( 736 0 0 ) ( 736 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -32 ) ( 0 0 -32 ) ( 16 16 -32 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6179
+{
+( 496 -16 16 ) ( 496 0 0 ) ( 496 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 720 16 16 ) ( 720 0 0 ) ( 720 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -48 ) ( 0 0 -48 ) ( 16 16 -48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -16 ) ( 0 0 -16 ) ( -16 16 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6180
+{
+( 928 -16 16 ) ( 928 0 0 ) ( 928 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 1184 16 16 ) ( 1184 0 0 ) ( 1184 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1216 -16 ) ( 0 -1216 0 ) ( 16 -1216 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -32 ) ( 0 0 -32 ) ( 16 16 -32 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6181
+{
+( 944 -16 16 ) ( 944 0 0 ) ( 944 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1168 16 16 ) ( 1168 0 0 ) ( 1168 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1184 16 ) ( 0 -1184 0 ) ( 16 -1184 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -48 ) ( 0 0 -48 ) ( 16 16 -48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -16 ) ( 0 0 -16 ) ( -16 16 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6182
+{
+( -192 -16 16 ) ( -192 0 0 ) ( -192 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 1312 16 16 ) ( 1312 0 0 ) ( 1312 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -1224 -16 ) ( 0 -1224 0 ) ( 16 -1224 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1176 16 ) ( 0 -1176 0 ) ( 16 -1176 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 128 ) ( 0 0 128 ) ( 16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6183
+{
+( -2400 -16 16 ) ( -2400 0 0 ) ( -2400 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -2080 16 16 ) ( -2080 0 0 ) ( -2080 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -928 -16 ) ( 0 -928 0 ) ( 16 -928 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -448 16 ) ( 0 -448 0 ) ( 16 -448 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -496 ) ( 0 0 -496 ) ( 16 16 -496 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -416 ) ( 0 0 -416 ) ( -16 16 -416 ) wilderness/m3l3grass_1rough 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6184
+{
+( -2384 -16 16 ) ( -2384 0 0 ) ( -2384 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -2360 16 16 ) ( -2360 0 0 ) ( -2360 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -896 -16 ) ( 0 -896 0 ) ( 16 -896 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -872 16 ) ( 0 -872 0 ) ( 16 -872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6185
+{
+( -2160 -16 16 ) ( -2160 0 0 ) ( -2160 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -2136 16 16 ) ( -2136 0 0 ) ( -2136 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -896 -16 ) ( 0 -896 0 ) ( 16 -896 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -872 16 ) ( 0 -872 0 ) ( 16 -872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6186
+{
+( -2384 -16 16 ) ( -2384 0 0 ) ( -2384 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -2360 16 16 ) ( -2360 0 0 ) ( -2360 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -512 -16 ) ( 0 -512 0 ) ( 16 -512 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -488 16 ) ( 0 -488 0 ) ( 16 -488 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6187
+{
+( -2160 -16 16 ) ( -2160 0 0 ) ( -2160 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -2136 16 16 ) ( -2136 0 0 ) ( -2136 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -512 -16 ) ( 0 -512 0 ) ( 16 -512 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -488 16 ) ( 0 -488 0 ) ( 16 -488 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6188
+{
+( -2400 -16 16 ) ( -2400 0 0 ) ( -2400 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -2112 16 16 ) ( -2112 0 0 ) ( -2112 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -928 -16 ) ( 0 -928 0 ) ( 16 -928 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -464 16 ) ( 0 -464 0 ) ( 16 -464 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -32 ) ( 0 0 -32 ) ( -16 16 -32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6189
+{
+( -2400 -16 16 ) ( -2400 0 0 ) ( -2400 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -2368 16 16 ) ( -2368 0 0 ) ( -2368 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -928 -16 ) ( 0 -928 0 ) ( 16 -928 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -464 16 ) ( 0 -464 0 ) ( 16 -464 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6190
+{
+( -2320 -16 16 ) ( -2320 0 0 ) ( -2320 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -2208 16 16 ) ( -2208 0 0 ) ( -2208 -16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -848 -16 ) ( 0 -848 0 ) ( 16 -848 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -752 16 ) ( 0 -752 0 ) ( 16 -752 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6191
+{
+( -2320 -16 16 ) ( -2320 0 0 ) ( -2320 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -2208 16 16 ) ( -2208 0 0 ) ( -2208 -16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -688 -16 ) ( 0 -688 0 ) ( 16 -688 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -592 16 ) ( 0 -592 0 ) ( 16 -592 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -304 ) ( 0 0 -304 ) ( -16 16 -304 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6192
+{
+( 1424 -16 16 ) ( 1424 0 0 ) ( 1424 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1448 16 16 ) ( 1448 0 0 ) ( 1448 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1504 -16 ) ( 0 -1504 0 ) ( 16 -1504 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1480 16 ) ( 0 -1480 0 ) ( 16 -1480 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6193
+{
+( 2112 -16 16 ) ( 2112 0 0 ) ( 2112 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 2136 16 16 ) ( 2136 0 0 ) ( 2136 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1504 -16 ) ( 0 -1504 0 ) ( 16 -1504 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1480 16 ) ( 0 -1480 0 ) ( 16 -1480 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6194
+{
+( 1424 -16 16 ) ( 1424 0 0 ) ( 1424 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1448 16 16 ) ( 1448 0 0 ) ( 1448 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1272 -16 ) ( 0 -1272 0 ) ( 16 -1272 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1248 16 ) ( 0 -1248 0 ) ( 16 -1248 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6195
+{
+( 2112 -16 16 ) ( 2112 0 0 ) ( 2112 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 2136 16 16 ) ( 2136 0 0 ) ( 2136 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1272 -16 ) ( 0 -1272 0 ) ( 16 -1272 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1248 16 ) ( 0 -1248 0 ) ( 16 -1248 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6196
+{
+( 1400 -16 16 ) ( 1400 0 0 ) ( 1400 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 2160 16 16 ) ( 2160 0 0 ) ( 2160 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1528 -16 ) ( 0 -1528 0 ) ( 16 -1528 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1248 16 ) ( 0 -1248 0 ) ( 16 -1248 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6197
+{
+( 1536 -16 16 ) ( 1536 0 0 ) ( 1536 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1664 16 16 ) ( 1664 0 0 ) ( 1664 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1504 -16 ) ( 0 -1504 0 ) ( 16 -1504 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1408 16 ) ( 0 -1408 0 ) ( 16 -1408 -16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -96 ) ( 0 0 -96 ) ( -16 16 -96 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6198
+{
+( 1760 -16 16 ) ( 1760 0 0 ) ( 1760 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1888 16 16 ) ( 1888 0 0 ) ( 1888 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1504 -16 ) ( 0 -1504 0 ) ( 16 -1504 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1408 16 ) ( 0 -1408 0 ) ( 16 -1408 -16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -96 ) ( 0 0 -96 ) ( -16 16 -96 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6199
+{
+( 1984 -16 16 ) ( 1984 0 0 ) ( 1984 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 2112 16 16 ) ( 2112 0 0 ) ( 2112 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1504 -16 ) ( 0 -1504 0 ) ( 16 -1504 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1408 16 ) ( 0 -1408 0 ) ( 16 -1408 -16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -96 ) ( 0 0 -96 ) ( -16 16 -96 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6200
+{
+( -1456 -16 16 ) ( -1456 0 0 ) ( -1456 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1296 16 16 ) ( -1296 0 0 ) ( -1296 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -224 -16 ) ( 0 -224 0 ) ( 16 -224 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -128 16 ) ( 0 -128 0 ) ( 16 -128 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -336 ) ( 0 0 -336 ) ( -16 16 -336 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6201
+{
+( -1904 -16 16 ) ( -1904 0 0 ) ( -1904 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1808 16 16 ) ( -1808 0 0 ) ( -1808 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -896 -16 ) ( 0 -896 0 ) ( 16 -896 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -736 16 ) ( 0 -736 0 ) ( 16 -736 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -288 ) ( 0 0 -288 ) ( -16 16 -288 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6202
+{
+( -1984 -16 16 ) ( -1984 0 0 ) ( -1984 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1792 16 16 ) ( -1792 0 0 ) ( -1792 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1504 -16 ) ( 0 -1504 0 ) ( 16 -1504 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1432 16 ) ( 0 -1432 0 ) ( 16 -1432 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -112 ) ( 0 0 -112 ) ( -16 16 -112 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6203
+{
+( -1184 -16 16 ) ( -1184 0 0 ) ( -1184 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1024 16 16 ) ( -1024 0 0 ) ( -1024 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1504 -16 ) ( 0 -1504 0 ) ( 16 -1504 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1432 16 ) ( 0 -1432 0 ) ( 16 -1432 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6204
+{
+( 160 -16 16 ) ( 160 0 0 ) ( 160 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 320 16 16 ) ( 320 0 0 ) ( 320 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1504 -16 ) ( 0 -1504 0 ) ( 16 -1504 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1424 16 ) ( 0 -1424 0 ) ( 16 -1424 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -176 ) ( 0 0 -176 ) ( 16 16 -176 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6205
+{
+( 736 -16 16 ) ( 736 0 0 ) ( 736 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 896 16 16 ) ( 896 0 0 ) ( 896 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1328 -16 ) ( 0 -1328 0 ) ( 16 -1328 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1248 16 ) ( 0 -1248 0 ) ( 16 -1248 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -176 ) ( 0 0 -176 ) ( 16 16 -176 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -48 ) ( 0 0 -48 ) ( -16 16 -48 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6206
+{
+( 2272 -16 16 ) ( 2272 0 0 ) ( 2272 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 2432 16 16 ) ( 2432 0 0 ) ( 2432 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1504 -16 ) ( 0 -1504 0 ) ( 16 -1504 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1424 16 ) ( 0 -1424 0 ) ( 16 -1424 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -112 ) ( 0 0 -112 ) ( -16 16 -112 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6207
+{
+( 2656 -16 16 ) ( 2656 0 0 ) ( 2656 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 2736 16 16 ) ( 2736 0 0 ) ( 2736 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1152 -16 ) ( 0 -1152 0 ) ( 16 -1152 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -992 16 ) ( 0 -992 0 ) ( 16 -992 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -256 ) ( 0 0 -256 ) ( 16 16 -256 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6208
+{
+( 2896 -16 16 ) ( 2896 0 0 ) ( 2896 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 3040 16 16 ) ( 3040 0 0 ) ( 3040 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -704 -16 ) ( 0 -704 0 ) ( 16 -704 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -608 16 ) ( 0 -608 0 ) ( 16 -608 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -336 ) ( 0 0 -336 ) ( -16 16 -336 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6209
+{
+( 2624 -16 16 ) ( 2624 0 0 ) ( 2624 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 2768 16 16 ) ( 2768 0 0 ) ( 2768 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -224 -16 ) ( 0 -224 0 ) ( 16 -224 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -128 16 ) ( 0 -128 0 ) ( 16 -128 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -320 ) ( 0 0 -320 ) ( -16 16 -320 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6210
+{
+( 2112 -16 16 ) ( 2112 0 0 ) ( 2112 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 2272 16 16 ) ( 2272 0 0 ) ( 2272 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 304 -16 ) ( 0 304 0 ) ( 16 304 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 400 16 ) ( 0 400 0 ) ( 16 400 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -336 ) ( 0 0 -336 ) ( -16 16 -336 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6211
+{
+( -1984 -16 16 ) ( -1984 0 0 ) ( -1984 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1888 16 16 ) ( -1888 0 0 ) ( -1888 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1568 -16 ) ( 0 -1568 0 ) ( 16 -1568 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 16 ) ( 0 -1536 0 ) ( 16 -1536 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6212
+{
+( -1536 -16 16 ) ( -1536 0 0 ) ( -1536 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -1440 16 16 ) ( -1440 0 0 ) ( -1440 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1568 -16 ) ( 0 -1568 0 ) ( 16 -1568 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 16 ) ( 0 -1536 0 ) ( 16 -1536 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6213
+{
+( -1088 -16 16 ) ( -1088 0 0 ) ( -1088 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -992 16 16 ) ( -992 0 0 ) ( -992 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1568 -16 ) ( 0 -1568 0 ) ( 16 -1568 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 16 ) ( 0 -1536 0 ) ( 16 -1536 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6214
+{
+( -640 -16 16 ) ( -640 0 0 ) ( -640 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -544 16 16 ) ( -544 0 0 ) ( -544 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1568 -16 ) ( 0 -1568 0 ) ( 16 -1568 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 16 ) ( 0 -1536 0 ) ( 16 -1536 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6215
+{
+( 1440 -16 16 ) ( 1440 0 0 ) ( 1440 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1536 16 16 ) ( 1536 0 0 ) ( 1536 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1568 -16 ) ( 0 -1568 0 ) ( 16 -1568 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 16 ) ( 0 -1536 0 ) ( 16 -1536 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6216
+{
+( 1888 -16 16 ) ( 1888 0 0 ) ( 1888 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 1984 16 16 ) ( 1984 0 0 ) ( 1984 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1568 -16 ) ( 0 -1568 0 ) ( 16 -1568 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 16 ) ( 0 -1536 0 ) ( 16 -1536 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6217
+{
+( 2336 -16 16 ) ( 2336 0 0 ) ( 2336 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 2432 16 16 ) ( 2432 0 0 ) ( 2432 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1568 -16 ) ( 0 -1568 0 ) ( 16 -1568 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 16 ) ( 0 -1536 0 ) ( 16 -1536 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6218
+{
+( 2784 -16 16 ) ( 2784 0 0 ) ( 2784 16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 2880 16 16 ) ( 2880 0 0 ) ( 2880 -16 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1568 -16 ) ( 0 -1568 0 ) ( 16 -1568 16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 -1536 16 ) ( 0 -1536 0 ) ( 16 -1536 -16 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( -16 16 -304 ) ( 0 0 -304 ) ( 16 16 -304 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) wilderness/wldrrckset1_1 0 0 0 1.500 1.500 0 0 0 surfaceDensity 64
+}
+// brush 6219
+{
+( 3040 -16 16 ) ( 3040 0 0 ) ( 3040 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -704 -16 ) ( 0 -704 0 ) ( 16 -704 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -608 16 ) ( 0 -608 0 ) ( 16 -608 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -496 ) ( 0 0 -496 ) ( 16 16 -496 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 -368 ) ( 0 0 -368 ) ( -16 16 -368 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6220
+{
+( 3040 -16 16 ) ( 3040 0 0 ) ( 3040 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 -256 -16 ) ( 0 -256 0 ) ( 16 -256 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -160 16 ) ( 0 -160 0 ) ( 16 -160 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -496 ) ( 0 0 -496 ) ( 16 16 -496 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 -368 ) ( 0 0 -368 ) ( -16 16 -368 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6221
+{
+( 3040 -16 16 ) ( 3040 0 0 ) ( 3040 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 3072 16 16 ) ( 3072 0 0 ) ( 3072 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 160 -16 ) ( 0 160 0 ) ( 16 160 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 256 16 ) ( 0 256 0 ) ( 16 256 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -496 ) ( 0 0 -496 ) ( 16 16 -496 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 -368 ) ( 0 0 -368 ) ( -16 16 -368 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6222
+{
+( -1512 -16 16 ) ( -1512 0 0 ) ( -1512 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -1496 16 16 ) ( -1496 0 0 ) ( -1496 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 216 -16 ) ( 0 216 0 ) ( 16 216 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 232 16 ) ( 0 232 0 ) ( 16 232 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6223
+{
+( -1512 -16 16 ) ( -1512 0 0 ) ( -1512 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -1440 16 16 ) ( -1440 0 0 ) ( -1440 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 216 -16 ) ( 0 216 0 ) ( 16 216 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 232 16 ) ( 0 232 0 ) ( 16 232 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -192 ) ( 0 0 -192 ) ( 16 16 -192 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6224
+{
+( -2008 -16 16 ) ( -2008 0 0 ) ( -2008 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -1992 16 16 ) ( -1992 0 0 ) ( -1992 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -712 -16 ) ( 0 -712 0 ) ( 16 -712 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -696 16 ) ( 0 -696 0 ) ( 16 -696 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -416 ) ( 0 0 -416 ) ( 16 16 -416 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6225
+{
+( -2008 -16 16 ) ( -2008 0 0 ) ( -2008 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -1936 16 16 ) ( -1936 0 0 ) ( -1936 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -712 -16 ) ( 0 -712 0 ) ( 16 -712 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -696 16 ) ( 0 -696 0 ) ( 16 -696 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -144 ) ( 0 0 -144 ) ( 16 16 -144 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6226
+{
+( -1608 -16 16 ) ( -1608 0 0 ) ( -1608 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -1592 16 16 ) ( -1592 0 0 ) ( -1592 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1496 -16 ) ( 0 -1496 0 ) ( 16 -1496 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1480 16 ) ( 0 -1480 0 ) ( 16 -1480 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6227
+{
+( -1608 -16 16 ) ( -1608 0 0 ) ( -1608 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -1536 16 16 ) ( -1536 0 0 ) ( -1536 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1496 -16 ) ( 0 -1496 0 ) ( 16 -1496 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1480 16 ) ( 0 -1480 0 ) ( 16 -1480 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6228
+{
+( -520 -16 16 ) ( -520 0 0 ) ( -520 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -504 16 16 ) ( -504 0 0 ) ( -504 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1496 -16 ) ( 0 -1496 0 ) ( 16 -1496 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1480 16 ) ( 0 -1480 0 ) ( 16 -1480 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6229
+{
+( -520 -16 16 ) ( -520 0 0 ) ( -520 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -448 16 16 ) ( -448 0 0 ) ( -448 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1496 -16 ) ( 0 -1496 0 ) ( 16 -1496 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1480 16 ) ( 0 -1480 0 ) ( 16 -1480 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6230
+{
+( 2232 -16 16 ) ( 2232 0 0 ) ( 2232 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 2248 16 16 ) ( 2248 0 0 ) ( 2248 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1496 -16 ) ( 0 -1496 0 ) ( 16 -1496 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1480 16 ) ( 0 -1480 0 ) ( 16 -1480 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -240 ) ( 0 0 -240 ) ( 16 16 -240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6231
+{
+( 2232 -16 16 ) ( 2232 0 0 ) ( 2232 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 2304 16 16 ) ( 2304 0 0 ) ( 2304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1496 -16 ) ( 0 -1496 0 ) ( 16 -1496 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -1480 16 ) ( 0 -1480 0 ) ( 16 -1480 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6232
+{
+( 3016 -16 16 ) ( 3016 0 0 ) ( 3016 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3032 16 16 ) ( 3032 0 0 ) ( 3032 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -920 -16 ) ( 0 -920 0 ) ( 16 -920 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -904 16 ) ( 0 -904 0 ) ( 16 -904 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -400 ) ( 0 0 -400 ) ( 16 16 -400 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -112 ) ( 0 0 -112 ) ( -16 16 -112 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6233
+{
+( 3016 -16 16 ) ( 3016 0 0 ) ( 3016 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3088 16 16 ) ( 3088 0 0 ) ( 3088 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -920 -16 ) ( 0 -920 0 ) ( 16 -920 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -904 16 ) ( 0 -904 0 ) ( 16 -904 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -128 ) ( 0 0 -128 ) ( 16 16 -128 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -112 ) ( 0 0 -112 ) ( -16 16 -112 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6234
+{
+( 3016 -16 16 ) ( 3016 0 0 ) ( 3016 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3032 16 16 ) ( 3032 0 0 ) ( 3032 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -392 -16 ) ( 0 -392 0 ) ( 16 -392 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -376 16 ) ( 0 -376 0 ) ( 16 -376 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6235
+{
+( 3016 -16 16 ) ( 3016 0 0 ) ( 3016 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3088 16 16 ) ( 3088 0 0 ) ( 3088 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -392 -16 ) ( 0 -392 0 ) ( 16 -392 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -376 16 ) ( 0 -376 0 ) ( 16 -376 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -192 ) ( 0 0 -192 ) ( 16 16 -192 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6236
+{
+( 2392 -16 16 ) ( 2392 0 0 ) ( 2392 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 2408 16 16 ) ( 2408 0 0 ) ( 2408 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 408 -16 ) ( 0 408 0 ) ( 16 408 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 424 16 ) ( 0 424 0 ) ( 16 424 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -464 ) ( 0 0 -464 ) ( 16 16 -464 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6237
+{
+( 2392 -16 16 ) ( 2392 0 0 ) ( 2392 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 2464 16 16 ) ( 2464 0 0 ) ( 2464 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 408 -16 ) ( 0 408 0 ) ( 16 408 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 424 16 ) ( 0 424 0 ) ( 16 424 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -192 ) ( 0 0 -192 ) ( 16 16 -192 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // CODEX OBJ_TEAM2 EXPANSION BRUSHES END
 }
@@ -75753,14 +76723,6 @@
 "classname" "static_item_switch1"
 "testanim" "idle"
 }
-// entity 398
-{
-"origin" "-1120.00 320.00 -461.00"
-"model" "static//bush_full.tik"
-"scale" "1.0"
-"classname" "static_natural_bush_full"
-"testanim" "idle"
-}
 // entity 399
 {
 "classname" "static_natural_tree_commontree"
@@ -75985,311 +76947,6 @@
 "model" "static//tree_juniper.tik"
 "origin" "-805.60 2628.40 200.20"
 "testanim" "idle"
-}
-// entity 425
-{
-"classname" "detail"
-// brush 0
-{
-( -736 16 -229 ) ( -1152 16 -229 ) ( -1152 16 -230 ) common/nodraw 24 15 -180.00 1 -1 536870912 2224 0 
-( -1272 -11 -199 ) ( -856 -11 -199 ) ( -856 -11 -200 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 
-( -1272 16 -229 ) ( -856 16 -229 ) ( -856 -11 -199 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 
-( -856 16 -230 ) ( -1272 16 -230 ) ( -1272 -11 -200 ) mohcommon/barbwire 22 -59 -180.00 0.399902 -0.300018 204800 35328 0 
-( -1028 41 -227 ) ( -1028 40 -227 ) ( -1028 13 -200 ) mohcommon/barbwire -111 -54 -180.00 1 -0.350006 204800 35328 0 
-( -2037 -11 -230 ) ( -2010 16 -230 ) ( -2024 2 -199 ) mohcommon/barbwire -31 -53 -180.00 1 -0.350006 204800 35328 0 
-}
-}
-// entity 426
-{
-"classname" "detail"
-// brush 0
-{
-( -1056 10 -428 ) ( -1028 10 -428 ) ( -1028 18 -428 ) common/nodraw 22 49 -180.00 1 1 536870912 2224 0 
-( -1040 18 -244 ) ( -1040 10 -244 ) ( -1068 10 -244 ) common/nodraw 22 49 -180.00 1 1 536870912 2224 0 
-( -1036 20 -196 ) ( -1064 20 -196 ) ( -1064 20 -228 ) common/nodraw 24 15 -180.00 1 -1 536870912 2224 0 
-( -1354 14 -196 ) ( -1354 6 -196 ) ( -1354 6 -228 ) common/nodraw -49 14 -180.00 1 -1 536870912 2224 0 
-( -1064 16 -196 ) ( -1036 16 -196 ) ( -1036 16 -228 ) mohcommon/secfence -141 170 0.00 0.625000 0.718750 204800 33312 0 
-( -1030 10 -196 ) ( -1030 18 -196 ) ( -1030 18 -228 ) common/nodraw -48 14 -180.00 1 -1 536870912 2224 0 
-}
-}
-// entity 427
-{
-"classname" "func_group"
-// brush 0
-{
-( -1024 20 -228 ) ( -1024 -12 -196 ) ( -1028 -12 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1024 20 -228 ) ( -1024 12 -228 ) ( -1024 -12 -200 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1024 -12 -200 ) ( -1024 12 -228 ) ( -1028 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1028 12 -228 ) ( -1028 20 -228 ) ( -1028 -12 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1024 -12 -196 ) ( -1024 -12 -200 ) ( -1028 -12 -200 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1024 12 -228 ) ( -1024 20 -228 ) ( -1028 20 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( -1024 12 -240 ) ( -1024 20 -240 ) ( -1028 20 -240 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1024 20 -228 ) ( -1024 12 -228 ) ( -1028 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1028 20 -240 ) ( -1024 20 -240 ) ( -1024 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1028 12 -240 ) ( -1028 20 -240 ) ( -1028 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1024 12 -240 ) ( -1028 12 -240 ) ( -1028 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1024 20 -240 ) ( -1024 12 -240 ) ( -1024 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-}
-// entity 428
-{
-"classname" "func_group"
-// brush 0
-{
-( -1354 20 -228 ) ( -1354 -12 -196 ) ( -1358 -12 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1354 20 -228 ) ( -1354 12 -228 ) ( -1354 -12 -200 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1354 -12 -200 ) ( -1354 12 -228 ) ( -1358 12 -228 ) common/nodraw 0 0 0.00 0.500000 0.500000 536870912 2224 0 +surfaceparm detail 
-( -1358 12 -228 ) ( -1358 20 -228 ) ( -1358 -12 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1354 -12 -196 ) ( -1354 -12 -200 ) ( -1358 -12 -200 ) common/nodraw 0 0 0.00 0.500000 0.500000 536870912 2224 0 +surfaceparm detail 
-( -1354 12 -228 ) ( -1354 20 -228 ) ( -1358 20 -228 ) mohtest/slatewldrty1 -28 78 -90.00 0.083496 0.083496 0 0 0 +surfaceparm detail 
-}
-}
-// entity 429
-{
-"classname" "func_group"
-// brush 0
-{
-( -1190 -12 -196 ) ( -1194 -12 -196 ) ( -1194 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1190 -12 -200 ) ( -1190 -12 -196 ) ( -1190 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1194 -12 -200 ) ( -1190 -12 -200 ) ( -1190 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1194 -12 -196 ) ( -1194 -12 -200 ) ( -1194 12 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1190 -12 -200 ) ( -1194 -12 -200 ) ( -1194 -12 -196 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1194 12 -228 ) ( -1190 12 -228 ) ( -1190 20 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( -1190 12 -240 ) ( -1190 20 -240 ) ( -1194 20 -240 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1190 20 -228 ) ( -1190 12 -228 ) ( -1194 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1190 20 -240 ) ( -1190 20 -228 ) ( -1194 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1194 20 -240 ) ( -1194 20 -228 ) ( -1194 12 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1190 12 -228 ) ( -1190 12 -240 ) ( -1194 12 -240 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1190 20 -228 ) ( -1190 20 -240 ) ( -1190 12 -240 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 430
-{
-"classname" "func_group"
-// brush 0
-{
-( -1354 12 -240 ) ( -1354 20 -240 ) ( -1358 20 -240 ) mohtest/slatewldrty1 21 75 -180.00 1 1 0 0 0 +surfaceparm detail 
-( -1354 20 -228 ) ( -1354 12 -228 ) ( -1358 12 -228 ) mohtest/slatewldrty1 21 75 -180.00 1 1 0 0 0 +surfaceparm detail 
-( -1358 20 -240 ) ( -1354 20 -240 ) ( -1354 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1358 12 -240 ) ( -1358 20 -240 ) ( -1358 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1354 12 -240 ) ( -1358 12 -240 ) ( -1358 12 -228 ) common/nodraw 0 0 0.00 0.500000 0.500000 536870912 2224 0 +surfaceparm detail 
-( -1354 20 -240 ) ( -1354 12 -240 ) ( -1354 12 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 431
-{
-"classname" "detail"
-// brush 0
-{
-( -1384 10 -428 ) ( -1356 10 -428 ) ( -1356 18 -428 ) common/nodraw 14 49 -180.00 1 1 536870912 2224 0 
-( -1368 18 -244 ) ( -1368 10 -244 ) ( -1396 10 -244 ) common/nodraw 14 49 -180.00 1 1 536870912 2224 0 
-( -1364 20 -196 ) ( -1392 20 -196 ) ( -1392 20 -228 ) common/nodraw 16 15 -180.00 1 -1 536870912 2224 0 
-( -1682 14 -196 ) ( -1682 6 -196 ) ( -1682 6 -228 ) common/nodraw -49 14 -180.00 1 -1 536870912 2224 0 
-( -1392 16 -196 ) ( -1364 16 -196 ) ( -1364 16 -228 ) mohcommon/secfence -127 170 0.00 0.625000 0.718750 204800 33312 0 
-( -1358 10 -196 ) ( -1358 18 -196 ) ( -1358 18 -228 ) common/nodraw -49 14 -180.00 1 -1 536870912 2224 0 
-}
-}
-// entity 432
-{
-"classname" "func_group"
-// brush 0
-{
-( -1682 20 -228 ) ( -1682 -12 -196 ) ( -1686 -12 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1682 20 -228 ) ( -1682 12 -228 ) ( -1682 -12 -200 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1682 -12 -200 ) ( -1682 12 -228 ) ( -1686 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1686 12 -228 ) ( -1686 20 -228 ) ( -1686 -12 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1682 -12 -196 ) ( -1682 -12 -200 ) ( -1686 -12 -200 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1682 12 -228 ) ( -1682 20 -228 ) ( -1686 20 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-}
-// entity 433
-{
-"classname" "func_group"
-// brush 0
-{
-( -1518 -12 -196 ) ( -1522 -12 -196 ) ( -1522 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1518 -12 -200 ) ( -1518 -12 -196 ) ( -1518 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1522 -12 -200 ) ( -1518 -12 -200 ) ( -1518 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1522 -12 -196 ) ( -1522 -12 -200 ) ( -1522 12 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1518 -12 -200 ) ( -1522 -12 -200 ) ( -1522 -12 -196 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1522 12 -228 ) ( -1518 12 -228 ) ( -1518 20 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( -1518 12 -240 ) ( -1518 20 -240 ) ( -1522 20 -240 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1518 20 -228 ) ( -1518 12 -228 ) ( -1522 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1518 20 -240 ) ( -1518 20 -228 ) ( -1522 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1522 20 -240 ) ( -1522 20 -228 ) ( -1522 12 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1518 12 -228 ) ( -1518 12 -240 ) ( -1522 12 -240 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1518 20 -228 ) ( -1518 20 -240 ) ( -1518 12 -240 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 434
-{
-"classname" "func_group"
-// brush 0
-{
-( -1682 12 -240 ) ( -1682 20 -240 ) ( -1686 20 -240 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1682 20 -228 ) ( -1682 12 -228 ) ( -1686 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1686 20 -240 ) ( -1682 20 -240 ) ( -1682 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1686 12 -240 ) ( -1686 20 -240 ) ( -1686 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1682 12 -240 ) ( -1686 12 -240 ) ( -1686 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1682 20 -240 ) ( -1682 12 -240 ) ( -1682 12 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 435
-{
-"classname" "detail"
-// brush 0
-{
-( -1710 10 -428 ) ( -1682 10 -428 ) ( -1682 18 -428 ) common/nodraw 8 49 -180.00 1 1 536870912 2224 0 
-( -1694 18 -244 ) ( -1694 10 -244 ) ( -1722 10 -244 ) common/nodraw 8 49 -180.00 1 1 536870912 2224 0 
-( -1690 20 -196 ) ( -1718 20 -196 ) ( -1718 20 -228 ) common/nodraw 10 15 -180.00 1 -1 536870912 2224 0 
-( -2006 14 -196 ) ( -2006 6 -196 ) ( -2006 6 -228 ) common/nodraw -49 14 -180.00 1 -1 536870912 2224 0 
-( -1718 16 -196 ) ( -1690 16 -196 ) ( -1690 16 -228 ) mohcommon/secfence -118 170 0.00 0.625000 0.718750 204800 33312 0 
-( -1686 10 -196 ) ( -1686 18 -196 ) ( -1686 18 -228 ) common/nodraw -49 14 -180.00 1 -1 536870912 2224 0 
-}
-}
-// entity 436
-{
-"classname" "func_group"
-// brush 0
-{
-( -1844 -12 -196 ) ( -1848 -12 -196 ) ( -1848 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1844 -12 -200 ) ( -1844 -12 -196 ) ( -1844 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1848 -12 -200 ) ( -1844 -12 -200 ) ( -1844 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1848 -12 -196 ) ( -1848 -12 -200 ) ( -1848 12 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1844 -12 -200 ) ( -1848 -12 -200 ) ( -1848 -12 -196 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1848 12 -228 ) ( -1844 12 -228 ) ( -1844 20 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( -1844 12 -240 ) ( -1844 20 -240 ) ( -1848 20 -240 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1844 20 -228 ) ( -1844 12 -228 ) ( -1848 12 -228 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1844 20 -240 ) ( -1844 20 -228 ) ( -1848 20 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1848 20 -240 ) ( -1848 20 -228 ) ( -1848 12 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -1844 12 -228 ) ( -1844 12 -240 ) ( -1848 12 -240 ) common/nodraw 0 15 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( -1844 20 -228 ) ( -1844 20 -240 ) ( -1844 12 -240 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 437
-{
-"classname" "detail"
-// brush 0
-{
-( -2010 -276 -229 ) ( -2010 140 -229 ) ( -2010 140 -230 ) common/nodraw 12 15 0.00 1 1 536870912 2224 0 
-( -2037 260 -199 ) ( -2037 -156 -199 ) ( -2037 -156 -200 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 
-( -2010 260 -229 ) ( -2010 -156 -229 ) ( -2037 -156 -199 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 
-( -2041 996 -201 ) ( -2042 996 -201 ) ( -2020 996 -227 ) mohcommon/barbwire 38 -54 -180.00 1 -0.350006 204800 35328 0 
-( -2010 -156 -230 ) ( -2010 260 -230 ) ( -2037 260 -200 ) mohcommon/barbwire 122 -59 0.00 0.399902 0.300018 204800 35328 0 
-( -2010 16 -230 ) ( -2037 -11 -230 ) ( -2024 2 -199 ) mohcommon/barbwire 55 -54 0.00 1 0.350006 204800 35328 0 
-}
-}
-// entity 438
-{
-"classname" "detail"
-// brush 0
-{
-( -2016 44 -428 ) ( -2016 16 -428 ) ( -2008 16 -428 ) common/nodraw 10 -36 90.00 1 1 536870912 2224 0 
-( -2008 28 -244 ) ( -2016 28 -244 ) ( -2016 56 -244 ) common/nodraw 10 -36 90.00 1 1 536870912 2224 0 
-( -2006 24 -196 ) ( -2006 52 -196 ) ( -2006 52 -228 ) common/nodraw 12 15 0.00 1 1 536870912 2224 0 
-( -2012 342 -196 ) ( -2020 342 -196 ) ( -2020 342 -228 ) common/nodraw 36 15 -180.00 1 -1 536870912 2224 0 
-( -2010 52 -196 ) ( -2010 24 -196 ) ( -2010 24 -228 ) mohcommon/secfence -223 169 -180.00 0.625000 -0.718750 204800 33312 0 
-( -2016 20 -196 ) ( -2008 20 -196 ) ( -2008 20 -228 ) common/nodraw 37 15 -180.00 1 -1 536870912 2224 0 
-}
-}
-// entity 439
-{
-"classname" "func_group"
-// brush 0
-{
-( -2006 342 -228 ) ( -2038 342 -196 ) ( -2038 346 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2006 342 -228 ) ( -2014 342 -228 ) ( -2038 342 -200 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2038 342 -200 ) ( -2014 342 -228 ) ( -2014 346 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2014 346 -228 ) ( -2006 346 -228 ) ( -2038 346 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2038 342 -196 ) ( -2038 342 -200 ) ( -2038 346 -200 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2014 342 -228 ) ( -2006 342 -228 ) ( -2006 346 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-}
-}
-// entity 440
-{
-"classname" "func_group"
-// brush 0
-{
-( -2038 178 -196 ) ( -2038 182 -196 ) ( -2006 182 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2038 178 -200 ) ( -2038 178 -196 ) ( -2006 178 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2038 182 -200 ) ( -2038 178 -200 ) ( -2014 178 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2038 182 -196 ) ( -2038 182 -200 ) ( -2014 182 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2038 178 -200 ) ( -2038 182 -200 ) ( -2038 182 -196 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2014 182 -228 ) ( -2014 178 -228 ) ( -2006 178 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( -2014 178 -240 ) ( -2006 178 -240 ) ( -2006 182 -240 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 178 -228 ) ( -2014 178 -228 ) ( -2014 182 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 178 -240 ) ( -2006 178 -228 ) ( -2006 182 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2006 182 -240 ) ( -2006 182 -228 ) ( -2014 182 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2014 178 -228 ) ( -2014 178 -240 ) ( -2014 182 -240 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 178 -228 ) ( -2006 178 -240 ) ( -2014 178 -240 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 441
-{
-"classname" "func_group"
-// brush 0
-{
-( -2014 342 -240 ) ( -2006 342 -240 ) ( -2006 346 -240 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 342 -228 ) ( -2014 342 -228 ) ( -2014 346 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 346 -240 ) ( -2006 342 -240 ) ( -2006 342 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2014 346 -240 ) ( -2006 346 -240 ) ( -2006 346 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2014 342 -240 ) ( -2014 346 -240 ) ( -2014 346 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 342 -240 ) ( -2014 342 -240 ) ( -2014 342 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 443
-{
-"classname" "func_group"
-// brush 0
-{
-( -2006 670 -228 ) ( -2038 670 -196 ) ( -2038 674 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2006 670 -228 ) ( -2014 670 -228 ) ( -2038 670 -200 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2038 670 -200 ) ( -2014 670 -228 ) ( -2014 674 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2014 674 -228 ) ( -2006 674 -228 ) ( -2038 674 -196 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2038 670 -196 ) ( -2038 670 -200 ) ( -2038 674 -200 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2014 670 -228 ) ( -2006 670 -228 ) ( -2006 674 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-}
-}
-// entity 445
-{
-"classname" "func_group"
-// brush 0
-{
-( -2014 670 -240 ) ( -2006 670 -240 ) ( -2006 674 -240 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 670 -228 ) ( -2014 670 -228 ) ( -2014 674 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 674 -240 ) ( -2006 670 -240 ) ( -2006 670 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2014 674 -240 ) ( -2006 674 -240 ) ( -2006 674 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-( -2014 670 -240 ) ( -2014 674 -240 ) ( -2014 674 -228 ) common/nodraw 52 15 0.00 1 1 536870912 2224 0 +surfaceparm detail 
-( -2006 670 -240 ) ( -2014 670 -240 ) ( -2014 670 -228 ) das_boot/ironwall1 0 0 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 446
-{
-"classname" "detail"
-// brush 0
-{
-( -2016 698 -428 ) ( -2016 670 -428 ) ( -2008 670 -428 ) common/nodraw 60 -36 90.00 1 1 536870912 2224 0 
-( -2008 682 -244 ) ( -2016 682 -244 ) ( -2016 710 -244 ) common/nodraw 60 -36 90.00 1 1 536870912 2224 0 
-( -2006 678 -196 ) ( -2006 706 -196 ) ( -2006 706 -228 ) common/nodraw 62 15 0.00 1 1 536870912 2224 0 
-( -2012 994 -196 ) ( -2020 994 -196 ) ( -2020 994 -228 ) common/nodraw 36 15 -180.00 1 -1 536870912 2224 0 
-( -2010 706 -196 ) ( -2010 678 -196 ) ( -2010 678 -228 ) mohcommon/secfence -202 169 -180.00 0.625000 -0.718750 204800 33312 0 
-( -2016 674 -196 ) ( -2008 674 -196 ) ( -2008 674 -228 ) common/nodraw 36 15 -180.00 1 -1 536870912 2224 0 
-}
 }
 // entity 447
 {
@@ -76525,26 +77182,6 @@
 "origin" "-531.80 1599.20 -294.00"
 "testanim" "idle"
 }
-// entity 471
-{
-"angle" "90"
-"origin" "-2356.40 -226.40 -450.60"
-"model" "static//tree_oak.tik"
-"scale" "0.90"
-"classname" "static_natural_tree_oak"
-"angles" "0 0 0"
-"testanim" "idle"
-}
-// entity 472
-{
-"angle" "0"
-"classname" "static_natural_tree_commontree"
-"scale" "1.30"
-"model" "static//tree_commontree.tik"
-"origin" "-1816.20 273.80 -429.60"
-"angles" "0 0 0"
-"testanim" "idle"
-}
 // entity 473
 {
 "origin" "-347.80 2005.20 -294.00"
@@ -76686,53 +77323,6 @@
 "model" "static//tree_commontree.tik"
 "origin" "-2655.60 -1342.60 -372.80"
 }
-// entity 489
-{
-"testanim" "idle"
-"origin" "-2028.20 -1425.20 -294.80"
-"model" "static//tree_oak.tik"
-"scale" "0.70"
-"classname" "static_natural_tree_oak"
-"angles" "0 0 0"
-}
-// entity 490
-{
-"angle" "270"
-"angles" "0 0 0"
-"classname" "static_natural_tree_oak"
-"scale" "0.60"
-"model" "static//tree_oak.tik"
-"origin" "-1445.60 -1506.60 -257.40"
-"testanim" "idle"
-}
-// entity 491
-{
-"origin" "-1053.60 -1450.60 -313.40"
-"model" "static//tree_oak.tik"
-"scale" "0.60"
-"classname" "static_natural_tree_oak"
-"angles" "0 0 0"
-"angle" "270"
-"testanim" "idle"
-}
-// entity 492
-{
-"origin" "-1534.00 -515.00 -448.00"
-"model" "static//tree_oak.tik"
-"scale" "1.00"
-"classname" "static_natural_tree_oak"
-"angles" "0 0 0"
-"angle" "270"
-"testanim" "idle"
-}
-// entity 493
-{
-"origin" "-1663.60 -1158.60 -404.80"
-"model" "static//tree_commontree.tik"
-"scale" "1.40"
-"classname" "static_natural_tree_commontree"
-"testanim" "idle"
-}
 // entity 494
 {
 "testanim" "idle"
@@ -76751,16 +77341,6 @@
 "classname" "static_natural_bush_full"
 "testanim" "idle"
 }
-// entity 496
-{
-"angle" "135"
-"classname" "static_natural_bush_full"
-"scale" "1.20"
-"model" "static//bush_full.tik"
-"origin" "-1670.20 -329.20 -468.00"
-"angles" "0 0 05"
-"testanim" "idle"
-}
 // entity 497
 {
 "angles" "0 0 05"
@@ -76769,15 +77349,6 @@
 "scale" "0.90"
 "classname" "static_natural_bush_full"
 "angle" "270"
-"testanim" "idle"
-}
-// entity 498
-{
-"origin" "-801.20 -1336.20 -437.60"
-"model" "static//tree_commontree.tik"
-"scale" "1.80"
-"classname" "static_natural_tree_commontree"
-"angle" "225"
 "testanim" "idle"
 }
 // entity 499
@@ -77027,15 +77598,6 @@
 "angle" "90"
 "testanim" "idle"
 }
-// entity 526
-{
-"origin" "-1734.20 191.80 -442.00"
-"model" "static//bush_full.tik"
-"scale" "0.70"
-"classname" "static_natural_bush_full"
-"angles" "0 0 15"
-"testanim" "idle"
-}
 // entity 527
 {
 "classname" "static_natural_bush_full"
@@ -77044,15 +77606,6 @@
 "origin" "-1861.20 389.80 -446.00"
 "angle" "315"
 "angles" "0 0 350"
-"testanim" "idle"
-}
-// entity 528
-{
-"origin" "-1082.20 133.80 -463.00"
-"model" "static//bush_full.tik"
-"scale" "0.70"
-"classname" "static_natural_bush_full"
-"angle" "225"
 "testanim" "idle"
 }
 // entity 529
@@ -77310,16 +77863,6 @@
 "model" "static//lightbulb_caged.tik"
 "scale" "1.40"
 "classname" "static_lamp_lightbulb-caged"
-"testanim" "idle"
-}
-// entity 558
-{
-"angles" "0 0 0"
-"origin" "-1197.40 174.60 -508.20"
-"model" "static//tree_commontree.tik"
-"scale" "1.60"
-"classname" "static_natural_tree_commontree"
-"angle" "0"
 "testanim" "idle"
 }
 // entity 559
@@ -78052,312 +78595,6 @@
 "scale" "1.0"
 "classname" "static_corona_orange"
 }
-// entity 648
-{
-"classname" "detail"
-// brush 0
-{
-( 2910 352 -281 ) ( 2494 352 -281 ) ( 2494 352 -282 ) common/nodraw 22 27 -180.00 1 -1 536870912 2224 0 
-( 2374 325 -251 ) ( 2790 325 -251 ) ( 2790 325 -252 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 
-( 2374 352 -281 ) ( 2790 352 -281 ) ( 2790 325 -251 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 
-( 2790 352 -282 ) ( 2374 352 -282 ) ( 2374 325 -252 ) mohcommon/barbwire -76 23 -180.00 0.399902 -0.300018 204800 35328 0 
-( 1638 325 -282.000641 ) ( 1638 327 -282.000641 ) ( 1638 326 -251 ) mohcommon/barbwire 49 54 -180.00 1 -0.350006 204800 35328 0 
-( 3168 352 -282.000549 ) ( 3195 325 -282.000549 ) ( 3181.500000 338.500000 -250.999878 ) mohcommon/barbwire 49 54 -180.00 1 -0.350006 204800 35328 0 
-}
-}
-// entity 649
-{
-"classname" "detail"
-// brush 0
-{
-( 2590 346 -480 ) ( 2618 346 -480 ) ( 2618 354 -480 ) common/nodraw 20 -31 -180.00 1 1 536870912 2224 0 
-( 2606 354 -296 ) ( 2606 346 -296 ) ( 2578 346 -296 ) common/nodraw 20 -31 -180.00 1 1 536870912 2224 0 
-( 2610 356 -248 ) ( 2582 356 -248 ) ( 2582 356 -280 ) common/nodraw 22 27 -180.00 1 -1 536870912 2224 0 
-( 2292 350 -248 ) ( 2292 342 -248 ) ( 2292 342 -280 ) common/nodraw 30 26 -180.00 1 -1 536870912 2224 0 
-( 2582 352 -248 ) ( 2610 352 -248 ) ( 2610 352 -280 ) mohcommon/secfence -86 -158 0.00 0.625000 0.718750 204800 33312 0 
-( 2616 346 -248 ) ( 2616 354 -248 ) ( 2616 354 -280 ) common/nodraw 31 26 -180.00 1 -1 536870912 2224 0 
-}
-}
-// entity 650
-{
-"classname" "func_group"
-// brush 0
-{
-( 2622 356 -280 ) ( 2622 324 -248 ) ( 2618 324 -248 ) das_boot/ironwall1 8 64 0.00 0.250000 0.250000 0 32768 0 
-( 2622 356 -280 ) ( 2622 348 -280 ) ( 2622 324 -252 ) common/nodraw 15 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2622 324 -252 ) ( 2622 348 -280 ) ( 2618 348 -280 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2618 348 -280 ) ( 2618 356 -280 ) ( 2618 324 -248 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2622 324 -248 ) ( 2622 324 -252 ) ( 2618 324 -252 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2622 348 -280 ) ( 2622 356 -280 ) ( 2618 356 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( 2622 348 -292 ) ( 2622 356 -292 ) ( 2618 356 -292 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2622 356 -280 ) ( 2622 348 -280 ) ( 2618 348 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2618 356 -292 ) ( 2622 356 -292 ) ( 2622 356 -280 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-( 2618 348 -292 ) ( 2618 356 -292 ) ( 2618 356 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2622 348 -292 ) ( 2618 348 -292 ) ( 2618 348 -280 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2622 356 -292 ) ( 2622 348 -292 ) ( 2622 348 -280 ) common/nodraw 15 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-}
-// entity 651
-{
-"classname" "func_group"
-// brush 0
-{
-( 2456 324 -248 ) ( 2452 324 -248 ) ( 2452 356 -280 ) das_boot/ironwall1 8 64 0.00 0.250000 0.250000 0 32768 0 
-( 2456 324 -252 ) ( 2456 324 -248 ) ( 2456 356 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2452 324 -252 ) ( 2456 324 -252 ) ( 2456 348 -280 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2452 324 -248 ) ( 2452 324 -252 ) ( 2452 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2456 324 -252 ) ( 2452 324 -252 ) ( 2452 324 -248 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2452 348 -280 ) ( 2456 348 -280 ) ( 2456 356 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( 2456 348 -292 ) ( 2456 356 -292 ) ( 2452 356 -292 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2456 356 -280 ) ( 2456 348 -280 ) ( 2452 348 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2456 356 -292 ) ( 2456 356 -280 ) ( 2452 356 -280 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-( 2452 356 -292 ) ( 2452 356 -280 ) ( 2452 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2456 348 -280 ) ( 2456 348 -292 ) ( 2452 348 -292 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2456 356 -280 ) ( 2456 356 -292 ) ( 2456 348 -292 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 652
-{
-"classname" "detail"
-// brush 0
-{
-( 2262 346 -480 ) ( 2290 346 -480 ) ( 2290 354 -480 ) common/nodraw 12 -31 -180.00 1 1 536870912 2224 0 
-( 2278 354 -296 ) ( 2278 346 -296 ) ( 2250 346 -296 ) common/nodraw 12 -31 -180.00 1 1 536870912 2224 0 
-( 2282 356 -248 ) ( 2254 356 -248 ) ( 2254 356 -280 ) common/nodraw 14 27 -180.00 1 -1 536870912 2224 0 
-( 1964 350 -248 ) ( 1964 342 -248 ) ( 1964 342 -280 ) common/nodraw 30 26 -180.00 1 -1 536870912 2224 0 
-( 2254 352 -248 ) ( 2282 352 -248 ) ( 2282 352 -280 ) mohcommon/secfence -72 -158 0.00 0.625000 0.718750 204800 33312 0 
-( 2288 346 -248 ) ( 2288 354 -248 ) ( 2288 354 -280 ) common/nodraw 30 26 -180.00 1 -1 536870912 2224 0 
-}
-}
-// entity 653
-{
-"classname" "func_group"
-// brush 0
-{
-( 1964 356 -280 ) ( 1964 324 -248 ) ( 1960 324 -248 ) das_boot/ironwall1 8 64 0.00 0.250000 0.250000 0 32768 0 
-( 1964 356 -280 ) ( 1964 348 -280 ) ( 1964 324 -252 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1964 324 -252 ) ( 1964 348 -280 ) ( 1960 348 -280 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1960 348 -280 ) ( 1960 356 -280 ) ( 1960 324 -248 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1964 324 -248 ) ( 1964 324 -252 ) ( 1960 324 -252 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1964 348 -280 ) ( 1964 356 -280 ) ( 1960 356 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-}
-// entity 654
-{
-"classname" "func_group"
-// brush 0
-{
-( 2128 324 -248 ) ( 2124 324 -248 ) ( 2124 356 -280 ) das_boot/ironwall1 8 64 0.00 0.250000 0.250000 0 32768 0 
-( 2128 324 -252 ) ( 2128 324 -248 ) ( 2128 356 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2124 324 -252 ) ( 2128 324 -252 ) ( 2128 348 -280 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2124 324 -248 ) ( 2124 324 -252 ) ( 2124 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2128 324 -252 ) ( 2124 324 -252 ) ( 2124 324 -248 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2124 348 -280 ) ( 2128 348 -280 ) ( 2128 356 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( 2128 348 -292 ) ( 2128 356 -292 ) ( 2124 356 -292 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2128 356 -280 ) ( 2128 348 -280 ) ( 2124 348 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2128 356 -292 ) ( 2128 356 -280 ) ( 2124 356 -280 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-( 2124 356 -292 ) ( 2124 356 -280 ) ( 2124 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2128 348 -280 ) ( 2128 348 -292 ) ( 2124 348 -292 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2128 356 -280 ) ( 2128 356 -292 ) ( 2128 348 -292 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 655
-{
-"classname" "func_group"
-// brush 0
-{
-( 1964 348 -292 ) ( 1964 356 -292 ) ( 1960 356 -292 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1964 356 -280 ) ( 1964 348 -280 ) ( 1960 348 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1960 356 -292 ) ( 1964 356 -292 ) ( 1964 356 -280 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-( 1960 348 -292 ) ( 1960 356 -292 ) ( 1960 356 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1964 348 -292 ) ( 1960 348 -292 ) ( 1960 348 -280 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1964 356 -292 ) ( 1964 348 -292 ) ( 1964 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 656
-{
-"classname" "detail"
-// brush 0
-{
-( 1936 346 -480 ) ( 1964 346 -480 ) ( 1964 354 -480 ) common/nodraw 6 -31 -180.00 1 1 536870912 2224 0 
-( 1952 354 -296 ) ( 1952 346 -296 ) ( 1924 346 -296 ) common/nodraw 6 -31 -180.00 1 1 536870912 2224 0 
-( 1956 356 -248 ) ( 1928 356 -248 ) ( 1928 356 -280 ) common/nodraw 8 27 -180.00 1 -1 536870912 2224 0 
-( 1638 350 -248 ) ( 1638 342 -248 ) ( 1638 342 -280 ) common/nodraw 30 26 -180.00 1 -1 536870912 2224 0 
-( 1928 352 -248 ) ( 1956 352 -248 ) ( 1956 352 -280 ) mohcommon/secfence -63 -158 0.00 0.625000 0.718750 204800 33312 0 
-( 1960 346 -248 ) ( 1960 354 -248 ) ( 1960 354 -280 ) common/nodraw 30 26 -180.00 1 -1 536870912 2224 0 
-}
-}
-// entity 657
-{
-"classname" "func_group"
-// brush 0
-{
-( 1802 324 -248 ) ( 1798 324 -248 ) ( 1798 356 -280 ) das_boot/ironwall1 8 64 0.00 0.250000 0.250000 0 32768 0 
-( 1802 324 -252 ) ( 1802 324 -248 ) ( 1802 356 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1798 324 -252 ) ( 1802 324 -252 ) ( 1802 348 -280 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1798 324 -248 ) ( 1798 324 -252 ) ( 1798 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1802 324 -252 ) ( 1798 324 -252 ) ( 1798 324 -248 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1798 348 -280 ) ( 1802 348 -280 ) ( 1802 356 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( 1802 348 -292 ) ( 1802 356 -292 ) ( 1798 356 -292 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1802 356 -280 ) ( 1802 348 -280 ) ( 1798 348 -280 ) common/nodraw -2 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1802 356 -292 ) ( 1802 356 -280 ) ( 1798 356 -280 ) das_boot/ironwall1 8 48 0.00 0.250000 0.250000 0 32768 0 
-( 1798 356 -292 ) ( 1798 356 -280 ) ( 1798 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1802 348 -280 ) ( 1802 348 -292 ) ( 1798 348 -292 ) common/nodraw -1 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1802 356 -280 ) ( 1802 356 -292 ) ( 1802 348 -292 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 658
-{
-"classname" "func_group"
-// brush 0
-{
-( 1638 356 -280 ) ( 1638 324 -248 ) ( 1634 324 -248 ) das_boot/ironwall1 32 64 0.00 0.250000 0.250000 0 32768 0 
-( 1638 356 -280 ) ( 1638 348 -280 ) ( 1638 324 -252 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1638 324 -252 ) ( 1638 348 -280 ) ( 1634 348 -280 ) common/nodraw -7 26 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1634 348 -280 ) ( 1634 356 -280 ) ( 1634 324 -248 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1638 324 -248 ) ( 1638 324 -252 ) ( 1634 324 -252 ) common/nodraw -7 26 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1638 348 -280 ) ( 1638 356 -280 ) ( 1634 356 -280 ) common/nodraw -8 30 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-}
-// entity 659
-{
-"classname" "func_group"
-// brush 0
-{
-( 1638 348 -292 ) ( 1638 356 -292 ) ( 1634 356 -292 ) common/nodraw -8 30 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1638 356 -280 ) ( 1638 348 -280 ) ( 1634 348 -280 ) common/nodraw -8 30 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1634 356 -292 ) ( 1638 356 -292 ) ( 1638 356 -280 ) das_boot/ironwall1 32 48 0.00 0.250000 0.250000 0 32768 0 
-( 1634 348 -292 ) ( 1634 356 -292 ) ( 1634 356 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 1638 348 -292 ) ( 1634 348 -292 ) ( 1634 348 -280 ) common/nodraw -7 26 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 1638 356 -292 ) ( 1638 348 -292 ) ( 1638 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 660
-{
-"classname" "func_group"
-// brush 0
-{
-( 2292 324 -248 ) ( 2288 324 -248 ) ( 2288 356 -280 ) das_boot/ironwall1 152 64 0.00 0.250000 0.250000 0 32768 0 
-( 2292 324 -252 ) ( 2292 324 -248 ) ( 2292 356 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2288 324 -252 ) ( 2292 324 -252 ) ( 2292 348 -280 ) common/nodraw -38 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2288 324 -248 ) ( 2288 324 -252 ) ( 2288 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2292 324 -252 ) ( 2288 324 -252 ) ( 2288 324 -248 ) common/nodraw -38 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2288 348 -280 ) ( 2292 348 -280 ) ( 2292 356 -280 ) common/nodraw -38 30 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( 2292 348 -292 ) ( 2292 356 -292 ) ( 2288 356 -292 ) common/nodraw -38 30 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2292 356 -280 ) ( 2292 348 -280 ) ( 2288 348 -280 ) common/nodraw -38 30 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2292 356 -292 ) ( 2292 356 -280 ) ( 2288 356 -280 ) das_boot/ironwall1 152 48 0.00 0.250000 0.250000 0 32768 0 
-( 2288 356 -292 ) ( 2288 356 -280 ) ( 2288 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2292 348 -280 ) ( 2292 348 -292 ) ( 2288 348 -292 ) common/nodraw -38 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2292 356 -280 ) ( 2292 356 -292 ) ( 2292 348 -292 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 661
-{
-"classname" "detail"
-// brush 0
-{
-( 2920 346 -480 ) ( 2948 346 -480 ) ( 2948 354 -480 ) common/nodraw 30 -31 -180.00 1 1 536870912 2224 0 
-( 2936 354 -296 ) ( 2936 346 -296 ) ( 2908 346 -296 ) common/nodraw 30 -31 -180.00 1 1 536870912 2224 0 
-( 2940 356 -248 ) ( 2912 356 -248 ) ( 2912 356 -280 ) common/nodraw 32 27 -180.00 1 -1 536870912 2224 0 
-( 2622 350 -248 ) ( 2622 342 -248 ) ( 2622 342 -280 ) common/nodraw 30 26 -180.00 1 -1 536870912 2224 0 
-( 2912 352 -248 ) ( 2940 352 -248 ) ( 2940 352 -280 ) mohcommon/secfence -101 -158 0.00 0.625000 0.718750 204800 33312 0 
-( 2946 346 -248 ) ( 2946 354 -248 ) ( 2946 354 -280 ) common/nodraw 31 26 -180.00 1 -1 536870912 2224 0 
-}
-}
-// entity 662
-{
-"classname" "func_group"
-// brush 0
-{
-( 2952 356 -280 ) ( 2952 324 -248 ) ( 2948 324 -248 ) das_boot/ironwall1 -32 64 0.00 0.250000 0.250000 0 32768 0 
-( 2952 356 -280 ) ( 2952 348 -280 ) ( 2952 324 -252 ) common/nodraw 15 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2952 324 -252 ) ( 2952 348 -280 ) ( 2948 348 -280 ) common/nodraw 8 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2948 348 -280 ) ( 2948 356 -280 ) ( 2948 324 -248 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2952 324 -248 ) ( 2952 324 -252 ) ( 2948 324 -252 ) common/nodraw 8 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2952 348 -280 ) ( 2952 356 -280 ) ( 2948 356 -280 ) common/nodraw 7 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( 2952 348 -292 ) ( 2952 356 -292 ) ( 2948 356 -292 ) common/nodraw 7 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2952 356 -280 ) ( 2952 348 -280 ) ( 2948 348 -280 ) common/nodraw 7 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2948 356 -292 ) ( 2952 356 -292 ) ( 2952 356 -280 ) das_boot/ironwall1 -32 48 0.00 0.250000 0.250000 0 32768 0 
-( 2948 348 -292 ) ( 2948 356 -292 ) ( 2948 356 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2952 348 -292 ) ( 2948 348 -292 ) ( 2948 348 -280 ) common/nodraw 8 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2952 356 -292 ) ( 2952 348 -292 ) ( 2952 348 -280 ) common/nodraw 15 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-}
-// entity 663
-{
-"classname" "func_group"
-// brush 0
-{
-( 2786 324 -248 ) ( 2782 324 -248 ) ( 2782 356 -280 ) das_boot/ironwall1 -32 64 0.00 0.250000 0.250000 0 32768 0 
-( 2786 324 -252 ) ( 2786 324 -248 ) ( 2786 356 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2782 324 -252 ) ( 2786 324 -252 ) ( 2786 348 -280 ) common/nodraw 8 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2782 324 -248 ) ( 2782 324 -252 ) ( 2782 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2786 324 -252 ) ( 2782 324 -252 ) ( 2782 324 -248 ) common/nodraw 8 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2782 348 -280 ) ( 2786 348 -280 ) ( 2786 356 -280 ) common/nodraw 7 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( 2786 348 -292 ) ( 2786 356 -292 ) ( 2782 356 -292 ) common/nodraw 7 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2786 356 -280 ) ( 2786 348 -280 ) ( 2782 348 -280 ) common/nodraw 7 31 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2786 356 -292 ) ( 2786 356 -280 ) ( 2782 356 -280 ) das_boot/ironwall1 -32 48 0.00 0.250000 0.250000 0 32768 0 
-( 2782 356 -292 ) ( 2782 356 -280 ) ( 2782 348 -280 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-( 2786 348 -280 ) ( 2786 348 -292 ) ( 2782 348 -292 ) common/nodraw 8 27 -180.00 1 -1 536870912 2224 0 +surfaceparm detail 
-( 2786 356 -280 ) ( 2786 356 -292 ) ( 2786 348 -292 ) das_boot/ironwall1 -64 48 0.00 0.250000 0.250000 0 32768 0 
-}
-}
-// entity 664
-{
-"classname" "detail"
-// brush 0
-{
-( 3250 346 -480 ) ( 3278 346 -480 ) ( 3278 354 -480 ) common/nodraw 40 -31 -180.00 1 1 536870912 2224 0 
-( 3266 354 -296 ) ( 3266 346 -296 ) ( 3238 346 -296 ) common/nodraw 40 -31 -180.00 1 1 536870912 2224 0 
-( 3270 356 -248 ) ( 3242 356 -248 ) ( 3242 356 -280 ) common/nodraw 42 27 -180.00 1 -1 536870912 2224 0 
-( 2952 350 -248 ) ( 2952 342 -248 ) ( 2952 342 -280 ) common/nodraw 30 26 -180.00 1 -1 536870912 2224 0 
-( 3242 352 -248 ) ( 3270 352 -248 ) ( 3270 352 -280 ) mohcommon/secfence 236 -155 0.00 -0.828125 0.718750 204800 33312 0 
-( 3164 346 -248 ) ( 3164 354 -248 ) ( 3164 354 -280 ) common/nodraw 31 26 -180.00 1 -1 536870912 2224 0 
-}
-}
-// entity 665
-{
-"classname" "func_group"
-// brush 0
-{
-( 3166.100830 356.727875 -280 ) ( 3188.728516 334.100769 -248 ) ( 3185.899414 331.271729 -248 ) das_boot/ironwall1 12 -19 44.92 0.250988 -0.249693 0 32768 0 
-( 3166.100830 356.727875 -280 ) ( 3171.757324 351.070923 -280 ) ( 3188.728516 334.100769 -252 ) das_boot/ironwall1 -36 156 44.92 0.250988 -0.249693 0 32768 0 
-( 3188.728516 334.100769 -252 ) ( 3171.757324 351.070923 -280 ) ( 3168.928955 348.242645 -280 ) common/nodraw -6 -54 -134.99 0.998404 0.856953 536870912 2224 0 +surfaceparm detail 
-( 3168.928955 348.242645 -280 ) ( 3163.272217 353.899750 -280 ) ( 3185.899414 331.271729 -248 ) das_boot/ironwall1 -130 48 0.00 0.176697 0.250000 0 32768 0 
-( 3188.728516 334.100769 -248 ) ( 3188.728516 334.100769 -252 ) ( 3185.899414 331.271729 -252 ) common/nodraw -41 26 -180.00 0.706299 -1 536870912 2224 0 +surfaceparm detail 
-( 3171.757324 351.070923 -280 ) ( 3166.100830 356.727875 -280 ) ( 3163.272217 353.899750 -280 ) common/nodraw -4 56 -135.00 1.000282 -1.000260 536870912 2224 0 +surfaceparm detail 
-}
-// brush 1
-{
-( 3171.757324 351.070923 -292 ) ( 3166.100830 356.727875 -292 ) ( 3163.272217 353.899750 -292 ) common/nodraw -4 56 -135.00 1.000282 -1.000260 536870912 2224 0 +surfaceparm detail 
-( 3166.100830 356.727875 -280 ) ( 3171.757324 351.070923 -280 ) ( 3168.928955 348.242645 -280 ) common/nodraw -4 56 -135.00 1.000282 -1.000260 536870912 2224 0 +surfaceparm detail 
-( 3163.272217 353.899750 -292 ) ( 3166.100830 356.727875 -292 ) ( 3166.100830 356.727875 -280 ) das_boot/ironwall1 10 48 0.00 0.176270 0.250000 0 32768 0 
-( 3168.928955 348.242645 -292 ) ( 3163.272217 353.899750 -292 ) ( 3163.272217 353.899750 -280 ) das_boot/ironwall1 -129 48 0.00 0.176788 0.250000 0 32768 0 
-( 3171.757324 351.070923 -292 ) ( 3168.928955 348.242645 -292 ) ( 3168.928955 348.242645 -280 ) common/nodraw 5 27 -180.00 0.706787 -1 536870912 2224 0 +surfaceparm detail 
-( 3166.100830 356.727875 -292 ) ( 3171.757324 351.070923 -292 ) ( 3171.757324 351.070923 -280 ) das_boot/ironwall1 -36 156 44.92 0.250988 -0.249693 0 32768 0 
-}
-}
 // entity 685
 {
 "testanim" "idle"
@@ -78407,16 +78644,6 @@
 "model" "static//tree_oak.tik"
 "origin" "1430.20 -1021.80 -393.20"
 "angle" "90"
-}
-// entity 696
-{
-"angle" "180"
-"origin" "2822.20 -1221.80 -441.20"
-"model" "static//tree_oak.tik"
-"scale" "1.30"
-"classname" "static_natural_tree_oak"
-"angles" "0 0 0"
-"testanim" "idle"
 }
 // entity 697
 {
@@ -80322,6 +80549,484 @@
 "classname" "light"
 "origin" "-1760 1312 -224"
 "light" "70"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 846
+{
+"classname" "info_player_deathmatch"
+"origin" "-1600 0 -416"
+"angle" "180"
+}
+// entity 847
+{
+"classname" "info_player_deathmatch"
+"origin" "-1792 -768 -368"
+"angle" "270"
+}
+// entity 848
+{
+"classname" "info_player_deathmatch"
+"origin" "-1760 -1456 -192"
+"angle" "0"
+}
+// entity 849
+{
+"classname" "info_player_deathmatch"
+"origin" "320 -1360 -128"
+"angle" "0"
+}
+// entity 850
+{
+"classname" "info_player_deathmatch"
+"origin" "896 -1360 -128"
+"angle" "180"
+}
+// entity 851
+{
+"classname" "info_player_deathmatch"
+"origin" "2368 -1360 -192"
+"angle" "180"
+}
+// entity 852
+{
+"classname" "info_player_deathmatch"
+"origin" "2800 -1040 -288"
+"angle" "90"
+}
+// entity 853
+{
+"classname" "info_player_deathmatch"
+"origin" "2800 -512 -416"
+"angle" "90"
+}
+// entity 854
+{
+"classname" "info_player_deathmatch"
+"origin" "1920 352 -416"
+"angle" "0"
+}
+// entity 855
+{
+"classname" "static_vehicle_german_opeltruck"
+"model" "static//vehicle_opeltruck.tik"
+"origin" "-1248 80 -464"
+"angle" "270"
+"scale" "1.10"
+"testanim" "idle"
+}
+// entity 856
+{
+"classname" "static_natural_tree_oak"
+"model" "static//tree_oak.tik"
+"origin" "-680 -1640 -176"
+"angle" "20"
+"angles" "0 0 0"
+"scale" "0.65"
+"testanim" "idle"
+}
+// entity 857
+{
+"classname" "static_natural_tree_oak"
+"model" "static//tree_oak.tik"
+"origin" "-232 -1640 -176"
+"angle" "310"
+"angles" "0 0 0"
+"scale" "0.7"
+"testanim" "idle"
+}
+// entity 858
+{
+"classname" "static_natural_tree_oak"
+"model" "static//tree_oak.tik"
+"origin" "216 -1640 -176"
+"angle" "80"
+"angles" "0 0 0"
+"scale" "0.6"
+"testanim" "idle"
+}
+// entity 859
+{
+"classname" "static_natural_tree_oak"
+"model" "static//tree_oak.tik"
+"origin" "664 -1640 -176"
+"angle" "215"
+"angles" "0 0 0"
+"scale" "0.7"
+"testanim" "idle"
+}
+// entity 860
+{
+"classname" "static_natural_tree_oak"
+"model" "static//tree_oak.tik"
+"origin" "1112 -1640 -176"
+"angle" "345"
+"angles" "0 0 0"
+"scale" "0.65"
+"testanim" "idle"
+}
+// entity 861
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "-2240 -816 -416"
+"angle" "90"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 862
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "-1872 -928 -416"
+"angle" "0"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 863
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "-1872 -1456 -240"
+"angle" "90"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 864
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "-1104 -1456 -240"
+"angle" "0"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 865
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "224 -1456 -176"
+"angle" "90"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 866
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "800 -1280 -176"
+"angle" "180"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 867
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "2352 -1456 -240"
+"angle" "0"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 868
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "2960 -656 -464"
+"angle" "90"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 869
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "2688 -176 -464"
+"angle" "0"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 870
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "2208 352 -464"
+"angle" "180"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 871
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-1448 224 -200"
+"angle" "180"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 872
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "-1448 224 -206"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 873
+{
+"classname" "light"
+"origin" "-1448 224 -248"
+"light" "80"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 874
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-1944 -704 -152"
+"angle" "0"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 875
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "-1944 -704 -158"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 876
+{
+"classname" "light"
+"origin" "-1944 -704 -200"
+"light" "80"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 877
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-1544 -1488 24"
+"angle" "0"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 878
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "-1544 -1488 18"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 879
+{
+"classname" "light"
+"origin" "-1544 -1488 -24"
+"light" "80"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 880
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-456 -1488 24"
+"angle" "0"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 881
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "-456 -1488 18"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 882
+{
+"classname" "light"
+"origin" "-456 -1488 -24"
+"light" "80"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 883
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "2296 -1488 24"
+"angle" "180"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 884
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "2296 -1488 18"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 885
+{
+"classname" "light"
+"origin" "2296 -1488 -24"
+"light" "80"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 886
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "3080 -912 -136"
+"angle" "180"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 887
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "3080 -912 -142"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 888
+{
+"classname" "light"
+"origin" "3080 -912 -184"
+"light" "80"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 889
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "3080 -384 -200"
+"angle" "180"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 890
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "3080 -384 -206"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 891
+{
+"classname" "light"
+"origin" "3080 -384 -248"
+"light" "80"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 892
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "2456 416 -200"
+"angle" "270"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 893
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "2456 416 -206"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 894
+{
+"classname" "light"
+"origin" "2456 416 -248"
+"light" "80"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 895
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "160 -1250 40"
+"angle" "90"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 896
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "160 -1256 40"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 897
+{
+"classname" "light"
+"origin" "160 -1320 16"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 898
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "608 -1250 40"
+"angle" "90"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 899
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "608 -1256 40"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 900
+{
+"classname" "light"
+"origin" "608 -1320 16"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 901
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "1056 -1250 40"
+"angle" "90"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 902
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "1056 -1256 40"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 903
+{
+"classname" "light"
+"origin" "1056 -1320 16"
+"light" "75"
 "_color" "1.0 0.9 0.8"
 "overbright_range" "0.15"
 }

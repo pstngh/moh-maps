@@ -87,16 +87,15 @@ if (entityBlocks.length !== 751) throw new Error(`Expected 751 point/brush entit
 
 const {
   firstEntityMarker,
-  eastFenceEntityNumbers,
-  alliedGateEntityNumbers,
-  removedStructureEntityNumbers,
-  eastFenceWorldBrushNumbers,
-  alliedGateWorldBrushNumbers,
-  removedWorldBrushNumbers,
+  worldBrushBlocks,
+  westFenceEntityNumbers,
+  southEastFenceEntityNumbers,
+  fenceEntityNumbers,
+  fenceWorldBrushNumbers,
   removed,
   removedIndexes,
   retainedSourceLines,
-} = require("./source_policy_obj_team2_expanded_v3")({ sourceLines, entityBlocks, blockAt, vector });
+} = require("./source_policy_obj_team2_expanded_v4")({ sourceLines, entityBlocks, blockAt, vector });
 
 const T = Object.freeze({
   caulk: "common/caulk",
@@ -114,6 +113,9 @@ const T = Object.freeze({
   utilitySide: "general_industrial/utilitybox_side",
   utilityFront: "general_industrial/utilitybox_front",
   utilityTop: "general_industrial/utilboxtop",
+  grass: "wilderness/m3l3grass_1rough",
+  rock: "wilderness/wldrrckset1_1",
+  sky: "sky/mohday1",
 });
 
 function fmt(value) {
@@ -157,6 +159,9 @@ const M = Object.freeze({
   utilitySide: material(T.utilitySide, { surface: 32768, extensions: "+surfaceparm detail" }),
   utilityFront: material(T.utilityFront, { surface: 32768, extensions: "+surfaceparm detail" }),
   utilityTop: material(T.utilityTop, { surface: 32768, extensions: "+surfaceparm detail" }),
+  grass: material(T.grass, { scaleX: 1.5, scaleY: 1.5, extensions: "surfaceDensity 64" }),
+  rock: material(T.rock, { scaleX: 1.5, scaleY: 1.5, extensions: "surfaceDensity 64" }),
+  sky: material(T.sky, { shiftX: 22, shiftY: -36, rotation: -180, scaleX: 30.75, scaleY: -14.25, surface: 276 }),
 });
 
 const faceNames = ["xMin", "xMax", "yMin", "yMax", "zMin", "zMax"];
@@ -214,7 +219,7 @@ function addUtility(role, min, max, frontFace) {
   addBox(role, min, max, visible, { detail: true });
 }
 
-const { addedEntities } = require("./layout_obj_team2_expanded_v3")({ addBox, addUtility, M });
+const { addedEntities } = require("./layout_obj_team2_forest_v4")({ addBox, addUtility, M });
 
 const worldCloseIndex = firstEntityMarker - 1;
 let highestWorldBrush = -1;
@@ -255,16 +260,16 @@ fs.writeFileSync(mapPath, outputText);
 fs.writeFileSync(scriptPath, "// Thin wrapper: retail obj_team2.scr remains authoritative.\nmain:\n\texec maps/obj/obj_team2.scr\nend\n");
 fs.writeFileSync(precachePath, "// Thin wrapper: retail assets remain in Pak0-Pak6.\nexec maps/obj/obj_team2_precache.scr\ncache models/fx/bazookaexplosion_dm.tik\n");
 
-const { report, fixedViews } = require("./report_obj_team2_expanded_v3")({
+const { report, fixedViews } = require("./report_obj_team2_expanded_v4")({
   sourceLines, retainedSourceLines, sourceBuffer, sourceSha256, sourcePath, outputRoot, outputText,
   mapName, gameDirectory, originalMap, displayName, entityBlocks, vector, removed,
-  removedWorldBrushNumbers, eastFenceEntityNumbers, alliedGateEntityNumbers,
-  eastFenceWorldBrushNumbers, alliedGateWorldBrushNumbers, brushes, addedEntities, roleCounts, usedMaterials,
+  worldBrushBlocks, westFenceEntityNumbers, southEastFenceEntityNumbers, fenceEntityNumbers,
+  fenceWorldBrushNumbers, brushes, addedEntities, roleCounts, usedMaterials,
 });
 const reportPath = path.join(outputRoot, `${mapName}-mirror-report.json`);
 const designPath = path.join(outputRoot, `${mapName}-design-report.json`);
 fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
-fs.writeFileSync(designPath, `${JSON.stringify({ schemaVersion: 3, revision: 3, mapName, fixedViews, design: report.expansion, preservation: report.preservation }, null, 2)}\n`);
+fs.writeFileSync(designPath, `${JSON.stringify({ schemaVersion: 4, revision: 4, mapName, fixedViews, design: report.expansion, preservation: report.preservation }, null, 2)}\n`);
 console.log(`Generated ${mapPath}`);
-console.log(`Added ${brushes.length} brushes and ${addedEntities.length} entities; removed the complete east fence/curb and opened the Allied exterior route`);
+console.log(`Added ${brushes.length} brushes and ${addedEntities.length} entities; removed every stock fence component and completed the forest-side exterior loop`);
 console.log(`SHA256 ${report.output.sha256}`);

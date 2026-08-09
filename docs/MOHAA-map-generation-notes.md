@@ -2728,3 +2728,25 @@ The final deterministic MAP/BSP/PK3 hashes are `b601d530...2553d`, `425490de...9
 **PROVEN outdoor-hull rule:** stock outdoor terrain and scenery bounds do not prove sealed buildable space. Probe footprint growth with focused Q3map passes, require `.prt` with no `.lin`, and encode direction-dependent safe limits in the generator.
 
 **PROVEN camera-origin rule:** fixed views must be revalidated after geometry changes. A captured frame from inside a new step or wall is a failed visual gate, not evidence about that area.
+
+## `codex_obj_team2_expanded` revision 4: complete fence-free forest loop
+
+Date: 2026-08-09
+
+Revision 3 misunderstood “remove the fences” as a local opening. A whole-source owner audit found 59 untargeted fence-system entities: 22 on the west side and 37 along the south/east side. Thirty-three cooperating worldspawn brushes supplied curbs, rails, posts, and collision; four were invisible playerclips that remained after the visible models disappeared. Revision 4 removes all of those exact owners plus 24 route-blocking foliage entities. It preserves all 23 doors, 88 targetnames, 16 Allied starts, 16 Axis starts, Objective links, and retail script behavior.
+
+The completed route starts in a broad Allied court and continues through a west transition, eleven-step forest climb, west ridge, 1,024-unit central causeway, east ridge, fourteen-step descent, lower lane, and the annex apron. Its minimum designed combat width is 320 units. The generator now adds 334 brushes, 152 entities, and 21 neutral starts. A revision-4 validator strips the additions and exact removals and proves equality with the retained canonical source; no retail/custom asset bytes enter the package.
+
+The first route build revealed that the apparent forest gap was not a usable hull. Western terrain stopped near X=-192 and eastern terrain began near X=1088. Successive `.lin` traces exposed, in order, a missing central foundation, north stock-floor edge, south side enclosure, north underside, central ceiling, and a final ceiling mismatch: the west stock sky bottom was Z=832 while the proposed central ceiling began at Z=960. The accepted source completes floor/foundation, both side hulls, and a Z=832 sky ceiling joined to stock geometry. Focused and release Q3map passes both wrote `.prt` and no `.lin`.
+
+The first sealed causeway was still not visually complete. Its south edge read as a bare map limit and the facility face was too flat. A final visual-cause pass added a retaining wall with six piers, five raised grass/oak planters, four projecting facade pilasters, three service doors/lintels, banding, and three wall-light groups. Twenty-eight player-height/overview frames then covered the original frontage, annex, Allied court, every route segment, central completion, east connection, and overheads. They captured 28 screenshots with zero visual-script errors and showed no fence/curb remnant, open void/sky seam, or floating route prop.
+
+The release build completed Q3map/VIS/MOHlight in 119.793/0.398/320.630 seconds. BSP19 contains 19,624 surfaces, 67 lightmap pages, and 131,080 visibility bytes with zero degenerates, clamps, or light-hash warnings. Compiled-zone inspection counts 51 Allied-perimeter, 172 west-route, 288 central-causeway, 328 east-return, and 2,036 annex surfaces. Objective QA admitted eight bots, built Recast in 2.150 seconds, and produced five combat events in 60 seconds. FFA built Recast in 2.134 seconds and produced four combat events. Neither mode emitted a candidate diagnostic.
+
+Final MAP/BSP/PK3 hashes are `871719b0...a8070`, `140ee2bf...92eb`, and `4b85f8ed...3918`. Human full-route choice, original-door behavior, Objective completion, and balance remain the release gate that automation cannot establish.
+
+**PROVEN complete-perimeter rule:** “all fencing” includes every panel, wire, post/cap, rail, curb, collision brush/playerclip, and blocking foliage owner across the requested perimeter. A rendered model inventory alone is insufficient.
+
+**PROVEN terrain/hull separation rule:** `terrainDef` cell/surface extent is not sealed-hull extent. A new outside route must explicitly join floor/foundation, side enclosure, and ceiling to stock structural boundaries.
+
+**PROVEN seal-to-scenery rule:** `.prt` without `.lin` proves enclosure, not visual completion. Inspect the entire new edge and turn structural sealing planes into intentional retaining, facade, landscape, and lighting work before acceptance.

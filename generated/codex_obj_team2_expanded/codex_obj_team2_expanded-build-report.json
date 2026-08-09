@@ -7,18 +7,18 @@
                    "bytes":  5478775,
                    "sha256":  "04cbee45bb4d94d5289d52b51e302984e3f6ce8843d7bdd0194500f4be35ee2f"
                },
-    "transform":  "revision 3 byte-preserving obj_team2 expansion: remove the complete east fence/curb, replace it with a continuous grand frontage, more than double the annex footprint, and add an Allied-spawn exterior route into the rear bunker yard",
+    "transform":  "revision 4 byte-preserving obj_team2 expansion: remove every west/south/east fence owner, curb, rail and playerclip; complete a graded Allied-to-annex forest loop; finish the central terrain gap as a lit bridge and facility facade",
     "terrainControlMode":  "legacy-full-row",
     "transformed":  {
-                        "addedBrushes":  205,
-                        "addedEntities":  94,
-                        "removedFoliageEntities":  10,
-                        "removedEastFenceEntities":  19,
-                        "removedAlliedGateEntities":  2,
-                        "removedWorldBrushes":  12,
-                        "removedEastFenceWorldBrushes":  8,
-                        "removedAlliedGateWorldBrushes":  4,
-                        "dmSpawnsAdded":  12
+                        "addedBrushes":  334,
+                        "addedEntities":  152,
+                        "removedFoliageEntities":  24,
+                        "removedFenceEntities":  59,
+                        "removedWestFenceEntities":  22,
+                        "removedSouthEastFenceEntities":  37,
+                        "removedFenceWorldBrushes":  33,
+                        "removedInvisibleFencePlayerclips":  4,
+                        "dmSpawnsAdded":  21
                     },
     "retailPaks":  [
                        {
@@ -61,34 +61,34 @@
                    "q3mapArgs":  [
 
                                  ],
-                   "q3mapSeconds":  119.673,
-                   "q3mapWarnings":  151,
+                   "q3mapSeconds":  119.793,
+                   "q3mapWarnings":  163,
                    "q3mapMissingImageWarnings":  1,
-                   "q3mapLeakDiagnostics":  4,
+                   "q3mapLeakDiagnostics":  5,
                    "q3mapDegenerateDiagnostics":  0,
-                   "visSeconds":  0.297,
-                   "mohlightSeconds":  356.013,
+                   "visSeconds":  0.398,
+                   "mohlightSeconds":  320.63,
                    "mohlightThreads":  1,
                    "lightClampWarnings":  0,
                    "lightHashWarnings":  0
                },
     "map":  {
-                "bytes":  5598022,
-                "sha256":  "b601d530d86f6b113af38e0ad9e57178c5bb69b5320670f304dc67976ce2553d"
+                "bytes":  5637967,
+                "sha256":  "871719b096129a5db24e94b77f5c3ba980aacdd4a796fd2fa9d48f415f2a8070"
             },
     "bsp":  {
                 "bsp":  "generated/codex_obj_team2_expanded/main/maps/obj/codex_obj_team2_expanded.bsp",
-                "bytes":  13328296,
-                "sha256":  "425490de3ee0520facaf0b08edf9f8376fd1875ab023a41abdb280be520927f1",
+                "bytes":  13873788,
+                "sha256":  "140ee2bf482ca4f83f1ecea11aee9d79d377cdf2974111a190fe1a9c1b1792eb",
                 "ident":  "0x35313032",
                 "version":  19,
-                "checksum":  "0x51741bb9",
+                "checksum":  "0x3db65168",
                 "shaders":  265,
-                "surfaces":  19224,
-                "lightmapPages":  66,
-                "allocatedLightmapPages":  66,
-                "visibilityBytes":  68840,
-                "entityBytes":  41860,
+                "surfaces":  19624,
+                "lightmapPages":  67,
+                "allocatedLightmapPages":  67,
+                "visibilityBytes":  131080,
+                "entityBytes":  43811,
                 "classCounts":  {
                                     "animate_equipment_radio-military":  1,
                                     "func_barrel":  4,
@@ -99,10 +99,10 @@
                                     "fx_smoke_smallfry":  1,
                                     "info_player_allied":  16,
                                     "info_player_axis":  16,
-                                    "info_player_deathmatch":  26,
+                                    "info_player_deathmatch":  35,
                                     "info_player_start":  1,
                                     "info_splinepath":  22,
-                                    "light":  204,
+                                    "light":  215,
                                     "script_model":  8,
                                     "script_object":  25,
                                     "script_origin":  11,
@@ -113,8 +113,8 @@
             },
     "package":  {
                     "entries":  3,
-                    "bytes":  2387483,
-                    "sha256":  "93390daf91f49b03712685539eb194ff4db15629d78ada9bbfa95031d87c9394",
+                    "bytes":  2543033,
+                    "sha256":  "4b85f8ede35726bbb6ea5f6f71480e2b8a2b10e47930f490c7082156e2833918",
                     "reproducedTwice":  true
                 }
 }

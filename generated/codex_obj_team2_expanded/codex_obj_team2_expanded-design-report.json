@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 3,
-  "revision": 3,
+  "schemaVersion": 4,
+  "revision": 4,
   "mapName": "codex_obj_team2_expanded",
   "fixedViews": [
     {
@@ -95,19 +95,6 @@
       ]
     },
     {
-      "id": "west_arcade",
-      "origin": [
-        3424,
-        1560,
-        -300
-      ],
-      "viewangles": [
-        -5,
-        0,
-        0
-      ]
-    },
-    {
       "id": "canopy_center",
       "origin": [
         3904,
@@ -186,11 +173,37 @@
       ]
     },
     {
-      "id": "allied_gate_inside",
+      "id": "allied_spawn_open_perimeter",
       "origin": [
-        -1840,
-        512,
-        -380
+        -1600,
+        288,
+        -360
+      ],
+      "viewangles": [
+        -7,
+        270,
+        0
+      ]
+    },
+    {
+      "id": "allied_forest_court",
+      "origin": [
+        -1440,
+        64,
+        -384
+      ],
+      "viewangles": [
+        -6,
+        180,
+        0
+      ]
+    },
+    {
+      "id": "allied_forest_layby",
+      "origin": [
+        -2112,
+        -640,
+        -336
       ],
       "viewangles": [
         -5,
@@ -199,11 +212,50 @@
       ]
     },
     {
-      "id": "allied_gate_outside",
+      "id": "west_forest_descent",
       "origin": [
-        -2240,
-        512,
-        -380
+        -1792,
+        -736,
+        -320
+      ],
+      "viewangles": [
+        -8,
+        270,
+        0
+      ]
+    },
+    {
+      "id": "west_forest_climb",
+      "origin": [
+        -1792,
+        -1120,
+        -280
+      ],
+      "viewangles": [
+        -8,
+        270,
+        0
+      ]
+    },
+    {
+      "id": "west_ridge",
+      "origin": [
+        -1376,
+        -1456,
+        -160
+      ],
+      "viewangles": [
+        -5,
+        180,
+        0
+      ]
+    },
+    {
+      "id": "central_bridge_west",
+      "origin": [
+        -96,
+        -1376,
+        -112
       ],
       "viewangles": [
         -5,
@@ -212,11 +264,63 @@
       ]
     },
     {
-      "id": "allied_outer_lane",
+      "id": "central_bridge_east",
       "origin": [
-        -2240,
-        864,
-        -380
+        960,
+        -1376,
+        -96
+      ],
+      "viewangles": [
+        -5,
+        180,
+        0
+      ]
+    },
+    {
+      "id": "central_facade",
+      "origin": [
+        544,
+        -1600,
+        -96
+      ],
+      "viewangles": [
+        -8,
+        90,
+        0
+      ]
+    },
+    {
+      "id": "east_ridge_shelter",
+      "origin": [
+        1856,
+        -1376,
+        -160
+      ],
+      "viewangles": [
+        -6,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "east_forest_descent",
+      "origin": [
+        2816,
+        -1088,
+        -224
+      ],
+      "viewangles": [
+        -8,
+        90,
+        0
+      ]
+    },
+    {
+      "id": "east_forest_lower",
+      "origin": [
+        2816,
+        -448,
+        -384
       ],
       "viewangles": [
         -5,
@@ -225,30 +329,57 @@
       ]
     },
     {
-      "id": "allied_rear_turn",
+      "id": "east_open_perimeter",
       "origin": [
-        -2240,
-        1184,
-        -380
+        2720,
+        352,
+        -384
       ],
       "viewangles": [
         -5,
         0,
         0
       ]
+    },
+    {
+      "id": "forest_loop_west_overhead",
+      "origin": [
+        -1792,
+        -896,
+        256
+      ],
+      "viewangles": [
+        40,
+        270,
+        0
+      ]
+    },
+    {
+      "id": "forest_loop_east_overhead",
+      "origin": [
+        2700,
+        -640,
+        256
+      ],
+      "viewangles": [
+        40,
+        270,
+        0
+      ]
     }
   ],
   "design": {
+    "revision": 4,
     "bounds": {
       "min": [
-        -2432,
-        0,
-        -560
+        -2400,
+        -1824,
+        -960
       ],
       "max": [
         5152,
         2496,
-        336
+        992
       ]
     },
     "eastAnnexBounds": {
@@ -263,50 +394,100 @@
         336
       ]
     },
-    "alliedRouteBounds": {
+    "forestRouteBounds": {
       "min": [
-        -2432,
-        0,
-        -560
+        -2400,
+        -1792,
+        -960
       ],
       "max": [
-        -1280,
-        1344,
-        -160
+        3072,
+        448,
+        176
       ]
     },
-    "serviceDeckTopZ": -384,
-    "alliedRouteTopZ": -464,
-    "revision": 3,
-    "fullySkinnedBrushes": 205,
+    "forestRouteBrushes": 138,
+    "forestRouteConnected": true,
+    "forestRouteEndpoints": [
+      "Allied spawn court",
+      "east annex grand apron"
+    ],
+    "forestRouteMinimumCombatWidth": 320,
+    "completeStockFenceSystemRemoved": true,
+    "remainingCustomFenceRoles": 0,
+    "remainingCustomFenceMaterials": 0,
+    "invisibleFenceCollisionRemoved": true,
+    "centralTerrainGapFinished": true,
+    "centralTerrainGapSealedBySolidFoundation": true,
+    "centralSouthEdgeVisuallyFinished": true,
+    "centralFacadeVisuallyFinished": true,
+    "stockSkyHullExtended": true,
+    "stockSkyHullExtensionBrushes": 3,
+    "centralBridgeWidth": 1024,
+    "centralBridgeLaneDepth": 320,
+    "fullySkinnedBrushes": 334,
     "transparentConstructionMaterials": [],
     "continuousFrontageCount": 1,
     "continuousFrontageWidth": 1824,
     "grandApronSteps": 6,
     "grandApronRiser": 16,
     "openHallBays": 4,
-    "alliedGateWidth": 326,
-    "alliedExteriorRouteConnected": true,
     "movingDoorsAdded": 0,
     "objectivesChanged": false,
     "originalTeamSpawnsChanged": false,
     "brushRoleCounts": {
-      "allied_fence_base_north": 1,
-      "allied_fence_base_south": 1,
-      "allied_fence_lower_rail": 2,
-      "allied_fence_upper_rail": 2,
       "allied_gate_apron": 1,
-      "allied_north_guard": 1,
-      "allied_outer_guard": 1,
       "allied_outer_lane": 1,
       "allied_rear_link": 1,
       "allied_route_cover": 4,
       "allied_route_light_pole": 4,
-      "allied_south_guard": 1,
       "courtyard_canopy_beam": 2,
       "courtyard_canopy_column": 6,
       "courtyard_canopy_roof": 1,
       "duct_bracket": 3,
+      "forest_allied_court": 1,
+      "forest_allied_layby": 1,
+      "forest_allied_shelter_back": 1,
+      "forest_allied_shelter_column": 4,
+      "forest_allied_shelter_roof": 1,
+      "forest_allied_utility": 2,
+      "forest_bridge_east_steps": 4,
+      "forest_bridge_west_steps": 4,
+      "forest_central_bridge": 1,
+      "forest_central_facade_awning": 3,
+      "forest_central_facade_backwall": 1,
+      "forest_central_facade_band": 1,
+      "forest_central_facade_base": 1,
+      "forest_central_facade_cornice": 1,
+      "forest_central_facade_lintel": 3,
+      "forest_central_facade_pier": 4,
+      "forest_central_facade_pilaster": 4,
+      "forest_central_foundation": 1,
+      "forest_central_service_door": 3,
+      "forest_central_service_door_lintel": 3,
+      "forest_central_sky_ceiling": 1,
+      "forest_east_descent_steps": 14,
+      "forest_east_drain_head": 3,
+      "forest_east_entry": 1,
+      "forest_east_lower_lane": 1,
+      "forest_east_ridge": 1,
+      "forest_east_ridge_buttress": 4,
+      "forest_north_sky_hull": 1,
+      "forest_ridge_shelter_column": 4,
+      "forest_ridge_shelter_roof": 1,
+      "forest_ridge_utility": 3,
+      "forest_route_light_arm": 8,
+      "forest_route_light_pole": 8,
+      "forest_route_stone_cover": 11,
+      "forest_south_retaining_pier": 6,
+      "forest_south_retaining_wall": 1,
+      "forest_south_sky_hull": 1,
+      "forest_south_tree_planter": 5,
+      "forest_west_climb_steps": 11,
+      "forest_west_lower_lane": 1,
+      "forest_west_ridge": 1,
+      "forest_west_ridge_buttress": 4,
+      "forest_west_transition_steps": 3,
       "grand_apron_steps": 6,
       "hall_bay_awning": 4,
       "hall_bay_frame": 12,
@@ -371,15 +552,22 @@
       "canopy_light": 9,
       "south_workshop_light": 9,
       "north_workshop_light": 9,
-      "allied_route_light": 12
+      "allied_route_light": 12,
+      "forest_dm_spawn": 9,
+      "forest_vehicle": 1,
+      "forest_south_tree": 5,
+      "forest_crate": 10,
+      "forest_route_light": 24,
+      "forest_facade_light": 9
     },
     "addedEntityClassCounts": {
-      "info_player_deathmatch": 12,
-      "static_vehicle_german_opeltruck": 1,
-      "static_item_nazicrate": 12,
-      "static_lamp_lightbulb-caged": 23,
-      "static_corona_orange": 23,
-      "light": 23
+      "info_player_deathmatch": 21,
+      "static_vehicle_german_opeltruck": 2,
+      "static_item_nazicrate": 22,
+      "static_lamp_lightbulb-caged": 34,
+      "static_corona_orange": 34,
+      "light": 34,
+      "static_natural_tree_oak": 5
     },
     "usedMaterials": [
       "algiers/doccrtset_1stepsml",
@@ -391,7 +579,10 @@
       "general_structure/jh_conc512b",
       "german/rusty_iron",
       "mohcommon/ibeam_1a",
-      "mohcommon/jeff-concrete-wallb"
+      "mohcommon/jeff-concrete-wallb",
+      "sky/mohday1",
+      "wilderness/m3l3grass_1rough",
+      "wilderness/wldrrckset1_1"
     ],
     "brushes": [
       {
@@ -4465,138 +4656,6 @@
         }
       },
       {
-        "role": "allied_fence_base_south",
-        "min": [
-          -2026,
-          0,
-          -560
-        ],
-        "max": [
-          -1944,
-          344,
-          -432
-        ],
-        "detail": false,
-        "faceTextures": {
-          "xMin": "mohcommon/jeff-concrete-wallb",
-          "xMax": "mohcommon/jeff-concrete-wallb",
-          "yMin": "general_structure/bunker_wall",
-          "yMax": "general_structure/bunker_wall",
-          "zMin": "general_structure/jh_conc512b",
-          "zMax": "general_structure/jh_conc512b"
-        }
-      },
-      {
-        "role": "allied_fence_base_north",
-        "min": [
-          -2026,
-          670,
-          -560
-        ],
-        "max": [
-          -1944,
-          1056,
-          -432
-        ],
-        "detail": false,
-        "faceTextures": {
-          "xMin": "mohcommon/jeff-concrete-wallb",
-          "xMax": "mohcommon/jeff-concrete-wallb",
-          "yMin": "general_structure/bunker_wall",
-          "yMax": "general_structure/bunker_wall",
-          "zMin": "general_structure/jh_conc512b",
-          "zMax": "general_structure/jh_conc512b"
-        }
-      },
-      {
-        "role": "allied_fence_lower_rail",
-        "min": [
-          -2014,
-          12,
-          -432
-        ],
-        "max": [
-          -2006,
-          344,
-          -428
-        ],
-        "detail": true,
-        "faceTextures": {
-          "xMin": "das_boot/ironwall1",
-          "xMax": "das_boot/ironwall1",
-          "yMin": "das_boot/ironwall1",
-          "yMax": "das_boot/ironwall1",
-          "zMin": "das_boot/ironwall1",
-          "zMax": "das_boot/ironwall1"
-        }
-      },
-      {
-        "role": "allied_fence_upper_rail",
-        "min": [
-          -2014,
-          12,
-          -244
-        ],
-        "max": [
-          -2006,
-          344,
-          -240
-        ],
-        "detail": true,
-        "faceTextures": {
-          "xMin": "das_boot/ironwall1",
-          "xMax": "das_boot/ironwall1",
-          "yMin": "das_boot/ironwall1",
-          "yMax": "das_boot/ironwall1",
-          "zMin": "das_boot/ironwall1",
-          "zMax": "das_boot/ironwall1"
-        }
-      },
-      {
-        "role": "allied_fence_lower_rail",
-        "min": [
-          -2014,
-          670,
-          -432
-        ],
-        "max": [
-          -2006,
-          1000,
-          -428
-        ],
-        "detail": true,
-        "faceTextures": {
-          "xMin": "das_boot/ironwall1",
-          "xMax": "das_boot/ironwall1",
-          "yMin": "das_boot/ironwall1",
-          "yMax": "das_boot/ironwall1",
-          "zMin": "das_boot/ironwall1",
-          "zMax": "das_boot/ironwall1"
-        }
-      },
-      {
-        "role": "allied_fence_upper_rail",
-        "min": [
-          -2014,
-          670,
-          -244
-        ],
-        "max": [
-          -2006,
-          1000,
-          -240
-        ],
-        "detail": true,
-        "faceTextures": {
-          "xMin": "das_boot/ironwall1",
-          "xMax": "das_boot/ironwall1",
-          "yMin": "das_boot/ironwall1",
-          "yMax": "das_boot/ironwall1",
-          "zMin": "das_boot/ironwall1",
-          "zMax": "das_boot/ironwall1"
-        }
-      },
-      {
         "role": "allied_gate_apron",
         "min": [
           -2400,
@@ -4651,72 +4710,6 @@
           -1280,
           1344,
           -464
-        ],
-        "detail": false,
-        "faceTextures": {
-          "xMin": "mohcommon/jeff-concrete-wallb",
-          "xMax": "mohcommon/jeff-concrete-wallb",
-          "yMin": "general_structure/bunker_wall",
-          "yMax": "general_structure/bunker_wall",
-          "zMin": "general_structure/jh_conc512b",
-          "zMax": "general_structure/jh_conc512b"
-        }
-      },
-      {
-        "role": "allied_outer_guard",
-        "min": [
-          -2432,
-          320,
-          -464
-        ],
-        "max": [
-          -2400,
-          1344,
-          -288
-        ],
-        "detail": false,
-        "faceTextures": {
-          "xMin": "mohcommon/jeff-concrete-wallb",
-          "xMax": "mohcommon/jeff-concrete-wallb",
-          "yMin": "general_structure/bunker_wall",
-          "yMax": "general_structure/bunker_wall",
-          "zMin": "general_structure/jh_conc512b",
-          "zMax": "general_structure/jh_conc512b"
-        }
-      },
-      {
-        "role": "allied_south_guard",
-        "min": [
-          -2400,
-          320,
-          -464
-        ],
-        "max": [
-          -2026,
-          352,
-          -288
-        ],
-        "detail": false,
-        "faceTextures": {
-          "xMin": "mohcommon/jeff-concrete-wallb",
-          "xMax": "mohcommon/jeff-concrete-wallb",
-          "yMin": "general_structure/bunker_wall",
-          "yMax": "general_structure/bunker_wall",
-          "zMin": "general_structure/jh_conc512b",
-          "zMax": "general_structure/jh_conc512b"
-        }
-      },
-      {
-        "role": "allied_north_guard",
-        "min": [
-          -2400,
-          1312,
-          -464
-        ],
-        "max": [
-          -1760,
-          1344,
-          -320
         ],
         "detail": false,
         "faceTextures": {
@@ -4893,6 +4886,3042 @@
           -1776,
           1336,
           -160
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_allied_court",
+        "min": [
+          -2400,
+          -320,
+          -560
+        ],
+        "max": [
+          -960,
+          320,
+          -464
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_transition_steps",
+        "min": [
+          -2048,
+          -352,
+          -512
+        ],
+        "max": [
+          -1536,
+          -320,
+          -448
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_transition_steps",
+        "min": [
+          -2048,
+          -384,
+          -496
+        ],
+        "max": [
+          -1536,
+          -352,
+          -432
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_transition_steps",
+        "min": [
+          -2048,
+          -416,
+          -480
+        ],
+        "max": [
+          -1536,
+          -384,
+          -416
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_lower_lane",
+        "min": [
+          -2048,
+          -1024,
+          -496
+        ],
+        "max": [
+          -1536,
+          -416,
+          -416
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1056,
+          -464
+        ],
+        "max": [
+          -1536,
+          -1024,
+          -400
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1088,
+          -448
+        ],
+        "max": [
+          -1536,
+          -1056,
+          -384
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1120,
+          -432
+        ],
+        "max": [
+          -1536,
+          -1088,
+          -368
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1152,
+          -416
+        ],
+        "max": [
+          -1536,
+          -1120,
+          -352
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1184,
+          -400
+        ],
+        "max": [
+          -1536,
+          -1152,
+          -336
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1216,
+          -384
+        ],
+        "max": [
+          -1536,
+          -1184,
+          -320
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1248,
+          -368
+        ],
+        "max": [
+          -1536,
+          -1216,
+          -304
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1280,
+          -352
+        ],
+        "max": [
+          -1536,
+          -1248,
+          -288
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1312,
+          -336
+        ],
+        "max": [
+          -1536,
+          -1280,
+          -272
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1344,
+          -320
+        ],
+        "max": [
+          -1536,
+          -1312,
+          -256
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_climb_steps",
+        "min": [
+          -2048,
+          -1376,
+          -304
+        ],
+        "max": [
+          -1536,
+          -1344,
+          -240
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_west_ridge",
+        "min": [
+          -2048,
+          -1536,
+          -304
+        ],
+        "max": [
+          -960,
+          -1376,
+          -240
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_bridge_west_steps",
+        "min": [
+          -192,
+          -1536,
+          -288
+        ],
+        "max": [
+          -128,
+          -1216,
+          -224
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_bridge_west_steps",
+        "min": [
+          -128,
+          -1536,
+          -272
+        ],
+        "max": [
+          -64,
+          -1216,
+          -208
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_bridge_west_steps",
+        "min": [
+          -64,
+          -1536,
+          -256
+        ],
+        "max": [
+          0,
+          -1216,
+          -192
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_bridge_west_steps",
+        "min": [
+          0,
+          -1536,
+          -240
+        ],
+        "max": [
+          64,
+          -1216,
+          -176
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_central_bridge",
+        "min": [
+          64,
+          -1536,
+          -224
+        ],
+        "max": [
+          1088,
+          -1216,
+          -176
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_bridge_east_steps",
+        "min": [
+          1088,
+          -1536,
+          -256
+        ],
+        "max": [
+          1152,
+          -1216,
+          -192
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_bridge_east_steps",
+        "min": [
+          1152,
+          -1536,
+          -272
+        ],
+        "max": [
+          1216,
+          -1216,
+          -208
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_bridge_east_steps",
+        "min": [
+          1216,
+          -1536,
+          -288
+        ],
+        "max": [
+          1280,
+          -1216,
+          -224
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_bridge_east_steps",
+        "min": [
+          1280,
+          -1536,
+          -304
+        ],
+        "max": [
+          1344,
+          -1216,
+          -240
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_ridge",
+        "min": [
+          1632,
+          -1536,
+          -304
+        ],
+        "max": [
+          2944,
+          -1216,
+          -240
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -1216,
+          -320
+        ],
+        "max": [
+          3072,
+          -1184,
+          -256
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -1184,
+          -336
+        ],
+        "max": [
+          3072,
+          -1152,
+          -272
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -1152,
+          -352
+        ],
+        "max": [
+          3072,
+          -1120,
+          -288
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -1120,
+          -368
+        ],
+        "max": [
+          3072,
+          -1088,
+          -304
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -1088,
+          -384
+        ],
+        "max": [
+          3072,
+          -1056,
+          -320
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -1056,
+          -400
+        ],
+        "max": [
+          3072,
+          -1024,
+          -336
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -1024,
+          -416
+        ],
+        "max": [
+          3072,
+          -992,
+          -352
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -992,
+          -432
+        ],
+        "max": [
+          3072,
+          -960,
+          -368
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -960,
+          -448
+        ],
+        "max": [
+          3072,
+          -928,
+          -384
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -928,
+          -464
+        ],
+        "max": [
+          3072,
+          -896,
+          -400
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -896,
+          -480
+        ],
+        "max": [
+          3072,
+          -864,
+          -416
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -864,
+          -496
+        ],
+        "max": [
+          3072,
+          -832,
+          -432
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -832,
+          -512
+        ],
+        "max": [
+          3072,
+          -800,
+          -448
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_descent_steps",
+        "min": [
+          2560,
+          -800,
+          -528
+        ],
+        "max": [
+          3072,
+          -768,
+          -464
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_lower_lane",
+        "min": [
+          2560,
+          -768,
+          -544
+        ],
+        "max": [
+          3072,
+          256,
+          -464
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_east_entry",
+        "min": [
+          1536,
+          256,
+          -560
+        ],
+        "max": [
+          3072,
+          448,
+          -464
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_central_foundation",
+        "min": [
+          -960,
+          -1792,
+          -960
+        ],
+        "max": [
+          1632,
+          -1040,
+          -240
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_south_sky_hull",
+        "min": [
+          -368,
+          -1824,
+          -960
+        ],
+        "max": [
+          1632,
+          -1792,
+          960
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "sky/mohday1",
+          "xMax": "sky/mohday1",
+          "yMin": "sky/mohday1",
+          "yMax": "sky/mohday1",
+          "zMin": "sky/mohday1",
+          "zMax": "sky/mohday1"
+        }
+      },
+      {
+        "role": "forest_north_sky_hull",
+        "min": [
+          -368,
+          -1040,
+          -960
+        ],
+        "max": [
+          960,
+          -1008,
+          960
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "sky/mohday1",
+          "xMax": "sky/mohday1",
+          "yMin": "sky/mohday1",
+          "yMax": "sky/mohday1",
+          "zMin": "sky/mohday1",
+          "zMax": "sky/mohday1"
+        }
+      },
+      {
+        "role": "forest_central_sky_ceiling",
+        "min": [
+          -960,
+          -1792,
+          832
+        ],
+        "max": [
+          1632,
+          -1008,
+          992
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "sky/mohday1",
+          "xMax": "sky/mohday1",
+          "yMin": "sky/mohday1",
+          "yMax": "sky/mohday1",
+          "zMin": "sky/mohday1",
+          "zMax": "sky/mohday1"
+        }
+      },
+      {
+        "role": "forest_south_retaining_wall",
+        "min": [
+          -896,
+          -1744,
+          -240
+        ],
+        "max": [
+          1568,
+          -1696,
+          32
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_south_retaining_pier",
+        "min": [
+          -832,
+          -1760,
+          -240
+        ],
+        "max": [
+          -768,
+          -1680,
+          112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_south_retaining_pier",
+        "min": [
+          -384,
+          -1760,
+          -240
+        ],
+        "max": [
+          -320,
+          -1680,
+          112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_south_retaining_pier",
+        "min": [
+          64,
+          -1760,
+          -240
+        ],
+        "max": [
+          128,
+          -1680,
+          112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_south_retaining_pier",
+        "min": [
+          512,
+          -1760,
+          -240
+        ],
+        "max": [
+          576,
+          -1680,
+          112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_south_retaining_pier",
+        "min": [
+          960,
+          -1760,
+          -240
+        ],
+        "max": [
+          1024,
+          -1680,
+          112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_south_retaining_pier",
+        "min": [
+          1408,
+          -1760,
+          -240
+        ],
+        "max": [
+          1472,
+          -1680,
+          112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_south_tree_planter",
+        "min": [
+          -800,
+          -1696,
+          -240
+        ],
+        "max": [
+          -560,
+          -1584,
+          -176
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_south_tree_planter",
+        "min": [
+          -352,
+          -1696,
+          -240
+        ],
+        "max": [
+          -112,
+          -1584,
+          -176
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_south_tree_planter",
+        "min": [
+          96,
+          -1696,
+          -240
+        ],
+        "max": [
+          336,
+          -1584,
+          -176
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_south_tree_planter",
+        "min": [
+          544,
+          -1696,
+          -240
+        ],
+        "max": [
+          784,
+          -1584,
+          -176
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_south_tree_planter",
+        "min": [
+          992,
+          -1696,
+          -240
+        ],
+        "max": [
+          1232,
+          -1584,
+          -176
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_central_facade_base",
+        "min": [
+          -160,
+          -1216,
+          -560
+        ],
+        "max": [
+          1280,
+          -1184,
+          -384
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_backwall",
+        "min": [
+          -160,
+          -1184,
+          -240
+        ],
+        "max": [
+          1280,
+          -1152,
+          176
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_pilaster",
+        "min": [
+          -128,
+          -1248,
+          -240
+        ],
+        "max": [
+          -80,
+          -1216,
+          176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_pilaster",
+        "min": [
+          320,
+          -1248,
+          -240
+        ],
+        "max": [
+          368,
+          -1216,
+          176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_pilaster",
+        "min": [
+          768,
+          -1248,
+          -240
+        ],
+        "max": [
+          816,
+          -1216,
+          176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_pilaster",
+        "min": [
+          1216,
+          -1248,
+          -240
+        ],
+        "max": [
+          1264,
+          -1216,
+          176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_service_door",
+        "min": [
+          64,
+          -1232,
+          -240
+        ],
+        "max": [
+          256,
+          -1216,
+          -32
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_central_service_door_lintel",
+        "min": [
+          48,
+          -1240,
+          -32
+        ],
+        "max": [
+          272,
+          -1216,
+          16
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_service_door",
+        "min": [
+          512,
+          -1232,
+          -240
+        ],
+        "max": [
+          704,
+          -1216,
+          -32
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_central_service_door_lintel",
+        "min": [
+          496,
+          -1240,
+          -32
+        ],
+        "max": [
+          720,
+          -1216,
+          16
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_service_door",
+        "min": [
+          960,
+          -1232,
+          -240
+        ],
+        "max": [
+          1152,
+          -1216,
+          -32
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_central_service_door_lintel",
+        "min": [
+          944,
+          -1240,
+          -32
+        ],
+        "max": [
+          1168,
+          -1216,
+          16
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_band",
+        "min": [
+          -160,
+          -1232,
+          64
+        ],
+        "max": [
+          1280,
+          -1216,
+          112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_pier",
+        "min": [
+          -160,
+          -1216,
+          -384
+        ],
+        "max": [
+          32,
+          -1184,
+          128
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_pier",
+        "min": [
+          288,
+          -1216,
+          -384
+        ],
+        "max": [
+          480,
+          -1184,
+          128
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_pier",
+        "min": [
+          736,
+          -1216,
+          -384
+        ],
+        "max": [
+          928,
+          -1184,
+          128
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_pier",
+        "min": [
+          1184,
+          -1216,
+          -384
+        ],
+        "max": [
+          1280,
+          -1184,
+          128
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_lintel",
+        "min": [
+          32,
+          -1216,
+          -32
+        ],
+        "max": [
+          288,
+          -1184,
+          128
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_awning",
+        "min": [
+          48,
+          -1248,
+          -48
+        ],
+        "max": [
+          272,
+          -1184,
+          -16
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_central_facade_lintel",
+        "min": [
+          480,
+          -1216,
+          -32
+        ],
+        "max": [
+          736,
+          -1184,
+          128
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_awning",
+        "min": [
+          496,
+          -1248,
+          -48
+        ],
+        "max": [
+          720,
+          -1184,
+          -16
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_central_facade_lintel",
+        "min": [
+          928,
+          -1216,
+          -32
+        ],
+        "max": [
+          1184,
+          -1184,
+          128
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_central_facade_awning",
+        "min": [
+          944,
+          -1248,
+          -48
+        ],
+        "max": [
+          1168,
+          -1184,
+          -16
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_central_facade_cornice",
+        "min": [
+          -192,
+          -1224,
+          128
+        ],
+        "max": [
+          1312,
+          -1176,
+          176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_allied_layby",
+        "min": [
+          -2400,
+          -928,
+          -496
+        ],
+        "max": [
+          -2080,
+          -448,
+          -416
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/m3l3grass_1rough"
+        }
+      },
+      {
+        "role": "forest_allied_shelter_column",
+        "min": [
+          -2384,
+          -896,
+          -416
+        ],
+        "max": [
+          -2360,
+          -872,
+          -64
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_allied_shelter_column",
+        "min": [
+          -2160,
+          -896,
+          -416
+        ],
+        "max": [
+          -2136,
+          -872,
+          -64
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_allied_shelter_column",
+        "min": [
+          -2384,
+          -512,
+          -416
+        ],
+        "max": [
+          -2360,
+          -488,
+          -64
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_allied_shelter_column",
+        "min": [
+          -2160,
+          -512,
+          -416
+        ],
+        "max": [
+          -2136,
+          -488,
+          -64
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_allied_shelter_roof",
+        "min": [
+          -2400,
+          -928,
+          -64
+        ],
+        "max": [
+          -2112,
+          -464,
+          -32
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_allied_shelter_back",
+        "min": [
+          -2400,
+          -928,
+          -416
+        ],
+        "max": [
+          -2368,
+          -464,
+          -64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_allied_utility",
+        "min": [
+          -2320,
+          -848,
+          -416
+        ],
+        "max": [
+          -2208,
+          -752,
+          -272
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_front",
+          "yMin": "general_industrial/utilitybox_side",
+          "yMax": "general_industrial/utilitybox_side",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
+      },
+      {
+        "role": "forest_allied_utility",
+        "min": [
+          -2320,
+          -688,
+          -416
+        ],
+        "max": [
+          -2208,
+          -592,
+          -304
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_front",
+          "yMin": "general_industrial/utilitybox_side",
+          "yMax": "general_industrial/utilitybox_side",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
+      },
+      {
+        "role": "forest_ridge_shelter_column",
+        "min": [
+          1424,
+          -1504,
+          -240
+        ],
+        "max": [
+          1448,
+          -1480,
+          96
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_ridge_shelter_column",
+        "min": [
+          2112,
+          -1504,
+          -240
+        ],
+        "max": [
+          2136,
+          -1480,
+          96
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_ridge_shelter_column",
+        "min": [
+          1424,
+          -1272,
+          -240
+        ],
+        "max": [
+          1448,
+          -1248,
+          96
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_ridge_shelter_column",
+        "min": [
+          2112,
+          -1272,
+          -240
+        ],
+        "max": [
+          2136,
+          -1248,
+          96
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_ridge_shelter_roof",
+        "min": [
+          1400,
+          -1528,
+          96
+        ],
+        "max": [
+          2160,
+          -1248,
+          128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_ridge_utility",
+        "min": [
+          1536,
+          -1504,
+          -240
+        ],
+        "max": [
+          1664,
+          -1408,
+          -96
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_side",
+          "yMax": "general_industrial/utilitybox_front",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
+      },
+      {
+        "role": "forest_ridge_utility",
+        "min": [
+          1760,
+          -1504,
+          -240
+        ],
+        "max": [
+          1888,
+          -1408,
+          -96
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_side",
+          "yMax": "general_industrial/utilitybox_front",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
+      },
+      {
+        "role": "forest_ridge_utility",
+        "min": [
+          1984,
+          -1504,
+          -240
+        ],
+        "max": [
+          2112,
+          -1408,
+          -96
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_side",
+          "yMax": "general_industrial/utilitybox_front",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          -1456,
+          -224,
+          -464
+        ],
+        "max": [
+          -1296,
+          -128,
+          -336
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          -1904,
+          -896,
+          -416
+        ],
+        "max": [
+          -1808,
+          -736,
+          -288
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          -1984,
+          -1504,
+          -240
+        ],
+        "max": [
+          -1792,
+          -1432,
+          -112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          -1184,
+          -1504,
+          -240
+        ],
+        "max": [
+          -1024,
+          -1432,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          160,
+          -1504,
+          -176
+        ],
+        "max": [
+          320,
+          -1424,
+          -64
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          736,
+          -1328,
+          -176
+        ],
+        "max": [
+          896,
+          -1248,
+          -48
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          2272,
+          -1504,
+          -240
+        ],
+        "max": [
+          2432,
+          -1424,
+          -112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          2656,
+          -1152,
+          -256
+        ],
+        "max": [
+          2736,
+          -992,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          2896,
+          -704,
+          -464
+        ],
+        "max": [
+          3040,
+          -608,
+          -336
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          2624,
+          -224,
+          -464
+        ],
+        "max": [
+          2768,
+          -128,
+          -320
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_route_stone_cover",
+        "min": [
+          2112,
+          304,
+          -464
+        ],
+        "max": [
+          2272,
+          400,
+          -336
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_west_ridge_buttress",
+        "min": [
+          -1984,
+          -1568,
+          -304
+        ],
+        "max": [
+          -1888,
+          -1536,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_west_ridge_buttress",
+        "min": [
+          -1536,
+          -1568,
+          -304
+        ],
+        "max": [
+          -1440,
+          -1536,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_west_ridge_buttress",
+        "min": [
+          -1088,
+          -1568,
+          -304
+        ],
+        "max": [
+          -992,
+          -1536,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_west_ridge_buttress",
+        "min": [
+          -640,
+          -1568,
+          -304
+        ],
+        "max": [
+          -544,
+          -1536,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_east_ridge_buttress",
+        "min": [
+          1440,
+          -1568,
+          -304
+        ],
+        "max": [
+          1536,
+          -1536,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_east_ridge_buttress",
+        "min": [
+          1888,
+          -1568,
+          -304
+        ],
+        "max": [
+          1984,
+          -1536,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_east_ridge_buttress",
+        "min": [
+          2336,
+          -1568,
+          -304
+        ],
+        "max": [
+          2432,
+          -1536,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_east_ridge_buttress",
+        "min": [
+          2784,
+          -1568,
+          -304
+        ],
+        "max": [
+          2880,
+          -1536,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "wilderness/wldrrckset1_1",
+          "xMax": "wilderness/wldrrckset1_1",
+          "yMin": "wilderness/wldrrckset1_1",
+          "yMax": "wilderness/wldrrckset1_1",
+          "zMin": "wilderness/wldrrckset1_1",
+          "zMax": "wilderness/wldrrckset1_1"
+        }
+      },
+      {
+        "role": "forest_east_drain_head",
+        "min": [
+          3040,
+          -704,
+          -496
+        ],
+        "max": [
+          3072,
+          -608,
+          -368
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_east_drain_head",
+        "min": [
+          3040,
+          -256,
+          -496
+        ],
+        "max": [
+          3072,
+          -160,
+          -368
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_east_drain_head",
+        "min": [
+          3040,
+          160,
+          -496
+        ],
+        "max": [
+          3072,
+          256,
+          -368
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "forest_route_light_pole",
+        "min": [
+          -1512,
+          216,
+          -464
+        ],
+        "max": [
+          -1496,
+          232,
+          -176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_arm",
+        "min": [
+          -1512,
+          216,
+          -192
+        ],
+        "max": [
+          -1440,
+          232,
+          -176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_pole",
+        "min": [
+          -2008,
+          -712,
+          -416
+        ],
+        "max": [
+          -1992,
+          -696,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_arm",
+        "min": [
+          -2008,
+          -712,
+          -144
+        ],
+        "max": [
+          -1936,
+          -696,
+          -128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_pole",
+        "min": [
+          -1608,
+          -1496,
+          -240
+        ],
+        "max": [
+          -1592,
+          -1480,
+          48
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_arm",
+        "min": [
+          -1608,
+          -1496,
+          32
+        ],
+        "max": [
+          -1536,
+          -1480,
+          48
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_pole",
+        "min": [
+          -520,
+          -1496,
+          -240
+        ],
+        "max": [
+          -504,
+          -1480,
+          48
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_arm",
+        "min": [
+          -520,
+          -1496,
+          32
+        ],
+        "max": [
+          -448,
+          -1480,
+          48
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_pole",
+        "min": [
+          2232,
+          -1496,
+          -240
+        ],
+        "max": [
+          2248,
+          -1480,
+          48
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_arm",
+        "min": [
+          2232,
+          -1496,
+          32
+        ],
+        "max": [
+          2304,
+          -1480,
+          48
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_pole",
+        "min": [
+          3016,
+          -920,
+          -400
+        ],
+        "max": [
+          3032,
+          -904,
+          -112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_arm",
+        "min": [
+          3016,
+          -920,
+          -128
+        ],
+        "max": [
+          3088,
+          -904,
+          -112
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_pole",
+        "min": [
+          3016,
+          -392,
+          -464
+        ],
+        "max": [
+          3032,
+          -376,
+          -176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_arm",
+        "min": [
+          3016,
+          -392,
+          -192
+        ],
+        "max": [
+          3088,
+          -376,
+          -176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_pole",
+        "min": [
+          2392,
+          408,
+          -464
+        ],
+        "max": [
+          2408,
+          424,
+          -176
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "forest_route_light_arm",
+        "min": [
+          2392,
+          408,
+          -192
+        ],
+        "max": [
+          2464,
+          424,
+          -176
         ],
         "detail": true,
         "faceTextures": {
@@ -5857,17 +8886,662 @@
           "_color": "1.0 0.9 0.8",
           "overbright_range": "0.15"
         }
+      },
+      {
+        "role": "forest_dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "-1600 0 -416",
+          "angle": "180"
+        }
+      },
+      {
+        "role": "forest_dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "-1792 -768 -368",
+          "angle": "270"
+        }
+      },
+      {
+        "role": "forest_dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "-1760 -1456 -192",
+          "angle": "0"
+        }
+      },
+      {
+        "role": "forest_dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "320 -1360 -128",
+          "angle": "0"
+        }
+      },
+      {
+        "role": "forest_dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "896 -1360 -128",
+          "angle": "180"
+        }
+      },
+      {
+        "role": "forest_dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "2368 -1360 -192",
+          "angle": "180"
+        }
+      },
+      {
+        "role": "forest_dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "2800 -1040 -288",
+          "angle": "90"
+        }
+      },
+      {
+        "role": "forest_dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "2800 -512 -416",
+          "angle": "90"
+        }
+      },
+      {
+        "role": "forest_dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "1920 352 -416",
+          "angle": "0"
+        }
+      },
+      {
+        "role": "forest_vehicle",
+        "classname": "static_vehicle_german_opeltruck",
+        "properties": {
+          "model": "static//vehicle_opeltruck.tik",
+          "origin": "-1248 80 -464",
+          "angle": "270",
+          "scale": "1.10",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_south_tree",
+        "classname": "static_natural_tree_oak",
+        "properties": {
+          "model": "static//tree_oak.tik",
+          "origin": "-680 -1640 -176",
+          "angle": "20",
+          "angles": "0 0 0",
+          "scale": "0.65",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_south_tree",
+        "classname": "static_natural_tree_oak",
+        "properties": {
+          "model": "static//tree_oak.tik",
+          "origin": "-232 -1640 -176",
+          "angle": "310",
+          "angles": "0 0 0",
+          "scale": "0.7",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_south_tree",
+        "classname": "static_natural_tree_oak",
+        "properties": {
+          "model": "static//tree_oak.tik",
+          "origin": "216 -1640 -176",
+          "angle": "80",
+          "angles": "0 0 0",
+          "scale": "0.6",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_south_tree",
+        "classname": "static_natural_tree_oak",
+        "properties": {
+          "model": "static//tree_oak.tik",
+          "origin": "664 -1640 -176",
+          "angle": "215",
+          "angles": "0 0 0",
+          "scale": "0.7",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_south_tree",
+        "classname": "static_natural_tree_oak",
+        "properties": {
+          "model": "static//tree_oak.tik",
+          "origin": "1112 -1640 -176",
+          "angle": "345",
+          "angles": "0 0 0",
+          "scale": "0.65",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "-2240 -816 -416",
+          "angle": "90",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "-1872 -928 -416",
+          "angle": "0",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "-1872 -1456 -240",
+          "angle": "90",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "-1104 -1456 -240",
+          "angle": "0",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "224 -1456 -176",
+          "angle": "90",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "800 -1280 -176",
+          "angle": "180",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "2352 -1456 -240",
+          "angle": "0",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "2960 -656 -464",
+          "angle": "90",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "2688 -176 -464",
+          "angle": "0",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "2208 352 -464",
+          "angle": "180",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "-1448 224 -200",
+          "angle": "180",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "-1448 224 -206",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "light",
+        "properties": {
+          "origin": "-1448 224 -248",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "-1944 -704 -152",
+          "angle": "0",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "-1944 -704 -158",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "light",
+        "properties": {
+          "origin": "-1944 -704 -200",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "-1544 -1488 24",
+          "angle": "0",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "-1544 -1488 18",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "light",
+        "properties": {
+          "origin": "-1544 -1488 -24",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "-456 -1488 24",
+          "angle": "0",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "-456 -1488 18",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "light",
+        "properties": {
+          "origin": "-456 -1488 -24",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "2296 -1488 24",
+          "angle": "180",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "2296 -1488 18",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "light",
+        "properties": {
+          "origin": "2296 -1488 -24",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "3080 -912 -136",
+          "angle": "180",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "3080 -912 -142",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "light",
+        "properties": {
+          "origin": "3080 -912 -184",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "3080 -384 -200",
+          "angle": "180",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "3080 -384 -206",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "light",
+        "properties": {
+          "origin": "3080 -384 -248",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "2456 416 -200",
+          "angle": "270",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "2456 416 -206",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_route_light",
+        "classname": "light",
+        "properties": {
+          "origin": "2456 416 -248",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_facade_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "160 -1250 40",
+          "angle": "90",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_facade_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "160 -1256 40",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_facade_light",
+        "classname": "light",
+        "properties": {
+          "origin": "160 -1320 16",
+          "light": "75",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_facade_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "608 -1250 40",
+          "angle": "90",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_facade_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "608 -1256 40",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_facade_light",
+        "classname": "light",
+        "properties": {
+          "origin": "608 -1320 16",
+          "light": "75",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "forest_facade_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "1056 -1250 40",
+          "angle": "90",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_facade_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "1056 -1256 40",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "forest_facade_light",
+        "classname": "light",
+        "properties": {
+          "origin": "1056 -1320 16",
+          "light": "75",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
       }
     ]
   },
   "preservation": {
     "sourceLineCount": 78260,
-    "retainedSourceLineCount": 77716,
-    "retainedSourceSha256": "bc9a36b1a45c1e75ffae17e76b696dc2f9f038096620ffb3ee93cfa30fd9e64c",
+    "retainedSourceLineCount": 76782,
+    "retainedSourceSha256": "5a383fcdddfb6f6564eaea704e96ed226ee0729a131160874d11e3d7d535fba8",
     "removedEntityNumbers": [
+      398,
+      425,
+      426,
+      427,
+      428,
+      429,
+      430,
+      431,
+      432,
+      433,
+      434,
+      435,
+      436,
+      437,
+      438,
+      439,
+      440,
+      441,
       442,
+      443,
       444,
+      445,
+      446,
       453,
+      471,
+      472,
+      489,
+      490,
+      491,
+      492,
+      493,
+      496,
+      498,
+      526,
+      528,
+      558,
+      648,
+      649,
+      650,
+      651,
+      652,
+      653,
+      654,
+      655,
+      656,
+      657,
+      658,
+      659,
+      660,
+      661,
+      662,
+      663,
+      664,
+      665,
       666,
       667,
       668,
@@ -5893,11 +9567,142 @@
       690,
       692,
       693,
+      696,
       699,
       702,
       704
     ],
     "removedEntities": [
+      {
+        "number": 398,
+        "classname": "static_natural_bush_full",
+        "origin": [
+          -1120,
+          320,
+          -461
+        ],
+        "model": "static//bush_full.tik",
+        "targetname": null
+      },
+      {
+        "number": 425,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 426,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 427,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 428,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 429,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 430,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 431,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 432,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 433,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 434,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 435,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 436,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 437,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 438,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 439,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 440,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 441,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
       {
         "number": 442,
         "classname": "detail",
@@ -5906,8 +9711,29 @@
         "targetname": null
       },
       {
+        "number": 443,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
         "number": 444,
         "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 445,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 446,
+        "classname": "detail",
         "origin": null,
         "model": null,
         "targetname": null
@@ -5921,6 +9747,264 @@
           -426.8
         ],
         "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 471,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          -2356.4,
+          -226.4,
+          -450.6
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 472,
+        "classname": "static_natural_tree_commontree",
+        "origin": [
+          -1816.2,
+          273.8,
+          -429.6
+        ],
+        "model": "static//tree_commontree.tik",
+        "targetname": null
+      },
+      {
+        "number": 489,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          -2028.2,
+          -1425.2,
+          -294.8
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 490,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          -1445.6,
+          -1506.6,
+          -257.4
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 491,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          -1053.6,
+          -1450.6,
+          -313.4
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 492,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          -1534,
+          -515,
+          -448
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 493,
+        "classname": "static_natural_tree_commontree",
+        "origin": [
+          -1663.6,
+          -1158.6,
+          -404.8
+        ],
+        "model": "static//tree_commontree.tik",
+        "targetname": null
+      },
+      {
+        "number": 496,
+        "classname": "static_natural_bush_full",
+        "origin": [
+          -1670.2,
+          -329.2,
+          -468
+        ],
+        "model": "static//bush_full.tik",
+        "targetname": null
+      },
+      {
+        "number": 498,
+        "classname": "static_natural_tree_commontree",
+        "origin": [
+          -801.2,
+          -1336.2,
+          -437.6
+        ],
+        "model": "static//tree_commontree.tik",
+        "targetname": null
+      },
+      {
+        "number": 526,
+        "classname": "static_natural_bush_full",
+        "origin": [
+          -1734.2,
+          191.8,
+          -442
+        ],
+        "model": "static//bush_full.tik",
+        "targetname": null
+      },
+      {
+        "number": 528,
+        "classname": "static_natural_bush_full",
+        "origin": [
+          -1082.2,
+          133.8,
+          -463
+        ],
+        "model": "static//bush_full.tik",
+        "targetname": null
+      },
+      {
+        "number": 558,
+        "classname": "static_natural_tree_commontree",
+        "origin": [
+          -1197.4,
+          174.6,
+          -508.2
+        ],
+        "model": "static//tree_commontree.tik",
+        "targetname": null
+      },
+      {
+        "number": 648,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 649,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 650,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 651,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 652,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 653,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 654,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 655,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 656,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 657,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 658,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 659,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 660,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 661,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 662,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 663,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 664,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 665,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
         "targetname": null
       },
       {
@@ -6123,6 +10207,17 @@
         "targetname": null
       },
       {
+        "number": 696,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          2822.2,
+          -1221.8,
+          -441.2
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
         "number": 699,
         "classname": "static_natural_tree_commontree",
         "origin": [
@@ -6157,7 +10252,10 @@
       }
     ],
     "removedWorldBrushNumbers": [
+      811,
+      812,
       819,
+      820,
       1109,
       1110,
       1111,
@@ -6165,11 +10263,30 @@
       1113,
       1114,
       1115,
+      1116,
+      1117,
+      1118,
+      1119,
+      1120,
+      1121,
+      1122,
+      1123,
       1124,
+      3217,
+      3218,
+      3219,
+      3220,
+      3221,
+      3222,
+      3223,
       3224,
+      3225,
+      3226,
+      3227,
       3228,
       3229
     ],
+    "canonicalWorldBrushCount": 5904,
     "originalDoorCount": 23,
     "originalTargetnameCount": 88
   }
