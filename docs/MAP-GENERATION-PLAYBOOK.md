@@ -961,3 +961,14 @@ For a complete left/right mirror of a MOH `.map`, define the plane explicitly (t
 10. Test the exact final PK3 in the intended mode. For an Objective map, separately distinguish Objective boot/rules from an optional FFA bot-movement exercise.
 
 A geometry/gameplay mirror retains original bitmap orientation by default. Mirrored lettering, signs, or texture imagery requires new/reversed art and is a separate asset decision.
+
+### Stock-map grammar gate for original maps
+
+1. Analyze the editable reference source before generation: counts, alignment, face modes, thicknesses, scales/flags, material-axis patterns, entity/spawn/model conventions, and light intensities.
+2. Inspect resolved retail images privately; filenames are not visual evidence. Ignore and never package extracted retail payloads.
+3. Copy grammar, not layout. Apply measured grid, thickness, layering, face treatment, palette roles, entity conventions, and light hierarchy.
+4. Default hidden faces to `common/caulk`; deliberately texture exposed top/front/side faces and preserve matching stock flags/scales.
+5. Treat silhouette and secondary framing separately; large themed boxes are still a blockout.
+6. Test stock helpers. A runtime-model substitute is acceptable only when collision is unnecessary, precache is explicit, and runtime diagnostics are clean.
+7. Inspect exact-candidate exterior, threshold, deep interior, vertical route, crossover, overview, and edge views. Camera mistakes are QA defects.
+8. Compiler/Recast/combat success does not establish visual quality. User screenshots/verdicts outrank automated language and must update the next baseline.

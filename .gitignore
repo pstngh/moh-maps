@@ -8,3 +8,5 @@ generated/codex_reactor/.build/
 generated/codex_mohdm6_mirror/.build/
 generated/codex_obj_team2_mirror/.build/
 generated/codex_obj_team4_mirror/.build/
+# Local-only V2 Depot retail inspection and compiler staging.
+generated/codex_v2_depot/.build/

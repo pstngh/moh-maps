@@ -1,0 +1,23 @@
+﻿{
+  "bsp": "generated/codex_v2_depot/main/maps/dm/codex_v2_depot.bsp",
+  "bytes": 655120,
+  "sha256": "f2a5a2b920bcb418a27b146612455db11014b1b854f809c5abc8f911a48cec30",
+  "ident": "0x35313032",
+  "version": 19,
+  "checksum": "0x4e602bef",
+  "shaders": 48,
+  "surfaces": 713,
+  "lightmapPages": 5,
+  "allocatedLightmapPages": 5,
+  "visibilityBytes": 1128,
+  "entityBytes": 9227,
+  "classCounts": {
+    "info_player_allied": 8,
+    "info_player_axis": 8,
+    "info_player_deathmatch": 18,
+    "info_player_start": 1,
+    "light": 25,
+    "script_model": 20,
+    "worldspawn": 1
+  }
+}

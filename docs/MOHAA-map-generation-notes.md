@@ -2648,3 +2648,19 @@ The final deterministic PK3 is 1,651,141 bytes with SHA-256 `0E658E19868CB7EEC00
 **PROVEN MOH terrain-control rule:** height samples are vertex data and reflect across the full row; material controls are cell-owned and carry a trailing sentinel. Reflect cell ownership without shifting that sentinel, then use a stock source with hidden high-relief terrain as a compiler regression test.
 
 **PROVEN manual-vis exception rule:** `-nomanvis` is not a general optimization flag. Use it only after reproducing a fixed-buffer failure on the unmodified stock source, preserve all geometry, and require the subsequent ordinary VIS stage to emit valid nonzero cluster, portal, and visibility data.
+
+## User-rejected Reactor baseline and V2 Depot revision 1
+
+Date: 2026-08-09
+
+The user rejected `codex_reactor` as buggy and a mess. That overrides its earlier positive visual status: compiler, Recast, bot-combat, and fixed-camera gates proved technical loadability, not stock-map construction quality or human polish. Reactor is now a negative case, not a release/design baseline.
+
+`codex_v2_depot` restarted from the actual `aa/obj_team2.map`. A generic analyzer measured its 5,827 brushes, 35,217 faces, 708 patches, seven terrains, alignment, thickness modes, material/axis use, scales/flags, entities, lights, models, and spawns. Private contact sheets of resolved retail textures confirmed the palette; retail bytes remain ignored and unbundled.
+
+The new original layout copies grammar rather than geometry: 189 brushes, 1,150 faces, 424 caulk faces, measured grid/thickness/stair conventions, three open bays, broad service loops, rear crossover, U-catwalk, 10 zones, 15 links, and 192-unit minimum routes. Validation caught three unsafe spawns. Changing the stock corona from an absent optional static helper to an explicitly precached runtime model removed 20 warnings.
+
+Final Q3map/VIS/MOHlight had zero Q3map warnings, zero light clamps, and zero hash warnings. Eight views drove a restrained interior relight and camera repairs; the final run produced eight screenshots/markers and zero script errors. Exact-PK3 QA built Recast in 0.127 s, admitted eight bots, and recorded 23 combat/death events in 40 s with zero candidate/stock-model diagnostics.
+
+**PROVEN rule:** measure the editable stock source and inspect its actual images before authoring in its style. Reproduce grid, thickness, flags, hidden-face policy, scale, palette roles, entity/light ratios, and layering - not layout.
+
+**PROVEN acceptance rule:** technical and fixed-view passes are necessary but insufficient. User rejection demotes prior positive claims, becomes regression evidence, and requires cause-level redesign. Never call a generated map perfect before human play.

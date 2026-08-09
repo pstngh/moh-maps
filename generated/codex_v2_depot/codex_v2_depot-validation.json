@@ -1,0 +1,33 @@
+﻿{
+  "schemaVersion": 1,
+  "mapName": "codex_v2_depot",
+  "mapBytes": 137984,
+  "brushes": 189,
+  "faces": 1150,
+  "caulkFaces": 424,
+  "caulkRatio": 0.3687,
+  "stockMaterials": 21,
+  "movingDoors": 0,
+  "spawns": {
+    "info_player_deathmatch": 18,
+    "info_player_allied": 8,
+    "info_player_axis": 8,
+    "info_player_start": 1
+  },
+  "lights": 25,
+  "staticModels": 41,
+  "routeZones": 10,
+  "routeConnections": 15,
+  "minRouteWidth": 192,
+  "fixedViews": 8,
+  "checks": [
+    "stock-only material policy",
+    "face-specific hidden caulk",
+    "source counts",
+    "spawn support and clearance",
+    "model grounding",
+    "light bounds and budget",
+    "route connectivity and width",
+    "DM scripts and precache"
+  ]
+}

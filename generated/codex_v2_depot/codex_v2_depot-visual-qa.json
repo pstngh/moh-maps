@@ -1,0 +1,74 @@
+{
+    "schemaVersion":  1,
+    "mapName":  "codex_v2_depot",
+    "qaRoot":  "C:\\tmp\\codex-codex_v2_depot-visual",
+    "exactPk3Count":  8,
+    "candidateSha256":  "a46451bc445281079b647817b4bc45ec5137b0fd15a8f16d96b6d059bb826245",
+    "looseOverride":  "maps/dm/codex_v2_depot.scr only; BSP/assets remain from exact candidate PK3",
+    "requestedViews":  [
+                           "yard_wide",
+                           "west_entry",
+                           "hall_low",
+                           "west_service",
+                           "rear_cross",
+                           "upper_loop",
+                           "hall_overview",
+                           "map_edge"
+                       ],
+    "viewMarkers":  [
+                        "[2026-08-08 23:55:35 UTC-5.000] CODEX_VISUAL_QA yard_wide",
+                        "[2026-08-08 23:55:36 UTC-5.000] CODEX_VISUAL_QA west_entry",
+                        "[2026-08-08 23:55:37 UTC-5.000] CODEX_VISUAL_QA hall_low",
+                        "[2026-08-08 23:55:38 UTC-5.000] CODEX_VISUAL_QA west_service",
+                        "[2026-08-08 23:55:39 UTC-5.000] CODEX_VISUAL_QA rear_cross",
+                        "[2026-08-08 23:55:40 UTC-5.000] CODEX_VISUAL_QA upper_loop",
+                        "[2026-08-08 23:55:41 UTC-5.000] CODEX_VISUAL_QA hall_overview",
+                        "[2026-08-08 23:55:42 UTC-5.000] CODEX_VISUAL_QA map_edge"
+                    ],
+    "screenshotCount":  8,
+    "screenshots":  [
+                        {
+                            "path":  "C:\\tmp\\codex-codex_v2_depot-visual\\home\\main\\screenshots\\shot0000.tga",
+                            "bytes":  2764818,
+                            "sha256":  "4a824458b4e77a7ec8bb31bbee2fa43a4f8ec5b07c6d18a3a1725aee5f9a1934"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_v2_depot-visual\\home\\main\\screenshots\\shot0001.tga",
+                            "bytes":  2764818,
+                            "sha256":  "30909ce8dc5cf647d89ad45969ced6deab5f721e9eb97baaa012ed32c1340774"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_v2_depot-visual\\home\\main\\screenshots\\shot0002.tga",
+                            "bytes":  2764818,
+                            "sha256":  "c9c57a186a4f15e7c3da746f0d137b63abb85ffbea8efac26b694366970e257d"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_v2_depot-visual\\home\\main\\screenshots\\shot0003.tga",
+                            "bytes":  2764818,
+                            "sha256":  "66b654d7f93f7a3efa50caf5e1a9da1573a77cec8728927e7daa3ca8da1a4e37"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_v2_depot-visual\\home\\main\\screenshots\\shot0004.tga",
+                            "bytes":  2764818,
+                            "sha256":  "0d34062d21067bfd0e54d6803449ea598d44706a9708e23a4fe60b97ced3da0f"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_v2_depot-visual\\home\\main\\screenshots\\shot0005.tga",
+                            "bytes":  2764818,
+                            "sha256":  "e299e87abd879c6dd094c1d3639f74b540850ea3dc1031559185108a642f91dd"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_v2_depot-visual\\home\\main\\screenshots\\shot0006.tga",
+                            "bytes":  2764818,
+                            "sha256":  "c0ce9e21e759b6610d6c0b498c08053d983fd031e025df31f9840aa6c3b48733"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_v2_depot-visual\\home\\main\\screenshots\\shot0007.tga",
+                            "bytes":  2764818,
+                            "sha256":  "726f152269e7883ea0d60beaf303199d78053ef2a2e7d4f56733cc695d13fe8d"
+                        }
+                    ],
+    "scriptErrorCount":  0,
+    "elapsedSeconds":  16.325,
+    "log":  "C:\\tmp\\codex-codex_v2_depot-visual\\home\\main\\qconsole.log"
+}

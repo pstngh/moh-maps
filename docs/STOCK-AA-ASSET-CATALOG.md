@@ -2,7 +2,7 @@
 
 Status: verified starter catalog, not yet exhaustive
 
-Last updated: 2026-07-26
+Last updated: 2026-08-09
 
 This file records stock AA asset names that have been compiled and rendered
 successfully in generated maps. It is not a substitute for visual inspection.
@@ -93,3 +93,9 @@ rule that every material containing `wall` or `trim` should become stone.
   examples.
 - Add verified TIKI bounds and origin conventions for useful static props.
 - Separate AA-only assets from Spearhead/Breakthrough dependencies.
+
+## V2 Depot stock-industrial proof set
+
+Revision 1 compiled/rendered these retail families together with zero compiler/light warnings and zero exact-runtime asset diagnostics: bunker/concrete (`bunker_wall`, `jh_conc512b`, `bunker_conc3`); floor/steps (`whsflrset1_1b`, `doccrtset_1stepsml`); structure (`ibeam_1a`, bunker ceiling/beams, `verticalbrace`); metal (`deckgrate_set1b`, `ironwall1`, `rusty_iron`); and face-specific utility-box/crate sets.
+
+The caged lamp remains a proven static helper. Use `static//corona_orange.tik` as an explicitly precached `script_model` when collision is unnecessary: the tested retail build lacks its optional static `.map` helper, while the runtime form is clean. The grounded Opel truck also passed compile/runtime checks. This is a role-specific proof set, not a mandatory palette.

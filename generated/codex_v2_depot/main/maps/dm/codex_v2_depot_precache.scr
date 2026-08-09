@@ -1,0 +1,6 @@
+exec global/DMprecache.scr
+cache models/items/dm_50_healthbox.tik
+cache models/fx/bazookaexplosion_dm.tik
+cache models/static/lightbulb_caged.tik
+cache models/static/corona_orange.tik
+cache models/static/vehicle_opeltruck.tik

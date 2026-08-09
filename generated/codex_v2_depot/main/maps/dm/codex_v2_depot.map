@@ -1,0 +1,2552 @@
+// entity 0
+{
+"classname" "worldspawn"
+"message" "V2 Depot"
+"ambient" "32"
+"ambientlight" "7.5 8 10"
+"suncolor" "95 86 74"
+"sundirection" "315 90 0"
+"sundiffusecolor" "44 52 66"
+"sundiffuse" "0.75"
+"_color" "1.0 0.9 0.8"
+"farplane" "6000"
+"farplane_color" "0.25 0.27 0.30"
+// brush 0
+{
+( -1504 -16 16 ) ( -1504 0 0 ) ( -1504 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 1504 16 16 ) ( 1504 0 0 ) ( 1504 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 0 ) ( 0 0 0 ) ( -16 16 0 ) mohcommon/jeff-concrete-walla 0 0 0 0.500 0.500 0 0 0
+}
+// brush 1
+{
+( -1504 -16 16 ) ( -1504 0 0 ) ( -1504 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 1504 16 16 ) ( 1504 0 0 ) ( 1504 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 1248 16 ) ( 0 1248 0 ) ( 16 1248 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 0 ) ( 0 0 0 ) ( -16 16 0 ) algiers/whsflrset1_1b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 2
+{
+( -1536 -16 16 ) ( -1536 0 0 ) ( -1536 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -1504 16 16 ) ( -1504 0 0 ) ( -1504 -16 16 ) sky/mohday1 0 0 0 1 1 0 0 0
+( 16 -1280 -16 ) ( 0 -1280 0 ) ( 16 -1280 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 1280 16 ) ( 0 1280 0 ) ( 16 1280 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 608 ) ( 0 0 608 ) ( -16 16 608 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 3
+{
+( 1504 -16 16 ) ( 1504 0 0 ) ( 1504 16 16 ) sky/mohday1 0 0 0 1 1 0 0 0
+( 1536 16 16 ) ( 1536 0 0 ) ( 1536 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -1280 -16 ) ( 0 -1280 0 ) ( 16 -1280 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 1280 16 ) ( 0 1280 0 ) ( 16 1280 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 608 ) ( 0 0 608 ) ( -16 16 608 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 4
+{
+( -1504 -16 16 ) ( -1504 0 0 ) ( -1504 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 1504 16 16 ) ( 1504 0 0 ) ( 1504 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -1280 -16 ) ( 0 -1280 0 ) ( 16 -1280 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -1248 16 ) ( 0 -1248 0 ) ( 16 -1248 -16 ) sky/mohday1 0 0 0 1 1 0 0 0
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 608 ) ( 0 0 608 ) ( -16 16 608 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 5
+{
+( -1504 -16 16 ) ( -1504 0 0 ) ( -1504 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 1504 16 16 ) ( 1504 0 0 ) ( 1504 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 1248 -16 ) ( 0 1248 0 ) ( 16 1248 16 ) sky/mohday1 0 0 0 1 1 0 0 0
+( 16 1280 16 ) ( 0 1280 0 ) ( 16 1280 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 608 ) ( 0 0 608 ) ( -16 16 608 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 6
+{
+( -1536 -16 16 ) ( -1536 0 0 ) ( -1536 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 1536 16 16 ) ( 1536 0 0 ) ( 1536 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -1280 -16 ) ( 0 -1280 0 ) ( 16 -1280 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 1280 16 ) ( 0 1280 0 ) ( 16 1280 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 576 ) ( 0 0 576 ) ( 16 16 576 ) sky/mohday1 0 0 0 1 1 0 0 0
+( 16 16 608 ) ( 0 0 608 ) ( -16 16 608 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 7
+{
+( -1504 -16 16 ) ( -1504 0 0 ) ( -1504 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -1472 16 16 ) ( -1472 0 0 ) ( -1472 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 8
+{
+( 1472 -16 16 ) ( 1472 0 0 ) ( 1472 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 1504 16 16 ) ( 1504 0 0 ) ( 1504 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 9
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -1248 -16 ) ( 0 -1248 0 ) ( 16 -1248 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -1216 16 ) ( 0 -1216 0 ) ( 16 -1216 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 10
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -1152 16 16 ) ( -1152 0 0 ) ( -1152 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 11
+{
+( -864 -16 16 ) ( -864 0 0 ) ( -864 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -192 16 16 ) ( -192 0 0 ) ( -192 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 12
+{
+( 192 -16 16 ) ( 192 0 0 ) ( 192 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 864 16 16 ) ( 864 0 0 ) ( 864 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 13
+{
+( 1152 -16 16 ) ( 1152 0 0 ) ( 1152 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 14
+{
+( -1152 -16 16 ) ( -1152 0 0 ) ( -1152 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -864 16 16 ) ( -864 0 0 ) ( -864 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) normandy/bunker_conc3 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 15
+{
+( -1152 -16 16 ) ( -1152 0 0 ) ( -1152 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -1136 16 16 ) ( -1136 0 0 ) ( -1136 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 16
+{
+( -880 -16 16 ) ( -880 0 0 ) ( -880 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -864 16 16 ) ( -864 0 0 ) ( -864 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 17
+{
+( -1152 -16 16 ) ( -1152 0 0 ) ( -1152 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -864 16 16 ) ( -864 0 0 ) ( -864 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 18
+{
+( -192 -16 16 ) ( -192 0 0 ) ( -192 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 192 16 16 ) ( 192 0 0 ) ( 192 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) normandy/bunker_conc3 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 19
+{
+( -192 -16 16 ) ( -192 0 0 ) ( -192 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -176 16 16 ) ( -176 0 0 ) ( -176 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 20
+{
+( 176 -16 16 ) ( 176 0 0 ) ( 176 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 192 16 16 ) ( 192 0 0 ) ( 192 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 21
+{
+( -192 -16 16 ) ( -192 0 0 ) ( -192 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 192 16 16 ) ( 192 0 0 ) ( 192 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 22
+{
+( 864 -16 16 ) ( 864 0 0 ) ( 864 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 1152 16 16 ) ( 1152 0 0 ) ( 1152 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) normandy/bunker_conc3 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 23
+{
+( 864 -16 16 ) ( 864 0 0 ) ( 864 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 880 16 16 ) ( 880 0 0 ) ( 880 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 24
+{
+( 1136 -16 16 ) ( 1136 0 0 ) ( 1136 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1152 16 16 ) ( 1152 0 0 ) ( 1152 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 25
+{
+( 864 -16 16 ) ( 864 0 0 ) ( 864 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 1152 16 16 ) ( 1152 0 0 ) ( 1152 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -288 16 ) ( 0 -288 0 ) ( 16 -288 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 26
+{
+( -1504 -16 16 ) ( -1504 0 0 ) ( -1504 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -1472 16 16 ) ( -1472 0 0 ) ( -1472 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 1248 16 ) ( 0 1248 0 ) ( 16 1248 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 27
+{
+( 1472 -16 16 ) ( 1472 0 0 ) ( 1472 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 1504 16 16 ) ( 1504 0 0 ) ( 1504 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 1248 16 ) ( 0 1248 0 ) ( 16 1248 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 28
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 1216 -16 ) ( 0 1216 0 ) ( 16 1216 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 1248 16 ) ( 0 1248 0 ) ( 16 1248 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 29
+{
+( -1504 -16 16 ) ( -1504 0 0 ) ( -1504 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 1504 16 16 ) ( 1504 0 0 ) ( 1504 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -320 -16 ) ( 0 -320 0 ) ( 16 -320 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 1248 16 ) ( 0 1248 0 ) ( 16 1248 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 384 ) ( 0 0 384 ) ( 16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 416 ) ( 0 0 416 ) ( -16 16 416 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0
+}
+// brush 30
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 376 ) ( 0 0 376 ) ( 16 16 376 ) normandy/bunk_ceiling 0 0 0 0.500 0.500 0 0 0
+( 16 16 384 ) ( 0 0 384 ) ( -16 16 384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 31
+{
+( -640 -16 16 ) ( -640 0 0 ) ( -640 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -608 16 16 ) ( -608 0 0 ) ( -608 -16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -64 16 ) ( 0 -64 0 ) ( 16 -64 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 32
+{
+( -640 -16 16 ) ( -640 0 0 ) ( -640 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -608 16 16 ) ( -608 0 0 ) ( -608 -16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 192 -16 ) ( 0 192 0 ) ( 16 192 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 448 16 ) ( 0 448 0 ) ( 16 448 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 33
+{
+( -640 -16 16 ) ( -640 0 0 ) ( -640 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -608 16 16 ) ( -608 0 0 ) ( -608 -16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 640 -16 ) ( 0 640 0 ) ( 16 640 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 832 16 ) ( 0 832 0 ) ( 16 832 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 34
+{
+( -640 -16 16 ) ( -640 0 0 ) ( -640 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -608 16 16 ) ( -608 0 0 ) ( -608 -16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 192 16 ) ( 0 192 0 ) ( 16 192 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 35
+{
+( -648 -16 16 ) ( -648 0 0 ) ( -648 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -600 16 16 ) ( -600 0 0 ) ( -600 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -48 16 ) ( 0 -48 0 ) ( 16 -48 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 36
+{
+( -648 -16 16 ) ( -648 0 0 ) ( -648 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -600 16 16 ) ( -600 0 0 ) ( -600 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 176 -16 ) ( 0 176 0 ) ( 16 176 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 192 16 ) ( 0 192 0 ) ( 16 192 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 37
+{
+( -648 -16 16 ) ( -648 0 0 ) ( -648 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -600 16 16 ) ( -600 0 0 ) ( -600 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 192 16 ) ( 0 192 0 ) ( 16 192 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 38
+{
+( -640 -16 16 ) ( -640 0 0 ) ( -640 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -608 16 16 ) ( -608 0 0 ) ( -608 -16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 448 -16 ) ( 0 448 0 ) ( 16 448 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 640 16 ) ( 0 640 0 ) ( 16 640 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 39
+{
+( -648 -16 16 ) ( -648 0 0 ) ( -648 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -600 16 16 ) ( -600 0 0 ) ( -600 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 448 -16 ) ( 0 448 0 ) ( 16 448 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 464 16 ) ( 0 464 0 ) ( 16 464 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 40
+{
+( -648 -16 16 ) ( -648 0 0 ) ( -648 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -600 16 16 ) ( -600 0 0 ) ( -600 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 624 -16 ) ( 0 624 0 ) ( 16 624 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 640 16 ) ( 0 640 0 ) ( 16 640 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 41
+{
+( -648 -16 16 ) ( -648 0 0 ) ( -648 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -600 16 16 ) ( -600 0 0 ) ( -600 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 448 -16 ) ( 0 448 0 ) ( 16 448 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 640 16 ) ( 0 640 0 ) ( 16 640 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 42
+{
+( 608 -16 16 ) ( 608 0 0 ) ( 608 16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 640 16 16 ) ( 640 0 0 ) ( 640 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -288 -16 ) ( 0 -288 0 ) ( 16 -288 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 -64 16 ) ( 0 -64 0 ) ( 16 -64 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 43
+{
+( 608 -16 16 ) ( 608 0 0 ) ( 608 16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 640 16 16 ) ( 640 0 0 ) ( 640 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 192 -16 ) ( 0 192 0 ) ( 16 192 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 448 16 ) ( 0 448 0 ) ( 16 448 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 44
+{
+( 608 -16 16 ) ( 608 0 0 ) ( 608 16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 640 16 16 ) ( 640 0 0 ) ( 640 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 640 -16 ) ( 0 640 0 ) ( 16 640 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 832 16 ) ( 0 832 0 ) ( 16 832 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 45
+{
+( 608 -16 16 ) ( 608 0 0 ) ( 608 16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 640 16 16 ) ( 640 0 0 ) ( 640 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 192 16 ) ( 0 192 0 ) ( 16 192 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 46
+{
+( 600 -16 16 ) ( 600 0 0 ) ( 600 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 648 16 16 ) ( 648 0 0 ) ( 648 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -48 16 ) ( 0 -48 0 ) ( 16 -48 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 47
+{
+( 600 -16 16 ) ( 600 0 0 ) ( 600 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 648 16 16 ) ( 648 0 0 ) ( 648 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 176 -16 ) ( 0 176 0 ) ( 16 176 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 192 16 ) ( 0 192 0 ) ( 16 192 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 48
+{
+( 600 -16 16 ) ( 600 0 0 ) ( 600 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 648 16 16 ) ( 648 0 0 ) ( 648 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 192 16 ) ( 0 192 0 ) ( 16 192 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 49
+{
+( 608 -16 16 ) ( 608 0 0 ) ( 608 16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 640 16 16 ) ( 640 0 0 ) ( 640 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 448 -16 ) ( 0 448 0 ) ( 16 448 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 640 16 ) ( 0 640 0 ) ( 16 640 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 50
+{
+( 600 -16 16 ) ( 600 0 0 ) ( 600 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 648 16 16 ) ( 648 0 0 ) ( 648 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 448 -16 ) ( 0 448 0 ) ( 16 448 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 464 16 ) ( 0 464 0 ) ( 16 464 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 51
+{
+( 600 -16 16 ) ( 600 0 0 ) ( 600 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 648 16 16 ) ( 648 0 0 ) ( 648 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 624 -16 ) ( 0 624 0 ) ( 16 624 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 640 16 ) ( 0 640 0 ) ( 16 640 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 52
+{
+( 600 -16 16 ) ( 600 0 0 ) ( 600 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 648 16 16 ) ( 648 0 0 ) ( 648 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 448 -16 ) ( 0 448 0 ) ( 16 448 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 640 16 ) ( 0 640 0 ) ( 16 640 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 53
+{
+( -608 -16 16 ) ( -608 0 0 ) ( -608 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -448 16 16 ) ( -448 0 0 ) ( -448 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 54
+{
+( -192 -16 16 ) ( -192 0 0 ) ( -192 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 192 16 16 ) ( 192 0 0 ) ( 192 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 55
+{
+( 448 -16 16 ) ( 448 0 0 ) ( 448 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 608 16 16 ) ( 608 0 0 ) ( 608 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 56
+{
+( -448 -16 16 ) ( -448 0 0 ) ( -448 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -192 16 16 ) ( -192 0 0 ) ( -192 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) normandy/bunker_conc3 0 0 0 0.500 0.500 0 0 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 57
+{
+( -448 -16 16 ) ( -448 0 0 ) ( -448 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -432 16 16 ) ( -432 0 0 ) ( -432 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 824 -16 ) ( 0 824 0 ) ( 16 824 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 872 16 ) ( 0 872 0 ) ( 16 872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 58
+{
+( -208 -16 16 ) ( -208 0 0 ) ( -208 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -192 16 16 ) ( -192 0 0 ) ( -192 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 824 -16 ) ( 0 824 0 ) ( 16 824 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 872 16 ) ( 0 872 0 ) ( 16 872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 59
+{
+( -448 -16 16 ) ( -448 0 0 ) ( -448 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -192 16 16 ) ( -192 0 0 ) ( -192 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 824 -16 ) ( 0 824 0 ) ( 16 824 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 872 16 ) ( 0 872 0 ) ( 16 872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 60
+{
+( 192 -16 16 ) ( 192 0 0 ) ( 192 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 448 16 16 ) ( 448 0 0 ) ( 448 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) normandy/bunker_conc3 0 0 0 0.500 0.500 0 0 0
+( 16 16 376 ) ( 0 0 376 ) ( -16 16 376 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+}
+// brush 61
+{
+( 192 -16 16 ) ( 192 0 0 ) ( 192 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 208 16 16 ) ( 208 0 0 ) ( 208 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 824 -16 ) ( 0 824 0 ) ( 16 824 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 872 16 ) ( 0 872 0 ) ( 16 872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 62
+{
+( 432 -16 16 ) ( 432 0 0 ) ( 432 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 448 16 16 ) ( 448 0 0 ) ( 448 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 824 -16 ) ( 0 824 0 ) ( 16 824 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 872 16 ) ( 0 872 0 ) ( 16 872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 63
+{
+( 192 -16 16 ) ( 192 0 0 ) ( 192 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 448 16 16 ) ( 448 0 0 ) ( 448 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 824 -16 ) ( 0 824 0 ) ( 16 824 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 872 16 ) ( 0 872 0 ) ( 16 872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 224 ) ( 0 0 224 ) ( 16 16 224 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 64
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -40 -16 ) ( 0 -40 0 ) ( 16 -40 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -24 16 ) ( 0 -24 0 ) ( 16 -24 -16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 344 ) ( 0 0 344 ) ( 16 16 344 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 360 ) ( 0 0 360 ) ( -16 16 360 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 65
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 216 -16 ) ( 0 216 0 ) ( 16 216 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 232 16 ) ( 0 232 0 ) ( 16 232 -16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 344 ) ( 0 0 344 ) ( 16 16 344 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 360 ) ( 0 0 360 ) ( -16 16 360 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 66
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 472 -16 ) ( 0 472 0 ) ( 16 472 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 488 16 ) ( 0 488 0 ) ( 16 488 -16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 344 ) ( 0 0 344 ) ( 16 16 344 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 360 ) ( 0 0 360 ) ( -16 16 360 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 67
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 728 -16 ) ( 0 728 0 ) ( 16 728 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 744 16 ) ( 0 744 0 ) ( 16 744 -16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 344 ) ( 0 0 344 ) ( 16 16 344 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 360 ) ( 0 0 360 ) ( -16 16 360 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 68
+{
+( -1472 -16 16 ) ( -1472 0 0 ) ( -1472 16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1472 16 16 ) ( 1472 0 0 ) ( 1472 -16 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 984 -16 ) ( 0 984 0 ) ( 16 984 16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1000 16 ) ( 0 1000 0 ) ( 16 1000 -16 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 344 ) ( 0 0 344 ) ( 16 16 344 ) normandy/bunk_ceiling_beam 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 360 ) ( 0 0 360 ) ( -16 16 360 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 69
+{
+( -604 -16 16 ) ( -604 0 0 ) ( -604 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -580 16 16 ) ( -580 0 0 ) ( -580 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -44 -16 ) ( 0 -44 0 ) ( 16 -44 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -20 16 ) ( 0 -20 0 ) ( 16 -20 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 344 ) ( 0 0 344 ) ( -16 16 344 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 70
+{
+( -604 -16 16 ) ( -604 0 0 ) ( -604 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -580 16 16 ) ( -580 0 0 ) ( -580 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 212 -16 ) ( 0 212 0 ) ( 16 212 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 236 16 ) ( 0 236 0 ) ( 16 236 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 344 ) ( 0 0 344 ) ( -16 16 344 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 71
+{
+( -604 -16 16 ) ( -604 0 0 ) ( -604 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -580 16 16 ) ( -580 0 0 ) ( -580 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 468 -16 ) ( 0 468 0 ) ( 16 468 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 492 16 ) ( 0 492 0 ) ( 16 492 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 344 ) ( 0 0 344 ) ( -16 16 344 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 72
+{
+( -604 -16 16 ) ( -604 0 0 ) ( -604 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -580 16 16 ) ( -580 0 0 ) ( -580 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 724 -16 ) ( 0 724 0 ) ( 16 724 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 748 16 ) ( 0 748 0 ) ( 16 748 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 344 ) ( 0 0 344 ) ( -16 16 344 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 73
+{
+( 580 -16 16 ) ( 580 0 0 ) ( 580 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 604 16 16 ) ( 604 0 0 ) ( 604 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -44 -16 ) ( 0 -44 0 ) ( 16 -44 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -20 16 ) ( 0 -20 0 ) ( 16 -20 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 344 ) ( 0 0 344 ) ( -16 16 344 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 74
+{
+( 580 -16 16 ) ( 580 0 0 ) ( 580 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 604 16 16 ) ( 604 0 0 ) ( 604 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 212 -16 ) ( 0 212 0 ) ( 16 212 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 236 16 ) ( 0 236 0 ) ( 16 236 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 344 ) ( 0 0 344 ) ( -16 16 344 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 75
+{
+( 580 -16 16 ) ( 580 0 0 ) ( 580 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 604 16 16 ) ( 604 0 0 ) ( 604 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 468 -16 ) ( 0 468 0 ) ( 16 468 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 492 16 ) ( 0 492 0 ) ( 16 492 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 344 ) ( 0 0 344 ) ( -16 16 344 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 76
+{
+( 580 -16 16 ) ( 580 0 0 ) ( 580 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 604 16 16 ) ( 604 0 0 ) ( 604 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 724 -16 ) ( 0 724 0 ) ( 16 724 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 748 16 ) ( 0 748 0 ) ( 16 748 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 344 ) ( 0 0 344 ) ( -16 16 344 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 77
+{
+( -176 -16 16 ) ( -176 0 0 ) ( -176 16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 176 16 16 ) ( 176 0 0 ) ( 176 -16 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 32 -16 ) ( 0 32 0 ) ( 16 32 16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 544 16 ) ( 0 544 0 ) ( 16 544 -16 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 32 ) ( 0 0 32 ) ( -16 16 32 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 78
+{
+( -144 -16 16 ) ( -144 0 0 ) ( -144 16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -112 16 16 ) ( -112 0 0 ) ( -112 -16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 56 -16 ) ( 0 56 0 ) ( 16 56 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 520 16 ) ( 0 520 0 ) ( 16 520 -16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 79
+{
+( 112 -16 16 ) ( 112 0 0 ) ( 112 16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 144 16 16 ) ( 144 0 0 ) ( 144 -16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 56 -16 ) ( 0 56 0 ) ( 16 56 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 520 16 ) ( 0 520 0 ) ( 16 520 -16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 80
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 128 16 16 ) ( 128 0 0 ) ( 128 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 80 -16 ) ( 0 80 0 ) ( 16 80 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 96 16 ) ( 0 96 0 ) ( 16 96 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 56 ) ( 0 0 56 ) ( -16 16 56 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 81
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 128 16 16 ) ( 128 0 0 ) ( 128 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 144 -16 ) ( 0 144 0 ) ( 16 144 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 160 16 ) ( 0 160 0 ) ( 16 160 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 56 ) ( 0 0 56 ) ( -16 16 56 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 82
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 128 16 16 ) ( 128 0 0 ) ( 128 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 208 -16 ) ( 0 208 0 ) ( 16 208 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 224 16 ) ( 0 224 0 ) ( 16 224 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 56 ) ( 0 0 56 ) ( -16 16 56 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 83
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 128 16 16 ) ( 128 0 0 ) ( 128 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 272 -16 ) ( 0 272 0 ) ( 16 272 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 288 16 ) ( 0 288 0 ) ( 16 288 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 56 ) ( 0 0 56 ) ( -16 16 56 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 84
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 128 16 16 ) ( 128 0 0 ) ( 128 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 336 -16 ) ( 0 336 0 ) ( 16 336 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 352 16 ) ( 0 352 0 ) ( 16 352 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 56 ) ( 0 0 56 ) ( -16 16 56 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 85
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 128 16 16 ) ( 128 0 0 ) ( 128 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 400 -16 ) ( 0 400 0 ) ( 16 400 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 416 16 ) ( 0 416 0 ) ( 16 416 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 56 ) ( 0 0 56 ) ( -16 16 56 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 86
+{
+( -128 -16 16 ) ( -128 0 0 ) ( -128 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 128 16 16 ) ( 128 0 0 ) ( 128 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 464 -16 ) ( 0 464 0 ) ( 16 464 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 480 16 ) ( 0 480 0 ) ( 16 480 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 56 ) ( 0 0 56 ) ( -16 16 56 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 87
+{
+( 62.354 324 56 ) ( 72 288 56 ) ( 72 288 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 36 350.354 56 ) ( 62.354 324 56 ) ( 62.354 324 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 0 360 56 ) ( 36 350.354 56 ) ( 36 350.354 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -36 350.354 56 ) ( 0 360 56 ) ( 0 360 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -62.354 324 56 ) ( -36 350.354 56 ) ( -36 350.354 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -72 288 56 ) ( -62.354 324 56 ) ( -62.354 324 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -62.354 252 56 ) ( -72 288 56 ) ( -72 288 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -36 225.646 56 ) ( -62.354 252 56 ) ( -62.354 252 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 0 216 56 ) ( -36 225.646 56 ) ( -36 225.646 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 36 225.646 56 ) ( 0 216 56 ) ( 0 216 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 62.354 252 56 ) ( 36 225.646 56 ) ( 36 225.646 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 72 288 56 ) ( 62.354 252 56 ) ( 62.354 252 168 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 304 56 ) ( 0 288 56 ) ( 16 304 56 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 304 168 ) ( 0 288 168 ) ( -16 304 168 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 88
+{
+( 72.746 330 96 ) ( 84 288 96 ) ( 84 288 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 42 360.746 96 ) ( 72.746 330 96 ) ( 72.746 330 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 0 372 96 ) ( 42 360.746 96 ) ( 42 360.746 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -42 360.746 96 ) ( 0 372 96 ) ( 0 372 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -72.746 330 96 ) ( -42 360.746 96 ) ( -42 360.746 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -84 288 96 ) ( -72.746 330 96 ) ( -72.746 330 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -72.746 246 96 ) ( -84 288 96 ) ( -84 288 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -42 215.254 96 ) ( -72.746 246 96 ) ( -72.746 246 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 0 204 96 ) ( -42 215.254 96 ) ( -42 215.254 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 42 215.254 96 ) ( 0 204 96 ) ( 0 204 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 72.746 246 96 ) ( 42 215.254 96 ) ( 42 215.254 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 84 288 96 ) ( 72.746 246 96 ) ( 72.746 246 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 304 96 ) ( 0 288 96 ) ( 16 304 96 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 304 120 ) ( 0 288 120 ) ( -16 304 120 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 89
+{
+( -304 -16 16 ) ( -304 0 0 ) ( -304 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -208 16 16 ) ( -208 0 0 ) ( -208 -16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 208 -16 ) ( 0 208 0 ) ( 16 208 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 368 16 ) ( 0 368 0 ) ( 16 368 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 104 ) ( 0 0 104 ) ( -16 16 104 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 90
+{
+( 208 -16 16 ) ( 208 0 0 ) ( 208 16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 304 16 16 ) ( 304 0 0 ) ( 304 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 208 -16 ) ( 0 208 0 ) ( 16 208 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 368 16 ) ( 0 368 0 ) ( 16 368 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 104 ) ( 0 0 104 ) ( -16 16 104 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 91
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -224 -16 ) ( 0 -224 0 ) ( 16 -224 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -192 16 ) ( 0 -192 0 ) ( 16 -192 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 32 ) ( 0 0 32 ) ( -16 16 32 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 92
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -192 -16 ) ( 0 -192 0 ) ( 16 -192 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -160 16 ) ( 0 -160 0 ) ( 16 -160 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 93
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -160 -16 ) ( 0 -160 0 ) ( 16 -160 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -128 16 ) ( 0 -128 0 ) ( 16 -128 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 94
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -128 -16 ) ( 0 -128 0 ) ( 16 -128 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -96 16 ) ( 0 -96 0 ) ( 16 -96 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 80 ) ( 0 0 80 ) ( -16 16 80 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 95
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -96 -16 ) ( 0 -96 0 ) ( 16 -96 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -64 16 ) ( 0 -64 0 ) ( 16 -64 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 96
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -32 16 ) ( 0 -32 0 ) ( 16 -32 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 97
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -32 -16 ) ( 0 -32 0 ) ( 16 -32 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 0 16 ) ( 0 0 0 ) ( 16 0 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 98
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 0 -16 ) ( 0 0 0 ) ( 16 0 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 32 16 ) ( 0 32 0 ) ( 16 32 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 144 ) ( 0 0 144 ) ( -16 16 144 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 99
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 32 -16 ) ( 0 32 0 ) ( 16 32 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 64 16 ) ( 0 64 0 ) ( 16 64 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 100
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 64 -16 ) ( 0 64 0 ) ( 16 64 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 96 16 ) ( 0 96 0 ) ( 16 96 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 101
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 96 -16 ) ( 0 96 0 ) ( 16 96 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 128 16 ) ( 0 128 0 ) ( 16 128 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 102
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -976 16 16 ) ( -976 0 0 ) ( -976 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 128 -16 ) ( 0 128 0 ) ( 16 128 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 160 16 ) ( 0 160 0 ) ( 16 160 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 103
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -224 -16 ) ( 0 -224 0 ) ( 16 -224 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -192 16 ) ( 0 -192 0 ) ( 16 -192 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 32 ) ( 0 0 32 ) ( -16 16 32 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 104
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -192 -16 ) ( 0 -192 0 ) ( 16 -192 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -160 16 ) ( 0 -160 0 ) ( 16 -160 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 105
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -160 -16 ) ( 0 -160 0 ) ( 16 -160 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -128 16 ) ( 0 -128 0 ) ( 16 -128 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 106
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -128 -16 ) ( 0 -128 0 ) ( 16 -128 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -96 16 ) ( 0 -96 0 ) ( 16 -96 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 80 ) ( 0 0 80 ) ( -16 16 80 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 107
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -96 -16 ) ( 0 -96 0 ) ( 16 -96 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -64 16 ) ( 0 -64 0 ) ( 16 -64 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 108
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -64 -16 ) ( 0 -64 0 ) ( 16 -64 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -32 16 ) ( 0 -32 0 ) ( 16 -32 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 109
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 -32 -16 ) ( 0 -32 0 ) ( 16 -32 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 0 16 ) ( 0 0 0 ) ( 16 0 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 110
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 0 -16 ) ( 0 0 0 ) ( 16 0 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 32 16 ) ( 0 32 0 ) ( 16 32 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 144 ) ( 0 0 144 ) ( -16 16 144 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 111
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 32 -16 ) ( 0 32 0 ) ( 16 32 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 64 16 ) ( 0 64 0 ) ( 16 64 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 160 ) ( 0 0 160 ) ( -16 16 160 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 112
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 64 -16 ) ( 0 64 0 ) ( 16 64 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 96 16 ) ( 0 96 0 ) ( 16 96 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 176 ) ( 0 0 176 ) ( -16 16 176 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 113
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 96 -16 ) ( 0 96 0 ) ( 16 96 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 128 16 ) ( 0 128 0 ) ( 16 128 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 114
+{
+( 976 -16 16 ) ( 976 0 0 ) ( 976 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 128 -16 ) ( 0 128 0 ) ( 16 128 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 160 16 ) ( 0 160 0 ) ( 16 160 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 115
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -384 16 16 ) ( -384 0 0 ) ( -384 -16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 160 -16 ) ( 0 160 0 ) ( 16 160 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 384 16 ) ( 0 384 0 ) ( 16 384 -16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 192 ) ( 0 0 192 ) ( 16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 116
+{
+( 384 -16 16 ) ( 384 0 0 ) ( 384 16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1200 16 16 ) ( 1200 0 0 ) ( 1200 -16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 160 -16 ) ( 0 160 0 ) ( 16 160 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 384 16 ) ( 0 384 0 ) ( 16 384 -16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 192 ) ( 0 0 192 ) ( 16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 117
+{
+( -576 -16 16 ) ( -576 0 0 ) ( -576 16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -384 16 16 ) ( -384 0 0 ) ( -384 -16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -32 -16 ) ( 0 -32 0 ) ( 16 -32 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 800 16 ) ( 0 800 0 ) ( 16 800 -16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 192 ) ( 0 0 192 ) ( 16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 118
+{
+( 384 -16 16 ) ( 384 0 0 ) ( 384 16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 576 16 16 ) ( 576 0 0 ) ( 576 -16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -32 -16 ) ( 0 -32 0 ) ( 16 -32 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 800 16 ) ( 0 800 0 ) ( 16 800 -16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 192 ) ( 0 0 192 ) ( 16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 119
+{
+( -576 -16 16 ) ( -576 0 0 ) ( -576 16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 576 16 16 ) ( 576 0 0 ) ( 576 -16 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 640 -16 ) ( 0 640 0 ) ( 16 640 16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 800 16 ) ( 0 800 0 ) ( 16 800 -16 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 192 ) ( 0 0 192 ) ( 16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 120
+{
+( -390 -16 16 ) ( -390 0 0 ) ( -390 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -378 16 16 ) ( -378 0 0 ) ( -378 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -6 -16 ) ( 0 -6 0 ) ( 16 -6 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 6 16 ) ( 0 6 0 ) ( 16 6 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 121
+{
+( -390 -16 16 ) ( -390 0 0 ) ( -390 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -378 16 16 ) ( -378 0 0 ) ( -378 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 154 -16 ) ( 0 154 0 ) ( 16 154 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 166 16 ) ( 0 166 0 ) ( 16 166 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 122
+{
+( -390 -16 16 ) ( -390 0 0 ) ( -390 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -378 16 16 ) ( -378 0 0 ) ( -378 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 314 -16 ) ( 0 314 0 ) ( 16 314 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 326 16 ) ( 0 326 0 ) ( 16 326 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 123
+{
+( -390 -16 16 ) ( -390 0 0 ) ( -390 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -378 16 16 ) ( -378 0 0 ) ( -378 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 474 -16 ) ( 0 474 0 ) ( 16 474 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 486 16 ) ( 0 486 0 ) ( 16 486 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 124
+{
+( -390 -16 16 ) ( -390 0 0 ) ( -390 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -378 16 16 ) ( -378 0 0 ) ( -378 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 634 -16 ) ( 0 634 0 ) ( 16 634 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 646 16 ) ( 0 646 0 ) ( 16 646 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 125
+{
+( -390 -16 16 ) ( -390 0 0 ) ( -390 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -378 16 16 ) ( -378 0 0 ) ( -378 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 778 -16 ) ( 0 778 0 ) ( 16 778 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 790 16 ) ( 0 790 0 ) ( 16 790 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 126
+{
+( -389 -16 16 ) ( -389 0 0 ) ( -389 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -379 16 16 ) ( -379 0 0 ) ( -379 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -8 -16 ) ( 0 -8 0 ) ( 16 -8 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 792 16 ) ( 0 792 0 ) ( 16 792 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 264 ) ( 0 0 264 ) ( 16 16 264 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 274 ) ( 0 0 274 ) ( -16 16 274 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 127
+{
+( 378 -16 16 ) ( 378 0 0 ) ( 378 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 390 16 16 ) ( 390 0 0 ) ( 390 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -6 -16 ) ( 0 -6 0 ) ( 16 -6 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 6 16 ) ( 0 6 0 ) ( 16 6 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 128
+{
+( 378 -16 16 ) ( 378 0 0 ) ( 378 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 390 16 16 ) ( 390 0 0 ) ( 390 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 154 -16 ) ( 0 154 0 ) ( 16 154 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 166 16 ) ( 0 166 0 ) ( 16 166 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 129
+{
+( 378 -16 16 ) ( 378 0 0 ) ( 378 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 390 16 16 ) ( 390 0 0 ) ( 390 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 314 -16 ) ( 0 314 0 ) ( 16 314 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 326 16 ) ( 0 326 0 ) ( 16 326 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 130
+{
+( 378 -16 16 ) ( 378 0 0 ) ( 378 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 390 16 16 ) ( 390 0 0 ) ( 390 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 474 -16 ) ( 0 474 0 ) ( 16 474 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 486 16 ) ( 0 486 0 ) ( 16 486 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 131
+{
+( 378 -16 16 ) ( 378 0 0 ) ( 378 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 390 16 16 ) ( 390 0 0 ) ( 390 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 634 -16 ) ( 0 634 0 ) ( 16 634 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 646 16 ) ( 0 646 0 ) ( 16 646 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 132
+{
+( 378 -16 16 ) ( 378 0 0 ) ( 378 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 390 16 16 ) ( 390 0 0 ) ( 390 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 778 -16 ) ( 0 778 0 ) ( 16 778 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 790 16 ) ( 0 790 0 ) ( 16 790 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 133
+{
+( 379 -16 16 ) ( 379 0 0 ) ( 379 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 389 16 16 ) ( 389 0 0 ) ( 389 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -8 -16 ) ( 0 -8 0 ) ( 16 -8 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 792 16 ) ( 0 792 0 ) ( 16 792 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 264 ) ( 0 0 264 ) ( 16 16 264 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 274 ) ( 0 0 274 ) ( -16 16 274 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 134
+{
+( -582 -16 16 ) ( -582 0 0 ) ( -582 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -570 16 16 ) ( -570 0 0 ) ( -570 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 642 -16 ) ( 0 642 0 ) ( 16 642 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 654 16 ) ( 0 654 0 ) ( 16 654 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 135
+{
+( -390 -16 16 ) ( -390 0 0 ) ( -390 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -378 16 16 ) ( -378 0 0 ) ( -378 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 642 -16 ) ( 0 642 0 ) ( 16 642 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 654 16 ) ( 0 654 0 ) ( 16 654 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 136
+{
+( 378 -16 16 ) ( 378 0 0 ) ( 378 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 390 16 16 ) ( 390 0 0 ) ( 390 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 642 -16 ) ( 0 642 0 ) ( 16 642 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 654 16 ) ( 0 654 0 ) ( 16 654 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 137
+{
+( 570 -16 16 ) ( 570 0 0 ) ( 570 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 582 16 16 ) ( 582 0 0 ) ( 582 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 642 -16 ) ( 0 642 0 ) ( 16 642 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 654 16 ) ( 0 654 0 ) ( 16 654 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 138
+{
+( -576 -16 16 ) ( -576 0 0 ) ( -576 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 576 16 16 ) ( 576 0 0 ) ( 576 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 643 -16 ) ( 0 643 0 ) ( 16 643 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 653 16 ) ( 0 653 0 ) ( 16 653 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 264 ) ( 0 0 264 ) ( 16 16 264 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 274 ) ( 0 0 274 ) ( -16 16 274 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 139
+{
+( -582 -16 16 ) ( -582 0 0 ) ( -582 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -570 16 16 ) ( -570 0 0 ) ( -570 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 786 -16 ) ( 0 786 0 ) ( 16 786 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 798 16 ) ( 0 798 0 ) ( 16 798 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 140
+{
+( -390 -16 16 ) ( -390 0 0 ) ( -390 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -378 16 16 ) ( -378 0 0 ) ( -378 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 786 -16 ) ( 0 786 0 ) ( 16 786 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 798 16 ) ( 0 798 0 ) ( 16 798 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 141
+{
+( 378 -16 16 ) ( 378 0 0 ) ( 378 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 390 16 16 ) ( 390 0 0 ) ( 390 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 786 -16 ) ( 0 786 0 ) ( 16 786 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 798 16 ) ( 0 798 0 ) ( 16 798 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 142
+{
+( 570 -16 16 ) ( 570 0 0 ) ( 570 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 582 16 16 ) ( 582 0 0 ) ( 582 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 786 -16 ) ( 0 786 0 ) ( 16 786 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 798 16 ) ( 0 798 0 ) ( 16 798 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 272 ) ( 0 0 272 ) ( -16 16 272 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 143
+{
+( -576 -16 16 ) ( -576 0 0 ) ( -576 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 576 16 16 ) ( 576 0 0 ) ( 576 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 787 -16 ) ( 0 787 0 ) ( 16 787 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 797 16 ) ( 0 797 0 ) ( 16 797 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 264 ) ( 0 0 264 ) ( 16 16 264 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 274 ) ( 0 0 274 ) ( -16 16 274 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 144
+{
+( -1376 -16 16 ) ( -1376 0 0 ) ( -1376 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -1248 16 16 ) ( -1248 0 0 ) ( -1248 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 32 -16 ) ( 0 32 0 ) ( 16 32 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 192 16 ) ( 0 192 0 ) ( 16 192 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 145
+{
+( -944 -16 16 ) ( -944 0 0 ) ( -944 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -784 16 16 ) ( -784 0 0 ) ( -784 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 480 -16 ) ( 0 480 0 ) ( 16 480 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 608 16 ) ( 0 608 0 ) ( 16 608 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 146
+{
+( -1360 -16 16 ) ( -1360 0 0 ) ( -1360 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -1168 16 16 ) ( -1168 0 0 ) ( -1168 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 1088 16 ) ( 0 1088 0 ) ( 16 1088 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 147
+{
+( 1248 -16 16 ) ( 1248 0 0 ) ( 1248 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 1376 16 16 ) ( 1376 0 0 ) ( 1376 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 32 -16 ) ( 0 32 0 ) ( 16 32 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 192 16 ) ( 0 192 0 ) ( 16 192 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 148
+{
+( 784 -16 16 ) ( 784 0 0 ) ( 784 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 944 16 16 ) ( 944 0 0 ) ( 944 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 480 -16 ) ( 0 480 0 ) ( 16 480 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 608 16 ) ( 0 608 0 ) ( 16 608 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 149
+{
+( 1168 -16 16 ) ( 1168 0 0 ) ( 1168 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 1360 16 16 ) ( 1360 0 0 ) ( 1360 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 1088 16 ) ( 0 1088 0 ) ( 16 1088 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 150
+{
+( -512 -16 16 ) ( -512 0 0 ) ( -512 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -320 16 16 ) ( -320 0 0 ) ( -320 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 928 -16 ) ( 0 928 0 ) ( 16 928 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 976 16 ) ( 0 976 0 ) ( 16 976 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 151
+{
+( 320 -16 16 ) ( 320 0 0 ) ( 320 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 512 16 16 ) ( 512 0 0 ) ( 512 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 928 -16 ) ( 0 928 0 ) ( 16 928 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 976 16 ) ( 0 976 0 ) ( 16 976 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 152
+{
+( -608 -16 16 ) ( -608 0 0 ) ( -608 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -584 16 16 ) ( -584 0 0 ) ( -584 -16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 80 -16 ) ( 0 80 0 ) ( 16 80 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 176 16 ) ( 0 176 0 ) ( 16 176 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 72 ) ( 0 0 72 ) ( 16 16 72 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 144 ) ( 0 0 144 ) ( -16 16 144 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 153
+{
+( 584 -16 16 ) ( 584 0 0 ) ( 584 16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 608 16 16 ) ( 608 0 0 ) ( 608 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 80 -16 ) ( 0 80 0 ) ( 16 80 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 176 16 ) ( 0 176 0 ) ( 16 176 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 72 ) ( 0 0 72 ) ( 16 16 72 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 144 ) ( 0 0 144 ) ( -16 16 144 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 154
+{
+( -608 -16 16 ) ( -608 0 0 ) ( -608 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -584 16 16 ) ( -584 0 0 ) ( -584 -16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 520 -16 ) ( 0 520 0 ) ( 16 520 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 616 16 ) ( 0 616 0 ) ( 16 616 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 64 ) ( 0 0 64 ) ( 16 16 64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 136 ) ( 0 0 136 ) ( -16 16 136 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 155
+{
+( 584 -16 16 ) ( 584 0 0 ) ( 584 16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 608 16 16 ) ( 608 0 0 ) ( 608 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 520 -16 ) ( 0 520 0 ) ( 16 520 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 616 16 ) ( 0 616 0 ) ( 16 616 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 64 ) ( 0 0 64 ) ( 16 16 64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 136 ) ( 0 0 136 ) ( -16 16 136 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 156
+{
+( -1328 -16 16 ) ( -1328 0 0 ) ( -1328 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -1232 16 16 ) ( -1232 0 0 ) ( -1232 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -344 -16 ) ( 0 -344 0 ) ( 16 -344 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 64 ) ( 0 0 64 ) ( 16 16 64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 136 ) ( 0 0 136 ) ( -16 16 136 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 157
+{
+( -1008 -16 16 ) ( -1008 0 0 ) ( -1008 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -912 16 16 ) ( -912 0 0 ) ( -912 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -344 -16 ) ( 0 -344 0 ) ( 16 -344 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 64 ) ( 0 0 64 ) ( 16 16 64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 136 ) ( 0 0 136 ) ( -16 16 136 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 158
+{
+( 912 -16 16 ) ( 912 0 0 ) ( 912 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1008 16 16 ) ( 1008 0 0 ) ( 1008 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -344 -16 ) ( 0 -344 0 ) ( 16 -344 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 64 ) ( 0 0 64 ) ( 16 16 64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 136 ) ( 0 0 136 ) ( -16 16 136 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 159
+{
+( 1232 -16 16 ) ( 1232 0 0 ) ( 1232 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1328 16 16 ) ( 1328 0 0 ) ( 1328 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -344 -16 ) ( 0 -344 0 ) ( 16 -344 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 64 ) ( 0 0 64 ) ( 16 16 64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 136 ) ( 0 0 136 ) ( -16 16 136 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 160
+{
+( -1456 -16 16 ) ( -1456 0 0 ) ( -1456 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -1168 16 16 ) ( -1168 0 0 ) ( -1168 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -332 -16 ) ( 0 -332 0 ) ( 16 -332 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 272 ) ( 0 0 272 ) ( 16 16 272 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 161
+{
+( -848 -16 16 ) ( -848 0 0 ) ( -848 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -208 16 16 ) ( -208 0 0 ) ( -208 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -332 -16 ) ( 0 -332 0 ) ( 16 -332 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 272 ) ( 0 0 272 ) ( 16 16 272 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 162
+{
+( 208 -16 16 ) ( 208 0 0 ) ( 208 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 848 16 16 ) ( 848 0 0 ) ( 848 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -332 -16 ) ( 0 -332 0 ) ( 16 -332 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 272 ) ( 0 0 272 ) ( 16 16 272 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 163
+{
+( 1168 -16 16 ) ( 1168 0 0 ) ( 1168 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 1456 16 16 ) ( 1456 0 0 ) ( 1456 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -332 -16 ) ( 0 -332 0 ) ( 16 -332 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 272 ) ( 0 0 272 ) ( 16 16 272 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 164
+{
+( -1368 -16 16 ) ( -1368 0 0 ) ( -1368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -1352 16 16 ) ( -1352 0 0 ) ( -1352 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 165
+{
+( -1016 -16 16 ) ( -1016 0 0 ) ( -1016 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -1000 16 16 ) ( -1000 0 0 ) ( -1000 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 166
+{
+( -536 -16 16 ) ( -536 0 0 ) ( -536 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -520 16 16 ) ( -520 0 0 ) ( -520 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 167
+{
+( 520 -16 16 ) ( 520 0 0 ) ( 520 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 536 16 16 ) ( 536 0 0 ) ( 536 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 168
+{
+( 1000 -16 16 ) ( 1000 0 0 ) ( 1000 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1016 16 16 ) ( 1016 0 0 ) ( 1016 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 169
+{
+( 1352 -16 16 ) ( 1352 0 0 ) ( 1352 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 1368 16 16 ) ( 1368 0 0 ) ( 1368 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 352 ) ( 0 0 352 ) ( -16 16 352 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 170
+{
+( -832 -16 16 ) ( -832 0 0 ) ( -832 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -608 16 16 ) ( -608 0 0 ) ( -608 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) mohcommon/jeff-concrete-walla 0 0 0 0.500 0.500 0 0 0
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 256 ) ( 0 0 256 ) ( -16 16 256 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 171
+{
+( -800 -16 16 ) ( -800 0 0 ) ( -800 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -640 16 16 ) ( -640 0 0 ) ( -640 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -344 -16 ) ( 0 -344 0 ) ( 16 -344 16 ) general_industrial/verticalbrace 0 0 0 0.500 0.500 204800 35328 0 +surfaceparm detail
+( 16 -336 16 ) ( 0 -336 0 ) ( 16 -336 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 112 ) ( 0 0 112 ) ( 16 16 112 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 172
+{
+( 608 -16 16 ) ( 608 0 0 ) ( 608 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 832 16 16 ) ( 832 0 0 ) ( 832 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -336 -16 ) ( 0 -336 0 ) ( 16 -336 16 ) mohcommon/jeff-concrete-walla 0 0 0 0.500 0.500 0 0 0
+( 16 -320 16 ) ( 0 -320 0 ) ( 16 -320 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 256 ) ( 0 0 256 ) ( -16 16 256 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 173
+{
+( 640 -16 16 ) ( 640 0 0 ) ( 640 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 800 16 16 ) ( 800 0 0 ) ( 800 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 -344 -16 ) ( 0 -344 0 ) ( 16 -344 16 ) general_industrial/verticalbrace 0 0 0 0.500 0.500 204800 35328 0 +surfaceparm detail
+( 16 -336 16 ) ( 0 -336 0 ) ( 16 -336 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 112 ) ( 0 0 112 ) ( 16 16 112 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 174
+{
+( -1312 -16 16 ) ( -1312 0 0 ) ( -1312 16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -1216 16 16 ) ( -1216 0 0 ) ( -1216 -16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -1136 -16 ) ( 0 -1136 0 ) ( 16 -1136 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -1040 16 ) ( 0 -1040 0 ) ( 16 -1040 -16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) german/crate_reinforced1_top 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+}
+// brush 175
+{
+( -1200 -16 16 ) ( -1200 0 0 ) ( -1200 16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -1104 16 16 ) ( -1104 0 0 ) ( -1104 -16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -1136 -16 ) ( 0 -1136 0 ) ( 16 -1136 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -1040 16 ) ( 0 -1040 0 ) ( 16 -1040 -16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) german/crate_reinforced1_top 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+}
+// brush 176
+{
+( -1256 -16 16 ) ( -1256 0 0 ) ( -1256 16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -1160 16 16 ) ( -1160 0 0 ) ( -1160 -16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -1040 -16 ) ( 0 -1040 0 ) ( 16 -1040 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -944 16 ) ( 0 -944 0 ) ( 16 -944 -16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) german/crate_reinforced1_top 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+}
+// brush 177
+{
+( -864 -16 16 ) ( -864 0 0 ) ( -864 16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -768 16 16 ) ( -768 0 0 ) ( -768 -16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -688 -16 ) ( 0 -688 0 ) ( 16 -688 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -592 16 ) ( 0 -592 0 ) ( 16 -592 -16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) german/crate_reinforced1_top 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+}
+// brush 178
+{
+( 768 -16 16 ) ( 768 0 0 ) ( 768 16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 864 16 16 ) ( 864 0 0 ) ( 864 -16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -688 -16 ) ( 0 -688 0 ) ( 16 -688 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -592 16 ) ( 0 -592 0 ) ( 16 -592 -16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) german/crate_reinforced1_top 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+}
+// brush 179
+{
+( -96 -16 16 ) ( -96 0 0 ) ( -96 16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 0 16 16 ) ( 0 0 0 ) ( 0 -16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -1072 -16 ) ( 0 -1072 0 ) ( 16 -1072 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -976 16 ) ( 0 -976 0 ) ( 16 -976 -16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) german/crate_reinforced1_top 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+}
+// brush 180
+{
+( 16 -16 16 ) ( 16 0 0 ) ( 16 16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 112 16 16 ) ( 112 0 0 ) ( 112 -16 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -1072 -16 ) ( 0 -1072 0 ) ( 16 -1072 16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( 16 -976 16 ) ( 0 -976 0 ) ( 16 -976 -16 ) german/crate_reinforced1_side 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) german/crate_reinforced1_top 0 0 0 0.500 0.500 0 16384 0 +surfaceparm detail
+}
+// brush 181
+{
+( -1088 -16 16 ) ( -1088 0 0 ) ( -1088 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -736 16 16 ) ( -736 0 0 ) ( -736 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 -816 -16 ) ( 0 -816 0 ) ( 16 -816 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 -784 16 ) ( 0 -784 0 ) ( 16 -784 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 182
+{
+( 736 -16 16 ) ( 736 0 0 ) ( 736 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 1088 16 16 ) ( 1088 0 0 ) ( 1088 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 -816 -16 ) ( 0 -816 0 ) ( 16 -816 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 -784 16 ) ( 0 -784 0 ) ( 16 -784 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 183
+{
+( -416 -16 16 ) ( -416 0 0 ) ( -416 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -160 16 16 ) ( -160 0 0 ) ( -160 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 -576 -16 ) ( 0 -576 0 ) ( 16 -576 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 -544 16 ) ( 0 -544 0 ) ( 16 -544 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 184
+{
+( 160 -16 16 ) ( 160 0 0 ) ( 160 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 416 16 16 ) ( 416 0 0 ) ( 416 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 -576 -16 ) ( 0 -576 0 ) ( 16 -576 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( 16 -544 16 ) ( 0 -544 0 ) ( 16 -544 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 +surfaceparm detail surfaceDensity 64
+( -16 16 0 ) ( 0 0 0 ) ( 16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 185
+{
+( -908 -16 16 ) ( -908 0 0 ) ( -908 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -884 16 16 ) ( -884 0 0 ) ( -884 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -800 -16 ) ( 0 -800 0 ) ( 16 -800 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -736 16 ) ( 0 -736 0 ) ( 16 -736 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 128 ) ( 0 0 128 ) ( 16 16 128 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 186
+{
+( 884 -16 16 ) ( 884 0 0 ) ( 884 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 908 16 16 ) ( 908 0 0 ) ( 908 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -800 -16 ) ( 0 -800 0 ) ( 16 -800 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -736 16 ) ( 0 -736 0 ) ( 16 -736 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 128 ) ( 0 0 128 ) ( 16 16 128 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 187
+{
+( -300 -16 16 ) ( -300 0 0 ) ( -300 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -276 16 16 ) ( -276 0 0 ) ( -276 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -560 -16 ) ( 0 -560 0 ) ( 16 -560 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -496 16 ) ( 0 -496 0 ) ( 16 -496 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 128 ) ( 0 0 128 ) ( 16 16 128 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+// brush 188
+{
+( 276 -16 16 ) ( 276 0 0 ) ( 276 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 300 16 16 ) ( 300 0 0 ) ( 300 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -560 -16 ) ( 0 -560 0 ) ( 16 -560 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 -496 16 ) ( 0 -496 0 ) ( 16 -496 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 128 ) ( 0 0 128 ) ( 16 16 128 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+}
+}
+// entity 1
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-320 64 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 2
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-320 64 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 3
+{
+"classname" "light"
+"origin" "-320 64 296"
+"light" "90"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 4
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "320 64 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 5
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "320 64 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 6
+{
+"classname" "light"
+"origin" "320 64 296"
+"light" "90"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 7
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-320 384 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 8
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-320 384 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 9
+{
+"classname" "light"
+"origin" "-320 384 296"
+"light" "90"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 10
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "320 384 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 11
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "320 384 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 12
+{
+"classname" "light"
+"origin" "320 384 296"
+"light" "90"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 13
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-320 704 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 14
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-320 704 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 15
+{
+"classname" "light"
+"origin" "-320 704 296"
+"light" "90"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 16
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "320 704 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 17
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "320 704 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 18
+{
+"classname" "light"
+"origin" "320 704 296"
+"light" "90"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 19
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-1120 32 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 20
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-1120 32 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 21
+{
+"classname" "light"
+"origin" "-1120 32 296"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 22
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-1120 480 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 23
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-1120 480 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 24
+{
+"classname" "light"
+"origin" "-1120 480 296"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 25
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-1120 992 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 26
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-1120 992 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 27
+{
+"classname" "light"
+"origin" "-1120 992 296"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 28
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "1120 32 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 29
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "1120 32 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 30
+{
+"classname" "light"
+"origin" "1120 32 296"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 31
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "1120 480 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 32
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "1120 480 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 33
+{
+"classname" "light"
+"origin" "1120 480 296"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 34
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "1120 992 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 35
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "1120 992 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 36
+{
+"classname" "light"
+"origin" "1120 992 296"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 37
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-256 1040 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 38
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-256 1040 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 39
+{
+"classname" "light"
+"origin" "-256 1040 296"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 40
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "256 1040 332"
+"testanim" "idle"
+"scale" "1.20"
+"angle" "-2"
+}
+// entity 41
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "256 1040 324"
+"testanim" "idle"
+"scale" "0.70"
+"spawnflags" "1"
+}
+// entity 42
+{
+"classname" "light"
+"origin" "256 1040 296"
+"light" "75"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+"radius" "60"
+"spawnflags" "2"
+"angles" "90 0 0"
+}
+// entity 43
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-1040 272 168"
+"testanim" "idle"
+"scale" "1.0"
+"angle" "-2"
+}
+// entity 44
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-1040 272 160"
+"testanim" "idle"
+"scale" "0.55"
+"spawnflags" "1"
+}
+// entity 45
+{
+"classname" "light"
+"origin" "-1040 272 144"
+"light" "65"
+"_color" "1.0 0.82 0.62"
+"overbright_range" "0.15"
+}
+// entity 46
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-1040 560 168"
+"testanim" "idle"
+"scale" "1.0"
+"angle" "-2"
+}
+// entity 47
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-1040 560 160"
+"testanim" "idle"
+"scale" "0.55"
+"spawnflags" "1"
+}
+// entity 48
+{
+"classname" "light"
+"origin" "-1040 560 144"
+"light" "65"
+"_color" "1.0 0.82 0.62"
+"overbright_range" "0.15"
+}
+// entity 49
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "1040 272 168"
+"testanim" "idle"
+"scale" "1.0"
+"angle" "-2"
+}
+// entity 50
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "1040 272 160"
+"testanim" "idle"
+"scale" "0.55"
+"spawnflags" "1"
+}
+// entity 51
+{
+"classname" "light"
+"origin" "1040 272 144"
+"light" "65"
+"_color" "1.0 0.82 0.62"
+"overbright_range" "0.15"
+}
+// entity 52
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "1040 560 168"
+"testanim" "idle"
+"scale" "1.0"
+"angle" "-2"
+}
+// entity 53
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "1040 560 160"
+"testanim" "idle"
+"scale" "0.55"
+"spawnflags" "1"
+}
+// entity 54
+{
+"classname" "light"
+"origin" "1040 560 144"
+"light" "65"
+"_color" "1.0 0.82 0.62"
+"overbright_range" "0.15"
+}
+// entity 55
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "-480 688 168"
+"testanim" "idle"
+"scale" "1.0"
+"angle" "-2"
+}
+// entity 56
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "-480 688 160"
+"testanim" "idle"
+"scale" "0.55"
+"spawnflags" "1"
+}
+// entity 57
+{
+"classname" "light"
+"origin" "-480 688 144"
+"light" "65"
+"_color" "1.0 0.82 0.62"
+"overbright_range" "0.15"
+}
+// entity 58
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "480 688 168"
+"testanim" "idle"
+"scale" "1.0"
+"angle" "-2"
+}
+// entity 59
+{
+"classname" "script_model"
+"model" "static//corona_orange.tik"
+"origin" "480 688 160"
+"testanim" "idle"
+"scale" "0.55"
+"spawnflags" "1"
+}
+// entity 60
+{
+"classname" "light"
+"origin" "480 688 144"
+"light" "65"
+"_color" "1.0 0.82 0.62"
+"overbright_range" "0.15"
+}
+// entity 61
+{
+"classname" "light"
+"origin" "-240 160 112"
+"light" "60"
+"_color" "0.82 0.88 1.0"
+"overbright_range" "0.15"
+}
+// entity 62
+{
+"classname" "light"
+"origin" "240 160 112"
+"light" "60"
+"_color" "0.82 0.88 1.0"
+"overbright_range" "0.15"
+}
+// entity 63
+{
+"classname" "light"
+"origin" "-240 448 112"
+"light" "60"
+"_color" "0.82 0.88 1.0"
+"overbright_range" "0.15"
+}
+// entity 64
+{
+"classname" "light"
+"origin" "240 448 112"
+"light" "60"
+"_color" "0.82 0.88 1.0"
+"overbright_range" "0.15"
+}
+// entity 65
+{
+"classname" "light"
+"origin" "0 1040 144"
+"light" "65"
+"_color" "0.90 0.88 0.82"
+"overbright_range" "0.15"
+}
+// entity 66
+{
+"classname" "static_vehicle_german_opeltruck"
+"model" "static//vehicle_opeltruck.tik"
+"origin" "1120 -1016 0"
+"testanim" "idle"
+"scale" "1.0"
+"angle" "0"
+}
+// entity 67
+{
+"classname" "info_player_deathmatch"
+"origin" "-1328 -944 32"
+"angle" "35"
+}
+// entity 68
+{
+"classname" "info_player_deathmatch"
+"origin" "-640 -1040 32"
+"angle" "41"
+}
+// entity 69
+{
+"classname" "info_player_deathmatch"
+"origin" "416 -1056 32"
+"angle" "126"
+}
+// entity 70
+{
+"classname" "info_player_deathmatch"
+"origin" "1328 -656 32"
+"angle" "172"
+}
+// entity 71
+{
+"classname" "info_player_deathmatch"
+"origin" "-1248 -128 32"
+"angle" "47"
+}
+// entity 72
+{
+"classname" "info_player_deathmatch"
+"origin" "-864 736 32"
+"angle" "0"
+}
+// entity 73
+{
+"classname" "info_player_deathmatch"
+"origin" "1248 -128 32"
+"angle" "133"
+}
+// entity 74
+{
+"classname" "info_player_deathmatch"
+"origin" "864 736 32"
+"angle" "180"
+}
+// entity 75
+{
+"classname" "info_player_deathmatch"
+"origin" "-448 -128 32"
+"angle" "43"
+}
+// entity 76
+{
+"classname" "info_player_deathmatch"
+"origin" "448 -128 32"
+"angle" "137"
+}
+// entity 77
+{
+"classname" "info_player_deathmatch"
+"origin" "-432 512 32"
+"angle" "333"
+}
+// entity 78
+{
+"classname" "info_player_deathmatch"
+"origin" "432 512 32"
+"angle" "207"
+}
+// entity 79
+{
+"classname" "info_player_deathmatch"
+"origin" "-896 1056 32"
+"angle" "354"
+}
+// entity 80
+{
+"classname" "info_player_deathmatch"
+"origin" "896 1056 32"
+"angle" "186"
+}
+// entity 81
+{
+"classname" "info_player_deathmatch"
+"origin" "-480 96 240"
+"angle" "36"
+}
+// entity 82
+{
+"classname" "info_player_deathmatch"
+"origin" "480 544 240"
+"angle" "191"
+}
+// entity 83
+{
+"classname" "info_player_deathmatch"
+"origin" "-256 720 240"
+"angle" "313"
+}
+// entity 84
+{
+"classname" "info_player_deathmatch"
+"origin" "256 720 240"
+"angle" "227"
+}
+// entity 85
+{
+"classname" "info_player_allied"
+"origin" "-1408 -720 32"
+"angle" "28"
+}
+// entity 86
+{
+"classname" "info_player_allied"
+"origin" "-960 -1056 32"
+"angle" "61"
+}
+// entity 87
+{
+"classname" "info_player_allied"
+"origin" "-592 -960 32"
+"angle" "55"
+}
+// entity 88
+{
+"classname" "info_player_allied"
+"origin" "-256 -944 32"
+"angle" "61"
+}
+// entity 89
+{
+"classname" "info_player_allied"
+"origin" "256 -944 32"
+"angle" "119"
+}
+// entity 90
+{
+"classname" "info_player_allied"
+"origin" "592 -960 32"
+"angle" "125"
+}
+// entity 91
+{
+"classname" "info_player_allied"
+"origin" "960 -1056 32"
+"angle" "119"
+}
+// entity 92
+{
+"classname" "info_player_allied"
+"origin" "1328 -880 32"
+"angle" "133"
+}
+// entity 93
+{
+"classname" "info_player_axis"
+"origin" "-1408 800 32"
+"angle" "340"
+}
+// entity 94
+{
+"classname" "info_player_axis"
+"origin" "-960 1088 32"
+"angle" "306"
+}
+// entity 95
+{
+"classname" "info_player_axis"
+"origin" "-560 1056 32"
+"angle" "311"
+}
+// entity 96
+{
+"classname" "info_player_axis"
+"origin" "-240 1056 32"
+"angle" "304"
+}
+// entity 97
+{
+"classname" "info_player_axis"
+"origin" "240 1056 32"
+"angle" "236"
+}
+// entity 98
+{
+"classname" "info_player_axis"
+"origin" "560 1056 32"
+"angle" "229"
+}
+// entity 99
+{
+"classname" "info_player_axis"
+"origin" "960 1088 32"
+"angle" "234"
+}
+// entity 100
+{
+"classname" "info_player_axis"
+"origin" "1408 800 32"
+"angle" "200"
+}
+// entity 101
+{
+"classname" "info_player_start"
+"origin" "0 -1152 32"
+"angle" "90"
+}

@@ -1,0 +1,37 @@
+{
+    "schemaVersion":  1,
+    "qaRoot":  "C:\\tmp\\codex-codex_v2_depot-runtime",
+    "mapName":  "codex_v2_depot",
+    "gameType":  1,
+    "exactPk3Count":  8,
+    "candidateSha256":  "a46451bc445281079b647817b4bc45ec5137b0fd15a8f16d96b6d059bb826245",
+    "engineSha256":  "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
+    "bspParse":  [
+                     "[2026-08-08 23:44:17 UTC-5.000] BSP file loaded and parsed in 0.003 seconds"
+                 ],
+    "recast":  [
+                   "[2026-08-08 23:44:17 UTC-5.000] Recast navigation mesh(es) generated in 0.127 seconds"
+               ],
+    "botsEntered":  8,
+    "botNames":  [
+                     "bot1",
+                     "bot2",
+                     "bot3",
+                     "bot4",
+                     "bot5",
+                     "bot6",
+                     "bot7",
+                     "bot8"
+                 ],
+    "combatEvents":  23,
+    "minimumCombatEvents":  3,
+    "candidateDiagnostics":  [
+
+                             ],
+    "stockAssetDiagnostics":  [
+
+                              ],
+    "scriptErrorCount":  0,
+    "sampleSeconds":  40,
+    "log":  "C:\\tmp\\codex-codex_v2_depot-runtime\\home\\main\\qconsole.log"
+}

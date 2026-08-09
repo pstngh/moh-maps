@@ -1,0 +1,15 @@
+main:
+
+setcvar "g_obj_alliedtext1" "V2 Depot"
+setcvar "g_obj_alliedtext2" "Original stock-AA industrial deathmatch"
+setcvar "g_obj_alliedtext3" "Open passages; three lower routes; upper loop"
+setcvar "g_obj_axistext1" ""
+setcvar "g_obj_axistext2" ""
+setcvar "g_obj_axistext3" ""
+
+level waittill prespawn
+exec global/DMprecache.scr
+level.script = maps/dm/codex_v2_depot.scr
+level waittill spawn
+
+end

@@ -1,0 +1,3939 @@
+{
+  "schemaVersion": 2,
+  "mapName": "codex_v2_depot",
+  "title": "V2 Depot",
+  "target": "Medal of Honor: Allied Assault BSP 19 / OpenMoHAA DM and TDM",
+  "designIntent": "Original compact V2-industrial depot using measured obj_team2 construction grammar, stock AA materials, face-specific texturing, broad bot routes, and no moving doors.",
+  "sourceReference": {
+    "path": "aa/obj_team2.map",
+    "policy": "construction grammar, material families, proportions, entity conventions, and lighting ratios only; no copied layout",
+    "measuredGrammar": "obj_team2-construction-grammar.json"
+  },
+  "bounds": {
+    "playable": [
+      -1472,
+      -1216,
+      1472,
+      1216,
+      0,
+      376
+    ],
+    "sealed": [
+      -1536,
+      -1280,
+      1536,
+      1280,
+      -64,
+      608
+    ]
+  },
+  "brushes": {
+    "total": 189,
+    "boxes": 187,
+    "cylinders": 2,
+    "roles": {
+      "assembly_plinth": 1,
+      "assembly_rail": 2,
+      "assembly_tie": 7,
+      "bunker_floor": 1,
+      "bunker_rear": 1,
+      "bunker_roof": 1,
+      "bunker_side": 2,
+      "catwalk_handrail": 2,
+      "catwalk_post": 12,
+      "catwalk_stair": 24,
+      "ceiling_beam": 5,
+      "door_frame": 9,
+      "east_catwalk": 1,
+      "east_landing": 1,
+      "engine_console": 2,
+      "facade_band": 4,
+      "facade_brace": 2,
+      "facade_inset": 2,
+      "facade_pier": 6,
+      "facade_utility": 4,
+      "front_lintel": 3,
+      "front_wall": 4,
+      "hall_column": 8,
+      "hall_divider": 6,
+      "hall_divider_lintel": 4,
+      "interior_ceiling": 1,
+      "interior_frame": 12,
+      "rear_catwalk": 1,
+      "rear_frame": 6,
+      "rear_hall_lintel": 2,
+      "rear_hall_wall": 3,
+      "rear_handrail": 2,
+      "rear_rail_post": 8,
+      "service_cover": 8,
+      "sky_ceiling": 1,
+      "sky_east": 1,
+      "sky_north": 1,
+      "sky_south": 1,
+      "sky_west": 1,
+      "test_engine": 1,
+      "test_engine_band": 1,
+      "utility_box": 4,
+      "west_catwalk": 1,
+      "west_landing": 1,
+      "yard_blast_wall": 4,
+      "yard_crate": 7,
+      "yard_floor": 1,
+      "yard_retaining": 3,
+      "yard_wall_cap": 4
+    },
+    "hiddenFacePolicy": "All box faces default to common/caulk; only deliberately exposed faces receive stock visible materials."
+  },
+  "materials": {
+    "stockOnly": true,
+    "bundledOriginalTextures": [],
+    "used": [
+      "algiers/doccrtset_1stepsml",
+      "algiers/whsflrset1_1b",
+      "common/caulk",
+      "das_boot/ironwall1",
+      "general_industrial/deckgrate_set1b",
+      "general_industrial/utilboxtop",
+      "general_industrial/utilitybox_front",
+      "general_industrial/utilitybox_side",
+      "general_industrial/verticalbrace",
+      "general_structure/bunker_wall",
+      "general_structure/jh_conc512b",
+      "german/crate_reinforced1_side",
+      "german/crate_reinforced1_top",
+      "german/rusty_iron",
+      "mohcommon/ibeam_1a",
+      "mohcommon/jeff-concrete-walla",
+      "mohcommon/jeff-concrete-wallb",
+      "normandy/bunk_ceiling",
+      "normandy/bunk_ceiling_beam",
+      "normandy/bunker_conc3",
+      "sky/mohday1"
+    ]
+  },
+  "constructionRules": {
+    "structuralGrid": 16,
+    "detailGrid": 2,
+    "wallThicknesses": [
+      32
+    ],
+    "primaryOpeningMinimum": 192,
+    "primaryCrossfireOpeningMinimum": 256,
+    "stair": {
+      "rise": 16,
+      "tread": 32,
+      "width": 224,
+      "countPerFlight": 12
+    },
+    "catwalkWidth": 192,
+    "lowerCatwalkHeadroom": 192,
+    "movingDoors": 0
+  },
+  "collision": {
+    "boxes": [
+      {
+        "role": "yard_floor",
+        "min": [
+          -1504,
+          -1248,
+          -64
+        ],
+        "max": [
+          1504,
+          -320,
+          0
+        ]
+      },
+      {
+        "role": "bunker_floor",
+        "min": [
+          -1504,
+          -320,
+          -64
+        ],
+        "max": [
+          1504,
+          1248,
+          0
+        ]
+      },
+      {
+        "role": "sky_west",
+        "min": [
+          -1536,
+          -1280,
+          -64
+        ],
+        "max": [
+          -1504,
+          1280,
+          608
+        ]
+      },
+      {
+        "role": "sky_east",
+        "min": [
+          1504,
+          -1280,
+          -64
+        ],
+        "max": [
+          1536,
+          1280,
+          608
+        ]
+      },
+      {
+        "role": "sky_south",
+        "min": [
+          -1504,
+          -1280,
+          -64
+        ],
+        "max": [
+          1504,
+          -1248,
+          608
+        ]
+      },
+      {
+        "role": "sky_north",
+        "min": [
+          -1504,
+          1248,
+          -64
+        ],
+        "max": [
+          1504,
+          1280,
+          608
+        ]
+      },
+      {
+        "role": "sky_ceiling",
+        "min": [
+          -1536,
+          -1280,
+          576
+        ],
+        "max": [
+          1536,
+          1280,
+          608
+        ]
+      },
+      {
+        "role": "yard_retaining",
+        "min": [
+          -1504,
+          -1248,
+          0
+        ],
+        "max": [
+          -1472,
+          -320,
+          192
+        ]
+      },
+      {
+        "role": "yard_retaining",
+        "min": [
+          1472,
+          -1248,
+          0
+        ],
+        "max": [
+          1504,
+          -320,
+          192
+        ]
+      },
+      {
+        "role": "yard_retaining",
+        "min": [
+          -1472,
+          -1248,
+          0
+        ],
+        "max": [
+          1472,
+          -1216,
+          160
+        ]
+      },
+      {
+        "role": "front_wall",
+        "min": [
+          -1472,
+          -320,
+          0
+        ],
+        "max": [
+          -1152,
+          -288,
+          384
+        ]
+      },
+      {
+        "role": "front_wall",
+        "min": [
+          -864,
+          -320,
+          0
+        ],
+        "max": [
+          -192,
+          -288,
+          384
+        ]
+      },
+      {
+        "role": "front_wall",
+        "min": [
+          192,
+          -320,
+          0
+        ],
+        "max": [
+          864,
+          -288,
+          384
+        ]
+      },
+      {
+        "role": "front_wall",
+        "min": [
+          1152,
+          -320,
+          0
+        ],
+        "max": [
+          1472,
+          -288,
+          384
+        ]
+      },
+      {
+        "role": "front_lintel",
+        "min": [
+          -1152,
+          -320,
+          224
+        ],
+        "max": [
+          -864,
+          -288,
+          384
+        ]
+      },
+      {
+        "role": "door_frame",
+        "min": [
+          -1152,
+          -336,
+          0
+        ],
+        "max": [
+          -1136,
+          -288,
+          240
+        ]
+      },
+      {
+        "role": "door_frame",
+        "min": [
+          -880,
+          -336,
+          0
+        ],
+        "max": [
+          -864,
+          -288,
+          240
+        ]
+      },
+      {
+        "role": "door_frame",
+        "min": [
+          -1152,
+          -336,
+          224
+        ],
+        "max": [
+          -864,
+          -288,
+          240
+        ]
+      },
+      {
+        "role": "front_lintel",
+        "min": [
+          -192,
+          -320,
+          224
+        ],
+        "max": [
+          192,
+          -288,
+          384
+        ]
+      },
+      {
+        "role": "door_frame",
+        "min": [
+          -192,
+          -336,
+          0
+        ],
+        "max": [
+          -176,
+          -288,
+          240
+        ]
+      },
+      {
+        "role": "door_frame",
+        "min": [
+          176,
+          -336,
+          0
+        ],
+        "max": [
+          192,
+          -288,
+          240
+        ]
+      },
+      {
+        "role": "door_frame",
+        "min": [
+          -192,
+          -336,
+          224
+        ],
+        "max": [
+          192,
+          -288,
+          240
+        ]
+      },
+      {
+        "role": "front_lintel",
+        "min": [
+          864,
+          -320,
+          224
+        ],
+        "max": [
+          1152,
+          -288,
+          384
+        ]
+      },
+      {
+        "role": "door_frame",
+        "min": [
+          864,
+          -336,
+          0
+        ],
+        "max": [
+          880,
+          -288,
+          240
+        ]
+      },
+      {
+        "role": "door_frame",
+        "min": [
+          1136,
+          -336,
+          0
+        ],
+        "max": [
+          1152,
+          -288,
+          240
+        ]
+      },
+      {
+        "role": "door_frame",
+        "min": [
+          864,
+          -336,
+          224
+        ],
+        "max": [
+          1152,
+          -288,
+          240
+        ]
+      },
+      {
+        "role": "bunker_side",
+        "min": [
+          -1504,
+          -320,
+          0
+        ],
+        "max": [
+          -1472,
+          1248,
+          384
+        ]
+      },
+      {
+        "role": "bunker_side",
+        "min": [
+          1472,
+          -320,
+          0
+        ],
+        "max": [
+          1504,
+          1248,
+          384
+        ]
+      },
+      {
+        "role": "bunker_rear",
+        "min": [
+          -1472,
+          1216,
+          0
+        ],
+        "max": [
+          1472,
+          1248,
+          384
+        ]
+      },
+      {
+        "role": "bunker_roof",
+        "min": [
+          -1504,
+          -320,
+          384
+        ],
+        "max": [
+          1504,
+          1248,
+          416
+        ]
+      },
+      {
+        "role": "hall_divider",
+        "min": [
+          -640,
+          -288,
+          0
+        ],
+        "max": [
+          -608,
+          -64,
+          376
+        ]
+      },
+      {
+        "role": "hall_divider",
+        "min": [
+          -640,
+          192,
+          0
+        ],
+        "max": [
+          -608,
+          448,
+          376
+        ]
+      },
+      {
+        "role": "hall_divider",
+        "min": [
+          -640,
+          640,
+          0
+        ],
+        "max": [
+          -608,
+          832,
+          376
+        ]
+      },
+      {
+        "role": "hall_divider_lintel",
+        "min": [
+          -640,
+          -64,
+          224
+        ],
+        "max": [
+          -608,
+          192,
+          376
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          -648,
+          -64,
+          0
+        ],
+        "max": [
+          -600,
+          -48,
+          240
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          -648,
+          176,
+          0
+        ],
+        "max": [
+          -600,
+          192,
+          240
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          -648,
+          -64,
+          224
+        ],
+        "max": [
+          -600,
+          192,
+          240
+        ]
+      },
+      {
+        "role": "hall_divider_lintel",
+        "min": [
+          -640,
+          448,
+          224
+        ],
+        "max": [
+          -608,
+          640,
+          376
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          -648,
+          448,
+          0
+        ],
+        "max": [
+          -600,
+          464,
+          240
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          -648,
+          624,
+          0
+        ],
+        "max": [
+          -600,
+          640,
+          240
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          -648,
+          448,
+          224
+        ],
+        "max": [
+          -600,
+          640,
+          240
+        ]
+      },
+      {
+        "role": "hall_divider",
+        "min": [
+          608,
+          -288,
+          0
+        ],
+        "max": [
+          640,
+          -64,
+          376
+        ]
+      },
+      {
+        "role": "hall_divider",
+        "min": [
+          608,
+          192,
+          0
+        ],
+        "max": [
+          640,
+          448,
+          376
+        ]
+      },
+      {
+        "role": "hall_divider",
+        "min": [
+          608,
+          640,
+          0
+        ],
+        "max": [
+          640,
+          832,
+          376
+        ]
+      },
+      {
+        "role": "hall_divider_lintel",
+        "min": [
+          608,
+          -64,
+          224
+        ],
+        "max": [
+          640,
+          192,
+          376
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          600,
+          -64,
+          0
+        ],
+        "max": [
+          648,
+          -48,
+          240
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          600,
+          176,
+          0
+        ],
+        "max": [
+          648,
+          192,
+          240
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          600,
+          -64,
+          224
+        ],
+        "max": [
+          648,
+          192,
+          240
+        ]
+      },
+      {
+        "role": "hall_divider_lintel",
+        "min": [
+          608,
+          448,
+          224
+        ],
+        "max": [
+          640,
+          640,
+          376
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          600,
+          448,
+          0
+        ],
+        "max": [
+          648,
+          464,
+          240
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          600,
+          624,
+          0
+        ],
+        "max": [
+          648,
+          640,
+          240
+        ]
+      },
+      {
+        "role": "interior_frame",
+        "min": [
+          600,
+          448,
+          224
+        ],
+        "max": [
+          648,
+          640,
+          240
+        ]
+      },
+      {
+        "role": "rear_hall_wall",
+        "min": [
+          -608,
+          832,
+          0
+        ],
+        "max": [
+          -448,
+          864,
+          376
+        ]
+      },
+      {
+        "role": "rear_hall_wall",
+        "min": [
+          -192,
+          832,
+          0
+        ],
+        "max": [
+          192,
+          864,
+          376
+        ]
+      },
+      {
+        "role": "rear_hall_wall",
+        "min": [
+          448,
+          832,
+          0
+        ],
+        "max": [
+          608,
+          864,
+          376
+        ]
+      },
+      {
+        "role": "rear_hall_lintel",
+        "min": [
+          -448,
+          832,
+          224
+        ],
+        "max": [
+          -192,
+          864,
+          376
+        ]
+      },
+      {
+        "role": "rear_frame",
+        "min": [
+          -448,
+          824,
+          0
+        ],
+        "max": [
+          -432,
+          872,
+          240
+        ]
+      },
+      {
+        "role": "rear_frame",
+        "min": [
+          -208,
+          824,
+          0
+        ],
+        "max": [
+          -192,
+          872,
+          240
+        ]
+      },
+      {
+        "role": "rear_frame",
+        "min": [
+          -448,
+          824,
+          224
+        ],
+        "max": [
+          -192,
+          872,
+          240
+        ]
+      },
+      {
+        "role": "rear_hall_lintel",
+        "min": [
+          192,
+          832,
+          224
+        ],
+        "max": [
+          448,
+          864,
+          376
+        ]
+      },
+      {
+        "role": "rear_frame",
+        "min": [
+          192,
+          824,
+          0
+        ],
+        "max": [
+          208,
+          872,
+          240
+        ]
+      },
+      {
+        "role": "rear_frame",
+        "min": [
+          432,
+          824,
+          0
+        ],
+        "max": [
+          448,
+          872,
+          240
+        ]
+      },
+      {
+        "role": "rear_frame",
+        "min": [
+          192,
+          824,
+          224
+        ],
+        "max": [
+          448,
+          872,
+          240
+        ]
+      },
+      {
+        "role": "ceiling_beam",
+        "min": [
+          -1472,
+          -40,
+          344
+        ],
+        "max": [
+          1472,
+          -24,
+          360
+        ]
+      },
+      {
+        "role": "ceiling_beam",
+        "min": [
+          -1472,
+          216,
+          344
+        ],
+        "max": [
+          1472,
+          232,
+          360
+        ]
+      },
+      {
+        "role": "ceiling_beam",
+        "min": [
+          -1472,
+          472,
+          344
+        ],
+        "max": [
+          1472,
+          488,
+          360
+        ]
+      },
+      {
+        "role": "ceiling_beam",
+        "min": [
+          -1472,
+          728,
+          344
+        ],
+        "max": [
+          1472,
+          744,
+          360
+        ]
+      },
+      {
+        "role": "ceiling_beam",
+        "min": [
+          -1472,
+          984,
+          344
+        ],
+        "max": [
+          1472,
+          1000,
+          360
+        ]
+      },
+      {
+        "role": "hall_column",
+        "min": [
+          -604,
+          -44,
+          0
+        ],
+        "max": [
+          -580,
+          -20,
+          344
+        ]
+      },
+      {
+        "role": "hall_column",
+        "min": [
+          -604,
+          212,
+          0
+        ],
+        "max": [
+          -580,
+          236,
+          344
+        ]
+      },
+      {
+        "role": "hall_column",
+        "min": [
+          -604,
+          468,
+          0
+        ],
+        "max": [
+          -580,
+          492,
+          344
+        ]
+      },
+      {
+        "role": "hall_column",
+        "min": [
+          -604,
+          724,
+          0
+        ],
+        "max": [
+          -580,
+          748,
+          344
+        ]
+      },
+      {
+        "role": "hall_column",
+        "min": [
+          580,
+          -44,
+          0
+        ],
+        "max": [
+          604,
+          -20,
+          344
+        ]
+      },
+      {
+        "role": "hall_column",
+        "min": [
+          580,
+          212,
+          0
+        ],
+        "max": [
+          604,
+          236,
+          344
+        ]
+      },
+      {
+        "role": "hall_column",
+        "min": [
+          580,
+          468,
+          0
+        ],
+        "max": [
+          604,
+          492,
+          344
+        ]
+      },
+      {
+        "role": "hall_column",
+        "min": [
+          580,
+          724,
+          0
+        ],
+        "max": [
+          604,
+          748,
+          344
+        ]
+      },
+      {
+        "role": "assembly_plinth",
+        "min": [
+          -176,
+          32,
+          0
+        ],
+        "max": [
+          176,
+          544,
+          32
+        ]
+      },
+      {
+        "role": "assembly_rail",
+        "min": [
+          -144,
+          56,
+          32
+        ],
+        "max": [
+          -112,
+          520,
+          48
+        ]
+      },
+      {
+        "role": "assembly_rail",
+        "min": [
+          112,
+          56,
+          32
+        ],
+        "max": [
+          144,
+          520,
+          48
+        ]
+      },
+      {
+        "role": "assembly_tie",
+        "min": [
+          -128,
+          80,
+          48
+        ],
+        "max": [
+          128,
+          96,
+          56
+        ]
+      },
+      {
+        "role": "assembly_tie",
+        "min": [
+          -128,
+          144,
+          48
+        ],
+        "max": [
+          128,
+          160,
+          56
+        ]
+      },
+      {
+        "role": "assembly_tie",
+        "min": [
+          -128,
+          208,
+          48
+        ],
+        "max": [
+          128,
+          224,
+          56
+        ]
+      },
+      {
+        "role": "assembly_tie",
+        "min": [
+          -128,
+          272,
+          48
+        ],
+        "max": [
+          128,
+          288,
+          56
+        ]
+      },
+      {
+        "role": "assembly_tie",
+        "min": [
+          -128,
+          336,
+          48
+        ],
+        "max": [
+          128,
+          352,
+          56
+        ]
+      },
+      {
+        "role": "assembly_tie",
+        "min": [
+          -128,
+          400,
+          48
+        ],
+        "max": [
+          128,
+          416,
+          56
+        ]
+      },
+      {
+        "role": "assembly_tie",
+        "min": [
+          -128,
+          464,
+          48
+        ],
+        "max": [
+          128,
+          480,
+          56
+        ]
+      },
+      {
+        "role": "engine_console",
+        "min": [
+          -304,
+          208,
+          0
+        ],
+        "max": [
+          -208,
+          368,
+          104
+        ]
+      },
+      {
+        "role": "engine_console",
+        "min": [
+          208,
+          208,
+          0
+        ],
+        "max": [
+          304,
+          368,
+          104
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          -224,
+          0
+        ],
+        "max": [
+          -976,
+          -192,
+          32
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          -192,
+          0
+        ],
+        "max": [
+          -976,
+          -160,
+          48
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          -160,
+          0
+        ],
+        "max": [
+          -976,
+          -128,
+          64
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          -128,
+          0
+        ],
+        "max": [
+          -976,
+          -96,
+          80
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          -96,
+          0
+        ],
+        "max": [
+          -976,
+          -64,
+          96
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          -64,
+          0
+        ],
+        "max": [
+          -976,
+          -32,
+          112
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          -32,
+          0
+        ],
+        "max": [
+          -976,
+          0,
+          128
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          0,
+          0
+        ],
+        "max": [
+          -976,
+          32,
+          144
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          32,
+          0
+        ],
+        "max": [
+          -976,
+          64,
+          160
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          64,
+          0
+        ],
+        "max": [
+          -976,
+          96,
+          176
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          96,
+          0
+        ],
+        "max": [
+          -976,
+          128,
+          192
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          -1200,
+          128,
+          0
+        ],
+        "max": [
+          -976,
+          160,
+          208
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          -224,
+          0
+        ],
+        "max": [
+          1200,
+          -192,
+          32
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          -192,
+          0
+        ],
+        "max": [
+          1200,
+          -160,
+          48
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          -160,
+          0
+        ],
+        "max": [
+          1200,
+          -128,
+          64
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          -128,
+          0
+        ],
+        "max": [
+          1200,
+          -96,
+          80
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          -96,
+          0
+        ],
+        "max": [
+          1200,
+          -64,
+          96
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          -64,
+          0
+        ],
+        "max": [
+          1200,
+          -32,
+          112
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          -32,
+          0
+        ],
+        "max": [
+          1200,
+          0,
+          128
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          0,
+          0
+        ],
+        "max": [
+          1200,
+          32,
+          144
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          32,
+          0
+        ],
+        "max": [
+          1200,
+          64,
+          160
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          64,
+          0
+        ],
+        "max": [
+          1200,
+          96,
+          176
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          96,
+          0
+        ],
+        "max": [
+          1200,
+          128,
+          192
+        ]
+      },
+      {
+        "role": "catwalk_stair",
+        "min": [
+          976,
+          128,
+          0
+        ],
+        "max": [
+          1200,
+          160,
+          208
+        ]
+      },
+      {
+        "role": "west_landing",
+        "min": [
+          -1200,
+          160,
+          192
+        ],
+        "max": [
+          -384,
+          384,
+          208
+        ]
+      },
+      {
+        "role": "east_landing",
+        "min": [
+          384,
+          160,
+          192
+        ],
+        "max": [
+          1200,
+          384,
+          208
+        ]
+      },
+      {
+        "role": "west_catwalk",
+        "min": [
+          -576,
+          -32,
+          192
+        ],
+        "max": [
+          -384,
+          800,
+          208
+        ]
+      },
+      {
+        "role": "east_catwalk",
+        "min": [
+          384,
+          -32,
+          192
+        ],
+        "max": [
+          576,
+          800,
+          208
+        ]
+      },
+      {
+        "role": "rear_catwalk",
+        "min": [
+          -576,
+          640,
+          192
+        ],
+        "max": [
+          576,
+          800,
+          208
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          -390,
+          -6,
+          208
+        ],
+        "max": [
+          -378,
+          6,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          -390,
+          154,
+          208
+        ],
+        "max": [
+          -378,
+          166,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          -390,
+          314,
+          208
+        ],
+        "max": [
+          -378,
+          326,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          -390,
+          474,
+          208
+        ],
+        "max": [
+          -378,
+          486,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          -390,
+          634,
+          208
+        ],
+        "max": [
+          -378,
+          646,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          -390,
+          778,
+          208
+        ],
+        "max": [
+          -378,
+          790,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_handrail",
+        "min": [
+          -389,
+          -8,
+          264
+        ],
+        "max": [
+          -379,
+          792,
+          274
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          378,
+          -6,
+          208
+        ],
+        "max": [
+          390,
+          6,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          378,
+          154,
+          208
+        ],
+        "max": [
+          390,
+          166,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          378,
+          314,
+          208
+        ],
+        "max": [
+          390,
+          326,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          378,
+          474,
+          208
+        ],
+        "max": [
+          390,
+          486,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          378,
+          634,
+          208
+        ],
+        "max": [
+          390,
+          646,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_post",
+        "min": [
+          378,
+          778,
+          208
+        ],
+        "max": [
+          390,
+          790,
+          272
+        ]
+      },
+      {
+        "role": "catwalk_handrail",
+        "min": [
+          379,
+          -8,
+          264
+        ],
+        "max": [
+          389,
+          792,
+          274
+        ]
+      },
+      {
+        "role": "rear_rail_post",
+        "min": [
+          -582,
+          642,
+          208
+        ],
+        "max": [
+          -570,
+          654,
+          272
+        ]
+      },
+      {
+        "role": "rear_rail_post",
+        "min": [
+          -390,
+          642,
+          208
+        ],
+        "max": [
+          -378,
+          654,
+          272
+        ]
+      },
+      {
+        "role": "rear_rail_post",
+        "min": [
+          378,
+          642,
+          208
+        ],
+        "max": [
+          390,
+          654,
+          272
+        ]
+      },
+      {
+        "role": "rear_rail_post",
+        "min": [
+          570,
+          642,
+          208
+        ],
+        "max": [
+          582,
+          654,
+          272
+        ]
+      },
+      {
+        "role": "rear_handrail",
+        "min": [
+          -576,
+          643,
+          264
+        ],
+        "max": [
+          576,
+          653,
+          274
+        ]
+      },
+      {
+        "role": "rear_rail_post",
+        "min": [
+          -582,
+          786,
+          208
+        ],
+        "max": [
+          -570,
+          798,
+          272
+        ]
+      },
+      {
+        "role": "rear_rail_post",
+        "min": [
+          -390,
+          786,
+          208
+        ],
+        "max": [
+          -378,
+          798,
+          272
+        ]
+      },
+      {
+        "role": "rear_rail_post",
+        "min": [
+          378,
+          786,
+          208
+        ],
+        "max": [
+          390,
+          798,
+          272
+        ]
+      },
+      {
+        "role": "rear_rail_post",
+        "min": [
+          570,
+          786,
+          208
+        ],
+        "max": [
+          582,
+          798,
+          272
+        ]
+      },
+      {
+        "role": "rear_handrail",
+        "min": [
+          -576,
+          787,
+          264
+        ],
+        "max": [
+          576,
+          797,
+          274
+        ]
+      },
+      {
+        "role": "service_cover",
+        "min": [
+          -1376,
+          32,
+          0
+        ],
+        "max": [
+          -1248,
+          192,
+          112
+        ]
+      },
+      {
+        "role": "service_cover",
+        "min": [
+          -944,
+          480,
+          0
+        ],
+        "max": [
+          -784,
+          608,
+          96
+        ]
+      },
+      {
+        "role": "service_cover",
+        "min": [
+          -1360,
+          896,
+          0
+        ],
+        "max": [
+          -1168,
+          1088,
+          112
+        ]
+      },
+      {
+        "role": "service_cover",
+        "min": [
+          1248,
+          32,
+          0
+        ],
+        "max": [
+          1376,
+          192,
+          112
+        ]
+      },
+      {
+        "role": "service_cover",
+        "min": [
+          784,
+          480,
+          0
+        ],
+        "max": [
+          944,
+          608,
+          96
+        ]
+      },
+      {
+        "role": "service_cover",
+        "min": [
+          1168,
+          896,
+          0
+        ],
+        "max": [
+          1360,
+          1088,
+          112
+        ]
+      },
+      {
+        "role": "service_cover",
+        "min": [
+          -512,
+          928,
+          0
+        ],
+        "max": [
+          -320,
+          976,
+          96
+        ]
+      },
+      {
+        "role": "service_cover",
+        "min": [
+          320,
+          928,
+          0
+        ],
+        "max": [
+          512,
+          976,
+          96
+        ]
+      },
+      {
+        "role": "utility_box",
+        "min": [
+          -608,
+          80,
+          72
+        ],
+        "max": [
+          -584,
+          176,
+          144
+        ]
+      },
+      {
+        "role": "utility_box",
+        "min": [
+          584,
+          80,
+          72
+        ],
+        "max": [
+          608,
+          176,
+          144
+        ]
+      },
+      {
+        "role": "utility_box",
+        "min": [
+          -608,
+          520,
+          64
+        ],
+        "max": [
+          -584,
+          616,
+          136
+        ]
+      },
+      {
+        "role": "utility_box",
+        "min": [
+          584,
+          520,
+          64
+        ],
+        "max": [
+          608,
+          616,
+          136
+        ]
+      },
+      {
+        "role": "facade_utility",
+        "min": [
+          -1328,
+          -344,
+          64
+        ],
+        "max": [
+          -1232,
+          -320,
+          136
+        ]
+      },
+      {
+        "role": "facade_utility",
+        "min": [
+          -1008,
+          -344,
+          64
+        ],
+        "max": [
+          -912,
+          -320,
+          136
+        ]
+      },
+      {
+        "role": "facade_utility",
+        "min": [
+          912,
+          -344,
+          64
+        ],
+        "max": [
+          1008,
+          -320,
+          136
+        ]
+      },
+      {
+        "role": "facade_utility",
+        "min": [
+          1232,
+          -344,
+          64
+        ],
+        "max": [
+          1328,
+          -320,
+          136
+        ]
+      },
+      {
+        "role": "facade_band",
+        "min": [
+          -1456,
+          -332,
+          272
+        ],
+        "max": [
+          -1168,
+          -320,
+          288
+        ]
+      },
+      {
+        "role": "facade_band",
+        "min": [
+          -848,
+          -332,
+          272
+        ],
+        "max": [
+          -208,
+          -320,
+          288
+        ]
+      },
+      {
+        "role": "facade_band",
+        "min": [
+          208,
+          -332,
+          272
+        ],
+        "max": [
+          848,
+          -320,
+          288
+        ]
+      },
+      {
+        "role": "facade_band",
+        "min": [
+          1168,
+          -332,
+          272
+        ],
+        "max": [
+          1456,
+          -320,
+          288
+        ]
+      },
+      {
+        "role": "facade_pier",
+        "min": [
+          -1368,
+          -336,
+          16
+        ],
+        "max": [
+          -1352,
+          -320,
+          352
+        ]
+      },
+      {
+        "role": "facade_pier",
+        "min": [
+          -1016,
+          -336,
+          16
+        ],
+        "max": [
+          -1000,
+          -320,
+          352
+        ]
+      },
+      {
+        "role": "facade_pier",
+        "min": [
+          -536,
+          -336,
+          16
+        ],
+        "max": [
+          -520,
+          -320,
+          352
+        ]
+      },
+      {
+        "role": "facade_pier",
+        "min": [
+          520,
+          -336,
+          16
+        ],
+        "max": [
+          536,
+          -320,
+          352
+        ]
+      },
+      {
+        "role": "facade_pier",
+        "min": [
+          1000,
+          -336,
+          16
+        ],
+        "max": [
+          1016,
+          -320,
+          352
+        ]
+      },
+      {
+        "role": "facade_pier",
+        "min": [
+          1352,
+          -336,
+          16
+        ],
+        "max": [
+          1368,
+          -320,
+          352
+        ]
+      },
+      {
+        "role": "facade_inset",
+        "min": [
+          -832,
+          -336,
+          96
+        ],
+        "max": [
+          -608,
+          -320,
+          256
+        ]
+      },
+      {
+        "role": "facade_inset",
+        "min": [
+          608,
+          -336,
+          96
+        ],
+        "max": [
+          832,
+          -320,
+          256
+        ]
+      },
+      {
+        "role": "yard_crate",
+        "min": [
+          -1312,
+          -1136,
+          0
+        ],
+        "max": [
+          -1216,
+          -1040,
+          96
+        ]
+      },
+      {
+        "role": "yard_crate",
+        "min": [
+          -1200,
+          -1136,
+          0
+        ],
+        "max": [
+          -1104,
+          -1040,
+          96
+        ]
+      },
+      {
+        "role": "yard_crate",
+        "min": [
+          -1256,
+          -1040,
+          0
+        ],
+        "max": [
+          -1160,
+          -944,
+          96
+        ]
+      },
+      {
+        "role": "yard_crate",
+        "min": [
+          -864,
+          -688,
+          0
+        ],
+        "max": [
+          -768,
+          -592,
+          96
+        ]
+      },
+      {
+        "role": "yard_crate",
+        "min": [
+          768,
+          -688,
+          0
+        ],
+        "max": [
+          864,
+          -592,
+          96
+        ]
+      },
+      {
+        "role": "yard_crate",
+        "min": [
+          -96,
+          -1072,
+          0
+        ],
+        "max": [
+          0,
+          -976,
+          96
+        ]
+      },
+      {
+        "role": "yard_crate",
+        "min": [
+          16,
+          -1072,
+          0
+        ],
+        "max": [
+          112,
+          -976,
+          96
+        ]
+      },
+      {
+        "role": "yard_blast_wall",
+        "min": [
+          -1088,
+          -816,
+          0
+        ],
+        "max": [
+          -736,
+          -784,
+          128
+        ]
+      },
+      {
+        "role": "yard_blast_wall",
+        "min": [
+          736,
+          -816,
+          0
+        ],
+        "max": [
+          1088,
+          -784,
+          128
+        ]
+      },
+      {
+        "role": "yard_blast_wall",
+        "min": [
+          -416,
+          -576,
+          0
+        ],
+        "max": [
+          -160,
+          -544,
+          112
+        ]
+      },
+      {
+        "role": "yard_blast_wall",
+        "min": [
+          160,
+          -576,
+          0
+        ],
+        "max": [
+          416,
+          -544,
+          112
+        ]
+      },
+      {
+        "role": "yard_wall_cap",
+        "min": [
+          -908,
+          -800,
+          128
+        ],
+        "max": [
+          -884,
+          -736,
+          192
+        ]
+      },
+      {
+        "role": "yard_wall_cap",
+        "min": [
+          884,
+          -800,
+          128
+        ],
+        "max": [
+          908,
+          -736,
+          192
+        ]
+      },
+      {
+        "role": "yard_wall_cap",
+        "min": [
+          -300,
+          -560,
+          128
+        ],
+        "max": [
+          -276,
+          -496,
+          192
+        ]
+      },
+      {
+        "role": "yard_wall_cap",
+        "min": [
+          276,
+          -560,
+          128
+        ],
+        "max": [
+          300,
+          -496,
+          192
+        ]
+      }
+    ],
+    "cylinders": [
+      {
+        "role": "test_engine",
+        "center": [
+          0,
+          288
+        ],
+        "minZ": 56,
+        "maxZ": 168,
+        "radius": 72
+      },
+      {
+        "role": "test_engine_band",
+        "center": [
+          0,
+          288
+        ],
+        "minZ": 96,
+        "maxZ": 120,
+        "radius": 84
+      }
+    ]
+  },
+  "spawns": [
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -1328,
+        -944,
+        32
+      ],
+      "angle": 35
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -640,
+        -1040,
+        32
+      ],
+      "angle": 41
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        416,
+        -1056,
+        32
+      ],
+      "angle": 126
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        1328,
+        -656,
+        32
+      ],
+      "angle": 172
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -1248,
+        -128,
+        32
+      ],
+      "angle": 47
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -864,
+        736,
+        32
+      ],
+      "angle": 0
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        1248,
+        -128,
+        32
+      ],
+      "angle": 133
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        864,
+        736,
+        32
+      ],
+      "angle": 180
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -448,
+        -128,
+        32
+      ],
+      "angle": 43
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        448,
+        -128,
+        32
+      ],
+      "angle": 137
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -432,
+        512,
+        32
+      ],
+      "angle": 333
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        432,
+        512,
+        32
+      ],
+      "angle": 207
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -896,
+        1056,
+        32
+      ],
+      "angle": 354
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        896,
+        1056,
+        32
+      ],
+      "angle": 186
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -480,
+        96,
+        240
+      ],
+      "angle": 36
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        480,
+        544,
+        240
+      ],
+      "angle": 191
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -256,
+        720,
+        240
+      ],
+      "angle": 313
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        256,
+        720,
+        240
+      ],
+      "angle": 227
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1408,
+        -720,
+        32
+      ],
+      "angle": 28
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -960,
+        -1056,
+        32
+      ],
+      "angle": 61
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -592,
+        -960,
+        32
+      ],
+      "angle": 55
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -256,
+        -944,
+        32
+      ],
+      "angle": 61
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        256,
+        -944,
+        32
+      ],
+      "angle": 119
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        592,
+        -960,
+        32
+      ],
+      "angle": 125
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        960,
+        -1056,
+        32
+      ],
+      "angle": 119
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        1328,
+        -880,
+        32
+      ],
+      "angle": 133
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        -1408,
+        800,
+        32
+      ],
+      "angle": 340
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        -960,
+        1088,
+        32
+      ],
+      "angle": 306
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        -560,
+        1056,
+        32
+      ],
+      "angle": 311
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        -240,
+        1056,
+        32
+      ],
+      "angle": 304
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        240,
+        1056,
+        32
+      ],
+      "angle": 236
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        560,
+        1056,
+        32
+      ],
+      "angle": 229
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        960,
+        1088,
+        32
+      ],
+      "angle": 234
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        1408,
+        800,
+        32
+      ],
+      "angle": 200
+    },
+    {
+      "classname": "info_player_start",
+      "origin": [
+        0,
+        -1152,
+        32
+      ],
+      "angle": 90
+    }
+  ],
+  "entities": {
+    "lights": [
+      {
+        "origin": [
+          -320,
+          64,
+          296
+        ],
+        "intensity": 90,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          320,
+          64,
+          296
+        ],
+        "intensity": 90,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          -320,
+          384,
+          296
+        ],
+        "intensity": 90,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          320,
+          384,
+          296
+        ],
+        "intensity": 90,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          -320,
+          704,
+          296
+        ],
+        "intensity": 90,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          320,
+          704,
+          296
+        ],
+        "intensity": 90,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          -1120,
+          32,
+          296
+        ],
+        "intensity": 75,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          -1120,
+          480,
+          296
+        ],
+        "intensity": 75,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          -1120,
+          992,
+          296
+        ],
+        "intensity": 75,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          1120,
+          32,
+          296
+        ],
+        "intensity": 75,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          1120,
+          480,
+          296
+        ],
+        "intensity": 75,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          1120,
+          992,
+          296
+        ],
+        "intensity": 75,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          -256,
+          1040,
+          296
+        ],
+        "intensity": 75,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          256,
+          1040,
+          296
+        ],
+        "intensity": 75,
+        "color": "1.0 0.9 0.8",
+        "radius": "60",
+        "spawnflags": "2",
+        "angles": "90 0 0"
+      },
+      {
+        "origin": [
+          -1040,
+          272,
+          144
+        ],
+        "intensity": 65,
+        "color": "1.0 0.82 0.62"
+      },
+      {
+        "origin": [
+          -1040,
+          560,
+          144
+        ],
+        "intensity": 65,
+        "color": "1.0 0.82 0.62"
+      },
+      {
+        "origin": [
+          1040,
+          272,
+          144
+        ],
+        "intensity": 65,
+        "color": "1.0 0.82 0.62"
+      },
+      {
+        "origin": [
+          1040,
+          560,
+          144
+        ],
+        "intensity": 65,
+        "color": "1.0 0.82 0.62"
+      },
+      {
+        "origin": [
+          -480,
+          688,
+          144
+        ],
+        "intensity": 65,
+        "color": "1.0 0.82 0.62"
+      },
+      {
+        "origin": [
+          480,
+          688,
+          144
+        ],
+        "intensity": 65,
+        "color": "1.0 0.82 0.62"
+      },
+      {
+        "origin": [
+          -240,
+          160,
+          112
+        ],
+        "intensity": 60,
+        "color": "0.82 0.88 1.0"
+      },
+      {
+        "origin": [
+          240,
+          160,
+          112
+        ],
+        "intensity": 60,
+        "color": "0.82 0.88 1.0"
+      },
+      {
+        "origin": [
+          -240,
+          448,
+          112
+        ],
+        "intensity": 60,
+        "color": "0.82 0.88 1.0"
+      },
+      {
+        "origin": [
+          240,
+          448,
+          112
+        ],
+        "intensity": 60,
+        "color": "0.82 0.88 1.0"
+      },
+      {
+        "origin": [
+          0,
+          1040,
+          144
+        ],
+        "intensity": 65,
+        "color": "0.90 0.88 0.82"
+      }
+    ],
+    "models": [
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -320,
+          64,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -320,
+          64,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          320,
+          64,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          320,
+          64,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -320,
+          384,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -320,
+          384,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          320,
+          384,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          320,
+          384,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -320,
+          704,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -320,
+          704,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          320,
+          704,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          320,
+          704,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -1120,
+          32,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -1120,
+          32,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -1120,
+          480,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -1120,
+          480,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -1120,
+          992,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -1120,
+          992,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          1120,
+          32,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          1120,
+          32,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          1120,
+          480,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          1120,
+          480,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          1120,
+          992,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          1120,
+          992,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -256,
+          1040,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -256,
+          1040,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          256,
+          1040,
+          332
+        ],
+        "scale": "1.20",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          256,
+          1040,
+          324
+        ],
+        "scale": "0.70",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -1040,
+          272,
+          168
+        ],
+        "scale": "1.0",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -1040,
+          272,
+          160
+        ],
+        "scale": "0.55",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -1040,
+          560,
+          168
+        ],
+        "scale": "1.0",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -1040,
+          560,
+          160
+        ],
+        "scale": "0.55",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          1040,
+          272,
+          168
+        ],
+        "scale": "1.0",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          1040,
+          272,
+          160
+        ],
+        "scale": "0.55",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          1040,
+          560,
+          168
+        ],
+        "scale": "1.0",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          1040,
+          560,
+          160
+        ],
+        "scale": "0.55",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          -480,
+          688,
+          168
+        ],
+        "scale": "1.0",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          -480,
+          688,
+          160
+        ],
+        "scale": "0.55",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_lamp_lightbulb-caged",
+        "model": "static//lightbulb_caged.tik",
+        "origin": [
+          480,
+          688,
+          168
+        ],
+        "scale": "1.0",
+        "angle": "-2"
+      },
+      {
+        "classname": "script_model",
+        "model": "static//corona_orange.tik",
+        "origin": [
+          480,
+          688,
+          160
+        ],
+        "scale": "0.55",
+        "spawnflags": "1"
+      },
+      {
+        "classname": "static_vehicle_german_opeltruck",
+        "model": "static//vehicle_opeltruck.tik",
+        "origin": [
+          1120,
+          -1016,
+          0
+        ],
+        "scale": "1.0",
+        "angle": "0"
+      }
+    ]
+  },
+  "routes": {
+    "zones": [
+      {
+        "id": "yard_west",
+        "bounds": [
+          -1472,
+          -1216,
+          -192,
+          -320,
+          0,
+          192
+        ]
+      },
+      {
+        "id": "yard_center",
+        "bounds": [
+          -192,
+          -1216,
+          192,
+          -320,
+          0,
+          192
+        ]
+      },
+      {
+        "id": "yard_east",
+        "bounds": [
+          192,
+          -1216,
+          1472,
+          -320,
+          0,
+          192
+        ]
+      },
+      {
+        "id": "west_service",
+        "bounds": [
+          -1472,
+          -288,
+          -640,
+          1216,
+          0,
+          192
+        ]
+      },
+      {
+        "id": "assembly_hall",
+        "bounds": [
+          -608,
+          -288,
+          608,
+          832,
+          0,
+          192
+        ]
+      },
+      {
+        "id": "east_service",
+        "bounds": [
+          640,
+          -288,
+          1472,
+          1216,
+          0,
+          192
+        ]
+      },
+      {
+        "id": "rear_crossover",
+        "bounds": [
+          -640,
+          864,
+          640,
+          1216,
+          0,
+          192
+        ]
+      },
+      {
+        "id": "west_upper",
+        "bounds": [
+          -1200,
+          -32,
+          -384,
+          800,
+          208,
+          360
+        ]
+      },
+      {
+        "id": "rear_upper",
+        "bounds": [
+          -576,
+          640,
+          576,
+          800,
+          208,
+          360
+        ]
+      },
+      {
+        "id": "east_upper",
+        "bounds": [
+          384,
+          -32,
+          1200,
+          800,
+          208,
+          360
+        ]
+      }
+    ],
+    "connections": [
+      [
+        "yard_west",
+        "west_service",
+        288
+      ],
+      [
+        "yard_center",
+        "assembly_hall",
+        384
+      ],
+      [
+        "yard_east",
+        "east_service",
+        288
+      ],
+      [
+        "west_service",
+        "assembly_hall",
+        256
+      ],
+      [
+        "west_service",
+        "assembly_hall",
+        192
+      ],
+      [
+        "east_service",
+        "assembly_hall",
+        256
+      ],
+      [
+        "east_service",
+        "assembly_hall",
+        192
+      ],
+      [
+        "assembly_hall",
+        "rear_crossover",
+        256
+      ],
+      [
+        "assembly_hall",
+        "rear_crossover",
+        256
+      ],
+      [
+        "west_service",
+        "rear_crossover",
+        416
+      ],
+      [
+        "east_service",
+        "rear_crossover",
+        416
+      ],
+      [
+        "west_service",
+        "west_upper",
+        224
+      ],
+      [
+        "east_service",
+        "east_upper",
+        224
+      ],
+      [
+        "west_upper",
+        "rear_upper",
+        192
+      ],
+      [
+        "rear_upper",
+        "east_upper",
+        192
+      ]
+    ]
+  },
+  "fixedViews": [
+    {
+      "id": "yard_wide",
+      "origin": [
+        0,
+        -1120,
+        72
+      ],
+      "viewangles": [
+        -8,
+        90,
+        0
+      ],
+      "covers": [
+        "yard",
+        "three entrances",
+        "facade",
+        "truck"
+      ]
+    },
+    {
+      "id": "west_entry",
+      "origin": [
+        -1008,
+        -656,
+        72
+      ],
+      "viewangles": [
+        -5,
+        72,
+        0
+      ],
+      "covers": [
+        "threshold",
+        "frames",
+        "service stair"
+      ]
+    },
+    {
+      "id": "hall_low",
+      "origin": [
+        0,
+        -192,
+        72
+      ],
+      "viewangles": [
+        -4,
+        90,
+        0
+      ],
+      "covers": [
+        "assembly bay",
+        "central cover",
+        "ceiling beams"
+      ]
+    },
+    {
+      "id": "west_service",
+      "origin": [
+        -1328,
+        512,
+        72
+      ],
+      "viewangles": [
+        -5,
+        0,
+        0
+      ],
+      "covers": [
+        "deep interior",
+        "under-catwalk lighting",
+        "utility detail"
+      ]
+    },
+    {
+      "id": "rear_cross",
+      "origin": [
+        -320,
+        1104,
+        72
+      ],
+      "viewangles": [
+        -5,
+        270,
+        0
+      ],
+      "covers": [
+        "rear crossover",
+        "twin openings"
+      ]
+    },
+    {
+      "id": "upper_loop",
+      "origin": [
+        -480,
+        320,
+        248
+      ],
+      "viewangles": [
+        -5,
+        0,
+        0
+      ],
+      "covers": [
+        "catwalk",
+        "handrail",
+        "upper lighting"
+      ]
+    },
+    {
+      "id": "hall_overview",
+      "origin": [
+        0,
+        544,
+        256
+      ],
+      "viewangles": [
+        35,
+        270,
+        0
+      ],
+      "covers": [
+        "high overview",
+        "roof closure",
+        "grounded cover"
+      ]
+    },
+    {
+      "id": "map_edge",
+      "origin": [
+        -1408,
+        -1120,
+        72
+      ],
+      "viewangles": [
+        -5,
+        45,
+        0
+      ],
+      "covers": [
+        "retaining wall",
+        "sky shell",
+        "perimeter"
+      ]
+    }
+  ],
+  "generated": {
+    "mapBytes": 137984,
+    "mapSha256": "61ee413bd42b3f5646fad77beed3ced395ac60737d0c28ae81fae43879a9aa5d"
+  },
+  "knownIntentionalOmissions": [
+    "moving doors",
+    "breakable machinery",
+    "custom textures",
+    "retail objective scripting",
+    "dense cosmetic signage"
+  ]
+}

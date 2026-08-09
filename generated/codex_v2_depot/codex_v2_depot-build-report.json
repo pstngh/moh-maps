@@ -1,0 +1,116 @@
+{
+    "schemaVersion":  1,
+    "mapName":  "codex_v2_depot",
+    "retailPaks":  [
+                       {
+                           "name":  "Pak0.pk3",
+                           "bytes":  98668934,
+                           "sha256":  "6caf6d93cc996b6895d5015f1be153724e5369b8c063c73e1609578323261df6"
+                       },
+                       {
+                           "name":  "Pak1.pk3",
+                           "bytes":  119631347,
+                           "sha256":  "60ed94c185c4f81813aefaf1603b16734e65eb1b931737ae588df84c0a2a4b80"
+                       },
+                       {
+                           "name":  "Pak2.pk3",
+                           "bytes":  365587748,
+                           "sha256":  "00133b93d350b5d82ff2d59a7d87fe94dad18147d28b6fd59dd2b5a6c816acce"
+                       },
+                       {
+                           "name":  "Pak3.pk3",
+                           "bytes":  87555605,
+                           "sha256":  "1e0eed04b234bae260097813755325d2533bb6082c5fc9e98332aa66c4f4db92"
+                       },
+                       {
+                           "name":  "Pak4.pk3",
+                           "bytes":  34046379,
+                           "sha256":  "853cc70610933e83284db95e6144ed3c02d81190065b44aae94ba58ca09f3130"
+                       },
+                       {
+                           "name":  "Pak5.pk3",
+                           "bytes":  87721422,
+                           "sha256":  "b6035d8686bed133be76cdee322c37fd4a9814ba88bbce3e91f20571ea7b2a1d"
+                       },
+                       {
+                           "name":  "pak6.pk3",
+                           "bytes":  11202988,
+                           "sha256":  "619e6acfd37471f0c71194ef6546e592d01cd9f7c1a3ebf57064cf618cf503ae"
+                       }
+                   ],
+    "validation":  {
+                       "schemaVersion":  1,
+                       "mapName":  "codex_v2_depot",
+                       "mapBytes":  137984,
+                       "brushes":  189,
+                       "faces":  1150,
+                       "caulkFaces":  424,
+                       "caulkRatio":  0.3687,
+                       "stockMaterials":  21,
+                       "movingDoors":  0,
+                       "spawns":  {
+                                      "info_player_deathmatch":  18,
+                                      "info_player_allied":  8,
+                                      "info_player_axis":  8,
+                                      "info_player_start":  1
+                                  },
+                       "lights":  25,
+                       "staticModels":  41,
+                       "routeZones":  10,
+                       "routeConnections":  15,
+                       "minRouteWidth":  192,
+                       "fixedViews":  8,
+                       "checks":  [
+                                      "stock-only material policy",
+                                      "face-specific hidden caulk",
+                                      "source counts",
+                                      "spawn support and clearance",
+                                      "model grounding",
+                                      "light bounds and budget",
+                                      "route connectivity and width",
+                                      "DM scripts and precache"
+                                  ]
+                   },
+    "stages":  {
+                   "generationReproduced":  true,
+                   "q3mapSeconds":  0.668,
+                   "visSeconds":  0.21,
+                   "mohlightSeconds":  4.587,
+                   "q3mapWarnings":  0,
+                   "lightClampWarnings":  0,
+                   "lightHashWarnings":  0
+               },
+    "map":  {
+                "bytes":  137984,
+                "sha256":  "61ee413bd42b3f5646fad77beed3ced395ac60737d0c28ae81fae43879a9aa5d"
+            },
+    "bsp":  {
+                "bsp":  "generated/codex_v2_depot/main/maps/dm/codex_v2_depot.bsp",
+                "bytes":  655120,
+                "sha256":  "f2a5a2b920bcb418a27b146612455db11014b1b854f809c5abc8f911a48cec30",
+                "ident":  "0x35313032",
+                "version":  19,
+                "checksum":  "0x4e602bef",
+                "shaders":  48,
+                "surfaces":  713,
+                "lightmapPages":  5,
+                "allocatedLightmapPages":  5,
+                "visibilityBytes":  1128,
+                "entityBytes":  9227,
+                "classCounts":  {
+                                    "info_player_allied":  8,
+                                    "info_player_axis":  8,
+                                    "info_player_deathmatch":  18,
+                                    "info_player_start":  1,
+                                    "light":  25,
+                                    "script_model":  20,
+                                    "worldspawn":  1
+                                }
+            },
+    "package":  {
+                    "entries":  3,
+                    "bytes":  112494,
+                    "sha256":  "a46451bc445281079b647817b4bc45ec5137b0fd15a8f16d96b6d059bb826245",
+                    "reproducedTwice":  true
+                }
+}
