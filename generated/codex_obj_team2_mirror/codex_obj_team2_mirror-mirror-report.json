@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "transform": "reflect X about world x=0",
+  "sourceMap": "../aa/obj_team2.map",
+  "sourceBytes": 5478775,
+  "sourceSha256": "04cbee45bb4d94d5289d52b51e302984e3f6ce8843d7bdd0194500f4be35ee2f",
+  "mapName": "codex_obj_team2_mirror",
+  "gameDirectory": "obj",
+  "originalMap": "obj_team2",
+  "displayName": "V2 Facility Mirror",
+  "output": {
+    "bytes": 5484624,
+    "sha256": "91d14682e39cb79bc1f9d0fc50319b8ceac9b970dd2de4a6e14690ed94b0a183"
+  },
+  "transformed": {
+    "brushFaces": 35217,
+    "patches": 708,
+    "terrains": 7,
+    "terrainSamples": 8479,
+    "terrainTextureControls": 177,
+    "origins": 595,
+    "angles": 249,
+    "angleVectors": 71,
+    "sunDirections": 1
+  },
+  "scriptPolicy": "thin wrappers execute retail scripts; no retail script contents redistributed",
+  "extraPrecache": [
+    "models/fx/bazookaexplosion_dm.tik"
+  ]
+}

@@ -4,3 +4,6 @@ generated/codex_nuke/.local-source2/
 generated/codex_nuke/codex_nuke-source2-local.pk3
 # Local-only Reactor compiler staging and logs.
 generated/codex_reactor/.build/
+# Local-only compiler staging and logs for stock-map reflections.
+generated/codex_mohdm6_mirror/.build/
+generated/codex_obj_team2_mirror/.build/

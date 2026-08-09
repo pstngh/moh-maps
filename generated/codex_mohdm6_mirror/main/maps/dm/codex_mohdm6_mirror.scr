@@ -1,0 +1,4 @@
+// Thin wrapper: retail mohdm6.scr remains authoritative.
+main:
+	exec maps/DM/mohdm6.scr
+end

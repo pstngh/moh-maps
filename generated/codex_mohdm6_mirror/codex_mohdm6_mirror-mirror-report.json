@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "transform": "reflect X about world x=0",
+  "sourceMap": "../aa/mohdm6.map",
+  "sourceBytes": 1726335,
+  "sourceSha256": "07c786c8f8f0f5f176b253bda2f0d37159f1b56784f80b07e2151011c2cdc0c7",
+  "mapName": "codex_mohdm6_mirror",
+  "gameDirectory": "dm",
+  "originalMap": "mohdm6",
+  "displayName": "Stalingrad Mirror",
+  "output": {
+    "bytes": 1700554,
+    "sha256": "d10bf1ae1caf744504146be6bd6cda81e40e92dc49639704933b988ac969908c"
+  },
+  "transformed": {
+    "brushFaces": 13938,
+    "patches": 68,
+    "terrains": 2,
+    "terrainSamples": 442,
+    "terrainTextureControls": 15,
+    "origins": 491,
+    "angles": 115,
+    "angleVectors": 2,
+    "sunDirections": 1
+  },
+  "scriptPolicy": "thin wrappers execute retail scripts; no retail script contents redistributed",
+  "extraPrecache": [
+    "models/items/dm_50_healthbox.tik",
+    "models/fx/bazookaexplosion_dm.tik"
+  ]
+}

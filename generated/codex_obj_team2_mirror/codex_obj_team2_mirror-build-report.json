@@ -1,0 +1,116 @@
+{
+    "schemaVersion":  1,
+    "mapName":  "codex_obj_team2_mirror",
+    "gameDirectory":  "obj",
+    "source":  {
+                   "path":  "aa/obj_team2.map",
+                   "bytes":  5478775,
+                   "sha256":  "04cbee45bb4d94d5289d52b51e302984e3f6ce8843d7bdd0194500f4be35ee2f"
+               },
+    "transform":  "reflect X about world x=0",
+    "transformed":  {
+                        "brushFaces":  35217,
+                        "patches":  708,
+                        "terrains":  7,
+                        "terrainSamples":  8479,
+                        "terrainTextureControls":  177,
+                        "origins":  595,
+                        "angles":  249,
+                        "angleVectors":  71,
+                        "sunDirections":  1
+                    },
+    "retailPaks":  [
+                       {
+                           "name":  "Pak0.pk3",
+                           "bytes":  98668934,
+                           "sha256":  "6caf6d93cc996b6895d5015f1be153724e5369b8c063c73e1609578323261df6"
+                       },
+                       {
+                           "name":  "Pak1.pk3",
+                           "bytes":  119631347,
+                           "sha256":  "60ed94c185c4f81813aefaf1603b16734e65eb1b931737ae588df84c0a2a4b80"
+                       },
+                       {
+                           "name":  "Pak2.pk3",
+                           "bytes":  365587748,
+                           "sha256":  "00133b93d350b5d82ff2d59a7d87fe94dad18147d28b6fd59dd2b5a6c816acce"
+                       },
+                       {
+                           "name":  "Pak3.pk3",
+                           "bytes":  87555605,
+                           "sha256":  "1e0eed04b234bae260097813755325d2533bb6082c5fc9e98332aa66c4f4db92"
+                       },
+                       {
+                           "name":  "Pak4.pk3",
+                           "bytes":  34046379,
+                           "sha256":  "853cc70610933e83284db95e6144ed3c02d81190065b44aae94ba58ca09f3130"
+                       },
+                       {
+                           "name":  "Pak5.pk3",
+                           "bytes":  87721422,
+                           "sha256":  "b6035d8686bed133be76cdee322c37fd4a9814ba88bbce3e91f20571ea7b2a1d"
+                       },
+                       {
+                           "name":  "pak6.pk3",
+                           "bytes":  11202988,
+                           "sha256":  "619e6acfd37471f0c71194ef6546e592d01cd9f7c1a3ebf57064cf618cf503ae"
+                       }
+                   ],
+    "stages":  {
+                   "q3mapSeconds":  127,
+                   "q3mapWarnings":  124,
+                   "q3mapMissingImageWarnings":  1,
+                   "q3mapLeakDiagnostics":  0,
+                   "q3mapDegenerateDiagnostics":  0,
+                   "visSeconds":  0,
+                   "mohlightSeconds":  517.7,
+                   "mohlightThreads":  1,
+                   "lightClampWarnings":  0,
+                   "lightHashWarnings":  0
+               },
+    "map":  {
+                "bytes":  5484624,
+                "sha256":  "91d14682e39cb79bc1f9d0fc50319b8ceac9b970dd2de4a6e14690ed94b0a183"
+            },
+    "bsp":  {
+                "bsp":  "generated/codex_obj_team2_mirror/main/maps/obj/codex_obj_team2_mirror.bsp",
+                "bytes":  12342844,
+                "sha256":  "d90ec65f3ec876a6b13b6884780cc58820ae3905df4f0182969f054ef096cd39",
+                "ident":  "0x35313032",
+                "version":  19,
+                "checksum":  "0xd745430e",
+                "shaders":  265,
+                "surfaces":  18333,
+                "lightmapPages":  59,
+                "allocatedLightmapPages":  59,
+                "visibilityBytes":  39608,
+                "entityBytes":  38590,
+                "classCounts":  {
+                                    "animate_equipment_radio-military":  1,
+                                    "func_barrel":  4,
+                                    "func_crate":  2,
+                                    "func_ladder":  5,
+                                    "func_rotatingdoor":  23,
+                                    "fx_exploder_adamspark":  4,
+                                    "fx_smoke_smallfry":  1,
+                                    "info_player_allied":  16,
+                                    "info_player_axis":  16,
+                                    "info_player_deathmatch":  14,
+                                    "info_player_start":  1,
+                                    "info_splinepath":  22,
+                                    "light":  181,
+                                    "script_model":  8,
+                                    "script_object":  25,
+                                    "script_origin":  11,
+                                    "trigger_multiple":  3,
+                                    "trigger_use":  16,
+                                    "worldspawn":  1
+                                }
+            },
+    "package":  {
+                    "entries":  3,
+                    "bytes":  2187167,
+                    "sha256":  "3f94073eae1d6ac9f56827b8357c1e26807df8c012a4b04b2a18e337b31b5c81",
+                    "reproducedTwice":  true
+                }
+}

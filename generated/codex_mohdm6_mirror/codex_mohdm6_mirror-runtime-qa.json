@@ -1,0 +1,36 @@
+{
+    "schemaVersion":  1,
+    "qaRoot":  "C:\\tmp\\codex-codex_mohdm6_mirror-runtime",
+    "mapName":  "codex_mohdm6_mirror",
+    "gameType":  1,
+    "exactPk3Count":  8,
+    "candidateSha256":  "43278a35d28cc64c32827479a4c30a66440f38f5c7350f94f6049b04ae102585",
+    "engineSha256":  "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
+    "bspParse":  [
+                     "[2026-08-08 20:11:11 UTC-5.000] BSP file loaded and parsed in 0.044 seconds"
+                 ],
+    "recast":  [
+                   "[2026-08-08 20:11:12 UTC-5.000] Recast navigation mesh(es) generated in 0.500 seconds"
+               ],
+    "botsEntered":  8,
+    "botNames":  [
+                     "bot1",
+                     "bot2",
+                     "bot3",
+                     "bot4",
+                     "bot5",
+                     "bot6",
+                     "bot7",
+                     "bot8"
+                 ],
+    "combatEvents":  2,
+    "combatRequired":  true,
+    "candidateDiagnostics":  [
+
+                             ],
+    "wrapperPrecacheReferences":  1,
+    "expectedRetailBotRunDiagnostics":  8,
+    "scriptErrorCount":  0,
+    "sampleSeconds":  10,
+    "log":  "C:\\tmp\\codex-codex_mohdm6_mirror-runtime\\home\\main\\qconsole.log"
+}

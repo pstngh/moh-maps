@@ -1,0 +1,107 @@
+{
+    "schemaVersion":  1,
+    "mapName":  "codex_mohdm6_mirror",
+    "gameDirectory":  "dm",
+    "source":  {
+                   "path":  "aa/mohdm6.map",
+                   "bytes":  1726335,
+                   "sha256":  "07c786c8f8f0f5f176b253bda2f0d37159f1b56784f80b07e2151011c2cdc0c7"
+               },
+    "transform":  "reflect X about world x=0",
+    "transformed":  {
+                        "brushFaces":  13938,
+                        "patches":  68,
+                        "terrains":  2,
+                        "terrainSamples":  442,
+                        "terrainTextureControls":  15,
+                        "origins":  491,
+                        "angles":  115,
+                        "angleVectors":  2,
+                        "sunDirections":  1
+                    },
+    "retailPaks":  [
+                       {
+                           "name":  "Pak0.pk3",
+                           "bytes":  98668934,
+                           "sha256":  "6caf6d93cc996b6895d5015f1be153724e5369b8c063c73e1609578323261df6"
+                       },
+                       {
+                           "name":  "Pak1.pk3",
+                           "bytes":  119631347,
+                           "sha256":  "60ed94c185c4f81813aefaf1603b16734e65eb1b931737ae588df84c0a2a4b80"
+                       },
+                       {
+                           "name":  "Pak2.pk3",
+                           "bytes":  365587748,
+                           "sha256":  "00133b93d350b5d82ff2d59a7d87fe94dad18147d28b6fd59dd2b5a6c816acce"
+                       },
+                       {
+                           "name":  "Pak3.pk3",
+                           "bytes":  87555605,
+                           "sha256":  "1e0eed04b234bae260097813755325d2533bb6082c5fc9e98332aa66c4f4db92"
+                       },
+                       {
+                           "name":  "Pak4.pk3",
+                           "bytes":  34046379,
+                           "sha256":  "853cc70610933e83284db95e6144ed3c02d81190065b44aae94ba58ca09f3130"
+                       },
+                       {
+                           "name":  "Pak5.pk3",
+                           "bytes":  87721422,
+                           "sha256":  "b6035d8686bed133be76cdee322c37fd4a9814ba88bbce3e91f20571ea7b2a1d"
+                       },
+                       {
+                           "name":  "pak6.pk3",
+                           "bytes":  11202988,
+                           "sha256":  "619e6acfd37471f0c71194ef6546e592d01cd9f7c1a3ebf57064cf618cf503ae"
+                       }
+                   ],
+    "stages":  {
+                   "q3mapSeconds":  5.493,
+                   "q3mapWarnings":  63,
+                   "q3mapLeakDiagnostics":  36,
+                   "q3mapDegenerateDiagnostics":  0,
+                   "visSeconds":  0.307,
+                   "mohlightSeconds":  32.851,
+                   "lightClampWarnings":  3,
+                   "lightHashWarnings":  0
+               },
+    "map":  {
+                "bytes":  1700554,
+                "sha256":  "d10bf1ae1caf744504146be6bd6cda81e40e92dc49639704933b988ac969908c"
+            },
+    "bsp":  {
+                "bsp":  "generated/codex_mohdm6_mirror/main/maps/dm/codex_mohdm6_mirror.bsp",
+                "bytes":  4495204,
+                "sha256":  "57ff1b395012c1a792d3046296441907daeff28baa79f19a31c96bfa728f0a22",
+                "ident":  "0x35313032",
+                "version":  19,
+                "checksum":  "0xed9155ec",
+                "shaders":  302,
+                "surfaces":  5463,
+                "lightmapPages":  25,
+                "allocatedLightmapPages":  25,
+                "visibilityBytes":  72392,
+                "entityBytes":  34765,
+                "classCounts":  {
+                                    "func_barrel":  5,
+                                    "func_crate":  29,
+                                    "func_ladder":  1,
+                                    "info_player_allied":  25,
+                                    "info_player_axis":  25,
+                                    "info_player_deathmatch":  25,
+                                    "info_player_start":  1,
+                                    "light":  293,
+                                    "trigger_use":  2,
+                                    "turretweapon_german_mg42":  1,
+                                    "turretweapon_german_mg42bipod":  1,
+                                    "worldspawn":  1
+                                }
+            },
+    "package":  {
+                    "entries":  3,
+                    "bytes":  874060,
+                    "sha256":  "43278a35d28cc64c32827479a4c30a66440f38f5c7350f94f6049b04ae102585",
+                    "reproducedTwice":  true
+                }
+}

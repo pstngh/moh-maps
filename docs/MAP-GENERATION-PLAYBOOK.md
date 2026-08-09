@@ -944,3 +944,20 @@ aggregate 224. Conversely, six additional high-impact Nuke families between 5
 and 18 surfaces loaded together in original Q3map without unexpected warnings.
 This isolated combined proof is required before those families enter an
 expensive full-map compile.
+
+### Whole-map reflection / inverse gate
+
+For a complete left/right mirror of a MOH `.map`, define the plane explicitly (the current canonical tool uses world `x = 0`) and treat the transform as negative-determinant geometry, not a global numeric replacement.
+
+1. Reflect all brush face points and reverse face point order so brush inside/outside remains valid.
+2. Reflect patch controls and reverse the serialized control-grid row dimension used by legacy MOH `patchDef2`.
+3. For `terrainDef`, translate the origin by the full grid span before negation, reverse each texture/sample row, and exchange paired triangle flags.
+4. Reflect entity origins, yaw, vector angles, and sun direction. Preserve special vertical angle values.
+5. Preserve target names, target links, objective keys, classes, light values, material names, and face texture parameters unless a separate content change is requested.
+6. Use thin wrappers around retail map/precache scripts when the derived name changes; never copy retail script bodies into the repository.
+7. Require entity-class count equality and a stable involution test in addition to source determinism.
+8. Run full BSP, VIS, and light against retail Pak data. If original tools need loose retail build inputs, extract only named files into an ignored build root and exclude them from the package.
+9. Compare warning/error signatures with the unmodified stock source or shipped map before labeling a diagnostic mirror-specific.
+10. Test the exact final PK3 in the intended mode. For an Objective map, separately distinguish Objective boot/rules from an optional FFA bot-movement exercise.
+
+A geometry/gameplay mirror retains original bitmap orientation by default. Mirrored lettering, signs, or texture imagery requires new/reversed art and is a separate asset decision.

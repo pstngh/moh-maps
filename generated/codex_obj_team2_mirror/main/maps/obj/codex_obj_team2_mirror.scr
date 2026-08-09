@@ -1,0 +1,4 @@
+// Thin wrapper: retail obj_team2.scr remains authoritative.
+main:
+	exec maps/obj/obj_team2.scr
+end

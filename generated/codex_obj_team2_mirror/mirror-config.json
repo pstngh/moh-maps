@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "mapName": "codex_obj_team2_mirror",
+  "gameDirectory": "obj",
+  "sourceMap": "aa/obj_team2.map",
+  "originalMap": "obj_team2",
+  "displayName": "V2 Facility Mirror",
+  "extraPrecache": [
+    "models/fx/bazookaexplosion_dm.tik"
+  ],
+  "looseBuildInputs": [
+    "textures/wilderness/wldrrckset1_1.jpg"
+  ],
+  "lightThreads": 1
+}

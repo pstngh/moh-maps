@@ -1,0 +1,28 @@
+﻿{
+  "bsp": "generated/codex_mohdm6_mirror/main/maps/dm/codex_mohdm6_mirror.bsp",
+  "bytes": 4495204,
+  "sha256": "57ff1b395012c1a792d3046296441907daeff28baa79f19a31c96bfa728f0a22",
+  "ident": "0x35313032",
+  "version": 19,
+  "checksum": "0xed9155ec",
+  "shaders": 302,
+  "surfaces": 5463,
+  "lightmapPages": 25,
+  "allocatedLightmapPages": 25,
+  "visibilityBytes": 72392,
+  "entityBytes": 34765,
+  "classCounts": {
+    "func_barrel": 5,
+    "func_crate": 29,
+    "func_ladder": 1,
+    "info_player_allied": 25,
+    "info_player_axis": 25,
+    "info_player_deathmatch": 25,
+    "info_player_start": 1,
+    "light": 293,
+    "trigger_use": 2,
+    "turretweapon_german_mg42": 1,
+    "turretweapon_german_mg42bipod": 1,
+    "worldspawn": 1
+  }
+}

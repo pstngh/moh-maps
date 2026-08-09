@@ -1,0 +1,36 @@
+{
+    "schemaVersion":  1,
+    "qaRoot":  "C:\\tmp\\codex-codex_obj_team2_mirror-runtime",
+    "mapName":  "codex_obj_team2_mirror",
+    "gameType":  1,
+    "exactPk3Count":  8,
+    "candidateSha256":  "3f94073eae1d6ac9f56827b8357c1e26807df8c012a4b04b2a18e337b31b5c81",
+    "engineSha256":  "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
+    "bspParse":  [
+                     "[2026-08-08 20:10:37 UTC-5.000] BSP file loaded and parsed in 0.113 seconds"
+                 ],
+    "recast":  [
+                   "[2026-08-08 20:10:39 UTC-5.000] Recast navigation mesh(es) generated in 1.853 seconds"
+               ],
+    "botsEntered":  8,
+    "botNames":  [
+                     "bot1",
+                     "bot2",
+                     "bot3",
+                     "bot4",
+                     "bot5",
+                     "bot6",
+                     "bot7",
+                     "bot8"
+                 ],
+    "combatEvents":  4,
+    "combatRequired":  true,
+    "candidateDiagnostics":  [
+
+                             ],
+    "wrapperPrecacheReferences":  1,
+    "expectedRetailBotRunDiagnostics":  8,
+    "scriptErrorCount":  7,
+    "sampleSeconds":  25,
+    "log":  "C:\\tmp\\codex-codex_obj_team2_mirror-runtime\\home\\main\\qconsole.log"
+}

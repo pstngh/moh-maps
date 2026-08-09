@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "purpose": "classify obj_team2 Objective-mode diagnostics against unmodified retail",
+  "date": "2026-08-08",
+  "stockMap": "obj/obj_team2",
+  "gameType": 4,
+  "runtimePk3Count": 7,
+  "runtimePk3Policy": "retail Pak0.pk3 through Pak6.pk3 only",
+  "engineSha256": "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
+  "bspParseSeconds": 0.116,
+  "recastSeconds": 1.797,
+  "botsEntered": 8,
+  "scriptErrorCount": 5,
+  "controlRoomOrNullListenerContextLines": 8,
+  "mirrorObjectiveScriptErrorCount": 5,
+  "classification": "baseline-identical legacy global/obj_dm.scr behavior; not mirror-specific"
+}
