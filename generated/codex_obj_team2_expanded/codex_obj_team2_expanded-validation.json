@@ -1,0 +1,18 @@
+﻿{
+  "schemaVersion": 1,
+  "valid": true,
+  "mapName": "codex_obj_team2_expanded",
+  "sourceSha256": "04cbee45bb4d94d5289d52b51e302984e3f6ce8843d7bdd0194500f4be35ee2f",
+  "mapSha256": "3a7fd859484b6392a54812f21eb12155ad624a56f77e202ad32ad0cf749148ce",
+  "retainedSourceSha256": "5bb09beabf97d249ddad4038535d42d4b56ccb202719cf1e4bf493b2346fab8c",
+  "originalDoorsPreserved": 23,
+  "originalTargetnamesPreserved": 88,
+  "removedUntargetedFoliage": 9,
+  "removedUntargetedConnectorObstructions": 5,
+  "addedBrushes": 102,
+  "addedEntities": 35,
+  "dmSpawns": 6,
+  "botSafeConnectors": 2,
+  "openHallBays": 3,
+  "customAssetBytes": 0
+}

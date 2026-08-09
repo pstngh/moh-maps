@@ -1,0 +1,5243 @@
+{
+  "source": "aa/obj_team2.map",
+  "sourceBytes": 5400516,
+  "primitiveCounts": {
+    "ordinaryBrushes": 5827,
+    "axisAlignedBoxes": 3352,
+    "angledBrushes": 2475,
+    "faces": 35217,
+    "patches": 708,
+    "terrains": 7
+  },
+  "brushFaceCounts": [
+    {
+      "name": "6",
+      "count": 5474
+    },
+    {
+      "name": "5",
+      "count": 196
+    },
+    {
+      "name": "10",
+      "count": 75
+    },
+    {
+      "name": "7",
+      "count": 48
+    },
+    {
+      "name": "8",
+      "count": 24
+    },
+    {
+      "name": "14",
+      "count": 5
+    },
+    {
+      "name": "9",
+      "count": 5
+    }
+  ],
+  "dominantMaterials": [
+    {
+      "name": "common/caulk",
+      "count": 11946
+    },
+    {
+      "name": "general_industrial/deckgrate_set1b",
+      "count": 10858
+    },
+    {
+      "name": "common/nodraw",
+      "count": 3553
+    },
+    {
+      "name": "general_structure/bunker_wall",
+      "count": 1188
+    },
+    {
+      "name": "general_industrial/deckgrate_set1a",
+      "count": 837
+    },
+    {
+      "name": "general_structure/jh_conc512b",
+      "count": 817
+    },
+    {
+      "name": "general_structure/beam_wood1",
+      "count": 767
+    },
+    {
+      "name": "common/metalclip",
+      "count": 474
+    },
+    {
+      "name": "common/clip",
+      "count": 384
+    },
+    {
+      "name": "german/minen_post",
+      "count": 374
+    },
+    {
+      "name": "algiers/whsflrset1_1b",
+      "count": 348
+    },
+    {
+      "name": "common/hint",
+      "count": 334
+    },
+    {
+      "name": "das_boot/ironwall1",
+      "count": 312
+    },
+    {
+      "name": "common/origin",
+      "count": 198
+    },
+    {
+      "name": "mohcommon/jeff-concrete-wallb",
+      "count": 190
+    },
+    {
+      "name": "general_industrial/utilboxtop",
+      "count": 154
+    },
+    {
+      "name": "general_industrial/utilitybox_side",
+      "count": 154
+    },
+    {
+      "name": "algiers/doccrtset_1stepsml",
+      "count": 152
+    },
+    {
+      "name": "common/areaportal",
+      "count": 150
+    },
+    {
+      "name": "common/playerclip",
+      "count": 137
+    },
+    {
+      "name": "mohcommon/ibeam_1a",
+      "count": 136
+    },
+    {
+      "name": "common/trigger",
+      "count": 114
+    },
+    {
+      "name": "common/stoneclip",
+      "count": 102
+    },
+    {
+      "name": "general_industrial/utilitybox_front",
+      "count": 77
+    },
+    {
+      "name": "norway/cr1_end",
+      "count": 76
+    },
+    {
+      "name": "general_industrial/deckgrate_set1",
+      "count": 62
+    },
+    {
+      "name": "common/ladder",
+      "count": 60
+    },
+    {
+      "name": "blasted/bunkerdoor2",
+      "count": 57
+    },
+    {
+      "name": "normandy/bunker_conc3",
+      "count": 56
+    },
+    {
+      "name": "general_industrial/ventshaft_conexn",
+      "count": 55
+    },
+    {
+      "name": "norway/cr1_top",
+      "count": 53
+    },
+    {
+      "name": "mohcommon/jeff-concrete-walla",
+      "count": 50
+    },
+    {
+      "name": "mohtest/core1lit",
+      "count": 49
+    },
+    {
+      "name": "german/rusty_iron",
+      "count": 47
+    },
+    {
+      "name": "general_structure/concretewall2",
+      "count": 46
+    },
+    {
+      "name": "general_industrial/jh_pipe1",
+      "count": 44
+    },
+    {
+      "name": "norway/cr1_side4",
+      "count": 43
+    },
+    {
+      "name": "general_industrial/verticalbrace",
+      "count": 40
+    },
+    {
+      "name": "mohtest/slatewldrty1",
+      "count": 34
+    },
+    {
+      "name": "general_industrial/ventshaft_rustedge",
+      "count": 33
+    },
+    {
+      "name": "normandy/blank",
+      "count": 33
+    },
+    {
+      "name": "sky/mohday1",
+      "count": 31
+    },
+    {
+      "name": "normandy/bunk_ceiling",
+      "count": 30
+    },
+    {
+      "name": "norway/cr1_sideblank",
+      "count": 26
+    },
+    {
+      "name": "general_industrial/jh_pipeunion1b",
+      "count": 24
+    },
+    {
+      "name": "algiers/arzewpj_2",
+      "count": 23
+    },
+    {
+      "name": "das_boot/ironwall1_sub",
+      "count": 22
+    },
+    {
+      "name": "general_industrial/jh_pipeunion2b",
+      "count": 22
+    },
+    {
+      "name": "normandy/taped2",
+      "count": 22
+    },
+    {
+      "name": "general_industrial/rembridge_ibeamA",
+      "count": 19
+    },
+    {
+      "name": "german/platform",
+      "count": 17
+    },
+    {
+      "name": "mohcommon/secfence",
+      "count": 17
+    },
+    {
+      "name": "norway/nor_panel2_v2dam",
+      "count": 17
+    },
+    {
+      "name": "normandy/army_property",
+      "count": 16
+    },
+    {
+      "name": "general_industrial/ibeam_vert",
+      "count": 15
+    },
+    {
+      "name": "blasted/bunkerdoor3",
+      "count": 14
+    },
+    {
+      "name": "general_structure/bunker_walltrans",
+      "count": 14
+    },
+    {
+      "name": "german/crate_reinforced1_side",
+      "count": 14
+    },
+    {
+      "name": "german/crate_reinforced1_sideflt",
+      "count": 14
+    },
+    {
+      "name": "german/control",
+      "count": 13
+    },
+    {
+      "name": "common/caulkshadow",
+      "count": 12
+    },
+    {
+      "name": "general_industrial/bridgebeam",
+      "count": 12
+    },
+    {
+      "name": "misc_outside/hedgerow",
+      "count": 12
+    },
+    {
+      "name": "models/items/v2",
+      "count": 12
+    },
+    {
+      "name": "mohcommon/barbwire",
+      "count": 12
+    },
+    {
+      "name": "normandy/taped1",
+      "count": 12
+    },
+    {
+      "name": "misc_outside/bocage_treerow1rev",
+      "count": 11
+    },
+    {
+      "name": "misc_outside/treeline_center",
+      "count": 11
+    },
+    {
+      "name": "mohcommon/cncrtset_4",
+      "count": 11
+    },
+    {
+      "name": "norway/nor_transferboxV1dam",
+      "count": 11
+    },
+    {
+      "name": "algiers/whsflrset1_1a",
+      "count": 10
+    },
+    {
+      "name": "general_industrial/ge_wires_para",
+      "count": 10
+    },
+    {
+      "name": "general_industrial/strangebrace1straight",
+      "count": 10
+    },
+    {
+      "name": "general_industrial/ibeam_flat2",
+      "count": 9
+    },
+    {
+      "name": "german/ex_crate6",
+      "count": 9
+    },
+    {
+      "name": "general_industrial/industrialgrate1_sml",
+      "count": 8
+    },
+    {
+      "name": "german/crate_reinforced1_top",
+      "count": 7
+    },
+    {
+      "name": "norway/nor_panel1v1dam",
+      "count": 7
+    },
+    {
+      "name": "general_industrial/shmconc_grn1spipe",
+      "count": 6
+    },
+    {
+      "name": "misc_outside/concpath1_wgrass",
+      "count": 6
+    }
+  ],
+  "materialsByAxis": [
+    {
+      "name": "z:common/caulk",
+      "count": 4065
+    },
+    {
+      "name": "x:general_industrial/deckgrate_set1b",
+      "count": 3371
+    },
+    {
+      "name": "y:common/caulk",
+      "count": 3337
+    },
+    {
+      "name": "y:general_industrial/deckgrate_set1b",
+      "count": 3224
+    },
+    {
+      "name": "x:common/caulk",
+      "count": 3111
+    },
+    {
+      "name": "z:general_industrial/deckgrate_set1b",
+      "count": 2620
+    },
+    {
+      "name": "angled:general_industrial/deckgrate_set1b",
+      "count": 1643
+    },
+    {
+      "name": "angled:common/caulk",
+      "count": 1433
+    },
+    {
+      "name": "x:common/nodraw",
+      "count": 1108
+    },
+    {
+      "name": "z:common/nodraw",
+      "count": 1096
+    },
+    {
+      "name": "y:common/nodraw",
+      "count": 900
+    },
+    {
+      "name": "angled:common/nodraw",
+      "count": 449
+    },
+    {
+      "name": "y:general_industrial/deckgrate_set1a",
+      "count": 414
+    },
+    {
+      "name": "x:general_structure/bunker_wall",
+      "count": 404
+    },
+    {
+      "name": "y:general_structure/bunker_wall",
+      "count": 379
+    },
+    {
+      "name": "z:algiers/whsflrset1_1b",
+      "count": 334
+    },
+    {
+      "name": "angled:general_structure/bunker_wall",
+      "count": 333
+    },
+    {
+      "name": "z:general_structure/beam_wood1",
+      "count": 292
+    },
+    {
+      "name": "x:general_structure/jh_conc512b",
+      "count": 282
+    },
+    {
+      "name": "y:general_structure/jh_conc512b",
+      "count": 282
+    },
+    {
+      "name": "z:general_industrial/deckgrate_set1a",
+      "count": 279
+    },
+    {
+      "name": "x:general_structure/beam_wood1",
+      "count": 243
+    },
+    {
+      "name": "y:general_structure/beam_wood1",
+      "count": 232
+    },
+    {
+      "name": "angled:general_structure/jh_conc512b",
+      "count": 214
+    },
+    {
+      "name": "z:common/metalclip",
+      "count": 158
+    },
+    {
+      "name": "z:general_industrial/utilboxtop",
+      "count": 154
+    },
+    {
+      "name": "z:german/minen_post",
+      "count": 150
+    },
+    {
+      "name": "x:general_industrial/deckgrate_set1a",
+      "count": 144
+    },
+    {
+      "name": "x:das_boot/ironwall1",
+      "count": 124
+    },
+    {
+      "name": "x:german/minen_post",
+      "count": 119
+    },
+    {
+      "name": "y:das_boot/ironwall1",
+      "count": 117
+    },
+    {
+      "name": "x:common/metalclip",
+      "count": 114
+    },
+    {
+      "name": "y:common/metalclip",
+      "count": 114
+    },
+    {
+      "name": "x:common/clip",
+      "count": 112
+    },
+    {
+      "name": "z:common/hint",
+      "count": 112
+    },
+    {
+      "name": "y:common/clip",
+      "count": 110
+    },
+    {
+      "name": "y:common/hint",
+      "count": 107
+    },
+    {
+      "name": "z:mohcommon/jeff-concrete-wallb",
+      "count": 107
+    },
+    {
+      "name": "z:common/clip",
+      "count": 106
+    },
+    {
+      "name": "y:german/minen_post",
+      "count": 105
+    },
+    {
+      "name": "x:common/hint",
+      "count": 104
+    },
+    {
+      "name": "angled:common/metalclip",
+      "count": 88
+    },
+    {
+      "name": "x:algiers/doccrtset_1stepsml",
+      "count": 76
+    },
+    {
+      "name": "x:general_industrial/utilitybox_side",
+      "count": 76
+    },
+    {
+      "name": "y:general_industrial/utilitybox_side",
+      "count": 76
+    },
+    {
+      "name": "z:general_structure/bunker_wall",
+      "count": 72
+    },
+    {
+      "name": "y:algiers/doccrtset_1stepsml",
+      "count": 71
+    },
+    {
+      "name": "x:common/origin",
+      "count": 66
+    },
+    {
+      "name": "y:common/origin",
+      "count": 66
+    },
+    {
+      "name": "z:common/origin",
+      "count": 66
+    },
+    {
+      "name": "angled:mohcommon/jeff-concrete-wallb",
+      "count": 64
+    },
+    {
+      "name": "z:general_industrial/deckgrate_set1",
+      "count": 62
+    },
+    {
+      "name": "x:mohcommon/ibeam_1a",
+      "count": 60
+    },
+    {
+      "name": "angled:common/clip",
+      "count": 56
+    },
+    {
+      "name": "angled:das_boot/ironwall1",
+      "count": 54
+    },
+    {
+      "name": "z:norway/cr1_top",
+      "count": 53
+    },
+    {
+      "name": "x:common/areaportal",
+      "count": 50
+    },
+    {
+      "name": "y:common/areaportal",
+      "count": 50
+    },
+    {
+      "name": "z:common/areaportal",
+      "count": 50
+    },
+    {
+      "name": "z:common/playerclip",
+      "count": 46
+    },
+    {
+      "name": "z:mohcommon/jeff-concrete-walla",
+      "count": 41
+    },
+    {
+      "name": "y:common/playerclip",
+      "count": 40
+    },
+    {
+      "name": "x:common/playerclip",
+      "count": 39
+    },
+    {
+      "name": "y:mohcommon/ibeam_1a",
+      "count": 39
+    },
+    {
+      "name": "z:general_structure/jh_conc512b",
+      "count": 39
+    },
+    {
+      "name": "x:common/trigger",
+      "count": 38
+    },
+    {
+      "name": "x:general_industrial/utilitybox_front",
+      "count": 38
+    },
+    {
+      "name": "y:common/trigger",
+      "count": 38
+    },
+    {
+      "name": "y:general_industrial/utilitybox_front",
+      "count": 38
+    },
+    {
+      "name": "z:common/trigger",
+      "count": 38
+    },
+    {
+      "name": "angled:mohtest/core1lit",
+      "count": 34
+    },
+    {
+      "name": "angled:norway/cr1_end",
+      "count": 34
+    },
+    {
+      "name": "x:common/stoneclip",
+      "count": 34
+    },
+    {
+      "name": "y:common/stoneclip",
+      "count": 34
+    },
+    {
+      "name": "y:norway/cr1_end",
+      "count": 34
+    },
+    {
+      "name": "z:common/stoneclip",
+      "count": 34
+    },
+    {
+      "name": "x:blasted/bunkerdoor2",
+      "count": 32
+    },
+    {
+      "name": "z:general_industrial/ventshaft_rustedge",
+      "count": 31
+    },
+    {
+      "name": "z:mohtest/slatewldrty1",
+      "count": 31
+    },
+    {
+      "name": "y:normandy/bunker_conc3",
+      "count": 30
+    },
+    {
+      "name": "y:general_industrial/ventshaft_conexn",
+      "count": 28
+    },
+    {
+      "name": "z:general_structure/concretewall2",
+      "count": 28
+    },
+    {
+      "name": "x:general_industrial/ventshaft_conexn",
+      "count": 27
+    },
+    {
+      "name": "z:mohcommon/ibeam_1a",
+      "count": 27
+    },
+    {
+      "name": "angled:norway/cr1_side4",
+      "count": 23
+    },
+    {
+      "name": "y:blasted/bunkerdoor2",
+      "count": 23
+    },
+    {
+      "name": "z:german/rusty_iron",
+      "count": 23
+    },
+    {
+      "name": "z:normandy/bunk_ceiling",
+      "count": 23
+    },
+    {
+      "name": "x:common/ladder",
+      "count": 20
+    },
+    {
+      "name": "x:general_industrial/verticalbrace",
+      "count": 20
+    },
+    {
+      "name": "y:common/ladder",
+      "count": 20
+    },
+    {
+      "name": "y:general_industrial/verticalbrace",
+      "count": 20
+    },
+    {
+      "name": "z:common/ladder",
+      "count": 20
+    },
+    {
+      "name": "x:normandy/bunker_conc3",
+      "count": 18
+    },
+    {
+      "name": "x:normandy/blank",
+      "count": 17
+    },
+    {
+      "name": "y:norway/nor_panel2_v2dam",
+      "count": 17
+    },
+    {
+      "name": "z:das_boot/ironwall1",
+      "count": 17
+    },
+    {
+      "name": "angled:das_boot/ironwall1_sub",
+      "count": 16
+    },
+    {
+      "name": "angled:general_industrial/jh_pipeunion1b",
+      "count": 16
+    },
+    {
+      "name": "angled:general_industrial/jh_pipeunion2b",
+      "count": 16
+    },
+    {
+      "name": "x:general_industrial/jh_pipe1",
+      "count": 16
+    },
+    {
+      "name": "x:norway/cr1_side4",
+      "count": 16
+    },
+    {
+      "name": "y:general_industrial/jh_pipe1",
+      "count": 16
+    },
+    {
+      "name": "y:german/rusty_iron",
+      "count": 16
+    },
+    {
+      "name": "x:norway/cr1_sideblank",
+      "count": 13
+    },
+    {
+      "name": "angled:common/playerclip",
+      "count": 12
+    },
+    {
+      "name": "angled:models/items/v2",
+      "count": 12
+    },
+    {
+      "name": "x:sky/mohday1",
+      "count": 12
+    },
+    {
+      "name": "z:general_industrial/jh_pipe1",
+      "count": 12
+    },
+    {
+      "name": "z:normandy/taped1",
+      "count": 12
+    },
+    {
+      "name": "angled:common/hint",
+      "count": 11
+    },
+    {
+      "name": "x:mohcommon/jeff-concrete-wallb",
+      "count": 11
+    },
+    {
+      "name": "y:norway/nor_transferboxV1dam",
+      "count": 11
+    },
+    {
+      "name": "y:sky/mohday1",
+      "count": 11
+    },
+    {
+      "name": "z:mohcommon/cncrtset_4",
+      "count": 11
+    },
+    {
+      "name": "angled:algiers/whsflrset1_1b",
+      "count": 10
+    },
+    {
+      "name": "angled:general_industrial/rembridge_ibeamA",
+      "count": 10
+    },
+    {
+      "name": "angled:general_structure/concretewall2",
+      "count": 10
+    },
+    {
+      "name": "angled:mohcommon/ibeam_1a",
+      "count": 10
+    },
+    {
+      "name": "x:general_industrial/ibeam_vert",
+      "count": 10
+    }
+  ],
+  "materialFlags": [
+    {
+      "name": "general_industrial/deckgrate_set1b|0,32768,0|+surfaceparm detail",
+      "count": 10147
+    },
+    {
+      "name": "common/caulk|0,160,0|none",
+      "count": 6291
+    },
+    {
+      "name": "common/caulk|0,160,0|+surfaceparm detail",
+      "count": 5655
+    },
+    {
+      "name": "common/nodraw|536870912,2224,0|+surfaceparm detail",
+      "count": 2443
+    },
+    {
+      "name": "common/nodraw|536870912,2224,0|none",
+      "count": 1045
+    },
+    {
+      "name": "general_structure/bunker_wall|0,0,0|none",
+      "count": 1003
+    },
+    {
+      "name": "general_industrial/deckgrate_set1a|8192,262176,0|+surfaceparm detail",
+      "count": 837
+    },
+    {
+      "name": "general_structure/beam_wood1|0,16384,0|+surfaceparm detail",
+      "count": 767
+    },
+    {
+      "name": "general_industrial/deckgrate_set1b|0,32768,0|none",
+      "count": 711
+    },
+    {
+      "name": "general_structure/jh_conc512b|0,0,0|+surfaceparm detail",
+      "count": 498
+    },
+    {
+      "name": "common/metalclip|536870912,32928,0|+surfaceparm detail",
+      "count": 462
+    },
+    {
+      "name": "common/clip|196608,2193,0|none",
+      "count": 384
+    },
+    {
+      "name": "german/minen_post|0,16384,0|+surfaceparm detail",
+      "count": 374
+    },
+    {
+      "name": "common/hint|268435456,2192,0|none",
+      "count": 334
+    },
+    {
+      "name": "general_structure/jh_conc512b|0,0,0|none",
+      "count": 319
+    },
+    {
+      "name": "das_boot/ironwall1|0,32768,0|none",
+      "count": 248
+    },
+    {
+      "name": "algiers/whsflrset1_1b|0,0,0|none",
+      "count": 229
+    },
+    {
+      "name": "common/origin|16777216,2176,0|none",
+      "count": 174
+    },
+    {
+      "name": "general_industrial/utilitybox_side|0,32768,0|+surfaceparm detail",
+      "count": 154
+    },
+    {
+      "name": "general_industrial/utilboxtop|0,32768,0|+surfaceparm detail",
+      "count": 151
+    },
+    {
+      "name": "common/areaportal|805339136,2192,0|none",
+      "count": 150
+    },
+    {
+      "name": "common/playerclip|65536,2193,0|none",
+      "count": 137
+    },
+    {
+      "name": "algiers/doccrtset_1stepsml|0,0,0|+surfaceparm detail",
+      "count": 122
+    },
+    {
+      "name": "algiers/whsflrset1_1b|0,0,0|+surfaceparm detail",
+      "count": 119
+    },
+    {
+      "name": "common/trigger|0,128,0|none",
+      "count": 114
+    },
+    {
+      "name": "mohcommon/ibeam_1a|0,32768,0|+surfaceparm detail",
+      "count": 107
+    },
+    {
+      "name": "mohcommon/jeff-concrete-wallb|0,0,0|none",
+      "count": 96
+    },
+    {
+      "name": "common/stoneclip|536870912,160,0|+surfaceparm detail",
+      "count": 90
+    },
+    {
+      "name": "general_industrial/utilitybox_front|0,32768,0|+surfaceparm detail",
+      "count": 77
+    },
+    {
+      "name": "norway/cr1_end|0,16384,0|+surfaceparm detail",
+      "count": 76
+    },
+    {
+      "name": "general_structure/bunker_wall|0,0,0|+surfaceparm detail surfaceDensity 64",
+      "count": 72
+    },
+    {
+      "name": "general_structure/bunker_wall|0,0,0|+surfaceparm detail",
+      "count": 66
+    },
+    {
+      "name": "common/nodraw|536870912,2224,0|+surfaceparm detail subdivisions 373.259918",
+      "count": 65
+    },
+    {
+      "name": "das_boot/ironwall1|0,32768,0|+surfaceparm detail",
+      "count": 64
+    },
+    {
+      "name": "general_industrial/deckgrate_set1|8192,262176,0|+surfaceparm detail",
+      "count": 62
+    },
+    {
+      "name": "common/ladder|0,136,0|none",
+      "count": 60
+    },
+    {
+      "name": "blasted/bunkerdoor2|0,32768,0|none",
+      "count": 57
+    },
+    {
+      "name": "normandy/bunker_conc3|0,0,0|none",
+      "count": 56
+    },
+    {
+      "name": "general_industrial/ventshaft_conexn|0,32768,0|none",
+      "count": 55
+    },
+    {
+      "name": "norway/cr1_top|0,16384,0|+surfaceparm detail",
+      "count": 53
+    },
+    {
+      "name": "mohcommon/jeff-concrete-wallb|0,0,0|surfaceDensity 16",
+      "count": 51
+    },
+    {
+      "name": "mohtest/core1lit|0,0,0|none",
+      "count": 49
+    },
+    {
+      "name": "general_structure/bunker_wall|0,0,0|surfaceDensity 64",
+      "count": 47
+    },
+    {
+      "name": "norway/cr1_side4|0,16384,0|+surfaceparm detail",
+      "count": 43
+    },
+    {
+      "name": "general_industrial/verticalbrace|204800,35328,0|+surfaceparm detail",
+      "count": 40
+    },
+    {
+      "name": "mohcommon/jeff-concrete-walla|0,0,0|none",
+      "count": 38
+    },
+    {
+      "name": "general_structure/concretewall2|0,0,0|+surfaceparm detail",
+      "count": 37
+    },
+    {
+      "name": "mohcommon/jeff-concrete-wallb|0,0,0|+surfaceparm detail",
+      "count": 35
+    },
+    {
+      "name": "mohtest/slatewldrty1|0,0,0|+surfaceparm detail",
+      "count": 34
+    },
+    {
+      "name": "general_industrial/jh_pipe1|0,32768,0|+surfaceparm detail",
+      "count": 33
+    },
+    {
+      "name": "general_industrial/ventshaft_rustedge|0,32768,0|none",
+      "count": 33
+    },
+    {
+      "name": "normandy/blank|0,0,0|+surfaceparm detail",
+      "count": 32
+    },
+    {
+      "name": "sky/mohday1|0,276,0|none",
+      "count": 31
+    },
+    {
+      "name": "algiers/doccrtset_1stepsml|0,0,0|none",
+      "count": 30
+    },
+    {
+      "name": "normandy/bunk_ceiling|0,32768,0|none",
+      "count": 30
+    },
+    {
+      "name": "german/rusty_iron|0,32768,0|none",
+      "count": 28
+    },
+    {
+      "name": "norway/cr1_sideblank|0,16384,0|+surfaceparm detail",
+      "count": 26
+    },
+    {
+      "name": "common/origin|16777216,2176,0|surfaceColor -1.000000 -1.000000 -1.000000",
+      "count": 24
+    },
+    {
+      "name": "general_industrial/jh_pipeunion1b|0,0,0|+surfaceparm detail",
+      "count": 24
+    },
+    {
+      "name": "das_boot/ironwall1_sub|393216,32768,0|+surfaceparm detail",
+      "count": 22
+    },
+    {
+      "name": "general_industrial/jh_pipeunion2b|0,0,0|+surfaceparm detail",
+      "count": 22
+    },
+    {
+      "name": "normandy/taped2|0,0,0|+surfaceparm detail",
+      "count": 22
+    },
+    {
+      "name": "mohcommon/ibeam_1a|0,32768,0|none",
+      "count": 21
+    },
+    {
+      "name": "german/rusty_iron|0,32768,0|+surfaceparm detail",
+      "count": 19
+    },
+    {
+      "name": "general_industrial/rembridge_ibeamA|0,32768,0|none",
+      "count": 17
+    },
+    {
+      "name": "mohcommon/secfence|204800,33312,0|none",
+      "count": 17
+    },
+    {
+      "name": "norway/nor_panel2_v2dam|0,32768,0|none",
+      "count": 17
+    },
+    {
+      "name": "german/platform|0,16384,0|+surfaceparm detail",
+      "count": 16
+    },
+    {
+      "name": "normandy/army_property|0,0,0|+surfaceparm detail",
+      "count": 16
+    },
+    {
+      "name": "algiers/arzewpj_2|0,16384,0|+surfaceparm detail",
+      "count": 15
+    },
+    {
+      "name": "general_industrial/ibeam_vert|0,32768,0|+surfaceparm detail",
+      "count": 15
+    },
+    {
+      "name": "general_structure/bunker_walltrans|0,0,0|+surfaceparm detail",
+      "count": 13
+    },
+    {
+      "name": "german/control|0,16384,0|none",
+      "count": 13
+    },
+    {
+      "name": "common/caulkshadow|0,480,0|+surfaceparm detail",
+      "count": 12
+    },
+    {
+      "name": "common/metalclip|536870912,32928,0|none",
+      "count": 12
+    },
+    {
+      "name": "common/stoneclip|536870912,160,0|none",
+      "count": 12
+    },
+    {
+      "name": "misc_outside/hedgerow|8192,524800,0|none",
+      "count": 12
+    },
+    {
+      "name": "models/items/v2|0,0,0|none",
+      "count": 12
+    },
+    {
+      "name": "mohcommon/barbwire|204800,35328,0|none",
+      "count": 12
+    },
+    {
+      "name": "mohcommon/jeff-concrete-walla|0,0,0|+surfaceparm detail",
+      "count": 12
+    },
+    {
+      "name": "normandy/taped1|0,0,0|+surfaceparm detail",
+      "count": 12
+    },
+    {
+      "name": "general_industrial/jh_pipe1|0,32768,0|subdivisions 373.259918",
+      "count": 11
+    },
+    {
+      "name": "misc_outside/bocage_treerow1rev|8192,33554944,0|none",
+      "count": 11
+    },
+    {
+      "name": "misc_outside/treeline_center|8192,33554944,0|none",
+      "count": 11
+    },
+    {
+      "name": "mohcommon/cncrtset_4|0,0,0|none",
+      "count": 11
+    },
+    {
+      "name": "norway/nor_transferboxV1dam|0,32768,0|subdivisions 373.259918",
+      "count": 11
+    },
+    {
+      "name": "algiers/whsflrset1_1a|0,0,0|none",
+      "count": 10
+    },
+    {
+      "name": "general_industrial/bridgebeam|0,32768,0|none",
+      "count": 10
+    },
+    {
+      "name": "general_industrial/ge_wires_para|536870912,34864,0|+surfaceparm detail",
+      "count": 10
+    },
+    {
+      "name": "general_industrial/strangebrace1straight|204800,35328,0|+surfaceparm detail",
+      "count": 10
+    },
+    {
+      "name": "german/crate_reinforced1_side|0,16384,0|+surfaceparm detail",
+      "count": 10
+    },
+    {
+      "name": "german/crate_reinforced1_sideflt|0,16384,0|+surfaceparm detail",
+      "count": 10
+    },
+    {
+      "name": "general_structure/concretewall2|0,0,0|none",
+      "count": 9
+    },
+    {
+      "name": "german/ex_crate6|0,16384,0|+surfaceparm detail",
+      "count": 9
+    },
+    {
+      "name": "algiers/arzewpj_2|0,16384,0|none",
+      "count": 8
+    },
+    {
+      "name": "mohcommon/ibeam_1a|0,32768,0|-surfaceparm solid +surfaceparm weaponclip +surfaceparm detail",
+      "count": 8
+    },
+    {
+      "name": "mohcommon/jeff-concrete-wallb|0,0,0|surfaceDensity 16 subdivisions 373.259918",
+      "count": 8
+    },
+    {
+      "name": "blasted/bunkerdoor3|0,32768,0|+surfaceparm detail",
+      "count": 7
+    },
+    {
+      "name": "blasted/bunkerdoor3|0,32768,0|none",
+      "count": 7
+    },
+    {
+      "name": "norway/nor_panel1v1dam|0,32768,0|none",
+      "count": 7
+    },
+    {
+      "name": "general_industrial/ibeam_flat2|0,32768,0|none",
+      "count": 6
+    },
+    {
+      "name": "general_industrial/industrialgrate1_sml|8192,0,0|none",
+      "count": 6
+    },
+    {
+      "name": "general_industrial/shmconc_grn1spipe|0,65536,0|+surfaceparm detail",
+      "count": 5
+    },
+    {
+      "name": "german/crate_reinforced1_top|0,16384,0|+surfaceparm detail",
+      "count": 5
+    },
+    {
+      "name": "algiers/jh_portarz_bk|0,16384,0|+surfaceparm detail",
+      "count": 4
+    },
+    {
+      "name": "general_industrial/jh_pipeunion2a|0,32768,0|+surfaceparm detail",
+      "count": 4
+    },
+    {
+      "name": "general_industrial/wh_conc2c|0,65536,0|none",
+      "count": 4
+    },
+    {
+      "name": "general_industrial/wiresnstuff|204800,35328,0|none",
+      "count": 4
+    },
+    {
+      "name": "german/crate_reinforced1_side|0,16384,0|none",
+      "count": 4
+    },
+    {
+      "name": "german/crate_reinforced1_sideflt|0,16384,0|none",
+      "count": 4
+    },
+    {
+      "name": "german/restrictedarea|0,16384,0|+surfaceparm detail",
+      "count": 4
+    },
+    {
+      "name": "misc_outside/concpath1_wgrass|0,0,0|+surfaceparm detail",
+      "count": 4
+    },
+    {
+      "name": "norway/blackboard1|0,0,0|+surfaceparm detail",
+      "count": 4
+    },
+    {
+      "name": "general_industrial/ibeam_flat2|0,32768,0|+surfaceparm detail",
+      "count": 3
+    },
+    {
+      "name": "general_industrial/strangebrace1|204800,35328,0|+surfaceparm detail",
+      "count": 3
+    },
+    {
+      "name": "general_industrial/utilboxtop|0,32768,0|none",
+      "count": 3
+    },
+    {
+      "name": "normandy/rubber_tube|0,0,0|none",
+      "count": 3
+    },
+    {
+      "name": "das_boot/iron_floor3b|0,32768,0|+surfaceparm detail",
+      "count": 2
+    },
+    {
+      "name": "general_industrial/bridgebeam|0,32768,0|+surfaceparm detail",
+      "count": 2
+    },
+    {
+      "name": "general_industrial/crossplate|0,32768,0|+surfaceparm detail",
+      "count": 2
+    },
+    {
+      "name": "general_industrial/industrialgrate1_sml|8192,0,0|+surfaceparm detail",
+      "count": 2
+    },
+    {
+      "name": "general_industrial/jh_pipeunion1a|0,0,0|+surfaceparm detail",
+      "count": 2
+    },
+    {
+      "name": "general_industrial/rembridge_ibeamA|0,32768,0|+surfaceparm detail",
+      "count": 2
+    },
+    {
+      "name": "general_industrial/wires3_barn|536870912,34864,0|+surfaceparm detail",
+      "count": 2
+    },
+    {
+      "name": "german/bunker_heavydoor1|0,32768,0|none",
+      "count": 2
+    },
+    {
+      "name": "german/crate_reinforced1_top|0,16384,0|none",
+      "count": 2
+    },
+    {
+      "name": "german/ex_crate4|0,16384,0|+surfaceparm detail",
+      "count": 2
+    },
+    {
+      "name": "german/gnrlcratesml_top1|0,16384,0|none",
+      "count": 2
+    },
+    {
+      "name": "misc_outside/concpath1_wgrass|0,0,0|none",
+      "count": 2
+    },
+    {
+      "name": "norway/nor_panel2_v2|0,32768,0|none",
+      "count": 2
+    },
+    {
+      "name": "algiers/doccrtset_1b|0,0,0|+surfaceparm detail",
+      "count": 1
+    },
+    {
+      "name": "algiers/doccrtset_1b|0,0,0|none",
+      "count": 1
+    },
+    {
+      "name": "general_industrial/heavy_bunkerdoors|0,65536,0|none",
+      "count": 1
+    },
+    {
+      "name": "general_industrial/shmconc_grn1spipe|0,65536,0|none",
+      "count": 1
+    },
+    {
+      "name": "general_structure/bunker_walltrans|0,0,0|none",
+      "count": 1
+    },
+    {
+      "name": "german/bunker_heavydoor1wout|0,32768,0|none",
+      "count": 1
+    },
+    {
+      "name": "german/ex_crate5|0,16384,0|+surfaceparm detail",
+      "count": 1
+    },
+    {
+      "name": "german/platform|0,16384,0|none",
+      "count": 1
+    },
+    {
+      "name": "mohcommon/ibeam_1|0,32768,0|+surfaceparm detail",
+      "count": 1
+    },
+    {
+      "name": "normandy/blank|0,0,0|none",
+      "count": 1
+    },
+    {
+      "name": "norway/cr1_side2|0,16384,0|+surfaceparm detail",
+      "count": 1
+    },
+    {
+      "name": "norway/nor_panel1v1|0,32768,0|none",
+      "count": 1
+    },
+    {
+      "name": "norway/nor_transferboxV1|0,32768,0|subdivisions 373.259918",
+      "count": 1
+    }
+  ],
+  "faceScales": [
+    {
+      "name": "0.5,0.5",
+      "count": 22570
+    },
+    {
+      "name": "0.5,-0.5",
+      "count": 3603
+    },
+    {
+      "name": "1,1",
+      "count": 3549
+    },
+    {
+      "name": "0.25,0.25",
+      "count": 1755
+    },
+    {
+      "name": "1,-1",
+      "count": 1319
+    },
+    {
+      "name": "0.25,-0.25",
+      "count": 798
+    },
+    {
+      "name": "0.0625,-0.3125",
+      "count": 117
+    },
+    {
+      "name": "0.3125,0.1875",
+      "count": 81
+    },
+    {
+      "name": "0.125,0.109375",
+      "count": 72
+    },
+    {
+      "name": "0.75,0.75",
+      "count": 45
+    },
+    {
+      "name": "0.125,-0.109375",
+      "count": 44
+    },
+    {
+      "name": "0.25,-8",
+      "count": 36
+    },
+    {
+      "name": "0.15625,0.109375",
+      "count": 35
+    },
+    {
+      "name": "0.353516,0.5",
+      "count": 31
+    },
+    {
+      "name": "30.75,-14.25",
+      "count": 28
+    },
+    {
+      "name": "0.15625,-0.109375",
+      "count": 25
+    },
+    {
+      "name": "0.59375,0.5",
+      "count": 25
+    },
+    {
+      "name": "-0.09375,-0.09375",
+      "count": 24
+    },
+    {
+      "name": "-0.25,0.25",
+      "count": 22
+    },
+    {
+      "name": "8,8",
+      "count": 20
+    },
+    {
+      "name": "0.25,-0.229492",
+      "count": 19
+    },
+    {
+      "name": "-0.59375,0.5",
+      "count": 18
+    },
+    {
+      "name": "0.25,-0.249969",
+      "count": 18
+    },
+    {
+      "name": "0.5,0.499939",
+      "count": 18
+    },
+    {
+      "name": "-0.15625,0.15625",
+      "count": 17
+    },
+    {
+      "name": "-0.3125,-0.25",
+      "count": 16
+    },
+    {
+      "name": "0.25,-0.229156",
+      "count": 14
+    },
+    {
+      "name": "0.203125,0.171875",
+      "count": 13
+    },
+    {
+      "name": "0.25,0.229156",
+      "count": 13
+    },
+    {
+      "name": "0.353586,-0.500054",
+      "count": 13
+    }
+  ],
+  "faceFlags": [
+    {
+      "name": "0,32768,0",
+      "count": 12077
+    },
+    {
+      "name": "0,160,0",
+      "count": 11946
+    },
+    {
+      "name": "536870912,2224,0",
+      "count": 3553
+    },
+    {
+      "name": "0,0,0",
+      "count": 3123
+    },
+    {
+      "name": "0,16384,0",
+      "count": 1450
+    },
+    {
+      "name": "8192,262176,0",
+      "count": 899
+    },
+    {
+      "name": "536870912,32928,0",
+      "count": 474
+    },
+    {
+      "name": "196608,2193,0",
+      "count": 384
+    },
+    {
+      "name": "268435456,2192,0",
+      "count": 334
+    },
+    {
+      "name": "16777216,2176,0",
+      "count": 198
+    },
+    {
+      "name": "805339136,2192,0",
+      "count": 150
+    },
+    {
+      "name": "65536,2193,0",
+      "count": 137
+    },
+    {
+      "name": "0,128,0",
+      "count": 114
+    },
+    {
+      "name": "536870912,160,0",
+      "count": 102
+    },
+    {
+      "name": "204800,35328,0",
+      "count": 69
+    },
+    {
+      "name": "0,136,0",
+      "count": 60
+    },
+    {
+      "name": "0,276,0",
+      "count": 31
+    },
+    {
+      "name": "393216,32768,0",
+      "count": 22
+    },
+    {
+      "name": "8192,33554944,0",
+      "count": 22
+    },
+    {
+      "name": "204800,33312,0",
+      "count": 17
+    },
+    {
+      "name": "0,480,0",
+      "count": 12
+    },
+    {
+      "name": "536870912,34864,0",
+      "count": 12
+    },
+    {
+      "name": "8192,524800,0",
+      "count": 12
+    },
+    {
+      "name": "0,65536,0",
+      "count": 11
+    },
+    {
+      "name": "8192,0,0",
+      "count": 8
+    }
+  ],
+  "extensionTokens": [
+    {
+      "name": "+surfaceparm",
+      "count": 23089
+    },
+    {
+      "name": "detail",
+      "count": 23081
+    },
+    {
+      "name": "surfaceDensity",
+      "count": 178
+    },
+    {
+      "name": "64",
+      "count": 119
+    },
+    {
+      "name": "373.259918",
+      "count": 96
+    },
+    {
+      "name": "subdivisions",
+      "count": 96
+    },
+    {
+      "name": "-1.000000",
+      "count": 72
+    },
+    {
+      "name": "16",
+      "count": 59
+    },
+    {
+      "name": "surfaceColor",
+      "count": 24
+    },
+    {
+      "name": "-surfaceparm",
+      "count": 8
+    },
+    {
+      "name": "solid",
+      "count": 8
+    },
+    {
+      "name": "weaponclip",
+      "count": 8
+    }
+  ],
+  "boxDimensions": {
+    "x": [
+      {
+        "name": "2",
+        "count": 613
+      },
+      {
+        "name": "16",
+        "count": 346
+      },
+      {
+        "name": "4",
+        "count": 281
+      },
+      {
+        "name": "32",
+        "count": 183
+      },
+      {
+        "name": "1",
+        "count": 139
+      },
+      {
+        "name": "80",
+        "count": 122
+      },
+      {
+        "name": "8",
+        "count": 115
+      },
+      {
+        "name": "96",
+        "count": 110
+      },
+      {
+        "name": "24",
+        "count": 109
+      },
+      {
+        "name": "6",
+        "count": 92
+      },
+      {
+        "name": "124",
+        "count": 70
+      },
+      {
+        "name": "64",
+        "count": 69
+      },
+      {
+        "name": "128",
+        "count": 68
+      },
+      {
+        "name": "5",
+        "count": 68
+      },
+      {
+        "name": "112",
+        "count": 53
+      },
+      {
+        "name": "3",
+        "count": 52
+      },
+      {
+        "name": "12",
+        "count": 43
+      },
+      {
+        "name": "28",
+        "count": 43
+      },
+      {
+        "name": "20",
+        "count": 38
+      },
+      {
+        "name": "30",
+        "count": 36
+      },
+      {
+        "name": "160",
+        "count": 34
+      },
+      {
+        "name": "36",
+        "count": 31
+      },
+      {
+        "name": "48",
+        "count": 28
+      },
+      {
+        "name": "76",
+        "count": 23
+      },
+      {
+        "name": "40",
+        "count": 20
+      },
+      {
+        "name": "104",
+        "count": 16
+      },
+      {
+        "name": "144",
+        "count": 15
+      },
+      {
+        "name": "176",
+        "count": 15
+      },
+      {
+        "name": "56",
+        "count": 15
+      },
+      {
+        "name": "66",
+        "count": 15
+      },
+      {
+        "name": "44",
+        "count": 14
+      },
+      {
+        "name": "320",
+        "count": 13
+      },
+      {
+        "name": "192",
+        "count": 12
+      },
+      {
+        "name": "208",
+        "count": 12
+      },
+      {
+        "name": "120",
+        "count": 11
+      },
+      {
+        "name": "204",
+        "count": 11
+      },
+      {
+        "name": "256",
+        "count": 11
+      },
+      {
+        "name": "200",
+        "count": 9
+      },
+      {
+        "name": "224",
+        "count": 9
+      },
+      {
+        "name": "232",
+        "count": 9
+      }
+    ],
+    "y": [
+      {
+        "name": "2",
+        "count": 571
+      },
+      {
+        "name": "16",
+        "count": 356
+      },
+      {
+        "name": "24",
+        "count": 236
+      },
+      {
+        "name": "4",
+        "count": 220
+      },
+      {
+        "name": "32",
+        "count": 167
+      },
+      {
+        "name": "8",
+        "count": 123
+      },
+      {
+        "name": "96",
+        "count": 118
+      },
+      {
+        "name": "1",
+        "count": 111
+      },
+      {
+        "name": "6",
+        "count": 74
+      },
+      {
+        "name": "5",
+        "count": 69
+      },
+      {
+        "name": "128",
+        "count": 63
+      },
+      {
+        "name": "64",
+        "count": 61
+      },
+      {
+        "name": "124",
+        "count": 57
+      },
+      {
+        "name": "80",
+        "count": 55
+      },
+      {
+        "name": "3",
+        "count": 52
+      },
+      {
+        "name": "28",
+        "count": 48
+      },
+      {
+        "name": "20",
+        "count": 42
+      },
+      {
+        "name": "160",
+        "count": 39
+      },
+      {
+        "name": "30",
+        "count": 39
+      },
+      {
+        "name": "12",
+        "count": 38
+      },
+      {
+        "name": "40",
+        "count": 37
+      },
+      {
+        "name": "112",
+        "count": 36
+      },
+      {
+        "name": "48",
+        "count": 34
+      },
+      {
+        "name": "36",
+        "count": 31
+      },
+      {
+        "name": "176",
+        "count": 24
+      },
+      {
+        "name": "144",
+        "count": 22
+      },
+      {
+        "name": "192",
+        "count": 22
+      },
+      {
+        "name": "288",
+        "count": 21
+      },
+      {
+        "name": "10",
+        "count": 20
+      },
+      {
+        "name": "56",
+        "count": 19
+      },
+      {
+        "name": "76",
+        "count": 19
+      },
+      {
+        "name": "72",
+        "count": 16
+      },
+      {
+        "name": "368",
+        "count": 14
+      },
+      {
+        "name": "120",
+        "count": 12
+      },
+      {
+        "name": "256",
+        "count": 12
+      },
+      {
+        "name": "54",
+        "count": 12
+      },
+      {
+        "name": "104",
+        "count": 11
+      },
+      {
+        "name": "22",
+        "count": 11
+      },
+      {
+        "name": "88",
+        "count": 11
+      },
+      {
+        "name": "224",
+        "count": 10
+      }
+    ],
+    "z": [
+      {
+        "name": "2",
+        "count": 551
+      },
+      {
+        "name": "4",
+        "count": 353
+      },
+      {
+        "name": "16",
+        "count": 247
+      },
+      {
+        "name": "128",
+        "count": 214
+      },
+      {
+        "name": "6",
+        "count": 119
+      },
+      {
+        "name": "12",
+        "count": 106
+      },
+      {
+        "name": "8",
+        "count": 105
+      },
+      {
+        "name": "50",
+        "count": 102
+      },
+      {
+        "name": "160",
+        "count": 101
+      },
+      {
+        "name": "64",
+        "count": 89
+      },
+      {
+        "name": "140",
+        "count": 84
+      },
+      {
+        "name": "1",
+        "count": 77
+      },
+      {
+        "name": "98",
+        "count": 76
+      },
+      {
+        "name": "176",
+        "count": 75
+      },
+      {
+        "name": "52",
+        "count": 71
+      },
+      {
+        "name": "28",
+        "count": 70
+      },
+      {
+        "name": "48",
+        "count": 65
+      },
+      {
+        "name": "20",
+        "count": 56
+      },
+      {
+        "name": "184",
+        "count": 32
+      },
+      {
+        "name": "146",
+        "count": 30
+      },
+      {
+        "name": "36",
+        "count": 30
+      },
+      {
+        "name": "59",
+        "count": 28
+      },
+      {
+        "name": "212",
+        "count": 25
+      },
+      {
+        "name": "44",
+        "count": 23
+      },
+      {
+        "name": "112",
+        "count": 20
+      },
+      {
+        "name": "13",
+        "count": 20
+      },
+      {
+        "name": "96",
+        "count": 20
+      },
+      {
+        "name": "120",
+        "count": 19
+      },
+      {
+        "name": "144",
+        "count": 19
+      },
+      {
+        "name": "32",
+        "count": 18
+      },
+      {
+        "name": "21",
+        "count": 16
+      },
+      {
+        "name": "3",
+        "count": 16
+      },
+      {
+        "name": "49",
+        "count": 16
+      },
+      {
+        "name": "40",
+        "count": 15
+      },
+      {
+        "name": "92",
+        "count": 14
+      },
+      {
+        "name": "19",
+        "count": 13
+      },
+      {
+        "name": "384",
+        "count": 13
+      },
+      {
+        "name": "148",
+        "count": 12
+      },
+      {
+        "name": "5",
+        "count": 12
+      },
+      {
+        "name": "100",
+        "count": 11
+      }
+    ],
+    "shortest": [
+      {
+        "name": "2",
+        "count": 929
+      },
+      {
+        "name": "16",
+        "count": 637
+      },
+      {
+        "name": "4",
+        "count": 527
+      },
+      {
+        "name": "1",
+        "count": 327
+      },
+      {
+        "name": "8",
+        "count": 217
+      },
+      {
+        "name": "32",
+        "count": 189
+      },
+      {
+        "name": "12",
+        "count": 104
+      },
+      {
+        "name": "3",
+        "count": 93
+      },
+      {
+        "name": "6",
+        "count": 83
+      },
+      {
+        "name": "5",
+        "count": 43
+      },
+      {
+        "name": "64",
+        "count": 39
+      },
+      {
+        "name": "20",
+        "count": 36
+      },
+      {
+        "name": "24",
+        "count": 18
+      },
+      {
+        "name": "44",
+        "count": 16
+      },
+      {
+        "name": "40",
+        "count": 10
+      },
+      {
+        "name": "80",
+        "count": 10
+      },
+      {
+        "name": "48",
+        "count": 7
+      },
+      {
+        "name": "96",
+        "count": 7
+      },
+      {
+        "name": "10",
+        "count": 6
+      },
+      {
+        "name": "15",
+        "count": 6
+      },
+      {
+        "name": "28",
+        "count": 6
+      },
+      {
+        "name": "144",
+        "count": 5
+      },
+      {
+        "name": "36",
+        "count": 5
+      },
+      {
+        "name": "176",
+        "count": 3
+      },
+      {
+        "name": "104",
+        "count": 2
+      },
+      {
+        "name": "112",
+        "count": 2
+      },
+      {
+        "name": "14",
+        "count": 2
+      },
+      {
+        "name": "33",
+        "count": 2
+      },
+      {
+        "name": "5.999878000000081",
+        "count": 2
+      },
+      {
+        "name": "88",
+        "count": 2
+      },
+      {
+        "name": "11",
+        "count": 1
+      },
+      {
+        "name": "128",
+        "count": 1
+      },
+      {
+        "name": "160",
+        "count": 1
+      },
+      {
+        "name": "204",
+        "count": 1
+      },
+      {
+        "name": "208",
+        "count": 1
+      },
+      {
+        "name": "224",
+        "count": 1
+      },
+      {
+        "name": "31",
+        "count": 1
+      },
+      {
+        "name": "344",
+        "count": 1
+      },
+      {
+        "name": "5.9999389999999835",
+        "count": 1
+      },
+      {
+        "name": "52",
+        "count": 1
+      }
+    ],
+    "substantialShortest": [
+      {
+        "name": "16",
+        "count": 637
+      },
+      {
+        "name": "32",
+        "count": 189
+      },
+      {
+        "name": "64",
+        "count": 39
+      },
+      {
+        "name": "20",
+        "count": 36
+      },
+      {
+        "name": "24",
+        "count": 18
+      },
+      {
+        "name": "44",
+        "count": 16
+      },
+      {
+        "name": "40",
+        "count": 10
+      },
+      {
+        "name": "80",
+        "count": 10
+      },
+      {
+        "name": "48",
+        "count": 7
+      },
+      {
+        "name": "96",
+        "count": 7
+      },
+      {
+        "name": "28",
+        "count": 6
+      },
+      {
+        "name": "144",
+        "count": 5
+      },
+      {
+        "name": "36",
+        "count": 5
+      },
+      {
+        "name": "176",
+        "count": 3
+      },
+      {
+        "name": "104",
+        "count": 2
+      },
+      {
+        "name": "112",
+        "count": 2
+      },
+      {
+        "name": "33",
+        "count": 2
+      },
+      {
+        "name": "88",
+        "count": 2
+      },
+      {
+        "name": "128",
+        "count": 1
+      },
+      {
+        "name": "160",
+        "count": 1
+      },
+      {
+        "name": "204",
+        "count": 1
+      },
+      {
+        "name": "208",
+        "count": 1
+      },
+      {
+        "name": "224",
+        "count": 1
+      },
+      {
+        "name": "31",
+        "count": 1
+      },
+      {
+        "name": "344",
+        "count": 1
+      },
+      {
+        "name": "52",
+        "count": 1
+      },
+      {
+        "name": "544",
+        "count": 1
+      },
+      {
+        "name": "56",
+        "count": 1
+      },
+      {
+        "name": "60",
+        "count": 1
+      },
+      {
+        "name": "66",
+        "count": 1
+      },
+      {
+        "name": "70",
+        "count": 1
+      },
+      {
+        "name": "72",
+        "count": 1
+      },
+      {
+        "name": "84",
+        "count": 1
+      }
+    ]
+  },
+  "spatial": {
+    "axisBoxBounds": {
+      "min": [
+        -3600,
+        -1856,
+        -832
+      ],
+      "max": [
+        5376,
+        3136,
+        960
+      ],
+      "size": [
+        8976,
+        4992,
+        1792
+      ],
+      "samples": 6704
+    },
+    "axisBoxGrid256": [
+      {
+        "name": "12,10,-2",
+        "count": 52
+      },
+      {
+        "name": "12,10,-1",
+        "count": 49
+      },
+      {
+        "name": "0,1,-1",
+        "count": 46
+      },
+      {
+        "name": "9,7,-3",
+        "count": 38
+      },
+      {
+        "name": "5,11,0",
+        "count": 37
+      },
+      {
+        "name": "3,4,0",
+        "count": 34
+      },
+      {
+        "name": "0,0,-1",
+        "count": 33
+      },
+      {
+        "name": "0,9,-2",
+        "count": 32
+      },
+      {
+        "name": "5,3,-1",
+        "count": 31
+      },
+      {
+        "name": "4,3,-3",
+        "count": 29
+      },
+      {
+        "name": "5,2,-2",
+        "count": 29
+      },
+      {
+        "name": "6,6,-2",
+        "count": 29
+      },
+      {
+        "name": "-2,0,-2",
+        "count": 27
+      },
+      {
+        "name": "1,5,-1",
+        "count": 27
+      },
+      {
+        "name": "4,11,0",
+        "count": 27
+      },
+      {
+        "name": "0,2,0",
+        "count": 26
+      },
+      {
+        "name": "0,4,-2",
+        "count": 26
+      },
+      {
+        "name": "8,11,0",
+        "count": 26
+      },
+      {
+        "name": "9,10,0",
+        "count": 26
+      },
+      {
+        "name": "0,3,0",
+        "count": 25
+      },
+      {
+        "name": "4,2,0",
+        "count": 25
+      },
+      {
+        "name": "1,8,0",
+        "count": 24
+      },
+      {
+        "name": "3,2,-2",
+        "count": 23
+      },
+      {
+        "name": "3,5,0",
+        "count": 23
+      },
+      {
+        "name": "6,2,-2",
+        "count": 23
+      },
+      {
+        "name": "0,4,-1",
+        "count": 22
+      },
+      {
+        "name": "0,7,0",
+        "count": 22
+      },
+      {
+        "name": "1,4,-1",
+        "count": 22
+      },
+      {
+        "name": "8,10,0",
+        "count": 22
+      },
+      {
+        "name": "0,0,0",
+        "count": 21
+      },
+      {
+        "name": "3,9,-2",
+        "count": 21
+      },
+      {
+        "name": "5,5,-2",
+        "count": 21
+      },
+      {
+        "name": "5,9,-2",
+        "count": 21
+      },
+      {
+        "name": "8,9,-2",
+        "count": 21
+      },
+      {
+        "name": "-1,7,-2",
+        "count": 20
+      },
+      {
+        "name": "0,-1,0",
+        "count": 20
+      },
+      {
+        "name": "1,1,-1",
+        "count": 20
+      },
+      {
+        "name": "1,4,-2",
+        "count": 20
+      },
+      {
+        "name": "1,5,-2",
+        "count": 20
+      },
+      {
+        "name": "10,7,-3",
+        "count": 20
+      },
+      {
+        "name": "3,1,-2",
+        "count": 20
+      },
+      {
+        "name": "3,10,-2",
+        "count": 20
+      },
+      {
+        "name": "4,2,-1",
+        "count": 20
+      },
+      {
+        "name": "4,6,-2",
+        "count": 20
+      },
+      {
+        "name": "5,2,-1",
+        "count": 20
+      },
+      {
+        "name": "6,3,-2",
+        "count": 20
+      },
+      {
+        "name": "0,2,-1",
+        "count": 19
+      },
+      {
+        "name": "0,5,-2",
+        "count": 19
+      },
+      {
+        "name": "0,8,0",
+        "count": 19
+      },
+      {
+        "name": "1,9,-1",
+        "count": 19
+      },
+      {
+        "name": "1,9,-2",
+        "count": 19
+      },
+      {
+        "name": "0,10,-2",
+        "count": 18
+      },
+      {
+        "name": "11,9,-1",
+        "count": 18
+      },
+      {
+        "name": "2,0,-1",
+        "count": 18
+      },
+      {
+        "name": "2,0,0",
+        "count": 18
+      },
+      {
+        "name": "2,1,0",
+        "count": 18
+      },
+      {
+        "name": "3,2,-1",
+        "count": 18
+      },
+      {
+        "name": "6,2,-1",
+        "count": 18
+      },
+      {
+        "name": "-2,1,-2",
+        "count": 17
+      },
+      {
+        "name": "-2,7,-2",
+        "count": 17
+      },
+      {
+        "name": "2,7,0",
+        "count": 17
+      },
+      {
+        "name": "3,1,0",
+        "count": 17
+      },
+      {
+        "name": "4,3,-2",
+        "count": 17
+      },
+      {
+        "name": "5,7,-2",
+        "count": 17
+      },
+      {
+        "name": "5,7,0",
+        "count": 17
+      },
+      {
+        "name": "-2,2,-2",
+        "count": 16
+      },
+      {
+        "name": "-3,0,-2",
+        "count": 16
+      },
+      {
+        "name": "-3,5,-2",
+        "count": 16
+      },
+      {
+        "name": "0,6,-2",
+        "count": 16
+      },
+      {
+        "name": "1,2,-1",
+        "count": 16
+      },
+      {
+        "name": "1,9,0",
+        "count": 16
+      },
+      {
+        "name": "3,3,-1",
+        "count": 16
+      },
+      {
+        "name": "-1,2,-2",
+        "count": 15
+      },
+      {
+        "name": "0,1,0",
+        "count": 15
+      },
+      {
+        "name": "1,-1,0",
+        "count": 15
+      },
+      {
+        "name": "1,0,0",
+        "count": 15
+      },
+      {
+        "name": "1,1,-3",
+        "count": 15
+      },
+      {
+        "name": "1,10,-2",
+        "count": 15
+      },
+      {
+        "name": "1,11,-2",
+        "count": 15
+      },
+      {
+        "name": "3,2,0",
+        "count": 15
+      },
+      {
+        "name": "4,3,-1",
+        "count": 15
+      },
+      {
+        "name": "4,9,-2",
+        "count": 15
+      },
+      {
+        "name": "-1,8,-2",
+        "count": 14
+      },
+      {
+        "name": "0,11,-2",
+        "count": 14
+      },
+      {
+        "name": "1,4,0",
+        "count": 14
+      },
+      {
+        "name": "10,10,0",
+        "count": 14
+      },
+      {
+        "name": "3,3,0",
+        "count": 14
+      },
+      {
+        "name": "8,8,-3",
+        "count": 14
+      },
+      {
+        "name": "-1,0,-2",
+        "count": 13
+      },
+      {
+        "name": "-1,2,0",
+        "count": 13
+      },
+      {
+        "name": "0,8,-2",
+        "count": 13
+      },
+      {
+        "name": "10,2,-2",
+        "count": 13
+      },
+      {
+        "name": "10,9,0",
+        "count": 13
+      },
+      {
+        "name": "12,9,-2",
+        "count": 13
+      },
+      {
+        "name": "2,8,0",
+        "count": 13
+      },
+      {
+        "name": "6,3,0",
+        "count": 13
+      },
+      {
+        "name": "-1,10,-2",
+        "count": 12
+      },
+      {
+        "name": "-3,3,-2",
+        "count": 12
+      },
+      {
+        "name": "0,5,-1",
+        "count": 12
+      },
+      {
+        "name": "0,7,-2",
+        "count": 12
+      },
+      {
+        "name": "1,3,-3",
+        "count": 12
+      },
+      {
+        "name": "11,2,-2",
+        "count": 12
+      },
+      {
+        "name": "2,3,-1",
+        "count": 12
+      },
+      {
+        "name": "2,5,0",
+        "count": 12
+      },
+      {
+        "name": "4,4,-1",
+        "count": 12
+      },
+      {
+        "name": "4,5,-1",
+        "count": 12
+      },
+      {
+        "name": "4,9,0",
+        "count": 12
+      },
+      {
+        "name": "5,1,0",
+        "count": 12
+      },
+      {
+        "name": "7,5,-3",
+        "count": 12
+      },
+      {
+        "name": "-3,8,-2",
+        "count": 11
+      },
+      {
+        "name": "3,3,-2",
+        "count": 11
+      },
+      {
+        "name": "7,10,0",
+        "count": 11
+      },
+      {
+        "name": "1,1,-2",
+        "count": 10
+      },
+      {
+        "name": "12,10,0",
+        "count": 10
+      },
+      {
+        "name": "12,9,-1",
+        "count": 10
+      },
+      {
+        "name": "2,4,0",
+        "count": 10
+      },
+      {
+        "name": "3,3,-3",
+        "count": 10
+      },
+      {
+        "name": "4,3,0",
+        "count": 10
+      },
+      {
+        "name": "4,7,-2",
+        "count": 10
+      },
+      {
+        "name": "4,8,-2",
+        "count": 10
+      },
+      {
+        "name": "5,3,-2",
+        "count": 10
+      },
+      {
+        "name": "5,7,-1",
+        "count": 10
+      },
+      {
+        "name": "7,11,0",
+        "count": 10
+      },
+      {
+        "name": "9,11,0",
+        "count": 10
+      },
+      {
+        "name": "-7,3,-2",
+        "count": 9
+      },
+      {
+        "name": "1,8,-2",
+        "count": 9
+      },
+      {
+        "name": "11,9,-2",
+        "count": 9
+      },
+      {
+        "name": "2,1,-1",
+        "count": 9
+      },
+      {
+        "name": "2,10,-2",
+        "count": 9
+      },
+      {
+        "name": "2,8,-2",
+        "count": 9
+      },
+      {
+        "name": "2,9,-2",
+        "count": 9
+      },
+      {
+        "name": "3,8,-2",
+        "count": 9
+      },
+      {
+        "name": "4,1,0",
+        "count": 9
+      },
+      {
+        "name": "5,2,0",
+        "count": 9
+      },
+      {
+        "name": "5,8,-2",
+        "count": 9
+      },
+      {
+        "name": "6,10,0",
+        "count": 9
+      },
+      {
+        "name": "6,11,0",
+        "count": 9
+      },
+      {
+        "name": "-1,0,0",
+        "count": 8
+      },
+      {
+        "name": "-1,1,0",
+        "count": 8
+      },
+      {
+        "name": "-2,8,-2",
+        "count": 8
+      },
+      {
+        "name": "-3,6,-2",
+        "count": 8
+      },
+      {
+        "name": "1,0,-3",
+        "count": 8
+      },
+      {
+        "name": "1,3,0",
+        "count": 8
+      },
+      {
+        "name": "1,5,0",
+        "count": 8
+      },
+      {
+        "name": "10,6,-3",
+        "count": 8
+      },
+      {
+        "name": "10,8,-3",
+        "count": 8
+      },
+      {
+        "name": "11,11,0",
+        "count": 8
+      },
+      {
+        "name": "12,8,-2",
+        "count": 8
+      },
+      {
+        "name": "2,3,-2",
+        "count": 8
+      },
+      {
+        "name": "5,3,-3",
+        "count": 8
+      },
+      {
+        "name": "7,8,-2",
+        "count": 8
+      },
+      {
+        "name": "-1,11,-2",
+        "count": 7
+      },
+      {
+        "name": "-3,4,-2",
+        "count": 7
+      },
+      {
+        "name": "1,2,-3",
+        "count": 7
+      },
+      {
+        "name": "1,3,-1",
+        "count": 7
+      },
+      {
+        "name": "2,11,-2",
+        "count": 7
+      },
+      {
+        "name": "2,2,-1",
+        "count": 7
+      },
+      {
+        "name": "2,3,-3",
+        "count": 7
+      },
+      {
+        "name": "2,3,0",
+        "count": 7
+      },
+      {
+        "name": "2,6,0",
+        "count": 7
+      }
+    ],
+    "axisBoxGrid512": [
+      {
+        "name": "0,2,-1",
+        "count": 168
+      },
+      {
+        "name": "2,1,-1",
+        "count": 146
+      },
+      {
+        "name": "0,0,-1",
+        "count": 124
+      },
+      {
+        "name": "6,5,-1",
+        "count": 118
+      },
+      {
+        "name": "1,1,-1",
+        "count": 97
+      },
+      {
+        "name": "0,4,-1",
+        "count": 96
+      },
+      {
+        "name": "4,5,0",
+        "count": 84
+      },
+      {
+        "name": "1,2,0",
+        "count": 79
+      },
+      {
+        "name": "2,5,0",
+        "count": 76
+      },
+      {
+        "name": "-1,0,-1",
+        "count": 70
+      },
+      {
+        "name": "3,1,-1",
+        "count": 69
+      },
+      {
+        "name": "2,3,-1",
+        "count": 66
+      },
+      {
+        "name": "2,4,-1",
+        "count": 63
+      },
+      {
+        "name": "0,1,0",
+        "count": 62
+      },
+      {
+        "name": "0,5,-1",
+        "count": 62
+      },
+      {
+        "name": "0,4,0",
+        "count": 59
+      },
+      {
+        "name": "2,2,-1",
+        "count": 58
+      },
+      {
+        "name": "4,3,-2",
+        "count": 58
+      },
+      {
+        "name": "0,0,0",
+        "count": 56
+      },
+      {
+        "name": "1,0,-1",
+        "count": 56
+      },
+      {
+        "name": "1,0,0",
+        "count": 56
+      },
+      {
+        "name": "1,4,-1",
+        "count": 54
+      },
+      {
+        "name": "0,1,-1",
+        "count": 48
+      },
+      {
+        "name": "2,1,0",
+        "count": 47
+      },
+      {
+        "name": "-1,3,-1",
+        "count": 43
+      },
+      {
+        "name": "-1,1,-1",
+        "count": 42
+      },
+      {
+        "name": "3,5,0",
+        "count": 40
+      },
+      {
+        "name": "1,1,0",
+        "count": 38
+      },
+      {
+        "name": "2,1,-2",
+        "count": 37
+      },
+      {
+        "name": "1,5,-1",
+        "count": 36
+      },
+      {
+        "name": "0,-1,0",
+        "count": 35
+      },
+      {
+        "name": "0,3,-1",
+        "count": 35
+      },
+      {
+        "name": "4,4,-1",
+        "count": 35
+      },
+      {
+        "name": "3,3,-1",
+        "count": 34
+      },
+      {
+        "name": "6,4,-1",
+        "count": 33
+      },
+      {
+        "name": "0,3,0",
+        "count": 32
+      },
+      {
+        "name": "5,4,-1",
+        "count": 32
+      },
+      {
+        "name": "-2,2,-1",
+        "count": 31
+      },
+      {
+        "name": "1,3,0",
+        "count": 31
+      },
+      {
+        "name": "2,3,0",
+        "count": 29
+      },
+      {
+        "name": "0,2,0",
+        "count": 28
+      },
+      {
+        "name": "5,3,-2",
+        "count": 28
+      },
+      {
+        "name": "5,1,-1",
+        "count": 27
+      },
+      {
+        "name": "-1,4,-1",
+        "count": 26
+      },
+      {
+        "name": "0,1,-2",
+        "count": 25
+      },
+      {
+        "name": "5,5,0",
+        "count": 25
+      },
+      {
+        "name": "0,0,-2",
+        "count": 24
+      },
+      {
+        "name": "4,4,-2",
+        "count": 24
+      },
+      {
+        "name": "-2,0,-1",
+        "count": 23
+      },
+      {
+        "name": "2,4,0",
+        "count": 23
+      },
+      {
+        "name": "-2,1,-1",
+        "count": 21
+      },
+      {
+        "name": "2,0,0",
+        "count": 21
+      },
+      {
+        "name": "-1,5,-1",
+        "count": 19
+      },
+      {
+        "name": "1,1,-2",
+        "count": 19
+      },
+      {
+        "name": "1,4,0",
+        "count": 19
+      },
+      {
+        "name": "3,5,-1",
+        "count": 19
+      },
+      {
+        "name": "3,2,-1",
+        "count": 18
+      },
+      {
+        "name": "3,2,-2",
+        "count": 18
+      },
+      {
+        "name": "3,4,-1",
+        "count": 18
+      },
+      {
+        "name": "5,4,0",
+        "count": 18
+      },
+      {
+        "name": "-4,1,-1",
+        "count": 17
+      },
+      {
+        "name": "1,3,-1",
+        "count": 17
+      },
+      {
+        "name": "3,1,0",
+        "count": 17
+      },
+      {
+        "name": "-1,0,0",
+        "count": 16
+      },
+      {
+        "name": "4,5,-1",
+        "count": 15
+      },
+      {
+        "name": "3,3,-2",
+        "count": 14
+      },
+      {
+        "name": "3,4,0",
+        "count": 14
+      },
+      {
+        "name": "-1,1,0",
+        "count": 13
+      },
+      {
+        "name": "-2,3,-1",
+        "count": 13
+      },
+      {
+        "name": "-4,0,-1",
+        "count": 13
+      },
+      {
+        "name": "-2,4,-1",
+        "count": 12
+      },
+      {
+        "name": "4,2,-2",
+        "count": 12
+      },
+      {
+        "name": "5,4,-2",
+        "count": 12
+      },
+      {
+        "name": "6,5,0",
+        "count": 12
+      },
+      {
+        "name": "-3,0,-1",
+        "count": 10
+      },
+      {
+        "name": "3,0,-1",
+        "count": 10
+      },
+      {
+        "name": "3,2,0",
+        "count": 10
+      },
+      {
+        "name": "1,2,-1",
+        "count": 9
+      },
+      {
+        "name": "2,3,-2",
+        "count": 9
+      },
+      {
+        "name": "5,2,-1",
+        "count": 9
+      },
+      {
+        "name": "2,0,-1",
+        "count": 8
+      },
+      {
+        "name": "3,3,0",
+        "count": 8
+      },
+      {
+        "name": "1,2,-2",
+        "count": 7
+      },
+      {
+        "name": "2,2,-2",
+        "count": 7
+      },
+      {
+        "name": "2,4,-2",
+        "count": 7
+      },
+      {
+        "name": "5,0,-1",
+        "count": 7
+      },
+      {
+        "name": "6,3,-1",
+        "count": 7
+      },
+      {
+        "name": "-1,-1,0",
+        "count": 6
+      },
+      {
+        "name": "4,0,-1",
+        "count": 6
+      },
+      {
+        "name": "4,1,-1",
+        "count": 6
+      },
+      {
+        "name": "5,2,-2",
+        "count": 6
+      },
+      {
+        "name": "5,3,-1",
+        "count": 6
+      },
+      {
+        "name": "6,2,-1",
+        "count": 6
+      },
+      {
+        "name": "-3,2,-1",
+        "count": 5
+      },
+      {
+        "name": "4,1,-2",
+        "count": 5
+      },
+      {
+        "name": "6,1,-1",
+        "count": 5
+      },
+      {
+        "name": "6,4,0",
+        "count": 5
+      },
+      {
+        "name": "-1,3,0",
+        "count": 4
+      },
+      {
+        "name": "0,-1,-1",
+        "count": 4
+      },
+      {
+        "name": "1,3,-2",
+        "count": 4
+      },
+      {
+        "name": "4,3,-1",
+        "count": 4
+      },
+      {
+        "name": "4,5,-2",
+        "count": 4
+      },
+      {
+        "name": "-1,2,-1",
+        "count": 3
+      },
+      {
+        "name": "0,3,-2",
+        "count": 3
+      },
+      {
+        "name": "1,-1,-1",
+        "count": 3
+      },
+      {
+        "name": "1,-1,0",
+        "count": 3
+      },
+      {
+        "name": "1,4,-2",
+        "count": 3
+      },
+      {
+        "name": "3,4,-2",
+        "count": 3
+      },
+      {
+        "name": "4,4,0",
+        "count": 3
+      },
+      {
+        "name": "5,5,-1",
+        "count": 3
+      },
+      {
+        "name": "-1,-3,-1",
+        "count": 2
+      },
+      {
+        "name": "-1,-3,0",
+        "count": 2
+      },
+      {
+        "name": "-3,3,-1",
+        "count": 2
+      },
+      {
+        "name": "-3,5,0",
+        "count": 2
+      },
+      {
+        "name": "-4,-4,-1",
+        "count": 2
+      },
+      {
+        "name": "-4,-4,0",
+        "count": 2
+      },
+      {
+        "name": "-6,5,-1",
+        "count": 2
+      },
+      {
+        "name": "-7,0,-1",
+        "count": 2
+      },
+      {
+        "name": "0,2,-2",
+        "count": 2
+      },
+      {
+        "name": "1,-2,0",
+        "count": 2
+      },
+      {
+        "name": "10,1,-1",
+        "count": 2
+      },
+      {
+        "name": "10,1,0",
+        "count": 2
+      },
+      {
+        "name": "2,2,0",
+        "count": 2
+      },
+      {
+        "name": "6,-4,-1",
+        "count": 2
+      },
+      {
+        "name": "6,-4,0",
+        "count": 2
+      },
+      {
+        "name": "6,0,-1",
+        "count": 2
+      },
+      {
+        "name": "6,4,-2",
+        "count": 2
+      },
+      {
+        "name": "8,5,-1",
+        "count": 2
+      },
+      {
+        "name": "-1,-1,-1",
+        "count": 1
+      },
+      {
+        "name": "-1,5,0",
+        "count": 1
+      },
+      {
+        "name": "-2,1,1",
+        "count": 1
+      },
+      {
+        "name": "-2,2,0",
+        "count": 1
+      },
+      {
+        "name": "-3,4,0",
+        "count": 1
+      },
+      {
+        "name": "-4,-3,-2",
+        "count": 1
+      },
+      {
+        "name": "-4,-3,1",
+        "count": 1
+      },
+      {
+        "name": "-4,2,-1",
+        "count": 1
+      },
+      {
+        "name": "-4,2,-2",
+        "count": 1
+      },
+      {
+        "name": "-4,4,-1",
+        "count": 1
+      },
+      {
+        "name": "-4,5,0",
+        "count": 1
+      },
+      {
+        "name": "-5,2,1",
+        "count": 1
+      },
+      {
+        "name": "-6,5,0",
+        "count": 1
+      },
+      {
+        "name": "-7,0,0",
+        "count": 1
+      },
+      {
+        "name": "-8,0,0",
+        "count": 1
+      },
+      {
+        "name": "1,-2,-1",
+        "count": 1
+      },
+      {
+        "name": "2,-1,0",
+        "count": 1
+      },
+      {
+        "name": "2,-2,-1",
+        "count": 1
+      },
+      {
+        "name": "2,3,1",
+        "count": 1
+      },
+      {
+        "name": "2,5,-1",
+        "count": 1
+      },
+      {
+        "name": "3,-1,0",
+        "count": 1
+      },
+      {
+        "name": "3,0,0",
+        "count": 1
+      },
+      {
+        "name": "3,5,-2",
+        "count": 1
+      },
+      {
+        "name": "5,0,-2",
+        "count": 1
+      },
+      {
+        "name": "5,1,-2",
+        "count": 1
+      },
+      {
+        "name": "6,-2,-2",
+        "count": 1
+      },
+      {
+        "name": "6,-2,1",
+        "count": 1
+      },
+      {
+        "name": "6,2,-2",
+        "count": 1
+      },
+      {
+        "name": "6,2,1",
+        "count": 1
+      },
+      {
+        "name": "8,2,-2",
+        "count": 1
+      },
+      {
+        "name": "8,5,0",
+        "count": 1
+      },
+      {
+        "name": "8,5,1",
+        "count": 1
+      },
+      {
+        "name": "8,6,0",
+        "count": 1
+      }
+    ],
+    "entityOriginBounds": {
+      "min": [
+        -3340.2,
+        -2135,
+        -740.48
+      ],
+      "max": [
+        5456,
+        4272,
+        784
+      ],
+      "size": [
+        8796.2,
+        6407,
+        1524.48
+      ],
+      "samples": 598
+    },
+    "entityClassOriginBounds": [
+      {
+        "name": "animate_equipment_radio-military",
+        "min": [
+          2304,
+          2700,
+          50
+        ],
+        "max": [
+          2304,
+          2700,
+          50
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "fx_exploder_adamspark",
+        "min": [
+          2194,
+          2828,
+          74
+        ],
+        "max": [
+          2358,
+          2844,
+          116
+        ],
+        "size": [
+          164,
+          16,
+          42
+        ],
+        "samples": 4
+      },
+      {
+        "name": "fx_smoke_smallfry",
+        "min": [
+          2354,
+          2828,
+          88
+        ],
+        "max": [
+          2354,
+          2828,
+          88
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "info_player_allied",
+        "min": [
+          -1728,
+          256,
+          -448
+        ],
+        "max": [
+          -184,
+          2088,
+          -392
+        ],
+        "size": [
+          1544,
+          1832,
+          56
+        ],
+        "samples": 16
+      },
+      {
+        "name": "info_player_axis",
+        "min": [
+          -8,
+          0,
+          -508
+        ],
+        "max": [
+          3312,
+          2832,
+          16
+        ],
+        "size": [
+          3320,
+          2832,
+          524
+        ],
+        "samples": 16
+      },
+      {
+        "name": "info_player_deathmatch",
+        "min": [
+          -1680,
+          368,
+          -508
+        ],
+        "max": [
+          2912,
+          2576,
+          24
+        ],
+        "size": [
+          4592,
+          2208,
+          532
+        ],
+        "samples": 14
+      },
+      {
+        "name": "info_player_start",
+        "min": [
+          -1724,
+          932,
+          -394
+        ],
+        "max": [
+          -1724,
+          932,
+          -394
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "info_splinepath",
+        "min": [
+          -2928,
+          -2135,
+          688
+        ],
+        "max": [
+          5456,
+          4272,
+          784
+        ],
+        "size": [
+          8384,
+          6407,
+          96
+        ],
+        "samples": 22
+      },
+      {
+        "name": "light",
+        "min": [
+          -783,
+          40,
+          -671
+        ],
+        "max": [
+          3264,
+          2962,
+          153
+        ],
+        "size": [
+          4047,
+          2922,
+          824
+        ],
+        "samples": 181
+      },
+      {
+        "name": "script_model",
+        "min": [
+          2246.98,
+          1208.22,
+          -740.48
+        ],
+        "max": [
+          2363.75,
+          2670.22,
+          88.27
+        ],
+        "size": [
+          116.76999999999998,
+          1461.9999999999998,
+          828.75
+        ],
+        "samples": 8
+      },
+      {
+        "name": "script_origin",
+        "min": [
+          -2686,
+          -571,
+          -240
+        ],
+        "max": [
+          3384,
+          2352,
+          398
+        ],
+        "size": [
+          6070,
+          2923,
+          638
+        ],
+        "samples": 11
+      },
+      {
+        "name": "static_corona_orange",
+        "min": [
+          -783,
+          40,
+          -660
+        ],
+        "max": [
+          3259,
+          2962,
+          167
+        ],
+        "size": [
+          4042,
+          2922,
+          827
+        ],
+        "samples": 119
+      },
+      {
+        "name": "static_equipment_bunkerstove",
+        "min": [
+          1575.82,
+          2647.56,
+          0.48
+        ],
+        "max": [
+          1575.82,
+          2647.56,
+          0.48
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_equipment_radio-military",
+        "min": [
+          1327.77,
+          2648.51,
+          51
+        ],
+        "max": [
+          1327.77,
+          2648.51,
+          51
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_flags_nazibanner1",
+        "min": [
+          443.69,
+          1744.3,
+          -349
+        ],
+        "max": [
+          443.69,
+          1744.3,
+          -349
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_furniture_bunkerchair",
+        "min": [
+          1312,
+          2665,
+          0
+        ],
+        "max": [
+          1312,
+          2665,
+          0
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_furniture_metaldesk",
+        "min": [
+          1313.97,
+          2645.92,
+          0
+        ],
+        "max": [
+          1313.97,
+          2645.92,
+          0
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_item_nazicrate",
+        "min": [
+          -586.69,
+          206,
+          -424
+        ],
+        "max": [
+          1282.29,
+          3040,
+          93
+        ],
+        "size": [
+          1868.98,
+          2834,
+          517
+        ],
+        "samples": 8
+      },
+      {
+        "name": "static_item_switch1",
+        "min": [
+          361.4,
+          479.4,
+          -139.6
+        ],
+        "max": [
+          361.4,
+          479.4,
+          -139.6
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_lamp_lightbulb-caged",
+        "min": [
+          -790,
+          56.2,
+          -666
+        ],
+        "max": [
+          3258.2,
+          2963.2,
+          170
+        ],
+        "size": [
+          4048.2,
+          2907,
+          836
+        ],
+        "samples": 106
+      },
+      {
+        "name": "static_lamp_lightbulb-covered-nowire",
+        "min": [
+          -7.89,
+          40.1,
+          -260.01
+        ],
+        "max": [
+          928.11,
+          2100.1,
+          157.99
+        ],
+        "size": [
+          936,
+          2060,
+          418
+        ],
+        "samples": 13
+      },
+      {
+        "name": "static_microphone",
+        "min": [
+          1325.63,
+          2663.7,
+          51
+        ],
+        "max": [
+          1325.63,
+          2663.7,
+          51
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_natural_bush_full",
+        "min": [
+          -1861.2,
+          -861.4,
+          -525
+        ],
+        "max": [
+          3428,
+          1912,
+          -442
+        ],
+        "size": [
+          5289.2,
+          2773.4,
+          83
+        ],
+        "samples": 17
+      },
+      {
+        "name": "static_natural_bush_sparseshrub",
+        "min": [
+          -1273,
+          981,
+          -458
+        ],
+        "max": [
+          -1127,
+          1003,
+          -454
+        ],
+        "size": [
+          146,
+          22,
+          4
+        ],
+        "samples": 2
+      },
+      {
+        "name": "static_natural_tree_commontree",
+        "min": [
+          -3170.4,
+          -1409.4,
+          -524
+        ],
+        "max": [
+          3866,
+          1955,
+          -295.2
+        ],
+        "size": [
+          7036.4,
+          3364.4,
+          228.8
+        ],
+        "samples": 13
+      },
+      {
+        "name": "static_natural_tree_juniper",
+        "min": [
+          -805.6,
+          2628.4,
+          200.2
+        ],
+        "max": [
+          -805.6,
+          2628.4,
+          200.2
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_natural_tree_oak",
+        "min": [
+          -3340.2,
+          -1522.4,
+          -543.6
+        ],
+        "max": [
+          4939.8,
+          2658.2,
+          -254.8
+        ],
+        "size": [
+          8280,
+          4180.6,
+          288.8
+        ],
+        "samples": 34
+      },
+      {
+        "name": "static_uboat_radiostation1",
+        "min": [
+          1419.74,
+          2629.89,
+          66
+        ],
+        "max": [
+          1419.74,
+          2629.89,
+          66
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_uboat_radiostation2",
+        "min": [
+          1389.4,
+          2629.89,
+          66
+        ],
+        "max": [
+          1389.4,
+          2629.89,
+          66
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      },
+      {
+        "name": "static_vehicle_german_opeltruck",
+        "min": [
+          183.5,
+          2020,
+          -512
+        ],
+        "max": [
+          183.5,
+          2020,
+          -512
+        ],
+        "size": [
+          0,
+          0,
+          0
+        ],
+        "samples": 1
+      }
+    ]
+  },
+  "patchMaterials": [
+    {
+      "name": "general_industrial/jh_pipeunion2a",
+      "count": 192
+    },
+    {
+      "name": "general_industrial/shmpipe_lite",
+      "count": 147
+    },
+    {
+      "name": "general_industrial/jh_pipeunion1a",
+      "count": 92
+    },
+    {
+      "name": "general_industrial/ge_wires_para",
+      "count": 68
+    },
+    {
+      "name": "general_industrial/jh_pipeunion2b",
+      "count": 29
+    },
+    {
+      "name": "general_industrial/jh_pipe2wet",
+      "count": 26
+    },
+    {
+      "name": "general_industrial/deckgrate_set1b",
+      "count": 20
+    },
+    {
+      "name": "general_industrial/jh_pipeunion1b",
+      "count": 17
+    },
+    {
+      "name": "barrel/blackbarrel_top",
+      "count": 16
+    },
+    {
+      "name": "german/rusty_iron",
+      "count": 16
+    },
+    {
+      "name": "general_industrial/jh_pipe1wet",
+      "count": 15
+    },
+    {
+      "name": "general_industrial/wires3_barn",
+      "count": 14
+    },
+    {
+      "name": "das_boot/ironwall1",
+      "count": 10
+    },
+    {
+      "name": "general_industrial/jh_piperust_lf",
+      "count": 10
+    },
+    {
+      "name": "normandy/can_top",
+      "count": 9
+    },
+    {
+      "name": "normandy/can_side",
+      "count": 8
+    },
+    {
+      "name": "misc_outside/rock_cliffside_trans",
+      "count": 7
+    },
+    {
+      "name": "general_industrial/jh_piperust_rt",
+      "count": 6
+    },
+    {
+      "name": "barrel/blackbarrel",
+      "count": 4
+    },
+    {
+      "name": "flags/nazi1",
+      "count": 2
+    }
+  ],
+  "patchDimensions": [
+    {
+      "name": "3x3",
+      "count": 398
+    },
+    {
+      "name": "9x3",
+      "count": 308
+    },
+    {
+      "name": "3x7",
+      "count": 1
+    },
+    {
+      "name": "5x3",
+      "count": 1
+    }
+  ],
+  "entityClasses": [
+    {
+      "name": "light",
+      "count": 181
+    },
+    {
+      "name": "static_corona_orange",
+      "count": 119
+    },
+    {
+      "name": "static_lamp_lightbulb-caged",
+      "count": 107
+    },
+    {
+      "name": "func_group",
+      "count": 53
+    },
+    {
+      "name": "static_natural_tree_oak",
+      "count": 34
+    },
+    {
+      "name": "script_object",
+      "count": 25
+    },
+    {
+      "name": "func_rotatingdoor",
+      "count": 23
+    },
+    {
+      "name": "info_splinepath",
+      "count": 22
+    },
+    {
+      "name": "detail",
+      "count": 21
+    },
+    {
+      "name": "static_natural_bush_full",
+      "count": 17
+    },
+    {
+      "name": "info_player_allied",
+      "count": 16
+    },
+    {
+      "name": "info_player_axis",
+      "count": 16
+    },
+    {
+      "name": "trigger_use",
+      "count": 16
+    },
+    {
+      "name": "info_player_deathmatch",
+      "count": 14
+    },
+    {
+      "name": "static_lamp_lightbulb-covered-nowire",
+      "count": 13
+    },
+    {
+      "name": "static_natural_tree_commontree",
+      "count": 13
+    },
+    {
+      "name": "script_origin",
+      "count": 11
+    },
+    {
+      "name": "script_model",
+      "count": 8
+    },
+    {
+      "name": "static_item_nazicrate",
+      "count": 8
+    },
+    {
+      "name": "func_ladder",
+      "count": 5
+    },
+    {
+      "name": "func_barrel",
+      "count": 4
+    },
+    {
+      "name": "fx_exploder_adamspark",
+      "count": 4
+    },
+    {
+      "name": "trigger_multiple",
+      "count": 3
+    },
+    {
+      "name": "func_crate",
+      "count": 2
+    },
+    {
+      "name": "static_natural_bush_sparseshrub",
+      "count": 2
+    },
+    {
+      "name": "animate_equipment_radio-military",
+      "count": 1
+    },
+    {
+      "name": "fx_smoke_smallfry",
+      "count": 1
+    },
+    {
+      "name": "info_player_start",
+      "count": 1
+    },
+    {
+      "name": "static_equipment_bunkerstove",
+      "count": 1
+    },
+    {
+      "name": "static_equipment_radio-military",
+      "count": 1
+    },
+    {
+      "name": "static_flags_nazibanner1",
+      "count": 1
+    },
+    {
+      "name": "static_furniture_bunkerchair",
+      "count": 1
+    },
+    {
+      "name": "static_furniture_metaldesk",
+      "count": 1
+    },
+    {
+      "name": "static_item_switch1",
+      "count": 1
+    },
+    {
+      "name": "static_microphone",
+      "count": 1
+    },
+    {
+      "name": "static_natural_tree_juniper",
+      "count": 1
+    },
+    {
+      "name": "static_uboat_radiostation1",
+      "count": 1
+    },
+    {
+      "name": "static_uboat_radiostation2",
+      "count": 1
+    },
+    {
+      "name": "static_vehicle_german_opeltruck",
+      "count": 1
+    }
+  ],
+  "models": [
+    {
+      "name": "static//corona_orange.tik",
+      "count": 119
+    },
+    {
+      "name": "static//lightbulb_caged.tik",
+      "count": 107
+    },
+    {
+      "name": "static//tree_oak.tik",
+      "count": 34
+    },
+    {
+      "name": "vehicles/p47fly.tik",
+      "count": 22
+    },
+    {
+      "name": "static//bush_full.tik",
+      "count": 17
+    },
+    {
+      "name": "static//lightbulb_covered_nowire.tik",
+      "count": 13
+    },
+    {
+      "name": "static//tree_commontree.tik",
+      "count": 13
+    },
+    {
+      "name": "static//nazi_crate.tik",
+      "count": 8
+    },
+    {
+      "name": "animate//fx_explosion_tank.tik",
+      "count": 5
+    },
+    {
+      "name": "emitters//adamspark.tik",
+      "count": 4
+    },
+    {
+      "name": "items/pulse_explosive.tik",
+      "count": 2
+    },
+    {
+      "name": "static//bush_sparseshrub.tik",
+      "count": 2
+    },
+    {
+      "name": "animate//military_radio.tik",
+      "count": 1
+    },
+    {
+      "name": "emitters//smoke_smallfry.tik",
+      "count": 1
+    },
+    {
+      "name": "furniture//bunkerchair.tik",
+      "count": 1
+    },
+    {
+      "name": "miscobj//radio_military.tik",
+      "count": 1
+    },
+    {
+      "name": "static//bunkerstove.tik",
+      "count": 1
+    },
+    {
+      "name": "static//metaldesk.tik",
+      "count": 1
+    },
+    {
+      "name": "static//microphone.tik",
+      "count": 1
+    },
+    {
+      "name": "static//static_nazibanner.tik",
+      "count": 1
+    },
+    {
+      "name": "static//static_radiostation1.tik",
+      "count": 1
+    },
+    {
+      "name": "static//static_radiostation2.tik",
+      "count": 1
+    },
+    {
+      "name": "static//switch1.tik",
+      "count": 1
+    },
+    {
+      "name": "static//tree_juniper.tik",
+      "count": 1
+    },
+    {
+      "name": "static//v2.tik",
+      "count": 1
+    },
+    {
+      "name": "static//vehicle_opeltruck.tik",
+      "count": 1
+    }
+  ],
+  "lightIntensities": [
+    {
+      "name": "100",
+      "count": 47
+    },
+    {
+      "name": "80",
+      "count": 32
+    },
+    {
+      "name": "60",
+      "count": 18
+    },
+    {
+      "name": "3",
+      "count": 15
+    },
+    {
+      "name": "50",
+      "count": 15
+    },
+    {
+      "name": "75",
+      "count": 14
+    },
+    {
+      "name": "20",
+      "count": 6
+    },
+    {
+      "name": "90",
+      "count": 6
+    },
+    {
+      "name": "300",
+      "count": 5
+    },
+    {
+      "name": "25",
+      "count": 4
+    },
+    {
+      "name": "400",
+      "count": 4
+    },
+    {
+      "name": "125",
+      "count": 3
+    },
+    {
+      "name": "30",
+      "count": 2
+    },
+    {
+      "name": "35",
+      "count": 2
+    },
+    {
+      "name": "350",
+      "count": 2
+    },
+    {
+      "name": "7",
+      "count": 2
+    },
+    {
+      "name": "70",
+      "count": 2
+    },
+    {
+      "name": "15",
+      "count": 1
+    },
+    {
+      "name": "500",
+      "count": 1
+    }
+  ],
+  "spawnOrigins": [
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -528,
+        944,
+        -440
+      ],
+      "angle": "270"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        -8,
+        32,
+        16
+      ],
+      "angle": "45"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        922,
+        496,
+        8
+      ],
+      "angle": "90"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        3072,
+        2416,
+        8
+      ],
+      "angle": "180"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        1744,
+        2832,
+        8
+      ],
+      "angle": "315"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        1312,
+        2240,
+        -432
+      ],
+      "angle": "180"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        1208,
+        2248,
+        8
+      ],
+      "angle": "180"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        1216,
+        536,
+        -434
+      ],
+      "angle": "45"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        1808,
+        2504,
+        -504
+      ],
+      "angle": "270"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        3112,
+        2608,
+        0
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        2736,
+        816,
+        -504
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1688,
+        743,
+        -448
+      ],
+      "angle": null
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        1164,
+        1344,
+        -194
+      ],
+      "angle": "270"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        487,
+        788,
+        -210
+      ],
+      "angle": null
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        1304,
+        1768,
+        -440
+      ],
+      "angle": "180"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        2792,
+        824,
+        -508
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_start",
+      "origin": [
+        -1724,
+        932,
+        -394
+      ],
+      "angle": "315"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        1456,
+        464,
+        4
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        2912,
+        2576,
+        4
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        1124,
+        1984,
+        4
+      ],
+      "angle": "0"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        900,
+        1928,
+        24
+      ],
+      "angle": "180"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        -1680,
+        368,
+        -424
+      ],
+      "angle": "45"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        912,
+        1520,
+        4
+      ],
+      "angle": "270"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        688,
+        1536,
+        4
+      ],
+      "angle": "180"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        444,
+        1352,
+        4
+      ],
+      "angle": "180"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        208,
+        1008,
+        4
+      ],
+      "angle": "0"
+    },
+    {
+      "classname": "info_player_deathmatch",
+      "origin": [
+        348,
+        576,
+        -230
+      ],
+      "angle": "180"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1728,
+        976,
+        -392
+      ],
+      "angle": "315"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1712,
+        559,
+        -448
+      ],
+      "angle": null
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1584,
+        399,
+        -416
+      ],
+      "angle": "45"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1392,
+        335,
+        -416
+      ],
+      "angle": "90"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1200,
+        399,
+        -416
+      ],
+      "angle": "90"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1456,
+        719,
+        -416
+      ],
+      "angle": "45"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1456,
+        559,
+        -416
+      ],
+      "angle": "45"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1264,
+        591,
+        -416
+      ],
+      "angle": "45"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -1264,
+        751,
+        -416
+      ],
+      "angle": "45"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        3312,
+        2256,
+        -504
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        1392,
+        864,
+        0
+      ],
+      "angle": "0"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        462,
+        14,
+        -232
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        632,
+        550,
+        4
+      ],
+      "angle": "315"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        744,
+        0,
+        -232
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_axis",
+      "origin": [
+        1391,
+        1998,
+        -508
+      ],
+      "angle": "180"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -536,
+        256,
+        -440
+      ],
+      "angle": "45"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -184,
+        256,
+        -440
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -472,
+        1320,
+        -440
+      ],
+      "angle": "135"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -472,
+        2088,
+        -440
+      ],
+      "angle": "225"
+    },
+    {
+      "classname": "info_player_allied",
+      "origin": [
+        -528,
+        1520,
+        -440
+      ],
+      "angle": "90"
+    }
+  ]
+}

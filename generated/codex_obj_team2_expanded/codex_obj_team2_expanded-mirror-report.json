@@ -1,0 +1,2047 @@
+{
+  "schemaVersion": 1,
+  "transform": "byte-preserving obj_team2 expansion outside documented removals: retain retail objectives/doors/targets/team spawns, remove nine untargeted footprint foliage entities and five untargeted fence/wire connector obstructions, add an east service annex",
+  "sourceMap": "../../aa/obj_team2.map",
+  "sourceBytes": 5478775,
+  "sourceSha256": "04cbee45bb4d94d5289d52b51e302984e3f6ce8843d7bdd0194500f4be35ee2f",
+  "mapName": "codex_obj_team2_expanded",
+  "gameDirectory": "obj",
+  "originalMap": "obj_team2",
+  "displayName": "V2 Facility: East Annex",
+  "output": {
+    "bytes": 5544555,
+    "sha256": "3a7fd859484b6392a54812f21eb12155ad624a56f77e202ad32ad0cf749148ce"
+  },
+  "preservation": {
+    "sourceLineCount": 78260,
+    "retainedSourceLineCount": 78089,
+    "retainedSourceSha256": "5bb09beabf97d249ddad4038535d42d4b56ccb202719cf1e4bf493b2346fab8c",
+    "removedEntityNumbers": [
+      666,
+      674,
+      675,
+      679,
+      680,
+      687,
+      688,
+      689,
+      690,
+      692,
+      693,
+      699,
+      702,
+      704
+    ],
+    "removedEntities": [
+      {
+        "number": 666,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 674,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 675,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 679,
+        "classname": "detail",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 680,
+        "classname": "func_group",
+        "origin": null,
+        "model": null,
+        "targetname": null
+      },
+      {
+        "number": 687,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          3678.2,
+          546.2,
+          -529.2
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 688,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          3542.2,
+          1442.2,
+          -489.2
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 689,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          4888.6,
+          2332.6,
+          -415.6
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 690,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          4939.8,
+          1487.8,
+          -434.8
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 692,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          4616.6,
+          572.6,
+          -527.6
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 693,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          4152.6,
+          1036.6,
+          -543.6
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      },
+      {
+        "number": 699,
+        "classname": "static_natural_tree_commontree",
+        "origin": [
+          3866,
+          1955,
+          -524
+        ],
+        "model": "static//tree_commontree.tik",
+        "targetname": null
+      },
+      {
+        "number": 702,
+        "classname": "static_natural_bush_full",
+        "origin": [
+          3420,
+          1912,
+          -509
+        ],
+        "model": "static//bush_full.tik",
+        "targetname": null
+      },
+      {
+        "number": 704,
+        "classname": "static_natural_tree_oak",
+        "origin": [
+          4286.2,
+          2658.2,
+          -425.2
+        ],
+        "model": "static//tree_oak.tik",
+        "targetname": null
+      }
+    ],
+    "originalDoorCount": 23,
+    "originalTargetnameCount": 88
+  },
+  "transformed": {
+    "addedBrushes": 102,
+    "addedEntities": 35,
+    "removedFoliageEntities": 9,
+    "removedConnectorObstructions": 5,
+    "dmSpawnsAdded": 6
+  },
+  "expansion": {
+    "bounds": {
+      "min": [
+        3296,
+        640,
+        -544
+      ],
+      "max": [
+        4800,
+        2496,
+        288
+      ]
+    },
+    "serviceDeckTopZ": -384,
+    "connectorCount": 2,
+    "connectorWidth": 288,
+    "connectorRiser": 12,
+    "openHallBays": 3,
+    "movingDoorsAdded": 0,
+    "objectivesChanged": false,
+    "originalTeamSpawnsChanged": false,
+    "brushRoleCounts": {
+      "canopy_beam": 2,
+      "canopy_column": 4,
+      "canopy_roof": 1,
+      "connector_steps": 18,
+      "duct_bracket": 3,
+      "hall_bay_frame": 9,
+      "hall_bay_lintel": 3,
+      "hall_east_wall": 1,
+      "hall_north_wall": 1,
+      "hall_roof": 1,
+      "hall_south_wall": 1,
+      "hall_west_pillar": 4,
+      "mezzanine_floor": 1,
+      "mezzanine_rail": 2,
+      "mezzanine_rail_post": 6,
+      "mezzanine_steps": 20,
+      "mezzanine_support": 3,
+      "north_retaining": 1,
+      "roof_parapet": 4,
+      "service_deck": 1,
+      "service_duct": 1,
+      "south_retaining": 1,
+      "utility_bank": 5,
+      "west_retaining": 3,
+      "yard_cover": 6
+    },
+    "addedEntityRoleCounts": {
+      "dm_spawn": 6,
+      "vehicle": 1,
+      "crate": 4,
+      "bay_light": 9,
+      "hall_light": 9,
+      "canopy_light": 6
+    },
+    "addedEntityClassCounts": {
+      "info_player_deathmatch": 6,
+      "static_vehicle_german_opeltruck": 1,
+      "static_item_nazicrate": 4,
+      "static_lamp_lightbulb-caged": 8,
+      "static_corona_orange": 8,
+      "light": 8
+    },
+    "usedMaterials": [
+      "algiers/doccrtset_1stepsml",
+      "common/caulk",
+      "das_boot/ironwall1",
+      "general_industrial/deckgrate_set1b",
+      "general_industrial/utilboxtop",
+      "general_industrial/utilitybox_front",
+      "general_industrial/utilitybox_side",
+      "general_structure/bunker_wall",
+      "general_structure/jh_conc512b",
+      "german/rusty_iron",
+      "mohcommon/ibeam_1a",
+      "mohcommon/jeff-concrete-wallb"
+    ],
+    "brushes": [
+      {
+        "role": "service_deck",
+        "min": [
+          3584,
+          640,
+          -544
+        ],
+        "max": [
+          4800,
+          2496,
+          -384
+        ],
+        "detail": false
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3296,
+          896,
+          -544
+        ],
+        "max": [
+          3328,
+          1184,
+          -480
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3328,
+          896,
+          -544
+        ],
+        "max": [
+          3360,
+          1184,
+          -468
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3360,
+          896,
+          -544
+        ],
+        "max": [
+          3392,
+          1184,
+          -456
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3392,
+          896,
+          -544
+        ],
+        "max": [
+          3424,
+          1184,
+          -444
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3424,
+          896,
+          -544
+        ],
+        "max": [
+          3456,
+          1184,
+          -432
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3456,
+          896,
+          -544
+        ],
+        "max": [
+          3488,
+          1184,
+          -420
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3488,
+          896,
+          -544
+        ],
+        "max": [
+          3520,
+          1184,
+          -408
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3520,
+          896,
+          -544
+        ],
+        "max": [
+          3552,
+          1184,
+          -396
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3552,
+          896,
+          -544
+        ],
+        "max": [
+          3584,
+          1184,
+          -384
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3296,
+          2016,
+          -544
+        ],
+        "max": [
+          3328,
+          2304,
+          -480
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3328,
+          2016,
+          -544
+        ],
+        "max": [
+          3360,
+          2304,
+          -468
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3360,
+          2016,
+          -544
+        ],
+        "max": [
+          3392,
+          2304,
+          -456
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3392,
+          2016,
+          -544
+        ],
+        "max": [
+          3424,
+          2304,
+          -444
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3424,
+          2016,
+          -544
+        ],
+        "max": [
+          3456,
+          2304,
+          -432
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3456,
+          2016,
+          -544
+        ],
+        "max": [
+          3488,
+          2304,
+          -420
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3488,
+          2016,
+          -544
+        ],
+        "max": [
+          3520,
+          2304,
+          -408
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3520,
+          2016,
+          -544
+        ],
+        "max": [
+          3552,
+          2304,
+          -396
+        ],
+        "detail": true
+      },
+      {
+        "role": "connector_steps",
+        "min": [
+          3552,
+          2016,
+          -544
+        ],
+        "max": [
+          3584,
+          2304,
+          -384
+        ],
+        "detail": true
+      },
+      {
+        "role": "west_retaining",
+        "min": [
+          3584,
+          640,
+          -384
+        ],
+        "max": [
+          3616,
+          896,
+          -224
+        ],
+        "detail": false
+      },
+      {
+        "role": "west_retaining",
+        "min": [
+          3584,
+          1184,
+          -384
+        ],
+        "max": [
+          3616,
+          2016,
+          -224
+        ],
+        "detail": false
+      },
+      {
+        "role": "west_retaining",
+        "min": [
+          3584,
+          2304,
+          -384
+        ],
+        "max": [
+          3616,
+          2496,
+          -224
+        ],
+        "detail": false
+      },
+      {
+        "role": "south_retaining",
+        "min": [
+          3616,
+          640,
+          -384
+        ],
+        "max": [
+          4304,
+          672,
+          -224
+        ],
+        "detail": false
+      },
+      {
+        "role": "north_retaining",
+        "min": [
+          3616,
+          2464,
+          -384
+        ],
+        "max": [
+          4304,
+          2496,
+          -224
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_east_wall",
+        "min": [
+          4768,
+          768,
+          -384
+        ],
+        "max": [
+          4800,
+          2368,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_south_wall",
+        "min": [
+          4304,
+          768,
+          -384
+        ],
+        "max": [
+          4768,
+          800,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_north_wall",
+        "min": [
+          4304,
+          2336,
+          -384
+        ],
+        "max": [
+          4768,
+          2368,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_west_pillar",
+        "min": [
+          4304,
+          768,
+          -384
+        ],
+        "max": [
+          4336,
+          896,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_west_pillar",
+        "min": [
+          4304,
+          1184,
+          -384
+        ],
+        "max": [
+          4336,
+          1376,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_west_pillar",
+        "min": [
+          4304,
+          1664,
+          -384
+        ],
+        "max": [
+          4336,
+          1856,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_west_pillar",
+        "min": [
+          4304,
+          2144,
+          -384
+        ],
+        "max": [
+          4336,
+          2368,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_bay_lintel",
+        "min": [
+          4304,
+          896,
+          -80
+        ],
+        "max": [
+          4336,
+          1184,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_bay_frame",
+        "min": [
+          4288,
+          896,
+          -384
+        ],
+        "max": [
+          4304,
+          912,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "hall_bay_frame",
+        "min": [
+          4288,
+          1168,
+          -384
+        ],
+        "max": [
+          4304,
+          1184,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "hall_bay_frame",
+        "min": [
+          4288,
+          896,
+          -80
+        ],
+        "max": [
+          4304,
+          1184,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "hall_bay_lintel",
+        "min": [
+          4304,
+          1376,
+          -80
+        ],
+        "max": [
+          4336,
+          1664,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_bay_frame",
+        "min": [
+          4288,
+          1376,
+          -384
+        ],
+        "max": [
+          4304,
+          1392,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "hall_bay_frame",
+        "min": [
+          4288,
+          1648,
+          -384
+        ],
+        "max": [
+          4304,
+          1664,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "hall_bay_frame",
+        "min": [
+          4288,
+          1376,
+          -80
+        ],
+        "max": [
+          4304,
+          1664,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "hall_bay_lintel",
+        "min": [
+          4304,
+          1856,
+          -80
+        ],
+        "max": [
+          4336,
+          2144,
+          208
+        ],
+        "detail": false
+      },
+      {
+        "role": "hall_bay_frame",
+        "min": [
+          4288,
+          1856,
+          -384
+        ],
+        "max": [
+          4304,
+          1872,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "hall_bay_frame",
+        "min": [
+          4288,
+          2128,
+          -384
+        ],
+        "max": [
+          4304,
+          2144,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "hall_bay_frame",
+        "min": [
+          4288,
+          1856,
+          -80
+        ],
+        "max": [
+          4304,
+          2144,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "hall_roof",
+        "min": [
+          4304,
+          768,
+          208
+        ],
+        "max": [
+          4800,
+          2368,
+          240
+        ],
+        "detail": false
+      },
+      {
+        "role": "roof_parapet",
+        "min": [
+          4304,
+          768,
+          240
+        ],
+        "max": [
+          4320,
+          2368,
+          288
+        ],
+        "detail": true
+      },
+      {
+        "role": "roof_parapet",
+        "min": [
+          4784,
+          768,
+          240
+        ],
+        "max": [
+          4800,
+          2368,
+          288
+        ],
+        "detail": true
+      },
+      {
+        "role": "roof_parapet",
+        "min": [
+          4320,
+          768,
+          240
+        ],
+        "max": [
+          4784,
+          784,
+          288
+        ],
+        "detail": true
+      },
+      {
+        "role": "roof_parapet",
+        "min": [
+          4320,
+          2352,
+          240
+        ],
+        "max": [
+          4784,
+          2368,
+          288
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          864,
+          -384
+        ],
+        "max": [
+          4512,
+          904,
+          -368
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          904,
+          -384
+        ],
+        "max": [
+          4512,
+          944,
+          -352
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          944,
+          -384
+        ],
+        "max": [
+          4512,
+          984,
+          -336
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          984,
+          -384
+        ],
+        "max": [
+          4512,
+          1024,
+          -320
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1024,
+          -384
+        ],
+        "max": [
+          4512,
+          1064,
+          -304
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1064,
+          -384
+        ],
+        "max": [
+          4512,
+          1104,
+          -288
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1104,
+          -384
+        ],
+        "max": [
+          4512,
+          1144,
+          -272
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1144,
+          -384
+        ],
+        "max": [
+          4512,
+          1184,
+          -256
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1184,
+          -384
+        ],
+        "max": [
+          4512,
+          1224,
+          -240
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1224,
+          -384
+        ],
+        "max": [
+          4512,
+          1264,
+          -224
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1264,
+          -384
+        ],
+        "max": [
+          4512,
+          1304,
+          -208
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1304,
+          -384
+        ],
+        "max": [
+          4512,
+          1344,
+          -192
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1344,
+          -384
+        ],
+        "max": [
+          4512,
+          1384,
+          -176
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1384,
+          -384
+        ],
+        "max": [
+          4512,
+          1424,
+          -160
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1424,
+          -384
+        ],
+        "max": [
+          4512,
+          1464,
+          -144
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1464,
+          -384
+        ],
+        "max": [
+          4512,
+          1504,
+          -128
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1504,
+          -384
+        ],
+        "max": [
+          4512,
+          1544,
+          -112
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1544,
+          -384
+        ],
+        "max": [
+          4512,
+          1584,
+          -96
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1584,
+          -384
+        ],
+        "max": [
+          4512,
+          1624,
+          -80
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_steps",
+        "min": [
+          4384,
+          1624,
+          -384
+        ],
+        "max": [
+          4512,
+          1664,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_floor",
+        "min": [
+          4384,
+          1664,
+          -80
+        ],
+        "max": [
+          4768,
+          2320,
+          -64
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_rail_post",
+        "min": [
+          4368,
+          1696,
+          -64
+        ],
+        "max": [
+          4384,
+          1712,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_rail_post",
+        "min": [
+          4368,
+          1824,
+          -64
+        ],
+        "max": [
+          4384,
+          1840,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_rail_post",
+        "min": [
+          4368,
+          1952,
+          -64
+        ],
+        "max": [
+          4384,
+          1968,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_rail_post",
+        "min": [
+          4368,
+          2080,
+          -64
+        ],
+        "max": [
+          4384,
+          2096,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_rail_post",
+        "min": [
+          4368,
+          2208,
+          -64
+        ],
+        "max": [
+          4384,
+          2224,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_rail_post",
+        "min": [
+          4368,
+          2304,
+          -64
+        ],
+        "max": [
+          4384,
+          2320,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_rail",
+        "min": [
+          4368,
+          1696,
+          -8
+        ],
+        "max": [
+          4384,
+          2320,
+          0
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_rail",
+        "min": [
+          4368,
+          1696,
+          48
+        ],
+        "max": [
+          4384,
+          2320,
+          56
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_support",
+        "min": [
+          4368,
+          1728,
+          -384
+        ],
+        "max": [
+          4400,
+          1760,
+          -80
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_support",
+        "min": [
+          4368,
+          2048,
+          -384
+        ],
+        "max": [
+          4400,
+          2080,
+          -80
+        ],
+        "detail": true
+      },
+      {
+        "role": "mezzanine_support",
+        "min": [
+          4368,
+          2288,
+          -384
+        ],
+        "max": [
+          4400,
+          2320,
+          -80
+        ],
+        "detail": true
+      },
+      {
+        "role": "canopy_column",
+        "min": [
+          3744,
+          1296,
+          -384
+        ],
+        "max": [
+          3776,
+          1328,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "canopy_column",
+        "min": [
+          3744,
+          1760,
+          -384
+        ],
+        "max": [
+          3776,
+          1792,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "canopy_column",
+        "min": [
+          4160,
+          1296,
+          -384
+        ],
+        "max": [
+          4192,
+          1328,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "canopy_column",
+        "min": [
+          4160,
+          1760,
+          -384
+        ],
+        "max": [
+          4192,
+          1792,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "canopy_roof",
+        "min": [
+          3728,
+          1280,
+          48
+        ],
+        "max": [
+          4208,
+          1808,
+          80
+        ],
+        "detail": true
+      },
+      {
+        "role": "canopy_beam",
+        "min": [
+          3728,
+          1280,
+          16
+        ],
+        "max": [
+          4208,
+          1296,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "canopy_beam",
+        "min": [
+          3728,
+          1792,
+          16
+        ],
+        "max": [
+          4208,
+          1808,
+          48
+        ],
+        "detail": true
+      },
+      {
+        "role": "yard_cover",
+        "min": [
+          3696,
+          736,
+          -384
+        ],
+        "max": [
+          3824,
+          784,
+          -272
+        ],
+        "detail": true
+      },
+      {
+        "role": "yard_cover",
+        "min": [
+          4056,
+          736,
+          -384
+        ],
+        "max": [
+          4184,
+          784,
+          -272
+        ],
+        "detail": true
+      },
+      {
+        "role": "yard_cover",
+        "min": [
+          3696,
+          2352,
+          -384
+        ],
+        "max": [
+          3824,
+          2400,
+          -272
+        ],
+        "detail": true
+      },
+      {
+        "role": "yard_cover",
+        "min": [
+          4056,
+          2352,
+          -384
+        ],
+        "max": [
+          4184,
+          2400,
+          -272
+        ],
+        "detail": true
+      },
+      {
+        "role": "yard_cover",
+        "min": [
+          3664,
+          1504,
+          -384
+        ],
+        "max": [
+          3712,
+          1632,
+          -288
+        ],
+        "detail": true
+      },
+      {
+        "role": "yard_cover",
+        "min": [
+          4224,
+          1504,
+          -384
+        ],
+        "max": [
+          4272,
+          1632,
+          -288
+        ],
+        "detail": true
+      },
+      {
+        "role": "utility_bank",
+        "min": [
+          3856,
+          928,
+          -384
+        ],
+        "max": [
+          3984,
+          1024,
+          -240
+        ],
+        "detail": true
+      },
+      {
+        "role": "utility_bank",
+        "min": [
+          4000,
+          928,
+          -384
+        ],
+        "max": [
+          4128,
+          1024,
+          -272
+        ],
+        "detail": true
+      },
+      {
+        "role": "utility_bank",
+        "min": [
+          4424,
+          1224,
+          -384
+        ],
+        "max": [
+          4520,
+          1320,
+          -240
+        ],
+        "detail": true
+      },
+      {
+        "role": "utility_bank",
+        "min": [
+          4624,
+          1224,
+          -384
+        ],
+        "max": [
+          4720,
+          1320,
+          -272
+        ],
+        "detail": true
+      },
+      {
+        "role": "utility_bank",
+        "min": [
+          4560,
+          2176,
+          -64
+        ],
+        "max": [
+          4704,
+          2272,
+          64
+        ],
+        "detail": true
+      },
+      {
+        "role": "service_duct",
+        "min": [
+          4688,
+          816,
+          48
+        ],
+        "max": [
+          4752,
+          1632,
+          112
+        ],
+        "detail": true
+      },
+      {
+        "role": "duct_bracket",
+        "min": [
+          4664,
+          944,
+          32
+        ],
+        "max": [
+          4760,
+          960,
+          128
+        ],
+        "detail": true
+      },
+      {
+        "role": "duct_bracket",
+        "min": [
+          4664,
+          1200,
+          32
+        ],
+        "max": [
+          4760,
+          1216,
+          128
+        ],
+        "detail": true
+      },
+      {
+        "role": "duct_bracket",
+        "min": [
+          4664,
+          1456,
+          32
+        ],
+        "max": [
+          4760,
+          1472,
+          128
+        ],
+        "detail": true
+      }
+    ],
+    "entities": [
+      {
+        "role": "dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "3744 816 -336",
+          "angle": "30"
+        }
+      },
+      {
+        "role": "dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "3744 2320 -336",
+          "angle": "330"
+        }
+      },
+      {
+        "role": "dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "4208 1120 -336",
+          "angle": "180"
+        }
+      },
+      {
+        "role": "dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "4592 1040 -336",
+          "angle": "180"
+        }
+      },
+      {
+        "role": "dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "4624 1512 -336",
+          "angle": "180"
+        }
+      },
+      {
+        "role": "dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "4576 2072 -16",
+          "angle": "200"
+        }
+      },
+      {
+        "role": "vehicle",
+        "classname": "static_vehicle_german_opeltruck",
+        "properties": {
+          "model": "static//vehicle_opeltruck.tik",
+          "origin": "3944 2104 -384",
+          "angle": "90",
+          "scale": "1.10",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "4672 864 -384",
+          "angle": "280",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "4632 904 -384",
+          "angle": "10",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "4672 864 -350",
+          "angle": "260",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "4432 2240 -64",
+          "angle": "90",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "bay_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "4294 1040 -112",
+          "angle": "0",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "bay_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "4288 1040 -115",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "bay_light",
+        "classname": "light",
+        "properties": {
+          "origin": "4232 1040 -112",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "bay_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "4294 1520 -112",
+          "angle": "0",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "bay_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "4288 1520 -115",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "bay_light",
+        "classname": "light",
+        "properties": {
+          "origin": "4232 1520 -112",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "bay_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "4294 2048 -112",
+          "angle": "0",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "bay_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "4288 2048 -115",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "bay_light",
+        "classname": "light",
+        "properties": {
+          "origin": "4232 2048 -112",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "hall_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "4544 1040 196",
+          "angle": "-2",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "hall_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "4544 1040 190",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "hall_light",
+        "classname": "light",
+        "properties": {
+          "origin": "4544 1040 128",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "hall_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "4544 1520 196",
+          "angle": "-2",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "hall_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "4544 1520 190",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "hall_light",
+        "classname": "light",
+        "properties": {
+          "origin": "4544 1520 128",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "hall_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "4544 2048 196",
+          "angle": "-2",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "hall_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "4544 2048 190",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "hall_light",
+        "classname": "light",
+        "properties": {
+          "origin": "4544 2048 128",
+          "light": "80",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "canopy_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "3872 1544 36",
+          "angle": "-2",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "canopy_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "3872 1544 30",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "canopy_light",
+        "classname": "light",
+        "properties": {
+          "origin": "3872 1544 -32",
+          "light": "60",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "canopy_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "4064 1544 36",
+          "angle": "-2",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "canopy_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "4064 1544 30",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "canopy_light",
+        "classname": "light",
+        "properties": {
+          "origin": "4064 1544 -32",
+          "light": "60",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      }
+    ]
+  },
+  "scriptPolicy": "thin wrappers execute retail obj_team2 scripts; no retail script or texture/model bytes redistributed",
+  "extraPrecache": [
+    "models/fx/bazookaexplosion_dm.tik"
+  ]
+}

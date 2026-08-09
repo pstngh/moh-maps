@@ -27,6 +27,28 @@ function sortedCounts(map, limit = null) {
   return limit == null ? rows : rows.slice(0, limit);
 }
 
+function emptyBounds() {
+  return { min: [Infinity, Infinity, Infinity], max: [-Infinity, -Infinity, -Infinity], count: 0 };
+}
+
+function includePoint(bounds, point) {
+  for (let axis = 0; axis < 3; axis += 1) {
+    bounds.min[axis] = Math.min(bounds.min[axis], point[axis]);
+    bounds.max[axis] = Math.max(bounds.max[axis], point[axis]);
+  }
+  bounds.count += 1;
+}
+
+function finishedBounds(bounds) {
+  if (!bounds.count) return null;
+  return {
+    min: bounds.min,
+    max: bounds.max,
+    size: bounds.max.map((value, axis) => value - bounds.min[axis]),
+    samples: bounds.count,
+  };
+}
+
 function cross(a, b) {
   return [
     a[1] * b[2] - a[2] * b[1],
@@ -105,6 +127,9 @@ const substantialBoxShortest = new Map();
 const brushFaceCounts = new Map();
 const patchMaterials = new Map();
 const patchDimensions = new Map();
+const axisBoxBounds = emptyBounds();
+const axisBoxGrid256 = new Map();
+const axisBoxGrid512 = new Map();
 let ordinaryBrushes = 0;
 let axisAlignedBoxes = 0;
 let angledBrushes = 0;
@@ -167,10 +192,21 @@ for (const primitive of primitiveBlocks) {
       coordinates[face.axis].push(face.points[0][axisIndex]);
     }
     const dimensions = {};
+    const minimum = [];
+    const maximum = [];
     for (const axis of ["x", "y", "z"]) {
-      dimensions[axis] = Math.abs(Math.max(...coordinates[axis]) - Math.min(...coordinates[axis]));
+      const axisMinimum = Math.min(...coordinates[axis]);
+      const axisMaximum = Math.max(...coordinates[axis]);
+      minimum.push(axisMinimum);
+      maximum.push(axisMaximum);
+      dimensions[axis] = Math.abs(axisMaximum - axisMinimum);
       addCount(boxDimensions[axis], String(dimensions[axis]));
     }
+    includePoint(axisBoxBounds, minimum);
+    includePoint(axisBoxBounds, maximum);
+    const center = minimum.map((value, axis) => (value + maximum[axis]) / 2);
+    addCount(axisBoxGrid256, `${Math.floor(center[0] / 256)},${Math.floor(center[1] / 256)},${Math.floor(center[2] / 256)}`);
+    addCount(axisBoxGrid512, `${Math.floor(center[0] / 512)},${Math.floor(center[1] / 512)},${Math.floor(center[2] / 512)}`);
     const shortest = Math.min(dimensions.x, dimensions.y, dimensions.z);
     addCount(boxShortest, String(shortest));
     if (shortest >= 16) addCount(substantialBoxShortest, String(shortest));
@@ -182,6 +218,8 @@ const entityClasses = new Map();
 const models = new Map();
 const lightIntensities = new Map();
 const spawnOrigins = [];
+const entityOriginBounds = emptyBounds();
+const entityClassOriginBounds = new Map();
 for (let index = 0; index < lines.length; index += 1) {
   if (!/^\s*\/\/\s*entity\s+\d+\s*$/.test(lines[index])) continue;
   const parsed = extractBalancedBlock(index + 1);
@@ -199,6 +237,14 @@ for (let index = 0; index < lines.length; index += 1) {
   if (keys.classname) addCount(entityClasses, keys.classname);
   if (keys.model) addCount(models, keys.model);
   if (keys.classname === "light" && keys.light) addCount(lightIntensities, keys.light);
+  if (keys.origin) {
+    const origin = keys.origin.split(/\s+/).map(Number);
+    if (origin.length === 3 && origin.every(Number.isFinite)) {
+      includePoint(entityOriginBounds, origin);
+      if (!entityClassOriginBounds.has(keys.classname || "<unknown>")) entityClassOriginBounds.set(keys.classname || "<unknown>", emptyBounds());
+      includePoint(entityClassOriginBounds.get(keys.classname || "<unknown>"), origin);
+    }
+  }
   if (["info_player_deathmatch", "info_player_allied", "info_player_axis", "info_player_start"].includes(keys.classname) && keys.origin) {
     spawnOrigins.push({ classname: keys.classname, origin: keys.origin.split(/\s+/).map(Number), angle: keys.angle || null });
   }
@@ -222,6 +268,15 @@ const report = {
     z: sortedCounts(boxDimensions.z, 40),
     shortest: sortedCounts(boxShortest, 40),
     substantialShortest: sortedCounts(substantialBoxShortest, 40),
+  },
+  spatial: {
+    axisBoxBounds: finishedBounds(axisBoxBounds),
+    axisBoxGrid256: sortedCounts(axisBoxGrid256, 160),
+    axisBoxGrid512: sortedCounts(axisBoxGrid512, 500),
+    entityOriginBounds: finishedBounds(entityOriginBounds),
+    entityClassOriginBounds: [...entityClassOriginBounds.entries()]
+      .map(([name, bounds]) => ({ name, ...finishedBounds(bounds) }))
+      .sort((a, b) => a.name.localeCompare(b.name)),
   },
   patchMaterials: sortedCounts(patchMaterials, 40),
   patchDimensions: sortedCounts(patchDimensions, 30),

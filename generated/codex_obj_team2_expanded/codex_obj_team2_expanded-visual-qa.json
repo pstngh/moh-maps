@@ -1,0 +1,88 @@
+{
+    "schemaVersion":  1,
+    "mapName":  "codex_obj_team2_expanded",
+    "qaRoot":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual",
+    "exactPk3Count":  8,
+    "candidateSha256":  "f7aa8769474666a16d588280c44a025b811af14dc2374993d917f59e6fca6ea7",
+    "looseOverride":  "maps/obj/codex_obj_team2_expanded.scr only; BSP/assets remain from exact candidate PK3",
+    "requestedViews":  [
+                           "south_connection",
+                           "north_connection",
+                           "annex_facade",
+                           "yard_south_lane",
+                           "yard_north_lane",
+                           "hall_center",
+                           "hall_stair",
+                           "mezzanine",
+                           "east_return",
+                           "overhead"
+                       ],
+    "viewMarkers":  [
+                        "[2026-08-09 14:34:59 UTC-5.000] CODEX_VISUAL_QA south_connection",
+                        "[2026-08-09 14:35:00 UTC-5.000] CODEX_VISUAL_QA north_connection",
+                        "[2026-08-09 14:35:01 UTC-5.000] CODEX_VISUAL_QA annex_facade",
+                        "[2026-08-09 14:35:02 UTC-5.000] CODEX_VISUAL_QA yard_south_lane",
+                        "[2026-08-09 14:35:03 UTC-5.000] CODEX_VISUAL_QA yard_north_lane",
+                        "[2026-08-09 14:35:04 UTC-5.000] CODEX_VISUAL_QA hall_center",
+                        "[2026-08-09 14:35:05 UTC-5.000] CODEX_VISUAL_QA hall_stair",
+                        "[2026-08-09 14:35:06 UTC-5.000] CODEX_VISUAL_QA mezzanine",
+                        "[2026-08-09 14:35:07 UTC-5.000] CODEX_VISUAL_QA east_return",
+                        "[2026-08-09 14:35:08 UTC-5.000] CODEX_VISUAL_QA overhead"
+                    ],
+    "screenshotCount":  10,
+    "screenshots":  [
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0000.tga",
+                            "bytes":  2764818,
+                            "sha256":  "f5cf9dd016883d75bd932ed75dc54f9e7dec153ac2d7f54d7e395ee0a2483fc0"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0001.tga",
+                            "bytes":  2764818,
+                            "sha256":  "e3b8ce18dacb2bb0a39216604b63ca9e952ca4cb5dc60e5bf3d368474a93703f"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0002.tga",
+                            "bytes":  2764818,
+                            "sha256":  "d6071b8d24e1d73c69a404f126ae250d1b851519303f7654935af609d2a788f2"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0003.tga",
+                            "bytes":  2764818,
+                            "sha256":  "5a95891d3b19baef04e269da0f65c7df1459c379c1cb76015c1b6fbe7e0aac5f"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0004.tga",
+                            "bytes":  2764818,
+                            "sha256":  "86c268ceabf3534714d5a0af6cf1bfdce4f26d043bccb7731c7176259f4cebcf"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0005.tga",
+                            "bytes":  2764818,
+                            "sha256":  "47dd74b80fb5b0afefe18aff3e59a0546c4e8147309d4487e5eb700345b5c577"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0006.tga",
+                            "bytes":  2764818,
+                            "sha256":  "0577accae0fc138ad2c273c9ff8ff06f002af759601670142e9e3c16f4ccf5fb"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0007.tga",
+                            "bytes":  2764818,
+                            "sha256":  "f765511f177fe9258fc25d78b45961b28a3367cfb49a0007e969b4c052f4f529"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0008.tga",
+                            "bytes":  2764818,
+                            "sha256":  "012f290662728e983e306dbec126ca655a9fb52744160afd5c1908e6f93ab037"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0009.tga",
+                            "bytes":  2764818,
+                            "sha256":  "05cda4d1ad2fdf3ff2d74f7cb5091e91a518a92b949ec02fab2171442f787fc8"
+                        }
+                    ],
+    "scriptErrorCount":  0,
+    "elapsedSeconds":  46.33,
+    "log":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\qconsole.log"
+}

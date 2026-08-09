@@ -27,6 +27,13 @@ foreach ($required in @($EnginePath, $packagePath, $designReportPath)) {
 }
 $design = Get-Content -Raw -LiteralPath $designReportPath | ConvertFrom-Json
 if (@($design.fixedViews).Count -lt 6) { throw "Design report lacks a useful fixed-view matrix" }
+$mapDirectory = "dm"
+$configPath = Join-Path $GeneratedRoot "mirror-config.json"
+if (Test-Path -LiteralPath $configPath -PathType Leaf) {
+    $config = Get-Content -Raw -LiteralPath $configPath | ConvertFrom-Json
+    if ($config.gameDirectory -notin @("dm", "obj")) { throw "Unsupported visual-QA game directory" }
+    $mapDirectory = [string]$config.gameDirectory
+}
 
 $retailPackDirectory = ""
 foreach ($candidate in @($RetailRoot, (Join-Path $RetailRoot "main"))) {
@@ -43,7 +50,7 @@ if (-not $qaRoot.StartsWith($safePrefix, [StringComparison]::OrdinalIgnoreCase))
 if (Test-Path -LiteralPath $qaRoot) { Remove-Item -LiteralPath $qaRoot -Recurse -Force }
 $baseMain = Join-Path $qaRoot "base\main"
 $homeMain = Join-Path $qaRoot "home\main"
-$looseMapRoot = Join-Path $homeMain "maps\dm"
+$looseMapRoot = Join-Path $homeMain "maps\$mapDirectory"
 New-Item -ItemType Directory -Path $baseMain, $looseMapRoot -Force | Out-Null
 foreach ($number in 0..6) {
     $pack = $retailPackLookup["pak$number.pk3"]
@@ -56,7 +63,7 @@ if (@(Get-ChildItem -LiteralPath $baseMain -Filter "*.pk3" -File).Count -ne 8) {
 
 $scriptLines = [Collections.Generic.List[string]]::new()
 foreach ($line in @(
-    "main:", "", "level waittill prespawn", "exec global/DMprecache.scr", "level.script = maps/dm/$MapName.scr", "level waittill spawn", "thread visual_qa", "", "end", "", "visual_qa:", "", "wait 4", '$player stufftext "noclip"', '$player stufftext "notarget"', "wait 1"
+    "main:", "", "level waittill prespawn", "exec global/DMprecache.scr", "level.script = maps/$mapDirectory/$MapName.scr", "level waittill spawn", "thread visual_qa", "", "end", "", "visual_qa:", "", "wait 4", '$player stufftext "noclip"', '$player stufftext "notarget"', "wait 1"
 )) { [void]$scriptLines.Add($line) }
 foreach ($view in @($design.fixedViews)) {
     $origin = @($view.origin) -join " "
@@ -87,7 +94,7 @@ $arguments = @(
     "+set", "r_customwidth", "1280",
     "+set", "r_customheight", "720",
     "+set", "com_maxfps", "60",
-    "+map", "dm/$MapName"
+    "+map", "$mapDirectory/$MapName"
 )
 $startInfo = [Diagnostics.ProcessStartInfo]::new()
 $startInfo.FileName = $EnginePath
@@ -125,7 +132,7 @@ $report = [ordered]@{
     qaRoot = $qaRoot
     exactPk3Count = 8
     candidateSha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $packagePath).Hash.ToLowerInvariant()
-    looseOverride = "maps/dm/$MapName.scr only; BSP/assets remain from exact candidate PK3"
+    looseOverride = "maps/$mapDirectory/$MapName.scr only; BSP/assets remain from exact candidate PK3"
     requestedViews = @($design.fixedViews | ForEach-Object { $_.id })
     viewMarkers = $viewMarkers
     screenshotCount = $screenshots.Count

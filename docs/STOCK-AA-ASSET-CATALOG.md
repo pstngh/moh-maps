@@ -65,6 +65,18 @@ mandatory palette:
 | Regular bush | `static//bush_regularbush.tik` | Used in Cobblestone |
 | Caged lamp | `static//lightbulb_caged.tik` | Present in `obj_team2`; pair with a purposeful light |
 | Orange corona | `static//corona_orange.tik` | Decorative light effect; not illumination by itself |
+| Opel truck | `vehicles//opeltruck.tik` | Grounded yard dressing rendered in the `obj_team2` east-annex exact-candidate visual pass |
+| Nazi crate | `static//crate_nazi.tik` | Grounded cover/dressing rendered in the `obj_team2` east-annex exact-candidate visual pass |
+
+The `codex_obj_team2_expanded` annex also proves the stock caged-lamp plus
+static-corona combination in an Objective derivative. Each new
+`static//corona_orange.tik` placement adds an optional missing editor-helper
+`.map` notice during original Q3map; eight placements produced exactly eight
+notices above the stock-mirror baseline. The models rendered successfully and
+runtime emitted no candidate diagnostic, so this is a classified compile-time
+cost rather than a missing packaged asset. Prefer the warning-free explicitly
+precached runtime-corona pattern used by new standalone maps when stock-source
+fidelity is not the priority.
 
 ## Selection protocol
 

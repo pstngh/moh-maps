@@ -972,3 +972,16 @@ A geometry/gameplay mirror retains original bitmap orientation by default. Mirro
 6. Test stock helpers. A runtime-model substitute is acceptable only when collision is unnecessary, precache is explicit, and runtime diagnostics are clean.
 7. Inspect exact-candidate exterior, threshold, deep interior, vertical route, crossover, overview, and edge views. Camera mistakes are QA defects.
 8. Compiler/Recast/combat success does not establish visual quality. User screenshots/verdicts outrank automated language and must update the next baseline.
+
+### Stock-map additive expansion gate
+
+1. Establish a stock baseline before editing: analyze the editable source and inspect the shipped map from both the playable side and the proposed outside approach.
+2. Map terrain, axis-box occupancy, entities, models, patches, and existing routes before selecting the expansion footprint. Empty entity space alone does not prove an opening.
+3. Treat outskirts as one-sided stage dressing. Treelines, fence groups, wire, nodraw backs, and collision may be correct from the stock side but broken or blocking when approached from a new area.
+4. Audit the compiled BSP surface bounds and collision at every proposed connector. A connector is not accepted until compiled evidence and player-height views from both directions show a genuinely open route.
+5. Remove only exact, documented, untargeted decorative boundary entities. Never infer permission to remove targetnamed objects, target links, triggers, objectives, doors, or team starts.
+6. Preserve retail scripts, doors, objectives, target graph, and team starts by default. Add neutral DM starts only unless a deliberate, separately reviewed team-balance change is requested.
+7. Give an annex at least two broad connections and a return path so it is not a dead end. Validate spawn support, headroom, and route width.
+8. Mark additions/removals in generated source, strip them during validation, and require byte-for-byte equality with the original source minus a narrow allowlist of documented removals.
+9. Compile the untouched source or nearest stock-derived baseline first, then classify the expansion's warning delta. Do not label inherited optional-helper/image warnings as new defects or silently ignore new warning classes.
+10. Test the exact final PK3 in its intended Objective mode and separately exercise FFA bot navigation/combat when useful. Inspect fixed views of every connector, threshold, interior route, vertical link, return, and overview; human door/objective/balance play remains authoritative.

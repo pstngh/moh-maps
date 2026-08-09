@@ -41,8 +41,12 @@ if (-not $NodePath) {
 }
 $NodePath = [IO.Path]::GetFullPath($NodePath)
 
-$generator = Join-Path $PSScriptRoot "mirror_stock_map.js"
-$validator = Join-Path $PSScriptRoot "validate_stock_mirror.js"
+$generator = if ($config.generatorScript) { [IO.Path]::GetFullPath((Join-Path $repositoryRoot ([string]$config.generatorScript))) } else { Join-Path $PSScriptRoot "mirror_stock_map.js" }
+$validator = if ($config.validatorScript) { [IO.Path]::GetFullPath((Join-Path $repositoryRoot ([string]$config.validatorScript))) } else { Join-Path $PSScriptRoot "validate_stock_mirror.js" }
+$repositoryPrefix = [IO.Path]::GetFullPath($repositoryRoot).TrimEnd([IO.Path]::DirectorySeparatorChar, [IO.Path]::AltDirectorySeparatorChar) + [IO.Path]::DirectorySeparatorChar
+foreach ($customTool in @($generator, $validator)) {
+    if (-not $customTool.StartsWith($repositoryPrefix, [StringComparison]::OrdinalIgnoreCase)) { throw "Configured tool resolves outside the repository: $customTool" }
+}
 $inspector = Join-Path $PSScriptRoot "inspect_aa_bsp.js"
 $q3map = Join-Path $MOHToolsDir "Q3map.exe"
 $mohlight = Join-Path $MOHToolsDir "MOHlight.exe"
