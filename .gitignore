@@ -7,3 +7,4 @@ generated/codex_reactor/.build/
 # Local-only compiler staging and logs for stock-map reflections.
 generated/codex_mohdm6_mirror/.build/
 generated/codex_obj_team2_mirror/.build/
+generated/codex_obj_team4_mirror/.build/

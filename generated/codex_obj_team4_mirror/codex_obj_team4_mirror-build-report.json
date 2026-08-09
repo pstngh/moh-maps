@@ -1,0 +1,115 @@
+{
+    "schemaVersion":  1,
+    "mapName":  "codex_obj_team4_mirror",
+    "gameDirectory":  "obj",
+    "source":  {
+                   "path":  "aa/obj_team4.map",
+                   "bytes":  4153220,
+                   "sha256":  "71880e3fd218ab5d8f6af8a045d02000b572b0487e789f98e99a1de3409586cf"
+               },
+    "transform":  "reflect X about world x=0",
+    "terrainControlMode":  "cell-sentinel",
+    "transformed":  {
+                        "brushFaces":  23671,
+                        "patches":  174,
+                        "terrains":  5,
+                        "terrainSamples":  29229,
+                        "terrainTextureControls":  543,
+                        "origins":  515,
+                        "angles":  247,
+                        "angleVectors":  1,
+                        "sunDirections":  1
+                    },
+    "retailPaks":  [
+                       {
+                           "name":  "Pak0.pk3",
+                           "bytes":  98668934,
+                           "sha256":  "6caf6d93cc996b6895d5015f1be153724e5369b8c063c73e1609578323261df6"
+                       },
+                       {
+                           "name":  "Pak1.pk3",
+                           "bytes":  119631347,
+                           "sha256":  "60ed94c185c4f81813aefaf1603b16734e65eb1b931737ae588df84c0a2a4b80"
+                       },
+                       {
+                           "name":  "Pak2.pk3",
+                           "bytes":  365587748,
+                           "sha256":  "00133b93d350b5d82ff2d59a7d87fe94dad18147d28b6fd59dd2b5a6c816acce"
+                       },
+                       {
+                           "name":  "Pak3.pk3",
+                           "bytes":  87555605,
+                           "sha256":  "1e0eed04b234bae260097813755325d2533bb6082c5fc9e98332aa66c4f4db92"
+                       },
+                       {
+                           "name":  "Pak4.pk3",
+                           "bytes":  34046379,
+                           "sha256":  "853cc70610933e83284db95e6144ed3c02d81190065b44aae94ba58ca09f3130"
+                       },
+                       {
+                           "name":  "Pak5.pk3",
+                           "bytes":  87721422,
+                           "sha256":  "b6035d8686bed133be76cdee322c37fd4a9814ba88bbce3e91f20571ea7b2a1d"
+                       },
+                       {
+                           "name":  "pak6.pk3",
+                           "bytes":  11202988,
+                           "sha256":  "619e6acfd37471f0c71194ef6546e592d01cd9f7c1a3ebf57064cf618cf503ae"
+                       }
+                   ],
+    "stages":  {
+                   "q3mapArgs":  [
+                                     "-nomanvis"
+                                 ],
+                   "q3mapSeconds":  9.048,
+                   "q3mapWarnings":  24,
+                   "q3mapMissingImageWarnings":  1,
+                   "q3mapLeakDiagnostics":  0,
+                   "q3mapDegenerateDiagnostics":  0,
+                   "visSeconds":  0.224,
+                   "mohlightSeconds":  774.05,
+                   "mohlightThreads":  1,
+                   "lightClampWarnings":  5,
+                   "lightHashWarnings":  0
+               },
+    "map":  {
+                "bytes":  4076951,
+                "sha256":  "55522114f6a77f9578fa1b26c203e212214b07c7275595d58b0d5c61aa1e3e30"
+            },
+    "bsp":  {
+                "bsp":  "generated/codex_obj_team4_mirror/main/maps/obj/codex_obj_team4_mirror.bsp",
+                "bytes":  8329732,
+                "sha256":  "467bf131e0c4d90787ea51e7b04f59b7f3417b2a52dc9455979681f9753b2989",
+                "ident":  "0x35313032",
+                "version":  19,
+                "checksum":  "0x421cb6d5",
+                "shaders":  313,
+                "surfaces":  8167,
+                "lightmapPages":  60,
+                "allocatedLightmapPages":  60,
+                "visibilityBytes":  11328,
+                "entityBytes":  30596,
+                "classCounts":  {
+                                    "animate_fx_mortar-water":  1,
+                                    "func_rotatingdoor":  13,
+                                    "func_window":  21,
+                                    "info_player_allied":  19,
+                                    "info_player_axis":  17,
+                                    "info_player_start":  1,
+                                    "light":  176,
+                                    "script_model":  3,
+                                    "script_object":  45,
+                                    "script_origin":  22,
+                                    "trigger_multiple":  1,
+                                    "trigger_multipleall":  1,
+                                    "trigger_use":  12,
+                                    "worldspawn":  1
+                                }
+            },
+    "package":  {
+                    "entries":  3,
+                    "bytes":  1651141,
+                    "sha256":  "0e658e19868cb7eec00d885f5010d1b778980472e4562886f6bbb347a81900b6",
+                    "reproducedTwice":  true
+                }
+}

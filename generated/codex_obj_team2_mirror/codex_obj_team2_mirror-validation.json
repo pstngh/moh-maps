@@ -1,4 +1,4 @@
-﻿{
+{
   "schemaVersion": 1,
   "mapName": "codex_obj_team2_mirror",
   "sourceSha256": "04cbee45bb4d94d5289d52b51e302984e3f6ce8843d7bdd0194500f4be35ee2f",
@@ -59,6 +59,8 @@
   },
   "preservedEntityKeyValueMultiset": true,
   "reflectedSunDirections": true,
+  "terrainControlMode": "legacy-full-row",
+  "canonicalTransformMatch": true,
   "stableInvolution": true,
   "retailScriptWrapper": true
 }

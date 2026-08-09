@@ -98,13 +98,29 @@ function reverseRows(values, width) {
   return output;
 }
 
+function reverseTerrainCellRows(values, width) {
+  assert(Number.isInteger(width) && width >= 2, `Invalid terrain cell-row width ${width}`);
+  assert(values.length % width === 0, `Terrain control payload length ${values.length} is not divisible by ${width}`);
+  const output = [];
+  for (let offset = 0; offset < values.length; offset += width) {
+    const row = values.slice(offset, offset + width);
+    // MOH terrain material controls describe the 8x8 cell that starts at a
+    // control. The last column is a boundary sentinel, not another cell.
+    // Reflect the cells and retain that sentinel instead of shifting every
+    // material owner one patch to the left.
+    output.push(...row.slice(0, -1).reverse(), row[row.length - 1]);
+  }
+  return output;
+}
+
 function swapTerrainTriangleFlags(line) {
   const match = line.match(new RegExp(`^(\\s*)(${NUMBER_SOURCE})(\\s+\\(\\s*)([^)]*)(\\s*\\)\\s+\\(\\s*)([^)]*)(\\s*\\)\\s*)$`));
   assert(match, `Malformed terrain sample: ${line}`);
   return `${match[1]}${match[2]}${match[3]}${match[6]}${match[5]}${match[4]}${match[7]}`;
 }
 
-function mirrorMapText(sourceText, displayName) {
+function mirrorMapText(sourceText, displayName, terrainControlMode = "cell-sentinel") {
+  assert(["cell-sentinel", "legacy-full-row"].includes(terrainControlMode), `Unsupported terrain control mode: ${terrainControlMode}`);
   const hadTerminalNewline = /\r?\n$/.test(sourceText);
   const lines = sourceText.replace(/\r\n/g, "\n").split("\n");
   if (lines[lines.length - 1] === "") lines.pop();
@@ -177,7 +193,9 @@ function mirrorMapText(sourceText, displayName) {
       const textureHeight = (height - 1) / 8 + 1;
       assert(Number.isInteger(textureWidth) && Number.isInteger(textureHeight), `Terrain ${width}x${height} is not on the 8-cell grid`);
       assert(textureIndexes.length === textureWidth * textureHeight, `Terrain texture grid has ${textureIndexes.length}/${textureWidth * textureHeight} controls`);
-      const mirroredTextureLines = reverseRows(textureIndexes.map((row) => lines[row]), textureWidth);
+      const mirroredTextureLines = terrainControlMode === "legacy-full-row"
+        ? reverseRows(textureIndexes.map((row) => lines[row]), textureWidth)
+        : reverseTerrainCellRows(textureIndexes.map((row) => lines[row]), textureWidth);
       textureIndexes.forEach((row, rowOffset) => terrainRows.set(row, mirroredTextureLines[rowOffset]));
 
       const heightOpen = findNext(lines, textureClose + 1, (line) => line.trim() === "{", "terrain height-grid opening");
@@ -281,7 +299,9 @@ function main() {
   const outputRoot = path.resolve(args["output-root"]);
   assert(fs.existsSync(sourcePath) && fs.statSync(sourcePath).isFile(), `Missing source MAP: ${sourcePath}`);
   const sourceText = fs.readFileSync(sourcePath, "utf8");
-  const mirrored = mirrorMapText(sourceText, args["display-name"]);
+  const terrainControlMode = args["terrain-control-mode"] || "cell-sentinel";
+  assert(["cell-sentinel", "legacy-full-row"].includes(terrainControlMode), `Unsupported terrain control mode: ${terrainControlMode}`);
+  const mirrored = mirrorMapText(sourceText, args["display-name"], terrainControlMode);
   const gameDirectory = args["game-directory"];
   const mapName = args["map-name"];
   const originalMap = args["original-map"];
@@ -302,6 +322,7 @@ function main() {
   const report = {
     schemaVersion: 1,
     transform: "reflect X about world x=0",
+    terrainControlMode,
     sourceMap: path.relative(path.dirname(outputRoot), sourcePath).replace(/\\/g, "/"),
     sourceBytes: Buffer.byteLength(sourceText),
     sourceSha256: sha256(sourceText),

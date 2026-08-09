@@ -5,6 +5,7 @@
   "sourceMap": "aa/mohdm6.map",
   "originalMap": "mohdm6",
   "displayName": "Stalingrad Mirror",
+  "terrainControlMode": "legacy-full-row",
   "extraPrecache": [
     "models/items/dm_50_healthbox.tik",
     "models/fx/bazookaexplosion_dm.tik"

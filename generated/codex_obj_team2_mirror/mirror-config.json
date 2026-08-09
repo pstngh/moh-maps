@@ -5,6 +5,7 @@
   "sourceMap": "aa/obj_team2.map",
   "originalMap": "obj_team2",
   "displayName": "V2 Facility Mirror",
+  "terrainControlMode": "legacy-full-row",
   "extraPrecache": [
     "models/fx/bazookaexplosion_dm.tik"
   ],

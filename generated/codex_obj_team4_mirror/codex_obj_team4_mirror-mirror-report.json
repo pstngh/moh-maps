@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "transform": "reflect X about world x=0",
+  "terrainControlMode": "cell-sentinel",
+  "sourceMap": "../aa/obj_team4.map",
+  "sourceBytes": 4153220,
+  "sourceSha256": "71880e3fd218ab5d8f6af8a045d02000b572b0487e789f98e99a1de3409586cf",
+  "mapName": "codex_obj_team4_mirror",
+  "gameDirectory": "obj",
+  "originalMap": "obj_team4",
+  "displayName": "The Bridge Mirror",
+  "output": {
+    "bytes": 4076951,
+    "sha256": "55522114f6a77f9578fa1b26c203e212214b07c7275595d58b0d5c61aa1e3e30"
+  },
+  "transformed": {
+    "brushFaces": 23671,
+    "patches": 174,
+    "terrains": 5,
+    "terrainSamples": 29229,
+    "terrainTextureControls": 543,
+    "origins": 515,
+    "angles": 247,
+    "angleVectors": 1,
+    "sunDirections": 1
+  },
+  "scriptPolicy": "thin wrappers execute retail scripts; no retail script contents redistributed",
+  "extraPrecache": [
+    "models/fx/bazookaexplosion_dm.tik"
+  ]
+}

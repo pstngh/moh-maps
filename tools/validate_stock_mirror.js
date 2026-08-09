@@ -146,9 +146,13 @@ function main() {
     assert(nearlyEqual(actual[0], 180 - direction[0]) && nearlyEqual(actual[1], direction[1]) && nearlyEqual(actual[2], -direction[2]), `Sun direction ${index} was not reflected exactly`);
   });
 
-  const first = mirrorMapText(source, null).text;
-  const second = mirrorMapText(first, null).text;
-  const third = mirrorMapText(second, null).text;
+  const terrainControlMode = config.terrainControlMode || "cell-sentinel";
+  assert(["cell-sentinel", "legacy-full-row"].includes(terrainControlMode), `Unsupported terrain control mode: ${terrainControlMode}`);
+  const canonicalMirror = mirrorMapText(source, config.displayName, terrainControlMode).text;
+  assert(mirrored === canonicalMirror, "Mirrored MAP differs from the canonical configured transform");
+  const first = mirrorMapText(source, null, terrainControlMode).text;
+  const second = mirrorMapText(first, null, terrainControlMode).text;
+  const third = mirrorMapText(second, null, terrainControlMode).text;
   assert(first === third, "Mirror transform is not a stable involution after canonicalization");
   assert(classCounts(second).worldspawn === 1, "Double-reflected MAP lost worldspawn");
 
@@ -167,6 +171,8 @@ function main() {
     transformed: report.transformed,
     preservedEntityKeyValueMultiset: true,
     reflectedSunDirections: true,
+    terrainControlMode,
+    canonicalTransformMatch: true,
     stableInvolution: true,
     retailScriptWrapper: true,
   };

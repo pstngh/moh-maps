@@ -70,6 +70,13 @@ $mapName = $config.mapName
 $gameDirectory = $config.gameDirectory
 $lightThreads = if ($config.lightThreads) { [int]$config.lightThreads } else { $Threads }
 if ($lightThreads -lt 1) { throw "lightThreads must be positive" }
+$terrainControlMode = if ($config.terrainControlMode) { [string]$config.terrainControlMode } else { "cell-sentinel" }
+if ($terrainControlMode -notin @("cell-sentinel", "legacy-full-row")) { throw "Unsupported terrainControlMode: $terrainControlMode" }
+$q3mapArguments = @($config.q3mapArgs | ForEach-Object { [string]$_ } | Where-Object { $_ })
+$allowedQ3mapArguments = @("-nomanvis")
+foreach ($argument in $q3mapArguments) {
+    if ($argument -notin $allowedQ3mapArguments) { throw "Unsupported q3mapArgs value: $argument" }
+}
 $canonicalMapRoot = Join-Path $GeneratedRoot "main\maps\$gameDirectory"
 $canonicalMap = Join-Path $canonicalMapRoot "$mapName.map"
 $canonicalBsp = Join-Path $canonicalMapRoot "$mapName.bsp"
@@ -87,7 +94,7 @@ $buildMap = Join-Path $buildMapRoot "$mapName.map"
 $buildBsp = Join-Path $buildMapRoot "$mapName.bsp"
 
 if (-not $SkipGenerate -and -not $PackageOnly) {
-    $generatorArguments = @($generator, "--source", $sourceMap, "--output-root", $GeneratedRoot, "--map-name", $mapName, "--game-directory", $gameDirectory, "--original-map", $config.originalMap, "--display-name", $config.displayName)
+    $generatorArguments = @($generator, "--source", $sourceMap, "--output-root", $GeneratedRoot, "--map-name", $mapName, "--game-directory", $gameDirectory, "--original-map", $config.originalMap, "--display-name", $config.displayName, "--terrain-control-mode", $terrainControlMode)
     $extraPrecache = @($config.extraPrecache) -join ";"
     if ($extraPrecache) { $generatorArguments += @("--extra-precache", $extraPrecache) }
     & $NodePath @generatorArguments
@@ -152,8 +159,9 @@ if (-not $PackageOnly) {
     $visLog = Join-Path $buildRoot "vis.log"
     $lightLog = Join-Path $buildRoot "mohlight.log"
 
+    $stageResults.q3mapArgs = @($q3mapArguments)
     $timer = [Diagnostics.Stopwatch]::StartNew()
-    & $q3map -threads $Threads -gamedir $buildRoot -moddir main $buildMap 2>&1 | Tee-Object -FilePath $q3mapLog
+    & $q3map -threads $Threads @q3mapArguments -gamedir $buildRoot -moddir main $buildMap 2>&1 | Tee-Object -FilePath $q3mapLog
     $q3mapExit = $LASTEXITCODE
     $timer.Stop()
     $stageResults.q3mapSeconds = [Math]::Round($timer.Elapsed.TotalSeconds, 3)
@@ -258,6 +266,7 @@ $buildReport = [ordered]@{
     gameDirectory = $gameDirectory
     source = [ordered]@{ path = $config.sourceMap; bytes = (Get-Item $sourceMap).Length; sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $sourceMap).Hash.ToLowerInvariant() }
     transform = $mirror.transform
+    terrainControlMode = $terrainControlMode
     transformed = $mirror.transformed
     retailPaks = @($retailPaks | ForEach-Object { [ordered]@{ name = $_.Name; bytes = $_.Length; sha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash.ToLowerInvariant() } })
     stages = $stageResults

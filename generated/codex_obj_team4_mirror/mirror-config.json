@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "mapName": "codex_obj_team4_mirror",
+  "gameDirectory": "obj",
+  "sourceMap": "aa/obj_team4.map",
+  "originalMap": "obj_team4",
+  "displayName": "The Bridge Mirror",
+  "terrainControlMode": "cell-sentinel",
+  "extraPrecache": [
+    "models/fx/bazookaexplosion_dm.tik"
+  ],
+  "q3mapArgs": [
+    "-nomanvis"
+  ],
+  "lightThreads": 1
+}
