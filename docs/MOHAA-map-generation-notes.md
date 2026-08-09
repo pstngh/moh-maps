@@ -2684,3 +2684,23 @@ The three-entry PK3 was reproduced byte-identically twice: 2,280,274 bytes, SHA-
 **PROVEN additive-expansion rule:** stock outskirts are authored for the original viewing direction and may contain one-sided or solid boundary dressing inside apparently empty space. Survey source occupancy, then inspect compiled surfaces/collision and player-height views from both directions. Remove only exact untargeted boundary owners, keep the target graph untouched, and prove the retained source byte-for-byte.
 
 **PROVEN Objective-derivative rule:** preserve retail scripts, doors, targets, triggers, objectives, and team starts unless the design explicitly changes them. Put new bot coverage in neutral DM starts, test intended Objective startup separately from FFA topology, compare errors with retail, and leave end-to-end objective and balance acceptance to human play.
+
+## `codex_obj_team2_expanded` revision 2: human-angle repair
+
+Date: 2026-08-09
+
+The first human screenshot overrode revision 1's automated visual acceptance. From the original stock side, the annex was visibly sparse and multiple hall/retaining/frame faces disappeared. The cause was not a missing retail texture: the generator had assigned `common/caulk` to faces assumed to be hidden from the interior-only camera set. Opening the old boundary made those faces visible. The solid-looking contact sheet had therefore tested the wrong viewing domain.
+
+Revision 2 makes every one of 156 added brushes six-face visible and rejects `common/caulk`, `common/nodraw`, `deckgrate_set1a`, and `deckgrate_set1b` anywhere inside the marked expansion geometry. The alpha canopy/mezzanine construction became solid iron/floor material. A validator now records all six face textures per brush and requires 156/156 fully skinned brushes with zero transparent construction materials.
+
+The compound grew from 102 brushes / 35 entities / six neutral starts to 156 brushes / 53 entities / eight neutral starts. Two two-bay service sheds, facade awnings, six ceiling ribs, three roof vents and caps, a dispatch island, eight bollards, seven utility banks, eight crates, and four additional light groups make the addition read as a complete facility. Original preservation did not loosen: only the same nine untargeted foliage and five untargeted connector-boundary entities are removed, while 23 doors, 88 targetnamed entities, the Objective graph, and all 16 Allied plus 16 Axis starts remain.
+
+Visual QA now begins with `reported_stock_side`, matching the failed human angle, followed by a raised stock-side overview and 12 connection/shed/yard/hall/mezzanine/return views. All 14 exact-candidate frames were captured with zero script errors. The reported outside frame shows solid retaining walls, facade, lintels, canopy, side sheds, and openings without the revision-1 holes. Human re-test still outranks this result.
+
+Q3map completed in 121.914 seconds with 19,053 surfaces, 136 classified warnings, zero leaks, and zero degenerates. The four-warning increase over revision 1 is exactly four additional optional corona-helper notices. VIS completed in 0.287 seconds with 58,528 bytes. One-thread MOHlight completed in 376.547 seconds with 63 pages, zero clamps, and zero hash warnings. The BSP SHA-256 is `48d0a46bee62f51db8164641bcc99fb26ddf5d005cce808673fe6a3e00811ba0`.
+
+The reproduced three-entry PK3 is 2,317,942 bytes with SHA-256 `b7c55baf2002aee31c8c53c322ba3289779f55053afc6bf69ce9ae7630a2a19e`. Exact Objective QA parsed the BSP in 0.120 seconds, built Recast in 2.065 seconds, admitted eight bots, observed combat, and emitted zero candidate diagnostics; the five script errors match retail. FFA parsed in 0.135 seconds, built Recast in 2.091 seconds, admitted eight bots, and produced two combat events in 45 seconds with zero candidate diagnostics; seven script errors remain inherited.
+
+**PROVEN changed-boundary face rule:** when an expansion changes where players can stand or look from, prior hidden-face assumptions are invalid. Fully skin every ambiguous added structural face with a solid visible material, reject caulk/nodraw and unintended alpha construction inside the added range, and inspect from both the old and new sides.
+
+**PROVEN human-angle regression rule:** every user screenshot that disproves acceptance becomes a named mandatory camera with the same viewing domain. Never let a convenient interior contact sheet stand in for the exterior angle that actually failed.

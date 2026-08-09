@@ -1,5 +1,7 @@
 # V2 Facility: East Annex revision 1
 
+> **Superseded / user-rejected:** the first human screenshot showed a sparse, incomplete annex with caulked/backfacing surfaces visible as holes. Revision 1 is regression evidence only; use revision 2.
+
 ## Identity and goal
 
 - Map/revision/date: `codex_obj_team2_expanded` / 1 / 2026-08-09

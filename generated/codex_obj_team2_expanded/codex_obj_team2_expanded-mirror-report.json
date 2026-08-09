@@ -1,6 +1,7 @@
 {
-  "schemaVersion": 1,
-  "transform": "byte-preserving obj_team2 expansion outside documented removals: retain retail objectives/doors/targets/team spawns, remove nine untargeted footprint foliage entities and five untargeted fence/wire connector obstructions, add an east service annex",
+  "schemaVersion": 2,
+  "revision": 2,
+  "transform": "revision 2 byte-preserving obj_team2 expansion: preserve retail gameplay, fully skin every added brush, remove transparent construction materials, and add two complete service sheds to the east annex",
   "sourceMap": "../../aa/obj_team2.map",
   "sourceBytes": 5478775,
   "sourceSha256": "04cbee45bb4d94d5289d52b51e302984e3f6ce8843d7bdd0194500f4be35ee2f",
@@ -9,8 +10,8 @@
   "originalMap": "obj_team2",
   "displayName": "V2 Facility: East Annex",
   "output": {
-    "bytes": 5544555,
-    "sha256": "3a7fd859484b6392a54812f21eb12155ad624a56f77e202ad32ad0cf749148ce"
+    "bytes": 5585462,
+    "sha256": "398f42625ea2970fbca01607c9c72ebf05465ec003fb6abdecf6214b42b231fc"
   },
   "preservation": {
     "sourceLineCount": 78260,
@@ -172,11 +173,11 @@
     "originalTargetnameCount": 88
   },
   "transformed": {
-    "addedBrushes": 102,
-    "addedEntities": 35,
+    "addedBrushes": 156,
+    "addedEntities": 53,
     "removedFoliageEntities": 9,
     "removedConnectorObstructions": 5,
-    "dmSpawnsAdded": 6
+    "dmSpawnsAdded": 8
   },
   "expansion": {
     "bounds": {
@@ -188,10 +189,13 @@
       "max": [
         4800,
         2496,
-        288
+        336
       ]
     },
     "serviceDeckTopZ": -384,
+    "revision": 2,
+    "fullySkinnedBrushes": 156,
+    "transparentConstructionMaterials": [],
     "connectorCount": 2,
     "connectorWidth": 288,
     "connectorRiser": 12,
@@ -204,9 +208,12 @@
       "canopy_column": 4,
       "canopy_roof": 1,
       "connector_steps": 18,
+      "dispatch_island": 1,
       "duct_bracket": 3,
+      "hall_bay_awning": 3,
       "hall_bay_frame": 9,
       "hall_bay_lintel": 3,
+      "hall_ceiling_beam": 6,
       "hall_east_wall": 1,
       "hall_north_wall": 1,
       "hall_roof": 1,
@@ -218,35 +225,55 @@
       "mezzanine_steps": 20,
       "mezzanine_support": 3,
       "north_retaining": 1,
+      "north_shed_back_wall": 1,
+      "north_shed_divider": 1,
+      "north_shed_east_wall": 1,
+      "north_shed_facade_lintel": 2,
+      "north_shed_facade_pillar": 3,
+      "north_shed_parapet": 4,
+      "north_shed_roof": 1,
+      "north_shed_west_wall": 1,
       "roof_parapet": 4,
+      "roof_vent": 3,
+      "roof_vent_cap": 3,
       "service_deck": 1,
       "service_duct": 1,
       "south_retaining": 1,
-      "utility_bank": 5,
+      "south_shed_back_wall": 1,
+      "south_shed_divider": 1,
+      "south_shed_east_wall": 1,
+      "south_shed_facade_lintel": 2,
+      "south_shed_facade_pillar": 3,
+      "south_shed_parapet": 4,
+      "south_shed_roof": 1,
+      "south_shed_west_wall": 1,
+      "utility_bank": 7,
       "west_retaining": 3,
+      "yard_bollard": 8,
       "yard_cover": 6
     },
     "addedEntityRoleCounts": {
-      "dm_spawn": 6,
+      "dm_spawn": 8,
       "vehicle": 1,
-      "crate": 4,
+      "crate": 8,
       "bay_light": 9,
       "hall_light": 9,
-      "canopy_light": 6
+      "canopy_light": 6,
+      "south_shed_light": 6,
+      "north_shed_light": 6
     },
     "addedEntityClassCounts": {
-      "info_player_deathmatch": 6,
+      "info_player_deathmatch": 8,
       "static_vehicle_german_opeltruck": 1,
-      "static_item_nazicrate": 4,
-      "static_lamp_lightbulb-caged": 8,
-      "static_corona_orange": 8,
-      "light": 8
+      "static_item_nazicrate": 8,
+      "static_lamp_lightbulb-caged": 12,
+      "static_corona_orange": 12,
+      "light": 12
     },
     "usedMaterials": [
       "algiers/doccrtset_1stepsml",
-      "common/caulk",
+      "algiers/whsflrset1_1b",
       "das_boot/ironwall1",
-      "general_industrial/deckgrate_set1b",
       "general_industrial/utilboxtop",
       "general_industrial/utilitybox_front",
       "general_industrial/utilitybox_side",
@@ -269,7 +296,15 @@
           2496,
           -384
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "connector_steps",
@@ -283,7 +318,15 @@
           1184,
           -480
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -297,7 +340,15 @@
           1184,
           -468
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -311,7 +362,15 @@
           1184,
           -456
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -325,7 +384,15 @@
           1184,
           -444
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -339,7 +406,15 @@
           1184,
           -432
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -353,7 +428,15 @@
           1184,
           -420
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -367,7 +450,15 @@
           1184,
           -408
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -381,7 +472,15 @@
           1184,
           -396
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -395,7 +494,15 @@
           1184,
           -384
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -409,7 +516,15 @@
           2304,
           -480
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -423,7 +538,15 @@
           2304,
           -468
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -437,7 +560,15 @@
           2304,
           -456
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -451,7 +582,15 @@
           2304,
           -444
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -465,7 +604,15 @@
           2304,
           -432
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -479,7 +626,15 @@
           2304,
           -420
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -493,7 +648,15 @@
           2304,
           -408
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -507,7 +670,15 @@
           2304,
           -396
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "connector_steps",
@@ -521,7 +692,15 @@
           2304,
           -384
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "west_retaining",
@@ -535,7 +714,15 @@
           896,
           -224
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "west_retaining",
@@ -549,7 +736,15 @@
           2016,
           -224
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "west_retaining",
@@ -563,7 +758,15 @@
           2496,
           -224
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "south_retaining",
@@ -577,7 +780,15 @@
           672,
           -224
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "mohcommon/jeff-concrete-wallb",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "north_retaining",
@@ -591,7 +802,15 @@
           2496,
           -224
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "mohcommon/jeff-concrete-wallb",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "hall_east_wall",
@@ -605,7 +824,15 @@
           2368,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
       },
       {
         "role": "hall_south_wall",
@@ -619,7 +846,15 @@
           800,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "mohcommon/jeff-concrete-wallb",
+          "zMax": "mohcommon/jeff-concrete-wallb"
+        }
       },
       {
         "role": "hall_north_wall",
@@ -633,7 +868,15 @@
           2368,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "mohcommon/jeff-concrete-wallb",
+          "zMax": "mohcommon/jeff-concrete-wallb"
+        }
       },
       {
         "role": "hall_west_pillar",
@@ -647,7 +890,15 @@
           896,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
       },
       {
         "role": "hall_west_pillar",
@@ -661,7 +912,15 @@
           1376,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
       },
       {
         "role": "hall_west_pillar",
@@ -675,7 +934,15 @@
           1856,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
       },
       {
         "role": "hall_west_pillar",
@@ -689,7 +956,15 @@
           2368,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
       },
       {
         "role": "hall_bay_lintel",
@@ -703,7 +978,15 @@
           1184,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "hall_bay_frame",
@@ -717,7 +1000,15 @@
           912,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "hall_bay_frame",
@@ -731,7 +1022,15 @@
           1184,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "hall_bay_frame",
@@ -745,7 +1044,37 @@
           1184,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "hall_bay_awning",
+        "min": [
+          4256,
+          920,
+          -64
+        ],
+        "max": [
+          4304,
+          1160,
+          -32
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "hall_bay_lintel",
@@ -759,7 +1088,15 @@
           1664,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "hall_bay_frame",
@@ -773,7 +1110,15 @@
           1392,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "hall_bay_frame",
@@ -787,7 +1132,15 @@
           1664,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "hall_bay_frame",
@@ -801,7 +1154,37 @@
           1664,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "hall_bay_awning",
+        "min": [
+          4256,
+          1400,
+          -64
+        ],
+        "max": [
+          4304,
+          1640,
+          -32
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "hall_bay_lintel",
@@ -815,7 +1198,15 @@
           2144,
           208
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "hall_bay_frame",
@@ -829,7 +1220,15 @@
           1872,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "hall_bay_frame",
@@ -843,7 +1242,15 @@
           2144,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "hall_bay_frame",
@@ -857,7 +1264,37 @@
           2144,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "hall_bay_awning",
+        "min": [
+          4256,
+          1880,
+          -64
+        ],
+        "max": [
+          4304,
+          2120,
+          -32
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "hall_roof",
@@ -871,7 +1308,15 @@
           2368,
           240
         ],
-        "detail": false
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "roof_parapet",
@@ -885,7 +1330,15 @@
           2368,
           288
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "roof_parapet",
@@ -899,7 +1352,15 @@
           2368,
           288
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "roof_parapet",
@@ -913,7 +1374,15 @@
           784,
           288
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "roof_parapet",
@@ -927,7 +1396,279 @@
           2368,
           288
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "hall_ceiling_beam",
+        "min": [
+          4336,
+          912,
+          160
+        ],
+        "max": [
+          4768,
+          928,
+          192
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
+      },
+      {
+        "role": "hall_ceiling_beam",
+        "min": [
+          4336,
+          1200,
+          160
+        ],
+        "max": [
+          4768,
+          1216,
+          192
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
+      },
+      {
+        "role": "hall_ceiling_beam",
+        "min": [
+          4336,
+          1488,
+          160
+        ],
+        "max": [
+          4768,
+          1504,
+          192
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
+      },
+      {
+        "role": "hall_ceiling_beam",
+        "min": [
+          4336,
+          1776,
+          160
+        ],
+        "max": [
+          4768,
+          1792,
+          192
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
+      },
+      {
+        "role": "hall_ceiling_beam",
+        "min": [
+          4336,
+          2064,
+          160
+        ],
+        "max": [
+          4768,
+          2080,
+          192
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
+      },
+      {
+        "role": "hall_ceiling_beam",
+        "min": [
+          4336,
+          2304,
+          160
+        ],
+        "max": [
+          4768,
+          2320,
+          192
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
+      },
+      {
+        "role": "roof_vent",
+        "min": [
+          4400,
+          928,
+          240
+        ],
+        "max": [
+          4496,
+          1120,
+          320
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "german/rusty_iron",
+          "xMax": "german/rusty_iron",
+          "yMin": "german/rusty_iron",
+          "yMax": "german/rusty_iron",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "roof_vent_cap",
+        "min": [
+          4392,
+          920,
+          320
+        ],
+        "max": [
+          4504,
+          1128,
+          336
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "roof_vent",
+        "min": [
+          4584,
+          1376,
+          240
+        ],
+        "max": [
+          4680,
+          1568,
+          304
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "german/rusty_iron",
+          "xMax": "german/rusty_iron",
+          "yMin": "german/rusty_iron",
+          "yMax": "german/rusty_iron",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "roof_vent_cap",
+        "min": [
+          4576,
+          1368,
+          304
+        ],
+        "max": [
+          4688,
+          1576,
+          320
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "roof_vent",
+        "min": [
+          4400,
+          1888,
+          240
+        ],
+        "max": [
+          4496,
+          2080,
+          320
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "german/rusty_iron",
+          "xMax": "german/rusty_iron",
+          "yMin": "german/rusty_iron",
+          "yMax": "german/rusty_iron",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "roof_vent_cap",
+        "min": [
+          4392,
+          1880,
+          320
+        ],
+        "max": [
+          4504,
+          2088,
+          336
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -941,7 +1682,15 @@
           904,
           -368
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -955,7 +1704,15 @@
           944,
           -352
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -969,7 +1726,15 @@
           984,
           -336
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -983,7 +1748,15 @@
           1024,
           -320
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -997,7 +1770,15 @@
           1064,
           -304
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1011,7 +1792,15 @@
           1104,
           -288
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1025,7 +1814,15 @@
           1144,
           -272
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1039,7 +1836,15 @@
           1184,
           -256
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1053,7 +1858,15 @@
           1224,
           -240
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1067,7 +1880,15 @@
           1264,
           -224
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1081,7 +1902,15 @@
           1304,
           -208
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1095,7 +1924,15 @@
           1344,
           -192
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1109,7 +1946,15 @@
           1384,
           -176
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1123,7 +1968,15 @@
           1424,
           -160
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1137,7 +1990,15 @@
           1464,
           -144
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1151,7 +2012,15 @@
           1504,
           -128
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1165,7 +2034,15 @@
           1544,
           -112
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1179,7 +2056,15 @@
           1584,
           -96
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1193,7 +2078,15 @@
           1624,
           -80
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_steps",
@@ -1207,7 +2100,15 @@
           1664,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "algiers/doccrtset_1stepsml",
+          "xMax": "algiers/doccrtset_1stepsml",
+          "yMin": "algiers/doccrtset_1stepsml",
+          "yMax": "algiers/doccrtset_1stepsml",
+          "zMin": "algiers/doccrtset_1stepsml",
+          "zMax": "algiers/doccrtset_1stepsml"
+        }
       },
       {
         "role": "mezzanine_floor",
@@ -1221,7 +2122,15 @@
           2320,
           -64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "algiers/whsflrset1_1b"
+        }
       },
       {
         "role": "mezzanine_rail_post",
@@ -1235,7 +2144,15 @@
           1712,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_rail_post",
@@ -1249,7 +2166,15 @@
           1840,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_rail_post",
@@ -1263,7 +2188,15 @@
           1968,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_rail_post",
@@ -1277,7 +2210,15 @@
           2096,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_rail_post",
@@ -1291,7 +2232,15 @@
           2224,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_rail_post",
@@ -1305,7 +2254,15 @@
           2320,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_rail",
@@ -1319,7 +2276,15 @@
           2320,
           0
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_rail",
@@ -1333,7 +2298,15 @@
           2320,
           56
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_support",
@@ -1347,7 +2320,15 @@
           1760,
           -80
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_support",
@@ -1361,7 +2342,15 @@
           2080,
           -80
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "mezzanine_support",
@@ -1375,7 +2364,15 @@
           2320,
           -80
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "canopy_column",
@@ -1389,7 +2386,15 @@
           1328,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "canopy_column",
@@ -1403,7 +2408,15 @@
           1792,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "canopy_column",
@@ -1417,7 +2430,15 @@
           1328,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "canopy_column",
@@ -1431,7 +2452,15 @@
           1792,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "canopy_roof",
@@ -1445,7 +2474,15 @@
           1808,
           80
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "canopy_beam",
@@ -1459,7 +2496,15 @@
           1296,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "canopy_beam",
@@ -1473,63 +2518,741 @@
           1808,
           48
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
+      },
+      {
+        "role": "dispatch_island",
+        "min": [
+          3920,
+          1440,
+          -384
+        ],
+        "max": [
+          4016,
+          1648,
+          -272
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "south_shed_west_wall",
+        "min": [
+          3616,
+          672,
+          -384
+        ],
+        "max": [
+          3648,
+          864,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "south_shed_east_wall",
+        "min": [
+          4176,
+          672,
+          -384
+        ],
+        "max": [
+          4208,
+          864,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "south_shed_back_wall",
+        "min": [
+          3648,
+          672,
+          -384
+        ],
+        "max": [
+          4176,
+          704,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "mohcommon/jeff-concrete-wallb",
+          "zMax": "mohcommon/jeff-concrete-wallb"
+        }
+      },
+      {
+        "role": "south_shed_facade_pillar",
+        "min": [
+          3648,
+          832,
+          -384
+        ],
+        "max": [
+          3712,
+          864,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "south_shed_facade_pillar",
+        "min": [
+          3904,
+          832,
+          -384
+        ],
+        "max": [
+          3976,
+          864,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "south_shed_facade_pillar",
+        "min": [
+          4144,
+          832,
+          -384
+        ],
+        "max": [
+          4176,
+          864,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "south_shed_facade_lintel",
+        "min": [
+          3712,
+          832,
+          -80
+        ],
+        "max": [
+          3904,
+          864,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "south_shed_facade_lintel",
+        "min": [
+          3976,
+          832,
+          -80
+        ],
+        "max": [
+          4144,
+          864,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "south_shed_divider",
+        "min": [
+          3920,
+          704,
+          -384
+        ],
+        "max": [
+          3952,
+          832,
+          -64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "south_shed_roof",
+        "min": [
+          3616,
+          672,
+          64
+        ],
+        "max": [
+          4208,
+          864,
+          96
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "south_shed_parapet",
+        "min": [
+          3616,
+          672,
+          96
+        ],
+        "max": [
+          3632,
+          864,
+          128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "south_shed_parapet",
+        "min": [
+          4192,
+          672,
+          96
+        ],
+        "max": [
+          4208,
+          864,
+          128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "south_shed_parapet",
+        "min": [
+          3632,
+          672,
+          96
+        ],
+        "max": [
+          4192,
+          688,
+          128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "south_shed_parapet",
+        "min": [
+          3632,
+          848,
+          96
+        ],
+        "max": [
+          4192,
+          864,
+          128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "north_shed_west_wall",
+        "min": [
+          3616,
+          2304,
+          -384
+        ],
+        "max": [
+          3648,
+          2464,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "north_shed_east_wall",
+        "min": [
+          4176,
+          2304,
+          -384
+        ],
+        "max": [
+          4208,
+          2464,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "north_shed_back_wall",
+        "min": [
+          3648,
+          2432,
+          -384
+        ],
+        "max": [
+          4176,
+          2464,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "mohcommon/jeff-concrete-wallb",
+          "zMax": "mohcommon/jeff-concrete-wallb"
+        }
+      },
+      {
+        "role": "north_shed_facade_pillar",
+        "min": [
+          3648,
+          2304,
+          -384
+        ],
+        "max": [
+          3712,
+          2336,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "north_shed_facade_pillar",
+        "min": [
+          3904,
+          2304,
+          -384
+        ],
+        "max": [
+          3976,
+          2336,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "north_shed_facade_pillar",
+        "min": [
+          4144,
+          2304,
+          -384
+        ],
+        "max": [
+          4176,
+          2336,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/bunker_wall"
+        }
+      },
+      {
+        "role": "north_shed_facade_lintel",
+        "min": [
+          3712,
+          2304,
+          -80
+        ],
+        "max": [
+          3904,
+          2336,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "north_shed_facade_lintel",
+        "min": [
+          3976,
+          2304,
+          -80
+        ],
+        "max": [
+          4144,
+          2336,
+          64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "north_shed_divider",
+        "min": [
+          3920,
+          2336,
+          -384
+        ],
+        "max": [
+          3952,
+          2432,
+          -64
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "north_shed_roof",
+        "min": [
+          3616,
+          2304,
+          64
+        ],
+        "max": [
+          4208,
+          2464,
+          96
+        ],
+        "detail": false,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "north_shed_parapet",
+        "min": [
+          3616,
+          2304,
+          96
+        ],
+        "max": [
+          3632,
+          2464,
+          128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "north_shed_parapet",
+        "min": [
+          4192,
+          2304,
+          96
+        ],
+        "max": [
+          4208,
+          2464,
+          128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "north_shed_parapet",
+        "min": [
+          3632,
+          2304,
+          96
+        ],
+        "max": [
+          4192,
+          2320,
+          128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "north_shed_parapet",
+        "min": [
+          3632,
+          2448,
+          96
+        ],
+        "max": [
+          4192,
+          2464,
+          128
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_structure/bunker_wall",
+          "xMax": "general_structure/bunker_wall",
+          "yMin": "general_structure/bunker_wall",
+          "yMax": "general_structure/bunker_wall",
+          "zMin": "general_structure/bunker_wall",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "yard_cover",
         "min": [
           3696,
-          736,
+          1040,
           -384
         ],
         "max": [
           3824,
-          784,
+          1088,
           -272
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "yard_cover",
         "min": [
           4056,
-          736,
+          1040,
           -384
         ],
         "max": [
           4184,
-          784,
+          1088,
           -272
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "yard_cover",
         "min": [
           3696,
-          2352,
+          2112,
           -384
         ],
         "max": [
           3824,
-          2400,
+          2160,
           -272
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "yard_cover",
         "min": [
           4056,
-          2352,
+          2112,
           -384
         ],
         "max": [
           4184,
-          2400,
+          2160,
           -272
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "yard_cover",
@@ -1543,7 +3266,15 @@
           1632,
           -288
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
       },
       {
         "role": "yard_cover",
@@ -1557,35 +3288,279 @@
           1632,
           -288
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/jeff-concrete-wallb",
+          "xMax": "mohcommon/jeff-concrete-wallb",
+          "yMin": "mohcommon/jeff-concrete-wallb",
+          "yMax": "mohcommon/jeff-concrete-wallb",
+          "zMin": "general_structure/jh_conc512b",
+          "zMax": "general_structure/jh_conc512b"
+        }
+      },
+      {
+        "role": "yard_bollard",
+        "min": [
+          3664,
+          1200,
+          -384
+        ],
+        "max": [
+          3680,
+          1216,
+          -256
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "yard_bollard",
+        "min": [
+          3664,
+          1936,
+          -384
+        ],
+        "max": [
+          3680,
+          1952,
+          -256
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "yard_bollard",
+        "min": [
+          3792,
+          1200,
+          -384
+        ],
+        "max": [
+          3808,
+          1216,
+          -256
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "yard_bollard",
+        "min": [
+          3792,
+          1936,
+          -384
+        ],
+        "max": [
+          3808,
+          1952,
+          -256
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "yard_bollard",
+        "min": [
+          4112,
+          1200,
+          -384
+        ],
+        "max": [
+          4128,
+          1216,
+          -256
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "yard_bollard",
+        "min": [
+          4112,
+          1936,
+          -384
+        ],
+        "max": [
+          4128,
+          1952,
+          -256
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "yard_bollard",
+        "min": [
+          4240,
+          1200,
+          -384
+        ],
+        "max": [
+          4256,
+          1216,
+          -256
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
+      },
+      {
+        "role": "yard_bollard",
+        "min": [
+          4240,
+          1936,
+          -384
+        ],
+        "max": [
+          4256,
+          1952,
+          -256
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "das_boot/ironwall1",
+          "xMax": "das_boot/ironwall1",
+          "yMin": "das_boot/ironwall1",
+          "yMax": "das_boot/ironwall1",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "utility_bank",
         "min": [
-          3856,
-          928,
+          3736,
+          720,
           -384
         ],
         "max": [
-          3984,
-          1024,
+          3848,
+          816,
           -240
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_side",
+          "yMax": "general_industrial/utilitybox_front",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
       },
       {
         "role": "utility_bank",
         "min": [
           4000,
-          928,
+          720,
           -384
         ],
         "max": [
-          4128,
-          1024,
+          4112,
+          816,
           -272
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_side",
+          "yMax": "general_industrial/utilitybox_front",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
+      },
+      {
+        "role": "utility_bank",
+        "min": [
+          3736,
+          2336,
+          -384
+        ],
+        "max": [
+          3848,
+          2432,
+          -240
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_front",
+          "yMax": "general_industrial/utilitybox_side",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
+      },
+      {
+        "role": "utility_bank",
+        "min": [
+          4000,
+          2336,
+          -384
+        ],
+        "max": [
+          4112,
+          2432,
+          -272
+        ],
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_front",
+          "yMax": "general_industrial/utilitybox_side",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
       },
       {
         "role": "utility_bank",
@@ -1599,7 +3574,15 @@
           1320,
           -240
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_front",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_side",
+          "yMax": "general_industrial/utilitybox_side",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
       },
       {
         "role": "utility_bank",
@@ -1613,7 +3596,15 @@
           1320,
           -272
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_front",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_side",
+          "yMax": "general_industrial/utilitybox_side",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
       },
       {
         "role": "utility_bank",
@@ -1627,7 +3618,15 @@
           2272,
           64
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "general_industrial/utilitybox_side",
+          "xMax": "general_industrial/utilitybox_side",
+          "yMin": "general_industrial/utilitybox_front",
+          "yMax": "general_industrial/utilitybox_side",
+          "zMin": "general_industrial/utilboxtop",
+          "zMax": "general_industrial/utilboxtop"
+        }
       },
       {
         "role": "service_duct",
@@ -1641,7 +3640,15 @@
           1632,
           112
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "german/rusty_iron",
+          "xMax": "german/rusty_iron",
+          "yMin": "german/rusty_iron",
+          "yMax": "german/rusty_iron",
+          "zMin": "das_boot/ironwall1",
+          "zMax": "das_boot/ironwall1"
+        }
       },
       {
         "role": "duct_bracket",
@@ -1655,7 +3662,15 @@
           960,
           128
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "duct_bracket",
@@ -1669,7 +3684,15 @@
           1216,
           128
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       },
       {
         "role": "duct_bracket",
@@ -1683,7 +3706,15 @@
           1472,
           128
         ],
-        "detail": true
+        "detail": true,
+        "faceTextures": {
+          "xMin": "mohcommon/ibeam_1a",
+          "xMax": "mohcommon/ibeam_1a",
+          "yMin": "mohcommon/ibeam_1a",
+          "yMax": "mohcommon/ibeam_1a",
+          "zMin": "mohcommon/ibeam_1a",
+          "zMax": "mohcommon/ibeam_1a"
+        }
       }
     ],
     "entities": [
@@ -1691,8 +3722,16 @@
         "role": "dm_spawn",
         "classname": "info_player_deathmatch",
         "properties": {
-          "origin": "3744 816 -336",
+          "origin": "3744 840 -336",
           "angle": "30"
+        }
+      },
+      {
+        "role": "dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "4056 840 -336",
+          "angle": "150"
         }
       },
       {
@@ -1701,6 +3740,14 @@
         "properties": {
           "origin": "3744 2320 -336",
           "angle": "330"
+        }
+      },
+      {
+        "role": "dm_spawn",
+        "classname": "info_player_deathmatch",
+        "properties": {
+          "origin": "4056 2320 -336",
+          "angle": "210"
         }
       },
       {
@@ -1786,6 +3833,50 @@
           "model": "static//nazi_crate.tik",
           "origin": "4432 2240 -64",
           "angle": "90",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "3824 752 -384",
+          "angle": "20",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "4080 752 -384",
+          "angle": "340",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "3824 2384 -384",
+          "angle": "160",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "crate",
+        "classname": "static_item_nazicrate",
+        "properties": {
+          "model": "static//nazi_crate.tik",
+          "origin": "4080 2384 -384",
+          "angle": "200",
           "scale": "1.0",
           "testanim": "idle"
         }
@@ -2033,6 +4124,130 @@
         "classname": "light",
         "properties": {
           "origin": "4064 1544 -32",
+          "light": "60",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "south_shed_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "3792 768 52",
+          "angle": "-2",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "south_shed_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "3792 768 46",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "south_shed_light",
+        "classname": "light",
+        "properties": {
+          "origin": "3792 768 -16",
+          "light": "60",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "south_shed_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "4056 768 52",
+          "angle": "-2",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "south_shed_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "4056 768 46",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "south_shed_light",
+        "classname": "light",
+        "properties": {
+          "origin": "4056 768 -16",
+          "light": "60",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "north_shed_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "3792 2400 52",
+          "angle": "-2",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "north_shed_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "3792 2400 46",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "north_shed_light",
+        "classname": "light",
+        "properties": {
+          "origin": "3792 2400 -16",
+          "light": "60",
+          "_color": "1.0 0.9 0.8",
+          "overbright_range": "0.15"
+        }
+      },
+      {
+        "role": "north_shed_light",
+        "classname": "static_lamp_lightbulb-caged",
+        "properties": {
+          "model": "static//lightbulb_caged.tik",
+          "origin": "4056 2400 52",
+          "angle": "-2",
+          "scale": "1.40",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "north_shed_light",
+        "classname": "static_corona_orange",
+        "properties": {
+          "model": "static//corona_orange.tik",
+          "origin": "4056 2400 46",
+          "scale": "1.0",
+          "testanim": "idle"
+        }
+      },
+      {
+        "role": "north_shed_light",
+        "classname": "light",
+        "properties": {
+          "origin": "4056 2400 -16",
           "light": "60",
           "_color": "1.0 0.9 0.8",
           "overbright_range": "0.15"

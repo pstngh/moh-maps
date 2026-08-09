@@ -71,6 +71,7 @@ const sourceBuffer = fs.readFileSync(sourcePath);
 const sourceText = sourceBuffer.toString("utf8");
 const mapText = fs.readFileSync(mapPath, "utf8");
 const report = JSON.parse(fs.readFileSync(reportPath, "utf8"));
+assert(report.schemaVersion === 2 && report.revision === 2, "Expected revision 2 generation report");
 assert(sha256(sourceBuffer) === report.sourceSha256, "Source hash no longer matches generation report");
 assert(Buffer.byteLength(mapText) === report.output.bytes && sha256(mapText) === report.output.sha256, "Generated MAP bytes/hash mismatch");
 assert(!mapText.includes("textures/codex"), "Expansion unexpectedly references custom texture bytes");
@@ -117,16 +118,27 @@ assert(brushMarkers.length === report.transformed.addedBrushes && brushMarkers.l
 const customEntities = entityBlocks(customEntityLines);
 assert(customEntities.length === report.transformed.addedEntities, "Added entity count mismatch");
 assert(customEntities.every((entity) => !entity.keys.targetname && !entity.keys.target), "Expansion must not alter the retail target graph");
-assert(customEntities.filter((entity) => entity.keys.classname === "info_player_deathmatch").length === 6, "Expected six expansion DM spawns");
+assert(customEntities.filter((entity) => entity.keys.classname === "info_player_deathmatch").length === 8, "Expected eight expansion DM spawns");
 assert(customEntities.every((entity) => entity.keys.classname !== "info_player_allied" && entity.keys.classname !== "info_player_axis"), "Expansion must not alter objective team spawn counts");
 assert(customEntities.every((entity) => entity.keys.classname !== "func_door" && entity.keys.classname !== "func_rotatingdoor"), "Expansion intentionally adds no doors");
+
+const forbiddenConstructionMaterials = ["common/caulk", "common/nodraw", "general_industrial/deckgrate_set1a", "general_industrial/deckgrate_set1b"];
+assert(!customWorldLines.some((line) => forbiddenConstructionMaterials.some((texture) => line.includes(` ${texture} `))), "Revision 2 contains an invisible or alpha construction surface");
+assert(report.expansion.fullySkinnedBrushes === report.expansion.brushes.length, "Not every expansion brush is fully skinned");
+assert(report.expansion.transparentConstructionMaterials.length === 0, "Transparent construction material remains in revision 2");
+for (const brush of report.expansion.brushes) {
+  assert(brush.faceTextures && Object.keys(brush.faceTextures).length === 6, `${brush.role} lacks six recorded face materials`);
+  assert(Object.values(brush.faceTextures).every((texture) => !forbiddenConstructionMaterials.includes(texture)), `${brush.role} contains a forbidden face material`);
+}
+assert(report.expansion.brushRoleCounts.south_shed_roof === 1 && report.expansion.brushRoleCounts.north_shed_roof === 1, "Both finished service sheds are required");
+assert(report.expansion.brushRoleCounts.hall_bay_awning === 3 && report.expansion.brushRoleCounts.hall_ceiling_beam === 6, "Facade/ceiling completion inventory changed");
 
 for (const brush of report.expansion.brushes) {
   assert(brush.min.length === 3 && brush.max.length === 3, `Malformed ${brush.role} bounds`);
   assert(brush.min.every((value, axis) => Number.isFinite(value) && value < brush.max[axis]), `Invalid ${brush.role} bounds`);
   assert(brush.min[0] >= 3296 && brush.max[0] <= 4800, `${brush.role} escaped the surveyed east-annex X footprint`);
   assert(brush.min[1] >= 640 && brush.max[1] <= 2496, `${brush.role} escaped the surveyed east-annex Y footprint`);
-  assert(brush.min[2] >= -544 && brush.max[2] <= 288, `${brush.role} escaped the surveyed east-annex Z footprint`);
+  assert(brush.min[2] >= -544 && brush.max[2] <= 336, `${brush.role} escaped the surveyed east-annex Z footprint`);
 }
 
 const connectors = report.expansion.brushes.filter((brush) => brush.role === "connector_steps");
@@ -163,7 +175,8 @@ assert(fs.readFileSync(scriptPath, "utf8") === expectedScript, "Runtime wrapper 
 assert(fs.readFileSync(precachePath, "utf8") === expectedPrecache, "Precache wrapper differs from the proven thin policy");
 
 process.stdout.write(`${JSON.stringify({
-  schemaVersion: 1,
+  schemaVersion: 2,
+  revision: 2,
   valid: true,
   mapName,
   sourceSha256: report.sourceSha256,

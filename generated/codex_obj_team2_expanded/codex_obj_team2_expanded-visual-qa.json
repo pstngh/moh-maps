@@ -3,12 +3,16 @@
     "mapName":  "codex_obj_team2_expanded",
     "qaRoot":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual",
     "exactPk3Count":  8,
-    "candidateSha256":  "f7aa8769474666a16d588280c44a025b811af14dc2374993d917f59e6fca6ea7",
+    "candidateSha256":  "b7c55baf2002aee31c8c53c322ba3289779f55053afc6bf69ce9ae7630a2a19e",
     "looseOverride":  "maps/obj/codex_obj_team2_expanded.scr only; BSP/assets remain from exact candidate PK3",
     "requestedViews":  [
+                           "reported_stock_side",
+                           "stock_side_overview",
                            "south_connection",
                            "north_connection",
                            "annex_facade",
+                           "south_shed",
+                           "north_shed",
                            "yard_south_lane",
                            "yard_north_lane",
                            "hall_center",
@@ -18,71 +22,95 @@
                            "overhead"
                        ],
     "viewMarkers":  [
-                        "[2026-08-09 14:34:59 UTC-5.000] CODEX_VISUAL_QA south_connection",
-                        "[2026-08-09 14:35:00 UTC-5.000] CODEX_VISUAL_QA north_connection",
-                        "[2026-08-09 14:35:01 UTC-5.000] CODEX_VISUAL_QA annex_facade",
-                        "[2026-08-09 14:35:02 UTC-5.000] CODEX_VISUAL_QA yard_south_lane",
-                        "[2026-08-09 14:35:03 UTC-5.000] CODEX_VISUAL_QA yard_north_lane",
-                        "[2026-08-09 14:35:04 UTC-5.000] CODEX_VISUAL_QA hall_center",
-                        "[2026-08-09 14:35:05 UTC-5.000] CODEX_VISUAL_QA hall_stair",
-                        "[2026-08-09 14:35:06 UTC-5.000] CODEX_VISUAL_QA mezzanine",
-                        "[2026-08-09 14:35:07 UTC-5.000] CODEX_VISUAL_QA east_return",
-                        "[2026-08-09 14:35:08 UTC-5.000] CODEX_VISUAL_QA overhead"
+                        "[2026-08-09 15:14:48 UTC-5.000] CODEX_VISUAL_QA reported_stock_side",
+                        "[2026-08-09 15:14:49 UTC-5.000] CODEX_VISUAL_QA stock_side_overview",
+                        "[2026-08-09 15:14:50 UTC-5.000] CODEX_VISUAL_QA south_connection",
+                        "[2026-08-09 15:14:51 UTC-5.000] CODEX_VISUAL_QA north_connection",
+                        "[2026-08-09 15:14:52 UTC-5.000] CODEX_VISUAL_QA annex_facade",
+                        "[2026-08-09 15:14:53 UTC-5.000] CODEX_VISUAL_QA south_shed",
+                        "[2026-08-09 15:14:54 UTC-5.000] CODEX_VISUAL_QA north_shed",
+                        "[2026-08-09 15:14:55 UTC-5.000] CODEX_VISUAL_QA yard_south_lane",
+                        "[2026-08-09 15:14:56 UTC-5.000] CODEX_VISUAL_QA yard_north_lane",
+                        "[2026-08-09 15:14:57 UTC-5.000] CODEX_VISUAL_QA hall_center",
+                        "[2026-08-09 15:14:58 UTC-5.000] CODEX_VISUAL_QA hall_stair",
+                        "[2026-08-09 15:14:59 UTC-5.000] CODEX_VISUAL_QA mezzanine",
+                        "[2026-08-09 15:15:00 UTC-5.000] CODEX_VISUAL_QA east_return",
+                        "[2026-08-09 15:15:01 UTC-5.000] CODEX_VISUAL_QA overhead"
                     ],
-    "screenshotCount":  10,
+    "screenshotCount":  14,
     "screenshots":  [
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0000.tga",
                             "bytes":  2764818,
-                            "sha256":  "f5cf9dd016883d75bd932ed75dc54f9e7dec153ac2d7f54d7e395ee0a2483fc0"
+                            "sha256":  "4f7c49ff13a9163bceaca9ad40b058f5ad32379ea0ad398c1ef7d1eb8cbffcfe"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0001.tga",
                             "bytes":  2764818,
-                            "sha256":  "e3b8ce18dacb2bb0a39216604b63ca9e952ca4cb5dc60e5bf3d368474a93703f"
+                            "sha256":  "e6dcb093f1beaba39210c00c4d8cbfe421bce253058101dfca8338e7492f4d69"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0002.tga",
                             "bytes":  2764818,
-                            "sha256":  "d6071b8d24e1d73c69a404f126ae250d1b851519303f7654935af609d2a788f2"
+                            "sha256":  "f083f2e43782865afac59e833188f6068debcca75d99a0adbde49eb18d73aec8"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0003.tga",
                             "bytes":  2764818,
-                            "sha256":  "5a95891d3b19baef04e269da0f65c7df1459c379c1cb76015c1b6fbe7e0aac5f"
+                            "sha256":  "ea5801e1ecf6b46612a97c73405eff3d2e3ff74f7e0d53290810b6b01e7f9086"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0004.tga",
                             "bytes":  2764818,
-                            "sha256":  "86c268ceabf3534714d5a0af6cf1bfdce4f26d043bccb7731c7176259f4cebcf"
+                            "sha256":  "fd42e04692e83f286ce10ebb8fdf0127b126d2a307e44be374a8e68a8b04a9d9"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0005.tga",
                             "bytes":  2764818,
-                            "sha256":  "47dd74b80fb5b0afefe18aff3e59a0546c4e8147309d4487e5eb700345b5c577"
+                            "sha256":  "49b3abfb162f2864e5ff86fbe8c7aa1be7ad463ba5e7a6005c63641f0cce3421"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0006.tga",
                             "bytes":  2764818,
-                            "sha256":  "0577accae0fc138ad2c273c9ff8ff06f002af759601670142e9e3c16f4ccf5fb"
+                            "sha256":  "f45477f0d946c55f41151fc6a4640ebc8e5bf4306ce10827e2894fa5cebcf551"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0007.tga",
                             "bytes":  2764818,
-                            "sha256":  "f765511f177fe9258fc25d78b45961b28a3367cfb49a0007e969b4c052f4f529"
+                            "sha256":  "6833ac9020fe3711956aa1e4dbf0b2a71ef12211b6cbc147e9d0e21661ee7a69"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0008.tga",
                             "bytes":  2764818,
-                            "sha256":  "012f290662728e983e306dbec126ca655a9fb52744160afd5c1908e6f93ab037"
+                            "sha256":  "46678dac4e4f8892fb2c5aa4f2b7dc78eb4f2121bdb2690c3d526b5e6ee1b4af"
                         },
                         {
                             "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0009.tga",
                             "bytes":  2764818,
-                            "sha256":  "05cda4d1ad2fdf3ff2d74f7cb5091e91a518a92b949ec02fab2171442f787fc8"
+                            "sha256":  "d66720aea165e4bdf73a3fa5510c39929f42c5f453bae9dfc7881e75bdcb627c"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0010.tga",
+                            "bytes":  2764818,
+                            "sha256":  "39cad6c9a151f212d20ff6fd82f3b654e7e493fa562d67e4afed7b3d6b95a6f0"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0011.tga",
+                            "bytes":  2764818,
+                            "sha256":  "97c4bb8c719cf711469d3138e4926397f11c1f054e1998c3d51d6e88d6157278"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0012.tga",
+                            "bytes":  2764818,
+                            "sha256":  "7ceb500f43c8fff868ed8b4b7d35e6f82e1ed34fa2df00ebfe192e41824b1d2f"
+                        },
+                        {
+                            "path":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\screenshots\\shot0013.tga",
+                            "bytes":  2764818,
+                            "sha256":  "47db456f5d9d997adbfb3a33286b76da1c95af995de019cc2bd42e7a77d173d2"
                         }
                     ],
     "scriptErrorCount":  0,
-    "elapsedSeconds":  46.33,
+    "elapsedSeconds":  61.146,
     "log":  "C:\\tmp\\codex-codex_obj_team2_expanded-visual\\home\\main\\qconsole.log"
 }

@@ -7,14 +7,14 @@
                    "bytes":  5478775,
                    "sha256":  "04cbee45bb4d94d5289d52b51e302984e3f6ce8843d7bdd0194500f4be35ee2f"
                },
-    "transform":  "byte-preserving obj_team2 expansion outside documented removals: retain retail objectives/doors/targets/team spawns, remove nine untargeted footprint foliage entities and five untargeted fence/wire connector obstructions, add an east service annex",
+    "transform":  "revision 2 byte-preserving obj_team2 expansion: preserve retail gameplay, fully skin every added brush, remove transparent construction materials, and add two complete service sheds to the east annex",
     "terrainControlMode":  "legacy-full-row",
     "transformed":  {
-                        "addedBrushes":  102,
-                        "addedEntities":  35,
+                        "addedBrushes":  156,
+                        "addedEntities":  53,
                         "removedFoliageEntities":  9,
                         "removedConnectorObstructions":  5,
-                        "dmSpawnsAdded":  6
+                        "dmSpawnsAdded":  8
                     },
     "retailPaks":  [
                        {
@@ -57,34 +57,34 @@
                    "q3mapArgs":  [
 
                                  ],
-                   "q3mapSeconds":  110.543,
-                   "q3mapWarnings":  132,
+                   "q3mapSeconds":  121.914,
+                   "q3mapWarnings":  136,
                    "q3mapMissingImageWarnings":  1,
                    "q3mapLeakDiagnostics":  0,
                    "q3mapDegenerateDiagnostics":  0,
-                   "visSeconds":  0.264,
-                   "mohlightSeconds":  342.057,
+                   "visSeconds":  0.287,
+                   "mohlightSeconds":  376.547,
                    "mohlightThreads":  1,
                    "lightClampWarnings":  0,
                    "lightHashWarnings":  0
                },
     "map":  {
-                "bytes":  5544555,
-                "sha256":  "3a7fd859484b6392a54812f21eb12155ad624a56f77e202ad32ad0cf749148ce"
+                "bytes":  5585462,
+                "sha256":  "398f42625ea2970fbca01607c9c72ebf05465ec003fb6abdecf6214b42b231fc"
             },
     "bsp":  {
                 "bsp":  "generated/codex_obj_team2_expanded/main/maps/obj/codex_obj_team2_expanded.bsp",
-                "bytes":  12779232,
-                "sha256":  "7d01a19b7354278a990d940528d4666c52ced196c788a3648589feb22c9b1239",
+                "bytes":  13000688,
+                "sha256":  "48d0a46bee62f51db8164641bcc99fb26ddf5d005cce808673fe6a3e00811ba0",
                 "ident":  "0x35313032",
                 "version":  19,
-                "checksum":  "0x42211ccd",
-                "shaders":  270,
-                "surfaces":  18735,
-                "lightmapPages":  62,
-                "allocatedLightmapPages":  62,
-                "visibilityBytes":  47448,
-                "entityBytes":  39728,
+                "checksum":  "0xf7fb1fc3",
+                "shaders":  266,
+                "surfaces":  19053,
+                "lightmapPages":  63,
+                "allocatedLightmapPages":  63,
+                "visibilityBytes":  58528,
+                "entityBytes":  40331,
                 "classCounts":  {
                                     "animate_equipment_radio-military":  1,
                                     "func_barrel":  4,
@@ -95,10 +95,10 @@
                                     "fx_smoke_smallfry":  1,
                                     "info_player_allied":  16,
                                     "info_player_axis":  16,
-                                    "info_player_deathmatch":  20,
+                                    "info_player_deathmatch":  22,
                                     "info_player_start":  1,
                                     "info_splinepath":  22,
-                                    "light":  189,
+                                    "light":  193,
                                     "script_model":  8,
                                     "script_object":  25,
                                     "script_origin":  11,
@@ -109,8 +109,8 @@
             },
     "package":  {
                     "entries":  3,
-                    "bytes":  2280274,
-                    "sha256":  "f7aa8769474666a16d588280c44a025b811af14dc2374993d917f59e6fca6ea7",
+                    "bytes":  2317942,
+                    "sha256":  "b7c55baf2002aee31c8c53c322ba3289779f55053afc6bf69ce9ae7630a2a19e",
                     "reproducedTwice":  true
                 }
 }

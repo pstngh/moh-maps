@@ -66620,7 +66620,7 @@
 ( 4800 16 16 ) ( 4800 0 0 ) ( 4800 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 640 -16 ) ( 0 640 0 ) ( 16 640 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 2496 16 ) ( 0 2496 0 ) ( 16 2496 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 16 -384 ) ( 0 0 -384 ) ( -16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5905
@@ -66629,7 +66629,7 @@
 ( 3328 16 16 ) ( 3328 0 0 ) ( 3328 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -480 ) ( 0 0 -480 ) ( -16 16 -480 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5906
@@ -66638,7 +66638,7 @@
 ( 3360 16 16 ) ( 3360 0 0 ) ( 3360 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -468 ) ( 0 0 -468 ) ( -16 16 -468 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5907
@@ -66647,7 +66647,7 @@
 ( 3392 16 16 ) ( 3392 0 0 ) ( 3392 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -456 ) ( 0 0 -456 ) ( -16 16 -456 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5908
@@ -66656,7 +66656,7 @@
 ( 3424 16 16 ) ( 3424 0 0 ) ( 3424 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -444 ) ( 0 0 -444 ) ( -16 16 -444 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5909
@@ -66665,7 +66665,7 @@
 ( 3456 16 16 ) ( 3456 0 0 ) ( 3456 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -432 ) ( 0 0 -432 ) ( -16 16 -432 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5910
@@ -66674,7 +66674,7 @@
 ( 3488 16 16 ) ( 3488 0 0 ) ( 3488 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -420 ) ( 0 0 -420 ) ( -16 16 -420 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5911
@@ -66683,7 +66683,7 @@
 ( 3520 16 16 ) ( 3520 0 0 ) ( 3520 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -408 ) ( 0 0 -408 ) ( -16 16 -408 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5912
@@ -66692,7 +66692,7 @@
 ( 3552 16 16 ) ( 3552 0 0 ) ( 3552 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -396 ) ( 0 0 -396 ) ( -16 16 -396 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5913
@@ -66701,7 +66701,7 @@
 ( 3584 16 16 ) ( 3584 0 0 ) ( 3584 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -384 ) ( 0 0 -384 ) ( -16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5914
@@ -66710,7 +66710,7 @@
 ( 3328 16 16 ) ( 3328 0 0 ) ( 3328 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 2016 -16 ) ( 0 2016 0 ) ( 16 2016 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2304 16 ) ( 0 2304 0 ) ( 16 2304 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -480 ) ( 0 0 -480 ) ( -16 16 -480 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5915
@@ -66719,7 +66719,7 @@
 ( 3360 16 16 ) ( 3360 0 0 ) ( 3360 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 2016 -16 ) ( 0 2016 0 ) ( 16 2016 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2304 16 ) ( 0 2304 0 ) ( 16 2304 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -468 ) ( 0 0 -468 ) ( -16 16 -468 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5916
@@ -66728,7 +66728,7 @@
 ( 3392 16 16 ) ( 3392 0 0 ) ( 3392 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 2016 -16 ) ( 0 2016 0 ) ( 16 2016 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2304 16 ) ( 0 2304 0 ) ( 16 2304 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -456 ) ( 0 0 -456 ) ( -16 16 -456 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5917
@@ -66737,7 +66737,7 @@
 ( 3424 16 16 ) ( 3424 0 0 ) ( 3424 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 2016 -16 ) ( 0 2016 0 ) ( 16 2016 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2304 16 ) ( 0 2304 0 ) ( 16 2304 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -444 ) ( 0 0 -444 ) ( -16 16 -444 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5918
@@ -66746,7 +66746,7 @@
 ( 3456 16 16 ) ( 3456 0 0 ) ( 3456 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 2016 -16 ) ( 0 2016 0 ) ( 16 2016 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2304 16 ) ( 0 2304 0 ) ( 16 2304 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -432 ) ( 0 0 -432 ) ( -16 16 -432 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5919
@@ -66755,7 +66755,7 @@
 ( 3488 16 16 ) ( 3488 0 0 ) ( 3488 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 2016 -16 ) ( 0 2016 0 ) ( 16 2016 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2304 16 ) ( 0 2304 0 ) ( 16 2304 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -420 ) ( 0 0 -420 ) ( -16 16 -420 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5920
@@ -66764,7 +66764,7 @@
 ( 3520 16 16 ) ( 3520 0 0 ) ( 3520 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 2016 -16 ) ( 0 2016 0 ) ( 16 2016 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2304 16 ) ( 0 2304 0 ) ( 16 2304 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -408 ) ( 0 0 -408 ) ( -16 16 -408 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5921
@@ -66773,7 +66773,7 @@
 ( 3552 16 16 ) ( 3552 0 0 ) ( 3552 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 2016 -16 ) ( 0 2016 0 ) ( 16 2016 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2304 16 ) ( 0 2304 0 ) ( 16 2304 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -396 ) ( 0 0 -396 ) ( -16 16 -396 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5922
@@ -66782,43 +66782,43 @@
 ( 3584 16 16 ) ( 3584 0 0 ) ( 3584 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 2016 -16 ) ( 0 2016 0 ) ( 16 2016 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2304 16 ) ( 0 2304 0 ) ( 16 2304 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -544 ) ( 0 0 -544 ) ( 16 16 -544 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 16 16 -384 ) ( 0 0 -384 ) ( -16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5923
 {
-( 3584 -16 16 ) ( 3584 0 0 ) ( 3584 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 3584 -16 16 ) ( 3584 0 0 ) ( 3584 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 3616 16 16 ) ( 3616 0 0 ) ( 3616 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 640 -16 ) ( 0 640 0 ) ( 16 640 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 896 16 ) ( 0 896 0 ) ( 16 896 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 16 -224 ) ( 0 0 -224 ) ( -16 16 -224 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5924
 {
-( 3584 -16 16 ) ( 3584 0 0 ) ( 3584 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 3584 -16 16 ) ( 3584 0 0 ) ( 3584 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 3616 16 16 ) ( 3616 0 0 ) ( 3616 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 1184 -16 ) ( 0 1184 0 ) ( 16 1184 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2016 16 ) ( 0 2016 0 ) ( 16 2016 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 16 -224 ) ( 0 0 -224 ) ( -16 16 -224 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5925
 {
-( 3584 -16 16 ) ( 3584 0 0 ) ( 3584 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 3584 -16 16 ) ( 3584 0 0 ) ( 3584 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 3616 16 16 ) ( 3616 0 0 ) ( 3616 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2496 16 ) ( 0 2496 0 ) ( 16 2496 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 16 -224 ) ( 0 0 -224 ) ( -16 16 -224 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5926
 {
 ( 3616 -16 16 ) ( 3616 0 0 ) ( 3616 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 640 -16 ) ( 0 640 0 ) ( 16 640 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 640 -16 ) ( 0 640 0 ) ( 16 640 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 672 16 ) ( 0 672 0 ) ( 16 672 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -224 ) ( 0 0 -224 ) ( -16 16 -224 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5927
@@ -66826,182 +66826,209 @@
 ( 3616 -16 16 ) ( 3616 0 0 ) ( 3616 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2464 -16 ) ( 0 2464 0 ) ( 16 2464 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 16 2496 16 ) ( 0 2496 0 ) ( 16 2496 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 2496 16 ) ( 0 2496 0 ) ( 16 2496 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -224 ) ( 0 0 -224 ) ( -16 16 -224 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5928
 {
 ( 4768 -16 16 ) ( 4768 0 0 ) ( 4768 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 4800 16 16 ) ( 4800 0 0 ) ( 4800 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 4800 16 16 ) ( 4800 0 0 ) ( 4800 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 }
 // brush 5929
 {
 ( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 800 16 ) ( 0 800 0 ) ( 16 800 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5930
 {
 ( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2336 -16 ) ( 0 2336 0 ) ( 16 2336 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5931
 {
-( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 4336 16 16 ) ( 4336 0 0 ) ( 4336 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 896 16 ) ( 0 896 0 ) ( 16 896 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 }
 // brush 5932
 {
-( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 4336 16 16 ) ( 4336 0 0 ) ( 4336 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 1184 -16 ) ( 0 1184 0 ) ( 16 1184 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1376 16 ) ( 0 1376 0 ) ( 16 1376 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 }
 // brush 5933
 {
-( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 4336 16 16 ) ( 4336 0 0 ) ( 4336 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 1664 -16 ) ( 0 1664 0 ) ( 16 1664 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1856 16 ) ( 0 1856 0 ) ( 16 1856 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 }
 // brush 5934
 {
-( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 4336 16 16 ) ( 4336 0 0 ) ( 4336 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 2144 -16 ) ( 0 2144 0 ) ( 16 2144 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 }
 // brush 5935
 {
-( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 4336 16 16 ) ( 4336 0 0 ) ( 4336 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5936
 {
 ( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 912 16 ) ( 0 912 0 ) ( 16 912 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5937
 {
 ( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1168 -16 ) ( 0 1168 0 ) ( 16 1168 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5938
 {
 ( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 896 -16 ) ( 0 896 0 ) ( 16 896 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5939
 {
-( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 4256 -16 16 ) ( 4256 0 0 ) ( 4256 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 920 -16 ) ( 0 920 0 ) ( 16 920 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1160 16 ) ( 0 1160 0 ) ( 16 1160 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -32 ) ( 0 0 -32 ) ( -16 16 -32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 5940
+{
+( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 4336 16 16 ) ( 4336 0 0 ) ( 4336 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 1376 -16 ) ( 0 1376 0 ) ( 16 1376 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1664 16 ) ( 0 1664 0 ) ( 16 1664 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-}
-// brush 5940
-{
-( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1376 -16 ) ( 0 1376 0 ) ( 16 1376 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 1392 16 ) ( 0 1392 0 ) ( 16 1392 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5941
 {
 ( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1648 -16 ) ( 0 1648 0 ) ( 16 1648 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1664 16 ) ( 0 1664 0 ) ( 16 1664 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 1376 -16 ) ( 0 1376 0 ) ( 16 1376 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1392 16 ) ( 0 1392 0 ) ( 16 1392 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5942
 {
 ( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1376 -16 ) ( 0 1376 0 ) ( 16 1376 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 1664 16 ) ( 0 1664 0 ) ( 16 1664 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1648 -16 ) ( 0 1648 0 ) ( 16 1648 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1664 16 ) ( 0 1664 0 ) ( 16 1664 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5943
 {
-( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0
+( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1376 -16 ) ( 0 1376 0 ) ( 16 1376 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1664 16 ) ( 0 1664 0 ) ( 16 1664 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 5944
+{
+( 4256 -16 16 ) ( 4256 0 0 ) ( 4256 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1400 -16 ) ( 0 1400 0 ) ( 16 1400 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1640 16 ) ( 0 1640 0 ) ( 16 1640 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -32 ) ( 0 0 -32 ) ( -16 16 -32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 5945
+{
+( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 4336 16 16 ) ( 4336 0 0 ) ( 4336 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 1856 -16 ) ( 0 1856 0 ) ( 16 1856 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 2144 16 ) ( 0 2144 0 ) ( 16 2144 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) common/caulk 0 0 0 0.500 0.500 0 160 0
-}
-// brush 5944
-{
-( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1856 -16 ) ( 0 1856 0 ) ( 16 1856 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 1872 16 ) ( 0 1872 0 ) ( 16 1872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-}
-// brush 5945
-{
-( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 2128 -16 ) ( 0 2128 0 ) ( 16 2128 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 2144 16 ) ( 0 2144 0 ) ( 16 2144 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 208 ) ( 0 0 208 ) ( -16 16 208 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5946
 {
 ( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1856 -16 ) ( 0 1856 0 ) ( 16 1856 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 2144 16 ) ( 0 2144 0 ) ( 16 2144 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1856 -16 ) ( 0 1856 0 ) ( 16 1856 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1872 16 ) ( 0 1872 0 ) ( 16 1872 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5947
+{
+( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2128 -16 ) ( 0 2128 0 ) ( 16 2128 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2144 16 ) ( 0 2144 0 ) ( 16 2144 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 5948
+{
+( 4288 -16 16 ) ( 4288 0 0 ) ( 4288 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1856 -16 ) ( 0 1856 0 ) ( 16 1856 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2144 16 ) ( 0 2144 0 ) ( 16 2144 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 5949
+{
+( 4256 -16 16 ) ( 4256 0 0 ) ( 4256 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4304 16 16 ) ( 4304 0 0 ) ( 4304 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1880 -16 ) ( 0 1880 0 ) ( 16 1880 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2120 16 ) ( 0 2120 0 ) ( 16 2120 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -32 ) ( 0 0 -32 ) ( -16 16 -32 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 5950
 {
 ( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 4800 16 16 ) ( 4800 0 0 ) ( 4800 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
@@ -67010,493 +67037,952 @@
 ( -16 16 208 ) ( 0 0 208 ) ( 16 16 208 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 240 ) ( 0 0 240 ) ( -16 16 240 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 5948
-{
-( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 4320 16 16 ) ( 4320 0 0 ) ( 4320 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-}
-// brush 5949
-{
-( 4784 -16 16 ) ( 4784 0 0 ) ( 4784 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 4800 16 16 ) ( 4800 0 0 ) ( 4800 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-}
-// brush 5950
-{
-( 4320 -16 16 ) ( 4320 0 0 ) ( 4320 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 4784 16 16 ) ( 4784 0 0 ) ( 4784 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 784 16 ) ( 0 784 0 ) ( 16 784 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
-}
 // brush 5951
 {
-( 4320 -16 16 ) ( 4320 0 0 ) ( 4320 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 4784 16 16 ) ( 4784 0 0 ) ( 4784 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 2352 -16 ) ( 0 2352 0 ) ( 16 2352 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
-( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 4304 -16 16 ) ( 4304 0 0 ) ( 4304 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4320 16 16 ) ( 4320 0 0 ) ( 4320 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
 ( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5952
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 864 -16 ) ( 0 864 0 ) ( 16 864 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 904 16 ) ( 0 904 0 ) ( 16 904 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -368 ) ( 0 0 -368 ) ( -16 16 -368 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4784 -16 16 ) ( 4784 0 0 ) ( 4784 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4800 16 16 ) ( 4800 0 0 ) ( 4800 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5953
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 904 -16 ) ( 0 904 0 ) ( 16 904 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 944 16 ) ( 0 944 0 ) ( 16 944 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -352 ) ( 0 0 -352 ) ( -16 16 -352 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4320 -16 16 ) ( 4320 0 0 ) ( 4320 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4784 16 16 ) ( 4784 0 0 ) ( 4784 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 768 -16 ) ( 0 768 0 ) ( 16 768 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 784 16 ) ( 0 784 0 ) ( 16 784 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5954
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 944 -16 ) ( 0 944 0 ) ( 16 944 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 984 16 ) ( 0 984 0 ) ( 16 984 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -336 ) ( 0 0 -336 ) ( -16 16 -336 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4320 -16 16 ) ( 4320 0 0 ) ( 4320 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4784 16 16 ) ( 4784 0 0 ) ( 4784 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2352 -16 ) ( 0 2352 0 ) ( 16 2352 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2368 16 ) ( 0 2368 0 ) ( 16 2368 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 288 ) ( 0 0 288 ) ( -16 16 288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
 // brush 5955
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 984 -16 ) ( 0 984 0 ) ( 16 984 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1024 16 ) ( 0 1024 0 ) ( 16 1024 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -320 ) ( 0 0 -320 ) ( -16 16 -320 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4336 -16 16 ) ( 4336 0 0 ) ( 4336 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 912 -16 ) ( 0 912 0 ) ( 16 912 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 928 16 ) ( 0 928 0 ) ( 16 928 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5956
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1024 -16 ) ( 0 1024 0 ) ( 16 1024 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1064 16 ) ( 0 1064 0 ) ( 16 1064 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -304 ) ( 0 0 -304 ) ( -16 16 -304 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4336 -16 16 ) ( 4336 0 0 ) ( 4336 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1200 -16 ) ( 0 1200 0 ) ( 16 1200 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5957
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1064 -16 ) ( 0 1064 0 ) ( 16 1064 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1104 16 ) ( 0 1104 0 ) ( 16 1104 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -288 ) ( 0 0 -288 ) ( -16 16 -288 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4336 -16 16 ) ( 4336 0 0 ) ( 4336 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1488 -16 ) ( 0 1488 0 ) ( 16 1488 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1504 16 ) ( 0 1504 0 ) ( 16 1504 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5958
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1104 -16 ) ( 0 1104 0 ) ( 16 1104 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1144 16 ) ( 0 1144 0 ) ( 16 1144 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4336 -16 16 ) ( 4336 0 0 ) ( 4336 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1776 -16 ) ( 0 1776 0 ) ( 16 1776 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1792 16 ) ( 0 1792 0 ) ( 16 1792 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5959
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1144 -16 ) ( 0 1144 0 ) ( 16 1144 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4336 -16 16 ) ( 4336 0 0 ) ( 4336 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2064 -16 ) ( 0 2064 0 ) ( 16 2064 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2080 16 ) ( 0 2080 0 ) ( 16 2080 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5960
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1184 -16 ) ( 0 1184 0 ) ( 16 1184 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1224 16 ) ( 0 1224 0 ) ( 16 1224 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4336 -16 16 ) ( 4336 0 0 ) ( 4336 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2320 16 ) ( 0 2320 0 ) ( 16 2320 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 160 ) ( 0 0 160 ) ( 16 16 160 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 192 ) ( 0 0 192 ) ( -16 16 192 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5961
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1224 -16 ) ( 0 1224 0 ) ( 16 1224 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1264 16 ) ( 0 1264 0 ) ( 16 1264 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -224 ) ( 0 0 -224 ) ( -16 16 -224 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4400 -16 16 ) ( 4400 0 0 ) ( 4400 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4496 16 16 ) ( 4496 0 0 ) ( 4496 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 928 -16 ) ( 0 928 0 ) ( 16 928 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1120 16 ) ( 0 1120 0 ) ( 16 1120 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 320 ) ( 0 0 320 ) ( -16 16 320 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5962
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1264 -16 ) ( 0 1264 0 ) ( 16 1264 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1304 16 ) ( 0 1304 0 ) ( 16 1304 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -208 ) ( 0 0 -208 ) ( -16 16 -208 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4392 -16 16 ) ( 4392 0 0 ) ( 4392 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4504 16 16 ) ( 4504 0 0 ) ( 4504 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 920 -16 ) ( 0 920 0 ) ( 16 920 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1128 16 ) ( 0 1128 0 ) ( 16 1128 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 320 ) ( 0 0 320 ) ( 16 16 320 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 336 ) ( 0 0 336 ) ( -16 16 336 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5963
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1304 -16 ) ( 0 1304 0 ) ( 16 1304 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1344 16 ) ( 0 1344 0 ) ( 16 1344 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -192 ) ( 0 0 -192 ) ( -16 16 -192 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4584 -16 16 ) ( 4584 0 0 ) ( 4584 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4680 16 16 ) ( 4680 0 0 ) ( 4680 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1376 -16 ) ( 0 1376 0 ) ( 16 1376 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1568 16 ) ( 0 1568 0 ) ( 16 1568 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 304 ) ( 0 0 304 ) ( -16 16 304 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5964
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1344 -16 ) ( 0 1344 0 ) ( 16 1344 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1384 16 ) ( 0 1384 0 ) ( 16 1384 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4576 -16 16 ) ( 4576 0 0 ) ( 4576 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4688 16 16 ) ( 4688 0 0 ) ( 4688 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1368 -16 ) ( 0 1368 0 ) ( 16 1368 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1576 16 ) ( 0 1576 0 ) ( 16 1576 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 304 ) ( 0 0 304 ) ( 16 16 304 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 320 ) ( 0 0 320 ) ( -16 16 320 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5965
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1384 -16 ) ( 0 1384 0 ) ( 16 1384 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1424 16 ) ( 0 1424 0 ) ( 16 1424 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -160 ) ( 0 0 -160 ) ( -16 16 -160 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4400 -16 16 ) ( 4400 0 0 ) ( 4400 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4496 16 16 ) ( 4496 0 0 ) ( 4496 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1888 -16 ) ( 0 1888 0 ) ( 16 1888 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2080 16 ) ( 0 2080 0 ) ( 16 2080 -16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 240 ) ( 0 0 240 ) ( 16 16 240 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 320 ) ( 0 0 320 ) ( -16 16 320 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5966
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1424 -16 ) ( 0 1424 0 ) ( 16 1424 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1464 16 ) ( 0 1464 0 ) ( 16 1464 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -144 ) ( 0 0 -144 ) ( -16 16 -144 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4392 -16 16 ) ( 4392 0 0 ) ( 4392 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4504 16 16 ) ( 4504 0 0 ) ( 4504 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1880 -16 ) ( 0 1880 0 ) ( 16 1880 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2088 16 ) ( 0 2088 0 ) ( 16 2088 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 320 ) ( 0 0 320 ) ( 16 16 320 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 336 ) ( 0 0 336 ) ( -16 16 336 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // brush 5967
 {
 ( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1464 -16 ) ( 0 1464 0 ) ( 16 1464 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1504 16 ) ( 0 1504 0 ) ( 16 1504 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 864 -16 ) ( 0 864 0 ) ( 16 864 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 904 16 ) ( 0 904 0 ) ( 16 904 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -368 ) ( 0 0 -368 ) ( -16 16 -368 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5968
 {
 ( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1504 -16 ) ( 0 1504 0 ) ( 16 1504 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1544 16 ) ( 0 1544 0 ) ( 16 1544 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -112 ) ( 0 0 -112 ) ( -16 16 -112 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 904 -16 ) ( 0 904 0 ) ( 16 904 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 944 16 ) ( 0 944 0 ) ( 16 944 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -352 ) ( 0 0 -352 ) ( -16 16 -352 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5969
 {
 ( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1544 -16 ) ( 0 1544 0 ) ( 16 1544 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1584 16 ) ( 0 1584 0 ) ( 16 1584 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -96 ) ( 0 0 -96 ) ( -16 16 -96 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 944 -16 ) ( 0 944 0 ) ( 16 944 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 984 16 ) ( 0 984 0 ) ( 16 984 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -336 ) ( 0 0 -336 ) ( -16 16 -336 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5970
 {
 ( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1584 -16 ) ( 0 1584 0 ) ( 16 1584 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1624 16 ) ( 0 1624 0 ) ( 16 1624 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -80 ) ( 0 0 -80 ) ( -16 16 -80 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 984 -16 ) ( 0 984 0 ) ( 16 984 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1024 16 ) ( 0 1024 0 ) ( 16 1024 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -320 ) ( 0 0 -320 ) ( -16 16 -320 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5971
 {
 ( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 ( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1624 -16 ) ( 0 1624 0 ) ( 16 1624 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( 16 1664 16 ) ( 0 1664 0 ) ( 16 1664 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1024 -16 ) ( 0 1024 0 ) ( 16 1024 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1064 16 ) ( 0 1064 0 ) ( 16 1064 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -304 ) ( 0 0 -304 ) ( -16 16 -304 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5972
 {
-( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 1664 -16 ) ( 0 1664 0 ) ( 16 1664 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 2320 16 ) ( 0 2320 0 ) ( 16 2320 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1064 -16 ) ( 0 1064 0 ) ( 16 1064 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1104 16 ) ( 0 1104 0 ) ( 16 1104 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -288 ) ( 0 0 -288 ) ( -16 16 -288 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
 }
 // brush 5973
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1104 -16 ) ( 0 1104 0 ) ( 16 1104 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1144 16 ) ( 0 1144 0 ) ( 16 1144 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5974
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1144 -16 ) ( 0 1144 0 ) ( 16 1144 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1184 16 ) ( 0 1184 0 ) ( 16 1184 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5975
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1184 -16 ) ( 0 1184 0 ) ( 16 1184 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1224 16 ) ( 0 1224 0 ) ( 16 1224 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5976
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1224 -16 ) ( 0 1224 0 ) ( 16 1224 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1264 16 ) ( 0 1264 0 ) ( 16 1264 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -224 ) ( 0 0 -224 ) ( -16 16 -224 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5977
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1264 -16 ) ( 0 1264 0 ) ( 16 1264 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1304 16 ) ( 0 1304 0 ) ( 16 1304 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -208 ) ( 0 0 -208 ) ( -16 16 -208 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5978
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1304 -16 ) ( 0 1304 0 ) ( 16 1304 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1344 16 ) ( 0 1344 0 ) ( 16 1344 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -192 ) ( 0 0 -192 ) ( -16 16 -192 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5979
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1344 -16 ) ( 0 1344 0 ) ( 16 1344 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1384 16 ) ( 0 1384 0 ) ( 16 1384 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -176 ) ( 0 0 -176 ) ( -16 16 -176 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5980
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1384 -16 ) ( 0 1384 0 ) ( 16 1384 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1424 16 ) ( 0 1424 0 ) ( 16 1424 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -160 ) ( 0 0 -160 ) ( -16 16 -160 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5981
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1424 -16 ) ( 0 1424 0 ) ( 16 1424 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1464 16 ) ( 0 1464 0 ) ( 16 1464 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -144 ) ( 0 0 -144 ) ( -16 16 -144 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5982
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1464 -16 ) ( 0 1464 0 ) ( 16 1464 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1504 16 ) ( 0 1504 0 ) ( 16 1504 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -128 ) ( 0 0 -128 ) ( -16 16 -128 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5983
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1504 -16 ) ( 0 1504 0 ) ( 16 1504 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1544 16 ) ( 0 1544 0 ) ( 16 1544 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -112 ) ( 0 0 -112 ) ( -16 16 -112 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5984
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1544 -16 ) ( 0 1544 0 ) ( 16 1544 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1584 16 ) ( 0 1584 0 ) ( 16 1584 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -96 ) ( 0 0 -96 ) ( -16 16 -96 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5985
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1584 -16 ) ( 0 1584 0 ) ( 16 1584 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1624 16 ) ( 0 1624 0 ) ( 16 1624 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -80 ) ( 0 0 -80 ) ( -16 16 -80 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5986
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 4512 16 16 ) ( 4512 0 0 ) ( 4512 -16 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1624 -16 ) ( 0 1624 0 ) ( 16 1624 16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 1664 16 ) ( 0 1664 0 ) ( 16 1664 -16 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) algiers/doccrtset_1stepsml 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5987
+{
+( 4384 -16 16 ) ( 4384 0 0 ) ( 4384 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4768 16 16 ) ( 4768 0 0 ) ( 4768 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1664 -16 ) ( 0 1664 0 ) ( 16 1664 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2320 16 ) ( 0 2320 0 ) ( 16 2320 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) algiers/whsflrset1_1b 0 0 0 0.500 0.500 0 0 0 +surfaceparm detail
+}
+// brush 5988
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4384 16 16 ) ( 4384 0 0 ) ( 4384 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1696 -16 ) ( 0 1696 0 ) ( 16 1696 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1712 16 ) ( 0 1712 0 ) ( 16 1712 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5974
+// brush 5989
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4384 16 16 ) ( 4384 0 0 ) ( 4384 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1824 -16 ) ( 0 1824 0 ) ( 16 1824 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1840 16 ) ( 0 1840 0 ) ( 16 1840 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5975
+// brush 5990
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4384 16 16 ) ( 4384 0 0 ) ( 4384 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1952 -16 ) ( 0 1952 0 ) ( 16 1952 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1968 16 ) ( 0 1968 0 ) ( 16 1968 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5976
+// brush 5991
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4384 16 16 ) ( 4384 0 0 ) ( 4384 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2080 -16 ) ( 0 2080 0 ) ( 16 2080 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2096 16 ) ( 0 2096 0 ) ( 16 2096 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5977
+// brush 5992
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4384 16 16 ) ( 4384 0 0 ) ( 4384 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2208 -16 ) ( 0 2208 0 ) ( 16 2208 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2224 16 ) ( 0 2224 0 ) ( 16 2224 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5978
+// brush 5993
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4384 16 16 ) ( 4384 0 0 ) ( 4384 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2320 16 ) ( 0 2320 0 ) ( 16 2320 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5979
+// brush 5994
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4384 16 16 ) ( 4384 0 0 ) ( 4384 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1696 -16 ) ( 0 1696 0 ) ( 16 1696 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2320 16 ) ( 0 2320 0 ) ( 16 2320 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -8 ) ( 0 0 -8 ) ( 16 16 -8 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 0 ) ( 0 0 0 ) ( -16 16 0 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -8 ) ( 0 0 -8 ) ( 16 16 -8 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 0 ) ( 0 0 0 ) ( -16 16 0 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5980
+// brush 5995
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4384 16 16 ) ( 4384 0 0 ) ( 4384 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1696 -16 ) ( 0 1696 0 ) ( 16 1696 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2320 16 ) ( 0 2320 0 ) ( 16 2320 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 56 ) ( 0 0 56 ) ( -16 16 56 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 56 ) ( 0 0 56 ) ( -16 16 56 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5981
+// brush 5996
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4400 16 16 ) ( 4400 0 0 ) ( 4400 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1728 -16 ) ( 0 1728 0 ) ( 16 1728 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1760 16 ) ( 0 1760 0 ) ( 16 1760 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -80 ) ( 0 0 -80 ) ( -16 16 -80 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -80 ) ( 0 0 -80 ) ( -16 16 -80 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5982
+// brush 5997
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4400 16 16 ) ( 4400 0 0 ) ( 4400 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2048 -16 ) ( 0 2048 0 ) ( 16 2048 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2080 16 ) ( 0 2080 0 ) ( 16 2080 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -80 ) ( 0 0 -80 ) ( -16 16 -80 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -80 ) ( 0 0 -80 ) ( -16 16 -80 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5983
+// brush 5998
 {
 ( 4368 -16 16 ) ( 4368 0 0 ) ( 4368 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4400 16 16 ) ( 4400 0 0 ) ( 4400 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2288 -16 ) ( 0 2288 0 ) ( 16 2288 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2320 16 ) ( 0 2320 0 ) ( 16 2320 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 -80 ) ( 0 0 -80 ) ( -16 16 -80 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -80 ) ( 0 0 -80 ) ( -16 16 -80 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5984
+// brush 5999
 {
 ( 3744 -16 16 ) ( 3744 0 0 ) ( 3744 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 3776 16 16 ) ( 3776 0 0 ) ( 3776 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1296 -16 ) ( 0 1296 0 ) ( 16 1296 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1328 16 ) ( 0 1328 0 ) ( 16 1328 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5985
+// brush 6000
 {
 ( 3744 -16 16 ) ( 3744 0 0 ) ( 3744 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 3776 16 16 ) ( 3776 0 0 ) ( 3776 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1760 -16 ) ( 0 1760 0 ) ( 16 1760 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1792 16 ) ( 0 1792 0 ) ( 16 1792 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5986
+// brush 6001
 {
 ( 4160 -16 16 ) ( 4160 0 0 ) ( 4160 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4192 16 16 ) ( 4192 0 0 ) ( 4192 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1296 -16 ) ( 0 1296 0 ) ( 16 1296 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1328 16 ) ( 0 1328 0 ) ( 16 1328 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5987
+// brush 6002
 {
 ( 4160 -16 16 ) ( 4160 0 0 ) ( 4160 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4192 16 16 ) ( 4192 0 0 ) ( 4192 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1760 -16 ) ( 0 1760 0 ) ( 16 1760 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1792 16 ) ( 0 1792 0 ) ( 16 1792 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5988
+// brush 6003
 {
 ( 3728 -16 16 ) ( 3728 0 0 ) ( 3728 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1280 -16 ) ( 0 1280 0 ) ( 16 1280 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1808 16 ) ( 0 1808 0 ) ( 16 1808 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) general_industrial/deckgrate_set1b 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 80 ) ( 0 0 80 ) ( -16 16 80 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5989
+// brush 6004
 {
-( 3728 -16 16 ) ( 3728 0 0 ) ( 3728 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 3728 -16 16 ) ( 3728 0 0 ) ( 3728 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1280 -16 ) ( 0 1280 0 ) ( 16 1280 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1296 16 ) ( 0 1296 0 ) ( 16 1296 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5990
+// brush 6005
 {
-( 3728 -16 16 ) ( 3728 0 0 ) ( 3728 16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 3728 -16 16 ) ( 3728 0 0 ) ( 3728 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1792 -16 ) ( 0 1792 0 ) ( 16 1792 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1808 16 ) ( 0 1808 0 ) ( 16 1808 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( -16 16 16 ) ( 0 0 16 ) ( 16 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 16 48 ) ( 0 0 48 ) ( -16 16 48 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5991
+// brush 6006
+{
+( 3920 -16 16 ) ( 3920 0 0 ) ( 3920 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 4016 16 16 ) ( 4016 0 0 ) ( 4016 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 1440 -16 ) ( 0 1440 0 ) ( 16 1440 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 1648 16 ) ( 0 1648 0 ) ( 16 1648 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6007
+{
+( 3616 -16 16 ) ( 3616 0 0 ) ( 3616 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3648 16 16 ) ( 3648 0 0 ) ( 3648 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 672 -16 ) ( 0 672 0 ) ( 16 672 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6008
+{
+( 4176 -16 16 ) ( 4176 0 0 ) ( 4176 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 672 -16 ) ( 0 672 0 ) ( 16 672 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6009
+{
+( 3648 -16 16 ) ( 3648 0 0 ) ( 3648 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 4176 16 16 ) ( 4176 0 0 ) ( 4176 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 672 -16 ) ( 0 672 0 ) ( 16 672 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 704 16 ) ( 0 704 0 ) ( 16 704 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6010
+{
+( 3648 -16 16 ) ( 3648 0 0 ) ( 3648 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3712 16 16 ) ( 3712 0 0 ) ( 3712 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6011
+{
+( 3904 -16 16 ) ( 3904 0 0 ) ( 3904 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3976 16 16 ) ( 3976 0 0 ) ( 3976 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6012
+{
+( 4144 -16 16 ) ( 4144 0 0 ) ( 4144 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4176 16 16 ) ( 4176 0 0 ) ( 4176 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6013
+{
+( 3712 -16 16 ) ( 3712 0 0 ) ( 3712 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3904 16 16 ) ( 3904 0 0 ) ( 3904 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6014
+{
+( 3976 -16 16 ) ( 3976 0 0 ) ( 3976 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4144 16 16 ) ( 4144 0 0 ) ( 4144 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 832 -16 ) ( 0 832 0 ) ( 16 832 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6015
+{
+( 3920 -16 16 ) ( 3920 0 0 ) ( 3920 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 3952 16 16 ) ( 3952 0 0 ) ( 3952 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 704 -16 ) ( 0 704 0 ) ( 16 704 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 832 16 ) ( 0 832 0 ) ( 16 832 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6016
+{
+( 3616 -16 16 ) ( 3616 0 0 ) ( 3616 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 672 -16 ) ( 0 672 0 ) ( 16 672 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 64 ) ( 0 0 64 ) ( 16 16 64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6017
+{
+( 3616 -16 16 ) ( 3616 0 0 ) ( 3616 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3632 16 16 ) ( 3632 0 0 ) ( 3632 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 672 -16 ) ( 0 672 0 ) ( 16 672 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6018
+{
+( 4192 -16 16 ) ( 4192 0 0 ) ( 4192 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 672 -16 ) ( 0 672 0 ) ( 16 672 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6019
+{
+( 3632 -16 16 ) ( 3632 0 0 ) ( 3632 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4192 16 16 ) ( 4192 0 0 ) ( 4192 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 672 -16 ) ( 0 672 0 ) ( 16 672 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 688 16 ) ( 0 688 0 ) ( 16 688 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6020
+{
+( 3632 -16 16 ) ( 3632 0 0 ) ( 3632 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4192 16 16 ) ( 4192 0 0 ) ( 4192 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 848 -16 ) ( 0 848 0 ) ( 16 848 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 864 16 ) ( 0 864 0 ) ( 16 864 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6021
+{
+( 3616 -16 16 ) ( 3616 0 0 ) ( 3616 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3648 16 16 ) ( 3648 0 0 ) ( 3648 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 2464 16 ) ( 0 2464 0 ) ( 16 2464 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6022
+{
+( 4176 -16 16 ) ( 4176 0 0 ) ( 4176 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 2464 16 ) ( 0 2464 0 ) ( 16 2464 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6023
+{
+( 3648 -16 16 ) ( 3648 0 0 ) ( 3648 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 4176 16 16 ) ( 4176 0 0 ) ( 4176 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 2432 -16 ) ( 0 2432 0 ) ( 16 2432 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2464 16 ) ( 0 2464 0 ) ( 16 2464 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6024
+{
+( 3648 -16 16 ) ( 3648 0 0 ) ( 3648 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3712 16 16 ) ( 3712 0 0 ) ( 3712 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2336 16 ) ( 0 2336 0 ) ( 16 2336 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6025
+{
+( 3904 -16 16 ) ( 3904 0 0 ) ( 3904 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3976 16 16 ) ( 3976 0 0 ) ( 3976 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2336 16 ) ( 0 2336 0 ) ( 16 2336 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6026
+{
+( 4144 -16 16 ) ( 4144 0 0 ) ( 4144 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4176 16 16 ) ( 4176 0 0 ) ( 4176 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2336 16 ) ( 0 2336 0 ) ( 16 2336 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+}
+// brush 6027
+{
+( 3712 -16 16 ) ( 3712 0 0 ) ( 3712 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3904 16 16 ) ( 3904 0 0 ) ( 3904 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2336 16 ) ( 0 2336 0 ) ( 16 2336 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6028
+{
+( 3976 -16 16 ) ( 3976 0 0 ) ( 3976 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4144 16 16 ) ( 4144 0 0 ) ( 4144 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2336 16 ) ( 0 2336 0 ) ( 16 2336 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -80 ) ( 0 0 -80 ) ( 16 16 -80 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6029
+{
+( 3920 -16 16 ) ( 3920 0 0 ) ( 3920 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 3952 16 16 ) ( 3952 0 0 ) ( 3952 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 2336 -16 ) ( 0 2336 0 ) ( 16 2336 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2432 16 ) ( 0 2432 0 ) ( 16 2432 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+( 16 16 -64 ) ( 0 0 -64 ) ( -16 16 -64 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6030
+{
+( 3616 -16 16 ) ( 3616 0 0 ) ( 3616 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2464 16 ) ( 0 2464 0 ) ( 16 2464 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 64 ) ( 0 0 64 ) ( 16 16 64 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 96 ) ( 0 0 96 ) ( -16 16 96 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6031
+{
+( 3616 -16 16 ) ( 3616 0 0 ) ( 3616 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 3632 16 16 ) ( 3632 0 0 ) ( 3632 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2464 16 ) ( 0 2464 0 ) ( 16 2464 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6032
+{
+( 4192 -16 16 ) ( 4192 0 0 ) ( 4192 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4208 16 16 ) ( 4208 0 0 ) ( 4208 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2464 16 ) ( 0 2464 0 ) ( 16 2464 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6033
+{
+( 3632 -16 16 ) ( 3632 0 0 ) ( 3632 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4192 16 16 ) ( 4192 0 0 ) ( 4192 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2304 -16 ) ( 0 2304 0 ) ( 16 2304 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2320 16 ) ( 0 2320 0 ) ( 16 2320 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6034
+{
+( 3632 -16 16 ) ( 3632 0 0 ) ( 3632 16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 4192 16 16 ) ( 4192 0 0 ) ( 4192 -16 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2448 -16 ) ( 0 2448 0 ) ( 16 2448 16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 2464 16 ) ( 0 2464 0 ) ( 16 2464 -16 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( -16 16 96 ) ( 0 0 96 ) ( 16 16 96 ) general_structure/bunker_wall 0 0 0 1 1 0 0 0 surfaceDensity 64
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
+}
+// brush 6035
 {
 ( 3696 -16 16 ) ( 3696 0 0 ) ( 3696 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 3824 16 16 ) ( 3824 0 0 ) ( 3824 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 736 -16 ) ( 0 736 0 ) ( 16 736 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 784 16 ) ( 0 784 0 ) ( 16 784 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 1040 -16 ) ( 0 1040 0 ) ( 16 1040 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 1088 16 ) ( 0 1088 0 ) ( 16 1088 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 5992
+// brush 6036
 {
 ( 4056 -16 16 ) ( 4056 0 0 ) ( 4056 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 4184 16 16 ) ( 4184 0 0 ) ( 4184 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 736 -16 ) ( 0 736 0 ) ( 16 736 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 784 16 ) ( 0 784 0 ) ( 16 784 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 1040 -16 ) ( 0 1040 0 ) ( 16 1040 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 1088 16 ) ( 0 1088 0 ) ( 16 1088 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 5993
+// brush 6037
 {
 ( 3696 -16 16 ) ( 3696 0 0 ) ( 3696 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 3824 16 16 ) ( 3824 0 0 ) ( 3824 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 2352 -16 ) ( 0 2352 0 ) ( 16 2352 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 2400 16 ) ( 0 2400 0 ) ( 16 2400 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 2112 -16 ) ( 0 2112 0 ) ( 16 2112 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 2160 16 ) ( 0 2160 0 ) ( 16 2160 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 5994
+// brush 6038
 {
 ( 4056 -16 16 ) ( 4056 0 0 ) ( 4056 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 4184 16 16 ) ( 4184 0 0 ) ( 4184 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 2352 -16 ) ( 0 2352 0 ) ( 16 2352 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( 16 2400 16 ) ( 0 2400 0 ) ( 16 2400 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 16 2112 -16 ) ( 0 2112 0 ) ( 16 2112 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( 16 2160 16 ) ( 0 2160 0 ) ( 16 2160 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 5995
+// brush 6039
 {
 ( 3664 -16 16 ) ( 3664 0 0 ) ( 3664 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 3712 16 16 ) ( 3712 0 0 ) ( 3712 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1504 -16 ) ( 0 1504 0 ) ( 16 1504 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1632 16 ) ( 0 1632 0 ) ( 16 1632 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -288 ) ( 0 0 -288 ) ( -16 16 -288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 5996
+// brush 6040
 {
 ( 4224 -16 16 ) ( 4224 0 0 ) ( 4224 16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 4272 16 16 ) ( 4272 0 0 ) ( 4272 -16 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1504 -16 ) ( 0 1504 0 ) ( 16 1504 16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
 ( 16 1632 16 ) ( 0 1632 0 ) ( 16 1632 -16 ) mohcommon/jeff-concrete-wallb 0 0 0 0.500 0.500 0 0 0
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 ( 16 16 -288 ) ( 0 0 -288 ) ( -16 16 -288 ) general_structure/jh_conc512b 0 0 0 0.500 0.500 0 0 0
 }
-// brush 5997
+// brush 6041
 {
-( 3856 -16 16 ) ( 3856 0 0 ) ( 3856 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 3984 16 16 ) ( 3984 0 0 ) ( 3984 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 928 -16 ) ( 0 928 0 ) ( 16 928 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1024 16 ) ( 0 1024 0 ) ( 16 1024 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 3664 -16 16 ) ( 3664 0 0 ) ( 3664 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3680 16 16 ) ( 3680 0 0 ) ( 3680 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1200 -16 ) ( 0 1200 0 ) ( 16 1200 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6042
+{
+( 3664 -16 16 ) ( 3664 0 0 ) ( 3664 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3680 16 16 ) ( 3680 0 0 ) ( 3680 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1936 -16 ) ( 0 1936 0 ) ( 16 1936 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1952 16 ) ( 0 1952 0 ) ( 16 1952 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6043
+{
+( 3792 -16 16 ) ( 3792 0 0 ) ( 3792 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3808 16 16 ) ( 3808 0 0 ) ( 3808 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1200 -16 ) ( 0 1200 0 ) ( 16 1200 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6044
+{
+( 3792 -16 16 ) ( 3792 0 0 ) ( 3792 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3808 16 16 ) ( 3808 0 0 ) ( 3808 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1936 -16 ) ( 0 1936 0 ) ( 16 1936 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1952 16 ) ( 0 1952 0 ) ( 16 1952 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6045
+{
+( 4112 -16 16 ) ( 4112 0 0 ) ( 4112 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4128 16 16 ) ( 4128 0 0 ) ( 4128 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1200 -16 ) ( 0 1200 0 ) ( 16 1200 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6046
+{
+( 4112 -16 16 ) ( 4112 0 0 ) ( 4112 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4128 16 16 ) ( 4128 0 0 ) ( 4128 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1936 -16 ) ( 0 1936 0 ) ( 16 1936 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1952 16 ) ( 0 1952 0 ) ( 16 1952 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6047
+{
+( 4240 -16 16 ) ( 4240 0 0 ) ( 4240 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4256 16 16 ) ( 4256 0 0 ) ( 4256 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1200 -16 ) ( 0 1200 0 ) ( 16 1200 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6048
+{
+( 4240 -16 16 ) ( 4240 0 0 ) ( 4240 16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4256 16 16 ) ( 4256 0 0 ) ( 4256 -16 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1936 -16 ) ( 0 1936 0 ) ( 16 1936 16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 1952 16 ) ( 0 1952 0 ) ( 16 1952 -16 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -256 ) ( 0 0 -256 ) ( -16 16 -256 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6049
+{
+( 3736 -16 16 ) ( 3736 0 0 ) ( 3736 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3848 16 16 ) ( 3848 0 0 ) ( 3848 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 720 -16 ) ( 0 720 0 ) ( 16 720 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 816 16 ) ( 0 816 0 ) ( 16 816 -16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5998
+// brush 6050
 {
 ( 4000 -16 16 ) ( 4000 0 0 ) ( 4000 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 4128 16 16 ) ( 4128 0 0 ) ( 4128 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 928 -16 ) ( 0 928 0 ) ( 16 928 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 16 1024 16 ) ( 0 1024 0 ) ( 16 1024 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 4112 16 16 ) ( 4112 0 0 ) ( 4112 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 720 -16 ) ( 0 720 0 ) ( 16 720 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 816 16 ) ( 0 816 0 ) ( 16 816 -16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 5999
+// brush 6051
+{
+( 3736 -16 16 ) ( 3736 0 0 ) ( 3736 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 3848 16 16 ) ( 3848 0 0 ) ( 3848 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2336 -16 ) ( 0 2336 0 ) ( 16 2336 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2432 16 ) ( 0 2432 0 ) ( 16 2432 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6052
+{
+( 4000 -16 16 ) ( 4000 0 0 ) ( 4000 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 4112 16 16 ) ( 4112 0 0 ) ( 4112 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2336 -16 ) ( 0 2336 0 ) ( 16 2336 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 2432 16 ) ( 0 2432 0 ) ( 16 2432 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+}
+// brush 6053
 {
 ( 4424 -16 16 ) ( 4424 0 0 ) ( 4424 16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4520 16 16 ) ( 4520 0 0 ) ( 4520 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1224 -16 ) ( 0 1224 0 ) ( 16 1224 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1320 16 ) ( 0 1320 0 ) ( 16 1320 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -240 ) ( 0 0 -240 ) ( -16 16 -240 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 6000
+// brush 6054
 {
 ( 4624 -16 16 ) ( 4624 0 0 ) ( 4624 16 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4720 16 16 ) ( 4720 0 0 ) ( 4720 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1224 -16 ) ( 0 1224 0 ) ( 16 1224 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1320 16 ) ( 0 1320 0 ) ( 16 1320 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -384 ) ( 0 0 -384 ) ( 16 16 -384 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 -272 ) ( 0 0 -272 ) ( -16 16 -272 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 6001
+// brush 6055
 {
 ( 4560 -16 16 ) ( 4560 0 0 ) ( 4560 16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4704 16 16 ) ( 4704 0 0 ) ( 4704 -16 16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2176 -16 ) ( 0 2176 0 ) ( 16 2176 16 ) general_industrial/utilitybox_front 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 2272 16 ) ( 0 2272 0 ) ( 16 2272 -16 ) general_industrial/utilitybox_side 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 -64 ) ( 0 0 -64 ) ( 16 16 -64 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 64 ) ( 0 0 64 ) ( -16 16 64 ) general_industrial/utilboxtop 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 6002
+// brush 6056
 {
 ( 4688 -16 16 ) ( 4688 0 0 ) ( 4688 16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 4752 16 16 ) ( 4752 0 0 ) ( 4752 -16 16 ) german/rusty_iron 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
@@ -67505,32 +67991,32 @@
 ( -16 16 48 ) ( 0 0 48 ) ( 16 16 48 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 16 112 ) ( 0 0 112 ) ( -16 16 112 ) das_boot/ironwall1 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 6003
+// brush 6057
 {
 ( 4664 -16 16 ) ( 4664 0 0 ) ( 4664 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 4760 16 16 ) ( 4760 0 0 ) ( 4760 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 4760 16 16 ) ( 4760 0 0 ) ( 4760 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 944 -16 ) ( 0 944 0 ) ( 16 944 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 960 16 ) ( 0 960 0 ) ( 16 960 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 6004
+// brush 6058
 {
 ( 4664 -16 16 ) ( 4664 0 0 ) ( 4664 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 4760 16 16 ) ( 4760 0 0 ) ( 4760 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 4760 16 16 ) ( 4760 0 0 ) ( 4760 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1200 -16 ) ( 0 1200 0 ) ( 16 1200 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1216 16 ) ( 0 1216 0 ) ( 16 1216 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
-// brush 6005
+// brush 6059
 {
 ( 4664 -16 16 ) ( 4664 0 0 ) ( 4664 16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( 4760 16 16 ) ( 4760 0 0 ) ( 4760 -16 16 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( 4760 16 16 ) ( 4760 0 0 ) ( 4760 -16 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1456 -16 ) ( 0 1456 0 ) ( 16 1456 16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 ( 16 1472 16 ) ( 0 1472 0 ) ( 16 1472 -16 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
-( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
-( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) common/caulk 0 0 0 0.500 0.500 0 160 0 +surfaceparm detail
+( -16 16 32 ) ( 0 0 32 ) ( 16 16 32 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
+( 16 16 128 ) ( 0 0 128 ) ( -16 16 128 ) mohcommon/ibeam_1a 0 0 0 0.500 0.500 0 32768 0 +surfaceparm detail
 }
 // CODEX OBJ_TEAM2 EXPANSION BRUSHES END
 }
@@ -79010,40 +79496,52 @@
 // entity 752
 {
 "classname" "info_player_deathmatch"
-"origin" "3744 816 -336"
+"origin" "3744 840 -336"
 "angle" "30"
 }
 // entity 753
 {
 "classname" "info_player_deathmatch"
+"origin" "4056 840 -336"
+"angle" "150"
+}
+// entity 754
+{
+"classname" "info_player_deathmatch"
 "origin" "3744 2320 -336"
 "angle" "330"
 }
-// entity 754
+// entity 755
+{
+"classname" "info_player_deathmatch"
+"origin" "4056 2320 -336"
+"angle" "210"
+}
+// entity 756
 {
 "classname" "info_player_deathmatch"
 "origin" "4208 1120 -336"
 "angle" "180"
 }
-// entity 755
+// entity 757
 {
 "classname" "info_player_deathmatch"
 "origin" "4592 1040 -336"
 "angle" "180"
 }
-// entity 756
+// entity 758
 {
 "classname" "info_player_deathmatch"
 "origin" "4624 1512 -336"
 "angle" "180"
 }
-// entity 757
+// entity 759
 {
 "classname" "info_player_deathmatch"
 "origin" "4576 2072 -16"
 "angle" "200"
 }
-// entity 758
+// entity 760
 {
 "classname" "static_vehicle_german_opeltruck"
 "model" "static//vehicle_opeltruck.tik"
@@ -79052,7 +79550,7 @@
 "scale" "1.10"
 "testanim" "idle"
 }
-// entity 759
+// entity 761
 {
 "classname" "static_item_nazicrate"
 "model" "static//nazi_crate.tik"
@@ -79061,7 +79559,7 @@
 "scale" "1.0"
 "testanim" "idle"
 }
-// entity 760
+// entity 762
 {
 "classname" "static_item_nazicrate"
 "model" "static//nazi_crate.tik"
@@ -79070,7 +79568,7 @@
 "scale" "1.0"
 "testanim" "idle"
 }
-// entity 761
+// entity 763
 {
 "classname" "static_item_nazicrate"
 "model" "static//nazi_crate.tik"
@@ -79079,7 +79577,7 @@
 "scale" "1.0"
 "testanim" "idle"
 }
-// entity 762
+// entity 764
 {
 "classname" "static_item_nazicrate"
 "model" "static//nazi_crate.tik"
@@ -79088,7 +79586,43 @@
 "scale" "1.0"
 "testanim" "idle"
 }
-// entity 763
+// entity 765
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "3824 752 -384"
+"angle" "20"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 766
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "4080 752 -384"
+"angle" "340"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 767
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "3824 2384 -384"
+"angle" "160"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 768
+{
+"classname" "static_item_nazicrate"
+"model" "static//nazi_crate.tik"
+"origin" "4080 2384 -384"
+"angle" "200"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 769
 {
 "classname" "static_lamp_lightbulb-caged"
 "model" "static//lightbulb_caged.tik"
@@ -79097,7 +79631,7 @@
 "scale" "1.40"
 "testanim" "idle"
 }
-// entity 764
+// entity 770
 {
 "classname" "static_corona_orange"
 "model" "static//corona_orange.tik"
@@ -79105,60 +79639,10 @@
 "scale" "1.0"
 "testanim" "idle"
 }
-// entity 765
-{
-"classname" "light"
-"origin" "4232 1040 -112"
-"light" "80"
-"_color" "1.0 0.9 0.8"
-"overbright_range" "0.15"
-}
-// entity 766
-{
-"classname" "static_lamp_lightbulb-caged"
-"model" "static//lightbulb_caged.tik"
-"origin" "4294 1520 -112"
-"angle" "0"
-"scale" "1.40"
-"testanim" "idle"
-}
-// entity 767
-{
-"classname" "static_corona_orange"
-"model" "static//corona_orange.tik"
-"origin" "4288 1520 -115"
-"scale" "1.0"
-"testanim" "idle"
-}
-// entity 768
-{
-"classname" "light"
-"origin" "4232 1520 -112"
-"light" "80"
-"_color" "1.0 0.9 0.8"
-"overbright_range" "0.15"
-}
-// entity 769
-{
-"classname" "static_lamp_lightbulb-caged"
-"model" "static//lightbulb_caged.tik"
-"origin" "4294 2048 -112"
-"angle" "0"
-"scale" "1.40"
-"testanim" "idle"
-}
-// entity 770
-{
-"classname" "static_corona_orange"
-"model" "static//corona_orange.tik"
-"origin" "4288 2048 -115"
-"scale" "1.0"
-"testanim" "idle"
-}
 // entity 771
 {
 "classname" "light"
-"origin" "4232 2048 -112"
+"origin" "4232 1040 -112"
 "light" "80"
 "_color" "1.0 0.9 0.8"
 "overbright_range" "0.15"
@@ -79167,8 +79651,8 @@
 {
 "classname" "static_lamp_lightbulb-caged"
 "model" "static//lightbulb_caged.tik"
-"origin" "4544 1040 196"
-"angle" "-2"
+"origin" "4294 1520 -112"
+"angle" "0"
 "scale" "1.40"
 "testanim" "idle"
 }
@@ -79176,14 +79660,14 @@
 {
 "classname" "static_corona_orange"
 "model" "static//corona_orange.tik"
-"origin" "4544 1040 190"
+"origin" "4288 1520 -115"
 "scale" "1.0"
 "testanim" "idle"
 }
 // entity 774
 {
 "classname" "light"
-"origin" "4544 1040 128"
+"origin" "4232 1520 -112"
 "light" "80"
 "_color" "1.0 0.9 0.8"
 "overbright_range" "0.15"
@@ -79192,8 +79676,8 @@
 {
 "classname" "static_lamp_lightbulb-caged"
 "model" "static//lightbulb_caged.tik"
-"origin" "4544 1520 196"
-"angle" "-2"
+"origin" "4294 2048 -112"
+"angle" "0"
 "scale" "1.40"
 "testanim" "idle"
 }
@@ -79201,14 +79685,14 @@
 {
 "classname" "static_corona_orange"
 "model" "static//corona_orange.tik"
-"origin" "4544 1520 190"
+"origin" "4288 2048 -115"
 "scale" "1.0"
 "testanim" "idle"
 }
 // entity 777
 {
 "classname" "light"
-"origin" "4544 1520 128"
+"origin" "4232 2048 -112"
 "light" "80"
 "_color" "1.0 0.9 0.8"
 "overbright_range" "0.15"
@@ -79217,7 +79701,7 @@
 {
 "classname" "static_lamp_lightbulb-caged"
 "model" "static//lightbulb_caged.tik"
-"origin" "4544 2048 196"
+"origin" "4544 1040 196"
 "angle" "-2"
 "scale" "1.40"
 "testanim" "idle"
@@ -79226,14 +79710,14 @@
 {
 "classname" "static_corona_orange"
 "model" "static//corona_orange.tik"
-"origin" "4544 2048 190"
+"origin" "4544 1040 190"
 "scale" "1.0"
 "testanim" "idle"
 }
 // entity 780
 {
 "classname" "light"
-"origin" "4544 2048 128"
+"origin" "4544 1040 128"
 "light" "80"
 "_color" "1.0 0.9 0.8"
 "overbright_range" "0.15"
@@ -79242,7 +79726,7 @@
 {
 "classname" "static_lamp_lightbulb-caged"
 "model" "static//lightbulb_caged.tik"
-"origin" "3872 1544 36"
+"origin" "4544 1520 196"
 "angle" "-2"
 "scale" "1.40"
 "testanim" "idle"
@@ -79251,15 +79735,15 @@
 {
 "classname" "static_corona_orange"
 "model" "static//corona_orange.tik"
-"origin" "3872 1544 30"
+"origin" "4544 1520 190"
 "scale" "1.0"
 "testanim" "idle"
 }
 // entity 783
 {
 "classname" "light"
-"origin" "3872 1544 -32"
-"light" "60"
+"origin" "4544 1520 128"
+"light" "80"
 "_color" "1.0 0.9 0.8"
 "overbright_range" "0.15"
 }
@@ -79267,7 +79751,7 @@
 {
 "classname" "static_lamp_lightbulb-caged"
 "model" "static//lightbulb_caged.tik"
-"origin" "4064 1544 36"
+"origin" "4544 2048 196"
 "angle" "-2"
 "scale" "1.40"
 "testanim" "idle"
@@ -79276,14 +79760,164 @@
 {
 "classname" "static_corona_orange"
 "model" "static//corona_orange.tik"
-"origin" "4064 1544 30"
+"origin" "4544 2048 190"
 "scale" "1.0"
 "testanim" "idle"
 }
 // entity 786
 {
 "classname" "light"
+"origin" "4544 2048 128"
+"light" "80"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 787
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "3872 1544 36"
+"angle" "-2"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 788
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "3872 1544 30"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 789
+{
+"classname" "light"
+"origin" "3872 1544 -32"
+"light" "60"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 790
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "4064 1544 36"
+"angle" "-2"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 791
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "4064 1544 30"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 792
+{
+"classname" "light"
 "origin" "4064 1544 -32"
+"light" "60"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 793
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "3792 768 52"
+"angle" "-2"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 794
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "3792 768 46"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 795
+{
+"classname" "light"
+"origin" "3792 768 -16"
+"light" "60"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 796
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "4056 768 52"
+"angle" "-2"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 797
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "4056 768 46"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 798
+{
+"classname" "light"
+"origin" "4056 768 -16"
+"light" "60"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 799
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "3792 2400 52"
+"angle" "-2"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 800
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "3792 2400 46"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 801
+{
+"classname" "light"
+"origin" "3792 2400 -16"
+"light" "60"
+"_color" "1.0 0.9 0.8"
+"overbright_range" "0.15"
+}
+// entity 802
+{
+"classname" "static_lamp_lightbulb-caged"
+"model" "static//lightbulb_caged.tik"
+"origin" "4056 2400 52"
+"angle" "-2"
+"scale" "1.40"
+"testanim" "idle"
+}
+// entity 803
+{
+"classname" "static_corona_orange"
+"model" "static//corona_orange.tik"
+"origin" "4056 2400 46"
+"scale" "1.0"
+"testanim" "idle"
+}
+// entity 804
+{
+"classname" "light"
+"origin" "4056 2400 -16"
 "light" "60"
 "_color" "1.0 0.9 0.8"
 "overbright_range" "0.15"
