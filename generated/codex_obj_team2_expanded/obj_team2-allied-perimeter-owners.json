@@ -1,0 +1,1293 @@
+{
+  "schemaVersion": 1,
+  "source": "aa/obj_team2.map",
+  "filters": {
+    "zone": {
+      "min": [
+        -2500,
+        250,
+        -600
+      ],
+      "max": [
+        -1900,
+        1450,
+        0
+      ]
+    },
+    "entityRange": [
+      430,
+      460
+    ],
+    "worldBrushRange": [
+      800,
+      3250
+    ]
+  },
+  "entities": [
+    {
+      "number": 437,
+      "line": 74444,
+      "classname": "detail",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2042,
+          -276,
+          -230
+        ],
+        "max": [
+          -2010,
+          996,
+          -199
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 3
+        },
+        {
+          "material": "mohcommon/barbwire",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "number": 438,
+      "line": 74457,
+      "classname": "detail",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2020,
+          16,
+          -428
+        ],
+        "max": [
+          -2006,
+          342,
+          -196
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 5
+        },
+        {
+          "material": "mohcommon/secfence",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 439,
+      "line": 74470,
+      "classname": "func_group",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2038,
+          342,
+          -228
+        ],
+        "max": [
+          -2006,
+          346,
+          -196
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 3
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "number": 441,
+      "line": 74505,
+      "classname": "func_group",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2014,
+          342,
+          -240
+        ],
+        "max": [
+          -2006,
+          346,
+          -228
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 3
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "number": 442,
+      "line": 74518,
+      "classname": "detail",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2020,
+          344,
+          -428
+        ],
+        "max": [
+          -2006,
+          670,
+          -196
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 5
+        },
+        {
+          "material": "mohcommon/secfence",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 443,
+      "line": 74531,
+      "classname": "func_group",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2038,
+          670,
+          -228
+        ],
+        "max": [
+          -2006,
+          674,
+          -196
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 3
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "number": 444,
+      "line": 74544,
+      "classname": "func_group",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2038,
+          506,
+          -240
+        ],
+        "max": [
+          -2006,
+          510,
+          -196
+        ]
+      },
+      "faceCount": 12,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 6
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "number": 445,
+      "line": 74566,
+      "classname": "func_group",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -240
+        ],
+        "max": [
+          -2006,
+          674,
+          -228
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 3
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "number": 446,
+      "line": 74579,
+      "classname": "detail",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2020,
+          670,
+          -428
+        ],
+        "max": [
+          -2006,
+          994,
+          -196
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 5
+        },
+        {
+          "material": "mohcommon/secfence",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 447,
+      "line": 74592,
+      "classname": "func_group",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2038,
+          996,
+          -228
+        ],
+        "max": [
+          -2006,
+          1000,
+          -196
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 3
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 2
+        },
+        {
+          "material": "mohtest/slatewldrty1",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 448,
+      "line": 74605,
+      "classname": "func_group",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2014,
+          996,
+          -240
+        ],
+        "max": [
+          -2006,
+          1000,
+          -228
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 2
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 2
+        },
+        {
+          "material": "mohtest/slatewldrty1",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "number": 449,
+      "line": 74618,
+      "classname": "func_group",
+      "origin": null,
+      "targetname": null,
+      "model": null,
+      "bounds": {
+        "min": [
+          -2038,
+          832,
+          -240
+        ],
+        "max": [
+          -2006,
+          836,
+          -196
+        ]
+      },
+      "faceCount": 12,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 6
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "number": 453,
+      "line": 74678,
+      "classname": "static_natural_tree_oak",
+      "origin": [
+        -2412.2,
+        447.8,
+        -426.8
+      ],
+      "targetname": null,
+      "model": "static//tree_oak.tik",
+      "bounds": null,
+      "faceCount": 0,
+      "materials": []
+    }
+  ],
+  "worldBrushes": [
+    {
+      "number": 818,
+      "line": 8030,
+      "bounds": {
+        "min": [
+          -1992,
+          992,
+          -440
+        ],
+        "max": [
+          -1316,
+          1016,
+          424
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/playerclip",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "number": 819,
+      "line": 8039,
+      "bounds": {
+        "min": [
+          -2032,
+          0,
+          -456
+        ],
+        "max": [
+          -1944,
+          1000,
+          192
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/playerclip",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "number": 1922,
+      "line": 23860,
+      "bounds": {
+        "min": [
+          -2304,
+          992,
+          -528
+        ],
+        "max": [
+          -1316,
+          1009,
+          -144
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 4
+        },
+        {
+          "material": "general_industrial/deckgrate_set1b",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "number": 1923,
+      "line": 23869,
+      "bounds": {
+        "min": [
+          -2304,
+          996,
+          -528
+        ],
+        "max": [
+          -1318,
+          1014,
+          -144
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 4
+        },
+        {
+          "material": "general_structure/concretewall2",
+          "count": 1
+        },
+        {
+          "material": "general_structure/jh_conc512b",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2556,
+      "line": 30221,
+      "bounds": {
+        "min": [
+          -2032,
+          704,
+          -544
+        ],
+        "max": [
+          -480,
+          2768,
+          832
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 3
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "number": 2558,
+      "line": 30239,
+      "bounds": {
+        "min": [
+          -2032,
+          -496,
+          -624
+        ],
+        "max": [
+          -488,
+          2776,
+          832
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 4
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "number": 2559,
+      "line": 30248,
+      "bounds": {
+        "min": [
+          -2032,
+          680,
+          -544
+        ],
+        "max": [
+          -488,
+          2648,
+          368
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "number": 2560,
+      "line": 30257,
+      "bounds": {
+        "min": [
+          -2032,
+          680,
+          -544
+        ],
+        "max": [
+          -488,
+          2776,
+          560
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 3
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "number": 2561,
+      "line": 30266,
+      "bounds": {
+        "min": [
+          -3584,
+          -1792,
+          -480
+        ],
+        "max": [
+          -192,
+          2216,
+          848
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 5
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2562,
+      "line": 30275,
+      "bounds": {
+        "min": [
+          -3584,
+          -512,
+          -472
+        ],
+        "max": [
+          -464,
+          2752,
+          848
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 5
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2563,
+      "line": 30284,
+      "bounds": {
+        "min": [
+          -3584,
+          -1792,
+          -560
+        ],
+        "max": [
+          -192,
+          2232,
+          -352
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "number": 2564,
+      "line": 30293,
+      "bounds": {
+        "min": [
+          -3584,
+          -512,
+          -560
+        ],
+        "max": [
+          -488,
+          2752,
+          -352
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "number": 2565,
+      "line": 30302,
+      "bounds": {
+        "min": [
+          -2032,
+          -512,
+          -544
+        ],
+        "max": [
+          -176,
+          2408,
+          832
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 5
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2566,
+      "line": 30311,
+      "bounds": {
+        "min": [
+          -2032,
+          -1792,
+          -544
+        ],
+        "max": [
+          -176,
+          2408,
+          832
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 5
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2569,
+      "line": 30338,
+      "bounds": {
+        "min": [
+          -6544,
+          -2032,
+          -992
+        ],
+        "max": [
+          -2176,
+          2640,
+          480
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 5
+        },
+        {
+          "material": "misc_outside/treeline_center",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2570,
+      "line": 30347,
+      "bounds": {
+        "min": [
+          -3456,
+          -1664,
+          -1008
+        ],
+        "max": [
+          1232,
+          2624,
+          480
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 5
+        },
+        {
+          "material": "misc_outside/treeline_center",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2576,
+      "line": 30401,
+      "bounds": {
+        "min": [
+          -3440,
+          -1680,
+          -992
+        ],
+        "max": [
+          -256,
+          3020,
+          480
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 4
+        },
+        {
+          "material": "misc_outside/treeline_center",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "number": 2829,
+      "line": 36519,
+      "bounds": {
+        "min": [
+          -2304,
+          1000,
+          -528
+        ],
+        "max": [
+          -1320,
+          1016,
+          -144
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 5
+        },
+        {
+          "material": "general_structure/bunker_walltrans",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2830,
+      "line": 36528,
+      "bounds": {
+        "min": [
+          -2304,
+          1000,
+          -528
+        ],
+        "max": [
+          -1776,
+          1016,
+          -144
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 5
+        },
+        {
+          "material": "general_structure/bunker_walltrans",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2831,
+      "line": 36537,
+      "bounds": {
+        "min": [
+          -2024,
+          1000,
+          -528
+        ],
+        "max": [
+          -1320,
+          1016,
+          -144
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 5
+        },
+        {
+          "material": "general_structure/bunker_walltrans",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2832,
+      "line": 36546,
+      "bounds": {
+        "min": [
+          -2024,
+          1000,
+          -528
+        ],
+        "max": [
+          -1320,
+          1016,
+          -144
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 5
+        },
+        {
+          "material": "general_structure/bunker_walltrans",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2833,
+      "line": 36555,
+      "bounds": {
+        "min": [
+          -2304,
+          1000,
+          -528
+        ],
+        "max": [
+          -1776,
+          1016,
+          -144
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 5
+        },
+        {
+          "material": "general_structure/bunker_walltrans",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 2859,
+      "line": 36789,
+      "bounds": {
+        "min": [
+          -2032,
+          676,
+          -544
+        ],
+        "max": [
+          -464,
+          2780,
+          560
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "number": 3193,
+      "line": 39973,
+      "bounds": {
+        "min": [
+          -3584,
+          656,
+          -544
+        ],
+        "max": [
+          -456,
+          2768,
+          832
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 5
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 3194,
+      "line": 39982,
+      "bounds": {
+        "min": [
+          -3584,
+          -1808,
+          -544
+        ],
+        "max": [
+          -192,
+          2224,
+          832
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 5
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 3224,
+      "line": 40340,
+      "bounds": {
+        "min": [
+          -2026,
+          0,
+          -560
+        ],
+        "max": [
+          -1944,
+          1056,
+          -432
+        ]
+      },
+      "faceCount": 8,
+      "materials": [
+        {
+          "material": "general_structure/jh_conc512b",
+          "count": 4
+        },
+        {
+          "material": "general_structure/concretewall2",
+          "count": 3
+        },
+        {
+          "material": "common/caulk",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 3225,
+      "line": 40351,
+      "bounds": {
+        "min": [
+          -2014,
+          994,
+          -432
+        ],
+        "max": [
+          -2006,
+          1088,
+          -244
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 2
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 2
+        },
+        {
+          "material": "mohtest/slatewldrty1",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "number": 3226,
+      "line": 40360,
+      "bounds": {
+        "min": [
+          -2014,
+          668,
+          -432
+        ],
+        "max": [
+          -2006,
+          764,
+          -244
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "das_boot/ironwall1",
+          "count": 3
+        },
+        {
+          "material": "mohtest/slatewldrty1",
+          "count": 2
+        },
+        {
+          "material": "common/nodraw",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 3227,
+      "line": 40369,
+      "bounds": {
+        "min": [
+          -2014,
+          340,
+          -432
+        ],
+        "max": [
+          -2006,
+          436,
+          -244
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "das_boot/ironwall1",
+          "count": 3
+        },
+        {
+          "material": "mohtest/slatewldrty1",
+          "count": 2
+        },
+        {
+          "material": "common/nodraw",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 3228,
+      "line": 40378,
+      "bounds": {
+        "min": [
+          -2018,
+          4,
+          -432
+        ],
+        "max": [
+          -2000,
+          1000,
+          -428
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 3
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 2
+        },
+        {
+          "material": "mohtest/slatewldrty1",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 3229,
+      "line": 40387,
+      "bounds": {
+        "min": [
+          -2019,
+          4,
+          -244
+        ],
+        "max": [
+          -1996,
+          1000,
+          -240
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/nodraw",
+          "count": 3
+        },
+        {
+          "material": "das_boot/ironwall1",
+          "count": 2
+        },
+        {
+          "material": "mohtest/slatewldrty1",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "number": 3230,
+      "line": 40396,
+      "bounds": {
+        "min": [
+          -3600,
+          -1792,
+          -544
+        ],
+        "max": [
+          1088,
+          2752,
+          832
+        ]
+      },
+      "faceCount": 6,
+      "materials": [
+        {
+          "material": "common/caulk",
+          "count": 5
+        },
+        {
+          "material": "sky/mohday1",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

@@ -27,7 +27,7 @@ const outputRoot = path.resolve(args["output-root"] || path.join(__dirname, ".."
 const mapName = args["map-name"] || "codex_obj_team2_expanded";
 const gameDirectory = args["game-directory"] || "obj";
 const originalMap = args["original-map"] || "obj_team2";
-const displayName = args["display-name"] || "V2 Facility: East Annex";
+const displayName = args["display-name"] || "V2 Facility: Expanded Complex";
 if (!/^[A-Za-z0-9_]+$/.test(mapName)) throw new Error("Unsafe map name");
 if (gameDirectory !== "obj") throw new Error("This derivative must remain in maps/obj");
 if (originalMap !== "obj_team2") throw new Error("This derivative requires the retail obj_team2 scripts");
@@ -85,30 +85,18 @@ for (let index = 0; index < sourceLines.length; index += 1) {
 }
 if (entityBlocks.length !== 751) throw new Error(`Expected 751 point/brush entities, found ${entityBlocks.length}`);
 
-const connectorObstructionNumbers = new Set([666, 674, 675, 679, 680]);
-const removed = entityBlocks.filter(({ number, keys }) => {
-  const origin = keys.origin ? vector(keys.origin) : null;
-  const footprintFoliage = Boolean(
-    origin
-    && (keys.classname || "").startsWith("static_natural_")
-    && !keys.targetname
-    && origin[0] >= 3400 && origin[0] <= 5050
-    && origin[1] >= 480 && origin[1] <= 2700
-    && origin[2] >= -600 && origin[2] <= -350
-  );
-  const connectorObstruction = connectorObstructionNumbers.has(number)
-    && !keys.targetname
-    && ["detail", "func_group"].includes(keys.classname);
-  return footprintFoliage || connectorObstruction;
-});
-if (removed.length !== 14 || [...connectorObstructionNumbers].some((number) => !removed.some((entity) => entity.number === number))) {
-  throw new Error(`Expected nine footprint foliage entities and five connector obstructions, found ${removed.length}`);
-}
-const removedIndexes = new Set();
-for (const entity of removed) {
-  for (let index = entity.markerIndex; index <= entity.closeIndex; index += 1) removedIndexes.add(index);
-}
-const retainedSourceLines = sourceLines.filter((_line, index) => !removedIndexes.has(index));
+const {
+  firstEntityMarker,
+  eastFenceEntityNumbers,
+  alliedGateEntityNumbers,
+  removedStructureEntityNumbers,
+  eastFenceWorldBrushNumbers,
+  alliedGateWorldBrushNumbers,
+  removedWorldBrushNumbers,
+  removed,
+  removedIndexes,
+  retainedSourceLines,
+} = require("./source_policy_obj_team2_expanded_v3")({ sourceLines, entityBlocks, blockAt, vector });
 
 const T = Object.freeze({
   caulk: "common/caulk",
@@ -226,205 +214,8 @@ function addUtility(role, min, max, frontFace) {
   addBox(role, min, max, visible, { detail: true });
 }
 
-// Raised motor-pool/service deck. Revision 2 treats every added surface as
-// potentially visible from the newly opened stock boundary.
-addBox("service_deck", [3584, 640, -544], [4800, 2496, -384], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete });
+const { addedEntities } = require("./layout_obj_team2_expanded_v3")({ addBox, addUtility, M });
 
-// Two independent, 288-unit-wide bot-safe approaches from the original Axis
-// exterior. Nine 12-unit risers stay below the measured stock step grammar.
-for (const yRange of [[896, 1184], [2016, 2304]]) {
-  for (let index = 0; index < 9; index += 1) {
-    const minX = 3296 + index * 32;
-    const maxX = minX + 32;
-    const top = -480 + index * 12;
-    addBox("connector_steps", [minX, yRange[0], -544], [maxX, yRange[1], top], { xMin: M.step, xMax: M.step, yMin: M.concreteB, yMax: M.concreteB, zMax: M.step }, { detail: true });
-  }
-}
-
-// Finished retaining walls hide the raised slab from all approach directions
-// while leaving both connections permanently open.
-for (const [minY, maxY] of [[640, 896], [1184, 2016], [2304, 2496]]) {
-  addBox("west_retaining", [3584, minY, -384], [3616, maxY, -224], { xMin: M.bunker, xMax: M.bunker, yMin: M.concreteB, yMax: M.concreteB, zMax: M.concrete });
-}
-addBox("south_retaining", [3616, 640, -384], [4304, 672, -224], { xMin: M.concreteB, xMax: M.concreteB, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete });
-addBox("north_retaining", [3616, 2464, -384], [4304, 2496, -224], { xMin: M.concreteB, xMax: M.concreteB, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete });
-
-// Complete concrete maintenance hall. Both interior and exterior faces are
-// visible and solid; the west facade keeps three broad, permanently open bays.
-addBox("hall_east_wall", [4768, 768, -384], [4800, 2368, 208], { xMin: M.bunker, xMax: M.bunker, yMin: M.concreteB, yMax: M.concreteB });
-addBox("hall_south_wall", [4304, 768, -384], [4768, 800, 208], { xMin: M.concreteB, xMax: M.concreteB, yMin: M.bunker, yMax: M.bunker });
-addBox("hall_north_wall", [4304, 2336, -384], [4768, 2368, 208], { xMin: M.concreteB, xMax: M.concreteB, yMin: M.bunker, yMax: M.bunker });
-for (const [minY, maxY] of [[768, 896], [1184, 1376], [1664, 1856], [2144, 2368]]) {
-  addBox("hall_west_pillar", [4304, minY, -384], [4336, maxY, 208], { xMin: M.bunker, xMax: M.bunker, yMin: M.concreteB, yMax: M.concreteB });
-}
-for (const [minY, maxY] of [[896, 1184], [1376, 1664], [1856, 2144]]) {
-  addBox("hall_bay_lintel", [4304, minY, -80], [4336, maxY, 208], { xMin: M.bunker, xMax: M.bunker, yMin: M.concreteB, yMax: M.concreteB, zMin: M.concrete, zMax: M.concrete });
-  addBox("hall_bay_frame", [4288, minY, -384], [4304, minY + 16, -64], { xMin: M.iron, xMax: M.iron, yMin: M.iron, yMax: M.iron, zMin: M.iron, zMax: M.iron }, { detail: true });
-  addBox("hall_bay_frame", [4288, maxY - 16, -384], [4304, maxY, -64], { xMin: M.iron, xMax: M.iron, yMin: M.iron, yMax: M.iron, zMin: M.iron, zMax: M.iron }, { detail: true });
-  addBox("hall_bay_frame", [4288, minY, -80], [4304, maxY, -64], { xMin: M.iron, xMax: M.iron, yMin: M.iron, yMax: M.iron, zMin: M.iron, zMax: M.iron }, { detail: true });
-  addBox("hall_bay_awning", [4256, minY + 24, -64], [4304, maxY - 24, -32], { xMin: M.iron, xMax: M.iron, yMin: M.iron, yMax: M.iron, zMin: M.iron, zMax: M.iron }, { detail: true });
-}
-addBox("hall_roof", [4304, 768, 208], [4800, 2368, 240], { xMin: M.concreteB, xMax: M.concreteB, yMin: M.concreteB, yMax: M.concreteB, zMin: M.concrete, zMax: M.concrete });
-addBox("roof_parapet", [4304, 768, 240], [4320, 2368, 288], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete }, { detail: true });
-addBox("roof_parapet", [4784, 768, 240], [4800, 2368, 288], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete }, { detail: true });
-addBox("roof_parapet", [4320, 768, 240], [4784, 784, 288], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete }, { detail: true });
-addBox("roof_parapet", [4320, 2352, 240], [4784, 2368, 288], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete }, { detail: true });
-
-// Ceiling ribs, facade overhangs, and rooftop equipment make the hall read as
-// a finished facility instead of an empty box.
-for (const y of [912, 1200, 1488, 1776, 2064, 2304]) {
-  addBox("hall_ceiling_beam", [4336, y, 160], [4768, y + 16, 192], { xMin: M.ibeam, xMax: M.ibeam, yMin: M.ibeam, yMax: M.ibeam, zMin: M.ibeam, zMax: M.ibeam }, { detail: true });
-}
-for (const vent of [
-  [[4400, 928, 240], [4496, 1120, 320]],
-  [[4584, 1376, 240], [4680, 1568, 304]],
-  [[4400, 1888, 240], [4496, 2080, 320]],
-]) {
-  addBox("roof_vent", vent[0], vent[1], { xMin: M.rust, xMax: M.rust, yMin: M.rust, yMax: M.rust, zMin: M.iron, zMax: M.iron }, { detail: true });
-  addBox("roof_vent_cap", [vent[0][0] - 8, vent[0][1] - 8, vent[1][2]], [vent[1][0] + 8, vent[1][1] + 8, vent[1][2] + 16], { xMin: M.iron, xMax: M.iron, yMin: M.iron, yMax: M.iron, zMin: M.iron, zMax: M.iron }, { detail: true });
-}
-
-// Internal mezzanine and a 128-unit-wide, 16-unit-rise stair. Revision 2 uses
-// a solid floor instead of an alpha grate so it cannot disappear edge-on.
-for (let index = 0; index < 20; index += 1) {
-  const minY = 864 + index * 40;
-  addBox("mezzanine_steps", [4384, minY, -384], [4512, minY + 40, -368 + index * 16], { xMin: M.step, xMax: M.step, yMin: M.step, yMax: M.step, zMin: M.step, zMax: M.step }, { detail: true });
-}
-addBox("mezzanine_floor", [4384, 1664, -80], [4768, 2320, -64], { xMin: M.iron, xMax: M.iron, yMin: M.iron, yMax: M.iron, zMin: M.iron, zMax: M.floorDetail }, { detail: true });
-for (const y of [1696, 1824, 1952, 2080, 2208, 2304]) {
-  addBox("mezzanine_rail_post", [4368, y, -64], [4384, y + 16, 48], { xMin: M.ibeam, xMax: M.ibeam, yMin: M.ibeam, yMax: M.ibeam, zMin: M.ibeam, zMax: M.ibeam }, { detail: true });
-}
-for (const [minZ, maxZ] of [[-8, 0], [48, 56]]) {
-  addBox("mezzanine_rail", [4368, 1696, minZ], [4384, 2320, maxZ], { xMin: M.ibeam, xMax: M.ibeam, yMin: M.ibeam, yMax: M.ibeam, zMin: M.ibeam, zMax: M.ibeam }, { detail: true });
-}
-for (const y of [1728, 2048, 2288]) {
-  addBox("mezzanine_support", [4368, y, -384], [4400, y + 32, -80], { xMin: M.ibeam, xMax: M.ibeam, yMin: M.ibeam, yMax: M.ibeam, zMin: M.ibeam, zMax: M.ibeam }, { detail: true });
-}
-
-// Solid loading canopy and a central waist-high dispatch island divide the yard
-// into close-range loops without introducing alpha or one-sided surfaces.
-for (const x of [3744, 4160]) {
-  for (const y of [1296, 1760]) {
-    addBox("canopy_column", [x, y, -384], [x + 32, y + 32, 48], { xMin: M.ibeam, xMax: M.ibeam, yMin: M.ibeam, yMax: M.ibeam, zMin: M.ibeam, zMax: M.ibeam }, { detail: true });
-  }
-}
-addBox("canopy_roof", [3728, 1280, 48], [4208, 1808, 80], { xMin: M.iron, xMax: M.iron, yMin: M.iron, yMax: M.iron, zMin: M.iron, zMax: M.iron }, { detail: true });
-addBox("canopy_beam", [3728, 1280, 16], [4208, 1296, 48], { xMin: M.ibeam, xMax: M.ibeam, yMin: M.ibeam, yMax: M.ibeam, zMin: M.ibeam, zMax: M.ibeam }, { detail: true });
-addBox("canopy_beam", [3728, 1792, 16], [4208, 1808, 48], { xMin: M.ibeam, xMax: M.ibeam, yMin: M.ibeam, yMax: M.ibeam, zMin: M.ibeam, zMax: M.ibeam }, { detail: true });
-addBox("dispatch_island", [3920, 1440, -384], [4016, 1648, -272], { xMin: M.concreteB, xMax: M.concreteB, yMin: M.concreteB, yMax: M.concreteB, zMin: M.concrete, zMax: M.concrete }, { detail: true });
-
-// South and north service sheds fill the previously empty ends of the deck.
-// Each has two open inward-facing bays, a divider, roof, and finished parapet.
-function addServiceShed(prefix, yMin, yMax, openingSide) {
-  const facadeMin = openingSide === "north" ? yMax - 32 : yMin;
-  const facadeMax = openingSide === "north" ? yMax : yMin + 32;
-  const backMin = openingSide === "north" ? yMin : yMax - 32;
-  const backMax = openingSide === "north" ? yMin + 32 : yMax;
-  const dividerMin = openingSide === "north" ? backMax : facadeMax;
-  const dividerMax = openingSide === "north" ? facadeMin : backMin;
-  addBox(`${prefix}_west_wall`, [3616, yMin, -384], [3648, yMax, 64], { xMin: M.bunker, xMax: M.bunker, yMin: M.concreteB, yMax: M.concreteB });
-  addBox(`${prefix}_east_wall`, [4176, yMin, -384], [4208, yMax, 64], { xMin: M.bunker, xMax: M.bunker, yMin: M.concreteB, yMax: M.concreteB });
-  addBox(`${prefix}_back_wall`, [3648, backMin, -384], [4176, backMax, 64], { xMin: M.concreteB, xMax: M.concreteB, yMin: M.bunker, yMax: M.bunker });
-  for (const [xMin, xMax] of [[3648, 3712], [3904, 3976], [4144, 4176]]) {
-    addBox(`${prefix}_facade_pillar`, [xMin, facadeMin, -384], [xMax, facadeMax, 64], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker });
-  }
-  for (const [xMin, xMax] of [[3712, 3904], [3976, 4144]]) {
-    addBox(`${prefix}_facade_lintel`, [xMin, facadeMin, -80], [xMax, facadeMax, 64], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMin: M.concrete, zMax: M.concrete });
-  }
-  addBox(`${prefix}_divider`, [3920, dividerMin, -384], [3952, dividerMax, -64], { xMin: M.concreteB, xMax: M.concreteB, yMin: M.bunker, yMax: M.bunker, zMin: M.concrete, zMax: M.concrete });
-  addBox(`${prefix}_roof`, [3616, yMin, 64], [4208, yMax, 96], { xMin: M.iron, xMax: M.iron, yMin: M.iron, yMax: M.iron, zMin: M.iron, zMax: M.concrete });
-  addBox(`${prefix}_parapet`, [3616, yMin, 96], [3632, yMax, 128], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete }, { detail: true });
-  addBox(`${prefix}_parapet`, [4192, yMin, 96], [4208, yMax, 128], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete }, { detail: true });
-  addBox(`${prefix}_parapet`, [3632, yMin, 96], [4192, yMin + 16, 128], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete }, { detail: true });
-  addBox(`${prefix}_parapet`, [3632, yMax - 16, 96], [4192, yMax, 128], { xMin: M.bunker, xMax: M.bunker, yMin: M.bunker, yMax: M.bunker, zMax: M.concrete }, { detail: true });
-}
-addServiceShed("south_shed", 672, 864, "north");
-addServiceShed("north_shed", 2304, 2464, "south");
-
-for (const box of [
-  [[3696, 1040, -384], [3824, 1088, -272]],
-  [[4056, 1040, -384], [4184, 1088, -272]],
-  [[3696, 2112, -384], [3824, 2160, -272]],
-  [[4056, 2112, -384], [4184, 2160, -272]],
-  [[3664, 1504, -384], [3712, 1632, -288]],
-  [[4224, 1504, -384], [4272, 1632, -288]],
-]) {
-  addBox("yard_cover", box[0], box[1], { xMin: M.concreteB, xMax: M.concreteB, yMin: M.concreteB, yMax: M.concreteB, zMin: M.concrete, zMax: M.concrete }, { detail: true });
-}
-
-for (const [x, y] of [
-  [3664, 1200], [3664, 1936], [3792, 1200], [3792, 1936],
-  [4112, 1200], [4112, 1936], [4240, 1200], [4240, 1936],
-]) {
-  addBox("yard_bollard", [x, y, -384], [x + 16, y + 16, -256], { xMin: M.iron, xMax: M.iron, yMin: M.iron, yMax: M.iron, zMin: M.iron, zMax: M.iron }, { detail: true });
-}
-
-addUtility("utility_bank", [3736, 720, -384], [3848, 816, -240], "yMax");
-addUtility("utility_bank", [4000, 720, -384], [4112, 816, -272], "yMax");
-addUtility("utility_bank", [3736, 2336, -384], [3848, 2432, -240], "yMin");
-addUtility("utility_bank", [4000, 2336, -384], [4112, 2432, -272], "yMin");
-addUtility("utility_bank", [4424, 1224, -384], [4520, 1320, -240], "xMin");
-addUtility("utility_bank", [4624, 1224, -384], [4720, 1320, -272], "xMin");
-addUtility("utility_bank", [4560, 2176, -64], [4704, 2272, 64], "yMin");
-
-// Solid service ducts echo the rectangular pipe/vent construction already used
-// throughout obj_team2 without relying on custom or alpha-textured assets.
-addBox("service_duct", [4688, 816, 48], [4752, 1632, 112], { xMin: M.rust, xMax: M.rust, yMin: M.rust, yMax: M.rust, zMin: M.iron, zMax: M.iron }, { detail: true });
-for (const y of [944, 1200, 1456]) {
-  addBox("duct_bracket", [4664, y, 32], [4760, y + 16, 128], { xMin: M.ibeam, xMax: M.ibeam, yMin: M.ibeam, yMax: M.ibeam, zMin: M.ibeam, zMax: M.ibeam }, { detail: true });
-}
-function pointEntity(classname, properties) {
-  const lines = ["{", `"classname" "${classname}"`];
-  for (const [key, value] of Object.entries(properties)) lines.push(`"${key}" "${value}"`);
-  lines.push("}");
-  return lines.join("\r\n");
-}
-
-const addedEntities = [];
-function addEntity(role, classname, properties) {
-  addedEntities.push({ role, classname, properties, text: pointEntity(classname, properties) });
-}
-
-for (const spawn of [
-  [3744, 840, -336, 30],
-  [4056, 840, -336, 150],
-  [3744, 2320, -336, 330],
-  [4056, 2320, -336, 210],
-  [4208, 1120, -336, 180],
-  [4592, 1040, -336, 180],
-  [4624, 1512, -336, 180],
-  [4576, 2072, -16, 200],
-]) {
-  addEntity("dm_spawn", "info_player_deathmatch", { origin: `${spawn[0]} ${spawn[1]} ${spawn[2]}`, angle: String(spawn[3]) });
-}
-
-addEntity("vehicle", "static_vehicle_german_opeltruck", { model: "static//vehicle_opeltruck.tik", origin: "3944 2104 -384", angle: "90", scale: "1.10", testanim: "idle" });
-for (const [x, y, z, angle] of [
-  [4672, 864, -384, 280],
-  [4632, 904, -384, 10],
-  [4672, 864, -350, 260],
-  [4432, 2240, -64, 90],
-  [3824, 752, -384, 20],
-  [4080, 752, -384, 340],
-  [3824, 2384, -384, 160],
-  [4080, 2384, -384, 200],
-]) {
-  addEntity("crate", "static_item_nazicrate", { model: "static//nazi_crate.tik", origin: `${x} ${y} ${z}`, angle: String(angle), scale: "1.0", testanim: "idle" });
-}
-
-function addLamp(role, fixtureOrigin, coronaOrigin, lightOrigin, angle, intensity) {
-  addEntity(role, "static_lamp_lightbulb-caged", { model: "static//lightbulb_caged.tik", origin: fixtureOrigin.join(" "), angle: String(angle), scale: "1.40", testanim: "idle" });
-  addEntity(role, "static_corona_orange", { model: "static//corona_orange.tik", origin: coronaOrigin.join(" "), scale: "1.0", testanim: "idle" });
-  addEntity(role, "light", { origin: lightOrigin.join(" "), light: String(intensity), _color: "1.0 0.9 0.8", overbright_range: "0.15" });
-}
-
-for (const y of [1040, 1520, 2048]) addLamp("bay_light", [4294, y, -112], [4288, y, -115], [4232, y, -112], 0, 80);
-for (const y of [1040, 1520, 2048]) addLamp("hall_light", [4544, y, 196], [4544, y, 190], [4544, y, 128], -2, 80);
-for (const x of [3872, 4064]) addLamp("canopy_light", [x, 1544, 36], [x, 1544, 30], [x, 1544, -32], -2, 60);
-for (const x of [3792, 4056]) addLamp("south_shed_light", [x, 768, 52], [x, 768, 46], [x, 768, -16], -2, 60);
-for (const x of [3792, 4056]) addLamp("north_shed_light", [x, 2400, 52], [x, 2400, 46], [x, 2400, -16], -2, 60);
-const firstEntityMarker = sourceLines.indexOf("// entity 1");
-if (firstEntityMarker < 0 || sourceLines[firstEntityMarker - 1] !== "}") throw new Error("Could not locate the worldspawn close before entity 1");
 const worldCloseIndex = firstEntityMarker - 1;
 let highestWorldBrush = -1;
 for (let index = 0; index < worldCloseIndex; index += 1) {
@@ -464,85 +255,16 @@ fs.writeFileSync(mapPath, outputText);
 fs.writeFileSync(scriptPath, "// Thin wrapper: retail obj_team2.scr remains authoritative.\nmain:\n\texec maps/obj/obj_team2.scr\nend\n");
 fs.writeFileSync(precachePath, "// Thin wrapper: retail assets remain in Pak0-Pak6.\nexec maps/obj/obj_team2_precache.scr\ncache models/fx/bazookaexplosion_dm.tik\n");
 
-const entityRoleCounts = {};
-const entityClassCounts = {};
-for (const entity of addedEntities) {
-  entityRoleCounts[entity.role] = (entityRoleCounts[entity.role] || 0) + 1;
-  entityClassCounts[entity.classname] = (entityClassCounts[entity.classname] || 0) + 1;
-}
-const allMinimum = [Math.min(...brushes.map((brush) => brush.min[0])), Math.min(...brushes.map((brush) => brush.min[1])), Math.min(...brushes.map((brush) => brush.min[2]))];
-const allMaximum = [Math.max(...brushes.map((brush) => brush.max[0])), Math.max(...brushes.map((brush) => brush.max[1])), Math.max(...brushes.map((brush) => brush.max[2]))];
-const fixedViews = [
-  { id: "reported_stock_side", origin: [3000, 1544, -300], viewangles: [-5, 0, 0] },
-  { id: "stock_side_overview", origin: [3000, 1544, 80], viewangles: [10, 0, 0] },
-  { id: "south_connection", origin: [3120, 1040, -360], viewangles: [-5, 0, 0] },
-  { id: "north_connection", origin: [3400, 2160, -300], viewangles: [-5, 0, 0] },
-  { id: "annex_facade", origin: [3712, 1544, -280], viewangles: [-5, 0, 0] },
-  { id: "south_shed", origin: [3840, 1120, -300], viewangles: [-5, 270, 0] },
-  { id: "north_shed", origin: [3840, 2112, -300], viewangles: [-5, 90, 0] },
-  { id: "yard_south_lane", origin: [3680, 1120, -300], viewangles: [-5, 35, 0] },
-  { id: "yard_north_lane", origin: [3680, 2080, -300], viewangles: [-5, 325, 0] },
-  { id: "hall_center", origin: [4560, 1200, -300], viewangles: [-5, 90, 0] },
-  { id: "hall_stair", origin: [4624, 960, -300], viewangles: [-10, 160, 0] },
-  { id: "mezzanine", origin: [4580, 2100, 0], viewangles: [5, 225, 0] },
-  { id: "east_return", origin: [4680, 2000, -300], viewangles: [-5, 180, 0] },
-  { id: "overhead", origin: [3300, 400, 350], viewangles: [25, 35, 0] },
-];
-const report = {
-  schemaVersion: 2,
-  revision: 2,
-  transform: "revision 2 byte-preserving obj_team2 expansion: preserve retail gameplay, fully skin every added brush, remove transparent construction materials, and add two complete service sheds to the east annex",
-  sourceMap: path.relative(outputRoot, sourcePath).replace(/\\/g, "/"),
-  sourceBytes: sourceBuffer.length,
-  sourceSha256,
-  mapName,
-  gameDirectory,
-  originalMap,
-  displayName,
-  output: { bytes: Buffer.byteLength(outputText), sha256: sha256(outputText) },
-  preservation: {
-    sourceLineCount: sourceLines.length,
-    retainedSourceLineCount: retainedSourceLines.length,
-    retainedSourceSha256: sha256(retainedSourceLines.join("\r\n")),
-    removedEntityNumbers: removed.map((entity) => entity.number),
-    removedEntities: removed.map((entity) => ({ number: entity.number, classname: entity.keys.classname, origin: entity.keys.origin ? vector(entity.keys.origin) : null, model: entity.keys.model || null, targetname: entity.keys.targetname || null })),
-    originalDoorCount: entityBlocks.filter((entity) => entity.keys.classname === "func_rotatingdoor").length,
-    originalTargetnameCount: entityBlocks.filter((entity) => entity.keys.targetname).length,
-  },
-  transformed: {
-    addedBrushes: brushes.length,
-    addedEntities: addedEntities.length,
-    removedFoliageEntities: removed.filter((entity) => (entity.keys.classname || "").startsWith("static_natural_")).length,
-    removedConnectorObstructions: removed.filter((entity) => connectorObstructionNumbers.has(entity.number)).length,
-    dmSpawnsAdded: entityClassCounts.info_player_deathmatch || 0,
-  },
-  expansion: {
-    bounds: { min: allMinimum, max: allMaximum },
-    serviceDeckTopZ: -384,
-    revision: 2,
-    fullySkinnedBrushes: brushes.filter((brush) => Object.values(brush.faceTextures).every((texture) => !["common/caulk", "common/nodraw"].includes(texture))).length,
-    transparentConstructionMaterials: [...usedMaterials].filter((texture) => texture.includes("deckgrate")),
-    connectorCount: 2,
-    connectorWidth: 288,
-    connectorRiser: 12,
-    openHallBays: 3,
-    movingDoorsAdded: 0,
-    objectivesChanged: false,
-    originalTeamSpawnsChanged: false,
-    brushRoleCounts: Object.fromEntries([...roleCounts.entries()].sort((a, b) => a[0].localeCompare(b[0]))),
-    addedEntityRoleCounts: entityRoleCounts,
-    addedEntityClassCounts: entityClassCounts,
-    usedMaterials: [...usedMaterials].sort(),
-    brushes: brushes.map(({ role, min, max, detail, faceTextures }) => ({ role, min, max, detail, faceTextures })),
-    entities: addedEntities.map(({ role, classname, properties }) => ({ role, classname, properties })),
-  },
-  scriptPolicy: "thin wrappers execute retail obj_team2 scripts; no retail script or texture/model bytes redistributed",
-  extraPrecache: ["models/fx/bazookaexplosion_dm.tik"],
-};
+const { report, fixedViews } = require("./report_obj_team2_expanded_v3")({
+  sourceLines, retainedSourceLines, sourceBuffer, sourceSha256, sourcePath, outputRoot, outputText,
+  mapName, gameDirectory, originalMap, displayName, entityBlocks, vector, removed,
+  removedWorldBrushNumbers, eastFenceEntityNumbers, alliedGateEntityNumbers,
+  eastFenceWorldBrushNumbers, alliedGateWorldBrushNumbers, brushes, addedEntities, roleCounts, usedMaterials,
+});
 const reportPath = path.join(outputRoot, `${mapName}-mirror-report.json`);
 const designPath = path.join(outputRoot, `${mapName}-design-report.json`);
 fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
-fs.writeFileSync(designPath, `${JSON.stringify({ schemaVersion: 2, revision: 2, mapName, fixedViews, design: report.expansion, preservation: report.preservation }, null, 2)}\n`);
+fs.writeFileSync(designPath, `${JSON.stringify({ schemaVersion: 3, revision: 3, mapName, fixedViews, design: report.expansion, preservation: report.preservation }, null, 2)}\n`);
 console.log(`Generated ${mapPath}`);
-console.log(`Added ${brushes.length} brushes and ${addedEntities.length} entities; removed nine untargeted foliage entities and five untargeted connector obstructions`);
+console.log(`Added ${brushes.length} brushes and ${addedEntities.length} entities; removed the complete east fence/curb and opened the Allied exterior route`);
 console.log(`SHA256 ${report.output.sha256}`);

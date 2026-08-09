@@ -5,7 +5,7 @@ Status: normative production standard
 Compatibility default: Medal of Honor: Allied Assault BSP version 19 and
 OpenMoHAA
 
-Last updated: 2026-07-27
+Last updated: 2026-08-09
 
 ## Mission
 
@@ -987,3 +987,6 @@ A geometry/gameplay mirror retains original bitmap orientation by default. Mirro
 10. Test the exact final PK3 in its intended Objective mode and separately exercise FFA bot navigation/combat when useful. Inspect fixed views of every connector, threshold, interior route, vertical link, return, and overview; human door/objective/balance play remains authoritative.
 11. In a newly playable boundary area, treat every added brush face as exposed unless compiled evidence proves it permanently buried. Reject caulk/nodraw on ambiguous structural faces, and do not use alpha grates as primary roofs, floors, walls, lintels, or silhouette framing.
 12. Convert every human-reported failure angle into a named fixed regression view. An interior-only sheet cannot accept an exterior addition, and a later human screenshot overrides an earlier automated visual verdict.
+13. Treat a visible perimeter as a cooperating boundary system, not one panel. Inventory the mesh/panel entity, wire, posts, caps, rails, curb, collision/player clip, and foliage owners; remove only the exact untargeted owners in scope; then inspect the compiled region for every old boundary material and obstruction.
+14. Outdoor terrain or empty entity space does not prove that new world geometry remains inside the stock sealed hull. After enlarging a footprint, run a focused Q3map seal probe before full VIS/light and require a portal file with no leak line. Record direction-dependent safe limits instead of hiding or forcing a leaking rectangular footprint.
+15. Revalidate fixed-camera origins after every material geometry change. A successfully captured screenshot from inside a step, wall, roof, or clip volume is a QA failure; move the camera into known playable air and repeat the complete fixed-view pass.

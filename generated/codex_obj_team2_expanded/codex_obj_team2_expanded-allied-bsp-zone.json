@@ -1,0 +1,4173 @@
+{
+  "schemaVersion": 1,
+  "bsp": "generated/codex_obj_team2_expanded/main/maps/obj/codex_obj_team2_expanded.bsp",
+  "zone": {
+    "min": [
+      -2450,
+      250,
+      -620
+    ],
+    "max": [
+      -1200,
+      1400,
+      300
+    ]
+  },
+  "matchedSurfaces": 205,
+  "shaderCounts": [
+    {
+      "shader": "textures/das_boot/ironwall1",
+      "count": 70
+    },
+    {
+      "shader": "textures/general_structure/jh_conc512b",
+      "count": 26
+    },
+    {
+      "shader": "textures/general_structure/bunker_wall",
+      "count": 23
+    },
+    {
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "count": 22
+    },
+    {
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "count": 19
+    },
+    {
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "count": 9
+    },
+    {
+      "shader": "textures/mohtest/slatewldrty1",
+      "count": 9
+    },
+    {
+      "shader": "textures/algiers/doccrtset_1stepsml",
+      "count": 8
+    },
+    {
+      "shader": "textures/general_structure/bunker_walltrans",
+      "count": 8
+    },
+    {
+      "shader": "textures/mohcommon/barbwire",
+      "count": 4
+    },
+    {
+      "shader": "textures/mohcommon/secfence",
+      "count": 4
+    },
+    {
+      "shader": "textures/general_structure/concretewall2",
+      "count": 2
+    },
+    {
+      "shader": "textures/blasted/bunkerdoor3",
+      "count": 1
+    }
+  ],
+  "surfaces": [
+    {
+      "surface": 1105,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13499,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          832,
+          -228
+        ],
+        "max": [
+          -2006,
+          832,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1106,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13503,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          836,
+          -228
+        ],
+        "max": [
+          -2006,
+          836,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1107,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13507,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          832,
+          -228
+        ],
+        "max": [
+          -2006,
+          836,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1108,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13511,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2006,
+          832,
+          -240
+        ],
+        "max": [
+          -2006,
+          836,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1109,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13515,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          832,
+          -240
+        ],
+        "max": [
+          -2006,
+          832,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1110,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13519,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          836,
+          -240
+        ],
+        "max": [
+          -2006,
+          836,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1111,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13523,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2006,
+          996,
+          -240
+        ],
+        "max": [
+          -2006,
+          1000,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1112,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13527,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          996,
+          -240
+        ],
+        "max": [
+          -2006,
+          996,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1113,
+      "shaderNum": 34,
+      "shader": "textures/mohtest/slatewldrty1",
+      "surfaceType": 1,
+      "firstVert": 13531,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          996,
+          -240
+        ],
+        "max": [
+          -2006,
+          1000,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 1114,
+      "shaderNum": 34,
+      "shader": "textures/mohtest/slatewldrty1",
+      "surfaceType": 1,
+      "firstVert": 13535,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          996,
+          -228
+        ],
+        "max": [
+          -2006,
+          1000,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1115,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13539,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          996,
+          -228
+        ],
+        "max": [
+          -2006,
+          996,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1116,
+      "shaderNum": 34,
+      "shader": "textures/mohtest/slatewldrty1",
+      "surfaceType": 1,
+      "firstVert": 13543,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          996,
+          -228
+        ],
+        "max": [
+          -2006,
+          1000,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1117,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13547,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          996,
+          -228
+        ],
+        "max": [
+          -2006,
+          1000,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1118,
+      "shaderNum": 31,
+      "shader": "textures/mohcommon/secfence",
+      "surfaceType": 1,
+      "firstVert": 13551,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2010,
+          674,
+          -428
+        ],
+        "max": [
+          -2010,
+          994,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 1119,
+      "shaderNum": 31,
+      "shader": "textures/mohcommon/secfence",
+      "surfaceType": 1,
+      "firstVert": 13555,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2010,
+          674,
+          -428
+        ],
+        "max": [
+          -2010,
+          994,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 1120,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13559,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2006,
+          670,
+          -240
+        ],
+        "max": [
+          -2006,
+          674,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1121,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13563,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -240
+        ],
+        "max": [
+          -2006,
+          670,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1122,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13567,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          674,
+          -240
+        ],
+        "max": [
+          -2006,
+          674,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1123,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13571,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          670,
+          -228
+        ],
+        "max": [
+          -2006,
+          670,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1124,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13575,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          674,
+          -228
+        ],
+        "max": [
+          -2006,
+          674,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1125,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13579,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          670,
+          -228
+        ],
+        "max": [
+          -2006,
+          674,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1126,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13583,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2006,
+          342,
+          -240
+        ],
+        "max": [
+          -2006,
+          346,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1127,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13588,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          342,
+          -240
+        ],
+        "max": [
+          -2006,
+          342,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1128,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13592,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          346,
+          -240
+        ],
+        "max": [
+          -2006,
+          346,
+          -228
+        ]
+      }
+    },
+    {
+      "surface": 1135,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13620,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          342,
+          -228
+        ],
+        "max": [
+          -2006,
+          342,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1136,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13624,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          346,
+          -228
+        ],
+        "max": [
+          -2006,
+          346,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1137,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 13628,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2038,
+          342,
+          -228
+        ],
+        "max": [
+          -2006,
+          346,
+          -196
+        ]
+      }
+    },
+    {
+      "surface": 1138,
+      "shaderNum": 31,
+      "shader": "textures/mohcommon/secfence",
+      "surfaceType": 1,
+      "firstVert": 13632,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2010,
+          20,
+          -428
+        ],
+        "max": [
+          -2010,
+          342,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 1139,
+      "shaderNum": 31,
+      "shader": "textures/mohcommon/secfence",
+      "surfaceType": 1,
+      "firstVert": 13636,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2010,
+          20,
+          -428
+        ],
+        "max": [
+          -2010,
+          342,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 1140,
+      "shaderNum": 32,
+      "shader": "textures/mohcommon/barbwire",
+      "surfaceType": 1,
+      "firstVert": 13640,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2037,
+          996,
+          -230
+        ],
+        "max": [
+          -2010,
+          996,
+          -199
+        ]
+      }
+    },
+    {
+      "surface": 1141,
+      "shaderNum": 32,
+      "shader": "textures/mohcommon/barbwire",
+      "surfaceType": 1,
+      "firstVert": 13644,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2037,
+          996,
+          -230
+        ],
+        "max": [
+          -2010,
+          996,
+          -199
+        ]
+      }
+    },
+    {
+      "surface": 1142,
+      "shaderNum": 32,
+      "shader": "textures/mohcommon/barbwire",
+      "surfaceType": 1,
+      "firstVert": 13648,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2037,
+          -11,
+          -230
+        ],
+        "max": [
+          -2010,
+          996,
+          -200
+        ]
+      }
+    },
+    {
+      "surface": 1143,
+      "shaderNum": 32,
+      "shader": "textures/mohcommon/barbwire",
+      "surfaceType": 1,
+      "firstVert": 13652,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2037,
+          -11,
+          -230
+        ],
+        "max": [
+          -2010,
+          996,
+          -200
+        ]
+      }
+    },
+    {
+      "surface": 2445,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19584,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1792,
+          1320,
+          -320
+        ],
+        "max": [
+          -1792,
+          1336,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2446,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19588,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1776,
+          1320,
+          -320
+        ],
+        "max": [
+          -1776,
+          1336,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2447,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19592,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1792,
+          1320,
+          -320
+        ],
+        "max": [
+          -1776,
+          1320,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2448,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19596,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1792,
+          1336,
+          -320
+        ],
+        "max": [
+          -1776,
+          1336,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2449,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19600,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1792,
+          1320,
+          -160
+        ],
+        "max": [
+          -1776,
+          1336,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2450,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19604,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2208,
+          1320,
+          -320
+        ],
+        "max": [
+          -2208,
+          1336,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2451,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19608,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2192,
+          1320,
+          -320
+        ],
+        "max": [
+          -2192,
+          1336,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2452,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19612,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2208,
+          1320,
+          -320
+        ],
+        "max": [
+          -2192,
+          1320,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2453,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19616,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2208,
+          1336,
+          -320
+        ],
+        "max": [
+          -2192,
+          1336,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2454,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19620,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2208,
+          1320,
+          -160
+        ],
+        "max": [
+          -2192,
+          1336,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2455,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19624,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2384,
+          1008,
+          -464
+        ],
+        "max": [
+          -2384,
+          1024,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2456,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19628,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2368,
+          1008,
+          -464
+        ],
+        "max": [
+          -2368,
+          1024,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2457,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19632,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2384,
+          1008,
+          -464
+        ],
+        "max": [
+          -2368,
+          1008,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2458,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19636,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2384,
+          1024,
+          -464
+        ],
+        "max": [
+          -2368,
+          1024,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2459,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19640,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2384,
+          1008,
+          -160
+        ],
+        "max": [
+          -2368,
+          1024,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2460,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19644,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2384,
+          544,
+          -464
+        ],
+        "max": [
+          -2384,
+          560,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2461,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19648,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2368,
+          544,
+          -464
+        ],
+        "max": [
+          -2368,
+          560,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2462,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19652,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2384,
+          544,
+          -464
+        ],
+        "max": [
+          -2368,
+          544,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2463,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19656,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2384,
+          560,
+          -464
+        ],
+        "max": [
+          -2368,
+          560,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2464,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19660,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2384,
+          544,
+          -160
+        ],
+        "max": [
+          -2368,
+          560,
+          -160
+        ]
+      }
+    },
+    {
+      "surface": 2465,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19664,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1600,
+          1184,
+          -464
+        ],
+        "max": [
+          -1600,
+          1264,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2466,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19668,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1440,
+          1184,
+          -464
+        ],
+        "max": [
+          -1440,
+          1264,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2467,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19672,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1600,
+          1184,
+          -464
+        ],
+        "max": [
+          -1440,
+          1184,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2468,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19676,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1600,
+          1264,
+          -464
+        ],
+        "max": [
+          -1440,
+          1264,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2469,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19680,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1600,
+          1184,
+          -352
+        ],
+        "max": [
+          -1440,
+          1264,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2470,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19684,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2000,
+          1120,
+          -464
+        ],
+        "max": [
+          -2000,
+          1200,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2471,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19688,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1840,
+          1120,
+          -464
+        ],
+        "max": [
+          -1840,
+          1200,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2472,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19692,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2000,
+          1120,
+          -464
+        ],
+        "max": [
+          -1840,
+          1120,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2473,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19696,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2000,
+          1200,
+          -464
+        ],
+        "max": [
+          -1840,
+          1200,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2474,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19700,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2000,
+          1120,
+          -352
+        ],
+        "max": [
+          -1840,
+          1200,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2475,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19704,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2176,
+          928,
+          -464
+        ],
+        "max": [
+          -2176,
+          1088,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2476,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19708,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2096,
+          928,
+          -464
+        ],
+        "max": [
+          -2096,
+          1088,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2477,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19712,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2176,
+          928,
+          -464
+        ],
+        "max": [
+          -2096,
+          928,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2478,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19716,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2176,
+          1088,
+          -464
+        ],
+        "max": [
+          -2096,
+          1088,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2479,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19720,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2176,
+          928,
+          -352
+        ],
+        "max": [
+          -2096,
+          1088,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2480,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19724,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2320,
+          736,
+          -464
+        ],
+        "max": [
+          -2320,
+          896,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2481,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19728,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2240,
+          736,
+          -464
+        ],
+        "max": [
+          -2240,
+          896,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2482,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19732,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2320,
+          736,
+          -464
+        ],
+        "max": [
+          -2240,
+          736,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2483,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19736,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2320,
+          896,
+          -464
+        ],
+        "max": [
+          -2240,
+          896,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2484,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19740,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2320,
+          736,
+          -352
+        ],
+        "max": [
+          -2240,
+          896,
+          -352
+        ]
+      }
+    },
+    {
+      "surface": 2485,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19744,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1760,
+          1312,
+          -464
+        ],
+        "max": [
+          -1760,
+          1344,
+          -320
+        ]
+      }
+    },
+    {
+      "surface": 2486,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19748,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2400,
+          1312,
+          -464
+        ],
+        "max": [
+          -1760,
+          1312,
+          -320
+        ]
+      }
+    },
+    {
+      "surface": 2487,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19753,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2400,
+          1344,
+          -464
+        ],
+        "max": [
+          -1760,
+          1344,
+          -320
+        ]
+      }
+    },
+    {
+      "surface": 2488,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19758,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2400,
+          1312,
+          -320
+        ],
+        "max": [
+          -1760,
+          1344,
+          -320
+        ]
+      }
+    },
+    {
+      "surface": 2489,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19762,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2026,
+          320,
+          -464
+        ],
+        "max": [
+          -2026,
+          352,
+          -288
+        ]
+      }
+    },
+    {
+      "surface": 2490,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19767,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2400,
+          320,
+          -464
+        ],
+        "max": [
+          -2026,
+          320,
+          -288
+        ]
+      }
+    },
+    {
+      "surface": 2491,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19773,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2400,
+          352,
+          -464
+        ],
+        "max": [
+          -2026,
+          352,
+          -288
+        ]
+      }
+    },
+    {
+      "surface": 2492,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19778,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2080,
+          320,
+          -464
+        ],
+        "max": [
+          -2026,
+          344,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2493,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19782,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2400,
+          320,
+          -288
+        ],
+        "max": [
+          -2026,
+          352,
+          -288
+        ]
+      }
+    },
+    {
+      "surface": 2494,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19786,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2432,
+          320,
+          -464
+        ],
+        "max": [
+          -2432,
+          1344,
+          -288
+        ]
+      }
+    },
+    {
+      "surface": 2495,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19790,
+      "numVerts": 7,
+      "bounds": {
+        "min": [
+          -2400,
+          352,
+          -464
+        ],
+        "max": [
+          -2400,
+          1344,
+          -288
+        ]
+      }
+    },
+    {
+      "surface": 2496,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19797,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2432,
+          320,
+          -464
+        ],
+        "max": [
+          -2400,
+          320,
+          -288
+        ]
+      }
+    },
+    {
+      "surface": 2497,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19801,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2432,
+          1344,
+          -464
+        ],
+        "max": [
+          -2400,
+          1344,
+          -288
+        ]
+      }
+    },
+    {
+      "surface": 2498,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19806,
+      "numVerts": 10,
+      "bounds": {
+        "min": [
+          -2432,
+          320,
+          -464
+        ],
+        "max": [
+          -2400,
+          1344,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2499,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19816,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2432,
+          320,
+          -288
+        ],
+        "max": [
+          -2400,
+          1344,
+          -288
+        ]
+      }
+    },
+    {
+      "surface": 2500,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19821,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2400,
+          1056,
+          -528
+        ],
+        "max": [
+          -2400,
+          1344,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2501,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19826,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1280,
+          1056,
+          -528
+        ],
+        "max": [
+          -1280,
+          1344,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2502,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19830,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2080,
+          1056,
+          -528
+        ],
+        "max": [
+          -1280,
+          1056,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2503,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19836,
+      "numVerts": 7,
+      "bounds": {
+        "min": [
+          -2400,
+          1344,
+          -528
+        ],
+        "max": [
+          -1280,
+          1344,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2504,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19843,
+      "numVerts": 8,
+      "bounds": {
+        "min": [
+          -2400,
+          1056,
+          -464
+        ],
+        "max": [
+          -1280,
+          1344,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2505,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19851,
+      "numVerts": 12,
+      "bounds": {
+        "min": [
+          -2400,
+          320,
+          -528
+        ],
+        "max": [
+          -2400,
+          1344,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2506,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19863,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2080,
+          320,
+          -528
+        ],
+        "max": [
+          -2080,
+          1056,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2507,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19869,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2400,
+          320,
+          -528
+        ],
+        "max": [
+          -2080,
+          320,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2508,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19873,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2400,
+          1344,
+          -528
+        ],
+        "max": [
+          -2080,
+          1344,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2509,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19877,
+      "numVerts": 7,
+      "bounds": {
+        "min": [
+          -2400,
+          352,
+          -464
+        ],
+        "max": [
+          -2080,
+          1312,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2510,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19884,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2400,
+          344,
+          -528
+        ],
+        "max": [
+          -2400,
+          670,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2511,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 19889,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1944,
+          344,
+          -528
+        ],
+        "max": [
+          -1944,
+          670,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2512,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19893,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2080,
+          344,
+          -528
+        ],
+        "max": [
+          -2026,
+          344,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2513,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 19897,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2080,
+          670,
+          -528
+        ],
+        "max": [
+          -2026,
+          670,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2514,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 19901,
+      "numVerts": 7,
+      "bounds": {
+        "min": [
+          -2400,
+          344,
+          -464
+        ],
+        "max": [
+          -1944,
+          670,
+          -464
+        ]
+      }
+    },
+    {
+      "surface": 2515,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19908,
+      "numVerts": 7,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -244
+        ],
+        "max": [
+          -2014,
+          1000,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 2516,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19915,
+      "numVerts": 10,
+      "bounds": {
+        "min": [
+          -2006,
+          670,
+          -244
+        ],
+        "max": [
+          -2006,
+          1000,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 2517,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19925,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -244
+        ],
+        "max": [
+          -2006,
+          670,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 2518,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19929,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          1000,
+          -244
+        ],
+        "max": [
+          -2006,
+          1000,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 2519,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19933,
+      "numVerts": 8,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -244
+        ],
+        "max": [
+          -2006,
+          1000,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 2520,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19941,
+      "numVerts": 9,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -240
+        ],
+        "max": [
+          -2006,
+          1000,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 2521,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19950,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -432
+        ],
+        "max": [
+          -2014,
+          1000,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 2522,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19956,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2006,
+          670,
+          -432
+        ],
+        "max": [
+          -2006,
+          1000,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 2523,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19962,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -432
+        ],
+        "max": [
+          -2006,
+          670,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 2524,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19966,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          1000,
+          -432
+        ],
+        "max": [
+          -2006,
+          1000,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 2525,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19970,
+      "numVerts": 8,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -428
+        ],
+        "max": [
+          -2006,
+          1000,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 2526,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19978,
+      "numVerts": 7,
+      "bounds": {
+        "min": [
+          -2014,
+          12,
+          -244
+        ],
+        "max": [
+          -2014,
+          344,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 2527,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 19985,
+      "numVerts": 11,
+      "bounds": {
+        "min": [
+          -2006,
+          12,
+          -244
+        ],
+        "max": [
+          -2006,
+          344,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 2529,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 20000,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          344,
+          -244
+        ],
+        "max": [
+          -2006,
+          344,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 2530,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 20004,
+      "numVerts": 9,
+      "bounds": {
+        "min": [
+          -2014,
+          12,
+          -244
+        ],
+        "max": [
+          -2006,
+          344,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 2531,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 20013,
+      "numVerts": 7,
+      "bounds": {
+        "min": [
+          -2014,
+          12,
+          -240
+        ],
+        "max": [
+          -2006,
+          344,
+          -240
+        ]
+      }
+    },
+    {
+      "surface": 2532,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 20020,
+      "numVerts": 7,
+      "bounds": {
+        "min": [
+          -2014,
+          12,
+          -432
+        ],
+        "max": [
+          -2014,
+          344,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 2533,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 20027,
+      "numVerts": 8,
+      "bounds": {
+        "min": [
+          -2006,
+          12,
+          -432
+        ],
+        "max": [
+          -2006,
+          344,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 2535,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 20039,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          344,
+          -432
+        ],
+        "max": [
+          -2006,
+          344,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 2536,
+      "shaderNum": 40,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 20043,
+      "numVerts": 9,
+      "bounds": {
+        "min": [
+          -2014,
+          12,
+          -428
+        ],
+        "max": [
+          -2006,
+          344,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 2537,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 20052,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2026,
+          670,
+          -528
+        ],
+        "max": [
+          -2026,
+          1056,
+          -432
+        ]
+      }
+    },
+    {
+      "surface": 2538,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 20058,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -1944,
+          670,
+          -528
+        ],
+        "max": [
+          -1944,
+          1056,
+          -432
+        ]
+      }
+    },
+    {
+      "surface": 2539,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 20064,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2026,
+          670,
+          -464
+        ],
+        "max": [
+          -1944,
+          670,
+          -432
+        ]
+      }
+    },
+    {
+      "surface": 2540,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 20070,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2026,
+          1056,
+          -464
+        ],
+        "max": [
+          -1944,
+          1056,
+          -432
+        ]
+      }
+    },
+    {
+      "surface": 2541,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 20074,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2026,
+          670,
+          -432
+        ],
+        "max": [
+          -1944,
+          1056,
+          -432
+        ]
+      }
+    },
+    {
+      "surface": 2542,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 20080,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -2026,
+          0,
+          -528
+        ],
+        "max": [
+          -2026,
+          344,
+          -432
+        ]
+      }
+    },
+    {
+      "surface": 2543,
+      "shaderNum": 41,
+      "shader": "textures/mohcommon/jeff-concrete-wallb",
+      "surfaceType": 1,
+      "firstVert": 20085,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -1944,
+          0,
+          -528
+        ],
+        "max": [
+          -1944,
+          344,
+          -432
+        ]
+      }
+    },
+    {
+      "surface": 2545,
+      "shaderNum": 42,
+      "shader": "textures/general_structure/bunker_wall",
+      "surfaceType": 1,
+      "firstVert": 20094,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2026,
+          344,
+          -464
+        ],
+        "max": [
+          -1944,
+          344,
+          -432
+        ]
+      }
+    },
+    {
+      "surface": 2546,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 20100,
+      "numVerts": 7,
+      "bounds": {
+        "min": [
+          -2026,
+          0,
+          -432
+        ],
+        "max": [
+          -1944,
+          344,
+          -432
+        ]
+      }
+    },
+    {
+      "surface": 10536,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 59970,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2006,
+          342,
+          -428
+        ],
+        "max": [
+          -2006,
+          346,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10537,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 59976,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          342,
+          -428
+        ],
+        "max": [
+          -2006,
+          342,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10538,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 59980,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          346,
+          -428
+        ],
+        "max": [
+          -2006,
+          346,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10539,
+      "shaderNum": 34,
+      "shader": "textures/mohtest/slatewldrty1",
+      "surfaceType": 1,
+      "firstVert": 59984,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2014,
+          342,
+          -428
+        ],
+        "max": [
+          -2006,
+          346,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 10540,
+      "shaderNum": 34,
+      "shader": "textures/mohtest/slatewldrty1",
+      "surfaceType": 1,
+      "firstVert": 59990,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2014,
+          342,
+          -244
+        ],
+        "max": [
+          -2006,
+          346,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10541,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 59996,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2006,
+          670,
+          -428
+        ],
+        "max": [
+          -2006,
+          674,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10542,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 60000,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -428
+        ],
+        "max": [
+          -2006,
+          670,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10543,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 60004,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          674,
+          -428
+        ],
+        "max": [
+          -2006,
+          674,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10544,
+      "shaderNum": 34,
+      "shader": "textures/mohtest/slatewldrty1",
+      "surfaceType": 1,
+      "firstVert": 60008,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -428
+        ],
+        "max": [
+          -2006,
+          674,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 10545,
+      "shaderNum": 34,
+      "shader": "textures/mohtest/slatewldrty1",
+      "surfaceType": 1,
+      "firstVert": 60012,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          670,
+          -244
+        ],
+        "max": [
+          -2006,
+          674,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10546,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 60016,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2006,
+          996,
+          -428
+        ],
+        "max": [
+          -2006,
+          1000,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10547,
+      "shaderNum": 28,
+      "shader": "textures/das_boot/ironwall1",
+      "surfaceType": 1,
+      "firstVert": 60020,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          996,
+          -428
+        ],
+        "max": [
+          -2006,
+          996,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 10548,
+      "shaderNum": 34,
+      "shader": "textures/mohtest/slatewldrty1",
+      "surfaceType": 1,
+      "firstVert": 60024,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          996,
+          -428
+        ],
+        "max": [
+          -2006,
+          1000,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 10549,
+      "shaderNum": 34,
+      "shader": "textures/mohtest/slatewldrty1",
+      "surfaceType": 1,
+      "firstVert": 60028,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2014,
+          996,
+          -244
+        ],
+        "max": [
+          -2006,
+          1000,
+          -244
+        ]
+      }
+    },
+    {
+      "surface": 11761,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65434,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1792,
+          896,
+          -460
+        ],
+        "max": [
+          -1792,
+          1000,
+          -396
+        ]
+      }
+    },
+    {
+      "surface": 11762,
+      "shaderNum": 49,
+      "shader": "textures/algiers/doccrtset_1stepsml",
+      "surfaceType": 1,
+      "firstVert": 65438,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -1664,
+          896,
+          -460
+        ],
+        "max": [
+          -1664,
+          1000,
+          -396
+        ]
+      }
+    },
+    {
+      "surface": 11763,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65443,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -1792,
+          896,
+          -460
+        ],
+        "max": [
+          -1664,
+          896,
+          -396
+        ]
+      }
+    },
+    {
+      "surface": 11764,
+      "shaderNum": 78,
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "surfaceType": 1,
+      "firstVert": 65448,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -1792,
+          896,
+          -396
+        ],
+        "max": [
+          -1664,
+          1000,
+          -396
+        ]
+      }
+    },
+    {
+      "surface": 11765,
+      "shaderNum": 49,
+      "shader": "textures/algiers/doccrtset_1stepsml",
+      "surfaceType": 1,
+      "firstVert": 65454,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1648,
+          896,
+          -412
+        ],
+        "max": [
+          -1648,
+          1000,
+          -404
+        ]
+      }
+    },
+    {
+      "surface": 11766,
+      "shaderNum": 53,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65458,
+      "numVerts": 3,
+      "bounds": {
+        "min": [
+          -1664,
+          896,
+          -412
+        ],
+        "max": [
+          -1648,
+          896,
+          -404
+        ]
+      }
+    },
+    {
+      "surface": 11767,
+      "shaderNum": 119,
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "surfaceType": 1,
+      "firstVert": 65461,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1664,
+          896,
+          -404
+        ],
+        "max": [
+          -1648,
+          1000,
+          -404
+        ]
+      }
+    },
+    {
+      "surface": 11768,
+      "shaderNum": 49,
+      "shader": "textures/algiers/doccrtset_1stepsml",
+      "surfaceType": 1,
+      "firstVert": 65465,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1632,
+          896,
+          -420
+        ],
+        "max": [
+          -1632,
+          1000,
+          -412
+        ]
+      }
+    },
+    {
+      "surface": 11769,
+      "shaderNum": 53,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65469,
+      "numVerts": 3,
+      "bounds": {
+        "min": [
+          -1648,
+          896,
+          -420
+        ],
+        "max": [
+          -1632,
+          896,
+          -412
+        ]
+      }
+    },
+    {
+      "surface": 11770,
+      "shaderNum": 119,
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "surfaceType": 1,
+      "firstVert": 65472,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1648,
+          896,
+          -412
+        ],
+        "max": [
+          -1632,
+          1000,
+          -412
+        ]
+      }
+    },
+    {
+      "surface": 11771,
+      "shaderNum": 49,
+      "shader": "textures/algiers/doccrtset_1stepsml",
+      "surfaceType": 1,
+      "firstVert": 65476,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1616,
+          896,
+          -428
+        ],
+        "max": [
+          -1616,
+          1000,
+          -420
+        ]
+      }
+    },
+    {
+      "surface": 11772,
+      "shaderNum": 53,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65480,
+      "numVerts": 3,
+      "bounds": {
+        "min": [
+          -1632,
+          896,
+          -428
+        ],
+        "max": [
+          -1616,
+          896,
+          -420
+        ]
+      }
+    },
+    {
+      "surface": 11773,
+      "shaderNum": 119,
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "surfaceType": 1,
+      "firstVert": 65483,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1632,
+          896,
+          -420
+        ],
+        "max": [
+          -1616,
+          1000,
+          -420
+        ]
+      }
+    },
+    {
+      "surface": 11774,
+      "shaderNum": 49,
+      "shader": "textures/algiers/doccrtset_1stepsml",
+      "surfaceType": 1,
+      "firstVert": 65487,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1600,
+          896,
+          -436
+        ],
+        "max": [
+          -1600,
+          1000,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 11775,
+      "shaderNum": 53,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65491,
+      "numVerts": 3,
+      "bounds": {
+        "min": [
+          -1616,
+          896,
+          -436
+        ],
+        "max": [
+          -1600,
+          896,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 11776,
+      "shaderNum": 119,
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "surfaceType": 1,
+      "firstVert": 65494,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1616,
+          896,
+          -428
+        ],
+        "max": [
+          -1600,
+          1000,
+          -428
+        ]
+      }
+    },
+    {
+      "surface": 11777,
+      "shaderNum": 49,
+      "shader": "textures/algiers/doccrtset_1stepsml",
+      "surfaceType": 1,
+      "firstVert": 65498,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1584,
+          896,
+          -444
+        ],
+        "max": [
+          -1584,
+          1000,
+          -436
+        ]
+      }
+    },
+    {
+      "surface": 11778,
+      "shaderNum": 53,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65502,
+      "numVerts": 3,
+      "bounds": {
+        "min": [
+          -1600,
+          896,
+          -444
+        ],
+        "max": [
+          -1584,
+          896,
+          -436
+        ]
+      }
+    },
+    {
+      "surface": 11779,
+      "shaderNum": 119,
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "surfaceType": 1,
+      "firstVert": 65505,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1600,
+          896,
+          -436
+        ],
+        "max": [
+          -1584,
+          1000,
+          -436
+        ]
+      }
+    },
+    {
+      "surface": 11780,
+      "shaderNum": 49,
+      "shader": "textures/algiers/doccrtset_1stepsml",
+      "surfaceType": 1,
+      "firstVert": 65509,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1568,
+          896,
+          -452
+        ],
+        "max": [
+          -1568,
+          1000,
+          -444
+        ]
+      }
+    },
+    {
+      "surface": 11781,
+      "shaderNum": 53,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65513,
+      "numVerts": 3,
+      "bounds": {
+        "min": [
+          -1584,
+          896,
+          -452
+        ],
+        "max": [
+          -1568,
+          896,
+          -444
+        ]
+      }
+    },
+    {
+      "surface": 11782,
+      "shaderNum": 119,
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "surfaceType": 1,
+      "firstVert": 65516,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1584,
+          896,
+          -444
+        ],
+        "max": [
+          -1568,
+          1000,
+          -444
+        ]
+      }
+    },
+    {
+      "surface": 11783,
+      "shaderNum": 49,
+      "shader": "textures/algiers/doccrtset_1stepsml",
+      "surfaceType": 1,
+      "firstVert": 65520,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1552,
+          896,
+          -460
+        ],
+        "max": [
+          -1552,
+          1000,
+          -452
+        ]
+      }
+    },
+    {
+      "surface": 11784,
+      "shaderNum": 53,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65524,
+      "numVerts": 3,
+      "bounds": {
+        "min": [
+          -1568,
+          896,
+          -460
+        ],
+        "max": [
+          -1552,
+          896,
+          -452
+        ]
+      }
+    },
+    {
+      "surface": 11785,
+      "shaderNum": 119,
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "surfaceType": 1,
+      "firstVert": 65527,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1568,
+          896,
+          -452
+        ],
+        "max": [
+          -1552,
+          1000,
+          -452
+        ]
+      }
+    },
+    {
+      "surface": 11786,
+      "shaderNum": 43,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 65531,
+      "numVerts": 10,
+      "bounds": {
+        "min": [
+          -1664,
+          896,
+          -460
+        ],
+        "max": [
+          -1552,
+          896,
+          -404
+        ]
+      }
+    },
+    {
+      "surface": 11787,
+      "shaderNum": 109,
+      "shader": "textures/general_structure/bunker_walltrans",
+      "surfaceType": 1,
+      "firstVert": 65541,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -1320,
+          1000,
+          -528
+        ],
+        "max": [
+          -1192,
+          1128,
+          -144
+        ]
+      }
+    },
+    {
+      "surface": 11788,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65547,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1776,
+          998,
+          -268
+        ],
+        "max": [
+          -1776,
+          1034,
+          -256
+        ]
+      }
+    },
+    {
+      "surface": 11789,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65551,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1680,
+          998,
+          -268
+        ],
+        "max": [
+          -1680,
+          1034,
+          -256
+        ]
+      }
+    },
+    {
+      "surface": 11790,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65555,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1776,
+          998,
+          -268
+        ],
+        "max": [
+          -1680,
+          998,
+          -256
+        ]
+      }
+    },
+    {
+      "surface": 11791,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65559,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1776,
+          998,
+          -268
+        ],
+        "max": [
+          -1680,
+          1034,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11792,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65563,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1776,
+          998,
+          -256
+        ],
+        "max": [
+          -1680,
+          1034,
+          -256
+        ]
+      }
+    },
+    {
+      "surface": 11793,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65567,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1768,
+          1008,
+          -396
+        ],
+        "max": [
+          -1768,
+          1024,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11794,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65571,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1766,
+          1008,
+          -396
+        ],
+        "max": [
+          -1766,
+          1024,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11795,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65575,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1768,
+          1008,
+          -396
+        ],
+        "max": [
+          -1766,
+          1008,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11796,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65579,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1768,
+          1008,
+          -396
+        ],
+        "max": [
+          -1766,
+          1024,
+          -396
+        ]
+      }
+    },
+    {
+      "surface": 11797,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65583,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1768,
+          1008,
+          -268
+        ],
+        "max": [
+          -1766,
+          1024,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11798,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65587,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1690,
+          1008,
+          -396
+        ],
+        "max": [
+          -1690,
+          1024,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11799,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65591,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1688,
+          1008,
+          -396
+        ],
+        "max": [
+          -1688,
+          1024,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11800,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65595,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1690,
+          1008,
+          -396
+        ],
+        "max": [
+          -1688,
+          1008,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11801,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65599,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1690,
+          1008,
+          -396
+        ],
+        "max": [
+          -1688,
+          1024,
+          -396
+        ]
+      }
+    },
+    {
+      "surface": 11802,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 65603,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1690,
+          1008,
+          -268
+        ],
+        "max": [
+          -1688,
+          1024,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11803,
+      "shaderNum": 109,
+      "shader": "textures/general_structure/bunker_walltrans",
+      "surfaceType": 1,
+      "firstVert": 65607,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1776,
+          1000,
+          -396
+        ],
+        "max": [
+          -1768,
+          1008,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11804,
+      "shaderNum": 109,
+      "shader": "textures/general_structure/bunker_walltrans",
+      "surfaceType": 1,
+      "firstVert": 65611,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1688,
+          1000,
+          -396
+        ],
+        "max": [
+          -1680,
+          1008,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 11805,
+      "shaderNum": 109,
+      "shader": "textures/general_structure/bunker_walltrans",
+      "surfaceType": 1,
+      "firstVert": 65615,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2304,
+          1000,
+          -528
+        ],
+        "max": [
+          -1792,
+          1000,
+          -396
+        ]
+      }
+    },
+    {
+      "surface": 11806,
+      "shaderNum": 109,
+      "shader": "textures/general_structure/bunker_walltrans",
+      "surfaceType": 1,
+      "firstVert": 65621,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -1680,
+          1000,
+          -396
+        ],
+        "max": [
+          -1320,
+          1000,
+          -256
+        ]
+      }
+    },
+    {
+      "surface": 11807,
+      "shaderNum": 109,
+      "shader": "textures/general_structure/bunker_walltrans",
+      "surfaceType": 1,
+      "firstVert": 65627,
+      "numVerts": 5,
+      "bounds": {
+        "min": [
+          -1664,
+          1000,
+          -528
+        ],
+        "max": [
+          -1320,
+          1000,
+          -396
+        ]
+      }
+    },
+    {
+      "surface": 11808,
+      "shaderNum": 109,
+      "shader": "textures/general_structure/bunker_walltrans",
+      "surfaceType": 1,
+      "firstVert": 65632,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2304,
+          1000,
+          -396
+        ],
+        "max": [
+          -1776,
+          1000,
+          -256
+        ]
+      }
+    },
+    {
+      "surface": 11809,
+      "shaderNum": 109,
+      "shader": "textures/general_structure/bunker_walltrans",
+      "surfaceType": 1,
+      "firstVert": 65638,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -2304,
+          1000,
+          -256
+        ],
+        "max": [
+          -1320,
+          1000,
+          -144
+        ]
+      }
+    },
+    {
+      "surface": 11810,
+      "shaderNum": 119,
+      "shader": "textures/mohcommon/jeff-concrete-walla",
+      "surfaceType": 1,
+      "firstVert": 65644,
+      "numVerts": 6,
+      "bounds": {
+        "min": [
+          -1792,
+          1000,
+          -396
+        ],
+        "max": [
+          -1664,
+          1032,
+          -396
+        ]
+      }
+    },
+    {
+      "surface": 11811,
+      "shaderNum": 122,
+      "shader": "textures/blasted/bunkerdoor3",
+      "surfaceType": 1,
+      "firstVert": 65650,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1766,
+          1012,
+          -396
+        ],
+        "max": [
+          -1690,
+          1012,
+          -268
+        ]
+      }
+    },
+    {
+      "surface": 14563,
+      "shaderNum": 53,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 77983,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2304,
+          996,
+          -208
+        ],
+        "max": [
+          -1318,
+          996,
+          -144
+        ]
+      }
+    },
+    {
+      "surface": 14564,
+      "shaderNum": 128,
+      "shader": "textures/general_structure/concretewall2",
+      "surfaceType": 1,
+      "firstVert": 77987,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2304,
+          996,
+          -208
+        ],
+        "max": [
+          -1318,
+          1000,
+          -208
+        ]
+      }
+    },
+    {
+      "surface": 14565,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 77991,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2304,
+          992,
+          -168
+        ],
+        "max": [
+          -1316,
+          992,
+          -144
+        ]
+      }
+    },
+    {
+      "surface": 14566,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 77995,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -2304,
+          992,
+          -168
+        ],
+        "max": [
+          -1316,
+          996,
+          -168
+        ]
+      }
+    },
+    {
+      "surface": 14567,
+      "shaderNum": 128,
+      "shader": "textures/general_structure/concretewall2",
+      "surfaceType": 1,
+      "firstVert": 77999,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1320,
+          996,
+          -208
+        ],
+        "max": [
+          -1188,
+          1128,
+          -208
+        ]
+      }
+    },
+    {
+      "surface": 14568,
+      "shaderNum": 53,
+      "shader": "textures/general_structure/jh_conc512b",
+      "surfaceType": 1,
+      "firstVert": 78003,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1318,
+          996,
+          -208
+        ],
+        "max": [
+          -1188,
+          1126,
+          -144
+        ]
+      }
+    },
+    {
+      "surface": 14569,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 78007,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1318,
+          992,
+          -168
+        ],
+        "max": [
+          -1184,
+          1126,
+          -168
+        ]
+      }
+    },
+    {
+      "surface": 14570,
+      "shaderNum": 14,
+      "shader": "textures/general_industrial/deckgrate_set1b",
+      "surfaceType": 1,
+      "firstVert": 78011,
+      "numVerts": 4,
+      "bounds": {
+        "min": [
+          -1316,
+          992,
+          -168
+        ],
+        "max": [
+          -1184,
+          1124,
+          -144
+        ]
+      }
+    }
+  ]
+}

@@ -4,13 +4,13 @@
     "mapName":  "codex_obj_team2_expanded",
     "gameType":  4,
     "exactPk3Count":  8,
-    "candidateSha256":  "b7c55baf2002aee31c8c53c322ba3289779f55053afc6bf69ce9ae7630a2a19e",
+    "candidateSha256":  "93390daf91f49b03712685539eb194ff4db15629d78ada9bbfa95031d87c9394",
     "engineSha256":  "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
     "bspParse":  [
-                     "[2026-08-09 15:18:16 UTC-5.000] BSP file loaded and parsed in 0.120 seconds"
+                     "[2026-08-09 16:24:41 UTC-5.000] BSP file loaded and parsed in 0.137 seconds"
                  ],
     "recast":  [
-                   "[2026-08-09 15:18:18 UTC-5.000] Recast navigation mesh(es) generated in 2.065 seconds"
+                   "[2026-08-09 16:24:43 UTC-5.000] Recast navigation mesh(es) generated in 2.224 seconds"
                ],
     "botsEntered":  8,
     "botNames":  [
@@ -24,13 +24,13 @@
                      "bot8"
                  ],
     "combatEvents":  2,
-    "combatRequired":  false,
+    "combatRequired":  true,
     "candidateDiagnostics":  [
 
                              ],
     "wrapperPrecacheReferences":  1,
     "expectedRetailBotRunDiagnostics":  8,
     "scriptErrorCount":  5,
-    "sampleSeconds":  35,
+    "sampleSeconds":  40,
     "log":  "C:\\tmp\\codex-codex_obj_team2_expanded-runtime\\home\\main\\qconsole.log"
 }

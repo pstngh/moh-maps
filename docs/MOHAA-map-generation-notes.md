@@ -2704,3 +2704,27 @@ The reproduced three-entry PK3 is 2,317,942 bytes with SHA-256 `b7c55baf2002aee3
 **PROVEN changed-boundary face rule:** when an expansion changes where players can stand or look from, prior hidden-face assumptions are invalid. Fully skin every ambiguous added structural face with a solid visible material, reject caulk/nodraw and unintended alpha construction inside the added range, and inspect from both the old and new sides.
 
 **PROVEN human-angle regression rule:** every user screenshot that disproves acceptance becomes a named mandatory camera with the same viewing domain. Never let a convenient interior contact sheet stand in for the exterior angle that actually failed.
+
+## `codex_obj_team2_expanded` revision 3: complete boundary removal and Allied exterior route
+
+Date: 2026-08-09
+
+The user asked for a much larger expansion, removal of the visible east fences and their concrete/brick base, and an outdoor connection from Allied spawn to the yards behind the bunker. Source-owner inspection showed why revision 2's connector-only policy was inadequate. The east perimeter was distributed across entities 666-684 and world brushes 1109-1115/1124: fence panels, barbwire, posts, caps, rails, and a `general_structure/concretewall2` curb. Revision 3 removes that complete untargeted system plus nine footprint foliage entities. A compiled BSP19 regional query then found zero `secfence` or `barbwire` surfaces and no old bottom curb in the removed east zone.
+
+The annex grew from 156 brushes / 53 entities to 205 fully visible solid brushes / 94 entities. Its one 1,824-unit-wide six-step apron replaces the two narrow entries. An L-shaped deck carries three-bay north and south workshops, a four-bay main hall with partitions/catwalk, canopy, arcade, roof equipment, cover, utilities, 23 fixture/light groups, and 12 neutral DM starts. Original preservation remains strict: 23 doors, 88 targetnames, the Objective graph, and 16 Allied plus 16 Axis starts are unchanged.
+
+The Allied route required a second complete ownership audit. Entity 442 was the gate panel, entity 444 the middle post, world brush 3224 the continuous curb, brushes 3228/3229 the rails, and brush 819 a continuous player clip. Removing those exact untargeted owners plus foliage entity 453 opened Y=344..670; split solid curb/rail replacements preserve the adjacent perimeter. The new top-Z -464 route is 320 units wide and turns east behind the bunker. Compiled inspection finds no panel across the 326-unit gate. Stock barbwire entity 437 remains overhead at Z=-230..-200, providing 234 units of route-floor clearance; the neighboring panels remain on either side.
+
+The first larger design used one rectangular northern extension and leaked. Focused Q3map probes narrowed the cause: apparently empty outdoor terrain is not equivalent to sealed playable hull. New construction west of X=3584 could not continue north of Y=2208 without cutting the decorative sky boundary, while Y=2208..2496 remained sealed east of X=3584. The final L-shaped footprint obeys this direction-dependent constraint, writes a 367,565-byte portal file, produces no line file, and completes VIS. This failed rectangle is retained as negative evidence against footprint selection by entity/terrain emptiness alone.
+
+Full Q3map/VIS/MOHlight completed in 119.673/0.297/356.013 seconds. The BSP19 has 19,224 surfaces, 66 lightmap pages, and 68,840 visibility bytes. There are no degenerates, light clamps, or light hash warnings. The one `textures/notexture` image warning is inherited. Q3map labels four unchanged stock `static_corona_orange` helpers as leaked lights, but this is classified helper behavior rather than a structural leak because `.prt` exists, `.lin` does not, and VIS succeeds.
+
+Exact-package Objective QA parsed the BSP in 0.137 seconds, generated Recast in 2.224 seconds, admitted eight bots, and observed two combat events in 40 seconds with zero candidate diagnostics. FFA topology QA parsed in 0.122 seconds, generated Recast in 2.125 seconds, admitted eight bots, and observed three combat events in 45 seconds. Eighteen fixed views cover the full frontage, both workshops, hall/catwalk, overview, Allied gate in both directions, outer lane, and rear turn. Two initial frontage cameras landed inside the new steps; moving them into proven playable air and repeating all views established camera-origin validation as part of geometry QA.
+
+The final deterministic MAP/BSP/PK3 hashes are `b601d530...2553d`, `425490de...927f1`, and `93390daf...39a4`. Human revision-3 play remains authoritative for route choice, door/objective completion, balance, and final visual acceptance.
+
+**PROVEN cooperating-boundary rule:** when removing a perimeter, enumerate the full owner system—panel, wire, posts/caps, rails, curb, collision/player clip, and foliage—then remove only documented untargeted owners and verify the compiled region for every old material/obstruction.
+
+**PROVEN outdoor-hull rule:** stock outdoor terrain and scenery bounds do not prove sealed buildable space. Probe footprint growth with focused Q3map passes, require `.prt` with no `.lin`, and encode direction-dependent safe limits in the generator.
+
+**PROVEN camera-origin rule:** fixed views must be revalidated after geometry changes. A captured frame from inside a new step or wall is a failed visual gate, not evidence about that area.

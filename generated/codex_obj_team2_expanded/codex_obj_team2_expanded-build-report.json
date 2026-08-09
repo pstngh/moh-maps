@@ -7,14 +7,18 @@
                    "bytes":  5478775,
                    "sha256":  "04cbee45bb4d94d5289d52b51e302984e3f6ce8843d7bdd0194500f4be35ee2f"
                },
-    "transform":  "revision 2 byte-preserving obj_team2 expansion: preserve retail gameplay, fully skin every added brush, remove transparent construction materials, and add two complete service sheds to the east annex",
+    "transform":  "revision 3 byte-preserving obj_team2 expansion: remove the complete east fence/curb, replace it with a continuous grand frontage, more than double the annex footprint, and add an Allied-spawn exterior route into the rear bunker yard",
     "terrainControlMode":  "legacy-full-row",
     "transformed":  {
-                        "addedBrushes":  156,
-                        "addedEntities":  53,
-                        "removedFoliageEntities":  9,
-                        "removedConnectorObstructions":  5,
-                        "dmSpawnsAdded":  8
+                        "addedBrushes":  205,
+                        "addedEntities":  94,
+                        "removedFoliageEntities":  10,
+                        "removedEastFenceEntities":  19,
+                        "removedAlliedGateEntities":  2,
+                        "removedWorldBrushes":  12,
+                        "removedEastFenceWorldBrushes":  8,
+                        "removedAlliedGateWorldBrushes":  4,
+                        "dmSpawnsAdded":  12
                     },
     "retailPaks":  [
                        {
@@ -57,34 +61,34 @@
                    "q3mapArgs":  [
 
                                  ],
-                   "q3mapSeconds":  121.914,
-                   "q3mapWarnings":  136,
+                   "q3mapSeconds":  119.673,
+                   "q3mapWarnings":  151,
                    "q3mapMissingImageWarnings":  1,
-                   "q3mapLeakDiagnostics":  0,
+                   "q3mapLeakDiagnostics":  4,
                    "q3mapDegenerateDiagnostics":  0,
-                   "visSeconds":  0.287,
-                   "mohlightSeconds":  376.547,
+                   "visSeconds":  0.297,
+                   "mohlightSeconds":  356.013,
                    "mohlightThreads":  1,
                    "lightClampWarnings":  0,
                    "lightHashWarnings":  0
                },
     "map":  {
-                "bytes":  5585462,
-                "sha256":  "398f42625ea2970fbca01607c9c72ebf05465ec003fb6abdecf6214b42b231fc"
+                "bytes":  5598022,
+                "sha256":  "b601d530d86f6b113af38e0ad9e57178c5bb69b5320670f304dc67976ce2553d"
             },
     "bsp":  {
                 "bsp":  "generated/codex_obj_team2_expanded/main/maps/obj/codex_obj_team2_expanded.bsp",
-                "bytes":  13000688,
-                "sha256":  "48d0a46bee62f51db8164641bcc99fb26ddf5d005cce808673fe6a3e00811ba0",
+                "bytes":  13328296,
+                "sha256":  "425490de3ee0520facaf0b08edf9f8376fd1875ab023a41abdb280be520927f1",
                 "ident":  "0x35313032",
                 "version":  19,
-                "checksum":  "0xf7fb1fc3",
-                "shaders":  266,
-                "surfaces":  19053,
-                "lightmapPages":  63,
-                "allocatedLightmapPages":  63,
-                "visibilityBytes":  58528,
-                "entityBytes":  40331,
+                "checksum":  "0x51741bb9",
+                "shaders":  265,
+                "surfaces":  19224,
+                "lightmapPages":  66,
+                "allocatedLightmapPages":  66,
+                "visibilityBytes":  68840,
+                "entityBytes":  41860,
                 "classCounts":  {
                                     "animate_equipment_radio-military":  1,
                                     "func_barrel":  4,
@@ -95,10 +99,10 @@
                                     "fx_smoke_smallfry":  1,
                                     "info_player_allied":  16,
                                     "info_player_axis":  16,
-                                    "info_player_deathmatch":  22,
+                                    "info_player_deathmatch":  26,
                                     "info_player_start":  1,
                                     "info_splinepath":  22,
-                                    "light":  193,
+                                    "light":  204,
                                     "script_model":  8,
                                     "script_object":  25,
                                     "script_origin":  11,
@@ -109,8 +113,8 @@
             },
     "package":  {
                     "entries":  3,
-                    "bytes":  2317942,
-                    "sha256":  "b7c55baf2002aee31c8c53c322ba3289779f55053afc6bf69ce9ae7630a2a19e",
+                    "bytes":  2387483,
+                    "sha256":  "93390daf91f49b03712685539eb194ff4db15629d78ada9bbfa95031d87c9394",
                     "reproducedTwice":  true
                 }
 }

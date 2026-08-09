@@ -4,7 +4,7 @@
   "gameDirectory": "obj",
   "sourceMap": "aa/obj_team2.map",
   "originalMap": "obj_team2",
-  "displayName": "V2 Facility: East Annex",
+  "displayName": "V2 Facility: Expanded Complex",
   "terrainControlMode": "legacy-full-row",
   "generatorScript": "generated/codex_obj_team2_expanded/tools/generate_obj_team2_expanded.js",
   "validatorScript": "generated/codex_obj_team2_expanded/tools/validate_obj_team2_expanded.js",
