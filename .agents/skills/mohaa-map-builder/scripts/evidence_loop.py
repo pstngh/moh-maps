@@ -1662,6 +1662,23 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     and audited_parts[-len(relative_parts):] == relative_parts
                 )
 
+            if visual_report is not None:
+                if visual_report.get("mapName") != manifest.get("map_name"):
+                    issues.append(
+                        "bundled visual report mapName does not match manifest"
+                    )
+                correlate_role(
+                    "candidate",
+                    visual_report.get("candidateSha256"),
+                    "bundled visual report candidate",
+                )
+                if "engineSha256" in visual_report:
+                    correlate_role(
+                        "engine:visual",
+                        visual_report.get("engineSha256"),
+                        "bundled visual report engine",
+                    )
+
             raw_logs = audit_report.get("raw_logs")
             if not isinstance(raw_logs, dict):
                 raw_logs = {}
@@ -1694,6 +1711,23 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                             "raw_log:visual original name does not match "
                             "bundled visual report log"
                         )
+
+                    if "runtimeLog" in visual_report:
+                        declared_runtime_log = visual_report.get("runtimeLog")
+                        if not path_claim_matches(
+                            declared_runtime_log, record.get("path")
+                        ):
+                            issues.append(
+                                "raw_log:visual runtimeLog path does not match "
+                                "bundled audit raw log"
+                            )
+                        if claimed_name(declared_runtime_log) != claimed_name(
+                            expected_name
+                        ):
+                            issues.append(
+                                "raw_log:visual original name does not match "
+                                "bundled visual report runtimeLog"
+                            )
 
             runtime_identity = audit_report.get("runtime_identity")
             runtime_by_label: dict[str, dict[str, Any]] = {}

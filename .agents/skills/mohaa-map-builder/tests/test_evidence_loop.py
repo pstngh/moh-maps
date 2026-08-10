@@ -216,6 +216,18 @@ class EvidenceLoopTests(unittest.TestCase):
                 (destination / runtime_entry["object"]).read_text(encoding="utf-8")
             )
             visual["log"] = runtime["log"]
+        elif variant == "runtime-log":
+            runtime_entry = by_role["report:runtime"]
+            runtime = json.loads(
+                (destination / runtime_entry["object"]).read_text(encoding="utf-8")
+            )
+            visual["runtimeLog"] = runtime["log"]
+        elif variant == "map-name":
+            visual["mapName"] = "fabricated_map"
+        elif variant == "candidate-hash":
+            visual["candidateSha256"] = "0" * 64
+        elif variant == "engine-hash":
+            visual["engineSha256"] = by_role["engine:bot"]["sha256"]
         elif variant == "first-screenshot":
             visual["screenshots"][0] = dict(visual["screenshots"][1])
         elif variant == "runtime-package":
@@ -781,6 +793,22 @@ class EvidenceLoopTests(unittest.TestCase):
             (
                 "raw-log",
                 "raw_log:visual path does not match bundled audit raw log",
+            ),
+            (
+                "runtime-log",
+                "raw_log:visual runtimeLog path does not match bundled audit raw log",
+            ),
+            (
+                "map-name",
+                "bundled visual report mapName does not match manifest",
+            ),
+            (
+                "candidate-hash",
+                "candidate hash does not match bundled visual report candidate",
+            ),
+            (
+                "engine-hash",
+                "engine:visual hash does not match bundled visual report engine",
             ),
             (
                 "first-screenshot",

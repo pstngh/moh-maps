@@ -225,6 +225,10 @@ screenshot paths, hashes, byte counts, and names to match the corresponding
 materialized roles and audit records. Hash-valid rewrites of the report and
 audit index cannot substitute those inputs.
 
+Also require the visual report's map name and candidate hash, optional engine
+hash, and optional duplicate `runtimeLog` claim to match the manifest and the
+candidate, visual-engine, and visual-raw-log roles they describe.
+
 Treat a loose or previously stored audit as stale after the scorer changes
 until it is replayed and materialized with the new scorer hash. Verification
 must reject missing, changed, or unexpected bundle files. A valid bundle proves
