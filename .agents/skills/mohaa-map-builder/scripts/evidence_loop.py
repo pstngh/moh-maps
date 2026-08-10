@@ -151,6 +151,15 @@ def inspect_pk3(path: Path, expected_bsp_member: str) -> tuple[dict[str, Any], l
         )
     if len(bsp_members) != 1:
         errors.append(f"expected exactly one BSP member in candidate, found {len(bsp_members)}")
+    if not expected_bsp_member.lower().endswith(".bsp"):
+        errors.append("expected BSP member path must end with .bsp")
+    if (
+        len(bsp_members) == 1
+        and bsp_members[0]["path"] != expected_bsp_member
+    ):
+        errors.append(
+            f"sole BSP member {bsp_members[0]['path']!r} does not match expected path"
+        )
 
     return (
         {
@@ -1454,6 +1463,24 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
         issues.append("scorer artifact does not match audit_scorer_sha256")
     if audit is None or audit.get("sha256") != manifest.get("audit_artifact_sha256"):
         issues.append("audit artifact does not match audit_artifact_sha256")
+
+    candidate_inspection: dict[str, Any] | None = None
+    expected_bsp_member = manifest.get("expected_bsp_member")
+    if not isinstance(expected_bsp_member, str) or not expected_bsp_member:
+        issues.append("manifest expected_bsp_member is invalid")
+    elif candidate is not None:
+        try:
+            candidate_inspection, candidate_issues = inspect_pk3(
+                bundle_dir / Path(candidate["object"]),
+                expected_bsp_member,
+            )
+        except (EvidenceError, KeyError) as exc:
+            issues.append(f"cannot independently inspect bundled candidate: {exc}")
+        else:
+            issues.extend(
+                f"bundled candidate: {issue}"
+                for issue in candidate_issues
+            )
     if audit is not None:
         try:
             audit_report = load_object(
@@ -1463,10 +1490,26 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
         except (EvidenceError, KeyError) as exc:
             issues.append(str(exc))
         else:
-            if audit_report.get("candidate", {}).get("sha256") != manifest.get(
-                "candidate_sha256"
-            ):
+            audit_candidate = audit_report.get("candidate")
+            if not isinstance(audit_candidate, dict):
+                audit_candidate = {}
+                issues.append("bundled audit candidate must be an object")
+            if audit_candidate.get("sha256") != manifest.get("candidate_sha256"):
                 issues.append("bundled audit candidate identity mismatch")
+            if candidate_inspection is not None:
+                for field in (
+                    "bytes",
+                    "sha256",
+                    "expected_bsp_member",
+                    "bsp_sha256",
+                    "member_count",
+                    "members",
+                ):
+                    if audit_candidate.get(field) != candidate_inspection.get(field):
+                        issues.append(
+                            f"bundled audit candidate {field} does not match "
+                            "independent candidate inspection"
+                        )
             if audit_report.get("promotion_allowed") is not False:
                 issues.append("bundled audit must never permit promotion")
             if (

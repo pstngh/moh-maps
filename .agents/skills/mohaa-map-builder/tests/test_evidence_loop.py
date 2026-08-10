@@ -167,6 +167,34 @@ class EvidenceLoopTests(unittest.TestCase):
             f"{manifest_sha}  manifest.json\n", encoding="ascii"
         )
 
+    def _write_bundle_audit(
+        self,
+        destination: Path,
+        manifest: dict,
+        audit: dict,
+    ) -> None:
+        audit_entry = next(
+            item for item in manifest["artifacts"] if item["role"] == "audit"
+        )
+        old_object = audit_entry["object"]
+        payload = (json.dumps(audit, indent=2) + "\n").encode("utf-8")
+        digest = hashlib.sha256(payload).hexdigest()
+        relative = f"objects/sha256/{digest}"
+        (destination / relative).write_bytes(payload)
+        audit_entry.update(
+            {
+                "bytes": len(payload),
+                "sha256": digest,
+                "object": relative,
+            }
+        )
+        manifest["audit_artifact_sha256"] = digest
+        referenced = {item["object"] for item in manifest["artifacts"]}
+        old_path = destination / old_object
+        if old_object not in referenced:
+            old_path.unlink()
+        self._write_bundle_manifest(destination, manifest)
+
     def _substitute_bundle_role(
         self,
         source: Path,
@@ -542,6 +570,58 @@ class EvidenceLoopTests(unittest.TestCase):
             verification["issues"],
         )
         self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_reopens_candidate_for_bsp_claims(self) -> None:
+        source = self.root / "bundle-candidate-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        variants = ("expected-member", "member-count", "inner-hash")
+        for index, variant in enumerate(variants):
+            with self.subTest(variant=variant):
+                destination = self.root / f"bundle-candidate-claim-{index}"
+                shutil.copytree(source, destination)
+                manifest_path = destination / "manifest.json"
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+                audit_entry = next(
+                    item
+                    for item in manifest["artifacts"]
+                    if item["role"] == "audit"
+                )
+                audit = json.loads(
+                    (destination / audit_entry["object"]).read_text(encoding="utf-8")
+                )
+                if variant == "expected-member":
+                    fabricated = "maps/dm/fabricated.bsp"
+                    manifest["expected_bsp_member"] = fabricated
+                    audit["candidate"]["expected_bsp_member"] = fabricated
+                elif variant == "member-count":
+                    audit["candidate"]["member_count"] = 999
+                else:
+                    fabricated_hash = "0" * 64
+                    audit["candidate"]["bsp_sha256"] = fabricated_hash
+                    bsp_member = next(
+                        item
+                        for item in audit["candidate"]["members"]
+                        if item["path"].endswith(".bsp")
+                    )
+                    bsp_member["sha256"] = fabricated_hash
+                self._write_bundle_audit(
+                    destination,
+                    manifest,
+                    audit,
+                )
+                verification = evidence_loop.verify_evidence_bundle(destination)
+                self.assertFalse(verification["valid"])
+                self.assertTrue(
+                    any("candidate" in issue for issue in verification["issues"]),
+                    verification["issues"],
+                )
+                self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
         repository = self.root / "repo"
