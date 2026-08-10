@@ -1457,10 +1457,15 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
     candidate = by_role.get("candidate")
     scorer = by_role.get("scorer")
     audit = by_role.get("audit")
+    executing_scorer_sha = sha256_file(Path(__file__).resolve())
     if candidate is None or candidate.get("sha256") != manifest.get("candidate_sha256"):
         issues.append("candidate artifact does not match manifest identity")
     if scorer is None or scorer.get("sha256") != manifest.get("audit_scorer_sha256"):
         issues.append("scorer artifact does not match audit_scorer_sha256")
+    if scorer is None or scorer.get("sha256") != executing_scorer_sha:
+        issues.append(
+            "bundled scorer does not match the currently executing evidence verifier"
+        )
     if audit is None or audit.get("sha256") != manifest.get("audit_artifact_sha256"):
         issues.append("audit artifact does not match audit_artifact_sha256")
 
@@ -1683,6 +1688,7 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
         "manifest_sha256": manifest_sha,
         "candidate_sha256": manifest.get("candidate_sha256"),
         "audit_scorer_sha256": manifest.get("audit_scorer_sha256"),
+        "executing_scorer_sha256": executing_scorer_sha,
         "issues": issues,
         "promotion_allowed": False,
     }

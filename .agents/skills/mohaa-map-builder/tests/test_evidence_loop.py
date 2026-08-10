@@ -623,6 +623,59 @@ class EvidenceLoopTests(unittest.TestCase):
                 )
                 self.assertFalse(verification["promotion_allowed"])
 
+    def test_bundle_verification_rejects_scorer_not_executing_verifier(self) -> None:
+        source = self.root / "bundle-scorer-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-scorer-substituted"
+        shutil.copytree(source, destination)
+        manifest_path = destination / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        by_role = {item["role"]: item for item in manifest["artifacts"]}
+        scorer = by_role["scorer"]
+        audit_entry = by_role["audit"]
+        old_scorer_object = scorer["object"]
+        replacement = b"not the executing evidence verifier\n"
+        replacement_sha = hashlib.sha256(replacement).hexdigest()
+        replacement_object = f"objects/sha256/{replacement_sha}"
+        (destination / replacement_object).write_bytes(replacement)
+        scorer.update(
+            {
+                "bytes": len(replacement),
+                "sha256": replacement_sha,
+                "object": replacement_object,
+            }
+        )
+        manifest["audit_scorer_sha256"] = replacement_sha
+        audit = json.loads(
+            (destination / audit_entry["object"]).read_text(encoding="utf-8")
+        )
+        scorer_record = next(
+            item for item in audit["materialized_roles"] if item["role"] == "scorer"
+        )
+        scorer_record.update(
+            {
+                "bytes": len(replacement),
+                "sha256": replacement_sha,
+            }
+        )
+        if old_scorer_object != replacement_object:
+            (destination / old_scorer_object).unlink()
+        self._write_bundle_audit(destination, manifest, audit)
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        self.assertIn(
+            "bundled scorer does not match the currently executing evidence verifier",
+            verification["issues"],
+        )
+        self.assertEqual(verification["executing_scorer_sha256"], sha256(SCRIPT))
+        self.assertFalse(verification["promotion_allowed"])
+
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
         repository = self.root / "repo"
         evidence = repository / "generated" / self.map_name / "evidence"

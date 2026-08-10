@@ -210,6 +210,11 @@ rehashed together. Repeating unchanged inputs must produce the same manifest has
 regardless of the caller's working directory. Resolve relative
 report-owned log, screenshot, and runtime-package paths by walking ancestors of
 the report file; never resolve them from the process working directory.
+Require the bundled scorer object and manifest scorer identity to equal the
+`evidence_loop.py` verifier currently executing. A self-consistent replacement
+scorer is not proof that it produced the audit. After any scorer change, treat
+older bundles as stale and rematerialize them before verification; never execute
+untrusted bundled scorer code merely to make an old bundle pass.
 
 Treat a loose or previously stored audit as stale after the scorer changes
 until it is replayed and materialized with the new scorer hash. Verification
