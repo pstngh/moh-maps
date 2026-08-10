@@ -36,6 +36,10 @@ BOT_COMBAT_RE = re.compile(
     r"blew (?:himself|herself) up|was .* by bot\d+)",
     re.IGNORECASE,
 )
+BSP_PARSE_RE = re.compile(r"BSP file loaded and parsed in", re.IGNORECASE)
+RECAST_GENERATION_RE = re.compile(
+    r"Recast navigation mesh\(es\) generated in", re.IGNORECASE
+)
 
 RUNTIME_LOG_TIMESTAMP_RE = re.compile(r"^\[\d{4}-\d{2}-\d{2}\s+[^\]]+\]\s*")
 
@@ -497,7 +501,7 @@ def audit_runtime(report: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any
     }
 
 
-def recount_bot_log_activity(path: Path) -> tuple[int, int]:
+def recount_bot_log_activity(path: Path) -> tuple[int, int, int, int]:
     lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
     entered = {
         match.group(1).casefold()
@@ -505,7 +509,9 @@ def recount_bot_log_activity(path: Path) -> tuple[int, int]:
         if (match := BOT_ENTRY_RE.search(line)) is not None
     }
     combat = sum(1 for line in lines if BOT_COMBAT_RE.search(line) is not None)
-    return len(entered), combat
+    bsp_parse = sum(1 for line in lines if BSP_PARSE_RE.search(line) is not None)
+    recast = sum(1 for line in lines if RECAST_GENERATION_RE.search(line) is not None)
+    return len(entered), combat, bsp_parse, recast
 
 
 def audit_bot_activity(report: dict[str, Any], plan: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -1842,7 +1848,12 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     issues.append("required bundle role is missing: raw_log:bot")
                 else:
                     try:
-                        recounted_entered, recounted_combat = (
+                        (
+                            recounted_entered,
+                            recounted_combat,
+                            recounted_bsp_parse,
+                            recounted_recast,
+                        ) = (
                             recount_bot_log_activity(
                                 bundle_dir / Path(raw_bot_entry["object"])
                             )
@@ -1883,6 +1894,37 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                                 issues.append(
                                     f"bundled audit bot_activity {audit_field} does "
                                     "not match raw_log:bot recount"
+                                )
+                        for report_field, audit_field, observed in (
+                            (
+                                "bspParse",
+                                "bsp_parse_observations",
+                                recounted_bsp_parse,
+                            ),
+                            (
+                                "recast",
+                                "recast_observations",
+                                recounted_recast,
+                            ),
+                        ):
+                            report_observations = runtime_report.get(report_field)
+                            report_count = (
+                                len(report_observations)
+                                if isinstance(report_observations, list)
+                                else None
+                            )
+                            if report_count != observed:
+                                issues.append(
+                                    f"bundled runtime report {report_field} count "
+                                    "does not match raw_log:bot recount"
+                                )
+                            if (
+                                isinstance(runtime_summary, dict)
+                                and runtime_summary.get(audit_field) != observed
+                            ):
+                                issues.append(
+                                    f"bundled audit runtime {audit_field} does not "
+                                    "match raw_log:bot recount"
                                 )
 
             raw_logs = audit_report.get("raw_logs")

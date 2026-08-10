@@ -90,6 +90,8 @@ class EvidenceLoopTests(unittest.TestCase):
                         "bot4 was perforated by bot5",
                     )
                 )
+                lines.append("BSP file loaded and parsed in 0.100 seconds")
+                lines.append("Recast navigation mesh(es) generated in 0.200 seconds")
             log.write_text("\n".join(lines) + "\n", encoding="utf-8")
         candidate_sha = sha256(self.candidate)
         self.visual_report = self.root / "visual.json"
@@ -334,6 +336,9 @@ class EvidenceLoopTests(unittest.TestCase):
                 "combat-threshold-bool": True,
                 "combat-threshold-string": "3",
             }[variant]
+        elif variant == "runtime-load-observations":
+            runtime["bspParse"] = []
+            runtime["recast"] = []
         else:
             self.fail(f"unsupported runtime-report variant: {variant}")
 
@@ -375,6 +380,9 @@ class EvidenceLoopTests(unittest.TestCase):
             audit["bot_activity"]["minimum_combat_events"] = runtime[
                 "minimumCombatEvents"
             ]
+        elif variant == "runtime-load-observations":
+            audit["runtime"]["bsp_parse_observations"] = 0
+            audit["runtime"]["recast_observations"] = 0
         audit["inputs"]["runtime_report"].update(
             {"bytes": len(runtime_payload), "sha256": runtime_sha}
         )
@@ -1128,6 +1136,33 @@ class EvidenceLoopTests(unittest.TestCase):
                     verification["issues"],
                 )
                 self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_recounts_runtime_load_observations(self) -> None:
+        source = self.root / "bundle-runtime-load-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-runtime-load-rewrite"
+        self._rewrite_bundle_runtime_report(
+            source,
+            destination,
+            "runtime-load-observations",
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        for expected_issue in (
+            "bundled runtime report bspParse count does not match raw_log:bot recount",
+            "bundled audit runtime bsp_parse_observations does not match raw_log:bot recount",
+            "bundled runtime report recast count does not match raw_log:bot recount",
+            "bundled audit runtime recast_observations does not match raw_log:bot recount",
+        ):
+            with self.subTest(issue=expected_issue):
+                self.assertIn(expected_issue, verification["issues"])
+        self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
         repository = self.root / "repo"
