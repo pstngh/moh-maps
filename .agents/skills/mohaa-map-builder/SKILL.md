@@ -1,6 +1,6 @@
 ---
 name: mohaa-map-builder
-description: "Create, revise, convert, compile, package, and validate Medal of Honor: Allied Assault and OpenMoHAA maps; investigate geometry, material, lighting, runtime, bot, packaging, and visual defects; process screenshot and playtest feedback; maintain repository mapping knowledge; and safely resume interrupted map work from repository checkpoints. Use for any MOHAA/OpenMoHAA map-production or map-quality task in this repository."
+description: "Create, revise, convert, compile, package, and validate Medal of Honor: Allied Assault and OpenMoHAA maps; autonomously run exact-hash screenshot, runtime, bot, evidence-scoring, regression, and governed skill-improvement loops; investigate geometry, material, lighting, runtime, bot, packaging, and visual defects; process screenshot and playtest feedback; maintain repository mapping knowledge; and safely resume interrupted map work from repository checkpoints. Use for any MOHAA/OpenMoHAA map-production, map-quality, evidence-audit, or map-building skill-improvement task in this repository."
 ---
 
 # MOHAA Map Builder
@@ -75,6 +75,29 @@ or promoting mapping knowledge.
 Apply all relevant gates in repository `VALIDATION.md`. Do not describe a map as
 complete, polished, release-ready, visually coherent, or accepted based only on
 compilation, Recast, bot combat, automated screenshots, or absence of criticism.
+
+## Run autonomous evidence and improvement loops
+
+For unattended OpenMoHAA capture/runtime/bot QA, exact-hash evidence scoring,
+comparison between iterations, or improvement of this skill, read
+[autonomous-evidence-loop.md](references/autonomous-evidence-loop.md). Copy
+[evidence-loop.template.json](assets/evidence-loop.template.json) to an external
+evidence workspace and bind it to the exact candidate, fixed views, screenshot
+hashes, visual observations, and instrumented bot evidence.
+
+Use the repository's proven visual and bot launchers, then audit their raw
+reports and isolated runtime copies with
+`scripts/evidence_loop.py`. Inspect every queued screenshot at full resolution;
+file health and capture count are not semantic inspection. Keep bot
+entry/combat, lifecycle, route coverage, visual quality, and human acceptance as
+separate gates. Never infer route coverage from Recast, kills, or bot entry.
+
+The loop may make a focused map iteration only when the active user goal permits
+map edits. It may propose a skill change only from authoritative evidence or a
+repeated controlled result, and must add a regression test plus a fresh-agent
+forward test. The loop and its scorer must always leave human acceptance open,
+set no acceptance field, and never promote a candidate without explicit user
+approval of that exact tested revision.
 
 ## Maintain state and knowledge
 

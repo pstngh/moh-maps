@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "map_name": "replace_with_exact_map_name",
+  "expected_bsp_member": "maps/dm/replace_with_exact_map_name.bsp",
+  "build_provenance": {
+    "source_map": {
+      "path": "replace_with_generated_source_map",
+      "sha256": "replace_with_sha256"
+    },
+    "design_report": {
+      "path": "replace_with_design_report_json",
+      "sha256": "replace_with_sha256"
+    },
+    "compile_log": {
+      "path": "replace_with_full_compile_log",
+      "sha256": "replace_with_sha256"
+    },
+    "compiled_bsp": {
+      "path": "replace_with_compiled_bsp",
+      "sha256": "replace_with_sha256"
+    }
+  },
+  "launch_provenance": {
+    "visual": {
+      "engine_path": "replace_with_openmohaa_executable",
+      "engine_sha256": "replace_with_sha256",
+      "arguments": [
+        "+set fs_basepath <isolated-base>",
+        "+set fs_homepath <isolated-home>",
+        "+map dm/replace_with_exact_map_name"
+      ],
+      "fs_basepath": "replace_with_visual_qa_root/base",
+      "fs_homepath": "replace_with_visual_qa_root/home"
+    },
+    "bot": {
+      "engine_path": "replace_with_omohaaded_executable",
+      "engine_sha256": "replace_with_sha256",
+      "arguments": [
+        "+set fs_basepath <isolated-base>",
+        "+set fs_homepath <isolated-home>",
+        "+map dm/replace_with_exact_map_name"
+      ],
+      "fs_basepath": "replace_with_bot_qa_root/base",
+      "fs_homepath": "replace_with_bot_qa_root/home"
+    }
+  },
+  "runtime_diagnostic_classifications": [],
+  "required_view_categories": [
+    "player_height_forward",
+    "player_height_reverse",
+    "high_angle",
+    "boundary",
+    "interior",
+    "exterior",
+    "transition",
+    "long_sightline"
+  ],
+  "views": [
+    {
+      "id": "replace_with_design_report_view_id",
+      "categories": [
+        "player_height_forward",
+        "exterior",
+        "long_sightline"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "replace_with_reverse_view_id",
+      "categories": [
+        "player_height_reverse",
+        "interior",
+        "transition"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "replace_with_overview_view_id",
+      "categories": [
+        "high_angle",
+        "boundary"
+      ],
+      "perspective": "fixed"
+    }
+  ],
+  "visual_review": {
+    "reviewer_kind": "codex_visual",
+    "candidate_sha256": "replace_after_exact_capture",
+    "views": [
+      {
+        "id": "replace_with_design_report_view_id",
+        "screenshot_sha256": "replace_from_visual_report",
+        "reviewed": false,
+        "blocking_defects": [],
+        "observations": []
+      }
+    ]
+  },
+  "bot_evidence": {
+    "expected_bot_count": 8,
+    "required_routes": [
+      "replace_with_route_id"
+    ],
+    "event_observations": [
+      {
+        "event": "spawn",
+        "source_path": "replace_with_hash_linked_log_or_trace",
+        "source_sha256": "replace_with_sha256",
+        "needle": "replace_with_literal_event_text",
+        "matches": 1
+      }
+    ],
+    "route_observations": [
+      {
+        "route_id": "replace_with_route_id",
+        "method": "instrumented_positions",
+        "source_path": "replace_with_hash_linked_trace",
+        "source_sha256": "replace_with_sha256",
+        "needle": "replace_with_literal_route_sample_text",
+        "sample_count": 2,
+        "unique_bots": 1
+      }
+    ]
+  }
+}

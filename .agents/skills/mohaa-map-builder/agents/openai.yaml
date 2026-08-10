@@ -1,4 +1,4 @@
 interface:
   display_name: "MOHAA Map Builder"
-  short_description: "Build and validate resumable MOHAA maps"
-  default_prompt: "Use $mohaa-map-builder to resume and safely validate the current MOHAA map task."
+  short_description: "Run exact-hash MOHAA map evidence loops"
+  default_prompt: "Use $mohaa-map-builder to resume a MOHAA map task and run exact-hash visual, runtime, bot, and evidence gates without accepting the map."

@@ -40,6 +40,11 @@ Retain full-resolution evidence for:
 - long sightlines and changed zones;
 - every exact user-reported failure viewpoint.
 
+Bind each view ID to explicit categories in an exact-hash evidence plan. Require
+fixed origins/angles for matrix coverage; spectator-follow and bot-follow images
+may show activity but do not satisfy fixed-view categories. Hash each screenshot
+and inspect it at full resolution before recording a semantic conclusion.
+
 Validate camera origins after geometry changes. A captured image from inside a
 wall, step, roof, clip, or unrepresentative location is a failed QA sample.
 Automated capture count and script success do not establish visual coherence.
@@ -48,3 +53,6 @@ Convert human screenshot feedback into a named regression viewpoint, diagnose
 the shared cause from source and engine evidence, and re-inspect all affected
 viewing domains. Never use lighting, fog, or camera selection to conceal missing
 construction.
+
+For autonomous capture, review records, and regression comparison, follow
+[autonomous-evidence-loop.md](autonomous-evidence-loop.md).

@@ -52,3 +52,13 @@ proven, no-void, no-floating, visually complete, or ready-to-play language:
 
 Human rejection always overrides an earlier automated pass. Preserve the failed
 experiment and explain why its validation surface missed the defect.
+
+## Skill-improvement evidence
+
+Do not convert one generated result into a universal skill rule. Classify a
+lesson as map-specific, harness-specific, engine-specific, or reusable. Promote
+reusable guidance only when authoritative source proves it or controlled
+exact-hash runs repeat it within a stated scope. Add a regression test, validate
+the complete skill, and forward-test a fresh agent on raw evidence without
+supplying the expected diagnosis. A generated audit cannot certify itself, and
+no skill improvement can supply human map acceptance.

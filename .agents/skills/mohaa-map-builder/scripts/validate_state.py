@@ -74,9 +74,13 @@ REQUIRED_PROJECT_FILES = (
     ".agents/skills/mohaa-map-builder/references/verification-protocol.md",
     ".agents/skills/mohaa-map-builder/references/geometry-and-visual-quality.md",
     ".agents/skills/mohaa-map-builder/references/bot-and-runtime-validation.md",
+    ".agents/skills/mohaa-map-builder/references/autonomous-evidence-loop.md",
     ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md",
+    ".agents/skills/mohaa-map-builder/assets/evidence-loop.template.json",
     ".agents/skills/mohaa-map-builder/scripts/validate_state.py",
     ".agents/skills/mohaa-map-builder/scripts/checkpoint.py",
+    ".agents/skills/mohaa-map-builder/scripts/evidence_loop.py",
+    ".agents/skills/mohaa-map-builder/tests/test_evidence_loop.py",
 )
 
 SELF_REFERENTIAL_COMMIT_KEYS = {
