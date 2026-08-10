@@ -1,12 +1,20 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "goal_version": 1,
   "project_goal": "Build reproducible, installable MOHAA/OpenMoHAA DM/TDM maps for enjoyable close- and medium-range bot combat, with evidence-driven construction and explicit human acceptance.",
   "canonical_repository": "https://github.com/pstngh/moh-maps",
   "expected_remote": "https://github.com/pstngh/moh-maps.git",
   "expected_branch": "main",
-  "checkpoint_id": "bootstrap-20260810-001",
-  "checkpoint_updated_utc": "2026-08-10T00:42:44Z",
+  "openmohaa_reference": {
+    "canonical_repository": "https://github.com/openmoh/openmohaa",
+    "inspected_branch": "main",
+    "inspected_commit": "a2f340195975f4f042e28a60b62561dd9a0b2700",
+    "local_reference_path": "C:/Users/plex/Documents/Codex/2026-07-24/pstngh-moh-maps-https-github-com/work/openmohaa",
+    "inspection_date_utc": "2026-08-10",
+    "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
+  },
+  "checkpoint_id": "bootstrap-openmohaa-amendment-20260810-001",
+  "checkpoint_updated_utc": "2026-08-10T00:55:42Z",
   "current_phase": "knowledge-audit",
   "active_map": "codex_dust2_v2",
   "active_revision": "10",

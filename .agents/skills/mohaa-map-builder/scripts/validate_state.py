@@ -6,9 +6,10 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -21,6 +22,7 @@ REQUIRED_TOP_LEVEL = {
     "canonical_repository",
     "expected_remote",
     "expected_branch",
+    "openmohaa_reference",
     "checkpoint_id",
     "checkpoint_updated_utc",
     "current_phase",
@@ -72,6 +74,7 @@ REQUIRED_PROJECT_FILES = (
     ".agents/skills/mohaa-map-builder/references/verification-protocol.md",
     ".agents/skills/mohaa-map-builder/references/geometry-and-visual-quality.md",
     ".agents/skills/mohaa-map-builder/references/bot-and-runtime-validation.md",
+    ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md",
     ".agents/skills/mohaa-map-builder/scripts/validate_state.py",
     ".agents/skills/mohaa-map-builder/scripts/checkpoint.py",
 )
@@ -82,6 +85,15 @@ SELF_REFERENTIAL_COMMIT_KEYS = {
     "containing_commit",
     "checkpoint_commit",
     "head_commit",
+}
+
+REQUIRED_OPENMOHAA_FIELDS = {
+    "canonical_repository",
+    "inspected_branch",
+    "inspected_commit",
+    "local_reference_path",
+    "inspection_date_utc",
+    "source_guide",
 }
 
 
@@ -187,6 +199,49 @@ def validate_state_data(
         errors.append("canonical_repository must identify github.com/pstngh/moh-maps")
     if remote_slug != "github.com/pstngh/moh-maps":
         errors.append("expected_remote must identify github.com/pstngh/moh-maps")
+
+    openmohaa = data.get("openmohaa_reference")
+    if not isinstance(openmohaa, dict):
+        errors.append("openmohaa_reference must be an object")
+    else:
+        reference_missing = sorted(REQUIRED_OPENMOHAA_FIELDS - openmohaa.keys())
+        if reference_missing:
+            errors.append(
+                "openmohaa_reference missing fields: " + ", ".join(reference_missing)
+            )
+        source_slug = normalized_repo_slug(
+            str(openmohaa.get("canonical_repository", ""))
+        )
+        if source_slug != "github.com/openmoh/openmohaa":
+            errors.append(
+                "openmohaa_reference.canonical_repository must identify "
+                "github.com/openmoh/openmohaa"
+            )
+        for field in ("inspected_branch", "local_reference_path", "source_guide"):
+            if not nonempty_string(openmohaa.get(field)):
+                errors.append(f"openmohaa_reference.{field} must be a non-empty string")
+        commit = openmohaa.get("inspected_commit")
+        if not isinstance(commit, str) or re.fullmatch(r"[0-9a-fA-F]{40}", commit) is None:
+            errors.append(
+                "openmohaa_reference.inspected_commit must be a full 40-character Git hash"
+            )
+        inspection_date = openmohaa.get("inspection_date_utc")
+        try:
+            date.fromisoformat(inspection_date)
+        except (TypeError, ValueError):
+            errors.append(
+                "openmohaa_reference.inspection_date_utc must be an ISO-8601 date"
+            )
+        guide = openmohaa.get("source_guide")
+        expected_guide = (
+            ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
+        )
+        if guide != expected_guide:
+            errors.append(
+                f"openmohaa_reference.source_guide must be {expected_guide!r}"
+            )
+        elif repo_root is not None and not (repo_root / guide).is_file():
+            errors.append(f"openmohaa_reference.source_guide does not exist: {guide}")
 
     statuses = data.get("map_statuses")
     if not isinstance(statuses, dict) or not statuses:

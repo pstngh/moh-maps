@@ -10,6 +10,7 @@ without losing the experiments that established it.
 | [`../DECISIONS.md`](../DECISIONS.md) | Durable project decisions | When changing policy or interpreting state |
 | [`../REJECTIONS.md`](../REJECTIONS.md) | Human rejections and superseded claims | Before reusing generated work |
 | [`../VALIDATION.md`](../VALIDATION.md) | Candidate production and acceptance gates | During planning and validation |
+| [`../.agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md`](../.agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md) | Pinned canonical engine-source routing index | Before any runtime-behavior conclusion |
 | [`MAP-GENERATION-PLAYBOOK.md`](MAP-GENERATION-PLAYBOOK.md) | Normative production workflow, subject to the evidence hierarchy | Before every map task |
 | [`STOCK-AA-ASSET-CATALOG.md`](STOCK-AA-ASSET-CATALOG.md) | Stock names and role-scoped observations | Before material or prop work |
 | [`templates/MAP-REVISION-REPORT.md`](templates/MAP-REVISION-REPORT.md) | Repeatable evidence record | During every material iteration |
@@ -30,6 +31,14 @@ Human rejection supersedes automated success and earlier repository language.
 The current checkpoint and `REJECTIONS.md` control map status. Historical
 sections remain useful evidence but are not authoritative merely because they
 are newer or describe a successful build.
+
+Until individually audited, every existing repository document and generated
+report is an untrusted index, not proof. Trace a specific claim to primary
+engine/tool source, original map or asset data, a controlled runtime result, or
+full-resolution human evidence as appropriate. OpenMoHAA source is authoritative
+for implemented runtime semantics at the inspected commit, but cannot establish
+map architecture, geometry, visual fidelity, material or lighting quality,
+combat layout, enjoyment, polish, or acceptance.
 
 ## Learning flow
 

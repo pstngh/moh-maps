@@ -37,3 +37,20 @@
   geometry or behavior.
 - Reason: Existing generated artifacts and documents include confident claims
   later contradicted by human evidence.
+
+## D-005 - Canonical OpenMoHAA source for runtime semantics
+
+- Date: 2026-08-09
+- Status: PROVEN
+- Decision: Use `https://github.com/openmoh/openmohaa` at an explicitly
+  recorded commit as the primary technical reference for engine runtime
+  behavior. Begin with the repository source guide, inspect direct source when
+  needed, distinguish AA/SH/BT/OpenMoHAA variants, and seek controlled runtime
+  confirmation for important conclusions when practical.
+- Boundary: Engine source does not prove map architecture, geometry, visual
+  fidelity, material or lighting quality, combat layout, enjoyment, polish, or
+  acceptance. Existing repository knowledge remains an untrusted index until
+  the individual claim is traced to primary evidence.
+- Evidence: Canonical `main` fetched and inspected at
+  `a2f340195975f4f042e28a60b62561dd9a0b2700`; exact implementation routes are
+  recorded in the source guide.

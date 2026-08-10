@@ -9,6 +9,9 @@ Assault and OpenMoHAA map work. Chat history is not a checkpoint.
   highest authority.
 - Treat every Codex-generated map, report, screenshot conclusion, and reusable
   claim as untrusted until its evidence is rechecked.
+- Treat all existing repository knowledge as an untrusted index until each
+  claim is individually audited and traced to engine/tool source, original
+  data, or controlled runtime evidence.
 - Preserve every pre-existing dirty path as user-owned. Never restore, delete,
   overwrite, stage, or reformat it merely to obtain a clean worktree.
 - Never use `git reset`, `git clean`, automatic rebase, force-push, broad
@@ -36,6 +39,8 @@ At the beginning of every map or mapping-knowledge task:
 8. Read `DECISIONS.md`, `REJECTIONS.md`, and `VALIDATION.md` as relevant.
 9. Read the active map README, relevant revision reports, and only the mapping
    references needed for the recorded task.
+   For runtime behavior, read
+   `.agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md`.
 10. Compare the checkpoint with the worktree and recent commits. If they
     disagree, stop map implementation and reconcile without discarding work.
 11. Report the goal and version, active map/revision, accepted baseline, latest
@@ -70,6 +75,22 @@ conversion, model origins, collision, scale, or visible construction:
    images, conclusion, evidence label, confidence, and remaining uncertainty.
 5. Leave inconclusive questions `OPEN` and ask the user instead of inventing
    geometry or behavior.
+
+For runtime questions, begin with the pinned routing index in
+`.agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md`, then
+read the actual canonical OpenMoHAA source at the recorded commit. If the guide
+is insufficient, search callers, declarations, configuration, and
+compatibility branches directly. Record exact commit, paths, symbols, line
+anchors, target variant, and evidence label. Distinguish AA, Spearhead,
+Breakthrough, and OpenMoHAA behavior. Old Codex map behavior, generated reports,
+and repository summaries are not proof of engine behavior.
+
+Pair important source conclusions with a controlled runtime check when
+practical; otherwise state that runtime confirmation was not performed and
+leave unsupported parts `OPEN`. OpenMoHAA source proves only implemented
+runtime semantics. It does not prove architecture, geometry, visual fidelity,
+material choice, lighting, combat layout, enjoyment, polish, or acceptance,
+and runtime success cannot override human-visible defects or rejection.
 
 Use `PROVEN`, `OBSERVED`, `HYPOTHESIS`, `OPEN`, `REJECTED`, and `SUPERSEDED` as
 defined in the skill's `references/verification-protocol.md`. Compilation,

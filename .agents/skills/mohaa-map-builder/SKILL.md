@@ -38,6 +38,22 @@ tool source, controlled compile/runtime behavior, and full-resolution in-game
 screenshots. Record the question, exact sources, conclusion, confidence, label,
 and remaining uncertainty.
 
+For any runtime-behavior question, first read
+[openmohaa-source-guide.md](references/openmohaa-source-guide.md), then inspect
+the canonical OpenMoHAA source at its recorded commit. If the guide does not
+settle the question, search the direct implementation, callers, declarations,
+configuration, and compatibility branches. Record exact commit, paths, symbols,
+line anchors, target variant, evidence label, and uncertainty. Distinguish AA,
+Spearhead, Breakthrough, and OpenMoHAA behavior. Never use old Codex map
+behavior or repository summaries as proof of engine behavior.
+
+Pair important source conclusions with controlled runtime confirmation when
+practical; if it is not practical, say so and keep unsupported parts `OPEN`.
+OpenMoHAA source establishes runtime semantics only, not architecture,
+geometry, visual fidelity, material or lighting quality, combat layout,
+enjoyment, polish, or acceptance. Runtime success cannot override a visible
+defect or human rejection.
+
 Read [verification-protocol.md](references/verification-protocol.md) before
 investigating defects, interpreting generated evidence, converting a reference,
 or promoting mapping knowledge.
@@ -69,6 +85,8 @@ compilation, Recast, bot combat, automated screenshots, or absence of criticism.
 - Put verified normative rules in the playbook, chronological evidence in the
   research log, map-specific state in its README/revision report, decisions in
   `DECISIONS.md`, and user rejection/supersession in `REJECTIONS.md`.
+- Treat existing repository knowledge as an index until each claim is audited
+  against primary source, original data, or controlled runtime evidence.
 - Leave inconclusive claims `OPEN`; never promote `OBSERVED` or `HYPOTHESIS`
   because a build compiled.
 
