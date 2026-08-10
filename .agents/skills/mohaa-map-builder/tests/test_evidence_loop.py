@@ -342,6 +342,8 @@ class EvidenceLoopTests(unittest.TestCase):
         elif variant == "runtime-load-fabricated":
             runtime["bspParse"] = ["fabricated BSP observation"]
             runtime["recast"] = ["fabricated Recast observation"]
+        elif variant == "runtime-script-error":
+            runtime["scriptErrorCount"] = 1
         else:
             self.fail(f"unsupported runtime-report variant: {variant}")
 
@@ -1190,6 +1192,29 @@ class EvidenceLoopTests(unittest.TestCase):
         ):
             with self.subTest(issue=expected_issue):
                 self.assertIn(expected_issue, verification["issues"])
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_replays_runtime_gate(self) -> None:
+        source = self.root / "bundle-runtime-gate-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-runtime-gate-rewrite"
+        self._rewrite_bundle_runtime_report(
+            source,
+            destination,
+            "runtime-script-error",
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        self.assertIn(
+            "bundled audit runtime_load gate does not match replayed runtime report",
+            verification["issues"],
+        )
         self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:

@@ -1843,6 +1843,25 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                                 f"bundled runtime report {report_field} does not "
                                 "match audited bot activity"
                             )
+                replayed_runtime_gate, replayed_runtime_summary = audit_runtime(
+                    runtime_report
+                )
+                audit_gates = audit_report.get("gates")
+                audited_runtime_gate = (
+                    audit_gates.get("runtime_load")
+                    if isinstance(audit_gates, dict)
+                    else None
+                )
+                if audited_runtime_gate != replayed_runtime_gate:
+                    issues.append(
+                        "bundled audit runtime_load gate does not match replayed "
+                        "runtime report"
+                    )
+                if audit_report.get("runtime") != replayed_runtime_summary:
+                    issues.append(
+                        "bundled audit runtime summary does not match replayed "
+                        "runtime report"
+                    )
                 raw_bot_entry = by_role.get("raw_log:bot")
                 if raw_bot_entry is None:
                     issues.append("required bundle role is missing: raw_log:bot")

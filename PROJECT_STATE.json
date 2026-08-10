@@ -13,15 +13,15 @@
     "inspection_date_utc": "2026-08-10",
     "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
   },
-  "checkpoint_id": "skill-evidence-bundle-runtime-load-observation-text-binding-20260810-019",
-  "checkpoint_updated_utc": "2026-08-10T22:29:40Z",
+  "checkpoint_id": "skill-evidence-bundle-runtime-gate-replay-20260810-020",
+  "checkpoint_updated_utc": "2026-08-10T22:40:56Z",
   "current_phase": "autonomous-skill-improvement",
   "active_map": "codex_cache",
   "active_revision": "1",
   "accepted_baseline": null,
   "latest_candidate": "codex_dust2_v2",
-  "next_action": "Replay audit_runtime(report:runtime) during verify-bundle and require its recomputed runtime-load gate and runtime summary to match audit.gates.runtime_load and audit.runtime; add a checksum-valid scriptErrorCount mismatch regression and fresh-agent real-bundle forward test, without modifying maps, then validate, commit, push, and verify.",
-  "stopping_condition": "Stop after verify-bundle requires every report:runtime bspParse and recast observation string to exist exactly in materialized raw_log:bot, rejects a checksum-valid count-preserving fabricated-observation rewrite, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
+  "next_action": "Parse the bundled report:evidence_plan during verify-bundle, replay audit_bot_activity(report:runtime, evidence_plan), and require the recomputed bot-entry/combat gate and bot_activity summary to match audit.gates.bot_entry_and_combat and audit.bot_activity; add a checksum-valid expected_bot_count=999 plan mismatch regression and fresh-agent real-bundle forward test, without modifying maps, then validate, commit, push, and verify.",
+  "stopping_condition": "Stop after verify-bundle replays audit_runtime over report:runtime and requires the recomputed runtime-load gate and runtime summary to match audit.gates.runtime_load and audit.runtime, rejects a checksum-valid scriptErrorCount mismatch rewrite, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
   "open_questions": [
     "Which exact revision/hash-linked original feedback artifact, if any, underlies the comparative codex_dust2_v2 bootstrap summary?",
     "Does the user want codex_cache revision 1 preserved as-is, or a separately authorized revision plan for the four recorded semantic visual blockers?"
