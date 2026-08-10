@@ -410,6 +410,7 @@ class EvidenceLoopTests(unittest.TestCase):
         map_name: str | None = None,
         expected_bsp_member: str | None = None,
         clear_blocking_defects: bool = False,
+        required_view_category: str | None = None,
     ) -> None:
         shutil.copytree(source, destination)
         manifest_path = destination / "manifest.json"
@@ -429,6 +430,8 @@ class EvidenceLoopTests(unittest.TestCase):
         if clear_blocking_defects:
             for view in plan["visual_review"]["views"]:
                 view["blocking_defects"] = []
+        if required_view_category is not None:
+            plan["required_view_categories"].append(required_view_category)
 
         plan_payload = (json.dumps(plan, indent=2) + "\n").encode("utf-8")
         plan_sha = hashlib.sha256(plan_payload).hexdigest()
@@ -1275,6 +1278,41 @@ class EvidenceLoopTests(unittest.TestCase):
             "bundled audit runtime_load gate does not match replayed runtime report",
             verification["issues"],
         )
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_replays_fixed_view_capture(self) -> None:
+        source = self.root / "bundle-plan-capture-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-plan-capture-rewrite"
+        self._rewrite_bundle_evidence_plan(
+            source,
+            destination,
+            required_view_category="fabricated_category",
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        for expected_issue in (
+            (
+                "bundled audit fixed_view_capture gate does not match replayed "
+                "visual report and evidence plan"
+            ),
+            (
+                "bundled audit capture summary does not match replayed visual "
+                "report and evidence plan"
+            ),
+            (
+                "bundled audit capture_integrity_and_coverage score does not "
+                "match replayed visual report and evidence plan"
+            ),
+        ):
+            with self.subTest(issue=expected_issue):
+                self.assertIn(expected_issue, verification["issues"])
         self.assertFalse(verification["promotion_allowed"])
 
     def test_bundle_verification_replays_semantic_visual_review(self) -> None:

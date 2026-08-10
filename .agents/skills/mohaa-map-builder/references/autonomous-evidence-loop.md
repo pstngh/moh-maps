@@ -267,6 +267,12 @@ Require the bundled evidence plan's map name and expected BSP member to match
 the bundle manifest and the corresponding audited map and candidate
 identities.
 
+Remap the bundled visual report's ordered screenshot paths to their
+content-addressed screenshot roles and replay the fixed-view capture scorer with
+the bundled evidence plan and exact candidate hash. Require the recomputed
+capture gate, path-normalized capture summary, and capture-integrity score to
+match the bundled audit exactly.
+
 Replay semantic visual review over the bundled evidence plan, exact candidate
 hash, and audited capture records. Require the recomputed semantic-review gate,
 review-completeness score, and blocking-defect records to match the bundled

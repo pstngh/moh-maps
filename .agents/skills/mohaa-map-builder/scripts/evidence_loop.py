@@ -1711,6 +1711,123 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                             "semantic visual-review replay"
                         )
                     else:
+                        visual_capture_for_review = audited_capture
+                        if visual_report is not None and visual_entry is not None:
+                            remapped_visual_report = json.loads(
+                                json.dumps(visual_report)
+                            )
+                            remapped_screenshots = remapped_visual_report.get(
+                                "screenshots"
+                            )
+                            capture_replay_ready = isinstance(
+                                remapped_screenshots,
+                                list,
+                            )
+                            if capture_replay_ready:
+                                for index, screenshot in enumerate(
+                                    remapped_screenshots
+                                ):
+                                    role_prefix = f"screenshot:{index:03d}:"
+                                    matching_roles = [
+                                        role
+                                        for role in by_role
+                                        if isinstance(role, str)
+                                        and role.startswith(role_prefix)
+                                    ]
+                                    if len(matching_roles) != 1:
+                                        issues.append(
+                                            f"cannot replay screenshot {index}: "
+                                            "expected one materialized role"
+                                        )
+                                        capture_replay_ready = False
+                                        continue
+                                    if not isinstance(screenshot, dict):
+                                        issues.append(
+                                            f"cannot replay screenshot {index}: "
+                                            "report entry must be an object"
+                                        )
+                                        capture_replay_ready = False
+                                        continue
+                                    screenshot_entry = by_role[matching_roles[0]]
+                                    screenshot["path"] = str(
+                                        (
+                                            bundle_dir
+                                            / Path(screenshot_entry["object"])
+                                        ).resolve()
+                                    )
+                            else:
+                                issues.append(
+                                    "cannot replay fixed-view capture: bundled "
+                                    "visual report screenshots must be a list"
+                                )
+                            if capture_replay_ready:
+                                (
+                                    replayed_capture_gate,
+                                    replayed_capture,
+                                    _,
+                                ) = audit_screenshots(
+                                    remapped_visual_report,
+                                    bundle_dir / Path(visual_entry["object"]),
+                                    evidence_plan,
+                                    candidate_sha,
+                                )
+                                normalized_replayed_capture = json.loads(
+                                    json.dumps(replayed_capture)
+                                )
+                                replayed_records = normalized_replayed_capture.get(
+                                    "screenshots"
+                                )
+                                audited_records = audited_capture.get("screenshots")
+                                if isinstance(replayed_records, list) and isinstance(
+                                    audited_records,
+                                    list,
+                                ):
+                                    for index, replayed_record in enumerate(
+                                        replayed_records
+                                    ):
+                                        if index >= len(audited_records):
+                                            break
+                                        audited_record = audited_records[index]
+                                        if isinstance(replayed_record, dict) and isinstance(
+                                            audited_record,
+                                            dict,
+                                        ):
+                                            replayed_record["path"] = audited_record.get(
+                                                "path"
+                                            )
+                                audited_gates = audit_report.get("gates")
+                                audited_capture_gate = (
+                                    audited_gates.get("fixed_view_capture")
+                                    if isinstance(audited_gates, dict)
+                                    else None
+                                )
+                                if audited_capture_gate != replayed_capture_gate:
+                                    issues.append(
+                                        "bundled audit fixed_view_capture gate does "
+                                        "not match replayed visual report and evidence plan"
+                                    )
+                                if audited_capture != normalized_replayed_capture:
+                                    issues.append(
+                                        "bundled audit capture summary does not match "
+                                        "replayed visual report and evidence plan"
+                                    )
+                                audited_scores = audit_report.get("scores")
+                                audited_capture_score = (
+                                    audited_scores.get(
+                                        "capture_integrity_and_coverage"
+                                    )
+                                    if isinstance(audited_scores, dict)
+                                    else None
+                                )
+                                if audited_capture_score != replayed_capture.get(
+                                    "integrity_score"
+                                ):
+                                    issues.append(
+                                        "bundled audit capture_integrity_and_coverage "
+                                        "score does not match replayed visual report "
+                                        "and evidence plan"
+                                    )
+                                visual_capture_for_review = replayed_capture
                         (
                             replayed_visual_gate,
                             replayed_visual_score,
@@ -1719,7 +1836,7 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                         ) = audit_visual_review(
                             evidence_plan,
                             candidate_sha,
-                            audited_capture,
+                            visual_capture_for_review,
                         )
                         audited_gates = audit_report.get("gates")
                         audited_visual_gate = (

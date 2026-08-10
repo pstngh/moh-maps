@@ -13,15 +13,15 @@
     "inspection_date_utc": "2026-08-10",
     "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
   },
-  "checkpoint_id": "skill-evidence-bundle-semantic-visual-review-replay-20260810-024",
-  "checkpoint_updated_utc": "2026-08-10T23:32:31Z",
+  "checkpoint_id": "skill-evidence-bundle-fixed-view-capture-replay-20260810-025",
+  "checkpoint_updated_utc": "2026-08-10T23:45:19Z",
   "current_phase": "autonomous-skill-improvement",
   "active_map": "codex_cache",
   "active_revision": "1",
   "accepted_baseline": null,
   "latest_candidate": "codex_dust2_v2",
-  "next_action": "Replay audit_screenshots over report:visual remapped to the materialized screenshot roles, report:evidence_plan, and the manifest candidate SHA-256 during verify-bundle; require the recomputed fixed_view_capture gate, capture summary, and capture_integrity_and_coverage score to match the corresponding audit records; add a checksum-valid fabricated_category required-view rewrite regression and fresh-agent real-bundle forward test, without modifying maps, then validate, commit, push, and verify.",
-  "stopping_condition": "Stop after verify-bundle replays audit_visual_review over the bundled evidence plan, manifest candidate SHA-256, and audited capture, requires the recomputed semantic_visual_review gate, completeness score, and blocking_visual_defects to match the corresponding audit records, rejects a checksum-valid plan rewrite that clears every blocking_defects list, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
+  "next_action": "Bind the bundled report:evidence_plan launch_provenance visual and bot engine paths, engine hashes, argument lists, fs_basepath, and fs_homepath to audit.launch_provenance and the materialized engine roles during verify-bundle; add a checksum-valid visual +map dm/fabricated plan-argument rewrite regression and fresh-agent real-bundle forward test, without modifying maps, then validate, commit, push, and verify.",
+  "stopping_condition": "Stop after verify-bundle remaps report:visual screenshot paths to materialized screenshot roles, replays audit_screenshots with the bundled evidence plan and manifest candidate SHA-256, requires the recomputed fixed_view_capture gate, path-normalized capture summary, and capture_integrity_and_coverage score to match the corresponding audit records, rejects a checksum-valid fabricated_category required-view rewrite, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
   "open_questions": [
     "Which exact revision/hash-linked original feedback artifact, if any, underlies the comparative codex_dust2_v2 bootstrap summary?",
     "Does the user want codex_cache revision 1 preserved as-is, or a separately authorized revision plan for the four recorded semantic visual blockers?"
