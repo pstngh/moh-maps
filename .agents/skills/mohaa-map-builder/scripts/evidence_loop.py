@@ -30,6 +30,12 @@ SEVERE_DIAGNOSTIC_RE = re.compile(
     re.IGNORECASE,
 )
 DIAGNOSTIC_DISPOSITIONS = {"blocking", "proven_nonblocking"}
+BOT_ENTRY_RE = re.compile(r"(bot\d+) has entered the battle", re.IGNORECASE)
+BOT_COMBAT_RE = re.compile(
+    r"bot\d+.*(?:rifled|machine-gunned|hunted down|perforated|buckshot|rocket|"
+    r"blew (?:himself|herself) up|was .* by bot\d+)",
+    re.IGNORECASE,
+)
 
 RUNTIME_LOG_TIMESTAMP_RE = re.compile(r"^\[\d{4}-\d{2}-\d{2}\s+[^\]]+\]\s*")
 
@@ -489,6 +495,17 @@ def audit_runtime(report: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any
         "bsp_parse_observations": len(report.get("bspParse", [])) if isinstance(report.get("bspParse"), list) else 0,
         "recast_observations": len(report.get("recast", [])) if isinstance(report.get("recast"), list) else 0,
     }
+
+
+def recount_bot_log_activity(path: Path) -> tuple[int, int]:
+    lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    entered = {
+        match.group(1).casefold()
+        for line in lines
+        if (match := BOT_ENTRY_RE.search(line)) is not None
+    }
+    combat = sum(1 for line in lines if BOT_COMBAT_RE.search(line) is not None)
+    return len(entered), combat
 
 
 def audit_bot_activity(report: dict[str, Any], plan: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -1820,6 +1837,36 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                                 f"bundled runtime report {report_field} does not "
                                 "match audited bot activity"
                             )
+                raw_bot_entry = by_role.get("raw_log:bot")
+                if raw_bot_entry is None:
+                    issues.append("required bundle role is missing: raw_log:bot")
+                else:
+                    try:
+                        recounted_entered, recounted_combat = (
+                            recount_bot_log_activity(
+                                bundle_dir / Path(raw_bot_entry["object"])
+                            )
+                        )
+                    except (KeyError, OSError) as exc:
+                        issues.append(f"could not recount raw_log:bot: {exc}")
+                    else:
+                        for report_field, audit_field, observed in (
+                            ("botsEntered", "bots_entered", recounted_entered),
+                            ("combatEvents", "combat_events", recounted_combat),
+                        ):
+                            if runtime_report.get(report_field) != observed:
+                                issues.append(
+                                    f"bundled runtime report {report_field} does "
+                                    "not match raw_log:bot recount"
+                                )
+                            if (
+                                isinstance(bot_activity, dict)
+                                and bot_activity.get(audit_field) != observed
+                            ):
+                                issues.append(
+                                    f"bundled audit bot_activity {audit_field} does "
+                                    "not match raw_log:bot recount"
+                                )
 
             raw_logs = audit_report.get("raw_logs")
             if not isinstance(raw_logs, dict):

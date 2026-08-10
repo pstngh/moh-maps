@@ -77,7 +77,20 @@ class EvidenceLoopTests(unittest.TestCase):
             ("bot", self.runtime_log),
         ):
             log.parent.mkdir(parents=True, exist_ok=True)
-            log.write_text(f"OpenMoHAA {label} test log\n", encoding="utf-8")
+            lines = [f"OpenMoHAA {label} test log"]
+            if label == "bot":
+                lines.extend(
+                    f"bot{index} has entered the battle" for index in range(1, 9)
+                )
+                lines.extend(
+                    (
+                        "bot1 was rifled by bot2",
+                        "bot2 was machine-gunned by bot3",
+                        "bot3 was hunted down by bot4",
+                        "bot4 was perforated by bot5",
+                    )
+                )
+            log.write_text("\n".join(lines) + "\n", encoding="utf-8")
         candidate_sha = sha256(self.candidate)
         self.visual_report = self.root / "visual.json"
         self.runtime_report = self.root / "runtime.json"
@@ -305,7 +318,7 @@ class EvidenceLoopTests(unittest.TestCase):
             runtime["runtimePackageSha256"] = "0" * 64
         elif variant == "engine-hash":
             runtime["engineSha256"] = "0" * 64
-        elif variant == "bot-activity":
+        elif variant in {"bot-activity", "bot-activity-coordinated"}:
             runtime["botsEntered"] = 999
             runtime["combatEvents"] = 999
             runtime["minimumCombatEvents"] = 999
@@ -332,6 +345,14 @@ class EvidenceLoopTests(unittest.TestCase):
         audit = json.loads(
             (destination / audit_entry["object"]).read_text(encoding="utf-8")
         )
+        if variant == "bot-activity-coordinated":
+            audit["bot_activity"].update(
+                {
+                    "bots_entered": 999,
+                    "combat_events": 999,
+                    "minimum_combat_events": 999,
+                }
+            )
         audit["inputs"]["runtime_report"].update(
             {"bytes": len(runtime_payload), "sha256": runtime_sha}
         )
@@ -1003,6 +1024,33 @@ class EvidenceLoopTests(unittest.TestCase):
                     f"bundled runtime report {report_field} does not match audited bot activity",
                     verification["issues"],
                 )
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_recounts_raw_bot_activity(self) -> None:
+        source = self.root / "bundle-runtime-recount-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-runtime-recount-rewrite"
+        self._rewrite_bundle_runtime_report(
+            source,
+            destination,
+            "bot-activity-coordinated",
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        for expected_issue in (
+            "bundled runtime report botsEntered does not match raw_log:bot recount",
+            "bundled audit bot_activity bots_entered does not match raw_log:bot recount",
+            "bundled runtime report combatEvents does not match raw_log:bot recount",
+            "bundled audit bot_activity combat_events does not match raw_log:bot recount",
+        ):
+            with self.subTest(issue=expected_issue):
+                self.assertIn(expected_issue, verification["issues"])
         self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
