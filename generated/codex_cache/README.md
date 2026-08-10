@@ -1,5 +1,10 @@
 # Codex Cache
 
+> **Evidence status (2026-08-10):** this map is an unaccepted candidate, not an
+> accepted baseline or release-ready build. The historical technical, bot,
+> visual, door, fidelity, and acceptance claims below are scoped and labeled in
+> [CLAIM-AUDIT.md](CLAIM-AUDIT.md).
+
 `codex_cache` is a first-playable Allied Assault/OpenMoHAA deathmatch
 conversion of the classic Cache layout. The target is clean modern industrial
 architecture, not a Second World War reskin.

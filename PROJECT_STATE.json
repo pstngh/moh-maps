@@ -13,18 +13,19 @@
     "inspection_date_utc": "2026-08-10",
     "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
   },
-  "checkpoint_id": "knowledge-audit-codex-dust2-v2-20260810-001",
-  "checkpoint_updated_utc": "2026-08-10T02:01:44Z",
-  "current_phase": "knowledge-audit",
+  "checkpoint_id": "knowledge-audit-codex-cache-r1-20260810-001",
+  "checkpoint_updated_utc": "2026-08-10T14:08:11Z",
+  "current_phase": "evidence-acquisition",
   "active_map": "codex_cache",
   "active_revision": "1",
   "accepted_baseline": null,
   "latest_candidate": "codex_dust2_v2",
-  "next_action": "Use $mohaa-map-builder to resume the checkpoint and audit the README, REVISION-1.md, REFERENCE-AUDIT.md, generator provenance, and existing visual/playtest evidence for codex_cache revision 1; do not modify map artifacts; label each significant quality or acceptance claim, update PROJECT_STATE.json with one next action, validate, commit, push, and verify synchronization.",
-  "stopping_condition": "Stop after the bounded codex_cache revision 1 claim audit is validated, committed, pushed, and local HEAD equals its upstream; do not create, compile, package, or repair a map.",
+  "next_action": "Use $mohaa-map-builder to resume the checkpoint and run a non-mutating autonomous exact-hash evidence acquisition for codex_cache revision 1 PK3 SHA-256 90477F688E4115400813B119A2061434A1F62324381B3CC864FA7BAB29084C53: preserve complete OpenMoHAA launch/runtime provenance and raw diagnostics, capture and semantically review an unobscured fixed player-height/high-angle matrix covering exteriors, interiors, transitions, long sightlines, boundaries, the rotating door, and likely -notjunc seams, and instrument bot spawn, movement, death, respawn, and multiple route probes separately; modify no map artifact, keep acceptance open, update PROJECT_STATE.json with one next action, validate, commit, push, and verify synchronization.",
+  "stopping_condition": "Stop after the exact-hash codex_cache revision 1 evidence acquisition is recorded, scored, validated, committed, pushed, and local HEAD equals its upstream; do not rebuild, repackage, repair, accept, or promote the map.",
   "open_questions": [
     "Which exact revision/hash-linked original feedback artifact, if any, underlies the comparative codex_dust2_v2 bootstrap summary?",
-    "Which codex_cache revision 1 claims survive exact-hash source, compile, runtime, visual, and human-evidence correlation?"
+    "Can the tracked codex_cache revision 1 PK3 produce unobscured fixed player-height and high-angle evidence for exteriors, interiors, transitions, long sightlines, boundaries, door behavior, and likely -notjunc seam domains?",
+    "Which codex_cache bot spawn, movement, death, respawn, and meaningful route claims survive instrumented exact-hash runtime probes?"
   ],
   "blockers": [],
   "known_dirty_paths": [
@@ -55,21 +56,26 @@
       "status": "candidate",
       "current_revision": "1",
       "accepted_revision": null,
-      "reason": "Technically tested first-playable candidate with no explicit final acceptance.",
+      "reason": "Exact-hash package, compiled-BSP, isolated-load, Recast, and bounded bot-combat evidence survives the revision-1 audit; source fidelity, visual quality, door behavior, deep bot/gameplay coverage, and human acceptance remain open.",
       "known_defects": [
-        "Human map-view and door review pending",
-        "Possible T-junction cracks from -notjunc",
-        "Planar terrain and major omitted Source props",
-        "Distant skybox omitted"
+        "The exact Source VMF is absent and unhashed; reference fidelity and source-to-output geometry/entity equivalence remain OPEN",
+        "Raw Cache Q3map, VIS, and MOHlight logs are absent; exact build invocation, timings, failure history, warning text/counts, and light-clamp claims remain only partially correlated",
+        "No exact-hash map-view screenshot or durable semantic review survives; recognition, boundaries, lighting, no-void/no-floating quality, and -notjunc seam/crack behavior remain OPEN",
+        "The generator reports 2,588 omitted unverified props, planar displacement treatment, and an omitted distant 3D skybox; their source counts and mapwide visual effect are not independently verified",
+        "The single rotating door has no exact-hash activation, alignment, swing, clearance, blocking, collision, or human interaction evidence",
+        "Bot entry, combat, and death are OBSERVED, but instrumented spawn, movement, respawn, meaningful route diversity, collision quality, stalls, and fairness remain OPEN",
+        "Complete historical launch arguments and a separate qconsole log do not survive",
+        "No explicit final human approval exists"
       ],
       "evidence_paths": [
         "generated/codex_cache/README.md",
         "generated/codex_cache/REVISION-1.md",
-        "generated/codex_cache/REFERENCE-AUDIT.md"
+        "generated/codex_cache/REFERENCE-AUDIT.md",
+        "generated/codex_cache/CLAIM-AUDIT.md"
       ],
-      "last_tested_revision_or_external_evidence": "Revision 1 repository technical reports; no explicit user approval.",
+      "last_tested_revision_or_external_evidence": "Bounded 2026-08-10 claim audit ties PK3 SHA-256 90477F688E4115400813B119A2061434A1F62324381B3CC864FA7BAB29084C53 to the surviving compile-stage BSP, isolated runtime copy, raw OpenMoHAA transcript, eight bot entries, and 55 combat/death lines; no exact-hash map-view or human acceptance evidence survives.",
       "user_approval_evidence": null,
-      "next_action": "Audit human visual evidence and all final or complete claims before any visual-baseline use."
+      "next_action": "Run a non-mutating autonomous exact-hash visual/runtime/bot/door evidence acquisition for revision 1; retain candidate status and keep human acceptance open."
     },
     "codex_cobblestone": {
       "status": "candidate",
@@ -272,7 +278,7 @@
   },
   "evidence_pending": [
     "Locate revision/hash-linked original feedback for codex_dust2_v2 if it exists; the bootstrap attachment proves only a comparative non-final summary.",
-    "Audit the significant acceptance, final, complete, polished, release, proven, no-void, no-floating, visually-complete, and ready-to-play claims for codex_cache revision 1."
+    "Acquire and score fresh exact-hash codex_cache revision 1 launch, raw-log, fixed-view, door, bot-lifecycle, and route evidence without modifying the map or opening acceptance."
   ],
   "user_approval_required": true,
   "approval_policy": "Explicit approval of the exact tested candidate is required before accepted status or accepted_baseline promotion."
