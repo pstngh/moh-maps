@@ -13,15 +13,15 @@
     "inspection_date_utc": "2026-08-10",
     "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
   },
-  "checkpoint_id": "skill-evidence-bundle-visual-report-identity-correlation-20260810-011",
-  "checkpoint_updated_utc": "2026-08-10T20:42:24Z",
+  "checkpoint_id": "skill-evidence-bundle-visual-launch-provenance-correlation-20260810-012",
+  "checkpoint_updated_utc": "2026-08-10T20:59:29Z",
   "current_phase": "autonomous-skill-improvement",
   "active_map": "codex_cache",
   "active_revision": "1",
   "accepted_baseline": null,
   "latest_candidate": "codex_dust2_v2",
-  "next_action": "Test whether verify-bundle accepts checksum-valid coordinated rewrites of report:visual plus the bundled audit input and materialized-role records when enginePath, arguments, fsBasepath, or fsHomepath contradicts audit.launch_provenance.visual or the engine:visual role; if any pass, require exact bundled visual launch-provenance correlation with regressions and a fresh-agent forward test, without modifying maps, then validate, commit, push, and verify.",
-  "stopping_condition": "Stop after verify-bundle requires bundled visual-report mapName, candidateSha256, optional engineSha256, and optional runtimeLog to match the manifest, candidate role, engine:visual role, and audited visual raw log, rejects checksum-valid coordinated rewrites, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
+  "next_action": "Test whether verify-bundle accepts checksum-valid coordinated rewrites of report:runtime plus the bundled audit input and materialized-role records when mapName, candidateSha256, log, or runtimePackageSha256 contradicts the manifest, candidate, raw_log:bot, or runtime_package:bot roles; if any pass, require exact bundled runtime-report identity correlation with regressions and a fresh-agent forward test, without modifying maps, then validate, commit, push, and verify.",
+  "stopping_condition": "Stop after verify-bundle requires declared visual enginePath, arguments, fsBasepath, and fsHomepath to match audit.launch_provenance.visual and the engine:visual role, rejects checksum-valid coordinated rewrites, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
   "open_questions": [
     "Which exact revision/hash-linked original feedback artifact, if any, underlies the comparative codex_dust2_v2 bootstrap summary?",
     "Does the user want codex_cache revision 1 preserved as-is, or a separately authorized revision plan for the four recorded semantic visual blockers?"

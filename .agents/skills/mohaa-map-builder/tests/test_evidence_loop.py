@@ -228,6 +228,14 @@ class EvidenceLoopTests(unittest.TestCase):
             visual["candidateSha256"] = "0" * 64
         elif variant == "engine-hash":
             visual["engineSha256"] = by_role["engine:bot"]["sha256"]
+        elif variant == "engine-path":
+            visual["enginePath"] = str(self.bot_engine)
+        elif variant == "arguments":
+            visual["arguments"] = ["+map", "dm/fabricated"]
+        elif variant == "fs-basepath":
+            visual["fsBasepath"] = str(self.runtime_root / "base")
+        elif variant == "fs-homepath":
+            visual["fsHomepath"] = str(self.runtime_root / "home")
         elif variant == "first-screenshot":
             visual["screenshots"][0] = dict(visual["screenshots"][1])
         elif variant == "runtime-package":
@@ -809,6 +817,22 @@ class EvidenceLoopTests(unittest.TestCase):
             (
                 "engine-hash",
                 "engine:visual hash does not match bundled visual report engine",
+            ),
+            (
+                "engine-path",
+                "engine:visual path does not match bundled visual launch provenance",
+            ),
+            (
+                "arguments",
+                "bundled visual report arguments do not match audited visual launch provenance",
+            ),
+            (
+                "fs-basepath",
+                "bundled visual report fsBasepath does not match audited visual launch provenance",
+            ),
+            (
+                "fs-homepath",
+                "bundled visual report fsHomepath does not match audited visual launch provenance",
             ),
             (
                 "first-screenshot",

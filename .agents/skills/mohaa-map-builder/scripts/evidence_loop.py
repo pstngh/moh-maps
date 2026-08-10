@@ -1679,6 +1679,68 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                         "bundled visual report engine",
                     )
 
+                launch_provenance = audit_report.get("launch_provenance")
+                visual_launch = (
+                    launch_provenance.get("visual")
+                    if isinstance(launch_provenance, dict)
+                    else None
+                )
+                launch_fields = (
+                    "enginePath",
+                    "arguments",
+                    "fsBasepath",
+                    "fsHomepath",
+                )
+                if any(field in visual_report for field in launch_fields):
+                    if not isinstance(visual_launch, dict):
+                        issues.append(
+                            "bundled audit visual launch provenance must be an object"
+                        )
+                    else:
+                        if "enginePath" in visual_report:
+                            declared_engine = visual_report.get("enginePath")
+                            if not path_claim_matches(
+                                declared_engine, visual_launch.get("engine_path")
+                            ):
+                                issues.append(
+                                    "engine:visual path does not match bundled visual "
+                                    "launch provenance"
+                                )
+                            engine_entry = by_role.get("engine:visual")
+                            expected_engine_name = (
+                                engine_entry.get("original_name")
+                                if engine_entry is not None
+                                else None
+                            )
+                            if claimed_name(declared_engine) != claimed_name(
+                                expected_engine_name
+                            ):
+                                issues.append(
+                                    "engine:visual original name does not match "
+                                    "bundled visual report enginePath"
+                                )
+                        if (
+                            "arguments" in visual_report
+                            and visual_report.get("arguments")
+                            != visual_launch.get("arguments")
+                        ):
+                            issues.append(
+                                "bundled visual report arguments do not match "
+                                "audited visual launch provenance"
+                            )
+                        for report_field, audit_field in (
+                            ("fsBasepath", "fs_basepath"),
+                            ("fsHomepath", "fs_homepath"),
+                        ):
+                            if report_field in visual_report and not path_claim_matches(
+                                visual_report.get(report_field),
+                                visual_launch.get(audit_field),
+                            ):
+                                issues.append(
+                                    f"bundled visual report {report_field} does not "
+                                    "match audited visual launch provenance"
+                                )
+
             raw_logs = audit_report.get("raw_logs")
             if not isinstance(raw_logs, dict):
                 raw_logs = {}

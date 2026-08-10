@@ -229,6 +229,10 @@ Also require the visual report's map name and candidate hash, optional engine
 hash, and optional duplicate `runtimeLog` claim to match the manifest and the
 candidate, visual-engine, and visual-raw-log roles they describe.
 
+When present, require the visual report's engine path, exact argument list,
+`fsBasepath`, and `fsHomepath` to match `audit.launch_provenance.visual`; also
+bind the engine filename to the `engine:visual` materialized role.
+
 Treat a loose or previously stored audit as stale after the scorer changes
 until it is replayed and materialized with the new scorer hash. Verification
 must reject missing, changed, or unexpected bundle files. A valid bundle proves
