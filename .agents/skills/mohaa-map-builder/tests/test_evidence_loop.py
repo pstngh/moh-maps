@@ -62,9 +62,12 @@ class EvidenceLoopTests(unittest.TestCase):
         )
         self.visual_log = self.visual_root / "home" / "main" / "qconsole.log"
         self.runtime_log = self.runtime_root / "home" / "main" / "qconsole.log"
-        for log in (self.visual_log, self.runtime_log):
+        for label, log in (
+            ("visual", self.visual_log),
+            ("bot", self.runtime_log),
+        ):
             log.parent.mkdir(parents=True, exist_ok=True)
-            log.write_text("OpenMoHAA test log\n", encoding="utf-8")
+            log.write_text(f"OpenMoHAA {label} test log\n", encoding="utf-8")
         candidate_sha = sha256(self.candidate)
         self.visual_report = self.root / "visual.json"
         self.runtime_report = self.root / "runtime.json"
@@ -142,6 +145,35 @@ class EvidenceLoopTests(unittest.TestCase):
 
     def _write_json(self, path: Path, value: dict) -> None:
         path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
+
+    def _substitute_bundle_role(
+        self,
+        source: Path,
+        destination: Path,
+        target_role: str,
+        donor_role: str,
+    ) -> None:
+        shutil.copytree(source, destination)
+        manifest_path = destination / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        by_role = {item["role"]: item for item in manifest["artifacts"]}
+        target = by_role[target_role]
+        donor = by_role[donor_role]
+        old_object = target["object"]
+        for key in ("sha256", "bytes", "object"):
+            target[key] = donor[key]
+        referenced = {item["object"] for item in manifest["artifacts"]}
+        old_path = destination / old_object
+        if old_object not in referenced:
+            old_path.unlink()
+        manifest["object_count"] = len(referenced)
+        payload = (json.dumps(manifest, indent=2) + "\n").encode("utf-8")
+        manifest_path.write_bytes(payload)
+        manifest_sha = hashlib.sha256(payload).hexdigest()
+        (destination / "manifest.sha256").write_text(
+            f"{manifest_sha}  manifest.json\n",
+            encoding="ascii",
+        )
 
     def _complete_plan(self) -> dict:
         trace_sha = sha256(self.trace)
@@ -420,6 +452,40 @@ class EvidenceLoopTests(unittest.TestCase):
             verification["artifact_count"],
             len(first_manifest["artifacts"]),
         )
+
+    def test_bundle_verification_rejects_hash_valid_cross_role_substitutions(self) -> None:
+        source = self.root / "bundle-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        substitutions = (
+            ("report:visual", "report:runtime"),
+            ("raw_log:visual", "raw_log:bot"),
+            ("screenshot:000:forward", "screenshot:001:reverse"),
+        )
+        for index, (target_role, donor_role) in enumerate(substitutions):
+            with self.subTest(role=target_role):
+                destination = self.root / f"bundle-substituted-{index}"
+                self._substitute_bundle_role(
+                    source,
+                    destination,
+                    target_role,
+                    donor_role,
+                )
+                verification = evidence_loop.verify_evidence_bundle(destination)
+                self.assertFalse(verification["valid"])
+                self.assertTrue(
+                    any(
+                        target_role in issue and "does not match" in issue
+                        for issue in verification["issues"]
+                    ),
+                    verification["issues"],
+                )
+                self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
         repository = self.root / "repo"

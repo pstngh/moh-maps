@@ -1027,9 +1027,21 @@ def build_audit(
         "map_name": map_name,
         "candidate": package,
         "inputs": {
-            "visual_report": str(visual_path.resolve()),
-            "runtime_report": str(runtime_path.resolve()),
-            "evidence_plan": str(plan_path.resolve()),
+            "visual_report": {
+                "path": str(visual_path.resolve()),
+                "bytes": visual_path.stat().st_size,
+                "sha256": sha256_file(visual_path),
+            },
+            "runtime_report": {
+                "path": str(runtime_path.resolve()),
+                "bytes": runtime_path.stat().st_size,
+                "sha256": sha256_file(runtime_path),
+            },
+            "evidence_plan": {
+                "path": str(plan_path.resolve()),
+                "bytes": plan_path.stat().st_size,
+                "sha256": sha256_file(plan_path),
+            },
         },
         "launch_provenance": launch_detail,
         "build_provenance": build_detail,
@@ -1451,6 +1463,114 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                 != "requires_explicit_user_approval"
             ):
                 issues.append("bundled audit acceptance status is invalid")
+
+            def correlate_role(
+                role: str,
+                expected_sha: Any,
+                source: str,
+                expected_bytes: Any = None,
+            ) -> None:
+                digest = normalized_sha(expected_sha)
+                if digest is None:
+                    issues.append(f"{source} sha256 is missing or invalid")
+                    return
+                entry = by_role.get(role)
+                if entry is None:
+                    issues.append(f"required bundle role is missing: {role}")
+                    return
+                if entry.get("sha256") != digest:
+                    issues.append(f"{role} hash does not match {source}")
+                if expected_bytes is not None and entry.get("bytes") != expected_bytes:
+                    issues.append(f"{role} byte count does not match {source}")
+
+            inputs = audit_report.get("inputs")
+            if not isinstance(inputs, dict):
+                inputs = {}
+                issues.append("bundled audit inputs must be an object")
+            for key, role in (
+                ("visual_report", "report:visual"),
+                ("runtime_report", "report:runtime"),
+                ("evidence_plan", "report:evidence_plan"),
+            ):
+                record = inputs.get(key)
+                if not isinstance(record, dict):
+                    issues.append(f"bundled audit input {key} must be hash-linked")
+                    continue
+                correlate_role(
+                    role,
+                    record.get("sha256"),
+                    f"bundled audit input {key}",
+                    record.get("bytes"),
+                )
+
+            raw_logs = audit_report.get("raw_logs")
+            if not isinstance(raw_logs, dict):
+                raw_logs = {}
+                issues.append("bundled audit raw_logs must be an object")
+            for label in ("visual", "bot"):
+                record = raw_logs.get(label)
+                if not isinstance(record, dict):
+                    issues.append(f"bundled audit raw log {label} is missing")
+                    continue
+                correlate_role(
+                    f"raw_log:{label}",
+                    record.get("sha256"),
+                    f"bundled audit raw log {label}",
+                )
+
+            runtime_identity = audit_report.get("runtime_identity")
+            runtime_by_label: dict[str, dict[str, Any]] = {}
+            if isinstance(runtime_identity, list):
+                for record in runtime_identity:
+                    if not isinstance(record, dict):
+                        continue
+                    label = record.get("label")
+                    if isinstance(label, str) and label not in runtime_by_label:
+                        runtime_by_label[label] = record
+            else:
+                issues.append("bundled audit runtime_identity must be a list")
+            for label in ("visual", "bot"):
+                record = runtime_by_label.get(label)
+                if record is None:
+                    issues.append(f"bundled audit runtime identity {label} is missing")
+                    continue
+                correlate_role(
+                    f"runtime_package:{label}",
+                    record.get("runtime_package_sha256"),
+                    f"bundled audit runtime identity {label}",
+                )
+
+            capture = audit_report.get("capture")
+            screenshots = capture.get("screenshots") if isinstance(capture, dict) else None
+            expected_screenshot_roles: set[str] = set()
+            if not isinstance(screenshots, list):
+                screenshots = []
+                issues.append("bundled audit capture screenshots must be a list")
+            for index, record in enumerate(screenshots):
+                if not isinstance(record, dict):
+                    issues.append(f"bundled audit screenshot {index} must be an object")
+                    continue
+                view_id = record.get("view_id")
+                if not isinstance(view_id, str) or not view_id:
+                    issues.append(f"bundled audit screenshot {index} view_id is invalid")
+                    continue
+                role = f"screenshot:{index:03d}:{view_id}"
+                expected_screenshot_roles.add(role)
+                correlate_role(
+                    role,
+                    record.get("sha256"),
+                    f"bundled audit screenshot {index}",
+                    record.get("bytes"),
+                )
+            actual_screenshot_roles = {
+                role for role in by_role if isinstance(role, str) and role.startswith("screenshot:")
+            }
+            extra_screenshot_roles = sorted(actual_screenshot_roles - expected_screenshot_roles)
+            if extra_screenshot_roles:
+                issues.append(
+                    "screenshot roles absent from bundled audit: "
+                    + ", ".join(extra_screenshot_roles)
+                )
 
     return {
         "valid": not issues,

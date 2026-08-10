@@ -194,8 +194,13 @@ through a temporary directory, and atomically publishes only after
 self-verification. Its manifest has no timestamp and binds the exact candidate,
 source reports, raw logs, screenshots, isolated runtime packages, available
 build/engine/bot sources, generated audit, and the exact scorer script to
-content-addressed objects. Repeating unchanged inputs must produce the same
-manifest hash regardless of the caller's working directory. Resolve relative
+content-addressed objects. The audit must record the exact source-report hashes,
+and verification must correlate report, raw-log, runtime-package, and ordered
+screenshot roles back to the hashes and view IDs inside that audit. Object hashes
+and a rehashed manifest are insufficient when an artifact has been substituted
+under the wrong role; reject such internally mixed evidence. Repeating unchanged
+inputs must produce the same manifest hash regardless of the caller's working
+directory. Resolve relative
 report-owned log, screenshot, and runtime-package paths by walking ancestors of
 the report file; never resolve them from the process working directory.
 
