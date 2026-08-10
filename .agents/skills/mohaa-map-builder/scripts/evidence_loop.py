@@ -1685,6 +1685,20 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                         issues.append(
                             "bundled evidence plan map_name does not match bundled audit"
                         )
+                    if evidence_plan.get("expected_bsp_member") != manifest.get(
+                        "expected_bsp_member"
+                    ):
+                        issues.append(
+                            "bundled evidence plan expected_bsp_member does not "
+                            "match manifest"
+                        )
+                    if evidence_plan.get("expected_bsp_member") != (
+                        audit_candidate.get("expected_bsp_member")
+                    ):
+                        issues.append(
+                            "bundled evidence plan expected_bsp_member does not "
+                            "match bundled audit candidate"
+                        )
 
             def claimed_name(value: Any) -> str | None:
                 if isinstance(value, Path):

@@ -408,6 +408,7 @@ class EvidenceLoopTests(unittest.TestCase):
         *,
         expected_bot_count: int | None = None,
         map_name: str | None = None,
+        expected_bsp_member: str | None = None,
     ) -> None:
         shutil.copytree(source, destination)
         manifest_path = destination / "manifest.json"
@@ -422,6 +423,8 @@ class EvidenceLoopTests(unittest.TestCase):
             plan["bot_evidence"]["expected_bot_count"] = expected_bot_count
         if map_name is not None:
             plan["map_name"] = map_name
+        if expected_bsp_member is not None:
+            plan["expected_bsp_member"] = expected_bsp_member
 
         plan_payload = (json.dumps(plan, indent=2) + "\n").encode("utf-8")
         plan_sha = hashlib.sha256(plan_payload).hexdigest()
@@ -1266,6 +1269,36 @@ class EvidenceLoopTests(unittest.TestCase):
         self.assertFalse(verification["valid"])
         self.assertIn(
             "bundled audit runtime_load gate does not match replayed runtime report",
+            verification["issues"],
+        )
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_binds_evidence_plan_bsp_member(self) -> None:
+        source = self.root / "bundle-plan-bsp-member-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-plan-bsp-member-rewrite"
+        self._rewrite_bundle_evidence_plan(
+            source,
+            destination,
+            expected_bsp_member="maps/dm/fabricated.bsp",
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        self.assertIn(
+            "bundled evidence plan expected_bsp_member does not match manifest",
+            verification["issues"],
+        )
+        self.assertIn(
+            (
+                "bundled evidence plan expected_bsp_member does not match "
+                "bundled audit candidate"
+            ),
             verification["issues"],
         )
         self.assertFalse(verification["promotion_allowed"])
