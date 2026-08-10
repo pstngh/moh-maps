@@ -676,6 +676,37 @@ class EvidenceLoopTests(unittest.TestCase):
         self.assertEqual(verification["executing_scorer_sha256"], sha256(SCRIPT))
         self.assertFalse(verification["promotion_allowed"])
 
+    def test_bundle_verification_rejects_manifest_audit_field_divergence(self) -> None:
+        source = self.root / "bundle-manifest-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        variants = (
+            ("map-name", "map_name", "fabricated_map"),
+            ("technical-ready", "technical_ready_for_human_review", False),
+        )
+        for index, (name, field, value) in enumerate(variants):
+            with self.subTest(field=field):
+                destination = self.root / f"bundle-manifest-divergence-{index}"
+                shutil.copytree(source, destination)
+                manifest_path = destination / "manifest.json"
+                manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+                if field == "technical_ready_for_human_review":
+                    value = not manifest[field]
+                manifest[field] = value
+                self._write_bundle_manifest(destination, manifest)
+                verification = evidence_loop.verify_evidence_bundle(destination)
+                self.assertFalse(verification["valid"])
+                self.assertIn(
+                    f"manifest {field} does not match bundled audit",
+                    verification["issues"],
+                )
+                self.assertFalse(verification["promotion_allowed"])
+
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
         repository = self.root / "repo"
         evidence = repository / "generated" / self.map_name / "evidence"

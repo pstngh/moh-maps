@@ -1515,6 +1515,15 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                             f"bundled audit candidate {field} does not match "
                             "independent candidate inspection"
                         )
+            if manifest.get("map_name") != audit_report.get("map_name"):
+                issues.append("manifest map_name does not match bundled audit")
+            if manifest.get("technical_ready_for_human_review") != audit_report.get(
+                "technical_ready_for_human_review"
+            ):
+                issues.append(
+                    "manifest technical_ready_for_human_review does not match "
+                    "bundled audit"
+                )
             if audit_report.get("promotion_allowed") is not False:
                 issues.append("bundled audit must never permit promotion")
             if (

@@ -215,6 +215,9 @@ Require the bundled scorer object and manifest scorer identity to equal the
 scorer is not proof that it produced the audit. After any scorer change, treat
 older bundles as stale and rematerialize them before verification; never execute
 untrusted bundled scorer code merely to make an old bundle pass.
+Require manifest `map_name` and `technical_ready_for_human_review` to equal the
+bundled audit exactly; a rehashed manifest cannot rename the evidence set or
+claim a readiness result that its audit did not produce.
 
 Treat a loose or previously stored audit as stale after the scorer changes
 until it is replayed and materialized with the new scorer hash. Verification

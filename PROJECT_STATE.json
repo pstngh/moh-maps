@@ -13,15 +13,15 @@
     "inspection_date_utc": "2026-08-10",
     "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
   },
-  "checkpoint_id": "skill-evidence-bundle-executing-scorer-binding-20260810-008",
-  "checkpoint_updated_utc": "2026-08-10T19:51:12Z",
+  "checkpoint_id": "skill-evidence-bundle-manifest-audit-correlation-20260810-009",
+  "checkpoint_updated_utc": "2026-08-10T20:04:04Z",
   "current_phase": "autonomous-skill-improvement",
   "active_map": "codex_cache",
   "active_revision": "1",
   "accepted_baseline": null,
   "latest_candidate": "codex_dust2_v2",
-  "next_action": "Test whether verify-bundle accepts checksum-valid manifest-only changes to map_name or technical_ready_for_human_review that contradict the bundled audit; if either passes, require exact manifest-to-audit correlation for those fields with regressions and a fresh-agent forward test, without modifying maps, then validate, commit, push, and verify.",
-  "stopping_condition": "Stop after verify-bundle requires the bundled scorer identity to equal the currently executing evidence_loop.py hash, rejects stale and coordinated replacement scorers without executing bundled code, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
+  "next_action": "Test whether verify-bundle accepts a checksum-valid coordinated rewrite of report:visual plus the bundled audit input and materialized-role records when the rewritten visual report's declared raw log, first screenshot, or runtime package contradicts the bundled roles; if any pass, require exact bundled visual-report-to-role semantic correlation with regressions and a fresh-agent forward test, without modifying maps, then validate, commit, push, and verify.",
+  "stopping_condition": "Stop after verify-bundle requires manifest map_name and technical_ready_for_human_review to match the bundled audit exactly, rejects checksum-valid divergence, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
   "open_questions": [
     "Which exact revision/hash-linked original feedback artifact, if any, underlies the comparative codex_dust2_v2 bootstrap summary?",
     "Does the user want codex_cache revision 1 preserved as-is, or a separately authorized revision plan for the four recorded semantic visual blockers?"
