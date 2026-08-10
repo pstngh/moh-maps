@@ -13,15 +13,15 @@
     "inspection_date_utc": "2026-08-10",
     "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
   },
-  "checkpoint_id": "skill-evidence-bundle-raw-bot-activity-recount-20260810-016",
-  "checkpoint_updated_utc": "2026-08-10T21:54:06Z",
+  "checkpoint_id": "skill-evidence-bundle-runtime-combat-threshold-enforcement-20260810-017",
+  "checkpoint_updated_utc": "2026-08-10T22:10:38Z",
   "current_phase": "autonomous-skill-improvement",
   "active_map": "codex_cache",
   "active_revision": "1",
   "accepted_baseline": null,
   "latest_candidate": "codex_dust2_v2",
-  "next_action": "Require report:runtime minimumCombatEvents to be a positive integer and require the independently recounted raw_log:bot combat-event count to meet it; add a checksum-valid coordinated 999-threshold report-plus-audit regression and fresh-agent real-bundle forward test, without modifying maps, then validate, commit, push, and verify.",
-  "stopping_condition": "Stop after verify-bundle independently recounts unique bot entries and launcher-matched combat lines from the materialized raw_log:bot object, requires both counts to match report:runtime and audit.bot_activity, rejects a checksum-valid coordinated report-plus-audit 999-count rewrite, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
+  "next_action": "Independently rederive BSP-parse and Recast-generation observation counts from raw_log:bot during verify-bundle and require them to match report:runtime arrays and audit.runtime; add a checksum-valid coordinated empty-observation regression and fresh-agent real-bundle forward test, without modifying maps, then validate, commit, push, and verify.",
+  "stopping_condition": "Stop after verify-bundle requires report:runtime minimumCombatEvents to be a positive integer and requires the independently recounted raw_log:bot combat-event total to meet it, rejects a checksum-valid coordinated 999-threshold report-plus-audit rewrite, covers zero, boolean, and string thresholds, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
   "open_questions": [
     "Which exact revision/hash-linked original feedback artifact, if any, underlies the comparative codex_dust2_v2 bootstrap summary?",
     "Does the user want codex_cache revision 1 preserved as-is, or a separately authorized revision plan for the four recorded semantic visual blockers?"

@@ -1850,6 +1850,23 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     except (KeyError, OSError) as exc:
                         issues.append(f"could not recount raw_log:bot: {exc}")
                     else:
+                        minimum_combat = runtime_report.get(
+                            "minimumCombatEvents"
+                        )
+                        if (
+                            isinstance(minimum_combat, bool)
+                            or not isinstance(minimum_combat, int)
+                            or minimum_combat < 1
+                        ):
+                            issues.append(
+                                "bundled runtime report minimumCombatEvents must "
+                                "be a positive integer"
+                            )
+                        elif recounted_combat < minimum_combat:
+                            issues.append(
+                                "raw_log:bot combat event recount does not meet "
+                                "bundled runtime report minimumCombatEvents"
+                            )
                         for report_field, audit_field, observed in (
                             ("botsEntered", "bots_entered", recounted_entered),
                             ("combatEvents", "combat_events", recounted_combat),

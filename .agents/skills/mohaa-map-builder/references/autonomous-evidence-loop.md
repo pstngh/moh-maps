@@ -249,6 +249,9 @@ Recount unique `botN has entered the battle` names and launcher-matched combat
 lines directly from the materialized `raw_log:bot` object. Require those counts
 to match both the runtime report and the audited bot-activity summary.
 
+Require `minimumCombatEvents` to be a positive integer and require the recounted
+combat-event total to meet that threshold.
+
 Treat a loose or previously stored audit as stale after the scorer changes
 until it is replayed and materialized with the new scorer hash. Verification
 must reject missing, changed, or unexpected bundle files. A valid bundle proves

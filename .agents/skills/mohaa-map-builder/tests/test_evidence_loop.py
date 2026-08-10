@@ -322,6 +322,18 @@ class EvidenceLoopTests(unittest.TestCase):
             runtime["botsEntered"] = 999
             runtime["combatEvents"] = 999
             runtime["minimumCombatEvents"] = 999
+        elif variant == "combat-threshold":
+            runtime["minimumCombatEvents"] = 999
+        elif variant in {
+            "combat-threshold-zero",
+            "combat-threshold-bool",
+            "combat-threshold-string",
+        }:
+            runtime["minimumCombatEvents"] = {
+                "combat-threshold-zero": 0,
+                "combat-threshold-bool": True,
+                "combat-threshold-string": "3",
+            }[variant]
         else:
             self.fail(f"unsupported runtime-report variant: {variant}")
 
@@ -353,6 +365,16 @@ class EvidenceLoopTests(unittest.TestCase):
                     "minimum_combat_events": 999,
                 }
             )
+        elif variant == "combat-threshold":
+            audit["bot_activity"]["minimum_combat_events"] = 999
+        elif variant in {
+            "combat-threshold-zero",
+            "combat-threshold-bool",
+            "combat-threshold-string",
+        }:
+            audit["bot_activity"]["minimum_combat_events"] = runtime[
+                "minimumCombatEvents"
+            ]
         audit["inputs"]["runtime_report"].update(
             {"bytes": len(runtime_payload), "sha256": runtime_sha}
         )
@@ -1052,6 +1074,60 @@ class EvidenceLoopTests(unittest.TestCase):
             with self.subTest(issue=expected_issue):
                 self.assertIn(expected_issue, verification["issues"])
         self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_enforces_combat_threshold(self) -> None:
+        source = self.root / "bundle-runtime-threshold-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-runtime-threshold-rewrite"
+        self._rewrite_bundle_runtime_report(
+            source,
+            destination,
+            "combat-threshold",
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        self.assertIn(
+            "raw_log:bot combat event recount does not meet bundled runtime report minimumCombatEvents",
+            verification["issues"],
+        )
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_requires_positive_combat_threshold(self) -> None:
+        source = self.root / "bundle-runtime-threshold-type-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        for index, variant in enumerate(
+            (
+                "combat-threshold-zero",
+                "combat-threshold-bool",
+                "combat-threshold-string",
+            )
+        ):
+            with self.subTest(variant=variant):
+                destination = self.root / f"bundle-runtime-threshold-type-{index}"
+                self._rewrite_bundle_runtime_report(
+                    source,
+                    destination,
+                    variant,
+                )
+                verification = evidence_loop.verify_evidence_bundle(destination)
+                self.assertFalse(verification["valid"])
+                self.assertIn(
+                    "bundled runtime report minimumCombatEvents must be a positive integer",
+                    verification["issues"],
+                )
+                self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
         repository = self.root / "repo"
