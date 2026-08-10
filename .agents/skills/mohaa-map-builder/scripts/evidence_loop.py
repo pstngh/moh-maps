@@ -1676,6 +1676,15 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     )
                 except (EvidenceError, KeyError) as exc:
                     issues.append(str(exc))
+                else:
+                    if evidence_plan.get("map_name") != manifest.get("map_name"):
+                        issues.append(
+                            "bundled evidence plan map_name does not match manifest"
+                        )
+                    if evidence_plan.get("map_name") != audit_report.get("map_name"):
+                        issues.append(
+                            "bundled evidence plan map_name does not match bundled audit"
+                        )
 
             def claimed_name(value: Any) -> str | None:
                 if isinstance(value, Path):

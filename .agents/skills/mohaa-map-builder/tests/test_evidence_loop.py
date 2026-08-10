@@ -406,7 +406,8 @@ class EvidenceLoopTests(unittest.TestCase):
         source: Path,
         destination: Path,
         *,
-        expected_bot_count: int,
+        expected_bot_count: int | None = None,
+        map_name: str | None = None,
     ) -> None:
         shutil.copytree(source, destination)
         manifest_path = destination / "manifest.json"
@@ -417,7 +418,10 @@ class EvidenceLoopTests(unittest.TestCase):
         plan = json.loads(
             (destination / old_plan_object).read_text(encoding="utf-8")
         )
-        plan["bot_evidence"]["expected_bot_count"] = expected_bot_count
+        if expected_bot_count is not None:
+            plan["bot_evidence"]["expected_bot_count"] = expected_bot_count
+        if map_name is not None:
+            plan["map_name"] = map_name
 
         plan_payload = (json.dumps(plan, indent=2) + "\n").encode("utf-8")
         plan_sha = hashlib.sha256(plan_payload).hexdigest()
@@ -1262,6 +1266,33 @@ class EvidenceLoopTests(unittest.TestCase):
         self.assertFalse(verification["valid"])
         self.assertIn(
             "bundled audit runtime_load gate does not match replayed runtime report",
+            verification["issues"],
+        )
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_binds_evidence_plan_map_name(self) -> None:
+        source = self.root / "bundle-plan-map-name-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-plan-map-name-rewrite"
+        self._rewrite_bundle_evidence_plan(
+            source,
+            destination,
+            map_name="fabricated_map",
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        self.assertIn(
+            "bundled evidence plan map_name does not match manifest",
+            verification["issues"],
+        )
+        self.assertIn(
+            "bundled evidence plan map_name does not match bundled audit",
             verification["issues"],
         )
         self.assertFalse(verification["promotion_allowed"])

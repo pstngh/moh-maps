@@ -263,6 +263,9 @@ Replay the runtime-load scorer over the bundled runtime report. Require the
 recomputed runtime gate and runtime summary to match the corresponding bundled
 audit records exactly.
 
+Require the bundled evidence plan's map name to match both the bundle manifest
+and the audited map identity.
+
 Parse the bundled evidence plan and replay the bot-entry/combat scorer over that
 plan and the bundled runtime report. Require the recomputed bot-entry/combat
 gate and bot-activity summary to match the corresponding bundled audit records

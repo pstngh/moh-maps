@@ -13,15 +13,15 @@
     "inspection_date_utc": "2026-08-10",
     "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
   },
-  "checkpoint_id": "skill-evidence-bundle-bot-plan-replay-20260810-021",
-  "checkpoint_updated_utc": "2026-08-10T22:56:09Z",
+  "checkpoint_id": "skill-evidence-bundle-plan-map-identity-binding-20260810-022",
+  "checkpoint_updated_utc": "2026-08-10T23:06:48Z",
   "current_phase": "autonomous-skill-improvement",
   "active_map": "codex_cache",
   "active_revision": "1",
   "accepted_baseline": null,
   "latest_candidate": "codex_dust2_v2",
-  "next_action": "Require the bundled report:evidence_plan map_name to match the manifest and audited map identity during verify-bundle; add a checksum-valid fabricated_map plan-identity regression and fresh-agent real-bundle forward test, without modifying maps, then validate, commit, push, and verify.",
-  "stopping_condition": "Stop after verify-bundle parses report:evidence_plan, replays audit_bot_activity(report:runtime, evidence_plan), requires the recomputed bot-entry/combat gate and bot_activity summary to match the corresponding audit records, rejects a checksum-valid expected_bot_count=999 plan rewrite, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
+  "next_action": "Require the bundled report:evidence_plan expected_bsp_member to match the manifest expected_bsp_member and audited candidate expected_bsp_member during verify-bundle; add a checksum-valid maps/dm/fabricated.bsp plan rewrite regression and fresh-agent real-bundle forward test, without modifying maps, then validate, commit, push, and verify.",
+  "stopping_condition": "Stop after verify-bundle requires the bundled report:evidence_plan map_name to match both the manifest and audited map identity, rejects a checksum-valid fabricated_map plan rewrite, and passes regressions, deterministic real-bundle replay, fresh-agent forward testing, commit, push, and synchronization; do not modify, accept, or promote any map.",
   "open_questions": [
     "Which exact revision/hash-linked original feedback artifact, if any, underlies the comparative codex_dust2_v2 bootstrap summary?",
     "Does the user want codex_cache revision 1 preserved as-is, or a separately authorized revision plan for the four recorded semantic visual blockers?"
