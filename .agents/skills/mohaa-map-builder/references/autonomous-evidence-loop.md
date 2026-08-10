@@ -233,6 +233,12 @@ When present, require the visual report's engine path, exact argument list,
 `fsBasepath`, and `fsHomepath` to match `audit.launch_provenance.visual`; also
 bind the engine filename to the `engine:visual` materialized role.
 
+Parse the bundled runtime report as well. Require its map name and candidate
+hash, bot raw-log path and name, and optional runtime-package hash to match the
+manifest and corresponding materialized roles. Derive its runtime-package path
+from `runtimePackage` or `qaRoot` and require that path and filename to match the
+audited bot runtime identity.
+
 Treat a loose or previously stored audit as stale after the scorer changes
 until it is replayed and materialized with the new scorer hash. Verification
 must reject missing, changed, or unexpected bundle files. A valid bundle proves

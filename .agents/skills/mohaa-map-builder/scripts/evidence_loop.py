@@ -1632,6 +1632,17 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                 except (EvidenceError, KeyError) as exc:
                     issues.append(str(exc))
 
+            runtime_report: dict[str, Any] | None = None
+            runtime_report_entry = by_role.get("report:runtime")
+            if runtime_report_entry is not None:
+                try:
+                    runtime_report = load_object(
+                        bundle_dir / Path(runtime_report_entry["object"]),
+                        "bundled runtime report",
+                    )
+                except (EvidenceError, KeyError) as exc:
+                    issues.append(str(exc))
+
             def claimed_name(value: Any) -> str | None:
                 if isinstance(value, Path):
                     return value.name.casefold()
@@ -1741,6 +1752,17 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                                     "match audited visual launch provenance"
                                 )
 
+            if runtime_report is not None:
+                if runtime_report.get("mapName") != manifest.get("map_name"):
+                    issues.append(
+                        "bundled runtime report mapName does not match manifest"
+                    )
+                correlate_role(
+                    "candidate",
+                    runtime_report.get("candidateSha256"),
+                    "bundled runtime report candidate",
+                )
+
             raw_logs = audit_report.get("raw_logs")
             if not isinstance(raw_logs, dict):
                 raw_logs = {}
@@ -1790,6 +1812,24 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                                 "raw_log:visual original name does not match "
                                 "bundled visual report runtimeLog"
                             )
+
+                if label == "bot" and runtime_report is not None:
+                    declared_log = runtime_report.get("log")
+                    raw_log_entry = by_role.get("raw_log:bot")
+                    expected_name = (
+                        raw_log_entry.get("original_name")
+                        if raw_log_entry is not None
+                        else None
+                    )
+                    if not path_claim_matches(declared_log, record.get("path")):
+                        issues.append(
+                            "raw_log:bot path does not match bundled audit raw log"
+                        )
+                    if claimed_name(declared_log) != claimed_name(expected_name):
+                        issues.append(
+                            "raw_log:bot original name does not match "
+                            "bundled runtime report log"
+                        )
 
             runtime_identity = audit_report.get("runtime_identity")
             runtime_by_label: dict[str, dict[str, Any]] = {}
@@ -1842,6 +1882,37 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                         issues.append(
                             "runtime_package:visual original name does not match "
                             "bundled visual report runtime package"
+                        )
+
+                if label == "bot" and runtime_report is not None:
+                    if "runtimePackageSha256" in runtime_report:
+                        correlate_role(
+                            "runtime_package:bot",
+                            runtime_report.get("runtimePackageSha256"),
+                            "bundled runtime report runtime package",
+                        )
+                    report_map_name = manifest.get("map_name")
+                    declared_package = (
+                        runtime_copy_path(runtime_report, report_map_name)
+                        if isinstance(report_map_name, str)
+                        else None
+                    )
+                    runtime_entry = by_role.get("runtime_package:bot")
+                    expected_name = (
+                        runtime_entry.get("original_name")
+                        if runtime_entry is not None
+                        else None
+                    )
+                    if not path_claim_matches(
+                        declared_package, record.get("runtime_package")
+                    ):
+                        issues.append(
+                            "runtime_package:bot path does not match bundled audit"
+                        )
+                    if claimed_name(declared_package) != claimed_name(expected_name):
+                        issues.append(
+                            "runtime_package:bot original name does not match "
+                            "bundled runtime report runtime package"
                         )
 
             capture = audit_report.get("capture")

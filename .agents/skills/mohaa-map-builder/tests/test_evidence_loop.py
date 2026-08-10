@@ -276,6 +276,69 @@ class EvidenceLoopTests(unittest.TestCase):
         )
         self._write_bundle_audit(destination, manifest, audit)
 
+    def _rewrite_bundle_runtime_report(
+        self,
+        source: Path,
+        destination: Path,
+        variant: str,
+    ) -> None:
+        shutil.copytree(source, destination)
+        manifest_path = destination / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        by_role = {item["role"]: item for item in manifest["artifacts"]}
+        runtime_entry = by_role["report:runtime"]
+        old_runtime_object = runtime_entry["object"]
+        runtime = json.loads(
+            (destination / old_runtime_object).read_text(encoding="utf-8")
+        )
+        if variant == "map-name":
+            runtime["mapName"] = "fabricated_map"
+        elif variant == "candidate-hash":
+            runtime["candidateSha256"] = "0" * 64
+        elif variant == "raw-log":
+            visual_entry = by_role["report:visual"]
+            visual = json.loads(
+                (destination / visual_entry["object"]).read_text(encoding="utf-8")
+            )
+            runtime["log"] = visual["log"]
+        elif variant == "runtime-package":
+            runtime["runtimePackageSha256"] = "0" * 64
+        else:
+            self.fail(f"unsupported runtime-report variant: {variant}")
+
+        runtime_payload = (json.dumps(runtime, indent=2) + "\n").encode("utf-8")
+        runtime_sha = hashlib.sha256(runtime_payload).hexdigest()
+        runtime_object = f"objects/sha256/{runtime_sha}"
+        (destination / runtime_object).write_bytes(runtime_payload)
+        runtime_entry.update(
+            {
+                "bytes": len(runtime_payload),
+                "sha256": runtime_sha,
+                "object": runtime_object,
+            }
+        )
+        if old_runtime_object not in {
+            item["object"] for item in manifest["artifacts"]
+        }:
+            (destination / old_runtime_object).unlink()
+
+        audit_entry = by_role["audit"]
+        audit = json.loads(
+            (destination / audit_entry["object"]).read_text(encoding="utf-8")
+        )
+        audit["inputs"]["runtime_report"].update(
+            {"bytes": len(runtime_payload), "sha256": runtime_sha}
+        )
+        indexed_runtime = next(
+            item
+            for item in audit["materialized_roles"]
+            if item["role"] == "report:runtime"
+        )
+        indexed_runtime.update(
+            {"bytes": len(runtime_payload), "sha256": runtime_sha}
+        )
+        self._write_bundle_audit(destination, manifest, audit)
+
     def _substitute_bundle_role(
         self,
         source: Path,
@@ -851,6 +914,39 @@ class EvidenceLoopTests(unittest.TestCase):
                     destination,
                     variant,
                 )
+                verification = evidence_loop.verify_evidence_bundle(destination)
+                self.assertFalse(verification["valid"])
+                self.assertIn(expected_issue, verification["issues"])
+                self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_rejects_coordinated_runtime_report_rewrites(self) -> None:
+        source = self.root / "bundle-runtime-report-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        variants = (
+            ("map-name", "bundled runtime report mapName does not match manifest"),
+            (
+                "candidate-hash",
+                "candidate hash does not match bundled runtime report candidate",
+            ),
+            (
+                "raw-log",
+                "raw_log:bot path does not match bundled audit raw log",
+            ),
+            (
+                "runtime-package",
+                "runtime_package:bot hash does not match bundled runtime report runtime package",
+            ),
+        )
+        for index, (variant, expected_issue) in enumerate(variants):
+            with self.subTest(variant=variant):
+                destination = self.root / f"bundle-runtime-report-rewrite-{index}"
+                self._rewrite_bundle_runtime_report(source, destination, variant)
                 verification = evidence_loop.verify_evidence_bundle(destination)
                 self.assertFalse(verification["valid"])
                 self.assertIn(expected_issue, verification["issues"])
