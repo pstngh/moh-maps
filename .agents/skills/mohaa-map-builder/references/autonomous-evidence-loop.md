@@ -60,6 +60,17 @@ counts or empty diagnostic arrays when they contradict their source log. Record
 every diagnostic as `blocking` or `proven_nonblocking` with its exact literal
 text and supporting evidence. Leave unclassified diagnostics open; treat
 unclassified script-load failures and invalid cvars as failures.
+Match diagnostic words as tokens. Engine identifiers and capability names such
+as `alGetError`, `curl_easy_strerror`, `GL_KHR_no_error`, and `ter_error` are
+not diagnostics merely because they contain the substring `error`; a standalone
+`ERROR` token remains a diagnostic and still requires classification.
+Treat literal `WARNING`, standalone `invalid`, corruption, and `not found`
+phrases as diagnostics too. They remain open unless their exact lines receive a
+supported disposition; do not silently omit them because a summary is clean.
+Group repeated timestamped diagnostics by their normalized literal and record
+the occurrence count. Preserve the raw log, its hash, and the total diagnostic
+count, and never let grouping hide a severe line or weaken its disposition.
+
 
 ## Build the capture matrix
 

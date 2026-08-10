@@ -19,7 +19,8 @@ ROUTE_METHODS = {"instrumented_positions", "controlled_route_probe"}
 REQUIRED_LIFECYCLE_EVENTS = {"spawn", "movement", "combat", "death", "respawn"}
 DIAGNOSTIC_RE = re.compile(
     r"script error|not properly loaded|could(?:n't| not)|can(?:'t| not)|"
-    r"failed|missing|invalid.{0,40}cvar|unknown command|error",
+    r"failed|missing|not found|\bwarning\b|\binvalid\b|"
+    r"corrupt(?:ed|ion)?|invalid.{0,40}cvar|unknown command|\berror\b",
     re.IGNORECASE,
 )
 SEVERE_DIAGNOSTIC_RE = re.compile(
@@ -27,6 +28,35 @@ SEVERE_DIAGNOSTIC_RE = re.compile(
     re.IGNORECASE,
 )
 DIAGNOSTIC_DISPOSITIONS = {"blocking", "proven_nonblocking"}
+
+RUNTIME_LOG_TIMESTAMP_RE = re.compile(r"^\[\d{4}-\d{2}-\d{2}\s+[^\]]+\]\s*")
+
+
+def normalize_diagnostic_line(line: str) -> str:
+    return RUNTIME_LOG_TIMESTAMP_RE.sub("", line).strip()
+
+
+def group_diagnostic_lines(lines: list[str]) -> list[dict[str, Any]]:
+    counts: dict[str, int] = {}
+    for line in lines:
+        literal = normalize_diagnostic_line(line)
+        counts[literal] = counts.get(literal, 0) + 1
+    return [
+        {"literal": literal, "count": count}
+        for literal, count in counts.items()
+    ]
+
+
+def summarize_labeled_diagnostics(items: list[tuple[str, str]]) -> list[str]:
+    counts: dict[tuple[str, str], int] = {}
+    for label, line in items:
+        key = (label, normalize_diagnostic_line(line))
+        counts[key] = counts.get(key, 0) + 1
+    return [
+        f"{label}: {literal}"
+        + (f" ({count} occurrences)" if count > 1 else "")
+        for (label, literal), count in counts.items()
+    ]
 
 
 class EvidenceError(ValueError):
@@ -779,9 +809,9 @@ def audit_raw_runtime_logs(
         else:
             valid_classifications.append(item)
 
-    blocking: list[str] = []
-    severe_unclassified: list[str] = []
-    unclassified: list[str] = []
+    blocking: list[tuple[str, str]] = []
+    severe_unclassified: list[tuple[str, str]] = []
+    unclassified: list[tuple[str, str]] = []
     checked_logs = 0
     for label, report in (("visual", visual_report), ("bot", runtime_report)):
         raw_path = report.get("log")
@@ -799,42 +829,53 @@ def audit_raw_runtime_logs(
             issues.append(f"cannot read {label} raw log {log_path}: {exc}")
             continue
         diagnostics = [line for line in lines if DIAGNOSTIC_RE.search(line)]
-        classified: list[dict[str, str]] = []
+        classified_counts: dict[tuple[str, str, str], int] = {}
         for line in diagnostics:
             matches = [
                 item for item in valid_classifications
                 if item["log"] == label and item["needle"] in line
             ]
             if any(item["disposition"] == "blocking" for item in matches):
-                blocking.append(f"{label}: {line}")
+                blocking.append((label, line))
             elif any(item["disposition"] == "proven_nonblocking" for item in matches):
                 selected = next(
                     item for item in matches if item["disposition"] == "proven_nonblocking"
                 )
-                classified.append(
-                    {"line": line, "disposition": selected["disposition"], "evidence": selected["evidence"]}
-                )
+                key = (normalize_diagnostic_line(line), selected["disposition"], selected["evidence"])
+                classified_counts[key] = classified_counts.get(key, 0) + 1
             elif SEVERE_DIAGNOSTIC_RE.search(line):
-                severe_unclassified.append(f"{label}: {line}")
+                severe_unclassified.append((label, line))
             else:
-                unclassified.append(f"{label}: {line}")
+                unclassified.append((label, line))
+        diagnostic_groups = group_diagnostic_lines(diagnostics)
+        classified = [
+            {
+                "line": line,
+                "count": count,
+                "disposition": disposition,
+                "evidence": evidence,
+            }
+            for (line, disposition, evidence), count in classified_counts.items()
+        ]
         detail[label] = {
             "path": str(log_path),
             "sha256": sha256_file(log_path),
             "diagnostic_count": len(diagnostics),
+            "unique_diagnostic_count": len(diagnostic_groups),
+            "diagnostic_groups": diagnostic_groups,
             "classified_nonblocking": classified,
         }
 
     if checked_logs != 2:
         issues.append(f"expected two raw logs, verified {checked_logs}")
     if blocking:
-        issues.append("blocking diagnostics: " + " | ".join(blocking))
+        issues.append("blocking diagnostics: " + " | ".join(summarize_labeled_diagnostics(blocking)))
     if severe_unclassified:
-        issues.append("severe unclassified diagnostics: " + " | ".join(severe_unclassified))
+        issues.append("severe unclassified diagnostics: " + " | ".join(summarize_labeled_diagnostics(severe_unclassified)))
     if issues:
         return gate("fail", "; ".join(issues)), detail, 0, open_items
     if unclassified:
-        open_items.append("classify raw runtime diagnostics: " + " | ".join(unclassified))
+        open_items.append("classify raw runtime diagnostics: " + " | ".join(summarize_labeled_diagnostics(unclassified)))
         return gate("open", open_items[-1]), detail, None, open_items
     return gate("pass", "raw visual and bot logs are hash-linked and diagnostics are classified"), detail, 100, []
 

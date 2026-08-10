@@ -298,6 +298,70 @@ class EvidenceLoopTests(unittest.TestCase):
         self.assertIn("not properly loaded", report["gates"]["raw_runtime_diagnostics"]["detail"])
         self.assertFalse(report["technical_ready_for_human_review"])
 
+    def test_error_substrings_inside_identifiers_are_not_diagnostics(self) -> None:
+        benign_lines = [
+            "Loaded symbol alGetError (00007FFCC86089A0)",
+            "Loaded symbol curl_easy_strerror (0x00007FFD23AC13D0)",
+            "GL_EXTENSIONS: GL_KHR_no_error GL_AMD_debug_output",
+            "Cvar_Set2: ter_error 4",
+            "Any SetCurrentTiki errors means that tiki was not prefetched",
+            'serverCommand: 2 : cs 1749 "UnknownAmmo"',
+            'serverCommand: 26 : cs 1758 "Unknown Item"',
+        ]
+        for log in (self.visual_log, self.runtime_log):
+            log.write_text("\n".join(benign_lines) + "\n", encoding="utf-8")
+        report = self.audit()
+        self.assertEqual(report["gates"]["raw_runtime_diagnostics"]["status"], "pass")
+        self.assertEqual(report["raw_logs"]["visual"]["diagnostic_count"], 0)
+        self.assertEqual(report["raw_logs"]["bot"]["diagnostic_count"], 0)
+
+    def test_standalone_error_word_remains_a_diagnostic(self) -> None:
+        self.visual_log.write_text(
+            "LOCALIZATION ERROR: untranslated key\n",
+            encoding="utf-8",
+        )
+        report = self.audit()
+        self.assertEqual(report["gates"]["raw_runtime_diagnostics"]["status"], "open")
+        self.assertIn(
+            "LOCALIZATION ERROR",
+            report["gates"]["raw_runtime_diagnostics"]["detail"],
+        )
+
+    def test_explicit_warning_invalid_corruption_and_not_found_are_diagnostics(self) -> None:
+        diagnostic_lines = [
+            "WARNING: shader has lightmap but no lightmap stage!",
+            "CM_AddFacetBevels... invalid bevel",
+            "Box data is corrupted for allied_pilot.skd",
+            "R_LevelMarksLoad: maps/dm/test_map.dcl not found",
+        ]
+        self.visual_log.write_text(
+            "\n".join(diagnostic_lines) + "\n", encoding="utf-8"
+        )
+        report = self.audit()
+        self.assertEqual(report["gates"]["raw_runtime_diagnostics"]["status"], "open")
+        self.assertEqual(report["raw_logs"]["visual"]["diagnostic_count"], 4)
+
+    def test_repeated_timestamped_diagnostics_are_grouped_with_counts(self) -> None:
+        literal = "WARNING: shader has lightmap but no lightmap stage!"
+        self.visual_log.write_text(
+            "\n".join(
+                [
+                    f"[2026-08-10 11:27:4{index} UTC-5.000] {literal}"
+                    for index in range(3)
+                ]
+            )
+            + "\n",
+            encoding="utf-8",
+        )
+        report = self.audit()
+        raw = report["raw_logs"]["visual"]
+        self.assertEqual(raw["diagnostic_count"], 3)
+        self.assertEqual(raw["unique_diagnostic_count"], 1)
+        self.assertEqual(raw["diagnostic_groups"], [{"literal": literal, "count": 3}])
+        gate_detail = report["gates"]["raw_runtime_diagnostics"]["detail"]
+        self.assertEqual(gate_detail.count(literal), 1)
+        self.assertIn("(3 occurrences)", gate_detail)
+
     def test_bot_observation_must_exist_in_hash_linked_source(self) -> None:
         death = next(
             item for item in self.plan["bot_evidence"]["event_observations"]
