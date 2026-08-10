@@ -1699,6 +1699,57 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                             "bundled evidence plan expected_bsp_member does not "
                             "match bundled audit candidate"
                         )
+                    audited_capture = audit_report.get("capture")
+                    candidate_sha = normalized_sha(
+                        manifest.get("candidate_sha256")
+                    )
+                    if not isinstance(audited_capture, dict):
+                        issues.append("bundled audit capture must be an object")
+                    elif candidate_sha is None:
+                        issues.append(
+                            "manifest candidate_sha256 is missing or invalid for "
+                            "semantic visual-review replay"
+                        )
+                    else:
+                        (
+                            replayed_visual_gate,
+                            replayed_visual_score,
+                            replayed_visual_defects,
+                            _,
+                        ) = audit_visual_review(
+                            evidence_plan,
+                            candidate_sha,
+                            audited_capture,
+                        )
+                        audited_gates = audit_report.get("gates")
+                        audited_visual_gate = (
+                            audited_gates.get("semantic_visual_review")
+                            if isinstance(audited_gates, dict)
+                            else None
+                        )
+                        if audited_visual_gate != replayed_visual_gate:
+                            issues.append(
+                                "bundled audit semantic_visual_review gate does "
+                                "not match replayed evidence plan"
+                            )
+                        audited_scores = audit_report.get("scores")
+                        audited_visual_score = (
+                            audited_scores.get("semantic_visual_review_completeness")
+                            if isinstance(audited_scores, dict)
+                            else None
+                        )
+                        if audited_visual_score != replayed_visual_score:
+                            issues.append(
+                                "bundled audit semantic_visual_review_completeness "
+                                "score does not match replayed evidence plan"
+                            )
+                        if audit_report.get(
+                            "blocking_visual_defects"
+                        ) != replayed_visual_defects:
+                            issues.append(
+                                "bundled audit blocking_visual_defects do not "
+                                "match replayed evidence plan"
+                            )
 
             def claimed_name(value: Any) -> str | None:
                 if isinstance(value, Path):

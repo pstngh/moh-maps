@@ -267,6 +267,11 @@ Require the bundled evidence plan's map name and expected BSP member to match
 the bundle manifest and the corresponding audited map and candidate
 identities.
 
+Replay semantic visual review over the bundled evidence plan, exact candidate
+hash, and audited capture records. Require the recomputed semantic-review gate,
+review-completeness score, and blocking-defect records to match the bundled
+audit exactly.
+
 Parse the bundled evidence plan and replay the bot-entry/combat scorer over that
 plan and the bundled runtime report. Require the recomputed bot-entry/combat
 gate and bot-activity summary to match the corresponding bundled audit records
