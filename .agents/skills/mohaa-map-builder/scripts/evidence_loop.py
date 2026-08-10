@@ -1621,6 +1621,47 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     record.get("bytes"),
                 )
 
+            visual_report: dict[str, Any] | None = None
+            visual_entry = by_role.get("report:visual")
+            if visual_entry is not None:
+                try:
+                    visual_report = load_object(
+                        bundle_dir / Path(visual_entry["object"]),
+                        "bundled visual report",
+                    )
+                except (EvidenceError, KeyError) as exc:
+                    issues.append(str(exc))
+
+            def claimed_name(value: Any) -> str | None:
+                if isinstance(value, Path):
+                    return value.name.casefold()
+                if isinstance(value, str) and value:
+                    return Path(value).name.casefold()
+                return None
+
+            def path_claim_matches(declared: Any, audited: Any) -> bool:
+                if not isinstance(declared, (str, Path)) or not isinstance(
+                    audited,
+                    (str, Path),
+                ):
+                    return False
+                declared_path = Path(declared)
+                audited_parts = tuple(
+                    part.casefold() for part in Path(audited).parts
+                )
+                declared_parts = tuple(
+                    part.casefold() for part in declared_path.parts
+                )
+                if declared_path.is_absolute():
+                    return declared_parts == audited_parts
+                relative_parts = tuple(
+                    part for part in declared_parts if part != ".."
+                )
+                return (
+                    bool(relative_parts)
+                    and audited_parts[-len(relative_parts):] == relative_parts
+                )
+
             raw_logs = audit_report.get("raw_logs")
             if not isinstance(raw_logs, dict):
                 raw_logs = {}
@@ -1635,6 +1676,24 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     record.get("sha256"),
                     f"bundled audit raw log {label}",
                 )
+
+                if label == "visual" and visual_report is not None:
+                    declared_log = visual_report.get("log")
+                    raw_log_entry = by_role.get("raw_log:visual")
+                    expected_name = (
+                        raw_log_entry.get("original_name")
+                        if raw_log_entry is not None
+                        else None
+                    )
+                    if not path_claim_matches(declared_log, record.get("path")):
+                        issues.append(
+                            "raw_log:visual path does not match bundled audit raw log"
+                        )
+                    if claimed_name(declared_log) != claimed_name(expected_name):
+                        issues.append(
+                            "raw_log:visual original name does not match "
+                            "bundled visual report log"
+                        )
 
             runtime_identity = audit_report.get("runtime_identity")
             runtime_by_label: dict[str, dict[str, Any]] = {}
@@ -1658,12 +1717,59 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     f"bundled audit runtime identity {label}",
                 )
 
+                if label == "visual" and visual_report is not None:
+                    if "runtimePackageSha256" in visual_report:
+                        correlate_role(
+                            "runtime_package:visual",
+                            visual_report.get("runtimePackageSha256"),
+                            "bundled visual report runtime package",
+                        )
+                    report_map_name = manifest.get("map_name")
+                    declared_package = (
+                        runtime_copy_path(visual_report, report_map_name)
+                        if isinstance(report_map_name, str)
+                        else None
+                    )
+                    runtime_entry = by_role.get("runtime_package:visual")
+                    expected_name = (
+                        runtime_entry.get("original_name")
+                        if runtime_entry is not None
+                        else None
+                    )
+                    if not path_claim_matches(
+                        declared_package, record.get("runtime_package")
+                    ):
+                        issues.append(
+                            "runtime_package:visual path does not match bundled audit"
+                        )
+                    if claimed_name(declared_package) != claimed_name(expected_name):
+                        issues.append(
+                            "runtime_package:visual original name does not match "
+                            "bundled visual report runtime package"
+                        )
+
             capture = audit_report.get("capture")
             screenshots = capture.get("screenshots") if isinstance(capture, dict) else None
             expected_screenshot_roles: set[str] = set()
+            report_screenshots: list[Any] = []
+            if visual_report is not None:
+                raw_report_screenshots = visual_report.get("screenshots")
+                if not isinstance(raw_report_screenshots, list):
+                    issues.append("bundled visual report screenshots must be a list")
+                else:
+                    report_screenshots = raw_report_screenshots
+                    if visual_report.get("screenshotCount") != len(report_screenshots):
+                        issues.append(
+                            "bundled visual report screenshotCount does not match "
+                            "screenshots array"
+                        )
             if not isinstance(screenshots, list):
                 screenshots = []
                 issues.append("bundled audit capture screenshots must be a list")
+            if visual_report is not None and len(report_screenshots) != len(screenshots):
+                issues.append(
+                    "bundled visual report screenshot count does not match bundled audit"
+                )
             for index, record in enumerate(screenshots):
                 if not isinstance(record, dict):
                     issues.append(f"bundled audit screenshot {index} must be an object")
@@ -1680,6 +1786,38 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     f"bundled audit screenshot {index}",
                     record.get("bytes"),
                 )
+                if visual_report is not None and index < len(report_screenshots):
+                    declared = report_screenshots[index]
+                    if not isinstance(declared, dict):
+                        issues.append(
+                            f"bundled visual report screenshot {index} must be an object"
+                        )
+                    else:
+                        correlate_role(
+                            role,
+                            declared.get("sha256"),
+                            f"bundled visual report screenshot {index}",
+                            declared.get("bytes"),
+                        )
+                        screenshot_entry = by_role.get(role)
+                        expected_name = (
+                            screenshot_entry.get("original_name")
+                            if screenshot_entry is not None
+                            else None
+                        )
+                        if not path_claim_matches(
+                            declared.get("path"), record.get("path")
+                        ):
+                            issues.append(
+                                f"{role} path does not match bundled audit screenshot"
+                            )
+                        if claimed_name(declared.get("path")) != claimed_name(
+                            expected_name
+                        ):
+                            issues.append(
+                                f"{role} original name does not match bundled visual "
+                                f"report screenshot {index}"
+                            )
             actual_screenshot_roles = {
                 role for role in by_role if isinstance(role, str) and role.startswith("screenshot:")
             }

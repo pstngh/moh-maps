@@ -195,6 +195,67 @@ class EvidenceLoopTests(unittest.TestCase):
             old_path.unlink()
         self._write_bundle_manifest(destination, manifest)
 
+    def _rewrite_bundle_visual_report(
+        self,
+        source: Path,
+        destination: Path,
+        variant: str,
+    ) -> None:
+        shutil.copytree(source, destination)
+        manifest_path = destination / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        by_role = {item["role"]: item for item in manifest["artifacts"]}
+        visual_entry = by_role["report:visual"]
+        old_visual_object = visual_entry["object"]
+        visual = json.loads(
+            (destination / old_visual_object).read_text(encoding="utf-8")
+        )
+        if variant == "raw-log":
+            runtime_entry = by_role["report:runtime"]
+            runtime = json.loads(
+                (destination / runtime_entry["object"]).read_text(encoding="utf-8")
+            )
+            visual["log"] = runtime["log"]
+        elif variant == "first-screenshot":
+            visual["screenshots"][0] = dict(visual["screenshots"][1])
+        elif variant == "runtime-package":
+            visual["runtimePackageSha256"] = "0" * 64
+        else:
+            self.fail(f"unsupported visual-report variant: {variant}")
+
+        visual_payload = (json.dumps(visual, indent=2) + "\n").encode("utf-8")
+        visual_sha = hashlib.sha256(visual_payload).hexdigest()
+        visual_object = f"objects/sha256/{visual_sha}"
+        (destination / visual_object).write_bytes(visual_payload)
+        visual_entry.update(
+            {
+                "bytes": len(visual_payload),
+                "sha256": visual_sha,
+                "object": visual_object,
+            }
+        )
+        if old_visual_object not in {
+            item["object"] for item in manifest["artifacts"]
+        }:
+            (destination / old_visual_object).unlink()
+
+        audit_entry = by_role["audit"]
+        audit = json.loads(
+            (destination / audit_entry["object"]).read_text(encoding="utf-8")
+        )
+        audit["inputs"]["visual_report"].update(
+            {"bytes": len(visual_payload), "sha256": visual_sha}
+        )
+        indexed_visual = next(
+            item
+            for item in audit["materialized_roles"]
+            if item["role"] == "report:visual"
+        )
+        indexed_visual.update(
+            {"bytes": len(visual_payload), "sha256": visual_sha}
+        )
+        self._write_bundle_audit(destination, manifest, audit)
+
     def _substitute_bundle_role(
         self,
         source: Path,
@@ -705,6 +766,42 @@ class EvidenceLoopTests(unittest.TestCase):
                     f"manifest {field} does not match bundled audit",
                     verification["issues"],
                 )
+                self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_rejects_coordinated_visual_report_rewrites(self) -> None:
+        source = self.root / "bundle-visual-report-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        variants = (
+            (
+                "raw-log",
+                "raw_log:visual path does not match bundled audit raw log",
+            ),
+            (
+                "first-screenshot",
+                "screenshot:000:forward hash does not match bundled visual report screenshot 0",
+            ),
+            (
+                "runtime-package",
+                "runtime_package:visual hash does not match bundled visual report runtime package",
+            ),
+        )
+        for index, (variant, expected_issue) in enumerate(variants):
+            with self.subTest(variant=variant):
+                destination = self.root / f"bundle-visual-report-rewrite-{index}"
+                self._rewrite_bundle_visual_report(
+                    source,
+                    destination,
+                    variant,
+                )
+                verification = evidence_loop.verify_evidence_bundle(destination)
+                self.assertFalse(verification["valid"])
+                self.assertIn(expected_issue, verification["issues"])
                 self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:

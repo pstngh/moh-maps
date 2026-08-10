@@ -219,6 +219,12 @@ Require manifest `map_name` and `technical_ready_for_human_review` to equal the
 bundled audit exactly; a rehashed manifest cannot rename the evidence set or
 claim a readiness result that its audit did not produce.
 
+Parse the bundled visual report during bundle verification. Require its declared
+visual raw-log path and name, runtime-package path, hash, and name, and ordered
+screenshot paths, hashes, byte counts, and names to match the corresponding
+materialized roles and audit records. Hash-valid rewrites of the report and
+audit index cannot substitute those inputs.
+
 Treat a loose or previously stored audit as stale after the scorer changes
 until it is replayed and materialized with the new scorer hash. Verification
 must reject missing, changed, or unexpected bundle files. A valid bundle proves
