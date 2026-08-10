@@ -303,6 +303,8 @@ class EvidenceLoopTests(unittest.TestCase):
             runtime["log"] = visual["log"]
         elif variant == "runtime-package":
             runtime["runtimePackageSha256"] = "0" * 64
+        elif variant == "engine-hash":
+            runtime["engineSha256"] = "0" * 64
         else:
             self.fail(f"unsupported runtime-report variant: {variant}")
 
@@ -951,6 +953,28 @@ class EvidenceLoopTests(unittest.TestCase):
                 self.assertFalse(verification["valid"])
                 self.assertIn(expected_issue, verification["issues"])
                 self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_binds_runtime_report_engine_hash(self) -> None:
+        source = self.root / "bundle-runtime-engine-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-runtime-engine-rewrite"
+        self._rewrite_bundle_runtime_report(source, destination, "engine-hash")
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        for expected_issue in (
+            "engine:bot hash does not match bundled runtime report engine",
+            "bundled runtime report engine hash does not match audited bot launch provenance",
+            "bundled runtime report engine hash does not match audited runtime summary",
+        ):
+            with self.subTest(issue=expected_issue):
+                self.assertIn(expected_issue, verification["issues"])
+        self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
         repository = self.root / "repo"

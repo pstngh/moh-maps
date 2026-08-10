@@ -1673,6 +1673,7 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     and audited_parts[-len(relative_parts):] == relative_parts
                 )
 
+            launch_provenance = audit_report.get("launch_provenance")
             if visual_report is not None:
                 if visual_report.get("mapName") != manifest.get("map_name"):
                     issues.append(
@@ -1690,7 +1691,6 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                         "bundled visual report engine",
                     )
 
-                launch_provenance = audit_report.get("launch_provenance")
                 visual_launch = (
                     launch_provenance.get("visual")
                     if isinstance(launch_provenance, dict)
@@ -1762,6 +1762,48 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     runtime_report.get("candidateSha256"),
                     "bundled runtime report candidate",
                 )
+                runtime_engine_sha = normalized_sha(
+                    runtime_report.get("engineSha256")
+                )
+                correlate_role(
+                    "engine:bot",
+                    runtime_engine_sha,
+                    "bundled runtime report engine",
+                )
+                bot_launch = (
+                    launch_provenance.get("bot")
+                    if isinstance(launch_provenance, dict)
+                    else None
+                )
+                audited_launch_engine_sha = (
+                    normalized_sha(bot_launch.get("engine_sha256"))
+                    if isinstance(bot_launch, dict)
+                    else None
+                )
+                if audited_launch_engine_sha is None:
+                    issues.append(
+                        "bundled audit bot launch engine sha256 is missing or invalid"
+                    )
+                elif runtime_engine_sha != audited_launch_engine_sha:
+                    issues.append(
+                        "bundled runtime report engine hash does not match audited "
+                        "bot launch provenance"
+                    )
+                runtime_summary = audit_report.get("runtime")
+                audited_runtime_engine_sha = (
+                    normalized_sha(runtime_summary.get("engine_sha256"))
+                    if isinstance(runtime_summary, dict)
+                    else None
+                )
+                if audited_runtime_engine_sha is None:
+                    issues.append(
+                        "bundled audit runtime engine sha256 is missing or invalid"
+                    )
+                elif runtime_engine_sha != audited_runtime_engine_sha:
+                    issues.append(
+                        "bundled runtime report engine hash does not match audited "
+                        "runtime summary"
+                    )
 
             raw_logs = audit_report.get("raw_logs")
             if not isinstance(raw_logs, dict):
