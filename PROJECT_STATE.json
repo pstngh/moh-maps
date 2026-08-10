@@ -13,15 +13,15 @@
     "inspection_date_utc": "2026-08-10",
     "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
   },
-  "checkpoint_id": "skill-evidence-bundle-cross-link-hardening-20260810-005",
-  "checkpoint_updated_utc": "2026-08-10T19:14:30Z",
+  "checkpoint_id": "skill-evidence-bundle-complete-role-index-20260810-006",
+  "checkpoint_updated_utc": "2026-08-10T19:31:17Z",
   "current_phase": "autonomous-skill-improvement",
   "active_map": "codex_cache",
   "active_revision": "1",
   "accepted_baseline": null,
   "latest_candidate": "codex_dust2_v2",
-  "next_action": "Test whether verify-bundle detects checksum-valid engine, optional build, or bot-source object substitutions under another role; if any pass, add an audit-owned complete materialized-role hash index and exact role-set verification with regressions and a fresh-agent forward test, without modifying maps, then validate, commit, push, and verify.",
-  "stopping_condition": "Stop after audit-owned source-report hashes and exact report, raw-log, runtime-package, and ordered-screenshot cross-role verification are regression-tested, real-bundle replayed, fresh-agent forward-tested, committed, pushed, and synchronized; do not modify, accept, or promote any map.",
+  "next_action": "Test whether verify-bundle rejects a checksum-valid audit and manifest rewrite that changes the expected BSP member, reported BSP member count, or inner BSP hash while candidate object bytes remain unchanged; if any pass, reopen the bundled candidate PK3 during verification and recompute its exact case-sensitive BSP inventory and inner hash with regressions and a fresh-agent forward test, without modifying maps, then validate, commit, push, and verify.",
+  "stopping_condition": "Stop after the audit-owned complete non-audit role index and exact role-set, hash, and byte verification for scorer, engine, optional build, bot-source, report, log, runtime-package, and screenshot artifacts are regression-tested, real-bundle replayed, fresh-agent forward-tested, committed, pushed, and synchronized; do not modify, accept, or promote any map.",
   "open_questions": [
     "Which exact revision/hash-linked original feedback artifact, if any, underlies the comparative codex_dust2_v2 bootstrap summary?",
     "Does the user want codex_cache revision 1 preserved as-is, or a separately authorized revision plan for the four recorded semantic visual blockers?"

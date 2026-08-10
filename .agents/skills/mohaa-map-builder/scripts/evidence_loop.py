@@ -1279,14 +1279,26 @@ def materialize_evidence_bundle(
             _store_bundle_path(staging, role, source)
             for role, source in sources
         ]
+        scorer = Path(__file__).resolve()
+        scorer_entry = _store_bundle_path(staging, "scorer", scorer)
+        artifacts.append(scorer_entry)
+        audit_report["materialized_roles"] = [
+            {
+                "role": item["role"],
+                "bytes": item["bytes"],
+                "sha256": item["sha256"],
+            }
+            for item in sorted(
+                artifacts,
+                key=lambda item: (item["role"], item["sha256"]),
+            )
+        ]
         audit_payload = (
             json.dumps(audit_report, indent=2, ensure_ascii=False) + "\n"
         ).encode("utf-8")
         artifacts.append(
             _store_bundle_bytes(staging, "audit", "audit.json", audit_payload)
         )
-        scorer = Path(__file__).resolve()
-        artifacts.append(_store_bundle_path(staging, "scorer", scorer))
         artifacts.sort(
             key=lambda item: (
                 item["role"],
@@ -1295,7 +1307,6 @@ def materialize_evidence_bundle(
             )
         )
         audit_entry = next(item for item in artifacts if item["role"] == "audit")
-        scorer_entry = next(item for item in artifacts if item["role"] == "scorer")
         manifest = {
             "schema_version": 1,
             "bundle_kind": "openmohaa_exact_hash_evidence",
@@ -1482,6 +1493,56 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                     issues.append(f"{role} hash does not match {source}")
                 if expected_bytes is not None and entry.get("bytes") != expected_bytes:
                     issues.append(f"{role} byte count does not match {source}")
+
+            materialized_roles = audit_report.get("materialized_roles")
+            indexed_roles: set[str] = set()
+            if not isinstance(materialized_roles, list):
+                materialized_roles = []
+                issues.append("bundled audit materialized_roles must be a list")
+            for index, record in enumerate(materialized_roles):
+                if not isinstance(record, dict):
+                    issues.append(
+                        f"bundled audit materialized_roles[{index}] must be an object"
+                    )
+                    continue
+                role = record.get("role")
+                if not isinstance(role, str) or not role:
+                    issues.append(
+                        f"bundled audit materialized_roles[{index}].role is invalid"
+                    )
+                    continue
+                if role == "audit":
+                    issues.append("bundled audit cannot self-index the audit role")
+                    continue
+                if role in indexed_roles:
+                    issues.append(f"duplicate bundled audit materialized role: {role}")
+                    continue
+                indexed_roles.add(role)
+                expected_bytes = record.get("bytes")
+                if not isinstance(expected_bytes, int) or expected_bytes < 0:
+                    issues.append(
+                        f"bundled audit materialized role {role} byte count is invalid"
+                    )
+                    expected_bytes = None
+                correlate_role(
+                    role,
+                    record.get("sha256"),
+                    f"bundled audit materialized role {role}",
+                    expected_bytes,
+                )
+            expected_indexed_roles = set(by_role) - {"audit"}
+            missing_indexed_roles = sorted(expected_indexed_roles - indexed_roles)
+            if missing_indexed_roles:
+                issues.append(
+                    "bundle roles missing from audit materialized_roles: "
+                    + ", ".join(missing_indexed_roles)
+                )
+            extra_indexed_roles = sorted(indexed_roles - expected_indexed_roles)
+            if extra_indexed_roles:
+                issues.append(
+                    "audit materialized_roles absent from bundle: "
+                    + ", ".join(extra_indexed_roles)
+                )
 
             inputs = audit_report.get("inputs")
             if not isinstance(inputs, dict):

@@ -196,10 +196,14 @@ source reports, raw logs, screenshots, isolated runtime packages, available
 build/engine/bot sources, generated audit, and the exact scorer script to
 content-addressed objects. The audit must record the exact source-report hashes,
 and verification must correlate report, raw-log, runtime-package, and ordered
-screenshot roles back to the hashes and view IDs inside that audit. Object hashes
-and a rehashed manifest are insufficient when an artifact has been substituted
-under the wrong role; reject such internally mixed evidence. Repeating unchanged
-inputs must produce the same manifest hash regardless of the caller's working
+screenshot roles back to the hashes and view IDs inside that audit. The audit
+must also index every materialized role except its self-referential audit object,
+including the scorer, engines, optional build sources, and bot evidence sources;
+verification must require that exact role set, hashes, and byte counts. Object
+hashes and a rehashed manifest are insufficient when an artifact has been
+substituted under the wrong role; reject such internally mixed evidence.
+Repeating unchanged inputs must produce the same manifest hash regardless of the
+caller's working
 directory. Resolve relative
 report-owned log, screenshot, and runtime-package paths by walking ancestors of
 the report file; never resolve them from the process working directory.

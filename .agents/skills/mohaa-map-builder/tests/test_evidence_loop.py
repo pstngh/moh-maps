@@ -60,6 +60,16 @@ class EvidenceLoopTests(unittest.TestCase):
             ) + "\n",
             encoding="utf-8",
         )
+        self.route_trace = self.root / "bot-routes.jsonl"
+        self.route_trace.write_text(
+            "\n".join(
+                [
+                    '{"bot":"bot1","route":"main_loop","sample":1}',
+                    '{"bot":"bot1","route":"main_loop","sample":2}',
+                ]
+            ) + "\n",
+            encoding="utf-8",
+        )
         self.visual_log = self.visual_root / "home" / "main" / "qconsole.log"
         self.runtime_log = self.runtime_root / "home" / "main" / "qconsole.log"
         for label, log in (
@@ -146,6 +156,17 @@ class EvidenceLoopTests(unittest.TestCase):
     def _write_json(self, path: Path, value: dict) -> None:
         path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
 
+    def _write_bundle_manifest(self, destination: Path, manifest: dict) -> None:
+        manifest["object_count"] = len(
+            {item["object"] for item in manifest["artifacts"]}
+        )
+        payload = (json.dumps(manifest, indent=2) + "\n").encode("utf-8")
+        (destination / "manifest.json").write_bytes(payload)
+        manifest_sha = hashlib.sha256(payload).hexdigest()
+        (destination / "manifest.sha256").write_text(
+            f"{manifest_sha}  manifest.json\n", encoding="ascii"
+        )
+
     def _substitute_bundle_role(
         self,
         source: Path,
@@ -166,17 +187,11 @@ class EvidenceLoopTests(unittest.TestCase):
         old_path = destination / old_object
         if old_object not in referenced:
             old_path.unlink()
-        manifest["object_count"] = len(referenced)
-        payload = (json.dumps(manifest, indent=2) + "\n").encode("utf-8")
-        manifest_path.write_bytes(payload)
-        manifest_sha = hashlib.sha256(payload).hexdigest()
-        (destination / "manifest.sha256").write_text(
-            f"{manifest_sha}  manifest.json\n",
-            encoding="ascii",
-        )
+        self._write_bundle_manifest(destination, manifest)
 
     def _complete_plan(self) -> dict:
         trace_sha = sha256(self.trace)
+        route_trace_sha = sha256(self.route_trace)
         candidate_sha = sha256(self.candidate)
         return {
             "schema_version": 1,
@@ -256,8 +271,8 @@ class EvidenceLoopTests(unittest.TestCase):
                     {
                         "route_id": "main_loop",
                         "method": "instrumented_positions",
-                        "source_path": str(self.trace),
-                        "source_sha256": trace_sha,
+                        "source_path": str(self.route_trace),
+                        "source_sha256": route_trace_sha,
                         "needle": '"route":"main_loop"',
                         "sample_count": 2,
                         "unique_bots": 1,
@@ -452,6 +467,18 @@ class EvidenceLoopTests(unittest.TestCase):
             verification["artifact_count"],
             len(first_manifest["artifacts"]),
         )
+        audit_entry = next(
+            item for item in first_manifest["artifacts"] if item["role"] == "audit"
+        )
+        audit = json.loads((first / audit_entry["object"]).read_text(encoding="utf-8"))
+        indexed_roles = {
+            item["role"] for item in audit["materialized_roles"]
+        }
+        self.assertEqual(indexed_roles, roles - {"audit"})
+        scorer_record = next(
+            item for item in audit["materialized_roles"] if item["role"] == "scorer"
+        )
+        self.assertEqual(scorer_record["sha256"], sha256(SCRIPT))
 
     def test_bundle_verification_rejects_hash_valid_cross_role_substitutions(self) -> None:
         source = self.root / "bundle-source"
@@ -466,6 +493,9 @@ class EvidenceLoopTests(unittest.TestCase):
             ("report:visual", "report:runtime"),
             ("raw_log:visual", "raw_log:bot"),
             ("screenshot:000:forward", "screenshot:001:reverse"),
+            ("engine:visual", "engine:bot"),
+            ("build:source_map", "build:design_report"),
+            ("bot_source:event:movement", "bot_source:route_id:main_loop"),
         )
         for index, (target_role, donor_role) in enumerate(substitutions):
             with self.subTest(role=target_role):
@@ -486,6 +516,32 @@ class EvidenceLoopTests(unittest.TestCase):
                     verification["issues"],
                 )
                 self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_rejects_role_absent_from_audit_index(self) -> None:
+        source = self.root / "bundle-index-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-renamed-role"
+        shutil.copytree(source, destination)
+        manifest_path = destination / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        engine = next(
+            item for item in manifest["artifacts"] if item["role"] == "engine:visual"
+        )
+        engine["role"] = "engine:renamed"
+        self._write_bundle_manifest(destination, manifest)
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        self.assertTrue(
+            any("materialized_roles" in issue for issue in verification["issues"]),
+            verification["issues"],
+        )
+        self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
         repository = self.root / "repo"
