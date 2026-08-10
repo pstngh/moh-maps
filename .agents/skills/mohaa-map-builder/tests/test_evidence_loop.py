@@ -401,6 +401,55 @@ class EvidenceLoopTests(unittest.TestCase):
         )
         self._write_bundle_audit(destination, manifest, audit)
 
+    def _rewrite_bundle_evidence_plan(
+        self,
+        source: Path,
+        destination: Path,
+        *,
+        expected_bot_count: int,
+    ) -> None:
+        shutil.copytree(source, destination)
+        manifest_path = destination / "manifest.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        by_role = {item["role"]: item for item in manifest["artifacts"]}
+        plan_entry = by_role["report:evidence_plan"]
+        old_plan_object = plan_entry["object"]
+        plan = json.loads(
+            (destination / old_plan_object).read_text(encoding="utf-8")
+        )
+        plan["bot_evidence"]["expected_bot_count"] = expected_bot_count
+
+        plan_payload = (json.dumps(plan, indent=2) + "\n").encode("utf-8")
+        plan_sha = hashlib.sha256(plan_payload).hexdigest()
+        plan_object = f"objects/sha256/{plan_sha}"
+        (destination / plan_object).write_bytes(plan_payload)
+        plan_entry.update(
+            {
+                "bytes": len(plan_payload),
+                "sha256": plan_sha,
+                "object": plan_object,
+            }
+        )
+        if old_plan_object not in {
+            item["object"] for item in manifest["artifacts"]
+        }:
+            (destination / old_plan_object).unlink()
+
+        audit_entry = by_role["audit"]
+        audit = json.loads(
+            (destination / audit_entry["object"]).read_text(encoding="utf-8")
+        )
+        audit["inputs"]["evidence_plan"].update(
+            {"bytes": len(plan_payload), "sha256": plan_sha}
+        )
+        indexed_plan = next(
+            item
+            for item in audit["materialized_roles"]
+            if item["role"] == "report:evidence_plan"
+        )
+        indexed_plan.update({"bytes": len(plan_payload), "sha256": plan_sha})
+        self._write_bundle_audit(destination, manifest, audit)
+
     def _substitute_bundle_role(
         self,
         source: Path,
@@ -1213,6 +1262,35 @@ class EvidenceLoopTests(unittest.TestCase):
         self.assertFalse(verification["valid"])
         self.assertIn(
             "bundled audit runtime_load gate does not match replayed runtime report",
+            verification["issues"],
+        )
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_replays_bot_activity_from_evidence_plan(
+        self,
+    ) -> None:
+        source = self.root / "bundle-bot-plan-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-bot-plan-rewrite"
+        self._rewrite_bundle_evidence_plan(
+            source,
+            destination,
+            expected_bot_count=999,
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        self.assertIn(
+            "bundled audit bot_entry_and_combat gate does not match replayed runtime report and evidence plan",
+            verification["issues"],
+        )
+        self.assertIn(
+            "bundled audit bot_activity summary does not match replayed runtime report and evidence plan",
             verification["issues"],
         )
         self.assertFalse(verification["promotion_allowed"])

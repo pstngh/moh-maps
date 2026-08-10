@@ -1666,6 +1666,17 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                 except (EvidenceError, KeyError) as exc:
                     issues.append(str(exc))
 
+            evidence_plan: dict[str, Any] | None = None
+            evidence_plan_entry = by_role.get("report:evidence_plan")
+            if evidence_plan_entry is not None:
+                try:
+                    evidence_plan = load_object(
+                        bundle_dir / Path(evidence_plan_entry["object"]),
+                        "bundled evidence plan",
+                    )
+                except (EvidenceError, KeyError) as exc:
+                    issues.append(str(exc))
+
             def claimed_name(value: Any) -> str | None:
                 if isinstance(value, Path):
                     return value.name.casefold()
@@ -1843,10 +1854,30 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                                 f"bundled runtime report {report_field} does not "
                                 "match audited bot activity"
                             )
+                audit_gates = audit_report.get("gates")
+                if evidence_plan is not None:
+                    replayed_bot_gate, replayed_bot_activity = audit_bot_activity(
+                        runtime_report,
+                        evidence_plan,
+                    )
+                    audited_bot_gate = (
+                        audit_gates.get("bot_entry_and_combat")
+                        if isinstance(audit_gates, dict)
+                        else None
+                    )
+                    if audited_bot_gate != replayed_bot_gate:
+                        issues.append(
+                            "bundled audit bot_entry_and_combat gate does not "
+                            "match replayed runtime report and evidence plan"
+                        )
+                    if bot_activity != replayed_bot_activity:
+                        issues.append(
+                            "bundled audit bot_activity summary does not match "
+                            "replayed runtime report and evidence plan"
+                        )
                 replayed_runtime_gate, replayed_runtime_summary = audit_runtime(
                     runtime_report
                 )
-                audit_gates = audit_report.get("gates")
                 audited_runtime_gate = (
                     audit_gates.get("runtime_load")
                     if isinstance(audit_gates, dict)
