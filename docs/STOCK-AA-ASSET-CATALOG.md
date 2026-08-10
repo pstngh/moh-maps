@@ -1,29 +1,30 @@
 # Stock Allied Assault asset catalog
 
-Status: verified starter catalog, not yet exhaustive
+Status: audited starter catalog, not exhaustive
 
 Last updated: 2026-08-09
 
-This file records stock AA asset names that have been compiled and rendered
-successfully in generated maps. It is not a substitute for visual inspection.
-Future work should add thumbnails/contact sheets, dimensions, shader behavior,
-and map examples.
+This file records stock AA asset names observed to compile or render in stated
+roles. A generated map's success does not prove that an asset is visually
+suitable, grounded, correctly scaled, or accepted in another context. Recheck
+the retail asset, shader behavior, origin, collision, scale, lighting, and
+full-resolution in-engine result for each new use.
 
 Stock asset references do not need to be bundled in a custom PK3; the player
-supplies the retail AA data.
+supplies retail AA data. Do not commit extracted retail payloads.
 
 ## Construction and hidden surfaces
 
-| Role | Verified stock material | Notes |
+| Role | Observed stock material | Notes |
 | --- | --- | --- |
-| Hidden face | `common/caulk` | Requires retail shader definitions during compile |
-| Day sky | `sky/mohday1` | AA-compatible sky used by current conversions |
-| Player/solid clipping | `common/clip`, `common/playerclip` | Use intentionally; Cobblestone preserves explicit player clips and measured large Source collision volumes |
-| Material clipping | `common/metalclip`, `common/stoneclip` | Match collision sound/behavior where appropriate |
+| Hidden face | `common/caulk` | Requires retail shader definitions; use only on faces proven permanently hidden |
+| Day sky | `sky/mohday1` | AA-compatible sky observed in current conversions; not a universal lighting solution |
+| Player/solid clipping | `common/clip`, `common/playerclip` | Use intentionally; audit every newly playable boundary |
+| Material clipping | `common/metalclip`, `common/stoneclip` | Match collision sound/behavior where evidence supports the role |
 
 ## Castle and European materials
 
-| Role | Verified stock material | Current use |
+| Role | Observed stock material | Current evidence scope |
 | --- | --- | --- |
 | General stone wall | `general_structure/stonewall2` | Cobblestone concrete/stone fallback |
 | Stone brick | `general_structure/stonebricks1` | Cobblestone primary architecture |
@@ -33,19 +34,19 @@ supplies the retail AA data.
 | Rough grass | `wilderness/m3l3grass_1rough` | Terrain backing and grass cover |
 | Wood shingles | `general_structure/jh_woodshingles1a` | Roofs |
 | Wood beam | `general_structure/beam_wood1` | Beams and wood fallback |
-| Shutter | `central_europe/shutter_set2` | Non-solid façade panels |
+| Shutter | `central_europe/shutter_set2` | Non-solid facade panels |
 | Wood door | `central_europe/frenchdoor_wood1` | Door panels |
-| Window glass | `mohcommon/window5` | Compiled and rendered as stock translucent glass in Cobblestone revision 3 |
+| Window glass | `mohcommon/window5` | Rendered as stock translucent glass in Cobblestone revision 3 |
 | Reinforced crate | `german/crate_reinforced1_side` | Generated cover |
 | Rusted iron | `german/rusty_iron` | Barrels/metal accents |
 | Iron wall | `das_boot/ironwall1` | Generic metal |
-| Deck grate | `general_industrial/deckgrate_set1a` | Grates |
+| Deck grate | `general_industrial/deckgrate_set1a` | Grates; never assume alpha surfaces are safe structure |
 | Pipe | `general_industrial/jh_pipe1` | Pipe/duct fallback |
 
 ## Industrial/V2 family candidates
 
-These names are verified in the stock corpus. They are candidates, not a
-mandatory palette:
+These names exist in the inspected stock corpus. They are candidates, not a
+mandatory palette or proof of visual suitability:
 
 | Role | Stock material candidates |
 | --- | --- |
@@ -57,57 +58,68 @@ mandatory palette:
 | Structural metal | `mohcommon/ibeam_1a`, `general_industrial/verticalbrace` |
 | Utility box | `general_industrial/utilitybox_side`, `general_industrial/utilitybox_front`, `general_industrial/utilboxtop` |
 
-## Stock models proven in generated-map QA
+## Stock models observed in generated-map QA
 
-| Role | Stock model | Notes |
+| Role | Stock model | Evidence boundary |
 | --- | --- | --- |
-| Common tree | `static//tree_commontree.tik` | Used in Cobblestone at reduced scale |
-| Oak tree | `static//tree_oak.tik` | Revision-4 `obj_team2` forest-loop planters; rendered at 0.90-1.06 scale with grounded planter origins |
-| Regular bush | `static//bush_regularbush.tik` | Used in Cobblestone |
-| Caged lamp | `static//lightbulb_caged.tik` | Present in `obj_team2`; pair with a purposeful light |
-| Orange corona | `static//corona_orange.tik` | Decorative light effect; not illumination by itself |
-| Opel truck | `static//vehicle_opeltruck.tik` | Grounded yard dressing rendered in the `obj_team2` east-annex exact-candidate visual pass |
-| Nazi crate | `static//nazi_crate.tik` | Grounded cover/dressing rendered in the `obj_team2` east-annex exact-candidate visual pass |
+| Common tree | `static//tree_commontree.tik` | Rendered in Cobblestone at reduced scale; grounding must be rechecked |
+| Oak tree | `static//tree_oak.tik` | Rendered in rejected obj_team2 revision 4; that run does not prove coherent placement or visual acceptance |
+| Regular bush | `static//bush_regularbush.tik` | Used in Cobblestone; recheck collision and grounding |
+| Caged lamp | `static//lightbulb_caged.tik` | Present in stock `obj_team2`; pair with purposeful illumination |
+| Orange corona | `static//corona_orange.tik` | Decorative effect, not illumination by itself |
+| Opel truck | `static//vehicle_opeltruck.tik` | Loaded/rendered in obj_team2 expansion QA; placement quality is not proven by the rejected map |
+| Nazi crate | `static//nazi_crate.tik` | Loaded/rendered in obj_team2 expansion QA; placement quality is not proven by the rejected map |
 
-The `codex_obj_team2_expanded` revision-4 forest-loop visual pass proves grounded stock oak trees,
-the Opel, crates, and the caged-lamp plus static-corona combination. Each
-new `static//corona_orange.tik` placement adds an optional missing editor-helper
-`.map` notice during original Q3map. The models rendered successfully in all annex
-and Allied-route zones and runtime emitted no candidate diagnostic, so this is a
-classified compile-time cost rather than a missing packaged asset. Prefer the
-warning-free explicitly precached runtime-corona pattern used by new standalone
-maps when stock-source fidelity is not the priority.
+`codex_obj_team2_expanded` revision 4 observed that the listed oak, Opel, crate,
+caged-lamp, and corona paths resolved and rendered without candidate runtime
+diagnostics. Later human evidence rejected the map's visual construction, so any
+earlier implication that the run proved coherent grounding, placement, or
+scene quality is `SUPERSEDED`. Retain only the narrow asset-resolution
+observation and reverify origins, support, scale, collision, and viewing domain.
+
+Each new `static//corona_orange.tik` placement can add an optional missing
+editor-helper `.map` notice during original Q3map. Prefer the warning-free,
+explicitly precached runtime-corona pattern observed in standalone maps when
+stock-source fidelity is not required, then verify the exact package.
 
 ## Selection protocol
 
-Before finalizing a map material:
+Before finalizing a material or model:
 
-1. Verify the shader and image exist in retail AA data.
-2. Extract and inspect the actual image.
-3. Check natural scale and directionality.
-4. Compare at least two candidates in the map's lighting.
-5. Confirm surface/content flags after compile.
-6. Record the winner, rejected alternatives, and reason.
+1. Verify the shader/image/model exists in locally supplied retail AA data.
+2. Inspect the actual asset; filenames are not visual evidence.
+3. Check origin, bounds, collision, natural scale, and directionality.
+4. Compare relevant alternatives under the candidate's lighting.
+5. Confirm surface/content flags and runtime behavior after compile.
+6. Inspect full-resolution player-height and overview evidence.
+7. Record the winner, rejected alternatives, evidence label, and reason.
 
-Do not infer visual suitability from a filename alone.
-
-Cobblestone revision 3 also established that the source families
-`de_cbble/outwall02` and `de_cbble/trimwall01` read as castle masonry in this
-layout. Mapping them to `general_structure/stonebricks1` is more coherent than
-the broad European-plaster fallback. This is a source-family decision, not a
-rule that every material containing `wall` or `trim` should become stone.
+Cobblestone revision 3 observed that Source families `de_cbble/outwall02` and
+`de_cbble/trimwall01` read more coherently as castle masonry when mapped to
+`general_structure/stonebricks1` than to the broad plaster fallback. Treat this
+as a source-family observation, not a filename-based global rule or acceptance
+of the map.
 
 ## Catalog backlog
 
-- Extract all stock AA texture images and shader metadata.
-- Generate category contact sheets with shader names printed below thumbnails.
-- Record pixel dimensions, alpha, surface flags, common scale, and stock-map
+- Extract and privately inspect stock AA images and shader metadata.
+- Generate category contact sheets with shader names below thumbnails.
+- Record pixel dimensions, alpha, surface flags, typical scale, and stock-map
   examples.
-- Add verified TIKI bounds and origin conventions for useful static props.
+- Add verified TIKI bounds, origin, collision, and support conventions.
 - Separate AA-only assets from Spearhead/Breakthrough dependencies.
 
-## V2 Depot stock-industrial proof set
+## V2 Depot stock-industrial observation set
 
-Revision 1 compiled/rendered these retail families together with zero compiler/light warnings and zero exact-runtime asset diagnostics: bunker/concrete (`bunker_wall`, `jh_conc512b`, `bunker_conc3`); floor/steps (`whsflrset1_1b`, `doccrtset_1stepsml`); structure (`ibeam_1a`, bunker ceiling/beams, `verticalbrace`); metal (`deckgrate_set1b`, `ironwall1`, `rusty_iron`); and face-specific utility-box/crate sets.
+Revision 1 compiled and rendered these retail families together with zero
+compiler/light warnings and no exact-runtime asset diagnostics: bunker/concrete
+(`bunker_wall`, `jh_conc512b`, `bunker_conc3`); floor/steps
+(`whsflrset1_1b`, `doccrtset_1stepsml`); structure (`ibeam_1a`, bunker
+ceiling/beams, `verticalbrace`); metal (`deckgrate_set1b`, `ironwall1`,
+`rusty_iron`); and face-specific utility-box/crate sets.
 
-The caged lamp remains a proven static helper. Use `static//corona_orange.tik` as an explicitly precached `script_model` when collision is unnecessary: the tested retail build lacks its optional static `.map` helper, while the runtime form is clean. The grounded Opel truck also passed compile/runtime checks. This is a role-specific proof set, not a mandatory palette.
+The run also observed a working static caged lamp and a clean explicitly
+precached `static//corona_orange.tik` runtime model when collision was
+unnecessary; the tested retail build lacked its optional static `.map` helper.
+The Opel truck loaded and rendered. These are role-scoped technical
+observations, not proof of V2 Depot's visual quality or a mandatory palette.

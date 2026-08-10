@@ -2750,3 +2750,25 @@ Final MAP/BSP/PK3 hashes are `871719b0...a8070`, `140ee2bf...92eb`, and `4b85f8e
 **PROVEN terrain/hull separation rule:** `terrainDef` cell/surface extent is not sealed-hull extent. A new outside route must explicitly join floor/foundation, side enclosure, and ceiling to stock structural boundaries.
 
 **PROVEN seal-to-scenery rule:** `.prt` without `.lin` proves enclosure, not visual completion. Inspect the entire new edge and turn structural sealing planes into intentional retaining, facade, landscape, and lighting work before acceptance.
+
+## `codex_obj_team2_expanded` revision 4: superseding human rejection
+
+Date: 2026-08-09
+
+A later human screenshot and explicit user rejection override revision 4's
+automated visual conclusion. The screenshot showed huge beige voids,
+disconnected-looking terrain/map islands, crude elevated causeway/slab
+construction, unfinished visible boundaries, and an overall result far below
+acceptable mapping quality.
+
+The 28-view suite proved that selected scripted cameras captured frames without
+script errors; it did not reproduce or correctly judge the human failure angle,
+large-scale spatial continuity, elevated construction, or newly exposed map
+edges. Compile sealing, surface counts, Recast, bot combat, and capture success
+did not establish visual coherence.
+
+`SUPERSEDED`: all revision-4 language implying a complete or finished forest
+loop, visually coherent causeway/facade, no visible voids, polished boundaries,
+release readiness, or acceptance. `REJECTED`: revision 4 as a positive map or
+construction baseline. Preserve its technical records and failed experiment,
+but do not reuse its geometry without fresh primary-evidence verification.

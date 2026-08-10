@@ -1,0 +1,39 @@
+# Project decisions
+
+## D-001 - Canonical repository and delivery path
+
+- Date: 2026-08-09
+- Status: PROVEN
+- Decision: Use `https://github.com/pstngh/moh-maps` as the canonical
+  repository, work on the current branch, and push coherent validated
+  checkpoints directly to its configured upstream without force-pushing.
+- Evidence: Current user requirement; verified `origin` configuration and Git
+  synchronization during bootstrap.
+
+## D-002 - Repository state outranks chat history
+
+- Date: 2026-08-09
+- Status: PROVEN
+- Decision: Store the stable charter in `PROJECT.md` and the authoritative
+  mutable checkpoint in `PROJECT_STATE.json`. Keep one exact authoritative next
+  action and validate Git agreement before implementation.
+- Reason: Future tasks must resume safely without conversation context.
+
+## D-003 - Acceptance is a human decision
+
+- Date: 2026-08-09
+- Status: PROVEN
+- Decision: Keep `accepted_baseline` separate from `latest_candidate`. Require
+  explicit user approval of the tested revision before promotion.
+- Reason: Compilation, Recast, combat logs, and automated cameras failed to
+  detect serious visible defects in rejected maps.
+
+## D-004 - Evidence-first construction
+
+- Date: 2026-08-09
+- Status: PROVEN
+- Decision: Stop and inspect primary evidence whenever a material map decision
+  is uncertain. Record uncertainty instead of filling gaps with invented
+  geometry or behavior.
+- Reason: Existing generated artifacts and documents include confident claims
+  later contradicted by human evidence.

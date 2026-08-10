@@ -1,0 +1,4 @@
+interface:
+  display_name: "MOHAA Map Builder"
+  short_description: "Build and validate resumable MOHAA maps"
+  default_prompt: "Use $mohaa-map-builder to resume and safely validate the current MOHAA map task."

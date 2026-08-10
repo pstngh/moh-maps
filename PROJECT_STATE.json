@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "goal_version": 1,
+  "project_goal": "Build reproducible, installable MOHAA/OpenMoHAA DM/TDM maps for enjoyable close- and medium-range bot combat, with evidence-driven construction and explicit human acceptance.",
+  "canonical_repository": "https://github.com/pstngh/moh-maps",
+  "expected_remote": "https://github.com/pstngh/moh-maps.git",
+  "expected_branch": "main",
+  "checkpoint_id": "bootstrap-20260810-001",
+  "checkpoint_updated_utc": "2026-08-10T00:42:44Z",
+  "current_phase": "knowledge-audit",
+  "active_map": "codex_dust2_v2",
+  "active_revision": "10",
+  "accepted_baseline": null,
+  "latest_candidate": "codex_dust2_v2",
+  "next_action": "Use $mohaa-map-builder to resume the checkpoint and audit codex_dust2_v2's README, conversion report, generator provenance, and existing visual and playtest evidence; do not modify map artifacts; label each significant quality or acceptance claim, update PROJECT_STATE.json with one next action, validate, commit, push, and verify synchronization.",
+  "stopping_condition": "Stop after the bounded codex_dust2_v2 claim audit is validated, committed, pushed, and local HEAD equals its upstream; do not create, compile, package, or repair a map.",
+  "open_questions": [
+    "Which exact user artifact records the comparatively positive codex_dust2_v2 feedback?",
+    "Which remaining generated-map claims beyond codex_dust2_v2 require downgrade after the bounded audit?"
+  ],
+  "blockers": [],
+  "known_dirty_paths": [
+    "generated/codex_cobblestone/codex_cobblestone.pk3",
+    "generated/codex_obj_team2_expanded/codex_obj_team2_expanded.pk3",
+    "generated/codex_reactor/codex_reactor.pk3"
+  ],
+  "map_statuses": {
+    "codex_arena01": {
+      "status": "experimental",
+      "current_revision": "prototype",
+      "accepted_revision": null,
+      "reason": "Compiled bot prototype with no explicit human acceptance and unfinished art and lighting.",
+      "known_defects": [
+        "Prototype art",
+        "Prototype lighting",
+        "No explicit final human approval"
+      ],
+      "evidence_paths": [
+        "generated/codex_arena01/README.md",
+        "docs/codex_arena01-ingame.png"
+      ],
+      "last_tested_revision_or_external_evidence": "Repository README records compile, Recast, and limited bot movement only.",
+      "user_approval_evidence": null,
+      "next_action": "Re-audit source, visual, and gameplay evidence before using this prototype as a construction example."
+    },
+    "codex_cache": {
+      "status": "candidate",
+      "current_revision": "1",
+      "accepted_revision": null,
+      "reason": "Technically tested first-playable candidate with no explicit final acceptance.",
+      "known_defects": [
+        "Human map-view and door review pending",
+        "Possible T-junction cracks from -notjunc",
+        "Planar terrain and major omitted Source props",
+        "Distant skybox omitted"
+      ],
+      "evidence_paths": [
+        "generated/codex_cache/README.md",
+        "generated/codex_cache/REVISION-1.md",
+        "generated/codex_cache/REFERENCE-AUDIT.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Revision 1 repository technical reports; no explicit user approval.",
+      "user_approval_evidence": null,
+      "next_action": "Audit human visual evidence and all final or complete claims before any visual-baseline use."
+    },
+    "codex_cobblestone": {
+      "status": "candidate",
+      "current_revision": "4",
+      "accepted_revision": null,
+      "reason": "Revision 4 is a technical candidate, but authoritative user feedback says visual and structural problems remain.",
+      "known_defects": [
+        "Unresolved visual and structural problems",
+        "Planar terrain",
+        "Incomplete exterior boundary and 3D skybox",
+        "Omitted Source-only architecture"
+      ],
+      "evidence_paths": [
+        "generated/codex_cobblestone/README.md",
+        "generated/codex_cobblestone/REVISION-4.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Revision 4 automated reports plus explicit user non-acceptance in the bootstrap request.",
+      "user_approval_evidence": null,
+      "next_action": "Inventory unresolved human-visible and structural defects from full-resolution evidence before revising."
+    },
+    "codex_dust2_v2": {
+      "status": "candidate",
+      "current_revision": "10",
+      "accepted_revision": null,
+      "reason": "Comparatively positive user feedback makes this the latest candidate, but no explicit final approval exists.",
+      "known_defects": [
+        "Port fidelity remains unverified",
+        "Source-to-AA art substitutions remain",
+        "Acceptance evidence has not been located and recorded"
+      ],
+      "evidence_paths": [
+        "generated/codex_dust2_v2/README.md",
+        "generated/codex_dust2_v2/conversion-report.json"
+      ],
+      "last_tested_revision_or_external_evidence": "Repository describes revision 10 technical QA; bootstrap request records comparatively positive but non-final feedback.",
+      "user_approval_evidence": null,
+      "next_action": "Audit the README, conversion report, provenance, and human evidence without modifying map artifacts."
+    },
+    "codex_inferno": {
+      "status": "candidate",
+      "current_revision": "5",
+      "accepted_revision": null,
+      "reason": "Direct source conversion improved recognition, but substantial missing content remains and the user has not accepted it.",
+      "known_defects": [
+        "Substantial missing content",
+        "Planarized displacements",
+        "Thousands of omitted props",
+        "Possible T-junction seams and distant skybox debt",
+        "No explicit final approval"
+      ],
+      "evidence_paths": [
+        "generated/codex_inferno/README.md",
+        "generated/codex_inferno/REVISION-5.md",
+        "generated/codex_inferno/REFERENCE-AUDIT.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Revision 5 technical evidence plus explicit non-acceptance in the bootstrap request.",
+      "user_approval_evidence": null,
+      "next_action": "Reconcile the user-recognized revision-4 geometry statement with missing-content evidence before any new revision."
+    },
+    "codex_mohdm6_mirror": {
+      "status": "experimental",
+      "current_revision": "1",
+      "accepted_revision": null,
+      "reason": "Automated mirror and runtime experiment with no human visual acceptance.",
+      "known_defects": [
+        "Human rendered sweep pending",
+        "Stock-source helper and leak warnings",
+        "Light clamps",
+        "No explicit final approval"
+      ],
+      "evidence_paths": [
+        "generated/codex_mohdm6_mirror/README.md",
+        "generated/codex_mohdm6_mirror/REVISION-1.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Revision 1 automated compile/runtime reports only.",
+      "user_approval_evidence": null,
+      "next_action": "Obtain and audit a human rendered sweep before making visual or acceptance claims."
+    },
+    "codex_nuke": {
+      "status": "experimental",
+      "current_revision": "4",
+      "accepted_revision": null,
+      "reason": "The map remains incomplete, empty in places, visually broken, and explicitly not accepted.",
+      "known_defects": [
+        "Incomplete and empty areas",
+        "Visually broken construction",
+        "Conservative blocky substitutes",
+        "Exterior terrain cracks and provisional sky",
+        "Large omitted Source content set"
+      ],
+      "evidence_paths": [
+        "generated/codex_nuke/README.md",
+        "generated/codex_nuke/REVISION-4-PLAYTEST.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Revision 4 playtest report plus explicit non-acceptance in the bootstrap request.",
+      "user_approval_evidence": null,
+      "next_action": "Audit the revision-4 playtest defects and primary Source evidence before selecting a representative repair zone."
+    },
+    "codex_obj_team2_expanded": {
+      "status": "rejected",
+      "current_revision": "4",
+      "accepted_revision": null,
+      "reason": "A later human screenshot and explicit rejection supersede the automated visual conclusions.",
+      "known_defects": [
+        "Huge beige voids",
+        "Disconnected-looking terrain and map islands",
+        "Crude elevated causeway and slab construction",
+        "Unfinished visible boundaries",
+        "Automated camera coverage missed the human failure domain"
+      ],
+      "evidence_paths": [
+        "REJECTIONS.md",
+        "generated/codex_obj_team2_expanded/README.md",
+        "generated/codex_obj_team2_expanded/REVISION-4.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Revision 4 automated suite followed by authoritative human screenshot rejection recorded in the bootstrap request.",
+      "user_approval_evidence": null,
+      "next_action": "Preserve as a negative example; do not repair or reuse its construction without a new evidence-driven plan approved by the user."
+    },
+    "codex_obj_team2_mirror": {
+      "status": "experimental",
+      "current_revision": "1",
+      "accepted_revision": null,
+      "reason": "Automated mirror experiment with no explicit human acceptance.",
+      "known_defects": [
+        "Human visual and door-swing sweep pending",
+        "Objective completion pending",
+        "Stock-source warnings and baseline script diagnostics",
+        "No explicit final approval"
+      ],
+      "evidence_paths": [
+        "generated/codex_obj_team2_mirror/README.md",
+        "generated/codex_obj_team2_mirror/REVISION-1.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Revision 1 automated Objective and FFA reports only.",
+      "user_approval_evidence": null,
+      "next_action": "Complete a human visual, door, and objective audit before promotion beyond experimental."
+    },
+    "codex_obj_team4_mirror": {
+      "status": "experimental",
+      "current_revision": "1",
+      "accepted_revision": null,
+      "reason": "Automated mirror experiment with no explicit human acceptance.",
+      "known_defects": [
+        "Human visual, door, bridge, and objective sweep pending",
+        "Inherited warnings and light clamps",
+        "Retail-baseline bridge script diagnostics",
+        "No explicit final approval"
+      ],
+      "evidence_paths": [
+        "generated/codex_obj_team4_mirror/README.md",
+        "generated/codex_obj_team4_mirror/REVISION-1.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Revision 1 automated Objective and FFA reports only.",
+      "user_approval_evidence": null,
+      "next_action": "Complete a human visual, door, bridge, and objective audit before promotion beyond experimental."
+    },
+    "codex_reactor": {
+      "status": "rejected",
+      "current_revision": "1",
+      "accepted_revision": null,
+      "reason": "The user explicitly rejected the map as extremely buggy and a mess.",
+      "known_defects": [
+        "Extremely buggy",
+        "Messy and visually unacceptable",
+        "Automated no-void and fixed-view claims were insufficient"
+      ],
+      "evidence_paths": [
+        "REJECTIONS.md",
+        "generated/codex_reactor/README.md",
+        "generated/codex_reactor/REVISION-1.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Explicit user rejection recorded in the bootstrap request and research log.",
+      "user_approval_evidence": null,
+      "next_action": "Retain as a negative case and require cause-level redesign from verified stock/reference evidence before any reuse."
+    },
+    "codex_v2_depot": {
+      "status": "experimental",
+      "current_revision": "1",
+      "accepted_revision": null,
+      "reason": "Technically validated original-map experiment with no explicit human acceptance.",
+      "known_defects": [
+        "Spawn fairness pending human review",
+        "Cover density pending human review",
+        "Brightness pending human review",
+        "No explicit final approval"
+      ],
+      "evidence_paths": [
+        "generated/codex_v2_depot/README.md",
+        "generated/codex_v2_depot/REVISION-1.md"
+      ],
+      "last_tested_revision_or_external_evidence": "Revision 1 automated compile, visual-camera, and bot reports only.",
+      "user_approval_evidence": null,
+      "next_action": "Obtain and record human spawn, cover, lighting, and gameplay evidence before candidate promotion."
+    }
+  },
+  "evidence_pending": [
+    "Locate exact positive-feedback provenance for codex_dust2_v2.",
+    "Audit remaining significant acceptance, final, complete, polished, release, proven, no-void, no-floating, visually-complete, and ready-to-play claims after the bounded dust2 audit."
+  ],
+  "user_approval_required": true,
+  "approval_policy": "Explicit approval of the exact tested candidate is required before accepted status or accepted_baseline promotion."
+}

@@ -21,14 +21,18 @@ future work must do.
 
 Use these labels when adding uncertain knowledge:
 
-- **PROVEN**: repeated compile/runtime evidence or directly verified source
-  behavior.
-- **OBSERVED**: seen in one or more concrete tests but not generalized fully.
-- **HYPOTHESIS**: plausible cause or technique awaiting an isolated test.
-- **OPEN**: known gap with no selected solution.
+- **PROVEN**: directly verified authoritative source behavior or repeated
+  controlled runtime evidence, limited to the property actually tested.
+- **OBSERVED**: seen in concrete evidence but not safe to generalize.
+- **HYPOTHESIS**: plausible cause or technique awaiting a controlled test.
+- **OPEN**: unresolved and not usable as a production rule.
+- **REJECTED**: contradicted by evidence or explicitly rejected by the user.
+- **SUPERSEDED**: replaced by newer, stronger evidence.
 
-Promote a hypothesis into a rule only after a controlled compile or engine
-test. Record failed experiments; they prevent future repetition.
+Do not promote an observation or hypothesis merely because a map compiled.
+State the scope of every proof. Human rejection overrides an automated pass,
+and Codex-generated artifacts are never authoritative merely because they are
+newer. Record failed experiments; they prevent future repetition.
 
 ## Release-ready definition
 
@@ -51,8 +55,12 @@ A release candidate must pass every applicable gate:
    debt are current.
 9. **Knowledge gate**: revision report, research evidence, and reusable rules
    are updated.
+10. **Human acceptance gate**: known debt is stated, the exact candidate is
+    supplied for human testing, feedback is recorded, and explicit user
+    approval is obtained before `accepted_baseline` promotion.
 
-Passing Q3map alone satisfies only part of gate 3.
+Passing Q3map alone satisfies only part of gate 3. Passing all technical gates
+does not replace the visual or human acceptance gates.
 
 ## Non-negotiable production rules
 
@@ -994,3 +1002,11 @@ A geometry/gameplay mirror retains original bitmap orientation by default. Mirro
 17. Record `terrainDef` visible cell/surface bounds separately from structural hull bounds. Terrain ending at an apparent outside route can leave an unfloored or unenclosed gap even when scenery makes the area look continuous; use `tools/inspect_map_terrain.js` or equivalent source evidence before laying out the route.
 18. When making a previously unused outdoor region playable, complete and join all three hull responsibilities: floor/foundation, side enclosure, and ceiling/sky. Follow each focused Q3map `.lin` trace to its next opening and require `.prt` with no `.lin`; specifically compare stock and new ceiling elevations at every join.
 19. A sealed build is not a finished exterior. Inspect the entire route from player height and overhead, then replace visible sealing planes/map edges with intentional retaining structure, facade depth, landscape, lighting, and supported props before visual acceptance.
+
+**SUPERSEDED revision-4 visual conclusion:** `codex_obj_team2_expanded`
+revision 4 passed its selected automated camera suite, compile, and runtime
+checks but was later rejected from a human screenshot showing huge beige voids,
+disconnected-looking terrain/map islands, crude elevated slab/causeway work,
+and unfinished boundaries. Treat its construction as a negative case. Automated
+capture count, script success, sealing, and surface-zone counts cannot establish
+visual coherence or acceptance.

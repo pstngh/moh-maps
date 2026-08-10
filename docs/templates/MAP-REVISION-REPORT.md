@@ -2,7 +2,7 @@
 
 Copy this file into the working notes for every material map revision.
 
-## Identity
+## Identity and status
 
 - Map:
 - Revision:
@@ -11,6 +11,12 @@ Copy this file into the working notes for every material map revision.
 - Goal:
 - User evidence:
 - Compatibility target:
+- Status (`candidate`, `experimental`, `rejected`, `unknown`, or `archived`):
+- Accepted revision (only after explicit approval):
+- Explicit user approval evidence:
+
+Do not use `accepted` status without explicit approval of the exact tested
+revision. Automated technical or visual gates are never approval evidence.
 
 ## Baseline
 
@@ -18,6 +24,8 @@ Copy this file into the working notes for every material map revision.
 - Previous BSP size/faces/clusters:
 - Known debt entering revision:
 - Fixed regression viewpoints:
+- Accepted baseline, if any:
+- Latest candidate:
 
 ## Input measurements
 
@@ -34,7 +42,7 @@ Copy this file into the working notes for every material map revision.
 
 ## Defect inventory
 
-| ID | Location/view | Visible symptom | Suspected shared cause | Confidence |
+| ID | Location/view | Visible symptom | Suspected shared cause | Evidence label/confidence |
 | --- | --- | --- | --- | --- |
 | | | | | |
 
@@ -43,6 +51,12 @@ Copy this file into the working notes for every material map revision.
 | Defect IDs | Cause-level change | Expected count/visual effect | Risk |
 | --- | --- | --- | --- |
 | | | | |
+
+## Evidence record
+
+| Question | Sources and exact paths | Relevant lines/entities/coordinates/views | Conclusion | Label | Remaining uncertainty |
+| --- | --- | --- | --- | --- | --- |
+| | | | | | |
 
 ## Material and asset decisions
 
@@ -68,29 +82,35 @@ Copy this file into the working notes for every material map revision.
 | Q3map VIS | | | |
 | MOHlight | | | |
 
-## Runtime and bot validation
+## Package, runtime, and bot validation
 
 - Exact isolated PK3 tested:
+- Package inventory verified:
+- Loose-file masking excluded:
 - OpenMoHAA version:
+- Intended mode and scripts:
 - Bot configuration:
 - Navigation-build result:
 - Spawn/respawn result:
 - Routes observed:
 - Combat/kills observed:
+- Doors/dynamic obstacles tested:
 - Stalls or collision defects:
 
 ## Visual regression matrix
 
-| View | Baseline defect | Result: fixed/improved/unchanged/regressed | Evidence |
+| View | Baseline defect | Result: fixed/improved/unchanged/regressed | Full-resolution evidence |
 | --- | --- | --- | --- |
-| Spawn route | | | |
+| Exact user failure angle | | | |
+| Spawn route both directions | | | |
 | High overview | | | |
 | Long exterior | | | |
 | Deep interior | | | |
 | Transition | | | |
-| Map edge | | | |
+| Map edge/boundary | | | |
 | Displacement boundary | | | |
 | Repeated modules | | | |
+| Previously hidden area | | | |
 
 ## Outcome
 
@@ -100,32 +120,49 @@ Copy this file into the working notes for every material map revision.
 - Regressed:
 - Newly exposed:
 - Remaining known debt:
+- Claims marked `SUPERSEDED` or `REJECTED`:
 
 ## Artifacts
 
 | Artifact | Size | SHA-256 |
 | --- | ---: | --- |
+| MAP/source | | |
 | BSP | | |
 | PK3 | | |
-| Source archive | | |
+| Full-resolution visual evidence | | |
 
-## Knowledge promotion
+## Knowledge and checkpoint
 
 - Map README updates:
 - Research-log evidence added:
 - Playbook rules added or changed:
 - Asset-catalog entries added:
+- Decisions/rejections updated:
 - Open questions/hypotheses:
+- Exact next action:
+- Stopping condition:
 
-## Release checklist
+## Candidate checklist
 
-- [ ] Source/generator is reproducible.
+- [ ] Source/generator is reproducible with recorded provenance.
+- [ ] Geometry, materials, and lighting passed their applicable gates.
 - [ ] BSP, VIS, and full light succeeded against retail AA data.
-- [ ] Exact isolated PK3 loaded.
+- [ ] Every warning is classified from evidence.
+- [ ] Exact isolated PK3 contents and loading were verified.
 - [ ] Required spawn classes/scripts are present.
-- [ ] Bots spawned, moved, and fought.
-- [ ] Regression views were inspected.
+- [ ] Bots spawned, moved, fought, respawned, and used multiple routes.
+- [ ] Applicable doors/dynamic obstacles were tested.
+- [ ] Exact failure angles and all changed viewing domains were inspected.
 - [ ] Known debt is documented honestly.
 - [ ] Hashes match repository artifacts.
-- [ ] Documentation is updated.
-- [ ] Commit is pushed.
+- [ ] Documentation and `PROJECT_STATE.json` are current.
+- [ ] User feedback is recorded; explicit approval is still separate.
+- [ ] Explicit paths were staged and the staged diff inspected.
+- [ ] Commit is pushed and local HEAD equals upstream.
+
+## Human acceptance gate
+
+- [ ] Exact candidate was provided for human testing.
+- [ ] Feedback was recorded with provenance.
+- [ ] User explicitly approved this exact revision.
+- [ ] Only after approval: map status and `accepted_baseline` were updated.

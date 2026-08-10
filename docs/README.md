@@ -5,22 +5,31 @@ without losing the experiments that established it.
 
 | Document | Role | Read when |
 | --- | --- | --- |
-| [`MAP-GENERATION-PLAYBOOK.md`](MAP-GENERATION-PLAYBOOK.md) | Normative production workflow and release gates | Before every map task |
-| [`STOCK-AA-ASSET-CATALOG.md`](STOCK-AA-ASSET-CATALOG.md) | Verified stock texture/model names and selection policy | Before material or prop work |
-| [`templates/MAP-REVISION-REPORT.md`](templates/MAP-REVISION-REPORT.md) | Repeatable record for a map revision | During every material iteration |
-| [`MOHAA-map-generation-notes.md`](MOHAA-map-generation-notes.md) | Chronological evidence, measurements, experiments, and case studies | When diagnosing or extending a rule |
-| `generated/<map>/README.md` | Current map-specific status, installation, limitations, and hashes | Before changing or releasing that map |
+| [`../PROJECT.md`](../PROJECT.md) | Stable mission | At the start of every task |
+| [`../PROJECT_STATE.json`](../PROJECT_STATE.json) | Authoritative mutable checkpoint when consistent with Git | At the start and before every stop |
+| [`../DECISIONS.md`](../DECISIONS.md) | Durable project decisions | When changing policy or interpreting state |
+| [`../REJECTIONS.md`](../REJECTIONS.md) | Human rejections and superseded claims | Before reusing generated work |
+| [`../VALIDATION.md`](../VALIDATION.md) | Candidate production and acceptance gates | During planning and validation |
+| [`MAP-GENERATION-PLAYBOOK.md`](MAP-GENERATION-PLAYBOOK.md) | Normative production workflow, subject to the evidence hierarchy | Before every map task |
+| [`STOCK-AA-ASSET-CATALOG.md`](STOCK-AA-ASSET-CATALOG.md) | Stock names and role-scoped observations | Before material or prop work |
+| [`templates/MAP-REVISION-REPORT.md`](templates/MAP-REVISION-REPORT.md) | Repeatable evidence record | During every material iteration |
+| [`MOHAA-map-generation-notes.md`](MOHAA-map-generation-notes.md) | Chronological experiments and case studies | When diagnosing or extending a rule |
+| `generated/<map>/README.md` | Map-specific history, installation, limitations, and hashes | Before changing that map |
 
-## Document priority
+## Evidence priority
 
-1. Current verified engine evidence
-2. The playbook
-3. The target map's current README and conversion report
-4. Historical research notes
+1. Explicit current user requirements and approval or rejection.
+2. Original source files and directly observed engine behavior.
+3. Engine, editor, and compiler source code.
+4. Controlled runtime and compile experiments.
+5. Original reference screenshots and geometry.
+6. Verified repository documentation.
+7. Codex-generated artifacts.
 
-If verified evidence conflicts with the playbook, update the playbook in the
-same revision. Historical sections should remain intact unless they contain a
-factual transcription error; they document why earlier decisions were made.
+Human rejection supersedes automated success and earlier repository language.
+The current checkpoint and `REJECTIONS.md` control map status. Historical
+sections remain useful evidence but are not authoritative merely because they
+are newer or describe a successful build.
 
 ## Learning flow
 
@@ -28,33 +37,36 @@ factual transcription error; they document why earlier decisions were made.
 playtest or experiment
         |
         v
-revision report with evidence
+revision report with scoped evidence labels
         |
         +--> map-specific result --> generated/<map>/README.md
         |
         +--> chronological evidence --> research log
         |
-        +--> confirmed reusable rule --> playbook
+        +--> verified reusable rule --> playbook
         |
-        +--> verified asset behavior --> stock asset catalog
+        +--> role-scoped asset behavior --> stock asset catalog
+        |
+        +--> human rejection/supersession --> REJECTIONS.md + PROJECT_STATE.json
 ```
 
-This separation is what makes the repository improve future maps instead of
-merely accumulating a long diary.
+## Current repository map line
 
-## Current validated map line
+This table is an index, not an acceptance list. `PROJECT_STATE.json` is the
+authoritative status record. No current Codex-generated map is an accepted
+baseline.
 
-| Map | Current validated state | Principal remaining debt |
+| Map | Conservatively supported state | Principal debt or status boundary |
 | --- | --- | --- |
-| `codex_arena01` | Original compiled DM prototype; OpenMoHAA navigation and bot movement proven | Prototype art and lighting |
-| `codex_dust2_v2` | Revision 10; full compile, displacement repair, Mediterranean relight, eight-bot QA | Port fidelity and remaining Source-to-AA art substitutions |
-| `codex_cobblestone` | Revision 4; revision-3 architecture retained, planar seams underlaid, measured source clips restored, eight-bot QA | Planar terrain, incomplete exterior boundary/3D skybox, and omitted Source-only architecture |
-| `codex_nuke` | Revision 4 measured visual-fidelity layer; 1,932 ordinary prop placements / 2,855 original brushes, 22 original textures, lossless 194-to-166-page atlas repack, full compile/light, fifteen-frame renderer QA, and exact-PK3 three-cycle eight-bot combat QA | Human revision-4 visual/door review, conservative blocky substitutes, exterior terrain cracks, provisional sky, 28 clamped light leaves, 710 omitted autocombines, curved terrain, and distant skybox |
-| `codex_cache` | Revision 1 first-playable; full measured brush cluster compiled with documented `-notjunc` draw-index fallback, nineteen original clean-industrial textures, one measured door, full light, exact-PK3 Recast, and eight-bot combat QA | Human map-view/door review, possible T-junction cracks, six clamped light leaves, planar terrain, 2,588 omitted Source props, and distant skybox |
-| `codex_inferno` | Revision 5 technically validated measured prop-fill candidate; all 5,696 recognized rev4 brushes preserved, 1,176 high-impact prop substitutes added, full corrected `-notjunc` compile/light, and exact-PK3 eight-bot combat QA | Human rev5 visual/door review, planarized displacements, 5,024 omitted lower-value props, possible T-junction seams, distant skybox, and 6.55 MB nominal BSP-budget overage |
-| `codex_reactor` | User-rejected revision 1 retained as a negative case; technical gates passed, but it was reported buggy and messy and is not a visual baseline | Substantial cause-level redesign; do not base future geometry or visual claims on it |
-| `codex_v2_depot` | Revision 1 original DM/TDM map from measured `obj_team2` grammar; stock-only palette, zero-warning full compile/light, eight fixed views, exact-PK3 eight-bot QA | Human review of spawn fairness, cover density, and brightness |
-| `codex_mohdm6_mirror` | Revision 1 complete X-axis reflection of AA `mohdm6`; deterministic brush/patch/terrain/entity transform, full compile/light, exact-PK3 Recast, and eight-bot combat | Human rendered sweep; stock-source helper/leak warnings and three light clamps |
-| `codex_obj_team2_mirror` | Revision 1 complete X-axis reflection of AA `obj_team2`; 23 doors and objective graph retained, full single-thread light, exact Objective boot/Recast plus FFA bot combat | Human visual/door/objective-completion sweep; stock-source warnings and retail-baseline `obj_dm.scr` diagnostics |
-| `codex_obj_team2_expanded` | Revision 4; all 59 fence entities plus 33 fence/curb/rail/clip brushes removed, complete 320-unit-minimum Allied forest loop and finished central causeway/facade, preserved Objective graph/23 doors/team starts, full compile/light, 28-view QA, Objective plus FFA eight-bot combat QA | Human full-loop route-frequency, door/objective-completion and balance sweep; annex/loop add combat space but no new objective |
-| `codex_obj_team4_mirror` | Revision 1 complete X-axis reflection of AA `obj_team4`; corrected cell-owned terrain controls, 13 doors and bridge objective graph retained, full single-thread light, exact Objective boot/Recast plus FFA bot combat | Human visual/door/bridge-destruction/objective-completion sweep; inherited warnings, five light clamps, and retail-baseline bridge script diagnostics |
+| `codex_arena01` | Experimental compiled DM/bot prototype | Prototype art/lighting; no human acceptance |
+| `codex_dust2_v2` | Latest candidate, revision 10 | Positive feedback is not final approval; port fidelity and art substitutions require audit |
+| `codex_cobblestone` | Candidate, revision 4 | Unresolved visual/structural defects, planar terrain, incomplete exterior boundary/skybox |
+| `codex_nuke` | Experimental, revision 4 | Incomplete, empty in places, visually broken, and not accepted |
+| `codex_cache` | Candidate, revision 1 | Human visual/door review, possible `-notjunc` seams, large omitted prop set |
+| `codex_inferno` | Candidate, revision 5 | Improved but substantial content remains missing; not accepted |
+| `codex_reactor` | REJECTED revision 1 negative case | Explicitly rejected as extremely buggy and a mess |
+| `codex_v2_depot` | Experimental revision 1 | Human spawn, cover, brightness, and gameplay review pending |
+| `codex_mohdm6_mirror` | Experimental revision 1 | Human rendered sweep and final approval absent |
+| `codex_obj_team2_mirror` | Experimental revision 1 | Human visual/door/objective sweep and final approval absent |
+| `codex_obj_team2_expanded` | REJECTED revision 4 negative case | Later human screenshot showed huge beige voids, disconnected-looking islands, crude slab/causeway work, and unfinished boundaries; automated visual conclusions are SUPERSEDED |
+| `codex_obj_team4_mirror` | Experimental revision 1 | Human visual/door/bridge/objective sweep and final approval absent |
