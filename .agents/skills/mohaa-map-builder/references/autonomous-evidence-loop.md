@@ -242,6 +242,9 @@ audited bot runtime identity.
 Also bind the runtime report's engine hash to the `engine:bot` materialized role,
 the audited bot launch engine, and the audited runtime summary engine.
 
+Require its bot-entry count, combat-event count, and minimum combat threshold to
+match the audited bot-activity summary exactly.
+
 Treat a loose or previously stored audit as stale after the scorer changes
 until it is replayed and materialized with the new scorer hash. Verification
 must reject missing, changed, or unexpected bundle files. A valid bundle proves

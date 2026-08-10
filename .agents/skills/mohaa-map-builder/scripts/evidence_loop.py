@@ -1804,6 +1804,22 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                         "bundled runtime report engine hash does not match audited "
                         "runtime summary"
                     )
+                bot_activity = audit_report.get("bot_activity")
+                if not isinstance(bot_activity, dict):
+                    issues.append("bundled audit bot_activity must be an object")
+                else:
+                    for report_field, audit_field in (
+                        ("botsEntered", "bots_entered"),
+                        ("combatEvents", "combat_events"),
+                        ("minimumCombatEvents", "minimum_combat_events"),
+                    ):
+                        if runtime_report.get(report_field) != bot_activity.get(
+                            audit_field
+                        ):
+                            issues.append(
+                                f"bundled runtime report {report_field} does not "
+                                "match audited bot activity"
+                            )
 
             raw_logs = audit_report.get("raw_logs")
             if not isinstance(raw_logs, dict):

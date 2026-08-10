@@ -305,6 +305,10 @@ class EvidenceLoopTests(unittest.TestCase):
             runtime["runtimePackageSha256"] = "0" * 64
         elif variant == "engine-hash":
             runtime["engineSha256"] = "0" * 64
+        elif variant == "bot-activity":
+            runtime["botsEntered"] = 999
+            runtime["combatEvents"] = 999
+            runtime["minimumCombatEvents"] = 999
         else:
             self.fail(f"unsupported runtime-report variant: {variant}")
 
@@ -974,6 +978,31 @@ class EvidenceLoopTests(unittest.TestCase):
         ):
             with self.subTest(issue=expected_issue):
                 self.assertIn(expected_issue, verification["issues"])
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_binds_runtime_report_bot_activity(self) -> None:
+        source = self.root / "bundle-runtime-activity-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-runtime-activity-rewrite"
+        self._rewrite_bundle_runtime_report(source, destination, "bot-activity")
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        for report_field in (
+            "botsEntered",
+            "combatEvents",
+            "minimumCombatEvents",
+        ):
+            with self.subTest(field=report_field):
+                self.assertIn(
+                    f"bundled runtime report {report_field} does not match audited bot activity",
+                    verification["issues"],
+                )
         self.assertFalse(verification["promotion_allowed"])
 
     def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
