@@ -172,6 +172,39 @@ Read lane scores separately:
 Never average them into an overall map score. A high lane score only says the
 specified evidence is present and internally correlated.
 
+## Materialize exact evidence
+
+After the audit inputs stabilize, create a new content-addressed bundle rather
+than leaving a loose audit beside mutable source paths:
+
+```powershell
+python .agents/skills/mohaa-map-builder/scripts/evidence_loop.py materialize `
+  --candidate-pk3 generated/<map>/<map>.pk3 `
+  --visual-report generated/<map>/<map>-visual-qa.json `
+  --runtime-report generated/<map>/<map>-runtime-qa.json `
+  --evidence-plan <evidence-workspace>/evidence-loop.json `
+  --output-dir <new-empty-bundle-directory>
+
+python .agents/skills/mohaa-map-builder/scripts/evidence_loop.py verify-bundle `
+  --bundle <new-empty-bundle-directory>
+```
+
+The materializer recomputes the audit, refuses an existing destination, writes
+through a temporary directory, and atomically publishes only after
+self-verification. Its manifest has no timestamp and binds the exact candidate,
+source reports, raw logs, screenshots, isolated runtime packages, available
+build/engine/bot sources, generated audit, and the exact scorer script to
+content-addressed objects. Repeating unchanged inputs must produce the same
+manifest hash regardless of the caller's working directory. Resolve relative
+report-owned log, screenshot, and runtime-package paths by walking ancestors of
+the report file; never resolve them from the process working directory.
+
+Treat a loose or previously stored audit as stale after the scorer changes
+until it is replayed and materialized with the new scorer hash. Verification
+must reject missing, changed, or unexpected bundle files. A valid bundle proves
+evidence identity only: it still sets promotion to false and cannot satisfy
+human acceptance.
+
 ## Iterate from evidence
 
 When the active goal permits map editing:

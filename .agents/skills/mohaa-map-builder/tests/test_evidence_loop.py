@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -361,6 +362,155 @@ class EvidenceLoopTests(unittest.TestCase):
         gate_detail = report["gates"]["raw_runtime_diagnostics"]["detail"]
         self.assertEqual(gate_detail.count(literal), 1)
         self.assertIn("(3 occurrences)", gate_detail)
+
+    def test_materialized_bundle_is_deterministic_and_verifiable(self) -> None:
+        first = self.root / "bundle-first"
+        second = self.root / "bundle-second"
+        first_manifest = evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            first,
+        )
+        second_manifest = evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            second,
+        )
+        self.assertEqual(first_manifest, second_manifest)
+        self.assertEqual(
+            (first / "manifest.json").read_bytes(),
+            (second / "manifest.json").read_bytes(),
+        )
+        self.assertEqual(
+            first_manifest["candidate_sha256"], sha256(self.candidate)
+        )
+        self.assertEqual(first_manifest["audit_scorer_sha256"], sha256(SCRIPT))
+        self.assertFalse(first_manifest["promotion_allowed"])
+        roles = {item["role"] for item in first_manifest["artifacts"]}
+        self.assertTrue(
+            {
+                "candidate",
+                "report:visual",
+                "report:runtime",
+                "report:evidence_plan",
+                "raw_log:visual",
+                "raw_log:bot",
+                "runtime_package:visual",
+                "runtime_package:bot",
+                "build:source_map",
+                "build:design_report",
+                "build:compile_log",
+                "build:compiled_bsp",
+                "engine:visual",
+                "engine:bot",
+                "screenshot:000:forward",
+                "screenshot:001:reverse",
+                "screenshot:002:overview",
+                "audit",
+                "scorer",
+            }.issubset(roles)
+        )
+        verification = evidence_loop.verify_evidence_bundle(first)
+        self.assertTrue(verification["valid"])
+        self.assertEqual(
+            verification["artifact_count"],
+            len(first_manifest["artifacts"]),
+        )
+
+    def test_report_artifacts_do_not_depend_on_process_cwd(self) -> None:
+        repository = self.root / "repo"
+        evidence = repository / "generated" / self.map_name / "evidence"
+        reports = evidence / "reports"
+        logs = evidence / "logs"
+        screenshots = evidence / "screenshots"
+        for directory in (reports, logs, screenshots):
+            directory.mkdir(parents=True, exist_ok=True)
+
+        visual_log = logs / "visual.log"
+        bot_log = logs / "bot.log"
+        shutil.copyfile(self.visual_log, visual_log)
+        shutil.copyfile(self.runtime_log, bot_log)
+        copied_screenshots = []
+        for index, screenshot in enumerate(self.screenshots):
+            copied = screenshots / f"shot{index:04}.tga"
+            shutil.copyfile(screenshot, copied)
+            copied_screenshots.append(copied)
+
+        visual = json.loads(self.visual_report.read_text(encoding="utf-8"))
+        runtime = json.loads(self.runtime_report.read_text(encoding="utf-8"))
+        visual["log"] = f"generated/{self.map_name}/evidence/logs/visual.log"
+        runtime["log"] = f"generated/{self.map_name}/evidence/logs/bot.log"
+        for index, item in enumerate(visual["screenshots"]):
+            item["path"] = (
+                f"generated/{self.map_name}/evidence/screenshots/"
+                f"{copied_screenshots[index].name}"
+            )
+        nested_visual = reports / "visual.json"
+        nested_runtime = reports / "runtime.json"
+        nested_plan = reports / "plan.json"
+        self._write_json(nested_visual, visual)
+        self._write_json(nested_runtime, runtime)
+        self._write_json(nested_plan, self.plan)
+
+        outside = self.root / "outside"
+        outside.mkdir()
+        original_cwd = Path.cwd()
+        try:
+            os.chdir(outside)
+            manifest = evidence_loop.materialize_evidence_bundle(
+                self.candidate,
+                nested_visual,
+                nested_runtime,
+                nested_plan,
+                outside / "bundle",
+            )
+        finally:
+            os.chdir(original_cwd)
+        self.assertEqual(manifest["candidate_sha256"], sha256(self.candidate))
+        self.assertTrue(
+            evidence_loop.verify_evidence_bundle(outside / "bundle")["valid"]
+        )
+
+    def test_materialize_bundle_refuses_existing_destination(self) -> None:
+        destination = self.root / "existing-bundle"
+        destination.mkdir()
+        with self.assertRaises(evidence_loop.EvidenceError):
+            evidence_loop.materialize_evidence_bundle(
+                self.candidate,
+                self.visual_report,
+                self.runtime_report,
+                self.plan_path,
+                destination,
+            )
+
+    def test_bundle_verification_detects_tampering(self) -> None:
+        destination = self.root / "tampered-bundle"
+        manifest = evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            destination,
+        )
+        candidate = next(
+            item for item in manifest["artifacts"] if item["role"] == "candidate"
+        )
+        (destination / candidate["object"]).write_bytes(b"mixed-candidate")
+        (destination / "unexpected.txt").write_text("mixed", encoding="utf-8")
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        self.assertTrue(
+            any("hash mismatch" in issue for issue in verification["issues"])
+        )
+        self.assertTrue(
+            any(
+                "unexpected bundle files" in issue for issue in verification["issues"]
+            )
+        )
 
     def test_bot_observation_must_exist_in_hash_linked_source(self) -> None:
         death = next(

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit and compare exact-hash OpenMoHAA map evidence without accepting maps."""
+"""Audit, bundle, verify, and compare exact-hash evidence without accepting maps."""
 
 from __future__ import annotations
 
@@ -7,7 +7,9 @@ import argparse
 import hashlib
 import json
 import re
+import shutil
 import sys
+import tempfile
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -164,9 +166,29 @@ def inspect_pk3(path: Path, expected_bsp_member: str) -> tuple[dict[str, Any], l
     )
 
 
-def runtime_copy_path(report: dict[str, Any], map_name: str) -> Path | None:
+def resolve_report_artifact_path(raw_path: Any, report_path: Path) -> Path:
+    if not isinstance(raw_path, str) or not raw_path.strip():
+        raise EvidenceError("report artifact path is missing")
+    path = Path(raw_path)
+    if path.is_absolute():
+        return path
+    resolved_report = report_path.resolve()
+    for ancestor in resolved_report.parents:
+        candidate = ancestor / path
+        if candidate.is_file():
+            return candidate.resolve()
+    return (resolved_report.parent / path).resolve()
+
+
+def runtime_copy_path(
+    report: dict[str, Any],
+    map_name: str,
+    report_path: Path | None = None,
+) -> Path | None:
     explicit = report.get("runtimePackage")
     if isinstance(explicit, str) and explicit.strip():
+        if report_path is not None:
+            return resolve_report_artifact_path(explicit, report_path)
         return Path(explicit)
     qa_root = report.get("qaRoot")
     if not isinstance(qa_root, str) or not qa_root.strip():
@@ -177,6 +199,7 @@ def runtime_copy_path(report: dict[str, Any], map_name: str) -> Path | None:
 def audit_runtime_identity(
     label: str,
     report: dict[str, Any],
+    report_path: Path,
     map_name: str,
     candidate_sha: str,
     expected_bsp_member: str,
@@ -185,7 +208,7 @@ def audit_runtime_identity(
     reported_sha = normalized_sha(report.get("candidateSha256"))
     if reported_sha != candidate_sha:
         issues.append("report candidateSha256 does not match the candidate")
-    copy_path = runtime_copy_path(report, map_name)
+    copy_path = runtime_copy_path(report, map_name, report_path)
     copy_sha: str | None = None
     inventory: list[dict[str, Any]] = []
     if copy_path is None:
@@ -247,6 +270,7 @@ def audit_runtime_identity(
 
 def audit_screenshots(
     report: dict[str, Any],
+    report_path: Path,
     plan: dict[str, Any],
     candidate_sha: str,
 ) -> tuple[dict[str, Any], dict[str, Any], list[str]]:
@@ -337,7 +361,7 @@ def audit_screenshots(
             issues.append(f"screenshots[{index}].path is missing")
             screenshot_records.append(record)
             continue
-        image_path = Path(raw_path)
+        image_path = resolve_report_artifact_path(raw_path, report_path)
         record["path"] = str(image_path)
         if not image_path.is_file():
             issues.append(f"screenshot is missing: {image_path}")
@@ -781,6 +805,8 @@ def audit_raw_runtime_logs(
     plan: dict[str, Any],
     visual_report: dict[str, Any],
     runtime_report: dict[str, Any],
+    visual_path: Path,
+    runtime_path: Path,
 ) -> tuple[dict[str, Any], dict[str, Any], int | None, list[str]]:
     classifications = plan.get("runtime_diagnostic_classifications", [])
     issues: list[str] = []
@@ -813,12 +839,15 @@ def audit_raw_runtime_logs(
     severe_unclassified: list[tuple[str, str]] = []
     unclassified: list[tuple[str, str]] = []
     checked_logs = 0
-    for label, report in (("visual", visual_report), ("bot", runtime_report)):
+    for label, report, report_path in (
+        ("visual", visual_report, visual_path),
+        ("bot", runtime_report, runtime_path),
+    ):
         raw_path = report.get("log")
         if not isinstance(raw_path, str) or not raw_path.strip():
             issues.append(f"{label} QA report does not identify its raw log")
             continue
-        log_path = Path(raw_path)
+        log_path = resolve_report_artifact_path(raw_path, report_path)
         if not log_path.is_file():
             issues.append(f"{label} raw log is missing: {log_path}")
             continue
@@ -911,18 +940,20 @@ def build_audit(
         plan, plan_path, package
     )
     visual_identity, visual_runtime = audit_runtime_identity(
-        "visual", visual, map_name, candidate_sha, bsp_member
+        "visual", visual, visual_path, map_name, candidate_sha, bsp_member
     )
     runtime_identity, bot_runtime = audit_runtime_identity(
-        "bot", runtime, map_name, candidate_sha, bsp_member
+        "bot", runtime, runtime_path, map_name, candidate_sha, bsp_member
     )
     launch_gate, launch_detail, launch_score, launch_open = audit_launch_provenance(
         plan, plan_path, visual, runtime
     )
     diagnostic_gate, raw_logs, diagnostic_score, diagnostic_open = audit_raw_runtime_logs(
-        plan, visual, runtime
+        plan, visual, runtime, visual_path, runtime_path
     )
-    capture_gate, capture, capture_open = audit_screenshots(visual, plan, candidate_sha)
+    capture_gate, capture, capture_open = audit_screenshots(
+        visual, visual_path, plan, candidate_sha
+    )
     visual_gate, visual_score, defects, visual_open = audit_visual_review(
         plan, candidate_sha, capture
     )
@@ -1030,6 +1061,409 @@ def build_audit(
     }
 
 
+def _resolve_artifact_path(raw: Any, label: str, base: Path | None = None) -> Path:
+    if isinstance(raw, Path):
+        path = raw
+    elif not isinstance(raw, str) or not raw.strip():
+        raise EvidenceError(f"{label} path is missing")
+    else:
+        path = Path(raw)
+    if base is not None and not path.is_absolute():
+        path = base / path
+    if not path.is_file():
+        raise EvidenceError(f"{label} is missing: {path}")
+    return path.resolve()
+
+
+def _optional_artifact_path(raw: Any, base: Path | None = None) -> Path | None:
+    if not isinstance(raw, str) or not raw.strip():
+        return None
+    path = Path(raw)
+    if base is not None and not path.is_absolute():
+        path = base / path
+    return path.resolve() if path.is_file() else None
+
+
+def _bundle_sources(
+    candidate_path: Path,
+    visual_path: Path,
+    runtime_path: Path,
+    plan_path: Path,
+    visual: dict[str, Any],
+    runtime: dict[str, Any],
+    plan: dict[str, Any],
+) -> list[tuple[str, Path]]:
+    sources: list[tuple[str, Path]] = [
+        ("candidate", candidate_path),
+        ("report:visual", visual_path),
+        ("report:runtime", runtime_path),
+        ("report:evidence_plan", plan_path),
+        (
+            "raw_log:visual",
+            _resolve_artifact_path(
+                resolve_report_artifact_path(visual.get("log"), visual_path),
+                "visual raw log",
+            ),
+        ),
+        (
+            "raw_log:bot",
+            _resolve_artifact_path(
+                resolve_report_artifact_path(runtime.get("log"), runtime_path),
+                "bot raw log",
+            ),
+        ),
+    ]
+    map_name = plan.get("map_name")
+    if not isinstance(map_name, str) or not map_name.strip():
+        raise EvidenceError("evidence plan map_name is required for materialization")
+    for label, report, report_path in (
+        ("visual", visual, visual_path),
+        ("bot", runtime, runtime_path),
+    ):
+        runtime_copy = runtime_copy_path(report, map_name, report_path)
+        if runtime_copy is None:
+            raise EvidenceError(f"{label} runtime package path is missing")
+        sources.append(
+            (
+                f"runtime_package:{label}",
+                _resolve_artifact_path(runtime_copy, f"{label} runtime package"),
+            )
+        )
+
+    views = plan.get("views") if isinstance(plan.get("views"), list) else []
+    screenshots = visual.get("screenshots")
+    if not isinstance(screenshots, list):
+        raise EvidenceError("visual report screenshots must be a list")
+    for index, item in enumerate(screenshots):
+        if not isinstance(item, dict):
+            raise EvidenceError(f"screenshots[{index}] must be an object")
+        view = views[index] if index < len(views) and isinstance(views[index], dict) else {}
+        view_id = view.get("id") if isinstance(view.get("id"), str) else "unknown"
+        sources.append(
+            (
+                f"screenshot:{index:03d}:{view_id}",
+                _resolve_artifact_path(
+                    resolve_report_artifact_path(item.get("path"), visual_path),
+                    f"screenshot {index}",
+                ),
+            )
+        )
+
+    build = plan.get("build_provenance")
+    if isinstance(build, dict):
+        for label in ("source_map", "design_report", "compile_log", "compiled_bsp"):
+            item = build.get(label)
+            raw = item.get("path") if isinstance(item, dict) else None
+            path = _optional_artifact_path(raw, plan_path.parent)
+            if path is not None:
+                sources.append((f"build:{label}", path))
+
+    launch = plan.get("launch_provenance")
+    if isinstance(launch, dict):
+        for label in ("visual", "bot"):
+            item = launch.get(label)
+            raw = item.get("engine_path") if isinstance(item, dict) else None
+            path = _optional_artifact_path(raw, plan_path.parent)
+            if path is not None:
+                sources.append((f"engine:{label}", path))
+
+    bot = plan.get("bot_evidence")
+    if isinstance(bot, dict):
+        for collection, identity_key in (
+            ("event_observations", "event"),
+            ("route_observations", "route_id"),
+        ):
+            items = bot.get(collection)
+            if not isinstance(items, list):
+                continue
+            for index, item in enumerate(items):
+                if not isinstance(item, dict):
+                    continue
+                identity = item.get(identity_key)
+                identity = identity if isinstance(identity, str) and identity else f"{index:03d}"
+                path = _optional_artifact_path(item.get("source_path"), plan_path.parent)
+                if path is not None:
+                    sources.append((f"bot_source:{identity_key}:{identity}", path))
+    return sources
+
+
+def _store_bundle_path(staging: Path, role: str, source: Path) -> dict[str, Any]:
+    digest = sha256_file(source)
+    relative = f"objects/sha256/{digest}"
+    destination = staging / Path(relative)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if not destination.exists():
+        shutil.copyfile(source, destination)
+    if sha256_file(destination) != digest:
+        raise EvidenceError(f"materialized object hash mismatch for {role}")
+    return {
+        "role": role,
+        "original_name": source.name,
+        "bytes": source.stat().st_size,
+        "sha256": digest,
+        "object": relative,
+    }
+
+
+def _store_bundle_bytes(
+    staging: Path,
+    role: str,
+    original_name: str,
+    payload: bytes,
+) -> dict[str, Any]:
+    digest = hashlib.sha256(payload).hexdigest()
+    relative = f"objects/sha256/{digest}"
+    destination = staging / Path(relative)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    if not destination.exists():
+        destination.write_bytes(payload)
+    if sha256_file(destination) != digest:
+        raise EvidenceError(f"materialized object hash mismatch for {role}")
+    return {
+        "role": role,
+        "original_name": original_name,
+        "bytes": len(payload),
+        "sha256": digest,
+        "object": relative,
+    }
+
+
+def materialize_evidence_bundle(
+    candidate_path: Path,
+    visual_path: Path,
+    runtime_path: Path,
+    plan_path: Path,
+    output_dir: Path,
+) -> dict[str, Any]:
+    candidate_path = candidate_path.resolve()
+    visual_path = visual_path.resolve()
+    runtime_path = runtime_path.resolve()
+    plan_path = plan_path.resolve()
+    output_dir = output_dir.resolve()
+    if output_dir.exists():
+        raise EvidenceError(f"bundle destination already exists: {output_dir}")
+    output_dir.parent.mkdir(parents=True, exist_ok=True)
+
+    audit_report = build_audit(candidate_path, visual_path, runtime_path, plan_path)
+    visual = load_object(visual_path, "visual QA report")
+    runtime = load_object(runtime_path, "bot runtime report")
+    plan = load_object(plan_path, "evidence plan")
+    sources = _bundle_sources(
+        candidate_path,
+        visual_path,
+        runtime_path,
+        plan_path,
+        visual,
+        runtime,
+        plan,
+    )
+
+    with tempfile.TemporaryDirectory(
+        prefix=f".{output_dir.name}.",
+        dir=output_dir.parent,
+    ) as temporary:
+        staging = Path(temporary)
+        artifacts = [
+            _store_bundle_path(staging, role, source)
+            for role, source in sources
+        ]
+        audit_payload = (
+            json.dumps(audit_report, indent=2, ensure_ascii=False) + "\n"
+        ).encode("utf-8")
+        artifacts.append(
+            _store_bundle_bytes(staging, "audit", "audit.json", audit_payload)
+        )
+        scorer = Path(__file__).resolve()
+        artifacts.append(_store_bundle_path(staging, "scorer", scorer))
+        artifacts.sort(
+            key=lambda item: (
+                item["role"],
+                item["sha256"],
+                item["original_name"],
+            )
+        )
+        audit_entry = next(item for item in artifacts if item["role"] == "audit")
+        scorer_entry = next(item for item in artifacts if item["role"] == "scorer")
+        manifest = {
+            "schema_version": 1,
+            "bundle_kind": "openmohaa_exact_hash_evidence",
+            "map_name": audit_report.get("map_name"),
+            "candidate_sha256": audit_report.get("candidate", {}).get("sha256"),
+            "expected_bsp_member": audit_report.get("candidate", {}).get(
+                "expected_bsp_member"
+            ),
+            "audit_artifact_sha256": audit_entry["sha256"],
+            "audit_scorer_sha256": scorer_entry["sha256"],
+            "artifact_count": len(artifacts),
+            "object_count": len({item["object"] for item in artifacts}),
+            "artifacts": artifacts,
+            "technical_ready_for_human_review": audit_report.get(
+                "technical_ready_for_human_review"
+            ),
+            "promotion_allowed": False,
+            "acceptance_status": "requires_explicit_user_approval",
+        }
+        manifest_payload = (
+            json.dumps(manifest, indent=2, ensure_ascii=False) + "\n"
+        ).encode("utf-8")
+        (staging / "manifest.json").write_bytes(manifest_payload)
+        manifest_sha = hashlib.sha256(manifest_payload).hexdigest()
+        (staging / "manifest.sha256").write_text(
+            f"{manifest_sha}  manifest.json\n",
+            encoding="ascii",
+        )
+        verification = verify_evidence_bundle(staging)
+        if not verification["valid"]:
+            raise EvidenceError(
+                "materialized bundle failed self-verification: "
+                + "; ".join(verification["issues"])
+            )
+        if output_dir.exists():
+            raise EvidenceError(f"bundle destination appeared during write: {output_dir}")
+        staging.replace(output_dir)
+    return manifest
+
+
+def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
+    bundle_dir = bundle_dir.resolve()
+    issues: list[str] = []
+    manifest_path = bundle_dir / "manifest.json"
+    checksum_path = bundle_dir / "manifest.sha256"
+    try:
+        manifest = load_object(manifest_path, "bundle manifest")
+    except EvidenceError as exc:
+        return {
+            "valid": False,
+            "artifact_count": 0,
+            "object_count": 0,
+            "issues": [str(exc)],
+            "promotion_allowed": False,
+        }
+
+    manifest_sha = sha256_file(manifest_path)
+    try:
+        checksum = checksum_path.read_text(encoding="ascii").strip()
+    except OSError as exc:
+        issues.append(f"cannot read manifest checksum: {exc}")
+    else:
+        if checksum != f"{manifest_sha}  manifest.json":
+            issues.append("manifest checksum mismatch")
+
+    if manifest.get("schema_version") != 1:
+        issues.append("bundle manifest must use schema_version 1")
+    if manifest.get("bundle_kind") != "openmohaa_exact_hash_evidence":
+        issues.append("bundle_kind is invalid")
+    if manifest.get("promotion_allowed") is not False:
+        issues.append("bundle must never permit promotion")
+    if manifest.get("acceptance_status") != "requires_explicit_user_approval":
+        issues.append("bundle acceptance status is invalid")
+
+    artifacts = manifest.get("artifacts")
+    if not isinstance(artifacts, list) or not artifacts:
+        artifacts = []
+        issues.append("bundle artifacts must be a non-empty list")
+    expected_files = {"manifest.json", "manifest.sha256"}
+    roles: set[str] = set()
+    valid_entries: list[dict[str, Any]] = []
+    for index, item in enumerate(artifacts):
+        if not isinstance(item, dict):
+            issues.append(f"artifacts[{index}] must be an object")
+            continue
+        role = item.get("role")
+        digest = normalized_sha(item.get("sha256"))
+        relative = item.get("object")
+        expected_bytes = item.get("bytes")
+        if not isinstance(role, str) or not role:
+            issues.append(f"artifacts[{index}].role is invalid")
+            continue
+        if role in roles:
+            issues.append(f"duplicate artifact role: {role}")
+        roles.add(role)
+        if (
+            digest is None
+            or not isinstance(relative, str)
+            or relative != f"objects/sha256/{digest}"
+            or "\\" in relative
+            or relative.startswith("/")
+            or ".." in relative.split("/")
+        ):
+            issues.append(f"{role}: object path or sha256 is invalid")
+            continue
+        if not isinstance(expected_bytes, int) or expected_bytes < 0:
+            issues.append(f"{role}: byte count is invalid")
+            continue
+        expected_files.add(relative)
+        object_path = bundle_dir / Path(relative)
+        if not object_path.is_file():
+            issues.append(f"{role}: object is missing")
+            continue
+        if object_path.stat().st_size != expected_bytes:
+            issues.append(f"{role}: byte count mismatch")
+        if sha256_file(object_path) != digest:
+            issues.append(f"{role}: hash mismatch")
+        valid_entries.append(item)
+
+    if manifest.get("artifact_count") != len(artifacts):
+        issues.append("artifact_count does not match artifacts")
+    object_count = len({item.get("object") for item in valid_entries})
+    if manifest.get("object_count") != object_count:
+        issues.append("object_count does not match materialized objects")
+
+    actual_files = {
+        path.relative_to(bundle_dir).as_posix()
+        for path in bundle_dir.rglob("*")
+        if path.is_file()
+    }
+    unexpected = sorted(actual_files - expected_files)
+    if unexpected:
+        issues.append("unexpected bundle files: " + ", ".join(unexpected))
+    missing = sorted(expected_files - actual_files)
+    if missing:
+        issues.append("missing bundle files: " + ", ".join(missing))
+
+    by_role = {item.get("role"): item for item in valid_entries}
+    candidate = by_role.get("candidate")
+    scorer = by_role.get("scorer")
+    audit = by_role.get("audit")
+    if candidate is None or candidate.get("sha256") != manifest.get("candidate_sha256"):
+        issues.append("candidate artifact does not match manifest identity")
+    if scorer is None or scorer.get("sha256") != manifest.get("audit_scorer_sha256"):
+        issues.append("scorer artifact does not match audit_scorer_sha256")
+    if audit is None or audit.get("sha256") != manifest.get("audit_artifact_sha256"):
+        issues.append("audit artifact does not match audit_artifact_sha256")
+    if audit is not None:
+        try:
+            audit_report = load_object(
+                bundle_dir / Path(audit["object"]),
+                "bundled audit",
+            )
+        except (EvidenceError, KeyError) as exc:
+            issues.append(str(exc))
+        else:
+            if audit_report.get("candidate", {}).get("sha256") != manifest.get(
+                "candidate_sha256"
+            ):
+                issues.append("bundled audit candidate identity mismatch")
+            if audit_report.get("promotion_allowed") is not False:
+                issues.append("bundled audit must never permit promotion")
+            if (
+                audit_report.get("acceptance_status")
+                != "requires_explicit_user_approval"
+            ):
+                issues.append("bundled audit acceptance status is invalid")
+
+    return {
+        "valid": not issues,
+        "artifact_count": len(artifacts),
+        "object_count": object_count,
+        "manifest_sha256": manifest_sha,
+        "candidate_sha256": manifest.get("candidate_sha256"),
+        "audit_scorer_sha256": manifest.get("audit_scorer_sha256"),
+        "issues": issues,
+        "promotion_allowed": False,
+    }
+
+
 def compare_reports(before_path: Path, after_path: Path) -> dict[str, Any]:
     before = load_object(before_path, "before audit")
     after = load_object(after_path, "after audit")
@@ -1131,6 +1565,20 @@ def main() -> int:
         action="store_true",
         help="exit 2 unless every non-human evidence gate passes",
     )
+    materialize = subparsers.add_parser(
+        "materialize",
+        help="create an atomic content-addressed exact-hash evidence bundle",
+    )
+    materialize.add_argument("--candidate-pk3", type=Path, required=True)
+    materialize.add_argument("--visual-report", type=Path, required=True)
+    materialize.add_argument("--runtime-report", type=Path, required=True)
+    materialize.add_argument("--evidence-plan", type=Path, required=True)
+    materialize.add_argument("--output-dir", type=Path, required=True)
+    verify = subparsers.add_parser(
+        "verify-bundle", help="verify a materialized evidence bundle"
+    )
+    verify.add_argument("--bundle", type=Path, required=True)
+    verify.add_argument("--output", type=Path)
     compare = subparsers.add_parser("compare", help="compare two audit reports")
     compare.add_argument("--before", type=Path, required=True)
     compare.add_argument("--after", type=Path, required=True)
@@ -1146,6 +1594,23 @@ def main() -> int:
             )
             write_json(report, args.output.resolve() if args.output else None)
             return 2 if args.strict and strict_failure(report) else 0
+        if args.command == "materialize":
+            materialize_evidence_bundle(
+                args.candidate_pk3.resolve(),
+                args.visual_report.resolve(),
+                args.runtime_report.resolve(),
+                args.evidence_plan.resolve(),
+                args.output_dir.resolve(),
+            )
+            print(args.output_dir.resolve() / "manifest.json")
+            return 0
+        if args.command == "verify-bundle":
+            verification = verify_evidence_bundle(args.bundle.resolve())
+            write_json(
+                verification,
+                args.output.resolve() if args.output else None,
+            )
+            return 0 if verification["valid"] else 2
         report = compare_reports(args.before.resolve(), args.after.resolve())
         write_json(report, args.output.resolve() if args.output else None)
         return 0

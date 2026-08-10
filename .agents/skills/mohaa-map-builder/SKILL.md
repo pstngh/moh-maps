@@ -91,6 +91,9 @@ reports and isolated runtime copies with
 file health and capture count are not semantic inspection. Keep bot
 entry/combat, lifecycle, route coverage, visual quality, and human acceptance as
 separate gates. Never infer route coverage from Recast, kills, or bot entry.
+Materialize a completed run into a new content-addressed bundle and verify it
+before treating the evidence as current; the bundled audit must identify the
+exact scorer hash that produced it.
 
 The loop may make a focused map iteration only when the active user goal permits
 map edits. It may propose a skill change only from authoritative evidence or a
