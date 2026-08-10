@@ -13,18 +13,18 @@
     "inspection_date_utc": "2026-08-10",
     "source_guide": ".agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md"
   },
-  "checkpoint_id": "bootstrap-openmohaa-amendment-20260810-001",
-  "checkpoint_updated_utc": "2026-08-10T00:55:42Z",
+  "checkpoint_id": "knowledge-audit-codex-dust2-v2-20260810-001",
+  "checkpoint_updated_utc": "2026-08-10T02:01:44Z",
   "current_phase": "knowledge-audit",
-  "active_map": "codex_dust2_v2",
-  "active_revision": "10",
+  "active_map": "codex_cache",
+  "active_revision": "1",
   "accepted_baseline": null,
   "latest_candidate": "codex_dust2_v2",
-  "next_action": "Use $mohaa-map-builder to resume the checkpoint and audit codex_dust2_v2's README, conversion report, generator provenance, and existing visual and playtest evidence; do not modify map artifacts; label each significant quality or acceptance claim, update PROJECT_STATE.json with one next action, validate, commit, push, and verify synchronization.",
-  "stopping_condition": "Stop after the bounded codex_dust2_v2 claim audit is validated, committed, pushed, and local HEAD equals its upstream; do not create, compile, package, or repair a map.",
+  "next_action": "Use $mohaa-map-builder to resume the checkpoint and audit the README, REVISION-1.md, REFERENCE-AUDIT.md, generator provenance, and existing visual/playtest evidence for codex_cache revision 1; do not modify map artifacts; label each significant quality or acceptance claim, update PROJECT_STATE.json with one next action, validate, commit, push, and verify synchronization.",
+  "stopping_condition": "Stop after the bounded codex_cache revision 1 claim audit is validated, committed, pushed, and local HEAD equals its upstream; do not create, compile, package, or repair a map.",
   "open_questions": [
-    "Which exact user artifact records the comparatively positive codex_dust2_v2 feedback?",
-    "Which remaining generated-map claims beyond codex_dust2_v2 require downgrade after the bounded audit?"
+    "Which exact revision/hash-linked original feedback artifact, if any, underlies the comparative codex_dust2_v2 bootstrap summary?",
+    "Which codex_cache revision 1 claims survive exact-hash source, compile, runtime, visual, and human-evidence correlation?"
   ],
   "blockers": [],
   "known_dirty_paths": [
@@ -94,19 +94,23 @@
       "status": "candidate",
       "current_revision": "10",
       "accepted_revision": null,
-      "reason": "Comparatively positive user feedback makes this the latest candidate, but no explicit final approval exists.",
+      "reason": "Revision 10 remains the latest candidate: exact-hash compile/runtime evidence establishes bounded technical execution and the bootstrap request records comparatively positive but non-final feedback, but no explicit approval or mapwide quality proof exists.",
       "known_defects": [
-        "Port fidelity remains unverified",
-        "Source-to-AA art substitutions remain",
-        "Acceptance evidence has not been located and recorded"
+        "Port fidelity beyond exact spawn-coordinate set equivalence remains OPEN",
+        "Displacement seam and void closure, collision quality, and model ground/collision behavior are not proven mapwide",
+        "The exact artifact chain records 58 MOHlight potential-hash-mismatch warnings, 120 CM_GridPlane unresolvable warnings, one mixed-plane-side warning, and seven bot_run.scr load failures; gameplay impact remains OPEN",
+        "Only one exact-hash eight-shot spectator-follow cycle exists; it does not prove two passes, player-height or high-angle coverage, or mapwide visual completeness",
+        "Source-to-AA art substitutions and omitted unsupported props remain",
+        "No explicit final approval exists; the bootstrap feedback summary is not original revision/hash-linked feedback"
       ],
       "evidence_paths": [
         "generated/codex_dust2_v2/README.md",
-        "generated/codex_dust2_v2/conversion-report.json"
+        "generated/codex_dust2_v2/conversion-report.json",
+        "generated/codex_dust2_v2/CLAIM-AUDIT.md"
       ],
-      "last_tested_revision_or_external_evidence": "Repository describes revision 10 technical QA; bootstrap request records comparatively positive but non-final feedback.",
+      "last_tested_revision_or_external_evidence": "Bounded 2026-08-10 claim audit ties PK3 SHA-256 9B113BC0A20B26A2DFD7E89AAC56AA87712E76B37FBA2D9246968EE43686DDA9 to its compiled BSP, visual_v18 runtime log, one eight-shot follow-camera cycle, and the bootstrap request's comparative but non-final feedback summary.",
       "user_approval_evidence": null,
-      "next_action": "Audit the README, conversion report, provenance, and human evidence without modifying map artifacts."
+      "next_action": "Do not modify the map; retain it as an unaccepted candidate until revision/hash-linked human feedback and full-resolution player-height and high-angle visual evidence are available."
     },
     "codex_inferno": {
       "status": "candidate",
@@ -267,8 +271,8 @@
     }
   },
   "evidence_pending": [
-    "Locate exact positive-feedback provenance for codex_dust2_v2.",
-    "Audit remaining significant acceptance, final, complete, polished, release, proven, no-void, no-floating, visually-complete, and ready-to-play claims after the bounded dust2 audit."
+    "Locate revision/hash-linked original feedback for codex_dust2_v2 if it exists; the bootstrap attachment proves only a comparative non-final summary.",
+    "Audit the significant acceptance, final, complete, polished, release, proven, no-void, no-floating, visually-complete, and ready-to-play claims for codex_cache revision 1."
   ],
   "user_approval_required": true,
   "approval_policy": "Explicit approval of the exact tested candidate is required before accepted status or accepted_baseline promotion."

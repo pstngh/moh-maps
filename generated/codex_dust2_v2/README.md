@@ -1,5 +1,10 @@
 # Codex Dust II V2
 
+> **Evidence status (2026-08-10):** this map is an unaccepted candidate, not an
+> accepted baseline or release-ready build. The historical claims below are
+> scoped and labeled in [CLAIM-AUDIT.md](CLAIM-AUDIT.md); terms such as
+> "final" describe an old build stage, not human acceptance.
+
 `codex_dust2_v2` is a deathmatch-focused MoHAA/OpenMoHAA translation of the
 Dust II brush layout, dressed with stock Allied Assault textures and a
 V2-facility treatment.
