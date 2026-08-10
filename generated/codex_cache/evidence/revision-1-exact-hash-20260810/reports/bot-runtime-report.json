@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "qaRoot": "C:\\tmp\\codex-codex_cache-runtime",
+  "mapName": "codex_cache",
+  "gameType": 1,
+  "exactPk3Count": 8,
+  "candidateSha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+  "engineSha256": "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
+  "bspParse": [
+    "[2026-08-10 11:33:49 UTC-5.000] BSP file loaded and parsed in 0.191 seconds"
+  ],
+  "recast": [
+    "[2026-08-10 11:33:53 UTC-5.000] Recast navigation mesh(es) generated in 3.447 seconds"
+  ],
+  "botsEntered": 8,
+  "botNames": [
+    "bot1",
+    "bot2",
+    "bot3",
+    "bot4",
+    "bot5",
+    "bot6",
+    "bot7",
+    "bot8"
+  ],
+  "combatEvents": 48,
+  "minimumCombatEvents": 3,
+  "candidateDiagnostics": [],
+  "stockAssetDiagnostics": [],
+  "scriptErrorCount": 0,
+  "sampleSeconds": 120,
+  "log": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/bot-standard-qconsole.log"
+}

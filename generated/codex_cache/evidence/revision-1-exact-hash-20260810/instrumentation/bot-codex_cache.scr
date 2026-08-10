@@ -1,0 +1,31 @@
+main:
+
+level waittill prespawn
+exec global/DMprecache.scr
+level.script = maps/dm/codex_cache.scr
+level waittill spawn
+thread codex_bot_probe
+end
+
+codex_bot_probe:
+
+wait 8
+local.sample = 0
+
+while (local.sample < 90)
+{
+    local.index = 1
+    while (local.index < $player.size + 1)
+    {
+        local.ent = $player[local.index]
+        local.alive = IsAlive local.ent
+        println ("CODEX_BOT_SAMPLE sample=" + local.sample + " player_index=" + local.index + " alive=" + local.alive + " origin=" + local.ent.origin)
+        local.index++
+    }
+
+    local.sample++
+    wait 1
+}
+
+println "CODEX_BOT_PROBE_COMPLETE samples=90"
+end

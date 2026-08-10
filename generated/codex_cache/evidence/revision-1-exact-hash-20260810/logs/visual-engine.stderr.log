@@ -1,0 +1,1825 @@
+--- Common Initialization ---
+OpenMoHAA 0.82.1-beta+5.a72bc15 win_msvc64-x86_64 Aug 05 2025 UTC
+Cvar_Set2: com_protocol 8
+Cvar_Set2: com_legacyprotocol 8
+Cvar_Set2: com_target_shortversion 1.12+0.82.1
+Cvar_Set2: com_target_extension Allied Assault
+Cvar_Set2: com_target_version Medal of Honor Allied Assault 1.12+0.82.1
+Cvar_Set2: com_gamename mohaa
+Cvar_Set2: fs_basegame 
+Cvar_Set2: protocol 8
+Cvar_Set2: fs_basepath C:\tmp\codex-cache-r1-exact-visual\base
+Cvar_Set2: fs_homepath C:\tmp\codex-cache-r1-exact-visual\home
+----- FS_Startup -----
+Current search path:
+C:\tmp\codex-cache-r1-exact-visual\home/main
+C:\tmp\codex-cache-r1-exact-visual\base/main
+C:\tmp\codex-cache-r1-exact-visual\base\main\zz_codex_cache.pk3 (23 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak6.pk3 (104 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak5.pk3 (259 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak4.pk3 (593 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak3.pk3 (669 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak2.pk3 (4722 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak1.pk3 (772 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak0.pk3 (11175 files)
+
+----------------------
+18317 files in pk3 files
+execing default.cfg
+execing menu.cfg
+Cvar_Set2: viewsize 100
+Cvar_Set2: ui_crosshair 1
+Cvar_Set2: cl_altbindings 0
+Cvar_Set2: cl_ctrlbindings 0
+Cvar_Set2: ui_voodoo 0
+Cvar_Set2: ui_dmmap 
+Cvar_Set2: ui_gametype 
+Cvar_Set2: ui_gametypestring 
+Cvar_Set2: ui_maxclients 32
+Cvar_Set2: ui_gamespy 1
+Cvar_Set2: ui_fraglimit 0
+Cvar_Set2: ui_timelimit 0
+Cvar_Set2: ui_teamdamage 0
+Cvar_Set2: ui_connectip 0.0.0.0
+Cvar_Set2: ui_inactivespectate 60
+Cvar_Set2: ui_inactivekick 900
+Cvar_Set2: ui_maplist_ffa dm/mohdm1 dm/mohdm2 dm/mohdm3 dm/mohdm4 dm/mohdm5 dm/mohdm6 dm/mohdm7
+Cvar_Set2: ui_maplist_team dm/mohdm1 dm/mohdm2 dm/mohdm3 dm/mohdm4 dm/mohdm5 dm/mohdm6 dm/mohdm7
+Cvar_Set2: ui_maplist_round dm/mohdm1 dm/mohdm2 dm/mohdm3 dm/mohdm4 dm/mohdm5 dm/mohdm6 dm/mohdm7
+Cvar_Set2: ui_maplist_obj obj/obj_team1 obj/obj_team2 obj/obj_team3 obj/obj_team4
+Cvar_Set2: ui_hostname Nameless Battle
+Cvar_Set2: detail 1
+Cvar_Set2: g_skill 1
+Cvar_Set2: g_subtitle 0
+Cvar_Set2: ui_signshader 
+Cvar_Set2: ui_medalsign 
+Cvar_Set2: ui_voodoo 0
+Cvar_Set2: g_medal0 0
+Cvar_Set2: g_medal1 0
+Cvar_Set2: g_medal2 0
+Cvar_Set2: g_medal3 0
+Cvar_Set2: g_medal4 0
+Cvar_Set2: g_medal5 0
+Cvar_Set2: g_eogmedal0 0
+Cvar_Set2: g_eogmedal1 0
+Cvar_Set2: g_eogmedal2 0
+Cvar_Set2: g_m1l1 1
+Cvar_Set2: g_m1l2 0
+Cvar_Set2: g_m1l3 0
+Cvar_Set2: g_m2l1 0
+Cvar_Set2: g_m2l2 0
+Cvar_Set2: g_m2l3 0
+Cvar_Set2: g_m3l1 0
+Cvar_Set2: g_m3l2 0
+Cvar_Set2: g_m3l3 0
+Cvar_Set2: g_m4l1 0
+Cvar_Set2: g_m4l2 0
+Cvar_Set2: g_m4l3 0
+Cvar_Set2: g_m5l1 0
+Cvar_Set2: g_m5l2 0
+Cvar_Set2: g_m5l3 0
+Cvar_Set2: g_m6l1 0
+Cvar_Set2: g_m6l2 0
+Cvar_Set2: g_m6l3 0
+Cvar_Set2: config omconfig.cfg
+Config: omconfig.cfg
+^~^~^ Can't find configs/omconfig.cfg
+The config file 'omconfig.cfg' doesn't exist, using unnamedsoldier.cfg as a template
+couldn't exec configs/unnamedsoldier.cfg
+couldn't exec localized.cfg
+couldn't exec autoexec.cfg
+Cvar_Set2: fs_basepath C:\tmp\codex-cache-r1-exact-visual\base
+Cvar_Set2: fs_homepath C:\tmp\codex-cache-r1-exact-visual\home
+Cvar_Set2: developer 2
+Cvar_Set2: logfile 2
+Cvar_Set2: g_gametype 1
+Cvar_Set2: g_inactiveSpectate 0
+Cvar_Set2: g_inactiveKick 0
+Cvar_Set2: cg_drawviewmodel 0
+Cvar_Set2: r_fullscreen 0
+Cvar_Set2: r_mode -1
+Cvar_Set2: r_customwidth 1280
+Cvar_Set2: r_customheight 720
+Cvar_Set2: com_maxfps 60
+Cvar_Set2: config omconfig.cfg
+Cvar_Set2: fs_basepath C:\tmp\codex-cache-r1-exact-visual\base
+Cvar_Set2: fs_homepath C:\tmp\codex-cache-r1-exact-visual\home
+Cvar_Set2: developer 2
+Cvar_Set2: logfile 2
+Cvar_Set2: g_gametype 1
+Cvar_Set2: g_inactiveSpectate 0
+Cvar_Set2: g_inactiveKick 0
+Cvar_Set2: cg_drawviewmodel 0
+Cvar_Set2: r_fullscreen 0
+Cvar_Set2: r_mode -1
+Cvar_Set2: r_customwidth 1280
+Cvar_Set2: r_customheight 720
+Cvar_Set2: com_maxfps 60
+Cvar_Set2: dedicated 0
+Cvar_Set2: com_updatecheck_interval 15
+logfile opened on Mon Aug 10 11:27:38 2026
+
+=> game is version OpenMoHAA 0.82.1-beta+5.a72bc15 win_msvc64-x86_64 Aug 05 2025 UTC
+=> targeting game ID 0
+Cvar_Set2: arch win_msvc64 x86_64
+Cvar_Set2: username plex
+Cvar_Set2: g_maxplayerhealth 750
+Cvar_Set2: skill 1
+You are now setup for medium mode.
+----- Client Initialization -----
+------ Unloading ClientGame ------
+Called FadeSound with: 0.000000
+
+------------------
+Event system initialized: 82 classes 277 events 181712 total memory in response list
+
+Cvar_Set2: cl_mouseAccelOffset 5
+Cvar_Set2: j_pitch_axis 3
+Cvar_Set2: j_yaw_axis 2
+Cvar_Set2: j_forward_axis 1
+Cvar_Set2: j_side_axis 0
+Cvar_Set2: j_up_axis 4
+Cvar_Set2: m_invert_pitch 0
+----- Initializing Renderer ----
+----- R_Init -----
+Cvar_Set2: r_picmip 1
+Cvar_Set2: r_subdivisions 4
+Cvar_Set2: r_displayRefresh 0
+Cvar_Set2: r_znear 4
+Glimp_Init( )
+SDL using driver "windows"
+Cvar_Set2: r_sdlDriver windows
+Initializing OpenGL display
+Display aspect: 1.778
+...setting mode -1: 1280 720
+Using 24 color bits, 24 depth, 8 stencil display.
+Couldn't get window display mode, no resolutions detected: Couldn't find display mode match
+GL_RENDERER: AMD Radeon 780M Graphics
+Initializing OpenGL extensions
+...ignoring GL_EXT_texture_compression_s3tc
+...ignoring GL_S3_s3tc
+...using GL_EXT_texture_env_add
+...using GL_ARB_multitexture
+...using GL_EXT_compiled_vertex_array
+...ignoring GL_EXT_texture_filter_anisotropic
+...using GL_SGIS_texture_edge_clamp
+
+------- Input Initialization -------
+Cvar_Set2: com_unfocused 1
+Cvar_Set2: com_minimized 0
+Calling SDL_Init(SDL_INIT_JOYSTICK)...
+SDL_Init(SDL_INIT_JOYSTICK) passed.
+Calling SDL_Init(SDL_INIT_GAMECONTROLLER)...
+SDL_Init(SDL_INIT_GAMECONTROLLER) passed.
+0 possible joysticks
+Cvar_Set2: in_availableJoysticks 
+Joystick is not active.
+------------------------------------
+Cvar_Set2: r_forceClampToEdge 1
+
+GL_VENDOR: ATI Technologies Inc.
+GL_RENDERER: AMD Radeon 780M Graphics
+GL_VERSION: 4.6.0 Compatibility Profile Context 26.6.4.260624
+GL_EXTENSIONS: GL_AMD_blend_minmax_factor GL_AMD_conservative_depth GL_AMD_debug_output GL_AMD_depth_clamp_separate GL_AMD_gpu_shader_half_float GL_AMD_gpu_shader_int16 GL_AMD_gpu_shader_int64 GL_AMD_multi_draw_indirect GL_AMD_pinned_memory GL_AMD_query_buffer_object GL_AMD_sample_positions GL_AMD_seamless_cubemap_per_texture GL_AMD_shader_trinary_minmax GL_AMD_texture_cube_map_array GL_AMD_vertex_shader_layer GL_AMD_vertex_shader_viewport_index GL_ARB_ES2_compatibility GL_ARB_ES3_1_compatibility GL_ARB_ES3_2_compatibility GL_ARB_ES3_compatibility GL_ARB_arrays_of_arrays GL_ARB_base_instance GL_ARB_bindless_texture GL_ARB_blend_func_extended GL_ARB_buffer_storage GL_ARB_clear_buffer_object GL_ARB_clear_texture GL_ARB_clip_control GL_ARB_color_buffer_float GL_ARB_compatibility GL_ARB_compressed_texture_pixel_storage GL_ARB_compute_shader GL_ARB_conditional_render_inverted GL_ARB_conservative_depth GL_ARB_copy_buffer GL_ARB_copy_image GL_ARB_cull_distance GL_ARB_debug_output GL_ARB_depth_buffer_float GL_ARB_depth_clamp GL_ARB_depth_texture GL_ARB_derivative_control GL_ARB_direct_state_access GL_ARB_draw_buffers GL_ARB_draw_buffers_blend GL_ARB_draw_elements_base_vertex GL_ARB_draw_indirect GL_ARB_draw_instanced GL_ARB_enhanced_layouts GL_ARB_explicit_attrib_location GL_ARB_explicit_uniform_location GL_ARB_fragment_coord_conventions GL_ARB_fragment_layer_viewport GL_ARB_fragment_program GL_ARB_fragment_program_shadow GL_ARB_fragment_shader GL_ARB_fragment_shader_interlock GL_ARB_framebuffer_no_attachments GL_ARB_framebuffer_object GL_ARB_framebuffer_sRGB GL_ARB_geometry_shader4 GL_ARB_get_program_binary GL_ARB_get_texture_sub_image GL_ARB_gl_spirv GL_ARB_gpu_shader5 GL_ARB_gpu_shader_fp64 GL_ARB_gpu_shader_int64 GL_ARB_half_float_pixel GL_ARB_half_float_vertex GL_ARB_indirect_parameters GL_ARB_instanced_arrays GL_ARB_internalformat_query GL_ARB_internalformat_query2 GL_ARB_invalidate_subdata GL_ARB_map_buffer_range GL_ARB_multi_bind GL_ARB_multi_draw_indirect GL_ARB_multisample GL_ARB_multitexture GL_ARB_occlusion_query GL_ARB_occlusion_query2 GL_ARB_parallel_shader_compile GL_ARB_pipeline_statistics_query GL_ARB_pixel_buffer_object GL_ARB_point_parameters GL_ARB_point_sprite GL_ARB_polygon_offset_clamp GL_ARB_post_depth_coverage GL_ARB_program_interface_query GL_ARB_provoking_vertex GL_ARB_query_buffer_object GL_ARB_robustness GL_ARB_sample_locations GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_seamless_cubemap_per_texture GL_ARB_separate_shader_objects GL_ARB_shader_atomic_counter_ops GL_ARB_shader_atomic_counters GL_ARB_shader_ballot GL_ARB_shader_bit_encoding GL_ARB_shader_clock GL_ARB_shader_draw_parameters GL_ARB_shader_group_vote GL_ARB_shader_image_load_store GL_ARB_shader_image_size GL_ARB_shader_objects GL_ARB_shader_precision GL_ARB_shader_stencil_export GL_ARB_shader_storage_buffer_object GL_ARB_shader_subroutine GL_ARB_shader_texture_image_samples GL_ARB_shader_texture_lod GL_ARB_shader_viewport_layer_array GL_ARB_shading_language_100 GL_ARB_shading_language_420pack GL_ARB_shading_language_packing GL_ARB_shadow GL_ARB_shadow_ambient GL_ARB_sparse_buffer GL_ARB_sparse_texture GL_ARB_spirv_extensions GL_ARB_stencil_texturing GL_ARB_sync GL_ARB_tessellation_shader GL_ARB_texture_barrier GL_ARB_texture_border_clamp GL_ARB_texture_buffer_object GL_ARB_texture_buffer_object_rgb32 GL_ARB_texture_buffer_range GL_ARB_texture_compression GL_ARB_texture_compression_bptc GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map GL_ARB_texture_cube_map_array GL_ARB_texture_env_add GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_filter_anisotropic GL_ARB_texture_filter_minmax GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_mirrored_repeat GL_ARB_texture_multisample GL_ARB_texture_multisample_no_array GL_ARB_texture_non_power_of_two GL_ARB_texture_query_levels GL_ARB_texture_query_lod GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_texture_rgb10_a2ui GL_ARB_texture_stencil8 GL_ARB_texture_storage GL_ARB_texture_storage_multisample GL_ARB_texture_swizzle GL_ARB_texture_view GL_ARB_timer_query GL_ARB_transform_feedback GL_ARB_transform_feedback2 GL_ARB_transform_feedback3 GL_ARB_transform_feedback_instanced GL_ARB_transform_feedback_overflow_query GL_ARB_transpose_matrix GL_ARB_uniform_buffer_object GL_ARB_vertex_array_bgra GL_ARB_vertex_array_object GL_ARB_vertex_attrib_64bit GL_ARB_vertex_attrib_binding GL_ARB_vertex_buffer_object GL_ARB_vertex_program GL_ARB_vertex_shader GL_ARB_vertex_type_10f_11f_11f_rev GL_ARB_vertex_type_2_10_10_10_rev GL_ARB_viewport_array GL_ARB_window_pos GL_ATI_draw_buffers GL_ATI_meminfo GL_ATI_separate_stencil GL_ATI_shader_texture_lod GL_ATI_texture_env_combine3 GL_ATI_texture_float GL_ATI_texture_mirror_once GL_EXT_abgr GL_EXT_bgra GL_EXT_bindable_uniform GL_EXT_blend_color GL_EXT_blend_equation_separate GL_EXT_blend_func_separate GL_EXT_blend_minmax GL_EXT_blend_subtract GL_EXT_compiled_vertex_array GL_EXT_copy_buffer GL_EXT_copy_texture GL_EXT_debug_label GL_EXT_depth_bounds_test GL_EXT_direct_state_access GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_draw_range_elements GL_EXT_fog_coord GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_geometry_shader4 GL_EXT_gpu_program_parameters GL_EXT_gpu_shader4 GL_EXT_memory_object GL_EXT_memory_object_win32 GL_EXT_multi_draw_arrays GL_EXT_nonuniform_qualifier GL_EXT_packed_depth_stencil GL_EXT_packed_float GL_EXT_packed_pixels GL_EXT_pixel_buffer_object GL_EXT_point_parameters GL_EXT_polygon_offset_clamp GL_EXT_provoking_vertex GL_EXT_rescale_normal GL_EXT_secondary_color GL_EXT_semaphore GL_EXT_semaphore_win32 GL_EXT_separate_specular_color GL_EXT_shader_image_load_formatted GL_EXT_shader_image_load_store GL_EXT_shader_integer_mix GL_EXT_shadow_funcs GL_EXT_stencil_wrap GL_EXT_subtexture GL_EXT_texture GL_EXT_texture3D GL_EXT_texture_array GL_EXT_texture_buffer_object GL_EXT_texture_compression_bptc GL_EXT_texture_compression_latc GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc GL_EXT_texture_cube_map GL_EXT_texture_edge_clamp GL_EXT_texture_env_add GL_EXT_texture_env_combine GL_EXT_texture_env_dot3 GL_EXT_texture_filter_anisotropic GL_EXT_texture_integer GL_EXT_texture_lod GL_EXT_texture_lod_bias GL_EXT_texture_mirror_clamp GL_EXT_texture_object GL_EXT_texture_rectangle GL_EXT_texture_sRGB GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_sRGB_decode GL_EXT_texture_shadow_lod GL_EXT_texture_shared_exponent GL_EXT_texture_snorm GL_EXT_texture_storage GL_EXT_texture_swizzle GL_EXT_timer_query GL_EXT_transform_feedback GL_EXT_vertex_array GL_EXT_vertex_array_bgra GL_EXT_vertex_attrib_64bit GL_IBM_texture_mirrored_repeat GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_KHR_context_flush_control GL_KHR_debug GL_KHR_no_error GL_KHR_parallel_shader_compile GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KHR_shader_subgroup GL_KHR_texture_compression_astc_ldr GL_NV_blend_square GL_NV_conditional_render GL_NV_copy_image GL_NV_depth_buffer_float GL_NV_float_buffer GL_NV_half_float GL_NV_mesh_shader GL_NV_primitive_restart GL_NV_shader_atomic_int64 GL_NV_texgen_reflection GL_NV_texture_barrier GL_NV_timeline_semaphore GL_OES_EGL_image GL_OVR_multiview GL_OVR_multiview2 GL_S3_s3tc GL_SGIS_generate_mipmap GL_SGIS_texture_edge_clamp GL_SGIS_texture_lod GL_SUN_multi_draw_arrays WGL_EXT_swap_control 
+GL_MAX_TEXTURE_SIZE: 16384
+GL_MAX_TEXTURE_UNITS_ARB: 8
+
+PIXELFORMAT: color(24-bits) Z(24-bit) stencil(8-bits)
+MODE: -1, 1280 x 720 windowed hz:N/A
+GAMMA: software w/ 0 overbright bits
+CPU: 
+rendering primitives: single glDrawElements
+texturemode: GL_LINEAR_MIPMAP_NEAREST
+picmip: 1
+texture bits: 0
+multitexture: enabled
+compiled vertex arrays: enabled
+texenv add: enabled
+compressed textures: disabled
+Cvar_Set2: r_gfxinfo 
+GL_VENDOR: ATI Technologies Inc.
+GL_RENDERER: AMD Radeon 780M Graphics
+GL_VERSION: 4.6.0 Compatibility Profile Context 26.6.4.260624
+GL_EXTENSIONS: GL_AMD_blend_minmax_factor GL_AMD_conservative_depth GL_AMD_debug_output GL_AMD_depth_clamp_separate GL_AMD_gpu_shader_half_float GL_AMD_gpu_shader_int16 GL_AMD_gpu_shader_int64 GL_AMD_multi_draw_indirect GL_AMD_pinned_memory GL_AMD_query_buffer_object GL_AMD_sample_positions GL_AMD_seamless_cubemap_per_texture GL_AMD_shader_trinary_minmax GL_AMD_texture_cube_map_array GL_AMD_vertex_shader_layer GL_AMD_vertex_shader_viewport_index GL_ARB_ES2_compatibility GL_ARB_ES3_1_compatibility GL_ARB_ES3_2_compatibility GL_ARB_ES3_compatibility GL_ARB_arrays_of_arrays GL_ARB_base_instance GL_ARB_bindless_texture GL_ARB_blend_func_extended GL_ARB_buffer_storage GL_ARB_clear_buffer_object GL_ARB_clear_texture GL_ARB_clip_control GL_ARB_color_buffer_float GL_ARB_compatibility GL_ARB_compressed_texture_pixel_storage GL_ARB_compute_shader GL_ARB_conditional_render_inverted GL_ARB_conservative_depth GL_ARB_copy_buffer GL_ARB_copy_image GL_ARB_cull_distance GL_ARB_debug_output GL_ARB_depth_buffer_float GL_ARB_depth_clamp GL_ARB_depth_texture GL_ARB_derivative_control GL_ARB_direct_state_access GL_ARB_draw_buffers GL_ARB_draw_buffers_blend GL_ARB_draw_elements_base_vertex GL_ARB_draw_indirect GL_ARB_draw_instanced GL_ARB_enhanced_layouts GL_ARB_explicit_attrib_location GL_ARB_explicit_uniform_location GL_ARB_fragment_coord_conventions GL_ARB_fragment_layer_viewport GL_ARB_fragment_program GL_ARB_fragment_program_shadow GL_ARB_fragment_shader GL_ARB_fragment_shader_interlock GL_ARB_framebuffer_no_attachments GL_ARB_framebuffer_object GL_ARB_framebuffer_sRGB GL_ARB_geometry_shader4 GL_ARB_get_program_binary GL_ARB_get_texture_sub_image GL_ARB_gl_spirv GL_ARB_gpu_shader5 GL_ARB_gpu_shader_fp64 GL_ARB_gpu_shader_int64 GL_ARB_half_float_pixel GL_ARB_half_float_vertex GL_ARB_indirect_parameters GL_ARB_instanced_arrays GL_ARB_internalformat_query GL_ARB_internalformat_query2 GL_ARB_invalidate_subdata GL_ARB_map_buffer_range GL_ARB_multi_bind GL_ARB_multi_draw_indirect GL_ARB_multisample GL_ARB_multitexture GL_ARB_occlusion_query GL_ARB_occlusion_query2 GL_ARB_parallel_shader_compile GL_ARB_pipeline_statistics_query GL_ARB_pixel_buffer_object GL_ARB_point_parameters GL_ARB_point_sprite GL_ARB_polygon_offset_clamp GL_ARB_post_depth_coverage GL_ARB_program_interface_query GL_ARB_provoking_vertex GL_ARB_query_buffer_object GL_ARB_robustness GL_ARB_sample_locations GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_seamless_cubemap_per_texture GL_ARB_separate_shader_objects GL_ARB_shader_atomic_counter_ops GL_ARB_shader_atomic_counters GL_ARB_shader_ballot GL_ARB_shader_bit_encoding GL_ARB_shader_clock GL_ARB_shader_draw_parameters GL_ARB_shader_group_vote GL_ARB_shader_image_load_store GL_ARB_shader_image_size GL_ARB_shader_objects GL_ARB_shader_precision GL_ARB_shader_stencil_export GL_ARB_shader_storage_buffer_object GL_ARB_shader_subroutine GL_ARB_shader_texture_image_samples GL_ARB_shader_texture_lod GL_ARB_shader_viewport_layer_array GL_ARB_shading_language_100 GL_ARB_shading_language_420pack GL_ARB_shading_language_packing GL_ARB_shadow GL_ARB_shadow_ambient GL_ARB_sparse_buffer GL_ARB_sparse_texture GL_ARB_spirv_extensions GL_ARB_stencil_texturing GL_ARB_sync GL_ARB_tessellation_shader GL_ARB_texture_barrier GL_ARB_texture_border_clamp GL_ARB_texture_buffer_object GL_ARB_texture_buffer_object_rgb32 GL_ARB_texture_buffer_range GL_ARB_texture_compression GL_ARB_texture_compression_bptc GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map GL_ARB_texture_cube_map_array GL_ARB_texture_env_add GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_filter_anisotropic GL_ARB_texture_filter_minmax GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_mirrored_repeat GL_ARB_texture_multisample GL_ARB_texture_multisample_no_array GL_ARB_texture_non_power_of_two GL_ARB_texture_query_áôtlCvar_Set2: r_intensity 1
+Initializing Shaders
+...loading 'scripts/codex_cache.shader'
+...loading 'scripts/gfx.shader'
+...loading 'scripts/jeep.shader'
+...loading 'scripts/ktigertank.shader'
+...loading 'scripts/mohmenu.shader'
+...loading 'scripts/opel.shader'
+...loading 'scripts/panzer_iv.shader'
+...loading 'scripts/tigertank.shader'
+...loading 'scripts/15cannon.shader'
+...loading 'scripts/20mmflak.shader'
+...loading 'scripts/3dk.shader'
+...loading 'scripts/algiers.shader'
+...loading 'scripts/allied_insignia.shader'
+...loading 'scripts/allied_pilot.shader'
+...loading 'scripts/barracks.shader'
+...loading 'scripts/barrel.shader'
+...loading 'scripts/beams.shader'
+...loading 'scripts/blasted.shader'
+...loading 'scripts/bmwbike.shader'
+...loading 'scripts/bottles.shader'
+...loading 'scripts/brest.shader'
+...loading 'scripts/bunker.shader'
+...loading 'scripts/c47.shader'
+...loading 'scripts/car.shader'
+...loading 'scripts/central_europe.shader'
+...loading 'scripts/central_europe_winter.shader'
+...loading 'scripts/clock.shader'
+...loading 'scripts/cockroach.shader'
+...loading 'scripts/common.shader'
+...loading 'scripts/crates.shader'
+...loading 'scripts/das_boot.shader'
+...loading 'scripts/ddaydark.shader'
+...loading 'scripts/dday_shaders_v1.shader'
+...loading 'scripts/decals.shader'
+...loading 'scripts/dtruck.shader'
+...loading 'scripts/effects.shader'
+...loading 'scripts/environmentalfx.shader'
+...loading 'scripts/faces.shader'
+...loading 'scripts/flags.shader'
+...loading 'scripts/flak88.shader'
+...loading 'scripts/fockwulf.shader'
+...loading 'scripts/french.shader'
+...loading 'scripts/french_resistance.shader'
+...loading 'scripts/frogman.shader'
+...loading 'scripts/furniture.shader'
+...loading 'scripts/general_industrial.shader'
+...loading 'scripts/general_structure.shader'
+...loading 'scripts/german.shader'
+...loading 'scripts/german_dak.shader'
+...loading 'scripts/german_gear.shader'
+...loading 'scripts/german_kreigsmarine.shader'
+...loading 'scripts/german_motorpool.shader'
+...loading 'scripts/german_obershutze.shader'
+...loading 'scripts/german_officer.shader'
+...loading 'scripts/german_officer2.shader'
+...loading 'scripts/german_scientist.shader'
+...loading 'scripts/german_sentry.shader'
+...loading 'scripts/german_shepherd.shader'
+...loading 'scripts/german_ssnco.shader'
+...loading 'scripts/german_ssshutze.shader'
+...loading 'scripts/german_wehrmact.shader'
+...loading 'scripts/german_winter.shader'
+...loading 'scripts/german_worker.shader'
+...loading 'scripts/gestapo.shader'
+...loading 'scripts/gmctruck.shader'
+...loading 'scripts/higgins.shader'
+...loading 'scripts/howitzer.shader'
+...loading 'scripts/hundpatrol.shader'
+...loading 'scripts/indycrate.shader'
+...loading 'scripts/interior.shader'
+...loading 'scripts/interiorfx.shader'
+...loading 'scripts/interior_northafrica.shader'
+...loading 'scripts/items.shader'
+...loading 'scripts/ktigertank_d.shader'
+...loading 'scripts/light.shader'
+...loading 'scripts/loadingscreens.shader'
+...loading 'scripts/m1l1anate.shader'
+...loading 'scripts/m3.shader'
+...loading 'scripts/m5l2anate.shader'
+...loading 'scripts/manon.shader'
+...loading 'scripts/mercedes.shader'
+...loading 'scripts/misc_outside.shader'
+...loading 'scripts/mohcommon.shader'
+...loading 'scripts/mohdetails.shader'
+...loading 'scripts/mohtest.shader'
+...loading 'scripts/nazi_crate.shader'
+...loading 'scripts/nebelwerfer.shader'
+...loading 'scripts/nebelwerfer_d.shader'
+...loading 'scripts/normandy.shader'
+...loading 'scripts/norway.shader'
+...loading 'scripts/obstacles.shader'
+...loading 'scripts/ocean.shader'
+...loading 'scripts/p47.shader'
+...loading 'scripts/panzershutze.shader'
+...loading 'scripts/panzer_g.shader'
+...loading 'scripts/panzer_grenadier.shader'
+...loading 'scripts/paulscrate.shader'
+...loading 'scripts/playerviewmodel.shader'
+...loading 'scripts/protoamerican.shader'
+...loading 'scripts/protogerman.shader'
+...loading 'scripts/protosprites.shader'
+...loading 'scripts/sandbags.shader'
+...loading 'scripts/sdkfz.shader'
+...loading 'scripts/sdkfz_desert_d.shader'
+...loading 'scripts/shells.shader'
+...loading 'scripts/shermantank.shader'
+...loading 'scripts/sky.shader'
+...loading 'scripts/sky_old.shader'
+...loading 'scripts/sprites.shader'
+...loading 'scripts/static_basket.shader'
+...loading 'scripts/static_items.shader'
+...loading 'scripts/static_obstacles.shader'
+...loading 'scripts/static_piperplane.shader'
+...loading 'scripts/static_sandbags.shader'
+...loading 'scripts/static_wirerailholder.shader'
+...loading 'scripts/stuka.shader'
+...loading 'scripts/submodels.shader'
+...loading 'scripts/sunflare.shader'
+...loading 'scripts/tank_commander.shader'
+...loading 'scripts/targets.shader'
+...loading 'scripts/tempfakk.shader'
+...loading 'scripts/tempsign.shader'
+...loading 'scripts/test.shader'
+...loading 'scripts/tigertank_d.shader'
+...loading 'scripts/train.shader'
+...loading 'scripts/trees.shader'
+...loading 'scripts/treeshadows.shader'
+...loading 'scripts/us_gear.shader'
+...loading 'scripts/us_soldier.shader'
+...loading 'scripts/wake.shader'
+...loading 'scripts/weapons_allied.shader'
+...loading 'scripts/weapons_german.shader'
+...loading 'scripts/wilderness.shader'
+...loading 'scripts/windowdecals.shader'
+...loading 'scripts/windowold.shader'
+...loading 'scripts/windowtst.shader'
+...loading 'scripts/wirecutters.shader'
+...loading 'scripts/hud.shader'
+Setting up Shaders
+----- finished R_Init -----
+-------------------------------
+Cvar_Set2: cl_paused 0
+Cvar_Set2: cl_running 1
+------- Sound Initialization (full) -------
+Trying to load "OpenAL64.dll"...
+ Loaded symbol alEnable (00007FFCC8628A20)
+ Loaded symbol alDisable (00007FFCC8628000)
+ Loaded symbol alIsEnabled (00007FFCC862A6D0)
+ Loaded symbol alGetString (00007FFCC8629D40)
+ Loaded symbol alGetBooleanv (00007FFCC8628E60)
+ Loaded symbol alGetIntegerv (00007FFCC8629890)
+ Loaded symbol alGetFloatv (00007FFCC86293E0)
+ Loaded symbol alGetDoublev (00007FFCC8629120)
+ Loaded symbol alGetBoolean (00007FFCC8628D40)
+ Loaded symbol alGetInteger (00007FFCC8629570)
+ Loaded symbol alGetFloat (00007FFCC86292B0)
+ Loaded symbol alGetDouble (00007FFCC8628FF0)
+ Loaded symbol alGetError (00007FFCC86089A0)
+ Loaded symbol alIsExtensionPresent (00007FFCC860A140)
+ Loaded symbol alGetProcAddress (00007FFCC860A120)
+ Loaded symbol alGetEnumValue (00007FFCC860A0F0)
+ Loaded symbol alListenerf (00007FFCC860DCE0)
+ Loaded symbol alListener3f (00007FFCC860D840)
+ Loaded symbol alListenerfv (00007FFCC860DF30)
+ Loaded symbol alListeneri (00007FFCC860E1E0)
+ Loaded symbol alGetListenerf (00007FFCC860D160)
+ Loaded symbol alGetListener3f (00007FFCC860CD50)
+ Loaded symbol alGetListenerfv (00007FFCC860D300)
+ Loaded symbol alGetListeneri (00007FFCC860D510)
+ Loaded symbol alGenSources (00007FFCC8620D90)
+ Loaded symbol alDeleteSources (00007FFCC8620B30)
+ Loaded symbol alIsSource (00007FFCC8622960)
+ Loaded symbol alSourcef (00007FFCC8625AF0)
+ Loaded symbol alSource3f (00007FFCC8622E30)
+ Loaded symbol alSourcefv (00007FFCC8625D00)
+ Loaded symbol alSourcei (00007FFCC8625F50)
+ Loaded symbol alGetSourcef (00007FFCC8621DF0)
+ Loaded symbol alGetSource3f (00007FFCC8621290)
+ Loaded symbol alGetSourcefv (00007FFCC8621FD0)
+ Loaded symbol alGetSourcei (00007FFCC86221C0)
+ Loaded symbol alGetSourceiv (00007FFCC8622770)
+ Loaded symbol alSourcePlayv (00007FFCC8624200)
+ Loaded symbol alSourceStopv (00007FFCC8624EF0)
+ Loaded symbol alSourceRewindv (00007FFCC8624A40)
+ Loaded symbol alSourcePausev (00007FFCC8623660)
+ Loaded symbol alSourcePlay (00007FFCC8623B00)
+ Loaded symbol alSourceStop (00007FFCC8624E50)
+ Loaded symbol alSourceRewind (00007FFCC86249A0)
+ Loaded symbol alSourcePause (00007FFCC86235C0)
+ Loaded symbol alSourceQueueBuffers (00007FFCC86245D0)
+ Loaded symbol alSourceUnqueueBuffers (00007FFCC86252E0)
+ Loaded symbol alGenBuffers (00007FFCC85EDF80)
+ Loaded symbol alDeleteBuffers (00007FFCC85EDA70)
+ Loaded symbol alIsBuffer (00007FFCC85EFA70)
+ Loaded symbol alBufferData (00007FFCC85EC080)
+ Loaded symbol alBufferi (00007FFCC85ED2C0)
+ Loaded symbol alGetBufferf (00007FFCC85EEE70)
+ Loaded symbol alGetBufferfv (00007FFCC85EF0B0)
+ Loaded symbol alGetBufferi (00007FFCC85EF2D0)
+ Loaded symbol alDopplerFactor (00007FFCC8628580)
+ Loaded symbol alSpeedOfSound (00007FFCC862AB00)
+ Loaded symbol alDistanceModel (00007FFCC8628280)
+ Loaded symbol alcCreateContext (00007FFCC8636EA0)
+ Loaded symbol alcMakeContextCurrent (00007FFCC8639410)
+ Loaded symbol alcProcessContext (00007FFCC863A080)
+ Loaded symbol alcSuspendContext (00007FFCC863B010)
+ Loaded symbol alcDestroyContext (00007FFCC86374B0)
+ Loaded symbol alcGetCurrentContext (00007FFCC8637B20)
+ Loaded symbol alcGetContextsDevice (00007FFCC8637A90)
+ Loaded symbol alcOpenDevice (00007FFCC8639590)
+ Loaded symbol alcCloseDevice (00007FFCC8636B20)
+ Loaded symbol alcGetError (00007FFCC8637C80)
+ Loaded symbol alcIsExtensionPresent (00007FFCC8638CA0)
+ Loaded symbol alcGetProcAddress (00007FFCC8638390)
+ Loaded symbol alcGetEnumValue (00007FFCC8637B50)
+ Loaded symbol alcGetString (00007FFCC86385F0)
+ Loaded symbol alcGetIntegerv (00007FFCC86382E0)
+ Loaded symbol alcCaptureOpenDevice (00007FFCC8636080)
+ Loaded symbol alcCaptureCloseDevice (00007FFCC8635EC0)
+ Loaded symbol alcCaptureStart (00007FFCC86368E0)
+ Loaded symbol alcCaptureStop (00007FFCC8636A30)
+ Loaded symbol alcCaptureSamples (00007FFCC8636780)
+OpenAL: Context initialization
+OpenAL: Default playback device: "OpenAL Soft on Headphones (Realtek(R) Audio)"
+OpenAL: List of available devices:
+OpenAL Soft on Headphones (Realtek(R) Audio)
+
+OpenAL: Opening device "{default}"...
+OpenAL: Device opened successfully.
+OpenAL: Creating AL context...
+OpenAL: Context created successfully.
+AL_VENDOR: OpenAL Community
+AL_VERSION: 1.1 ALSOFT 1.24.3
+AL_RENDERER: OpenAL Soft
+AL_EXTENSIONS: EAX EAX2.0 EAX3.0 EAX4.0 EAX5.0 EAX-RAM AL_EXT_ALAW AL_EXT_BFORMAT AL_EXT_debug AL_EXT_direct_context AL_EXT_DOUBLE AL_EXT_EXPONENT_DISTANCE AL_EXT_FLOAT32 AL_EXT_IMA4 AL_EXT_LINEAR_DISTANCE AL_EXT_MCFORMATS AL_EXT_MULAW AL_EXT_MULAW_BFORMAT AL_EXT_MULAW_MCFORMATS AL_EXT_OFFSET AL_EXT_source_distance_model AL_EXT_SOURCE_RADIUS AL_EXT_STATIC_BUFFER AL_EXT_STEREO_ANGLES AL_LOKI_quadriphonic AL_SOFT_bformat_ex AL_SOFT_bformat_hoa AL_SOFT_block_alignment AL_SOFT_buffer_length_query AL_SOFT_callback_buffer AL_SOFTX_convolution_effect AL_SOFT_deferred_updates AL_SOFT_direct_channels AL_SOFT_direct_channels_remix AL_SOFT_effect_target AL_SOFT_events AL_SOFT_gain_clamp_ex AL_SOFTX_hold_on_disconnect AL_SOFT_loop_points AL_SOFTX_map_buffer AL_SOFT_MSADPCM AL_SOFT_source_latency AL_SOFT_source_length AL_SOFTX_source_panning AL_SOFT_source_resampler AL_SOFT_source_spatialize AL_SOFT_source_start_delay AL_SOFT_UHJ AL_SOFT_UHJ_ex
+AL extension: Looking up symbol "alGetStringiSOFT"......found.
+OpenAL: Using Cubic Spline as the resampler.
+Loading global/sound0.txt
+------- S_StopAllSounds (stop music) -------
+MUSIC: changing from [  |  ] to [ none | none ]
+------- S_StopAllSounds Complete-------
+----- Sound Info -----
+device - {default}
+reverb - OFF
+samplebits - 16
+speed - 44100
+----------------------
+------- Sound Initialization Complete ------- 56 ms
+QKEY building random string
+writing to: C:\tmp\codex-cache-r1-exact-visual\home\qkey
+QKEY generated
+Cvar_Set2: cl_guid 1EBC65D7941EFF61D0889AC6C8108553
+Setting up Shaders
+Cvar_Set2: cg_hud 0
+Loading inventory...
+Cvar_Set2: game_version v1.12+0.82.1
+**************S_LoadSound: sound/menu/back.wav
+**************S_LoadSound: sound/menu/apply.wav
+Cvar_Set2: viewmodelsyncrate 0
+Cvar_Set2: viewmodelanimslot 0
+Cvar_Set2: viewmodelblend 0
+Cvar_Set2: viewmodelanimnum2 0
+Cvar_Set2: viewmodelnormaltime 0
+Cvar_Set2: viewmodelactionweight 0
+Cvar_Set2: cam_angles_roll 0
+Cvar_Set2: cam_angles_pitch 0
+Cvar_Set2: cam_angles_yaw 0
+**************S_LoadSound: sound/menu/scroll.wav
+Cvar_Set2: cg_te_filename dump/testemitter.txt
+Cvar_Set2: r_farplane 0
+Cvar_Set2: cg_te_color_b 1
+Cvar_Set2: cg_te_color_r 1
+Cvar_Set2: cg_te_color_g 1
+Cvar_Set2: cg_te_alpha 1
+Cvar_Set2: cg_te_filename dump/testemitter.txt
+Cvar_Set2: snd_width 16
+Cvar_Set2: snd_length 16
+Cvar_Set2: snd_height 16
+Cvar_Set2: snd_yaw 0
+Cvar_Set2: snd_reverbtype 0
+Cvar_Set2: snd_reverblevel 0.5
+Cvar_Set2: snd_mindist 160
+Cvar_Set2: snd_volume 1
+Cvar_Set2: snd_chance 1
+Cvar_Set2: snd_mindelay 2
+Cvar_Set2: snd_maxdelay 12
+Cvar_Set2: snaps 20
+Cvar_Set2: cl_maxpackets 30
+----- Client Initialization Complete ----- -491 ms
+Cvar_Set2: com_altivec 0
+--- Common Initialization Complete --- 646 ms
+-- Localization: I see 1 localization files
+--- Localization: reading file global/localization.txt
+Loading Localization File global/localization.txt
+Loaded 1242 localization entries
+Loading "libcurl.dll"...
+Trying to load "libcurl.dll"...
+Loaded symbol curl_version (0x00007FFD23ACE820)
+Loaded symbol curl_getenv (0x00007FFD23A91CF0)
+Loaded symbol curl_free (0x00007FFD23A722F0)
+Loaded symbol curl_slist_append (0x00007FFD23ABA420)
+Loaded symbol curl_slist_free_all (0x00007FFD23ABA4E0)
+Loaded symbol curl_version_info (0x00007FFD23ACE920)
+Loaded symbol curl_easy_strerror (0x00007FFD23AC13D0)
+Loaded symbol curl_share_strerror (0x00007FFD23AC1930)
+Loaded symbol curl_easy_pause (0x00007FFD23A88C50)
+Loaded symbol curl_easy_escape (0x00007FFD23A89800)
+Loaded symbol curl_easy_unescape (0x00007FFD23A89960)
+Loaded symbol curl_easy_init (0x00007FFD23A88BE0)
+Loaded symbol curl_easy_setopt (0x00007FFD23AB6BC0)
+Loaded symbol curl_easy_perform (0x00007FFD23A88DD0)
+Loaded symbol curl_easy_cleanup (0x00007FFD23A887A0)
+Loaded symbol curl_easy_getinfo (0x00007FFD23A88BB0)
+Loaded symbol curl_easy_duphandle (0x00007FFD23A887D0)
+Loaded symbol curl_easy_reset (0x00007FFD23A88EC0)
+Loaded symbol curl_easy_recv (0x00007FFD23A88DE0)
+Loaded symbol curl_easy_send (0x00007FFD23A88F60)
+Loaded symbol curl_easy_upkeep (0x00007FFD23A89060)
+Loaded symbol curl_multi_init (0x00007FFD23AAA150)
+Loaded symbol curl_multi_add_handle (0x00007FFD23AA9A50)
+Loaded symbol curl_multi_remove_handle (0x00007FFD23AAA550)
+Loaded symbol curl_multi_fdset (0x00007FFD23AA9E80)
+Loaded symbol curl_multi_wait (0x00007FFD23AAA9D0)
+Loaded symbol curl_multi_poll (0x00007FFD23AAA520)
+Loaded symbol curl_multi_wakeup (0x00007FFD23AAAB20)
+Loaded symbol curl_multi_perform (0x00007FFD23AAA330)
+Loaded symbol curl_multi_cleanup (0x00007FFD23AA9C70)
+Loaded symbol curl_multi_info_read (0x00007FFD23AAA0B0)
+Loaded symbol curl_multi_strerror (0x00007FFD23AC1850)
+Loaded symbol curl_multi_socket_action (0x00007FFD23AAA920)
+Loaded symbol curl_multi_timeout (0x00007FFD23AAA990)
+Loaded symbol curl_multi_setopt (0x00007FFD23AAA780)
+Loaded symbol curl_multi_assign (0x00007FFD23AA9C10)
+Loaded symbol curl_pushheader_bynum (0x00007FFD23A72510)
+Loaded symbol curl_pushheader_byname (0x00007FFD23A72510)
+Winsock Initialized
+Hostname: DESKTOP-FODB6P8
+IP6: fe80::29e8:d6f3:b70e:61b3%3
+IP6: fe80::8a33:609c:d5c8:3859%19
+IP6: fe80::85f0:10c1:1268:bd16%18
+IP: 192.168.50.115
+IP: 192.168.160.1
+IP: 192.168.211.1
+Opening IP6 socket: [::]:12203
+Cvar_Set2: net_port6 12203
+Opening IP socket: 0.0.0.0:12203
+Cvar_Set2: net_port 12203
+------ Server Initialization ------
+Server: dm/codex_cache
+Cvar_Set2: g_netoptimize 1
+Cvar_Set2: sv_running 1
+Called FadeSound with: 0.000000
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: nextmap 
+Cvar_Set2: r_uiFullScreen 1
+Cvar_Set2: cl_downloadName 
+------ Unloading ClientGame ------
+Called FadeSound with: 0.000000
+Cvar_Set2: sv_cheats 1
+Cvar_Set2: cl_guid 1EBC65D7941EFF61D0889AC6C8108553
+------ Unloading ClientGame ------
+------- S_StopAllSounds (stop music) -------
+------- S_StopAllSounds Complete-------
+Called FadeSound with: 0.000000
+Cvar_Set2: ui_newvidmode -1
+Setting up Shaders
+Cvar_Set2: r_intensity 1
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: ui_newvidmode -1
+UI_DrawConnect called
+LOCALIZATION ERROR: 'OpenMoHAA console version 0.82.1' does not have a localization entry
+Trying to load "game.dll" from "C:\Users\plex\Documents\Codex\2026-07-24\pstngh-moh-maps-https-github-com\work\openmohaa-bin\runtime"...
+Sys_GetGameAPI(game.dll): succeeded ...
+==== InitGame ====
+gamename: OPENMOHAA
+gamedate: Aug  5 2025
+Cvar_Set2: sv_runspeed 250
+Cvar_Set2: deathmatch 1
+Cvar_Set2: g_gametypestring Free-For-All
+Cvar_Set2: g_obj_alliedtext1 
+Cvar_Set2: g_obj_axistext1 
+Cvar_Set2: g_obj_alliedtext2 
+Cvar_Set2: g_obj_axistext2 
+Cvar_Set2: g_obj_alliedtext3 
+Cvar_Set2: g_obj_axistext3 
+Cvar_Set2: g_obj_alliedtext4 
+Cvar_Set2: g_obj_axistext4 
+Cvar_Set2: g_obj_alliedtext5 
+Cvar_Set2: g_obj_axistext5 
+Cvar_Set2: g_scoreboardpic 
+sizeof(Actor) == 4128
+Magic sizeof actor number: 4064
+
+------------------
+Event system initialized: 200 classes 1764 events 2822400 total memory in response list
+
+==== CleanupGame ====
+Cvar_Set2: session 1
+Cvar_Set2: g_scoreboardpicover 
+Cvar_Set2: bosshealth 0
+CM_LoadMap( maps/dm/codex_cache.bsp, 0 )
+WARNING: CM_AddFacetBevels... invalid bevel
+WARNING: CM_AddFacetBevels... invalid bevel
+WARNING: CM_AddFacetBevels... invalid bevel
+WARNING: CM_AddFacetBevels... invalid bevel
+WARNING: CM_AddFacetBevels... invalid bevel
+WARNING: CM_AddFacetBevels... invalid bevel
+Cvar_Set2: sv_mapChecksum -1862603596
+Cvar_Set2: mapname dm/codex_cache
+Cvar_Set2: sv_serverid 766
+Adding script: 'maps/dm/codex_cache_precache.scr'
+TIKI_InitTiki: could not find surface 'panzerschreck2' in 'models/weapons/panzerschreck.tik' (check referenced skb/skd files).
+TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).
+TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).
+TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).
+TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).
+Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+^~^~^ Box data is corrupted for 'models/human/allied_pilot/allied_pilot.skd'
+Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+Channel named Bip01 L Clavicle pos not added. (Bone will not work without it)
+Channel named Bip01 R Clavicle pos not added. (Bone will not work without it)
+Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+WARNING: Couldn't find voting options file: callvote.cfg
+-------------------- Spawning Entities -----------------------
+Cvar_Set2: skill 1
+soundtrack switched to .
+Cvar_Set2: sv_gravity 800
+Cvar_Set2: sv_cinematic 0
+-------------------- Actual Spawning Entities -----------------------
+-------------------- Actual Spawning Entities Done ------------------ 1 ms
+0 teams with 0 entities
+Adding script: 'maps/dm/codex_cache.scr'
+Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+1 entities spawned
+66 simple entities spawned
+0 entities inhibited
+-------------------- Spawning Entities Done ------------------ 12 ms
+Cvar_Set2: sv_paks 
+Cvar_Set2: sv_pakNames 
+Cvar_Set2: sv_referencedPaks 
+Cvar_Set2: sv_referencedPakNames 
+------ Server Initialization Complete ------  1.66 seconds
+---- Recast Navigation ----
+No bots, skipping navigation
+SV packet loopback : connect
+SVC_DirectConnect ()
+>>>\version\1.12+0.82.1\challenge\0\qport\48354\protocol\8\com_gamename\mohaa\name\UnnamedSoldier#31929\rate\25000\snaps\20\dm_playermodel\american_army\dm_playergermanmodel\german_wehrmacht_soldier\shortversion\0.82.1\cl_guid\1EBC65D7941EFF61D0889AC6C8108553<<<
+Cvar_Set2: session0 - 0 0
+Client 0 (IP: localhost) is connecting
+Going from CS_FREE to CS_CONNECTED for UnnamedSoldier#31929
+CL packet loopback: connectResponse
+UnnamedSoldier#31929 : dropped gamestate, resending
+SV_SendClientGameState() for UnnamedSoldier#31929
+Going from CS_CONNECTED to CS_PRIMED for UnnamedSoldier#31929
+Cvar_Set2: ui_newvidmode -1
+------ Unloading ClientGame ------
+Called FadeSound with: 0.000000
+Cvar_Set2: sv_serverid 766
+Cvar_Set2: pmove_msec 0
+Cvar_Set2: pmove_fixed 0
+Cvar_Set2: r_static_shadermultiplier3 1
+Cvar_Set2: r_static_shadermultiplier2 1
+Cvar_Set2: r_static_shadermultiplier1 1
+Cvar_Set2: r_static_shadermultiplier0 1
+Cvar_Set2: r_static_shaderdata3 0
+Cvar_Set2: r_static_shaderdata2 0
+Cvar_Set2: r_static_shaderdata1 0
+Cvar_Set2: r_static_shaderdata0 0
+Cvar_Set2: sv_pure 0
+Cvar_Set2: com_radar_range 1024
+Cvar_Set2: timescale 1
+Cvar_Set2: cheats 1
+----- FS_Startup -----
+Cmd_AddCommand: which already defined
+Current search path:
+C:\tmp\codex-cache-r1-exact-visual\home/main
+C:\tmp\codex-cache-r1-exact-visual\base/main
+C:\tmp\codex-cache-r1-exact-visual\base\main\zz_codex_cache.pk3 (23 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak6.pk3 (104 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak5.pk3 (259 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak4.pk3 (593 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak3.pk3 (669 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak2.pk3 (4722 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak1.pk3 (772 files)
+C:\tmp\codex-cache-r1-exact-visual\base\main\Pak0.pk3 (11175 files)
+
+handle 1: qconsole.log
+----------------------
+36634 files in pk3 files
+------- Sound Begin Registration -------
+------- S_StopAllSounds (stop music) -------
+------- S_StopAllSounds Complete-------
+------- Sound Begin Registration Complete -------
+------ Unloading ClientGame ------
+Trying to load "cgame.dll" from "C:\Users\plex\Documents\Codex\2026-07-24\pstngh-moh-maps-https-github-com\work\openmohaa-bin\runtime"...
+Sys_GetCGameAPI(cgame.dll): succeeded ...
+
+------------------
+Event system initialized: 8 classes 164 events 10496 total memory in response list
+
+Cvar_Set2: cg_effectdetail 0.2
+Cvar_Set2: cg_max_tempmodels 1100
+Cvar_Set2: g_servertype 2
+Cvar_Set2: cg_gametype 1
+Cvar_Set2: cg_fraglimit 20
+Cvar_Set2: cg_timelimit 0
+Cvar_Set2: cg_maxclients 
+Cvar_Set2: cg_allowvote 1
+Cvar_Set2: cg_obj_alliedtext1 
+Cvar_Set2: cg_obj_alliedtext2 
+Cvar_Set2: cg_obj_alliedtext3 
+Cvar_Set2: cg_obj_alliedtext4 
+Cvar_Set2: cg_obj_alliedtext5 
+Cvar_Set2: cg_obj_axistext1 
+Cvar_Set2: cg_obj_axistext2 
+Cvar_Set2: cg_obj_axistext3 
+Cvar_Set2: cg_obj_axistext4 
+Cvar_Set2: cg_obj_axistext5 
+Cvar_Set2: cg_scoreboardpic 
+Cvar_Set2: cg_scoreboardpicover 
+Cvar_Set2: cg_weapon_rifle 1
+Cvar_Set2: cg_weapon_sniper 1
+Cvar_Set2: cg_weapon_mg 1
+Cvar_Set2: cg_weapon_smg 1
+Cvar_Set2: cg_weapon_rocket 1
+Cvar_Set2: cg_weapon_shotgun 1
+Cvar_Set2: cg_weapon_landmine 1
+CM_LoadMap( maps/dm/codex_cache.bsp, 1 )
+
+
+-----------PARSING 'ubersound/uberdialog.scr'------------
+Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.
+CG_Command_ProcessFile: ubersound/uberdialog.scr
+Couldn't load sound: sound/null.wav
+Parse/Load time: 0.039000 seconds.
+-------------PARSING 'ubersound/uberdialog.scr' DONE---------------
+
+
+
+-----------PARSING 'ubersound/ubersound.scr'------------
+Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.
+CG_Command_ProcessFile: ubersound/ubersound.scr
+Parse/Load time: 0.218000 seconds.
+-------------PARSING 'ubersound/ubersound.scr' DONE---------------
+
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+stitched 0 LoD cracks
+...loaded 57545 faces, 83 meshes, 0 trisurfs, 0 flares
+Z_TagMalloc, Negative or zero size 0 tag 12
+Cvar_Set2: ter_maxlod 6
+Cvar_Set2: ter_error 4
+Cvar_Set2: ter_maxtris 24576
+R_LevelMarksLoad: maps/dm/codex_cache.dcl not found
+Couldn't find image for shader textures/menu/exit
+WARNING: reused image textures/effects/fire_ring.tga with mixed glWrapClampMode parm
+Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+Loading Special Effects...
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_paper_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_paper_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_wood_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_wood_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_metal_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_metal_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_stone_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_stone_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_dirt_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_dirt_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_grass_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_grass_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_mud_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_mud_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_water_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_water_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_glass_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_glass_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_sand_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_sand_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_foliage_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_foliage_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_snow_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_snow_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_carpet_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_carpet_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_human_uniform_lite.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bh_human_uniform_hard.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/water_trail_bubble.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_base.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/bazookaexp_base.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_paper.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_wood.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_metal.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_stone.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_dirt.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_grass.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_mud.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_water.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_gravel.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_sand.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_foliage.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_snow.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/grenexp_carpet.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/water_ripple_still.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/water_ripple_moving.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/barrel_oil_leak_big.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/barrel_oil_leak_medium.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/barrel_oil_leak_small.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/barrel_oil_leak_splat.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/barrel_water_leak_big.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/barrel_water_leak_medium.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/barrel_water_leak_small.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/barrel_water_leak_splat.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/fs_light_dust.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/fs_heavy_dust.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/fs_dirt.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/fs_grass.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/fs_mud.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/fs_puddle.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/fs_sand.tik
+^~^~^ Add the following line to the *_precache.scr map script:
+cache models/fx/fs_snow.tik
+Tiki:LoadFile Couldn't load models/fx/fx_fence_wood.tik
+Skeletor CacheAnimSkel: Could not open binary file models/fx/fx_fence_wood.skc
+^~^~^ TIKI_InitTiki: Couldn't load models/fx/fx_fence_wood.tik
+Cvar_Set2: cg_hud 1
+------- Sound End Registration -------
+------- Sound End Registration Complete -------
+Z_TouchMemory: 0 msec
+CL_EndRegistration: -0.01 seconds
+CL_InitCGame:  1.12 seconds
+clientCommand: UnnamedSoldier#31929 : 1 : userinfo "\cheats\1\g_gametype\1\com_gamename\mohaa\deathmatch\1\skill\1\name\UnnamedSoldier#31929\rate\25000\snaps\20\dm_playermodel\american_army\dm_playergermanmodel\german_wehrmacht_soldier\g_realismmode\0\shortversion\0.82.1\cl_guid\1EBC65D7941EFF61D0889AC6C8108553"
+clientCommand: UnnamedSoldier#31929 : 2 : cp 1352469061 -550080020 455480933 725852527 1721431257 -648791937 
+Going from CS_PRIMED to CS_ACTIVE for UnnamedSoldier#31929
+Called FadeSound with: 0.000000
+Cvar_Set2: ui_newvidmode -1
+serverCommand: 1 : stopwatch 0 0
+serverCommand: 2 : cs 1749 "UnknownAmmo"
+
+serverCommand: 3 : cs 1750 "pistol"
+
+serverCommand: 4 : cs 1751 "rifle"
+
+serverCommand: 5 : cs 1752 "smg"
+
+serverCommand: 6 : cs 1753 "mg"
+
+serverCommand: 7 : cs 1754 "grenade"
+
+serverCommand: 8 : cs 1755 "agrenade"
+
+serverCommand: 9 : cs 1756 "heavy"
+
+serverCommand: 10 : cs 1757 "shotgun"
+
+serverCommand: 11 : cs 1684 "name\UnnamedSoldier#31929\team\1"
+
+serverCommand: 12 : print "UnnamedSoldier#31929 has entered the battle
+"
+serverCommand: 13 : cs 1 "\sv_serverid\766\cg_rain_drawcoverage\0\cg_animationviewmodel\0\pmove_msec\0\pmove_fixed\0\r_static_shadermultiplier3\1\r_static_shadermultiplier2\1\r_static_shadermultiplier1\1\r_static_shadermultiplier0\1\r_static_shaderdata3\0\r_static_shaderdata2\0\r_static_shaderdata1\0\r_static_shaderdata0\0\sv_pure\0\com_radar_range\1024\timescale\1\cheats\1"
+
+Cvar_Set2: sv_serverid 766
+Cvar_Set2: cg_rain_drawcoverage 0
+Cvar_Set2: cg_animationviewmodel 0
+Cvar_Set2: pmove_msec 0
+Cvar_Set2: pmove_fixed 0
+Cvar_Set2: r_static_shadermultiplier3 1
+Cvar_Set2: r_static_shadermultiplier2 1
+Cvar_Set2: r_static_shadermultiplier1 1
+Cvar_Set2: r_static_shadermultiplier0 1
+Cvar_Set2: r_static_shaderdata3 0
+Cvar_Set2: r_static_shaderdata2 0
+Cvar_Set2: r_static_shaderdata1 0
+Cvar_Set2: r_static_shaderdata0 0
+Cvar_Set2: sv_pure 0
+Cvar_Set2: com_radar_range 1024
+Cvar_Set2: timescale 1
+Cvar_Set2: cheats 1
+serverCommand: 1 : stopwatch 0 0
+serverCommand: 2 : cs 1749 "UnknownAmmo"
+
+serverCommand: 3 : cs 1750 "pistol"
+
+serverCommand: 4 : cs 1751 "rifle"
+
+serverCommand: 5 : cs 1752 "smg"
+
+serverCommand: 6 : cs 1753 "mg"
+
+serverCommand: 7 : cs 1754 "grenade"
+
+serverCommand: 8 : cs 1755 "agrenade"
+
+serverCommand: 9 : cs 1756 "heavy"
+
+serverCommand: 10 : cs 1757 "shotgun"
+
+serverCommand: 11 : cs 1684 "name\UnnamedSoldier#31929\team\1"
+
+serverCommand: 12 : print "UnnamedSoldier#31929 has entered the battle
+"
+UnnamedSoldier#31929 has entered the battle
+serverCommand: 13 : cs 1 "\sv_serverid\766\cg_rain_drawcoverage\0\cg_animationviewmodel\0\pmove_msec\0\pmove_fixed\0\r_static_shadermultiplier3\1\r_static_shadermultiplier2\1\r_static_shadermultiplier1\1\r_static_shadermultiplier0\1\r_static_shaderdata3\0\r_static_shaderdata2\0\r_static_shaderdata1\0\r_static_shaderdata0\0\sv_pure\0\com_radar_range\1024\timescale\1\cheats\1"
+
+MUSIC: changing from [ none | none ] to [ normal | normal ]
+Couldn't find image for shader textures/hud/radar_allies.tga
+Couldn't find image for shader textures/hud/radar_axis.tga
+Cvar_Set2: pmove_msec 8
+Cvar_Set2: cg_te_mode_name Temp Emitter Off
+Cvar_Set2: ui_timemessage Time Left:  0:00
+LOCALIZATION ERROR: 'Press Use(e) to follow a player.' does not have a localization entry
+Cvar_Set2: g_servertype 2
+Cvar_Set2: cg_gametype 1
+Cvar_Set2: cg_fraglimit 20
+Cvar_Set2: cg_timelimit 0
+Cvar_Set2: cg_maxclients 
+Cvar_Set2: cg_allowvote 1
+Cvar_Set2: cg_obj_alliedtext1 
+Cvar_Set2: cg_obj_alliedtext2 
+Cvar_Set2: cg_obj_alliedtext3 
+Cvar_Set2: cg_obj_alliedtext4 
+Cvar_Set2: cg_obj_alliedtext5 
+Cvar_Set2: cg_obj_axistext1 
+Cvar_Set2: cg_obj_axistext2 
+Cvar_Set2: cg_obj_axistext3 
+Cvar_Set2: cg_obj_axistext4 
+Cvar_Set2: cg_obj_axistext5 
+Cvar_Set2: cg_scoreboardpic 
+Cvar_Set2: cg_scoreboardpicover 
+Cvar_Set2: cg_weapon_rifle 1
+Cvar_Set2: cg_weapon_sniper 1
+Cvar_Set2: cg_weapon_mg 1
+Cvar_Set2: cg_weapon_smg 1
+Cvar_Set2: cg_weapon_rocket 1
+Cvar_Set2: cg_weapon_shotgun 1
+Cvar_Set2: cg_weapon_landmine 1
+serverCommand: 14 : cs 1 "\sv_serverid\766\cg_rain_drawcoverage\0\cg_animationviewmodel\0\pmove_msec\8\pmove_fixed\0\r_static_shadermultiplier3\1\r_static_shadermultiplier2\1\r_static_shadermultiplier1\1\r_static_shadermultiplier0\1\r_static_shaderdata3\0\r_static_shaderdata2\0\r_static_shaderdata1\0\r_static_shaderdata0\0\sv_pure\0\com_radar_range\1024\timescale\1\cheats\1"
+
+Cvar_Set2: sv_serverid 766
+Cvar_Set2: cg_rain_drawcoverage 0
+Cvar_Set2: cg_animationviewmodel 0
+Cvar_Set2: pmove_msec 8
+Cvar_Set2: pmove_fixed 0
+Cvar_Set2: r_static_shadermultiplier3 1
+Cvar_Set2: r_static_shadermultiplier2 1
+Cvar_Set2: r_static_shadermultiplier1 1
+Cvar_Set2: r_static_shadermultiplier0 1
+Cvar_Set2: r_static_shaderdata3 0
+Cvar_Set2: r_static_shaderdata2 0
+Cvar_Set2: r_static_shaderdata1 0
+Cvar_Set2: r_static_shaderdata0 0
+Cvar_Set2: sv_pure 0
+Cvar_Set2: com_radar_range 1024
+Cvar_Set2: timescale 1
+Cvar_Set2: cheats 1
+serverCommand: 14 : cs 1 "\sv_serverid\766\cg_rain_drawcoverage\0\cg_animationviewmodel\0\pmove_msec\8\pmove_fixed\0\r_static_shadermultiplier3\1\r_static_shadermultiplier2\1\r_static_shadermultiplier1\1\r_static_shadermultiplier0\1\r_static_shaderdata3\0\r_static_shaderdata2\0\r_static_shaderdata1\0\r_static_shaderdata0\0\sv_pure\0\com_radar_range\1024\timescale\1\cheats\1"
+
+Cvar_Set2: ui_timemessage 
+serverCommand: 15 : stufftext "ui_applyplayermodel"
+serverCommand: 15 : stufftext "ui_applyplayermodel"
+serverCommand: 16 : svlag
+serverCommand: 17 : stufftext "con_notifytime 0"
+serverCommand: 16 : svlag
+serverCommand: 17 : stufftext "con_notifytime 0"
+serverCommand: 18 : cs 1684 "name\UnnamedSoldier#31929\team\0"
+
+serverCommand: 19 : cs 1894 "1 spectator 0 player(s)"
+
+serverCommand: 20 : cs 1895 "3 allies 0 player(s)"
+
+serverCommand: 21 : cs 1896 "4 axis 0 player(s)"
+
+serverCommand: 22 : cs 1892 "3"
+
+serverCommand: 23 : cs 1684 "name\UnnamedSoldier#31929\team\3"
+
+serverCommand: 24 : stufftext "wait 250;pushmenu_weaponselect"
+serverCommand: 18 : cs 1684 "name\UnnamedSoldier#31929\team\0"
+
+serverCommand: 19 : cs 1894 "1 spectator 0 player(s)"
+
+serverCommand: 20 : cs 1895 "3 allies 0 player(s)"
+
+serverCommand: 21 : cs 1896 "4 axis 0 player(s)"
+
+serverCommand: 22 : cs 1892 "3"
+
+serverCommand: 23 : cs 1684 "name\UnnamedSoldier#31929\team\3"
+
+serverCommand: 24 : stufftext "wait 250;pushmenu_weaponselect"
+Cvar_Set2: ui_newvidmode -1
+serverCommand: 25 : stopwatch 0 0
+serverCommand: 26 : cs 1758 "Unknown Item"
+
+serverCommand: 27 : cs 1759 "Unnamed Weapon"
+
+serverCommand: 28 : cs 1760 "M1 Garand"
+
+serverCommand: 29 : cs 1761 "Frag Grenade"
+
+serverCommand: 30 : cs 1762 "Colt 45"
+
+serverCommand: 25 : stopwatch 0 0
+serverCommand: 26 : cs 1758 "Unknown Item"
+
+serverCommand: 27 : cs 1759 "Unnamed Weapon"
+
+serverCommand: 28 : cs 1760 "M1 Garand"
+
+serverCommand: 29 : cs 1761 "Frag Grenade"
+
+serverCommand: 30 : cs 1762 "Colt 45"
+
+WARNING: reused image textures/sprites/dustdrop.tga with mixed allowPicmip parm
+serverCommand: 31 : stufftext "popmenu 0"
+serverCommand: 31 : stufftext "popmenu 0"
+Cvar_Set2: ui_newvidmode -1
+serverCommand: 32 : stufftext "popmenu 0"
+serverCommand: 32 : stufftext "popmenu 0"
+Cvar_Set2: ui_newvidmode -1
+serverCommand: 33 : stufftext "popmenu 0"
+serverCommand: 33 : stufftext "popmenu 0"
+Cvar_Set2: ui_newvidmode -1
+serverCommand: 34 : stufftext "ui_hidemouse"
+serverCommand: 35 : stufftext "ui_hud 0"
+serverCommand: 36 : stufftext "cg_drawviewmodel 0"
+serverCommand: 37 : stufftext "clear"
+serverCommand: 38 : stufftext "noclip"
+serverCommand: 39 : stufftext "notarget"
+serverCommand: 34 : stufftext "ui_hidemouse"
+serverCommand: 35 : stufftext "ui_hud 0"
+serverCommand: 36 : stufftext "cg_drawviewmodel 0"
+serverCommand: 37 : stufftext "clear"
+serverCommand: 38 : stufftext "noclip"
+serverCommand: 39 : stufftext "notarget"
+Cvar_Set2: cg_hud 0
+CODEX_VISUAL_QA axis_exterior_westbound
+serverCommand: 40 : stufftext "popmenu 0"
+serverCommand: 41 : stufftext "ui_hidemouse"
+serverCommand: 42 : stufftext "ui_hud 0"
+serverCommand: 40 : stufftext "popmenu 0"
+serverCommand: 41 : stufftext "ui_hidemouse"
+serverCommand: 42 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 43 : stufftext "screenshot"
+serverCommand: 43 : stufftext "screenshot"
+CODEX_VISUAL_QA allied_exterior_northbound
+serverCommand: 44 : stufftext "popmenu 0"
+serverCommand: 45 : stufftext "ui_hidemouse"
+serverCommand: 46 : stufftext "ui_hud 0"
+serverCommand: 44 : stufftext "popmenu 0"
+serverCommand: 45 : stufftext "ui_hidemouse"
+serverCommand: 46 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 47 : stufftext "screenshot"
+serverCommand: 47 : stufftext "screenshot"
+CODEX_VISUAL_QA mid_transition_forward
+serverCommand: 48 : stufftext "popmenu 0"
+serverCommand: 49 : stufftext "ui_hidemouse"
+serverCommand: 50 : stufftext "ui_hud 0"
+serverCommand: 48 : stufftext "popmenu 0"
+serverCommand: 49 : stufftext "ui_hidemouse"
+serverCommand: 50 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 51 : stufftext "screenshot"
+serverCommand: 51 : stufftext "screenshot"
+CODEX_VISUAL_QA mid_transition_reverse
+serverCommand: 52 : stufftext "popmenu 0"
+serverCommand: 53 : stufftext "ui_hidemouse"
+serverCommand: 54 : stufftext "ui_hud 0"
+serverCommand: 52 : stufftext "popmenu 0"
+serverCommand: 53 : stufftext "ui_hidemouse"
+serverCommand: 54 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 55 : stufftext "screenshot"
+serverCommand: 55 : stufftext "screenshot"
+CODEX_VISUAL_QA south_long_forward
+serverCommand: 56 : stufftext "popmenu 0"
+serverCommand: 57 : stufftext "ui_hidemouse"
+serverCommand: 58 : stufftext "ui_hud 0"
+serverCommand: 56 : stufftext "popmenu 0"
+serverCommand: 57 : stufftext "ui_hidemouse"
+serverCommand: 58 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 59 : stufftext "screenshot"
+serverCommand: 59 : stufftext "screenshot"
+CODEX_VISUAL_QA south_long_reverse
+serverCommand: 60 : stufftext "popmenu 0"
+serverCommand: 61 : stufftext "ui_hidemouse"
+serverCommand: 62 : stufftext "ui_hud 0"
+serverCommand: 60 : stufftext "popmenu 0"
+serverCommand: 61 : stufftext "ui_hidemouse"
+serverCommand: 62 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 63 : stufftext "screenshot"
+serverCommand: 63 : stufftext "screenshot"
+CODEX_VISUAL_QA west_long_forward
+serverCommand: 64 : stufftext "popmenu 0"
+serverCommand: 65 : stufftext "ui_hidemouse"
+serverCommand: 66 : stufftext "ui_hud 0"
+serverCommand: 64 : stufftext "popmenu 0"
+serverCommand: 65 : stufftext "ui_hidemouse"
+serverCommand: 66 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 67 : stufftext "screenshot"
+serverCommand: 67 : stufftext "screenshot"
+CODEX_VISUAL_QA east_boundary_reverse
+serverCommand: 68 : stufftext "popmenu 0"
+serverCommand: 69 : stufftext "ui_hidemouse"
+serverCommand: 70 : stufftext "ui_hud 0"
+serverCommand: 68 : stufftext "popmenu 0"
+serverCommand: 69 : stufftext "ui_hidemouse"
+serverCommand: 70 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 71 : stufftext "screenshot"
+serverCommand: 71 : stufftext "screenshot"
+CODEX_VISUAL_QA upper_interior
+serverCommand: 72 : stufftext "popmenu 0"
+serverCommand: 73 : stufftext "ui_hidemouse"
+serverCommand: 74 : stufftext "ui_hud 0"
+serverCommand: 72 : stufftext "popmenu 0"
+serverCommand: 73 : stufftext "ui_hidemouse"
+serverCommand: 74 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 75 : stufftext "screenshot"
+serverCommand: 75 : stufftext "screenshot"
+CODEX_VISUAL_QA north_transition
+serverCommand: 76 : stufftext "popmenu 0"
+serverCommand: 77 : stufftext "ui_hidemouse"
+serverCommand: 78 : stufftext "ui_hud 0"
+serverCommand: 76 : stufftext "popmenu 0"
+serverCommand: 77 : stufftext "ui_hidemouse"
+serverCommand: 78 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 79 : stufftext "screenshot"
+serverCommand: 79 : stufftext "screenshot"
+CODEX_VISUAL_QA door_front
+serverCommand: 80 : stufftext "popmenu 0"
+serverCommand: 81 : stufftext "ui_hidemouse"
+serverCommand: 82 : stufftext "ui_hud 0"
+serverCommand: 80 : stufftext "popmenu 0"
+serverCommand: 81 : stufftext "ui_hidemouse"
+serverCommand: 82 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 83 : stufftext "screenshot"
+serverCommand: 83 : stufftext "screenshot"
+CODEX_VISUAL_QA door_reverse
+serverCommand: 84 : stufftext "popmenu 0"
+serverCommand: 85 : stufftext "ui_hidemouse"
+serverCommand: 86 : stufftext "ui_hud 0"
+serverCommand: 84 : stufftext "popmenu 0"
+serverCommand: 85 : stufftext "ui_hidemouse"
+serverCommand: 86 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 87 : stufftext "screenshot"
+serverCommand: 87 : stufftext "screenshot"
+CODEX_VISUAL_QA notjunc_low_south
+serverCommand: 88 : stufftext "popmenu 0"
+serverCommand: 89 : stufftext "ui_hidemouse"
+serverCommand: 90 : stufftext "ui_hud 0"
+serverCommand: 88 : stufftext "popmenu 0"
+serverCommand: 89 : stufftext "ui_hidemouse"
+serverCommand: 90 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 91 : stufftext "screenshot"
+serverCommand: 91 : stufftext "screenshot"
+CODEX_VISUAL_QA notjunc_low_west
+serverCommand: 92 : stufftext "popmenu 0"
+serverCommand: 93 : stufftext "ui_hidemouse"
+serverCommand: 94 : stufftext "ui_hud 0"
+serverCommand: 92 : stufftext "popmenu 0"
+serverCommand: 93 : stufftext "ui_hidemouse"
+serverCommand: 94 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 95 : stufftext "screenshot"
+serverCommand: 95 : stufftext "screenshot"
+CODEX_VISUAL_QA high_overview_center
+serverCommand: 96 : stufftext "popmenu 0"
+serverCommand: 97 : stufftext "ui_hidemouse"
+serverCommand: 98 : stufftext "ui_hud 0"
+serverCommand: 96 : stufftext "popmenu 0"
+serverCommand: 97 : stufftext "ui_hidemouse"
+serverCommand: 98 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 99 : stufftext "screenshot"
+serverCommand: 99 : stufftext "screenshot"
+CODEX_VISUAL_QA high_overview_northwest
+serverCommand: 100 : stufftext "popmenu 0"
+serverCommand: 101 : stufftext "ui_hidemouse"
+serverCommand: 102 : stufftext "ui_hud 0"
+serverCommand: 100 : stufftext "popmenu 0"
+serverCommand: 101 : stufftext "ui_hidemouse"
+serverCommand: 102 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 103 : stufftext "screenshot"
+serverCommand: 103 : stufftext "screenshot"
+CODEX_VISUAL_QA north_boundary
+serverCommand: 104 : stufftext "popmenu 0"
+serverCommand: 105 : stufftext "ui_hidemouse"
+serverCommand: 106 : stufftext "ui_hud 0"
+serverCommand: 104 : stufftext "popmenu 0"
+serverCommand: 105 : stufftext "ui_hidemouse"
+serverCommand: 106 : stufftext "ui_hud 0"
+Cvar_Set2: ui_newvidmode -1
+Cvar_Set2: cg_hud 0
+serverCommand: 107 : stufftext "screenshot"
+serverCommand: 107 : stufftext "screenshot"
+serverCommand: 108 : stufftext "quit"
+serverCommand: 108 : stufftext "quit"

@@ -1,0 +1,205 @@
+main:
+
+level waittill prespawn
+exec global/DMprecache.scr
+level.script = maps/dm/codex_cache.scr
+level waittill spawn
+thread evidence_probe
+end
+
+evidence_probe:
+wait 6
+$player stufftext "ui_applyplayermodel"
+wait .25
+$player stufftext "con_notifytime 0"
+wait .25
+$player auto_join_team
+wait 3
+$player primarydmweapon rifle
+wait 3
+$player stufftext "popmenu 0"
+wait .25
+$player stufftext "popmenu 0"
+wait .25
+$player stufftext "popmenu 0"
+wait .25
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+$player stufftext "cg_drawviewmodel 0"
+$player stufftext "clear"
+$player stufftext "noclip"
+$player stufftext "notarget"
+wait 8
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA axis_exterior_westbound"
+$player.origin = ( 1987.3 239 1645 )
+$player.viewangles = ( 0 180 0 )
+wait .35
+$player.viewangles = ( 0 180 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA allied_exterior_northbound"
+$player.origin = ( -898 245 1622 )
+$player.viewangles = ( 0 90 0 )
+wait .35
+$player.viewangles = ( 0 90 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA mid_transition_forward"
+$player.origin = ( 105 -137 1626 )
+$player.viewangles = ( 0 150 0 )
+wait .35
+$player.viewangles = ( 0 150 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA mid_transition_reverse"
+$player.origin = ( 105 -137 1626 )
+$player.viewangles = ( 0 330 0 )
+wait .35
+$player.viewangles = ( 0 330 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA south_long_forward"
+$player.origin = ( 492 -1246 1626 )
+$player.viewangles = ( -2 330 0 )
+wait .35
+$player.viewangles = ( -2 330 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA south_long_reverse"
+$player.origin = ( 90 -1364 1667 )
+$player.viewangles = ( -2 165 0 )
+wait .35
+$player.viewangles = ( -2 165 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA west_long_forward"
+$player.origin = ( -1788 475 1623 )
+$player.viewangles = ( -2 30 0 )
+wait .35
+$player.viewangles = ( -2 30 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA east_boundary_reverse"
+$player.origin = ( 2759 352 1636 )
+$player.viewangles = ( -2 285 0 )
+wait .35
+$player.viewangles = ( -2 285 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA upper_interior"
+$player.origin = ( -308 -476 1807 )
+$player.viewangles = ( -5 315 0 )
+wait .35
+$player.viewangles = ( -5 315 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA north_transition"
+$player.origin = ( 806 2003 1710 )
+$player.viewangles = ( -2 210 0 )
+wait .35
+$player.viewangles = ( -2 210 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA door_front"
+$player.origin = ( 225 2232 1696 )
+$player.viewangles = ( 0 270 0 )
+wait .35
+$player.viewangles = ( 0 270 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA door_reverse"
+$player.origin = ( 225 1920 1696 )
+$player.viewangles = ( 0 90 0 )
+wait .35
+$player.viewangles = ( 0 90 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA notjunc_low_south"
+$player.origin = ( 90 -1364 1696 )
+$player.viewangles = ( 18 165 0 )
+wait .35
+$player.viewangles = ( 18 165 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA notjunc_low_west"
+$player.origin = ( -1788 475 1690 )
+$player.viewangles = ( 18 30 0 )
+wait .35
+$player.viewangles = ( 18 30 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA high_overview_center"
+$player.origin = ( 600 500 2750 )
+$player.viewangles = ( 55 210 0 )
+wait .35
+$player.viewangles = ( 55 210 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA high_overview_northwest"
+$player.origin = ( -500 1000 2600 )
+$player.viewangles = ( 55 330 0 )
+wait .35
+$player.viewangles = ( 55 330 0 )
+$player stufftext "screenshot"
+wait 5
+$player stufftext "popmenu 0"
+$player stufftext "ui_hidemouse"
+$player stufftext "ui_hud 0"
+println "CODEX_VISUAL_QA north_boundary"
+$player.origin = ( -275 2216 1706 )
+$player.viewangles = ( 0 285 0 )
+wait .35
+$player.viewangles = ( 0 285 0 )
+$player stufftext "screenshot"
+wait 5
+wait 1
+$player stufftext "quit"
+end

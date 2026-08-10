@@ -1,0 +1,1706 @@
+[2026-08-10 11:27:38 UTC-5.000] logfile opened on Mon Aug 10 11:27:38 2026
+
+[2026-08-10 11:27:38 UTC-5.000] => game is version OpenMoHAA 0.82.1-beta+5.a72bc15 win_msvc64-x86_64 Aug 05 2025 UTC
+[2026-08-10 11:27:38 UTC-5.000] => targeting game ID 0
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: com_updatecheck_interval 15
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: arch win_msvc64 x86_64
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: username plex
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: g_maxplayerhealth 750
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: skill 1
+[2026-08-10 11:27:38 UTC-5.000] You are now setup for medium mode.
+[2026-08-10 11:27:38 UTC-5.000] ----- Client Initialization -----
+[2026-08-10 11:27:38 UTC-5.000] ------ Unloading ClientGame ------
+[2026-08-10 11:27:38 UTC-5.000] Called FadeSound with: 0.000000
+[2026-08-10 11:27:38 UTC-5.000] 
+------------------
+Event system initialized: 82 classes 277 events 181712 total memory in response list
+
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: cl_mouseAccelOffset 5
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: j_pitch_axis 3
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: j_yaw_axis 2
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: j_forward_axis 1
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: j_side_axis 0
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: j_up_axis 4
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: m_invert_pitch 0
+[2026-08-10 11:27:38 UTC-5.000] ----- Initializing Renderer ----
+[2026-08-10 11:27:38 UTC-5.000] ----- R_Init -----
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: r_picmip 1
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: r_subdivisions 4
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: r_displayRefresh 0
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: r_znear 4
+[2026-08-10 11:27:38 UTC-5.000] Glimp_Init( )
+[2026-08-10 11:27:38 UTC-5.000] SDL using driver "windows"
+[2026-08-10 11:27:38 UTC-5.000] Cvar_Set2: r_sdlDriver windows
+[2026-08-10 11:27:38 UTC-5.000] Initializing OpenGL display
+[2026-08-10 11:27:38 UTC-5.000] Display aspect: 1.778
+[2026-08-10 11:27:38 UTC-5.000] ...setting mode -1: 1280 720
+[2026-08-10 11:27:39 UTC-5.000] Using 24 color bits, 24 depth, 8 stencil display.
+[2026-08-10 11:27:39 UTC-5.000] Couldn't get window display mode, no resolutions detected: Couldn't find display mode match
+[2026-08-10 11:27:39 UTC-5.000] GL_RENDERER: AMD Radeon 780M Graphics
+[2026-08-10 11:27:39 UTC-5.000] Initializing OpenGL extensions
+[2026-08-10 11:27:39 UTC-5.000] ...ignoring GL_EXT_texture_compression_s3tc
+[2026-08-10 11:27:39 UTC-5.000] ...ignoring GL_S3_s3tc
+[2026-08-10 11:27:39 UTC-5.000] ...using GL_EXT_texture_env_add
+[2026-08-10 11:27:39 UTC-5.000] ...using GL_ARB_multitexture
+[2026-08-10 11:27:39 UTC-5.000] ...using GL_EXT_compiled_vertex_array
+[2026-08-10 11:27:39 UTC-5.000] ...ignoring GL_EXT_texture_filter_anisotropic
+[2026-08-10 11:27:39 UTC-5.000] ...using GL_SGIS_texture_edge_clamp
+[2026-08-10 11:27:39 UTC-5.000] 
+------- Input Initialization -------
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: com_unfocused 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: com_minimized 0
+[2026-08-10 11:27:39 UTC-5.000] Calling SDL_Init(SDL_INIT_JOYSTICK)...
+[2026-08-10 11:27:39 UTC-5.000] SDL_Init(SDL_INIT_JOYSTICK) passed.
+[2026-08-10 11:27:39 UTC-5.000] Calling SDL_Init(SDL_INIT_GAMECONTROLLER)...
+[2026-08-10 11:27:39 UTC-5.000] SDL_Init(SDL_INIT_GAMECONTROLLER) passed.
+[2026-08-10 11:27:39 UTC-5.000] 0 possible joysticks
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: in_availableJoysticks 
+[2026-08-10 11:27:39 UTC-5.000] Joystick is not active.
+[2026-08-10 11:27:39 UTC-5.000] ------------------------------------
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: r_forceClampToEdge 1
+[2026-08-10 11:27:39 UTC-5.000] 
+GL_VENDOR: ATI Technologies Inc.
+[2026-08-10 11:27:39 UTC-5.000] GL_RENDERER: AMD Radeon 780M Graphics
+[2026-08-10 11:27:39 UTC-5.000] GL_VERSION: 4.6.0 Compatibility Profile Context 26.6.4.260624
+[2026-08-10 11:27:39 UTC-5.000] GL_EXTENSIONS: GL_AMD_blend_minmax_factor GL_AMD_conservative_depth GL_AMD_debug_output GL_AMD_depth_clamp_separate GL_AMD_gpu_shader_half_float GL_AMD_gpu_shader_int16 GL_AMD_gpu_shader_int64 GL_AMD_multi_draw_indirect GL_AMD_pinned_memory GL_AMD_query_buffer_object GL_AMD_sample_positions GL_AMD_seamless_cubemap_per_texture GL_AMD_shader_trinary_minmax GL_AMD_texture_cube_map_array GL_AMD_vertex_shader_layer GL_AMD_vertex_shader_viewport_index GL_ARB_ES2_compatibility GL_ARB_ES3_1_compatibility GL_ARB_ES3_2_compatibility GL_ARB_ES3_compatibility GL_ARB_arrays_of_arrays GL_ARB_base_instance GL_ARB_bindless_texture GL_ARB_blend_func_extended GL_ARB_buffer_storage GL_ARB_clear_buffer_object GL_ARB_clear_texture GL_ARB_clip_control GL_ARB_color_buffer_float GL_ARB_compatibility GL_ARB_compressed_texture_pixel_storage GL_ARB_compute_shader GL_ARB_conditional_render_inverted GL_ARB_conservative_depth GL_ARB_copy_buffer GL_ARB_copy_image GL_ARB_cull_distance GL_ARB_debug_output GL_ARB_depth_buffer_float GL_ARB_depth_clamp GL_ARB_depth_texture GL_ARB_derivative_control GL_ARB_direct_state_access GL_ARB_draw_buffers GL_ARB_draw_buffers_blend GL_ARB_draw_elements_base_vertex GL_ARB_draw_indirect GL_ARB_draw_instanced GL_ARB_enhanced_layouts GL_ARB_explicit_attrib_location GL_ARB_explicit_uniform_location GL_ARB_fragment_coord_conventions GL_ARB_fragment_layer_viewport GL_ARB_fragment_program GL_ARB_fragment_program_shadow GL_ARB_fragment_shader GL_ARB_fragment_shader_interlock GL_ARB_framebuffer_no_attachments GL_ARB_framebuffer_object GL_ARB_framebuffer_sRGB GL_ARB_geometry_shader4 GL_ARB_get_program_binary GL_ARB_get_texture_sub_image GL_ARB_gl_spirv GL_ARB_gpu_shader5 GL_ARB_gpu_shader_fp64 GL_ARB_gpu_shader_int64 GL_ARB_half_float_pixel GL_ARB_half_float_vertex GL_ARB_indirect_parameters GL_ARB_instanced_arrays GL_ARB_internalformat_query GL_ARB_internalformat_query2 GL_ARB_invalidate_subdata GL_ARB_map_buffer_range GL_ARB_multi_bind GL_ARB_multi_draw_indirect GL_ARB_multisample GL_ARB_multitexture GL_ARB_occlusion_query GL_ARB_occlusion_query2 GL_ARB_parallel_shader_compile GL_ARB_pipeline_statistics_query GL_ARB_pixel_buffer_object GL_ARB_point_parameters GL_ARB_point_sprite GL_ARB_polygon_offset_clamp GL_ARB_post_depth_coverage GL_ARB_program_interface_query GL_ARB_provoking_vertex GL_ARB_query_buffer_object GL_ARB_robustness GL_ARB_sample_locations GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_seamless_cubemap_per_texture GL_ARB_separate_shader_objects GL_ARB_shader_atomic_counter_ops GL_ARB_shader_atomic_counters GL_ARB_shader_ballot GL_ARB_shader_bit_encoding GL_ARB_shader_clock GL_ARB_shader_draw_parameters GL_ARB_shader_group_vote GL_ARB_shader_image_load_store GL_ARB_shader_image_size GL_ARB_shader_objects GL_ARB_shader_precision GL_ARB_shader_stencil_export GL_ARB_shader_storage_buffer_object GL_ARB_shader_subroutine GL_ARB_shader_texture_image_samples GL_ARB_shader_texture_lod GL_ARB_shader_viewport_layer_array GL_ARB_shading_language_100 GL_ARB_shading_language_420pack GL_ARB_shading_language_packing GL_ARB_shadow GL_ARB_shadow_ambient GL_ARB_sparse_buffer GL_ARB_sparse_texture GL_ARB_spirv_extensions GL_ARB_stencil_texturing GL_ARB_sync GL_ARB_tessellation_shader GL_ARB_texture_barrier GL_ARB_texture_border_clamp GL_ARB_texture_buffer_object GL_ARB_texture_buffer_object_rgb32 GL_ARB_texture_buffer_range GL_ARB_texture_compression GL_ARB_texture_compression_bptc GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map GL_ARB_texture_cube_map_array GL_ARB_texture_env_add GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_filter_anisotropic GL_ARB_texture_filter_minmax GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_mirrored_repeat GL_ARB_texture_multisample GL_ARB_texture_multisample_no_array GL_ARB_texture_non_power_of_two GL_ARB_texture_query_levels GL_ARB_texture_query_lod GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_texture_rgb10_a2ui GL_ARB_texture_stencil8 GL_ARB_texture_storage GL_ARB_texture_storage_multisample GL_ARB_texture_swizzle GL_ARB_texture_view GL_ARB_timer_query GL_ARB_transform_feedback GL_ARB_transform_feedback2 GL_ARB_transform_feedback3 GL_ARB_transform_feedback_instanced GL_ARB_transform_feedback_overflow_query GL_ARB_transpose_matrix GL_ARB_uniform_buffer_object GL_ARB_vertex_array_bgra GL_ARB_vertex_array_object GL_ARB_vertex_attrib_64bit GL_ARB_vertex_attrib_binding GL_ARB_vertex_buffer_object GL_ARB_vertex_program GL_ARB_vertex_shader GL_ARB_vertex_type_10f_11f_11f_rev GL_ARB_vertex_type_2_10_10_10_rev GL_ARB_viewport_array GL_ARB_window_pos GL_ATI_draw_buffers GL_ATI_meminfo GL_ATI_separate_stencil GL_ATI_shader_texture_lod GL_ATI_texture_env_combine3 GL_ATI_texture_float GL_ATI_texture_mirror_once GL_EXT_abgr GL_EXT_bgra GL_EXT_bindable_uniform GL_EXT_blend_color GL_EXT_blend_equation_separate GL_EXT_blend_func_separate GL_EXT_blend_minmax GL_EXT_blend_subtract GL_EXT_compiled_vertex_array GL_EXT_copy_buffer GL_EXT_copy_texture GL_EXT_debug_label GL_EXT_depth_bounds_test GL_EXT_direct_state_access GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_draw_range_elements GL_EXT_fog_coord GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_geometry_shader4 GL_EXT_gpu_program_parameters GL_EXT_gpu_shader4 GL_EXT_memory_object GL_EXT_memory_object_win32 GL_EXT_multi_draw_arrays GL_EXT_nonuniform_qualifier GL_EXT_packed_depth_stencil GL_EXT_packed_float GL_EXT_packed_pixels GL_EXT_pixel_buffer_object GL_EXT_point_parameters GL_EXT_polygon_offset_clamp GL_EXT_provoking_vertex GL_EXT_rescale_normal GL_EXT_secondary_color GL_EXT_semaphore GL_EXT_semaphore_win32 GL_EXT_separate_specular_color GL_EXT_shader_image_load_formatted GL_EXT_shader_image_load_store GL_EXT_shader_integer_mix GL_EXT_shadow_funcs GL_EXT_stencil_wrap GL_EXT_subtexture GL_EXT_texture GL_EXT_texture3D GL_EXT_texture_array GL_EXT_texture_buffer_object GL_EXT_texture_compression_bptc GL_EXT_texture_compression_latc GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc GL_EXT_texture_cube_map GL_EXT_texture_edge_clamp GL_EXT_texture_env_add GL_EXT_texture_env_combine GL_EXT_texture_env_dot3 GL_EXT_texture_filter_anisotropic GL_EXT_texture_integer GL_EXT_texture_lod GL_EXT_texture_lod_bias GL_EXT_texture_mirror_clamp GL_EXT_texture_object GL_EXT_texture_rectangle GL_EXT_texture_sRGB GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_sRGB_decode GL_EXT_texture_shadow_lod GL_EXT_texture_shared_exponent GL_EXT_texture_snorm GL_EXT_texture_storage GL_EXT_texture_swizzle GL_EXT_timer_query GL_EXT_transform_feedback GL_EXT_vertex_array GL_EXT_vertex_array_bgra GL_EXT_vertex_attrib_64bit GL_IBM_texture_mirrored_repeat GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_KHR_context_flush_control GL_KHR_debug GL_KHR_no_error GL_KHR_parallel_shader_compile GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KHR_shader_subgroup GL_KHR_texture_compression_astc_ldr GL_NV_blend_square GL_NV_conditional_render GL_NV_copy_image GL_NV_depth_buffer_float GL_NV_float_buffer GL_NV_half_float GL_NV_mesh_shader GL_NV_primitive_restart GL_NV_shader_atomic_int64 GL_NV_texgen_reflection GL_NV_texture_barrier GL_NV_timeline_semaphore GL_OES_EGL_image GL_OVR_multiview GL_OVR_multiview2 GL_S3_s3tc GL_SGIS_generate_mipmap GL_SGIS_texture_edge_clamp GL_SGIS_texture_lod GL_SUN_multi_draw_arrays WGL_EXT_swap_control 
+[2026-08-10 11:27:39 UTC-5.000] GL_MAX_TEXTURE_SIZE: 16384
+[2026-08-10 11:27:39 UTC-5.000] GL_MAX_TEXTURE_UNITS_ARB: 8
+[2026-08-10 11:27:39 UTC-5.000] 
+PIXELFORMAT: color(24-bits) Z(24-bit) stencil(8-bits)
+[2026-08-10 11:27:39 UTC-5.000] MODE: -1, 1280 x 720 windowed hz:N/A
+[2026-08-10 11:27:39 UTC-5.000] GAMMA: software w/ 0 overbright bits
+[2026-08-10 11:27:39 UTC-5.000] CPU: 
+[2026-08-10 11:27:39 UTC-5.000] rendering primitives: single glDrawElements
+[2026-08-10 11:27:39 UTC-5.000] texturemode: GL_LINEAR_MIPMAP_NEAREST
+[2026-08-10 11:27:39 UTC-5.000] picmip: 1
+[2026-08-10 11:27:39 UTC-5.000] texture bits: 0
+[2026-08-10 11:27:39 UTC-5.000] multitexture: enabled
+[2026-08-10 11:27:39 UTC-5.000] compiled vertex arrays: enabled
+[2026-08-10 11:27:39 UTC-5.000] texenv add: enabled
+[2026-08-10 11:27:39 UTC-5.000] compressed textures: disabled
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: r_gfxinfo 
+GL_VENDOR: ATI Technologies Inc.
+GL_RENDERER: AMD Radeon 780M Graphics
+GL_VERSION: 4.6.0 Compatibility Profile Context 26.6.4.260624
+GL_EXTENSIONS: GL_AMD_blend_minmax_factor GL_AMD_conservative_depth GL_AMD_debug_output GL_AMD_depth_clamp_separate GL_AMD_gpu_shader_half_float GL_AMD_gpu_shader_int16 GL_AMD_gpu_shader_int64 GL_AMD_multi_draw_indirect GL_AMD_pinned_memory GL_AMD_query_buffer_object GL_AMD_sample_positions GL_AMD_seamless_cubemap_per_texture GL_AMD_shader_trinary_minmax GL_AMD_texture_cube_map_array GL_AMD_vertex_shader_layer GL_AMD_vertex_shader_viewport_index GL_ARB_ES2_compatibility GL_ARB_ES3_1_compatibility GL_ARB_ES3_2_compatibility GL_ARB_ES3_compatibility GL_ARB_arrays_of_arrays GL_ARB_base_instance GL_ARB_bindless_texture GL_ARB_blend_func_extended GL_ARB_buffer_storage GL_ARB_clear_buffer_object GL_ARB_clear_texture GL_ARB_clip_control GL_ARB_color_buffer_float GL_ARB_compatibility GL_ARB_compressed_texture_pixel_storage GL_ARB_compute_shader GL_ARB_conditional_render_inverted GL_ARB_conservative_depth GL_ARB_copy_buffer GL_ARB_copy_image GL_ARB_cull_distance GL_ARB_debug_output GL_ARB_depth_buffer_float GL_ARB_depth_clamp GL_ARB_depth_texture GL_ARB_derivative_control GL_ARB_direct_state_access GL_ARB_draw_buffers GL_ARB_draw_buffers_blend GL_ARB_draw_elements_base_vertex GL_ARB_draw_indirect GL_ARB_draw_instanced GL_ARB_enhanced_layouts GL_ARB_explicit_attrib_location GL_ARB_explicit_uniform_location GL_ARB_fragment_coord_conventions GL_ARB_fragment_layer_viewport GL_ARB_fragment_program GL_ARB_fragment_program_shadow GL_ARB_fragment_shader GL_ARB_fragment_shader_interlock GL_ARB_framebuffer_no_attachments GL_ARB_framebuffer_object GL_ARB_framebuffer_sRGB GL_ARB_geometry_shader4 GL_ARB_get_program_binary GL_ARB_get_texture_sub_image GL_ARB_gl_spirv GL_ARB_gpu_shader5 GL_ARB_gpu_shader_fp64 GL_ARB_gpu_shader_int64 GL_ARB_half_float_pixel GL_ARB_half_float_vertex GL_ARB_indirect_parameters GL_ARB_instanced_arrays GL_ARB_internalformat_query GL_ARB_internalformat_query2 GL_ARB_invalidate_subdata GL_ARB_map_buffer_range GL_ARB_multi_bind GL_ARB_multi_draw_indirect GL_ARB_multisample GL_ARB_multitexture GL_ARB_occlusion_query GL_ARB_occlusion_query2 GL_ARB_parallel_shader_compile GL_ARB_pipeline_statistics_query GL_ARB_pixel_buffer_object GL_ARB_point_parameters GL_ARB_point_sprite GL_ARB_polygon_offset_clamp GL_ARB_post_depth_coverage GL_ARB_program_interface_query GL_ARB_provoking_vertex GL_ARB_query_buffer_object GL_ARB_robustness GL_ARB_sample_locations GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_seamless_cubemap_per_texture GL_ARB_separate_shader_objects GL_ARB_shader_atomic_counter_ops GL_ARB_shader_atomic_counters GL_ARB_shader_ballot GL_ARB_shader_bit_encoding GL_ARB_shader_clock GL_ARB_shader_draw_parameters GL_ARB_shader_group_vote GL_ARB_shader_image_load_store GL_ARB_shader_image_size GL_ARB_shader_objects GL_ARB_shader_precision GL_ARB_shader_stencil_export GL_ARB_shader_storage_buffer_object GL_ARB_shader_subroutine GL_ARB_shader_texture_image_samples GL_ARB_shader_texture_lod GL_ARB_shader_viewport_layer_array GL_ARB_shading_language_100 GL_ARB_shading_language_420pack GL_ARB_shading_language_packing GL_ARB_shadow GL_ARB_shadow_ambient GL_ARB_sparse_buffer GL_ARB_sparse_texture GL_ARB_spirv_extensions GL_ARB_stencil_texturing GL_ARB_sync GL_ARB_tessellation_shader GL_ARB_texture_barrier GL_ARB_texture_border_clamp GL_ARB_texture_buffer_object GL_ARB_texture_buffer_object_rgb32 GL_ARB_texture_buffer_range GL_ARB_texture_compression GL_ARB_texture_compression_bptc GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map GL_ARB_texture_cube_map_array GL_ARB_texture_env_add GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_filter_anisotropic GL_ARB_texture_filter_minmax GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_mirrored_repeat GL_ARB_texture_multisample GL_ARB_texture_multisample_no_array GL_ARB_texture_non_power_of_two GL_ARB_texture_query_ατ^CtlCvar_Set2: r_intensity 1
+[2026-08-10 11:27:39 UTC-5.000] Initializing Shaders
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/codex_cache.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/gfx.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/jeep.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/ktigertank.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/mohmenu.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/opel.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/panzer_iv.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/tigertank.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/15cannon.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/20mmflak.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/3dk.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/algiers.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/allied_insignia.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/allied_pilot.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/barracks.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/barrel.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/beams.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/blasted.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/bmwbike.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/bottles.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/brest.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/bunker.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/c47.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/car.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/central_europe.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/central_europe_winter.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/clock.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/cockroach.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/common.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/crates.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/das_boot.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/ddaydark.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/dday_shaders_v1.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/decals.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/dtruck.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/effects.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/environmentalfx.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/faces.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/flags.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/flak88.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/fockwulf.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/french.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/french_resistance.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/frogman.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/furniture.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/general_industrial.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/general_structure.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_dak.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_gear.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_kreigsmarine.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_motorpool.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_obershutze.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_officer.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_officer2.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_scientist.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_sentry.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_shepherd.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_ssnco.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_ssshutze.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_wehrmact.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_winter.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/german_worker.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/gestapo.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/gmctruck.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/higgins.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/howitzer.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/hundpatrol.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/indycrate.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/interior.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/interiorfx.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/interior_northafrica.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/items.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/ktigertank_d.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/light.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/loadingscreens.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/m1l1anate.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/m3.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/m5l2anate.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/manon.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/mercedes.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/misc_outside.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/mohcommon.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/mohdetails.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/mohtest.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/nazi_crate.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/nebelwerfer.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/nebelwerfer_d.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/normandy.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/norway.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/obstacles.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/ocean.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/p47.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/panzershutze.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/panzer_g.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/panzer_grenadier.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/paulscrate.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/playerviewmodel.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/protoamerican.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/protogerman.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/protosprites.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/sandbags.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/sdkfz.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/sdkfz_desert_d.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/shells.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/shermantank.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/sky.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/sky_old.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/sprites.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/static_basket.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/static_items.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/static_obstacles.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/static_piperplane.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/static_sandbags.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/static_wirerailholder.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/stuka.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/submodels.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/sunflare.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/tank_commander.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/targets.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/tempfakk.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/tempsign.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/test.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/tigertank_d.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/train.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/trees.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/treeshadows.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/us_gear.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/us_soldier.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/wake.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/weapons_allied.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/weapons_german.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/wilderness.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/windowdecals.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/windowold.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/windowtst.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/wirecutters.shader'
+[2026-08-10 11:27:39 UTC-5.000] ...loading 'scripts/hud.shader'
+[2026-08-10 11:27:39 UTC-5.000] Setting up Shaders
+[2026-08-10 11:27:39 UTC-5.000] ----- finished R_Init -----
+[2026-08-10 11:27:39 UTC-5.000] -------------------------------
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cl_paused 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cl_running 1
+[2026-08-10 11:27:39 UTC-5.000] ------- Sound Initialization (full) -------
+[2026-08-10 11:27:39 UTC-5.000] Trying to load "OpenAL64.dll"...
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alEnable (00007FFCC8628A20)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alDisable (00007FFCC8628000)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alIsEnabled (00007FFCC862A6D0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetString (00007FFCC8629D40)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetBooleanv (00007FFCC8628E60)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetIntegerv (00007FFCC8629890)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetFloatv (00007FFCC86293E0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetDoublev (00007FFCC8629120)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetBoolean (00007FFCC8628D40)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetInteger (00007FFCC8629570)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetFloat (00007FFCC86292B0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetDouble (00007FFCC8628FF0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetError (00007FFCC86089A0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alIsExtensionPresent (00007FFCC860A140)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetProcAddress (00007FFCC860A120)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetEnumValue (00007FFCC860A0F0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alListenerf (00007FFCC860DCE0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alListener3f (00007FFCC860D840)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alListenerfv (00007FFCC860DF30)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alListeneri (00007FFCC860E1E0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetListenerf (00007FFCC860D160)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetListener3f (00007FFCC860CD50)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetListenerfv (00007FFCC860D300)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetListeneri (00007FFCC860D510)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGenSources (00007FFCC8620D90)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alDeleteSources (00007FFCC8620B30)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alIsSource (00007FFCC8622960)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourcef (00007FFCC8625AF0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSource3f (00007FFCC8622E30)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourcefv (00007FFCC8625D00)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourcei (00007FFCC8625F50)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetSourcef (00007FFCC8621DF0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetSource3f (00007FFCC8621290)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetSourcefv (00007FFCC8621FD0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetSourcei (00007FFCC86221C0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetSourceiv (00007FFCC8622770)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourcePlayv (00007FFCC8624200)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourceStopv (00007FFCC8624EF0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourceRewindv (00007FFCC8624A40)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourcePausev (00007FFCC8623660)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourcePlay (00007FFCC8623B00)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourceStop (00007FFCC8624E50)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourceRewind (00007FFCC86249A0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourcePause (00007FFCC86235C0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourceQueueBuffers (00007FFCC86245D0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSourceUnqueueBuffers (00007FFCC86252E0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGenBuffers (00007FFCC85EDF80)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alDeleteBuffers (00007FFCC85EDA70)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alIsBuffer (00007FFCC85EFA70)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alBufferData (00007FFCC85EC080)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alBufferi (00007FFCC85ED2C0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetBufferf (00007FFCC85EEE70)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetBufferfv (00007FFCC85EF0B0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetBufferi (00007FFCC85EF2D0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alDopplerFactor (00007FFCC8628580)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alSpeedOfSound (00007FFCC862AB00)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alDistanceModel (00007FFCC8628280)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcCreateContext (00007FFCC8636EA0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcMakeContextCurrent (00007FFCC8639410)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcProcessContext (00007FFCC863A080)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcSuspendContext (00007FFCC863B010)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcDestroyContext (00007FFCC86374B0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcGetCurrentContext (00007FFCC8637B20)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcGetContextsDevice (00007FFCC8637A90)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcOpenDevice (00007FFCC8639590)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcCloseDevice (00007FFCC8636B20)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcGetError (00007FFCC8637C80)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcIsExtensionPresent (00007FFCC8638CA0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcGetProcAddress (00007FFCC8638390)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcGetEnumValue (00007FFCC8637B50)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcGetString (00007FFCC86385F0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcGetIntegerv (00007FFCC86382E0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcCaptureOpenDevice (00007FFCC8636080)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcCaptureCloseDevice (00007FFCC8635EC0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcCaptureStart (00007FFCC86368E0)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcCaptureStop (00007FFCC8636A30)
+[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcCaptureSamples (00007FFCC8636780)
+[2026-08-10 11:27:39 UTC-5.000] OpenAL: Context initialization
+[2026-08-10 11:27:39 UTC-5.000] OpenAL: Default playback device: "OpenAL Soft on Headphones (Realtek(R) Audio)"
+[2026-08-10 11:27:39 UTC-5.000] OpenAL: List of available devices:
+OpenAL Soft on Headphones (Realtek(R) Audio)
+
+[2026-08-10 11:27:39 UTC-5.000] OpenAL: Opening device "{default}"...
+[2026-08-10 11:27:39 UTC-5.000] OpenAL: Device opened successfully.
+[2026-08-10 11:27:39 UTC-5.000] OpenAL: Creating AL context...
+[2026-08-10 11:27:39 UTC-5.000] OpenAL: Context created successfully.
+[2026-08-10 11:27:39 UTC-5.000] AL_VENDOR: OpenAL Community
+[2026-08-10 11:27:39 UTC-5.000] AL_VERSION: 1.1 ALSOFT 1.24.3
+[2026-08-10 11:27:39 UTC-5.000] AL_RENDERER: OpenAL Soft
+[2026-08-10 11:27:39 UTC-5.000] AL_EXTENSIONS: EAX EAX2.0 EAX3.0 EAX4.0 EAX5.0 EAX-RAM AL_EXT_ALAW AL_EXT_BFORMAT AL_EXT_debug AL_EXT_direct_context AL_EXT_DOUBLE AL_EXT_EXPONENT_DISTANCE AL_EXT_FLOAT32 AL_EXT_IMA4 AL_EXT_LINEAR_DISTANCE AL_EXT_MCFORMATS AL_EXT_MULAW AL_EXT_MULAW_BFORMAT AL_EXT_MULAW_MCFORMATS AL_EXT_OFFSET AL_EXT_source_distance_model AL_EXT_SOURCE_RADIUS AL_EXT_STATIC_BUFFER AL_EXT_STEREO_ANGLES AL_LOKI_quadriphonic AL_SOFT_bformat_ex AL_SOFT_bformat_hoa AL_SOFT_block_alignment AL_SOFT_buffer_length_query AL_SOFT_callback_buffer AL_SOFTX_convolution_effect AL_SOFT_deferred_updates AL_SOFT_direct_channels AL_SOFT_direct_channels_remix AL_SOFT_effect_target AL_SOFT_events AL_SOFT_gain_clamp_ex AL_SOFTX_hold_on_disconnect AL_SOFT_loop_points AL_SOFTX_map_buffer AL_SOFT_MSADPCM AL_SOFT_source_latency AL_SOFT_source_length AL_SOFTX_source_panning AL_SOFT_source_resampler AL_SOFT_source_spatialize AL_SOFT_source_start_delay AL_SOFT_UHJ AL_SOFT_UHJ_ex
+[2026-08-10 11:27:39 UTC-5.000] AL extension: Looking up symbol "alGetStringiSOFT"......found.
+[2026-08-10 11:27:39 UTC-5.000] OpenAL: Using Cubic Spline as the resampler.
+[2026-08-10 11:27:39 UTC-5.000] Loading global/sound0.txt
+[2026-08-10 11:27:39 UTC-5.000] ------- S_StopAllSounds (stop music) -------
+[2026-08-10 11:27:39 UTC-5.000] MUSIC: changing from [  |  ] to [ none | none ]
+[2026-08-10 11:27:39 UTC-5.000] ------- S_StopAllSounds Complete-------
+[2026-08-10 11:27:39 UTC-5.000] ----- Sound Info -----
+[2026-08-10 11:27:39 UTC-5.000] device - {default}
+[2026-08-10 11:27:39 UTC-5.000] reverb - OFF
+[2026-08-10 11:27:39 UTC-5.000] samplebits - 16
+[2026-08-10 11:27:39 UTC-5.000] speed - 44100
+[2026-08-10 11:27:39 UTC-5.000] ----------------------
+[2026-08-10 11:27:39 UTC-5.000] ------- Sound Initialization Complete ------- 56 ms
+[2026-08-10 11:27:39 UTC-5.000] QKEY building random string
+[2026-08-10 11:27:39 UTC-5.000] writing to: C:\tmp\codex-cache-r1-exact-visual\home\qkey
+[2026-08-10 11:27:39 UTC-5.000] QKEY generated
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cl_guid 1EBC65D7941EFF61D0889AC6C8108553
+[2026-08-10 11:27:39 UTC-5.000] Setting up Shaders
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:27:39 UTC-5.000] Loading inventory...
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: game_version v1.12+0.82.1
+[2026-08-10 11:27:39 UTC-5.000] **************S_LoadSound: sound/menu/back.wav
+[2026-08-10 11:27:39 UTC-5.000] **************S_LoadSound: sound/menu/apply.wav
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: viewmodelsyncrate 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: viewmodelanimslot 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: viewmodelblend 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: viewmodelanimnum2 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: viewmodelnormaltime 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: viewmodelactionweight 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cam_angles_roll 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cam_angles_pitch 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cam_angles_yaw 0
+[2026-08-10 11:27:39 UTC-5.000] **************S_LoadSound: sound/menu/scroll.wav
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cg_te_filename dump/testemitter.txt
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: r_farplane 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cg_te_color_b 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cg_te_color_r 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cg_te_color_g 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cg_te_alpha 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cg_te_filename dump/testemitter.txt
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_width 16
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_length 16
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_height 16
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_yaw 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_reverbtype 0
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_reverblevel 0.5
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_mindist 160
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_volume 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_chance 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_mindelay 2
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snd_maxdelay 12
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: snaps 20
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cl_maxpackets 30
+[2026-08-10 11:27:39 UTC-5.000] ----- Client Initialization Complete ----- -491 ms
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: com_altivec 0
+[2026-08-10 11:27:39 UTC-5.000] --- Common Initialization Complete --- 646 ms
+[2026-08-10 11:27:39 UTC-5.000] -- Localization: I see 1 localization files
+[2026-08-10 11:27:39 UTC-5.000] --- Localization: reading file global/localization.txt
+[2026-08-10 11:27:39 UTC-5.000] Loading Localization File global/localization.txt
+[2026-08-10 11:27:39 UTC-5.000] Loaded 1242 localization entries
+[2026-08-10 11:27:39 UTC-5.000] Loading "libcurl.dll"...
+[2026-08-10 11:27:39 UTC-5.000] Trying to load "libcurl.dll"...
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_version (0x00007FFD23ACE820)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_getenv (0x00007FFD23A91CF0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_free (0x00007FFD23A722F0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_slist_append (0x00007FFD23ABA420)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_slist_free_all (0x00007FFD23ABA4E0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_version_info (0x00007FFD23ACE920)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_strerror (0x00007FFD23AC13D0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_share_strerror (0x00007FFD23AC1930)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_pause (0x00007FFD23A88C50)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_escape (0x00007FFD23A89800)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_unescape (0x00007FFD23A89960)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_init (0x00007FFD23A88BE0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_setopt (0x00007FFD23AB6BC0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_perform (0x00007FFD23A88DD0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_cleanup (0x00007FFD23A887A0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_getinfo (0x00007FFD23A88BB0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_duphandle (0x00007FFD23A887D0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_reset (0x00007FFD23A88EC0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_recv (0x00007FFD23A88DE0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_send (0x00007FFD23A88F60)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_upkeep (0x00007FFD23A89060)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_init (0x00007FFD23AAA150)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_add_handle (0x00007FFD23AA9A50)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_remove_handle (0x00007FFD23AAA550)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_fdset (0x00007FFD23AA9E80)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_wait (0x00007FFD23AAA9D0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_poll (0x00007FFD23AAA520)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_wakeup (0x00007FFD23AAAB20)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_perform (0x00007FFD23AAA330)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_cleanup (0x00007FFD23AA9C70)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_info_read (0x00007FFD23AAA0B0)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_strerror (0x00007FFD23AC1850)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_socket_action (0x00007FFD23AAA920)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_timeout (0x00007FFD23AAA990)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_setopt (0x00007FFD23AAA780)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_assign (0x00007FFD23AA9C10)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_pushheader_bynum (0x00007FFD23A72510)
+[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_pushheader_byname (0x00007FFD23A72510)
+[2026-08-10 11:27:39 UTC-5.000] Winsock Initialized
+[2026-08-10 11:27:39 UTC-5.000] Hostname: DESKTOP-FODB6P8
+[2026-08-10 11:27:39 UTC-5.000] IP6: fe80::29e8:d6f3:b70e:61b3%3
+[2026-08-10 11:27:39 UTC-5.000] IP6: fe80::8a33:609c:d5c8:3859%19
+[2026-08-10 11:27:39 UTC-5.000] IP6: fe80::85f0:10c1:1268:bd16%18
+[2026-08-10 11:27:39 UTC-5.000] IP: 192.168.50.115
+[2026-08-10 11:27:39 UTC-5.000] IP: 192.168.160.1
+[2026-08-10 11:27:39 UTC-5.000] IP: 192.168.211.1
+[2026-08-10 11:27:39 UTC-5.000] Opening IP6 socket: [::]:12203
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: net_port6 12203
+[2026-08-10 11:27:39 UTC-5.000] Opening IP socket: 0.0.0.0:12203
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: net_port 12203
+[2026-08-10 11:27:39 UTC-5.000] ------ Server Initialization ------
+[2026-08-10 11:27:39 UTC-5.000] Server: dm/codex_cache
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_netoptimize 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: sv_running 1
+[2026-08-10 11:27:39 UTC-5.000] Called FadeSound with: 0.000000
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: nextmap 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: r_uiFullScreen 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cl_downloadName 
+[2026-08-10 11:27:39 UTC-5.000] ------ Unloading ClientGame ------
+[2026-08-10 11:27:39 UTC-5.000] Called FadeSound with: 0.000000
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: sv_cheats 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: cl_guid 1EBC65D7941EFF61D0889AC6C8108553
+[2026-08-10 11:27:39 UTC-5.000] ------ Unloading ClientGame ------
+[2026-08-10 11:27:39 UTC-5.000] ------- S_StopAllSounds (stop music) -------
+[2026-08-10 11:27:39 UTC-5.000] ------- S_StopAllSounds Complete-------
+[2026-08-10 11:27:39 UTC-5.000] Called FadeSound with: 0.000000
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:39 UTC-5.000] Setting up Shaders
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: r_intensity 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:39 UTC-5.000] UI_DrawConnect called
+[2026-08-10 11:27:39 UTC-5.000] LOCALIZATION ERROR: 'OpenMoHAA console version 0.82.1' does not have a localization entry
+[2026-08-10 11:27:39 UTC-5.000] Trying to load "game.dll" from "C:\Users\plex\Documents\Codex\2026-07-24\pstngh-moh-maps-https-github-com\work\openmohaa-bin\runtime"...
+[2026-08-10 11:27:39 UTC-5.000] Sys_GetGameAPI(game.dll): succeeded ...
+[2026-08-10 11:27:39 UTC-5.000] ==== InitGame ====
+[2026-08-10 11:27:39 UTC-5.000] gamename: OPENMOHAA
+[2026-08-10 11:27:39 UTC-5.000] gamedate: Aug  5 2025
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: sv_runspeed 250
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: deathmatch 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_gametypestring Free-For-All
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_alliedtext1 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_axistext1 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_alliedtext2 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_axistext2 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_alliedtext3 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_axistext3 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_alliedtext4 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_axistext4 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_alliedtext5 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_obj_axistext5 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_scoreboardpic 
+[2026-08-10 11:27:39 UTC-5.000] sizeof(Actor) == 4128
+[2026-08-10 11:27:39 UTC-5.000] Magic sizeof actor number: 4064
+[2026-08-10 11:27:39 UTC-5.000] 
+------------------
+Event system initialized: 200 classes 1764 events 2822400 total memory in response list
+
+[2026-08-10 11:27:39 UTC-5.000] ==== CleanupGame ====
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: session 1
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: g_scoreboardpicover 
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: bosshealth 0
+[2026-08-10 11:27:39 UTC-5.000] CM_LoadMap( maps/dm/codex_cache.bsp, 0 )
+[2026-08-10 11:27:39 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:27:39 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:27:39 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:27:39 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:27:39 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:27:39 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: sv_mapChecksum -1862603596
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: mapname dm/codex_cache
+[2026-08-10 11:27:39 UTC-5.000] Cvar_Set2: sv_serverid 766
+[2026-08-10 11:27:39 UTC-5.000] Adding script: 'maps/dm/codex_cache_precache.scr'
+[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'panzerschreck2' in 'models/weapons/panzerschreck.tik' (check referenced skb/skd files).
+[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).
+[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).
+[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).
+[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ Box data is corrupted for 'models/human/allied_pilot/allied_pilot.skd'
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Channel named Bip01 L Clavicle pos not added. (Bone will not work without it)
+[2026-08-10 11:27:40 UTC-5.000] Channel named Bip01 R Clavicle pos not added. (Bone will not work without it)
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] WARNING: Couldn't find voting options file: callvote.cfg
+[2026-08-10 11:27:40 UTC-5.000] -------------------- Spawning Entities -----------------------
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: skill 1
+[2026-08-10 11:27:40 UTC-5.000] soundtrack switched to .
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: sv_gravity 800
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: sv_cinematic 0
+[2026-08-10 11:27:40 UTC-5.000] -------------------- Actual Spawning Entities -----------------------
+[2026-08-10 11:27:40 UTC-5.000] -------------------- Actual Spawning Entities Done ------------------ 1 ms
+[2026-08-10 11:27:40 UTC-5.000] 0 teams with 0 entities
+[2026-08-10 11:27:40 UTC-5.000] Adding script: 'maps/dm/codex_cache.scr'
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:27:40 UTC-5.000] 1 entities spawned
+[2026-08-10 11:27:40 UTC-5.000] 66 simple entities spawned
+[2026-08-10 11:27:40 UTC-5.000] 0 entities inhibited
+[2026-08-10 11:27:40 UTC-5.000] -------------------- Spawning Entities Done ------------------ 12 ms
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: sv_paks 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: sv_pakNames 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: sv_referencedPaks 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: sv_referencedPakNames 
+[2026-08-10 11:27:40 UTC-5.000] ------ Server Initialization Complete ------  1.66 seconds
+[2026-08-10 11:27:40 UTC-5.000] ---- Recast Navigation ----
+[2026-08-10 11:27:40 UTC-5.000] No bots, skipping navigation
+[2026-08-10 11:27:40 UTC-5.000] SV packet loopback : connect
+[2026-08-10 11:27:40 UTC-5.000] SVC_DirectConnect ()
+>>>\version\1.12+0.82.1\challenge\0\qport\48354\protocol\8\com_gamename\mohaa\name\UnnamedSoldier#31929\rate\25000\snaps\20\dm_playermodel\american_army\dm_playergermanmodel\german_wehrmacht_soldier\shortversion\0.82.1\cl_guid\1EBC65D7941EFF61D0889AC6C8108553<<<
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: session0 - 0 0
+[2026-08-10 11:27:40 UTC-5.000] Client 0 (IP: localhost) is connecting
+[2026-08-10 11:27:40 UTC-5.000] Going from CS_FREE to CS_CONNECTED for UnnamedSoldier#31929
+[2026-08-10 11:27:40 UTC-5.000] CL packet loopback: connectResponse
+[2026-08-10 11:27:40 UTC-5.000] UnnamedSoldier#31929 : dropped gamestate, resending
+[2026-08-10 11:27:40 UTC-5.000] SV_SendClientGameState() for UnnamedSoldier#31929
+[2026-08-10 11:27:40 UTC-5.000] Going from CS_CONNECTED to CS_PRIMED for UnnamedSoldier#31929
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:40 UTC-5.000] ------ Unloading ClientGame ------
+[2026-08-10 11:27:40 UTC-5.000] Called FadeSound with: 0.000000
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: sv_serverid 766
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: pmove_msec 0
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: pmove_fixed 0
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: r_static_shadermultiplier3 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: r_static_shadermultiplier2 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: r_static_shadermultiplier1 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: r_static_shadermultiplier0 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: r_static_shaderdata3 0
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: r_static_shaderdata2 0
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: r_static_shaderdata1 0
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: r_static_shaderdata0 0
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: sv_pure 0
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: com_radar_range 1024
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: timescale 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cheats 1
+[2026-08-10 11:27:40 UTC-5.000] Cmd_AddCommand: which already defined
+[2026-08-10 11:27:40 UTC-5.000] Current search path:
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\home/main
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\base/main
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\base\main\zz_codex_cache.pk3 (23 files)
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\base\main\Pak6.pk3 (104 files)
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\base\main\Pak5.pk3 (259 files)
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\base\main\Pak4.pk3 (593 files)
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\base\main\Pak3.pk3 (669 files)
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\base\main\Pak2.pk3 (4722 files)
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\base\main\Pak1.pk3 (772 files)
+[2026-08-10 11:27:40 UTC-5.000] C:\tmp\codex-cache-r1-exact-visual\base\main\Pak0.pk3 (11175 files)
+[2026-08-10 11:27:40 UTC-5.000] 
+[2026-08-10 11:27:40 UTC-5.000] handle 1: qconsole.log
+[2026-08-10 11:27:40 UTC-5.000] ----------------------
+[2026-08-10 11:27:40 UTC-5.000] 36634 files in pk3 files
+[2026-08-10 11:27:40 UTC-5.000] ------- Sound Begin Registration -------
+[2026-08-10 11:27:40 UTC-5.000] ------- S_StopAllSounds (stop music) -------
+[2026-08-10 11:27:40 UTC-5.000] ------- S_StopAllSounds Complete-------
+[2026-08-10 11:27:40 UTC-5.000] ------- Sound Begin Registration Complete -------
+[2026-08-10 11:27:40 UTC-5.000] ------ Unloading ClientGame ------
+[2026-08-10 11:27:40 UTC-5.000] Trying to load "cgame.dll" from "C:\Users\plex\Documents\Codex\2026-07-24\pstngh-moh-maps-https-github-com\work\openmohaa-bin\runtime"...
+[2026-08-10 11:27:40 UTC-5.000] Sys_GetCGameAPI(cgame.dll): succeeded ...
+[2026-08-10 11:27:40 UTC-5.000] 
+------------------
+Event system initialized: 8 classes 164 events 10496 total memory in response list
+
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_effectdetail 0.2
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_max_tempmodels 1100
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: g_servertype 2
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_gametype 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_fraglimit 20
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_timelimit 0
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_maxclients 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_allowvote 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_alliedtext1 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_alliedtext2 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_alliedtext3 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_alliedtext4 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_alliedtext5 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_axistext1 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_axistext2 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_axistext3 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_axistext4 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_obj_axistext5 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_scoreboardpic 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_scoreboardpicover 
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_weapon_rifle 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_weapon_sniper 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_weapon_mg 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_weapon_smg 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_weapon_rocket 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_weapon_shotgun 1
+[2026-08-10 11:27:40 UTC-5.000] Cvar_Set2: cg_weapon_landmine 1
+[2026-08-10 11:27:40 UTC-5.000] CM_LoadMap( maps/dm/codex_cache.bsp, 1 )
+[2026-08-10 11:27:40 UTC-5.000] 
+
+-----------PARSING 'ubersound/uberdialog.scr'------------
+[2026-08-10 11:27:40 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.
+[2026-08-10 11:27:40 UTC-5.000] CG_Command_ProcessFile: ubersound/uberdialog.scr
+[2026-08-10 11:27:40 UTC-5.000] Couldn't load sound: sound/null.wav
+[2026-08-10 11:27:40 UTC-5.000] Parse/Load time: 0.039000 seconds.
+[2026-08-10 11:27:40 UTC-5.000] -------------PARSING 'ubersound/uberdialog.scr' DONE---------------
+
+[2026-08-10 11:27:40 UTC-5.000] 
+
+-----------PARSING 'ubersound/ubersound.scr'------------
+[2026-08-10 11:27:40 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.
+[2026-08-10 11:27:40 UTC-5.000] CG_Command_ProcessFile: ubersound/ubersound.scr
+[2026-08-10 11:27:40 UTC-5.000] Parse/Load time: 0.218000 seconds.
+[2026-08-10 11:27:40 UTC-5.000] -------------PARSING 'ubersound/ubersound.scr' DONE---------------
+
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:40 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] WARNING: shader 'textures/codex_cache/glass' has lightmap but no lightmap stage!
+[2026-08-10 11:27:41 UTC-5.000] stitched 0 LoD cracks
+[2026-08-10 11:27:41 UTC-5.000] ...loaded 57545 faces, 83 meshes, 0 trisurfs, 0 flares
+[2026-08-10 11:27:41 UTC-5.000] Z_TagMalloc, Negative or zero size 0 tag 12
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: ter_maxlod 6
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: ter_error 4
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: ter_maxtris 24576
+[2026-08-10 11:27:41 UTC-5.000] R_LevelMarksLoad: maps/dm/codex_cache.dcl not found
+[2026-08-10 11:27:41 UTC-5.000] Couldn't find image for shader textures/menu/exit
+[2026-08-10 11:27:41 UTC-5.000] WARNING: reused image textures/effects/fire_ring.tga with mixed glWrapClampMode parm
+[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:27:41 UTC-5.000] Loading Special Effects...
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_paper_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_paper_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_wood_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_wood_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_metal_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_metal_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_stone_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_stone_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_dirt_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_dirt_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_grass_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_grass_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_mud_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_mud_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_water_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_water_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_glass_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_glass_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_sand_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_sand_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_foliage_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_foliage_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_snow_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_snow_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_carpet_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_carpet_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_human_uniform_lite.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bh_human_uniform_hard.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/water_trail_bubble.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_base.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/bazookaexp_base.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_paper.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_wood.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_metal.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_stone.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_dirt.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_grass.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_mud.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_water.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_gravel.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_sand.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_foliage.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_snow.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/grenexp_carpet.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/water_ripple_still.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/water_ripple_moving.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/barrel_oil_leak_big.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/barrel_oil_leak_medium.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/barrel_oil_leak_small.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/barrel_oil_leak_splat.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/barrel_water_leak_big.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/barrel_water_leak_medium.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/barrel_water_leak_small.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/barrel_water_leak_splat.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/fs_light_dust.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/fs_heavy_dust.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/fs_dirt.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/fs_grass.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/fs_mud.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/fs_puddle.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/fs_sand.tik
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:27:41 UTC-5.000] cache models/fx/fs_snow.tik
+[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/fx/fx_fence_wood.tik
+[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/fx/fx_fence_wood.skc
+[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/fx/fx_fence_wood.tik
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_hud 1
+[2026-08-10 11:27:41 UTC-5.000] ------- Sound End Registration -------
+[2026-08-10 11:27:41 UTC-5.000] ------- Sound End Registration Complete -------
+[2026-08-10 11:27:41 UTC-5.000] Z_TouchMemory: 0 msec
+[2026-08-10 11:27:41 UTC-5.000] CL_EndRegistration: -0.01 seconds
+[2026-08-10 11:27:41 UTC-5.000] CL_InitCGame:  1.12 seconds
+[2026-08-10 11:27:41 UTC-5.000] clientCommand: UnnamedSoldier#31929 : 1 : userinfo "\cheats\1\g_gametype\1\com_gamename\mohaa\deathmatch\1\skill\1\name\UnnamedSoldier#31929\rate\25000\snaps\20\dm_playermodel\american_army\dm_playergermanmodel\german_wehrmacht_soldier\g_realismmode\0\shortversion\0.82.1\cl_guid\1EBC65D7941EFF61D0889AC6C8108553"
+[2026-08-10 11:27:41 UTC-5.000] clientCommand: UnnamedSoldier#31929 : 2 : cp 1352469061 -550080020 455480933 725852527 1721431257 -648791937 
+[2026-08-10 11:27:41 UTC-5.000] Going from CS_PRIMED to CS_ACTIVE for UnnamedSoldier#31929
+[2026-08-10 11:27:41 UTC-5.000] Called FadeSound with: 0.000000
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 1 : stopwatch 0 0
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 2 : cs 1749 "UnknownAmmo"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 3 : cs 1750 "pistol"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 4 : cs 1751 "rifle"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 5 : cs 1752 "smg"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 6 : cs 1753 "mg"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 7 : cs 1754 "grenade"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 8 : cs 1755 "agrenade"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 9 : cs 1756 "heavy"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 10 : cs 1757 "shotgun"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 11 : cs 1684 "name\UnnamedSoldier#31929\team\1"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 12 : print "UnnamedSoldier#31929 has entered the battle
+"
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 13 : cs 1 "\sv_serverid\766\cg_rain_drawcoverage\0\cg_animationviewmodel\0\pmove_msec\0\pmove_fixed\0\r_static_shadermultiplier3\1\r_static_shadermultiplier2\1\r_static_shadermultiplier1\1\r_static_shadermultiplier0\1\r_static_shaderdata3\0\r_static_shaderdata2\0\r_static_shaderdata1\0\r_static_shaderdata0\0\sv_pure\0\com_radar_range\1024\timescale\1\cheats\1"
+
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: sv_serverid 766
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_rain_drawcoverage 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_animationviewmodel 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: pmove_msec 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: pmove_fixed 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shadermultiplier3 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shadermultiplier2 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shadermultiplier1 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shadermultiplier0 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shaderdata3 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shaderdata2 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shaderdata1 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shaderdata0 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: sv_pure 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: com_radar_range 1024
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: timescale 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cheats 1
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 1 : stopwatch 0 0
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 2 : cs 1749 "UnknownAmmo"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 3 : cs 1750 "pistol"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 4 : cs 1751 "rifle"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 5 : cs 1752 "smg"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 6 : cs 1753 "mg"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 7 : cs 1754 "grenade"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 8 : cs 1755 "agrenade"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 9 : cs 1756 "heavy"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 10 : cs 1757 "shotgun"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 11 : cs 1684 "name\UnnamedSoldier#31929\team\1"
+
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 12 : print "UnnamedSoldier#31929 has entered the battle
+"
+[2026-08-10 11:27:41 UTC-5.000] UnnamedSoldier#31929 has entered the battle
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 13 : cs 1 "\sv_serverid\766\cg_rain_drawcoverage\0\cg_animationviewmodel\0\pmove_msec\0\pmove_fixed\0\r_static_shadermultiplier3\1\r_static_shadermultiplier2\1\r_static_shadermultiplier1\1\r_static_shadermultiplier0\1\r_static_shaderdata3\0\r_static_shaderdata2\0\r_static_shaderdata1\0\r_static_shaderdata0\0\sv_pure\0\com_radar_range\1024\timescale\1\cheats\1"
+
+[2026-08-10 11:27:41 UTC-5.000] MUSIC: changing from [ none | none ] to [ normal | normal ]
+[2026-08-10 11:27:41 UTC-5.000] Couldn't find image for shader textures/hud/radar_allies.tga
+[2026-08-10 11:27:41 UTC-5.000] Couldn't find image for shader textures/hud/radar_axis.tga
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: pmove_msec 8
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_te_mode_name Temp Emitter Off
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: ui_timemessage Time Left:  0:00
+[2026-08-10 11:27:41 UTC-5.000] LOCALIZATION ERROR: 'Press Use(e) to follow a player.' does not have a localization entry
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: g_servertype 2
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_gametype 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_fraglimit 20
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_timelimit 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_maxclients 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_allowvote 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_alliedtext1 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_alliedtext2 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_alliedtext3 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_alliedtext4 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_alliedtext5 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_axistext1 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_axistext2 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_axistext3 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_axistext4 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_obj_axistext5 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_scoreboardpic 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_scoreboardpicover 
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_weapon_rifle 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_weapon_sniper 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_weapon_mg 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_weapon_smg 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_weapon_rocket 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_weapon_shotgun 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_weapon_landmine 1
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 14 : cs 1 "\sv_serverid\766\cg_rain_drawcoverage\0\cg_animationviewmodel\0\pmove_msec\8\pmove_fixed\0\r_static_shadermultiplier3\1\r_static_shadermultiplier2\1\r_static_shadermultiplier1\1\r_static_shadermultiplier0\1\r_static_shaderdata3\0\r_static_shaderdata2\0\r_static_shaderdata1\0\r_static_shaderdata0\0\sv_pure\0\com_radar_range\1024\timescale\1\cheats\1"
+
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: sv_serverid 766
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_rain_drawcoverage 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cg_animationviewmodel 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: pmove_msec 8
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: pmove_fixed 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shadermultiplier3 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shadermultiplier2 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shadermultiplier1 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shadermultiplier0 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shaderdata3 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shaderdata2 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shaderdata1 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: r_static_shaderdata0 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: sv_pure 0
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: com_radar_range 1024
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: timescale 1
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: cheats 1
+[2026-08-10 11:27:41 UTC-5.000] serverCommand: 14 : cs 1 "\sv_serverid\766\cg_rain_drawcoverage\0\cg_animationviewmodel\0\pmove_msec\8\pmove_fixed\0\r_static_shadermultiplier3\1\r_static_shadermultiplier2\1\r_static_shadermultiplier1\1\r_static_shadermultiplier0\1\r_static_shaderdata3\0\r_static_shaderdata2\0\r_static_shaderdata1\0\r_static_shaderdata0\0\sv_pure\0\com_radar_range\1024\timescale\1\cheats\1"
+
+[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: ui_timemessage 
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 15 : stufftext "ui_applyplayermodel"
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 15 : stufftext "ui_applyplayermodel"
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 16 : svlag
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 17 : stufftext "con_notifytime 0"
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 16 : svlag
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 17 : stufftext "con_notifytime 0"
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 18 : cs 1684 "name\UnnamedSoldier#31929\team\0"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 19 : cs 1894 "1 spectator 0 player(s)"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 20 : cs 1895 "3 allies 0 player(s)"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 21 : cs 1896 "4 axis 0 player(s)"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 22 : cs 1892 "3"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 23 : cs 1684 "name\UnnamedSoldier#31929\team\3"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 24 : stufftext "wait 250;pushmenu_weaponselect"
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 18 : cs 1684 "name\UnnamedSoldier#31929\team\0"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 19 : cs 1894 "1 spectator 0 player(s)"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 20 : cs 1895 "3 allies 0 player(s)"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 21 : cs 1896 "4 axis 0 player(s)"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 22 : cs 1892 "3"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 23 : cs 1684 "name\UnnamedSoldier#31929\team\3"
+
+[2026-08-10 11:27:47 UTC-5.000] serverCommand: 24 : stufftext "wait 250;pushmenu_weaponselect"
+[2026-08-10 11:27:47 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 25 : stopwatch 0 0
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 26 : cs 1758 "Unknown Item"
+
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 27 : cs 1759 "Unnamed Weapon"
+
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 28 : cs 1760 "M1 Garand"
+
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 29 : cs 1761 "Frag Grenade"
+
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 30 : cs 1762 "Colt 45"
+
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 25 : stopwatch 0 0
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 26 : cs 1758 "Unknown Item"
+
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 27 : cs 1759 "Unnamed Weapon"
+
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 28 : cs 1760 "M1 Garand"
+
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 29 : cs 1761 "Frag Grenade"
+
+[2026-08-10 11:27:50 UTC-5.000] serverCommand: 30 : cs 1762 "Colt 45"
+
+[2026-08-10 11:27:50 UTC-5.000] WARNING: reused image textures/sprites/dustdrop.tga with mixed allowPicmip parm
+[2026-08-10 11:27:53 UTC-5.000] serverCommand: 31 : stufftext "popmenu 0"
+[2026-08-10 11:27:53 UTC-5.000] serverCommand: 31 : stufftext "popmenu 0"
+[2026-08-10 11:27:53 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:53 UTC-5.000] serverCommand: 32 : stufftext "popmenu 0"
+[2026-08-10 11:27:53 UTC-5.000] serverCommand: 32 : stufftext "popmenu 0"
+[2026-08-10 11:27:53 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 33 : stufftext "popmenu 0"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 33 : stufftext "popmenu 0"
+[2026-08-10 11:27:54 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 34 : stufftext "ui_hidemouse"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 35 : stufftext "ui_hud 0"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 36 : stufftext "cg_drawviewmodel 0"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 37 : stufftext "clear"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 38 : stufftext "noclip"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 39 : stufftext "notarget"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 34 : stufftext "ui_hidemouse"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 35 : stufftext "ui_hud 0"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 36 : stufftext "cg_drawviewmodel 0"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 37 : stufftext "clear"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 38 : stufftext "noclip"
+[2026-08-10 11:27:54 UTC-5.000] serverCommand: 39 : stufftext "notarget"
+[2026-08-10 11:27:54 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:02 UTC-5.000] CODEX_VISUAL_QA axis_exterior_westbound
+[2026-08-10 11:28:02 UTC-5.000] serverCommand: 40 : stufftext "popmenu 0"
+[2026-08-10 11:28:02 UTC-5.000] serverCommand: 41 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:02 UTC-5.000] serverCommand: 42 : stufftext "ui_hud 0"
+[2026-08-10 11:28:02 UTC-5.000] serverCommand: 40 : stufftext "popmenu 0"
+[2026-08-10 11:28:02 UTC-5.000] serverCommand: 41 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:02 UTC-5.000] serverCommand: 42 : stufftext "ui_hud 0"
+[2026-08-10 11:28:02 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:02 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:02 UTC-5.000] serverCommand: 43 : stufftext "screenshot"
+[2026-08-10 11:28:02 UTC-5.000] serverCommand: 43 : stufftext "screenshot"
+[2026-08-10 11:28:07 UTC-5.000] CODEX_VISUAL_QA allied_exterior_northbound
+[2026-08-10 11:28:07 UTC-5.000] serverCommand: 44 : stufftext "popmenu 0"
+[2026-08-10 11:28:07 UTC-5.000] serverCommand: 45 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:07 UTC-5.000] serverCommand: 46 : stufftext "ui_hud 0"
+[2026-08-10 11:28:07 UTC-5.000] serverCommand: 44 : stufftext "popmenu 0"
+[2026-08-10 11:28:07 UTC-5.000] serverCommand: 45 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:07 UTC-5.000] serverCommand: 46 : stufftext "ui_hud 0"
+[2026-08-10 11:28:07 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:07 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:08 UTC-5.000] serverCommand: 47 : stufftext "screenshot"
+[2026-08-10 11:28:08 UTC-5.000] serverCommand: 47 : stufftext "screenshot"
+[2026-08-10 11:28:13 UTC-5.000] CODEX_VISUAL_QA mid_transition_forward
+[2026-08-10 11:28:13 UTC-5.000] serverCommand: 48 : stufftext "popmenu 0"
+[2026-08-10 11:28:13 UTC-5.000] serverCommand: 49 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:13 UTC-5.000] serverCommand: 50 : stufftext "ui_hud 0"
+[2026-08-10 11:28:13 UTC-5.000] serverCommand: 48 : stufftext "popmenu 0"
+[2026-08-10 11:28:13 UTC-5.000] serverCommand: 49 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:13 UTC-5.000] serverCommand: 50 : stufftext "ui_hud 0"
+[2026-08-10 11:28:13 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:13 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:13 UTC-5.000] serverCommand: 51 : stufftext "screenshot"
+[2026-08-10 11:28:13 UTC-5.000] serverCommand: 51 : stufftext "screenshot"
+[2026-08-10 11:28:18 UTC-5.000] CODEX_VISUAL_QA mid_transition_reverse
+[2026-08-10 11:28:18 UTC-5.000] serverCommand: 52 : stufftext "popmenu 0"
+[2026-08-10 11:28:18 UTC-5.000] serverCommand: 53 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:18 UTC-5.000] serverCommand: 54 : stufftext "ui_hud 0"
+[2026-08-10 11:28:18 UTC-5.000] serverCommand: 52 : stufftext "popmenu 0"
+[2026-08-10 11:28:18 UTC-5.000] serverCommand: 53 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:18 UTC-5.000] serverCommand: 54 : stufftext "ui_hud 0"
+[2026-08-10 11:28:18 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:18 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:18 UTC-5.000] serverCommand: 55 : stufftext "screenshot"
+[2026-08-10 11:28:18 UTC-5.000] serverCommand: 55 : stufftext "screenshot"
+[2026-08-10 11:28:23 UTC-5.000] CODEX_VISUAL_QA south_long_forward
+[2026-08-10 11:28:23 UTC-5.000] serverCommand: 56 : stufftext "popmenu 0"
+[2026-08-10 11:28:23 UTC-5.000] serverCommand: 57 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:23 UTC-5.000] serverCommand: 58 : stufftext "ui_hud 0"
+[2026-08-10 11:28:23 UTC-5.000] serverCommand: 56 : stufftext "popmenu 0"
+[2026-08-10 11:28:23 UTC-5.000] serverCommand: 57 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:23 UTC-5.000] serverCommand: 58 : stufftext "ui_hud 0"
+[2026-08-10 11:28:23 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:23 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:24 UTC-5.000] serverCommand: 59 : stufftext "screenshot"
+[2026-08-10 11:28:24 UTC-5.000] serverCommand: 59 : stufftext "screenshot"
+[2026-08-10 11:28:29 UTC-5.000] CODEX_VISUAL_QA south_long_reverse
+[2026-08-10 11:28:29 UTC-5.000] serverCommand: 60 : stufftext "popmenu 0"
+[2026-08-10 11:28:29 UTC-5.000] serverCommand: 61 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:29 UTC-5.000] serverCommand: 62 : stufftext "ui_hud 0"
+[2026-08-10 11:28:29 UTC-5.000] serverCommand: 60 : stufftext "popmenu 0"
+[2026-08-10 11:28:29 UTC-5.000] serverCommand: 61 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:29 UTC-5.000] serverCommand: 62 : stufftext "ui_hud 0"
+[2026-08-10 11:28:29 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:29 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:29 UTC-5.000] serverCommand: 63 : stufftext "screenshot"
+[2026-08-10 11:28:29 UTC-5.000] serverCommand: 63 : stufftext "screenshot"
+[2026-08-10 11:28:34 UTC-5.000] CODEX_VISUAL_QA west_long_forward
+[2026-08-10 11:28:34 UTC-5.000] serverCommand: 64 : stufftext "popmenu 0"
+[2026-08-10 11:28:34 UTC-5.000] serverCommand: 65 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:34 UTC-5.000] serverCommand: 66 : stufftext "ui_hud 0"
+[2026-08-10 11:28:34 UTC-5.000] serverCommand: 64 : stufftext "popmenu 0"
+[2026-08-10 11:28:34 UTC-5.000] serverCommand: 65 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:34 UTC-5.000] serverCommand: 66 : stufftext "ui_hud 0"
+[2026-08-10 11:28:34 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:34 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:34 UTC-5.000] serverCommand: 67 : stufftext "screenshot"
+[2026-08-10 11:28:34 UTC-5.000] serverCommand: 67 : stufftext "screenshot"
+[2026-08-10 11:28:39 UTC-5.000] CODEX_VISUAL_QA east_boundary_reverse
+[2026-08-10 11:28:39 UTC-5.000] serverCommand: 68 : stufftext "popmenu 0"
+[2026-08-10 11:28:39 UTC-5.000] serverCommand: 69 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:39 UTC-5.000] serverCommand: 70 : stufftext "ui_hud 0"
+[2026-08-10 11:28:39 UTC-5.000] serverCommand: 68 : stufftext "popmenu 0"
+[2026-08-10 11:28:39 UTC-5.000] serverCommand: 69 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:39 UTC-5.000] serverCommand: 70 : stufftext "ui_hud 0"
+[2026-08-10 11:28:39 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:39 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:40 UTC-5.000] serverCommand: 71 : stufftext "screenshot"
+[2026-08-10 11:28:40 UTC-5.000] serverCommand: 71 : stufftext "screenshot"
+[2026-08-10 11:28:45 UTC-5.000] CODEX_VISUAL_QA upper_interior
+[2026-08-10 11:28:45 UTC-5.000] serverCommand: 72 : stufftext "popmenu 0"
+[2026-08-10 11:28:45 UTC-5.000] serverCommand: 73 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:45 UTC-5.000] serverCommand: 74 : stufftext "ui_hud 0"
+[2026-08-10 11:28:45 UTC-5.000] serverCommand: 72 : stufftext "popmenu 0"
+[2026-08-10 11:28:45 UTC-5.000] serverCommand: 73 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:45 UTC-5.000] serverCommand: 74 : stufftext "ui_hud 0"
+[2026-08-10 11:28:45 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:45 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:45 UTC-5.000] serverCommand: 75 : stufftext "screenshot"
+[2026-08-10 11:28:45 UTC-5.000] serverCommand: 75 : stufftext "screenshot"
+[2026-08-10 11:28:50 UTC-5.000] CODEX_VISUAL_QA north_transition
+[2026-08-10 11:28:50 UTC-5.000] serverCommand: 76 : stufftext "popmenu 0"
+[2026-08-10 11:28:50 UTC-5.000] serverCommand: 77 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:50 UTC-5.000] serverCommand: 78 : stufftext "ui_hud 0"
+[2026-08-10 11:28:50 UTC-5.000] serverCommand: 76 : stufftext "popmenu 0"
+[2026-08-10 11:28:50 UTC-5.000] serverCommand: 77 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:50 UTC-5.000] serverCommand: 78 : stufftext "ui_hud 0"
+[2026-08-10 11:28:50 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:50 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:50 UTC-5.000] serverCommand: 79 : stufftext "screenshot"
+[2026-08-10 11:28:50 UTC-5.000] serverCommand: 79 : stufftext "screenshot"
+[2026-08-10 11:28:55 UTC-5.000] CODEX_VISUAL_QA door_front
+[2026-08-10 11:28:55 UTC-5.000] serverCommand: 80 : stufftext "popmenu 0"
+[2026-08-10 11:28:55 UTC-5.000] serverCommand: 81 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:55 UTC-5.000] serverCommand: 82 : stufftext "ui_hud 0"
+[2026-08-10 11:28:55 UTC-5.000] serverCommand: 80 : stufftext "popmenu 0"
+[2026-08-10 11:28:55 UTC-5.000] serverCommand: 81 : stufftext "ui_hidemouse"
+[2026-08-10 11:28:55 UTC-5.000] serverCommand: 82 : stufftext "ui_hud 0"
+[2026-08-10 11:28:55 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:28:55 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:28:56 UTC-5.000] serverCommand: 83 : stufftext "screenshot"
+[2026-08-10 11:28:56 UTC-5.000] serverCommand: 83 : stufftext "screenshot"
+[2026-08-10 11:29:01 UTC-5.000] CODEX_VISUAL_QA door_reverse
+[2026-08-10 11:29:01 UTC-5.000] serverCommand: 84 : stufftext "popmenu 0"
+[2026-08-10 11:29:01 UTC-5.000] serverCommand: 85 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:01 UTC-5.000] serverCommand: 86 : stufftext "ui_hud 0"
+[2026-08-10 11:29:01 UTC-5.000] serverCommand: 84 : stufftext "popmenu 0"
+[2026-08-10 11:29:01 UTC-5.000] serverCommand: 85 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:01 UTC-5.000] serverCommand: 86 : stufftext "ui_hud 0"
+[2026-08-10 11:29:01 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:29:01 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:29:01 UTC-5.000] serverCommand: 87 : stufftext "screenshot"
+[2026-08-10 11:29:01 UTC-5.000] serverCommand: 87 : stufftext "screenshot"
+[2026-08-10 11:29:06 UTC-5.000] CODEX_VISUAL_QA notjunc_low_south
+[2026-08-10 11:29:06 UTC-5.000] serverCommand: 88 : stufftext "popmenu 0"
+[2026-08-10 11:29:06 UTC-5.000] serverCommand: 89 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:06 UTC-5.000] serverCommand: 90 : stufftext "ui_hud 0"
+[2026-08-10 11:29:06 UTC-5.000] serverCommand: 88 : stufftext "popmenu 0"
+[2026-08-10 11:29:06 UTC-5.000] serverCommand: 89 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:06 UTC-5.000] serverCommand: 90 : stufftext "ui_hud 0"
+[2026-08-10 11:29:06 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:29:06 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:29:06 UTC-5.000] serverCommand: 91 : stufftext "screenshot"
+[2026-08-10 11:29:06 UTC-5.000] serverCommand: 91 : stufftext "screenshot"
+[2026-08-10 11:29:11 UTC-5.000] CODEX_VISUAL_QA notjunc_low_west
+[2026-08-10 11:29:11 UTC-5.000] serverCommand: 92 : stufftext "popmenu 0"
+[2026-08-10 11:29:11 UTC-5.000] serverCommand: 93 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:11 UTC-5.000] serverCommand: 94 : stufftext "ui_hud 0"
+[2026-08-10 11:29:11 UTC-5.000] serverCommand: 92 : stufftext "popmenu 0"
+[2026-08-10 11:29:11 UTC-5.000] serverCommand: 93 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:11 UTC-5.000] serverCommand: 94 : stufftext "ui_hud 0"
+[2026-08-10 11:29:11 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:29:11 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:29:12 UTC-5.000] serverCommand: 95 : stufftext "screenshot"
+[2026-08-10 11:29:12 UTC-5.000] serverCommand: 95 : stufftext "screenshot"
+[2026-08-10 11:29:17 UTC-5.000] CODEX_VISUAL_QA high_overview_center
+[2026-08-10 11:29:17 UTC-5.000] serverCommand: 96 : stufftext "popmenu 0"
+[2026-08-10 11:29:17 UTC-5.000] serverCommand: 97 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:17 UTC-5.000] serverCommand: 98 : stufftext "ui_hud 0"
+[2026-08-10 11:29:17 UTC-5.000] serverCommand: 96 : stufftext "popmenu 0"
+[2026-08-10 11:29:17 UTC-5.000] serverCommand: 97 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:17 UTC-5.000] serverCommand: 98 : stufftext "ui_hud 0"
+[2026-08-10 11:29:17 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:29:17 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:29:17 UTC-5.000] serverCommand: 99 : stufftext "screenshot"
+[2026-08-10 11:29:17 UTC-5.000] serverCommand: 99 : stufftext "screenshot"
+[2026-08-10 11:29:22 UTC-5.000] CODEX_VISUAL_QA high_overview_northwest
+[2026-08-10 11:29:22 UTC-5.000] serverCommand: 100 : stufftext "popmenu 0"
+[2026-08-10 11:29:22 UTC-5.000] serverCommand: 101 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:22 UTC-5.000] serverCommand: 102 : stufftext "ui_hud 0"
+[2026-08-10 11:29:22 UTC-5.000] serverCommand: 100 : stufftext "popmenu 0"
+[2026-08-10 11:29:22 UTC-5.000] serverCommand: 101 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:22 UTC-5.000] serverCommand: 102 : stufftext "ui_hud 0"
+[2026-08-10 11:29:22 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:29:22 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:29:23 UTC-5.000] serverCommand: 103 : stufftext "screenshot"
+[2026-08-10 11:29:23 UTC-5.000] serverCommand: 103 : stufftext "screenshot"
+[2026-08-10 11:29:27 UTC-5.000] CODEX_VISUAL_QA north_boundary
+[2026-08-10 11:29:28 UTC-5.000] serverCommand: 104 : stufftext "popmenu 0"
+[2026-08-10 11:29:28 UTC-5.000] serverCommand: 105 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:28 UTC-5.000] serverCommand: 106 : stufftext "ui_hud 0"
+[2026-08-10 11:29:28 UTC-5.000] serverCommand: 104 : stufftext "popmenu 0"
+[2026-08-10 11:29:28 UTC-5.000] serverCommand: 105 : stufftext "ui_hidemouse"
+[2026-08-10 11:29:28 UTC-5.000] serverCommand: 106 : stufftext "ui_hud 0"
+[2026-08-10 11:29:28 UTC-5.000] Cvar_Set2: ui_newvidmode -1
+[2026-08-10 11:29:28 UTC-5.000] Cvar_Set2: cg_hud 0
+[2026-08-10 11:29:28 UTC-5.000] serverCommand: 107 : stufftext "screenshot"
+[2026-08-10 11:29:28 UTC-5.000] serverCommand: 107 : stufftext "screenshot"
+[2026-08-10 11:29:34 UTC-5.000] serverCommand: 108 : stufftext "quit"
+[2026-08-10 11:29:34 UTC-5.000] serverCommand: 108 : stufftext "quit"

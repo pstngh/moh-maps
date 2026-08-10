@@ -1,0 +1,1010 @@
+[2026-08-10 11:52:45 UTC-5.000] logfile opened on Mon Aug 10 11:52:45 2026
+
+[2026-08-10 11:52:45 UTC-5.000] => game is version OpenMoHAA 0.82.1-beta+5.a72bc15 win_msvc64-x86_64 Aug 05 2025 UTC
+[2026-08-10 11:52:45 UTC-5.000] => targeting game ID 0
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: viewlog 1
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: com_updatecheck_interval 15
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: arch win_msvc64 x86_64
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: username plex
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_maxplayerhealth 750
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: skill 1
+[2026-08-10 11:52:45 UTC-5.000] You are now setup for medium mode.
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: com_altivec 0
+[2026-08-10 11:52:45 UTC-5.000] --- Common Initialization Complete --- 146 ms
+[2026-08-10 11:52:45 UTC-5.000] -- Localization: I see 1 localization files
+[2026-08-10 11:52:45 UTC-5.000] --- Localization: reading file global/localization.txt
+[2026-08-10 11:52:45 UTC-5.000] Loading Localization File global/localization.txt
+[2026-08-10 11:52:45 UTC-5.000] Loaded 1242 localization entries
+[2026-08-10 11:52:45 UTC-5.000] Loading "libcurl.dll"...
+[2026-08-10 11:52:45 UTC-5.000] Trying to load "libcurl.dll"...
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_version (0x00007FFD1F63E820)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_getenv (0x00007FFD1F601CF0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_free (0x00007FFD1F5E22F0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_slist_append (0x00007FFD1F62A420)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_slist_free_all (0x00007FFD1F62A4E0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_version_info (0x00007FFD1F63E920)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_strerror (0x00007FFD1F6313D0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_share_strerror (0x00007FFD1F631930)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_pause (0x00007FFD1F5F8C50)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_escape (0x00007FFD1F5F9800)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_unescape (0x00007FFD1F5F9960)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_init (0x00007FFD1F5F8BE0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_setopt (0x00007FFD1F626BC0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_perform (0x00007FFD1F5F8DD0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_cleanup (0x00007FFD1F5F87A0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_getinfo (0x00007FFD1F5F8BB0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_duphandle (0x00007FFD1F5F87D0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_reset (0x00007FFD1F5F8EC0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_recv (0x00007FFD1F5F8DE0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_send (0x00007FFD1F5F8F60)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_easy_upkeep (0x00007FFD1F5F9060)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_init (0x00007FFD1F61A150)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_add_handle (0x00007FFD1F619A50)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_remove_handle (0x00007FFD1F61A550)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_fdset (0x00007FFD1F619E80)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_wait (0x00007FFD1F61A9D0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_poll (0x00007FFD1F61A520)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_wakeup (0x00007FFD1F61AB20)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_perform (0x00007FFD1F61A330)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_cleanup (0x00007FFD1F619C70)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_info_read (0x00007FFD1F61A0B0)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_strerror (0x00007FFD1F631850)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_socket_action (0x00007FFD1F61A920)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_timeout (0x00007FFD1F61A990)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_setopt (0x00007FFD1F61A780)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_multi_assign (0x00007FFD1F619C10)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_pushheader_bynum (0x00007FFD1F5E2510)
+[2026-08-10 11:52:45 UTC-5.000] Loaded symbol curl_pushheader_byname (0x00007FFD1F5E2510)
+[2026-08-10 11:52:45 UTC-5.000] Winsock Initialized
+[2026-08-10 11:52:45 UTC-5.000] Hostname: DESKTOP-FODB6P8
+[2026-08-10 11:52:45 UTC-5.000] IP6: fe80::29e8:d6f3:b70e:61b3%3
+[2026-08-10 11:52:45 UTC-5.000] IP6: fe80::8a33:609c:d5c8:3859%19
+[2026-08-10 11:52:45 UTC-5.000] IP6: fe80::85f0:10c1:1268:bd16%18
+[2026-08-10 11:52:45 UTC-5.000] IP: 192.168.50.115
+[2026-08-10 11:52:45 UTC-5.000] IP: 192.168.160.1
+[2026-08-10 11:52:45 UTC-5.000] IP: 192.168.211.1
+[2026-08-10 11:52:45 UTC-5.000] Opening IP socket: 0.0.0.0:12390
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: net_port 12390
+[2026-08-10 11:52:45 UTC-5.000] ------ Server Initialization ------
+[2026-08-10 11:52:45 UTC-5.000] Server: dm/codex_cache
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_netoptimize 1
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: sv_running 1
+[2026-08-10 11:52:45 UTC-5.000] Trying to load "game.dll" from "C:\Users\plex\Documents\Codex\2026-07-24\pstngh-moh-maps-https-github-com\work\openmohaa-bin\runtime"...
+[2026-08-10 11:52:45 UTC-5.000] Sys_GetGameAPI(game.dll): succeeded ...
+[2026-08-10 11:52:45 UTC-5.000] ==== InitGame ====
+[2026-08-10 11:52:45 UTC-5.000] gamename: OPENMOHAA
+[2026-08-10 11:52:45 UTC-5.000] gamedate: Aug  5 2025
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: sv_runspeed 250
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: deathmatch 1
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_gametypestring Free-For-All
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_alliedtext1 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_axistext1 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_alliedtext2 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_axistext2 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_alliedtext3 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_axistext3 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_alliedtext4 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_axistext4 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_alliedtext5 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_obj_axistext5 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_scoreboardpic 
+[2026-08-10 11:52:45 UTC-5.000] sizeof(Actor) == 4128
+[2026-08-10 11:52:45 UTC-5.000] Magic sizeof actor number: 4064
+[2026-08-10 11:52:45 UTC-5.000] 
+------------------
+Event system initialized: 200 classes 1764 events 2822400 total memory in response list
+
+[2026-08-10 11:52:45 UTC-5.000] ==== CleanupGame ====
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: session 1
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: g_scoreboardpicover 
+[2026-08-10 11:52:45 UTC-5.000] Cvar_Set2: bosshealth 0
+[2026-08-10 11:52:45 UTC-5.000] CM_LoadMap( maps/dm/codex_cache.bsp, 0 )
+[2026-08-10 11:52:46 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:52:46 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:52:46 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:52:46 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:52:46 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:52:46 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: sv_mapChecksum -1862603596
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: mapname dm/codex_cache
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: sv_serverid 293
+[2026-08-10 11:52:46 UTC-5.000] Adding script: 'maps/dm/codex_cache_precache.scr'
+[2026-08-10 11:52:46 UTC-5.000] TIKI_InitTiki: could not find surface 'panzerschreck2' in 'models/weapons/panzerschreck.tik' (check referenced skb/skd files).
+[2026-08-10 11:52:46 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).
+[2026-08-10 11:52:46 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).
+[2026-08-10 11:52:46 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).
+[2026-08-10 11:52:46 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ Box data is corrupted for 'models/human/allied_pilot/allied_pilot.skd'
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Channel named Bip01 L Clavicle pos not added. (Bone will not work without it)
+[2026-08-10 11:52:46 UTC-5.000] Channel named Bip01 R Clavicle pos not added. (Bone will not work without it)
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] WARNING: Couldn't find voting options file: callvote.cfg
+[2026-08-10 11:52:46 UTC-5.000] -------------------- Spawning Entities -----------------------
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: skill 1
+[2026-08-10 11:52:46 UTC-5.000] soundtrack switched to .
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: sv_gravity 800
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: sv_cinematic 0
+[2026-08-10 11:52:46 UTC-5.000] -------------------- Actual Spawning Entities -----------------------
+[2026-08-10 11:52:46 UTC-5.000] -------------------- Actual Spawning Entities Done ------------------ 1 ms
+[2026-08-10 11:52:46 UTC-5.000] 0 teams with 0 entities
+[2026-08-10 11:52:46 UTC-5.000] Adding script: 'maps/dm/codex_cache.scr'
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+[2026-08-10 11:52:46 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+[2026-08-10 11:52:46 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 11:52:46 UTC-5.000] 1 entities spawned
+[2026-08-10 11:52:46 UTC-5.000] 66 simple entities spawned
+[2026-08-10 11:52:46 UTC-5.000] 0 entities inhibited
+[2026-08-10 11:52:46 UTC-5.000] -------------------- Spawning Entities Done ------------------ 10 ms
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: sv_paks 
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: sv_pakNames 
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: sv_referencedPaks 
+[2026-08-10 11:52:46 UTC-5.000] Cvar_Set2: sv_referencedPakNames 
+[2026-08-10 11:52:46 UTC-5.000] 
+
+-----------PARSING 'ubersound/uberdialog.scr' (SERVER)------------
+[2026-08-10 11:52:46 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.
+[2026-08-10 11:52:46 UTC-5.000] G_Command_ProcessFile: ubersound/uberdialog.scr
+[2026-08-10 11:52:46 UTC-5.000] Parse/Load time: 0.029000 seconds.
+[2026-08-10 11:52:46 UTC-5.000] -------------PARSING 'ubersound/uberdialog.scr' DONE (SERVER)---------------
+
+[2026-08-10 11:52:46 UTC-5.000] 
+
+-----------PARSING 'ubersound/ubersound.scr' (SERVER)------------
+[2026-08-10 11:52:46 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.
+[2026-08-10 11:52:46 UTC-5.000] G_Command_ProcessFile: ubersound/ubersound.scr
+[2026-08-10 11:52:46 UTC-5.000] Parse/Load time: 0.015000 seconds.
+[2026-08-10 11:52:46 UTC-5.000] -------------PARSING 'ubersound/ubersound.scr' DONE (SERVER)---------------
+
+[2026-08-10 11:52:46 UTC-5.000] ------ Server Initialization Complete ------  1.04 seconds
+[2026-08-10 11:52:46 UTC-5.000] ---- Recast Navigation ----
+[2026-08-10 11:52:46 UTC-5.000] BSP file loaded and parsed in 0.192 seconds
+[2026-08-10 11:52:46 UTC-5.000] Building the navigation mesh...
+[2026-08-10 11:52:46 UTC-5.000]   Building the world mesh...
+[2026-08-10 11:52:47 UTC-5.000] Recast (category 2): rcBuildContours: Expanding max contours from 282 to 564.
+[2026-08-10 11:52:50 UTC-5.000]   Building meshes for entities...
+[2026-08-10 11:52:50 UTC-5.000] Recast navigation mesh(es) generated in 3.922 seconds
+[2026-08-10 11:52:50 UTC-5.000] Cvar_Set2: session16 - 0 0
+[2026-08-10 11:52:50 UTC-5.000] bot1 has entered the battle
+[2026-08-10 11:52:50 UTC-5.000] Can't find 'global/bot_run.scr'
+
+[2026-08-10 11:52:50 UTC-5.000] Cvar_Set2: session17 - 0 0
+[2026-08-10 11:52:50 UTC-5.000] bot2 has entered the battle
+[2026-08-10 11:52:50 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 11:52:50 UTC-5.000] Cvar_Set2: session18 - 0 0
+[2026-08-10 11:52:50 UTC-5.000] bot3 has entered the battle
+[2026-08-10 11:52:50 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 11:52:50 UTC-5.000] Cvar_Set2: session19 - 0 0
+[2026-08-10 11:52:50 UTC-5.000] bot4 has entered the battle
+[2026-08-10 11:52:50 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 11:52:50 UTC-5.000] Cvar_Set2: session20 - 0 0
+[2026-08-10 11:52:50 UTC-5.000] bot5 has entered the battle
+[2026-08-10 11:52:50 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 11:52:50 UTC-5.000] Cvar_Set2: session21 - 0 0
+[2026-08-10 11:52:50 UTC-5.000] bot6 has entered the battle
+[2026-08-10 11:52:50 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 11:52:50 UTC-5.000] Cvar_Set2: session22 - 0 0
+[2026-08-10 11:52:50 UTC-5.000] bot7 has entered the battle
+[2026-08-10 11:52:50 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 11:52:50 UTC-5.000] Cvar_Set2: session23 - 0 0
+[2026-08-10 11:52:50 UTC-5.000] bot8 has entered the battle
+[2026-08-10 11:52:50 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 11:52:50 UTC-5.000] Hitch warning: 4874 msec frame time
+[2026-08-10 11:52:50 UTC-5.000] bot4 shouts @all: Go on and run, you yellow-bellies!
+[2026-08-10 11:52:50 UTC-5.000] bot8 was machine-gunned by bot4
+[2026-08-10 11:52:50 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:52:50 UTC-5.000] cache models/items/dm_50_healthbox.tik
+[2026-08-10 11:52:51 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 11:52:51 UTC-5.000] cache models/fx/bazookaexplosion_dm.tik
+[2026-08-10 11:52:53 UTC-5.000] CODEX_BOT_SAMPLE sample=0 player_index=1 alive=1 origin=( -714.253 -980.224 1613.125 )
+[2026-08-10 11:52:53 UTC-5.000] CODEX_BOT_SAMPLE sample=0 player_index=2 alive=1 origin=( -554.779 1252.706 1687.125 )
+[2026-08-10 11:52:53 UTC-5.000] CODEX_BOT_SAMPLE sample=0 player_index=3 alive=1 origin=( 3201.611 630.361 1655.125 )
+[2026-08-10 11:52:53 UTC-5.000] CODEX_BOT_SAMPLE sample=0 player_index=4 alive=1 origin=( -1115.482 242.898 1614.125 )
+[2026-08-10 11:52:53 UTC-5.000] CODEX_BOT_SAMPLE sample=0 player_index=5 alive=1 origin=( 1513.901 499.079 1613.125 )
+[2026-08-10 11:52:53 UTC-5.000] CODEX_BOT_SAMPLE sample=0 player_index=6 alive=1 origin=( 478.119 -764.172 1612.125 )
+[2026-08-10 11:52:53 UTC-5.000] CODEX_BOT_SAMPLE sample=0 player_index=7 alive=1 origin=( 1035.796 1849.495 1701.125 )
+[2026-08-10 11:52:53 UTC-5.000] CODEX_BOT_SAMPLE sample=0 player_index=8 alive=1 origin=( 1683.886 -929.859 1613.125 )
+[2026-08-10 11:52:54 UTC-5.000] CODEX_BOT_SAMPLE sample=1 player_index=1 alive=1 origin=( -913.153 -1029.858 1613.125 )
+[2026-08-10 11:52:54 UTC-5.000] CODEX_BOT_SAMPLE sample=1 player_index=2 alive=1 origin=( -742.716 1138.339 1687.125 )
+[2026-08-10 11:52:54 UTC-5.000] CODEX_BOT_SAMPLE sample=1 player_index=3 alive=1 origin=( 3214.766 634.115 1655.125 )
+[2026-08-10 11:52:54 UTC-5.000] CODEX_BOT_SAMPLE sample=1 player_index=4 alive=1 origin=( -1128.902 144.105 1613.125 )
+[2026-08-10 11:52:54 UTC-5.000] CODEX_BOT_SAMPLE sample=1 player_index=5 alive=1 origin=( 1405.018 571.106 1613.125 )
+[2026-08-10 11:52:54 UTC-5.000] CODEX_BOT_SAMPLE sample=1 player_index=6 alive=1 origin=( 360.790 -550.233 1612.125 )
+[2026-08-10 11:52:54 UTC-5.000] CODEX_BOT_SAMPLE sample=1 player_index=7 alive=1 origin=( 1171.711 1619.570 1705.125 )
+[2026-08-10 11:52:54 UTC-5.000] CODEX_BOT_SAMPLE sample=1 player_index=8 alive=1 origin=( 1537.438 -786.870 1613.125 )
+[2026-08-10 11:52:55 UTC-5.000] CODEX_BOT_SAMPLE sample=2 player_index=1 alive=1 origin=( -1077.457 -1045.447 1613.125 )
+[2026-08-10 11:52:55 UTC-5.000] CODEX_BOT_SAMPLE sample=2 player_index=2 alive=1 origin=( -905.396 1025.125 1680.559 )
+[2026-08-10 11:52:55 UTC-5.000] CODEX_BOT_SAMPLE sample=2 player_index=3 alive=1 origin=( 2958.047 652.686 1655.125 )
+[2026-08-10 11:52:55 UTC-5.000] CODEX_BOT_SAMPLE sample=2 player_index=4 alive=1 origin=( -1160.607 -59.804 1613.125 )
+[2026-08-10 11:52:55 UTC-5.000] CODEX_BOT_SAMPLE sample=2 player_index=5 alive=1 origin=( 1210.143 632.889 1613.125 )
+[2026-08-10 11:52:55 UTC-5.000] CODEX_BOT_SAMPLE sample=2 player_index=6 alive=1 origin=( 223.269 -395.132 1614.125 )
+[2026-08-10 11:52:55 UTC-5.000] CODEX_BOT_SAMPLE sample=2 player_index=7 alive=1 origin=( 1217.171 1385.421 1701.125 )
+[2026-08-10 11:52:55 UTC-5.000] CODEX_BOT_SAMPLE sample=2 player_index=8 alive=1 origin=( 1414.940 -749.921 1614.125 )
+[2026-08-10 11:52:56 UTC-5.000] bot7 shouts @all: Try again!
+[2026-08-10 11:52:56 UTC-5.000] bot5 was hunted down by bot7
+[2026-08-10 11:52:56 UTC-5.000] CODEX_BOT_SAMPLE sample=3 player_index=1 alive=1 origin=( -1037.533 -930.770 1613.125 )
+[2026-08-10 11:52:56 UTC-5.000] CODEX_BOT_SAMPLE sample=3 player_index=2 alive=1 origin=( -957.403 837.232 1658.119 )
+[2026-08-10 11:52:56 UTC-5.000] CODEX_BOT_SAMPLE sample=3 player_index=3 alive=1 origin=( 2856.918 658.872 1655.125 )
+[2026-08-10 11:52:56 UTC-5.000] CODEX_BOT_SAMPLE sample=3 player_index=4 alive=1 origin=( -1198.000 -273.478 1613.125 )
+[2026-08-10 11:52:56 UTC-5.000] CODEX_BOT_SAMPLE sample=3 player_index=5 alive=0 origin=( 1014.728 694.838 1613.125 )
+[2026-08-10 11:52:56 UTC-5.000] CODEX_BOT_SAMPLE sample=3 player_index=6 alive=1 origin=( -13.223 -410.400 1614.125 )
+[2026-08-10 11:52:56 UTC-5.000] CODEX_BOT_SAMPLE sample=3 player_index=7 alive=1 origin=( 1208.212 1207.849 1677.082 )
+[2026-08-10 11:52:56 UTC-5.000] CODEX_BOT_SAMPLE sample=3 player_index=8 alive=1 origin=( 1219.265 -809.677 1614.125 )
+[2026-08-10 11:52:57 UTC-5.000] CODEX_BOT_SAMPLE sample=4 player_index=1 alive=1 origin=( -962.803 -761.439 1617.096 )
+[2026-08-10 11:52:57 UTC-5.000] CODEX_BOT_SAMPLE sample=4 player_index=2 alive=1 origin=( -984.828 620.491 1632.209 )
+[2026-08-10 11:52:57 UTC-5.000] CODEX_BOT_SAMPLE sample=4 player_index=3 alive=1 origin=( 2825.232 753.052 1695.125 )
+[2026-08-10 11:52:57 UTC-5.000] CODEX_BOT_SAMPLE sample=4 player_index=4 alive=1 origin=( -1207.547 -201.815 1613.125 )
+[2026-08-10 11:52:57 UTC-5.000] CODEX_BOT_SAMPLE sample=4 player_index=5 alive=0 origin=( 1014.728 694.838 1613.125 )
+[2026-08-10 11:52:57 UTC-5.000] CODEX_BOT_SAMPLE sample=4 player_index=6 alive=1 origin=( -124.007 -494.779 1613.125 )
+[2026-08-10 11:52:57 UTC-5.000] CODEX_BOT_SAMPLE sample=4 player_index=7 alive=1 origin=( 1139.806 1145.027 1658.654 )
+[2026-08-10 11:52:57 UTC-5.000] CODEX_BOT_SAMPLE sample=4 player_index=8 alive=1 origin=( 1101.653 -915.951 1614.125 )
+[2026-08-10 11:52:58 UTC-5.000] CODEX_BOT_SAMPLE sample=5 player_index=1 alive=1 origin=( -942.927 -623.710 1614.125 )
+[2026-08-10 11:52:58 UTC-5.000] CODEX_BOT_SAMPLE sample=5 player_index=2 alive=1 origin=( -1012.947 403.672 1614.125 )
+[2026-08-10 11:52:58 UTC-5.000] CODEX_BOT_SAMPLE sample=5 player_index=3 alive=1 origin=( 2868.992 912.452 1686.520 )
+[2026-08-10 11:52:58 UTC-5.000] CODEX_BOT_SAMPLE sample=5 player_index=4 alive=1 origin=( -1211.807 -40.787 1613.125 )
+[2026-08-10 11:52:58 UTC-5.000] CODEX_BOT_SAMPLE sample=5 player_index=5 alive=1 origin=( -275.596 2215.847 1703.093 )
+[2026-08-10 11:52:58 UTC-5.000] CODEX_BOT_SAMPLE sample=5 player_index=6 alive=1 origin=( -283.669 -677.129 1613.125 )
+[2026-08-10 11:52:58 UTC-5.000] CODEX_BOT_SAMPLE sample=5 player_index=7 alive=1 origin=( 1136.978 1406.178 1701.125 )
+[2026-08-10 11:52:58 UTC-5.000] CODEX_BOT_SAMPLE sample=5 player_index=8 alive=1 origin=( 1066.504 -1117.587 1612.125 )
+[2026-08-10 11:52:59 UTC-5.000] CODEX_BOT_SAMPLE sample=6 player_index=1 alive=1 origin=( -985.571 -455.362 1614.125 )
+[2026-08-10 11:52:59 UTC-5.000] CODEX_BOT_SAMPLE sample=6 player_index=2 alive=1 origin=( -1051.801 188.791 1614.125 )
+[2026-08-10 11:52:59 UTC-5.000] CODEX_BOT_SAMPLE sample=6 player_index=3 alive=1 origin=( 3069.836 879.989 1655.125 )
+[2026-08-10 11:52:59 UTC-5.000] CODEX_BOT_SAMPLE sample=6 player_index=4 alive=1 origin=( -1136.396 -14.419 1613.125 )
+[2026-08-10 11:52:59 UTC-5.000] CODEX_BOT_SAMPLE sample=6 player_index=5 alive=1 origin=( -147.033 2125.960 1687.125 )
+[2026-08-10 11:52:59 UTC-5.000] CODEX_BOT_SAMPLE sample=6 player_index=6 alive=1 origin=( -423.817 -843.950 1613.125 )
+[2026-08-10 11:52:59 UTC-5.000] CODEX_BOT_SAMPLE sample=6 player_index=7 alive=1 origin=( 1121.776 1669.168 1703.125 )
+[2026-08-10 11:52:59 UTC-5.000] CODEX_BOT_SAMPLE sample=6 player_index=8 alive=1 origin=( 1034.844 -1299.414 1613.125 )
+[2026-08-10 11:52:59 UTC-5.000] bot4 took bot1's rocket in the face
+[2026-08-10 11:53:00 UTC-5.000] CODEX_BOT_SAMPLE sample=7 player_index=1 alive=1 origin=( -1021.629 -279.697 1621.232 )
+[2026-08-10 11:53:00 UTC-5.000] CODEX_BOT_SAMPLE sample=7 player_index=2 alive=1 origin=( -1043.703 25.995 1614.125 )
+[2026-08-10 11:53:00 UTC-5.000] CODEX_BOT_SAMPLE sample=7 player_index=3 alive=1 origin=( 3313.871 815.783 1655.125 )
+[2026-08-10 11:53:00 UTC-5.000] CODEX_BOT_SAMPLE sample=7 player_index=4 alive=0 origin=( -1145.587 -11.631 1613.125 )
+[2026-08-10 11:53:00 UTC-5.000] CODEX_BOT_SAMPLE sample=7 player_index=5 alive=1 origin=( 14.288 1999.466 1687.125 )
+[2026-08-10 11:53:00 UTC-5.000] CODEX_BOT_SAMPLE sample=7 player_index=6 alive=1 origin=( -661.893 -835.664 1614.125 )
+[2026-08-10 11:53:00 UTC-5.000] CODEX_BOT_SAMPLE sample=7 player_index=7 alive=1 origin=( 983.887 1901.076 1701.125 )
+[2026-08-10 11:53:00 UTC-5.000] CODEX_BOT_SAMPLE sample=7 player_index=8 alive=1 origin=( 1020.374 -1186.037 1614.125 )
+[2026-08-10 11:53:01 UTC-5.000] bot1 was machine-gunned by bot6
+[2026-08-10 11:53:01 UTC-5.000] CODEX_BOT_SAMPLE sample=8 player_index=1 alive=0 origin=( -1060.122 -150.129 1614.125 )
+[2026-08-10 11:53:01 UTC-5.000] CODEX_BOT_SAMPLE sample=8 player_index=2 alive=1 origin=( -1059.597 -115.871 1614.125 )
+[2026-08-10 11:53:01 UTC-5.000] CODEX_BOT_SAMPLE sample=8 player_index=3 alive=1 origin=( 3531.405 795.092 1655.125 )
+[2026-08-10 11:53:01 UTC-5.000] CODEX_BOT_SAMPLE sample=8 player_index=4 alive=0 origin=( -1226.995 35.264 1613.125 )
+[2026-08-10 11:53:01 UTC-5.000] CODEX_BOT_SAMPLE sample=8 player_index=5 alive=1 origin=( 175.608 1872.972 1687.125 )
+[2026-08-10 11:53:01 UTC-5.000] CODEX_BOT_SAMPLE sample=8 player_index=6 alive=1 origin=( -782.771 -651.795 1613.454 )
+[2026-08-10 11:53:01 UTC-5.000] CODEX_BOT_SAMPLE sample=8 player_index=7 alive=1 origin=( 949.894 1990.989 1703.125 )
+[2026-08-10 11:53:01 UTC-5.000] CODEX_BOT_SAMPLE sample=8 player_index=8 alive=1 origin=( 945.794 -1024.314 1612.125 )
+[2026-08-10 11:53:02 UTC-5.000] CODEX_BOT_SAMPLE sample=9 player_index=1 alive=0 origin=( -1060.429 -147.858 1614.125 )
+[2026-08-10 11:53:02 UTC-5.000] CODEX_BOT_SAMPLE sample=9 player_index=2 alive=1 origin=( -1062.128 -118.453 1614.125 )
+[2026-08-10 11:53:02 UTC-5.000] CODEX_BOT_SAMPLE sample=9 player_index=3 alive=1 origin=( 3789.022 781.000 1655.125 )
+[2026-08-10 11:53:02 UTC-5.000] CODEX_BOT_SAMPLE sample=9 player_index=4 alive=1 origin=( 1694.859 448.264 1613.125 )
+[2026-08-10 11:53:02 UTC-5.000] CODEX_BOT_SAMPLE sample=9 player_index=5 alive=1 origin=( 336.932 1746.481 1687.125 )
+[2026-08-10 11:53:02 UTC-5.000] CODEX_BOT_SAMPLE sample=9 player_index=6 alive=1 origin=( -905.395 -443.085 1614.125 )
+[2026-08-10 11:53:02 UTC-5.000] CODEX_BOT_SAMPLE sample=9 player_index=7 alive=1 origin=( 1073.382 1756.098 1701.125 )
+[2026-08-10 11:53:02 UTC-5.000] CODEX_BOT_SAMPLE sample=9 player_index=8 alive=1 origin=( 777.158 -933.924 1614.125 )
+[2026-08-10 11:53:03 UTC-5.000] bot6 was sniped by bot2
+[2026-08-10 11:53:03 UTC-5.000] CODEX_BOT_SAMPLE sample=10 player_index=1 alive=0 origin=( -1060.429 -147.858 1614.125 )
+[2026-08-10 11:53:03 UTC-5.000] CODEX_BOT_SAMPLE sample=10 player_index=2 alive=1 origin=( -1058.975 -150.129 1614.125 )
+[2026-08-10 11:53:03 UTC-5.000] CODEX_BOT_SAMPLE sample=10 player_index=3 alive=1 origin=( 4046.639 766.909 1655.125 )
+[2026-08-10 11:53:03 UTC-5.000] CODEX_BOT_SAMPLE sample=10 player_index=4 alive=1 origin=( 1524.998 509.781 1613.125 )
+[2026-08-10 11:53:03 UTC-5.000] CODEX_BOT_SAMPLE sample=10 player_index=5 alive=1 origin=( 493.411 1633.787 1702.125 )
+[2026-08-10 11:53:03 UTC-5.000] CODEX_BOT_SAMPLE sample=10 player_index=6 alive=0 origin=( -959.933 -348.875 1614.125 )
+[2026-08-10 11:53:03 UTC-5.000] CODEX_BOT_SAMPLE sample=10 player_index=7 alive=1 origin=( 1119.323 1531.682 1701.125 )
+[2026-08-10 11:53:03 UTC-5.000] CODEX_BOT_SAMPLE sample=10 player_index=8 alive=1 origin=( 594.961 -886.638 1614.125 )
+[2026-08-10 11:53:04 UTC-5.000] CODEX_BOT_SAMPLE sample=11 player_index=1 alive=1 origin=( 2811.072 336.691 1613.125 )
+[2026-08-10 11:53:04 UTC-5.000] CODEX_BOT_SAMPLE sample=11 player_index=2 alive=1 origin=( -1045.090 -68.877 1614.125 )
+[2026-08-10 11:53:04 UTC-5.000] CODEX_BOT_SAMPLE sample=11 player_index=3 alive=1 origin=( 4283.657 773.128 1655.125 )
+[2026-08-10 11:53:04 UTC-5.000] CODEX_BOT_SAMPLE sample=11 player_index=4 alive=1 origin=( 1336.125 590.162 1613.125 )
+[2026-08-10 11:53:04 UTC-5.000] CODEX_BOT_SAMPLE sample=11 player_index=5 alive=1 origin=( 558.043 1489.141 1702.125 )
+[2026-08-10 11:53:04 UTC-5.000] CODEX_BOT_SAMPLE sample=11 player_index=6 alive=0 origin=( -935.604 -399.161 1614.125 )
+[2026-08-10 11:53:04 UTC-5.000] CODEX_BOT_SAMPLE sample=11 player_index=7 alive=1 origin=( 1172.430 1307.918 1701.125 )
+[2026-08-10 11:53:04 UTC-5.000] CODEX_BOT_SAMPLE sample=11 player_index=8 alive=1 origin=( 427.211 -817.913 1612.125 )
+[2026-08-10 11:53:05 UTC-5.000] CODEX_BOT_SAMPLE sample=12 player_index=1 alive=1 origin=( 2823.343 374.774 1625.125 )
+[2026-08-10 11:53:05 UTC-5.000] CODEX_BOT_SAMPLE sample=12 player_index=2 alive=1 origin=( -976.344 41.533 1614.125 )
+[2026-08-10 11:53:05 UTC-5.000] CODEX_BOT_SAMPLE sample=12 player_index=3 alive=1 origin=( 4162.868 766.936 1655.125 )
+[2026-08-10 11:53:05 UTC-5.000] CODEX_BOT_SAMPLE sample=12 player_index=4 alive=1 origin=( 1126.694 657.528 1613.125 )
+[2026-08-10 11:53:05 UTC-5.000] CODEX_BOT_SAMPLE sample=12 player_index=5 alive=1 origin=( 607.003 1290.073 1702.125 )
+[2026-08-10 11:53:05 UTC-5.000] CODEX_BOT_SAMPLE sample=12 player_index=6 alive=1 origin=( -270.794 2212.647 1687.125 )
+[2026-08-10 11:53:05 UTC-5.000] CODEX_BOT_SAMPLE sample=12 player_index=7 alive=1 origin=( 1193.087 1127.220 1653.430 )
+[2026-08-10 11:53:05 UTC-5.000] CODEX_BOT_SAMPLE sample=12 player_index=8 alive=1 origin=( 512.225 -848.592 1614.125 )
+[2026-08-10 11:53:05 UTC-5.000] bot4 was perforated by bot1's' SMG in the upper right arm
+[2026-08-10 11:53:06 UTC-5.000] CODEX_BOT_SAMPLE sample=13 player_index=1 alive=1 origin=( 2824.950 413.061 1655.125 )
+[2026-08-10 11:53:06 UTC-5.000] CODEX_BOT_SAMPLE sample=13 player_index=2 alive=1 origin=( -772.430 123.648 1614.125 )
+[2026-08-10 11:53:06 UTC-5.000] CODEX_BOT_SAMPLE sample=13 player_index=3 alive=1 origin=( 3931.459 769.828 1655.125 )
+[2026-08-10 11:53:06 UTC-5.000] CODEX_BOT_SAMPLE sample=13 player_index=4 alive=0 origin=( 1074.336 674.369 1613.125 )
+[2026-08-10 11:53:06 UTC-5.000] CODEX_BOT_SAMPLE sample=13 player_index=5 alive=1 origin=( 655.975 1091.008 1702.125 )
+[2026-08-10 11:53:06 UTC-5.000] CODEX_BOT_SAMPLE sample=13 player_index=6 alive=1 origin=( -120.049 2102.031 1687.125 )
+[2026-08-10 11:53:06 UTC-5.000] CODEX_BOT_SAMPLE sample=13 player_index=7 alive=1 origin=( 1095.589 954.112 1613.125 )
+[2026-08-10 11:53:06 UTC-5.000] CODEX_BOT_SAMPLE sample=13 player_index=8 alive=1 origin=( 656.394 -889.081 1614.125 )
+[2026-08-10 11:53:07 UTC-5.000] CODEX_BOT_SAMPLE sample=14 player_index=1 alive=1 origin=( 2818.917 285.707 1613.125 )
+[2026-08-10 11:53:07 UTC-5.000] CODEX_BOT_SAMPLE sample=14 player_index=2 alive=1 origin=( -617.076 145.336 1648.625 )
+[2026-08-10 11:53:07 UTC-5.000] CODEX_BOT_SAMPLE sample=14 player_index=3 alive=1 origin=( 3726.913 773.404 1655.125 )
+[2026-08-10 11:53:07 UTC-5.000] CODEX_BOT_SAMPLE sample=14 player_index=4 alive=0 origin=( 1074.336 674.369 1613.125 )
+[2026-08-10 11:53:07 UTC-5.000] CODEX_BOT_SAMPLE sample=14 player_index=5 alive=1 origin=( 704.947 891.943 1702.125 )
+[2026-08-10 11:53:07 UTC-5.000] CODEX_BOT_SAMPLE sample=14 player_index=6 alive=1 origin=( 41.489 1976.078 1687.125 )
+[2026-08-10 11:53:07 UTC-5.000] CODEX_BOT_SAMPLE sample=14 player_index=7 alive=1 origin=( 964.130 753.143 1613.125 )
+[2026-08-10 11:53:07 UTC-5.000] CODEX_BOT_SAMPLE sample=14 player_index=8 alive=1 origin=( 844.242 -885.242 1614.125 )
+[2026-08-10 11:53:08 UTC-5.000] CODEX_BOT_SAMPLE sample=15 player_index=1 alive=1 origin=( 2820.125 398.872 1626.125 )
+[2026-08-10 11:53:08 UTC-5.000] CODEX_BOT_SAMPLE sample=15 player_index=2 alive=1 origin=( -456.569 114.736 1663.125 )
+[2026-08-10 11:53:08 UTC-5.000] CODEX_BOT_SAMPLE sample=15 player_index=3 alive=1 origin=( 3514.921 786.068 1655.125 )
+[2026-08-10 11:53:08 UTC-5.000] CODEX_BOT_SAMPLE sample=15 player_index=4 alive=1 origin=( -1723.119 466.214 1660.667 )
+[2026-08-10 11:53:08 UTC-5.000] CODEX_BOT_SAMPLE sample=15 player_index=5 alive=1 origin=( 719.866 778.721 1700.125 )
+[2026-08-10 11:53:08 UTC-5.000] CODEX_BOT_SAMPLE sample=15 player_index=6 alive=1 origin=( 203.148 1850.018 1687.125 )
+[2026-08-10 11:53:08 UTC-5.000] CODEX_BOT_SAMPLE sample=15 player_index=7 alive=1 origin=( 749.994 772.479 1700.125 )
+[2026-08-10 11:53:08 UTC-5.000] CODEX_BOT_SAMPLE sample=15 player_index=8 alive=1 origin=( 935.555 -782.213 1614.125 )
+[2026-08-10 11:53:09 UTC-5.000] bot7 shouts @all: Try again!
+[2026-08-10 11:53:09 UTC-5.000] bot5 was pumped full of buckshot by bot7
+[2026-08-10 11:53:09 UTC-5.000] CODEX_BOT_SAMPLE sample=16 player_index=1 alive=1 origin=( 2802.022 500.118 1705.671 )
+[2026-08-10 11:53:09 UTC-5.000] CODEX_BOT_SAMPLE sample=16 player_index=2 alive=1 origin=( -293.996 50.702 1662.125 )
+[2026-08-10 11:53:09 UTC-5.000] CODEX_BOT_SAMPLE sample=16 player_index=3 alive=1 origin=( 3318.623 790.561 1655.125 )
+[2026-08-10 11:53:09 UTC-5.000] CODEX_BOT_SAMPLE sample=16 player_index=4 alive=1 origin=( -1550.837 403.751 1613.125 )
+[2026-08-10 11:53:09 UTC-5.000] CODEX_BOT_SAMPLE sample=16 player_index=5 alive=0 origin=( 723.905 698.571 1700.125 )
+[2026-08-10 11:53:09 UTC-5.000] CODEX_BOT_SAMPLE sample=16 player_index=6 alive=1 origin=( 364.809 1723.960 1687.125 )
+[2026-08-10 11:53:09 UTC-5.000] CODEX_BOT_SAMPLE sample=16 player_index=7 alive=1 origin=( 797.677 723.201 1684.125 )
+[2026-08-10 11:53:09 UTC-5.000] CODEX_BOT_SAMPLE sample=16 player_index=8 alive=1 origin=( 984.781 -583.378 1612.125 )
+[2026-08-10 11:53:10 UTC-5.000] CODEX_BOT_SAMPLE sample=17 player_index=1 alive=1 origin=( 2609.825 502.855 1645.125 )
+[2026-08-10 11:53:10 UTC-5.000] CODEX_BOT_SAMPLE sample=17 player_index=2 alive=1 origin=( -259.861 253.707 1625.767 )
+[2026-08-10 11:53:10 UTC-5.000] CODEX_BOT_SAMPLE sample=17 player_index=3 alive=1 origin=( 3139.282 814.759 1655.125 )
+[2026-08-10 11:53:10 UTC-5.000] CODEX_BOT_SAMPLE sample=17 player_index=4 alive=1 origin=( -1366.564 283.888 1613.125 )
+[2026-08-10 11:53:10 UTC-5.000] CODEX_BOT_SAMPLE sample=17 player_index=5 alive=0 origin=( 815.053 659.458 1676.125 )
+[2026-08-10 11:53:10 UTC-5.000] CODEX_BOT_SAMPLE sample=17 player_index=6 alive=1 origin=( 516.271 1643.193 1702.125 )
+[2026-08-10 11:53:10 UTC-5.000] CODEX_BOT_SAMPLE sample=17 player_index=7 alive=1 origin=( 850.957 693.587 1652.125 )
+[2026-08-10 11:53:10 UTC-5.000] CODEX_BOT_SAMPLE sample=17 player_index=8 alive=1 origin=( 1009.173 -497.549 1614.125 )
+[2026-08-10 11:53:11 UTC-5.000] CODEX_BOT_SAMPLE sample=18 player_index=1 alive=1 origin=( 2372.425 456.328 1645.125 )
+[2026-08-10 11:53:11 UTC-5.000] CODEX_BOT_SAMPLE sample=18 player_index=2 alive=1 origin=( -228.242 470.010 1614.220 )
+[2026-08-10 11:53:11 UTC-5.000] CODEX_BOT_SAMPLE sample=18 player_index=3 alive=1 origin=( 2948.938 884.626 1655.125 )
+[2026-08-10 11:53:11 UTC-5.000] CODEX_BOT_SAMPLE sample=18 player_index=4 alive=1 origin=( -1182.142 163.934 1613.125 )
+[2026-08-10 11:53:11 UTC-5.000] CODEX_BOT_SAMPLE sample=18 player_index=5 alive=0 origin=( 849.632 644.619 1658.125 )
+[2026-08-10 11:53:11 UTC-5.000] CODEX_BOT_SAMPLE sample=18 player_index=6 alive=1 origin=( 564.444 1452.735 1702.125 )
+[2026-08-10 11:53:11 UTC-5.000] CODEX_BOT_SAMPLE sample=18 player_index=7 alive=1 origin=( 713.698 787.871 1700.125 )
+[2026-08-10 11:53:11 UTC-5.000] CODEX_BOT_SAMPLE sample=18 player_index=8 alive=1 origin=( 1028.814 -699.545 1614.125 )
+[2026-08-10 11:53:12 UTC-5.000] CODEX_BOT_SAMPLE sample=19 player_index=1 alive=1 origin=( 2289.267 433.484 1681.412 )
+[2026-08-10 11:53:12 UTC-5.000] CODEX_BOT_SAMPLE sample=19 player_index=2 alive=1 origin=( -196.779 685.244 1647.153 )
+[2026-08-10 11:53:12 UTC-5.000] CODEX_BOT_SAMPLE sample=19 player_index=3 alive=1 origin=( 2806.812 901.125 1668.783 )
+[2026-08-10 11:53:12 UTC-5.000] CODEX_BOT_SAMPLE sample=19 player_index=4 alive=1 origin=( -1127.672 169.504 1613.125 )
+[2026-08-10 11:53:12 UTC-5.000] CODEX_BOT_SAMPLE sample=19 player_index=5 alive=0 origin=( 860.584 639.920 1644.125 )
+[2026-08-10 11:53:12 UTC-5.000] CODEX_BOT_SAMPLE sample=19 player_index=6 alive=1 origin=( 601.034 1282.744 1702.125 )
+[2026-08-10 11:53:12 UTC-5.000] CODEX_BOT_SAMPLE sample=19 player_index=7 alive=1 origin=( 675.152 831.230 1702.125 )
+[2026-08-10 11:53:12 UTC-5.000] CODEX_BOT_SAMPLE sample=19 player_index=8 alive=1 origin=( 1158.136 -724.429 1614.125 )
+[2026-08-10 11:53:13 UTC-5.000] CODEX_BOT_SAMPLE sample=20 player_index=1 alive=1 origin=( 2084.115 488.037 1613.125 )
+[2026-08-10 11:53:13 UTC-5.000] CODEX_BOT_SAMPLE sample=20 player_index=2 alive=1 origin=( -165.326 900.500 1679.961 )
+[2026-08-10 11:53:13 UTC-5.000] CODEX_BOT_SAMPLE sample=20 player_index=3 alive=1 origin=( 2819.114 731.836 1695.195 )
+[2026-08-10 11:53:13 UTC-5.000] CODEX_BOT_SAMPLE sample=20 player_index=4 alive=1 origin=( -1145.839 201.077 1613.125 )
+[2026-08-10 11:53:13 UTC-5.000] CODEX_BOT_SAMPLE sample=20 player_index=5 alive=1 origin=( 103.194 -1405.190 1659.125 )
+[2026-08-10 11:53:13 UTC-5.000] CODEX_BOT_SAMPLE sample=20 player_index=6 alive=1 origin=( 655.934 1094.440 1702.125 )
+[2026-08-10 11:53:13 UTC-5.000] CODEX_BOT_SAMPLE sample=20 player_index=7 alive=1 origin=( 630.600 1015.854 1702.125 )
+[2026-08-10 11:53:13 UTC-5.000] CODEX_BOT_SAMPLE sample=20 player_index=8 alive=1 origin=( 1358.453 -681.239 1614.125 )
+[2026-08-10 11:53:13 UTC-5.000] bot1 shouts @all: Go on and run, you yellow-bellies!
+[2026-08-10 11:53:13 UTC-5.000] bot7 was perforated by bot1's' SMG in the upper right arm
+[2026-08-10 11:53:14 UTC-5.000] CODEX_BOT_SAMPLE sample=21 player_index=1 alive=1 origin=( 1833.812 551.314 1613.125 )
+[2026-08-10 11:53:14 UTC-5.000] CODEX_BOT_SAMPLE sample=21 player_index=2 alive=1 origin=( -133.595 1117.710 1687.125 )
+[2026-08-10 11:53:14 UTC-5.000] CODEX_BOT_SAMPLE sample=21 player_index=3 alive=1 origin=( 2840.078 523.909 1645.125 )
+[2026-08-10 11:53:14 UTC-5.000] CODEX_BOT_SAMPLE sample=21 player_index=4 alive=1 origin=( -1116.663 237.584 1614.125 )
+[2026-08-10 11:53:14 UTC-5.000] CODEX_BOT_SAMPLE sample=21 player_index=5 alive=1 origin=( 90.141 -1323.912 1659.125 )
+[2026-08-10 11:53:14 UTC-5.000] CODEX_BOT_SAMPLE sample=21 player_index=6 alive=1 origin=( 624.247 1128.063 1702.125 )
+[2026-08-10 11:53:14 UTC-5.000] CODEX_BOT_SAMPLE sample=21 player_index=7 alive=0 origin=( 630.738 1028.034 1702.125 )
+[2026-08-10 11:53:14 UTC-5.000] CODEX_BOT_SAMPLE sample=21 player_index=8 alive=1 origin=( 1558.845 -638.018 1613.125 )
+[2026-08-10 11:53:15 UTC-5.000] CODEX_BOT_SAMPLE sample=22 player_index=1 alive=1 origin=( 1587.228 622.610 1613.125 )
+[2026-08-10 11:53:15 UTC-5.000] CODEX_BOT_SAMPLE sample=22 player_index=2 alive=1 origin=( -120.983 1286.875 1687.125 )
+[2026-08-10 11:53:15 UTC-5.000] CODEX_BOT_SAMPLE sample=22 player_index=3 alive=1 origin=( 2815.757 321.800 1680.696 )
+[2026-08-10 11:53:15 UTC-5.000] CODEX_BOT_SAMPLE sample=22 player_index=4 alive=1 origin=( -1297.604 133.593 1613.125 )
+[2026-08-10 11:53:15 UTC-5.000] CODEX_BOT_SAMPLE sample=22 player_index=5 alive=1 origin=( -18.809 -1113.414 1659.125 )
+[2026-08-10 11:53:15 UTC-5.000] CODEX_BOT_SAMPLE sample=22 player_index=6 alive=1 origin=( 637.046 1000.017 1702.125 )
+[2026-08-10 11:53:15 UTC-5.000] CODEX_BOT_SAMPLE sample=22 player_index=7 alive=0 origin=( 554.687 1056.046 1702.125 )
+[2026-08-10 11:53:15 UTC-5.000] CODEX_BOT_SAMPLE sample=22 player_index=8 alive=1 origin=( 1759.235 -594.792 1613.125 )
+[2026-08-10 11:53:16 UTC-5.000] CODEX_BOT_SAMPLE sample=23 player_index=1 alive=1 origin=( 1337.363 693.573 1613.125 )
+[2026-08-10 11:53:16 UTC-5.000] CODEX_BOT_SAMPLE sample=23 player_index=2 alive=1 origin=( 36.851 1439.343 1687.125 )
+[2026-08-10 11:53:16 UTC-5.000] CODEX_BOT_SAMPLE sample=23 player_index=3 alive=1 origin=( 2727.096 322.992 1613.125 )
+[2026-08-10 11:53:16 UTC-5.000] CODEX_BOT_SAMPLE sample=23 player_index=4 alive=1 origin=( -1485.673 19.443 1613.125 )
+[2026-08-10 11:53:16 UTC-5.000] CODEX_BOT_SAMPLE sample=23 player_index=5 alive=1 origin=( -129.832 -923.672 1614.125 )
+[2026-08-10 11:53:16 UTC-5.000] CODEX_BOT_SAMPLE sample=23 player_index=6 alive=1 origin=( 719.874 813.182 1702.125 )
+[2026-08-10 11:53:16 UTC-5.000] CODEX_BOT_SAMPLE sample=23 player_index=7 alive=1 origin=( 798.289 2000.065 1702.125 )
+[2026-08-10 11:53:16 UTC-5.000] CODEX_BOT_SAMPLE sample=23 player_index=8 alive=1 origin=( 1959.626 -551.566 1613.125 )
+[2026-08-10 11:53:17 UTC-5.000] CODEX_BOT_SAMPLE sample=24 player_index=1 alive=1 origin=( 1078.305 726.763 1613.125 )
+[2026-08-10 11:53:17 UTC-5.000] CODEX_BOT_SAMPLE sample=24 player_index=2 alive=1 origin=( 125.229 1556.522 1687.125 )
+[2026-08-10 11:53:17 UTC-5.000] CODEX_BOT_SAMPLE sample=24 player_index=3 alive=1 origin=( 2823.141 375.268 1625.125 )
+[2026-08-10 11:53:17 UTC-5.000] CODEX_BOT_SAMPLE sample=24 player_index=4 alive=1 origin=( -1673.732 -94.723 1613.125 )
+[2026-08-10 11:53:17 UTC-5.000] CODEX_BOT_SAMPLE sample=24 player_index=5 alive=1 origin=( -363.157 -886.219 1613.125 )
+[2026-08-10 11:53:17 UTC-5.000] CODEX_BOT_SAMPLE sample=24 player_index=6 alive=1 origin=( 724.844 698.072 1700.125 )
+[2026-08-10 11:53:17 UTC-5.000] CODEX_BOT_SAMPLE sample=24 player_index=7 alive=1 origin=( 629.248 1883.217 1702.125 )
+[2026-08-10 11:53:17 UTC-5.000] CODEX_BOT_SAMPLE sample=24 player_index=8 alive=1 origin=( 2160.017 -508.339 1613.125 )
+[2026-08-10 11:53:18 UTC-5.000] bot2 was sniped by bot7
+[2026-08-10 11:53:18 UTC-5.000] CODEX_BOT_SAMPLE sample=25 player_index=1 alive=1 origin=( 916.684 775.538 1613.125 )
+[2026-08-10 11:53:18 UTC-5.000] CODEX_BOT_SAMPLE sample=25 player_index=2 alive=0 origin=( 246.428 1630.255 1687.125 )
+[2026-08-10 11:53:18 UTC-5.000] CODEX_BOT_SAMPLE sample=25 player_index=3 alive=1 origin=( 2824.184 394.570 1625.125 )
+[2026-08-10 11:53:18 UTC-5.000] CODEX_BOT_SAMPLE sample=25 player_index=4 alive=1 origin=( -1713.348 -46.165 1613.125 )
+[2026-08-10 11:53:18 UTC-5.000] CODEX_BOT_SAMPLE sample=25 player_index=5 alive=1 origin=( -603.699 -845.285 1612.125 )
+[2026-08-10 11:53:18 UTC-5.000] CODEX_BOT_SAMPLE sample=25 player_index=6 alive=1 origin=( 874.255 690.341 1711.684 )
+[2026-08-10 11:53:18 UTC-5.000] CODEX_BOT_SAMPLE sample=25 player_index=7 alive=1 origin=( 504.074 1767.682 1702.125 )
+[2026-08-10 11:53:18 UTC-5.000] CODEX_BOT_SAMPLE sample=25 player_index=8 alive=1 origin=( 2311.653 -439.231 1613.125 )
+[2026-08-10 11:53:19 UTC-5.000] bot3 took bot8's rocket right in the kisser
+[2026-08-10 11:53:19 UTC-5.000] bot6 was perforated by bot1's' SMG in the head
+[2026-08-10 11:53:19 UTC-5.000] CODEX_BOT_SAMPLE sample=26 player_index=1 alive=1 origin=( 959.056 753.925 1613.125 )
+[2026-08-10 11:53:19 UTC-5.000] CODEX_BOT_SAMPLE sample=26 player_index=2 alive=0 origin=( 198.822 1601.027 1687.125 )
+[2026-08-10 11:53:19 UTC-5.000] CODEX_BOT_SAMPLE sample=26 player_index=3 alive=0 origin=( 2823.336 378.013 1625.125 )
+[2026-08-10 11:53:19 UTC-5.000] CODEX_BOT_SAMPLE sample=26 player_index=4 alive=1 origin=( -1670.586 121.609 1613.125 )
+[2026-08-10 11:53:19 UTC-5.000] CODEX_BOT_SAMPLE sample=26 player_index=5 alive=1 origin=( -754.594 -711.380 1613.125 )
+[2026-08-10 11:53:19 UTC-5.000] CODEX_BOT_SAMPLE sample=26 player_index=6 alive=0 origin=( 893.044 693.365 1620.125 )
+[2026-08-10 11:53:19 UTC-5.000] CODEX_BOT_SAMPLE sample=26 player_index=7 alive=1 origin=( 327.264 1837.532 1687.125 )
+[2026-08-10 11:53:19 UTC-5.000] CODEX_BOT_SAMPLE sample=26 player_index=8 alive=1 origin=( 2355.173 -355.013 1613.125 )
+[2026-08-10 11:53:20 UTC-5.000] CODEX_BOT_SAMPLE sample=27 player_index=1 alive=1 origin=( 713.376 787.873 1700.125 )
+[2026-08-10 11:53:20 UTC-5.000] CODEX_BOT_SAMPLE sample=27 player_index=2 alive=1 origin=( 491.673 -1245.522 1613.125 )
+[2026-08-10 11:53:20 UTC-5.000] CODEX_BOT_SAMPLE sample=27 player_index=3 alive=0 origin=( 2798.547 288.735 1613.125 )
+[2026-08-10 11:53:20 UTC-5.000] CODEX_BOT_SAMPLE sample=27 player_index=4 alive=1 origin=( -1509.842 -16.554 1613.125 )
+[2026-08-10 11:53:20 UTC-5.000] CODEX_BOT_SAMPLE sample=27 player_index=5 alive=1 origin=( -869.008 -516.666 1613.125 )
+[2026-08-10 11:53:20 UTC-5.000] CODEX_BOT_SAMPLE sample=27 player_index=6 alive=0 origin=( 893.044 693.365 1620.125 )
+[2026-08-10 11:53:20 UTC-5.000] CODEX_BOT_SAMPLE sample=27 player_index=7 alive=1 origin=( 157.375 1914.546 1687.125 )
+[2026-08-10 11:53:20 UTC-5.000] CODEX_BOT_SAMPLE sample=27 player_index=8 alive=1 origin=( 2250.464 -506.883 1613.125 )
+[2026-08-10 11:53:21 UTC-5.000] CODEX_BOT_SAMPLE sample=28 player_index=1 alive=1 origin=( 682.097 845.596 1702.125 )
+[2026-08-10 11:53:21 UTC-5.000] CODEX_BOT_SAMPLE sample=28 player_index=2 alive=1 origin=( 694.212 -1224.053 1613.125 )
+[2026-08-10 11:53:21 UTC-5.000] CODEX_BOT_SAMPLE sample=28 player_index=3 alive=0 origin=( 2796.857 287.873 1613.125 )
+[2026-08-10 11:53:21 UTC-5.000] CODEX_BOT_SAMPLE sample=28 player_index=4 alive=1 origin=( -1339.034 -155.205 1613.125 )
+[2026-08-10 11:53:21 UTC-5.000] CODEX_BOT_SAMPLE sample=28 player_index=5 alive=1 origin=( -963.644 -349.755 1614.125 )
+[2026-08-10 11:53:21 UTC-5.000] CODEX_BOT_SAMPLE sample=28 player_index=6 alive=1 origin=( -38.715 -74.153 1613.125 )
+[2026-08-10 11:53:21 UTC-5.000] CODEX_BOT_SAMPLE sample=28 player_index=7 alive=1 origin=( -25.173 2037.331 1687.125 )
+[2026-08-10 11:53:21 UTC-5.000] CODEX_BOT_SAMPLE sample=28 player_index=8 alive=1 origin=( 2106.121 -575.867 1614.125 )
+[2026-08-10 11:53:22 UTC-5.000] CODEX_BOT_SAMPLE sample=29 player_index=1 alive=1 origin=( 626.613 1103.487 1702.125 )
+[2026-08-10 11:53:22 UTC-5.000] CODEX_BOT_SAMPLE sample=29 player_index=2 alive=1 origin=( 937.246 -1225.322 1613.125 )
+[2026-08-10 11:53:22 UTC-5.000] CODEX_BOT_SAMPLE sample=29 player_index=3 alive=1 origin=( 1649.138 879.188 1619.125 )
+[2026-08-10 11:53:22 UTC-5.000] CODEX_BOT_SAMPLE sample=29 player_index=4 alive=1 origin=( -1178.697 -279.967 1613.125 )
+[2026-08-10 11:53:22 UTC-5.000] CODEX_BOT_SAMPLE sample=29 player_index=5 alive=1 origin=( -1034.876 -183.435 1614.125 )
+[2026-08-10 11:53:22 UTC-5.000] CODEX_BOT_SAMPLE sample=29 player_index=6 alive=1 origin=( -222.875 -53.583 1626.780 )
+[2026-08-10 11:53:22 UTC-5.000] CODEX_BOT_SAMPLE sample=29 player_index=7 alive=1 origin=( -187.528 2152.025 1687.125 )
+[2026-08-10 11:53:22 UTC-5.000] CODEX_BOT_SAMPLE sample=29 player_index=8 alive=1 origin=( 1907.352 -626.021 1613.125 )
+[2026-08-10 11:53:23 UTC-5.000] bot4 shouts @all: That made a mess.
+[2026-08-10 11:53:23 UTC-5.000] bot5 was sniped by bot4
+[2026-08-10 11:53:23 UTC-5.000] CODEX_BOT_SAMPLE sample=30 player_index=1 alive=1 origin=( 571.095 1361.583 1702.125 )
+[2026-08-10 11:53:23 UTC-5.000] CODEX_BOT_SAMPLE sample=30 player_index=2 alive=1 origin=( 1036.119 -1082.816 1612.125 )
+[2026-08-10 11:53:23 UTC-5.000] CODEX_BOT_SAMPLE sample=30 player_index=3 alive=1 origin=( 1420.312 854.667 1619.125 )
+[2026-08-10 11:53:23 UTC-5.000] CODEX_BOT_SAMPLE sample=30 player_index=4 alive=1 origin=( -1184.792 -261.629 1613.125 )
+[2026-08-10 11:53:23 UTC-5.000] CODEX_BOT_SAMPLE sample=30 player_index=5 alive=0 origin=( -1060.684 -150.130 1614.125 )
+[2026-08-10 11:53:23 UTC-5.000] CODEX_BOT_SAMPLE sample=30 player_index=6 alive=1 origin=( -361.898 -8.682 1663.125 )
+[2026-08-10 11:53:23 UTC-5.000] CODEX_BOT_SAMPLE sample=30 player_index=7 alive=1 origin=( -403.894 2166.216 1687.125 )
+[2026-08-10 11:53:23 UTC-5.000] CODEX_BOT_SAMPLE sample=30 player_index=8 alive=1 origin=( 1708.583 -676.179 1613.125 )
+[2026-08-10 11:53:24 UTC-5.000] CODEX_BOT_SAMPLE sample=31 player_index=1 alive=1 origin=( 516.349 1619.678 1702.125 )
+[2026-08-10 11:53:24 UTC-5.000] CODEX_BOT_SAMPLE sample=31 player_index=2 alive=1 origin=( 1114.984 -851.913 1614.125 )
+[2026-08-10 11:53:24 UTC-5.000] CODEX_BOT_SAMPLE sample=31 player_index=3 alive=1 origin=( 1237.430 829.698 1623.709 )
+[2026-08-10 11:53:24 UTC-5.000] CODEX_BOT_SAMPLE sample=31 player_index=4 alive=1 origin=( -1190.873 -256.977 1613.125 )
+[2026-08-10 11:53:24 UTC-5.000] CODEX_BOT_SAMPLE sample=31 player_index=5 alive=0 origin=( -1066.529 -51.116 1614.125 )
+[2026-08-10 11:53:24 UTC-5.000] CODEX_BOT_SAMPLE sample=31 player_index=6 alive=1 origin=( -557.982 143.556 1665.125 )
+[2026-08-10 11:53:24 UTC-5.000] CODEX_BOT_SAMPLE sample=31 player_index=7 alive=1 origin=( -315.398 2170.557 1687.125 )
+[2026-08-10 11:53:24 UTC-5.000] CODEX_BOT_SAMPLE sample=31 player_index=8 alive=1 origin=( 1509.819 -726.353 1613.125 )
+[2026-08-10 11:53:25 UTC-5.000] bot2 took bot8's rocket in the face
+[2026-08-10 11:53:25 UTC-5.000] bot8 blew himself up
+[2026-08-10 11:53:25 UTC-5.000] CODEX_BOT_SAMPLE sample=32 player_index=1 alive=1 origin=( 308.307 1574.262 1687.125 )
+[2026-08-10 11:53:25 UTC-5.000] CODEX_BOT_SAMPLE sample=32 player_index=2 alive=0 origin=( 1220.843 -810.057 1614.125 )
+[2026-08-10 11:53:25 UTC-5.000] CODEX_BOT_SAMPLE sample=32 player_index=3 alive=1 origin=( 1039.104 784.822 1613.125 )
+[2026-08-10 11:53:25 UTC-5.000] CODEX_BOT_SAMPLE sample=32 player_index=4 alive=1 origin=( -1320.834 -238.264 1613.125 )
+[2026-08-10 11:53:25 UTC-5.000] CODEX_BOT_SAMPLE sample=32 player_index=5 alive=0 origin=( -1067.875 -28.305 1614.125 )
+[2026-08-10 11:53:25 UTC-5.000] CODEX_BOT_SAMPLE sample=32 player_index=6 alive=1 origin=( -643.623 151.892 1640.011 )
+[2026-08-10 11:53:25 UTC-5.000] CODEX_BOT_SAMPLE sample=32 player_index=7 alive=1 origin=( -123.566 2093.989 1687.125 )
+[2026-08-10 11:53:25 UTC-5.000] CODEX_BOT_SAMPLE sample=32 player_index=8 alive=0 origin=( 1428.599 -733.003 1614.125 )
+[2026-08-10 11:53:26 UTC-5.000] bot1 was sniped by bot7
+[2026-08-10 11:53:26 UTC-5.000] CODEX_BOT_SAMPLE sample=33 player_index=1 alive=0 origin=( 232.763 1550.477 1687.125 )
+[2026-08-10 11:53:26 UTC-5.000] CODEX_BOT_SAMPLE sample=33 player_index=2 alive=0 origin=( 1198.228 -719.938 1614.125 )
+[2026-08-10 11:53:26 UTC-5.000] CODEX_BOT_SAMPLE sample=33 player_index=3 alive=1 origin=( 807.658 772.125 1676.125 )
+[2026-08-10 11:53:26 UTC-5.000] CODEX_BOT_SAMPLE sample=33 player_index=4 alive=1 origin=( -1501.017 -195.239 1613.125 )
+[2026-08-10 11:53:26 UTC-5.000] CODEX_BOT_SAMPLE sample=33 player_index=5 alive=0 origin=( -1067.875 -28.305 1614.125 )
+[2026-08-10 11:53:26 UTC-5.000] CODEX_BOT_SAMPLE sample=33 player_index=6 alive=1 origin=( -400.762 65.018 1663.125 )
+[2026-08-10 11:53:26 UTC-5.000] CODEX_BOT_SAMPLE sample=33 player_index=7 alive=1 origin=( 19.432 1979.230 1687.125 )
+[2026-08-10 11:53:26 UTC-5.000] CODEX_BOT_SAMPLE sample=33 player_index=8 alive=0 origin=( 1581.384 -686.079 1613.125 )
+[2026-08-10 11:53:27 UTC-5.000] CODEX_BOT_SAMPLE sample=34 player_index=1 alive=0 origin=( 232.763 1550.477 1687.125 )
+[2026-08-10 11:53:27 UTC-5.000] CODEX_BOT_SAMPLE sample=34 player_index=2 alive=0 origin=( 1199.058 -718.669 1614.125 )
+[2026-08-10 11:53:27 UTC-5.000] CODEX_BOT_SAMPLE sample=34 player_index=3 alive=1 origin=( 692.363 795.199 1740.952 )
+[2026-08-10 11:53:27 UTC-5.000] CODEX_BOT_SAMPLE sample=34 player_index=4 alive=1 origin=( -1316.033 -164.320 1613.125 )
+[2026-08-10 11:53:27 UTC-5.000] CODEX_BOT_SAMPLE sample=34 player_index=5 alive=1 origin=( 2745.976 313.549 1613.125 )
+[2026-08-10 11:53:27 UTC-5.000] CODEX_BOT_SAMPLE sample=34 player_index=6 alive=1 origin=( -258.584 119.664 1651.934 )
+[2026-08-10 11:53:27 UTC-5.000] CODEX_BOT_SAMPLE sample=34 player_index=7 alive=1 origin=( 195.292 1847.045 1687.125 )
+[2026-08-10 11:53:27 UTC-5.000] CODEX_BOT_SAMPLE sample=34 player_index=8 alive=1 origin=( 90.000 -1364.000 1668.000 )
+[2026-08-10 11:53:28 UTC-5.000] CODEX_BOT_SAMPLE sample=35 player_index=1 alive=1 origin=( 1805.388 -976.935 1613.125 )
+[2026-08-10 11:53:28 UTC-5.000] CODEX_BOT_SAMPLE sample=35 player_index=2 alive=1 origin=( 1605.005 866.585 1619.125 )
+[2026-08-10 11:53:28 UTC-5.000] CODEX_BOT_SAMPLE sample=35 player_index=3 alive=1 origin=( 643.660 1005.269 1702.125 )
+[2026-08-10 11:53:28 UTC-5.000] CODEX_BOT_SAMPLE sample=35 player_index=4 alive=1 origin=( -1132.322 -118.149 1613.125 )
+[2026-08-10 11:53:28 UTC-5.000] CODEX_BOT_SAMPLE sample=35 player_index=5 alive=1 origin=( 2638.930 139.477 1613.125 )
+[2026-08-10 11:53:28 UTC-5.000] CODEX_BOT_SAMPLE sample=35 player_index=6 alive=1 origin=( -246.348 219.351 1632.473 )
+[2026-08-10 11:53:28 UTC-5.000] CODEX_BOT_SAMPLE sample=35 player_index=7 alive=1 origin=( 371.152 1714.860 1687.125 )
+[2026-08-10 11:53:28 UTC-5.000] CODEX_BOT_SAMPLE sample=35 player_index=8 alive=1 origin=( 54.974 -1420.255 1659.125 )
+[2026-08-10 11:53:29 UTC-5.000] CODEX_BOT_SAMPLE sample=36 player_index=1 alive=1 origin=( 1969.461 -796.726 1613.125 )
+[2026-08-10 11:53:29 UTC-5.000] CODEX_BOT_SAMPLE sample=36 player_index=2 alive=1 origin=( 1373.124 843.089 1621.675 )
+[2026-08-10 11:53:29 UTC-5.000] CODEX_BOT_SAMPLE sample=36 player_index=3 alive=1 origin=( 588.786 1270.325 1702.125 )
+[2026-08-10 11:53:29 UTC-5.000] CODEX_BOT_SAMPLE sample=36 player_index=4 alive=1 origin=( -1255.965 -36.375 1613.125 )
+[2026-08-10 11:53:29 UTC-5.000] CODEX_BOT_SAMPLE sample=36 player_index=5 alive=1 origin=( 2531.391 -35.051 1613.125 )
+[2026-08-10 11:53:29 UTC-5.000] CODEX_BOT_SAMPLE sample=36 player_index=6 alive=1 origin=( -246.348 219.351 1632.473 )
+[2026-08-10 11:53:29 UTC-5.000] CODEX_BOT_SAMPLE sample=36 player_index=7 alive=1 origin=( 543.348 1609.185 1702.125 )
+[2026-08-10 11:53:29 UTC-5.000] CODEX_BOT_SAMPLE sample=36 player_index=8 alive=1 origin=( -82.197 -1219.512 1659.125 )
+[2026-08-10 11:53:30 UTC-5.000] CODEX_BOT_SAMPLE sample=37 player_index=1 alive=1 origin=( 2133.737 -616.311 1613.125 )
+[2026-08-10 11:53:30 UTC-5.000] CODEX_BOT_SAMPLE sample=37 player_index=2 alive=1 origin=( 1191.793 818.820 1613.125 )
+[2026-08-10 11:53:30 UTC-5.000] CODEX_BOT_SAMPLE sample=37 player_index=3 alive=1 origin=( 563.748 1470.470 1702.125 )
+[2026-08-10 11:53:30 UTC-5.000] CODEX_BOT_SAMPLE sample=37 player_index=4 alive=1 origin=( -1395.624 133.501 1613.125 )
+[2026-08-10 11:53:30 UTC-5.000] CODEX_BOT_SAMPLE sample=37 player_index=5 alive=1 origin=( 2423.859 -209.584 1613.125 )
+[2026-08-10 11:53:30 UTC-5.000] CODEX_BOT_SAMPLE sample=37 player_index=6 alive=1 origin=( -286.048 114.797 1652.884 )
+[2026-08-10 11:53:30 UTC-5.000] CODEX_BOT_SAMPLE sample=37 player_index=7 alive=1 origin=( 644.785 1475.864 1702.125 )
+[2026-08-10 11:53:30 UTC-5.000] CODEX_BOT_SAMPLE sample=37 player_index=8 alive=1 origin=( -107.118 -1018.028 1672.125 )
+[2026-08-10 11:53:31 UTC-5.000] bot7 was hunted down by bot3
+[2026-08-10 11:53:31 UTC-5.000] bot1 took bot5's rocket right in the kisser
+[2026-08-10 11:53:31 UTC-5.000] bot5 blew himself up
+[2026-08-10 11:53:31 UTC-5.000] CODEX_BOT_SAMPLE sample=38 player_index=1 alive=0 origin=( 2246.335 -496.130 1613.125 )
+[2026-08-10 11:53:31 UTC-5.000] CODEX_BOT_SAMPLE sample=38 player_index=2 alive=1 origin=( 987.832 760.637 1613.125 )
+[2026-08-10 11:53:31 UTC-5.000] CODEX_BOT_SAMPLE sample=38 player_index=3 alive=1 origin=( 555.220 1491.975 1702.125 )
+[2026-08-10 11:53:31 UTC-5.000] CODEX_BOT_SAMPLE sample=38 player_index=4 alive=1 origin=( -1535.353 303.429 1613.125 )
+[2026-08-10 11:53:31 UTC-5.000] CODEX_BOT_SAMPLE sample=38 player_index=5 alive=0 origin=( 2369.236 -301.976 1613.125 )
+[2026-08-10 11:53:31 UTC-5.000] CODEX_BOT_SAMPLE sample=38 player_index=6 alive=1 origin=( -406.520 61.788 1663.125 )
+[2026-08-10 11:53:31 UTC-5.000] CODEX_BOT_SAMPLE sample=38 player_index=7 alive=0 origin=( 636.813 1501.646 1702.125 )
+[2026-08-10 11:53:31 UTC-5.000] CODEX_BOT_SAMPLE sample=38 player_index=8 alive=1 origin=( -223.342 -945.472 1614.280 )
+[2026-08-10 11:53:32 UTC-5.000] CODEX_BOT_SAMPLE sample=39 player_index=1 alive=0 origin=( 2246.328 -496.125 1613.125 )
+[2026-08-10 11:53:32 UTC-5.000] CODEX_BOT_SAMPLE sample=39 player_index=2 alive=1 origin=( 730.843 784.274 1700.125 )
+[2026-08-10 11:53:32 UTC-5.000] CODEX_BOT_SAMPLE sample=39 player_index=3 alive=1 origin=( 620.603 1229.530 1702.125 )
+[2026-08-10 11:53:32 UTC-5.000] CODEX_BOT_SAMPLE sample=39 player_index=4 alive=1 origin=( -1646.900 470.220 1614.125 )
+[2026-08-10 11:53:32 UTC-5.000] CODEX_BOT_SAMPLE sample=39 player_index=5 alive=0 origin=( 2449.040 -163.497 1613.125 )
+[2026-08-10 11:53:32 UTC-5.000] CODEX_BOT_SAMPLE sample=39 player_index=6 alive=1 origin=( -617.251 161.273 1648.568 )
+[2026-08-10 11:53:32 UTC-5.000] CODEX_BOT_SAMPLE sample=39 player_index=7 alive=0 origin=( 636.813 1501.646 1702.125 )
+[2026-08-10 11:53:32 UTC-5.000] CODEX_BOT_SAMPLE sample=39 player_index=8 alive=1 origin=( -465.730 -969.906 1612.125 )
+[2026-08-10 11:53:33 UTC-5.000] CODEX_BOT_SAMPLE sample=40 player_index=1 alive=0 origin=( 2246.328 -496.125 1613.125 )
+[2026-08-10 11:53:33 UTC-5.000] CODEX_BOT_SAMPLE sample=40 player_index=2 alive=1 origin=( 688.729 821.407 1702.125 )
+[2026-08-10 11:53:33 UTC-5.000] CODEX_BOT_SAMPLE sample=40 player_index=3 alive=1 origin=( 664.122 1016.898 1702.125 )
+[2026-08-10 11:53:33 UTC-5.000] CODEX_BOT_SAMPLE sample=40 player_index=4 alive=1 origin=( -1791.953 473.737 1614.125 )
+[2026-08-10 11:53:33 UTC-5.000] CODEX_BOT_SAMPLE sample=40 player_index=5 alive=0 origin=( 2449.040 -163.497 1613.125 )
+[2026-08-10 11:53:33 UTC-5.000] CODEX_BOT_SAMPLE sample=40 player_index=6 alive=1 origin=( -870.991 238.061 1614.125 )
+[2026-08-10 11:53:33 UTC-5.000] CODEX_BOT_SAMPLE sample=40 player_index=7 alive=1 origin=( 2708.047 362.213 1613.125 )
+[2026-08-10 11:53:33 UTC-5.000] CODEX_BOT_SAMPLE sample=40 player_index=8 alive=1 origin=( -664.963 -958.763 1614.125 )
+[2026-08-10 11:53:34 UTC-5.000] bot2 was pumped full of buckshot by bot3
+[2026-08-10 11:53:34 UTC-5.000] CODEX_BOT_SAMPLE sample=41 player_index=1 alive=1 origin=( -293.265 2208.585 1687.125 )
+[2026-08-10 11:53:34 UTC-5.000] CODEX_BOT_SAMPLE sample=41 player_index=2 alive=0 origin=( 590.408 980.910 1702.125 )
+[2026-08-10 11:53:34 UTC-5.000] CODEX_BOT_SAMPLE sample=41 player_index=3 alive=1 origin=( 664.577 963.166 1702.125 )
+[2026-08-10 11:53:34 UTC-5.000] CODEX_BOT_SAMPLE sample=41 player_index=4 alive=1 origin=( -1675.017 508.524 1614.125 )
+[2026-08-10 11:53:34 UTC-5.000] CODEX_BOT_SAMPLE sample=41 player_index=5 alive=1 origin=( 1729.808 -961.909 1613.125 )
+[2026-08-10 11:53:34 UTC-5.000] CODEX_BOT_SAMPLE sample=41 player_index=6 alive=1 origin=( -1078.875 258.318 1614.125 )
+[2026-08-10 11:53:34 UTC-5.000] CODEX_BOT_SAMPLE sample=41 player_index=7 alive=1 origin=( 2844.817 336.690 1613.125 )
+[2026-08-10 11:53:34 UTC-5.000] CODEX_BOT_SAMPLE sample=41 player_index=8 alive=1 origin=( -899.976 -1022.568 1613.125 )
+[2026-08-10 11:53:35 UTC-5.000] CODEX_BOT_SAMPLE sample=42 player_index=1 alive=1 origin=( -141.150 2099.914 1687.125 )
+[2026-08-10 11:53:35 UTC-5.000] CODEX_BOT_SAMPLE sample=42 player_index=2 alive=0 origin=( 539.463 986.748 1702.125 )
+[2026-08-10 11:53:35 UTC-5.000] CODEX_BOT_SAMPLE sample=42 player_index=3 alive=1 origin=( 609.815 1216.733 1702.125 )
+[2026-08-10 11:53:35 UTC-5.000] CODEX_BOT_SAMPLE sample=42 player_index=4 alive=1 origin=( -1544.384 684.712 1614.125 )
+[2026-08-10 11:53:35 UTC-5.000] CODEX_BOT_SAMPLE sample=42 player_index=5 alive=1 origin=( 1568.864 -813.196 1613.125 )
+[2026-08-10 11:53:35 UTC-5.000] CODEX_BOT_SAMPLE sample=42 player_index=6 alive=1 origin=( -1065.514 278.993 1614.125 )
+[2026-08-10 11:53:35 UTC-5.000] CODEX_BOT_SAMPLE sample=42 player_index=7 alive=1 origin=( 2834.069 467.672 1645.125 )
+[2026-08-10 11:53:35 UTC-5.000] CODEX_BOT_SAMPLE sample=42 player_index=8 alive=1 origin=( -1063.818 -1066.872 1613.125 )
+[2026-08-10 11:53:36 UTC-5.000] CODEX_BOT_SAMPLE sample=43 player_index=1 alive=1 origin=( -23.151 1932.773 1687.125 )
+[2026-08-10 11:53:36 UTC-5.000] CODEX_BOT_SAMPLE sample=43 player_index=2 alive=0 origin=( 539.463 986.748 1702.125 )
+[2026-08-10 11:53:36 UTC-5.000] CODEX_BOT_SAMPLE sample=43 player_index=3 alive=1 origin=( 547.907 1480.566 1702.125 )
+[2026-08-10 11:53:36 UTC-5.000] CODEX_BOT_SAMPLE sample=43 player_index=4 alive=1 origin=( -1469.143 668.742 1614.125 )
+[2026-08-10 11:53:36 UTC-5.000] CODEX_BOT_SAMPLE sample=43 player_index=5 alive=1 origin=( 1451.218 -737.078 1614.125 )
+[2026-08-10 11:53:36 UTC-5.000] CODEX_BOT_SAMPLE sample=43 player_index=6 alive=1 origin=( -1017.568 478.586 1615.074 )
+[2026-08-10 11:53:36 UTC-5.000] CODEX_BOT_SAMPLE sample=43 player_index=7 alive=1 origin=( 2830.639 658.875 1679.930 )
+[2026-08-10 11:53:36 UTC-5.000] CODEX_BOT_SAMPLE sample=43 player_index=8 alive=1 origin=( -1019.344 -950.451 1613.125 )
+[2026-08-10 11:53:37 UTC-5.000] CODEX_BOT_SAMPLE sample=44 player_index=1 alive=1 origin=( 14.479 1773.373 1687.125 )
+[2026-08-10 11:53:37 UTC-5.000] CODEX_BOT_SAMPLE sample=44 player_index=2 alive=1 origin=( 843.822 447.457 1613.125 )
+[2026-08-10 11:53:37 UTC-5.000] CODEX_BOT_SAMPLE sample=44 player_index=3 alive=1 origin=( 478.675 1650.592 1702.125 )
+[2026-08-10 11:53:37 UTC-5.000] CODEX_BOT_SAMPLE sample=44 player_index=4 alive=1 origin=( -1405.741 458.528 1614.125 )
+[2026-08-10 11:53:37 UTC-5.000] CODEX_BOT_SAMPLE sample=44 player_index=5 alive=1 origin=( 1241.554 -802.273 1614.125 )
+[2026-08-10 11:53:37 UTC-5.000] CODEX_BOT_SAMPLE sample=44 player_index=6 alive=1 origin=( -1076.842 662.423 1637.241 )
+[2026-08-10 11:53:37 UTC-5.000] CODEX_BOT_SAMPLE sample=44 player_index=7 alive=1 origin=( 2815.209 852.304 1695.125 )
+[2026-08-10 11:53:37 UTC-5.000] CODEX_BOT_SAMPLE sample=44 player_index=8 alive=1 origin=( -998.112 -963.325 1613.125 )
+[2026-08-10 11:53:38 UTC-5.000] bot3 took bot1's rocket in the face
+[2026-08-10 11:53:38 UTC-5.000] CODEX_BOT_SAMPLE sample=45 player_index=1 alive=1 origin=( 119.549 1727.709 1687.125 )
+[2026-08-10 11:53:38 UTC-5.000] CODEX_BOT_SAMPLE sample=45 player_index=2 alive=1 origin=( 882.446 303.980 1613.125 )
+[2026-08-10 11:53:38 UTC-5.000] CODEX_BOT_SAMPLE sample=45 player_index=3 alive=0 origin=( 293.647 1745.210 1687.125 )
+[2026-08-10 11:53:38 UTC-5.000] CODEX_BOT_SAMPLE sample=45 player_index=4 alive=1 origin=( -1342.263 247.885 1613.125 )
+[2026-08-10 11:53:38 UTC-5.000] CODEX_BOT_SAMPLE sample=45 player_index=5 alive=1 origin=( 1088.051 -906.756 1614.125 )
+[2026-08-10 11:53:38 UTC-5.000] CODEX_BOT_SAMPLE sample=45 player_index=6 alive=1 origin=( -1021.700 485.743 1616.114 )
+[2026-08-10 11:53:38 UTC-5.000] CODEX_BOT_SAMPLE sample=45 player_index=7 alive=1 origin=( 2902.512 987.662 1655.125 )
+[2026-08-10 11:53:38 UTC-5.000] CODEX_BOT_SAMPLE sample=45 player_index=8 alive=1 origin=( -963.624 -766.113 1617.266 )
+[2026-08-10 11:53:39 UTC-5.000] CODEX_BOT_SAMPLE sample=46 player_index=1 alive=1 origin=( 191.071 1667.010 1687.125 )
+[2026-08-10 11:53:39 UTC-5.000] CODEX_BOT_SAMPLE sample=46 player_index=2 alive=1 origin=( 1024.888 156.999 1613.125 )
+[2026-08-10 11:53:39 UTC-5.000] CODEX_BOT_SAMPLE sample=46 player_index=3 alive=0 origin=( 282.275 1666.378 1687.125 )
+[2026-08-10 11:53:39 UTC-5.000] CODEX_BOT_SAMPLE sample=46 player_index=4 alive=1 origin=( -1278.784 37.242 1613.125 )
+[2026-08-10 11:53:39 UTC-5.000] CODEX_BOT_SAMPLE sample=46 player_index=5 alive=1 origin=( 1013.466 -1113.268 1612.125 )
+[2026-08-10 11:53:39 UTC-5.000] CODEX_BOT_SAMPLE sample=46 player_index=6 alive=1 origin=( -1017.949 287.072 1614.125 )
+[2026-08-10 11:53:39 UTC-5.000] CODEX_BOT_SAMPLE sample=46 player_index=7 alive=1 origin=( 2935.522 1049.017 1655.125 )
+[2026-08-10 11:53:39 UTC-5.000] CODEX_BOT_SAMPLE sample=46 player_index=8 alive=1 origin=( -972.768 -545.854 1627.849 )
+[2026-08-10 11:53:40 UTC-5.000] CODEX_BOT_SAMPLE sample=47 player_index=1 alive=1 origin=( 23.794 1571.245 1687.125 )
+[2026-08-10 11:53:40 UTC-5.000] CODEX_BOT_SAMPLE sample=47 player_index=2 alive=1 origin=( 1159.586 72.643 1613.125 )
+[2026-08-10 11:53:40 UTC-5.000] CODEX_BOT_SAMPLE sample=47 player_index=3 alive=0 origin=( 278.730 1652.453 1687.125 )
+[2026-08-10 11:53:40 UTC-5.000] CODEX_BOT_SAMPLE sample=47 player_index=4 alive=1 origin=( -1215.305 -173.401 1613.125 )
+[2026-08-10 11:53:40 UTC-5.000] CODEX_BOT_SAMPLE sample=47 player_index=5 alive=1 origin=( 984.246 -1294.870 1652.703 )
+[2026-08-10 11:53:40 UTC-5.000] CODEX_BOT_SAMPLE sample=47 player_index=6 alive=1 origin=( -1034.582 88.538 1614.125 )
+[2026-08-10 11:53:40 UTC-5.000] CODEX_BOT_SAMPLE sample=47 player_index=7 alive=1 origin=( 2895.327 914.112 1655.125 )
+[2026-08-10 11:53:40 UTC-5.000] CODEX_BOT_SAMPLE sample=47 player_index=8 alive=1 origin=( -1021.070 -309.757 1614.125 )
+[2026-08-10 11:53:41 UTC-5.000] bot8 was pumped full of buckshot by bot6
+[2026-08-10 11:53:41 UTC-5.000] CODEX_BOT_SAMPLE sample=48 player_index=1 alive=1 origin=( -154.467 1470.013 1687.125 )
+[2026-08-10 11:53:41 UTC-5.000] CODEX_BOT_SAMPLE sample=48 player_index=2 alive=1 origin=( 1269.312 114.385 1613.125 )
+[2026-08-10 11:53:41 UTC-5.000] CODEX_BOT_SAMPLE sample=48 player_index=3 alive=1 origin=( 1018.821 1534.874 1701.125 )
+[2026-08-10 11:53:41 UTC-5.000] CODEX_BOT_SAMPLE sample=48 player_index=4 alive=1 origin=( -1170.932 -222.011 1613.125 )
+[2026-08-10 11:53:41 UTC-5.000] CODEX_BOT_SAMPLE sample=48 player_index=5 alive=1 origin=( 873.446 -1456.872 1613.125 )
+[2026-08-10 11:53:41 UTC-5.000] CODEX_BOT_SAMPLE sample=48 player_index=6 alive=1 origin=( -1049.384 -89.640 1614.125 )
+[2026-08-10 11:53:41 UTC-5.000] CODEX_BOT_SAMPLE sample=48 player_index=7 alive=1 origin=( 2815.374 882.251 1695.195 )
+[2026-08-10 11:53:41 UTC-5.000] CODEX_BOT_SAMPLE sample=48 player_index=8 alive=0 origin=( -1060.848 -150.130 1614.125 )
+[2026-08-10 11:53:42 UTC-5.000] bot4 was hunted down by bot6
+[2026-08-10 11:53:42 UTC-5.000] CODEX_BOT_SAMPLE sample=49 player_index=1 alive=1 origin=( -332.722 1368.769 1687.125 )
+[2026-08-10 11:53:42 UTC-5.000] CODEX_BOT_SAMPLE sample=49 player_index=2 alive=1 origin=( 1382.745 285.046 1613.125 )
+[2026-08-10 11:53:42 UTC-5.000] CODEX_BOT_SAMPLE sample=49 player_index=3 alive=1 origin=( 1019.551 1315.481 1701.125 )
+[2026-08-10 11:53:42 UTC-5.000] CODEX_BOT_SAMPLE sample=49 player_index=4 alive=0 origin=( -1131.859 -116.465 1613.125 )
+[2026-08-10 11:53:42 UTC-5.000] CODEX_BOT_SAMPLE sample=49 player_index=5 alive=1 origin=( 702.064 -1437.560 1613.125 )
+[2026-08-10 11:53:42 UTC-5.000] CODEX_BOT_SAMPLE sample=49 player_index=6 alive=1 origin=( -1001.156 -65.415 1614.125 )
+[2026-08-10 11:53:42 UTC-5.000] CODEX_BOT_SAMPLE sample=49 player_index=7 alive=1 origin=( 2872.574 648.371 1692.554 )
+[2026-08-10 11:53:42 UTC-5.000] CODEX_BOT_SAMPLE sample=49 player_index=8 alive=0 origin=( -1064.123 -207.190 1614.125 )
+[2026-08-10 11:53:43 UTC-5.000] CODEX_BOT_SAMPLE sample=50 player_index=1 alive=1 origin=( -510.973 1267.519 1687.125 )
+[2026-08-10 11:53:43 UTC-5.000] CODEX_BOT_SAMPLE sample=50 player_index=2 alive=1 origin=( 1494.420 456.662 1613.125 )
+[2026-08-10 11:53:43 UTC-5.000] CODEX_BOT_SAMPLE sample=50 player_index=3 alive=1 origin=( 1020.246 1102.597 1646.206 )
+[2026-08-10 11:53:43 UTC-5.000] CODEX_BOT_SAMPLE sample=50 player_index=4 alive=0 origin=( -1195.453 -139.896 1613.125 )
+[2026-08-10 11:53:43 UTC-5.000] CODEX_BOT_SAMPLE sample=50 player_index=5 alive=1 origin=( 511.465 -1456.872 1613.125 )
+[2026-08-10 11:53:43 UTC-5.000] CODEX_BOT_SAMPLE sample=50 player_index=6 alive=1 origin=( -996.703 178.506 1614.125 )
+[2026-08-10 11:53:43 UTC-5.000] CODEX_BOT_SAMPLE sample=50 player_index=7 alive=1 origin=( 3099.285 517.826 1645.125 )
+[2026-08-10 11:53:43 UTC-5.000] CODEX_BOT_SAMPLE sample=50 player_index=8 alive=0 origin=( -1064.123 -207.190 1614.125 )
+[2026-08-10 11:53:44 UTC-5.000] CODEX_BOT_SAMPLE sample=51 player_index=1 alive=1 origin=( -689.225 1166.269 1687.125 )
+[2026-08-10 11:53:44 UTC-5.000] CODEX_BOT_SAMPLE sample=51 player_index=2 alive=1 origin=( 1463.638 566.629 1613.125 )
+[2026-08-10 11:53:44 UTC-5.000] CODEX_BOT_SAMPLE sample=51 player_index=3 alive=1 origin=( 1020.968 887.491 1613.125 )
+[2026-08-10 11:53:44 UTC-5.000] CODEX_BOT_SAMPLE sample=51 player_index=4 alive=0 origin=( -1207.907 -144.484 1613.125 )
+[2026-08-10 11:53:44 UTC-5.000] CODEX_BOT_SAMPLE sample=51 player_index=5 alive=1 origin=( 672.842 -1383.029 1613.125 )
+[2026-08-10 11:53:44 UTC-5.000] CODEX_BOT_SAMPLE sample=51 player_index=6 alive=1 origin=( -1008.878 449.233 1614.125 )
+[2026-08-10 11:53:44 UTC-5.000] CODEX_BOT_SAMPLE sample=51 player_index=7 alive=1 origin=( 3307.871 449.096 1653.125 )
+[2026-08-10 11:53:44 UTC-5.000] CODEX_BOT_SAMPLE sample=51 player_index=8 alive=1 origin=( 225.314 2232.506 1686.125 )
+[2026-08-10 11:53:45 UTC-5.000] bot3 was blown away by bot2
+[2026-08-10 11:53:45 UTC-5.000] CODEX_BOT_SAMPLE sample=52 player_index=1 alive=1 origin=( -854.210 1076.428 1687.125 )
+[2026-08-10 11:53:45 UTC-5.000] CODEX_BOT_SAMPLE sample=52 player_index=2 alive=1 origin=( 1332.529 656.729 1613.125 )
+[2026-08-10 11:53:45 UTC-5.000] CODEX_BOT_SAMPLE sample=52 player_index=3 alive=0 origin=( 1018.690 782.598 1613.125 )
+[2026-08-10 11:53:45 UTC-5.000] CODEX_BOT_SAMPLE sample=52 player_index=4 alive=1 origin=( -312.874 -488.884 1796.125 )
+[2026-08-10 11:53:45 UTC-5.000] CODEX_BOT_SAMPLE sample=52 player_index=5 alive=1 origin=( 867.153 -1279.862 1613.125 )
+[2026-08-10 11:53:45 UTC-5.000] CODEX_BOT_SAMPLE sample=52 player_index=6 alive=1 origin=( -979.396 711.557 1643.096 )
+[2026-08-10 11:53:45 UTC-5.000] CODEX_BOT_SAMPLE sample=52 player_index=7 alive=1 origin=( 3300.163 419.937 1680.539 )
+[2026-08-10 11:53:45 UTC-5.000] CODEX_BOT_SAMPLE sample=52 player_index=8 alive=1 origin=( 443.535 2202.857 1686.125 )
+[2026-08-10 11:53:46 UTC-5.000] CODEX_BOT_SAMPLE sample=53 player_index=1 alive=1 origin=( -937.252 969.364 1673.900 )
+[2026-08-10 11:53:46 UTC-5.000] CODEX_BOT_SAMPLE sample=53 player_index=2 alive=1 origin=( 1168.211 722.197 1613.125 )
+[2026-08-10 11:53:46 UTC-5.000] CODEX_BOT_SAMPLE sample=53 player_index=3 alive=0 origin=( 1063.974 810.517 1613.125 )
+[2026-08-10 11:53:46 UTC-5.000] CODEX_BOT_SAMPLE sample=53 player_index=4 alive=1 origin=( -318.159 -692.255 1796.125 )
+[2026-08-10 11:53:46 UTC-5.000] CODEX_BOT_SAMPLE sample=53 player_index=5 alive=1 origin=( 995.555 -1179.520 1614.125 )
+[2026-08-10 11:53:46 UTC-5.000] CODEX_BOT_SAMPLE sample=53 player_index=6 alive=1 origin=( -1020.165 900.835 1665.715 )
+[2026-08-10 11:53:46 UTC-5.000] CODEX_BOT_SAMPLE sample=53 player_index=7 alive=1 origin=( 3307.052 276.485 1613.125 )
+[2026-08-10 11:53:46 UTC-5.000] CODEX_BOT_SAMPLE sample=53 player_index=8 alive=1 origin=( 684.570 2217.961 1701.125 )
+[2026-08-10 11:53:47 UTC-5.000] CODEX_BOT_SAMPLE sample=54 player_index=1 alive=1 origin=( -948.925 957.186 1672.445 )
+[2026-08-10 11:53:47 UTC-5.000] CODEX_BOT_SAMPLE sample=54 player_index=2 alive=1 origin=( 965.214 750.790 1613.125 )
+[2026-08-10 11:53:47 UTC-5.000] CODEX_BOT_SAMPLE sample=54 player_index=3 alive=1 origin=( 2054.924 -507.939 1622.869 )
+[2026-08-10 11:53:47 UTC-5.000] CODEX_BOT_SAMPLE sample=54 player_index=4 alive=1 origin=( -498.311 -680.174 1796.125 )
+[2026-08-10 11:53:47 UTC-5.000] CODEX_BOT_SAMPLE sample=54 player_index=5 alive=1 origin=( 855.693 -1071.206 1614.125 )
+[2026-08-10 11:53:47 UTC-5.000] CODEX_BOT_SAMPLE sample=54 player_index=6 alive=1 origin=( -1000.768 850.024 1659.647 )
+[2026-08-10 11:53:47 UTC-5.000] CODEX_BOT_SAMPLE sample=54 player_index=7 alive=1 origin=( 3131.813 340.112 1613.125 )
+[2026-08-10 11:53:47 UTC-5.000] CODEX_BOT_SAMPLE sample=54 player_index=8 alive=1 origin=( 877.290 2084.619 1703.125 )
+[2026-08-10 11:53:48 UTC-5.000] CODEX_BOT_SAMPLE sample=55 player_index=1 alive=1 origin=( -916.570 1002.315 1723.051 )
+[2026-08-10 11:53:48 UTC-5.000] CODEX_BOT_SAMPLE sample=55 player_index=2 alive=1 origin=( 762.668 779.683 1700.125 )
+[2026-08-10 11:53:48 UTC-5.000] CODEX_BOT_SAMPLE sample=55 player_index=3 alive=1 origin=( 2247.981 -496.129 1613.125 )
+[2026-08-10 11:53:48 UTC-5.000] CODEX_BOT_SAMPLE sample=55 player_index=4 alive=1 origin=( -598.156 -525.147 1804.560 )
+[2026-08-10 11:53:48 UTC-5.000] CODEX_BOT_SAMPLE sample=55 player_index=5 alive=1 origin=( 665.165 -961.211 1614.125 )
+[2026-08-10 11:53:48 UTC-5.000] CODEX_BOT_SAMPLE sample=55 player_index=6 alive=1 origin=( -1042.841 837.450 1658.145 )
+[2026-08-10 11:53:48 UTC-5.000] CODEX_BOT_SAMPLE sample=55 player_index=7 alive=1 origin=( 3053.115 398.875 1638.780 )
+[2026-08-10 11:53:48 UTC-5.000] CODEX_BOT_SAMPLE sample=55 player_index=8 alive=1 origin=( 1050.634 2005.396 1703.125 )
+[2026-08-10 11:53:49 UTC-5.000] bot6 shouts @all: I think they are all out of real men!
+[2026-08-10 11:53:49 UTC-5.000] bot1 was hunted down by bot6
+[2026-08-10 11:53:49 UTC-5.000] CODEX_BOT_SAMPLE sample=56 player_index=1 alive=0 origin=( -898.566 1042.590 1682.645 )
+[2026-08-10 11:53:49 UTC-5.000] CODEX_BOT_SAMPLE sample=56 player_index=2 alive=1 origin=( 694.423 802.092 1729.026 )
+[2026-08-10 11:53:49 UTC-5.000] CODEX_BOT_SAMPLE sample=56 player_index=3 alive=1 origin=( 2401.325 -319.914 1613.125 )
+[2026-08-10 11:53:49 UTC-5.000] CODEX_BOT_SAMPLE sample=56 player_index=4 alive=1 origin=( -638.947 -371.480 1620.125 )
+[2026-08-10 11:53:49 UTC-5.000] CODEX_BOT_SAMPLE sample=56 player_index=5 alive=1 origin=( 474.636 -851.218 1614.125 )
+[2026-08-10 11:53:49 UTC-5.000] CODEX_BOT_SAMPLE sample=56 player_index=6 alive=1 origin=( -1054.721 817.242 1655.731 )
+[2026-08-10 11:53:49 UTC-5.000] CODEX_BOT_SAMPLE sample=56 player_index=7 alive=1 origin=( 2882.195 431.787 1653.125 )
+[2026-08-10 11:53:49 UTC-5.000] CODEX_BOT_SAMPLE sample=56 player_index=8 alive=1 origin=( 1290.688 2006.081 1703.125 )
+[2026-08-10 11:53:50 UTC-5.000] CODEX_BOT_SAMPLE sample=57 player_index=1 alive=0 origin=( -860.696 1083.656 1687.125 )
+[2026-08-10 11:53:50 UTC-5.000] CODEX_BOT_SAMPLE sample=57 player_index=2 alive=1 origin=( 653.179 980.693 1702.125 )
+[2026-08-10 11:53:50 UTC-5.000] CODEX_BOT_SAMPLE sample=57 player_index=3 alive=1 origin=( 2549.482 -140.657 1613.125 )
+[2026-08-10 11:53:50 UTC-5.000] CODEX_BOT_SAMPLE sample=57 player_index=4 alive=1 origin=( -831.334 -388.665 1614.125 )
+[2026-08-10 11:53:50 UTC-5.000] CODEX_BOT_SAMPLE sample=57 player_index=5 alive=1 origin=( 284.100 -741.236 1614.125 )
+[2026-08-10 11:53:50 UTC-5.000] CODEX_BOT_SAMPLE sample=57 player_index=6 alive=1 origin=( -975.931 563.445 1625.387 )
+[2026-08-10 11:53:50 UTC-5.000] CODEX_BOT_SAMPLE sample=57 player_index=7 alive=1 origin=( 2711.034 359.055 1653.114 )
+[2026-08-10 11:53:50 UTC-5.000] CODEX_BOT_SAMPLE sample=57 player_index=8 alive=1 origin=( 1253.077 1835.488 1701.125 )
+[2026-08-10 11:53:51 UTC-5.000] bot3 was pumped full of buckshot by bot7
+[2026-08-10 11:53:51 UTC-5.000] CODEX_BOT_SAMPLE sample=58 player_index=1 alive=1 origin=( 1703.722 -1072.575 1613.125 )
+[2026-08-10 11:53:51 UTC-5.000] CODEX_BOT_SAMPLE sample=58 player_index=2 alive=1 origin=( 610.030 1181.101 1702.125 )
+[2026-08-10 11:53:51 UTC-5.000] CODEX_BOT_SAMPLE sample=58 player_index=3 alive=0 origin=( 2604.405 -73.514 1613.125 )
+[2026-08-10 11:53:51 UTC-5.000] CODEX_BOT_SAMPLE sample=58 player_index=4 alive=1 origin=( -891.852 -564.226 1613.125 )
+[2026-08-10 11:53:51 UTC-5.000] CODEX_BOT_SAMPLE sample=58 player_index=5 alive=1 origin=( 117.233 -727.208 1612.125 )
+[2026-08-10 11:53:51 UTC-5.000] CODEX_BOT_SAMPLE sample=58 player_index=6 alive=1 origin=( -909.257 308.164 1614.125 )
+[2026-08-10 11:53:51 UTC-5.000] CODEX_BOT_SAMPLE sample=58 player_index=7 alive=1 origin=( 2657.306 155.336 1613.125 )
+[2026-08-10 11:53:51 UTC-5.000] CODEX_BOT_SAMPLE sample=58 player_index=8 alive=1 origin=( 1190.484 1623.121 1705.125 )
+[2026-08-10 11:53:52 UTC-5.000] CODEX_BOT_SAMPLE sample=59 player_index=1 alive=1 origin=( 1608.790 -916.373 1613.125 )
+[2026-08-10 11:53:52 UTC-5.000] CODEX_BOT_SAMPLE sample=59 player_index=2 alive=1 origin=( 566.875 1381.507 1702.125 )
+[2026-08-10 11:53:52 UTC-5.000] CODEX_BOT_SAMPLE sample=59 player_index=3 alive=0 origin=( 2604.405 -73.514 1613.125 )
+[2026-08-10 11:53:52 UTC-5.000] CODEX_BOT_SAMPLE sample=59 player_index=4 alive=1 origin=( -966.181 -771.265 1635.571 )
+[2026-08-10 11:53:52 UTC-5.000] CODEX_BOT_SAMPLE sample=59 player_index=5 alive=1 origin=( -96.603 -778.923 1613.125 )
+[2026-08-10 11:53:52 UTC-5.000] CODEX_BOT_SAMPLE sample=59 player_index=6 alive=1 origin=( -844.375 64.656 1614.125 )
+[2026-08-10 11:53:52 UTC-5.000] CODEX_BOT_SAMPLE sample=59 player_index=7 alive=1 origin=( 2591.768 -107.620 1613.125 )
+[2026-08-10 11:53:52 UTC-5.000] CODEX_BOT_SAMPLE sample=59 player_index=8 alive=1 origin=( 1141.144 1384.653 1701.125 )
+[2026-08-10 11:53:53 UTC-5.000] CODEX_BOT_SAMPLE sample=60 player_index=1 alive=1 origin=( 1506.127 -748.546 1613.125 )
+[2026-08-10 11:53:53 UTC-5.000] CODEX_BOT_SAMPLE sample=60 player_index=2 alive=1 origin=( 523.706 1581.910 1702.125 )
+[2026-08-10 11:53:53 UTC-5.000] CODEX_BOT_SAMPLE sample=60 player_index=3 alive=1 origin=( -179.767 2145.227 1687.125 )
+[2026-08-10 11:53:53 UTC-5.000] CODEX_BOT_SAMPLE sample=60 player_index=4 alive=1 origin=( -1043.413 -975.336 1613.125 )
+[2026-08-10 11:53:53 UTC-5.000] CODEX_BOT_SAMPLE sample=60 player_index=5 alive=1 origin=( -283.114 -814.510 1613.125 )
+[2026-08-10 11:53:53 UTC-5.000] CODEX_BOT_SAMPLE sample=60 player_index=6 alive=1 origin=( -773.604 -120.476 1614.125 )
+[2026-08-10 11:53:53 UTC-5.000] CODEX_BOT_SAMPLE sample=60 player_index=7 alive=1 origin=( 2526.251 -370.580 1613.125 )
+[2026-08-10 11:53:53 UTC-5.000] CODEX_BOT_SAMPLE sample=60 player_index=8 alive=1 origin=( 1092.736 1150.344 1660.213 )
+[2026-08-10 11:53:54 UTC-5.000] bot4 was pumped full of buckshot by bot6
+[2026-08-10 11:53:54 UTC-5.000] CODEX_BOT_SAMPLE sample=61 player_index=1 alive=1 origin=( 1349.742 -753.768 1614.125 )
+[2026-08-10 11:53:54 UTC-5.000] CODEX_BOT_SAMPLE sample=61 player_index=2 alive=1 origin=( 476.977 1684.396 1702.125 )
+[2026-08-10 11:53:54 UTC-5.000] CODEX_BOT_SAMPLE sample=61 player_index=3 alive=1 origin=( -61.930 2052.620 1687.125 )
+[2026-08-10 11:53:54 UTC-5.000] CODEX_BOT_SAMPLE sample=61 player_index=4 alive=0 origin=( -953.149 -961.572 1613.125 )
+[2026-08-10 11:53:54 UTC-5.000] CODEX_BOT_SAMPLE sample=61 player_index=5 alive=1 origin=( -487.159 -846.308 1612.125 )
+[2026-08-10 11:53:54 UTC-5.000] CODEX_BOT_SAMPLE sample=61 player_index=6 alive=1 origin=( -783.580 -244.765 1614.125 )
+[2026-08-10 11:53:54 UTC-5.000] CODEX_BOT_SAMPLE sample=61 player_index=7 alive=1 origin=( 2464.711 -575.738 1613.125 )
+[2026-08-10 11:53:54 UTC-5.000] CODEX_BOT_SAMPLE sample=61 player_index=8 alive=1 origin=( 1044.714 917.893 1613.125 )
+[2026-08-10 11:53:54 UTC-5.000] bot3 took bot2's rocket in the face
+[2026-08-10 11:53:55 UTC-5.000] CODEX_BOT_SAMPLE sample=62 player_index=1 alive=1 origin=( 1150.589 -802.379 1614.125 )
+[2026-08-10 11:53:55 UTC-5.000] CODEX_BOT_SAMPLE sample=62 player_index=2 alive=1 origin=( 307.896 1634.831 1687.125 )
+[2026-08-10 11:53:55 UTC-5.000] CODEX_BOT_SAMPLE sample=62 player_index=3 alive=0 origin=( -40.719 2038.293 1687.125 )
+[2026-08-10 11:53:55 UTC-5.000] CODEX_BOT_SAMPLE sample=62 player_index=4 alive=0 origin=( -894.016 -945.398 1613.125 )
+[2026-08-10 11:53:55 UTC-5.000] CODEX_BOT_SAMPLE sample=62 player_index=5 alive=1 origin=( -422.276 -841.908 1613.125 )
+[2026-08-10 11:53:55 UTC-5.000] CODEX_BOT_SAMPLE sample=62 player_index=6 alive=1 origin=( -765.102 -339.234 1614.125 )
+[2026-08-10 11:53:55 UTC-5.000] CODEX_BOT_SAMPLE sample=62 player_index=7 alive=1 origin=( 2425.574 -841.885 1613.125 )
+[2026-08-10 11:53:55 UTC-5.000] CODEX_BOT_SAMPLE sample=62 player_index=8 alive=1 origin=( 951.578 748.961 1613.125 )
+[2026-08-10 11:53:56 UTC-5.000] CODEX_BOT_SAMPLE sample=63 player_index=1 alive=1 origin=( 951.441 -851.007 1612.125 )
+[2026-08-10 11:53:56 UTC-5.000] CODEX_BOT_SAMPLE sample=63 player_index=2 alive=1 origin=( 116.736 1564.337 1687.125 )
+[2026-08-10 11:53:56 UTC-5.000] CODEX_BOT_SAMPLE sample=63 player_index=3 alive=0 origin=( 19.286 2110.583 1687.125 )
+[2026-08-10 11:53:56 UTC-5.000] CODEX_BOT_SAMPLE sample=63 player_index=4 alive=0 origin=( -894.016 -945.398 1613.125 )
+[2026-08-10 11:53:56 UTC-5.000] CODEX_BOT_SAMPLE sample=63 player_index=5 alive=1 origin=( -641.856 -836.209 1614.125 )
+[2026-08-10 11:53:56 UTC-5.000] CODEX_BOT_SAMPLE sample=63 player_index=6 alive=1 origin=( -781.235 -98.087 1614.125 )
+[2026-08-10 11:53:56 UTC-5.000] CODEX_BOT_SAMPLE sample=63 player_index=7 alive=1 origin=( 2435.271 -1108.680 1613.125 )
+[2026-08-10 11:53:56 UTC-5.000] CODEX_BOT_SAMPLE sample=63 player_index=8 alive=1 origin=( 716.414 786.415 1700.125 )
+[2026-08-10 11:53:57 UTC-5.000] CODEX_BOT_SAMPLE sample=64 player_index=1 alive=1 origin=( 786.671 -882.866 1614.125 )
+[2026-08-10 11:53:57 UTC-5.000] CODEX_BOT_SAMPLE sample=64 player_index=2 alive=1 origin=( -76.947 1497.164 1687.125 )
+[2026-08-10 11:53:57 UTC-5.000] CODEX_BOT_SAMPLE sample=64 player_index=3 alive=1 origin=( -1767.109 470.232 1614.125 )
+[2026-08-10 11:53:57 UTC-5.000] CODEX_BOT_SAMPLE sample=64 player_index=4 alive=1 origin=( 2849.259 346.689 1613.125 )
+[2026-08-10 11:53:57 UTC-5.000] CODEX_BOT_SAMPLE sample=64 player_index=5 alive=1 origin=( -758.027 -720.767 1613.125 )
+[2026-08-10 11:53:57 UTC-5.000] CODEX_BOT_SAMPLE sample=64 player_index=6 alive=1 origin=( -801.531 126.886 1614.125 )
+[2026-08-10 11:53:57 UTC-5.000] CODEX_BOT_SAMPLE sample=64 player_index=7 alive=1 origin=( 2418.169 -896.760 1613.125 )
+[2026-08-10 11:53:57 UTC-5.000] CODEX_BOT_SAMPLE sample=64 player_index=8 alive=1 origin=( 687.889 832.454 1702.125 )
+[2026-08-10 11:53:58 UTC-5.000] CODEX_BOT_SAMPLE sample=65 player_index=1 alive=1 origin=( 614.711 -899.086 1614.125 )
+[2026-08-10 11:53:58 UTC-5.000] CODEX_BOT_SAMPLE sample=65 player_index=2 alive=1 origin=( -270.627 1429.984 1687.125 )
+[2026-08-10 11:53:58 UTC-5.000] CODEX_BOT_SAMPLE sample=65 player_index=3 alive=1 origin=( -1568.214 428.827 1614.125 )
+[2026-08-10 11:53:58 UTC-5.000] CODEX_BOT_SAMPLE sample=65 player_index=4 alive=1 origin=( 2849.690 240.560 1613.125 )
+[2026-08-10 11:53:58 UTC-5.000] CODEX_BOT_SAMPLE sample=65 player_index=5 alive=1 origin=( -892.616 -548.090 1613.125 )
+[2026-08-10 11:53:58 UTC-5.000] CODEX_BOT_SAMPLE sample=65 player_index=6 alive=1 origin=( -611.302 146.984 1650.499 )
+[2026-08-10 11:53:58 UTC-5.000] CODEX_BOT_SAMPLE sample=65 player_index=7 alive=1 origin=( 2422.068 -977.458 1613.125 )
+[2026-08-10 11:53:58 UTC-5.000] CODEX_BOT_SAMPLE sample=65 player_index=8 alive=1 origin=( 635.740 1070.619 1702.125 )
+[2026-08-10 11:53:59 UTC-5.000] CODEX_BOT_SAMPLE sample=66 player_index=1 alive=1 origin=( 501.153 -794.346 1612.125 )
+[2026-08-10 11:53:59 UTC-5.000] CODEX_BOT_SAMPLE sample=66 player_index=2 alive=1 origin=( -464.303 1362.794 1687.125 )
+[2026-08-10 11:53:59 UTC-5.000] CODEX_BOT_SAMPLE sample=66 player_index=3 alive=1 origin=( -1430.792 350.511 1613.125 )
+[2026-08-10 11:53:59 UTC-5.000] CODEX_BOT_SAMPLE sample=66 player_index=4 alive=1 origin=( 2827.819 399.213 1655.125 )
+[2026-08-10 11:53:59 UTC-5.000] CODEX_BOT_SAMPLE sample=66 player_index=5 alive=1 origin=( -1015.350 -372.344 1614.125 )
+[2026-08-10 11:53:59 UTC-5.000] CODEX_BOT_SAMPLE sample=66 player_index=6 alive=1 origin=( -420.047 94.977 1663.125 )
+[2026-08-10 11:53:59 UTC-5.000] CODEX_BOT_SAMPLE sample=66 player_index=7 alive=1 origin=( 2441.612 -718.563 1601.125 )
+[2026-08-10 11:53:59 UTC-5.000] CODEX_BOT_SAMPLE sample=66 player_index=8 alive=1 origin=( 583.559 1308.974 1702.125 )
+[2026-08-10 11:54:00 UTC-5.000] CODEX_BOT_SAMPLE sample=67 player_index=1 alive=1 origin=( 400.034 -616.020 1612.125 )
+[2026-08-10 11:54:00 UTC-5.000] CODEX_BOT_SAMPLE sample=67 player_index=2 alive=1 origin=( -431.435 1527.500 1687.125 )
+[2026-08-10 11:54:00 UTC-5.000] CODEX_BOT_SAMPLE sample=67 player_index=3 alive=1 origin=( -1262.684 239.326 1613.125 )
+[2026-08-10 11:54:00 UTC-5.000] CODEX_BOT_SAMPLE sample=67 player_index=4 alive=1 origin=( 2844.482 637.105 1655.125 )
+[2026-08-10 11:54:00 UTC-5.000] CODEX_BOT_SAMPLE sample=67 player_index=5 alive=1 origin=( -1005.384 -380.252 1614.125 )
+[2026-08-10 11:54:00 UTC-5.000] CODEX_BOT_SAMPLE sample=67 player_index=6 alive=1 origin=( -264.622 98.858 1655.996 )
+[2026-08-10 11:54:00 UTC-5.000] CODEX_BOT_SAMPLE sample=67 player_index=7 alive=1 origin=( 2495.041 -469.885 1613.125 )
+[2026-08-10 11:54:00 UTC-5.000] CODEX_BOT_SAMPLE sample=67 player_index=8 alive=1 origin=( 531.361 1547.325 1702.125 )
+[2026-08-10 11:54:01 UTC-5.000] CODEX_BOT_SAMPLE sample=68 player_index=1 alive=1 origin=( 303.516 -440.207 1614.125 )
+[2026-08-10 11:54:01 UTC-5.000] CODEX_BOT_SAMPLE sample=68 player_index=2 alive=1 origin=( -405.005 1686.931 1687.125 )
+[2026-08-10 11:54:01 UTC-5.000] CODEX_BOT_SAMPLE sample=68 player_index=3 alive=1 origin=( -1125.534 136.096 1613.125 )
+[2026-08-10 11:54:01 UTC-5.000] CODEX_BOT_SAMPLE sample=68 player_index=4 alive=1 origin=( 2816.190 755.161 1695.125 )
+[2026-08-10 11:54:01 UTC-5.000] CODEX_BOT_SAMPLE sample=68 player_index=5 alive=1 origin=( -971.981 -538.833 1614.125 )
+[2026-08-10 11:54:01 UTC-5.000] CODEX_BOT_SAMPLE sample=68 player_index=6 alive=1 origin=( -246.348 135.009 1648.939 )
+[2026-08-10 11:54:01 UTC-5.000] CODEX_BOT_SAMPLE sample=68 player_index=7 alive=1 origin=( 2556.332 -248.228 1613.125 )
+[2026-08-10 11:54:01 UTC-5.000] CODEX_BOT_SAMPLE sample=68 player_index=8 alive=1 origin=( 379.740 1620.921 1687.125 )
+[2026-08-10 11:54:02 UTC-5.000] CODEX_BOT_SAMPLE sample=69 player_index=1 alive=1 origin=( 174.039 -404.225 1614.125 )
+[2026-08-10 11:54:02 UTC-5.000] CODEX_BOT_SAMPLE sample=69 player_index=2 alive=1 origin=( -256.908 1691.951 1687.125 )
+[2026-08-10 11:54:02 UTC-5.000] CODEX_BOT_SAMPLE sample=69 player_index=3 alive=1 origin=( -1242.074 119.461 1613.125 )
+[2026-08-10 11:54:02 UTC-5.000] CODEX_BOT_SAMPLE sample=69 player_index=4 alive=1 origin=( 2870.296 933.738 1680.275 )
+[2026-08-10 11:54:02 UTC-5.000] CODEX_BOT_SAMPLE sample=69 player_index=5 alive=1 origin=( -957.079 -605.896 1626.190 )
+[2026-08-10 11:54:02 UTC-5.000] CODEX_BOT_SAMPLE sample=69 player_index=6 alive=1 origin=( -246.390 134.784 1649.009 )
+[2026-08-10 11:54:02 UTC-5.000] CODEX_BOT_SAMPLE sample=69 player_index=7 alive=1 origin=( 2663.405 -7.674 1613.125 )
+[2026-08-10 11:54:02 UTC-5.000] CODEX_BOT_SAMPLE sample=69 player_index=8 alive=1 origin=( 144.576 1601.963 1687.125 )
+[2026-08-10 11:54:03 UTC-5.000] CODEX_BOT_SAMPLE sample=70 player_index=1 alive=1 origin=( -18.244 -404.427 1614.125 )
+[2026-08-10 11:54:03 UTC-5.000] CODEX_BOT_SAMPLE sample=70 player_index=2 alive=1 origin=( -97.343 1698.981 1687.125 )
+[2026-08-10 11:54:03 UTC-5.000] CODEX_BOT_SAMPLE sample=70 player_index=3 alive=1 origin=( -1459.250 93.303 1613.125 )
+[2026-08-10 11:54:03 UTC-5.000] CODEX_BOT_SAMPLE sample=70 player_index=4 alive=1 origin=( 3090.414 978.567 1655.125 )
+[2026-08-10 11:54:03 UTC-5.000] CODEX_BOT_SAMPLE sample=70 player_index=5 alive=1 origin=( -954.105 -808.386 1618.125 )
+[2026-08-10 11:54:03 UTC-5.000] CODEX_BOT_SAMPLE sample=70 player_index=6 alive=1 origin=( -246.348 294.140 1617.873 )
+[2026-08-10 11:54:03 UTC-5.000] CODEX_BOT_SAMPLE sample=70 player_index=7 alive=1 origin=( 2779.322 230.368 1613.125 )
+[2026-08-10 11:54:03 UTC-5.000] CODEX_BOT_SAMPLE sample=70 player_index=8 alive=1 origin=( -43.027 1662.376 1687.125 )
+[2026-08-10 11:54:03 UTC-5.000] bot2 was machine-gunned by bot8
+[2026-08-10 11:54:04 UTC-5.000] CODEX_BOT_SAMPLE sample=71 player_index=1 alive=1 origin=( -154.389 -489.696 1613.125 )
+[2026-08-10 11:54:04 UTC-5.000] CODEX_BOT_SAMPLE sample=71 player_index=2 alive=0 origin=( -87.066 1723.191 1687.125 )
+[2026-08-10 11:54:04 UTC-5.000] CODEX_BOT_SAMPLE sample=71 player_index=3 alive=1 origin=( -1670.561 145.771 1613.125 )
+[2026-08-10 11:54:04 UTC-5.000] CODEX_BOT_SAMPLE sample=71 player_index=4 alive=1 origin=( 3352.938 1006.460 1655.125 )
+[2026-08-10 11:54:04 UTC-5.000] CODEX_BOT_SAMPLE sample=71 player_index=5 alive=1 origin=( -946.843 -943.356 1613.125 )
+[2026-08-10 11:54:04 UTC-5.000] CODEX_BOT_SAMPLE sample=71 player_index=6 alive=1 origin=( -273.208 174.921 1641.150 )
+[2026-08-10 11:54:04 UTC-5.000] CODEX_BOT_SAMPLE sample=71 player_index=7 alive=1 origin=( 2820.706 380.235 1626.125 )
+[2026-08-10 11:54:04 UTC-5.000] CODEX_BOT_SAMPLE sample=71 player_index=8 alive=1 origin=( -42.252 1632.050 1687.125 )
+[2026-08-10 11:54:05 UTC-5.000] CODEX_BOT_SAMPLE sample=72 player_index=1 alive=1 origin=( -279.367 -651.582 1613.125 )
+[2026-08-10 11:54:05 UTC-5.000] CODEX_BOT_SAMPLE sample=72 player_index=2 alive=0 origin=( -136.015 1750.108 1687.125 )
+[2026-08-10 11:54:05 UTC-5.000] CODEX_BOT_SAMPLE sample=72 player_index=3 alive=1 origin=( -1752.859 120.350 1615.125 )
+[2026-08-10 11:54:05 UTC-5.000] CODEX_BOT_SAMPLE sample=72 player_index=4 alive=1 origin=( 3615.458 1034.375 1655.125 )
+[2026-08-10 11:54:05 UTC-5.000] CODEX_BOT_SAMPLE sample=72 player_index=5 alive=1 origin=( -953.613 -736.273 1616.206 )
+[2026-08-10 11:54:05 UTC-5.000] CODEX_BOT_SAMPLE sample=72 player_index=6 alive=1 origin=( -257.584 351.444 1613.125 )
+[2026-08-10 11:54:05 UTC-5.000] CODEX_BOT_SAMPLE sample=72 player_index=7 alive=1 origin=( 2846.529 504.392 1645.125 )
+[2026-08-10 11:54:05 UTC-5.000] CODEX_BOT_SAMPLE sample=72 player_index=8 alive=1 origin=( -57.768 1435.519 1687.125 )
+[2026-08-10 11:54:06 UTC-5.000] CODEX_BOT_SAMPLE sample=73 player_index=1 alive=1 origin=( -399.796 -811.989 1613.125 )
+[2026-08-10 11:54:06 UTC-5.000] CODEX_BOT_SAMPLE sample=73 player_index=2 alive=1 origin=( 1743.254 -1021.785 1613.125 )
+[2026-08-10 11:54:06 UTC-5.000] CODEX_BOT_SAMPLE sample=73 player_index=3 alive=1 origin=( -1721.489 57.308 1613.237 )
+[2026-08-10 11:54:06 UTC-5.000] CODEX_BOT_SAMPLE sample=73 player_index=4 alive=1 origin=( 3877.977 1062.291 1655.125 )
+[2026-08-10 11:54:06 UTC-5.000] CODEX_BOT_SAMPLE sample=73 player_index=5 alive=1 origin=( -981.778 -818.593 1621.125 )
+[2026-08-10 11:54:06 UTC-5.000] CODEX_BOT_SAMPLE sample=73 player_index=6 alive=1 origin=( -242.885 575.665 1630.386 )
+[2026-08-10 11:54:06 UTC-5.000] CODEX_BOT_SAMPLE sample=73 player_index=7 alive=1 origin=( 2827.996 658.875 1688.754 )
+[2026-08-10 11:54:06 UTC-5.000] CODEX_BOT_SAMPLE sample=73 player_index=8 alive=1 origin=( -120.250 1237.069 1687.125 )
+[2026-08-10 11:54:07 UTC-5.000] bot8 was pumped full of buckshot by bot6
+[2026-08-10 11:54:07 UTC-5.000] CODEX_BOT_SAMPLE sample=74 player_index=1 alive=1 origin=( -532.854 -840.347 1612.125 )
+[2026-08-10 11:54:07 UTC-5.000] CODEX_BOT_SAMPLE sample=74 player_index=2 alive=1 origin=( 1884.133 -873.641 1613.125 )
+[2026-08-10 11:54:07 UTC-5.000] CODEX_BOT_SAMPLE sample=74 player_index=3 alive=1 origin=( -1613.375 -77.889 1613.237 )
+[2026-08-10 11:54:07 UTC-5.000] CODEX_BOT_SAMPLE sample=74 player_index=4 alive=1 origin=( 4140.497 1090.206 1655.125 )
+[2026-08-10 11:54:07 UTC-5.000] CODEX_BOT_SAMPLE sample=74 player_index=5 alive=1 origin=( -918.006 -652.476 1613.125 )
+[2026-08-10 11:54:07 UTC-5.000] CODEX_BOT_SAMPLE sample=74 player_index=6 alive=1 origin=( -210.223 733.911 1654.599 )
+[2026-08-10 11:54:07 UTC-5.000] CODEX_BOT_SAMPLE sample=74 player_index=7 alive=1 origin=( 2815.092 865.752 1695.125 )
+[2026-08-10 11:54:07 UTC-5.000] CODEX_BOT_SAMPLE sample=74 player_index=8 alive=0 origin=( -152.231 1010.781 1687.125 )
+[2026-08-10 11:54:08 UTC-5.000] CODEX_BOT_SAMPLE sample=75 player_index=1 alive=1 origin=( -737.005 -830.351 1613.125 )
+[2026-08-10 11:54:08 UTC-5.000] CODEX_BOT_SAMPLE sample=75 player_index=2 alive=1 origin=( 2025.343 -725.032 1614.125 )
+[2026-08-10 11:54:08 UTC-5.000] CODEX_BOT_SAMPLE sample=75 player_index=3 alive=1 origin=( -1416.084 -172.125 1613.237 )
+[2026-08-10 11:54:08 UTC-5.000] CODEX_BOT_SAMPLE sample=75 player_index=4 alive=1 origin=( 4403.017 1118.121 1655.125 )
+[2026-08-10 11:54:08 UTC-5.000] CODEX_BOT_SAMPLE sample=75 player_index=5 alive=1 origin=( -859.129 -440.500 1614.125 )
+[2026-08-10 11:54:08 UTC-5.000] CODEX_BOT_SAMPLE sample=75 player_index=6 alive=1 origin=( -185.288 513.618 1620.893 )
+[2026-08-10 11:54:08 UTC-5.000] CODEX_BOT_SAMPLE sample=75 player_index=7 alive=1 origin=( 2911.761 957.625 1655.125 )
+[2026-08-10 11:54:08 UTC-5.000] CODEX_BOT_SAMPLE sample=75 player_index=8 alive=0 origin=( -152.231 1010.781 1687.125 )
+[2026-08-10 11:54:09 UTC-5.000] CODEX_BOT_SAMPLE sample=76 player_index=1 alive=1 origin=( -941.243 -814.669 1619.125 )
+[2026-08-10 11:54:09 UTC-5.000] CODEX_BOT_SAMPLE sample=76 player_index=2 alive=1 origin=( 2166.544 -576.413 1613.125 )
+[2026-08-10 11:54:09 UTC-5.000] CODEX_BOT_SAMPLE sample=76 player_index=3 alive=1 origin=( -1217.093 -265.945 1613.237 )
+[2026-08-10 11:54:09 UTC-5.000] CODEX_BOT_SAMPLE sample=76 player_index=4 alive=1 origin=( 4497.537 1035.692 1655.125 )
+[2026-08-10 11:54:09 UTC-5.000] CODEX_BOT_SAMPLE sample=76 player_index=5 alive=1 origin=( -800.269 -228.521 1614.125 )
+[2026-08-10 11:54:09 UTC-5.000] CODEX_BOT_SAMPLE sample=76 player_index=6 alive=1 origin=( -130.121 248.903 1613.125 )
+[2026-08-10 11:54:09 UTC-5.000] CODEX_BOT_SAMPLE sample=76 player_index=7 alive=1 origin=( 3168.618 983.024 1655.125 )
+[2026-08-10 11:54:09 UTC-5.000] CODEX_BOT_SAMPLE sample=76 player_index=8 alive=1 origin=( -275.000 2216.000 1707.000 )
+[2026-08-10 11:54:10 UTC-5.000] CODEX_BOT_SAMPLE sample=77 player_index=1 alive=1 origin=( -965.945 -769.469 1635.335 )
+[2026-08-10 11:54:10 UTC-5.000] CODEX_BOT_SAMPLE sample=77 player_index=2 alive=1 origin=( 2277.347 -448.735 1613.125 )
+[2026-08-10 11:54:10 UTC-5.000] CODEX_BOT_SAMPLE sample=77 player_index=3 alive=1 origin=( -1174.323 -140.689 1613.237 )
+[2026-08-10 11:54:10 UTC-5.000] CODEX_BOT_SAMPLE sample=77 player_index=4 alive=1 origin=( 4449.190 776.791 1655.125 )
+[2026-08-10 11:54:10 UTC-5.000] CODEX_BOT_SAMPLE sample=77 player_index=5 alive=1 origin=( -770.004 -20.078 1614.125 )
+[2026-08-10 11:54:10 UTC-5.000] CODEX_BOT_SAMPLE sample=77 player_index=6 alive=1 origin=( -97.715 12.598 1613.125 )
+[2026-08-10 11:54:10 UTC-5.000] CODEX_BOT_SAMPLE sample=77 player_index=7 alive=1 origin=( 3432.852 1001.879 1655.125 )
+[2026-08-10 11:54:10 UTC-5.000] CODEX_BOT_SAMPLE sample=77 player_index=8 alive=1 origin=( -383.942 2175.886 1687.125 )
+[2026-08-10 11:54:10 UTC-5.000] bot5 took bot1's rocket in the face
+[2026-08-10 11:54:11 UTC-5.000] CODEX_BOT_SAMPLE sample=78 player_index=1 alive=1 origin=( -963.579 -594.227 1639.264 )
+[2026-08-10 11:54:11 UTC-5.000] CODEX_BOT_SAMPLE sample=78 player_index=2 alive=1 origin=( 2269.537 -517.788 1613.125 )
+[2026-08-10 11:54:11 UTC-5.000] CODEX_BOT_SAMPLE sample=78 player_index=3 alive=1 origin=( -1297.886 -98.755 1613.237 )
+[2026-08-10 11:54:11 UTC-5.000] CODEX_BOT_SAMPLE sample=78 player_index=4 alive=1 origin=( 4239.837 770.137 1655.125 )
+[2026-08-10 11:54:11 UTC-5.000] CODEX_BOT_SAMPLE sample=78 player_index=5 alive=0 origin=( -767.722 23.603 1614.125 )
+[2026-08-10 11:54:11 UTC-5.000] CODEX_BOT_SAMPLE sample=78 player_index=6 alive=1 origin=( -151.083 164.289 1613.125 )
+[2026-08-10 11:54:11 UTC-5.000] CODEX_BOT_SAMPLE sample=78 player_index=7 alive=1 origin=( 3679.511 1016.580 1655.125 )
+[2026-08-10 11:54:11 UTC-5.000] CODEX_BOT_SAMPLE sample=78 player_index=8 alive=1 origin=( -394.885 1968.161 1687.125 )
+[2026-08-10 11:54:12 UTC-5.000] CODEX_BOT_SAMPLE sample=79 player_index=1 alive=1 origin=( -982.505 -421.512 1614.125 )
+[2026-08-10 11:54:12 UTC-5.000] CODEX_BOT_SAMPLE sample=79 player_index=2 alive=1 origin=( 2230.656 -718.738 1613.125 )
+[2026-08-10 11:54:12 UTC-5.000] CODEX_BOT_SAMPLE sample=79 player_index=3 alive=1 origin=( -1516.931 -118.288 1613.237 )
+[2026-08-10 11:54:12 UTC-5.000] CODEX_BOT_SAMPLE sample=79 player_index=4 alive=1 origin=( 3976.172 783.420 1655.125 )
+[2026-08-10 11:54:12 UTC-5.000] CODEX_BOT_SAMPLE sample=79 player_index=5 alive=0 origin=( -860.594 37.790 1614.125 )
+[2026-08-10 11:54:12 UTC-5.000] CODEX_BOT_SAMPLE sample=79 player_index=6 alive=1 origin=( -152.739 433.827 1613.125 )
+[2026-08-10 11:54:12 UTC-5.000] CODEX_BOT_SAMPLE sample=79 player_index=7 alive=1 origin=( 3884.780 1025.857 1655.125 )
+[2026-08-10 11:54:12 UTC-5.000] CODEX_BOT_SAMPLE sample=79 player_index=8 alive=1 origin=( -350.026 1715.021 1687.125 )
+[2026-08-10 11:54:13 UTC-5.000] CODEX_BOT_SAMPLE sample=80 player_index=1 alive=1 origin=( -1029.405 -243.009 1614.125 )
+[2026-08-10 11:54:13 UTC-5.000] CODEX_BOT_SAMPLE sample=80 player_index=2 alive=1 origin=( 2191.745 -920.011 1613.125 )
+[2026-08-10 11:54:13 UTC-5.000] CODEX_BOT_SAMPLE sample=80 player_index=3 alive=1 origin=( -1486.321 -112.162 1613.237 )
+[2026-08-10 11:54:13 UTC-5.000] CODEX_BOT_SAMPLE sample=80 player_index=4 alive=1 origin=( 3814.336 785.560 1655.125 )
+[2026-08-10 11:54:13 UTC-5.000] CODEX_BOT_SAMPLE sample=80 player_index=5 alive=1 origin=( 1709.201 904.900 1619.125 )
+[2026-08-10 11:54:13 UTC-5.000] CODEX_BOT_SAMPLE sample=80 player_index=6 alive=1 origin=( -188.699 697.687 1649.057 )
+[2026-08-10 11:54:13 UTC-5.000] CODEX_BOT_SAMPLE sample=80 player_index=7 alive=1 origin=( 4079.805 1046.395 1655.125 )
+[2026-08-10 11:54:13 UTC-5.000] CODEX_BOT_SAMPLE sample=80 player_index=8 alive=1 origin=( -318.605 1532.926 1687.125 )
+[2026-08-10 11:54:14 UTC-5.000] bot1 was sniped by bot3
+[2026-08-10 11:54:14 UTC-5.000] CODEX_BOT_SAMPLE sample=81 player_index=1 alive=0 origin=( -1055.548 -150.131 1614.125 )
+[2026-08-10 11:54:14 UTC-5.000] CODEX_BOT_SAMPLE sample=81 player_index=2 alive=1 origin=( 2152.843 -1120.875 1613.125 )
+[2026-08-10 11:54:14 UTC-5.000] CODEX_BOT_SAMPLE sample=81 player_index=3 alive=1 origin=( -1409.134 -129.654 1613.237 )
+[2026-08-10 11:54:14 UTC-5.000] CODEX_BOT_SAMPLE sample=81 player_index=4 alive=1 origin=( 4064.421 804.797 1655.125 )
+[2026-08-10 11:54:14 UTC-5.000] CODEX_BOT_SAMPLE sample=81 player_index=5 alive=1 origin=( 1471.269 848.681 1620.160 )
+[2026-08-10 11:54:14 UTC-5.000] CODEX_BOT_SAMPLE sample=81 player_index=6 alive=1 origin=( -215.012 899.290 1679.778 )
+[2026-08-10 11:54:14 UTC-5.000] CODEX_BOT_SAMPLE sample=81 player_index=7 alive=1 origin=( 4312.460 1105.400 1655.125 )
+[2026-08-10 11:54:14 UTC-5.000] CODEX_BOT_SAMPLE sample=81 player_index=8 alive=1 origin=( -278.208 1441.532 1687.125 )
+[2026-08-10 11:54:15 UTC-5.000] bot6 was rifled by bot8
+[2026-08-10 11:54:15 UTC-5.000] CODEX_BOT_SAMPLE sample=82 player_index=1 alive=0 origin=( -1067.875 -113.323 1614.125 )
+[2026-08-10 11:54:15 UTC-5.000] CODEX_BOT_SAMPLE sample=82 player_index=2 alive=1 origin=( 2006.251 -1026.961 1613.125 )
+[2026-08-10 11:54:15 UTC-5.000] CODEX_BOT_SAMPLE sample=82 player_index=3 alive=1 origin=( -1373.119 -129.103 1613.237 )
+[2026-08-10 11:54:15 UTC-5.000] CODEX_BOT_SAMPLE sample=82 player_index=4 alive=1 origin=( 3978.012 808.989 1655.125 )
+[2026-08-10 11:54:15 UTC-5.000] CODEX_BOT_SAMPLE sample=82 player_index=5 alive=1 origin=( 1212.091 801.165 1615.971 )
+[2026-08-10 11:54:15 UTC-5.000] CODEX_BOT_SAMPLE sample=82 player_index=6 alive=0 origin=( -221.086 950.057 1687.125 )
+[2026-08-10 11:54:15 UTC-5.000] CODEX_BOT_SAMPLE sample=82 player_index=7 alive=1 origin=( 4418.542 985.460 1655.125 )
+[2026-08-10 11:54:15 UTC-5.000] CODEX_BOT_SAMPLE sample=82 player_index=8 alive=1 origin=( -261.436 1420.939 1687.125 )
+[2026-08-10 11:54:16 UTC-5.000] CODEX_BOT_SAMPLE sample=83 player_index=1 alive=1 origin=( 90.000 -1364.000 1668.000 )
+[2026-08-10 11:54:16 UTC-5.000] CODEX_BOT_SAMPLE sample=83 player_index=2 alive=1 origin=( 1827.450 -926.688 1613.125 )
+[2026-08-10 11:54:16 UTC-5.000] CODEX_BOT_SAMPLE sample=83 player_index=3 alive=1 origin=( -1157.313 -131.625 1613.237 )
+[2026-08-10 11:54:16 UTC-5.000] CODEX_BOT_SAMPLE sample=83 player_index=4 alive=1 origin=( 4193.578 778.448 1655.125 )
+[2026-08-10 11:54:16 UTC-5.000] CODEX_BOT_SAMPLE sample=83 player_index=5 alive=1 origin=( 952.485 753.551 1613.125 )
+[2026-08-10 11:54:16 UTC-5.000] CODEX_BOT_SAMPLE sample=83 player_index=6 alive=0 origin=( -221.086 950.057 1687.125 )
+[2026-08-10 11:54:16 UTC-5.000] CODEX_BOT_SAMPLE sample=83 player_index=7 alive=1 origin=( 4434.439 759.871 1655.125 )
+[2026-08-10 11:54:16 UTC-5.000] CODEX_BOT_SAMPLE sample=83 player_index=8 alive=1 origin=( -313.073 1672.555 1687.125 )
+[2026-08-10 11:54:16 UTC-5.000] bot7 was perforated by bot4's' SMG in the head
+[2026-08-10 11:54:17 UTC-5.000] CODEX_BOT_SAMPLE sample=84 player_index=1 alive=1 origin=( 2.533 -1148.675 1659.125 )
+[2026-08-10 11:54:17 UTC-5.000] CODEX_BOT_SAMPLE sample=84 player_index=2 alive=1 origin=( 1648.648 -826.414 1613.125 )
+[2026-08-10 11:54:17 UTC-5.000] CODEX_BOT_SAMPLE sample=84 player_index=3 alive=1 origin=( -1137.982 -132.671 1613.237 )
+[2026-08-10 11:54:17 UTC-5.000] CODEX_BOT_SAMPLE sample=84 player_index=4 alive=1 origin=( 4150.256 758.828 1655.125 )
+[2026-08-10 11:54:17 UTC-5.000] CODEX_BOT_SAMPLE sample=84 player_index=5 alive=1 origin=( 702.242 787.872 1700.125 )
+[2026-08-10 11:54:17 UTC-5.000] CODEX_BOT_SAMPLE sample=84 player_index=6 alive=1 origin=( 2843.603 344.963 1613.125 )
+[2026-08-10 11:54:17 UTC-5.000] CODEX_BOT_SAMPLE sample=84 player_index=7 alive=0 origin=( 4380.789 772.896 1655.125 )
+[2026-08-10 11:54:17 UTC-5.000] CODEX_BOT_SAMPLE sample=84 player_index=8 alive=1 origin=( -366.096 1925.048 1687.125 )
+[2026-08-10 11:54:18 UTC-5.000] CODEX_BOT_SAMPLE sample=85 player_index=1 alive=1 origin=( -132.598 -929.061 1614.125 )
+[2026-08-10 11:54:18 UTC-5.000] CODEX_BOT_SAMPLE sample=85 player_index=2 alive=1 origin=( 1502.072 -733.843 1614.125 )
+[2026-08-10 11:54:18 UTC-5.000] CODEX_BOT_SAMPLE sample=85 player_index=3 alive=1 origin=( -1141.523 76.793 1613.237 )
+[2026-08-10 11:54:18 UTC-5.000] CODEX_BOT_SAMPLE sample=85 player_index=4 alive=1 origin=( 3907.934 761.221 1655.125 )
+[2026-08-10 11:54:18 UTC-5.000] CODEX_BOT_SAMPLE sample=85 player_index=5 alive=1 origin=( 665.608 858.821 1702.125 )
+[2026-08-10 11:54:18 UTC-5.000] CODEX_BOT_SAMPLE sample=85 player_index=6 alive=1 origin=( 2835.637 245.795 1613.125 )
+[2026-08-10 11:54:18 UTC-5.000] CODEX_BOT_SAMPLE sample=85 player_index=7 alive=0 origin=( 4436.514 776.808 1655.125 )
+[2026-08-10 11:54:18 UTC-5.000] CODEX_BOT_SAMPLE sample=85 player_index=8 alive=1 origin=( -419.128 2177.537 1687.125 )
+[2026-08-10 11:54:19 UTC-5.000] CODEX_BOT_SAMPLE sample=86 player_index=1 alive=1 origin=( -390.485 -884.983 1613.125 )
+[2026-08-10 11:54:19 UTC-5.000] CODEX_BOT_SAMPLE sample=86 player_index=2 alive=1 origin=( 1312.777 -780.104 1614.125 )
+[2026-08-10 11:54:19 UTC-5.000] CODEX_BOT_SAMPLE sample=86 player_index=3 alive=1 origin=( -1134.152 295.976 1613.237 )
+[2026-08-10 11:54:19 UTC-5.000] CODEX_BOT_SAMPLE sample=86 player_index=4 alive=1 origin=( 3679.920 771.093 1655.125 )
+[2026-08-10 11:54:19 UTC-5.000] CODEX_BOT_SAMPLE sample=86 player_index=5 alive=1 origin=( 614.657 1117.752 1702.125 )
+[2026-08-10 11:54:19 UTC-5.000] CODEX_BOT_SAMPLE sample=86 player_index=6 alive=1 origin=( 2827.278 399.208 1655.125 )
+[2026-08-10 11:54:19 UTC-5.000] CODEX_BOT_SAMPLE sample=86 player_index=7 alive=1 origin=( 1700.604 874.438 1619.125 )
+[2026-08-10 11:54:19 UTC-5.000] CODEX_BOT_SAMPLE sample=86 player_index=8 alive=1 origin=( -398.388 2243.234 1725.867 )
+[2026-08-10 11:54:20 UTC-5.000] CODEX_BOT_SAMPLE sample=87 player_index=1 alive=1 origin=( -657.065 -836.238 1614.125 )
+[2026-08-10 11:54:20 UTC-5.000] CODEX_BOT_SAMPLE sample=87 player_index=2 alive=1 origin=( 1117.117 -839.874 1614.125 )
+[2026-08-10 11:54:20 UTC-5.000] CODEX_BOT_SAMPLE sample=87 player_index=3 alive=1 origin=( -1127.547 300.045 1613.237 )
+[2026-08-10 11:54:20 UTC-5.000] CODEX_BOT_SAMPLE sample=87 player_index=4 alive=1 origin=( 3453.586 793.482 1655.125 )
+[2026-08-10 11:54:20 UTC-5.000] CODEX_BOT_SAMPLE sample=87 player_index=5 alive=1 origin=( 563.674 1376.783 1702.125 )
+[2026-08-10 11:54:20 UTC-5.000] CODEX_BOT_SAMPLE sample=87 player_index=6 alive=1 origin=( 2843.568 623.495 1655.125 )
+[2026-08-10 11:54:20 UTC-5.000] CODEX_BOT_SAMPLE sample=87 player_index=7 alive=1 origin=( 1483.933 839.380 1622.850 )
+[2026-08-10 11:54:20 UTC-5.000] CODEX_BOT_SAMPLE sample=87 player_index=8 alive=1 origin=( -390.763 2173.540 1687.125 )
+[2026-08-10 11:54:21 UTC-5.000] CODEX_BOT_SAMPLE sample=88 player_index=1 alive=1 origin=( -798.111 -678.743 1613.125 )
+[2026-08-10 11:54:21 UTC-5.000] CODEX_BOT_SAMPLE sample=88 player_index=2 alive=1 origin=( 1097.011 -1015.744 1614.125 )
+[2026-08-10 11:54:21 UTC-5.000] CODEX_BOT_SAMPLE sample=88 player_index=3 alive=1 origin=( -1147.847 81.772 1613.237 )
+[2026-08-10 11:54:21 UTC-5.000] CODEX_BOT_SAMPLE sample=88 player_index=4 alive=1 origin=( 3217.939 806.206 1655.125 )
+[2026-08-10 11:54:21 UTC-5.000] CODEX_BOT_SAMPLE sample=88 player_index=5 alive=1 origin=( 512.063 1629.106 1702.125 )
+[2026-08-10 11:54:21 UTC-5.000] CODEX_BOT_SAMPLE sample=88 player_index=6 alive=1 origin=( 2816.700 740.298 1695.125 )
+[2026-08-10 11:54:21 UTC-5.000] CODEX_BOT_SAMPLE sample=88 player_index=7 alive=1 origin=( 1267.082 804.340 1617.744 )
+[2026-08-10 11:54:21 UTC-5.000] CODEX_BOT_SAMPLE sample=88 player_index=8 alive=1 origin=( -407.684 1916.503 1687.125 )
+[2026-08-10 11:54:22 UTC-5.000] CODEX_BOT_SAMPLE sample=89 player_index=1 alive=1 origin=( -896.396 -485.076 1613.125 )
+[2026-08-10 11:54:22 UTC-5.000] CODEX_BOT_SAMPLE sample=89 player_index=2 alive=1 origin=( 1070.676 -1181.134 1614.125 )
+[2026-08-10 11:54:22 UTC-5.000] CODEX_BOT_SAMPLE sample=89 player_index=3 alive=1 origin=( -1168.697 -137.238 1613.237 )
+[2026-08-10 11:54:22 UTC-5.000] CODEX_BOT_SAMPLE sample=89 player_index=4 alive=1 origin=( 2976.142 878.983 1655.125 )
+[2026-08-10 11:54:22 UTC-5.000] CODEX_BOT_SAMPLE sample=89 player_index=5 alive=1 origin=( 296.650 1735.187 1687.125 )
+[2026-08-10 11:54:22 UTC-5.000] CODEX_BOT_SAMPLE sample=89 player_index=6 alive=1 origin=( 2895.987 916.170 1682.804 )
+[2026-08-10 11:54:22 UTC-5.000] CODEX_BOT_SAMPLE sample=89 player_index=7 alive=1 origin=( 1050.106 769.270 1613.125 )
+[2026-08-10 11:54:22 UTC-5.000] CODEX_BOT_SAMPLE sample=89 player_index=8 alive=1 origin=( -424.577 1659.056 1687.125 )
+[2026-08-10 11:54:22 UTC-5.000] bot6 was perforated by bot4's' SMG in the upper torso
+[2026-08-10 11:54:23 UTC-5.000] CODEX_BOT_PROBE_COMPLETE samples=90
+[2026-08-10 11:54:24 UTC-5.000] bot3 was pumped full of buckshot by bot1
+[2026-08-10 11:54:29 UTC-5.000] bot8 was perforated by bot5's' SMG in the pelvis
+[2026-08-10 11:54:29 UTC-5.000] bot5 was hunted down by bot1

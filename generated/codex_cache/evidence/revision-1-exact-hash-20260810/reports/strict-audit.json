@@ -1,0 +1,1459 @@
+{
+  "schema_version": 1,
+  "map_name": "codex_cache",
+  "candidate": {
+    "path": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\moh-maps\\generated\\codex_cache\\codex_cache.pk3",
+    "bytes": 10127241,
+    "sha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+    "expected_bsp_member": "maps/dm/codex_cache.bsp",
+    "bsp_sha256": "653aef5e9ae82fea5fd68307cd67f1842e424dc611758875cb8ea779e16ee94c",
+    "member_count": 23,
+    "members": [
+      {
+        "path": "maps/dm/codex_cache.bsp",
+        "bytes": 32125316,
+        "sha256": "653aef5e9ae82fea5fd68307cd67f1842e424dc611758875cb8ea779e16ee94c"
+      },
+      {
+        "path": "maps/dm/codex_cache.scr",
+        "bytes": 362,
+        "sha256": "0db1309be47b20b8068a3b6fc48795fc5e389efedb1d0676efe0d1c4caf099d4"
+      },
+      {
+        "path": "maps/dm/codex_cache_precache.scr",
+        "bytes": 27,
+        "sha256": "685f0f6c1149622145fd4226d09cea98bb54e55648e296540e01294868865026"
+      },
+      {
+        "path": "scripts/codex_cache.shader",
+        "bytes": 851,
+        "sha256": "f7e593a21296495987ae4bdf19d0840712fdddbb6b73a1c2721aeee3b3978319"
+      },
+      {
+        "path": "textures/codex_cache/asphalt.tga",
+        "bytes": 786476,
+        "sha256": "9139a77ff4114477b4ba52b5022146c84bf557dd6af363637ba8fcb262f0d538"
+      },
+      {
+        "path": "textures/codex_cache/brick.tga",
+        "bytes": 786476,
+        "sha256": "988e75d14940c8ee56c082ceca3033216338aeb1758d8c5c02df2fe5ec5a7929"
+      },
+      {
+        "path": "textures/codex_cache/ceiling_tile.tga",
+        "bytes": 786476,
+        "sha256": "ae5516b00afb0a4d642edbbca3b11745d0a50fa5dfd45b74cbb23c0de05fae78"
+      },
+      {
+        "path": "textures/codex_cache/chainlink.tga",
+        "bytes": 1048620,
+        "sha256": "c2c56e40e669638c44aa5ce5f625092ab7a44168a5e091b8dbbfbcec7f312fa9"
+      },
+      {
+        "path": "textures/codex_cache/concrete_dark.tga",
+        "bytes": 786476,
+        "sha256": "dacb940a7c3cee921f3c60f8fff97e562badc639bb0664690ab1a3f8973a95e3"
+      },
+      {
+        "path": "textures/codex_cache/concrete_floor.tga",
+        "bytes": 786476,
+        "sha256": "8ca5773e04406b38706485aebf154e0603448085f25a163c54199520926b8bcf"
+      },
+      {
+        "path": "textures/codex_cache/concrete_light.tga",
+        "bytes": 786476,
+        "sha256": "1fcdce2cf17a0645e27c98c5b5d4624da26dcc17fb7ff197e139bda063348f6e"
+      },
+      {
+        "path": "textures/codex_cache/corrugated_blue.tga",
+        "bytes": 786476,
+        "sha256": "f28e02a0e18ab24df5ab05453bf54f4ef93abece9634ec40874eba8872df0c1f"
+      },
+      {
+        "path": "textures/codex_cache/corrugated_gray.tga",
+        "bytes": 786476,
+        "sha256": "726cc489c1a95c8f0d65e308ebecc119eb3cb27d7ebb31554e04ed133f4184ff"
+      },
+      {
+        "path": "textures/codex_cache/glass.tga",
+        "bytes": 1048620,
+        "sha256": "3c2c73b489d3b547eeef8fb600021e9cd8a5f8361aeb0d387f0d160603bf6c79"
+      },
+      {
+        "path": "textures/codex_cache/grass.tga",
+        "bytes": 786476,
+        "sha256": "0d3a0b41534667e47b30f6bf71d1ccea13ac4f165d25cbb6636cc8a32955bf4a"
+      },
+      {
+        "path": "textures/codex_cache/gravel.tga",
+        "bytes": 786476,
+        "sha256": "0b683abdd8666bc407d0241ae2dc20864b4e06ecbdcefe9a4e13bdba9b3595e8"
+      },
+      {
+        "path": "textures/codex_cache/metal_grating.tga",
+        "bytes": 786476,
+        "sha256": "9d5cfe2182d477291f9d302c77e82092ccaf9b220916e40421274b310cf02c44"
+      },
+      {
+        "path": "textures/codex_cache/metal_trim.tga",
+        "bytes": 786476,
+        "sha256": "f0a14635928c0b853871558315ba919409542c57a8051823cf56e94661e4aff4"
+      },
+      {
+        "path": "textures/codex_cache/painted_concrete.tga",
+        "bytes": 786476,
+        "sha256": "30321e8e08a62cf0cbe99954d1d51e195fda0994a40086ff795d7401375476ef"
+      },
+      {
+        "path": "textures/codex_cache/painted_concrete_blue.tga",
+        "bytes": 786476,
+        "sha256": "097f66997113ab328f5f429f636e883a2a8fcc362ed489084824c284515d27f0"
+      },
+      {
+        "path": "textures/codex_cache/painted_metal.tga",
+        "bytes": 786476,
+        "sha256": "87dea6b73938dcd32cfba79b5842d71b59da248ddd0097970c0351208bb1e0f7"
+      },
+      {
+        "path": "textures/codex_cache/window_backing.tga",
+        "bytes": 786476,
+        "sha256": "255ff7d0be770b5d3afd42902bb6c9c6985218640bf27678dd1ad9252cf84895"
+      },
+      {
+        "path": "textures/codex_cache/wood.tga",
+        "bytes": 786476,
+        "sha256": "65d2756eee463c447a9f2df99445aaba5c48bb84266f2f694c3b3d609e82b60b"
+      }
+    ]
+  },
+  "inputs": {
+    "visual_report": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\moh-maps\\generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\reports\\visual-report.json",
+    "runtime_report": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\moh-maps\\generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\reports\\bot-runtime-report.json",
+    "evidence_plan": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\moh-maps\\generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\reports\\evidence-plan.json"
+  },
+  "launch_provenance": {
+    "visual": {
+      "engine_path": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\openmohaa-bin\\runtime\\openmohaa.exe",
+      "engine_sha256": "2364a08a2c2269504320027fad3354c9504230434aa33ac43e6234c50c630cd6",
+      "arguments": [
+        "+set",
+        "fs_basepath",
+        "C:\\tmp\\codex-cache-r1-exact-visual\\base",
+        "+set",
+        "fs_homepath",
+        "C:\\tmp\\codex-cache-r1-exact-visual\\home",
+        "+set",
+        "developer",
+        "2",
+        "+set",
+        "logfile",
+        "2",
+        "+set",
+        "g_gametype",
+        "1",
+        "+set",
+        "g_inactiveSpectate",
+        "0",
+        "+set",
+        "g_inactiveKick",
+        "0",
+        "+set",
+        "cg_drawviewmodel",
+        "0",
+        "+set",
+        "r_fullscreen",
+        "0",
+        "+set",
+        "r_mode",
+        "-1",
+        "+set",
+        "r_customwidth",
+        "1280",
+        "+set",
+        "r_customheight",
+        "720",
+        "+set",
+        "com_maxfps",
+        "60",
+        "+map",
+        "dm/codex_cache"
+      ],
+      "fs_basepath": "C:\\tmp\\codex-cache-r1-exact-visual\\base",
+      "fs_homepath": "C:\\tmp\\codex-cache-r1-exact-visual\\home"
+    },
+    "bot": {
+      "engine_path": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\openmohaa-bin\\runtime\\omohaaded.exe",
+      "engine_sha256": "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
+      "arguments": [
+        "+set",
+        "fs_basepath",
+        "C:\\tmp\\codex-codex_cache-runtime\\base",
+        "+set",
+        "fs_homepath",
+        "C:\\tmp\\codex-codex_cache-runtime\\home",
+        "+set",
+        "dedicated",
+        "1",
+        "+set",
+        "developer",
+        "2",
+        "+set",
+        "logfile",
+        "2",
+        "+set",
+        "net_port",
+        "12381",
+        "+set",
+        "g_gametype",
+        "1",
+        "+set",
+        "sv_maxclients",
+        "16",
+        "+set",
+        "sv_maxbots",
+        "8",
+        "+set",
+        "sv_numbots",
+        "8",
+        "+map",
+        "dm/codex_cache"
+      ],
+      "fs_basepath": "C:\\tmp\\codex-codex_cache-runtime\\base",
+      "fs_homepath": "C:\\tmp\\codex-codex_cache-runtime\\home"
+    }
+  },
+  "build_provenance": {},
+  "raw_logs": {
+    "visual": {
+      "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\logs\\visual-qconsole.log",
+      "sha256": "56ce1fc0357ee8b2b0fc0397edcac56942a0a230ef4e32f6179b5ba08fb4241b",
+      "diagnostic_count": 97,
+      "classified_nonblocking": [
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] Couldn't get window display mode, no resolutions detected: Couldn't find display mode match",
+          "disposition": "proven_nonblocking",
+          "evidence": "The requested 1280x720 window was created and all 17 unique fixed-view screenshots were captured."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] GL_EXTENSIONS: GL_AMD_blend_minmax_factor GL_AMD_conservative_depth GL_AMD_debug_output GL_AMD_depth_clamp_separate GL_AMD_gpu_shader_half_float GL_AMD_gpu_shader_int16 GL_AMD_gpu_shader_int64 GL_AMD_multi_draw_indirect GL_AMD_pinned_memory GL_AMD_query_buffer_object GL_AMD_sample_positions GL_AMD_seamless_cubemap_per_texture GL_AMD_shader_trinary_minmax GL_AMD_texture_cube_map_array GL_AMD_vertex_shader_layer GL_AMD_vertex_shader_viewport_index GL_ARB_ES2_compatibility GL_ARB_ES3_1_compatibility GL_ARB_ES3_2_compatibility GL_ARB_ES3_compatibility GL_ARB_arrays_of_arrays GL_ARB_base_instance GL_ARB_bindless_texture GL_ARB_blend_func_extended GL_ARB_buffer_storage GL_ARB_clear_buffer_object GL_ARB_clear_texture GL_ARB_clip_control GL_ARB_color_buffer_float GL_ARB_compatibility GL_ARB_compressed_texture_pixel_storage GL_ARB_compute_shader GL_ARB_conditional_render_inverted GL_ARB_conservative_depth GL_ARB_copy_buffer GL_ARB_copy_image GL_ARB_cull_distance GL_ARB_debug_output GL_ARB_depth_buffer_float GL_ARB_depth_clamp GL_ARB_depth_texture GL_ARB_derivative_control GL_ARB_direct_state_access GL_ARB_draw_buffers GL_ARB_draw_buffers_blend GL_ARB_draw_elements_base_vertex GL_ARB_draw_indirect GL_ARB_draw_instanced GL_ARB_enhanced_layouts GL_ARB_explicit_attrib_location GL_ARB_explicit_uniform_location GL_ARB_fragment_coord_conventions GL_ARB_fragment_layer_viewport GL_ARB_fragment_program GL_ARB_fragment_program_shadow GL_ARB_fragment_shader GL_ARB_fragment_shader_interlock GL_ARB_framebuffer_no_attachments GL_ARB_framebuffer_object GL_ARB_framebuffer_sRGB GL_ARB_geometry_shader4 GL_ARB_get_program_binary GL_ARB_get_texture_sub_image GL_ARB_gl_spirv GL_ARB_gpu_shader5 GL_ARB_gpu_shader_fp64 GL_ARB_gpu_shader_int64 GL_ARB_half_float_pixel GL_ARB_half_float_vertex GL_ARB_indirect_parameters GL_ARB_instanced_arrays GL_ARB_internalformat_query GL_ARB_internalformat_query2 GL_ARB_invalidate_subdata GL_ARB_map_buffer_range GL_ARB_multi_bind GL_ARB_multi_draw_indirect GL_ARB_multisample GL_ARB_multitexture GL_ARB_occlusion_query GL_ARB_occlusion_query2 GL_ARB_parallel_shader_compile GL_ARB_pipeline_statistics_query GL_ARB_pixel_buffer_object GL_ARB_point_parameters GL_ARB_point_sprite GL_ARB_polygon_offset_clamp GL_ARB_post_depth_coverage GL_ARB_program_interface_query GL_ARB_provoking_vertex GL_ARB_query_buffer_object GL_ARB_robustness GL_ARB_sample_locations GL_ARB_sample_shading GL_ARB_sampler_objects GL_ARB_seamless_cube_map GL_ARB_seamless_cubemap_per_texture GL_ARB_separate_shader_objects GL_ARB_shader_atomic_counter_ops GL_ARB_shader_atomic_counters GL_ARB_shader_ballot GL_ARB_shader_bit_encoding GL_ARB_shader_clock GL_ARB_shader_draw_parameters GL_ARB_shader_group_vote GL_ARB_shader_image_load_store GL_ARB_shader_image_size GL_ARB_shader_objects GL_ARB_shader_precision GL_ARB_shader_stencil_export GL_ARB_shader_storage_buffer_object GL_ARB_shader_subroutine GL_ARB_shader_texture_image_samples GL_ARB_shader_texture_lod GL_ARB_shader_viewport_layer_array GL_ARB_shading_language_100 GL_ARB_shading_language_420pack GL_ARB_shading_language_packing GL_ARB_shadow GL_ARB_shadow_ambient GL_ARB_sparse_buffer GL_ARB_sparse_texture GL_ARB_spirv_extensions GL_ARB_stencil_texturing GL_ARB_sync GL_ARB_tessellation_shader GL_ARB_texture_barrier GL_ARB_texture_border_clamp GL_ARB_texture_buffer_object GL_ARB_texture_buffer_object_rgb32 GL_ARB_texture_buffer_range GL_ARB_texture_compression GL_ARB_texture_compression_bptc GL_ARB_texture_compression_rgtc GL_ARB_texture_cube_map GL_ARB_texture_cube_map_array GL_ARB_texture_env_add GL_ARB_texture_env_combine GL_ARB_texture_env_crossbar GL_ARB_texture_env_dot3 GL_ARB_texture_filter_anisotropic GL_ARB_texture_filter_minmax GL_ARB_texture_float GL_ARB_texture_gather GL_ARB_texture_mirror_clamp_to_edge GL_ARB_texture_mirrored_repeat GL_ARB_texture_multisample GL_ARB_texture_multisample_no_array GL_ARB_texture_non_power_of_two GL_ARB_texture_query_levels GL_ARB_texture_query_lod GL_ARB_texture_rectangle GL_ARB_texture_rg GL_ARB_texture_rgb10_a2ui GL_ARB_texture_stencil8 GL_ARB_texture_storage GL_ARB_texture_storage_multisample GL_ARB_texture_swizzle GL_ARB_texture_view GL_ARB_timer_query GL_ARB_transform_feedback GL_ARB_transform_feedback2 GL_ARB_transform_feedback3 GL_ARB_transform_feedback_instanced GL_ARB_transform_feedback_overflow_query GL_ARB_transpose_matrix GL_ARB_uniform_buffer_object GL_ARB_vertex_array_bgra GL_ARB_vertex_array_object GL_ARB_vertex_attrib_64bit GL_ARB_vertex_attrib_binding GL_ARB_vertex_buffer_object GL_ARB_vertex_program GL_ARB_vertex_shader GL_ARB_vertex_type_10f_11f_11f_rev GL_ARB_vertex_type_2_10_10_10_rev GL_ARB_viewport_array GL_ARB_window_pos GL_ATI_draw_buffers GL_ATI_meminfo GL_ATI_separate_stencil GL_ATI_shader_texture_lod GL_ATI_texture_env_combine3 GL_ATI_texture_float GL_ATI_texture_mirror_once GL_EXT_abgr GL_EXT_bgra GL_EXT_bindable_uniform GL_EXT_blend_color GL_EXT_blend_equation_separate GL_EXT_blend_func_separate GL_EXT_blend_minmax GL_EXT_blend_subtract GL_EXT_compiled_vertex_array GL_EXT_copy_buffer GL_EXT_copy_texture GL_EXT_debug_label GL_EXT_depth_bounds_test GL_EXT_direct_state_access GL_EXT_draw_buffers2 GL_EXT_draw_instanced GL_EXT_draw_range_elements GL_EXT_fog_coord GL_EXT_framebuffer_blit GL_EXT_framebuffer_multisample GL_EXT_framebuffer_object GL_EXT_framebuffer_sRGB GL_EXT_geometry_shader4 GL_EXT_gpu_program_parameters GL_EXT_gpu_shader4 GL_EXT_memory_object GL_EXT_memory_object_win32 GL_EXT_multi_draw_arrays GL_EXT_nonuniform_qualifier GL_EXT_packed_depth_stencil GL_EXT_packed_float GL_EXT_packed_pixels GL_EXT_pixel_buffer_object GL_EXT_point_parameters GL_EXT_polygon_offset_clamp GL_EXT_provoking_vertex GL_EXT_rescale_normal GL_EXT_secondary_color GL_EXT_semaphore GL_EXT_semaphore_win32 GL_EXT_separate_specular_color GL_EXT_shader_image_load_formatted GL_EXT_shader_image_load_store GL_EXT_shader_integer_mix GL_EXT_shadow_funcs GL_EXT_stencil_wrap GL_EXT_subtexture GL_EXT_texture GL_EXT_texture3D GL_EXT_texture_array GL_EXT_texture_buffer_object GL_EXT_texture_compression_bptc GL_EXT_texture_compression_latc GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc GL_EXT_texture_cube_map GL_EXT_texture_edge_clamp GL_EXT_texture_env_add GL_EXT_texture_env_combine GL_EXT_texture_env_dot3 GL_EXT_texture_filter_anisotropic GL_EXT_texture_integer GL_EXT_texture_lod GL_EXT_texture_lod_bias GL_EXT_texture_mirror_clamp GL_EXT_texture_object GL_EXT_texture_rectangle GL_EXT_texture_sRGB GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_sRGB_decode GL_EXT_texture_shadow_lod GL_EXT_texture_shared_exponent GL_EXT_texture_snorm GL_EXT_texture_storage GL_EXT_texture_swizzle GL_EXT_timer_query GL_EXT_transform_feedback GL_EXT_vertex_array GL_EXT_vertex_array_bgra GL_EXT_vertex_attrib_64bit GL_IBM_texture_mirrored_repeat GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_KHR_context_flush_control GL_KHR_debug GL_KHR_no_error GL_KHR_parallel_shader_compile GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KHR_shader_subgroup GL_KHR_texture_compression_astc_ldr GL_NV_blend_square GL_NV_conditional_render GL_NV_copy_image GL_NV_depth_buffer_float GL_NV_float_buffer GL_NV_half_float GL_NV_mesh_shader GL_NV_primitive_restart GL_NV_shader_atomic_int64 GL_NV_texgen_reflection GL_NV_texture_barrier GL_NV_timeline_semaphore GL_OES_EGL_image GL_OVR_multiview GL_OVR_multiview2 GL_S3_s3tc GL_SGIS_generate_mipmap GL_SGIS_texture_edge_clamp GL_SGIS_texture_lod GL_SUN_multi_draw_arrays WGL_EXT_swap_control ",
+          "disposition": "proven_nonblocking",
+          "evidence": "This is a renderer extension inventory; the word error occurs only inside extension identifiers."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alGetError (00007FFCC86089A0)",
+          "disposition": "proven_nonblocking",
+          "evidence": "Successful OpenAL symbol-resolution telemetry."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000]  Loaded symbol alcGetError (00007FFCC8637C80)",
+          "disposition": "proven_nonblocking",
+          "evidence": "Successful OpenAL symbol-resolution telemetry."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_easy_strerror (0x00007FFD23AC13D0)",
+          "disposition": "proven_nonblocking",
+          "evidence": "Successful curl symbol-resolution telemetry."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_share_strerror (0x00007FFD23AC1930)",
+          "disposition": "proven_nonblocking",
+          "evidence": "Successful curl symbol-resolution telemetry."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] Loaded symbol curl_multi_strerror (0x00007FFD23AC1850)",
+          "disposition": "proven_nonblocking",
+          "evidence": "Successful curl symbol-resolution telemetry."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] LOCALIZATION ERROR: 'OpenMoHAA console version 0.82.1' does not have a localization entry",
+          "disposition": "proven_nonblocking",
+          "evidence": "OpenMoHAA localization-table noise; it neither obscured nor prevented the completed screenshots."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'panzerschreck2' in 'models/weapons/panzerschreck.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:39 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] WARNING: Couldn't find voting options file: callvote.cfg",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.",
+          "disposition": "proven_nonblocking",
+          "evidence": "Stock engine guidance about optional unprefetched TIKIs; the exact map loaded and the capture matrix completed."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Couldn't load sound: sound/null.wav",
+          "disposition": "proven_nonblocking",
+          "evidence": "Stock null-sound placeholder warning; no candidate-specific diagnostic and no capture interruption occurred."
+        },
+        {
+          "line": "[2026-08-10 11:27:40 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.",
+          "disposition": "proven_nonblocking",
+          "evidence": "Stock engine guidance about optional unprefetched TIKIs; the exact map loaded and the capture matrix completed."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Cvar_Set2: ter_error 4",
+          "disposition": "proven_nonblocking",
+          "evidence": "Terrain status cvar telemetry; it is not an invalid-cvar or script error."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Couldn't find image for shader textures/menu/exit",
+          "disposition": "proven_nonblocking",
+          "evidence": "Stock menu shader warning; UI was dismissed and every gameplay capture remained unobscured."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Tiki:LoadFile Couldn't load models/fx/fx_fence_wood.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/fx/fx_fence_wood.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/fx/fx_fence_wood.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Couldn't find image for shader textures/hud/radar_allies.tga",
+          "disposition": "proven_nonblocking",
+          "evidence": "Stock HUD-radar shader warning; HUD was deliberately hidden and the screenshots were unobscured."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] Couldn't find image for shader textures/hud/radar_axis.tga",
+          "disposition": "proven_nonblocking",
+          "evidence": "Stock HUD-radar shader warning; HUD was deliberately hidden and the screenshots were unobscured."
+        },
+        {
+          "line": "[2026-08-10 11:27:41 UTC-5.000] LOCALIZATION ERROR: 'Press Use(e) to follow a player.' does not have a localization entry",
+          "disposition": "proven_nonblocking",
+          "evidence": "OpenMoHAA localization-table noise; it neither obscured nor prevented the completed screenshots."
+        }
+      ]
+    },
+    "bot": {
+      "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\logs\\bot-standard-qconsole.log",
+      "sha256": "dfa13dc0d5252d09116bb99e0d0f157e51d726094985b8f3ff57224d105d58a6",
+      "diagnostic_count": 67,
+      "classified_nonblocking": [
+        {
+          "line": "[2026-08-10 11:33:48 UTC-5.000] Loaded symbol curl_easy_strerror (0x00007FFCC73F13D0)",
+          "disposition": "proven_nonblocking",
+          "evidence": "Successful curl symbol-resolution telemetry."
+        },
+        {
+          "line": "[2026-08-10 11:33:48 UTC-5.000] Loaded symbol curl_share_strerror (0x00007FFCC73F1930)",
+          "disposition": "proven_nonblocking",
+          "evidence": "Successful curl symbol-resolution telemetry."
+        },
+        {
+          "line": "[2026-08-10 11:33:48 UTC-5.000] Loaded symbol curl_multi_strerror (0x00007FFCC73F1850)",
+          "disposition": "proven_nonblocking",
+          "evidence": "Successful curl symbol-resolution telemetry."
+        },
+        {
+          "line": "[2026-08-10 11:33:48 UTC-5.000] TIKI_InitTiki: could not find surface 'panzerschreck2' in 'models/weapons/panzerschreck.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:48 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:48 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:48 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:48 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] WARNING: Couldn't find voting options file: callvote.cfg",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik",
+          "disposition": "proven_nonblocking",
+          "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.",
+          "disposition": "proven_nonblocking",
+          "evidence": "Stock engine guidance about optional unprefetched TIKIs; all 8 bots entered and the combat threshold passed."
+        },
+        {
+          "line": "[2026-08-10 11:33:49 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.",
+          "disposition": "proven_nonblocking",
+          "evidence": "Stock engine guidance about optional unprefetched TIKIs; all 8 bots entered and the combat threshold passed."
+        },
+        {
+          "line": "[2026-08-10 11:33:53 UTC-5.000] Can't find 'global/bot_run.scr'",
+          "disposition": "proven_nonblocking",
+          "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+        },
+        {
+          "line": "[2026-08-10 11:33:53 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded",
+          "disposition": "proven_nonblocking",
+          "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+        },
+        {
+          "line": "[2026-08-10 11:33:53 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded",
+          "disposition": "proven_nonblocking",
+          "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+        },
+        {
+          "line": "[2026-08-10 11:33:53 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded",
+          "disposition": "proven_nonblocking",
+          "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+        },
+        {
+          "line": "[2026-08-10 11:33:53 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded",
+          "disposition": "proven_nonblocking",
+          "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+        },
+        {
+          "line": "[2026-08-10 11:33:53 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded",
+          "disposition": "proven_nonblocking",
+          "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+        },
+        {
+          "line": "[2026-08-10 11:33:53 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded",
+          "disposition": "proven_nonblocking",
+          "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+        },
+        {
+          "line": "[2026-08-10 11:33:53 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded",
+          "disposition": "proven_nonblocking",
+          "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+        }
+      ]
+    }
+  },
+  "runtime_identity": [
+    {
+      "label": "visual",
+      "reported_candidate_sha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+      "runtime_package": "C:\\tmp\\codex-cache-r1-exact-visual\\base\\main\\zz_codex_cache.pk3",
+      "runtime_package_sha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+      "pk3_inventory": [
+        {
+          "name": "Pak0.pk3",
+          "bytes": 98668934
+        },
+        {
+          "name": "Pak1.pk3",
+          "bytes": 119631347
+        },
+        {
+          "name": "Pak2.pk3",
+          "bytes": 365587748
+        },
+        {
+          "name": "Pak3.pk3",
+          "bytes": 87555605
+        },
+        {
+          "name": "Pak4.pk3",
+          "bytes": 34046379
+        },
+        {
+          "name": "Pak5.pk3",
+          "bytes": 87721422
+        },
+        {
+          "name": "Pak6.pk3",
+          "bytes": 11202988
+        },
+        {
+          "name": "zz_codex_cache.pk3",
+          "bytes": 10127241
+        }
+      ]
+    },
+    {
+      "label": "bot",
+      "reported_candidate_sha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+      "runtime_package": "C:\\tmp\\codex-codex_cache-runtime\\base\\main\\zz_codex_cache.pk3",
+      "runtime_package_sha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+      "pk3_inventory": [
+        {
+          "name": "Pak0.pk3",
+          "bytes": 98668934
+        },
+        {
+          "name": "Pak1.pk3",
+          "bytes": 119631347
+        },
+        {
+          "name": "Pak2.pk3",
+          "bytes": 365587748
+        },
+        {
+          "name": "Pak3.pk3",
+          "bytes": 87555605
+        },
+        {
+          "name": "Pak4.pk3",
+          "bytes": 34046379
+        },
+        {
+          "name": "Pak5.pk3",
+          "bytes": 87721422
+        },
+        {
+          "name": "pak6.pk3",
+          "bytes": 11202988
+        },
+        {
+          "name": "zz_codex_cache.pk3",
+          "bytes": 10127241
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "engine_sha256": "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
+    "bsp_parse_observations": 1,
+    "recast_observations": 1
+  },
+  "capture": {
+    "requested_views": [
+      "axis_exterior_westbound",
+      "allied_exterior_northbound",
+      "mid_transition_forward",
+      "mid_transition_reverse",
+      "south_long_forward",
+      "south_long_reverse",
+      "west_long_forward",
+      "east_boundary_reverse",
+      "upper_interior",
+      "north_transition",
+      "door_front",
+      "door_reverse",
+      "notjunc_low_south",
+      "notjunc_low_west",
+      "high_overview_center",
+      "high_overview_northwest",
+      "north_boundary"
+    ],
+    "category_coverage": {
+      "player_height_forward": [
+        "axis_exterior_westbound",
+        "mid_transition_forward",
+        "south_long_forward",
+        "west_long_forward",
+        "upper_interior",
+        "door_front",
+        "notjunc_low_south",
+        "north_boundary"
+      ],
+      "player_height_reverse": [
+        "allied_exterior_northbound",
+        "mid_transition_reverse",
+        "south_long_reverse",
+        "east_boundary_reverse",
+        "north_transition",
+        "door_reverse",
+        "notjunc_low_west"
+      ],
+      "high_angle": [
+        "high_overview_center",
+        "high_overview_northwest"
+      ],
+      "boundary": [
+        "allied_exterior_northbound",
+        "south_long_reverse",
+        "west_long_forward",
+        "east_boundary_reverse",
+        "notjunc_low_west",
+        "high_overview_center",
+        "high_overview_northwest",
+        "north_boundary"
+      ],
+      "interior": [
+        "mid_transition_forward",
+        "upper_interior",
+        "high_overview_center"
+      ],
+      "exterior": [
+        "axis_exterior_westbound",
+        "allied_exterior_northbound",
+        "south_long_forward",
+        "south_long_reverse",
+        "west_long_forward",
+        "east_boundary_reverse",
+        "notjunc_low_south",
+        "notjunc_low_west",
+        "high_overview_center",
+        "north_boundary"
+      ],
+      "transition": [
+        "mid_transition_forward",
+        "mid_transition_reverse",
+        "upper_interior",
+        "north_transition",
+        "door_front",
+        "door_reverse",
+        "high_overview_northwest"
+      ],
+      "long_sightline": [
+        "axis_exterior_westbound",
+        "mid_transition_reverse",
+        "south_long_forward",
+        "west_long_forward",
+        "north_transition"
+      ]
+    },
+    "screenshots": [
+      {
+        "view_id": "axis_exterior_westbound",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0000.png",
+        "sha256": "fed78d00f369f169e5b1420a52de64492d0824e1b4b03afced0b8e941e7e9297",
+        "bytes": 520414
+      },
+      {
+        "view_id": "allied_exterior_northbound",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0001.png",
+        "sha256": "09062e38ce90d53f0d35676f6a750879a2d3e1f57d36109a3c1fdebadd6b0272",
+        "bytes": 556793
+      },
+      {
+        "view_id": "mid_transition_forward",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0002.png",
+        "sha256": "726d16b530bbe21e5f51131d7546d0fcb11648827bd7e2638750fc2c524a0efa",
+        "bytes": 636968
+      },
+      {
+        "view_id": "mid_transition_reverse",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0003.png",
+        "sha256": "c4551a7062af59b878d64a247c6094fdd9e975cd72e2b0070adcabfe17dcfd26",
+        "bytes": 142353
+      },
+      {
+        "view_id": "south_long_forward",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0004.png",
+        "sha256": "2b03721a043301ef4241ff4f58c38a6370f64dd2af44806fb153d3f894a805aa",
+        "bytes": 604498
+      },
+      {
+        "view_id": "south_long_reverse",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0005.png",
+        "sha256": "e0bab62810f041ea9deee3f92f6cea505e7d024cb334673a7786a0850e600510",
+        "bytes": 748874
+      },
+      {
+        "view_id": "west_long_forward",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0006.png",
+        "sha256": "652165b63e438c6caf82265f2d35c710eac8d1ebe67905f10aec49146d338eba",
+        "bytes": 642220
+      },
+      {
+        "view_id": "east_boundary_reverse",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0007.png",
+        "sha256": "d5a824f6cc75ea3c4a3a8746a2b6639227ef34f29c502448bad1b191ee200084",
+        "bytes": 348547
+      },
+      {
+        "view_id": "upper_interior",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0008.png",
+        "sha256": "f4ebb066beb4aa1c0d46e146be9487b4ba6442bbb3f3aba52235d177c63534f1",
+        "bytes": 736837
+      },
+      {
+        "view_id": "north_transition",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0009.png",
+        "sha256": "4d56c5ffb7449400185f88dab72f30e15bef20ff56ba10877d13ec474704e4a8",
+        "bytes": 626197
+      },
+      {
+        "view_id": "door_front",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0010.png",
+        "sha256": "f3652c9774648a7fb163f44dd61c2947cf9bfb13c6bfe77650794664df486e5c",
+        "bytes": 329746
+      },
+      {
+        "view_id": "door_reverse",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0011.png",
+        "sha256": "3cdd13ed47f9f7cddff2b6f676706825f531331bf6e981b4c2ea02da4b490fd3",
+        "bytes": 338152
+      },
+      {
+        "view_id": "notjunc_low_south",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0012.png",
+        "sha256": "345cfc67fd1948970b07e177f5e11f21f567780c1ba3e781f59885703e751262",
+        "bytes": 788074
+      },
+      {
+        "view_id": "notjunc_low_west",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0013.png",
+        "sha256": "619f56aaa72a8b9a6984614c9490e343d50d3a395fbbff62c6b8a33b2080e0a5",
+        "bytes": 599194
+      },
+      {
+        "view_id": "high_overview_center",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0014.png",
+        "sha256": "1256c136bcd8f76d8e32ac2f31032f489e1d990f2423529af27cf99146481bca",
+        "bytes": 1049405
+      },
+      {
+        "view_id": "high_overview_northwest",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0015.png",
+        "sha256": "1bf618db3501cd3b54ddbecc4f868630a30239b64f7b34c8b558e655b9dd68b6",
+        "bytes": 1009276
+      },
+      {
+        "view_id": "north_boundary",
+        "path": "generated\\codex_cache\\evidence\\revision-1-exact-hash-20260810\\screenshots\\shot0016.png",
+        "sha256": "ff7ffbeb5a1c70983471966dcc5dd1b5ce8609f475e38f394876ec1b25440c06",
+        "bytes": 579779
+      }
+    ],
+    "integrity_score": 100
+  },
+  "bot_activity": {
+    "expected_bots": 8,
+    "bots_entered": 8,
+    "combat_events": 48,
+    "minimum_combat_events": 3,
+    "scope": "entry and combat only; this does not prove movement, death, respawn, or route coverage"
+  },
+  "gates": {
+    "candidate_package_identity": {
+      "status": "pass",
+      "detail": "candidate PK3 and BSP identity are unambiguous",
+      "evidence": [
+        "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\moh-maps\\generated\\codex_cache\\codex_cache.pk3",
+        "maps/dm/codex_cache.bsp"
+      ]
+    },
+    "visual_runtime_package_identity": {
+      "status": "pass",
+      "detail": "exact candidate package was used",
+      "evidence": [
+        "C:\\tmp\\codex-cache-r1-exact-visual\\base\\main\\zz_codex_cache.pk3"
+      ]
+    },
+    "build_provenance": {
+      "status": "open",
+      "detail": "source, design, compile, and packaged BSP hashes are not correlated",
+      "evidence": []
+    },
+    "bot_runtime_package_identity": {
+      "status": "pass",
+      "detail": "exact candidate package was used",
+      "evidence": [
+        "C:\\tmp\\codex-codex_cache-runtime\\base\\main\\zz_codex_cache.pk3"
+      ]
+    },
+    "launch_provenance": {
+      "status": "pass",
+      "detail": "visual and bot launches are hash-linked",
+      "evidence": []
+    },
+    "raw_runtime_diagnostics": {
+      "status": "pass",
+      "detail": "raw visual and bot logs are hash-linked and diagnostics are classified",
+      "evidence": []
+    },
+    "runtime_load": {
+      "status": "pass",
+      "detail": "runtime load gates passed",
+      "evidence": []
+    },
+    "fixed_view_capture": {
+      "status": "pass",
+      "detail": "capture matrix is complete",
+      "evidence": []
+    },
+    "semantic_visual_review": {
+      "status": "fail",
+      "detail": "mid_transition_reverse: Camera placement abuts or intersects opaque geometry, leaving most of the frame black and preventing assessment of the intended reverse transition.; east_boundary_reverse: Boundary reverse view exposes a gray exterior or underside shell against open blue space; playable boundary containment is not established.; notjunc_low_south: Open rectangular black floor aperture is visible at player height beside the paved surface.; notjunc_low_west: Long black pavement-to-grass seam and triangular open blue/void aperture are visible at player height.",
+      "evidence": []
+    },
+    "bot_entry_and_combat": {
+      "status": "pass",
+      "detail": "bot entry and combat gates passed",
+      "evidence": []
+    },
+    "bot_lifecycle": {
+      "status": "pass",
+      "detail": "all lifecycle event types are hash-linked",
+      "evidence": []
+    },
+    "bot_route_coverage": {
+      "status": "pass",
+      "detail": "all required routes have instrumented observations",
+      "evidence": []
+    },
+    "human_acceptance": {
+      "status": "open",
+      "detail": "only explicit user approval of this exact tested candidate can satisfy acceptance",
+      "evidence": []
+    }
+  },
+  "scores": {
+    "exact_identity": 100,
+    "launch_provenance": 100,
+    "build_provenance": null,
+    "raw_runtime_diagnostics": 100,
+    "runtime_and_bot_activity": 100,
+    "capture_integrity_and_coverage": 100,
+    "semantic_visual_review_completeness": 100,
+    "bot_lifecycle_and_route_evidence": 100
+  },
+  "blocking_visual_defects": [
+    {
+      "view_id": "mid_transition_reverse",
+      "defect": "Camera placement abuts or intersects opaque geometry, leaving most of the frame black and preventing assessment of the intended reverse transition."
+    },
+    {
+      "view_id": "east_boundary_reverse",
+      "defect": "Boundary reverse view exposes a gray exterior or underside shell against open blue space; playable boundary containment is not established."
+    },
+    {
+      "view_id": "notjunc_low_south",
+      "defect": "Open rectangular black floor aperture is visible at player height beside the paved surface."
+    },
+    {
+      "view_id": "notjunc_low_west",
+      "defect": "Long black pavement-to-grass seam and triangular open blue/void aperture are visible at player height."
+    }
+  ],
+  "open_items": [
+    "record hash-linked source map, design report, compile log, and compiled BSP"
+  ],
+  "technical_ready_for_human_review": false,
+  "promotion_allowed": false,
+  "acceptance_status": "requires_explicit_user_approval",
+  "scope_warning": "Lane scores measure evidence completeness within this run. They are not an acceptance score and cannot promote PROJECT_STATE.json."
+}

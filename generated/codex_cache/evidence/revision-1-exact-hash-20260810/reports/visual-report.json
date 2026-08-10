@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 2,
+  "mapName": "codex_cache",
+  "qaRoot": "C:\\tmp\\codex-cache-r1-exact-visual",
+  "exactPk3Count": 8,
+  "candidateSha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+  "runtimePackage": "C:\\tmp\\codex-cache-r1-exact-visual\\base\\main\\zz_codex_cache.pk3",
+  "runtimePackageSha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+  "enginePath": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\openmohaa-bin\\runtime\\openmohaa.exe",
+  "engineSha256": "2364a08a2c2269504320027fad3354c9504230434aa33ac43e6234c50c630cd6",
+  "arguments": [
+    "+set",
+    "fs_basepath",
+    "C:\\tmp\\codex-cache-r1-exact-visual\\base",
+    "+set",
+    "fs_homepath",
+    "C:\\tmp\\codex-cache-r1-exact-visual\\home",
+    "+set",
+    "developer",
+    "2",
+    "+set",
+    "logfile",
+    "2",
+    "+set",
+    "g_gametype",
+    "1",
+    "+set",
+    "g_inactiveSpectate",
+    "0",
+    "+set",
+    "g_inactiveKick",
+    "0",
+    "+set",
+    "cg_drawviewmodel",
+    "0",
+    "+set",
+    "r_fullscreen",
+    "0",
+    "+set",
+    "r_mode",
+    "-1",
+    "+set",
+    "r_customwidth",
+    "1280",
+    "+set",
+    "r_customheight",
+    "720",
+    "+set",
+    "com_maxfps",
+    "60",
+    "+map",
+    "dm/codex_cache"
+  ],
+  "fsBasepath": "C:\\tmp\\codex-cache-r1-exact-visual\\base",
+  "fsHomepath": "C:\\tmp\\codex-cache-r1-exact-visual\\home",
+  "packageInventory": [
+    {
+      "name": "Pak0.pk3",
+      "bytes": 98668934,
+      "sha256": "6caf6d93cc996b6895d5015f1be153724e5369b8c063c73e1609578323261df6"
+    },
+    {
+      "name": "Pak1.pk3",
+      "bytes": 119631347,
+      "sha256": "60ed94c185c4f81813aefaf1603b16734e65eb1b931737ae588df84c0a2a4b80"
+    },
+    {
+      "name": "Pak2.pk3",
+      "bytes": 365587748,
+      "sha256": "00133b93d350b5d82ff2d59a7d87fe94dad18147d28b6fd59dd2b5a6c816acce"
+    },
+    {
+      "name": "Pak3.pk3",
+      "bytes": 87555605,
+      "sha256": "1e0eed04b234bae260097813755325d2533bb6082c5fc9e98332aa66c4f4db92"
+    },
+    {
+      "name": "Pak4.pk3",
+      "bytes": 34046379,
+      "sha256": "853cc70610933e83284db95e6144ed3c02d81190065b44aae94ba58ca09f3130"
+    },
+    {
+      "name": "Pak5.pk3",
+      "bytes": 87721422,
+      "sha256": "b6035d8686bed133be76cdee322c37fd4a9814ba88bbce3e91f20571ea7b2a1d"
+    },
+    {
+      "name": "Pak6.pk3",
+      "bytes": 11202988,
+      "sha256": "619e6acfd37471f0c71194ef6546e592d01cd9f7c1a3ebf57064cf618cf503ae"
+    },
+    {
+      "name": "zz_codex_cache.pk3",
+      "bytes": 10127241,
+      "sha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53"
+    }
+  ],
+  "looseOverride": "maps/dm/codex_cache.scr only; fixed-camera and modal-dismissal instrumentation; BSP/assets remain from exact candidate PK3",
+  "looseScript": "C:\\tmp\\codex-cache-r1-exact-visual\\home\\main\\maps\\dm\\codex_cache.scr",
+  "looseScriptSha256": "bcf1a4697b3e9d8899debc43c559810e3ec6a970b5083c1bc73d3d5ed155cbf6",
+  "clientEntryAndModalDismissal": [
+    "launch +set g_inactiveSpectate 0",
+    "launch +set g_inactiveKick 0",
+    "launch +set cg_drawviewmodel 0",
+    "ui_applyplayermodel",
+    "con_notifytime 0",
+    "direct server-side  auto_join_team event",
+    "3-second event sequencing wait",
+    "direct server-side  primarydmweapon rifle event",
+    "3-second server-response wait",
+    "popmenu 0",
+    "popmenu 0",
+    "popmenu 0",
+    "ui_hidemouse",
+    "ui_hud 0",
+    "cg_drawviewmodel 0 reaffirmed",
+    "clear",
+    "8-second notification fade before first capture",
+    "repeated popmenu 0, ui_hidemouse, and ui_hud 0 before each screenshot",
+    "5-second notification fade after each screenshot"
+  ],
+  "requestedViews": [
+    "axis_exterior_westbound",
+    "allied_exterior_northbound",
+    "mid_transition_forward",
+    "mid_transition_reverse",
+    "south_long_forward",
+    "south_long_reverse",
+    "west_long_forward",
+    "east_boundary_reverse",
+    "upper_interior",
+    "north_transition",
+    "door_front",
+    "door_reverse",
+    "notjunc_low_south",
+    "notjunc_low_west",
+    "high_overview_center",
+    "high_overview_northwest",
+    "north_boundary"
+  ],
+  "viewMarkers": [
+    "[2026-08-10 11:28:02 UTC-5.000] CODEX_VISUAL_QA axis_exterior_westbound",
+    "[2026-08-10 11:28:07 UTC-5.000] CODEX_VISUAL_QA allied_exterior_northbound",
+    "[2026-08-10 11:28:13 UTC-5.000] CODEX_VISUAL_QA mid_transition_forward",
+    "[2026-08-10 11:28:18 UTC-5.000] CODEX_VISUAL_QA mid_transition_reverse",
+    "[2026-08-10 11:28:23 UTC-5.000] CODEX_VISUAL_QA south_long_forward",
+    "[2026-08-10 11:28:29 UTC-5.000] CODEX_VISUAL_QA south_long_reverse",
+    "[2026-08-10 11:28:34 UTC-5.000] CODEX_VISUAL_QA west_long_forward",
+    "[2026-08-10 11:28:39 UTC-5.000] CODEX_VISUAL_QA east_boundary_reverse",
+    "[2026-08-10 11:28:45 UTC-5.000] CODEX_VISUAL_QA upper_interior",
+    "[2026-08-10 11:28:50 UTC-5.000] CODEX_VISUAL_QA north_transition",
+    "[2026-08-10 11:28:55 UTC-5.000] CODEX_VISUAL_QA door_front",
+    "[2026-08-10 11:29:01 UTC-5.000] CODEX_VISUAL_QA door_reverse",
+    "[2026-08-10 11:29:06 UTC-5.000] CODEX_VISUAL_QA notjunc_low_south",
+    "[2026-08-10 11:29:11 UTC-5.000] CODEX_VISUAL_QA notjunc_low_west",
+    "[2026-08-10 11:29:17 UTC-5.000] CODEX_VISUAL_QA high_overview_center",
+    "[2026-08-10 11:29:22 UTC-5.000] CODEX_VISUAL_QA high_overview_northwest",
+    "[2026-08-10 11:29:27 UTC-5.000] CODEX_VISUAL_QA north_boundary"
+  ],
+  "screenshotCount": 17,
+  "screenshots": [
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0000.png",
+      "bytes": 520414,
+      "sha256": "fed78d00f369f169e5b1420a52de64492d0824e1b4b03afced0b8e941e7e9297"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0001.png",
+      "bytes": 556793,
+      "sha256": "09062e38ce90d53f0d35676f6a750879a2d3e1f57d36109a3c1fdebadd6b0272"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0002.png",
+      "bytes": 636968,
+      "sha256": "726d16b530bbe21e5f51131d7546d0fcb11648827bd7e2638750fc2c524a0efa"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0003.png",
+      "bytes": 142353,
+      "sha256": "c4551a7062af59b878d64a247c6094fdd9e975cd72e2b0070adcabfe17dcfd26"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0004.png",
+      "bytes": 604498,
+      "sha256": "2b03721a043301ef4241ff4f58c38a6370f64dd2af44806fb153d3f894a805aa"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0005.png",
+      "bytes": 748874,
+      "sha256": "e0bab62810f041ea9deee3f92f6cea505e7d024cb334673a7786a0850e600510"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0006.png",
+      "bytes": 642220,
+      "sha256": "652165b63e438c6caf82265f2d35c710eac8d1ebe67905f10aec49146d338eba"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0007.png",
+      "bytes": 348547,
+      "sha256": "d5a824f6cc75ea3c4a3a8746a2b6639227ef34f29c502448bad1b191ee200084"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0008.png",
+      "bytes": 736837,
+      "sha256": "f4ebb066beb4aa1c0d46e146be9487b4ba6442bbb3f3aba52235d177c63534f1"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0009.png",
+      "bytes": 626197,
+      "sha256": "4d56c5ffb7449400185f88dab72f30e15bef20ff56ba10877d13ec474704e4a8"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0010.png",
+      "bytes": 329746,
+      "sha256": "f3652c9774648a7fb163f44dd61c2947cf9bfb13c6bfe77650794664df486e5c"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0011.png",
+      "bytes": 338152,
+      "sha256": "3cdd13ed47f9f7cddff2b6f676706825f531331bf6e981b4c2ea02da4b490fd3"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0012.png",
+      "bytes": 788074,
+      "sha256": "345cfc67fd1948970b07e177f5e11f21f567780c1ba3e781f59885703e751262"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0013.png",
+      "bytes": 599194,
+      "sha256": "619f56aaa72a8b9a6984614c9490e343d50d3a395fbbff62c6b8a33b2080e0a5"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0014.png",
+      "bytes": 1049405,
+      "sha256": "1256c136bcd8f76d8e32ac2f31032f489e1d990f2423529af27cf99146481bca"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0015.png",
+      "bytes": 1009276,
+      "sha256": "1bf618db3501cd3b54ddbecc4f868630a30239b64f7b34c8b558e655b9dd68b6"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0016.png",
+      "bytes": 579779,
+      "sha256": "ff7ffbeb5a1c70983471966dcc5dd1b5ce8609f475e38f394876ec1b25440c06"
+    }
+  ],
+  "scriptErrorCount": 0,
+  "scriptErrors": [],
+  "elapsedSeconds": 126.156,
+  "timedOut": true,
+  "exitCode": null,
+  "log": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/visual-qconsole.log",
+  "runtimeLog": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/visual-qconsole.log",
+  "stdoutLog": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/visual-engine.stdout.log",
+  "stderrLog": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/visual-engine.stderr.log",
+  "durableEvidenceConversion": {
+    "sourceFormat": "TGA",
+    "durableFormat": "PNG",
+    "manifest": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/reports/screenshot-conversion-manifest.json",
+    "losslessPixelMatch": true
+  }
+}

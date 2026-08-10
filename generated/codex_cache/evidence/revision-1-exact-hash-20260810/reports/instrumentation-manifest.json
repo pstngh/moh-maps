@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "candidateSha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+  "files": [
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/analyze_bot_instrument_v2.ps1",
+      "bytes": 5702,
+      "sha256": "866c836efac9f80d921fd9d8b4ba5a45f1de4617b9929aa3373fd41431ce8ef9"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/bot-codex_cache.scr",
+      "bytes": 629,
+      "sha256": "a41df2aa22a200d60b28f54d02063c2a27daf4576357266079e2473c6bb174cb"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/correct_bot_instrument_harness.ps1",
+      "bytes": 1882,
+      "sha256": "50064516452393c8c373e3798315a349eb5fc7f60b627009cf947906e83fe02f"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/correct_visual_harness.ps1",
+      "bytes": 1985,
+      "sha256": "ab6c1a4252f0640753f1f6a1d8ff02ef67d71966128cfc402035de5f6e53a435"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/door-codex_cache.scr",
+      "bytes": 1316,
+      "sha256": "acec93df27bef9d1d6c7a1d72a6279859d6d023a8d9e4730a66336436bdd6195"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/fix_door_instrument_harness.ps1",
+      "bytes": 2636,
+      "sha256": "846975edca236b0fe61d8982859e9b35c46d1d7cf2bd4ec6a6e1086ae5b3dc3f"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/run_bot_instrument_probe.ps1",
+      "bytes": 7896,
+      "sha256": "d540bc54e60fbec09de5df74d99791b87591367a5c1590754f8f5436a59a44a8"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/run_door_instrument_probe.ps1",
+      "bytes": 6944,
+      "sha256": "d3c6ba2b0d80ce7b092c285fec0c77b53f5668affbd6bf387916aaedb1ffdabe"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/run_visual_probe.ps1",
+      "bytes": 10864,
+      "sha256": "817f4c5a6d6c9624fd52845af95423e4123eb7bbf7d18b43aae324a7f92a5e80"
+    },
+    {
+      "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/visual-codex_cache.scr",
+      "bytes": 5540,
+      "sha256": "bcf1a4697b3e9d8899debc43c559810e3ec6a970b5083c1bc73d3d5ed155cbf6"
+    }
+  ]
+}

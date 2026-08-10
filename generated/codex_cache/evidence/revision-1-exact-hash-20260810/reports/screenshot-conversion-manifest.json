@@ -1,0 +1,348 @@
+{
+  "schemaVersion": 1,
+  "candidateSha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+  "transform": "TGA to PNG; decoded dimensions, mode, and pixel bytes verified identical",
+  "count": 17,
+  "screenshots": [
+    {
+      "view_id": "axis_exterior_westbound",
+      "source_tga": {
+        "name": "shot0000.tga",
+        "bytes": 2764818,
+        "sha256": "fbe95d978237ebf3ee27043cc2fb8b93a7bef94bb334040a84735075b0638299"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0000.png",
+        "bytes": 520414,
+        "sha256": "fed78d00f369f169e5b1420a52de64492d0824e1b4b03afced0b8e941e7e9297"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "bd3b79adf862ef6676f3a4fffaac602fb58547e8ffefacc44c8089e7b89925ed",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "allied_exterior_northbound",
+      "source_tga": {
+        "name": "shot0001.tga",
+        "bytes": 2764818,
+        "sha256": "9a04cdb645c36ce7fa2a61fa6319cc6b43d404165b7c9fd1eb4e447b987ae78a"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0001.png",
+        "bytes": 556793,
+        "sha256": "09062e38ce90d53f0d35676f6a750879a2d3e1f57d36109a3c1fdebadd6b0272"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "d01251d9b0e25583f3e601ea6e3f782dc27fdcefecd08a8d822bdc44c5da11b0",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "mid_transition_forward",
+      "source_tga": {
+        "name": "shot0002.tga",
+        "bytes": 2764818,
+        "sha256": "92b4c3ab27a719d4154b40f77615246623ff88f57750e7ae0363c33ee497fee6"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0002.png",
+        "bytes": 636968,
+        "sha256": "726d16b530bbe21e5f51131d7546d0fcb11648827bd7e2638750fc2c524a0efa"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "63ce354e347e968a621c76967a4dc26e25d96d4a86c0ed8d327bf95c95f7e5d5",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "mid_transition_reverse",
+      "source_tga": {
+        "name": "shot0003.tga",
+        "bytes": 2764818,
+        "sha256": "2bd3c1cb749544c11800b8b043188f627e0ed8fe3cfef3d203ac5c659e7ae2d6"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0003.png",
+        "bytes": 142353,
+        "sha256": "c4551a7062af59b878d64a247c6094fdd9e975cd72e2b0070adcabfe17dcfd26"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "2c4c25a13a24f3575b492f6b800e0e021c59eb6f582d041a1eaf37788329759f",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "south_long_forward",
+      "source_tga": {
+        "name": "shot0004.tga",
+        "bytes": 2764818,
+        "sha256": "09a0dfece1c3b6ad7dcc385a45e251a02e1cf79ba3cbe303a467d07edaf0b49f"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0004.png",
+        "bytes": 604498,
+        "sha256": "2b03721a043301ef4241ff4f58c38a6370f64dd2af44806fb153d3f894a805aa"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "4dde61f1ab1cf42fecce5b7de5508311879011b5e2ba3ad3537b5cd8920e2ab4",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "south_long_reverse",
+      "source_tga": {
+        "name": "shot0005.tga",
+        "bytes": 2764818,
+        "sha256": "0bc34d90f61b07b9c660cbf649556d702d413885d33c51e83310a7cd8c441a02"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0005.png",
+        "bytes": 748874,
+        "sha256": "e0bab62810f041ea9deee3f92f6cea505e7d024cb334673a7786a0850e600510"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "aee5048e239f759409909ee47ec71a6350e216c828d1c47be20f9e0121efc216",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "west_long_forward",
+      "source_tga": {
+        "name": "shot0006.tga",
+        "bytes": 2764818,
+        "sha256": "7ac7f9600f693adb1eb32a961a28f191ecd088877f6a4c69d2c65cd5cb70e6cf"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0006.png",
+        "bytes": 642220,
+        "sha256": "652165b63e438c6caf82265f2d35c710eac8d1ebe67905f10aec49146d338eba"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "09edcfb8418437024a160019dcf846326f013984447f7c5389944c117756b00b",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "east_boundary_reverse",
+      "source_tga": {
+        "name": "shot0007.tga",
+        "bytes": 2764818,
+        "sha256": "1f62c1daf9d0bc9ac47a15ad7de8d1624217bec444603eb9c09fcc7342dc3d43"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0007.png",
+        "bytes": 348547,
+        "sha256": "d5a824f6cc75ea3c4a3a8746a2b6639227ef34f29c502448bad1b191ee200084"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "2a88751ffb8afb21b99e5547fc85929c7485cb52f707cc73187fc16e04ba12f8",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "upper_interior",
+      "source_tga": {
+        "name": "shot0008.tga",
+        "bytes": 2764818,
+        "sha256": "4ce051e5bf5122362601a9832f0b106932ceeafba2286c0878f9da59bfeff934"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0008.png",
+        "bytes": 736837,
+        "sha256": "f4ebb066beb4aa1c0d46e146be9487b4ba6442bbb3f3aba52235d177c63534f1"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "f9476b7e3a8b516beca98dc83ae3a4cf8697e364effb57b75530fcba32a397a5",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "north_transition",
+      "source_tga": {
+        "name": "shot0009.tga",
+        "bytes": 2764818,
+        "sha256": "65f33c49ff8b3db6d1c6ad1cd22a994ec13efc25f5964496dc7592e66fc4cb60"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0009.png",
+        "bytes": 626197,
+        "sha256": "4d56c5ffb7449400185f88dab72f30e15bef20ff56ba10877d13ec474704e4a8"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "a4a8d857614b1c7b49cece808caad3f75322d7c754d8081d313fff175ff393e5",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "door_front",
+      "source_tga": {
+        "name": "shot0010.tga",
+        "bytes": 2764818,
+        "sha256": "55cdc4e9397326a2b5facc8cbdf10e0518d6c9b34e006b2071a3e307d4ee1a8c"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0010.png",
+        "bytes": 329746,
+        "sha256": "f3652c9774648a7fb163f44dd61c2947cf9bfb13c6bfe77650794664df486e5c"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "55c92e129f324c82fb3760897afbf82d16b84e0a4d30a77000f684d9da4a0e1d",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "door_reverse",
+      "source_tga": {
+        "name": "shot0011.tga",
+        "bytes": 2764818,
+        "sha256": "8422762f83c0f2165739746b81227a73b3449ee31a9923c9eeea778ca0549fc9"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0011.png",
+        "bytes": 338152,
+        "sha256": "3cdd13ed47f9f7cddff2b6f676706825f531331bf6e981b4c2ea02da4b490fd3"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "1bd1d5b204d065dcb9a09fabbd9d22f8ac8c4308e854656a44ffb63fb41ac61d",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "notjunc_low_south",
+      "source_tga": {
+        "name": "shot0012.tga",
+        "bytes": 2764818,
+        "sha256": "a41f4570edd9e58870a357dc213e02fbff985c50612ced526335725d1b6e041c"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0012.png",
+        "bytes": 788074,
+        "sha256": "345cfc67fd1948970b07e177f5e11f21f567780c1ba3e781f59885703e751262"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "3b8aac4989dbba25fb6a418d3120985a1b246de1198a51346b95dcd0bc7a6fdf",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "notjunc_low_west",
+      "source_tga": {
+        "name": "shot0013.tga",
+        "bytes": 2764818,
+        "sha256": "d9b324cf4ba79c7147e17fa6e107bd94368571f39ce14bcbac87e3951d3b505d"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0013.png",
+        "bytes": 599194,
+        "sha256": "619f56aaa72a8b9a6984614c9490e343d50d3a395fbbff62c6b8a33b2080e0a5"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "8b48e484d711161f182a7e4459d68c5004e58de1e316e7b39ac57f224adf9a61",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "high_overview_center",
+      "source_tga": {
+        "name": "shot0014.tga",
+        "bytes": 2764818,
+        "sha256": "e3ddab459164fab95b335ab67d9c7051df47dca2df5409d8bb6b1770e590041c"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0014.png",
+        "bytes": 1049405,
+        "sha256": "1256c136bcd8f76d8e32ac2f31032f489e1d990f2423529af27cf99146481bca"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "d82676ba666fa6db35536ccc85556826446ad5ed14632016d4a1095c0f59e09d",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "high_overview_northwest",
+      "source_tga": {
+        "name": "shot0015.tga",
+        "bytes": 2764818,
+        "sha256": "d71f8816f7ea3dee69e746271eebda2a90f860e77f5dfea28f614b6cbfb7f723"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0015.png",
+        "bytes": 1009276,
+        "sha256": "1bf618db3501cd3b54ddbecc4f868630a30239b64f7b34c8b558e655b9dd68b6"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "5624a3877287ffe3a298b64be88ecd0c91dab835f1ac23daf461d943aa40a2a6",
+      "lossless_pixel_match": true
+    },
+    {
+      "view_id": "north_boundary",
+      "source_tga": {
+        "name": "shot0016.tga",
+        "bytes": 2764818,
+        "sha256": "a29745e7a4b8591f4a163a894fbd740be997feb332643afb99a29d9640738df1"
+      },
+      "durable_png": {
+        "path": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/screenshots/shot0016.png",
+        "bytes": 579779,
+        "sha256": "ff7ffbeb5a1c70983471966dcc5dd1b5ce8609f475e38f394876ec1b25440c06"
+      },
+      "dimensions": [
+        1280,
+        720
+      ],
+      "mode": "RGB",
+      "decoded_pixel_sha256": "d668f126256f8fd01ae7950257cb223777341f5da42c28f0203c36776b14a355",
+      "lossless_pixel_match": true
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 2,
+  "sourceLog": "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\bot-instrumented-qconsole.log",
+  "sourceLogSha256": "a1fb02642635d2a976b83b62e7cbf7c6bb2f50ed5449bfec36792c3e69b9682b",
+  "analysisMethod": "one-second samples; zones west/central/east at x=-500/500 and south/mid/north at y=300/1200; route transitions require both samples alive and >=32 units displacement",
+  "players": [
+    {
+      "playerIndex": 1,
+      "samples": 90,
+      "uniquePositions": 86,
+      "zonesVisited": [
+        "central_north",
+        "central_south",
+        "east_mid",
+        "east_north",
+        "east_south",
+        "west_mid",
+        "west_north",
+        "west_south"
+      ],
+      "approximateDistance": 29272.371,
+      "liveToDeadTransitions": 5,
+      "deadToLiveTransitions": 5
+    },
+    {
+      "playerIndex": 2,
+      "samples": 90,
+      "uniquePositions": 89,
+      "zonesVisited": [
+        "central_mid",
+        "central_north",
+        "central_south",
+        "east_mid",
+        "east_north",
+        "east_south",
+        "west_mid",
+        "west_north",
+        "west_south"
+      ],
+      "approximateDistance": 22699.495,
+      "liveToDeadTransitions": 4,
+      "deadToLiveTransitions": 4
+    },
+    {
+      "playerIndex": 3,
+      "samples": 90,
+      "uniquePositions": 89,
+      "zonesVisited": [
+        "central_north",
+        "east_mid",
+        "east_north",
+        "east_south",
+        "west_mid",
+        "west_south"
+      ],
+      "approximateDistance": 23084.498,
+      "liveToDeadTransitions": 5,
+      "deadToLiveTransitions": 5
+    },
+    {
+      "playerIndex": 4,
+      "samples": 90,
+      "uniquePositions": 88,
+      "zonesVisited": [
+        "central_south",
+        "east_mid",
+        "east_south",
+        "west_mid",
+        "west_south"
+      ],
+      "approximateDistance": 24760.413,
+      "liveToDeadTransitions": 4,
+      "deadToLiveTransitions": 4
+    },
+    {
+      "playerIndex": 5,
+      "samples": 90,
+      "uniquePositions": 87,
+      "zonesVisited": [
+        "central_north",
+        "central_south",
+        "east_mid",
+        "east_north",
+        "east_south",
+        "west_south"
+      ],
+      "approximateDistance": 26087.616,
+      "liveToDeadTransitions": 5,
+      "deadToLiveTransitions": 5
+    },
+    {
+      "playerIndex": 6,
+      "samples": 90,
+      "uniquePositions": 87,
+      "zonesVisited": [
+        "central_mid",
+        "central_north",
+        "central_south",
+        "east_mid",
+        "east_north",
+        "east_south",
+        "west_mid",
+        "west_south"
+      ],
+      "approximateDistance": 21550.586,
+      "liveToDeadTransitions": 3,
+      "deadToLiveTransitions": 3
+    },
+    {
+      "playerIndex": 7,
+      "samples": 90,
+      "uniquePositions": 89,
+      "zonesVisited": [
+        "central_north",
+        "east_mid",
+        "east_north",
+        "east_south"
+      ],
+      "approximateDistance": 21839.892,
+      "liveToDeadTransitions": 3,
+      "deadToLiveTransitions": 3
+    },
+    {
+      "playerIndex": 8,
+      "samples": 90,
+      "uniquePositions": 88,
+      "zonesVisited": [
+        "central_mid",
+        "central_north",
+        "central_south",
+        "east_mid",
+        "east_north",
+        "east_south",
+        "west_south"
+      ],
+      "approximateDistance": 20875.15,
+      "liveToDeadTransitions": 3,
+      "deadToLiveTransitions": 3
+    }
+  ],
+  "totals": {
+    "players": 8,
+    "samples": 720,
+    "uniquePositions": 703,
+    "approximateDistance": 190170.021,
+    "liveToDeadTransitions": 32,
+    "deadToLiveTransitions": 32,
+    "routeTransitions": 72,
+    "distinctRoutePairs": [
+      "central_mid->central_north",
+      "central_mid->central_south",
+      "central_north->east_north",
+      "central_north->west_north",
+      "central_south->central_mid",
+      "central_south->east_south",
+      "central_south->west_south",
+      "east_mid->east_north",
+      "east_mid->east_south",
+      "east_north->central_north",
+      "east_north->east_mid",
+      "east_south->central_south",
+      "east_south->east_mid",
+      "west_mid->west_south",
+      "west_north->west_mid",
+      "west_south->central_south",
+      "west_south->west_mid"
+    ]
+  },
+  "routeObservationLog": "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\bot-route-observations.log",
+  "routeObservationLogSha256": "984cdb79310130e038a7f3cdc798d88a3194e05470c6cad96b4cb5c8fb0b6991",
+  "lifecycleObservationLog": "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\bot-lifecycle-observations.log",
+  "lifecycleObservationLogSha256": "489c77d4a4bde8aa6e5dd5644fd0ac2c8cb2651621708aac98bb6e38116f0ded",
+  "durableSourceLog": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/bot-instrumented-qconsole.log",
+  "durableSourceLogSha256": "a1fb02642635d2a976b83b62e7cbf7c6bb2f50ed5449bfec36792c3e69b9682b",
+  "durableRouteObservationLog": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/bot-route-observations.log",
+  "durableLifecycleObservationLog": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/bot-lifecycle-observations.log"
+}

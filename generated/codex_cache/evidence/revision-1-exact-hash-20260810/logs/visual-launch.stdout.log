@@ -1,0 +1,259 @@
+{
+    "schemaVersion":  2,
+    "mapName":  "codex_cache",
+    "qaRoot":  "C:\\tmp\\codex-cache-r1-exact-visual",
+    "exactPk3Count":  8,
+    "candidateSha256":  "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+    "runtimePackage":  "C:\\tmp\\codex-cache-r1-exact-visual\\base\\main\\zz_codex_cache.pk3",
+    "runtimePackageSha256":  "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+    "enginePath":  "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\openmohaa-bin\\runtime\\openmohaa.exe",
+    "engineSha256":  "2364a08a2c2269504320027fad3354c9504230434aa33ac43e6234c50c630cd6",
+    "arguments":  [
+                      "+set",
+                      "fs_basepath",
+                      "C:\\tmp\\codex-cache-r1-exact-visual\\base",
+                      "+set",
+                      "fs_homepath",
+                      "C:\\tmp\\codex-cache-r1-exact-visual\\home",
+                      "+set",
+                      "developer",
+                      "2",
+                      "+set",
+                      "logfile",
+                      "2",
+                      "+set",
+                      "g_gametype",
+                      "1",
+                      "+set",
+                      "g_inactiveSpectate",
+                      "0",
+                      "+set",
+                      "g_inactiveKick",
+                      "0",
+                      "+set",
+                      "cg_drawviewmodel",
+                      "0",
+                      "+set",
+                      "r_fullscreen",
+                      "0",
+                      "+set",
+                      "r_mode",
+                      "-1",
+                      "+set",
+                      "r_customwidth",
+                      "1280",
+                      "+set",
+                      "r_customheight",
+                      "720",
+                      "+set",
+                      "com_maxfps",
+                      "60",
+                      "+map",
+                      "dm/codex_cache"
+                  ],
+    "fsBasepath":  "C:\\tmp\\codex-cache-r1-exact-visual\\base",
+    "fsHomepath":  "C:\\tmp\\codex-cache-r1-exact-visual\\home",
+    "packageInventory":  [
+                             {
+                                 "name":  "Pak0.pk3",
+                                 "bytes":  98668934,
+                                 "sha256":  "6caf6d93cc996b6895d5015f1be153724e5369b8c063c73e1609578323261df6"
+                             },
+                             {
+                                 "name":  "Pak1.pk3",
+                                 "bytes":  119631347,
+                                 "sha256":  "60ed94c185c4f81813aefaf1603b16734e65eb1b931737ae588df84c0a2a4b80"
+                             },
+                             {
+                                 "name":  "Pak2.pk3",
+                                 "bytes":  365587748,
+                                 "sha256":  "00133b93d350b5d82ff2d59a7d87fe94dad18147d28b6fd59dd2b5a6c816acce"
+                             },
+                             {
+                                 "name":  "Pak3.pk3",
+                                 "bytes":  87555605,
+                                 "sha256":  "1e0eed04b234bae260097813755325d2533bb6082c5fc9e98332aa66c4f4db92"
+                             },
+                             {
+                                 "name":  "Pak4.pk3",
+                                 "bytes":  34046379,
+                                 "sha256":  "853cc70610933e83284db95e6144ed3c02d81190065b44aae94ba58ca09f3130"
+                             },
+                             {
+                                 "name":  "Pak5.pk3",
+                                 "bytes":  87721422,
+                                 "sha256":  "b6035d8686bed133be76cdee322c37fd4a9814ba88bbce3e91f20571ea7b2a1d"
+                             },
+                             {
+                                 "name":  "Pak6.pk3",
+                                 "bytes":  11202988,
+                                 "sha256":  "619e6acfd37471f0c71194ef6546e592d01cd9f7c1a3ebf57064cf618cf503ae"
+                             },
+                             {
+                                 "name":  "zz_codex_cache.pk3",
+                                 "bytes":  10127241,
+                                 "sha256":  "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53"
+                             }
+                         ],
+    "looseOverride":  "maps/dm/codex_cache.scr only; fixed-camera and modal-dismissal instrumentation; BSP/assets remain from exact candidate PK3",
+    "looseScript":  "C:\\tmp\\codex-cache-r1-exact-visual\\home\\main\\maps\\dm\\codex_cache.scr",
+    "looseScriptSha256":  "bcf1a4697b3e9d8899debc43c559810e3ec6a970b5083c1bc73d3d5ed155cbf6",
+    "clientEntryAndModalDismissal":  [
+                                         "launch +set g_inactiveSpectate 0",
+                                         "launch +set g_inactiveKick 0",
+                                         "launch +set cg_drawviewmodel 0",
+                                         "ui_applyplayermodel",
+                                         "con_notifytime 0",
+                                         "direct server-side  auto_join_team event",
+                                         "3-second event sequencing wait",
+                                         "direct server-side  primarydmweapon rifle event",
+                                         "3-second server-response wait",
+                                         "popmenu 0",
+                                         "popmenu 0",
+                                         "popmenu 0",
+                                         "ui_hidemouse",
+                                         "ui_hud 0",
+                                         "cg_drawviewmodel 0 reaffirmed",
+                                         "clear",
+                                         "8-second notification fade before first capture",
+                                         "repeated popmenu 0, ui_hidemouse, and ui_hud 0 before each screenshot",
+                                         "5-second notification fade after each screenshot"
+                                     ],
+    "requestedViews":  [
+                           "axis_exterior_westbound",
+                           "allied_exterior_northbound",
+                           "mid_transition_forward",
+                           "mid_transition_reverse",
+                           "south_long_forward",
+                           "south_long_reverse",
+                           "west_long_forward",
+                           "east_boundary_reverse",
+                           "upper_interior",
+                           "north_transition",
+                           "door_front",
+                           "door_reverse",
+                           "notjunc_low_south",
+                           "notjunc_low_west",
+                           "high_overview_center",
+                           "high_overview_northwest",
+                           "north_boundary"
+                       ],
+    "viewMarkers":  [
+                        "[2026-08-10 11:28:02 UTC-5.000] CODEX_VISUAL_QA axis_exterior_westbound",
+                        "[2026-08-10 11:28:07 UTC-5.000] CODEX_VISUAL_QA allied_exterior_northbound",
+                        "[2026-08-10 11:28:13 UTC-5.000] CODEX_VISUAL_QA mid_transition_forward",
+                        "[2026-08-10 11:28:18 UTC-5.000] CODEX_VISUAL_QA mid_transition_reverse",
+                        "[2026-08-10 11:28:23 UTC-5.000] CODEX_VISUAL_QA south_long_forward",
+                        "[2026-08-10 11:28:29 UTC-5.000] CODEX_VISUAL_QA south_long_reverse",
+                        "[2026-08-10 11:28:34 UTC-5.000] CODEX_VISUAL_QA west_long_forward",
+                        "[2026-08-10 11:28:39 UTC-5.000] CODEX_VISUAL_QA east_boundary_reverse",
+                        "[2026-08-10 11:28:45 UTC-5.000] CODEX_VISUAL_QA upper_interior",
+                        "[2026-08-10 11:28:50 UTC-5.000] CODEX_VISUAL_QA north_transition",
+                        "[2026-08-10 11:28:55 UTC-5.000] CODEX_VISUAL_QA door_front",
+                        "[2026-08-10 11:29:01 UTC-5.000] CODEX_VISUAL_QA door_reverse",
+                        "[2026-08-10 11:29:06 UTC-5.000] CODEX_VISUAL_QA notjunc_low_south",
+                        "[2026-08-10 11:29:11 UTC-5.000] CODEX_VISUAL_QA notjunc_low_west",
+                        "[2026-08-10 11:29:17 UTC-5.000] CODEX_VISUAL_QA high_overview_center",
+                        "[2026-08-10 11:29:22 UTC-5.000] CODEX_VISUAL_QA high_overview_northwest",
+                        "[2026-08-10 11:29:27 UTC-5.000] CODEX_VISUAL_QA north_boundary"
+                    ],
+    "screenshotCount":  17,
+    "screenshots":  [
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0000.tga",
+                            "bytes":  2764818,
+                            "sha256":  "fbe95d978237ebf3ee27043cc2fb8b93a7bef94bb334040a84735075b0638299"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0001.tga",
+                            "bytes":  2764818,
+                            "sha256":  "9a04cdb645c36ce7fa2a61fa6319cc6b43d404165b7c9fd1eb4e447b987ae78a"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0002.tga",
+                            "bytes":  2764818,
+                            "sha256":  "92b4c3ab27a719d4154b40f77615246623ff88f57750e7ae0363c33ee497fee6"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0003.tga",
+                            "bytes":  2764818,
+                            "sha256":  "2bd3c1cb749544c11800b8b043188f627e0ed8fe3cfef3d203ac5c659e7ae2d6"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0004.tga",
+                            "bytes":  2764818,
+                            "sha256":  "09a0dfece1c3b6ad7dcc385a45e251a02e1cf79ba3cbe303a467d07edaf0b49f"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0005.tga",
+                            "bytes":  2764818,
+                            "sha256":  "0bc34d90f61b07b9c660cbf649556d702d413885d33c51e83310a7cd8c441a02"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0006.tga",
+                            "bytes":  2764818,
+                            "sha256":  "7ac7f9600f693adb1eb32a961a28f191ecd088877f6a4c69d2c65cd5cb70e6cf"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0007.tga",
+                            "bytes":  2764818,
+                            "sha256":  "1f62c1daf9d0bc9ac47a15ad7de8d1624217bec444603eb9c09fcc7342dc3d43"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0008.tga",
+                            "bytes":  2764818,
+                            "sha256":  "4ce051e5bf5122362601a9832f0b106932ceeafba2286c0878f9da59bfeff934"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0009.tga",
+                            "bytes":  2764818,
+                            "sha256":  "65f33c49ff8b3db6d1c6ad1cd22a994ec13efc25f5964496dc7592e66fc4cb60"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0010.tga",
+                            "bytes":  2764818,
+                            "sha256":  "55cdc4e9397326a2b5facc8cbdf10e0518d6c9b34e006b2071a3e307d4ee1a8c"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0011.tga",
+                            "bytes":  2764818,
+                            "sha256":  "8422762f83c0f2165739746b81227a73b3449ee31a9923c9eeea778ca0549fc9"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0012.tga",
+                            "bytes":  2764818,
+                            "sha256":  "a41f4570edd9e58870a357dc213e02fbff985c50612ced526335725d1b6e041c"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0013.tga",
+                            "bytes":  2764818,
+                            "sha256":  "d9b324cf4ba79c7147e17fa6e107bd94368571f39ce14bcbac87e3951d3b505d"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0014.tga",
+                            "bytes":  2764818,
+                            "sha256":  "e3ddab459164fab95b335ab67d9c7051df47dca2df5409d8bb6b1770e590041c"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0015.tga",
+                            "bytes":  2764818,
+                            "sha256":  "d71f8816f7ea3dee69e746271eebda2a90f860e77f5dfea28f614b6cbfb7f723"
+                        },
+                        {
+                            "path":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-screenshots\\shot0016.tga",
+                            "bytes":  2764818,
+                            "sha256":  "a29745e7a4b8591f4a163a894fbd740be997feb332643afb99a29d9640738df1"
+                        }
+                    ],
+    "scriptErrorCount":  0,
+    "scriptErrors":  [
+
+                     ],
+    "elapsedSeconds":  126.156,
+    "timedOut":  true,
+    "exitCode":  null,
+    "log":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-qconsole.log",
+    "runtimeLog":  "C:\\tmp\\codex-cache-r1-exact-visual\\home\\main\\qconsole.log",
+    "stdoutLog":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-engine.stdout.log",
+    "stderrLog":  "C:\\Users\\plex\\Documents\\Codex\\2026-08-09\\files-mentioned-by-the-user-skill\\work\\cache_r1_exact_hash_20260810\\visual-engine.stderr.log"
+}

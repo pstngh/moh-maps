@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "mapName": "codex_cache",
+  "candidateSha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+  "cameraSource": {
+    "playerHeight": "Verified info_player_* origins and angles in generated/codex_cache/main/maps/dm/codex_cache.map; duplicated origins use deliberate reverse yaws.",
+    "door": "Verified func_rotatingdoor brush at X 198.7509..255.2491, Y 2054.1008..2061.8992, Z 1687.7448..1798.25 plus nearby verified DM spawn at 225 2232 1696.",
+    "highAngle": "Derived inside the recorded structural sky shell bounds for deliberate overview evidence; these are noclip viewpoints, not route samples.",
+    "seams": "Low-angle outdoor samples target representative terrain/transition domains because the missing raw compile record does not identify exact -notjunc seam coordinates."
+  },
+  "generated": {
+    "mapPath": "generated/codex_cache/main/maps/dm/codex_cache.map",
+    "mapSha256": "9966961e5c1d52b65d6bbb300699ff24e2ef3bdcbc6b4bb90619abf8794dbedc"
+  },
+  "fixedViews": [
+    {
+      "id": "axis_exterior_westbound",
+      "origin": [1987.3, 239, 1645],
+      "viewangles": [0, 180, 0],
+      "covers": ["player_height_forward", "exterior", "long_sightline"]
+    },
+    {
+      "id": "allied_exterior_northbound",
+      "origin": [-898, 245, 1622],
+      "viewangles": [0, 90, 0],
+      "covers": ["player_height_reverse", "exterior", "boundary"]
+    },
+    {
+      "id": "mid_transition_forward",
+      "origin": [105, -137, 1626],
+      "viewangles": [0, 150, 0],
+      "covers": ["player_height_forward", "transition", "interior"]
+    },
+    {
+      "id": "mid_transition_reverse",
+      "origin": [105, -137, 1626],
+      "viewangles": [0, 330, 0],
+      "covers": ["player_height_reverse", "transition", "long_sightline"]
+    },
+    {
+      "id": "south_long_forward",
+      "origin": [492, -1246, 1626],
+      "viewangles": [-2, 330, 0],
+      "covers": ["player_height_forward", "exterior", "long_sightline"]
+    },
+    {
+      "id": "south_long_reverse",
+      "origin": [90, -1364, 1667],
+      "viewangles": [-2, 165, 0],
+      "covers": ["player_height_reverse", "exterior", "boundary"]
+    },
+    {
+      "id": "west_long_forward",
+      "origin": [-1788, 475, 1623],
+      "viewangles": [-2, 30, 0],
+      "covers": ["player_height_forward", "exterior", "long_sightline", "boundary"]
+    },
+    {
+      "id": "east_boundary_reverse",
+      "origin": [2759, 352, 1636],
+      "viewangles": [-2, 285, 0],
+      "covers": ["player_height_reverse", "exterior", "boundary"]
+    },
+    {
+      "id": "upper_interior",
+      "origin": [-308, -476, 1807],
+      "viewangles": [-5, 315, 0],
+      "covers": ["player_height_forward", "interior", "transition"]
+    },
+    {
+      "id": "north_transition",
+      "origin": [806, 2003, 1710],
+      "viewangles": [-2, 210, 0],
+      "covers": ["player_height_reverse", "transition", "long_sightline"]
+    },
+    {
+      "id": "door_front",
+      "origin": [225, 2232, 1696],
+      "viewangles": [0, 270, 0],
+      "covers": ["player_height_forward", "transition", "rotating_door"]
+    },
+    {
+      "id": "door_reverse",
+      "origin": [225, 1920, 1696],
+      "viewangles": [0, 90, 0],
+      "covers": ["player_height_reverse", "transition", "rotating_door"]
+    },
+    {
+      "id": "notjunc_low_south",
+      "origin": [90, -1364, 1696],
+      "viewangles": [18, 165, 0],
+      "covers": ["player_height_forward", "exterior", "notjunc_seam"]
+    },
+    {
+      "id": "notjunc_low_west",
+      "origin": [-1788, 475, 1690],
+      "viewangles": [18, 30, 0],
+      "covers": ["player_height_reverse", "exterior", "notjunc_seam", "boundary"]
+    },
+    {
+      "id": "high_overview_center",
+      "origin": [600, 500, 2750],
+      "viewangles": [55, 210, 0],
+      "covers": ["high_angle", "boundary", "exterior", "interior"]
+    },
+    {
+      "id": "high_overview_northwest",
+      "origin": [-500, 1000, 2600],
+      "viewangles": [55, 330, 0],
+      "covers": ["high_angle", "boundary", "transition"]
+    },
+    {
+      "id": "north_boundary",
+      "origin": [-275, 2216, 1706],
+      "viewangles": [0, 285, 0],
+      "covers": ["player_height_forward", "boundary", "exterior", "rotating_door"]
+    }
+  ]
+}

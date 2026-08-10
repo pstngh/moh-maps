@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "lane": "supplemental-instrumented-not-package-pure",
+  "mapName": "codex_cache",
+  "qaRoot": "C:\\tmp\\codex-cache-r1-bot-instrumented",
+  "candidateSha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+  "runtimeCandidateSha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+  "exactPk3Count": 8,
+  "packageInventory": [
+    {
+      "name": "Pak0.pk3",
+      "bytes": 98668934,
+      "sha256": "6caf6d93cc996b6895d5015f1be153724e5369b8c063c73e1609578323261df6",
+      "path": "C:\\tmp\\codex-cache-r1-bot-instrumented\\base\\main\\Pak0.pk3"
+    },
+    {
+      "name": "Pak1.pk3",
+      "bytes": 119631347,
+      "sha256": "60ed94c185c4f81813aefaf1603b16734e65eb1b931737ae588df84c0a2a4b80",
+      "path": "C:\\tmp\\codex-cache-r1-bot-instrumented\\base\\main\\Pak1.pk3"
+    },
+    {
+      "name": "Pak2.pk3",
+      "bytes": 365587748,
+      "sha256": "00133b93d350b5d82ff2d59a7d87fe94dad18147d28b6fd59dd2b5a6c816acce",
+      "path": "C:\\tmp\\codex-cache-r1-bot-instrumented\\base\\main\\Pak2.pk3"
+    },
+    {
+      "name": "Pak3.pk3",
+      "bytes": 87555605,
+      "sha256": "1e0eed04b234bae260097813755325d2533bb6082c5fc9e98332aa66c4f4db92",
+      "path": "C:\\tmp\\codex-cache-r1-bot-instrumented\\base\\main\\Pak3.pk3"
+    },
+    {
+      "name": "Pak4.pk3",
+      "bytes": 34046379,
+      "sha256": "853cc70610933e83284db95e6144ed3c02d81190065b44aae94ba58ca09f3130",
+      "path": "C:\\tmp\\codex-cache-r1-bot-instrumented\\base\\main\\Pak4.pk3"
+    },
+    {
+      "name": "Pak5.pk3",
+      "bytes": 87721422,
+      "sha256": "b6035d8686bed133be76cdee322c37fd4a9814ba88bbce3e91f20571ea7b2a1d",
+      "path": "C:\\tmp\\codex-cache-r1-bot-instrumented\\base\\main\\Pak5.pk3"
+    },
+    {
+      "name": "Pak6.pk3",
+      "bytes": 11202988,
+      "sha256": "619e6acfd37471f0c71194ef6546e592d01cd9f7c1a3ebf57064cf618cf503ae",
+      "path": "C:\\tmp\\codex-cache-r1-bot-instrumented\\base\\main\\Pak6.pk3"
+    },
+    {
+      "name": "zz_codex_cache.pk3",
+      "bytes": 10127241,
+      "sha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+      "path": "C:\\tmp\\codex-cache-r1-bot-instrumented\\base\\main\\zz_codex_cache.pk3"
+    }
+  ],
+  "enginePath": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\openmohaa-bin\\runtime\\omohaaded.exe",
+  "engineSha256": "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
+  "gameDllPath": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\openmohaa-bin\\runtime\\game.dll",
+  "gameDllSha256": "7ed4f2cc70b9579f2df2577b7f2722d5990653131269ecf61074aeb341968ee0",
+  "arguments": [
+    "+set",
+    "fs_basepath",
+    "C:\\tmp\\codex-cache-r1-bot-instrumented\\base",
+    "+set",
+    "fs_homepath",
+    "C:\\tmp\\codex-cache-r1-bot-instrumented\\home",
+    "+set",
+    "dedicated",
+    "1",
+    "+set",
+    "developer",
+    "2",
+    "+set",
+    "logfile",
+    "2",
+    "+set",
+    "cheats",
+    "1",
+    "+set",
+    "net_port",
+    "12390",
+    "+set",
+    "g_gametype",
+    "1",
+    "+set",
+    "sv_maxclients",
+    "16",
+    "+set",
+    "sv_maxbots",
+    "8",
+    "+set",
+    "sv_numbots",
+    "8",
+    "+map",
+    "dm/codex_cache"
+  ],
+  "looseOverride": {
+    "path": "C:\\tmp\\codex-cache-r1-bot-instrumented\\home\\main\\maps\\dm\\codex_cache.scr",
+    "sha256": "a41df2aa22a200d60b28f54d02063c2a27daf4576357266079e2473c6bb174cb",
+    "purpose": "supplemental bot position/lifecycle and rotating-door sampling only"
+  },
+  "elapsedSeconds": 105.028,
+  "requestedSampleSeconds": 105,
+  "botSampleLines": 720,
+  "doorSampleLines": 0,
+  "botNames": [
+    "bot1",
+    "bot2",
+    "bot3",
+    "bot4",
+    "bot5",
+    "bot6",
+    "bot7",
+    "bot8"
+  ],
+  "combatEvents": 37,
+  "scriptErrorCount": 0,
+  "scriptErrors": [],
+  "runtimeLog": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/bot-instrumented-qconsole.log",
+  "runtimeLogSha256": "a1fb02642635d2a976b83b62e7cbf7c6bb2f50ed5449bfec36792c3e69b9682b",
+  "stdoutLog": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/bot-instrumented-engine.stdout.log",
+  "stderrLog": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/logs/bot-instrumented-engine.stderr.log",
+  "durableLooseScript": "generated/codex_cache/evidence/revision-1-exact-hash-20260810/instrumentation/bot-codex_cache.scr",
+  "durableLooseScriptSha256": "a41df2aa22a200d60b28f54d02063c2a27daf4576357266079e2473c6bb174cb"
+}

@@ -1,0 +1,682 @@
+{
+  "schema_version": 1,
+  "map_name": "codex_cache",
+  "expected_bsp_member": "maps/dm/codex_cache.bsp",
+  "launch_provenance": {
+    "visual": {
+      "engine_path": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\openmohaa-bin\\runtime\\openmohaa.exe",
+      "engine_sha256": "2364a08a2c2269504320027fad3354c9504230434aa33ac43e6234c50c630cd6",
+      "arguments": [
+        "+set",
+        "fs_basepath",
+        "C:\\tmp\\codex-cache-r1-exact-visual\\base",
+        "+set",
+        "fs_homepath",
+        "C:\\tmp\\codex-cache-r1-exact-visual\\home",
+        "+set",
+        "developer",
+        "2",
+        "+set",
+        "logfile",
+        "2",
+        "+set",
+        "g_gametype",
+        "1",
+        "+set",
+        "g_inactiveSpectate",
+        "0",
+        "+set",
+        "g_inactiveKick",
+        "0",
+        "+set",
+        "cg_drawviewmodel",
+        "0",
+        "+set",
+        "r_fullscreen",
+        "0",
+        "+set",
+        "r_mode",
+        "-1",
+        "+set",
+        "r_customwidth",
+        "1280",
+        "+set",
+        "r_customheight",
+        "720",
+        "+set",
+        "com_maxfps",
+        "60",
+        "+map",
+        "dm/codex_cache"
+      ],
+      "fs_basepath": "C:\\tmp\\codex-cache-r1-exact-visual\\base",
+      "fs_homepath": "C:\\tmp\\codex-cache-r1-exact-visual\\home"
+    },
+    "bot": {
+      "engine_path": "C:\\Users\\plex\\Documents\\Codex\\2026-07-24\\pstngh-moh-maps-https-github-com\\work\\openmohaa-bin\\runtime\\omohaaded.exe",
+      "engine_sha256": "ddb7d12666560701d914ff0d26b5082d686c1cc027407a929fb4950d24fbdafb",
+      "arguments": [
+        "+set",
+        "fs_basepath",
+        "C:\\tmp\\codex-codex_cache-runtime\\base",
+        "+set",
+        "fs_homepath",
+        "C:\\tmp\\codex-codex_cache-runtime\\home",
+        "+set",
+        "dedicated",
+        "1",
+        "+set",
+        "developer",
+        "2",
+        "+set",
+        "logfile",
+        "2",
+        "+set",
+        "net_port",
+        "12381",
+        "+set",
+        "g_gametype",
+        "1",
+        "+set",
+        "sv_maxclients",
+        "16",
+        "+set",
+        "sv_maxbots",
+        "8",
+        "+set",
+        "sv_numbots",
+        "8",
+        "+map",
+        "dm/codex_cache"
+      ],
+      "fs_basepath": "C:\\tmp\\codex-codex_cache-runtime\\base",
+      "fs_homepath": "C:\\tmp\\codex-codex_cache-runtime\\home"
+    }
+  },
+  "runtime_diagnostic_classifications": [
+    {
+      "log": "visual",
+      "needle": "Couldn't get window display mode",
+      "disposition": "proven_nonblocking",
+      "evidence": "The requested 1280x720 window was created and all 17 unique fixed-view screenshots were captured."
+    },
+    {
+      "log": "visual",
+      "needle": "GL_EXTENSIONS:",
+      "disposition": "proven_nonblocking",
+      "evidence": "This is a renderer extension inventory; the word error occurs only inside extension identifiers."
+    },
+    {
+      "log": "visual",
+      "needle": "Loaded symbol alGetError",
+      "disposition": "proven_nonblocking",
+      "evidence": "Successful OpenAL symbol-resolution telemetry."
+    },
+    {
+      "log": "visual",
+      "needle": "Loaded symbol alcGetError",
+      "disposition": "proven_nonblocking",
+      "evidence": "Successful OpenAL symbol-resolution telemetry."
+    },
+    {
+      "log": "visual",
+      "needle": "Loaded symbol curl_easy_strerror",
+      "disposition": "proven_nonblocking",
+      "evidence": "Successful curl symbol-resolution telemetry."
+    },
+    {
+      "log": "visual",
+      "needle": "Loaded symbol curl_share_strerror",
+      "disposition": "proven_nonblocking",
+      "evidence": "Successful curl symbol-resolution telemetry."
+    },
+    {
+      "log": "visual",
+      "needle": "Loaded symbol curl_multi_strerror",
+      "disposition": "proven_nonblocking",
+      "evidence": "Successful curl symbol-resolution telemetry."
+    },
+    {
+      "log": "visual",
+      "needle": "LOCALIZATION ERROR:",
+      "disposition": "proven_nonblocking",
+      "evidence": "OpenMoHAA localization-table noise; it neither obscured nor prevented the completed screenshots."
+    },
+    {
+      "log": "visual",
+      "needle": "could not find surface",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "visual",
+      "needle": "Couldn't load models/player/",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "visual",
+      "needle": "Could not open binary file models/player/",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "visual",
+      "needle": "Couldn't find voting options file",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "visual",
+      "needle": "SetCurrentTiki errors means",
+      "disposition": "proven_nonblocking",
+      "evidence": "Stock engine guidance about optional unprefetched TIKIs; the exact map loaded and the capture matrix completed."
+    },
+    {
+      "log": "visual",
+      "needle": "Couldn't load sound: sound/null.wav",
+      "disposition": "proven_nonblocking",
+      "evidence": "Stock null-sound placeholder warning; no candidate-specific diagnostic and no capture interruption occurred."
+    },
+    {
+      "log": "visual",
+      "needle": "Cvar_Set2: ter_error",
+      "disposition": "proven_nonblocking",
+      "evidence": "Terrain status cvar telemetry; it is not an invalid-cvar or script error."
+    },
+    {
+      "log": "visual",
+      "needle": "Couldn't find image for shader textures/menu/exit",
+      "disposition": "proven_nonblocking",
+      "evidence": "Stock menu shader warning; UI was dismissed and every gameplay capture remained unobscured."
+    },
+    {
+      "log": "visual",
+      "needle": "Couldn't load models/fx/fx_fence_wood",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "visual",
+      "needle": "Could not open binary file models/fx/fx_fence_wood",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "visual",
+      "needle": "Couldn't find image for shader textures/hud/",
+      "disposition": "proven_nonblocking",
+      "evidence": "Stock HUD-radar shader warning; HUD was deliberately hidden and the screenshots were unobscured."
+    },
+    {
+      "log": "bot",
+      "needle": "Loaded symbol curl_easy_strerror",
+      "disposition": "proven_nonblocking",
+      "evidence": "Successful curl symbol-resolution telemetry."
+    },
+    {
+      "log": "bot",
+      "needle": "Loaded symbol curl_share_strerror",
+      "disposition": "proven_nonblocking",
+      "evidence": "Successful curl symbol-resolution telemetry."
+    },
+    {
+      "log": "bot",
+      "needle": "Loaded symbol curl_multi_strerror",
+      "disposition": "proven_nonblocking",
+      "evidence": "Successful curl symbol-resolution telemetry."
+    },
+    {
+      "log": "bot",
+      "needle": "could not find surface",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "bot",
+      "needle": "Couldn't load models/player/",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "bot",
+      "needle": "Could not open binary file models/player/",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "bot",
+      "needle": "Couldn't find voting options file",
+      "disposition": "proven_nonblocking",
+      "evidence": "The line is stock OpenMoHAA or retail-asset startup noise, not candidate-specific; exact candidate identity, BSP load, Recast, clean candidate diagnostics, and the applicable visual/runtime outcome are independently hash-linked."
+    },
+    {
+      "log": "bot",
+      "needle": "SetCurrentTiki errors means",
+      "disposition": "proven_nonblocking",
+      "evidence": "Stock engine guidance about optional unprefetched TIKIs; all 8 bots entered and the combat threshold passed."
+    },
+    {
+      "log": "bot",
+      "needle": "Can't find 'global/bot_run.scr'",
+      "disposition": "proven_nonblocking",
+      "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+    },
+    {
+      "log": "bot",
+      "needle": "Script 'global/bot_run.scr' was not properly loaded",
+      "disposition": "proven_nonblocking",
+      "evidence": "The stock optional bot helper is absent, but the same package-pure exact-hash run recorded all 8 bot entries and 48 combat events; a separate exact-hash instrumented lane recorded 703 unique sampled positions and 32 death-to-respawn cycles."
+    }
+  ],
+  "required_view_categories": [
+    "player_height_forward",
+    "player_height_reverse",
+    "high_angle",
+    "boundary",
+    "interior",
+    "exterior",
+    "transition",
+    "long_sightline"
+  ],
+  "views": [
+    {
+      "id": "axis_exterior_westbound",
+      "categories": [
+        "player_height_forward",
+        "exterior",
+        "long_sightline"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "allied_exterior_northbound",
+      "categories": [
+        "player_height_reverse",
+        "exterior",
+        "boundary"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "mid_transition_forward",
+      "categories": [
+        "player_height_forward",
+        "transition",
+        "interior"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "mid_transition_reverse",
+      "categories": [
+        "player_height_reverse",
+        "transition",
+        "long_sightline"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "south_long_forward",
+      "categories": [
+        "player_height_forward",
+        "exterior",
+        "long_sightline"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "south_long_reverse",
+      "categories": [
+        "player_height_reverse",
+        "exterior",
+        "boundary"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "west_long_forward",
+      "categories": [
+        "player_height_forward",
+        "exterior",
+        "long_sightline",
+        "boundary"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "east_boundary_reverse",
+      "categories": [
+        "player_height_reverse",
+        "exterior",
+        "boundary"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "upper_interior",
+      "categories": [
+        "player_height_forward",
+        "interior",
+        "transition"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "north_transition",
+      "categories": [
+        "player_height_reverse",
+        "transition",
+        "long_sightline"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "door_front",
+      "categories": [
+        "player_height_forward",
+        "transition",
+        "rotating_door"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "door_reverse",
+      "categories": [
+        "player_height_reverse",
+        "transition",
+        "rotating_door"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "notjunc_low_south",
+      "categories": [
+        "player_height_forward",
+        "exterior",
+        "notjunc_seam"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "notjunc_low_west",
+      "categories": [
+        "player_height_reverse",
+        "exterior",
+        "notjunc_seam",
+        "boundary"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "high_overview_center",
+      "categories": [
+        "high_angle",
+        "boundary",
+        "exterior",
+        "interior"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "high_overview_northwest",
+      "categories": [
+        "high_angle",
+        "boundary",
+        "transition"
+      ],
+      "perspective": "fixed"
+    },
+    {
+      "id": "north_boundary",
+      "categories": [
+        "player_height_forward",
+        "boundary",
+        "exterior",
+        "rotating_door"
+      ],
+      "perspective": "fixed"
+    }
+  ],
+  "visual_review": {
+    "reviewer_kind": "codex_visual",
+    "candidate_sha256": "90477f688e4115400813b119a2061434a1f62324381b3cc864fa7bab29084c53",
+    "views": [
+      {
+        "id": "axis_exterior_westbound",
+        "screenshot_sha256": "fed78d00f369f169e5b1420a52de64492d0824e1b4b03afced0b8e941e7e9297",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "allied_exterior_northbound",
+        "screenshot_sha256": "09062e38ce90d53f0d35676f6a750879a2d3e1f57d36109a3c1fdebadd6b0272",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "mid_transition_forward",
+        "screenshot_sha256": "726d16b530bbe21e5f51131d7546d0fcb11648827bd7e2638750fc2c524a0efa",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "mid_transition_reverse",
+        "screenshot_sha256": "c4551a7062af59b878d64a247c6094fdd9e975cd72e2b0070adcabfe17dcfd26",
+        "reviewed": true,
+        "blocking_defects": [
+          "Camera placement abuts or intersects opaque geometry, leaving most of the frame black and preventing assessment of the intended reverse transition."
+        ],
+        "observations": [
+          "Unobscured UI state, but the fixed viewpoint itself is not usable semantic evidence for the reverse transition."
+        ]
+      },
+      {
+        "id": "south_long_forward",
+        "screenshot_sha256": "2b03721a043301ef4241ff4f58c38a6370f64dd2af44806fb153d3f894a805aa",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "south_long_reverse",
+        "screenshot_sha256": "e0bab62810f041ea9deee3f92f6cea505e7d024cb334673a7786a0850e600510",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "west_long_forward",
+        "screenshot_sha256": "652165b63e438c6caf82265f2d35c710eac8d1ebe67905f10aec49146d338eba",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "east_boundary_reverse",
+        "screenshot_sha256": "d5a824f6cc75ea3c4a3a8746a2b6639227ef34f29c502448bad1b191ee200084",
+        "reviewed": true,
+        "blocking_defects": [
+          "Boundary reverse view exposes a gray exterior or underside shell against open blue space; playable boundary containment is not established."
+        ],
+        "observations": [
+          "The image is unobscured, so this is a map/boundary observation rather than a UI-capture artifact."
+        ]
+      },
+      {
+        "id": "upper_interior",
+        "screenshot_sha256": "f4ebb066beb4aa1c0d46e146be9487b4ba6442bbb3f3aba52235d177c63534f1",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "north_transition",
+        "screenshot_sha256": "4d56c5ffb7449400185f88dab72f30e15bef20ff56ba10877d13ec474704e4a8",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "door_front",
+        "screenshot_sha256": "f3652c9774648a7fb163f44dd61c2947cf9bfb13c6bfe77650794664df486e5c",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Static rotating-door face is unobscured; behavior is assessed separately by the exact-hash supplemental door trace."
+        ]
+      },
+      {
+        "id": "door_reverse",
+        "screenshot_sha256": "3cdd13ed47f9f7cddff2b6f676706825f531331bf6e981b4c2ea02da4b490fd3",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Static reverse door face is unobscured; behavior is assessed separately by the exact-hash supplemental door trace."
+        ]
+      },
+      {
+        "id": "notjunc_low_south",
+        "screenshot_sha256": "345cfc67fd1948970b07e177f5e11f21f567780c1ba3e781f59885703e751262",
+        "reviewed": true,
+        "blocking_defects": [
+          "Open rectangular black floor aperture is visible at player height beside the paved surface."
+        ],
+        "observations": [
+          "The targeted low-angle seam view directly exposes the aperture."
+        ]
+      },
+      {
+        "id": "notjunc_low_west",
+        "screenshot_sha256": "619f56aaa72a8b9a6984614c9490e343d50d3a395fbbff62c6b8a33b2080e0a5",
+        "reviewed": true,
+        "blocking_defects": [
+          "Long black pavement-to-grass seam and triangular open blue/void aperture are visible at player height."
+        ],
+        "observations": [
+          "The targeted low-angle seam/boundary view directly exposes both discontinuities."
+        ]
+      },
+      {
+        "id": "high_overview_center",
+        "screenshot_sha256": "1256c136bcd8f76d8e32ac2f31032f489e1d990f2423529af27cf99146481bca",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "high_overview_northwest",
+        "screenshot_sha256": "1bf618db3501cd3b54ddbecc4f868630a30239b64f7b34c8b558e655b9dd68b6",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      },
+      {
+        "id": "north_boundary",
+        "screenshot_sha256": "ff7ffbeb5a1c70983471966dcc5dd1b5ce8609f475e38f394876ec1b25440c06",
+        "reviewed": true,
+        "blocking_defects": [],
+        "observations": [
+          "Full-resolution exact-hash image reviewed; capture is unobscured."
+        ]
+      }
+    ]
+  },
+  "bot_evidence": {
+    "expected_bot_count": 8,
+    "required_routes": [
+      "east_mid_to_east_north",
+      "west_mid_to_west_south",
+      "central_south_to_west_south"
+    ],
+    "event_observations": [
+      {
+        "event": "spawn",
+        "source_path": "../logs/bot-standard-qconsole.log",
+        "source_sha256": "dfa13dc0d5252d09116bb99e0d0f157e51d726094985b8f3ff57224d105d58a6",
+        "needle": "has entered the battle",
+        "matches": 8
+      },
+      {
+        "event": "movement",
+        "source_path": "../logs/bot-instrumented-qconsole.log",
+        "source_sha256": "a1fb02642635d2a976b83b62e7cbf7c6bb2f50ed5449bfec36792c3e69b9682b",
+        "needle": "CODEX_BOT_SAMPLE",
+        "matches": 720
+      },
+      {
+        "event": "combat",
+        "source_path": "../logs/bot-standard-qconsole.log",
+        "source_sha256": "dfa13dc0d5252d09116bb99e0d0f157e51d726094985b8f3ff57224d105d58a6",
+        "needle": "bot4 was sniped by bot8",
+        "matches": 1
+      },
+      {
+        "event": "death",
+        "source_path": "../logs/bot-lifecycle-observations.log",
+        "source_sha256": "489c77d4a4bde8aa6e5dd5644fd0ac2c8cb2651621708aac98bb6e38116f0ded",
+        "needle": "event=death_transition",
+        "matches": 32
+      },
+      {
+        "event": "respawn",
+        "source_path": "../logs/bot-lifecycle-observations.log",
+        "source_sha256": "489c77d4a4bde8aa6e5dd5644fd0ac2c8cb2651621708aac98bb6e38116f0ded",
+        "needle": "event=respawn_transition",
+        "matches": 32
+      }
+    ],
+    "route_observations": [
+      {
+        "route_id": "east_mid_to_east_north",
+        "method": "instrumented_positions",
+        "source_path": "../logs/bot-route-observations.log",
+        "source_sha256": "984cdb79310130e038a7f3cdc798d88a3194e05470c6cad96b4cb5c8fb0b6991",
+        "needle": "from_zone=east_mid to_zone=east_north",
+        "sample_count": 7,
+        "unique_bots": 6
+      },
+      {
+        "route_id": "west_mid_to_west_south",
+        "method": "instrumented_positions",
+        "source_path": "../logs/bot-route-observations.log",
+        "source_sha256": "984cdb79310130e038a7f3cdc798d88a3194e05470c6cad96b4cb5c8fb0b6991",
+        "needle": "from_zone=west_mid to_zone=west_south",
+        "sample_count": 7,
+        "unique_bots": 4
+      },
+      {
+        "route_id": "central_south_to_west_south",
+        "method": "instrumented_positions",
+        "source_path": "../logs/bot-route-observations.log",
+        "source_sha256": "984cdb79310130e038a7f3cdc798d88a3194e05470c6cad96b4cb5c8fb0b6991",
+        "needle": "from_zone=central_south to_zone=west_south",
+        "sample_count": 9,
+        "unique_bots": 5
+      }
+    ]
+  }
+}

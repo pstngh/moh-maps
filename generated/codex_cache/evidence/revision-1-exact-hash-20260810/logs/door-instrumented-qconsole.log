@@ -1,0 +1,309 @@
+[2026-08-10 12:04:56 UTC-5.000] logfile opened on Mon Aug 10 12:04:56 2026
+
+[2026-08-10 12:04:56 UTC-5.000] => game is version OpenMoHAA 0.82.1-beta+5.a72bc15 win_msvc64-x86_64 Aug 05 2025 UTC
+[2026-08-10 12:04:56 UTC-5.000] => targeting game ID 0
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: viewlog 1
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: com_updatecheck_interval 15
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: arch win_msvc64 x86_64
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: username plex
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_maxplayerhealth 750
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: skill 1
+[2026-08-10 12:04:56 UTC-5.000] You are now setup for medium mode.
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: com_altivec 0
+[2026-08-10 12:04:56 UTC-5.000] --- Common Initialization Complete --- 141 ms
+[2026-08-10 12:04:56 UTC-5.000] -- Localization: I see 1 localization files
+[2026-08-10 12:04:56 UTC-5.000] --- Localization: reading file global/localization.txt
+[2026-08-10 12:04:56 UTC-5.000] Loading Localization File global/localization.txt
+[2026-08-10 12:04:56 UTC-5.000] Loaded 1242 localization entries
+[2026-08-10 12:04:56 UTC-5.000] Loading "libcurl.dll"...
+[2026-08-10 12:04:56 UTC-5.000] Trying to load "libcurl.dll"...
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_version (0x00007FFCD1D8E820)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_getenv (0x00007FFCD1D51CF0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_free (0x00007FFCD1D322F0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_slist_append (0x00007FFCD1D7A420)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_slist_free_all (0x00007FFCD1D7A4E0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_version_info (0x00007FFCD1D8E920)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_strerror (0x00007FFCD1D813D0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_share_strerror (0x00007FFCD1D81930)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_pause (0x00007FFCD1D48C50)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_escape (0x00007FFCD1D49800)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_unescape (0x00007FFCD1D49960)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_init (0x00007FFCD1D48BE0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_setopt (0x00007FFCD1D76BC0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_perform (0x00007FFCD1D48DD0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_cleanup (0x00007FFCD1D487A0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_getinfo (0x00007FFCD1D48BB0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_duphandle (0x00007FFCD1D487D0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_reset (0x00007FFCD1D48EC0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_recv (0x00007FFCD1D48DE0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_send (0x00007FFCD1D48F60)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_easy_upkeep (0x00007FFCD1D49060)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_init (0x00007FFCD1D6A150)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_add_handle (0x00007FFCD1D69A50)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_remove_handle (0x00007FFCD1D6A550)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_fdset (0x00007FFCD1D69E80)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_wait (0x00007FFCD1D6A9D0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_poll (0x00007FFCD1D6A520)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_wakeup (0x00007FFCD1D6AB20)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_perform (0x00007FFCD1D6A330)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_cleanup (0x00007FFCD1D69C70)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_info_read (0x00007FFCD1D6A0B0)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_strerror (0x00007FFCD1D81850)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_socket_action (0x00007FFCD1D6A920)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_timeout (0x00007FFCD1D6A990)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_setopt (0x00007FFCD1D6A780)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_multi_assign (0x00007FFCD1D69C10)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_pushheader_bynum (0x00007FFCD1D32510)
+[2026-08-10 12:04:56 UTC-5.000] Loaded symbol curl_pushheader_byname (0x00007FFCD1D32510)
+[2026-08-10 12:04:56 UTC-5.000] Winsock Initialized
+[2026-08-10 12:04:56 UTC-5.000] Hostname: DESKTOP-FODB6P8
+[2026-08-10 12:04:56 UTC-5.000] IP6: fe80::29e8:d6f3:b70e:61b3%3
+[2026-08-10 12:04:56 UTC-5.000] IP6: fe80::8a33:609c:d5c8:3859%19
+[2026-08-10 12:04:56 UTC-5.000] IP6: fe80::85f0:10c1:1268:bd16%18
+[2026-08-10 12:04:56 UTC-5.000] IP: 192.168.50.115
+[2026-08-10 12:04:56 UTC-5.000] IP: 192.168.160.1
+[2026-08-10 12:04:56 UTC-5.000] IP: 192.168.211.1
+[2026-08-10 12:04:56 UTC-5.000] Opening IP socket: 0.0.0.0:12391
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: net_port 12391
+[2026-08-10 12:04:56 UTC-5.000] ------ Server Initialization ------
+[2026-08-10 12:04:56 UTC-5.000] Server: dm/codex_cache
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_netoptimize 1
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: sv_running 1
+[2026-08-10 12:04:56 UTC-5.000] Trying to load "game.dll" from "C:\Users\plex\Documents\Codex\2026-07-24\pstngh-moh-maps-https-github-com\work\openmohaa-bin\runtime"...
+[2026-08-10 12:04:56 UTC-5.000] Sys_GetGameAPI(game.dll): succeeded ...
+[2026-08-10 12:04:56 UTC-5.000] ==== InitGame ====
+[2026-08-10 12:04:56 UTC-5.000] gamename: OPENMOHAA
+[2026-08-10 12:04:56 UTC-5.000] gamedate: Aug  5 2025
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: sv_runspeed 250
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: deathmatch 1
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_gametypestring Free-For-All
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_alliedtext1 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_axistext1 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_alliedtext2 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_axistext2 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_alliedtext3 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_axistext3 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_alliedtext4 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_axistext4 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_alliedtext5 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_obj_axistext5 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_scoreboardpic 
+[2026-08-10 12:04:56 UTC-5.000] sizeof(Actor) == 4128
+[2026-08-10 12:04:56 UTC-5.000] Magic sizeof actor number: 4064
+[2026-08-10 12:04:56 UTC-5.000] 
+------------------
+Event system initialized: 200 classes 1764 events 2822400 total memory in response list
+
+[2026-08-10 12:04:56 UTC-5.000] ==== CleanupGame ====
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: session 1
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: g_scoreboardpicover 
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: bosshealth 0
+[2026-08-10 12:04:56 UTC-5.000] CM_LoadMap( maps/dm/codex_cache.bsp, 0 )
+[2026-08-10 12:04:56 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 12:04:56 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 12:04:56 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 12:04:56 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 12:04:56 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 12:04:56 UTC-5.000] WARNING: CM_AddFacetBevels... invalid bevel
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: sv_mapChecksum -1862603596
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: mapname dm/codex_cache
+[2026-08-10 12:04:56 UTC-5.000] Cvar_Set2: sv_serverid 292
+[2026-08-10 12:04:56 UTC-5.000] Adding script: 'maps/dm/codex_cache_precache.scr'
+[2026-08-10 12:04:56 UTC-5.000] TIKI_InitTiki: could not find surface 'panzerschreck2' in 'models/weapons/panzerschreck.tik' (check referenced skb/skd files).
+[2026-08-10 12:04:56 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).
+[2026-08-10 12:04:56 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate_primary.tik' (check referenced skb/skd files).
+[2026-08-10 12:04:56 UTC-5.000] TIKI_InitTiki: could not find surface 'origin' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).
+[2026-08-10 12:04:56 UTC-5.000] TIKI_InitTiki: could not find surface 'tag_barrel' in 'models/projectiles/steilhandgranate.tik' (check referenced skb/skd files).
+[2026-08-10 12:04:56 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+[2026-08-10 12:04:56 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+[2026-08-10 12:04:56 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+[2026-08-10 12:04:56 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 12:04:56 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+[2026-08-10 12:04:56 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 12:04:56 UTC-5.000] ^~^~^ Box data is corrupted for 'models/human/allied_pilot/allied_pilot.skd'
+[2026-08-10 12:04:56 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 12:04:56 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+[2026-08-10 12:04:56 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 12:04:56 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 12:04:56 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+[2026-08-10 12:04:56 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 12:04:56 UTC-5.000] Channel named Bip01 L Clavicle pos not added. (Bone will not work without it)
+[2026-08-10 12:04:56 UTC-5.000] Channel named Bip01 R Clavicle pos not added. (Bone will not work without it)
+[2026-08-10 12:04:56 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+[2026-08-10 12:04:56 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+[2026-08-10 12:04:56 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+[2026-08-10 12:04:56 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 12:04:56 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+[2026-08-10 12:04:56 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 12:04:56 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+[2026-08-10 12:04:56 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+[2026-08-10 12:04:56 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+[2026-08-10 12:04:56 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 12:04:56 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+[2026-08-10 12:04:56 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 12:04:57 UTC-5.000] WARNING: Couldn't find voting options file: callvote.cfg
+[2026-08-10 12:04:57 UTC-5.000] -------------------- Spawning Entities -----------------------
+[2026-08-10 12:04:57 UTC-5.000] Cvar_Set2: skill 1
+[2026-08-10 12:04:57 UTC-5.000] soundtrack switched to .
+[2026-08-10 12:04:57 UTC-5.000] Cvar_Set2: sv_gravity 800
+[2026-08-10 12:04:57 UTC-5.000] Cvar_Set2: sv_cinematic 0
+[2026-08-10 12:04:57 UTC-5.000] -------------------- Actual Spawning Entities -----------------------
+[2026-08-10 12:04:57 UTC-5.000] -------------------- Actual Spawning Entities Done ------------------ 1 ms
+[2026-08-10 12:04:57 UTC-5.000] 0 teams with 0 entities
+[2026-08-10 12:04:57 UTC-5.000] Adding script: 'maps/dm/codex_cache.scr'
+[2026-08-10 12:04:57 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss.tik
+[2026-08-10 12:04:57 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss.skc
+[2026-08-10 12:04:57 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss.tik
+[2026-08-10 12:04:57 UTC-5.000] Tiki:LoadFile Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 12:04:57 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/allied_oss_fps.skc
+[2026-08-10 12:04:57 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/allied_oss_fps.tik
+[2026-08-10 12:04:57 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 12:04:57 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo.skc
+[2026-08-10 12:04:57 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo.tik
+[2026-08-10 12:04:57 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 12:04:57 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_elite_gestapo_fps.skc
+[2026-08-10 12:04:57 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_elite_gestapo_fps.tik
+[2026-08-10 12:04:57 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1.tik
+[2026-08-10 12:04:57 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1.skc
+[2026-08-10 12:04:57 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1.tik
+[2026-08-10 12:04:57 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 12:04:57 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter1_fps.skc
+[2026-08-10 12:04:57 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter1_fps.tik
+[2026-08-10 12:04:57 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2.tik
+[2026-08-10 12:04:57 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2.skc
+[2026-08-10 12:04:57 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2.tik
+[2026-08-10 12:04:57 UTC-5.000] Tiki:LoadFile Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 12:04:57 UTC-5.000] Skeletor CacheAnimSkel: Could not open binary file models/player/german_winter2_fps.skc
+[2026-08-10 12:04:57 UTC-5.000] ^~^~^ TIKI_InitTiki: Couldn't load models/player/german_winter2_fps.tik
+[2026-08-10 12:04:57 UTC-5.000] 1 entities spawned
+[2026-08-10 12:04:57 UTC-5.000] 66 simple entities spawned
+[2026-08-10 12:04:57 UTC-5.000] 0 entities inhibited
+[2026-08-10 12:04:57 UTC-5.000] -------------------- Spawning Entities Done ------------------ 9 ms
+[2026-08-10 12:04:57 UTC-5.000] Cvar_Set2: sv_paks 
+[2026-08-10 12:04:57 UTC-5.000] Cvar_Set2: sv_pakNames 
+[2026-08-10 12:04:57 UTC-5.000] Cvar_Set2: sv_referencedPaks 
+[2026-08-10 12:04:57 UTC-5.000] Cvar_Set2: sv_referencedPakNames 
+[2026-08-10 12:04:57 UTC-5.000] 
+
+-----------PARSING 'ubersound/uberdialog.scr' (SERVER)------------
+[2026-08-10 12:04:57 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.
+[2026-08-10 12:04:57 UTC-5.000] G_Command_ProcessFile: ubersound/uberdialog.scr
+[2026-08-10 12:04:57 UTC-5.000] Parse/Load time: 0.031000 seconds.
+[2026-08-10 12:04:57 UTC-5.000] -------------PARSING 'ubersound/uberdialog.scr' DONE (SERVER)---------------
+
+[2026-08-10 12:04:57 UTC-5.000] 
+
+-----------PARSING 'ubersound/ubersound.scr' (SERVER)------------
+[2026-08-10 12:04:57 UTC-5.000] Any SetCurrentTiki errors means that tiki wasn't prefetched and tiki-specific sounds for it won't work. To fix prefetch the tiki. Ignore if you don't use that tiki on this level.
+[2026-08-10 12:04:57 UTC-5.000] G_Command_ProcessFile: ubersound/ubersound.scr
+[2026-08-10 12:04:57 UTC-5.000] Parse/Load time: 0.016000 seconds.
+[2026-08-10 12:04:57 UTC-5.000] -------------PARSING 'ubersound/ubersound.scr' DONE (SERVER)---------------
+
+[2026-08-10 12:04:57 UTC-5.000] ------ Server Initialization Complete ------  1.02 seconds
+[2026-08-10 12:04:57 UTC-5.000] ---- Recast Navigation ----
+[2026-08-10 12:04:57 UTC-5.000] BSP file loaded and parsed in 0.199 seconds
+[2026-08-10 12:04:57 UTC-5.000] Building the navigation mesh...
+[2026-08-10 12:04:57 UTC-5.000]   Building the world mesh...
+[2026-08-10 12:04:57 UTC-5.000] Recast (category 2): rcBuildContours: Expanding max contours from 282 to 564.
+[2026-08-10 12:05:00 UTC-5.000]   Building meshes for entities...
+[2026-08-10 12:05:00 UTC-5.000] Recast navigation mesh(es) generated in 3.466 seconds
+[2026-08-10 12:05:00 UTC-5.000] Cvar_Set2: session16 - 0 0
+[2026-08-10 12:05:00 UTC-5.000] bot1 has entered the battle
+[2026-08-10 12:05:00 UTC-5.000] Can't find 'global/bot_run.scr'
+
+[2026-08-10 12:05:00 UTC-5.000] Cvar_Set2: session17 - 0 0
+[2026-08-10 12:05:00 UTC-5.000] bot2 has entered the battle
+[2026-08-10 12:05:00 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 12:05:00 UTC-5.000] Cvar_Set2: session18 - 0 0
+[2026-08-10 12:05:00 UTC-5.000] bot3 has entered the battle
+[2026-08-10 12:05:00 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 12:05:00 UTC-5.000] Cvar_Set2: session19 - 0 0
+[2026-08-10 12:05:00 UTC-5.000] bot4 has entered the battle
+[2026-08-10 12:05:00 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 12:05:00 UTC-5.000] Cvar_Set2: session20 - 0 0
+[2026-08-10 12:05:00 UTC-5.000] bot5 has entered the battle
+[2026-08-10 12:05:00 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 12:05:00 UTC-5.000] Cvar_Set2: session21 - 0 0
+[2026-08-10 12:05:00 UTC-5.000] bot6 has entered the battle
+[2026-08-10 12:05:00 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 12:05:00 UTC-5.000] Cvar_Set2: session22 - 0 0
+[2026-08-10 12:05:00 UTC-5.000] bot7 has entered the battle
+[2026-08-10 12:05:00 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 12:05:00 UTC-5.000] Cvar_Set2: session23 - 0 0
+[2026-08-10 12:05:00 UTC-5.000] bot8 has entered the battle
+[2026-08-10 12:05:00 UTC-5.000] Script 'global/bot_run.scr' was not properly loaded
+
+[2026-08-10 12:05:00 UTC-5.000] Hitch warning: 4412 msec frame time
+[2026-08-10 12:05:04 UTC-5.000] CODEX_NEAR_DOOR entnum=24 classname=RotatingDoor distance=61.717 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:04 UTC-5.000] CODEX_DOOR_FOUND entnum=24 classname=RotatingDoor origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:04 UTC-5.000] CODEX_DOOR_SAMPLE sample=0 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:05 UTC-5.000] CODEX_DOOR_SAMPLE sample=1 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:05 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 12:05:05 UTC-5.000] cache models/fx/bazookaexplosion_dm.tik
+[2026-08-10 12:05:05 UTC-5.000] bot8 was rifled by bot6
+[2026-08-10 12:05:05 UTC-5.000] ^~^~^ Add the following line to the *_precache.scr map script:
+[2026-08-10 12:05:05 UTC-5.000] cache models/items/dm_50_healthbox.tik
+[2026-08-10 12:05:06 UTC-5.000] CODEX_DOOR_SAMPLE sample=2 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:06 UTC-5.000] bot7 was hunted down by bot1
+[2026-08-10 12:05:07 UTC-5.000] CODEX_DOOR_SAMPLE sample=3 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:08 UTC-5.000] CODEX_DOOR_SAMPLE sample=4 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:09 UTC-5.000] CODEX_DOOR_SAMPLE sample=5 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:10 UTC-5.000] bot6 took bot4's rocket in the face
+[2026-08-10 12:05:10 UTC-5.000] CODEX_DOOR_SAMPLE sample=6 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:11 UTC-5.000] CODEX_DOOR_SAMPLE sample=7 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:11 UTC-5.000] bot3 shouts @all: Is that all you've got?
+[2026-08-10 12:05:11 UTC-5.000] bot1 was rifled by bot3
+[2026-08-10 12:05:12 UTC-5.000] CODEX_DOOR_SAMPLE sample=8 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:13 UTC-5.000] CODEX_DOOR_SAMPLE sample=9 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:14 UTC-5.000] CODEX_DOOR_COMMAND doopen
+[2026-08-10 12:05:14 UTC-5.000] CODEX_DOOR_SAMPLE sample=10 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:15 UTC-5.000] CODEX_DOOR_SAMPLE sample=11 angles=( 0.000 90.000 0.000 ) isopen=1 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:16 UTC-5.000] CODEX_DOOR_SAMPLE sample=12 angles=( 0.000 90.000 0.000 ) isopen=1 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:17 UTC-5.000] CODEX_DOOR_SAMPLE sample=13 angles=( 0.000 90.000 0.000 ) isopen=1 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:17 UTC-5.000] bot4 was rifled by bot6
+[2026-08-10 12:05:18 UTC-5.000] CODEX_DOOR_SAMPLE sample=14 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:19 UTC-5.000] CODEX_DOOR_SAMPLE sample=15 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:19 UTC-5.000] bot1 was sniped by bot8
+[2026-08-10 12:05:20 UTC-5.000] CODEX_DOOR_SAMPLE sample=16 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:21 UTC-5.000] CODEX_DOOR_SAMPLE sample=17 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:21 UTC-5.000] bot3 was rifled by bot7
+[2026-08-10 12:05:22 UTC-5.000] CODEX_DOOR_SAMPLE sample=18 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:23 UTC-5.000] CODEX_DOOR_SAMPLE sample=19 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:24 UTC-5.000] CODEX_DOOR_COMMAND doclose
+[2026-08-10 12:05:24 UTC-5.000] CODEX_DOOR_SAMPLE sample=20 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:25 UTC-5.000] CODEX_DOOR_SAMPLE sample=21 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:25 UTC-5.000] bot8 was perforated by bot5's' SMG in the upper right leg
+[2026-08-10 12:05:26 UTC-5.000] CODEX_DOOR_SAMPLE sample=22 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:27 UTC-5.000] CODEX_DOOR_SAMPLE sample=23 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:28 UTC-5.000] bot4 was rifled by bot7
+[2026-08-10 12:05:28 UTC-5.000] CODEX_DOOR_SAMPLE sample=24 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:29 UTC-5.000] CODEX_DOOR_SAMPLE sample=25 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:30 UTC-5.000] CODEX_DOOR_SAMPLE sample=26 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:31 UTC-5.000] bot6 shouts @all: Go on and run, you yellow-bellies!
+[2026-08-10 12:05:31 UTC-5.000] bot7 was rifled by bot6
+[2026-08-10 12:05:31 UTC-5.000] CODEX_DOOR_SAMPLE sample=27 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:32 UTC-5.000] CODEX_DOOR_SAMPLE sample=28 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:33 UTC-5.000] CODEX_DOOR_SAMPLE sample=29 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:34 UTC-5.000] CODEX_DOOR_SAMPLE sample=30 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:35 UTC-5.000] CODEX_DOOR_SAMPLE sample=31 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:35 UTC-5.000] bot6 was machine-gunned by bot8
+[2026-08-10 12:05:36 UTC-5.000] CODEX_DOOR_SAMPLE sample=32 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:37 UTC-5.000] CODEX_DOOR_SAMPLE sample=33 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:38 UTC-5.000] bot5 was perforated by bot1's' SMG in the upper torso
+[2026-08-10 12:05:38 UTC-5.000] CODEX_DOOR_SAMPLE sample=34 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:39 UTC-5.000] CODEX_DOOR_SAMPLE sample=35 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:40 UTC-5.000] bot8 was hunted down by bot4
+[2026-08-10 12:05:40 UTC-5.000] CODEX_DOOR_SAMPLE sample=36 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:41 UTC-5.000] CODEX_DOOR_SAMPLE sample=37 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:42 UTC-5.000] CODEX_DOOR_SAMPLE sample=38 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:43 UTC-5.000] CODEX_DOOR_SAMPLE sample=39 angles=( 0.000 0.000 0.000 ) isopen=0 origin=( 199.000 2058.000 1688.000 )
+[2026-08-10 12:05:44 UTC-5.000] CODEX_DOOR_PROBE_COMPLETE samples=40
+[2026-08-10 12:05:49 UTC-5.000] bot8 was perforated by bot1's' SMG in the lower torso
+[2026-08-10 12:05:50 UTC-5.000] bot7 shouts @all: I think they are all out of real men!
+[2026-08-10 12:05:50 UTC-5.000] bot6 was sniped by bot7

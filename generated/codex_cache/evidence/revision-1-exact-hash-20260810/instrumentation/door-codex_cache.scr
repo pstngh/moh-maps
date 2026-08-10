@@ -1,0 +1,41 @@
+main:
+
+level waittill prespawn
+exec global/DMprecache.scr
+level.script = maps/dm/codex_cache.scr
+level waittill spawn
+thread codex_door_probe
+end
+
+codex_door_probe:
+
+wait 8
+level.codex_door = getentbyentnum 24
+if (level.codex_door.classname != "RotatingDoor")
+{
+    println ("CODEX_DOOR_IDENTITY_MISMATCH entnum=24 classname=" + level.codex_door.classname)
+    end
+}
+local.distance = vector_length (level.codex_door.origin - ( 227 2058 1743 ))
+println ("CODEX_NEAR_DOOR entnum=" + level.codex_door.entnum + " classname=" + level.codex_door.classname + " distance=" + local.distance + " origin=" + level.codex_door.origin)
+
+println ("CODEX_DOOR_FOUND entnum=" + level.codex_door.entnum + " classname=" + level.codex_door.classname + " origin=" + level.codex_door.origin)
+local.sample = 0
+while (local.sample < 40)
+{
+    if (local.sample == 10)
+    {
+        println "CODEX_DOOR_COMMAND doopen"
+        level.codex_door doopen $player[1]
+    }
+    if (local.sample == 20)
+    {
+        println "CODEX_DOOR_COMMAND doclose"
+        level.codex_door doclose
+    }
+    println ("CODEX_DOOR_SAMPLE sample=" + local.sample + " angles=" + level.codex_door.angles + " isopen=" + level.codex_door.isOpen + " origin=" + level.codex_door.origin)
+    local.sample++
+    wait 1
+}
+println "CODEX_DOOR_PROBE_COMPLETE samples=40"
+end
