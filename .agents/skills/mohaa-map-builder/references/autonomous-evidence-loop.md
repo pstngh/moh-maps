@@ -256,6 +256,9 @@ Also recount BSP-load and Recast-generation markers from `raw_log:bot`. Require
 their counts to match the corresponding runtime-report arrays and audited
 runtime-summary counts.
 
+Require every reported BSP-load and Recast-generation observation string to
+exist exactly in the materialized bot log.
+
 Treat a loose or previously stored audit as stale after the scorer changes
 until it is replayed and materialized with the new scorer hash. Verification
 must reject missing, changed, or unexpected bundle files. A valid bundle proves

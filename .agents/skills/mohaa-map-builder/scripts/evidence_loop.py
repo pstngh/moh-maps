@@ -501,7 +501,7 @@ def audit_runtime(report: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any
     }
 
 
-def recount_bot_log_activity(path: Path) -> tuple[int, int, int, int]:
+def recount_bot_log_activity(path: Path) -> tuple[int, int, list[str], list[str]]:
     lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
     entered = {
         match.group(1).casefold()
@@ -509,8 +509,8 @@ def recount_bot_log_activity(path: Path) -> tuple[int, int, int, int]:
         if (match := BOT_ENTRY_RE.search(line)) is not None
     }
     combat = sum(1 for line in lines if BOT_COMBAT_RE.search(line) is not None)
-    bsp_parse = sum(1 for line in lines if BSP_PARSE_RE.search(line) is not None)
-    recast = sum(1 for line in lines if RECAST_GENERATION_RE.search(line) is not None)
+    bsp_parse = [line for line in lines if BSP_PARSE_RE.search(line) is not None]
+    recast = [line for line in lines if RECAST_GENERATION_RE.search(line) is not None]
     return len(entered), combat, bsp_parse, recast
 
 
@@ -1851,8 +1851,8 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                         (
                             recounted_entered,
                             recounted_combat,
-                            recounted_bsp_parse,
-                            recounted_recast,
+                            recounted_bsp_lines,
+                            recounted_recast_lines,
                         ) = (
                             recount_bot_log_activity(
                                 bundle_dir / Path(raw_bot_entry["object"])
@@ -1899,33 +1899,47 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                             (
                                 "bspParse",
                                 "bsp_parse_observations",
-                                recounted_bsp_parse,
+                                recounted_bsp_lines,
                             ),
                             (
                                 "recast",
                                 "recast_observations",
-                                recounted_recast,
+                                recounted_recast_lines,
                             ),
                         ):
+                            observed_count = len(observed)
                             report_observations = runtime_report.get(report_field)
                             report_count = (
                                 len(report_observations)
                                 if isinstance(report_observations, list)
                                 else None
                             )
-                            if report_count != observed:
+                            if report_count != observed_count:
                                 issues.append(
                                     f"bundled runtime report {report_field} count "
                                     "does not match raw_log:bot recount"
                                 )
                             if (
                                 isinstance(runtime_summary, dict)
-                                and runtime_summary.get(audit_field) != observed
+                                and runtime_summary.get(audit_field) != observed_count
                             ):
                                 issues.append(
                                     f"bundled audit runtime {audit_field} does not "
                                     "match raw_log:bot recount"
                                 )
+                            if isinstance(report_observations, list):
+                                for index, observation in enumerate(
+                                    report_observations
+                                ):
+                                    if (
+                                        not isinstance(observation, str)
+                                        or observation not in observed
+                                    ):
+                                        issues.append(
+                                            f"bundled runtime report {report_field}"
+                                            f"[{index}] does not exist exactly in "
+                                            "raw_log:bot"
+                                        )
 
             raw_logs = audit_report.get("raw_logs")
             if not isinstance(raw_logs, dict):

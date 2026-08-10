@@ -137,8 +137,8 @@ class EvidenceLoopTests(unittest.TestCase):
                 "exactPk3Count": 8,
                 "candidateSha256": candidate_sha,
                 "engineSha256": sha256(self.bot_engine),
-                "bspParse": ["BSP file loaded and parsed"],
-                "recast": ["Recast navigation mesh(es) generated"],
+                "bspParse": ["BSP file loaded and parsed in 0.100 seconds"],
+                "recast": ["Recast navigation mesh(es) generated in 0.200 seconds"],
                 "botsEntered": 8,
                 "combatEvents": 4,
                 "minimumCombatEvents": 3,
@@ -339,6 +339,9 @@ class EvidenceLoopTests(unittest.TestCase):
         elif variant == "runtime-load-observations":
             runtime["bspParse"] = []
             runtime["recast"] = []
+        elif variant == "runtime-load-fabricated":
+            runtime["bspParse"] = ["fabricated BSP observation"]
+            runtime["recast"] = ["fabricated Recast observation"]
         else:
             self.fail(f"unsupported runtime-report variant: {variant}")
 
@@ -1159,6 +1162,31 @@ class EvidenceLoopTests(unittest.TestCase):
             "bundled audit runtime bsp_parse_observations does not match raw_log:bot recount",
             "bundled runtime report recast count does not match raw_log:bot recount",
             "bundled audit runtime recast_observations does not match raw_log:bot recount",
+        ):
+            with self.subTest(issue=expected_issue):
+                self.assertIn(expected_issue, verification["issues"])
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_binds_runtime_load_observation_text(self) -> None:
+        source = self.root / "bundle-runtime-load-text-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-runtime-load-text-rewrite"
+        self._rewrite_bundle_runtime_report(
+            source,
+            destination,
+            "runtime-load-fabricated",
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        for expected_issue in (
+            "bundled runtime report bspParse[0] does not exist exactly in raw_log:bot",
+            "bundled runtime report recast[0] does not exist exactly in raw_log:bot",
         ):
             with self.subTest(issue=expected_issue):
                 self.assertIn(expected_issue, verification["issues"])
