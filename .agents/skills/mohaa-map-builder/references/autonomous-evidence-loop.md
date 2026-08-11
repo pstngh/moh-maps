@@ -267,6 +267,11 @@ Require the bundled evidence plan's map name and expected BSP member to match
 the bundle manifest and the corresponding audited map and candidate
 identities.
 
+Bind both bundled evidence-plan launch records to the audited visual and bot
+launch provenance. Require engine paths, hashes, filenames, full argument
+lists, `fs_basepath`, and `fs_homepath` to match, and bind each engine hash and
+filename to its content-addressed `engine:visual` or `engine:bot` role.
+
 Remap the bundled visual report's ordered screenshot paths to their
 content-addressed screenshot roles and replay the fixed-view capture scorer with
 the bundled evidence plan and exact candidate hash. Require the recomputed

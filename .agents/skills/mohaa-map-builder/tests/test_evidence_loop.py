@@ -411,6 +411,7 @@ class EvidenceLoopTests(unittest.TestCase):
         expected_bsp_member: str | None = None,
         clear_blocking_defects: bool = False,
         required_view_category: str | None = None,
+        visual_launch_map: str | None = None,
     ) -> None:
         shutil.copytree(source, destination)
         manifest_path = destination / "manifest.json"
@@ -432,6 +433,8 @@ class EvidenceLoopTests(unittest.TestCase):
                 view["blocking_defects"] = []
         if required_view_category is not None:
             plan["required_view_categories"].append(required_view_category)
+        if visual_launch_map is not None:
+            plan["launch_provenance"]["visual"]["arguments"][-1] = visual_launch_map
 
         plan_payload = (json.dumps(plan, indent=2) + "\n").encode("utf-8")
         plan_sha = hashlib.sha256(plan_payload).hexdigest()
@@ -1276,6 +1279,34 @@ class EvidenceLoopTests(unittest.TestCase):
         self.assertFalse(verification["valid"])
         self.assertIn(
             "bundled audit runtime_load gate does not match replayed runtime report",
+            verification["issues"],
+        )
+        self.assertFalse(verification["promotion_allowed"])
+
+    def test_bundle_verification_binds_evidence_plan_launch_provenance(
+        self,
+    ) -> None:
+        source = self.root / "bundle-plan-launch-source"
+        evidence_loop.materialize_evidence_bundle(
+            self.candidate,
+            self.visual_report,
+            self.runtime_report,
+            self.plan_path,
+            source,
+        )
+        destination = self.root / "bundle-plan-launch-rewrite"
+        self._rewrite_bundle_evidence_plan(
+            source,
+            destination,
+            visual_launch_map="dm/fabricated",
+        )
+        verification = evidence_loop.verify_evidence_bundle(destination)
+        self.assertFalse(verification["valid"])
+        self.assertIn(
+            (
+                "bundled evidence plan visual launch arguments do not match "
+                "bundled audit"
+            ),
             verification["issues"],
         )
         self.assertFalse(verification["promotion_allowed"])

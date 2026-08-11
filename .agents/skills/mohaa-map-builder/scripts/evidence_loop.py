@@ -1666,6 +1666,36 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                 except (EvidenceError, KeyError) as exc:
                     issues.append(str(exc))
 
+            def claimed_name(value: Any) -> str | None:
+                if isinstance(value, Path):
+                    return value.name.casefold()
+                if isinstance(value, str) and value:
+                    return Path(value).name.casefold()
+                return None
+
+            def path_claim_matches(declared: Any, audited: Any) -> bool:
+                if not isinstance(declared, (str, Path)) or not isinstance(
+                    audited,
+                    (str, Path),
+                ):
+                    return False
+                declared_path = Path(declared)
+                audited_parts = tuple(
+                    part.casefold() for part in Path(audited).parts
+                )
+                declared_parts = tuple(
+                    part.casefold() for part in declared_path.parts
+                )
+                if declared_path.is_absolute():
+                    return declared_parts == audited_parts
+                relative_parts = tuple(
+                    part for part in declared_parts if part != ".."
+                )
+                return (
+                    bool(relative_parts)
+                    and audited_parts[-len(relative_parts):] == relative_parts
+                )
+
             evidence_plan: dict[str, Any] | None = None
             evidence_plan_entry = by_role.get("report:evidence_plan")
             if evidence_plan_entry is not None:
@@ -1699,6 +1729,85 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                             "bundled evidence plan expected_bsp_member does not "
                             "match bundled audit candidate"
                         )
+                    planned_launch = evidence_plan.get("launch_provenance")
+                    audited_launch = audit_report.get("launch_provenance")
+                    if not isinstance(planned_launch, dict):
+                        issues.append(
+                            "bundled evidence plan launch_provenance must be an object"
+                        )
+                    elif not isinstance(audited_launch, dict):
+                        issues.append(
+                            "bundled audit launch_provenance must be an object"
+                        )
+                    else:
+                        for label in ("visual", "bot"):
+                            planned_record = planned_launch.get(label)
+                            audited_record = audited_launch.get(label)
+                            if not isinstance(planned_record, dict):
+                                issues.append(
+                                    "bundled evidence plan launch_provenance."
+                                    f"{label} must be an object"
+                                )
+                                continue
+                            if not isinstance(audited_record, dict):
+                                issues.append(
+                                    f"bundled audit launch_provenance.{label} "
+                                    "must be an object"
+                                )
+                                continue
+                            planned_engine_sha = normalized_sha(
+                                planned_record.get("engine_sha256")
+                            )
+                            correlate_role(
+                                f"engine:{label}",
+                                planned_engine_sha,
+                                f"bundled evidence plan {label} launch engine",
+                            )
+                            if planned_engine_sha != normalized_sha(
+                                audited_record.get("engine_sha256")
+                            ):
+                                issues.append(
+                                    f"bundled evidence plan {label} launch engine "
+                                    "hash does not match bundled audit"
+                                )
+                            planned_engine_path = planned_record.get("engine_path")
+                            if not path_claim_matches(
+                                planned_engine_path,
+                                audited_record.get("engine_path"),
+                            ):
+                                issues.append(
+                                    f"bundled evidence plan {label} launch engine "
+                                    "path does not match bundled audit"
+                                )
+                            engine_entry = by_role.get(f"engine:{label}")
+                            expected_engine_name = (
+                                engine_entry.get("original_name")
+                                if engine_entry is not None
+                                else None
+                            )
+                            if claimed_name(planned_engine_path) != claimed_name(
+                                expected_engine_name
+                            ):
+                                issues.append(
+                                    f"engine:{label} original name does not match "
+                                    "bundled evidence plan engine_path"
+                                )
+                            if planned_record.get("arguments") != audited_record.get(
+                                "arguments"
+                            ):
+                                issues.append(
+                                    f"bundled evidence plan {label} launch arguments "
+                                    "do not match bundled audit"
+                                )
+                            for field in ("fs_basepath", "fs_homepath"):
+                                if not path_claim_matches(
+                                    planned_record.get(field),
+                                    audited_record.get(field),
+                                ):
+                                    issues.append(
+                                        f"bundled evidence plan {label} launch "
+                                        f"{field} does not match bundled audit"
+                                    )
                     audited_capture = audit_report.get("capture")
                     candidate_sha = normalized_sha(
                         manifest.get("candidate_sha256")
@@ -1867,36 +1976,6 @@ def verify_evidence_bundle(bundle_dir: Path) -> dict[str, Any]:
                                 "bundled audit blocking_visual_defects do not "
                                 "match replayed evidence plan"
                             )
-
-            def claimed_name(value: Any) -> str | None:
-                if isinstance(value, Path):
-                    return value.name.casefold()
-                if isinstance(value, str) and value:
-                    return Path(value).name.casefold()
-                return None
-
-            def path_claim_matches(declared: Any, audited: Any) -> bool:
-                if not isinstance(declared, (str, Path)) or not isinstance(
-                    audited,
-                    (str, Path),
-                ):
-                    return False
-                declared_path = Path(declared)
-                audited_parts = tuple(
-                    part.casefold() for part in Path(audited).parts
-                )
-                declared_parts = tuple(
-                    part.casefold() for part in declared_path.parts
-                )
-                if declared_path.is_absolute():
-                    return declared_parts == audited_parts
-                relative_parts = tuple(
-                    part for part in declared_parts if part != ".."
-                )
-                return (
-                    bool(relative_parts)
-                    and audited_parts[-len(relative_parts):] == relative_parts
-                )
 
             launch_provenance = audit_report.get("launch_provenance")
             if visual_report is not None:
