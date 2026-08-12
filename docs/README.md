@@ -5,9 +5,10 @@ without losing the experiments that established it.
 
 | Document | Role | Read when |
 | --- | --- | --- |
-| [`../PROJECT.md`](../PROJECT.md) | Stable mission | At the start of every task |
-| [`../PROJECT_STATE.json`](../PROJECT_STATE.json) | Authoritative mutable checkpoint when consistent with Git | At the start and before every stop |
-| [`../DECISIONS.md`](../DECISIONS.md) | Durable project decisions | When changing policy or interpreting state |
+| [`../AGENTS.md`](../AGENTS.md) | Fresh-session bootloader | At the start of every coding-agent session |
+| [`../.agent/GOAL.md`](../.agent/GOAL.md) | Stable goal, constraints, and non-goals | At the start of every task |
+| [`../.agent/STATE.md`](../.agent/STATE.md) | Current continuation point when consistent with Git | At the start and before every meaningful stop |
+| [`../.agent/DECISIONS.md`](../.agent/DECISIONS.md) | Durable non-obvious rationale | When changing policy or interpreting state |
 | [`../REJECTIONS.md`](../REJECTIONS.md) | Human rejections and superseded claims | Before reusing generated work |
 | [`../VALIDATION.md`](../VALIDATION.md) | Candidate production and acceptance gates | During planning and validation |
 | [`../.agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md`](../.agents/skills/mohaa-map-builder/references/openmohaa-source-guide.md) | Pinned canonical engine-source routing index | Before any runtime-behavior conclusion |
@@ -56,12 +57,12 @@ revision report with scoped evidence labels
         |
         +--> role-scoped asset behavior --> stock asset catalog
         |
-        +--> human rejection/supersession --> REJECTIONS.md + PROJECT_STATE.json
+        +--> human rejection/supersession --> REJECTIONS.md + .agent/STATE.md
 ```
 
 ## Current repository map line
 
-This table is an index, not an acceptance list. `PROJECT_STATE.json` is the
+This table is an index, not an acceptance list. `.agent/STATE.md` is the
 authoritative status record. No current Codex-generated map is an accepted
 baseline.
 

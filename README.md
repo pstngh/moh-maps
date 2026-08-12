@@ -2,6 +2,8 @@
 
 This repository contains stock map-source references, generated playable maps,
 and a cumulative production system for creating better MOHAA/OpenMoHAA maps.
+Coding agents should start with [`AGENTS.md`](AGENTS.md); lightweight session
+continuity lives in [`.agent/`](.agent/).
 
 Start with [`docs/README.md`](docs/README.md). The mandatory production
 workflow is [`docs/MAP-GENERATION-PLAYBOOK.md`](docs/MAP-GENERATION-PLAYBOOK.md).

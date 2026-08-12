@@ -155,7 +155,7 @@ revision. Automated technical or visual gates are never approval evidence.
 - [ ] Exact failure angles and all changed viewing domains were inspected.
 - [ ] Known debt is documented honestly.
 - [ ] Hashes match repository artifacts.
-- [ ] Documentation and `PROJECT_STATE.json` are current.
+- [ ] Documentation and `.agent/STATE.md` are current.
 - [ ] User feedback is recorded; explicit approval is still separate.
 - [ ] Explicit paths were staged and the staged diff inspected.
 - [ ] Commit is pushed and local HEAD equals upstream.
