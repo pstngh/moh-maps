@@ -1,8 +1,8 @@
 # HANDOFF: current state and next steps (living file; keep it current)
 
-Git history was restarted from a single clean commit and force-pushed to
-GitHub `main` (user-approved). The old local `.git` is backed up at
-`~/Library/Caches/mohkit/old-git-backup`; the user may delete it. Read `CLAUDE.md` first.
+Read `CLAUDE.md` first. Git: GitHub `main` (https://github.com/pstngh/moh-maps).
+The old pre-restart `.git` is backed up at `~/Library/Caches/mohkit/old-git-backup`
+(the user may delete it).
 
 **Goal (confirmed by the user):** (1) convert CS:GO maps to MOHAA; (2) create
 any map from scratch, whether invented, described, or **recreated from a
@@ -14,112 +14,100 @@ compile → screenshot → bot-test loop. Conversions are personal-use only.
 
 - Python: `~/Documents/moh-toolchain/venv/bin/python` (Pillow, numpy, dulwich).
 - **System `git` is blocked** by an unaccepted Xcode license (`sudo xcodebuild
-  -license` would fix it; the user must do that). Use the dulwich helper:
-  `~/Documents/moh-toolchain/venv/bin/python ~/Documents/moh-toolchain/gitc.py status|commit "msg"|log|push <branch>`.
-  Push needs `GH_TOKEN` (e.g. `GH_TOKEN=$(gh auth token)`).
+  -license`; the user must do that). Use the dulwich helper:
+  `~/Documents/moh-toolchain/venv/bin/python ~/Documents/moh-toolchain/gitc.py status|commit "msg" [paths…]|log|push main`.
+  **Always pass paths to `commit`**: without them it stages everything,
+  including a background agent's half-written files (that happened once:
+  `maps/mk_medina` scaffold landed in commit ac8066e). Push needs
+  `GH_TOKEN=$(gh auth token)`.
 - EA tools: `.toolchain/MOHTools` (gitignored). CrossOver Wine, bottle "Steam".
-  Game at `~/Documents/Games/moh`, CS:GO at `~/Documents/Games/csgo`.
-- Git: dulwich only (see above). The repo was re-initialised; `origin` =
-  https://github.com/pstngh/moh-maps.git.
+  Game at `~/Documents/Games/moh`, CS:GO at `~/Documents/Games/csgo`,
+  OpenMoHAA source at `~/Documents/moh-toolchain/openmohaa-src` (cite it).
 - **`~/Documents` is iCloud-synced.** Build scratch lives in
-  `~/Library/Caches/mohkit/build` (iCloud deleted files mid-compile when it was
-  in the repo).
-- Wine buffers tool output: the per-stage logs (`<build>/roots/<name>/*.log`)
-  only fill when a stage ends.
+  `~/Library/Caches/mohkit/build`.
+- Wine buffers tool output: per-stage logs (`<build>/roots/<name>/*.log`) only
+  fill when a stage ends, and Q3map's BSP log has no per-phase timings.
+- No `timeout` binary on this Mac.
 
-## State at pause
+## Done this session (all committed and pushed)
 
-Done and committed: the mohkit toolkit, the docs, the `reference/` corpus
-move, `data/` catalogs, `maps/mk_village`, the CS:GO converter
-(brushes/displacements/materials/sky/lights/spawns), the prop converter
-(`mohkit/source/modelconv.py`, verified in engine by an agent), tests.
+- Village normal build: 31 kills/60 s with 8 bots; `-q preview` (2 bounces)
+  looks the same as 8 bounces. Latest source (facade doors, fountain water,
+  spawns out of props) is built and verified in `dist/mk_village_shots.png`.
+- **Harness fixes** (`mohkit/game.py`, docs/testing.md):
+  - bots join *after* the cameras (the spectator was following bots, so shots
+    were third-person views of random bots);
+  - load wait counts frames (bare `wait` = one Cbuf pass, two per frame),
+    because `wait N` is consumed by one long loading frame;
+  - `finishloadingscreen` after load: maps with their own loading menu (stock
+    mohdm1) fake-pause the server until "continue" (`UI_EndLoad`), so `tele`
+    was lost. Stock maps can now be shot from any spot.
+  - `Shot.fov`, `game.fov_from_vertical`, `game.vertical_fov`, `game.compare`
+    (reference | shot | blend), CLI `mohkit compare`, `mohkit test --shots maps/x`.
+- `-q preview` quality (full VIS, MOHlight `-bounce 2`).
+- **cs_dust2 failed to load in engine** (`LoadTGA: Only type 2…`): Q3map
+  copies `qer_editorimage` into the BSP fence-mask field, and the engine reads
+  it as a TGA by exact name; our shaders named `.jpg`. Fixed with
+  `shaders.editor_image` (always `.tga`, like 205 retail shaders), a
+  `bsp_checks` error, docs (materials.md, toolchain.md). Verified by patching
+  the old BSP: dust2 loads and renders (draft light, shots looked right).
+- `build_local` passes the runtime-prop precache list to the Project.
 
-Committed with this handoff, **untested**:
+## Running now
 
-- `Converter.props()` / `_prop_clips()` in `mohkit/source/convert.py`. Static
-  props become `static_*` models up to 70k lit vertices (largest first); the
-  next 600 become `script_model` (spawnflags 1 = not solid) with collision
-  baked as world clip brushes; the rest are dropped.
-- **TODO:** `build_local()` doesn't yet pass `res.report["precache"]` into the
-  Project, so the `_precache.scr` misses `cache models/…` lines for the
-  runtime props. Fix that, then run `python -m mohkit csgo de_dust2`.
-
-Running when paused (independent OS processes; results land by themselves):
-
-1. `mohkit build maps/mk_village -q normal --bots 8 --seconds 60`: log
-   `/tmp/claude-501/village_normal.log`; output `dist/mk_village_shots.png`,
-   `dist/mk_village_report.json`. Normal lighting is slow (>20 min, radiosity
-   with 8 bounces). Consider `light_args=["-bounce","2"]` or similar for
-   iteration and document the trade-off.
-2. `mohkit csgo de_dust2 --name cs_dust2 -q draft` (without props): log
-   `/tmp/claude-501/dust2.log`; output in `local/csgo/cs_dust2/`. The BSP stage
-   takes 20+ min (≈36k detail faces in a caulk shell). If it's too slow, try
-   `--structural`, or profile which faces cost.
-3. Before/after: `python /tmp/claude-501/dust2_compare.py new|old` renders six
-   named dust2 spots. A render of the previous dust2 attempt is at `/tmp/claude-501/dust2_old.png`.
+1. `mohkit csgo de_dust2 --name cs_dust2 -q draft` **with props** (1509
+   instances: 61 static / 69,989 verts, 600 script_model, 848 dropped).
+   Log: `/private/tmp/claude-501/-Users-pstn-Documents-moh-maps/428d8928-2422-476b-8216-47fa81ef2aca/scratchpad/dust2_props.log`
+   (session scratch; if gone, rerun). Expect ≈20 min BSP + ≈50+ min light.
+   Output `local/csgo/cs_dust2/` (+ `cs_dust2_shots.png`).
+2. A background agent is doing the zero-context one-shot test: builds
+   `maps/mk_medina` from CLAUDE.md/docs only and reports doc gaps. It writes
+   only under `maps/mk_medina/`.
 
 ## Next steps (in order)
 
-1. Look at `dist/mk_village_shots.png` (normal build). Fix lighting (interiors
-   dark? too bright?), check the bot kills in the report, and commit the final
-   village. The source already includes edits made after that build started:
-   facade doors, fountain water, spawns moved out of props. Rebuild.
-2. Look at the cs_dust2 screenshots: texture alignment, displacement facing,
-   sky orientation, light levels. Fix the converter, then wire props (see
-   TODO) and rebuild with props. Update `docs/csgo-conversion.md` with
-   measured results and remove "in progress" for props.
-3. Rerun the zero-context "one-shot" test: a fresh agent builds
-   `maps/mk_medina` (North African town, arcades, alleys, roof terrace, palms,
-   terrain edges) using only CLAUDE.md/docs, then reports doc gaps. Fix the
-   docs from its report. The previous attempt was stopped at the pause.
-4. **Screenshot → map workflow** (new, from the user's goal). Write
-   `docs/from-reference.md`:
-   - read the image;
-   - estimate scale from known objects (door ≈ 112–128 u tall, player 94 u,
-     storey 128–192 u, window ≈ 56×80);
-   - identify materials and pick stock look-alikes (contact sheets);
-   - block out with the Carver, then detail with kit and props;
-   - estimate the camera (eye ≈ 82 u, FOV 80) and render a matching
-     `Shot`;
-   - compare side by side and iterate.
-   Add a helper (e.g. `mohkit.game.compare(reference_png, shot_png, out)`)
-   that places them side by side. Prove it: recreate a stock-map screenshot
-   (render e.g. mohdm1 from a known spot as the "reference", rebuild the
-   scene from scratch, compare).
-5. Put a couple of screenshots (small JPGs) in `docs/images/` for the README.
-6. Commit and push to `main` (user-approved repo; still confirm before force-pushes).
-7. Tell the user: accept the Xcode license (restores git/clang); consider
-   moving the repo out of iCloud (`~/Developer/moh-maps`).
+1. When dust2 finishes: look at `local/csgo/cs_dust2/cs_dust2_shots.png`
+   (props placed/oriented right? floating? missing textures?), run bots on it
+   (`mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 60`),
+   update `docs/csgo-conversion.md` with measured results (remove "in
+   progress" for props). Consider why BSP takes 20 min (experiment: `-notjunc`?
+   fewer splits? `detail_all` vs structural) and why 848 props are dropped.
+2. When the medina agent reports: fix every doc gap / toolkit bug it lists;
+   judge its map; commit `maps/mk_medina` only if it's good (else delete it
+   from the repo in a normal commit).
+3. **Screenshot → map workflow**: write `docs/from-reference.md` (read the
+   image; scale from known objects: door ≈ 112–128 u, player 94 u eye 82,
+   storey 128–192, window ≈ 56×80; materials → stock look-alikes; block out
+   with Carver, detail with kit/props; camera: eye height, fov via
+   `fov_from_vertical`, `Shot.looking_at`; `mohkit compare`; iterate).
+   Prove it: reference = stock mohdm1 camera `c8` = eye (-288, 1240, 130),
+   yaw 0 (stone room: beamed ceiling, hanging bulb, door, barred window) —
+   rebuild it from scratch as `maps/mk_ref_room`, compare side by side.
+   Candidate sheet: `game.run([], "dm/mohdm1", shots)`.
+4. Screenshots (small JPGs) in `docs/images/` for the README.
+5. Tell the user: accept the Xcode license; consider moving the repo out of
+   iCloud (`~/Developer/moh-maps`).
 
-## Findings from this session (already in the docs)
+## Decisions made while the user was away
 
-- Cheats need `thereisnomonkey 1`.
-- `wait N` is in ms.
-- `saveshot` gives clean captures.
-- More than 64 vertices per face → checker.
-- Scale 1.0 is standard.
-- Props get collision from companion `.map`.
-- Patch visible side = cross(row step, col step).
-- Terrain control SIZE field = texture repeat in units.
-- MOHlight `-threads` helps.
-- `func_detail` is stripped.
-- `surfaceparm stone` is a no-op.
+- Village: accepted as final at `normal` quality (no rebuild needed; the
+  preview build contains the latest source and looks the same).
+- Dust2 colour: left as is. Textures are the right sandstone colour; the grey
+  look in draft shots is the cool fill light in shadow, not a converter bug.
 
 ## Unverified inherited claims (verify with a test, or delete)
 
-The user trusts nothing from the previous (pre-mohkit) attempt. These claims
-came from its notes and have not been re-tested. Verify each with a small
-controlled compile or engine test (evidence into the doc), or delete it:
+The user trusts nothing from the previous (pre-mohkit) attempt. Verify each
+with a small controlled compile or engine test (evidence into the doc), or
+delete it:
 
-1. `func_detail` brush entities are stripped by Q3map (map-format.md, entities.md, design.md, CLAUDE.md).
-2. Lightmap page limit "180" (toolchain.md, design.md, lighting.md, CLAUDE.md, compile.bsp_checks).
-   Engine `MAX_MAP_LIGHTING 0x800000` / 49152 bytes per page ≈ 170: test it.
+1. `func_detail` brush entities are stripped by Q3map.
+2. Lightmap page limit "180" (engine `MAX_MAP_LIGHTING 0x800000` / 49152 ≈ 170: test it).
 3. Static-model limits: ~75k lit vertices per map (MOHlight crash), ≤ 24
    surfaces per TIKI, < 1000 verts / 2000 tris per SKD surface, zero-filled
-   collapse arrays required (design.md, modelconv).
-4. `MAX_SURFACE_INFO` when compiling against a mod-heavy `main` (toolchain.md).
+   collapse arrays required.
+4. `MAX_SURFACE_INFO` when compiling against a mod-heavy `main`.
 5. "Multi-threaded MOHlight access-violated once" (toolchain.md, compile.py retry).
-6. `-notjunc` as a `MAX_MAP_DRAWINDEXES` fallback (toolchain.md).
-7. Terrain mirroring "cell-owning controls + sentinel" (map-format.md).
-8. VIS overflow fixed by structural shell + detail (design.md, csgo-conversion.md).
-   The 2 MB limit itself is verified in engine source.
+6. `-notjunc` as a `MAX_MAP_DRAWINDEXES` fallback.
+7. Terrain mirroring "cell-owning controls + sentinel".
+8. VIS overflow fixed by structural shell + detail (the 2 MB limit is verified).
