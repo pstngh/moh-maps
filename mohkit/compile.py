@@ -220,7 +220,15 @@ def compile_map(map_text_or_path: Union[str, Path], name: str,
     if light:
         st = tc.run("light", "MOHlight.exe", [*thr, *light_q, *light_args, *game, tmap], root, timeout)
         if st.returncode not in (0, None) and threads != 1:
-            # Multi-threaded MOHlight occasionally access-violates on big maps; one thread is reliable.
+            # Retry with one thread, keeping the failed run's log as light_mt.log (evidence for
+            # docs/toolchain.md: multi-threaded MOHlight was seen to access-violate).
+            failed = Path(root) / "light.log"
+            if failed.is_file():
+                failed.replace(Path(root) / "light_mt.log")
+            st.name = "light_mt"
+            res.stages.append(st)
+            res.problems.append(f"[light] multi-threaded MOHlight exited with {st.returncode:#x}; "
+                                f"retried with -threads 1 (log: light_mt.log)")
             st = tc.run("light", "MOHlight.exe", ["-threads", "1", *light_q, *light_args, *game, tmap], root, timeout)
         res.stages.append(st)
     info = tc.run("info", "Q3map.exe", ["-info", to_tool_path(res.bsp)], root, 300)

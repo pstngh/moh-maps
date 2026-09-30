@@ -71,7 +71,10 @@ Q3map.exe   -info <root>\main\maps\dm\x.bsp                                     
 The driver passes `-threads <cpu count>` to every stage. Full lighting is the
 slow part (radiosity), so iterate on geometry with `draft`. If multi-threaded
 MOHlight crashes (an access violation was seen once on a large map), the
-driver retries with `-threads 1`.
+driver retries with `-threads 1`, keeps the failed run's output as
+`light_mt.log` and reports the exit code as a problem. (**UNVERIFIED** cause: on
+2026-09-30 an mk_medina compile fell back to one thread while three other
+compiles ran; the log from before this change was lost.)
 
 ### Q3map 1.34 options (BSP stage)
 
