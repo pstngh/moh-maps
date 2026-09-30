@@ -82,7 +82,7 @@ with fill lights until you have seen a normal build.
 
 ## Limits
 
-- 180 lightmap pages of 128×128 per map. Exceeding it is a hard failure. Use
+- 170 lightmap pages of 128×128 per map (tested 2026-09-30: 170 pages compile, 172 fail; 0x800000 / 49152 = 170.7). Exceeding it is a hard failure. Use
   coarser `lightmapdensity` (32 or 64) on big maps and big faces rather than
   making surfaces `nolightmap` (unlit detail looks fullbright).
 - Radiosity needs VIS data. A map whose only structure is a shell still gets

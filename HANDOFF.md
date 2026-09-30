@@ -111,7 +111,7 @@ with a small controlled compile or engine test (evidence into the doc), or
 delete it:
 
 1. ~~`func_detail` is stripped by Q3map~~ **Tested: wrong.** It compiles as a brush model, spawns as a generic Object and renders black. Docs fixed.
-2. Lightmap page limit "180" (engine `MAX_MAP_LIGHTING 0x800000` / 49152 ≈ 170: test it).
+2. ~~Lightmap page limit 180~~ **Tested: 170** (170 pages compile, 172 fail = 0x800000/49152). Docs, CLAUDE.md, bsp_checks fixed.
 3. Static-model limits: ~75k lit vertices per map (MOHlight crash), ≤ 24
    surfaces per TIKI, < 1000 verts / 2000 tris per SKD surface, zero-filled
    collapse arrays required.

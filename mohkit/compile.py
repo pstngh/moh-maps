@@ -219,8 +219,9 @@ def compile_map(map_text_or_path: Union[str, Path], name: str,
         res.stages.append(tc.run("vis", "Q3map.exe", ["-vis", *thr, *vis_q, *vis_args, *game, tmap], root, timeout))
     if light:
         st = tc.run("light", "MOHlight.exe", [*thr, *light_q, *light_args, *game, tmap], root, timeout)
-        if st.returncode not in (0, None) and threads != 1:
-            # Retry with one thread, keeping the failed run's log as light_mt.log (evidence for
+        if st.returncode not in (0, None) and threads != 1 and "ERROR" not in st.log:
+            # A crash without a reported ERROR (those, like MAX_MAP_LIGHTING, are deterministic):
+            # retry with one thread, keeping the failed run's log as light_mt.log (evidence for
             # docs/toolchain.md: multi-threaded MOHlight was seen to access-violate).
             failed = Path(root) / "light.log"
             if failed.is_file():
@@ -296,8 +297,8 @@ def bsp_checks(path: Path) -> list[str]:
     if bad:
         out.append(f"[bsp-check] ERROR {len(bad)} shaders have a non-.tga qer_editorimage; the engine reads it as a TGA "
                    f"fence mask and the map fails to load (use shaders.editor_image): {', '.join(bad[:5])}")
-    if summ["lightmap_pages"] > 180:
-        out.append(f"[bsp-check] ERROR {summ['lightmap_pages']} lightmap pages (MOHlight limit is 180)")
+    if summ["lightmap_pages"] > 170:
+        out.append(f"[bsp-check] ERROR {summ['lightmap_pages']} lightmap pages (MOHlight limit is 170)")
     return out
 
 

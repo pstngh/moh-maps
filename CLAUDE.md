@@ -82,7 +82,7 @@ part of the definition of done. Human feedback outranks both.
 - Lights: sun + cool sky fill + low ambient + fixtures. No fill lights on spawns.
 - Bots need `sv_maxbots` > 0 before map load. They ignore doors, props without
   collision and crouch-only gaps.
-- Keep the map within ±8192; ≤ 180 lightmap pages; ≤ 60 lights per leaf.
+- Keep the map within ±8192; ≤ 170 lightmap pages; ≤ 60 lights per leaf.
 - Converted CS:GO content (textures, models, BSPs) is local-only: write it under
   `local/` (gitignored) and never commit it.
 

@@ -110,7 +110,7 @@ from corner points.
 | limit | value | what happens |
 |---|---|---|
 | vertices per planar face (after T-junctions) | **64** | the face renders as the default checker. Split long brushes (≤ 512) |
-| lightmap pages | 180 × 128² | MOHlight aborts. Coarser `lightmapdensity` on big areas |
+| lightmap pages | 170 × 128² (tested 2026-09-30: 170 pages compile, 172 fail; 0x800000 / 49152 = 170.7) | MOHlight aborts. Coarser `lightmapdensity` on big areas |
 | lights reaching one leaf | 60 | clamped; lights go missing |
 | VIS data | 2 MB | VIS fails. More detail, less structure |
 | brushes / brush sides / planes | 32768 / 131072 / 131072 | |

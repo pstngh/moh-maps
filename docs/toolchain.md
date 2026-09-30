@@ -72,9 +72,10 @@ The driver passes `-threads <cpu count>` to every stage. Full lighting is the
 slow part (radiosity), so iterate on geometry with `draft`. If multi-threaded
 MOHlight crashes (an access violation was seen once on a large map), the
 driver retries with `-threads 1`, keeps the failed run's output as
-`light_mt.log` and reports the exit code as a problem. (**UNVERIFIED** cause: on
-2026-09-30 an mk_medina compile fell back to one thread while three other
-compiles ran; the log from before this change was lost.)
+`light_mt.log` and reports the exit code as a problem. It doesn't retry when
+MOHlight printed an `ERROR` (e.g. `MAX_MAP_LIGHTING`): those fail the same way
+on one thread. (**UNVERIFIED**: whether multi-threading itself ever causes a
+crash. The single report predates these logs.)
 
 ### Q3map 1.34 options (BSP stage)
 
@@ -121,7 +122,7 @@ lighting it also inspects the BSP (`bsp_checks`).
 | `Entity N, Brush M: degenerate plane` | collinear face points | fix the generator |
 | `LoadPortals: NumVisBytes X exceeds 2097152` | too many structural splits for VIS | make interior brushes detail; keep a simple structural hull |
 | `MAX_MAP_DRAWINDEXES` | too many triangles after T-junction fixing | reduce detail; `-notjunc` as a last resort (risks cracks) |
-| `MAX_MAP_LIGHTING exceeded from N lightmaps` | more than 180 lightmap pages of 128×128 | raise `lightmapdensity`/`surfaceDensity` on large surfaces, remove junk geometry |
+| `MAX_MAP_LIGHTING exceeded from N lightmaps` | more than 170 lightmap pages of 128×128 (the 8 MB `MAX_MAP_LIGHTING` buffer; 170 compiled, 172 failed in a test) | raise `lightmapdensity`/`surfaceDensity` on large surfaces, remove junk geometry |
 | `Num lights per leaf clamped from N to 60` | too many lights reach one leaf | fewer, better placed lights |
 | `WARNING: Could not find 'models/…/x.map'` | a prop has no collision file | normal for many props; add clip brushes if players should collide |
 | `potential hash mismatch` (MOHlight) | curved-patch lighting quirk | harmless if it looks right |
