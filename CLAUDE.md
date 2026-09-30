@@ -19,15 +19,14 @@ generators or format code. Extend mohkit instead.**
   session start, clear and compaction by the hook in `.claude/settings.json`.
   Keep it current at each milestone: state, running processes, exact next
   steps.
-- **Hand off before the context fills.** After a big milestone, or when the
-  conversation is long, do this:
+- **Pause before the context fills.** Check `mcp__ccd_session_mgmt__get_usage`
+  (context `percentUsed`; auto-compact starts near 97%) after each milestone.
+  At **75%** or more:
   1. finish the current step;
   2. update `HANDOFF.md`;
   3. commit and push to `main`;
-  4. call `mcp__ccd_session_mgmt__clear_session` with `session_id: "self"`
-     (it clears when the turn ends);
-  5. tell the user to type **continue**.
-  The fresh context gets `CLAUDE.md` + `HANDOFF.md` automatically.
+  4. stop and give the user a one-line handoff to paste into a fresh chat
+     ("Read CLAUDE.md and HANDOFF.md, then continue").
 - **Git**: push small commits straight to `main` after tests pass. Never
   force-push or rewrite history without asking.
 
