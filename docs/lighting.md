@@ -73,6 +73,8 @@ beyond that ("Num lights per leaf clamped"), so cluster dense fixture fields.
 ## Quality settings
 
 - `draft` (`-fast`): no radiosity, for checking geometry.
+- `preview` (`-bounce 2`): radiosity with 2 bounces; on mk_village it looked the same as
+  `normal`. Use it to judge lighting quickly.
 - `normal`: 8 radiosity bounces, so light through windows and doors reaches
   interiors. This is the one to judge lighting by.
 - `final` (`-final`): full detail; use for release builds.

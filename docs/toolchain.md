@@ -68,7 +68,8 @@ Q3map.exe   -info <root>\main\maps\dm\x.bsp                                     
 
 | mohkit quality | VIS | MOHlight | use |
 |---|---|---|---|
-| `draft` | `-fast` | `-fast` | iterating on geometry (seconds to minutes) |
+| `draft` | `-fast` (BSP: `-nomerge`) | `-fast` | iterating on geometry (seconds to minutes) |
+| `preview` | full | `-bounce 2` | judging lighting faster than normal |
 | `normal` | full | default (radiosity, 8 bounces) | real lighting |
 | `final` | full | `-final` | release |
 

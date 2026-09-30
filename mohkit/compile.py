@@ -36,11 +36,12 @@ PROBLEM_RE = re.compile(r"warning|error|leak|degenerate|couldn't|could not|MAX_|
                         re.IGNORECASE)
 
 QUALITY = {
-    # vis flags, light flags
-    "draft": (["-fast"], ["-fast"]),
-    "preview": ([], ["-bounce", "2"]),
-    "normal": ([], []),
-    "final": ([], ["-final"]),
+    # bsp flags, vis flags, light flags. Draft skips face merging (-nomerge): on mk_village the
+    # BSP stage took 23 s instead of 84 s, for 30% more draw surfaces (docs/toolchain.md).
+    "draft": (["-nomerge"], ["-fast"], ["-fast"]),
+    "preview": ([], [], ["-bounce", "2"]),
+    "normal": ([], [], []),
+    "final": ([], [], ["-final"]),
 }
 
 
@@ -266,7 +267,7 @@ def compile_map(map_text_or_path: Union[str, Path], name: str,
                 cfg: Optional[_config.Config] = None) -> CompileResult:
     """Compile a map. ``name`` is the game path without extension, e.g. ``dm/mymap``.
 
-    ``quality``: ``draft`` (fast VIS + fast light), ``preview`` (2 radiosity bounces), ``normal`` (8),
+    ``quality``: ``draft`` (no face merging, fast VIS + fast light), ``preview`` (2 radiosity bounces), ``normal`` (8),
     ``final`` (MOHlight -final).
     """
     cfg = cfg or _config.load()
@@ -284,9 +285,9 @@ def compile_map(map_text_or_path: Union[str, Path], name: str,
     tmap = to_tool_path(map_path)
     threads = threads or os.cpu_count() or 4
     thr = ["-threads", str(threads)]
-    vis_q, light_q = QUALITY[quality]
+    bsp_q, vis_q, light_q = QUALITY[quality]
 
-    st = tc.run("bsp", "Q3map.exe", [*thr, *bsp_args, *game, tmap], root, timeout)
+    st = tc.run("bsp", "Q3map.exe", [*thr, *bsp_q, *bsp_args, *game, tmap], root, timeout)
     res.stages.append(st)
     # "Entity N of type 'light' leaked" only means that entity sits in the void (stock maps do it);
     # a real hull leak prints the banner below and writes a .lin trace instead of a .prt.
