@@ -168,8 +168,10 @@ height ( tokens ) ( tokens )         <- height relative to Z; tokens e.g. nodraw
 - Samples are 64 units apart; the vertex at column c, row r is at
   (X + 64c, Y + 64r, Z + height).
 - Material controls belong to 8 × 8 cells, plus a trailing sentinel row and
-  column. When mirroring, reverse the cell-owning controls but keep the
-  sentinel.
+  column: all 15,747 terrains in `reference/` have ((W−1)/8+1) × ((H−1)/8+1)
+  controls, and the sentinel column repeats its neighbour in 15,735 of them. So
+  when mirroring, reverse the cell-owning controls and keep the sentinel last
+  (follows from the layout; not tested in engine).
 - Height resolution is 2 units, and a single 512 × 512 patch may span at most
   510 units of height; the compiler errors otherwise.
 - `SIZE` is the texture's repeat size in world units: 256 or 512 with scale 1

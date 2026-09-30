@@ -118,5 +118,5 @@ delete it:
 4. `MAX_SURFACE_INFO` when compiling against a mod-heavy `main`.
 5. "Multi-threaded MOHlight access-violated once" (toolchain.md, compile.py retry).
 6. `-notjunc` as a `MAX_MAP_DRAWINDEXES` fallback.
-7. Terrain mirroring "cell-owning controls + sentinel".
+7. ~~Terrain mirroring~~ **Layout verified** on 15,747 stock terrains (sentinel row/column present, usually a copy of its neighbour); the mirroring advice follows from it. map-format.md updated.
 8. VIS overflow fixed by structural shell + detail (the 2 MB limit is verified).
