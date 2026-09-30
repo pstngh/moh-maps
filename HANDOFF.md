@@ -75,7 +75,7 @@ compile → screenshot → bot-test loop. Conversions are personal-use only.
 
 ## Next steps (in order)
 
-1. **Rebuild dust2** after the running build: the props' shader script was
+1. **Rebuild dust2** after the running build (default `--static-verts`; draft BSP should now be ~8 min: `-nomerge` + displacement simplification): the props' shader script was
    written to the package root instead of `scripts/` (fixed in convert.py;
    alpha-tested prop textures rendered opaque before). When dust2 finishes: look at `local/csgo/cs_dust2/cs_dust2_shots.png`
    (props placed/oriented right? floating? missing textures?), run bots on it
@@ -93,6 +93,13 @@ compile → screenshot → bot-test loop. Conversions are personal-use only.
    iCloud (`~/Developer/moh-maps`).
 
 ## Decisions made while the user was away
+
+- Kept the pre-fix dust2 build running (2h+, single-threaded prop lighting) to see
+  prop placement rather than kill it; rebuild with fixes afterwards.
+- Displacement simplification tolerance: 1 unit (2 would be faster, but the
+  remaining BSP phases dominate and 1 unit is safer for curved walls).
+- Draft quality skips Q3map face merging (-nomerge); T-junction fixing kept so
+  64-vertex face problems still show up in drafts.
 
 - Village: accepted as final at `normal` quality (no rebuild needed; the
   preview build contains the latest source and looks the same).
@@ -118,9 +125,10 @@ delete it:
 2. ~~Lightmap page limit 180~~ **Tested: 170** (170 pages compile, 172 fail = 0x800000/49152). Docs, CLAUDE.md, bsp_checks fixed.
 3. Static-model limits: **24 surfaces per TIKI and 1000 verts / 2000 tris per
    surface verified in source**. The ~75k lit-vertex MOHlight crash was **not
-   reproduced**: 109k (stock), 1,200 instances, 161k (converted props) all lit in
-   small maps. It was seen once on full de_dust2; test there with
-   `mohkit csgo de_dust2 --static-verts 160000` (converter still budgets 70k).
+   reproduced** (109k stock, 1,200 instances, 161k converted props all lit in small
+   maps). Found instead: MOHlight lights static-model vertices **single-threaded at
+   ~190 verts/s** (one-light room), so the budget is compile time. Not re-testing
+   160k on full dust2 (hours); docs updated.
 4. ~~`MAX_SURFACE_INFO`~~ **Tested:** ~1,632 extra script shaders fit on top of retail, 1,639 fail. toolchain.md updated. (Consider a converter warning near 1,500 shaders.)
 5. "Multi-threaded MOHlight access-violated once": now instrumented (a crash keeps `light_mt.log`; no retry after a reported ERROR). Still unverified.
 6. ~~`-notjunc` fallback~~ **Tested:** halves draw indexes on mk_village (63,195 → 30,486). toolchain.md updated.
