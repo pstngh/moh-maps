@@ -115,7 +115,7 @@ delete it:
 3. Static-model limits: ~75k lit vertices per map (MOHlight crash), ≤ 24
    surfaces per TIKI, < 1000 verts / 2000 tris per SKD surface, zero-filled
    collapse arrays required.
-4. `MAX_SURFACE_INFO` when compiling against a mod-heavy `main`.
+4. ~~`MAX_SURFACE_INFO`~~ **Tested:** ~1,632 extra script shaders fit on top of retail, 1,639 fail. toolchain.md updated. (Consider a converter warning near 1,500 shaders.)
 5. "Multi-threaded MOHlight access-violated once" (toolchain.md, compile.py retry).
 6. `-notjunc` as a `MAX_MAP_DRAWINDEXES` fallback.
 7. ~~Terrain mirroring~~ **Layout verified** on 15,747 stock terrains (sentinel row/column present, usually a copy of its neighbour); the mirroring advice follows from it. map-format.md updated.

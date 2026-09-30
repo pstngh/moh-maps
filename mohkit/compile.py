@@ -9,8 +9,9 @@ The EA tools are 32-bit Windows programs. On macOS/Linux they run under Wine
 
 Compiling against the retail paks is not optional: without ``scripts/common.shader``
 the compiler treats ``common/caulk``, sky and clip shaders as ordinary textures and
-the map renders with black holes. Compiling against a heavily modded ``main`` can
-exhaust ``MAX_SURFACE_INFO``, hence the isolated root.
+the map renders with black holes. Q3map holds only ~1,600 shaders beyond the retail
+scripts (``MAX_SURFACE_INFO``, measured), so mods in ``main`` could exhaust it: hence
+the isolated root.
 """
 
 from __future__ import annotations

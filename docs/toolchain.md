@@ -46,8 +46,12 @@ Rules learned the hard way:
   flags from `scripts/*.shader`. Without them `common/caulk` is an ordinary
   (missing) texture and skies aren't skies: the map compiles, then renders
   with black holes.
-- **Compile against retail only, not a mod-heavy `main`.** Extra shader
-  scripts can exhaust `MAX_SURFACE_INFO`.
+- **Compile against retail only, not a mod-heavy `main`.** Q3map loads every
+  shader script it can see and holds a fixed number (`MAX_SURFACE_INFO`,
+  consistent with q3map's 4096). Tested 2026-09-30: on top of the retail
+  scripts, 1,632 extra script shaders compile and 1,639 fail with
+  `MAX_SURFACE_INFO`. So a map (or the mods in `main`) may add about **1,600
+  shaders**; a large conversion with many prop materials can get close.
 - The map's own textures and shader scripts must be in the compile root too.
   Lightmap sizes and surface flags come from them.
 
