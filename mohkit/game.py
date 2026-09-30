@@ -137,8 +137,9 @@ FPS = 60
 
 
 def frames(ms: int) -> list[str]:
-    """Harness lines that wait ~``ms`` of rendered frames (one bare ``wait`` = one frame)."""
-    return ["wait"] * max(1, round(ms * FPS / 1000))
+    """Harness lines that wait ~``ms`` of frames. A bare ``wait`` holds the buffer for one
+    ``Cbuf_Execute`` pass, and there are two passes per frame (``qcommon/common.c``)."""
+    return ["wait"] * max(2, 2 * round(ms * FPS / 1000))
 
 
 def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, gametype: int = 1,
@@ -163,11 +164,13 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
         shutil.copy2(pk3, main / Path(pk3).name)
 
     # ui_hud must be issued after the map loads (CG_Init turns it back on). `wait N` subtracts
-    # each frame's duration, so one long loading frame used up the whole wait and the
-    # cameras ran before the client was in game (stock mohdm1). Bare `wait`s count frames
-    # instead (com_maxfps 60 below), which loading can't consume.
-    lines: list[str] = frames(1500) + ["ui_hud 0", "ui_crosshair 0", "ui_compass 0", "ui_gmbox 0", "ui_minicon 0",
-                                       "cg_drawviewmodel 0", "fps 0", "cg_lagometer 0"]
+    # each frame's duration, so one long loading frame can use up the whole wait; bare
+    # `wait`s count frames instead (com_maxfps below), which loading can't consume.
+    # A map with its own loading menu (stock mohdm1) waits for its "continue" button with
+    # the local server paused when sv_maxclients <= 1 (UI_EndLoad, client/cl_ui.cpp):
+    # `finishloadingscreen` dismisses it and is harmless otherwise.
+    lines: list[str] = frames(1500) + ["finishloadingscreen", "ui_hud 0", "ui_crosshair 0", "ui_compass 0",
+                                       "ui_gmbox 0", "ui_minicon 0", "cg_drawviewmodel 0", "fps 0", "cg_lagometer 0"]
     lines += list(extra_commands)
     lines += frames(settle_ms)
     shot_names = []

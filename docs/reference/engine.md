@@ -208,10 +208,10 @@ Files go under the home path. On macOS that is `~/Library/Application Support/op
 
 ### 2.6 `wait` in command buffers (`qcommon/cmd.c:62-70`, `:196-205`)
 
-- A bare `wait` stops execution until the next `Cbuf_Execute` pass.
+- A bare `wait` stops execution until the next `Cbuf_Execute` pass. With two passes per frame, a bare `wait` is half a frame (measured: 600 bare waits ≈ 5 s at 60 fps).
 - **`wait N` counts down N *milliseconds*** (it subtracts the frame msec), not frames. `wait 0` does nothing.
 - `Cbuf_Execute` runs twice per `Com_Frame`: once with 0 before SV_Frame, and once with msec after it (`qcommon/common.c:2357`, `:2417`).
-- Suggested (not measured): `wait 500`–`1000` after `tele`/`face` before `saveshot`.
+- `mohkit.game.run` uses bare-`wait` runs until the map is loaded, then `finishloadingscreen`, then `tele`/`face`/`fov`, `wait 700`, the same again, `wait 300`, `saveshot` (verified on stock mohdm1 and on mohkit maps).
 
 ### 2.7 Suggested script (not run)
 

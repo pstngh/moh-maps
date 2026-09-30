@@ -54,9 +54,14 @@ human reported.
   captures.
 - `wait N` waits **N milliseconds**, but it subtracts each frame's duration, so
   a single long loading frame uses up the whole wait (`Cbuf_Execute`,
-  `qcommon/cmd.c`). On stock mohdm1 every camera ran before the client was in
-  game. A bare `wait` is exactly one frame, so the harness waits for loading
-  with runs of bare `wait`s at `com_maxfps 60` (`game.frames`).
+  `qcommon/cmd.c`). A bare `wait` holds the buffer for one `Cbuf_Execute` pass,
+  and there are two passes per frame, so the harness waits for loading with runs
+  of bare `wait`s (`game.frames`).
+- **Custom loading screens pause the game.** A map with its own loading menu
+  (stock mohdm1) shows a "continue" button and fake-pauses the local server
+  when `sv_maxclients` ≤ 1 (`UI_EndLoad`, `client/cl_ui.cpp`); `tele` is then
+  lost and every camera shows the spawn point. The harness sends
+  `finishloadingscreen`, which dismisses it and is harmless otherwise.
 - **Bots join after the cameras** (`sv_numbots` is 0 at launch and set after the
   last `saveshot`). With bots present the local spectator can end up following
   one, and every shot turns into a third-person view of a random bot.
