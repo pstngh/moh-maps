@@ -112,7 +112,8 @@ removed at spawn).
 
 ## Don'ts
 
-- No `func_detail`: Q3map drops the brushes. Use `+surfaceparm detail`.
+- No `func_detail`: it becomes a generic game entity that renders black (see
+  map-format.md). Use `+surfaceparm detail`.
 - No `misc_model`: the game deletes it and Q3map ignores it.
 - `info_pathnode` is only needed for legacy bots or single-player AI; OpenMoHAA
   bots use the generated navmesh.

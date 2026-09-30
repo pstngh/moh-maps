@@ -70,7 +70,7 @@ part of the definition of done. Human feedback outranks both.
 - **Max 64 vertices per face** after T-junction fixing, or the face renders as
   a checkerboard. Split long brushes at 512 (the Carver, `MapBuilder.box` and
   `kit.gable_roof` do). The compile's bsp-check reports offenders.
-- No `func_detail` (Q3map deletes it): use `+surfaceparm detail` (the default
+- No `func_detail` (it becomes an unlit, black game entity): use `+surfaceparm detail` (the default
   for `MapBuilder.box`/`prism`/`hull`).
 - Props (`static_*`) have **no collision** unless the model ships a
   `models/<path>.map` (`mohkit.props.get(x).collision`). Add clip brushes

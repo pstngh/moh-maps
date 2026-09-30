@@ -110,7 +110,7 @@ The user trusts nothing from the previous (pre-mohkit) attempt. Verify each
 with a small controlled compile or engine test (evidence into the doc), or
 delete it:
 
-1. `func_detail` brush entities are stripped by Q3map.
+1. ~~`func_detail` is stripped by Q3map~~ **Tested: wrong.** It compiles as a brush model, spawns as a generic Object and renders black. Docs fixed.
 2. Lightmap page limit "180" (engine `MAX_MAP_LIGHTING 0x800000` / 49152 ≈ 170: test it).
 3. Static-model limits: ~75k lit vertices per map (MOHlight crash), ≤ 24
    surfaces per TIKI, < 1000 verts / 2000 tris per SKD surface, zero-filled

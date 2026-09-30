@@ -98,10 +98,13 @@ sky+nolightmap, and `+surfaceparm detail` gets CONTENTS_DETAIL.
 | `subdivisions N` | tessellation hint |
 | `surfaceColor r g b` | seen on origin brushes (`-1 -1 -1`) |
 
-**MOHAA has no `func_detail`.** Ordinary Quake `func_detail` brush entities are
-stripped by Q3map (the geometry silently disappears). Mark detail per face with
-`+surfaceparm detail`, as stock maps do. The `detail` entity is editor grouping
-only.
+**MOHAA has no `func_detail`.** Q3map compiles a Quake `func_detail` brush entity
+as an ordinary brush model (`*1`); the game doesn't know the class, logs
+`Classname func_detail used, but model was not a TIKI, using Object.` and spawns
+it as a generic entity, which renders **black** (unlit, even with radiosity and
+ambient 40). Tested 2026-09-30 with a sealed room holding one `func_detail` box
+and one world box. Mark detail per face with `+surfaceparm detail`, as stock maps
+do. The `detail` entity is editor grouping only.
 
 ## Patches (`patchDef2`)
 
