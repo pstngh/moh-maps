@@ -56,6 +56,8 @@ python -m mohkit install dist/my_first.pk3        # then in game: g_gametype 1; 
    screens.
 8. [testing.md](testing.md): automated screenshots, bot matches, log triage.
 9. [csgo-conversion.md](csgo-conversion.md): converting CS:GO maps.
+10. [from-reference.md](from-reference.md): recreating a scene from a screenshot or
+    photo (camera maths, texture look-alikes, side-by-side comparison).
 
 ## Reference
 

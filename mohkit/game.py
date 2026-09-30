@@ -304,3 +304,20 @@ def compare(reference: Path, shot: Path, out: Path, height: int = 540,
     out.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(out)
     return out
+
+
+def measure(reference: Path, shot: Path, regions: dict[str, tuple[int, int, int, int]]) -> dict[str, dict]:
+    """Mean colour of named pixel boxes (x0, y0, x1, y1) in both images, and the brightness
+    ratio reference/shot: > 1 means the shot is too dark there. Use it to tune lights and
+    ambient against a reference. Boxes are in the reference's pixels; the shot is resized
+    to the reference's size first."""
+    from PIL import Image
+    ref = Image.open(reference).convert("RGB")
+    got = Image.open(shot).convert("RGB").resize(ref.size)
+    out = {}
+    for name, box in regions.items():
+        a = [sum(c) / len(c) for c in zip(*ref.crop(box).getdata())]
+        b = [sum(c) / len(c) for c in zip(*got.crop(box).getdata())]
+        out[name] = {"reference": [round(v) for v in a], "shot": [round(v) for v in b],
+                     "ratio": round(sum(a) / max(sum(b), 1e-6), 2)}
+    return out

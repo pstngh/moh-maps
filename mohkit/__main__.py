@@ -9,7 +9,9 @@
     python -m mohkit plan file.map [-o out.png] [--zmin Z --zmax Z]
     python -m mohkit inspect file.map|file.bsp
     python -m mohkit test file.pk3 dm/name [--shots maps/<name>] [--bots N --seconds S]
-    python -m mohkit compare ref.png shot.png [-o out.png]   reference | shot | blend, for recreating a picture
+    python -m mohkit swatches stone brick [-o sheet.png]     stock materials by name, as a picture sheet
+    python -m mohkit looks-like ref.png --box x0,y0,x1,y1 [--where wall] [--word stone]   texture look-alikes
+    python -m mohkit compare ref.png shot.png [-o out.png] [--region name=x0,y0,x1,y1]   reference | shot | blend
     python -m mohkit install file.pk3            copy a package into the game's main/
     python -m mohkit csgo de_dust2 [--name cs_dust2] [-q draft] [--scale 1.0]   convert a CS:GO map (local/ only)
 """
@@ -203,9 +205,38 @@ def cmd_test(a) -> int:
     return 0
 
 
+def cmd_swatches(a) -> int:
+    from . import lookalike as L
+    names = L.search_names(a.words)[:a.n]
+    print("\n".join(names))
+    print(L.swatches(names, Path(a.out)))
+    return 0
+
+
+def cmd_looks_like(a) -> int:
+    from PIL import Image
+
+    from . import lookalike as L
+    im = Image.open(a.image).convert("RGB")
+    if a.box:
+        im = im.crop(tuple(int(v) for v in a.box.split(",")))
+    ranked = L.rank(im, where=a.where, words=a.word or (), n=a.n, all_images=a.all)
+    for name, dist in ranked:
+        print(f"{dist:6.3f}  {name}")
+    print(L.swatches([n for n, _ in ranked], Path(a.out), first=im))
+    return 0
+
+
 def cmd_compare(a) -> int:
     from . import game
     print(game.compare(Path(a.reference), Path(a.shot), Path(a.out)))
+    if a.region:
+        regions = {}
+        for r in a.region:
+            name, _, box = r.partition("=")
+            regions[name] = tuple(int(v) for v in box.split(","))
+        for name, m in game.measure(Path(a.reference), Path(a.shot), regions).items():
+            print(f"{name:16s} reference {m['reference']}  shot {m['shot']}  ratio {m['ratio']}")
     return 0
 
 
@@ -270,10 +301,25 @@ def main(argv=None) -> int:
     s.add_argument("--seconds", type=float, default=0)
     s.add_argument("--shots", metavar="FOLDER", help="use the SHOTS of this map project")
     s.set_defaults(fn=cmd_test)
+    s = sub.add_parser("swatches", help="sheet of stock materials whose name contains a word")
+    s.add_argument("words", nargs="+")
+    s.add_argument("-n", type=int, default=36)
+    s.add_argument("-o", "--out", default="dist/swatches.png")
+    s.set_defaults(fn=cmd_swatches)
+    s = sub.add_parser("looks-like", help="stock materials that look like a crop of a picture")
+    s.add_argument("image")
+    s.add_argument("--box", help="x0,y0,x1,y1 crop in pixels")
+    s.add_argument("--all", action="store_true", help="also rank retail images no stock map uses")
+    s.add_argument("--where", choices=["floor", "wall", "ceiling"])
+    s.add_argument("--word", action="append", help="keep names containing this (repeatable)")
+    s.add_argument("-n", type=int, default=23)
+    s.add_argument("-o", "--out", default="dist/lookalike.png")
+    s.set_defaults(fn=cmd_looks_like)
     s = sub.add_parser("compare")
     s.add_argument("reference")
     s.add_argument("shot")
     s.add_argument("-o", "--out", default="dist/compare.png")
+    s.add_argument("--region", action="append", help="name=x0,y0,x1,y1: print mean colours and the brightness ratio")
     s.set_defaults(fn=cmd_compare)
     s = sub.add_parser("install")
     s.add_argument("pk3")

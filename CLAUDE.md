@@ -100,9 +100,10 @@ part of the definition of done. Human feedback outranks both.
 | scripts, precache, loading screens | `docs/scripting.md` |
 | automated screenshots and bots | `docs/testing.md` |
 | CS:GO conversion | `docs/csgo-conversion.md` |
+| recreating a screenshot/photo | `docs/from-reference.md` (`mohkit.camera`, `looks-like`, `swatches`, `compare`) |
 | engine facts with source citations | `docs/reference/engine.md` |
 | stock data (materials, entities, props, lighting) | `data/*.json` (regenerate: `python -m mohkit.catalog`) |
-| real examples | `reference/aa/*.map` (mohdm1–7, obj_team1–4), `reference/sh`, `reference/bt`; `maps/mk_village/build.py` |
+| real examples | `reference/aa/*.map` (mohdm1–7, obj_team1–4), `reference/sh`, `reference/bt`; `maps/mk_village/build.py`; `maps/mk_ref_room/build.py` (from a screenshot) |
 
 When you learn something new about the engine or tools, put it in the right
 doc (with evidence: a source line, a binary string or an in-game test), not in

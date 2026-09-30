@@ -134,6 +134,18 @@ def test_editor_image_is_tga():
     assert editor_image("textures/x/plain") == "textures/x/plain.tga"
 
 
+def test_camera_measure():
+    from mohkit.camera import Camera
+    cam = Camera(1280, 720)
+    assert abs(cam.focal - 572.0) < 1.0
+    d = cam.floor_depth(530)
+    assert abs(d - 276) < 1
+    assert abs(cam.lateral(170, d) - 227) < 1
+    assert abs(cam.height(263, d) - 129) < 1
+    x, y = cam.project((d, cam.lateral(170, d), 0))
+    assert abs(x - 170) < 0.01 and abs(y - 530) < 0.01
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):
