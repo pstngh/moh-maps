@@ -154,7 +154,13 @@ exit, but flushes every line to a terminal) and every line is timestamped
 stages over a minute). Measured with Q3map `-v` on mk_village: 65 of 84 s
 is **"Merging faces"**. `-nomerge` skips it: 23 s instead of 84 s, for 30%
 more draw surfaces (6,552 vs 5,041) and 17% more draw indexes. Use it for
-iteration on big maps; keep merging for release builds.
+iteration on big maps; keep merging for release builds (`-q draft` uses it).
+
+cs_dust2 (23k faces, 619 patches), 1,360 s under load: `PatchMapDrawSurfs` 673 s
+(patch LOD grouping compares every control point pair: see csgo-conversion.md),
+"Merging faces" 374 s, `FixTJunctions` 281 s, everything else ~30 s. Draft skips
+merging and patch simplification cuts the grouping work 3.9×, so a draft BSP
+should take about a third of that.
 
 ## Packaging
 
