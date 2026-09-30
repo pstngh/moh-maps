@@ -1,0 +1,105 @@
+# Working in moh-maps (instructions for coding agents)
+
+This repo makes Medal of Honor: Allied Assault / OpenMoHAA multiplayer maps:
+original maps generated in Python, and conversions of CS:GO maps. Everything goes
+through `mohkit/`, a Python toolkit. **Do not write one-off generators or
+format code. Extend mohkit instead.**
+
+## Environment (check first)
+
+```sh
+python -m mohkit doctor        # game dir, retail paks, EA tools, wine, OpenMoHAA, CS:GO
+python -m mohkit setup         # fetch Q3map.exe/MOHlight.exe into .toolchain/ if missing
+```
+
+Use a Python with Pillow + numpy (on the owner's Mac: `~/Documents/moh-toolchain/venv/bin/python`).
+On macOS the EA compilers run under CrossOver Wine. System `git`/`clang` may be
+blocked by an unaccepted Xcode license; dulwich works for git
+(`from dulwich import porcelain`).
+
+## The loop (always close it)
+
+1. **Author**: `python -m mohkit new <name>` scaffolds `maps/<name>/build.py`
+   (a working yard + hall to replace). It defines `build()` → `MapBuilder`,
+   plus `META` and `SHOTS`. Use the `Carver` for all playable space (sealed by
+   construction), `kit` for stairs, windows, doors, roofs and lamps, and
+   `MapBuilder.prop()` for stock props.
+2. **Check**: `python -m mohkit validate maps/<name>/<name>.map` and
+   `python -m mohkit plan …` (top-down PNG).
+3. **Build**: `python -m mohkit build maps/<name> -q draft`. This generates,
+   validates, compiles, packages `dist/<name>.pk3`, runs OpenMoHAA with your
+   `SHOTS`, and writes `dist/<name>_shots.png`.
+4. **Look** at the contact sheet with the Read tool. Fix what you see and
+   repeat. Judge lighting only on `-q normal` builds (radiosity).
+5. **Play-test with bots**: `--bots 8 --seconds 90`, and check the kill count
+   and log.
+
+Never claim a map is finished from a compile alone. Screenshots and bots are
+part of the definition of done. Human feedback outranks both.
+
+## Rules that bite (each cost real time before)
+
+- Compile only against the **retail paks** (the driver does this). Otherwise
+  caulk and skies break into black holes.
+- **Texture scale 1.0** is the MOHAA norm (not Quake's 0.5).
+- **Max 64 vertices per face** after T-junction fixing, or the face renders as
+  a checkerboard. Split long brushes at 512 (the Carver, `MapBuilder.box` and
+  `kit.gable_roof` do). The compile's bsp-check reports offenders.
+- No `func_detail` (Q3map deletes it): use `+surfaceparm detail` (the default
+  for `MapBuilder.box`/`prism`/`hull`).
+- Props (`static_*`) have **no collision** unless the model ships a
+  `models/<path>.map` (`mohkit.props.get(x).collision`). Add clip brushes
+  otherwise. Pivots vary: check with `python -m mohkit.propview static/x`.
+- Patch visible side = cross(row step, column step). Patch dims are `(rows cols)`, odd, ≤ 17.
+- Cheat commands in tests need `cheats 1` **and** `thereisnomonkey 1`. `wait N`
+  is milliseconds.
+- `surfaceparm stone` does nothing; use `rock`.
+- Lights: sun + cool sky fill + low ambient + fixtures. No fill lights on spawns.
+- Bots need `sv_maxbots` > 0 before map load. They ignore doors, props without
+  collision and crouch-only gaps.
+- Keep the map within ±8192; ≤ 180 lightmap pages; ≤ 60 lights per leaf.
+- Converted CS:GO content (textures, models, BSPs) is local-only: write it under
+  `local/` (gitignored) and never commit it.
+
+## Where knowledge lives
+
+| need | read |
+|---|---|
+| start here / index | `docs/README.md` |
+| design, dimensions, layout, budgets | `docs/design.md` |
+| `.map` syntax, texture projection, patches, terrain | `docs/map-format.md` |
+| compiling, flags, error messages | `docs/toolchain.md` |
+| entities, props, doors, ladders | `docs/entities.md` |
+| lighting recipes | `docs/lighting.md` |
+| textures, tool shaders, custom shaders | `docs/materials.md` + `docs/reference/materials.md` |
+| scripts, precache, loading screens | `docs/scripting.md` |
+| automated screenshots and bots | `docs/testing.md` |
+| CS:GO conversion | `docs/csgo-conversion.md` |
+| engine facts with source citations | `docs/reference/engine.md` |
+| stock data (materials, entities, props, lighting) | `data/*.json` (regenerate: `python -m mohkit.catalog`) |
+| real examples | `reference/aa/*.map` (mohdm1–7, obj_team1–4), `reference/sh`, `reference/bt`; `maps/mk_village/build.py` |
+
+When you learn something new about the engine or tools, put it in the right
+doc (with evidence: a source line, a binary string or an in-game test), not in
+a log.
+
+## Repo layout
+
+```text
+mohkit/            toolkit (mapfile, geom, build, kit, compile, game, bsp, pak, shaders, props, validate, render, catalog, source/)
+maps/<name>/       map projects (build.py or <name>.map, assets/, README.md)
+reference/         stock EA .map sources (aa, sh, bt) + community maps; read-only
+data/              generated catalogs of stock materials/entities/props/lighting
+docs/              knowledge base
+tests/             python tests/test_*.py (plain asserts; run as scripts)
+local/             (ignored) CS:GO conversions and anything derived from commercial assets
+dist/ .toolchain/  (ignored) packages + contact sheets, EA tools; compile roots and test homes live in the user cache dir
+```
+
+## Conventions
+
+- Python 3.10+, typed dataclasses, stdlib-first (Pillow/numpy where needed).
+- Tests: `python tests/test_<x>.py`. Keep them fast; skip when game data is missing.
+- Deterministic outputs (same inputs → identical `.map` and `.pk3` bytes).
+- Commits: small and descriptive. Never commit `dist/`, `local/`,
+  `.toolchain/` or retail/Valve files.

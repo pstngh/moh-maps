@@ -1,0 +1,18 @@
+# Build outputs (compile roots, test homes, screenshots, reports)
+.build/
+dist/
+
+# EA compilers (fetched by `python -m mohkit setup`; licensed for MOHAA, not redistributed here)
+.toolchain/
+
+# Per-machine paths
+mohkit.local.json
+
+# Conversions of commercial maps (CS:GO textures, models, compiled BSPs) are for
+# local use only and must never be committed or redistributed.
+local/
+
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
