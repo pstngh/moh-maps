@@ -52,6 +52,13 @@ compile → screenshot → bot-test loop. Conversions are personal-use only.
   `bsp_checks` error, docs (materials.md, toolchain.md). Verified by patching
   the old BSP: dust2 loads and renders (draft light, shots looked right).
 - `build_local` passes the runtime-prop precache list to the Project.
+- Harness: `finishloadingscreen` (stock maps with their own loading menu
+  fake-pause the server, so `tele` was lost); two bare `wait`s per frame.
+- **Screenshot → map workflow done**: `docs/from-reference.md`,
+  `mohkit/camera.py` (pinhole maths), `mohkit/lookalike.py` + CLI
+  `looks-like`/`swatches`, `game.measure` + `compare --region`, proof map
+  `maps/mk_ref_room` (mohdm1 room rebuilt from one screenshot; comparison in
+  `docs/images/ref_room_compare.jpg`).
 
 ## Running now
 
@@ -74,17 +81,10 @@ compile → screenshot → bot-test loop. Conversions are personal-use only.
    fewer splits? `detail_all` vs structural) and why 848 props are dropped.
 2. When the medina agent reports: fix every doc gap / toolkit bug it lists;
    judge its map; commit `maps/mk_medina` only if it's good (else delete it
-   from the repo in a normal commit).
-3. **Screenshot → map workflow**: write `docs/from-reference.md` (read the
-   image; scale from known objects: door ≈ 112–128 u, player 94 u eye 82,
-   storey 128–192, window ≈ 56×80; materials → stock look-alikes; block out
-   with Carver, detail with kit/props; camera: eye height, fov via
-   `fov_from_vertical`, `Shot.looking_at`; `mohkit compare`; iterate).
-   Prove it: reference = stock mohdm1 camera `c8` = eye (-288, 1240, 130),
-   yaw 0 (stone room: beamed ceiling, hanging bulb, door, barred window) —
-   rebuild it from scratch as `maps/mk_ref_room`, compare side by side.
-   Candidate sheet: `game.run([], "dm/mohdm1", shots)`.
-4. Screenshots (small JPGs) in `docs/images/` for the README.
+   from the repo in a normal commit; its scaffold landed in ac8066e).
+3. More README screenshots in `docs/images/` (village, dust2 is local-only:
+   don't publish converted Valve content).
+4. Verify the "unverified inherited claims" below (small controlled tests).
 5. Tell the user: accept the Xcode license; consider moving the repo out of
    iCloud (`~/Developer/moh-maps`).
 
@@ -94,6 +94,15 @@ compile → screenshot → bot-test loop. Conversions are personal-use only.
   preview build contains the latest source and looks the same).
 - Dust2 colour: left as is. Textures are the right sandstone colour; the grey
   look in draft shots is the cool fill light in shadow, not a converter bug.
+- Screenshot proof: used a stock mohdm1 screenshot as the "reference" and
+  committed a small comparison JPG of it (`docs/images/ref_room_compare.jpg`,
+  60 KB) for the doc. Retail textures appear in every MOHAA screenshot; no
+  retail files are committed.
+- mk_ref_room left with its door 2x brighter than the reference (texture
+  choice) and slightly redder walls: good enough to prove the workflow.
+- `looks-like` ranking: tiling textures to the crop's world size made results
+  worse on every test, so that option was removed.
+- Git helper `gitc.py commit` now takes paths; always pass them.
 
 ## Unverified inherited claims (verify with a test, or delete)
 
