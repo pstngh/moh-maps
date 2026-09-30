@@ -27,7 +27,7 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | `info_player_terrorist` / `counterterrorist` / `info_deathmatch_spawn` | `info_player_axis` / `allied` / `deathmatch` | T+CT double as DM spawns when the map has none |
 | `light`, `light_spot` | `light` (+ `info_null` target) | intensity ≈ 0.75 × Source brightness, clamped 40–600 |
 | `light_environment` | worldspawn `suncolor`, `sundirection`, `ambientlight`, `sundiffusecolor` | |
-| static props (`prop_static`) | *in progress*: `mohkit/source/modelconv.py` (MDL → TIKI/SKD/SKC + collision `.map`) | without it, prop gaps are visible |
+| static props (`prop_static`) | `mohkit/source/modelconv.py` (MDL → TIKI/SKD/SKC + collision `.map`). Largest first: `static_*` models up to `--static-verts` (70k) lit vertices, the next 600 as non-solid `script_model` with baked clip brushes, the rest dropped (reported) | static-prop lighting is single-threaded (~190 verts/s at best), so the budget is compile time |
 
 ## Visibility and compile time
 

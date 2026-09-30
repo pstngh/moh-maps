@@ -91,3 +91,9 @@ with fill lights until you have seen a normal build.
   bounce light, but compiles slower.
 - Static props are lit per vertex. 161k lit vertices lit fine in a test map; one crash near
   ~81k was seen on the full de_dust2 conversion (cause unknown), so the converter budgets 70k.
+- **Static-prop lighting is slow and single-threaded.** MOHlight lights every
+  static-model vertex on one thread: ~26 s per 4,958-vertex tank (~190 vertices/s)
+  in a one-light test room with `-fast` (timestamped log), and far slower on a big
+  map with many lights. Budget static-prop vertices for compile time. Props as
+  `script_model` cost nothing at compile time (the engine lights them from the
+  light grid at run time).
