@@ -125,7 +125,7 @@ lighting it also inspects the BSP (`bsp_checks`).
 | `WARNING: Entity N of type 'light' leaked` | only that entity is outside the hull (stock maps have these) | harmless, but the light is wasted |
 | `Entity N, Brush M: degenerate plane` | collinear face points | fix the generator |
 | `LoadPortals: NumVisBytes X exceeds 2097152` | too many structural splits for VIS | make interior brushes detail; keep a simple structural hull |
-| `MAX_MAP_DRAWINDEXES` | too many triangles after T-junction fixing | reduce detail; `-notjunc` as a last resort (risks cracks) |
+| `MAX_MAP_DRAWINDEXES` | too many triangles after T-junction fixing | reduce detail; `-notjunc` as a last resort (risks cracks at T-junctions). Measured on mk_village: `-notjunc` cut draw indexes from 63,195 to 30,486 and draw verts from 30,644 to 20,244, same faces |
 | `MAX_MAP_LIGHTING exceeded from N lightmaps` | more than 170 lightmap pages of 128×128 (the 8 MB `MAX_MAP_LIGHTING` buffer; 170 compiled, 172 failed in a test) | raise `lightmapdensity`/`surfaceDensity` on large surfaces, remove junk geometry |
 | `Num lights per leaf clamped from N to 60` | too many lights reach one leaf | fewer, better placed lights |
 | `WARNING: Could not find 'models/…/x.map'` | a prop has no collision file | normal for many props; add clip brushes if players should collide |
