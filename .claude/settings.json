@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=\"$CLAUDE_PROJECT_DIR/HANDOFF.md\"; if [ -f \"$f\" ]; then echo \"=== HANDOFF.md: current project state. Continue from its next steps unless the user asks otherwise. ===\"; cat \"$f\"; fi",
+            "timeout": 10,
+            "statusMessage": "Loading HANDOFF.md"
+          }
+        ]
+      }
+    ]
+  }
+}

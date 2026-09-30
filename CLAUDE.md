@@ -10,6 +10,27 @@ the user asks for, bug-free and looking like a finished stock map:
 Everything goes through `mohkit/`, a Python toolkit. **Do not write one-off
 generators or format code. Extend mohkit instead.**
 
+## How to work (the user's rules)
+
+- **Keep going until the task is done or the user says stop.** Don't pause to
+  ask what's next when the next step is clear; don't invent busywork either.
+  When the work is done, stop and summarize.
+- **`HANDOFF.md` is the continuity file**, injected automatically at every
+  session start, clear and compaction by the hook in `.claude/settings.json`.
+  Keep it current at each milestone: state, running processes, exact next
+  steps.
+- **Hand off before the context fills.** After a big milestone, or when the
+  conversation is long, do this:
+  1. finish the current step;
+  2. update `HANDOFF.md`;
+  3. commit and push to `main`;
+  4. call `mcp__ccd_session_mgmt__clear_session` with `session_id: "self"`
+     (it clears when the turn ends);
+  5. tell the user to type **continue**.
+  The fresh context gets `CLAUDE.md` + `HANDOFF.md` automatically.
+- **Git**: push small commits straight to `main` after tests pass. Never
+  force-push or rewrite history without asking.
+
 ## Environment (check first)
 
 ```sh

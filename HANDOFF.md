@@ -1,4 +1,4 @@
-# Session handoff (2026-09-30), delete once picked up
+# HANDOFF: current state and next steps (living file; keep it current)
 
 Git history was restarted from a single clean commit and force-pushed to
 GitHub `main` (user-approved). The old local `.git` is backed up at
