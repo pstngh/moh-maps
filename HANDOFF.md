@@ -25,8 +25,9 @@ compile → screenshot → bot-test loop. Conversions are personal-use only.
   OpenMoHAA source at `~/Documents/moh-toolchain/openmohaa-src` (cite it).
 - **`~/Documents` is iCloud-synced.** Build scratch lives in
   `~/Library/Caches/mohkit/build`.
-- Wine buffers tool output: per-stage logs (`<build>/roots/<name>/*.log`) only
-  fill when a stage ends, and Q3map's BSP log has no per-phase timings.
+- Tool stages run on a pseudo-terminal, so logs (`<build>/roots/<name>/*.log`)
+  are live and timestamped (`Stage.timeline`, `Stage.slowest()`). Q3map's
+  "Merging faces" is most of a BSP compile; `-nomerge` is ~3.6x faster.
 - No `timeout` binary on this Mac.
 
 ## Done this session (all committed and pushed)

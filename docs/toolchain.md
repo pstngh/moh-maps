@@ -146,6 +146,15 @@ Typical times on an Apple Silicon Mac through Wine:
 
 About 5 s of each stage is Wine start-up.
 
+**Where BSP time goes.** The driver runs each tool on a pseudo-terminal, so
+logs are live (Wine's C runtime buffers output to files and pipes until
+exit, but flushes every line to a terminal) and every line is timestamped
+(`Stage.timeline`; `CompileResult.summary()` lists the longest silences of
+stages over a minute). Measured with Q3map `-v` on mk_village: 65 of 84 s
+is **"Merging faces"**. `-nomerge` skips it: 23 s instead of 84 s, for 30%
+more draw surfaces (6,552 vs 5,041) and 17% more draw indexes. Use it for
+iteration on big maps; keep merging for release builds.
+
 ## Packaging
 
 A `.pk3` is a zip with forward-slash names. `mohkit.project.write_pk3` writes

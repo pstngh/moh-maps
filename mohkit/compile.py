@@ -31,6 +31,7 @@ from . import config as _config
 PROGRESS_RE = re.compile(r"\s*\d+% complete\.\s+\d+ hours\s+\d+ minutes\s+\d+ seconds remaining\.")
 TIMING_RE = re.compile(r"^\s*\(\d+\.\d+\) seconds\.$")
 NOISE = ("msync:", "fixme:", "err:ntdll", "wine:")
+ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
 PROBLEM_RE = re.compile(r"warning|error|leak|degenerate|couldn't|could not|MAX_|exceed|too large|clamped|mismatch|huge winding|bad ",
                         re.IGNORECASE)
 
@@ -51,6 +52,17 @@ class Stage:
     returncode: Optional[int]
     log: str
     timed_out: bool = False
+    timeline: list[tuple[float, str]] = field(default_factory=list)  # (seconds, line), POSIX only
+
+    def slowest(self, n: int = 3, min_seconds: float = 5.0) -> list[tuple[float, str, str]]:
+        """The ``n`` longest silences in the log: (seconds, line before, line after)."""
+        gaps = []
+        prev_t, prev = 0.0, "(start)"
+        for t, line in self.timeline + [(self.seconds, "(end)")]:
+            if t - prev_t >= min_seconds:
+                gaps.append((round(t - prev_t, 1), prev, line))
+            prev_t, prev = t, line
+        return sorted(gaps, reverse=True)[:n]
 
 
 @dataclass
@@ -72,6 +84,9 @@ class CompileResult:
         lines = [f"{self.name}: {'OK' if self.ok else 'FAILED'}  ({self.bsp})"]
         for s in self.stages:
             lines.append(f"  {s.name:6s} {s.seconds:8.1f}s  rc={s.returncode}{'  TIMEOUT' if s.timed_out else ''}")
+            if s.seconds >= 60:
+                for dt, before, after in s.slowest():
+                    lines.append(f"      {dt:7.1f}s after {before[:60]!r}")
         if self.leaked:
             lines.append(f"  LEAK: see {self.bsp.with_suffix('.lin')}")
         if self.stats:
@@ -119,25 +134,88 @@ class Toolchain:
         return [exe_path, *args]
 
     def run(self, name: str, exe: str, args: Iterable[str], cwd: Path, timeout: float) -> Stage:
-        """Run one tool; its raw output streams to ``<cwd>/<name>.log`` while it runs."""
+        """Run one tool; its output streams to ``<cwd>/<name>.log`` while it runs.
+
+        On POSIX the tool writes to a pseudo-terminal: Wine's C runtime buffers output to
+        a file or pipe until the process exits, but flushes every line to a terminal. So
+        the log is live and :attr:`Stage.timeline` has the time of each line (this found
+        that Q3map's "Merging faces" step takes most of a BSP compile).
+        """
         argv = self._argv(exe, list(args))
         env = dict(os.environ)
         env.setdefault("WINEDEBUG", "-all")
         t0 = time.time()
         log_path = Path(cwd) / f"{name}.log"
-        rc, to = None, False
-        with open(log_path, "wb") as fh:
-            # stdin=DEVNULL: the EA tools wait for a key on some usage/error paths.
-            p = subprocess.Popen(argv, cwd=cwd, env=env, stdin=subprocess.DEVNULL, stdout=fh, stderr=subprocess.STDOUT)
-            try:
-                rc = p.wait(timeout=timeout)
-            except subprocess.TimeoutExpired:
-                to = True
-                p.kill()
-                p.wait()
-                self.kill_stragglers(exe)
+        if os.name == "posix":
+            rc, to, timeline = self._run_pty(argv, cwd, env, log_path, timeout, t0)
+        else:
+            timeline = []
+            rc, to = None, False
+            with open(log_path, "wb") as fh:
+                # stdin=DEVNULL: the EA tools wait for a key on some usage/error paths.
+                p = subprocess.Popen(argv, cwd=cwd, env=env, stdin=subprocess.DEVNULL, stdout=fh, stderr=subprocess.STDOUT)
+                try:
+                    rc = p.wait(timeout=timeout)
+                except subprocess.TimeoutExpired:
+                    to = True
+                    p.kill()
+                    p.wait()
+        if to:
+            self.kill_stragglers(exe)
         log = log_path.read_bytes().decode("latin-1", "replace")
-        return Stage(name, argv, time.time() - t0, rc, clean_log(log), to)
+        return Stage(name, argv, time.time() - t0, rc, clean_log(log), to, timeline)
+
+    @staticmethod
+    def _run_pty(argv, cwd, env, log_path: Path, timeout: float, t0: float):
+        import pty
+        import select
+        import fcntl
+        import struct
+        import termios
+        master, slave = pty.openpty()
+        # Wine's console wraps output at the terminal width (80 by default): make it wide.
+        fcntl.ioctl(slave, termios.TIOCSWINSZ, struct.pack("HHHH", 50, 4000, 0, 0))
+        timeline: list[tuple[float, str]] = []
+        to = False
+        with open(log_path, "w", encoding="latin-1", errors="replace") as fh:
+            p = subprocess.Popen(argv, cwd=cwd, env=env, stdin=subprocess.DEVNULL, stdout=slave, stderr=slave,
+                                 start_new_session=True)
+            os.close(slave)
+            buf = b""
+
+            def emit(chunk: bytes) -> None:
+                for raw in re.split(rb"[\r\n]+", chunk):
+                    line = ANSI_RE.sub("", raw.decode("latin-1", "replace")).rstrip()
+                    if line:
+                        fh.write(line + "\n")
+                        timeline.append((round(time.time() - t0, 2), line))
+                fh.flush()
+
+            while True:
+                if time.time() - t0 > timeout:
+                    to = True
+                    p.kill()
+                    break
+                ready, _, _ = select.select([master], [], [], 0.5)
+                if ready:
+                    try:
+                        data = os.read(master, 65536)
+                    except OSError:  # EIO: every writer closed the terminal
+                        data = b""
+                    if not data:
+                        break
+                    buf += data
+                    cut = max(buf.rfind(b"\n"), buf.rfind(b"\r"))
+                    if cut >= 0:
+                        emit(buf[:cut])
+                        buf = buf[cut + 1:]
+                elif p.poll() is not None:
+                    break
+            if buf:
+                emit(buf)
+            rc = p.wait()
+        os.close(master)
+        return (None if to else rc), to, timeline
 
     def kill_stragglers(self, exe: str) -> None:
         if platform.system() != "Windows":
