@@ -73,7 +73,9 @@ compile → screenshot → bot-test loop. Conversions are personal-use only.
 
 ## Next steps (in order)
 
-1. When dust2 finishes: look at `local/csgo/cs_dust2/cs_dust2_shots.png`
+1. **Rebuild dust2** after the running build: the props' shader script was
+   written to the package root instead of `scripts/` (fixed in convert.py;
+   alpha-tested prop textures rendered opaque before). When dust2 finishes: look at `local/csgo/cs_dust2/cs_dust2_shots.png`
    (props placed/oriented right? floating? missing textures?), run bots on it
    (`mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 60`),
    update `docs/csgo-conversion.md` with measured results (remove "in

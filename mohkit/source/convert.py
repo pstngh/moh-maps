@@ -653,7 +653,7 @@ class Converter:
                 continue
             used[cm.tik] = cm
         if used:
-            self.assets.update(modelconv.bundle(used.values(), prefix="csgo", script=f"csgo_{self.opt.name}_props.shader"))
+            self.assets.update(modelconv.bundle(used.values(), prefix="csgo", script=f"scripts/csgo_{self.opt.name}_props.shader"))
         self.report["props"] = {"instances": len(items), "static": len(items) - runtime - dropped,
                                 "static_vertices": static_v, "runtime": runtime, "dropped": dropped,
                                 "models": len(used)}
@@ -709,8 +709,15 @@ class Converter:
         scripts = [self._shader_text(cm) for cm in self.mats.values()]
         if getattr(self, "_sky_text", None):
             scripts.insert(0, self._sky_text)
-        self.assets = {k: v for k, v in self.assets.items() if not k.startswith("scripts/")}
         self.assets[f"scripts/{self._script_name()}"] = ("\n\n".join(scripts) + "\n").encode("latin-1")
+        stray = [k for k in self.assets if k.endswith(".shader") and not k.startswith("scripts/")]
+        if stray:  # the engine and Q3map only read scripts/*.shader
+            raise ValueError(f"shader scripts outside scripts/: {stray}")
+        self.report["shaders"] = sum(t.count("\n{") for k, t in ((k, v.decode("latin-1")) for k, v in self.assets.items())
+                                     if k.startswith("scripts/"))
+        if self.report["shaders"] > 1500:
+            self.report["warnings"].append(f"{self.report['shaders']} shaders: Q3map holds only ~1,630 beyond retail "
+                                           "(MAX_SURFACE_INFO, docs/toolchain.md)")
         self.report["materials"] = len(self.mats)
         self.report["entities"] = len(ents)
         self.report["asset_bytes"] = sum(len(v) for v in self.assets.values())
