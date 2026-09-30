@@ -9,6 +9,14 @@ multiplayer maps, built so an AI agent (or you) can make any map, bug-free:
 
 Every map goes from idea to a tested, playable `.pk3` in one automated loop.
 
+![mk_village: square, street and town hall](docs/images/mk_village.jpg)
+
+*`maps/mk_village`, written entirely in Python with mohkit.* Below: a room from
+stock mohdm1 recreated from one screenshot (reference, recreation, blend; see
+[docs/from-reference.md](docs/from-reference.md)).
+
+![reference | recreation | blend](docs/images/ref_room_compare.jpg)
+
 ```text
 maps/<name>/build.py ──▶ .map ──EA Q3map/VIS/MOHlight──▶ .bsp ──▶ .pk3 ──OpenMoHAA──▶ screenshots + bot match
 ```
@@ -33,6 +41,7 @@ maps/<name>/build.py ──▶ .map ──EA Q3map/VIS/MOHlight──▶ .bsp �
 - **`maps/`**, map projects. [`mk_village`](maps/mk_village) is a Normandy
   crossroads DM map written entirely in Python (squares, streets, a two-storey
   town hall, house, warehouse, stock props, gable roofs).
+  [`mk_ref_room`](maps/mk_ref_room) is a room rebuilt from a single screenshot.
 - **`reference/`**, the stock EA `.map` sources (Allied Assault, Spearhead,
   Breakthrough) plus a few community maps: the best examples of how real MOHAA
   maps are built.
