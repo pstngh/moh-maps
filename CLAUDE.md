@@ -1,9 +1,14 @@
 # Working in moh-maps (instructions for coding agents)
 
-This repo makes Medal of Honor: Allied Assault / OpenMoHAA multiplayer maps:
-original maps generated in Python, and conversions of CS:GO maps. Everything goes
-through `mohkit/`, a Python toolkit. **Do not write one-off generators or
-format code. Extend mohkit instead.**
+**Goal.** Make any Medal of Honor: Allied Assault / OpenMoHAA multiplayer map
+the user asks for, bug-free and looking like a finished stock map:
+
+1. **Convert CS:GO maps** to MOHAA (`python -m mohkit csgo <map>`).
+2. **Create maps from scratch**: invented by you, described in words, or
+   recreated from a screenshot/photo the user sends.
+
+Everything goes through `mohkit/`, a Python toolkit. **Do not write one-off
+generators or format code. Extend mohkit instead.**
 
 ## Environment (check first)
 

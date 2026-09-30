@@ -1,9 +1,13 @@
 # moh-maps
 
 Tools and knowledge for making **Medal of Honor: Allied Assault / OpenMoHAA**
-multiplayer maps: by hand, generated from Python, or converted from
-**CS:GO**. Built so that people and AI agents can go from idea to a tested,
-playable `.pk3` in one loop.
+multiplayer maps, built so an AI agent (or you) can make any map, bug-free:
+
+1. **convert CS:GO maps** to MOHAA;
+2. **create maps from scratch**: invented, described in words, or recreated
+   from a screenshot.
+
+Every map goes from idea to a tested, playable `.pk3` in one automated loop.
 
 ```text
 maps/<name>/build.py ──▶ .map ──EA Q3map/VIS/MOHlight──▶ .bsp ──▶ .pk3 ──OpenMoHAA──▶ screenshots + bot match

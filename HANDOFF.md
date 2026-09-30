@@ -4,9 +4,10 @@ Git history was restarted from a single clean commit and force-pushed to
 GitHub `main` (user-approved). The old local `.git` is backed up at
 `~/Library/Caches/mohkit/old-git-backup`; the user may delete it. Read `CLAUDE.md` first.
 
-User priorities: original maps and CS:GO conversions **equally**. Goal (agreed):
-an AI or the user can reliably produce good, playable MOHAA/OpenMoHAA MP maps,
-ideally in one shot, via verified knowledge + mohkit + the automated
+**Goal (confirmed by the user):** (1) convert CS:GO maps to MOHAA; (2) create
+any map from scratch, whether invented, described, or **recreated from a
+screenshot the user sends**, bug-free and at stock quality. Both priorities are
+equal. It works through verified knowledge + mohkit + the automated
 compile → screenshot → bot-test loop. Conversions are personal-use only.
 
 ## Environment notes
@@ -71,10 +72,23 @@ Running when paused (independent OS processes; results land by themselves):
    `maps/mk_medina` (North African town, arcades, alleys, roof terrace, palms,
    terrain edges) using only CLAUDE.md/docs, then reports doc gaps. Fix the
    docs from its report. The previous attempt was stopped at the pause.
-4. Put a couple of screenshots (small JPGs) in `docs/images/` for the README.
-5. Push the branch and open a PR to `pstngh/moh-maps` (confirm with the user
-   first).
-6. Tell the user: accept the Xcode license (restores git/clang); consider
+4. **Screenshot → map workflow** (new, from the user's goal). Write
+   `docs/from-reference.md`:
+   - read the image;
+   - estimate scale from known objects (door ≈ 112–128 u tall, player 94 u,
+     storey 128–192 u, window ≈ 56×80);
+   - identify materials and pick stock look-alikes (contact sheets);
+   - block out with the Carver, then detail with kit and props;
+   - estimate the camera (eye ≈ 82 u, FOV 80) and render a matching
+     `Shot`;
+   - compare side by side and iterate.
+   Add a helper (e.g. `mohkit.game.compare(reference_png, shot_png, out)`)
+   that places them side by side. Prove it: recreate a stock-map screenshot
+   (render e.g. mohdm1 from a known spot as the "reference", rebuild the
+   scene from scratch, compare).
+5. Put a couple of screenshots (small JPGs) in `docs/images/` for the README.
+6. Commit and push to `main` (user-approved repo; still confirm before force-pushes).
+7. Tell the user: accept the Xcode license (restores git/clang); consider
    moving the repo out of iCloud (`~/Developer/moh-maps`).
 
 ## Findings from this session (already in the docs)
