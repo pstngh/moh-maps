@@ -116,7 +116,7 @@ from corner points.
 | brushes / brush sides / planes | 32768 / 131072 / 131072 | |
 | draw verts / indexes | 524288 each | `MAX_MAP_DRAWINDEXES`. Reduce detail |
 | entities | 8192 (OpenMoHAA), fewer in AA | |
-| statically lit prop vertices | ~75,000 per map | MOHlight crashes above ~81k |
+| statically lit prop vertices | no limit found up to 161k | MOHlight crashed once near ~81k on full de_dust2; not reproduced in small test maps in small maps (22 stock tanks = 109k, 102 converted props = 162k, 1,200 instances) |
 | props per model TIKI | ≤ 24 surfaces; < 1000 verts and ≤ 2000 tris per surface | the TIKI setup array is `loadsurfaces[24]` with no bounds check (`tiki/tiki_files.cpp:310`, `tiki_parse.cpp:878-894`); `TIKI_MAX_VERTEXES` 1000 / `TIKI_MAX_TRIANGLES` 2000 (`tiki/tiki_shared.h:77-78`, enforced `tiki_skel.cpp:610-618`). Stock maxima: 24 surfaces (uboat), 913 verts |
 | world extent | ±8192 | origins wrap, navmesh ends |
 

@@ -43,7 +43,9 @@ none``; ``surfaceparm`` from ``$surfaceprop`` (``rock`` for stone, concrete,
 brick ...: ``surfaceparm stone`` sets no flag in MOHAA).
 
 Limits the caller must budget (see ``ConvertedModel.vertices``): original
-MOHlight 1.48 crashes above roughly 75,000 statically lit vertices per map.
+MOHlight 1.48 crashed once above roughly 75,000 statically lit vertices on the full
+de_dust2 conversion, but 161,741 (102 converted props) lit fine in a small test map
+(docs/design.md), so the real limit is unknown.
 ``vertices`` is exactly what MOHlight counts ("Total Vertecies Lit" equals the
 sum over placements). de_dust2's 1,523 props total ~826,000, so a map
 converter must keep most of them as ``script_model`` or drop them.

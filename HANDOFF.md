@@ -117,9 +117,10 @@ delete it:
 1. ~~`func_detail` is stripped by Q3map~~ **Tested: wrong.** It compiles as a brush model, spawns as a generic Object and renders black. Docs fixed.
 2. ~~Lightmap page limit 180~~ **Tested: 170** (170 pages compile, 172 fail = 0x800000/49152). Docs, CLAUDE.md, bsp_checks fixed.
 3. Static-model limits: **24 surfaces per TIKI and 1000 verts / 2000 tris per
-   surface verified in source** (design.md cites them); zero-filled collapse arrays
-   are the layout proven in engine (skd.py explains). Still testing: the ~75k lit
-   vertex MOHlight crash (Sherman-tank rooms, scratch `smtest.py`).
+   surface verified in source**. The ~75k lit-vertex MOHlight crash was **not
+   reproduced**: 109k (stock), 1,200 instances, 161k (converted props) all lit in
+   small maps. It was seen once on full de_dust2; test there with
+   `mohkit csgo de_dust2 --static-verts 160000` (converter still budgets 70k).
 4. ~~`MAX_SURFACE_INFO`~~ **Tested:** ~1,632 extra script shaders fit on top of retail, 1,639 fail. toolchain.md updated. (Consider a converter warning near 1,500 shaders.)
 5. "Multi-threaded MOHlight access-violated once": now instrumented (a crash keeps `light_mt.log`; no retry after a reported ERROR). Still unverified.
 6. ~~`-notjunc` fallback~~ **Tested:** halves draw indexes on mk_village (63,195 → 30,486). toolchain.md updated.

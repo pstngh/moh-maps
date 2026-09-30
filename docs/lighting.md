@@ -89,4 +89,5 @@ with fill lights until you have seen a normal build.
   making surfaces `nolightmap` (unlit detail looks fullbright).
 - Radiosity needs VIS data. A map whose only structure is a shell still gets
   bounce light, but compiles slower.
-- Static props are lit per vertex (~75k lit vertices per map at most).
+- Static props are lit per vertex. 161k lit vertices lit fine in a test map; one crash near
+  ~81k was seen on the full de_dust2 conversion (cause unknown), so the converter budgets 70k.

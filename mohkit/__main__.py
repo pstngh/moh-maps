@@ -250,8 +250,9 @@ def cmd_install(a) -> int:
 
 def cmd_csgo(a) -> int:
     from .source.convert import build_local
+    extra = {"props_static_vertices": a.static_verts} if a.static_verts else {}
     rep = build_local(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
-                      detail_all=not a.structural, max_texture=a.max_texture)
+                      detail_all=not a.structural, max_texture=a.max_texture, **extra)
     return 0 if rep.get("compile_ok") else 1
 
 
@@ -331,6 +332,7 @@ def main(argv=None) -> int:
     s.add_argument("--scale", type=float, default=1.0)
     s.add_argument("--max-texture", type=int, default=512)
     s.add_argument("--structural", action="store_true", help="keep Source world brushes structural (better VIS, may overflow)")
+    s.add_argument("--static-verts", type=int, help="lit-vertex budget for compiled static props (default 70000)")
     s.add_argument("--no-test", action="store_true")
     s.set_defaults(fn=cmd_csgo)
     a = ap.parse_args(argv)
