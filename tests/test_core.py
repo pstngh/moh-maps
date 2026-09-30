@@ -146,6 +146,27 @@ def test_camera_measure():
     assert abs(x - 170) < 0.01 and abs(y - 530) < 0.01
 
 
+def test_disp_simplify_keeps_shared_edges():
+    import numpy as np
+    from mohkit.source.convert import _simplify_grids
+
+    def grid(x0, bump=0.0):
+        g = np.zeros((5, 5, 5))
+        for i in range(5):
+            for j in range(5):
+                g[i, j] = (x0 + 16 * j, 16 * i, 0.0, j / 4, i / 4)
+        g[2, 2, 2] = bump  # interior bump at row 2
+        return g
+    flat, bumpy = _simplify_grids([grid(0), grid(64, bump=10.0)], tol=1.0)
+    assert bumpy.shape[:2] == (5, 5)  # the bump ramps from rows/cols 1 to 3: nothing is straight
+    # the flat neighbour keeps every vertex the bumpy one keeps on their shared edge x = 64,
+    # and drops its own straight interior columns
+    assert flat.shape[:2] == (5, 2)
+    assert sorted(round(float(r[-1, 1])) for r in flat) == [0, 16, 32, 48, 64]
+    alone = _simplify_grids([grid(0)], tol=1.0)[0]
+    assert alone.shape[:2] == (2, 2)
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

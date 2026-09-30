@@ -21,7 +21,7 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | sky faces | converted skybox shader (`skyParms env/csgo/<map>/sky`) | Source cubemap faces → `_rt _lf _ft _bk _up _dn` (up/dn rotated) |
 | hint, skip, areaportal, trigger, occluder, fog, blocklos, grenade/NPC clip, water, ladders | dropped (counted in the report) | ladders and water are TODO |
 | 3D skybox (the area containing `sky_camera`) | dropped | detected from BSP areas, not bounds |
-| displacements | `patchDef2` meshes | midpoint-expanded so they pass through every Source sample; split to ≤ 17×17; visible side toward the air |
+| displacements | `patchDef2` meshes | midpoint-expanded so they pass through every kept Source sample; sample rows/columns straight within `disp_tolerance` (1 unit) dropped, consistently across shared edges; split to ≤ 17×17; visible side toward the air |
 | materials | TGA/JPG + generated shader script | `$basetexture` only (blends use the first layer); power-of-two, max 512 px; `$surfaceprop` → MOHAA material surfaceparm; alphatest/translucent/nocull handled |
 | texture alignment | Q3 shift/rotate/scale | exact for any rotation, scale or mirror (`tests/test_texdef.py`) |
 | `info_player_terrorist` / `counterterrorist` / `info_deathmatch_spawn` | `info_player_axis` / `allied` / `deathmatch` | T+CT double as DM spawns when the map has none |
@@ -36,6 +36,13 @@ That compiles reliably; a Source layout imported as structural geometry
 overflows MOHAA's 2 MB VIS buffer. The price is no VIS culling and a slow
 BSP stage on big maps: tens of thousands of faces share one leaf. `--structural`
 keeps Source's own world/detail split instead; try it on small maps.
+
+**Displacements cost BSP time quadratically.** Q3map groups patches for LOD by
+comparing every control point of every patch with every control point of every
+other patch (`PatchMapDrawSurfs`, q3map `patch.c`). de_dust2's 619 patches
+(118k control points) spent 673 s there, measured with timestamped logs.
+Dropping straight sample lines halves the control points and cuts that work
+3.9× (`Options.disp_tolerance`, default 1 unit; 2 units: 6.8×).
 
 ## Scale
 

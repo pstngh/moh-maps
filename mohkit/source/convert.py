@@ -79,6 +79,7 @@ class Options:
     max_texture: int = 512          # largest texture edge written
     detail_all: bool = True         # all brushes detail + structural shell (robust VIS)
     displacements: bool = True
+    disp_tolerance: float = 1.0     # drop displacement sample lines within this many units of straight (0 = keep all)
     lights: bool = True
     light_scale: float = 1.0
     sky_shader: Optional[str] = None  # override (e.g. "sky/mohday2"); default converts the Source sky
@@ -453,6 +454,7 @@ class Converter:
         out = []
         if not self.opt.displacements:
             return out
+        grids: list[tuple[str, np.ndarray]] = []
         for d in self.bsp.displacements():
             flat = d.flat
             n = d.size
@@ -472,21 +474,26 @@ class Converter:
             st[..., 0] = (flat @ tv[0, :3] + tv[0, 3]) / cm.src_size[0]
             st[..., 1] = (flat @ tv[1, :3] + tv[1, 3]) / cm.src_size[1]
             grid = np.concatenate([pos, st], axis=2)  # (n, n, 5)
-            # midpoint expansion -> (2n-1)^2 controls; even indices are the Source samples
-            m = 2 * n - 1
-            ctrl = np.zeros((m, m, 5))
+            if np.dot(np.cross(grid[1, 0, :3] - grid[0, 0, :3], grid[0, 1, :3] - grid[0, 0, :3]), d.normal) < 0:
+                grid = grid.transpose(1, 0, 2)  # visible side = cross(row step, column step) faces the air
+            grids.append((cm.shader, grid))
+        before = sum((2 * g.shape[0] - 1) * (2 * g.shape[1] - 1) for _, g in grids)
+        if self.opt.disp_tolerance > 0:
+            grids = [(sh, g) for (sh, _), g in zip(grids, _simplify_grids([g for _, g in grids], self.opt.disp_tolerance))]
+        for shader, grid in grids:
+            # midpoint expansion -> (2r-1)x(2c-1) controls; even indices are the (kept) Source samples
+            r, c = grid.shape[:2]
+            ctrl = np.zeros((2 * r - 1, 2 * c - 1, 5))
             ctrl[0::2, 0::2] = grid
             ctrl[1::2, 0::2] = (grid[:-1] + grid[1:]) / 2
             ctrl[0::2, 1::2] = (grid[:, :-1] + grid[:, 1:]) / 2
             ctrl[1::2, 1::2] = (grid[:-1, :-1] + grid[1:, :-1] + grid[:-1, 1:] + grid[1:, 1:]) / 4
-            rstep = ctrl[2, 0, :3] - ctrl[0, 0, :3]
-            cstep = ctrl[0, 2, :3] - ctrl[0, 0, :3]
-            if np.dot(np.cross(rstep, cstep), d.normal) < 0:
-                ctrl = ctrl.transpose(1, 0, 2)
             for piece in _split_patch(ctrl, 17):
                 rows = [[tuple(round(float(v), 3) for v in piece[i, j]) for j in range(piece.shape[1])]
                         for i in range(piece.shape[0])]
-                out.append(Patch(cm.shader, rows))
+                out.append(Patch(shader, rows))
+        after = sum(len(p.ctrl) * len(p.ctrl[0]) for p in out)
+        self.report["patch_controls"] = {"before": before, "after": after}
         self.report["patches"] = len(out)
         return out
 
@@ -771,6 +778,66 @@ def _split_long(geo, grid: float):
                     nxt.append(piece)
         pieces = nxt
     return pieces
+
+
+def _keep_lines(g: np.ndarray, tol: float) -> list[int]:
+    """Columns of sample grid ``g`` (rows x cols x 5) to keep: a run of columns is dropped
+    when every point in it lies within ``tol`` of the straight line between the kept
+    columns on either side, in every row (greedy from column 0)."""
+    n = g.shape[1]
+    keep = [0]
+    for j in range(1, n - 1):
+        a, b = keep[-1], j + 1
+        for k in range(a + 1, b):
+            t = (k - a) / (b - a)
+            if np.abs(g[:, k, :3] - ((1 - t) * g[:, a, :3] + t * g[:, b, :3])).max() > tol:
+                keep.append(j)
+                break
+    keep.append(n - 1)
+    return keep
+
+
+def _simplify_grids(grids: list[np.ndarray], tol: float) -> list[np.ndarray]:
+    """Drop displacement sample rows/columns that are straight within ``tol`` units.
+
+    Q3map groups patches for LOD by comparing every control point of every patch with
+    every control point of every other patch (``PatchMapDrawSurfs``, q3map ``patch.c``),
+    so compile time grows with (patches x controls)^2: de_dust2's 619 patches spent 11
+    minutes there. Fewer controls per patch cut that quadratically.
+
+    Neighbouring displacements must keep the same vertices on a shared edge or cracks
+    open, so the choice is a global fixed point: a line is kept if its own straightness
+    test fails *or* any patch keeps a boundary vertex at the position of one of its
+    boundary vertices. Texture coordinates are linear in the (flat) sample grid, so
+    dropping lines leaves them exact.
+    """
+    def key(p):
+        return (round(float(p[0]) * 4), round(float(p[1]) * 4), round(float(p[2]) * 4))
+
+    keeps = [[set(_keep_lines(g.transpose(1, 0, 2), tol)), set(_keep_lines(g, tol))] for g in grids]  # [rows, cols]
+
+    def kept_boundary(g, rows, cols):
+        r, c = g.shape[:2]
+        pts = [g[0, j] for j in cols] + [g[r - 1, j] for j in cols] + [g[i, 0] for i in rows] + [g[i, c - 1] for i in rows]
+        return {key(p) for p in pts}
+
+    changed = True
+    while changed:
+        changed = False
+        kept = set()
+        for g, (rows, cols) in zip(grids, keeps):
+            kept |= kept_boundary(g, rows, cols)
+        for g, (rows, cols) in zip(grids, keeps):
+            r, c = g.shape[:2]
+            for j in range(c):
+                if j not in cols and (key(g[0, j]) in kept or key(g[r - 1, j]) in kept):
+                    cols.add(j)
+                    changed = True
+            for i in range(r):
+                if i not in rows and (key(g[i, 0]) in kept or key(g[i, c - 1]) in kept):
+                    rows.add(i)
+                    changed = True
+    return [g[sorted(rows)][:, sorted(cols)] for g, (rows, cols) in zip(grids, keeps)]
 
 
 def _split_patch(ctrl: np.ndarray, maxn: int) -> list[np.ndarray]:
