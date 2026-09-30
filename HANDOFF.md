@@ -61,16 +61,17 @@ compile → screenshot → bot-test loop. Conversions are personal-use only.
   `maps/mk_ref_room` (mohdm1 room rebuilt from one screenshot; comparison in
   `docs/images/ref_room_compare.jpg`).
 
-## Running now
+## Running now (2026-09-30 ~18:30)
 
-1. `mohkit csgo de_dust2 --name cs_dust2 -q draft` **with props** (1509
-   instances: 61 static / 69,989 verts, 600 script_model, 848 dropped).
-   Log: `/private/tmp/claude-501/-Users-pstn-Documents-moh-maps/428d8928-2422-476b-8216-47fa81ef2aca/scratchpad/dust2_props.log`
-   (session scratch; if gone, rerun). Expect ≈20 min BSP + ≈50+ min light.
-   Output `local/csgo/cs_dust2/` (+ `cs_dust2_shots.png`).
-2. A background agent is doing the zero-context one-shot test: builds
-   `maps/mk_medina` from CLAUDE.md/docs only and reports doc gaps. It writes
-   only under `maps/mk_medina/`.
+1. `mohkit csgo de_dust2 --name cs_dust2 -q draft` **with props**, started
+   17:18 before the props-shader fix (so prop shaders are missing in this
+   build; rebuild after). Log: session scratch `dust2_props.log`. Output
+   `local/csgo/cs_dust2/`.
+2. Background agent: zero-context one-shot `maps/mk_medina` test (writes only
+   under `maps/mk_medina/`; its scaffold was committed in ac8066e by mistake).
+3. Scratch tests: static-model limit (`smtest.py 14 16 18 22`: 14 tanks =
+   69,412 lit verts compiled fine) and dust2 BSP with `-nomerge` (root
+   `dm_cs_dust2_nm`) to measure the speed-up on a big map.
 
 ## Next steps (in order)
 
