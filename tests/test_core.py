@@ -127,6 +127,13 @@ def test_kit_facade_terrain_ground():
     assert validate.ground_height(m, 500, 100, 1000) == 0
 
 
+def test_editor_image_is_tga():
+    from mohkit.shaders import editor_image
+    assert editor_image("textures/x/wall.jpg") == "textures/x/wall.tga"
+    assert editor_image("textures/x/fence.tga") == "textures/x/fence.tga"
+    assert editor_image("textures/x/plain") == "textures/x/plain.tga"
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

@@ -75,6 +75,7 @@ import numpy as np
 
 from .. import geom
 from ..mapfile import Brush, Entity, Face, MapFile
+from ..shaders import editor_image
 from . import skd as _skd
 from .studiomdl import StudioModel, load_phy, load_studio_model
 from .vmt import MaterialInfo, material_info
@@ -377,7 +378,7 @@ def _resolve_material(fs, info, tex_index: int, prefix: str, model_surfaceprop: 
 
 def shader_text(mat: _Material) -> str:
     img = mat.image
-    lines = [mat.shader, "{", f"\tqer_editorimage {img}"]
+    lines = [mat.shader, "{", f"\tqer_editorimage {editor_image(img)}"]
     if mat.surfaceparm:
         lines.append(f"\tsurfaceparm {mat.surfaceparm}")
     if mat.nocull:

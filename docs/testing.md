@@ -12,12 +12,13 @@ automatically, from the command line.
    and a generated `harness.cfg`.
 3. Launches `openmohaa +set fs_basepath … +set fs_homepath … +set cheats 1
    +set thereisnomonkey 1 … +devmap dm/<name> +exec harness.cfg`.
-4. The harness hides the HUD, then for each camera does `tele`, `face`,
-   `wait`, `saveshot <name>`, and finally `quit`.
+4. The harness waits ~3.5 s of rendered frames, hides the HUD, then for each
+   camera does `tele`, `face`, `fov`, `wait`, `saveshot <name>`. Bots (if any)
+   join only after the last camera, then the match runs and the harness quits.
 5. Screenshots are converted to PNG and tiled into a contact sheet
    (`dist/<name>_shots.png`). The console log is triaged for problems.
 
-A 9-shot run takes about 15 seconds.
+A 9-shot run takes about 20 seconds.
 
 ## Cameras
 
@@ -28,8 +29,15 @@ from mohkit.game import Shot
 SHOTS = [
     Shot.looking_at("square_from_south", (0, -420, 90), (0, 200, 120)),   # eye position, target point
     Shot("overview", (-600, -700, 700), (35, 45, 0)),                    # eye, (pitch, yaw, roll)
+    Shot.looking_at("tele_lens", (0, 0, 90), (400, 0, 90), fov=40),        # optional fov (default 80)
 ]
 ```
+
+`fov` is the game's value: the horizontal angle of a 4:3 view. Wider screens keep
+the vertical angle (64.4° at fov 80) and see more at the sides (`CG_CalcFov`,
+`cgame/cg_view.c`). `game.fov_from_vertical(deg)` converts a photo's vertical
+angle. Re-shoot an existing package with a project's cameras, without compiling:
+`python -m mohkit test dist/x.pk3 dm/x --shots maps/x`.
 
 The origin is the **eye** position (the harness subtracts the 82-unit eye
 height before teleporting). Spectators fly, so overviews from above the roofs
@@ -44,7 +52,14 @@ human reported.
 - `tele X Y Z` sets the feet position, `face P Y R` sets the view. Both go
   through the 20 Hz server, so the harness sets them, waits, sets again, then
   captures.
-- `wait N` waits **N milliseconds**; a bare `wait` is one command-buffer pass.
+- `wait N` waits **N milliseconds**, but it subtracts each frame's duration, so
+  a single long loading frame uses up the whole wait (`Cbuf_Execute`,
+  `qcommon/cmd.c`). On stock mohdm1 every camera ran before the client was in
+  game. A bare `wait` is exactly one frame, so the harness waits for loading
+  with runs of bare `wait`s at `com_maxfps 60` (`game.frames`).
+- **Bots join after the cameras** (`sv_numbots` is 0 at launch and set after the
+  last `saveshot`). With bots present the local spectator can end up following
+  one, and every shot turns into a third-person view of a random bot.
 - `ui_hud 0` must come *after* the map loads (CG_Init turns the HUD back on).
   `saveshot <name>` renders one frame without menus, HUD or spectator text
   and writes `screenshots/<name>.tga`.
@@ -58,8 +73,8 @@ python -m mohkit build maps/mk_village --bots 8 --seconds 90
 python -m mohkit test dist/mk_village.pk3 dm/mk_village --bots 8 --seconds 90
 ```
 
-This sets `sv_maxbots`/`sv_numbots` (both needed, and `sv_maxbots` must be set
-before the map loads) and `g_gametype 1`. The result counts kill messages in the
+This sets `sv_maxbots` before the map loads (it is latched), `g_gametype 1`, and
+`sv_numbots` after the cameras. The result counts kill messages in the
 log. More than a handful per minute means bots found each other and could
 navigate. For deeper checks watch a match yourself: `python -m mohkit install
 dist/x.pk3`, then in game `set sv_maxbots 8; set sv_numbots 8; set g_gametype 1;

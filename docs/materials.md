@@ -82,7 +82,7 @@ puddle always let bullets through; wood lets through weapons with
 ```text
 textures/mymap/wall_plaster
 {
-	qer_editorimage textures/mymap/wall_plaster.jpg
+	qer_editorimage textures/mymap/wall_plaster.tga
 	surfaceparm rock
 	{
 		map textures/mymap/wall_plaster.jpg
@@ -91,6 +91,12 @@ textures/mymap/wall_plaster
 	}
 }
 ```
+
+`qer_editorimage` always names the **`.tga`**, even when the file is a `.jpg`.
+Q3map copies it into the BSP, the engine loads it by that exact name as a TGA
+fence mask, and a `.jpg` there stops the map from loading (`LoadTGA: Only type
+2 …`). A missing `.tga` is fine: no mask, and the tools fall back to the `.jpg`.
+Generated shaders use `mohkit.shaders.editor_image()`.
 
 Alpha-tested (fences, foliage):
 

@@ -370,6 +370,21 @@ class _ShaderParser:
             sd.unknown.append(kw)
 
 
+def editor_image(image: str) -> str:
+    """The ``qer_editorimage`` path for an image: always the ``.tga`` name.
+
+    Q3map copies the editor image of every shader that has one into the BSP's
+    fence-mask field, and at map load the engine reads that file *by its exact name*
+    as a TGA (``qcommon/cm_fencemask.c`` CM_LoadTGA). A ``.jpg`` there is parsed as
+    a TGA header and the map fails to load ("LoadTGA: Only type 2 (RGB), 3 (gray), and
+    10 (RGB) TGA images supported"). Stock scripts always name the ``.tga`` (205 retail
+    shaders name a ``.tga`` of which only the ``.jpg`` ships): a missing file means no
+    mask, and the tools and renderer fall back to the ``.jpg`` for the image itself.
+    """
+    stem, _ = split_image_ext(image)
+    return stem + ".tga"
+
+
 def parse_shader_text(text: str, source: str = "<shader>", pak: Optional[str] = None,
                       mod: str = "") -> tuple[list[ShaderDef], list[str]]:
     """Parse one script. Returns definitions in file order and a list of problems."""

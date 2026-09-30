@@ -17,6 +17,7 @@ without HUD/menus/spectator text and writes ``screenshots/<name>.tga``.
 
 from __future__ import annotations
 
+import math
 import os
 import re
 import shutil
@@ -41,18 +42,34 @@ KILL_RE = re.compile(r" was (?:killed|shot|blown|sniped|bashed|gunned)| killed |
 
 @dataclass
 class Shot:
-    """A camera: origin is the *eye* position, angles are pitch, yaw, roll in degrees."""
+    """A camera: origin is the *eye* position, angles are pitch, yaw, roll in degrees.
+
+    ``fov`` is the game's fov value (default 80): the horizontal field of view of a
+    4:3 view. Wider screens keep the same vertical angle and see more at the sides
+    (``cgame/cg_view.c`` CG_CalcFov), so fov 80 is 64.6° vertical at any aspect.
+    Use ``fov_from_vertical`` to match a photo.
+    """
     name: str
     origin: Vec3
     angles: tuple[float, float, float] = (0.0, 0.0, 0.0)
+    fov: Optional[float] = None
 
     @classmethod
-    def looking_at(cls, name: str, eye: Vec3, target: Vec3) -> "Shot":
-        import math
+    def looking_at(cls, name: str, eye: Vec3, target: Vec3, fov: Optional[float] = None) -> "Shot":
         dx, dy, dz = target[0] - eye[0], target[1] - eye[1], target[2] - eye[2]
         yaw = math.degrees(math.atan2(dy, dx))
         pitch = -math.degrees(math.atan2(dz, math.hypot(dx, dy)))
-        return cls(name, eye, (pitch, yaw, 0.0))
+        return cls(name, eye, (pitch, yaw, 0.0), fov)
+
+
+def fov_from_vertical(vfov_deg: float) -> float:
+    """Game fov value that gives a vertical field of view of ``vfov_deg`` degrees."""
+    return math.degrees(2 * math.atan(math.tan(math.radians(vfov_deg) / 2) * 4 / 3))
+
+
+def vertical_fov(fov: float = 80.0) -> float:
+    """Vertical field of view (degrees) of the game fov value ``fov``."""
+    return math.degrees(2 * math.atan(math.tan(math.radians(fov) / 2) * 3 / 4))
 
 
 @dataclass
@@ -106,15 +123,22 @@ def camera_commands(shot: Shot) -> list[str]:
     """Console commands that put the local player's view at ``shot``.
 
     Requires ``cheats 1`` (set by ``run``). ``tele`` moves the player origin (feet);
-    ``face`` sets the view angles. The eye is ~82 units above the origin standing,
+    ``face`` sets the view angles, ``fov`` the field of view. The eye is ~82 units above the origin standing,
     so subtract that to place the eye where requested.
     """
     x, y, z = shot.origin
     p, yw, r = shot.angles
-    return [f"tele {x:.0f} {y:.0f} {z - EYE_HEIGHT:.0f}", f"face {p:.1f} {yw:.1f} {r:.1f}"]
+    return [f"tele {x:.0f} {y:.0f} {z - EYE_HEIGHT:.0f}", f"face {p:.1f} {yw:.1f} {r:.1f}",
+            f"fov {shot.fov if shot.fov is not None else 80:g}"]
 
 
 EYE_HEIGHT = 82.0
+FPS = 60
+
+
+def frames(ms: int) -> list[str]:
+    """Harness lines that wait ~``ms`` of rendered frames (one bare ``wait`` = one frame)."""
+    return ["wait"] * max(1, round(ms * FPS / 1000))
 
 
 def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, gametype: int = 1,
@@ -138,11 +162,14 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
     for pk3 in pk3s:
         shutil.copy2(pk3, main / Path(pk3).name)
 
-    # ui_hud must be issued after the map loads (CG_Init turns it back on). `wait N` waits N ms.
-    lines: list[str] = ["wait 1500", "ui_hud 0", "ui_crosshair 0", "ui_compass 0", "ui_gmbox 0", "ui_minicon 0",
-                        "cg_drawviewmodel 0", "fps 0", "cg_lagometer 0"]
+    # ui_hud must be issued after the map loads (CG_Init turns it back on). `wait N` subtracts
+    # each frame's duration, so one long loading frame used up the whole wait and the
+    # cameras ran before the client was in game (stock mohdm1). Bare `wait`s count frames
+    # instead (com_maxfps 60 below), which loading can't consume.
+    lines: list[str] = frames(1500) + ["ui_hud 0", "ui_crosshair 0", "ui_compass 0", "ui_gmbox 0", "ui_minicon 0",
+                                       "cg_drawviewmodel 0", "fps 0", "cg_lagometer 0"]
     lines += list(extra_commands)
-    lines += [f"wait {settle_ms}"]
+    lines += frames(settle_ms)
     shot_names = []
     if not shots:
         lines += ["saveshot spawn", "wait 300"]
@@ -152,6 +179,10 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
         # tele/face round-trip through the 20 Hz server: set, wait, set again, then capture.
         lines += camera_commands(s) + [f"wait {shot_ms}"] + camera_commands(s) + ["wait 300", f"saveshot {nm}", "wait 300"]
         shot_names.append(nm)
+    if bots:
+        # Bots join only after the cameras: with other players present the local
+        # spectator can end up following one, and every shot turns third-person.
+        lines += [f"sv_numbots {bots}"]
     if match_seconds:
         lines += [f"wait {int(match_seconds * 1000)}"]
     lines += ["quit"]
@@ -161,7 +192,7 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
         "fs_homepath": str(home), "fs_basepath": str(base), "com_updatecheck_enabled": "0",
         "r_fullscreen": "0", "r_mode": "-1", "r_customwidth": str(width), "r_customheight": str(height),
         "cl_playintro": "0", "logfile": "2", "developer": "1", "cheats": "1", "thereisnomonkey": "1", "g_gametype": str(gametype),
-        "sv_maxbots": str(bots), "sv_numbots": str(bots), "name": "mohkit", "com_maxfps": "60",
+        "sv_maxbots": str(bots), "sv_numbots": "0", "name": "mohkit", "com_maxfps": str(FPS),
         "s_volume": "0", "s_musicvolume": "0",
     }
     sets.update(cvars or {})
@@ -234,5 +265,39 @@ def contact_sheet(images: dict[str, Path], out: Path, cols: int = 3, thumb_w: in
         x, y = (i % cols) * w, (i // cols) * (h + 20)
         sheet.paste(im.resize((w, h)), (x, y + 20))
         d.text((x + 6, y + 4), k, fill=(255, 220, 120))
+    sheet.save(out)
+    return out
+
+
+def compare(reference: Path, shot: Path, out: Path, height: int = 540,
+            labels: tuple[str, str] = ("reference", "mohaa")) -> Path:
+    """Side-by-side check for recreating a scene from a picture.
+
+    Writes ``out`` with three panels at the same height: the reference, the game
+    shot, and a 50/50 blend (edges that line up in the blend mean the camera and the
+    geometry match). The reference is centre-cropped to the shot's aspect ratio;
+    render the shot at the reference's aspect (``run(width=, height=)``) to avoid that.
+    """
+    from PIL import Image, ImageDraw
+    ref = Image.open(reference).convert("RGB")
+    got = Image.open(shot).convert("RGB")
+    aspect = got.width / got.height
+    if abs(ref.width / ref.height - aspect) > 0.01:
+        if ref.width / ref.height > aspect:
+            w = round(ref.height * aspect)
+            ref = ref.crop(((ref.width - w) // 2, 0, (ref.width - w) // 2 + w, ref.height))
+        else:
+            h = round(ref.width / aspect)
+            ref = ref.crop((0, (ref.height - h) // 2, ref.width, (ref.height - h) // 2 + h))
+    w = round(height * aspect)
+    ref, got = ref.resize((w, height), Image.LANCZOS), got.resize((w, height), Image.LANCZOS)
+    blend = Image.blend(ref, got, 0.5)
+    sheet = Image.new("RGB", (3 * w, height + 20), (20, 20, 20))
+    d = ImageDraw.Draw(sheet)
+    for i, (im, label) in enumerate(((ref, labels[0]), (got, labels[1]), (blend, "blend"))):
+        sheet.paste(im, (i * w, 20))
+        d.text((i * w + 6, 4), label, fill=(255, 220, 120))
+    out = Path(out)
+    out.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(out)
     return out

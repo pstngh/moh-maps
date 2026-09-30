@@ -47,6 +47,7 @@ import numpy as np
 from .. import geom
 from ..build import _tri_for
 from ..mapfile import Brush as MBrush, Entity as MEntity, Face, MapFile, Patch, fmt
+from ..shaders import editor_image
 from .bsp import Brush, Contents, SourceBSP, Surf
 from .vmt import MaterialInfo, material_info
 from .vpk import SearchPath, ZipSource
@@ -244,7 +245,7 @@ class Converter:
         return None
 
     def _shader_text(self, cm: ConvertedMaterial) -> str:
-        lines = [f"textures/{cm.shader}", "{", f"\tqer_editorimage {cm.image}"]
+        lines = [f"textures/{cm.shader}", "{", f"\tqer_editorimage {editor_image(cm.image)}"]
         parm = self._surfaceparm(cm.info)
         if parm:
             lines.append(f"\tsurfaceparm {parm}")
@@ -292,7 +293,7 @@ class Converter:
             self.report["warnings"].append(f"sky {name}: only {written}/6 faces found; using sky/mohday2")
             return "sky/mohday2"
         self._sky_text = "\n".join([
-            f"textures/{self.prefix}/sky", "{", f"\tqer_editorimage env/{self.prefix}/sky_ft.jpg",
+            f"textures/{self.prefix}/sky", "{", f"\tqer_editorimage env/{self.prefix}/sky_ft.tga",
             "\tsurfaceparm noimpact", "\tsurfaceparm nolightmap", "\tsurfaceparm sky",
             f"\tskyParms env/{self.prefix}/sky 512 -", "}"])
         return f"{self.prefix}/sky"
@@ -862,7 +863,8 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     report = {"name": name, "source": str(src), "convert": res.report, "compile_ok": cr.ok, "stats": cr.stats,
               "problems": cr.problems}
     if cr.ok:
-        proj = project.Project(name=name, folder=out, title=src.stem, ambience="mohdm2")
+        proj = project.Project(name=name, folder=out, title=src.stem, ambience="mohdm2",
+                               precache=list(res.report.get("precache", ())))
         files = {f"maps/dm/{name}.bsp": cr.bsp.read_bytes(), **proj.scripts(), **res.assets}
         pk3 = out / f"{name}.pk3"
         project.write_pk3(pk3, files)

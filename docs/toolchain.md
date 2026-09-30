@@ -123,6 +123,7 @@ lighting it also inspects the BSP (`bsp_checks`).
 | `WARNING: Could not find 'models/…/x.map'` | a prop has no collision file | normal for many props; add clip brushes if players should collide |
 | `potential hash mismatch` (MOHlight) | curved-patch lighting quirk | harmless if it looks right |
 | `BSP weighs in at X MB out of an allowed 10.00 MB` | advisory size | fine above 10, but watch load times |
+| **bsp-check: non-.tga qer_editorimage**; in game the map drops to the menu with `LoadTGA: Only type 2 (RGB), 3 (gray), and 10 (RGB) TGA images supported` | Q3map copies each shader's `qer_editorimage` into the BSP fence-mask field and the engine loads it by exact name as a TGA (`qcommon/cm_fencemask.c`); a `.jpg` there is parsed as a TGA | name the `.tga` in `qer_editorimage` even when only the `.jpg` exists, as 205 retail shaders do (`mohkit.shaders.editor_image`) |
 | **bsp-check: faces have > 64 vertices** | the renderer draws them with the default checker (`MAX_FACE_POINTS`, `renderergl1/tr_bsp.c`) | split long brushes (mohkit splits on a 512 grid automatically) |
 
 Typical times on an Apple Silicon Mac through Wine:
@@ -131,6 +132,8 @@ Typical times on an Apple Silicon Mac through Wine:
 |---|---|---|---|---|
 | test room | 11 | 5 s | 5 s | 6 s |
 | mk_village (draft) | 5,000 | 58 s | 5 s | 225 s |
+| mk_village (normal, 8 bounces) | 5,000 | 56 s | 5 s | 1,380 s |
+| cs_dust2 (draft, detail in a caulk shell) | 18,200 | 1,213 s | 1 s | 3,090 s |
 | stock mohdm6 (normal) | 5,250 | 31 s | 110 s | 400 s |
 
 About 5 s of each stage is Wine start-up.

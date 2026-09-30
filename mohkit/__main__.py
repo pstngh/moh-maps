@@ -3,12 +3,13 @@
     python -m mohkit doctor                     check game, tools, wine, OpenMoHAA
     python -m mohkit new <name>                 scaffold maps/<name>/build.py from a working template
     python -m mohkit setup                      download the EA compilers (MOHTools) into .toolchain/
-    python -m mohkit build maps/<name> [-q draft|normal|final] [--no-test] [--bots N --seconds S]
+    python -m mohkit build maps/<name> [-q draft|preview|normal|final] [--no-test] [--bots N --seconds S]
     python -m mohkit compile file.map --name dm/x [-q draft]
     python -m mohkit validate file.map
     python -m mohkit plan file.map [-o out.png] [--zmin Z --zmax Z]
     python -m mohkit inspect file.map|file.bsp
-    python -m mohkit test file.pk3 dm/name [--bots N --seconds S]
+    python -m mohkit test file.pk3 dm/name [--shots maps/<name>] [--bots N --seconds S]
+    python -m mohkit compare ref.png shot.png [-o out.png]   reference | shot | blend, for recreating a picture
     python -m mohkit install file.pk3            copy a package into the game's main/
     python -m mohkit csgo de_dust2 [--name cs_dust2] [-q draft] [--scale 1.0]   convert a CS:GO map (local/ only)
 """
@@ -188,10 +189,23 @@ def cmd_inspect(a) -> int:
 
 def cmd_test(a) -> int:
     from . import game
-    r = game.run([Path(a.pk3)], a.map, bots=a.bots, match_seconds=a.seconds)
+    shots = []
+    if a.shots:
+        from .project import Project
+        shots = Project.load(Path(a.shots)).shots
+    r = game.run([Path(a.pk3)], a.map, shots, bots=a.bots, match_seconds=a.seconds)
     print(r.summary())
     for k, v in r.screenshots.items():
         print(f"  {k}: {v}")
+    if len(r.screenshots) > 1:
+        out = Path(a.pk3).with_name(Path(a.pk3).stem + "_shots.png")
+        print(f"== contact sheet {game.contact_sheet(r.screenshots, out)}")
+    return 0
+
+
+def cmd_compare(a) -> int:
+    from . import game
+    print(game.compare(Path(a.reference), Path(a.shot), Path(a.out)))
     return 0
 
 
@@ -224,7 +238,7 @@ def main(argv=None) -> int:
     s.set_defaults(fn=cmd_setup)
     s = sub.add_parser("build")
     s.add_argument("folder")
-    s.add_argument("-q", "--quality", default="normal", choices=["draft", "normal", "final"])
+    s.add_argument("-q", "--quality", default="normal", choices=["draft", "preview", "normal", "final"])
     s.add_argument("--no-test", action="store_true")
     s.add_argument("--bots", type=int, default=0)
     s.add_argument("--seconds", type=float, default=0)
@@ -232,7 +246,7 @@ def main(argv=None) -> int:
     s = sub.add_parser("compile")
     s.add_argument("map")
     s.add_argument("--name", required=True, help="game path, e.g. dm/mymap")
-    s.add_argument("-q", "--quality", default="normal", choices=["draft", "normal", "final"])
+    s.add_argument("-q", "--quality", default="normal", choices=["draft", "preview", "normal", "final"])
     s.add_argument("-o", "--out")
     s.set_defaults(fn=cmd_compile)
     s = sub.add_parser("validate")
@@ -254,14 +268,20 @@ def main(argv=None) -> int:
     s.add_argument("map", help="game path, e.g. dm/mymap")
     s.add_argument("--bots", type=int, default=0)
     s.add_argument("--seconds", type=float, default=0)
+    s.add_argument("--shots", metavar="FOLDER", help="use the SHOTS of this map project")
     s.set_defaults(fn=cmd_test)
+    s = sub.add_parser("compare")
+    s.add_argument("reference")
+    s.add_argument("shot")
+    s.add_argument("-o", "--out", default="dist/compare.png")
+    s.set_defaults(fn=cmd_compare)
     s = sub.add_parser("install")
     s.add_argument("pk3")
     s.set_defaults(fn=cmd_install)
     s = sub.add_parser("csgo", help="convert a CS:GO map (output in local/, never commit it)")
     s.add_argument("map", help="map name in csgo/maps (de_dust2) or a .bsp path")
     s.add_argument("--name", help="MOHAA map name (default cs_<name>)")
-    s.add_argument("-q", "--quality", default="draft", choices=["draft", "normal", "final"])
+    s.add_argument("-q", "--quality", default="draft", choices=["draft", "preview", "normal", "final"])
     s.add_argument("--scale", type=float, default=1.0)
     s.add_argument("--max-texture", type=int, default=512)
     s.add_argument("--structural", action="store_true", help="keep Source world brushes structural (better VIS, may overflow)")

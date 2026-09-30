@@ -36,6 +36,7 @@ PROBLEM_RE = re.compile(r"warning|error|leak|degenerate|couldn't|could not|MAX_|
 QUALITY = {
     # vis flags, light flags
     "draft": (["-fast"], ["-fast"]),
+    "preview": ([], ["-bounce", "2"]),
     "normal": ([], []),
     "final": ([], ["-final"]),
 }
@@ -186,7 +187,8 @@ def compile_map(map_text_or_path: Union[str, Path], name: str,
                 cfg: Optional[_config.Config] = None) -> CompileResult:
     """Compile a map. ``name`` is the game path without extension, e.g. ``dm/mymap``.
 
-    ``quality``: ``draft`` (fast VIS + fast light), ``normal``, ``final`` (MOHlight -final).
+    ``quality``: ``draft`` (fast VIS + fast light), ``preview`` (2 radiosity bounces), ``normal`` (8),
+    ``final`` (MOHlight -final).
     """
     cfg = cfg or _config.load()
     tc = Toolchain(cfg)
@@ -281,6 +283,11 @@ def bsp_checks(path: Path) -> list[str]:
     summ = b.summary()
     for k, v in summ["over_limit"].items():
         out.append(f"[bsp-check] ERROR {k} over engine limit: {v}")
+    bad = sorted({sh.fence_mask for sh in shaders if sh.fence_mask and sh.fence_mask not in ("nomask", "ignore")
+                  and not sh.fence_mask.lower().endswith(".tga")})
+    if bad:
+        out.append(f"[bsp-check] ERROR {len(bad)} shaders have a non-.tga qer_editorimage; the engine reads it as a TGA "
+                   f"fence mask and the map fails to load (use shaders.editor_image): {', '.join(bad[:5])}")
     if summ["lightmap_pages"] > 180:
         out.append(f"[bsp-check] ERROR {summ['lightmap_pages']} lightmap pages (MOHlight limit is 180)")
     return out
