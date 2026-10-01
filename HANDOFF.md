@@ -20,20 +20,16 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 00:52):**
-- Nuke **unlit** build `cs_nukeu` (00:35-00:43; BSP 261 s, VIS 1 s, 4,801 props injected,
-  38 named-camera shots): reads clearly as Nuke (layout, props, overlays/signage, B-site
-  reactor and pool under the glass grid, doors, open vents). **Bots: 83 kills in 90 s**
-  with 8 bots, navmesh built in 10 s, nothing stuck. **Ladders (`game.ladder_probe`): 5 of
-  6 climbed**; the A-site one hangs 47 units above the box you climb from: fixed (trigger
-  extended down to the floor in front), not yet re-verified. Sheet bugs fixed since:
-  light-shaft cards drawn solid white (additive now alpha-weighted, unlit materials
-  `rgbGen identity`), asphalt cracks as grey squares (DecalModulate -> modulate decal).
-- Running: Nuke lit draft `cs_nuke` (started 00:24, light 39% at 00:49, built from code
-  before those fixes and before ropes/func_brush handling), dust2 draft (light started
-  ~00:46, slow first %), both in the session scratchpad logs.
-- Next: look at the lit Nuke sheet, then a fresh Nuke build with every fix (unlit first
-  for ladders/geometry, then lit), bots, then the final-quality decision.
+**Live state (update as you go, 01:25):**
+- **dust2 done for tonight's time box:** fresh draft (density 32) OK: 1,574 props
+  injected, 459 overlays (graffiti, A/B markings), 32 named cameras look like Dust2,
+  **75 bot kills** in 90 s. `local/csgo/cs_dust2/cs_dust2.pk3`. Shadows are dark (draft
+  light, no bounce); a radiosity build would lift them.
+- **Nuke:** unlit build verified (83 kills; ladders 5/6 by walking, the hanging A-site one
+  should mount with +use: re-test with the updated probe). Lit draft `cs_nuke` (00:24
+  code) light at ~75% at 01:20. Then: rebuild Nuke with every fix, probe ladders, bots,
+  choose the final lighting.
+- **Mirage:** `-q unlit --name cs_mirageu` started 01:17.
 
 Done this run (all committed and pushed):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).

@@ -121,3 +121,13 @@ surfaces a frame (`MAX_STATIC_MODELS_SURFS`).
 - Openable/breakable props (`prop_dynamic` vent slats opened by `func_button` or `OnBreak`)
   aren't converted: those vents are open. Door handles and other relief are lost.
 - Sprites (`env_sprite` glows) and detail sprites (grass) are dropped.
+
+## Measured builds (2026-10-01, Apple Silicon, three builds sharing 10 cores)
+
+| map | quality | props injected (vertices) | overlays | BSP | VIS | light | shots | bots (8, 90 s) |
+|---|---|---|---|---|---|---|---|---|
+| cs_dust2 | draft (density 32) | 1,574 (842k) | 459 | 559 s | 1 s | 1,962 s | 32 named cameras, 47 s | 75 kills |
+| cs_nuke | unlit | 4,801 (5.6M) | 718 | 261–489 s | 1 s | — | 38 named cameras, 59 s | 83 kills |
+
+de_nuke's draft light at density 16 had reached 1% after 6 minutes; at density 32 the
+first 10% still took ~15 minutes (progress is not linear: the slow part comes first).
