@@ -6,6 +6,35 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
+## NEXT SESSION: start here (user, chat 2026-10-01 ~13:05)
+
+**User's priorities, in order:**
+1. **Lighting quality of the conversions (main complaint).** User's words: "some things are
+   very, very, very high brightness. Sometimes it's a room, sometimes it's specific textures,
+   but the lighting is not cozy at all in a lot of the maps. It can be either too dark or way
+   too bright." Treat it as a systematic exposure problem across all converted maps
+   (cs_dust2, cs_mirage, cs_nuke, cs_inferno, cs_cache, cs_rats), not a single bug.
+   Suspects to measure first (each was changed or tuned recently):
+   - texlights on by default (one point light per emitting face: whole rooms can blow out);
+   - `$additive` world materials now `blendFunc add` (commit bcaca59): bright textures;
+   - converted lights at 1.5x Source brightness, merging of near lights, `light_spot` cones;
+   - `$selfillum` / unlit model materials drawn fullbright; rgbGen identity on overlays;
+   - injected prop colours (`staticlight.LIGHTMAP_TO_VERTEX` 1.78 scale) vs the lightmaps;
+   - sun/ambient/sky fill from `light_environment` (HDR vs LDR values), `-fast -bounce 2`.
+   Method: build a measurable check before tuning: per contact-sheet shot, the share of
+   blown-out (near 255) and crushed (near 0) pixels and mean luminance, per map; find the
+   worst shots and trace each to its cause (a light, a shader, a prop); compare with CS:GO's
+   own look (the `.jpg` loading images in csgo/maps, or CS:GO screenshots if it can be run)
+   and with stock MOHAA maps (mohdm1-7). Fix in mohkit, rebuild, re-measure, then rebuild and
+   reinstall all six maps. Judge on `-q fastrad` or better.
+2. **de_vertigo** (`de_vertigo.bsp`, 28 MB, cameras file present), then **de_cbble**
+   (Cobblestone, 83 MB, cameras file present). Same treatment as Inferno/Cache: `-q unlit`
+   first (geometry, ladders, props, spawns), then `-q fastrad` with `local/csgo/<x>_final.sh`
+   (copy `cache_final.sh`), sheets checked, 8 bots, `ladprobe.py`, then `mohkit install`.
+   Vertigo: skyscraper (falls, scaffolds, ladders, 3D city skybox below); Cobblestone: big
+   castle map with long sightlines.
+3. Keep all six existing maps installed and working (re-run `mohkit install` after rebuilds).
+
 ## Current session (2026-10-01, from 11:25): de_inferno, de_cache, de_rats_1337_v2
 
 **User (chat 11:25):** convert de_inferno, then de_cache, then workshop de_rats_1337_v2
