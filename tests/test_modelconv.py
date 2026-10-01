@@ -310,6 +310,22 @@ def test_phy_synthetic() -> None:
     assert '"index" "0"' in phy.keyvalues
 
 
+def test_see_through_image() -> None:
+    """Refract materials (no $basetexture) become a faint translucent tint, not opaque grey."""
+    from mohkit.source.vmt import MaterialInfo
+
+    class NoFiles:
+        def try_read(self, path):
+            return None
+
+    mi = MaterialInfo("glass", found=True, shader="refract", params={"$refracttint": "[1 0.5 0.5]"})
+    a = mc.see_through_image(NoFiles(), mi)
+    assert a.shape == (64, 64, 4) and (a[..., 3] == 77).all() and a[..., 0].mean() > a[..., 1].mean()
+    assert mc.convert_texture(NoFiles(), mi, keep_alpha=True)[..., 3].max() == 77
+    mi.shader = "vertexlitgeneric"
+    assert mc.see_through_image(NoFiles(), mi) is None
+
+
 def test_names_and_surface_types() -> None:
     d, b = mc.model_names("models/props/de_dust/Dust_Rusty_Barrel.mdl")
     assert (d, b) == ("models/csgo/props/de_dust", "dust_rusty_barrel")

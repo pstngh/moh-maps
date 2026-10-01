@@ -263,7 +263,33 @@ class Converter:
         self.assets: dict[str, bytes] = {}
         self.report: dict = {"dropped": {}, "brushes": 0, "faces": 0, "patches": 0, "materials": 0, "warnings": []}
         self.sky_area = self.bsp.skybox_area()
+        self.sky_box = self._sky_box()
         self.sky_shader = opt.sky_shader or self._convert_sky()
+
+    def _sky_box(self):
+        """Bounds (lo, hi) of the 3D skybox's leaves, or ``None`` (no sky area, or the box
+        overlaps the leaves of other areas). de_cache's skybox brushes whose faces all touch
+        solid, and its func_brushes, have no area of their own: the box catches them."""
+        if self.sky_area is None:
+            return None
+        areas = self.bsp.leaf_areas
+        leafs = self.bsp.leafs
+        sky, rest = leafs[areas == self.sky_area], leafs[(areas != self.sky_area) & (areas != 0)]
+        if not len(sky) or not len(rest):
+            return None
+        lo, hi = sky["mins"].min(0).astype(np.float64), sky["maxs"].max(0).astype(np.float64)
+        rlo, rhi = rest["mins"].min(0), rest["maxs"].max(0)
+        if np.all(lo < rhi) and np.all(rlo < hi):
+            return None
+        return lo, hi
+
+    def _in_sky(self, p) -> bool:
+        """``p`` (Source world units) is in the 3D skybox."""
+        if self.sky_area is None:
+            return False
+        if self.sky_box is not None and np.all(self.sky_box[0] <= p) and np.all(np.asarray(p) <= self.sky_box[1]):
+            return True
+        return self.bsp.point_area(tuple(float(v) for v in p)) == self.sky_area
 
     # ------------------------------------------------------------------ materials
     def _shader_name(self, src: str) -> str:
@@ -370,10 +396,15 @@ class Converter:
                 rgba = load_vtf(self.fs, tex).decode()
             except Exception as e:  # noqa: BLE001
                 self.report["warnings"].append(f"texture {tex}: {e}")
+        see = None
+        if rgba is None and info.found:
+            from .modelconv import see_through_image
+            rgba = see = see_through_image(self.fs, info)   # refract glass: a faint tint
         if rgba is None:
             rgba = np.full((64, 64, 4), (128, 128, 128, 255), np.uint8)
             self.report["warnings"].append(f"material {src}: no texture, grey placeholder")
-        cm.kind = "translucent" if info.translucent or info.additive else ("alphatest" if info.alphatest else "opaque")
+        cm.kind = "translucent" if info.translucent or info.additive or see is not None else (
+            "alphatest" if info.alphatest else "opaque")
         if (info.shader or "").lower() == "decalmodulate":
             cm.kind = "modulate"   # multiplies what is under it by 2 x texture (grey 128 = no change)
             # its alpha (when $translucent) says where it applies: fold it into the colour as
@@ -609,9 +640,12 @@ class Converter:
             if len(geo) < 4:
                 drop["degenerate"] = drop.get("degenerate", 0) + 1
                 continue
-            if br.model == 0 and self.sky_area is not None:
-                areas = self.bsp.brush_face_areas(br, [w for _, w in geo]) if False else self._areas(br, geo)
-                if areas and areas <= {self.sky_area}:
+            if self.sky_area is not None:
+                c = np.mean([p for _, w in geo for p in w], axis=0)
+                if br.model > 0:
+                    c = np.array(self._apply(tuple(c), self._xf(br.model))) / self.opt.scale
+                areas = self._areas(br, geo) if br.model == 0 else set()
+                if (areas and areas <= {self.sky_area}) or (self.sky_box is not None and self._in_sky(c)):
                     drop["skybox3d"] = drop.get("skybox3d", 0) + 1
                     continue
             if self.opt.texlights:
@@ -815,7 +849,7 @@ class Converter:
             V = np.cross(n, U)
             if uvp[3, 2] == 1.0:
                 V = -V
-            if self.sky_area is not None and self.bsp.point_area(tuple(o + n * 2)) == self.sky_area:
+            if self._in_sky(o + n * 2):
                 self.report["dropped"]["skybox3d_overlay"] = self.report["dropped"].get("skybox3d_overlay", 0) + 1
                 continue
             ti = int(r["texinfo"])
@@ -891,7 +925,7 @@ class Converter:
                 continue
             a = np.array(e.origin, np.float64)
             b = np.array(nxt.origin, np.float64)
-            if self.sky_area is not None and self.bsp.point_area(tuple((a + b) / 2)) == self.sky_area:
+            if self._in_sky((a + b) / 2):
                 continue
             try:
                 width = max(0.5, float(e.get("width", "2") or 2))
@@ -963,7 +997,7 @@ class Converter:
             mat = (e.get("model") or "").replace("\\", "/")
             if o is None or not mat.endswith(".vmt"):
                 continue          # .spr / .vtf sprites: rare in CS:GO maps
-            if self.sky_area is not None and self.bsp.point_area(o) == self.sky_area:
+            if self._in_sky(o):
                 continue
             try:
                 col = [float(x) / 255 for x in (e.get("rendercolor") or "255 255 255").split()[:3]]
@@ -1379,8 +1413,7 @@ class Converter:
             n = d.size
             c = d.positions.reshape(-1, 3).mean(axis=0)
             if self.sky_area is not None:
-                a = self.bsp.point_area(tuple(c + np.array(d.normal) * 2.0))
-                if a == self.sky_area:
+                if self._in_sky(c + np.array(d.normal) * 2.0):
                     self.report["dropped"]["skybox3d_disp"] = self.report["dropped"].get("skybox3d_disp", 0) + 1
                     continue
             td = self.bsp.texdata[self.bsp.texinfo[d.texinfo]["texdata"]]
@@ -1474,7 +1507,7 @@ class Converter:
         ``light_min_brightness`` are dropped and a light within ``light_merge_distance`` of
         a brighter one is folded into it (half its intensity added)."""
         lights = [(e, e.classname, self._brightness(e)) for e in self.bsp.entities
-                  if e.classname in ("light", "light_spot") and e.origin is not None]
+                  if e.classname in ("light", "light_spot") and e.origin is not None and not self._in_sky(e.origin)]
         before = len(lights)
         lights = [t for t in lights if t[2] >= self.opt.light_min_brightness]
         lights.sort(key=lambda t: -t[2])
@@ -1597,7 +1630,7 @@ class Converter:
             if self.sky_area is not None:
                 areas = self.bsp.prop_areas(p) if not getattr(p, "entity", False) else {
                     self.bsp.point_area(p.origin)}
-                if areas and areas <= {self.sky_area}:
+                if (areas and areas <= {self.sky_area}) or self._in_sky(p.origin):
                     continue
             key = (p.model.lower(), p.skin, p.solid if p.solid in (0, 2, 6) else 6)
             if key not in cache:
@@ -1824,16 +1857,18 @@ class _CutWinding(list):
 
 def _split_long(geo, grid: float):
     """Split a convex brush, given as [(side, winding)], at multiples of ``grid`` along X and Y
-    when it is longer than ``grid``. Cut faces come back as (None, _CutWinding)."""
+    and of ``min(grid, 512)`` along Z when it is longer than that. Cut faces come back as
+    (None, _CutWinding). Z too: de_rats' 672-unit-tall, 24-wide wall strip collected 65
+    T-junction vertices; few brushes are that tall, so the finer Z grid costs little."""
     if not grid:
         return [geo]
     pts = [p for _, w in geo for p in w]
-    (x0, y0, _), (x1, y1, _) = geom.bounds_of(pts)
+    (x0, y0, z0), (x1, y1, z1) = geom.bounds_of(pts)
     pieces = [geo]
-    for ax, lo, hi in ((0, x0, x1), (1, y0, y1)):
-        if hi - lo <= grid:
+    for ax, lo, hi, g in ((0, x0, x1, grid), (1, y0, y1, grid), (2, z0, z1, min(grid, 512.0))):
+        if hi - lo <= g:
             continue
-        cuts = [k * grid for k in range(math.floor(lo / grid) + 1, math.ceil(hi / grid))]
+        cuts = [k * g for k in range(math.floor(lo / g) + 1, math.ceil(hi / g))]
         nxt = []
         for pc in pieces:
             planes = [(s.plane if s is not None else geom.Plane(w.normal, geom.dot(w.normal, w[0]))) for s, w in pc]

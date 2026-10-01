@@ -285,6 +285,36 @@ def _parse_color(v) -> Optional[np.ndarray]:
     return c
 
 
+def see_through_image(fs, mi: MaterialInfo) -> Optional[np.ndarray]:
+    """RGBA for a material drawn from what is behind it, with no ``$basetexture``: ``Refract``
+    (glass, de_inferno's fountain water sheet) and ``Water``. A faint tint (``$refracttint`` or
+    ``$fogcolor``) shaded by the normal map's relief; alpha 0.3 (refract) or 0.5 (water).
+    ``None`` for other shaders. Without this the material was an opaque grey placeholder."""
+    if mi.shader not in ("refract", "water") or mi.basetexture:
+        return None
+    tint = None
+    for key in ("$refracttint", "$fogcolor"):
+        tint = _parse_color(mi.params.get(key)) if tint is None else tint
+    tint = np.clip(tint if tint is not None else np.array([0.75, 0.85, 0.9], np.float32), 0.05, 1.0)
+    relief = np.full((64, 64), 0.5, np.float32)
+    nm = mi.params.get("$normalmap") or mi.params.get("$bumpmap") or mi.params.get("$dudvmap")
+    if isinstance(nm, str):
+        name = nm.replace("\\", "/").lower().strip("/")
+        name = name[len("materials/"):] if name.startswith("materials/") else name
+        data = fs.try_read(f"materials/{name.removesuffix('.vtf')}.vtf")
+        if data is not None:
+            try:
+                n = VTF(data, name).decode().astype(np.float32) / 255.0
+                relief = 0.5 * n[..., 0] + 0.5 * n[..., 1]
+            except Exception:  # noqa: BLE001
+                pass
+    shade = 0.85 + 0.5 * (relief - relief.mean())
+    out = np.empty(relief.shape + (4,), np.uint8)
+    out[..., :3] = np.clip(tint[None, None, :] * shade[..., None] * 255 + 0.5, 0, 255).astype(np.uint8)
+    out[..., 3] = 77 if mi.shader == "refract" else 128
+    return out
+
+
 def _pow2_at_most(n: int, cap: int) -> int:
     p = 1
     while p * 2 <= n:
@@ -307,9 +337,11 @@ def convert_texture(fs, mi: MaterialInfo, max_texture: int = 512, keep_alpha: bo
                     warnings: Optional[list[str]] = None) -> np.ndarray:
     """``$basetexture`` of a material as RGBA, tinted by ``$color``/``$color2``, resized to powers of two."""
     from PIL import Image
-    rgba = None
+    rgba = see_through_image(fs, mi)
     tex = mi.basetexture
-    if tex:
+    if rgba is not None:
+        pass
+    elif tex:
         data = fs.try_read(f"materials/{tex}.vtf")
         if data is None and warnings is not None:
             warnings.append(f"{mi.name}: texture materials/{tex}.vtf not found")
@@ -383,7 +415,8 @@ def _resolve_material(fs, info, tex_index: int, prefix: str, model_surfaceprop: 
     mat = _Material(name, mi, texture_name(name, prefix), parm, clip)
     if mi:
         mat.alphatest = mi.alphatest
-        mat.translucent = mi.translucent and not mi.alphatest
+        mat.translucent = (mi.translucent and not mi.alphatest) or (mi.shader in ("refract", "water")
+                                                                     and not mi.basetexture)
         mat.additive = mi.additive
         mat.nocull = mi.nocull or mi.alphatest
         mat.skip = mi.nodraw or mi.name.startswith("tools/") or mi.shader in ("nodraw",)
