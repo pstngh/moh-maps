@@ -1054,6 +1054,7 @@ class Converter:
         """
         s = self.opt.scale
         merged = self._ladder_boxes()
+        self._ladder_mount_boxes: list = []
         props = None
         out: list[MEntity] = []
         for lo, hi in merged:
@@ -1115,6 +1116,10 @@ class Converter:
             org[thin] = near
             o_lo, o_hi = org - 1, org + 1
             from ..build import box
+            # where FuncLadder::CanUseLadder box-traces the player (origin - facing * 29, from
+            # absmin + 16 down 16, player size): prop collision there blocks mounting
+            mc = (org - np.array(facing) * 29) * s
+            self._ladder_mount_boxes.append(((mc[0] - 16, mc[1] - 16, t_lo[2] * s), (mc[0] + 16, mc[1] + 16, t_lo[2] * s + 16 + 96)))
             trig = box(tuple(t_lo * s), tuple(t_hi * s), "common/trigger")
             obr = box(tuple(o_lo * s), tuple(o_hi * s), "common/origin")
             yaw = round(math.degrees(math.atan2(facing[1], facing[0]))) % 360
@@ -1503,10 +1508,13 @@ class Converter:
         self.statics: list = []
         prop_ents, prop_clips, precache = self.props() if self.opt.props else ([], [], [])
         # A ladder model's own collision (mirage's leaning ladderwood) stands inside the ladder
-        # volume and stops the view trace that mounts a func_ladder (Player::CondLadder):
-        # drop prop clips that reach into a ladder volume.
+        # volume and stops the view trace that mounts a func_ladder (Player::CondLadder), and a
+        # door model beside that ladder filled the box FuncLadder::CanUseLadder checks: drop
+        # prop clips that reach into a ladder volume or its mount box.
         s = self.opt.scale
+        ladder_ents = self.ladders()
         lboxes = [(lo * s - 2, hi * s + 2) for lo, hi in self._ladder_boxes()]
+        lboxes += [(np.array(lo), np.array(hi)) for lo, hi in self._ladder_mount_boxes]
         if lboxes:
             kept = []
             for b in prop_clips:
@@ -1520,7 +1528,7 @@ class Converter:
         world.prims = list(brushes) + list(patches) + overlay_patches + prop_clips + self.sprites()
         if self.opt.detail_all:
             world.prims = self.shell(brushes, patches) + world.prims
-        ents = [world] + self.entities() + self.ladders() + self.windows() + self.doors() + self.breakables() + prop_ents
+        ents = [world] + self.entities() + ladder_ents + self.windows() + self.doors() + self.breakables() + prop_ents
         self.report["precache"] = precache
         scripts = [self._shader_text(cm) for cm in self.mats.values()]
         scripts += list(getattr(self, "_overlay_shaders", {}).values())
