@@ -45,7 +45,7 @@ from typing import Optional
 import numpy as np
 
 from .. import geom
-from ..build import _tri_for
+from ..build import Material, _tri_for
 from ..mapfile import Brush as MBrush, Entity as MEntity, Face, MapFile, Patch, fmt
 from ..shaders import editor_image
 from .bsp import Brush, Contents, SourceBSP, Surf
@@ -94,6 +94,7 @@ class Options:
     lightmap_density: int = 16
     overlays: bool = True           # info_overlay decals -> flat blended patches
     ropes: bool = True              # move_rope/keyframe_rope cables -> crossed ribbon patches
+    sprites: bool = True            # env_sprite glows -> autosprite quads
     light_scale: float = 1.0
     sky_shader: Optional[str] = None  # override (e.g. "sky/mohday2"); default converts the Source sky
     texture_quality: int = 90       # JPEG quality for opaque textures
@@ -778,6 +779,76 @@ class Converter:
             self._overlay_shaders[name] = "\n".join(lines)
         return name
 
+    # ------------------------------------------------------------------ sprites
+    def sprites(self) -> list[MBrush]:
+        """``env_sprite`` glows (lamp halos) -> a floating quad facing the viewer: a thin
+        ``common/nodraw`` brush whose one visible face has an additive ``deformVertexes
+        autosprite`` shader (a quad, so autosprite applies; docs/reference/engine.md).
+        ``rendercolor`` x ``renderamt`` is baked into the image; the quad is 0.75 x the
+        texture size x ``scale`` units wide (8-96)."""
+        out: list[MBrush] = []
+        if not self.opt.sprites:
+            return out
+        from ..build import box
+        s = self.opt.scale
+        self._overlay_shaders = getattr(self, "_overlay_shaders", {})
+        cache: dict = {}
+        for e in self.bsp.find_entities("env_sprite"):
+            o = e.origin
+            mat = (e.get("model") or "").replace("\\", "/")
+            if o is None or not mat.endswith(".vmt"):
+                continue          # .spr / .vtf sprites: rare in CS:GO maps
+            if self.sky_area is not None and self.bsp.point_area(o) == self.sky_area:
+                continue
+            try:
+                col = [float(x) / 255 for x in (e.get("rendercolor") or "255 255 255").split()[:3]]
+                amt = float(e.get("renderamt", "255") or 255) / 255
+                scale = float(e.get("scale", "1") or 1)
+            except ValueError:
+                continue
+            key = (mat.lower(), tuple(round(c * amt, 2) for c in col))
+            if key not in cache:
+                info = material_info(self.fs, mat[:-4])
+                tex = info.basetexture if info.found else None
+                try:
+                    rgba = load_vtf(self.fs, tex).decode() if tex else None
+                except Exception:  # noqa: BLE001
+                    rgba = None
+                if rgba is None:
+                    cache[key] = None
+                    continue
+                img = rgba[..., :3].astype(np.float32)
+                if info.params.get("$translucent") or rgba[..., 3].min() < 250:
+                    img *= rgba[..., 3:4].astype(np.float32) / 255.0
+                img = np.clip(img * np.array(key[1], np.float32), 0, 255).astype(np.uint8)
+                h = hashlib.md5(repr(key).encode()).hexdigest()[:6]
+                name = f"{self.prefix}/spr_{Path(tex).name[:20]}_{h}"
+                full = np.concatenate([img, np.full(img.shape[:2] + (1,), 255, np.uint8)], axis=2)
+                image, _size = self._write_image(name, full, False)
+                self._overlay_shaders[name] = "\n".join([
+                    f"textures/{name}", "{", f"\tqer_editorimage {editor_image(image)}", "\tsurfaceparm nonsolid",
+                    "\tsurfaceparm trans", "\tsurfaceparm nolightmap", "\tsurfaceparm nomarks",
+                    "\tdeformVertexes autosprite", "\tcull none", "\t{", f"\t\tmap {image}", "\t\tblendFunc add",
+                    "\t\trgbGen identity", "\t}", "}"])
+                cache[key] = (name, rgba.shape[1])
+            if cache[key] is None:
+                continue
+            name, width = cache[key]
+            half = max(4.0, min(48.0, width * scale * 0.75 / 2)) * s
+            c = [v * s for v in o]
+            spec = {"east": Material(name, (1, 1)), "default": Material("common/nodraw", (1, 1))}
+            b = box((c[0] - 0.5, c[1] - half, c[2] - half), (c[0] + 0.5, c[1] + half, c[2] + half), spec, detail=True)
+            for f in b.faces:
+                if f.shader == name:
+                    # fit the image to the quad: an east face projects s = y / scale + shift and
+                    # t = -z / scale + shift (Q3 base axes), so the glow is centred and whole
+                    sc = 2 * half / width
+                    f.scale = (round(sc, 6), round(sc, 6))
+                    f.shift = (round((-(c[1] - half) / sc) % width, 3), round(((c[2] + half) / sc) % width, 3))
+            out.append(b)
+        self.report["sprites"] = len(out)
+        return out
+
     # ------------------------------------------------------------------ doors
     def doors(self) -> list[MEntity]:
         """``prop_door_rotating`` -> ``func_rotatingdoor``: a brush slab spanning the door
@@ -1378,7 +1449,7 @@ class Converter:
         self.statics: list = []
         prop_ents, prop_clips, precache = self.props() if self.opt.props else ([], [], [])
         world = MEntity(self.worldspawn())
-        world.prims = list(brushes) + list(patches) + overlay_patches + prop_clips
+        world.prims = list(brushes) + list(patches) + overlay_patches + prop_clips + self.sprites()
         if self.opt.detail_all:
             world.prims = self.shell(brushes, patches) + world.prims
         ents = [world] + self.entities() + self.ladders() + self.windows() + self.doors() + prop_ents
