@@ -1,22 +1,10 @@
 # HANDOFF: current state and next steps (living file; keep it current)
 
-## Overnight run rules (2026-10-01, until 06:00 America/New_York)
+## Session rules
 
-The user is asleep and authorized an unattended run. These rules override CLAUDE.md's
-"pause at 75% context" rule for this run only:
-
-- Do **not** pause or hand off for context. Let auto-compaction happen as often as needed.
-- Keep this file current at every milestone and commit + push after tests pass, so a
-  compaction loses nothing.
-- Work through "Next steps" in order. Skip a step that's blocked (note why) and keep
-  going. When the list runs out, add worthwhile work toward the Goal and do it.
-- Don't ask questions. Make reasonable decisions and log them under "Decisions made
-  while the user was away".
-- Run long builds in the background and work on something else meanwhile. Never end a
-  turn with nothing running before 06:00 (check `date`). Use a background waiter
-  (`while kill -0 PID; do sleep 30; done`) so you're woken up.
-- At 06:00 ET: finish or park the current step, update this file, commit, push, and stop
-  with a short summary for the user.
+The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer apply.
+CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
+update this file, commit and push, then stop and give the user the one-line handoff.
 
 ## Summary (overnight run 2026-10-01, fourth session; ended 06:00 ET)
 
