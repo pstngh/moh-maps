@@ -172,8 +172,13 @@ def write_pk3(out: Path, files: dict[str, bytes]) -> None:
 
 
 def build(folder: Path, quality: str = "normal", test: bool = True, bots: int = 0, match_seconds: float = 0,
-          log=print) -> dict:
-    """Full pipeline for one project folder. Returns a report dict (also written to dist/)."""
+          log=print, inject_props: bool = False) -> dict:
+    """Full pipeline for one project folder. Returns a report dict (also written to dist/).
+
+    ``inject_props``: compile without the ``static_*`` props (their collision ``.map``
+    brushes go into the world instead) and add them after the light stage, coloured from
+    the light grid (``mohkit.staticlight``): no MOHlight static-model lighting, which runs
+    on one thread at ~190 vertices a second (mk_medina's 107 props: ~55 minutes)."""
     t0 = time.time()
     proj = Project.load(folder)
     log(f"== {proj.game_path}: generating")
@@ -184,6 +189,23 @@ def build(folder: Path, quality: str = "normal", test: bool = True, bots: int = 
         log(f"  {i}")
     if any(i.severity == "error" for i in issues):
         raise SystemExit(f"{proj.name}: validation errors, not compiling")
+    statics: list = []
+    read = None
+    if inject_props:
+        from . import config as _config, staticlight
+        from .pak import GameFS
+        fs = GameFS(_config.load().game_dir, loose=False)
+
+        def _retail(path, _fs=fs):
+            try:
+                return _fs.read(path)
+            except Exception:  # noqa: BLE001
+                return None
+        local = staticlight.files_reader(proj.assets())
+        read = lambda p: local(p) or _retail(p)  # noqa: E731
+        statics, clips = staticlight.take_statics(m, read)
+        m.worldspawn.prims.extend(clips)
+        log(f"== {len(statics)} static props held back for injection ({len(clips)} collision brushes)")
     log(f"== compiling ({quality})")
     res = proj.compile(m, quality=quality)
     log(res.summary())
@@ -191,7 +213,15 @@ def build(folder: Path, quality: str = "normal", test: bool = True, bots: int = 
               "problems": res.problems, "issues": [str(i) for i in issues]}
     if not res.ok:
         return report
-    pk3 = proj.package(res.bsp)
+    bsp = res.bsp
+    if statics:
+        from . import staticlight
+        lit = DIST / f"{proj.name}.bsp"
+        DIST.mkdir(parents=True, exist_ok=True)
+        report["statics"] = staticlight.inject_statics(res.bsp, statics, read, lit)
+        log(f"== static props injected: {report['statics']}")
+        bsp = lit
+    pk3 = proj.package(bsp)
     report["pk3"] = str(pk3)
     log(f"== packaged {pk3} ({pk3.stat().st_size // 1024} KB)")
     if test:

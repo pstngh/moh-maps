@@ -157,7 +157,8 @@ def cmd_generate(a) -> int:
 
 def cmd_build(a) -> int:
     from . import project
-    rep = project.build(Path(a.folder), quality=a.quality, test=not a.no_test, bots=a.bots, match_seconds=a.seconds)
+    rep = project.build(Path(a.folder), quality=a.quality, test=not a.no_test, bots=a.bots, match_seconds=a.seconds,
+                        inject_props=a.inject_props)
     return 0 if rep.get("compile_ok") else 1
 
 
@@ -307,6 +308,8 @@ def main(argv=None) -> int:
     s.add_argument("--no-test", action="store_true")
     s.add_argument("--bots", type=int, default=0)
     s.add_argument("--seconds", type=float, default=0)
+    s.add_argument("--inject-props", action="store_true",
+                   help="add static_* props after the light stage, lit from the light grid (no MOHlight prop lighting)")
     s.set_defaults(fn=cmd_build)
     s = sub.add_parser("compile")
     s.add_argument("map")

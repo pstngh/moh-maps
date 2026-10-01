@@ -62,6 +62,26 @@ def test_shade_neutral_on_average() -> None:
     assert abs(high.mean() - 200 * 0.64) < 3.0
 
 
+def test_take_statics_moves_collision() -> None:
+    """static_* entities leave the map; their collision .map brushes come back placed in the
+    world (translated, turned by the yaw, scaled), as Q3map would have baked them."""
+    from mohkit.mapfile import Entity, MapFile
+    from mohkit.build import box
+    coll = MapFile([Entity({"classname": "worldspawn"}, [box((0, 0, 0), (32, 16, 8), "common/woodclip")])]).dumps()
+    m = MapFile([Entity({"classname": "worldspawn"}),
+                 Entity({"classname": "static_crate", "model": "static/crate.tik", "origin": "100 200 0",
+                         "angle": "90", "scale": "2"}),
+                 Entity({"classname": "info_player_deathmatch", "origin": "0 0 0"})])
+    read = SL.files_reader({"models/static/crate.map": coll.encode()})
+    statics, clips = SL.take_statics(m, read)
+    assert [e.classname for e in m.entities] == ["worldspawn", "info_player_deathmatch"]
+    assert statics == [("static/crate.tik", (100.0, 200.0, 0.0), (0.0, 90.0, 0.0), 2.0)]
+    assert len(clips) == 1
+    lo, hi = clips[0].bounds()
+    # yaw 90 turns +x into +y: x 0..32, y 0..16 (x2) -> x -32..0, y 0..64 around (100, 200)
+    assert np.allclose(lo, (68, 200, 0), atol=0.01) and np.allclose(hi, (100, 264, 16), atol=0.01), (lo, hi)
+
+
 def _reference_grid(bsp: BSP, grid: SL.LightGrid, x: int, y: int) -> list[int]:
     """Palette indices of one grid column, walked exactly like R_GetLightingGridValue."""
     offs = np.frombuffer(bsp.lump("lightgridoffsets"), "<u2")

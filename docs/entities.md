@@ -86,6 +86,16 @@ Locked-door prop, as in stock maps: a `trigger_use` with `targetname
 door_locked` and `$type wood`, plus `exec global/door_locked.scr::lock` before
 `level waittill spawn`.
 
+## Static props without MOHlight (`build --inject-props`)
+
+MOHlight lights `static_*` props per vertex on one thread at about 190 vertices a second
+(mk_medina's 107 props: ~55 minutes of its light stage). `python -m mohkit build maps/x
+--inject-props` holds them back: their collision `.map` brushes go into the world (where
+Q3map would have baked them), the map compiles and lights without them, and
+`mohkit.staticlight` adds them to the BSP afterwards with vertex colours sampled from the
+light grid. The colours match MOHlight's on average but have no per-vertex shadows, so
+compare a sheet before preferring it for a finished map.
+
 ## Ladders
 
 `func_ladder` is a brush entity that covers the climbable face, with an origin

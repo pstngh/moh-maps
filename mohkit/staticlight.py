@@ -335,3 +335,83 @@ def files_reader(*roots: Union[str, Path, dict]) -> Callable[[str], Optional[byt
                 return p.read_bytes()
         return None
     return read
+
+
+# ---------------------------------------------------------------------------- maps with static_* props
+
+
+def entity_angles(e) -> tuple[float, float, float]:
+    """``angles`` "p y r", else ``angle`` (yaw), of a map entity."""
+    if e.get("angles"):
+        v = [float(x) for x in e.get("angles").split()[:3]]
+        return (v[0], v[1], v[2]) if len(v) == 3 else (0.0, 0.0, 0.0)
+    return (0.0, float(e.get("angle", "0") or 0), 0.0)
+
+
+def take_statics(m, read: Callable[[str], Optional[bytes]]) -> tuple[list, list]:
+    """Remove the ``static_*`` entities from map ``m`` for injection after the light stage.
+
+    Returns ``(statics, clips)``: ``(model, origin, angles, scale)`` per entity, and the
+    model's collision brushes (``models/<model>.map``, which Q3map would have baked into the
+    world) placed as world brushes, so collision is unchanged."""
+    from . import geom
+    from .build import _tri_for
+    from .mapfile import Brush, Face, MapFile
+    statics, clips, keep = [], [], []
+    maps: dict = {}
+    for e in m.entities:
+        if not e.classname.startswith("static_") or not e.get("model"):
+            keep.append(e)
+            continue
+        model = e.get("model")
+        o = e.origin() or (0.0, 0.0, 0.0)
+        ang = entity_angles(e)
+        sc = float(e.get("scale", "1") or 1)
+        statics.append((model, tuple(o), ang, sc))
+        key = model if model.startswith("models/") else "models/" + model
+        key = key[:-4] + ".map" if key.endswith(".tik") else key + ".map"
+        if key not in maps:
+            data = read(key)
+            maps[key] = MapFile.parse(data.decode("latin-1")).worldspawn.brushes() if data else []
+        if not maps[key]:
+            continue
+        ax = axes(ang)
+        for b in maps[key]:
+            faces = []
+            for f, w in zip(b.faces, b.windings()):
+                if len(w) < 3:
+                    continue
+                pts = [tuple(float(v) for v in np.asarray(q, np.float64) * sc @ ax + np.asarray(o, np.float64))
+                       for q in w]
+                n = tuple(float(v) for v in np.asarray(f.plane.normal, np.float64) @ ax)
+                try:
+                    tri = _tri_for(n, pts)
+                except AssertionError:
+                    continue
+                faces.append(Face(tri, f.shader, (0, 0), 0, (1, 1), 0, 0, 0, ["+surfaceparm", "detail"]))
+            if len(faces) >= 4:
+                clips.append(Brush(faces))
+    m.entities = keep
+    return statics, clips
+
+
+def inject_statics(bsp_path, statics: Sequence[tuple], read: Callable[[str], Optional[bytes]],
+                   out: Optional[Union[str, Path]] = None) -> dict:
+    """``inject`` for ``(model, origin, angles, scale)`` tuples, meshes read with ``read``."""
+    meshes: dict = {}
+    inst = []
+    skipped = 0
+    for model, origin, angles, scale in statics:
+        if model not in meshes:
+            try:
+                meshes[model] = tiki_mesh(read, model)
+            except (FileNotFoundError, ValueError):
+                meshes[model] = (np.zeros((0, 3)), np.zeros((0, 3)))
+        pos, nrm = meshes[model]
+        if len(pos):
+            inst.append(StaticInstance(model, origin, angles, scale, pos, nrm))
+        else:
+            skipped += 1
+    info = inject(bsp_path, inst, out)
+    info["unreadable"] = skipped
+    return info
