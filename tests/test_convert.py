@@ -69,6 +69,18 @@ def test_converter_methods_exist() -> None:
     assert not missing, missing
 
 
+def test_merge_ladder_boxes() -> None:
+    """de_cache's A-site ladder (two rails + a 1.5-unit brush per rung) is one ladder;
+    de_nuke's stacked pieces merge; a ladder 3 units to the side stays separate."""
+    rails = [((-101, 1099, 1702), (-100, 1100, 1847)), ((-76, 1099, 1702), (-72, 1100, 1847))]
+    rungs = [((-100, 1099, z), (-76, 1100, z + 1.5)) for z in range(1708, 1840, 16)]
+    stacked = [((233, -860, -399), (234, -836, -288)), ((233, -860, -284), (234, -836, -56))]
+    apart = [((-69, 1099, 1702), (-60, 1100, 1847))]
+    got = sorted((lo.tolist(), hi.tolist()) for lo, hi in C.merge_ladder_boxes(rungs + rails + stacked + apart))
+    assert got == [([-101, 1099, 1702], [-72, 1100, 1847]), ([-69, 1099, 1702], [-60, 1100, 1847]),
+                   ([233, -860, -399], [234, -836, -56])], got
+
+
 def test_ladder_facing() -> None:
     """Converted ladders (de_mirage, if CS:GO is installed). The leaning ladder's square
     volume must face the ledge (+x); as a func_ladder it climbs 8 units off its far face.

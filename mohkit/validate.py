@@ -170,6 +170,47 @@ def point_in_brush(p, s: _Solid, eps: float = 0.1) -> bool:
     return all(pl.distance(p) < -eps for pl in s.planes)
 
 
+SPAWN_CLASSES = ("info_player_deathmatch", "info_player_allied", "info_player_axis", "info_player_start")
+
+
+def fix_spawns(m: MapFile, shaders=None, reach: float = 48.0) -> list[str]:
+    """Move each spawn whose player box overlaps a solid to the nearest clear spot (within
+    ``reach`` horizontally, up to 18 units up, on a floor), in place. Spawns with no clear spot
+    are removed. Returns one line per change. Source maps place some spawns (DM ones) a few
+    units inside walls; Source unsticks players, MOHAA leaves them stuck."""
+    solids, _ = _solids(m, shaders)
+    solids += _prop_solids(m, shaders)
+
+    def clear(o) -> bool:
+        lo, hi = geom.add(o, PLAYER_MINS), geom.add(o, PLAYER_MAXS)
+        return not any(box_hits_brush(lo, hi, s) for s in solids)
+
+    def floor_under(o) -> bool:
+        return any(box_hits_brush((o[0] - 14, o[1] - 14, o[2] - 24), (o[0] + 14, o[1] + 14, o[2] + 0.5), s, eps=0.0)
+                   for s in solids)
+
+    offsets = sorted(((dx, dy, dz) for dx in range(-int(reach), int(reach) + 1, 4)
+                      for dy in range(-int(reach), int(reach) + 1, 4) for dz in (0, 2, 6, 10, 18)
+                      if dx * dx + dy * dy <= reach * reach),
+                     key=lambda d: (d[0] ** 2 + d[1] ** 2 + 4 * d[2] ** 2, d))
+    notes, drop = [], []
+    for e in m.entities:
+        o = e.origin()
+        if e.classname not in SPAWN_CLASSES or o is None or clear(o):
+            continue
+        new = next(((o[0] + dx, o[1] + dy, o[2] + dz) for dx, dy, dz in offsets
+                    if clear((o[0] + dx, o[1] + dy, o[2] + dz)) and floor_under((o[0] + dx, o[1] + dy, o[2] + dz))),
+                   None)
+        if new is None:
+            drop.append(e)
+            notes.append(f"{e.classname} at {o} removed (no clear spot within {reach:g})")
+        else:
+            e["origin"] = " ".join(f"{v:g}" for v in new)
+            notes.append(f"{e.classname} at {o} moved by {tuple(round(n - v, 1) for n, v in zip(new, o))}")
+    m.entities[:] = [e for e in m.entities if not any(e is d for d in drop)]
+    return notes
+
+
 def check(m: MapFile, shaders=None, min_dm_spawns: int = 8) -> list[Issue]:
     issues: list[Issue] = []
     if not m.entities or m.entities[0].classname != "worldspawn":

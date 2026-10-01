@@ -44,7 +44,7 @@ from typing import Optional
 
 import numpy as np
 
-from .. import geom
+from .. import geom, validate
 from ..build import Material, _tri_for
 from ..mapfile import Brush as MBrush, Entity as MEntity, Face, MapFile, Patch, fmt
 from ..shaders import editor_image
@@ -1208,18 +1208,8 @@ class Converter:
                 continue
             boxes.append([pts.min(0), pts.max(0)])
         boxes.sort(key=lambda b: (round(b[0][0]), round(b[0][1]), b[0][2]))
-        merged: list = []
-        for lo, hi in boxes:
-            for m in merged:
-                if (np.abs(m[0][:2] - lo[:2]).max() < 1 and np.abs(m[1][:2] - hi[:2]).max() < 1
-                        and lo[2] <= m[1][2] + 8 and hi[2] >= m[0][2] - 8):
-                    m[0] = np.minimum(m[0], lo)
-                    m[1] = np.maximum(m[1], hi)
-                    break
-            else:
-                merged.append([lo.copy(), hi.copy()])
-        self._ladder_box_cache = merged
-        return merged
+        self._ladder_box_cache = merge_ladder_boxes(boxes)
+        return self._ladder_box_cache
 
     def ladders(self) -> list[MEntity]:
         """Source ladder volumes (``CONTENTS_LADDER`` brushes) -> step columns
@@ -1801,7 +1791,30 @@ class Converter:
         self.report["materials"] = len(self.mats)
         self.report["entities"] = len(ents)
         self.report["asset_bytes"] = sum(len(v) for v in self.assets.values())
-        return Result(MapFile(ents), self.assets, self.report, list(self.statics))
+        m = MapFile(ents)
+        moved = validate.fix_spawns(m)
+        if moved:
+            self.report["spawns_fixed"] = moved
+        return Result(m, self.assets, self.report, list(self.statics))
+
+
+def merge_ladder_boxes(boxes, gap_xy: float = 2.0, gap_z: float = 8.0) -> list:
+    """Union ladder volumes ([lo, hi] arrays) that touch: within ``gap_xy`` horizontally and
+    ``gap_z`` vertically. One Source ladder is often several brushes: stacked pieces (de_nuke)
+    or two rails plus a 1.5-unit brush per rung (de_cache's A-site ladder, 11 brushes)."""
+    merged = [[np.array(lo, dtype=np.float64), np.array(hi, dtype=np.float64)] for lo, hi in boxes]
+    changed = True
+    while changed:
+        changed = False
+        for i in range(len(merged)):
+            for j in range(len(merged) - 1, i, -1):
+                (alo, ahi), (blo, bhi) = merged[i], merged[j]
+                gap = np.maximum(alo - bhi, blo - ahi)
+                if gap[0] <= gap_xy and gap[1] <= gap_xy and gap[2] <= gap_z:
+                    merged[i] = [np.minimum(alo, blo), np.maximum(ahi, bhi)]
+                    del merged[j]
+                    changed = True
+    return merged
 
 
 class _CutWinding(list):

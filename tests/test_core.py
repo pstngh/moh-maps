@@ -121,6 +121,21 @@ def test_spawn_under_palm_canopy():
     assert len(issues) == 3 and all("(0.0, 0.0, 1.0)" in i.message for i in issues), issues  # dm + allied + axis
 
 
+def test_fix_spawns_moves_out_of_walls():
+    from mohkit import validate
+    from mohkit.build import box
+    floor = box((-256, -256, -16), (256, 256, 0), "general_structure/floor4")
+    wall = box((40, -256, 0), (72, 256, 128), "general_structure/floor4")
+    tomb = box((-256, -256, 0), (-200, -200, 128), "general_structure/floor4")
+    world = Entity({"classname": "worldspawn"}, [floor, wall, tomb])
+    spawns = [Entity({"classname": "info_player_deathmatch", "origin": o}) for o in ("30 0 1", "0 0 1", "-228 -228 1")]
+    m = MapFile([world] + spawns)
+    notes = validate.fix_spawns(m, reach=16)
+    assert len(notes) == 2 and "moved" in notes[0] and "removed" in notes[1], notes
+    assert [e.origin() for e in m.entities[1:]] == [(22.0, 0.0, 1.0), (0.0, 0.0, 1.0)]
+    assert not [i for i in validate.check(m) if "overlaps solid" in i.message]
+
+
 def test_fov_crop():
     from mohkit import game
     assert game.drawn_fov(30) == 65 and game.drawn_fov(None) == 80 and game.drawn_fov(140) == 120
