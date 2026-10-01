@@ -20,14 +20,14 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (paused 2026-09-30 ~23:35, third session; overnight run until 06:00 ET next)
 
-All work is committed and pushed to `main` (`68386e0`). One build may still be running:
+All work is committed and pushed to `main`. Nothing is running.
 
-| build | log | results land in |
-|---|---|---|
-| mk_medina preview + 8 bots 60 s (`mohkit build maps/mk_medina -q preview --bots 8 --seconds 60`, pid 69103, started 22:04; static-model lighting at 23:25) | `~/Library/Caches/mohkit/build/roots/dm_mk_medina/light.log` | `dist/mk_medina.pk3`, `dist/mk_medina_shots.png`, `dist/mk_medina_report.json` (kills) |
-
-Its screenshots may still use the **old low-detail harness**: Python loaded `game.py`
-before the change. Re-shoot the finished package rather than trust that sheet (step 2).
+The mk_medina preview build (`-q preview --bots 8 --seconds 60`) finished at 23:28:
+compile OK in 5,032 s (light on one thread), 107 static models lit, 32 lightmap pages,
+**22 kills** in 60 s with 8 bots, no validation issues. `dist/mk_medina.pk3` holds
+the new cornices/balconies/lighting. Its sheet `dist/mk_medina_shots.png` was shot with
+the **old low-detail harness** (the process had loaded `game.py` before the fix), so
+re-shoot it (step 2) before judging.
 
 This session (third) found why converted props were black, and that **every contact
 sheet so far was shot at low detail**:
@@ -99,10 +99,10 @@ equal. Conversions are personal-use only.
    Then bots: `python -m mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 60`.
    Add the measured stage times and the props report (1,509 instances, 600 runtime,
    909 dropped) to `docs/csgo-conversion.md`.
-2. **mk_medina:** when pid 69103 is done, re-shoot at high detail:
+2. **mk_medina:** the package is built; re-shoot at high detail (no compile needed):
    `python -m mohkit test dist/mk_medina.pk3 dm/mk_medina --shots maps/mk_medina --bots 8 --seconds 60`.
    Check alleys 05–07 brightness, cornices, balconies, beam ends (nothing floating or
-   z-fighting), and kills (the last run had 24). Fix, rebuild, commit, update the README.
+   z-fighting), and kills (22 in the 23:28 run, 24 before). Fix, rebuild, commit, update the README.
 3. **Re-judge the other maps at high detail:** re-shoot `mk_village` and `mk_ref_room`
    (`mohkit test dist/<x>.pk3 dm/<x> --shots maps/<x>`; build first if `dist/` lacks
    the pk3). Earlier lighting judgments and `docs/lighting.md` recipes were made at
