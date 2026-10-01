@@ -1287,7 +1287,9 @@ class Converter:
             return []
         mx = max(r, g, b, 1e-3)
         color = (r / mx, g / mx, b / mx)
-        intensity = max(40.0, min(600.0, bright * 0.75 * gain)) * self.opt.light_scale
+        # MOHAA's `light` is roughly the reach in units. 0.75 x Source brightness left de_nuke's
+        # radio-room ceiling spots (175) at 131: they barely reached the floor 140 units below
+        intensity = max(40.0, min(800.0, bright * 1.5 * gain)) * self.opt.light_scale
         o = e.origin
         org = (o[0] * s, o[1] * s, o[2] * s)
         le = _ent("light", org, light=fmt(round(intensity)), _color=" ".join(f"{c:.3f}" for c in color))
