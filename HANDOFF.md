@@ -46,10 +46,15 @@ Working from the "Next steps" below, in order (no new user request).
   Vertigo now have the plain 2D sky. Real regressions found:
   1. **Cache**: its blends all use `$blendmodulatetexture`; linear blending turned ivy walls into
      bare grey panels. **Reinstalled the afternoon Cache** (`before/cs_cache_pre_final2`), then
-     implemented threshold blends (alpha test, docs "materials" row). Cache rebuild running:
-     `local/csgo/final3_cache.log` (final2.sh de_cache; it installs at the end). Check the
-     ivy wall (`shots/17_spawn0.png`, `01_T.png`) and greenness vs CS:GO (afternoon error 0.57).
-     If good, rebuild the other maps with modulated blends (check `report.convert.blend_mod`).
+     implemented threshold blends (alpha test, docs "materials" row). **Cache rebuilt and
+     installed (18:58)**: ivy patches over panels and grass patches like CS:GO's 01_T (the mean
+     greenness number favoured the all-ivy build, but the images match CS:GO better), 28 kills,
+     ladder 1/1, error 9.6.
+     **RUNNING (19:00), NOT installed (`NOINSTALL=1`):** dust2, inferno, cbble
+     (`local/csgo/final3_a.log`) and mirage, nuke (`final3_b.log`) rebuilt with threshold
+     blends. Next session: read the logs, compare each against the installed build
+     (`python local/csgo/cmp3.py <name>` compares against `before/<name>_pre_final2`; also look
+     at blended walls/ground), then `python -m mohkit install local/csgo/<name>/<name>.pk3`.
   2. **Vertigo portal sky**: above the city the sky is dark navy in some views (T spawn window,
      overview) where CS:GO is light blue; it was light blue in the test build before the sky
      room became structural (b857580). Inside the room (normal view) it looks right. Next:
