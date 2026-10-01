@@ -67,6 +67,15 @@ Working from the "Next steps" below, in order (no new user request).
   `docs/images/csgo/<map>.jpg` (3 evenly spaced named cameras, CS:GO | MOHAA) from the installed
   builds' shots (snapshot in `local/csgo/readme_shots/`). Re-make them when the five rebuilds
   are installed (same recipe; update the table numbers from the lane logs).
+- **User (chat ~19:10): "the maps look pretty amazing; the only issue is FPS is so low".**
+  Not measured yet. Likely causes: (1) `detail_all` = every brush detail inside one
+  structural shell, so VIS culls nothing and nearly the whole map draws every frame, and
+  `farplane_cull 0`; (2) props: 1,300-3,500 static models, 0.8-2.9 M vertices (cbble 2.9 M), all
+  from LOD 0; (3) displacement patches, blends drawn twice, overlays. **Do first next session:**
+  add fps + r_speeds capture per camera to the harness (`game.run`), then try in order: CS:GO's
+  lower VTX LODs for props, keeping Source's structural brushes structural (real VIS; watch
+  compile time / overflow), farplane culling at the fog distance, more staticmerge.
+  Measure each change; keep the look (screenshots vs before).
 
 ## Previous session (2026-10-01 from 13:20)
 
