@@ -191,4 +191,4 @@ then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-g
    build) and retries on one thread.
 6. `-notjunc`: **tested.** It halves draw indexes.
 7. Terrain control layout: **verified** on 15,747 stock terrains.
-8. VIS overflow without the shell: still unverified (step 4 above).
+8. VIS overflow without the shell: **tested, false for de_dust2** (61 KB of VIS data, 2026-10-01).
