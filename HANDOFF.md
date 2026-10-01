@@ -20,10 +20,12 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go):** started 23:34. Running: `python -m mohkit csgo de_nuke
--q draft --name cs_nukei` (log in the session scratchpad; output `local/csgo/cs_nukei/`,
-compile root `~/Library/Caches/mohkit/build/roots/dm_cs_nukei`). It is the first build with
-injected props; it predates overlay conversion. The final map name stays `cs_nuke`.
+**Live state (update as you go, 00:08):** the first injected Nuke draft (`--name cs_nukei`)
+was stopped in MOHlight: 1% after 6 min (hours to go). Suspected cause: every brush is
+detail in one structural shell, so the BSP has 1024-unit leaves full of brushes and each
+light trace tests thousands of them. Running: Q3map `-blocksize 512` and `256` copies of
+that compile (`roots/dm_nkb512`, `dm_nkb256`, script in the scratchpad) to measure the
+light speed-up, and a full dust2 draft (`local/csgo/cs_dust2/`, started 00:00).
 
 Done this run (all committed and pushed):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).

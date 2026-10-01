@@ -1037,9 +1037,10 @@ class Converter:
             return out, clips, precache
         cache: dict = {}
         items = []
-        for p in sp.props:
+        for p in list(sp.props) + self._entity_props():
             if self.sky_area is not None:
-                areas = self.bsp.prop_areas(p)
+                areas = self.bsp.prop_areas(p) if not getattr(p, "entity", False) else {
+                    self.bsp.point_area(p.origin)}
                 if areas and areas <= {self.sky_area}:
                     continue
             key = (p.model.lower(), p.skin, p.solid if p.solid in (0, 2, 6) else 6)
@@ -1100,6 +1101,41 @@ class Converter:
                                 "injected": injected, "static_vertices": static_v, "runtime": runtime,
                                 "dropped": dropped, "models": len(used)}
         return out, clips, sorted(set(precache))
+
+    PROP_ENTITIES = ("prop_dynamic", "prop_dynamic_override", "prop_physics", "prop_physics_override",
+                     "prop_physics_multiplayer")
+
+    def _entity_props(self) -> list:
+        """Model entities that stand still in play (``prop_dynamic``, physics props), as
+        static-prop-like records. Interactive ones are skipped: a prop another entity's
+        outputs target (de_nuke's vent slats, opened by a ``func_button``) or one with
+        outputs of its own (``OnBreak``: breakable vent covers), so those openings stay open."""
+        from types import SimpleNamespace
+        targeted: set[str] = set()
+        for e in self.bsp.entities:
+            for k, v in e.items():
+                if k.lower().startswith("on"):
+                    targeted.add(re.split(r"[,\x1b]", v, 1)[0].strip().lower())
+        out = []
+        skipped = 0
+        for e in self.bsp.entities:
+            if e.classname not in self.PROP_ENTITIES or not e.get("model") or e.origin is None:
+                continue
+            if any(k.lower().startswith("on") for k, _ in e.items()) or (
+                    e.get("targetname") and e.get("targetname").lower() in targeted):
+                skipped += 1
+                continue
+            try:
+                solid = int(float(e.get("solid", "6") or 6))
+                skin = int(float(e.get("skin", "0") or 0))
+                scale = float(e.get("modelscale", "1") or 1)
+            except ValueError:
+                solid, skin, scale = 6, 0, 1.0
+            out.append(SimpleNamespace(model=e.get("model"), origin=e.origin,
+                                       angles=e.vector("angles", (0.0, 0.0, 0.0)) or (0.0, 0.0, 0.0),
+                                       skin=skin, solid=solid, uniform_scale=scale, entity=True))
+        self.report["entity_props"] = {"converted": len(out), "interactive_skipped": skipped}
+        return out
 
     def _prop_origin(self, p, cm, scale: float) -> tuple[float, float, float]:
         """World origin of the converted model: the Source origin moved to the model's
