@@ -2752,7 +2752,7 @@ def auto_cameras(m: MapFile, n: int = 9, landmarks=(), spawns: bool = True):
 
 def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[list] = None,
                    exposure: Optional[float] = None, gains: Optional[dict] = None,
-                   tint_mask: Optional[dict] = None) -> dict:
+                   tint_mask: Optional[dict] = None, lod: bool = True) -> dict:
     """Add the converter's props (``Result.statics``) to a lit BSP as static models
     (``mohkit.staticlight``); meshes are read from ``assets``. Over
     ``staticmerge.DEFAULT_TARGET`` props, nearby copies of a model are merged into one model
@@ -2761,7 +2761,9 @@ def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[li
     With ``exposure`` (the BSP carries CS:GO's transferred lightmaps), props with CS:GO's
     own vertex lighting (``prop_light``, VRAD byte scale) get it through the same tone curve
     as the lightmaps, and the others are lit from the lightmaps at vertex scale 1.0;
-    otherwise every prop is lit from MOHlight's lightmaps and grid."""
+    otherwise every prop is lit from MOHlight's lightmaps and grid. With ``lod``, every SKD
+    the final props load gets progressive LOD (``mohkit.lod``; vertex colours follow the new
+    vertex order)."""
     from .. import staticlight as SL, staticmerge
     from .lighting import tonemap
     read = SL.files_reader(assets)
@@ -2821,8 +2823,20 @@ def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[li
     assets.update(files)
     if files:
         merged["pruned"] = staticmerge.prune(assets, {mk for mk, *_ in statics}, {i.model for i in inst}, read)
+    lod_info = None
+    if lod:
+        from .. import lod as _lod
+        perms = _lod.apply_to_assets(assets, [i.model for i in inst], SL.files_reader(assets))
+        for i in inst:
+            pm = perms.get(i.model)
+            if pm is not None and len(pm) == len(i.positions):
+                i.positions, i.normals = i.positions[pm], i.normals[pm]
+                if i.colors is not None:
+                    i.colors = np.asarray(i.colors)[pm]
+        lod_info = {"skds": sum(1 for k in assets if k.endswith(".lod")), "tikis_reordered": len(perms)}
     info = SL.inject(bsp_path, inst, out, field_scale=1.0 if exposure is not None else SL.LIGHTMAP_TO_VERTEX)
     info["merge"] = merged
+    info["lod"] = lod_info
     info["csgo_vertex_light"] = used
     return info
 
@@ -2850,7 +2864,8 @@ def named_cameras(path, scale: float = 1.0):
 
 def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics: list, map_: MapFile,
                  convert_report: dict, test: bool = True, shots: int = 9, scale: float = 1.0, log=print,
-                 prop_light: Optional[list] = None, lighting: str = "csgo", exposure: Optional[float] = None) -> dict:
+                 prop_light: Optional[list] = None, lighting: str = "csgo", exposure: Optional[float] = None,
+                 lod: bool = True) -> dict:
     """After a compile: light it (``lighting="csgo"``: CS:GO's own baked lighting moved into
     the lightmaps, light grid and props, ``mohkit.source.lighting``; ``"mohlight"``: keep
     MOHlight's), inject the static props, package ``local/csgo/<name>/<name>.pk3`` and
@@ -2888,7 +2903,7 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
     bsp_bytes = base.read_bytes()
     if statics:
         info = inject_statics(base, statics, assets, lit, prop_light, exposure, gains,
-                              convert_report.get("tint_mask"))
+                              convert_report.get("tint_mask"), lod=lod)
         report["statics"] = info
         log(f"== static models injected: {json.dumps(info)}")
         bsp_bytes = lit.read_bytes()
@@ -2904,6 +2919,9 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
     files = {f"maps/dm/{name}.bsp": bsp_bytes, **proj.scripts(),
              **{k: (v if isinstance(v, bytes) else Path(v).read_bytes()) for k, v in assets.items()}}
     pk3 = out / f"{name}.pk3"
+    pairs = sorted({k[:-4] for k in files if k.lower().endswith(".jpg")} & {k[:-4] for k in files if k.lower().endswith(".tga")})
+    if pairs:
+        log(f"== WARNING: {len(pairs)} images exist as both .jpg and .tga (the .jpg wins in game): {pairs[:5]}")
     project.write_pk3(pk3, files)
     report["pk3"] = str(pk3)
     log(f"== packaged {pk3} ({pk3.stat().st_size // 1024} KB)")
@@ -2969,6 +2987,30 @@ def shoot_local(map_name: str, name: Optional[str] = None, scale: float = 1.0, l
     return shoot(name, out / f"{name}.pk3", cams, out, log=log)
 
 
+def perf_local(map_name: str, name: Optional[str] = None, scale: float = 1.0, ms: int = 3000,
+               toggles=(), pk3: Optional[Path] = None, label: str = "perf", log=print) -> dict:
+    """Frame times of the packaged ``local/csgo/<name>/<name>.pk3`` (or ``pk3``) at its
+    cameras (``game.perf_commands``): ``<out>/<label>.json`` and a table."""
+    import json
+
+    from .. import config, game
+    cfg = config.load()
+    src = Path(map_name)
+    if not src.is_file():
+        src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
+    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    out = config.REPO / "local" / "csgo" / name
+    prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
+    cams = map_cameras(src, MapFile.load(str(out / f"{name}.map")), prev.get("convert", {}).get("landmarks", ()),
+                       scale=scale, offset=prev.get("convert", {}).get("offset") or (0, 0, 0))
+    run = game.run([Path(pk3) if pk3 else out / f"{name}.pk3"], f"dm/{name}", cams, run_name=f"{name}_{label}",
+                   perf_ms=ms, perf_toggles=toggles, screenshots=False)
+    (out / f"{label}.json").write_text(json.dumps(run.perf, indent=1))
+    log(run.summary())
+    log(game.perf_table(run.perf))
+    return run.perf
+
+
 def save_prop_light(path: Path, light: list) -> None:
     """``Result.prop_light`` (per static: uint8 N x 3 or None) as one npz."""
     starts = np.full(len(light), -1, np.int64)
@@ -2991,8 +3033,54 @@ def load_prop_light(path: Path) -> Optional[list]:
     return [c[s:s + n] if s >= 0 else None for s, n in zip(d["starts"], d["lengths"])]
 
 
+def write_assets(out: Path, assets: dict) -> None:
+    """Write a conversion's ``assets`` under ``<out>/assets``, delete the files earlier builds
+    left there that it no longer has, and list them in ``<out>/assets.json`` (what
+    ``resume_local`` packages). A leftover is not harmless: the renderer loads ``x.jpg``
+    before ``x.tga`` for either name (``renderergl1/tr_image.c`` R_LoadImage), so an old
+    opaque JPG hid every texture that later gained alpha (threshold blends, masked decals)."""
+    import json
+    root = out / "assets"
+    for rel, data in assets.items():
+        p = root / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(data if isinstance(data, bytes) else Path(data).read_bytes())
+    keep = {str(Path(r)) for r in assets}
+    if root.is_dir():
+        for p in sorted(root.rglob("*")):
+            if p.is_file() and str(p.relative_to(root)) not in keep:
+                p.unlink()
+    (out / "assets.json").write_text(json.dumps(sorted(keep), indent=0))
+
+
+def saved_assets(out: Path, log=print) -> dict:
+    """``{game path: file}`` of the assets the last build wrote (``assets.json``). Folders
+    from before the manifest: every file, keeping only the newer of an ``x.jpg`` / ``x.tga``
+    pair (see ``write_assets``)."""
+    import json
+    root = out / "assets"
+    man = out / "assets.json"
+    if man.is_file():
+        return {rel: root / rel for rel in json.loads(man.read_text()) if (root / rel).is_file()}
+    files = {str(p.relative_to(root)): p for p in root.rglob("*") if p.is_file()}
+    stems: dict = {}
+    for rel, p in files.items():
+        if rel.lower().endswith((".jpg", ".tga")):
+            stems.setdefault(rel[:-4].lower(), []).append(rel)
+    dropped = []
+    for rels in stems.values():
+        if len(rels) > 1:
+            rels.sort(key=lambda r: files[r].stat().st_mtime)
+            dropped += rels[:-1]
+    for rel in dropped:
+        del files[rel]
+    if dropped:
+        log(f"== assets: {len(dropped)} stale images left out (an older .jpg/.tga of the same name)")
+    return files
+
+
 def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, log=print,
-                 exposure: Optional[float] = None) -> dict:
+                 exposure: Optional[float] = None, lod: bool = True) -> dict:
     """Finish a build from what it left on disk: ``local/csgo/<name>/`` (map, assets,
     ``statics.json``, ``report.json``) and the compile root's BSP. Use it after re-running
     a stage of the compile by hand (e.g. a light stage that was killed)."""
@@ -3006,14 +3094,14 @@ def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, l
     name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
     out = config.REPO / "local" / "csgo" / name
     root_bsp = Path(cfg.build_dir) / "roots" / f"dm_{name}" / "main" / "maps" / "dm" / f"{name}.bsp"
-    assets = {str(p.relative_to(out / "assets")): p for p in (out / "assets").rglob("*") if p.is_file()}
+    assets = saved_assets(out, log)
     statics = [tuple(x) for x in json.loads((out / "statics.json").read_text())]
     prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
     report = dict(prev)
     report.update(finish_local(name, src, root_bsp, assets, statics, MapFile.load(str(out / f"{name}.map")),
                                prev.get("convert", {}), test=test, log=log,
                                scale=float(prev.get("scale", 1.0)), prop_light=load_prop_light(out / "prop_light.npz"),
-                               lighting=prev.get("lighting_mode", "csgo"), exposure=exposure))
+                               lighting=prev.get("lighting_mode", "csgo"), exposure=exposure, lod=lod))
     (out / "report.json").write_text(json.dumps(report, indent=2))
     return report
 
@@ -3112,10 +3200,7 @@ def refresh_assets(map_name: str, name: Optional[str] = None, quality: str = "dr
     res = convert(str(src), cfg.csgo_dir, Options(name=name, **opts))
     if not root_map.is_file() or root_map.read_text(encoding="latin-1") != res.map.dumps():
         raise SystemExit("--refresh-assets: the map changed since the last compile; run a full build")
-    for rel, data in res.assets.items():
-        p = out / "assets" / rel
-        p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_bytes(data)
+    write_assets(out, res.assets)
     (out / "statics.json").write_text(json.dumps(res.statics))
     save_prop_light(out / "prop_light.npz", res.prop_light)
     prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
@@ -3177,10 +3262,7 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
         if diff:
             raise SystemExit(f"--props-only: more than runtime props changed ({diff}); run a full build")
     (out / f"{name}.map").write_text(res.map.dumps(), encoding="latin-1")
-    for rel, data in res.assets.items():
-        p = out / "assets" / rel
-        p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_bytes(data)
+    write_assets(out, res.assets)
     log(json.dumps({k: v for k, v in res.report.items() if k != "warnings"}))
     issues = [i for i in validate.check(res.map) if i.severity == "error"]
     for i in issues:

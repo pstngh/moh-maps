@@ -421,6 +421,29 @@ and draw the extra models with the wrong transform (de_inferno with 6,326: crash
 leaf `visCount` test is commented out, `tr_staticmodels.cpp`) and at most 8,192 of their
 surfaces are drawn per frame (`MAX_STATIC_MODELS_SURFS`, same file).
 
+**Static model LOD (progressive meshes).** Every frame each static model in the frustum
+gets a metric `m = R * (100 / fovX) / distance` (`ProjectRadius`, `renderergl1/tr_model.cpp:1825`;
+`R` is the SKC frame radius times the TIKI scale, `tr_staticmodels.cpp:355-357`).
+`GetLodCutoff` (`tr_model.cpp:472`) scales it, `m' = (m - maxMetric) * r_lodscale +
+maxMetric`, caps it at `maxMetric + (minMetric - maxMetric) * r_lodcap` (retail high preset:
+both 0.55, so the high preset never draws a LOD'd model at full detail), and reads a cutoff
+off the SKD's LOD curve. `RB_StaticMesh` (`tr_model.cpp:1494-1590`) then draws only the
+vertices whose `collapseIndex >= cutoff` (a prefix: the file sorts vertices by
+non-increasing `collapseIndex`), maps each dropped vertex through `collapse[]` (always a
+lower index) to a drawn one (`:1567`), and draws triangles in file order until the first
+degenerate one, so triangles are sorted by the step at which they vanish. A surface with
+`collapseIndex[2] < cutoff` is not drawn at all (`:1512`). The curve comes from
+`<skd path up to the first "skd">lod` (`GetLODFile`, `tiki/tiki_skel.cpp:751`, `:778`): a
+96-byte `lodControl_t` (minMetric, maxMetric, five `(pos, val)` points, four constants that
+`TIKI_CalcLodConsts` recomputes, `:838`), linear in `m'` with `pos` 0 at minMetric and 1 at
+maxMetric. Without a surface whose first and last `collapseIndex` differ there is no LOD
+(`:766`) and the whole mesh is always drawn. Retail ships 275 `models/static/*.lod`
+(Pak0.pk3; `alarmbell.lod`: 0.5 0.012, curve (0,0) (0.5,15) (0.8,28.8) (0.95,45) (1,58),
+`collapseIndex` 58 for the base vertices down to 1). Converted props now carry LOD from
+`mohkit.lod` (quadric half-edge collapses, curve for ~1 px error at 1920 wide); before it
+de_cache drew 0.3-0.9 M prop vertices per frame and props were 70-85% of the frame time
+(`mohkit test --perf --toggle r_drawstaticmodels=0`).
+
 **How a runtime model is lit.** cgame sets `lightingOrigin = origin + centre of the
 box packed into entityState.solid` (`cgame/cg_modelanim.c:1064-1067`). A NOT_SOLID
 entity packs `solid = 0` (`server/sv_world.c:230-257`), which unpacks to the box

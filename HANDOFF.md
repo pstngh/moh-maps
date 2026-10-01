@@ -6,7 +6,31 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## Current session (2026-10-01 from 16:05): ladders, exposure fit, blend textures
+## Current session (2026-10-01 from 19:17): frame rate (prop LOD), stale-asset bug
+
+Working on the user's FPS complaint (chat ~19:10), no new request since. User asked (~19:35)
+whether another session runs: none does; only lane A (`final2.sh`, NOINSTALL) from 18:59.
+- **Measured (`mohkit csgo <map> --perf MS [--toggle cvar=val]`, `mohkit test --perf`;
+  `game.perf_commands`/`parse_perf`: com_speeds + r_speeds per camera, uncapped):** cs_cache
+  at 1280x720 with Q3map busy: mean 144 fps, worst 64 (overview); **props are 70-85% of the
+  frame** (Atruck 12.4 ms -> 2.7 ms with `r_drawstaticmodels 0`; 0.9 M prop vertices drawn).
+  Static models are never VIS-culled in OpenMoHAA (check commented out), so VIS can't help them.
+- **Prop LOD (`mohkit/lod.py`, done, tests `tests/test_lod.py`):** quadric half-edge collapse
+  -> SKD collapse/collapseIndex + `.lod` curve (~1 px at 1920, high preset), applied in
+  `inject_statics` after staticmerge (instance colours permuted). Engine rules in
+  docs/reference/engine.md §5.2. Cache: 377 SKDs in 15 s; shots vs pre-LOD differ < 1/255
+  (`local/csgo/compare/cs_cache_lod.png`). `--resume --no-lod` for A/B. **Next: perf A/B**
+  (`local/csgo/before/cs_cache_pre_lod/cs_cache.pk3` vs `local/csgo/cs_cache/cs_cache.pk3`,
+  `--perf 3000 --pk3 X --label Y`) once the CPU is idle; then maybe raise `lod.TAU_PX`.
+- **Bug found and fixed: stale assets.** `resume_local` (and so `--fit-exposure`) packaged every
+  file in `local/csgo/<m>/assets/`, and the engine loads `x.jpg` before `x.tga`: old layer-2
+  JPGs hid the threshold-blend TGAs. Affected (not installed): lane builds of dust2 (2),
+  inferno (18), mirage (13); **installed cs_nuke has 3 stale crack-decal JPGs** (opaque
+  squares). Fix: `convert.write_assets` prunes + `assets.json` manifest; `saved_assets` keeps
+  the newer of a pair for old folders; packaging warns on pairs. Those maps need re-packaging
+  (`--resume`) before install.
+
+## Session (2026-10-01 from 16:05): ladders, exposure fit, blend textures
 
 Working from the "Next steps" below, in order (no new user request).
 - **Ladders (done in code, verified on Vertigo):** rail-clip drop narrowed to *pairs* flanking a

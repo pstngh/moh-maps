@@ -144,6 +144,19 @@ def test_fov_crop():
     assert game.camera_commands(game.Shot("a", (0, 0, 82), fov=30))[-1] == "cg_fov 65"
 
 
+def test_parse_perf():
+    from mohkit import game
+    cmds = game.perf_commands("00_a", 1000, [("r_drawstaticmodels", "0")])
+    assert cmds[0] == "com_maxfps 0" and "r_drawstaticmodels 1" in cmds and cmds[-2] == f"com_maxfps {game.FPS}"
+    frame = "[x] frame:{} all:  5 sv:  0 ev:  0 cl:  1 gm:  0 rf:  2 bk:  2"
+    speeds = "10/200 shaders/surfs 30 leafs 4000 verts 1000/1200 tris 1.00 mtex 1.00 dc"
+    log = "\n".join(["[x] mohkit-perf begin 00_a base 1000"] + [frame.format(i) for i in range(10)] + [speeds] * 10
+                    + ["[x] mohkit-perf end", "[x] " + frame.format(99)])
+    st = game.parse_perf(log)["00_a"]["base"]
+    assert st["frames"] == 6 and st["fps"] == 200 and st["wall_fps"] == 10 and st["surfs"] == 200 and st["tris"] == 1200
+    assert "00_a" in game.perf_table({"00_a": {"base": st}})
+
+
 def test_fit_unmirrored():
     # +X facing wall: s runs +Y; image left edge at u0
     m = fit("x/win", (1, 0, 0), 100, 164, 200, scale=0.5)

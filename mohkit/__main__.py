@@ -224,8 +224,12 @@ def cmd_test(a) -> int:
         shots = Project.load(Path(a.shots)).shots
         if Path(a.shots).resolve().name != stem:
             stem += "_" + Path(a.shots).resolve().name   # don't overwrite the map's own contact sheet
-    r = game.run([Path(a.pk3)], a.map, shots, bots=a.bots, match_seconds=a.seconds)
+    r = game.run([Path(a.pk3)], a.map, shots, bots=a.bots, match_seconds=a.seconds,
+                 perf_ms=a.perf, perf_toggles=_toggles(a.toggle), screenshots=not a.perf)
     print(r.summary())
+    if a.perf:
+        print(game.perf_table(r.perf))
+        return 0
     for k, v in r.screenshots.items():
         print(f"  {k}: {v}")
     if len(r.screenshots) > 1:
@@ -277,18 +281,28 @@ def cmd_install(a) -> int:
     return 0
 
 
+def _toggles(specs) -> list[tuple[str, str]]:
+    """``--toggle r_drawstaticmodels=0`` -> [("r_drawstaticmodels", "0")]."""
+    return [tuple(t.split("=", 1)) for t in specs or ()]
+
+
 def cmd_csgo(a) -> int:
     from .source.convert import build_local, resume_local
     if a.shoot:
         from .source.convert import shoot_local
         rep = shoot_local(a.map, a.name, scale=a.scale)
         return 0 if rep.get("contact_sheet") else 1
+    if a.perf:
+        from .source.convert import perf_local
+        perf_local(a.map, a.name, scale=a.scale, ms=a.perf, toggles=_toggles(a.toggle),
+                   pk3=Path(a.pk3) if a.pk3 else None, label=a.label)
+        return 0
     if a.fit_exposure:
         from .source.convert import fit_exposure
         fit_exposure(a.map, a.name)
         return 0
     if a.resume:
-        rep = resume_local(a.map, a.name, test=not a.no_test, exposure=a.exposure)
+        rep = resume_local(a.map, a.name, test=not a.no_test, exposure=a.exposure, lod=not a.no_lod)
         return 0 if rep.get("pk3") else 1
     if a.refresh_assets:
         from .source.convert import refresh_assets
@@ -392,6 +406,10 @@ def main(argv=None) -> int:
     s.add_argument("--seconds", type=float, default=0)
     s.add_argument("--shots", metavar="FOLDER", help="use the SHOTS of this map project")
     s.add_argument("-o", "--out", help="contact sheet path (default <pk3 name>[_<shots folder>]_shots.png beside the pk3)")
+    s.add_argument("--perf", type=int, default=0, metavar="MS",
+                   help="time MS of uncapped frames at each camera instead of screenshots (fps, r_speeds)")
+    s.add_argument("--toggle", action="append", metavar="CVAR=VALUE",
+                   help="with --perf: also time each camera with this cvar set (e.g. r_drawstaticmodels=0)")
     s.set_defaults(fn=cmd_test)
     s = sub.add_parser("swatches", help="sheet of stock materials whose name contains a word")
     s.add_argument("words", nargs="+")
@@ -436,6 +454,7 @@ def main(argv=None) -> int:
     s.add_argument("--resume", action="store_true",
                    help="only inject props, package and test what the last build left (after redoing a stage by hand)")
     s.add_argument("--no-test", action="store_true")
+    s.add_argument("--no-lod", action="store_true", help="with --resume: props without progressive LOD (A/B tests)")
     s.add_argument("--shoot", action="store_true", help="only re-shoot the packaged map (contact sheets, shots, exposure)")
     s.add_argument("--exposure", type=float, help="with --resume: tone-map CS:GO's light with this exposure")
     s.add_argument("--fit-exposure", action="store_true",
@@ -443,6 +462,12 @@ def main(argv=None) -> int:
                         "exposure in data/csgo_exposure.json")
     s.add_argument("--mohlight", action="store_true",
                    help="light with MOHlight from converted lights (default: transfer CS:GO's own baked lighting)")
+    s.add_argument("--perf", type=int, default=0, metavar="MS",
+                   help="only time MS of uncapped frames at each camera of the packaged map (<label>.json)")
+    s.add_argument("--toggle", action="append", metavar="CVAR=VALUE",
+                   help="with --perf: also time each camera with this cvar set (e.g. r_drawstaticmodels=0)")
+    s.add_argument("--pk3", help="with --perf: time this package instead of local/csgo/<name>/<name>.pk3")
+    s.add_argument("--label", default="perf", help="with --perf: output name (<label>.json)")
     s.set_defaults(fn=cmd_csgo)
 
     s = sub.add_parser("csgo-ref", help="screenshots from CS:GO itself at the map's named cameras (local/ only)")

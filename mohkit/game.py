@@ -84,6 +84,7 @@ class RunResult:
     seconds: float = 0.0
     exit_code: Optional[int] = None
     timed_out: bool = False
+    perf: dict[str, dict] = field(default_factory=dict)   # camera -> parse_perf() (run(perf_ms=...))
 
     def summary(self) -> str:
         lines = [f"run {self.home.name}: {self.seconds:.0f}s exit={self.exit_code}"
@@ -177,15 +178,107 @@ def frames(ms: int) -> list[str]:
     return ["wait"] * max(2, 2 * round(ms * FPS / 1000))
 
 
+PERF_FRAME_RE = re.compile(r"frame:\s*\d+ all:\s*(\d+) sv:\s*-?\d+ ev:\s*-?\d+ cl:\s*-?\d+ gm:\s*(-?\d+) "
+                           r"rf:\s*(-?\d+) bk:\s*(-?\d+)")
+PERF_SPEEDS_RE = re.compile(r"(\d+)/(\d+) shaders/surfs (\d+) leafs (\d+) verts (\d+)/(\d+) tris")
+PERF_MARK = "mohkit-perf"
+
+
+def perf_commands(name: str, ms: int, toggles: Sequence[tuple[str, str]] = ()) -> list[str]:
+    """Harness lines that time ``ms`` of uncapped frames at the current view: ``com_speeds 1``
+    prints each frame's milliseconds (``all``: server + events + client, the renderer
+    front end ``rf`` and back end ``bk``; ``qcommon/common.c`` Com_Frame), ``r_speeds 1``
+    its shaders, surfaces, leafs, vertices and triangles (``renderergl1/tr_cmds.c``).
+    ``com_maxfps 0`` still waits 1 ms between frames (``minMsec``), so the ceiling is
+    ~1000 fps. Each ``(cvar, value)`` in ``toggles`` repeats the timing with that cvar
+    set (e.g. ``r_drawstaticmodels 0``: what the props cost) and restored to 1."""
+    out = ["com_maxfps 0", "wait 500"]
+    for tag, (cvar, value) in [("base", ("", ""))] + [(f"{c}={v}", (c, v)) for c, v in toggles]:
+        if cvar:
+            out += [f"{cvar} {value}", "wait 300"]
+        out += ["r_speeds 1", "com_speeds 1", f"echo {PERF_MARK} begin {name} {tag} {ms}", f"wait {ms}",
+                f"echo {PERF_MARK} end", "com_speeds 0", "r_speeds 0"]
+        if cvar:
+            out += [f"{cvar} 1"]
+    return out + [f"com_maxfps {FPS}", "wait 200"]
+
+
+def parse_perf(log: str) -> dict[str, dict]:
+    """``{camera: {tag: stats}}`` from the frames ``perf_commands`` timed. Stats: frame count,
+    ``fps`` (frames per second of measured frame time; Sys_Milliseconds is whole ms, so a
+    mean over many frames), ``wall_fps`` (frames in the window: includes the 1 ms floor
+    between frames, so it tops out near 1000), ``ms`` mean, ``p90_ms``, ``rf``/``bk`` renderer front/back end ms,
+    and the mean ``surfs``, ``leafs``, ``verts``, ``tris`` drawn. The first and last two
+    frames of each window are dropped (the toggling frames)."""
+    out: dict[str, dict] = {}
+    cur, frames, speeds = None, [], []
+    for line in log.splitlines():
+        if PERF_MARK in line and " begin " in line:
+            parts = line.split(PERF_MARK + " begin ", 1)[1].split()
+            cur, frames, speeds = (parts[0], parts[1] if len(parts) > 1 else "base",
+                                   int(parts[2]) if len(parts) > 2 and parts[2].isdigit() else 0), [], []
+            continue
+        if cur is None:
+            continue
+        if PERF_MARK in line and line.rstrip().endswith(" end"):
+            fr, sp = frames[2:-2] or frames, speeds[2:-2] or speeds
+            if fr:
+                alls = sorted(f[0] for f in fr)
+                n = len(fr)
+                mean = sum(alls) / n
+                st = {"frames": n, "ms": round(mean, 2), "fps": round(1000.0 / max(mean, 1e-3), 1),
+                      "wall_fps": round(len(frames) * 1000.0 / cur[2], 1) if cur[2] else None,
+                      "p90_ms": alls[min(n - 1, int(n * 0.9))],
+                      "rf": round(sum(f[2] for f in fr) / n, 2), "bk": round(sum(f[3] for f in fr) / n, 2),
+                      "gm": round(sum(f[1] for f in fr) / n, 2)}
+                if sp:
+                    m = len(sp)
+                    for k, i in (("shaders", 0), ("surfs", 1), ("leafs", 2), ("verts", 3), ("tris", 4)):
+                        st[k] = round(sum(s[i] for s in sp) / m)
+                out.setdefault(cur[0], {})[cur[1]] = st
+            cur = None
+            continue
+        m = PERF_FRAME_RE.search(line)
+        if m:
+            frames.append(tuple(int(g) for g in m.groups()))
+            continue
+        m = PERF_SPEEDS_RE.search(line)
+        if m:
+            g = [int(v) for v in m.groups()]
+            speeds.append((g[0], g[1], g[2], g[3], g[5]))
+    return out
+
+
+def perf_table(perf: dict[str, dict]) -> str:
+    """One line per camera and toggle: fps, frame ms, renderer ms, what was drawn."""
+    rows = [f"{'camera':28} {'tag':22} {'fps':>6} {'wall':>5} {'ms':>6} {'p90':>4} {'rf':>5} {'bk':>5} "
+            f"{'surfs':>6} {'leafs':>6} {'verts':>8} {'tris':>8}"]
+    for cam, tags in perf.items():
+        for tag, s in tags.items():
+            rows.append(f"{cam[:28]:28} {tag[:22]:22} {s['fps']:6.0f} {s.get('wall_fps') or 0:5.0f} {s['ms']:6.2f} "
+                        f"{s['p90_ms']:4d} {s['rf']:5.1f} "
+                        f"{s['bk']:5.1f} {s.get('surfs', 0):6d} {s.get('leafs', 0):6d} {s.get('verts', 0):8d} "
+                        f"{s.get('tris', 0):8d}")
+    base = [t["base"]["ms"] for t in perf.values() if "base" in t]
+    if base:
+        ms = sorted(base)
+        rows.append(f"== {len(base)} cameras: mean {1000 * len(ms) / sum(ms):.0f} fps (frame-time mean), "
+                    f"worst {1000 / ms[-1]:.0f} fps, median {1000 / ms[len(ms) // 2]:.0f} fps")
+    return "\n".join(rows)
+
+
 def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, gametype: int = 1,
         bots: int = 0, match_seconds: float = 0, width: int = 1280, height: int = 720,
         settle_ms: int = 2000, shot_ms: int = 700, cvars: Optional[dict[str, str]] = None,
         extra_commands: Iterable[str] = (), run_name: Optional[str] = None, timeout: float = 300,
+        perf_ms: int = 0, perf_toggles: Sequence[tuple[str, str]] = (), screenshots: bool = True,
         cfg: Optional[_config.Config] = None) -> RunResult:
     """Launch OpenMoHAA on ``map_name`` (e.g. ``dm/mymap``) with only retail data + ``pk3s``.
 
     Takes one screenshot per ``shot`` (or one from the spawn point if none), optionally
-    lets ``bots`` fight for ``match_seconds``, then quits.
+    lets ``bots`` fight for ``match_seconds``, then quits. With ``perf_ms``, each camera is
+    also timed for that long (``perf_commands``, ``perf_toggles``); ``RunResult.perf``
+    holds the numbers. ``screenshots=False`` skips the saveshots (timing only).
     """
     cfg = cfg or _config.load()
     base = gamebase(cfg)
@@ -213,11 +306,17 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
     if not shots:
         lines += ["saveshot spawn", "wait 300"]
         shot_names.append("spawn")
+        if perf_ms:
+            lines += perf_commands("spawn", perf_ms, perf_toggles)
     for i, s in enumerate(shots):
         nm = f"{i:02d}_" + re.sub(r"[^A-Za-z0-9_-]", "_", s.name)
         # tele/face round-trip through the 20 Hz server: set, wait, set again, then capture.
-        lines += camera_commands(s) + [f"wait {shot_ms}"] + camera_commands(s) + ["wait 300", f"saveshot {nm}", "wait 300"]
-        shot_names.append(nm)
+        lines += camera_commands(s) + [f"wait {shot_ms}"] + camera_commands(s) + ["wait 300"]
+        if screenshots:
+            lines += [f"saveshot {nm}", "wait 300"]
+            shot_names.append(nm)
+        if perf_ms:
+            lines += perf_commands(nm, perf_ms, perf_toggles)
     if bots:
         # Bots join only after the cameras: with other players present the local
         # spectator can end up following one, and every shot turns third-person.
@@ -240,6 +339,8 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
         argv += ["+set", k, v]
     argv += ["+devmap", map_name, "+exec", "harness.cfg"]
 
+    if perf_ms:
+        timeout += max(1, len(shots)) * (perf_ms + 900) * (1 + len(perf_toggles)) / 1000
     t0 = time.time()
     timed_out, rc = False, None
     with open(home / "stdout.txt", "wb") as out:
@@ -264,6 +365,8 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
             res.screenshots[nm] = _to_png(f, nm, crop)
     res.problems = triage(res.log)
     res.kills = sum(1 for line in res.log.splitlines() if KILL_RE.search(line))
+    if perf_ms:
+        res.perf = parse_perf(res.log)
     return res
 
 

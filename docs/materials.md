@@ -106,7 +106,12 @@ puddle always let bullets through; wood lets through weapons with
 ## Custom textures
 
 - Power-of-two TGA (with alpha) or JPG, usually 256 or 512. The engine prefers
-  `.jpg` over `.tga` when both exist.
+  `.jpg` over `.tga` when both exist: for a name ending in either, R_LoadImage tries the
+  `.jpg` first (`renderergl1/tr_image.c`, `r_loadjpg`). So a leftover `x.jpg` from an
+  older build hides a new `x.tga` with alpha. This happened: stale layer-2 JPGs turned
+  threshold blends into full ivy or full concrete, and old crack-decal JPGs drew as
+  opaque squares on de_nuke. Conversions now prune their `assets/` folder on every
+  build (`convert.write_assets`), and packaging warns about `.jpg`/`.tga` pairs.
 - Path `textures/<folder>/<name>.jpg`, referenced in the `.map` as
   `<folder>/<name>`. Without a shader script the image is used directly
   (texture × lightmap, rock material).

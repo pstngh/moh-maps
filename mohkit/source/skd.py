@@ -27,7 +27,8 @@ SKD (little endian)::
       triangles int32[3 * numTriangles]  (clockwise w.r.t. the vertex normals, as retail)
       vertices  48 B each: normal[3], texCoords[2] (s, t; t = 0 at the image top),
                 numWeights 1, numMorphs 0, then {boneIndex 0, boneWeight 1.0, offset[3]}
-      collapse int32[numVerts] = 0, collapseIndex int32[numVerts] = 0
+      collapse int32[numVerts], collapseIndex int32[numVerts]: zero (no LOD) unless the
+      surface carries ``mohkit.lod`` data; then a ``.lod`` file goes beside the ``.skd``
 
 The engine limits each surface to 1000 vertices / 2000 triangles
 (``TIKI_MAX_VERTEXES`` / ``TIKI_MAX_TRIANGLES``); :data:`MAX_SURFACE_VERTS` and
@@ -106,6 +107,10 @@ class SkdSurface:
     normals: np.ndarray     # (n, 3)
     uvs: np.ndarray         # (n, 2) s, t
     triangles: np.ndarray   # (m, 3) counter-clockwise (right-handed w.r.t. the normals)
+    # progressive LOD (``mohkit.lod``): per vertex, the lower-index vertex it collapses into and
+    # the cutoff below which it is drawn; None writes zeros (no LOD, always fully drawn)
+    collapse: Optional[np.ndarray] = None
+    collapse_index: Optional[np.ndarray] = None
 
     def check(self) -> None:
         if not self.name or len(self.name) > MAX_SURFACE_NAME:
@@ -146,7 +151,11 @@ def _surface_record(s: SkdSurface) -> bytes:
     end = ofs_colidx + 4 * n
     head = SKD_SURFACE_IDENT + _fixed(s.name, 64) + struct.pack("<8i", m, n, 0, ofs_tri, ofs_vert, ofs_col, end,
                                                                 ofs_colidx)
-    return head + tris.tobytes() + verts.tobytes() + bytes(8 * n)
+    if s.collapse is None or s.collapse_index is None:
+        return head + tris.tobytes() + verts.tobytes() + bytes(8 * n)
+    col = np.asarray(s.collapse, "<i4").reshape(n)
+    cidx = np.asarray(s.collapse_index, "<i4").reshape(n)
+    return head + tris.tobytes() + verts.tobytes() + col.tobytes() + cidx.tobytes()
 
 
 def build_skd(name: str, surfaces: Sequence[SkdSurface], bone: str = BONE_NAME) -> bytes:
