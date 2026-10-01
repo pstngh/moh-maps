@@ -20,12 +20,19 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 00:08):** the first injected Nuke draft (`--name cs_nukei`)
-was stopped in MOHlight: 1% after 6 min (hours to go). Suspected cause: every brush is
-detail in one structural shell, so the BSP has 1024-unit leaves full of brushes and each
-light trace tests thousands of them. Running: Q3map `-blocksize 512` and `256` copies of
-that compile (`roots/dm_nkb512`, `dm_nkb256`, script in the scratchpad) to measure the
-light speed-up, and a full dust2 draft (`local/csgo/cs_dust2/`, started 00:00).
+**Live state (update as you go, 00:27):**
+- **dust2:** the 00:00 draft's light stage was killed by my own experiments
+  (`kill_stragglers` pkill'd every MOHlight; fixed). Its light is being re-run by hand
+  (`scratchpad/relight.py cs_dust2 10`), and a waiter then runs
+  `python -m mohkit csgo de_dust2 --resume` (inject 1,509 props, package, 23 named
+  cameras). `local/csgo/cs_dust2/statics.json` was regenerated without entity props to
+  match that build's clip brushes. If the waiter died: run the resume by hand once
+  `roots/dm_cs_dust2/light.log` ends.
+- **nuke:** `python -m mohkit csgo de_nuke -q draft` (draft 3, name `cs_nuke`, started
+  00:24): doors, overlays, windows, water, ladders, fog, 4,801 injected props,
+  lightmapdensity 32. Light-time findings: `-blocksize 512/256`, no `sundiffuse` and no
+  light entities all left MOHlight at ~1% after 5 min (under heavy CPU contention), so the
+  per-texel cost is base cost; density 32 cuts texels 4×.
 
 Done this run (all committed and pushed):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
