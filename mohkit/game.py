@@ -381,3 +381,56 @@ def measure(reference: Path, shot: Path, regions: dict[str, tuple[int, int, int,
         out[name] = {"reference": [round(v) for v in a], "shot": [round(v) for v in b],
                      "ratio": round(sum(a) / max(sum(b), 1e-6), 2)}
     return out
+
+
+# ---------------------------------------------------------------------------- ladder probe
+
+VIEWPOS_RE = re.compile(r"\((-?\d+) (-?\d+) (-?\d+)\) : (-?\d+)\s*$", re.M)  # cgame viewpos output
+
+
+def ladders_in_bsp(bsp_path: Path) -> list[dict]:
+    """Every ``func_ladder`` of a compiled map: origin (on the climb face), facing yaw
+    (``angle``, toward the wall) and the world z range of its brushes."""
+    from .bsp import BSP
+    b = BSP(Path(bsp_path))
+    models = b.models()
+    out = []
+    for e in b.entities():
+        if e.get("classname") != "func_ladder" or not e.get("model", "").startswith("*"):
+            continue
+        o = [float(v) for v in e.get("origin", "0 0 0").split()]
+        m = models[int(e["model"][1:])]
+        out.append({"origin": o, "angle": float(e.get("angle", "0") or 0),
+                    "zmin": o[2] + m["mins"][2], "zmax": o[2] + m["maxs"][2]})
+    return out
+
+
+def ladder_probe(pk3s: Sequence[Path], map_name: str, ladders: Sequence[dict], climb_ms: int = 4000,
+                 run_name: Optional[str] = None) -> list[dict]:
+    """Climb every ladder as a player and report how far up each one got.
+
+    One game per ladder (a player still on a ladder ignores ``tele``): the local player
+    joins a team, is teleported to the foot of the ladder (feet 1 unit above its bottom,
+    28 units back from the climb face), looks 50 degrees up toward the wall and holds
+    +forward for ``climb_ms``; ``viewpos`` before and after gives the climb (walking into
+    a ladder while looking more than 35 degrees up or down mounts it,
+    ``docs/reference/engine.md`` §1.3). Verified on stock mohdm2: 325 units in 4 s."""
+    out = []
+    for i, l in enumerate(ladders):
+        yaw = math.radians(l["angle"])
+        x = l["origin"][0] - math.cos(yaw) * 28
+        y = l["origin"][1] - math.sin(yaw) * 28
+        z = l["zmin"] + 1
+        cmds = ["auto_join_team", "primarydmweapon rifle", "wait 3000",
+                f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 600",
+                f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 400", "viewpos",
+                "+forward", f"wait {climb_ms}", "viewpos", "-forward", f"saveshot ladder{i:02d}", "wait 300"]
+        res = run(pk3s, map_name, (), extra_commands=cmds, run_name=f"{run_name or 'ladders'}{i:02d}",
+                  timeout=120 + climb_ms / 1000)
+        pos = [tuple(int(v) for v in m.groups()[:3]) for m in VIEWPOS_RE.finditer(res.log)]
+        before, after = (pos[0], pos[1]) if len(pos) >= 2 else (None, None)
+        climbed = (after[2] - before[2]) if before and after else None
+        shot = next(iter(res.screenshots.values()), None)
+        out.append({**l, "before": before, "after": after, "climbed": climbed, "shot": str(shot) if shot else None,
+                    "ok": climbed is not None and climbed >= min(64.0, (l["zmax"] - l["zmin"]) * 0.5)})
+    return out

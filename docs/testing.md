@@ -149,3 +149,13 @@ Checklist for every sheet:
 
 Also render a plan (`python -m mohkit plan maps/x/x.map`) to check layout,
 spawns and lights from above before compiling.
+
+## Ladders
+
+`game.ladder_probe(pk3s, map, game.ladders_in_bsp(bsp))` climbs every `func_ladder` as a
+player, one game per ladder (a player still on a ladder ignores `tele`): `auto_join_team`,
+`primarydmweapon rifle`, `tele` to the foot of the ladder 28 units back from its climb
+face, `face -50 <angle>`, hold `+forward` for 4 s, and compare `viewpos` before and after
+(cgame prints `(x y z) : yaw`). Stock mohdm2's three ladders climb 325, 225 and 256 units
+(the last two to the top), so the probe works; a converted ladder that doesn't climb
+has its origin or facing wrong.
