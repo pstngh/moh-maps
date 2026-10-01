@@ -18,22 +18,21 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 - At 06:00 ET: finish or park the current step, update this file, commit, push, and stop
   with a short summary for the user.
 
-## Summary (overnight run in progress, 2026-10-01; fourth session)
+## Summary (overnight run 2026-10-01, fourth session; ended 06:00 ET)
 
-**Live state (update as you go, 04:30):**
-- **dust2 final** (`local/csgo/cs_dust2/cs_dust2.pk3`, fastrad, all fixes): 32 named
-  shots, **91 bot kills** in 90 s, nothing stuck.
-- **Mirage final** (`local/csgo/cs_mirage/cs_mirage.pk3`): BSP 262 s, light 3,838 s
-  (shared CPU), **81 bot kills**, nothing stuck. Ladders 2/3 by the probe; the third is a
-  **leaning** ladder (CS climbs it along its slope to a wall 48+ units behind the
-  volume): it now mounts with +use and climbs, but MOHAA ladders are vertical, so the
-  player steps off at the top short of the wall and falls. Fix idea: for deep ladder
-  volumes, a second func_ladder near the wall or a clip ramp/step at the top. Shop
-  interiors are dark.
-- **Nuke final** (`de_nuke -q fastrad`, started 03:15): in radiosity at 04:28; then
-  `postcheck.sh` -> `post_nuke3.log`.
-- The texlight Nuke builds were stopped (surface lights ~15 h; the point-light version
-  would have ended after 06:00).
+**Results (local only, `local/` is gitignored; install with
+`python -m mohkit install local/csgo/cs_nuke/cs_nuke.pk3`, then `map dm/cs_nuke`):**
+
+| map | pk3 | build | bots (8, 90 s) | ladders | notes |
+|---|---|---|---|---|---|
+| de_nuke | `local/csgo/cs_nuke/cs_nuke.pk3` | fastrad, BSP 208 s, light 4,550 s (shared CPU) | **83 kills**, none stuck | **6/6** (A-site one: +use from the ledge) | 4,801 props, 718 overlays, 6 doors, 3 breakable vents, 38 glass windows, 70 ropes, 78 glows, water; interiors (radio, lobby) still dark |
+| de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` | fastrad, BSP 262 s, light 3,838 s | **81 kills**, none stuck | 2/3 (leaning ladder: falls off the top) | 1,470 props, 512 overlays, 85 ropes, 35 glows, 3 breakable covers/shutter + 3 windows; shops dark |
+| de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` | fastrad, BSP 684 s, light 2,752 s | **91 kills**, none stuck | — | 1,574 props, 459 overlays |
+
+Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
+
+**Live state at the end:** see the line below if a texlight Nuke build (`cs_nuket`) was
+still running; nothing else runs.
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
