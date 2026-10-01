@@ -20,17 +20,20 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 03:03):**
-- **Mirage fastrad done:** `local/csgo/cs_mirage/cs_mirage.pk3`. BSP 293 s, light 2,672 s
-  (shared CPU), 1,470 props injected (1.35M vertices), 30 named-camera shots read as Mirage.
-  **77 bot kills** in 90 s, nothing stuck. Ladders 2/3: the leaning one's mount box was
-  blocked by a door model's collision; fixed in the converter (prop clips in ladder mount
-  boxes dropped), being verified by `scratchpad/mirage_ladcheck.sh` (unlit + probe); the
-  pk3 needs a rebuild to get the fix. Shop interiors are very dark.
-- **Nuke fastrad:** in radiosity (initial light 2,036 s). `postcheck.sh` then runs bots
-  and the ladder probe (`post_nuke.log`).
-- **dust2 fastrad:** light ~10% (started 02:42).
-- Claim 8 tested: structural de_dust2 compiles with 61 KB of VIS data (no overflow).
+**Live state (update as you go, 03:14):**
+- **Found and fixed:** Pillow resizes RGBA with premultiplied alpha, so every texture over
+  512 px with a Source alpha mask came out darkened (Nuke's asphalt cracks were black
+  squares). Opaque textures are now resized as RGB. `csgo --refresh-assets` re-packages the
+  last compile when only assets changed (refuses if the map text differs).
+- **Nuke fastrad3** (03:08, before that fix): 79 bot kills, nothing stuck, ladders 5/6 by
+  the probe (the hanging A-site one mounts with +use from the ledge: verified by hand).
+  Backed up as `scratchpad/cs_nuke_fastrad3.pk3`. Lighting much better than the draft.
+- **Running (final builds):** `de_nuke -q fastrad` (03:11, `nuke_fastrad4.log`) and
+  `de_mirage -q fastrad` (03:13, `mirage_fastrad4.log`; ladder origin slid clear of a clip
+  ledge), each followed by `postcheck.sh` (bots + ladders -> `post_nuke2.log`,
+  `post_mirage2.log`); `de_dust2 -q fastrad` (02:42, old textures: afterwards run
+  `python -m mohkit csgo de_dust2 -q fastrad --refresh-assets`).
+- Mirage fastrad3 (backup `scratchpad/cs_mirage_fastrad3.pk3`): 77 bot kills.
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
