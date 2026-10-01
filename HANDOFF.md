@@ -38,6 +38,24 @@ Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator c
   re-checked at high detail.
 
 **Next steps:**
+0. **User's next priority (chat, 2026-10-01 11:25): de_inferno, then de_cache, then the
+   workshop map de_rats_1337_v2.** All three should get the full treatment Nuke/Mirage got
+   (final `-q fastrad` build, sheets checked, 8 bots, `local/csgo/ladprobe.py`), then
+   `python -m mohkit install local/csgo/<name>/<name>.pk3` so the user can play them.
+   - `de_inferno.bsp` (93 MB) and `de_cache.bsp` (217 MB) are in `~/Documents/Games/csgo/csgo/maps/`
+     with `_cameras.txt`. Start each with `python -m mohkit csgo de_inferno -q unlit` (minutes)
+     to check geometry, ladders and props before the long lit build. Copy
+     `local/csgo/nuke_final.sh` as the build+bots+ladders script. Cache is big (217 MB):
+     watch BSP time, shader count (<1,500) and lightmap pages (<=170).
+   - **de_rats_1337_v2** (Steam Workshop 741136461, by SkyDusH, 8.7 MB, CS:GO only,
+     custom models by Tomobobo packed in the BSP): not on disk. Getting it needs the user:
+     subscribe in Steam with CS:GO legacy (`csgo_legacy` beta) installed, or `steamcmd
+     +login <user> +workshop_download_item 730 741136461`; ask before downloading from any
+     third-party site. The converter takes a `.bsp` path (`mohkit csgo path/to/x.bsp`).
+     Rats is a giant-scale kitchen: expect big props, `--scale` questions and custom
+     materials in the pakfile.
+   - Installed for the user to try (11:20): `cs_nuke`, `cs_mirage`, `cs_dust2` in
+     `~/Documents/Games/moh/main/`. Re-run `mohkit install` after rebuilding any of them.
 1. Done 11:13: final Mirage and Nuke builds checked (table above).
 2. Checked 10:25: a third-person player under dust2's tunnel spot looks as lit as in the
    sun (run-time light-entity lighting), so the grid needs no rewrite.
