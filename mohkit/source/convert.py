@@ -88,11 +88,9 @@ class Options:
     disp_tolerance: float = 1.0     # drop displacement sample lines within this many units of straight (0 = keep all)
     lights: bool = True
     light_min_brightness: float = 20.0   # Source _light brightness below this: dropped
-    # Source texlights (lights.rad: emissive materials) -> q3map_surfacelight. Opt-in: the
-    # mechanism is verified (MOHlight counts the faces as light emitting surfaces) but the
-    # brightness scale isn't tuned on a converted map yet.
+    # Source texlights (lights.rad: emissive materials) -> one point light per emitting face.
+    # Opt-in until compared on a sheet (q3map_surfacelight made de_nuke's light ~15 hours).
     texlights: bool = False
-    texlight_scale: float = 100.0        # surfacelight = brightness x this, clamped 100-5000
     light_merge_distance: float = 32.0   # a light this close to a brighter one is folded into it
     # world units per lightmap texel. MOHlight time is roughly proportional to the texel
     # count (de_nuke: ~1M texels at 16), so drafts use 32 (a quarter of the texels).
@@ -122,7 +120,6 @@ class ConvertedMaterial:
     size: tuple[int, int]           # written image size
     info: Optional[MaterialInfo] = None
     kind: str = "opaque"            # opaque | alphatest | translucent | sky | tool
-    surfacelight: float = 0.0       # q3map_surfacelight from a Source texlight (lights.rad), 0 = none
 
 
 @dataclass
@@ -217,6 +214,56 @@ class Converter:
             name = f"{self.prefix}/{tail}_{h}"
         return name
 
+    def _collect_texlights(self, br: Brush, geo, xf) -> None:
+        """Remember each drawn face whose material is a Source texlight (world space)."""
+        table = self._texlights()
+        if not hasattr(self, "_texlight_faces"):
+            self._texlight_faces = []
+        for side, w in geo:
+            if side is None or not side.material or side.nodraw:
+                continue
+            key = self.bsp.original_material(side.material).lower()
+            if key not in table:
+                continue
+            pts = [self._apply(p, xf) for p in w]
+            n = self._apply_vec(side.normal, xf)
+            area = geom.winding_area(pts)
+            if area >= 4.0:
+                self._texlight_faces.append((key, geom.winding_center(pts), n, area))
+
+    def texlight_lights(self) -> list[MEntity]:
+        """Source texlights as point lights: one ``light`` per emitting face, 8 units out along
+        its normal, intensity sqrt(area x brightness) x 4 (40-600), colour from the rad line.
+        (``q3map_surfacelight`` works but made de_nuke's light estimate ~15 hours.)"""
+        out: list[MEntity] = []
+        rad = self._texlight_colors()
+        for key, c, n, area in getattr(self, "_texlight_faces", []):
+            r, g, b, bright = rad[key]
+            intensity = max(40.0, min(600.0, math.sqrt(area * bright) * 4.0)) * self.opt.light_scale
+            mx = max(r, g, b, 1.0)
+            o = tuple(c[i] + n[i] * 8 * self.opt.scale for i in range(3))
+            out.append(_ent("light", o, light=fmt(round(intensity)),
+                            _color=f"{r / mx:.3f} {g / mx:.3f} {b / mx:.3f}"))
+        self.report["texlight_lights"] = len(out)
+        return out
+
+    def _texlight_colors(self) -> dict:
+        if not hasattr(self, "_texlight_color_table"):
+            table: dict = {}
+            for path in ("lights.rad", f"maps/{self.mapname}.rad"):
+                data = self.fs.try_read(path)
+                if not data:
+                    continue
+                for line in data.decode("latin-1", "replace").splitlines():
+                    parts = line.split("//")[0].split()
+                    if len(parts) >= 5 and not parts[0].lower().startswith(("forcetextureshadow", "noshadow")):
+                        try:
+                            table[parts[0].lower().replace("\\", "/")] = tuple(float(x) for x in parts[1:5])
+                        except ValueError:
+                            continue
+            self._texlight_color_table = table
+        return self._texlight_color_table
+
     def _texlights(self) -> dict:
         """Source texlights: ``lights.rad`` (and ``maps/<map>.rad``) lines ``material r g b
         brightness``, keyed by lower-case material name."""
@@ -271,10 +318,6 @@ class Converter:
             rgba[..., :3] = np.clip(128.0 + (rgba[..., :3].astype(np.float32) - 128.0) * f + 0.5, 0, 255).astype(np.uint8)
         cm.image, cm.size = self._write_image(shader, rgba, cm.kind not in ("opaque", "modulate"))
         self.assets[f"scripts/{self._script_name()}"] = b""  # placeholder, written in finish()
-        if self.opt.texlights:
-            bright = self._texlights().get(self.bsp.original_material(src).lower())
-            if bright:
-                cm.surfacelight = max(100.0, min(5000.0, bright * self.opt.texlight_scale))
         self.mats[key] = cm
         return cm
 
@@ -343,8 +386,7 @@ class Converter:
         parm = self._surfaceparm(cm.info)
         if parm:
             lines.append(f"\tsurfaceparm {parm}")
-        if cm.surfacelight:
-            lines.append(f"\tq3map_surfacelight {cm.surfacelight:.0f}")
+
         if cm.info and cm.info.nocull:
             lines.append("\tcull none")
         if cm.kind == "water":  # the visible face of a water volume; its other sides are common/waterskip
@@ -464,15 +506,12 @@ class Converter:
                 # func_brush keys: StartDisabled 1 = not there at the start (invisible and not
                 # solid; de_nuke has 32), Solidity 1 = never solid, rendermode 10 = not drawn
                 if (ent.get("startdisabled") or "0") == "1":
-                    # a disabled brush that only carries texlight materials lit the map in VRAD
-                    # (de_nuke's office-light strips): with texlights on it stays, non-solid
-                    lit = self.opt.texlights and br.materials and all(
-                        m.lower().startswith("tools/") or self.bsp.original_material(m).lower() in self._texlights()
-                        for m in br.materials)
-                    if not lit:
-                        drop["entity:disabled"] = drop.get("entity:disabled", 0) + 1
-                        continue
-                    nonsolid = True
+                    # de_nuke's disabled office-light strips lit the map in VRAD only: with
+                    # texlights on, their faces still become point lights (_texlight_faces)
+                    if self.opt.texlights:
+                        self._collect_texlights(br, br.geometry(), self._xf(br.model))
+                    drop["entity:disabled"] = drop.get("entity:disabled", 0) + 1
+                    continue
                 if (ent.get("solidity") or "0") == "1":
                     nonsolid = True
                 if (ent.get("rendermode") or "0") == "10":
@@ -510,6 +549,8 @@ class Converter:
                 if areas and areas <= {self.sky_area}:
                     drop["skybox3d"] = drop.get("skybox3d", 0) + 1
                     continue
+            if self.opt.texlights:
+                self._collect_texlights(br, geo, self._xf(br.model))
             mb = self._brush(br, geo, kinds, nonsolid, water)
             if mb:
                 out.append(mb)
@@ -1265,6 +1306,8 @@ class Converter:
         if self.opt.lights:
             for e, cls, gain in self._kept_lights():
                 out += self._light(e, cls, gain)
+            if self.opt.texlights:
+                out += self.texlight_lights()
         if start:
             out.append(_ent("info_player_start", start, angle="0"))
         # landmarks for cameras: bomb sites and hostage spots
