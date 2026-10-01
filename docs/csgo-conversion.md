@@ -90,7 +90,7 @@ was 20 up (over `STEPSIZE` 18) and it climbed 0. A ladder whose first step is mo
 jump (56) above the floor in front (counting prop collision) gets `hang` in its report
 entry: de_vertigo's hatch ladder hangs 135 up (a CS:GO player reaches 72 + 57 = 129, so it
 is climbed down there too). `game.ladder_probe` starts those in the air at the column with
-+forward held: a falling player pressing into a step column steps up it.
++forward held: a falling player pressing into a step column steps up it. Probe starts are 4 units above the floor: the probe's `tele` rounds to whole units, and a player put within a unit of a patch falls through its collision (de_cbble's 460-unit ladder: "climbs 0", the player sank 46 units onto the caulk below the displacement ground; from 4 up it climbs 464 to the top).
 
 ## Visibility and compile time
 

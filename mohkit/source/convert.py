@@ -1581,7 +1581,9 @@ class Converter:
             for off in offs:
                 c = np.asarray(front, np.float64) - facing * back
                 c[wide] += off
-                z = z0 + 1
+                # 4 up: the probe's tele rounds to whole units, and a player put within a unit of
+                # a patch (de_cbble's displacement ground) falls through its collision
+                z = z0 + 4
                 hits = [q for q in self._probe_solids
                         if validate.box_hits_brush((c[0] - 15, c[1] - 15, z), (c[0] + 15, c[1] + 15, z + 95), q)]
                 if hits and max(q.maxs[2] for q in hits) <= z0 + 16:
