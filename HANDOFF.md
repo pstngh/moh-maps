@@ -89,26 +89,40 @@ equal. Conversions are personal-use only.
 
 ## Next steps (in order)
 
-**User's priority (2026-09-30, 23:40):** the next map is **de_nuke, ideally perfect**,
-then **de_mirage**. Start Nuke **from scratch** with the current converter. A Nuke
-conversion existed before the repo restart (7 commits, e.g. "add first playable Nuke
-conversion", "add local CS2 topology pipeline"). It survives only in the pre-restart
-backup `~/Library/Caches/mohkit/old-git-backup`. Don't read, reuse or restore it.
-Nothing from it is in the current repo, `local/` or the build cache.
+**User's priority (2026-09-30, 23:45):** first **finish de_dust2** (it was in
+progress), then **de_nuke, ideally perfect**, then **de_mirage**. Start Nuke **from
+scratch** with the current converter. A Nuke conversion existed before the repo
+restart (7 commits, e.g. "add first playable Nuke conversion", "add local CS2 topology
+pipeline"). It survives only in the pre-restart backup
+`~/Library/Caches/mohkit/old-git-backup`. Don't read, reuse or restore it. Nothing
+from it is in the current repo, `local/` or the build cache.
 
 1. **Converter prerequisite (short):** moving a model's pivot changed its clip hulls by
    up to 20 units (Hausdorff; dust2 worldspawn brushes 6716/6730, 32→35 faces). A
    convex hull must not depend on translation. Find the cause in
    `modelconv._hull_brush` (plane snapping/rounding relative to the origin?), fix it
    and add a test (hull of translated points == translated hull).
-2. **de_nuke, from scratch, aiming for perfect.** Use
+2. **Finish de_dust2** (time box: park what's left in this file at ~02:00 ET and move on
+   to Nuke).
+   - Full draft rebuild with the new pivots: `python -m mohkit csgo de_dust2 -q draft`
+     (~45 min, background it; do step 1's tests or the Nuke camera loader meanwhile).
+   - Check that cars and crates are now sunlit (they were ambient-only), that props are
+     where `local/csgo/cs_dust2/cs_dust2_shots.png` shows them, and that nothing
+     floats or sinks.
+   - Bots: `python -m mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 90`
+     (kills > 0, no stuck bots).
+   - Fix what the sheet shows. Use `--props-only` for prop-only changes.
+   - Use `de_dust2_cameras.txt` once the camera loader exists (step 3).
+   - Record the props report (1,509 instances, 600 runtime, 909 dropped) and the stage
+     times in `docs/csgo-conversion.md`.
+3. **de_nuke, from scratch, aiming for perfect.** Use
    `python -m mohkit csgo de_nuke -q draft` (output `local/csgo/cs_nuke/`). Iterate on
    drafts, with `--props-only` for prop-only changes, then finish at `-q normal`.
-   - **Cameras:** CS:GO ships `csgo/maps/de_nuke_cameras.txt`, named spectator
-     viewpoints in Source coordinates. Teach `auto_cameras`/`build_local` to use
-     `<map>_cameras.txt` when it exists (names → shot names, pitch/yaw, eye height as
-     given), so the sheet covers every named area. The CS:GO radar
-     (`resource/overviews/de_nuke_radar.*` in the VPKs) is the layout reference.
+   - **Cameras:** CS:GO ships `csgo/maps/<map>_cameras.txt`, named spectator viewpoints
+     in Source coordinates (`"T Spawn" "-2385.6 -1200.0 -230.2 29.1 151.1"` = x y z
+     pitch yaw). Teach `auto_cameras`/`build_local` to use it when it exists, so the
+     sheet covers every named area. The CS:GO radar (`resource/overviews/de_nuke_radar.*`
+     in the VPKs) is the layout reference.
    - **"Perfect" means:** every route and spot reachable as in CS:GO (ladders, vents,
      the hatch and drop between the two sites, jumps), no holes, leaks, black or missing
      textures; props placed, lit and solid where CS:GO's are; sky and sun mood
@@ -116,22 +130,19 @@ Nothing from it is in the current repo, `local/` or the build cache.
      no stuck bots in the log); the contact sheet reads as Nuke at stock MOHAA quality.
    - **Converter work Nuke needs** (it is multi-level and ladder-heavy): `func_ladder`
      conversion (`docs/reference/engine.md` §1.3 has the MOHAA ladder rules: origin on
-     the climbable face, `angle`), crouch-only vents (MOHAA crouch height: check
-     they're passable), overlays/decals (`info_overlay`, lots of signage), water if
+     the climbable face, `angle`), crouch-only vents (check they're passable at MOHAA
+     crouch height), overlays/decals (`info_overlay`, lots of signage), water if
      present, doors (`prop_door_rotating`: decide static vs `func_door`), glass.
      Keep everything generic in `mohkit/source/`: no Nuke-specific hacks.
    - Measure and record stage times; keep `docs/csgo-conversion.md` current.
-3. **de_mirage**, the same way (`de_mirage_cameras.txt` exists too).
-4. **Multi-threaded MOHlight crash.** `-q normal` conversions with static props may hit
+4. **de_mirage**, the same way.
+5. **Multi-threaded MOHlight crash.** `-q normal` conversions with static props may hit
    it, and medina's light takes ~55 min on one thread.
    `~/Library/Caches/mohkit/build/roots/dm_mtx` holds a copy of medina's pre-light
    BSP/VIS. Run `Toolchain().run("light_mt", "MOHlight.exe", ["-threads", "10", "-fast",
    "-bounce", "0", "-gamedir", to_tool_path(root), "-moddir", "main", to_tool_path(map)], root, 3600)`.
    Hypothesis: the crash is in static-model lighting (107 static models in medina;
    dust2 drafts with 0 ran fine on 10 threads). Record the result in `docs/toolchain.md`.
-5. **dust2:** full draft rebuild with the new pivots (after step 1). Check that cars and
-   crates are sunlit, then bots. Add the props report and stage times to
-   `docs/csgo-conversion.md`.
 6. **mk_medina:** the package is built; re-shoot at high detail:
    `python -m mohkit test dist/mk_medina.pk3 dm/mk_medina --shots maps/mk_medina --bots 8 --seconds 60`.
    Check alleys, cornices, balconies, beam ends and kills (22 in the 23:28 run). Then
