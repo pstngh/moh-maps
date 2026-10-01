@@ -29,6 +29,8 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 - Previous good builds kept as `scratchpad/cs_nuke_fastrad3.pk3` (79 kills),
   `cs_mirage_fastrad3.pk3` (77 kills), `cs_dust2_draft_0119.pk3` (75 kills) in case a final
   build fails.
+- Also running: `de_nuke -q fastrad --texlights --name cs_nuket` (03:18, experiment for
+  next-step 1; `nuke_texlights1.log`). All four share the CPU, so expect ~05:00.
 - Known remaining looks issue: Source texlights (`lights.rad`: office light strips, lit
   windows) aren't converted (`q3map_surfacelight` would do it); interiors rely on point lights.
 
