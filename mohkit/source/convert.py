@@ -1862,7 +1862,8 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
         bsp_bytes = lit.read_bytes()
     proj = project.Project(name=name, folder=out, title=src.stem, ambience="mohdm2",
                            precache=list(convert_report.get("precache", ())))
-    files = {f"maps/dm/{name}.bsp": bsp_bytes, **proj.scripts(), **assets}
+    files = {f"maps/dm/{name}.bsp": bsp_bytes, **proj.scripts(),
+             **{k: (v if isinstance(v, bytes) else Path(v).read_bytes()) for k, v in assets.items()}}
     pk3 = out / f"{name}.pk3"
     project.write_pk3(pk3, files)
     report["pk3"] = str(pk3)
