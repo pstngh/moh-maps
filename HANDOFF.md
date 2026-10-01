@@ -31,8 +31,13 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
-**Live state at the end:** see the line below if a texlight Nuke build (`cs_nuket`) was
-still running; nothing else runs.
+**Live state (04:45):** found at 04:40 that every converted `light_spot` pointed the wrong
+way (VRAD uses z = +sin(pitch); downward ceiling spots lit ceilings: the dark Nuke
+interiors and Mirage shops). Fixed; rebuilding `de_nuke` (04:43) and `de_mirage` (04:44),
+`-q fastrad`, each followed by `postcheck.sh` (`post_nuke4.log`, `post_mirage4.log`).
+The previous finals are backed up in the scratchpad (`cs_nuke_final_0437.pk3`,
+`cs_mirage_final_0425.pk3`, `cs_dust2_final_0414.pk3`); dust2 (13 spots) was not rebuilt.
+The texlight builds were stopped.
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
