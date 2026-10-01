@@ -845,11 +845,27 @@ class Converter:
             td = self.bsp.texdata[self.bsp.texinfo[side.texinfo]["texdata"]]
             cm = self.material(side.material, (int(td["width"]), int(td["height"])))
             shift, rot, scale = self._texdef(side, n, tri, cm, xf)
-            faces.append(Face(tri, cm.shader, shift, rot, scale, 0, 0, 0, list(ext)))
+            faces.append(Face(tri, cm.shader, shift, rot, scale, 0, 0, 0, list(ext) + self._density(side.texinfo)))
         if len(faces) < 4:
             return None
         self.report["faces"] += len(faces)
         return MBrush(faces)
+
+    def _density(self, texinfo: int) -> list[str]:
+        """``surfaceDensity`` for a face whose Source luxels are coarser than the map's
+        lightmap density (de_vertigo's facades: 128 units): MOHAA texels finer than the
+        CS:GO light they carry only cost pages."""
+        if texinfo < 0:
+            return []
+        v = self.bsp.texinfo[texinfo]["lightmap_vecs"][0][:3]
+        ln = float(np.sqrt((np.asarray(v, np.float64) ** 2).sum()))
+        if ln < 1e-9:
+            return []
+        size = 1.0 / ln * self.opt.scale
+        d = self.opt.lightmap_density
+        if size <= d * 1.5:
+            return []
+        return ["surfaceDensity", str(int(min(256, max(d, round(size)))))]
 
     def _texdef(self, side, n, tri, cm: ConvertedMaterial, xf):
         (sx, sy, sz, sw), (tx, ty, tz, tw) = side.texture_vecs
@@ -2046,6 +2062,13 @@ class Converter:
             translate_map(m, T)
             self.statics = [(mk, tuple(o[i] + T[i] for i in range(3)), *rest) for mk, o, *rest in self.statics]
             self.report["landmarks"] = [[c + T[i] for i, c in enumerate(p)] for p in self.report.get("landmarks", [])]
+            for rec in self.report.get("ladders", []):   # game.ladders_for_probe reads these
+                for k in ("origin", "probe_start"):
+                    if k in rec:
+                        rec[k] = [round(rec[k][i] + T[i], 1) for i in range(3)]
+                for k in ("zmin", "zmax"):
+                    if k in rec:
+                        rec[k] = round(rec[k] + T[2], 1)
         self.report["offset"] = list(T)
         moved = validate.fix_spawns(m)
         if moved:

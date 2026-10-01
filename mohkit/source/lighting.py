@@ -324,7 +324,12 @@ def lookup(index: LuxelIndex, pts: np.ndarray, nrm: np.ndarray, batch: int = 40_
     rest = np.nonzero(level == 4)[0]
     if len(rest):
         far = far or LuxelIndex(L, cell=96.0)
-        rgb, found = far.query(pts[rest], nrm[rest], 96.0, -1.0)
+        rgb, found = far.query(pts[rest], nrm[rest], 96.0, 0.5)
+        if not found.all():    # coarse Source lightmaps (128-unit luxels): any facing within 192
+            r2 = rest[~found]
+            rgb2, found2 = far.query(pts[r2], nrm[r2], 192.0, 0.0)
+            out[r2[found2]] = rgb2[found2]
+            level[r2[found2]] = 3
         out[rest[found]] = rgb[found]
         level[rest[found]] = 3
     return out, level
