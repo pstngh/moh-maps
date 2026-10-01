@@ -121,8 +121,9 @@ then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-g
 5. **mk_medina re-shot at high detail (05:35):** `dist/mk_medina_shots.png`, 20 shots,
    **19 bot kills** in 60 s; alleys, arcades, cornices, café and props read well (its props
    are MOHlight-lit; compare with the injected copy `dist/mk_medinai_shots.png`: nearly the
-   same, MOHlight's props show a little more self-shading). Still to do: re-shoot
-   `mk_village` and `mk_ref_room` and correct `docs/lighting.md` claims made at low detail.
+   same, MOHlight's props show a little more self-shading). `mk_village` and
+   `mk_ref_room` were re-shot too (sharp textures, props lit; `dist/*_shots.png`). Still to
+   do: re-check the `docs/lighting.md` claims that were made from low-detail sheets.
 6. Tell the user: accept the Xcode license (`sudo xcodebuild -license`), and consider
    moving the repo out of iCloud (`~/Developer/moh-maps`).
 
