@@ -39,6 +39,26 @@ def test_shader_names_fit_q3map() -> None:
     assert len(mc.texture_name("metal/hr_metal/hr_metal_corrugated_001x")) <= 59
 
 
+def test_yaw_to_hull() -> None:
+    """A door mesh along +x whose MDL hull runs along +y is turned 90 degrees."""
+    import numpy as np
+    pts = np.array([[0, -2, 0], [60, 2, 110], [30, 0, 50]], float)
+    R = C._yaw_to_hull(pts, (-2, 0, 0), (2, 60, 110))
+    q = pts @ R.T
+    assert np.allclose(q.min(0), (-2, 0, 0)) and np.allclose(q.max(0), (2, 60, 110))
+    assert np.allclose(C._yaw_to_hull(pts, (0, -2, 0), (60, 2, 110)), np.eye(3))  # already matching
+
+
+def test_rope_sag_is_parabola() -> None:
+    """A 3-column patch row is a quadratic Bezier: with the control point 2 * sag below the
+    chord's middle, the curve's middle hangs exactly `sag` below it."""
+    import numpy as np
+    a, b, sag = np.array([0.0, 0, 100]), np.array([400.0, 0, 100]), 50.0
+    mid = (a + b) / 2 - np.array([0, 0, 2 * sag])
+    curve_mid = 0.25 * a + 0.5 * mid + 0.25 * b
+    assert np.allclose(curve_mid, (a + b) / 2 - np.array([0, 0, sag]))
+
+
 def test_converter_methods_exist() -> None:
     """Every ``self.x(...)`` call in the converter names something the class defines (a
     cleanup once deleted ``_is_glass``/``windows`` and only a full conversion noticed)."""
