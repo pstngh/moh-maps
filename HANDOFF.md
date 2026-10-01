@@ -29,7 +29,10 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 - Previous good builds kept as `scratchpad/cs_nuke_fastrad3.pk3` (79 kills),
   `cs_mirage_fastrad3.pk3` (77 kills), `cs_dust2_draft_0119.pk3` (75 kills) in case a final
   build fails.
-- The `--texlights` Nuke experiment (03:18) was stopped at 03:42: MOHlight estimated ~15 h.
+- The surface-light `--texlights` experiment (03:18) was stopped at 03:42 (MOHlight
+  estimated ~15 h). `--texlights` now makes one point light per emitter face (43 on Nuke);
+  `de_nuke -q fastrad --texlights --name cs_nuket` started 03:43 (`nuke_texlights2.log`)
+  to compare with the final `cs_nuke` build.
 - Known remaining looks issue: interiors rely on point lights (next step 1).
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
@@ -92,12 +95,10 @@ equal. Conversions are personal-use only.
 de_mirage. HANDOFF edit (23:45): finish de_dust2 first, time-boxed to ~02:00, then Nuke,
 then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-git-backup`).
 
-1. **CS:GO look, next lever: texlights.** `--texlights` (opt-in) turns `lights.rad`
-   emissive materials into `q3map_surfacelight`; it works on a test room, but de_nuke's 43
-   emitting surfaces made MOHlight estimate ~15 hours, so it was stopped. Do it as point
-   lights instead: one `light` per emitter face (centre, pushed out along the normal),
-   intensity from the face area x rad brightness, colour from the rad line. Then compare
-   Nuke's radio rooms/lobby and Mirage's shops against the 03:15 builds.
+1. **CS:GO look, next lever: texlights.** `--texlights` (opt-in) adds one point light per
+   `lights.rad` emitter face (surface lights were ~15 h of MOHlight on Nuke). Compare
+   `local/csgo/cs_nuket` (if its build finished) with `cs_nuke`: radio rooms, lobby, B
+   site. If better, make it the default; Mirage has no texlights.
    Other Nuke gaps: vents break like glass; door handles lost; detail grass dropped.
 2. **Structural CS:GO maps:** `--structural` dust2 compiles (61 KB VIS, claim 8 false).
    Try a lit structural build: smaller leaves may light faster and avoid the 60-lights-
