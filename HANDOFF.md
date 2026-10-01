@@ -20,14 +20,19 @@ update this file, commit and push, then stop and give the user the one-line hand
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
 **Morning session (2026-10-01, 08:00):** the Mirage spot-fix rebuild finished at 06:05
-(75 kills, ladders 2/3; shops and palace lit). Its sheets showed flat `farplane_color`
-walls: displacements whose face has `side` 1 were turned inside out (back-facing patches;
-dust2 176, Mirage 143, Nuke 77). Fixed in `SourceBSP.displacement` (docs/csgo-conversion.md).
-**Running since 08:20, all three with the fix:** `local/csgo/dust2_rebuild.sh`,
-`local/csgo/mirage_rebuild.sh` (both: build, 8 bots 90 s, ladder probe) and
-`local/csgo/nuket_build.sh` (Nuke `--texlights --name cs_nuket`, bots). Logs
-`local/csgo/{dust2_rebuild,mirage_rebuild,nuket_build}.log` end with "done". `cs_nuke`
-(05:29) still has the inside-out displacements. Earlier packages are backed up in the session
+(75 kills; shops and palace lit). Its sheets showed flat `farplane_color` walls:
+displacements whose face has `side` 1 were turned inside out (back-facing patches; dust2
+176, Mirage 143, Nuke 77). Fixed in `SourceBSP.displacement` (docs/csgo-conversion.md).
+**User (chat, 08:50): CS-style ladders you run up are fine** (MOHAA ladders fight CS
+layouts). Done: `Options.ladder_style="steps"` (default): invisible clip step columns;
+Mirage's leaning ladder now faces its ledge (square volume, both axes tried); breakable
+vents/covers get metal or wood debris (`debris_7/8.tik`); `game.ladder_probe` records
+the highest point; `game.ladders_for_probe` includes step ladders from report.json.
+**Running since 08:20:** `local/csgo/dust2_rebuild.sh` (dust2 has no ladders: its result is
+final), `local/csgo/mirage_rebuild.sh` and `local/csgo/nuket_build.sh` (both converted
+before the step ladders: Mirage must be rebuilt again; cs_nuket is only the texlights
+comparison). Logs `local/csgo/{dust2_rebuild,mirage_rebuild,nuket_build}.log` end with
+"done". Earlier packages are backed up in the session
 scratchpad only (`cs_nuke_final_0437.pk3` etc.); they will be lost with it.
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):

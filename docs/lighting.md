@@ -76,8 +76,11 @@ beyond that ("Num lights per leaf clamped"), so cluster dense fixture fields.
   its own still runs the radiosity pass: in a test room its lightmaps matched
   `-fast -bounce 2` (mean difference 0.07 of 255) and not `-bounce 0` (0.89), and
   mk_medina spent 584 s in it. So draft adds `-bounce 0` (2026-09-30).
-- `preview` (`-bounce 2`): radiosity with 2 bounces; on mk_village it looked the same as
-  `normal`. Use it to judge lighting quickly.
+- `preview` (`-bounce 2`): radiosity with 2 bounces; on mk_village it looks the same as
+  `normal`. Re-checked at retail high detail (2026-10-01, same 9 cameras): mean
+  brightness within 2.5% on 8 shots, interiors within 1.2%; the warehouse was 11%
+  brighter in preview, but that build had newer source than the normal one. Use it to
+  judge lighting quickly.
 - `normal`: 8 radiosity bounces, so light through windows and doors reaches
   interiors. This is the one to judge lighting by.
 - `final` (`-final`): full detail; use for release builds.

@@ -69,6 +69,30 @@ def test_converter_methods_exist() -> None:
     assert not missing, missing
 
 
+def test_ladder_facing() -> None:
+    """Converted ladders (de_mirage, if CS:GO is installed). The leaning ladder's square
+    volume must face the ledge (+x); as a func_ladder it climbs 8 units off its far face.
+    All were verified in game with game.ladder_probe."""
+    import os
+    root = Path(os.environ.get("CSGO_DIR", "/Users/pstn/Documents/Games/csgo"))
+    bsp = root / "csgo" / "maps" / "de_mirage.bsp"
+    if not bsp.is_file():
+        print("skip test_ladder_facing: no de_mirage.bsp")
+        return
+    cv = C.Converter(str(bsp), str(root), C.Options(name="cs_ladtest", ladder_style="func_ladder"))
+    cv.brushes()
+    cv.ladders()
+    got = [(r["angle"], r["origin"][:2]) for r in cv.report["ladders"]]
+    assert got == [(270, [-992.0, -206.0]), (0, [156.0, -1972.0]), (0, [456.0, 668.0])], got
+    # default: CS-style step columns against the same walls, from the floor to the volume top
+    cv = C.Converter(str(bsp), str(root), C.Options(name="cs_ladtest"))
+    cv.brushes()
+    assert cv.ladders() == []
+    got = [(r["angle"], r["origin"][:2], r["zmin"], r["zmax"]) for r in cv.report["ladders"]]
+    assert got == [(270, [-992.0, -220.0], -168.0, -20.0), (0, [158.0, -1972.0], -168.0, -8.0),
+                   (0, [454.0, 668.0], -258.0, -112.0)], got
+    assert len(cv._ladder_step_brushes) == 10 + 10 + 10
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

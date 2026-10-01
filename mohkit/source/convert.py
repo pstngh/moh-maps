@@ -78,6 +78,66 @@ SURFACEPROP = [
 ]
 
 
+# func_window debris: the game sends the window's debristype and the client spawns
+# models/fx/windows/debris_<n>.tik (fgame/windows.cpp WindowKilled, cgame/cg_parsemsg.cpp
+# CGM_MAKE_WINDOW_DEBRIS). Retail's debris_0..3 are all glass shards, so converted maps ship
+# their own metal and wood debris built from retail effect models and sound aliases.
+DEBRIS_GLASS, DEBRIS_METAL, DEBRIS_WOOD = 0, 7, 8
+
+
+def _debris_piece(model: str, count: int, scale: float, life: str) -> str:
+    return f"""\t\toriginspawn
+\t\t(
+\t\t\tmodel {model}
+\t\t\tcount {count}
+\t\t\toffset crandom 12 crandom 12 crandom 12
+\t\t\tradialvelocity 2 0 64
+\t\t\trandvel 0 0 32
+\t\t\taccel 0 0 -800
+\t\t\tfriction 0.25
+\t\t\tangles crandom 90 crandom 180 crandom 180
+\t\t\tavelocity 0 0 crandom 360
+\t\t\tlife {life}
+\t\t\tfadedelay 4
+\t\t\tcollision
+\t\t\tbouncefactor 0.25
+\t\t\tscale {scale}
+\t\t)
+"""
+
+
+def debris_tiki(kind: int) -> str:
+    """Client effect for a broken ``func_window`` of ``debristype`` ``kind`` (metal or wood)."""
+    if kind == DEBRIS_METAL:
+        models = ["models/fx/metal_section.tik", "models/fx/bh_metal_fastpiece.tik"]
+        body = (_debris_piece(models[0], 4, 0.35, "5 1")
+                + "\t\toriginspawn\n\t\t(\n\t\t\tmodel models/fx/bh_metal_fastpiece.tik\n\t\t\tcount 12\n"
+                  "\t\t\tvelocity 150\n\t\t\trandvelaxis random 150 crandom 100 crandom 100\n"
+                  "\t\t\taccel 0 0 -800\n\t\t\tlife 0.1 0.4\n\t\t\tscalemin 0.8\n\t\t\tscalemax 1.4\n"
+                  "\t\t\tscalerate -1.0\n\t\t)\n")
+        sound = "snd_bodyfall_metal1"
+    elif kind == DEBRIS_WOOD:
+        models = ["models/fx/crates/crate-jib-plank.tik", "models/fx/crates/crate-jib-smallplank.tik",
+                  "models/fx/crates/crate-jib-splinter.tik"]
+        body = "".join(_debris_piece(m, n, 0.5, "5 1") for m, n in zip(models, (3, 4, 6)))
+        sound = "snd_crate_wood"
+    else:
+        raise ValueError(kind)
+    cache = "".join(f"\t\tcache {m}\n" for m in models)
+    return ("TIKI\nsetup\n{\n\tscale 1.0\n\tpath models/fx/dummy\n\tskelmodel dummy2.skd\n}\n\ninit\n{\n"
+            f"\tclient\n\t{{\n{cache}\t\tsound {sound}\n{body}\t}}\n}}\n")
+
+
+def debris_type(surfaceprops) -> int:
+    """``debristype`` for a breakable made of these Source ``$surfaceprop`` values."""
+    sp = " ".join(x.lower() for x in surfaceprops if x)
+    if "glass" in sp:
+        return DEBRIS_GLASS
+    if any(w in sp for w in ("wood", "plank", "crate")):
+        return DEBRIS_WOOD
+    return DEBRIS_METAL
+
+
 @dataclass
 class Options:
     name: str                       # MOHAA map name (file name), e.g. "cs_dust2"
@@ -96,6 +156,10 @@ class Options:
     # count (de_nuke: ~1M texels at 16), so drafts use 32 (a quarter of the texels).
     lightmap_density: int = 16
     overlays: bool = True           # info_overlay decals -> flat blended patches
+    # "steps": CS-style ladders, a column of invisible 16-unit clip steps you run up and can
+    # leave in any direction (MOHAA's func_ladder only lets you off forward at the top, which
+    # CS maps' scaffold and hole ladders don't allow). "func_ladder": MOHAA ladders.
+    ladder_style: str = "steps"
     ropes: bool = True              # move_rope/keyframe_rope cables -> crossed ribbon patches
     sprites: bool = True            # env_sprite glows -> autosprite quads
     light_scale: float = 1.0
@@ -624,9 +688,13 @@ class Converter:
                 hp = max(1, int(float(ent.get("health", "1") or 1))) if ent else 1
             except ValueError:
                 hp = 1
-            glass = any("glass" in f.shader for b in brushes for f in b.faces)
-            out.append(MEntity({"classname": "func_window", "health": str(hp), "debristype": "0" if glass else "1"},
-                               brushes))
+            if any("glass" in f.shader for b in brushes for f in b.faces):
+                kind = DEBRIS_GLASS
+            else:
+                props = {cm.shader: (cm.info.surfaceprop if cm.info else "") for cm in self.mats.values()}
+                kind = debris_type(props.get(f.shader, "") for b in brushes for f in b.faces)
+            out.append(MEntity({"classname": "func_window", "health": str(hp), "debristype": str(kind)}, brushes))
+            self._use_debris(kind)
         self.report["windows"] = len(out)
         return out
 
@@ -950,7 +1018,8 @@ class Converter:
         """Solid interactive props (``_entity_props`` skips them: de_nuke's vent slats, opened
         by a button or broken by shooting, and its breakable vent cover) -> ``func_window``:
         a slab of the model (``_model_slab``) that blocks the opening until it is shot.
-        MOHAA windows break into glass debris; CS players open these vents the same way."""
+        Shooting it open spawns metal or wood debris (``debris_tiki``); CS players open these
+        vents the same way."""
         out: list[MEntity] = []
         for e in getattr(self, "_interactive_props", []):
             if (e.get("solid") or "6") == "0" or e.origin is None:
@@ -965,9 +1034,18 @@ class Converter:
                 hp = max(1, int(float(e.get("health", "25") or 25)))
             except ValueError:
                 hp = 25
-            out.append(MEntity({"classname": "func_window", "health": str(hp), "debristype": "1"}, [slab[0]]))
+            kind = debris_type([slab[5].info.surfaceprop or "", e.get("model")])
+            out.append(MEntity({"classname": "func_window", "health": str(hp), "debristype": str(kind)}, [slab[0]]))
+            self._use_debris(kind)
         self.report["breakables"] = len(out)
         return out
+
+    def _use_debris(self, kind: int) -> None:
+        """Ship the debris effect of a ``func_window`` debristype that retail lacks."""
+        if kind != DEBRIS_GLASS:
+            self.assets[f"models/fx/windows/debris_{kind}.tik"] = debris_tiki(kind).encode()
+            self.report.setdefault("debris", {})
+            self.report["debris"][kind] = self.report["debris"].get(kind, 0) + 1
 
     # ------------------------------------------------------------------ doors
     def _model_slab(self, e, mdl: str, o, ang):
@@ -1107,6 +1185,14 @@ class Converter:
         """Source world contents at ``p`` (Source units) are solid."""
         return bool(int(self.bsp.leafs[self.bsp.point_leaf(p)]["contents"]) & Contents.SOLID)
 
+    def _ladder_solid(self, p) -> bool:
+        """Solid at ``p`` (Source units) for a player: Source world contents, or a converted
+        world brush (detail and clip brushes, which Source's leaf contents leave out)."""
+        if self._solid(p):
+            return True
+        q = np.asarray(p, dtype=np.float64) * self.opt.scale
+        return self._world_box_solid(tuple(q - 0.5), tuple(q + 0.5))
+
     def _ladder_boxes(self) -> list:
         """Source ladder volumes as [lo, hi] boxes (Source units), stacked pieces merged."""
         if hasattr(self, "_ladder_box_cache"):
@@ -1135,7 +1221,9 @@ class Converter:
         return merged
 
     def ladders(self) -> list[MEntity]:
-        """Source ladder volumes (``CONTENTS_LADDER`` brushes) -> MOHAA ``func_ladder``.
+        """Source ladder volumes (``CONTENTS_LADDER`` brushes) -> step columns
+        (``Options.ladder_style`` "steps", ``_ladder_steps``: world brushes in
+        ``self._ladder_step_brushes``, no entity) or MOHAA ``func_ladder``s.
 
         MOHAA climbs a ``func_ladder`` whose ``origin`` is on the climbable face, centred
         horizontally, with ``angle`` = the direction the climber faces (into the wall); the
@@ -1148,23 +1236,31 @@ class Converter:
         s = self.opt.scale
         merged = self._ladder_boxes()
         self._ladder_mount_boxes: list = []
+        self._ladder_step_brushes: list = []
         props = None
         out: list[MEntity] = []
         for lo, hi in merged:
             ext = hi - lo
-            thin = 0 if ext[0] <= ext[1] else 1          # the climb face is perpendicular to the thin axis
-            wide = 1 - thin
             c = (lo + hi) / 2
-            score = {}
-            for sgn in (-1, 1):
-                hits = 0
-                for d in (2, 4, 8, 12, 16, 24, 32, 48, 64):
-                    for z in np.linspace(lo[2] + 4, hi[2] - 4, 5):
-                        p = c.copy()
-                        p[2] = z
-                        p[thin] = (hi[thin] if sgn > 0 else lo[thin]) + sgn * d
-                        hits += self._solid(p)
-                score[sgn] = hits
+            # the climb face is perpendicular to the thin axis; a square volume tries both axes
+            # (mirage's leaning ladder is 32.0001 x 32: float noise picked the wrong one, facing
+            # a wall 44 units away instead of the ledge it leads to)
+            axes = [0, 1] if abs(ext[0] - ext[1]) < 2 else [0 if ext[0] < ext[1] else 1]
+            walls = {}
+            for ax in axes:
+                for sgn in (-1, 1):
+                    hits = 0
+                    for d in (2, 4, 8, 12, 16, 24, 32, 48, 64):
+                        for z in np.linspace(lo[2] + 4, hi[2] - 4, 5):
+                            p = c.copy()
+                            p[2] = z
+                            p[ax] = (hi[ax] if sgn > 0 else lo[ax]) + sgn * d
+                            hits += self._ladder_solid(p)
+                    walls[(ax, sgn)] = hits
+            best = max(walls.values())
+            thin = max((k for k in walls if walls[k] == best), key=lambda k: (k[0] == axes[0], k[1]))[0]
+            wide = 1 - thin
+            score = {sgn: walls[(thin, sgn)] for sgn in (-1, 1)}
             how = "solid"
             if score[1] == score[-1]:
                 how = "props"
@@ -1201,12 +1297,28 @@ class Converter:
                     floors.append(f)
             if floors and max(floors) < lo[2] - 32:
                 t_lo[2] = max(floors) + 1
+            if self.opt.ladder_style == "steps":
+                z0 = max(floors) if floors and max(floors) >= lo[2] - 96 else lo[2]
+                front = self._ladder_steps(lo, hi, thin, sgn, far, z0)
+                org = c.copy()
+                org[thin] = front
+                yaw = round(math.degrees(math.atan2(facing[1], facing[0]))) % 360
+                self.report.setdefault("ladders", []).append(
+                    {"origin": [round(float(v) * s, 1) for v in org], "angle": yaw, "height": round(float(hi[2] - z0) * s),
+                     "zmin": round(float(z0) * s, 1), "zmax": round(float(hi[2]) * s, 1), "style": "steps",
+                     "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)})
+                continue
             if sgn > 0:
                 t_lo[thin] = near - 8
             else:
                 t_hi[thin] = near + 8
             org = c.copy()
             org[thin] = near
+            if ext[thin] > 28:
+                # a deep volume (mirage's leaning ladder: 32, the ledge at its far side): climb
+                # 8 units off the far face, or the top dismount (CondCanGetOffLadderTop and the
+                # get-off animation) ends short of the ledge and the player falls
+                org[thin] = far - sgn * 8
             # FuncLadder::CanUseLadder refuses when a player box at origin - facing * 29,
             # absmin + 16 is in solid (mirage's leaning ladder: a Source clip ledge filled it):
             # slide the origin along the ladder's width to the first clear spot
@@ -1236,6 +1348,34 @@ class Converter:
                  "extended_down": round(float(lo[2] - t_lo[2]) * s, 1),
                  "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)})
         return out
+
+    STEP_RISE = 16.0    # under MOHAA's STEPSIZE 18: one step up per move (bg_slidemove.cpp)
+    STEP_DEPTH = 1.0
+
+    def _ladder_steps(self, lo, hi, thin: int, sgn: int, far: float, z0: float) -> float:
+        """A CS-style ladder: invisible ``common/clip`` slices from ``z0`` to the top of the
+        Source volume against its wall face (``far``), each ``STEP_RISE`` high and
+        ``STEP_DEPTH`` shallower than the one below, so running into the ladder climbs it
+        (one step per move: about 600 units/s at 60 fps), backing off climbs down and the
+        player can step off sideways or onto the ledge at the top. Returns the column's
+        front (climber-side) coordinate on the ``thin`` axis (Source units)."""
+        from ..build import box
+        s = self.opt.scale
+        wide = 1 - thin
+        w0, w1 = lo[wide], hi[wide]
+        if w1 - w0 < 32:  # at least a player's width
+            m = (w0 + w1) / 2
+            w0, w1 = m - 16, m + 16
+        top = hi[2]
+        n = max(1, math.ceil((top - z0) / self.STEP_RISE - 1e-6))
+        for k in range(1, n + 1):
+            za, zb = z0 + (k - 1) * self.STEP_RISE, min(z0 + k * self.STEP_RISE, top)
+            out = (n - k + 1) * self.STEP_DEPTH
+            a, b = sorted((far, far - sgn * out))
+            bl, bh = [0.0, 0.0, za], [0.0, 0.0, zb]
+            bl[thin], bh[thin], bl[wide], bh[wide] = a, b, w0, w1
+            self._ladder_step_brushes.append(box(tuple(v * s for v in bl), tuple(v * s for v in bh), "common/clip", True))
+        return far - sgn * n * self.STEP_DEPTH
 
     # ------------------------------------------------------------------ displacements
     def patches(self) -> list[Patch]:
@@ -1638,7 +1778,8 @@ class Converter:
             self.report["ladder_prop_clips_dropped"] = len(prop_clips) - len(kept)
             prop_clips = kept
         world = MEntity(self.worldspawn())
-        world.prims = list(brushes) + list(patches) + overlay_patches + prop_clips + self.sprites()
+        world.prims = (list(brushes) + list(patches) + overlay_patches + prop_clips + self.sprites()
+                       + self._ladder_step_brushes)
         if self.opt.detail_all:
             world.prims = self.shell(brushes, patches) + world.prims
         ents = [world] + self.entities() + ladder_ents + self.windows() + self.doors() + self.breakables() + prop_ents
