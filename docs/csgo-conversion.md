@@ -44,6 +44,7 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | breakable glass (`func_breakable`/`_surf` whose drawn materials are all `$surfaceprop glass`) | `func_window` (MOHAA breakable glass), Source `health` | |
 | overlays (`info_overlay`, LUMP_OVERLAYS) | flat 3×3 patch half a unit off the surface; shader `ov_<material>`: `trans nonsolid nomarks polygonOffset`, `blendFunc blend` + `nextbundle $lightmap` like retail decals | U axis is packed in the z of UV points 0–2, V = N×U (negated if point 3's z is 1); overlays wrapped over corners/displacements are placed flat |
 | doors (`prop_door_rotating`) | `func_rotatingdoor`: a brush slab between the model's two largest opposite faces, textured with the model's material (each face's texdef reproduces the UVs of the largest mesh triangle on it), origin brush on the hinge, `openangle` = `distance`, `time` = distance/speed, `alwaysaway` for two-way doors | door meshes can lie 90° off the frame their angles apply to (rotated root bone): the mesh is turned to match the MDL hull box (`_yaw_to_hull`); no static prop in de_nuke needs it |
+| ropes (`move_rope` → `keyframe_rope` via `NextKey`) | two crossed ribbon patches per segment, `Width` wide, `rope_*` shader (nonsolid, `cull none`, alpha-tested, lightmapped) | sag ≈ sqrt(3·span·Slack/8): a parabola, exact as one 3-column patch row (quadratic Bezier) |
 | `env_fog_controller` | worldspawn `farplane` = fogend / fogmaxdensity, `farplane_color`, `farplane_cull 0` | |
 | sky (`skyname`) | six faces from each face material's `$basetexture` | de_nuke's `nukeblank` faces all use `skybox/nukeblankup` (plain 90 134 186 blue) |
 | spectator cameras (`maps/<map>_cameras.txt`) | contact-sheet shots (eye position, pitch/yaw as given), pages of 9 (`<name>_shots.png`, `_shots_2.png`, …) | `named_cameras` |
@@ -119,4 +120,4 @@ surfaces a frame (`MAX_STATIC_MODELS_SURFS`).
 - Blend textures use the first layer only.
 - Openable/breakable props (`prop_dynamic` vent slats opened by `func_button` or `OnBreak`)
   aren't converted: those vents are open. Door handles and other relief are lost.
-- Ropes and cables (`keyframe_rope`/`move_rope`), sprites and detail sprites are dropped.
+- Sprites (`env_sprite` glows) and detail sprites (grass) are dropped.

@@ -87,6 +87,7 @@ class Options:
     # count (de_nuke: ~1M texels at 16), so drafts use 32 (a quarter of the texels).
     lightmap_density: int = 16
     overlays: bool = True           # info_overlay decals -> flat blended patches
+    ropes: bool = True              # move_rope/keyframe_rope cables -> crossed ribbon patches
     light_scale: float = 1.0
     sky_shader: Optional[str] = None  # override (e.g. "sky/mohday2"); default converts the Source sky
     texture_quality: int = 90       # JPEG quality for opaque textures
@@ -647,6 +648,81 @@ class Converter:
             self._overlay_shaders[name] = "\n".join(lines)
         return name
 
+    # ------------------------------------------------------------------ ropes
+    def ropes(self) -> list[Patch]:
+        """Cables and power lines (``move_rope`` -> ``keyframe_rope`` chains via ``NextKey``)
+        -> two crossed ribbon patches per segment, ``Width`` wide, hanging in a parabola:
+        a rope ``Slack`` units longer than the span D sags by about sqrt(3 D Slack / 8), and a
+        3-column patch row is a quadratic Bezier, so the parabola is exact. Each segment uses
+        the width, slack and material of the entity it starts from."""
+        out: list[Patch] = []
+        if not self.opt.ropes:
+            return out
+        s = self.opt.scale
+        by_name = {}
+        for e in self.bsp.find_entities("keyframe_rope"):
+            if e.get("targetname") and e.origin is not None:
+                by_name.setdefault(e.get("targetname").lower(), e)
+        up = np.array([0.0, 0.0, 1.0])
+        for e in self.bsp.find_entities("move_rope") + self.bsp.find_entities("keyframe_rope"):
+            nxt = by_name.get((e.get("nextkey") or "").lower())
+            if nxt is None or e.origin is None:
+                continue
+            a = np.array(e.origin, np.float64)
+            b = np.array(nxt.origin, np.float64)
+            if self.sky_area is not None and self.bsp.point_area(tuple((a + b) / 2)) == self.sky_area:
+                continue
+            try:
+                width = max(0.5, float(e.get("width", "2") or 2))
+                slack = max(0.0, float(e.get("slack", "25") or 25))
+            except ValueError:
+                width, slack = 2.0, 25.0
+            span = float(np.linalg.norm(b - a))
+            if span < 1.0:
+                continue
+            sag = math.sqrt(3.0 * span * slack / 8.0)
+            mid = (a + b) / 2 - up * 2 * sag            # Bezier control point: the curve's middle sags by `sag`
+            mat = (e.get("ropematerial") or "cable/cable").replace(".vmt", "")
+            cm = self.material(mat, (64, 64))
+            shader = self._rope_shader(cm)
+            t = (b - a) / span
+            side = np.cross(t, up)
+            side = side / np.linalg.norm(side) if np.linalg.norm(side) > 1e-6 else np.array([1.0, 0.0, 0.0])
+            vert = np.cross(side, t)
+            length = span + slack
+            smax = length / max(8.0 * width, 1.0)
+            for d in (side, vert):
+                rows = []
+                for k, off in enumerate((-0.5, 0.0, 0.5)):
+                    row = []
+                    for j, p in enumerate((a, mid, b)):
+                        q = (p + d * off * width) * s
+                        row.append((round(float(q[0]), 3), round(float(q[1]), 3), round(float(q[2]), 3),
+                                    round(smax * j / 2, 4), round(off + 0.5, 4)))
+                    rows.append(row)
+                out.append(Patch(shader, rows))
+        self.report["ropes"] = len(out) // 2
+        return out
+
+    def _rope_shader(self, cm: ConvertedMaterial) -> str:
+        """Non-solid, two-sided, lightmapped version of a converted material (alpha-tested
+        when the image has alpha)."""
+        tail = cm.shader.rsplit("/", 1)[-1]
+        name = f"{self.prefix}/rope_{tail}"
+        if len("textures/" + name) > MAX_SHADER_NAME:
+            h = hashlib.md5(cm.shader.encode()).hexdigest()[:6]
+            name = f"{self.prefix}/rope_{tail[: MAX_SHADER_NAME - len('textures/' + self.prefix) - 13]}_{h}"
+        self._overlay_shaders = getattr(self, "_overlay_shaders", {})
+        if name not in self._overlay_shaders:
+            alpha = cm.image is not None and cm.image.endswith(".tga")
+            lines = [f"textures/{name}", "{", f"\tqer_editorimage {editor_image(cm.image)}", "\tsurfaceparm nonsolid",
+                     "\tsurfaceparm nomarks", "\tsurfaceparm trans", "\tcull none", "\t{", f"\t\tmap {cm.image}"]
+            if alpha:
+                lines += ["\t\talphaFunc GE128", "\t\tdepthWrite"]
+            lines += ["\tnextbundle", "\t\tmap $lightmap", "\t}", "}"]
+            self._overlay_shaders[name] = "\n".join(lines)
+        return name
+
     # ------------------------------------------------------------------ doors
     def doors(self) -> list[MEntity]:
         """``prop_door_rotating`` -> ``func_rotatingdoor``: a brush slab spanning the door
@@ -1188,7 +1264,7 @@ class Converter:
     def run(self) -> Result:
         brushes = self.brushes()
         patches = self.patches()
-        overlay_patches = self.overlays()
+        overlay_patches = self.overlays() + self.ropes()
         self.statics: list = []
         prop_ents, prop_clips, precache = self.props() if self.opt.props else ([], [], [])
         world = MEntity(self.worldspawn())
