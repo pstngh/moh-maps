@@ -6,7 +6,47 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## Summary (morning session 2026-10-01, from 08:00)
+## Current session (2026-10-01, from 11:25): de_inferno, de_cache, de_rats_1337_v2
+
+**User (chat 11:25):** convert de_inferno, then de_cache, then workshop de_rats_1337_v2
+(Steam Workshop 741136461), each to final quality with bots and ladders checked, and
+install them in the MOH folder. **User (chat ~11:30): the rats copy in ~/Downloads is the
+wrong version; get the workshop one.** Done: `local/workshop/de_rats_1337_v2.bsp`
+(24 MB VBSP 21, from Valve's UGC CDN via the public GetPublishedFileDetails API; the
+download was a zip, SHA-1 matched the CDN hash).
+
+**State (12:45):**
+- **Inferno**: final fastrad build done (BSP 233 s, light 674 s), sheets good (fountain
+  water fixed). Its bot run crashed: **static model limits** (see below). Re-inject with
+  the budgeted merge running: `local/csgo/merge_redo.sh` (Inferno `--resume` + 8 bots,
+  then Nuke `--resume` + 8 bots + ladder probe; logs `inferno_resume.log`,
+  `nuke_merge.log`). Check the new sheet (props all present: well, benches, statue,
+  B-site cylinder racks) and kills, then install.
+- **Cache**: final build running (`local/csgo/cache_final.sh`, log `cache_final.log`; build,
+  8 bots, ladder probe). Unlit pass looked right (skybox leak and black skylight panes fixed).
+  Its 1,378 props are under both budgets.
+- **Rats**: `--scale 1.1` (ducts 88-92 tall need it to stand), `--name cs_rats`. 30 step
+  ladders; test builds as `cs_ratsx` (unlit) + `ladprobe.py`: 23/30 climb. Adaptive step
+  depth (1.0, less where a shaft is too narrow) being probed now (`ratsx_unlit.log`, wait
+  for PROBEDONE). Remaining failures are rats oddities: 25 hangs 600 units up (CS players
+  reach it some other way), 14 has no ladder model, 9/15/0/5/6/29 stop under overhangs.
+  Then run `local/csgo/rats_final.sh` (fastrad + bots + ladders).
+- **Nuke must be reinstalled** after `merge_redo.sh`: the installed final Nuke has 1,365
+  prop SKDs > the 1,024 skeleton cache, so hundreds of its props never loaded.
+- Then `python -m mohkit install local/csgo/<name>/<name>.pk3` for cs_inferno, cs_cache,
+  cs_rats, cs_nuke.
+
+**Engine limits found (docs/reference/engine.md §5.2, docs/csgo-conversion.md):** at most
+4,095 static models (`staticModelNumIndexes[4095]`, 12-bit sort key) and 1,024 SKDs in the
+skeleton cache (shared with players/weapons). `mohkit.staticmerge` keeps 3,500 / 600.
+
+**Done this session (committed and pushed):** spawn nudging (`validate.fix_spawns`),
+touching ladder pieces merged, skybox by leaf bounds (Cache leak), Z splits at 512,
+see-through refract/water model materials (Inferno fountain), additive world materials,
+`prop_hallucination` props (rats), auto cameras look down the longest sightline,
+staticmerge + prune, ladder probe start (`probe_start`), adaptive step depth.
+
+## Earlier summary (morning session 2026-10-01, from 08:00)
 
 **Results (local only, `local/` is gitignored; install with
 `python -m mohkit install local/csgo/cs_nuke/cs_nuke.pk3`, then `map dm/cs_nuke`):**

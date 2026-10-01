@@ -158,16 +158,22 @@ OpenMoHAA draws every static model whose bounds pass the frustum test (the leaf
 surfaces a frame (`MAX_STATIC_MODELS_SURFS`). de_nuke's 4,801 props have 9,071 surfaces
 in all, so only a view of nearly the whole map (the overview shot) can lose some.
 
-**At most 4,095 static models per map.** The renderer adds each drawn static model's
-triangle count to `staticModelNumIndexes[4095]` (`renderergl1/tr_model.cpp:33`, `:1560`),
-indexed by static model number, and packs that number into 12 sort-key bits
-(`R_DecomposeSort`, `tr_main.c:1241`: `& 4095`). Model 4,095 and up write past the array
-every frame and draw with another model's transform. de_inferno's 6,326 injected props
-crashed the game 16 s into an 8-bot match (`R_PrintInfoWorldtris`, called on corrupted
-state); de_nuke's 4,801 had survived its tests by luck. `mohkit.staticmerge` merges
-copies of one model in a grid cell (512 units, larger if needed) into one rigid model
-when a map has more than 3,500 props (de_inferno: 6,326 -> about 2,900), and
-`staticlight.inject` refuses more than 4,095.
+**At most 4,095 static models and about 600 prop SKDs per map.** The renderer adds each
+drawn static model's triangle count to `staticModelNumIndexes[4095]`
+(`renderergl1/tr_model.cpp:33`, `:1560`), indexed by static model number, and packs that
+number into 12 sort-key bits (`R_DecomposeSort`, `tr_main.c:1241`: `& 4095`). Model 4,095
+and up write past the array every frame and draw with another model's transform:
+de_inferno's 6,326 injected props crashed the game 16 s into an 8-bot match
+(`R_PrintInfoWorldtris`, called on corrupted state). Separately, the skeleton cache holds
+1,024 SKDs (`TIKI_MAX_SKELCACHE`, `tiki/tiki_shared.h:79`), shared with players, weapons
+and effects; props past it never load ("No free spots open in skel cache"): de_nuke's
+1,365 prop SKDs lost hundreds of props (2,807 such errors in its shot run).
+`mohkit.staticmerge` keeps both budgets (3,500 instances, 600 SKDs): it merges one-off
+models first (no geometry is duplicated), then the models cheapest to duplicate, per
+1,024-unit cell, into rigid models with one surface bucket per shader; `prune` drops the
+merged-away originals from the pk3. de_inferno: 6,326 models / 301 SKDs -> 3,436 / 253;
+de_nuke: 4,801 / 1,365 -> 2,917 / 598, pk3 assets 262 -> 267 MB. `staticlight.inject`
+refuses more than 4,095 static models.
 
 ## Known gaps
 
