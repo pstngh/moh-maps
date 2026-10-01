@@ -172,13 +172,14 @@ def write_pk3(out: Path, files: dict[str, bytes]) -> None:
 
 
 def build(folder: Path, quality: str = "normal", test: bool = True, bots: int = 0, match_seconds: float = 0,
-          log=print, inject_props: bool = False) -> dict:
+          log=print, inject_props: bool = True) -> dict:
     """Full pipeline for one project folder. Returns a report dict (also written to dist/).
 
-    ``inject_props``: compile without the ``static_*`` props (their collision ``.map``
-    brushes go into the world instead) and add them after the light stage, coloured from
-    the light grid (``mohkit.staticlight``): no MOHlight static-model lighting, which runs
-    on one thread at ~190 vertices a second (mk_medina's 107 props: ~55 minutes)."""
+    ``inject_props`` (default): compile without the ``static_*`` props (their collision
+    ``.map`` brushes go into the world instead) and add them after the light stage,
+    coloured from the map's lightmaps (``mohkit.staticlight``): no MOHlight static-model
+    lighting, which runs on one thread at ~190 vertices a second (mk_medina's 107 props:
+    ~55 minutes). On mk_medina the result matched MOHlight's props (docs/entities.md)."""
     t0 = time.time()
     proj = Project.load(folder)
     log(f"== {proj.game_path}: generating")

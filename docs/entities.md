@@ -86,19 +86,23 @@ Locked-door prop, as in stock maps: a `trigger_use` with `targetname
 door_locked` and `$type wood`, plus `exec global/door_locked.scr::lock` before
 `level waittill spawn`.
 
-## Static props without MOHlight (`build --inject-props`)
+## Static props without MOHlight (the default since 2026-10-01)
 
 MOHlight lights `static_*` props per vertex on one thread at about 190 vertices a second
-(mk_medina's 107 props: ~55 minutes of its light stage). `python -m mohkit build maps/x
---inject-props` holds them back: their collision `.map` brushes go into the world (where
-Q3map would have baked them), the map compiles and lights without them, and
-`mohkit.staticlight` adds them to the BSP afterwards with vertex colours taken from the
-map's lightmaps (light grid where none reach; docs/csgo-conversion.md). The colours
-match MOHlight's on average but have no per-vertex shadows, so
-compare a sheet before preferring it for a finished map. Tried on a copy of mk_medina
-(2026-10-01, draft): 107 props injected with 501 collision brushes, every TIKI read, and
-the sheet showed palms, carts, the car and café chairs lit in keeping with the walls
-around them (`dist/mk_medinai_shots.png`).
+(mk_medina's 107 props: ~55 minutes of its light stage). `python -m mohkit build` holds
+them back by default: their collision `.map` brushes go into the world (where Q3map would
+have baked them), the map compiles and lights without them, and `mohkit.staticlight`
+adds them to the BSP afterwards with vertex colours taken from the map's lightmaps
+(light grid where none reach; docs/csgo-conversion.md). `--mohlight-props` restores
+MOHlight's per-vertex prop lighting.
+
+Evidence: mk_medina's MOHlight-lit BSP with its 107 props stripped and re-injected
+(same lightmaps, only the prop colours differ): the 20 high-detail shots' mean brightness
+is within 1% of MOHlight's (interior 3%), and carts, chairs, the car and the fountain look
+the same. Per vertex the injected colours correlate 0.56 with MOHlight's (the light grid:
+0.41); what's lost is MOHlight's per-vertex self-shadowing, which barely shows. A map
+without static models also lit on 10 threads where MOHlight-lit statics had crashed
+(docs/toolchain.md).
 
 ## Ladders
 

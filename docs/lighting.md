@@ -102,10 +102,10 @@ with fill lights until you have seen a normal build.
   in a one-light test room with `-fast` (timestamped log), and far slower on a big
   map with many lights. Budget static-prop vertices for compile time. Props as
   `script_model` cost nothing at compile time (the engine lights them from the
-  light grid at run time). Alternative: `build --inject-props` (and every CS:GO
-  conversion) adds the props after the light stage with vertex colours from the
-  lightmaps (`mohkit.staticlight`): seconds instead of MOHlight's static phase, on
-  average the same brightness, less self-shading (`docs/entities.md`).
+  light grid at run time). `build` (by default) and every CS:GO conversion add the
+  props after the light stage with vertex colours from the lightmaps
+  (`mohkit.staticlight`): seconds instead of MOHlight's static phase, the same
+  brightness, less self-shading (`docs/entities.md`; `--mohlight-props` opts out).
 - **The light grid ignores spotlight cones** (MOHlight 1.48; test room, 2026-10-01):
   below a spot aimed at the floor the grid ramps up with depth at any distance
   off-axis (11 just under the lamp, 58 at the floor), while the lightmaps show the

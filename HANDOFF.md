@@ -121,9 +121,9 @@ then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-g
 2. **Structural CS:GO maps:** `--structural` dust2 compiles (61 KB VIS, claim 8 false).
    Try a lit structural build: smaller leaves may light faster and avoid the 60-lights-
    per-leaf cap, and VIS would cull. If it holds up, make it the default.
-3. **From-scratch `build --inject-props`** exists (opt-in; tried on a mk_medina copy,
-   `dist/mk_medinai_shots.png`). Compare it side by side with a MOHlight-lit build at the
-   same quality before making it the default.
+3. **Done (09:55): prop injection is the `build` default** (`--mohlight-props` opts out).
+   A/B on mk_medina's own lit BSP (props stripped and re-injected from the lightmaps): mean
+   brightness within 1% on all 20 shots, props look the same (docs/entities.md).
 4. **Multi-threaded MOHlight crash:** evidence now points at static models: mk_medina
    without its static props (`--inject-props`) lit on 10 threads cleanly (docs/toolchain.md).
    To confirm, re-run MT light on `roots/dm_mtx` (with statics) a few times and on
