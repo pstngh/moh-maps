@@ -439,8 +439,9 @@ class Converter:
                         drop["entity:invisible"] = drop.get("entity:invisible", 0) + 1
                         continue
                     self._invisible_models.add(br.model)
-                if cls in BREAKABLE_ENTITIES and self._is_glass(br):
-                    # breakable glass -> MOHAA func_window (one entity per Source brush model)
+                if cls in BREAKABLE_ENTITIES:
+                    # breakable glass, wall covers, boards -> MOHAA func_window (one entity per
+                    # Source brush model; mirage's wall-hole covers pair a prop with one of these)
                     geo = br.geometry()
                     if len(geo) >= 4:
                         pieces = [self._brush_piece(br, pc, br.tool_kinds, False) for pc in _split_long(geo, self.opt.split)]
@@ -530,7 +531,9 @@ class Converter:
                 hp = max(1, int(float(ent.get("health", "1") or 1))) if ent else 1
             except ValueError:
                 hp = 1
-            out.append(MEntity({"classname": "func_window", "health": str(hp), "debristype": "0"}, brushes))
+            glass = any("glass" in f.shader for b in brushes for f in b.faces)
+            out.append(MEntity({"classname": "func_window", "health": str(hp), "debristype": "0" if glass else "1"},
+                               brushes))
         self.report["windows"] = len(out)
         return out
 
@@ -859,6 +862,8 @@ class Converter:
         for e in getattr(self, "_interactive_props", []):
             if (e.get("solid") or "6") == "0" or e.origin is None:
                 continue
+            if not any(k.lower() == "onbreak" for k, _ in e.items()):
+                continue      # enabled/animated later (a broken shutter's remains): left out
             ang = e.vector("angles", (0.0, 0.0, 0.0)) or (0.0, 0.0, 0.0)
             slab = self._model_slab(e, e.get("model"), e.origin, ang)
             if slab is None:
@@ -1414,17 +1419,22 @@ class Converter:
         outputs of its own (``OnBreak``: breakable vent covers), so those openings stay open."""
         from types import SimpleNamespace
         self._interactive_props = []
+        # names that some output enables, breaks, kills or animates (a prop only re-skinned,
+        # like mirage's TVs, stays an ordinary prop)
         targeted: set[str] = set()
         for e in self.bsp.entities:
             for k, v in e.items():
                 if k.lower().startswith("on"):
-                    targeted.add(re.split(r"[,\x1b]", v, 1)[0].strip().lower())
+                    parts = [x.strip().lower() for x in re.split(r"[,\x1b]", v)]
+                    if len(parts) > 1 and parts[1] in ("enable", "disable", "toggle", "break", "kill",
+                                                       "setanimation", "setdefaultanimation", "turnon", "turnoff"):
+                        targeted.add(parts[0])
         out = []
         skipped = 0
         for e in self.bsp.entities:
             if e.classname not in self.PROP_ENTITIES or not e.get("model") or e.origin is None:
                 continue
-            if any(k.lower().startswith("on") for k, _ in e.items()) or (
+            if any(k.lower() == "onbreak" for k, _ in e.items()) or (e.get("startdisabled") or "0") == "1" or (
                     e.get("targetname") and e.get("targetname").lower() in targeted):
                 skipped += 1
                 self._interactive_props.append(e)
