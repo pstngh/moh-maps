@@ -20,17 +20,17 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 02:00):**
+**Live state (update as you go, 02:06):**
 - **dust2:** done for tonight's time box (draft, 75 bot kills, `local/csgo/cs_dust2/`).
-- **Nuke:** all 6 ladders verified (`game.ladder_probe`; the A-site one hangs over a gap
-  and mounts with +use, now that its trigger reaches the ledge). Lighting fixes are in
-  (lights 473 -> 247, `-blocksize 512`, sky fill): a fastrad build with them reached 70%
-  of initial light in 13 min (the old draft took 65 min), so light is much faster now.
-- **Running (started 01:55):** `mohkit csgo de_nuke -q fastrad` and
-  `mohkit csgo de_mirage -q fastrad` (logs `scratchpad/nuke_fastrad2.log`,
-  `mirage_fastrad1.log`). When done: look at the sheets, run bots and the ladder probe,
-  record times.
-- Mirage unlit (`cs_mirageu`) looked right.
+  If time allows at the end: a `fastrad` rebuild with the newer converter.
+- **Running (02:05):** `mohkit csgo de_nuke -q fastrad` and `mohkit csgo de_mirage -q
+  fastrad` with every feature (sprites, breakable vents, ladder fixes, light pruning);
+  logs `scratchpad/nuke_fastrad3.log`, `mirage_fastrad2.log`. Then: sheets, bots, ladder
+  probe (`scratchpad/ladprobe2.py <pk3> <bsp> dm/<name>`), record times.
+- Also running: `mohkit build <scratchpad>/mk_medinai -q draft --inject-props` (a renamed
+  copy of mk_medina, testing prop injection for from-scratch maps; its light is
+  single-threaded because mk_medina's compile args force `-threads 1`).
+- Nuke ladders 6/6 verified; Mirage 2/3 before the prop-clip fix (re-check).
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
