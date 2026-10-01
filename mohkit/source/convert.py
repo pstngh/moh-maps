@@ -399,6 +399,7 @@ class Converter:
         self._extra: list[MBrush] = []
         self._ladder_src: list[Brush] = []
         self._windows: dict[int, list[MBrush]] = {}
+        self._invisible_models: set[int] = set()
         ents = self.bsp.model_entities
         drop = self.report["dropped"]
         for br in self.bsp.brushes(include_culled=False):
@@ -412,6 +413,18 @@ class Converter:
                     drop[f"entity:{cls}"] = drop.get(f"entity:{cls}", 0) + 1
                     continue
                 nonsolid = cls in NONSOLID_ENTITIES
+                # func_brush keys: StartDisabled 1 = not there at the start (invisible and not
+                # solid; de_nuke has 32), Solidity 1 = never solid, rendermode 10 = not drawn
+                if (ent.get("startdisabled") or "0") == "1":
+                    drop["entity:disabled"] = drop.get("entity:disabled", 0) + 1
+                    continue
+                if (ent.get("solidity") or "0") == "1":
+                    nonsolid = True
+                if (ent.get("rendermode") or "0") == "10":
+                    if nonsolid:
+                        drop["entity:invisible"] = drop.get("entity:invisible", 0) + 1
+                        continue
+                    self._invisible_models.add(br.model)
                 if cls in BREAKABLE_ENTITIES and self._is_glass(br):
                     # breakable glass -> MOHAA func_window (one entity per Source brush model)
                     geo = br.geometry()
@@ -503,7 +516,7 @@ class Converter:
         xf = self._xf(br.model)
         hidden = "common/waterskip" if water else CAULK   # caulk is solid: it would fill a water volume
         faces = []
-        clip = "common/clip" if "clip" in kinds or "invisible" in kinds else (
+        clip = "common/clip" if "clip" in kinds or "invisible" in kinds or br.model in self._invisible_models else (
             "common/playerclip" if "playerclip" in kinds else None)
         detail = self.opt.detail_all or br.is_detail or br.model > 0
         for side, w in geo:
