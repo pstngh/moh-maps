@@ -253,6 +253,24 @@ with the mean of the light arriving along the six axes and the brightest of them
 (`encode_grid`; round-trips MOHlight's grid exactly). Drawvert colours (`rgbGen vertex`
 surfaces) come from the luxels too.
 
+**Results (2026-10-01, all maps rebuilt this way, same cameras as CS:GO's own shots):**
+per-camera mean brightness, mean absolute error against CS:GO (0-255) and correlation.
+
+| map | CS:GO mean | before (MOHlight) | after (transfer) | build (BSP + light) |
+|---|---|---|---|---|
+| de_dust2 | 113 | 71, error 52, corr -0.36 | 96, error 17, corr 0.96 | ~12 min (was ~55) |
+| de_mirage | 100 | 77, error 35, corr 0.05 | 95, error 6, corr 0.97 | ~8 min (was ~45) |
+| de_nuke | 96 | 131, error 38, corr -0.05 | 90, error 7, corr 0.95 | ~6 min (was ~57) |
+| de_inferno | 95 | 72, error 31, corr 0.12 | 79, error 19, corr 0.75 | ~7 min (was ~15) |
+| de_cache | 106 | 79, error 34, corr -0.38 | 95, error 13, corr 0.84 | |
+| de_vertigo | 92 | (new) | 86, error 10, corr 0.88 | 4 min |
+| de_cbble | 75 | (new) | 65, error 10, corr 0.99 | 9 min |
+
+All still read a little darker than CS:GO (its bloom, detail textures and phong are not
+converted); raise `--exposure` on a `--resume` to brighten one. Lightmap pages may pass
+170 now (de_cbble: 190): that limit was MOHlight's buffer; the renderer takes 256
+(`MAX_LIGHTMAPS`, `renderergl1/tr_local.h:1182`) and de_cbble loads and plays.
+
 **Reference shots.** `python -m mohkit csgo-ref de_nuke` runs the CS:GO client in
 `csgo_dir` windowed, drives it over `-netconport`, and saves `jpeg`s from every named
 camera into `local/csgo/<name>/csgo_ref/` (restoring `config.cfg`/`video.txt`). Compare

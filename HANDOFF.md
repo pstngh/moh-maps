@@ -14,37 +14,35 @@ in mohkit, rebuild + reinstall all six, show before/after. P2: de_vertigo then d
 final quality like Inferno/Cache (unlit pass, full build, 8 bots, ladder probe, sheets,
 install). Keep going until done; pause rule at 75%.
 
-**P1 status: fixed in mohkit (commit 1320404), final rebuild of all six running.**
-- Measuring: `mohkit.exposure` (`python -m mohkit exposure <shots dirs> [--by-map] [-n 10]`),
-  converted maps keep full-size shots in `local/csgo/<name>/shots/` + `exposure.json`,
-  `python -m mohkit csgo <map> --shoot` re-shoots. **CS:GO reference shots:**
-  `python -m mohkit csgo-ref de_nuke` runs the CS:GO port in `~/Documents/Games/csgo`
-  (netcon, spectator `spec_goto`, `jpeg`), saves `local/csgo/<name>/csgo_ref/NN_<cam>.jpg`,
-  restores its config. Done for dust2, mirage, nuke, inferno, cache (rats is a workshop map,
-  no refs). Stock: `dist/stock_shots/<map>/` (mohdm1-3,5-7, obj_team1-4).
-- Causes found: (1) MOHlight light falloff is 7500*I*cos/d^2 in display space, capped at
-  127 (measured), vs VRAD's linear-space d^2 (~1/d^0.9 on screen): flat white near lamps,
-  dark between (Nuke radio 183 vs CS:GO 94, Inferno halls 107 vs 56); texlights stacked
-  more; (2) props: 1.78x lightmap scale, and CS:GO's per-prop tints (DiffuseModulation)
-  ignored: thousands of grey/yellow/blue props drawn white; (3) the lightmap cap (texture
-  colour) made white rooms flat.
-- Fix: lit conversions no longer run MOHlight: BSP+VIS, then `mohkit.source.lighting.transfer`
-  moves CS:GO's own baked lighting (LIGHTING_HDR) into the lightmaps, grid, drawverts;
-  props get VRAD's per-vertex light (`sp_hdr_N.vhv`) + tints; per-texture "headroom" gain
-  lets sunlight exceed the texture colour. `--mohlight` keeps the old path. Details and
-  numbers: docs/csgo-conversion.md "Lighting". Before/after vs CS:GO (same cameras):
-  Nuke mean error 38 -> 7, corr -0.05 -> 0.95; Inferno 31 -> 19, 0.12 -> 0.75.
-- **Running (started 14:57):** `local/csgo/all_final.sh` (log `local/csgo/all_final.log`):
-  inferno refresh, nuke resume, dust2/mirage/cache/rats full builds, each with 8 bots
-  (`<name>_bots.png`) and ladder probes. Old pk3s + shots are kept in `local/csgo/before/<name>/`.
-  When done: `python -m mohkit exposure --ref local/csgo/<name>/csgo_ref
-  local/csgo/before/<name>/shots local/csgo/<name>/shots` per map, side-by-side sheets with
-  `exposure.triple_sheet`; install all six
-  (`python -m mohkit install local/csgo/<name>/<name>.pk3`), make a before/after page
-  for the user, commit, update this file.
-- Also started 15:05: `python -m mohkit csgo de_vertigo -q unlit` (log `local/csgo/vertigo_unlit.log`).
-- Known gaps left: masked prop tints averaged; blend textures first layer only (Nuke radio
-  walls are red in CS:GO, pink-white here); CS:GO is still ~15% brighter in sunlit shots.
+**P1 status: DONE (15:50).** All six conversions rebuilt with CS:GO's own baked lighting
+(commits 1320404, 1e4df5d, f4df496) and installed in `~/Documents/Games/moh/main/`.
+Per-camera error vs CS:GO's own shots (0-255) before -> after, corr: dust2 52 -> 17
+(-0.36 -> 0.96), mirage 35 -> 6 (0.05 -> 0.97), nuke 38 -> 7 (-0.05 -> 0.95), inferno
+31 -> 19 (0.12 -> 0.75), cache 34 -> 13 (-0.38 -> 0.84). Bots (8, 90 s): inferno 24, nuke 74,
+dust2 83, mirage 76, cache 29, rats 16 kills. Ladders 35/40 (rats' known 5 fail).
+Sheets sent to the user: `local/csgo/compare/<name>.png` (CS:GO | before | after).
+Old pk3s/shots kept in `local/csgo/before/<name>/`. Builds: `local/csgo/all_final.sh`.
+- Tools: `python -m mohkit exposure` (+ `--ref`), `python -m mohkit csgo-ref <map>`
+  (CS:GO port, netcon; restores its config), `python -m mohkit csgo <map> --shoot`,
+  `--resume --exposure X`. Method + numbers: docs/csgo-conversion.md "Lighting".
+- Causes found (for the record): MOHlight falloff (7500*I*cos/d^2 in display space, cap
+  127) vs VRAD's linear d^2; texlights; the texture-colour cap; props at 1.78x and CS:GO's
+  per-prop tints ignored (thousands of props drawn white).
+
+**P2 status:** **de_vertigo DONE** (`local/csgo/cs_vertigo/`, installed; `map dm/cs_vertigo`):
+moved into +-8192 by (-512, 512, -6656) (`Options.offset`, auto), 40 bot kills, error vs
+CS:GO 10 (corr 0.88), 48 lightmap pages (per-face `surfaceDensity` from Source luxel size).
+**Open: its 3 ladders fail the probe** (climb 0, -83 at the right positions now): check the
+step columns near (-1528, -836, 5056) (translated coords) in game / in the .map.
+**de_cbble DONE** (installed; `map dm/cs_cbble`): 53 bot kills, error 10 (corr 0.99),
+ladders 1/2 (the 460-tall one at (-1120, 2461, 90) climbs 0), 190 lightmap pages (fine:
+renderer limit 256; 170 was MOHlight's). Scripts `local/csgo/{vertigo,cbble}_final.sh`.
+
+**Next steps (suggested):** (1) Vertigo's 3 ladders and Cobble's tall ladder; (2) maps
+still read ~10-15% darker than CS:GO (dust2 96 vs 113, inferno 79 vs 95): try
+`--resume --exposure` sweeps per map, or a rule nearer the top of the auto-exposure range;
+(3) masked prop tints exact (tinted texture variants); (4) blend textures (Nuke's red radio
+walls); (5) the 3D skybox (Vertigo's city below shows the sky-box floor).
 
 ## Current session (2026-10-01, from 11:25): de_inferno, de_cache, de_rats_1337_v2
 
