@@ -671,7 +671,7 @@ def build_grid(bsp, field, fill: Sequence[float] = (40.0, 40.0, 40.0)) -> dict[s
 
 
 def blend_alphas(bsp, source: SourceBSP, blends: dict, scale: float = 1.0, offset=(0.0, 0.0, 0.0),
-                 sky_room: Optional[dict] = None) -> bytes:
+                 sky_room: Optional[dict] = None, modulated=()) -> bytes:
     """The drawverts lump with the alpha of every vertex of a two-layer blend surface set from
     the Source displacements of the same material around it (``blends``: converted shader ->
     Source material, ``report["blend"]``; the shader draws layer 2 by ``alphaGen vertex``).
@@ -716,6 +716,12 @@ def blend_alphas(bsp, source: SourceBSP, blends: dict, scale: float = 1.0, offse
             acc = np.bincount(pi[ok], weights=w * alpha[li[ok]], minlength=len(p))
             got = ws > 0
             dv["rgba"][v[got], 3] = np.clip(np.round(acc[got] / ws[got]), 0, 255).astype(np.uint8)
+    # alpha-tested blends ($blendmodulatetexture, convert.material): (1 + a) / 2
+    mods = {n.lower() for n in modulated or ()}
+    for s in surfs:
+        if 0 <= s.shader < len(names) and names[s.shader] in mods and s.num_verts:
+            a = dv["rgba"][s.first_vert:s.first_vert + s.num_verts, 3].astype(np.int32)
+            dv["rgba"][s.first_vert:s.first_vert + s.num_verts, 3] = ((255 + a + 1) // 2).astype(np.uint8)
     return dv.tobytes()
 
 

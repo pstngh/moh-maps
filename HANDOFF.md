@@ -34,16 +34,29 @@ Working from the "Next steps" below, in order (no new user request).
   nearer the eye than 8 x spawn spread / 16 are dropped, and a room losing > 3/4 falls back to
   the 2D sky. Net effect: only Vertigo keeps a portal sky (its city); the other maps' skyboxes
   are rooms around the map that one fixed eye can't show (AA has no sky parallax).
-- **RUNNING (restarted 17:50): final rebuild of all 8** with everything above:
-  `local/csgo/final2.sh` in two lanes, logs `local/csgo/final2_a.log` (dust2, inferno, cache,
-  vertigo) and `final2_b.log` (mirage, nuke, cbble, rats); per map: fastrad build
-  (`<name>_final2.log`), 8 bots, ladder probe, `--fit-exposure` (if csgo_ref), install.
-  Baseline pk3s/shots: `local/csgo/before/<name>_pre_final2/`; before/after sheets:
-  `python <scratch>/cmp3.py <name>` (copy in HANDOFF below if lost: triple_sheet of csgo_ref,
-  before/<name>_pre_final2/shots, <name>/shots for the cameras that changed most).
-  **Next:** read both lane logs (kills, ladders True/False, exposure errors), check sheets,
-  update the results table in docs/csgo-conversion.md, commit `data/csgo_exposure.json`, stop
-  and summarize for the user.
+- **Final rebuild done (18:50), installed:** dust2 (73 kills, error vs CS:GO 17.4 -> 5.3),
+  mirage (68, ladders 3/3, 6.0 -> 4.1), nuke (81, 6/6, 7 -> 5.3), inferno (26, 19.2 -> 6.0, corr
+  0.75 -> 0.95), vertigo (48, **3/3**, 10 -> 10.6: its portal city is darker than CS:GO's hazy
+  one), cbble (49, **2/2**, 10 -> 5.0), rats (18 kills, ladders 25/30 as before). Fitted
+  exposures in `data/csgo_exposure.json` (uncommitted until the next commit).
+- **User (chat ~18:50): stop working on rats for now. Some skies looked buggy ("a map in the
+  sky") and some maps/backgrounds had new bugs in the screenshots.** Audit (sheet
+  `local/csgo/compare/sky_audit.png`): the "map in the sky" was the intermediate 17:06 build
+  (dust2/mirage installed ~40 min with the room sharing the map's VIS region); all maps but
+  Vertigo now have the plain 2D sky. Real regressions found:
+  1. **Cache**: its blends all use `$blendmodulatetexture`; linear blending turned ivy walls into
+     bare grey panels. **Reinstalled the afternoon Cache** (`before/cs_cache_pre_final2`), then
+     implemented threshold blends (alpha test, docs "materials" row). Cache rebuild running:
+     `local/csgo/final3_cache.log` (final2.sh de_cache; it installs at the end). Check the
+     ivy wall (`shots/17_spawn0.png`, `01_T.png`) and greenness vs CS:GO (afternoon error 0.57).
+     If good, rebuild the other maps with modulated blends (check `report.convert.blend_mod`).
+  2. **Vertigo portal sky**: above the city the sky is dark navy in some views (T spawn window,
+     overview) where CS:GO is light blue; it was light blue in the test build before the sky
+     room became structural (b857580). Inside the room (normal view) it looks right. Next:
+     find why the room's 2D sky draws dark in the portal view (`tr_sky.c`
+     RB_StageIteratorSky: boxSize = zFar / 1.75, `tr.farclip`), or give the room's sky walls
+     the haze colour; also bake CS:GO's sky_camera fog (143 172 186) into the room.
+  3. Cache's pk3 carries unused skybox prop models when the room is dropped (bloat only).
 
 ## Previous session (2026-10-01 from 13:20)
 

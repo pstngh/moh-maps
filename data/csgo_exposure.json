@@ -1,20 +1,44 @@
 {
+ "de_cache": {
+  "exposure": 2.0201,
+  "ratio": 0.9982,
+  "cameras": 17,
+  "rule": 1.2247
+ },
+ "de_cbble": {
+  "exposure": 0.8128,
+  "ratio": 1.0191,
+  "cameras": 21,
+  "rule": 0.6364
+ },
  "de_dust2": {
-  "exposure": 2.5322,
-  "ratio": 1.0065,
+  "exposure": 2.367,
+  "ratio": 0.9839,
   "cameras": 30,
   "rule": 1.4491
  },
  "de_inferno": {
-  "exposure": 2.1569,
-  "ratio": 1.0053,
+  "exposure": 2.3163,
+  "ratio": 1.0166,
   "cameras": 31,
   "rule": 1.0607
  },
  "de_mirage": {
-  "exposure": 1.0789,
+  "exposure": 1.079,
   "ratio": 1.0108,
   "cameras": 28,
   "rule": 1.0198
+ },
+ "de_nuke": {
+  "exposure": 1.0646,
+  "ratio": 1.0128,
+  "cameras": 36,
+  "rule": 0.9287
+ },
+ "de_vertigo": {
+  "exposure": 1.5586,
+  "ratio": 1.0105,
+  "cameras": 10,
+  "rule": 1.4142
  }
 }

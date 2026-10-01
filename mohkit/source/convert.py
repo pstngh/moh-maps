@@ -196,6 +196,7 @@ class ConvertedMaterial:
     kind: str = "opaque"            # opaque | alphatest | translucent | blend | sky | tool
     gain: float = 1.0               # texture brightened by this (``lighting.headroom_gain``)
     image2: Optional[str] = None    # blend: the second layer's image (``$basetexture2``)
+    blend_mod: bool = False         # blend: layer 2 alpha-tested by a $blendmodulatetexture threshold
 
 
 @dataclass
@@ -529,10 +530,29 @@ class Converter:
             self._gain("textures/" + shader, cm.gain)
         cm.image, cm.size = self._write_image(shader, rgba, cm.kind not in ("opaque", "modulate", "blend"))
         if rgba2 is not None:
+            # $blendmodulatetexture: CS:GO shows layer 2 where the vertex alpha passes a per-pixel
+            # threshold (its green; smoothstep(g - r, g + r, alpha)), which gives de_cache's ivy
+            # its edges; a linear blend washed the ivy out. Alpha-tested here: layer 2's alpha is
+            # 255 / (1 + g), the vertex alpha (1 + a) / 2 (lighting.blend_alphas), so the product
+            # passes 128 exactly where a >= g. (No $blendmasktransform: the base coordinates.)
+            mod = info.textures.get("$blendmodulatetexture") or info.params.get("$blendmodulatetexture")
+            if isinstance(mod, str) and mod:
+                try:
+                    from PIL import Image
+                    m = load_vtf(self.fs, mod).decode()
+                    g = np.asarray(Image.fromarray(np.ascontiguousarray(m[..., 1])).resize(
+                        (rgba2.shape[1], rgba2.shape[0]), Image.BILINEAR), np.float32) / 255.0
+                    rgba2 = rgba2.copy()
+                    rgba2[..., 3] = np.clip(np.round(255.0 / (1.0 + g)), 0, 255).astype(np.uint8)
+                    cm.blend_mod = True
+                except Exception as e:  # noqa: BLE001
+                    self.report["warnings"].append(f"blend modulate {mod}: {e}")
             # a short name: image paths must stay under MAX_QPATH (64, tr_image.c)
             h = hashlib.md5(shader.encode()).hexdigest()[:10]
-            cm.image2, _ = self._write_image(f"{self.prefix}/l2_{h}", rgba2, False)
+            cm.image2, _ = self._write_image(f"{self.prefix}/l2_{h}", rgba2, cm.blend_mod)
             self.report.setdefault("blend", {})["textures/" + shader] = src.lower()
+            if cm.blend_mod:
+                self.report.setdefault("blend_mod", []).append("textures/" + shader)
         self.assets[f"scripts/{self._script_name()}"] = b""  # placeholder, written in finish()
         self.mats[key] = cm
         return cm
@@ -629,8 +649,8 @@ class Converter:
                       "\t\talphaFunc GE128", "\t\tdepthWrite", "\tnextbundle", "\t\tmap $lightmap", "\t}"]
         elif cm.kind == "blend":   # layer 2 over layer 1 by vertex alpha (lighting.blend_alphas)
             lines += ["\t{", f"\t\tmap {cm.image}", "\tnextbundle", "\t\tmap $lightmap", "\t}",
-                      "\t{", f"\t\tmap {cm.image2}", "\t\tblendFunc blend", "\t\talphaGen vertex",
-                      "\tnextbundle", "\t\tmap $lightmap", "\t}"]
+                      "\t{", f"\t\tmap {cm.image2}", "\t\talphaFunc GE128" if cm.blend_mod else "\t\tblendFunc blend",
+                      "\t\talphaGen vertex", "\tnextbundle", "\t\tmap $lightmap", "\t}"]
         else:
             lines += ["\t{", f"\t\tmap {cm.image}", "\tnextbundle", "\t\tmap $lightmap", "\t}"]
         lines.append("}")
@@ -2862,7 +2882,8 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
         b = _BSP(base)
         write_lumps(b, {"drawverts": blend_alphas(b, SourceBSP(str(src)), convert_report["blend"], scale,
                                                   convert_report.get("offset") or (0, 0, 0),
-                                                  convert_report.get("sky_room"))}, lit)
+                                                  convert_report.get("sky_room"),
+                                                  convert_report.get("blend_mod"))}, lit)
         base = lit
     bsp_bytes = base.read_bytes()
     if statics:
