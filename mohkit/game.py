@@ -47,7 +47,9 @@ class Shot:
     ``fov`` is the game's fov value (default 80): the horizontal field of view of a
     4:3 view. Wider screens keep the same vertical angle and see more at the sides
     (``cgame/cg_view.c`` CG_CalcFov), so fov 80 is 64.6° vertical at any aspect.
-    Use ``fov_from_vertical`` to match a photo.
+    Use ``fov_from_vertical`` to match a photo. The engine draws 65..120 only (OpenMoHAA
+    clamps ``cg_fov``); a narrower ``fov`` is rendered at 65 and centre-cropped (a digital
+    zoom, so it is softer), and a wider one is drawn at 120.
     """
     name: str
     origin: Vec3
@@ -123,13 +125,30 @@ def camera_commands(shot: Shot) -> list[str]:
     """Console commands that put the local player's view at ``shot``.
 
     Requires ``cheats 1`` (set by ``run``). ``tele`` moves the player origin (feet);
-    ``face`` sets the view angles, ``fov`` the field of view. The eye is ~82 units above the origin standing,
+    ``face`` sets the view angles. The eye is ~82 units above the origin standing,
     so subtract that to place the eye where requested.
+
+    The field of view is the client cvar ``cg_fov``: unless the player is zoomed or in a
+    script camera, cgame uses it and ignores the server's ``fov`` command
+    (``cgame/cg_predict.c``), and clamps it to 65..120 (``cgame/cg_view.c``).
     """
     x, y, z = shot.origin
     p, yw, r = shot.angles
     return [f"tele {x:.0f} {y:.0f} {z - EYE_HEIGHT:.0f}", f"face {p:.1f} {yw:.1f} {r:.1f}",
-            f"fov {shot.fov if shot.fov is not None else 80:g}"]
+            f"cg_fov {drawn_fov(shot.fov):g}"]
+
+
+FOV_MIN, FOV_MAX = 65.0, 120.0  # OpenMoHAA clamps cg_fov to this range every frame
+
+
+def drawn_fov(fov: Optional[float]) -> float:
+    """The fov the engine actually draws for a requested ``fov``."""
+    return min(FOV_MAX, max(FOV_MIN, 80.0 if fov is None else fov))
+
+
+def zoom_crop(fov: float, drawn: float) -> float:
+    """Fraction of the frame (each axis) that shows ``fov`` when the engine drew ``drawn``."""
+    return math.tan(math.radians(fov) / 2) / math.tan(math.radians(drawn) / 2)
 
 
 EYE_HEIGHT = 82.0
@@ -219,22 +238,31 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
     log_path = main / "qconsole.log"
     res.log = log_path.read_text("latin-1", "replace") if log_path.exists() else (home / "stdout.txt").read_text("latin-1", "replace")
     shots_dir = main / "screenshots"
+    by_name = {nm: s for nm, s in zip(shot_names, shots)}
     for nm in shot_names:
         f = next((shots_dir / (nm + ext) for ext in (".tga", ".jpg") if (shots_dir / (nm + ext)).exists()), None)
         if f is not None:
-            res.screenshots[nm] = _to_png(f, nm)
+            s = by_name.get(nm)
+            crop = zoom_crop(s.fov, FOV_MIN) if s is not None and s.fov is not None and s.fov < FOV_MIN else 1.0
+            res.screenshots[nm] = _to_png(f, nm, crop)
     res.problems = triage(res.log)
     res.kills = sum(1 for line in res.log.splitlines() if KILL_RE.search(line))
     return res
 
 
-def _to_png(tga: Path, name: str) -> Path:
+def _to_png(tga: Path, name: str, crop: float = 1.0) -> Path:
+    """Convert a screenshot to PNG; ``crop`` < 1 keeps that centre fraction, resized back up."""
     try:
         from PIL import Image
     except ImportError:
         return tga
     out = tga.with_suffix(".png")
-    Image.open(tga).convert("RGB").save(out)
+    im = Image.open(tga).convert("RGB")
+    if crop < 0.999:
+        w, h = im.size
+        cw, ch = w * crop, h * crop
+        im = im.resize((w, h), Image.LANCZOS, box=((w - cw) / 2, (h - ch) / 2, (w + cw) / 2, (h + ch) / 2))
+    im.save(out)
     return out
 
 

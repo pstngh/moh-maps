@@ -71,7 +71,9 @@ Block out with the `Carver` (one air box per room or yard; windows and openings
 as small air boxes through the wall), then `kit.door`/`kit.window` for
 openings with images, `b.box` for beams, trims and bars, and `b.prop` for
 fixtures (`mohkit.props.search("bulb")`). Put a `Shot` at the reference camera
-first in `SHOTS`, plus a couple of others to check the spaces. Add at least one
+first in `SHOTS` (`fov=game.fov_from_vertical(vfov)` for a photo; the engine draws
+65–120, and a narrower fov is a centre crop of a 65 shot, see
+[testing.md](testing.md#cameras)), plus a couple of others to check the spaces. Add at least one
 spawn. Work at `-q draft` (seconds for a room).
 
 ## 6. Compare and iterate

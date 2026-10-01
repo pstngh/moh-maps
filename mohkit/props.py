@@ -69,6 +69,13 @@ def get(name: str) -> Optional[Prop]:
                 m.get("avail", "?"))
 
 
+def collision_bounds(name: str) -> Optional[tuple[tuple, tuple]]:
+    """Bounds of the whole collision ``.map`` (every brush, including bullet-only foliage), or None."""
+    c = (_table().get(_norm(name)) or {}).get("collision") or {}
+    b = c.get("bounds")
+    return (tuple(b[0]), tuple(b[1])) if b else None
+
+
 def search(*words: str, game: str = "aa", collision: Optional[bool] = None, limit: int = 40) -> list[Prop]:
     """Props whose path contains all ``words``, most used first."""
     out = []

@@ -130,6 +130,11 @@ class BSP:
             out.append(Surface(v[0], v[2], v[3], v[4], v[5], v[6], v[7], v[8], v[9], v[10], v[11], pw, ph))
         return out
 
+    def vertex_positions(self, first: int, count: int) -> list[tuple[float, float, float]]:
+        """xyz of ``count`` draw vertices from ``first`` (a drawvert is xyz, st, lightmap st, normal, rgba)."""
+        ofs, _ = self.lumps["drawverts"]
+        return [struct.unpack_from("<3f", self.data, ofs + (first + i) * 44) for i in range(count)]
+
     def entities_text(self) -> str:
         return self.lump("entities").split(b"\0")[0].decode("latin-1")
 

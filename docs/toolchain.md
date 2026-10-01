@@ -123,8 +123,11 @@ with stdin closed so this can't hang a build.
 
 ## Reading the output
 
-`mohkit.compile.CompileResult` collects stats and every warning/error line. After
-lighting it also inspects the BSP (`bsp_checks`).
+`mohkit.compile.CompileResult` collects stats and every warning/error line. Right
+after the BSP stage it checks face vertex counts (`face_checks`; T-junctions are
+fixed by then) and **stops before VIS and light** if any face is over 64, so a bad
+face costs seconds instead of a full light. After lighting it inspects the BSP
+again (`bsp_checks`: limits, fence masks, lightmap pages).
 
 | message | meaning | fix |
 |---|---|---|
@@ -139,7 +142,7 @@ lighting it also inspects the BSP (`bsp_checks`).
 | `potential hash mismatch` (MOHlight) | curved-patch lighting quirk | harmless if it looks right |
 | `BSP weighs in at X MB out of an allowed 10.00 MB` | advisory size | fine above 10, but watch load times |
 | **bsp-check: non-.tga qer_editorimage**; in game the map drops to the menu with `LoadTGA: Only type 2 (RGB), 3 (gray), and 10 (RGB) TGA images supported` | Q3map copies each shader's `qer_editorimage` into the BSP fence-mask field and the engine loads it by exact name as a TGA (`qcommon/cm_fencemask.c`); a `.jpg` there is parsed as a TGA | name the `.tga` in `qer_editorimage` even when only the `.jpg` exists, as 205 retail shaders do (`mohkit.shaders.editor_image`) |
-| **bsp-check: faces have > 64 vertices** | the renderer draws them with the default checker (`MAX_FACE_POINTS`, `renderergl1/tr_bsp.c`) | split long brushes (mohkit splits on a 512 grid automatically) |
+| **bsp-check: faces have > 64 vertices**, then one line per face: vertex count, shader, centre, x/y/z span | the renderer draws them with the default checker (`MAX_FACE_POINTS`, `renderergl1/tr_bsp.c`). The compile stops after BSP | go to the centre printed. A long face: split the brush (mohkit splits on a 512 grid automatically). A narrow face (a ceiling strip, a lintel) that many detail pieces touch: each touching edge adds T-junction vertices, so stop the pieces short of it and close the gap with one piece (see [map-format.md](map-format.md#64-vertex-faces)). `compile_map(..., stop_on_bad_faces=False)` compiles anyway |
 
 Typical times on an Apple Silicon Mac through Wine:
 

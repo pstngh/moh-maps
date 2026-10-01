@@ -81,8 +81,52 @@ def _nonsolid(shaders, name: str) -> bool:
     return bool(parms & {"nonsolid", "trigger", "areaportal", "hint", "skip"})
 
 
-def _prop_solids(m: MapFile) -> list[_Solid]:
-    """Approximate collision of props that ship a collision .map (rotated AABB -> box)."""
+def _blocks_players(shaders, name: str) -> bool:
+    """True unless the shader is nonsolid without playerclip (e.g. ``common/foliageclip``, bullets only)."""
+    try:
+        parms = {s.lower() for s in shaders.surfaceparms(name)}
+    except Exception:  # noqa: BLE001
+        return True
+    return "playerclip" in parms or not parms & {"nonsolid", "trigger", "areaportal", "hint", "skip"}
+
+
+_COLLISION_BOXES: dict[str, list[tuple[tuple, tuple]]] = {}
+
+
+def _collision_boxes(info, shaders) -> list[tuple[tuple, tuple]]:
+    """Model-space bounds of each player-blocking brush in the prop's collision .map.
+
+    A palm's collision is a woodclip trunk plus a foliageclip canopy that only stops
+    bullets; using the whole model (or the whole .map) rejects spawns under the canopy.
+    Without the game files this falls back to the bounds of the whole collision .map.
+    """
+    if info.path in _COLLISION_BOXES:
+        return _COLLISION_BOXES[info.path]
+    boxes: Optional[list[tuple[tuple, tuple]]] = None
+    fs = getattr(shaders, "fs", None)
+    cpath = info.path[:-4] + ".map"
+    if fs is not None and fs.exists(cpath):
+        try:
+            cm = MapFile.parse(fs.read_text(cpath), cpath)
+            boxes = []
+            for _, p in cm.iter_prims():
+                if isinstance(p, Brush) and any(_blocks_players(shaders, f.shader) for f in p.faces):
+                    pts = [pt for w in p.windings() for pt in w]
+                    if pts:
+                        boxes.append(geom.bounds_of(pts))
+        except Exception:  # noqa: BLE001
+            boxes = None
+    if boxes is None:
+        from . import props
+        c = props.collision_bounds(info.path)
+        boxes = [c] if c else [(info.mins, info.maxs)]
+    _COLLISION_BOXES[info.path] = boxes
+    return boxes
+
+
+def _prop_solids(m: MapFile, shaders=None) -> list[_Solid]:
+    """Approximate collision of props that ship a collision .map: each player-blocking
+    brush as its rotated, scaled bounding box."""
     try:
         from . import props
     except Exception:  # noqa: BLE001
@@ -99,14 +143,15 @@ def _prop_solids(m: MapFile) -> list[_Solid]:
         yaw = float(e.get("angle", "0") or 0)
         if e.get("angles"):
             yaw = float(e["angles"].split()[1])
-        corners = [(x, y) for x in (info.mins[0], info.maxs[0]) for y in (info.mins[1], info.maxs[1])]
-        rc = [geom.rotate_z((x * sc, y * sc, 0), yaw) for x, y in corners]
-        mins = (o[0] + min(p[0] for p in rc), o[1] + min(p[1] for p in rc), o[2] + info.mins[2] * sc)
-        maxs = (o[0] + max(p[0] for p in rc), o[1] + max(p[1] for p in rc), o[2] + info.maxs[2] * sc)
-        planes = [geom.Plane((-1.0, 0.0, 0.0), -mins[0]), geom.Plane((1.0, 0.0, 0.0), maxs[0]),
-                  geom.Plane((0.0, -1.0, 0.0), -mins[1]), geom.Plane((0.0, 1.0, 0.0), maxs[1]),
-                  geom.Plane((0.0, 0.0, -1.0), -mins[2]), geom.Plane((0.0, 0.0, 1.0), maxs[2])]
-        out.append(_Solid(planes, mins, maxs, f"entity {ei} ({info.path.rsplit('/', 1)[-1]})"))
+        for bmin, bmax in _collision_boxes(info, shaders):
+            corners = [(x, y) for x in (bmin[0], bmax[0]) for y in (bmin[1], bmax[1])]
+            rc = [geom.rotate_z((x * sc, y * sc, 0), yaw) for x, y in corners]
+            mins = (o[0] + min(p[0] for p in rc), o[1] + min(p[1] for p in rc), o[2] + bmin[2] * sc)
+            maxs = (o[0] + max(p[0] for p in rc), o[1] + max(p[1] for p in rc), o[2] + bmax[2] * sc)
+            planes = [geom.Plane((-1.0, 0.0, 0.0), -mins[0]), geom.Plane((1.0, 0.0, 0.0), maxs[0]),
+                      geom.Plane((0.0, -1.0, 0.0), -mins[1]), geom.Plane((0.0, 1.0, 0.0), maxs[1]),
+                      geom.Plane((0.0, 0.0, -1.0), -mins[2]), geom.Plane((0.0, 0.0, 1.0), maxs[2])]
+            out.append(_Solid(planes, mins, maxs, f"entity {ei} ({info.path.rsplit('/', 1)[-1]})"))
     return out
 
 
@@ -132,7 +177,7 @@ def check(m: MapFile, shaders=None, min_dm_spawns: int = 8) -> list[Issue]:
     solids, bi = _solids(m, shaders)
     issues += bi
     brush_solids = list(solids)
-    solids += _prop_solids(m)
+    solids += _prop_solids(m, shaders)
     patch_boxes = [p.bounds() for _, p in m.iter_prims() if isinstance(p, Patch)]
 
     nbrush = sum(1 for _, p in m.iter_prims() if isinstance(p, Brush))

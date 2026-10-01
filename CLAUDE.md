@@ -49,8 +49,9 @@ blocked by an unaccepted Xcode license; dulwich works for git
    plus `META` and `SHOTS`. Use the `Carver` for all playable space (sealed by
    construction), `kit` for stairs, windows, doors, roofs and lamps, and
    `MapBuilder.prop()` for stock props.
-2. **Check**: `python -m mohkit validate maps/<name>/<name>.map` and
-   `python -m mohkit plan …` (top-down PNG).
+2. **Check**: `python -m mohkit generate maps/<name>` writes
+   `maps/<name>/<name>.map` from `build.py`, validates it and draws the top-down
+   plan `dist/<name>_plan.png` (seconds, no compile). Look at the plan.
 3. **Build**: `python -m mohkit build maps/<name> -q draft`. This generates,
    validates, compiles, packages `dist/<name>.pk3`, runs OpenMoHAA with your
    `SHOTS`, and writes `dist/<name>_shots.png`.
@@ -92,6 +93,7 @@ part of the definition of done. Human feedback outranks both.
 |---|---|
 | start here / index | `docs/README.md` |
 | design, dimensions, layout, budgets | `docs/design.md` |
+| `build.py` API: MapBuilder, Carver, kit, material specs, side conventions | `docs/api.md` |
 | `.map` syntax, texture projection, patches, terrain | `docs/map-format.md` |
 | compiling, flags, error messages | `docs/toolchain.md` |
 | entities, props, doors, ladders | `docs/entities.md` |

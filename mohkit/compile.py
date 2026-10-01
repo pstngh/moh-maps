@@ -38,7 +38,8 @@ PROBLEM_RE = re.compile(r"warning|error|leak|degenerate|couldn't|could not|MAX_|
 QUALITY = {
     # bsp flags, vis flags, light flags. Draft skips face merging (-nomerge): on mk_village the
     # BSP stage took 23 s instead of 84 s, for 30% more draw surfaces (docs/toolchain.md).
-    "draft": (["-nomerge"], ["-fast"], ["-fast"]),
+    # MOHlight -fast alone still runs radiosity (its lightmaps match -bounce 2); -bounce 0 skips it.
+    "draft": (["-nomerge"], ["-fast"], ["-fast", "-bounce", "0"]),
     "preview": ([], [], ["-bounce", "2"]),
     "normal": ([], [], []),
     "final": ([], [], ["-final"]),
@@ -268,11 +269,15 @@ def compile_map(map_text_or_path: Union[str, Path], name: str,
                 quality: str = "normal", vis: bool = True, light: bool = True,
                 bsp_args: Iterable[str] = (), vis_args: Iterable[str] = (), light_args: Iterable[str] = (),
                 threads: Optional[int] = None, timeout: float = 4 * 3600,
-                cfg: Optional[_config.Config] = None) -> CompileResult:
+                stop_on_bad_faces: bool = True, cfg: Optional[_config.Config] = None) -> CompileResult:
     """Compile a map. ``name`` is the game path without extension, e.g. ``dm/mymap``.
 
-    ``quality``: ``draft`` (no face merging, fast VIS + fast light), ``preview`` (2 radiosity bounces), ``normal`` (8),
+    ``quality``: ``draft`` (no face merging, fast VIS, fast light without radiosity), ``preview`` (2 radiosity
+    bounces), ``normal`` (8),
     ``final`` (MOHlight -final).
+
+    Faces the renderer cannot draw (> 64 vertices) are checked right after the BSP stage;
+    with ``stop_on_bad_faces`` the compile stops there instead of spending VIS and light time.
     """
     cfg = cfg or _config.load()
     tc = Toolchain(cfg)
@@ -297,6 +302,13 @@ def compile_map(map_text_or_path: Union[str, Path], name: str,
     # a real hull leak prints the banner below and writes a .lin trace instead of a .prt.
     res.leaked = map_path.with_suffix(".lin").exists() or "******* leaked *******" in st.log
     if st.returncode != 0 or res.leaked or not res.bsp.is_file():
+        _collect(res)
+        return res
+    # Q3map has fixed T-junctions by now, so face vertex counts are final.
+    res.problems += face_checks(res.bsp)
+    if stop_on_bad_faces and any("ERROR" in p for p in res.problems):
+        res.problems.append("[bsp-check] stopped before VIS and light: fix the faces above "
+                            "(compile_map(..., stop_on_bad_faces=False) compiles anyway)")
         _collect(res)
         return res
     if vis:
@@ -359,8 +371,36 @@ def _collect(res: CompileResult) -> None:
 MAX_FACE_POINTS = 64  # renderergl1/tr_local.h: faces with more vertices draw as the default checker
 
 
+def face_checks(path: Path, show: int = 12) -> list[str]:
+    """Planar faces with more than 64 vertices (they render as the default checker), with
+    their shader, vertex count, centre and bounds. Valid right after the BSP stage."""
+    from . import bsp as _bsp
+    try:
+        b = _bsp.BSP(path)
+    except Exception as e:  # noqa: BLE001
+        return [f"[bsp-check] cannot read BSP: {e}"]
+    shaders = b.shaders()
+    big = sorted((s for s in b.surfaces() if s.type == 1 and s.num_verts > MAX_FACE_POINTS),
+                 key=lambda s: -s.num_verts)
+    if not big:
+        return []
+    out = [f"[bsp-check] ERROR {len(big)} planar faces have > {MAX_FACE_POINTS} vertices and will render as the "
+           f"default checker. Usually a long or narrow face collecting T-junction vertices from the detail that "
+           f"meets it: split the brush, or stop the detail short of it (docs/map-format.md, 64-vertex faces)"]
+    for s in big[:show]:
+        pts = b.vertex_positions(s.first_vert, s.num_verts)
+        lo = [min(p[i] for p in pts) for i in range(3)]
+        hi = [max(p[i] for p in pts) for i in range(3)]
+        c = " ".join(f"{(lo[i] + hi[i]) / 2:.0f}" for i in range(3))
+        span = " ".join(f"{lo[i]:.0f}..{hi[i]:.0f}" for i in range(3))
+        out.append(f"[bsp-check]   {s.num_verts} verts  {shaders[s.shader].name}  centre ({c})  x y z {span}")
+    if len(big) > show:
+        out.append(f"[bsp-check]   ... {len(big) - show} more")
+    return out
+
+
 def bsp_checks(path: Path) -> list[str]:
-    """Defects that only show up in the compiled BSP."""
+    """Defects that only show up in the lit BSP (face vertex counts: see face_checks)."""
     from . import bsp as _bsp
     out = []
     try:
@@ -368,11 +408,6 @@ def bsp_checks(path: Path) -> list[str]:
     except Exception as e:  # noqa: BLE001
         return [f"[bsp-check] cannot read BSP: {e}"]
     shaders = b.shaders()
-    big = [s for s in b.surfaces() if s.type == 1 and s.num_verts > MAX_FACE_POINTS]
-    if big:
-        names = sorted({shaders[s.shader].name for s in big})
-        out.append(f"[bsp-check] ERROR {len(big)} planar faces have > {MAX_FACE_POINTS} vertices and will render as "
-                   f"the default checker (split long brushes): {', '.join(names[:8])}")
     summ = b.summary()
     for k, v in summ["over_limit"].items():
         out.append(f"[bsp-check] ERROR {k} over engine limit: {v}")

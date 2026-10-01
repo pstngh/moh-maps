@@ -72,7 +72,10 @@ beyond that ("Num lights per leaf clamped"), so cluster dense fixture fields.
 
 ## Quality settings
 
-- `draft` (`-fast`): no radiosity, for checking geometry.
+- `draft` (`-fast -bounce 0`): no radiosity, for checking geometry. `-fast` on
+  its own still runs the radiosity pass: in a test room its lightmaps matched
+  `-fast -bounce 2` (mean difference 0.07 of 255) and not `-bounce 0` (0.89), and
+  mk_medina spent 584 s in it. So draft adds `-bounce 0` (2026-09-30).
 - `preview` (`-bounce 2`): radiosity with 2 bounces; on mk_village it looked the same as
   `normal`. Use it to judge lighting quickly.
 - `normal`: 8 radiosity bounces, so light through windows and doors reaches
@@ -97,3 +100,10 @@ with fill lights until you have seen a normal build.
   map with many lights. Budget static-prop vertices for compile time. Props as
   `script_model` cost nothing at compile time (the engine lights them from the
   light grid at run time).
+- **Where light time goes on a big map.** mk_medina (one thread, 2 bounces,
+  2026-09-30) took 3,215 s: initial (direct) lighting 1,020 s + 111 s, one radiosity
+  pass 584 s, light grids 9 s, and about 1,450 s in the static-model phase (107
+  models, 28,193 vertices; MOHlight prints no time for it). Direct and bounce time
+  grow with the lightmapped area: the hill-terrain ring and the building backs
+  seen from it are a large share of medina's surfaces, so keep the backdrop
+  small and give it a coarse `surfaceDensity` (32–64) rather than `nolightmap`.

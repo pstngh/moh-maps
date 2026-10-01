@@ -3,6 +3,7 @@
     python -m mohkit doctor                     check game, tools, wine, OpenMoHAA
     python -m mohkit new <name>                 scaffold maps/<name>/build.py from a working template
     python -m mohkit setup                      download the EA compilers (MOHTools) into .toolchain/
+    python -m mohkit generate maps/<name>       write maps/<name>/<name>.map from build.py, validate it, draw its plan
     python -m mohkit build maps/<name> [-q draft|preview|normal|final] [--no-test] [--bots N --seconds S]
     python -m mohkit compile file.map --name dm/x [-q draft]
     python -m mohkit validate file.map
@@ -134,6 +135,24 @@ def cmd_setup(a) -> int:
     return cmd_doctor(a)
 
 
+def cmd_generate(a) -> int:
+    from . import project, render, validate
+    proj = project.Project.load(Path(a.folder))
+    m = proj.generate()
+    out = proj.folder / f"{proj.name}.map"
+    issues = validate.check(m, validate.load_shader_index())
+    for i in issues:
+        if a.all or i.severity != "info":
+            print(i)
+    print(f"{out}: {sum(i.severity == 'error' for i in issues)} errors, "
+          f"{sum(i.severity == 'warning' for i in issues)} warnings")
+    plan = project.DIST / f"{proj.name}_plan.png"
+    plan.parent.mkdir(parents=True, exist_ok=True)
+    render.plan(m, str(plan))
+    print(f"plan {plan}")
+    return 1 if any(i.severity == "error" for i in issues) else 0
+
+
 def cmd_build(a) -> int:
     from . import project
     rep = project.build(Path(a.folder), quality=a.quality, test=not a.no_test, bots=a.bots, match_seconds=a.seconds)
@@ -192,15 +211,18 @@ def cmd_inspect(a) -> int:
 def cmd_test(a) -> int:
     from . import game
     shots = []
+    stem = Path(a.pk3).stem
     if a.shots:
         from .project import Project
         shots = Project.load(Path(a.shots)).shots
+        if Path(a.shots).resolve().name != stem:
+            stem += "_" + Path(a.shots).resolve().name   # don't overwrite the map's own contact sheet
     r = game.run([Path(a.pk3)], a.map, shots, bots=a.bots, match_seconds=a.seconds)
     print(r.summary())
     for k, v in r.screenshots.items():
         print(f"  {k}: {v}")
     if len(r.screenshots) > 1:
-        out = Path(a.pk3).with_name(Path(a.pk3).stem + "_shots.png")
+        out = Path(a.out) if a.out else Path(a.pk3).with_name(stem + "_shots.png")
         print(f"== contact sheet {game.contact_sheet(r.screenshots, out)}")
     return 0
 
@@ -268,6 +290,10 @@ def main(argv=None) -> int:
     s.add_argument("--repo", default="pstngh/MOHTools")
     s.add_argument("--force", action="store_true")
     s.set_defaults(fn=cmd_setup)
+    s = sub.add_parser("generate", help="write and validate a project's .map, and draw its plan (no compile)")
+    s.add_argument("folder")
+    s.add_argument("--all", action="store_true", help="also show info-level notes")
+    s.set_defaults(fn=cmd_generate)
     s = sub.add_parser("build")
     s.add_argument("folder")
     s.add_argument("-q", "--quality", default="normal", choices=["draft", "preview", "normal", "final"])
@@ -301,6 +327,7 @@ def main(argv=None) -> int:
     s.add_argument("--bots", type=int, default=0)
     s.add_argument("--seconds", type=float, default=0)
     s.add_argument("--shots", metavar="FOLDER", help="use the SHOTS of this map project")
+    s.add_argument("-o", "--out", help="contact sheet path (default <pk3 name>[_<shots folder>]_shots.png beside the pk3)")
     s.set_defaults(fn=cmd_test)
     s = sub.add_parser("swatches", help="sheet of stock materials whose name contains a word")
     s.add_argument("words", nargs="+")

@@ -93,6 +93,42 @@ def test_carver_bands():
     assert {"general_structure/stonebricks1", "general_structure/plaster_wall2"} <= shaders
 
 
+def test_brush_rejects_band_list():
+    stone, plaster = Material("general_structure/stonebricks1"), Material("general_structure/plaster_wall2")
+    for spec in ([(0, stone), (32, plaster)], {"sides": [(0, stone)]}):
+        try:
+            box((0, 0, 0), (64, 64, 64), spec)
+            raise AssertionError("a band list on a brush must raise")
+        except TypeError as e:
+            assert "band" in str(e)
+
+
+def test_spawn_under_palm_canopy():
+    from mohkit import validate
+    from mohkit.build import MapBuilder
+    idx = validate.load_shader_index()
+    if idx is None:
+        print("skip test_spawn_under_palm_canopy: no game data")
+        return
+    b = MapBuilder("t")
+    cv = Carver(16)
+    cv.room(-512, -512, 0, 512, 512, 512, floor=Material("general_structure/floor4"), sky=True)
+    b.carve(cv)
+    b.prop("static/tree_regularpalm", 0, 0, 0)
+    b.spawn((60, 0, 1), 0)    # under the canopy (foliageclip only stops bullets)
+    b.spawn((0, 0, 1), 0)     # inside the trunk (woodclip)
+    issues = [i for i in validate.check(b.to_map(), idx) if "overlaps solid" in i.message]
+    assert len(issues) == 3 and all("(0.0, 0.0, 1.0)" in i.message for i in issues), issues  # dm + allied + axis
+
+
+def test_fov_crop():
+    from mohkit import game
+    assert game.drawn_fov(30) == 65 and game.drawn_fov(None) == 80 and game.drawn_fov(140) == 120
+    k = game.zoom_crop(30, 65)
+    assert abs(k - 0.4207) < 1e-3
+    assert game.camera_commands(game.Shot("a", (0, 0, 82), fov=30))[-1] == "cg_fov 65"
+
+
 def test_fit_unmirrored():
     # +X facing wall: s runs +Y; image left edge at u0
     m = fit("x/win", (1, 0, 0), 100, 164, 200, scale=0.5)

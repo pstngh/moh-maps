@@ -13,7 +13,7 @@ automatically, from the command line.
 3. Launches `openmohaa +set fs_basepath … +set fs_homepath … +set cheats 1
    +set thereisnomonkey 1 … +devmap dm/<name> +exec harness.cfg`.
 4. The harness waits ~3.5 s of rendered frames, hides the HUD, then for each
-   camera does `tele`, `face`, `fov`, `wait`, `saveshot <name>`. Bots (if any)
+   camera does `tele`, `face`, `cg_fov`, `wait`, `saveshot <name>`. Bots (if any)
    join only after the last camera, then the match runs and the harness quits.
 5. Screenshots are converted to PNG and tiled into a contact sheet
    (`dist/<name>_shots.png`). The console log is triaged for problems.
@@ -36,8 +36,19 @@ SHOTS = [
 `fov` is the game's value: the horizontal angle of a 4:3 view. Wider screens keep
 the vertical angle (64.4° at fov 80) and see more at the sides (`CG_CalcFov`,
 `cgame/cg_view.c`). `game.fov_from_vertical(deg)` converts a photo's vertical
-angle. Re-shoot an existing package with a project's cameras, without compiling:
-`python -m mohkit test dist/x.pk3 dm/x --shots maps/x`.
+angle.
+
+The engine draws fov **65 to 120** only. The harness sets the client cvar
+`cg_fov`: OpenMoHAA ignores the server's `fov` command unless the player is zoomed
+or in a script camera (`cgame/cg_predict.c`), and clamps `cg_fov` to 65..120 every
+frame (`cgame/cg_view.c`). A narrower `fov` (a telephoto photo) is shot at 65 and
+centre-cropped to the requested angle, a softer digital zoom; a wider one is drawn
+at 120. Before this fix every shot was drawn at 80 whatever its `fov`.
+
+Re-shoot an existing package with a project's cameras, without compiling:
+`python -m mohkit test dist/x.pk3 dm/x --shots maps/x`. The contact sheet is
+`dist/x_shots.png`; cameras from another folder write `dist/x_<folder>_shots.png`
+instead, so the map's own sheet survives (`-o` picks any path).
 
 The origin is the **eye** position (the harness subtracts the 82-unit eye
 height before teleporting). Spectators fly, so overviews from above the roofs

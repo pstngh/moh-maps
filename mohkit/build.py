@@ -63,6 +63,11 @@ MatLike = Union[Material, str]
 def mat(m: MatLike, scale: Optional[float] = None) -> Material:
     if isinstance(m, Material):
         return m if scale is None else m(scale=(scale, scale))
+    if not isinstance(m, str):
+        # A band list [(z, material), ...] is a Carver wall spec; brushes take one material per face.
+        what = "a wall-band list (only Carver rooms take bands)" if _is_bands(m) else type(m).__name__
+        raise TypeError(f"expected a Material or shader name, got {what}: {m!r:.80}. For a brush, pass one "
+                        f"material or a mapping like {{'top': A, 'sides': B}}; to band a brush, stack boxes.")
     return Material(m, (scale, scale) if scale is not None else (1.0, 1.0))
 
 
