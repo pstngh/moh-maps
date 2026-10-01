@@ -278,6 +278,11 @@ def cmd_csgo(a) -> int:
     if a.resume:
         rep = resume_local(a.map, a.name, test=not a.no_test)
         return 0 if rep.get("pk3") else 1
+    if a.refresh_assets:
+        from .source.convert import refresh_assets
+        rep = refresh_assets(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
+                             detail_all=not a.structural, max_texture=a.max_texture)
+        return 0 if rep.get("pk3") else 1
     extra = {"props_static_vertices": a.static_verts} if a.static_verts else {}
     if a.lightmap_density:
         extra["lightmap_density"] = a.lightmap_density
@@ -374,6 +379,8 @@ def main(argv=None) -> int:
     s.add_argument("--props-only", action="store_true",
                    help="re-place runtime props in the last compile (Q3map -onlyents, seconds); refuses other changes")
     s.add_argument("--lightmap-density", type=int, help="units per lightmap texel (default 16; 32 for -q draft)")
+    s.add_argument("--refresh-assets", action="store_true",
+                   help="re-convert and re-package with the last compile when only textures/models changed")
     s.add_argument("--resume", action="store_true",
                    help="only inject props, package and test what the last build left (after redoing a stage by hand)")
     s.add_argument("--no-test", action="store_true")

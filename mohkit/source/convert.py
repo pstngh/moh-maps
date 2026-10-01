@@ -277,7 +277,9 @@ class Converter:
         from PIL import Image
         h, w = rgba.shape[:2]
         tw, th = self._pow2(w), self._pow2(h)
-        im = Image.fromarray(rgba, "RGBA")
+        # Pillow resizes RGBA with premultiplied alpha: an opaque texture whose alpha is a
+        # Source specular/envmap mask came out darkened (black where the mask was 0)
+        im = Image.fromarray(rgba, "RGBA") if alpha else Image.fromarray(np.ascontiguousarray(rgba[..., :3]), "RGB")
         if (tw, th) != (w, h):
             im = im.resize((tw, th), Image.LANCZOS)
         buf = io.BytesIO()
@@ -286,7 +288,7 @@ class Converter:
             im.save(buf, "TGA")
         else:
             path = f"textures/{shader}.jpg"
-            im.convert("RGB").save(buf, "JPEG", quality=self.opt.texture_quality)
+            im.save(buf, "JPEG", quality=self.opt.texture_quality)
         self.assets[path] = buf.getvalue()
         return path, (tw, th)
 
@@ -1840,6 +1842,42 @@ def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, l
     report = dict(prev)
     report.update(finish_local(name, src, root_bsp, assets, statics, MapFile.load(str(out / f"{name}.map")),
                                prev.get("convert", {}), test=test, log=log))
+    (out / "report.json").write_text(json.dumps(report, indent=2))
+    return report
+
+
+def refresh_assets(map_name: str, name: Optional[str] = None, quality: str = "draft", test: bool = True,
+                   log=print, **opts) -> dict:
+    """Re-convert and re-package with the last compile's BSP when only assets changed
+    (textures, shader scripts, models): refuses unless the new ``.map`` text equals the
+    compiled one exactly. Minutes instead of a full compile."""
+    import json
+
+    from .. import config
+    cfg = config.load()
+    src = Path(map_name)
+    if not src.is_file():
+        src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
+    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    out = config.REPO / "local" / "csgo" / name
+    root_map = Path(cfg.build_dir) / "roots" / f"dm_{name}" / "main" / "maps" / "dm" / f"{name}.map"
+    if quality in ("draft", "unlit", "fastrad"):
+        opts.setdefault("props_static_vertices", 0)
+        opts.setdefault("lightmap_density", 32)
+    log(f"== re-converting {src.name} -> {name} (assets only)")
+    res = convert(str(src), cfg.csgo_dir, Options(name=name, **opts))
+    if not root_map.is_file() or root_map.read_text(encoding="latin-1") != res.map.dumps():
+        raise SystemExit("--refresh-assets: the map changed since the last compile; run a full build")
+    for rel, data in res.assets.items():
+        p = out / "assets" / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(data)
+    (out / "statics.json").write_text(json.dumps(res.statics))
+    prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
+    report = dict(prev)
+    report["convert"] = res.report
+    report.update(finish_local(name, src, root_map.with_suffix(".bsp"), res.assets, res.statics, res.map, res.report,
+                               test=test, scale=opts.get("scale", 1.0), log=log))
     (out / "report.json").write_text(json.dumps(report, indent=2))
     return report
 

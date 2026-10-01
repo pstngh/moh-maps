@@ -335,15 +335,17 @@ def convert_texture(fs, mi: MaterialInfo, max_texture: int = 512, keep_alpha: bo
         else:
             img[..., :3] *= c
     rgba = np.clip(img + 0.5, 0, 255).astype(np.uint8)
+    if not keep_alpha:
+        # before resizing: Pillow resizes RGBA with premultiplied alpha, which darkened opaque
+        # textures whose alpha is a specular/envmap mask (black where the mask was 0)
+        rgba = rgba.copy()
+        rgba[..., 3] = 255
     h, w = rgba.shape[:2]
     nw, nh = _pow2_at_most(w, max_texture), _pow2_at_most(h, max_texture)
     if (nw, nh) != (w, h):
         im = Image.fromarray(rgba, "RGBA")
         im = im.resize((nw, nh), Image.LANCZOS if nw < w or nh < h else Image.BICUBIC)
         rgba = np.asarray(im, np.uint8)
-    if not keep_alpha:
-        rgba = rgba.copy()
-        rgba[..., 3] = 255
     return rgba
 
 
