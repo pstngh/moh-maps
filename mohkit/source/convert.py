@@ -1379,8 +1379,11 @@ class Converter:
         if cls == "light_spot":
             ang = e.vector("angles", (0, 0, 0)) or (0, 0, 0)
             pitch = float(e.get("pitch", ang[0]) or ang[0])
+            # VRAD's SetupLightNormalFromProps: z = +sin(pitch), so a ceiling spot's pitch -90
+            # points down. (With -sin, every downward spot in a converted map lit the ceiling:
+            # de_nuke's 194 ceiling spots, its dark radio rooms and lobby.)
             fwd = (math.cos(math.radians(pitch)) * math.cos(math.radians(ang[1])),
-                   math.cos(math.radians(pitch)) * math.sin(math.radians(ang[1])), -math.sin(math.radians(pitch)))
+                   math.cos(math.radians(pitch)) * math.sin(math.radians(ang[1])), math.sin(math.radians(pitch)))
             tname = f"spot{abs(hash((org, ang))) % 10**8}"
             le["target"] = tname
             cone = float(e.get("_cone", "45") or 45)
