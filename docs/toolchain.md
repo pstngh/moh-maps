@@ -82,6 +82,12 @@ MOHlight printed an `ERROR` (e.g. `MAX_MAP_LIGHTING`): those fail the same way
 on one thread. (**UNVERIFIED**: whether multi-threading itself ever causes a
 crash. The single report predates these logs.)
 
+**Verified 2026-09-30 on mk_medina:** multi-threaded MOHlight crashed on both
+multi-threaded runs at the same instruction (`wine: Unhandled page fault on write
+access to … at address 00433F3A`); one thread always worked. Wine then started
+its crash debugger, which parked the process (the build hung ~20 min); the driver
+now sets `WINEDLLOVERRIDES=winedbg.exe=d` so a crash fails fast and the retry runs.
+
 ### Q3map 1.34 options (BSP stage)
 
 `-v -threads N -info -vis -nowater -nofill -nodetail -nohint -fulldetail

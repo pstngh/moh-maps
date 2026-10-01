@@ -79,7 +79,8 @@ class CompileResult:
     @property
     def ok(self) -> bool:
         return (not self.leaked and self.bsp.is_file() and not any("ERROR" in p for p in self.problems if p.startswith("[bsp-check]"))
-                and all(s.returncode == 0 and not s.timed_out for s in self.stages if s.name != "info"))
+                and all(s.returncode == 0 and not s.timed_out for s in self.stages
+                        if s.name not in ("info", "light_mt")))  # light_mt: a crashed run that was retried
 
     def summary(self) -> str:
         lines = [f"{self.name}: {'OK' if self.ok else 'FAILED'}  ({self.bsp})"]
@@ -145,6 +146,9 @@ class Toolchain:
         argv = self._argv(exe, list(args))
         env = dict(os.environ)
         env.setdefault("WINEDEBUG", "-all")
+        # A crashing tool would otherwise start Wine's debugger (winedbg --auto), which parks
+        # the process: the build hangs instead of failing and retrying (seen with MOHlight).
+        env.setdefault("WINEDLLOVERRIDES", "winedbg.exe=d")
         t0 = time.time()
         log_path = Path(cwd) / f"{name}.log"
         if os.name == "posix":
