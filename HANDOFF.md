@@ -18,48 +18,26 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 - At 06:00 ET: finish or park the current step, update this file, commit, push, and stop
   with a short summary for the user.
 
-## Summary (paused 2026-09-30 ~23:35, third session; overnight run until 06:00 ET next)
+## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-All work is committed and pushed to `main`. Nothing is running.
+**Live state (update as you go):** started 23:34. Running: `python -m mohkit csgo de_nuke
+-q draft --name cs_nukei` (log in the session scratchpad; output `local/csgo/cs_nukei/`,
+compile root `~/Library/Caches/mohkit/build/roots/dm_cs_nukei`). It is the first build with
+injected props; it predates overlay conversion. The final map name stays `cs_nuke`.
 
-The mk_medina preview build (`-q preview --bots 8 --seconds 60`) finished at 23:28:
-compile OK in 5,032 s (light on one thread), 107 static models lit, 32 lightmap pages,
-**22 kills** in 60 s with 8 bots, no validation issues. `dist/mk_medina.pk3` holds
-the new cornices/balconies/lighting. Its sheet `dist/mk_medina_shots.png` was shot with
-the **old low-detail harness** (the process had loaded `game.py` before the fix), so
-re-shoot it (step 2) before judging.
-
-This session (third) found why converted props were black, and that **every contact
-sheet so far was shot at low detail**:
-
-- **Harness detail (verified in game):** a fresh OpenMoHAA home is near low/safe mode:
-  `r_picmip 2` (quarter-size textures, the blur in old sheets), `r_fastentlight 1`
-  (models lit from the light grid only, so floor props sampling grid points in solid
-  were black), `r_subdivisions 20`. `game.run` now writes retail `high.cfg` values to
-  the run's `autoexec.cfg` (`game.QUALITY_CVARS`), with `cg_shadows 1` because `2`
-  darkens the whole frame about 3× (measured). Keep the command line short: it holds
-  32 `+` commands and silently drops the rest (`+devmap` too). `docs/testing.md`.
-- **Runtime prop lighting (code-read and in-game colour test):** a NOT_SOLID
-  `script_model` is lit from **8 below its origin** (`q_math.c:1652`), with one sun
-  trace. With a pure red `suncolor` and blue `ambientlight`, the rubble went red (sun)
-  and cars and some crates went blue (ambient only: the trace from inside their own
-  multi-brush hull hits another hull brush). `modelconv` now puts the origin 16 above
-  the mesh's top (`LIGHT_ABOVE_TOP`), so the lighting point is 8 above the model.
-  **Unverified in game:** it changed the collision hulls, so it needs a full rebuild
-  (step 1). `docs/reference/engine.md` §5.2.
-- **`mohkit csgo <map> --props-only`** (verified on dust2, 48 s instead of ~45 min):
-  re-converts, refuses if anything but `script_model`s changed
-  (`mapfile.compiled_difference`), and rewrites the entity lump of the last compile
-  (`compile.update_entities`, `Q3map -onlyents`). Useful for any runtime-entity change.
-  `docs/csgo-conversion.md`.
-- dust2 with the new harness (props-only, centre pivots): rubble is lit, crates in shot
-  03 lit, textures sharp. Cars are still dark (ambient only). Sheet:
-  `local/csgo/cs_dust2/cs_dust2_shots.png`.
-
-Trick worth reusing: to see which light reaches a runtime model, copy the compile root,
-set worldspawn `suncolor "255 0 0"` and `ambientlight "0 0 60"` in the `.map`, run
-`compile.update_entities` on the copy and screenshot. Red means sun, blue means ambient
-only. Lightmaps are unchanged because they are baked.
+Done this run (all committed and pushed):
+- Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
+- **MAX_MAP_SHADERS on de_nuke:** EA Q3map never de-duplicates BSP shader entries whose
+  name (with `textures/`) is exactly 60 characters: one entry per brush side. Names are
+  now capped at 59 (`convert.MAX_SHADER_NAME`, `modelconv.texture_name`). docs/toolchain.md.
+- **`mohkit.staticlight`**: static models injected into the lit BSP, vertex colours from
+  the BSP light grid (calibrated to MOHlight means). The converter's default
+  `props_mode="inject"` makes all 4,801 Nuke props static models (no MOHlight time, no
+  entities) with clip brushes. `tests/test_staticlight.py`.
+- Converter: ladders → `func_ladder`; water → water shader + `common/waterskip`; glass
+  `func_breakable` → `func_window`; `info_overlay` → decal patches (`ov_*` shaders);
+  contact sheets from `maps/<map>_cameras.txt` (36 Nuke cameras), pages of 9.
+- Trap: a scratchpad script named `bisect.py` shadowed the stdlib module (PIL imports it).
 
 Read `CLAUDE.md` first. Git: GitHub `main` (https://github.com/pstngh/moh-maps).
 The old pre-restart `.git` is backed up at `~/Library/Caches/mohkit/old-git-backup`
@@ -153,6 +131,19 @@ from it is in the current repo, `local/` or the build cache.
    moving the repo out of iCloud (`~/Developer/moh-maps`).
 
 ## Decisions made while the user was away
+
+- (fourth session) The chat said "de_nuke first"; HANDOFF (edited 23:45, after the run
+  started) says finish dust2 first, time-boxed to ~02:00. Did step 1, then built the
+  converter features both maps need while Nuke compiled, and started a dust2 rebuild at
+  00:00 in parallel with the Nuke build. Nuke is the main focus after ~02:00.
+- (fourth session) All props are injected static models (`staticlight`), not MOHlight-lit
+  `static_*` or `script_model`s: 4,801 Nuke props would light for hours on one thread and
+  the entity limit is 1,024. Per-vertex colours come from the 32-unit light grid
+  (calibrated to MOHlight's means), so fine prop self-shadowing is lost.
+- (fourth session) Doors (`prop_door_rotating`) and the breakable vent slats
+  (`prop_dynamic` opened by `func_button`/`OnBreak`) aren't converted yet, so those
+  doorways and vents are open. Converting doors needs a brush door with a baked texture
+  or a scripted `script_model`; decide after the first Nuke sheet.
 
 - (third session) Screenshots render at retail's high preset with full-size textures
   and blob shadows (`game.QUALITY_CVARS`): stock-quality judgments need what a player
