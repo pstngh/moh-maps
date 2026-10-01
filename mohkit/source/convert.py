@@ -974,6 +974,33 @@ class Converter:
         """Source world contents at ``p`` (Source units) are solid."""
         return bool(int(self.bsp.leafs[self.bsp.point_leaf(p)]["contents"]) & Contents.SOLID)
 
+    def _ladder_boxes(self) -> list:
+        """Source ladder volumes as [lo, hi] boxes (Source units), stacked pieces merged."""
+        if hasattr(self, "_ladder_box_cache"):
+            return self._ladder_box_cache
+        boxes = []
+        for br in getattr(self, "_ladder_src", []):
+            if br.model != 0:  # brush-entity ladders are in model space; Source compiles func_ladder into the world
+                self.report["warnings"].append(f"ladder brush {br.index} in model {br.model} skipped")
+                continue
+            pts = np.array([p for w in br.windings() for p in w], dtype=np.float64)
+            if len(pts) < 4:
+                continue
+            boxes.append([pts.min(0), pts.max(0)])
+        boxes.sort(key=lambda b: (round(b[0][0]), round(b[0][1]), b[0][2]))
+        merged: list = []
+        for lo, hi in boxes:
+            for m in merged:
+                if (np.abs(m[0][:2] - lo[:2]).max() < 1 and np.abs(m[1][:2] - hi[:2]).max() < 1
+                        and lo[2] <= m[1][2] + 8 and hi[2] >= m[0][2] - 8):
+                    m[0] = np.minimum(m[0], lo)
+                    m[1] = np.maximum(m[1], hi)
+                    break
+            else:
+                merged.append([lo.copy(), hi.copy()])
+        self._ladder_box_cache = merged
+        return merged
+
     def ladders(self) -> list[MEntity]:
         """Source ladder volumes (``CONTENTS_LADDER`` brushes) -> MOHAA ``func_ladder``.
 
@@ -986,27 +1013,7 @@ class Converter:
         on the climber's side.
         """
         s = self.opt.scale
-        boxes = []
-        for br in self._ladder_src:
-            if br.model != 0:  # brush-entity ladders are in model space; Source compiles func_ladder into the world
-                self.report["warnings"].append(f"ladder brush {br.index} in model {br.model} skipped")
-                continue
-            pts = np.array([p for w in br.windings() for p in w], dtype=np.float64)
-            if len(pts) < 4:
-                continue
-            boxes.append([pts.min(0), pts.max(0)])
-        # merge stacked pieces (same footprint, vertical gap <= 8)
-        boxes.sort(key=lambda b: (round(b[0][0]), round(b[0][1]), b[0][2]))
-        merged: list = []
-        for lo, hi in boxes:
-            for m in merged:
-                if (np.abs(m[0][:2] - lo[:2]).max() < 1 and np.abs(m[1][:2] - hi[:2]).max() < 1
-                        and lo[2] <= m[1][2] + 8 and hi[2] >= m[0][2] - 8):
-                    m[0] = np.minimum(m[0], lo)
-                    m[1] = np.maximum(m[1], hi)
-                    break
-            else:
-                merged.append([lo.copy(), hi.copy()])
+        merged = self._ladder_boxes()
         props = None
         out: list[MEntity] = []
         for lo, hi in merged:
@@ -1017,7 +1024,7 @@ class Converter:
             score = {}
             for sgn in (-1, 1):
                 hits = 0
-                for d in (2, 4, 8, 12, 16, 24, 32):
+                for d in (2, 4, 8, 12, 16, 24, 32, 48, 64):
                     for z in np.linspace(lo[2] + 4, hi[2] - 4, 5):
                         p = c.copy()
                         p[2] = z
@@ -1448,6 +1455,20 @@ class Converter:
         overlay_patches = self.overlays() + self.ropes()
         self.statics: list = []
         prop_ents, prop_clips, precache = self.props() if self.opt.props else ([], [], [])
+        # A ladder model's own collision (mirage's leaning ladderwood) stands inside the ladder
+        # volume and stops the view trace that mounts a func_ladder (Player::CondLadder):
+        # drop prop clips that reach into a ladder volume.
+        s = self.opt.scale
+        lboxes = [(lo * s - 2, hi * s + 2) for lo, hi in self._ladder_boxes()]
+        if lboxes:
+            kept = []
+            for b in prop_clips:
+                blo, bhi = b.bounds()
+                if any(all(blo[i] < hi[i] and bhi[i] > lo[i] for i in range(3)) for lo, hi in lboxes):
+                    continue
+                kept.append(b)
+            self.report["ladder_prop_clips_dropped"] = len(prop_clips) - len(kept)
+            prop_clips = kept
         world = MEntity(self.worldspawn())
         world.prims = list(brushes) + list(patches) + overlay_patches + prop_clips + self.sprites()
         if self.opt.detail_all:
