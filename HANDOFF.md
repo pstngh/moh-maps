@@ -85,35 +85,29 @@ equal. Conversions are personal-use only.
 de_mirage. HANDOFF edit (23:45): finish de_dust2 first, time-boxed to ~02:00, then Nuke,
 then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-git-backup`).
 
-1. **de_nuke** (`python -m mohkit csgo de_nuke`, output `local/csgo/cs_nuke/`; quick checks
-   with `-q unlit --name cs_nukeu`):
-   - Look at the lit draft sheet (`cs_nuke_shots*.png`, 38 named cameras) and fix what it
-     shows; rebuild with every fix since 00:24 (ropes, func_brush, beams, cracks, ladders).
-   - Re-run `game.ladder_probe` (script pattern in `docs/testing.md`): all 6 ladders must climb.
-   - Bots: `python -m mohkit test local/csgo/cs_nuke/cs_nuke.pk3 dm/cs_nuke --bots 8 --seconds 90`.
-   - Final lighting: drafts are `-fast -bounce 0` at lightmap density 32. Decide between
-     `-q preview` (radiosity) at density 32 and the draft, from the time a draft takes alone.
-   - Known gaps: vent slats/breakable vent covers are left open (not converted); door
-     handles are lost; sprites and detail grass are dropped.
-2. **de_dust2**: draft running (fresh, density 32). Look at the sheet (23 named cameras),
-   bots, record stage times in `docs/csgo-conversion.md`.
-3. **de_mirage** the same way (`de_mirage_cameras.txt`; 93 entity props now converted).
-4. From-scratch maps could use `staticlight` too: MapBuilder props compiled as
-   `static_*` cost mk_medina ~55 min of single-threaded MOHlight. Add an opt-in
-   `build --inject-props` (needs a GameFS reader for retail TIKI/SKD in `tiki_mesh`) and
-   compare a sheet against MOHlight's lighting before making it the default.
-5. **Multi-threaded MOHlight crash:** evidence now points at static models: mk_medina
+1. **CS:GO look, next lever: texlights.** Source lights many interiors with emissive
+   textures listed in `csgo/lights.rad` ("material r g b brightness": de_nuke's office
+   light strips 10, lit windows 325, reactor glow 150). Convert them to
+   `q3map_surfacelight N` in the material's shader (retail uses 1000-3000 for lit windows;
+   MOHlight prints "N light emitting surfaces"), and keep de_nuke's StartDisabled emitter
+   func_brushes (dropped now) as visible non-solid emitters. Then compare the radio rooms
+   and Mirage's shops (both still dark) with the 03:15 builds.
+   Other Nuke gaps: vents break like glass; door handles lost; detail grass dropped.
+2. **Structural CS:GO maps:** `--structural` dust2 compiles (61 KB VIS, claim 8 false).
+   Try a lit structural build: smaller leaves may light faster and avoid the 60-lights-
+   per-leaf cap, and VIS would cull. If it holds up, make it the default.
+3. **From-scratch `build --inject-props`** exists (opt-in; tried on a mk_medina copy,
+   `dist/mk_medinai_shots.png`). Compare it side by side with a MOHlight-lit build at the
+   same quality before making it the default.
+4. **Multi-threaded MOHlight crash:** evidence now points at static models: mk_medina
    without its static props (`--inject-props`) lit on 10 threads cleanly (docs/toolchain.md).
    To confirm, re-run MT light on `roots/dm_mtx` (with statics) a few times and on
    `roots/dm_mtnostatic` (without) a few times. If confirmed, mk_medina could drop its
    forced `-threads 1` when built with `--inject-props`.
-6. **mk_medina** re-shoot at high detail:
+5. **mk_medina** re-shoot at high detail:
    `python -m mohkit test dist/mk_medina.pk3 dm/mk_medina --shots maps/mk_medina --bots 8 --seconds 60`;
    then `mk_village`, `mk_ref_room`, and correct `docs/lighting.md` claims made at low detail.
-7. **Claim 8 is false for de_dust2:** `--structural` compiled (unlit) with 691 clusters and
-   61 KB of VIS data (docs/csgo-conversion.md). Next: a lit `--structural` dust2 to compare
-   light time and look; if good, consider making structural the default for CS:GO maps.
-8. Tell the user: accept the Xcode license (`sudo xcodebuild -license`), and consider
+6. Tell the user: accept the Xcode license (`sudo xcodebuild -license`), and consider
    moving the repo out of iCloud (`~/Developer/moh-maps`).
 
 ## Decisions made while the user was away
