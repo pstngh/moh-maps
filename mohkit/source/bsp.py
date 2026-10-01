@@ -35,6 +35,8 @@ Lumps used here (index: record layout, little endian)::
                            int16 texinfo, dispinfo, fog_volume, uint8 styles[4], int32 lightofs,
                            float area, int32 lm_mins[2], lm_size[2], int32 orig_face,
                            uint16 num_prims, first_prim, uint32 smoothing_groups
+                     planes[planenum] is the face's own outward plane whatever ``side`` says
+                     (checked on every face of de_dust2/mirage/nuke against its winding)
     10 LEAFS         v1 32 B: int32 contents, int16 cluster, int16 area:9|flags:7, int16 mins[3], maxs[3],
                               uint16 firstleafface, numleaffaces, firstleafbrush, numleafbrushes,
                               int16 leaf_water_data_id, pad       (v0 is 56 B: +24 B light cube)
@@ -1150,10 +1152,9 @@ class SourceBSP:
         ts = int(di["tri_start"])
         f = self.faces[face]
         ti = int(f["texinfo"])
-        pl = self.planes[int(f["planenum"])]
-        nrm = pl["normal"].astype(np.float64)
-        if f["side"]:
-            nrm = -nrm
+        # planes[planenum] is already the face's own (outward) plane; ``side`` only says how it
+        # sits on its node. Flipping by it turned 143 of de_mirage's displacements inside out.
+        nrm = self.planes[int(f["planenum"])]["normal"].astype(np.float64)
         min_tess = int(di["min_tess"]) & 0xFFFFFFFF
         flags = min_tess & 0xFF000000 if min_tess & DISP_FLAG_MAGIC else 0
         mb = None

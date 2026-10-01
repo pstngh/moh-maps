@@ -545,6 +545,15 @@ def map_report(name: str, verbose: bool = True) -> dict[str, Any]:
     with timed("disp_seams"):
         seam_ratio = _seam_ratio([d.positions for d in disps])
         seam_ratio_transposed = _seam_ratio([d.flat + d.offsets.transpose(1, 0, 2) for d in disps])
+    # Facing: where the flat surface separates air from solid, the normal must point into the
+    # air (a flipped one becomes a back-facing, invisible patch).
+    with timed("disp_facing"):
+        facing = collections.Counter()
+        for d in disps:
+            c, n = d.flat.reshape(-1, 3).mean(axis=0), np.array(d.normal)
+            front, back = (int(b.leafs[b.point_leaf(tuple(c + n * k))]["contents"]) & 1 for k in (4, -4))
+            if front != back:
+                facing["air" if back else "solid"] += 1
 
     # Texture decode: the most used visible world material.
     with timed("texture"):
@@ -582,6 +591,7 @@ def map_report(name: str, verbose: bool = True) -> dict[str, Any]:
                pruned_sides=pruned_sides, sky_area=sky_area,
                sky_brushes=sky_brushes, sky_props=sky_props, disp_seam_ratio=seam_ratio,
                disp_seam_ratio_transposed=seam_ratio_transposed,
+               disp_facing=dict(facing),
                missing_materials=sorted(m for m, mi in infos.items() if not mi.found),
                pak_files=len(pak.namelist()), texture=tex_out, times=times)
 
@@ -622,6 +632,8 @@ def _check(rep: dict[str, Any]) -> None:
     assert rep["static_props"] > 0 and rep["mdl_ok"] == rep["prop_models"]
     if rep["displacements"] >= 20:
         assert rep["disp_seam_ratio"] > rep["disp_seam_ratio_transposed"], "displacement corner ordering"
+        # a few are buried in other brushes (de_dust2: 10 of 120); flipped normals gave 58 of 131
+        assert rep["disp_facing"].get("solid", 0) <= rep["disp_facing"].get("air", 0) // 8, rep["disp_facing"]
     assert rep["texture"] is not None
 
 

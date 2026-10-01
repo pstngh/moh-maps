@@ -14,20 +14,20 @@ update this file, commit and push, then stop and give the user the one-line hand
 | map | pk3 | build | bots (8, 90 s) | ladders | notes |
 |---|---|---|---|---|---|
 | de_nuke | `local/csgo/cs_nuke/cs_nuke.pk3` (05:29, spot fix) | fastrad, BSP 200 s, light 2,389 s | **70 kills**, none stuck | **6/6** (A-site one: +use from the ledge) | 4,801 props, 718 overlays, 6 doors, 3 breakable vents, 38 glass windows, 70 ropes, 78 glows, water; interiors now lit |
-| de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (04:25, before the spot fix) | fastrad, BSP 262 s, light 3,838 s | **81 kills**, none stuck | 2/3 (leaning ladder: falls off the top) | 1,470 props, 512 overlays, 85 ropes, 35 glows, 3 breakable covers/shutter + 3 windows; shops dark |
+| de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (06:02, spot fix) | fastrad, BSP 242 s, light 1,259 s | **75 kills** | 2/3 (leaning ladder at (444 652 -182): falls off the top) | 1,470 props, 512 overlays, 85 ropes, 35 glows, 3 breakable covers/shutter + 3 windows; shops and palace now lit |
 | de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (04:14, before the spot fix) | fastrad, BSP 684 s, light 2,752 s | **91 kills**, none stuck | — | 1,574 props, 459 overlays |
 
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
-**State at 06:00:** one job is still running: `local/csgo/mirage_rebuild.sh` (started
-05:37) rebuilds Mirage with the spot fix (`-q fastrad`, ~35 min alone), then runs 8 bots
-for 90 s and the ladder probe; everything goes to `local/csgo/mirage_rebuild.log` ("done"
-at the end). Until it finishes, `local/csgo/cs_mirage/cs_mirage.pk3` is the 04:25 build. At 04:40 I found that every converted
-`light_spot` pointed the wrong way (VRAD: z = +sin(pitch); ceiling spots lit ceilings),
-which was why Nuke's radio rooms/lobby and Mirage's shops were dark. Nuke was rebuilt with
-the fix (interiors now lit, `local/csgo/cs_nuke/cs_nuke_shots_3.png`). Mirage is being
-rebuilt by the job above; **dust2 was not**: rebuild it first next session
-(`python -m mohkit csgo de_dust2 -q fastrad`, ~45 min alone) and check the Mirage log. Earlier packages are backed up in the session
+**Morning session (2026-10-01, 08:00):** the Mirage spot-fix rebuild finished at 06:05
+(75 kills, ladders 2/3; shops and palace lit). Its sheets showed flat `farplane_color`
+walls: displacements whose face has `side` 1 were turned inside out (back-facing patches;
+dust2 176, Mirage 143, Nuke 77). Fixed in `SourceBSP.displacement` (docs/csgo-conversion.md).
+**Running since 08:20, all three with the fix:** `local/csgo/dust2_rebuild.sh`,
+`local/csgo/mirage_rebuild.sh` (both: build, 8 bots 90 s, ladder probe) and
+`local/csgo/nuket_build.sh` (Nuke `--texlights --name cs_nuket`, bots). Logs
+`local/csgo/{dust2_rebuild,mirage_rebuild,nuket_build}.log` end with "done". `cs_nuke`
+(05:29) still has the inside-out displacements. Earlier packages are backed up in the session
 scratchpad only (`cs_nuke_final_0437.pk3` etc.); they will be lost with it.
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):

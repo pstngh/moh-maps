@@ -382,7 +382,7 @@ def main(argv=None) -> int:
                    help="re-place runtime props in the last compile (Q3map -onlyents, seconds); refuses other changes")
     s.add_argument("--lightmap-density", type=int, help="units per lightmap texel (default 16; 32 for -q draft)")
     s.add_argument("--texlights", action="store_true",
-                   help="Source texlights (lights.rad emissive materials) -> q3map_surfacelight (untuned)")
+                   help="Source texlights (lights.rad emissive materials) -> one point light per emitting face")
     s.add_argument("--refresh-assets", action="store_true",
                    help="re-convert and re-package with the last compile when only textures/models changed")
     s.add_argument("--resume", action="store_true",

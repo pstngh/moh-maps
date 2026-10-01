@@ -92,6 +92,15 @@ other patch (`PatchMapDrawSurfs`, q3map `patch.c`). de_dust2's 619 patches
 Dropping straight sample lines halves the control points and cuts that work
 3.9× (`Options.disp_tolerance`, default 1 unit; 2 units: 6.8×).
 
+**A face's plane is `planes[planenum]` as stored; ignore `side`.** On every face of
+de_dust2, de_mirage and de_nuke the stored plane agrees with the face winding, whatever
+`side` says (`side` only records how the face sits on its BSP node). Until 2026-10-01 the
+displacement normal was flipped when `side` was 1, so those displacements (dust2 176,
+Mirage 143, Nuke 77) were turned inside out: back-facing patches the engine culls, seen
+in game as flat `farplane_color` walls (Mirage's mid and B site). Found by casting the
+camera's rays through both BSPs (every ray hit the patch; the patch faced away).
+`tests/test_source_readers.py` now checks that displacements face the air.
+
 ## Scale
 
 CS players are 72 units tall, MOHAA's are 94, but jump height (56 vs about 55)
