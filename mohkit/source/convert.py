@@ -149,8 +149,9 @@ class Options:
     lights: bool = True
     light_min_brightness: float = 20.0   # Source _light brightness below this: dropped
     # Source texlights (lights.rad: emissive materials) -> one point light per emitting face.
-    # Opt-in until compared on a sheet (q3map_surfacelight made de_nuke's light ~15 hours).
-    texlights: bool = False
+    # On by default since 2026-10-01: de_nuke's Hell and B site went from dim to lit like
+    # CS:GO (q3map_surfacelight had made its light estimate ~15 hours).
+    texlights: bool = True
     light_merge_distance: float = 32.0   # a light this close to a brighter one is folded into it
     # world units per lightmap texel. MOHlight time is roughly proportional to the texel
     # count (de_nuke: ~1M texels at 16), so drafts use 32 (a quarter of the texels).

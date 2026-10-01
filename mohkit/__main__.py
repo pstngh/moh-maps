@@ -286,8 +286,8 @@ def cmd_csgo(a) -> int:
     extra = {"props_static_vertices": a.static_verts} if a.static_verts else {}
     if a.lightmap_density:
         extra["lightmap_density"] = a.lightmap_density
-    if a.texlights:
-        extra["texlights"] = True
+    if a.no_texlights:
+        extra["texlights"] = False
     rep = build_local(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
                       detail_all=not a.structural, max_texture=a.max_texture, props_only=a.props_only, **extra)
     return 0 if rep.get("compile_ok") else 1
@@ -384,7 +384,8 @@ def main(argv=None) -> int:
                    help="re-place runtime props in the last compile (Q3map -onlyents, seconds); refuses other changes")
     s.add_argument("--lightmap-density", type=int, help="units per lightmap texel (default 16; 32 for -q draft)")
     s.add_argument("--texlights", action="store_true",
-                   help="Source texlights (lights.rad emissive materials) -> one point light per emitting face")
+                   help="(the default) Source texlights (lights.rad emissive materials) -> one point light per emitting face")
+    s.add_argument("--no-texlights", action="store_true", help="leave emissive materials unlit")
     s.add_argument("--refresh-assets", action="store_true",
                    help="re-convert and re-package with the last compile when only textures/models changed")
     s.add_argument("--resume", action="store_true",
