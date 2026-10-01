@@ -14,13 +14,12 @@ update this file, commit and push, then stop and give the user the one-line hand
 | map | pk3 | build | bots (8, 90 s) | ladders | notes |
 |---|---|---|---|---|---|
 | de_nuke | `local/csgo/cs_nuket/cs_nuket.pk3` (10:05: texlights, displacement fix, lightmap-lit props; old func_ladders) | fastrad, light 6,403 s (3-4 builds sharing the CPU) | **76 kills** | — | Hell, B site, Heaven approach now lit like CS:GO. **Final build running** (`cs_nuke`, below) |
-| de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (09:22: spot + displacement fixes; grid-lit props, old func_ladders) | fastrad, light 3,858 s (shared CPU) | **83 kills** | old func_ladders | fog-coloured walls gone. **Final build running** (below) |
+| de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (10:17, **final**: step ladders, displacement + spot fixes, lightmap-lit props) | fastrad, BSP 344 s, light 2,169 s (shared CPU) | **66 kills** | **3/3** step ladders climb to the top | fog-coloured walls gone; shop shelves and litter lit (were black) |
 | de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (09:12, props re-injected 09:45) | fastrad, BSP 714 s, light 2,692 s (shared CPU) | **88 kills** | — (no ladders) | final: spot + displacement fixes, lightmap-lit props (tunnel crates no longer black) |
 
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
-**Running:** `local/csgo/mirage_rebuild.sh` (started 09:35) and `local/csgo/nuke_final.sh`
-(10:15): full builds with every fix below, then 8 bots for 90 s and the ladder probe
+**Running:** `local/csgo/nuke_final.sh` (10:15; Mirage's finished 10:19): a full build with every fix below, then 8 bots for 90 s and the ladder probe
 (`local/csgo/ladprobe.py`, step ladders from report.json). Logs
 `local/csgo/{mirage_rebuild,nuke_final}.log` end with "done".
 
