@@ -81,6 +81,18 @@ def test_merge_ladder_boxes() -> None:
                    ([233, -860, -399], [234, -836, -56])], got
 
 
+def test_open_yaw_sees_thin_walls() -> None:
+    """Auto cameras look down the longest clear sightline; a 2-unit wall must block it."""
+    from mohkit.build import box
+    from mohkit.mapfile import Entity, MapFile
+    m = "general_structure/floor4"
+    walls = [box((-512, -128, -16), (512, 128, 0), m), box((-512, 128, 0), (512, 144, 128), m),
+             box((-512, -144, 0), (512, -128, 128), m), box((-528, -144, 0), (-512, 144, 128), m),
+             box((512, -144, 0), (528, 144, 128), m), box((64, -128, 0), (66, 128, 128), m)]
+    mf = MapFile([Entity({"classname": "worldspawn"}, walls)])
+    assert C._open_yaw(mf, [(0.0, 0.0, 50.0)]) == [180.0]
+
+
 def test_ladder_facing() -> None:
     """Converted ladders (de_mirage, if CS:GO is installed). The leaning ladder's square
     volume must face the ledge (+x); as a func_ladder it climbs 8 units off its far face.

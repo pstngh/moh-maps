@@ -403,8 +403,10 @@ class Converter:
         if rgba is None:
             rgba = np.full((64, 64, 4), (128, 128, 128, 255), np.uint8)
             self.report["warnings"].append(f"material {src}: no texture, grey placeholder")
-        cm.kind = "translucent" if info.translucent or info.additive or see is not None else (
-            "alphatest" if info.alphatest else "opaque")
+        # $additive: blendFunc add. As a blend, de_cache's skylight glow (effects/trainsky, a dark
+        # opaque image) drew black panes over B site.
+        cm.kind = "additive" if info.additive and see is None else (
+            "translucent" if info.translucent or see is not None else ("alphatest" if info.alphatest else "opaque"))
         if (info.shader or "").lower() == "decalmodulate":
             cm.kind = "modulate"   # multiplies what is under it by 2 x texture (grey 128 = no change)
             # its alpha (when $translucent) says where it applies: fold it into the colour as
@@ -495,6 +497,9 @@ class Converter:
         if cm.kind == "translucent":
             lines += ["\tsurfaceparm trans", "\tsurfaceparm nolightmap", "\tcull none", "\t{",
                       f"\t\tmap {cm.image}", "\t\tblendFunc blend", "\t\trgbGen vertex", "\t}"]
+        elif cm.kind == "additive":
+            lines += ["\tsurfaceparm trans", "\tsurfaceparm nolightmap", "\tsurfaceparm nomarks", "\tcull none", "\t{",
+                      f"\t\tmap {cm.image}", "\t\tblendFunc add", "\t\trgbGen identity", "\t}"]
         elif cm.kind == "alphatest":
             lines += ["\tsurfaceparm trans", "\tsurfaceparm alphashadow", "\tcull none", "\t{", f"\t\tmap {cm.image}",
                       "\t\talphaFunc GE128", "\t\tdepthWrite", "\tnextbundle", "\t\tmap $lightmap", "\t}"]
@@ -892,6 +897,10 @@ class Converter:
             alpha = cm.image is not None and cm.image.endswith(".tga")
             lines = [f"textures/{name}", "{", f"\tqer_editorimage {editor_image(cm.image)}", "\tsurfaceparm trans",
                      "\tsurfaceparm nonsolid", "\tsurfaceparm nomarks", "\tpolygonOffset", "\t{", f"\t\tmap {cm.image}"]
+            if cm.kind == "additive":
+                lines += ["\t\tblendFunc add", "\t\trgbGen identity", "\t}", "}"]
+                self._overlay_shaders[name] = "\n".join(lines)
+                return name
             if cm.kind == "modulate":
                 # Source DecalModulate (cracks, grime): dst * 2 * src, lit by the surface below
                 lines += ["\t\tblendFunc GL_DST_COLOR GL_SRC_COLOR", "\t\trgbGen identity", "\t}", "}"]
@@ -1691,8 +1700,9 @@ class Converter:
                                 "dropped": dropped, "models": len(used)}
         return out, clips, sorted(set(precache))
 
+    # prop_hallucination: a never-solid prop; de_rats_1337_v2 draws its ladders and lamps with 97
     PROP_ENTITIES = ("prop_dynamic", "prop_dynamic_override", "prop_physics", "prop_physics_override",
-                     "prop_physics_multiplayer")
+                     "prop_physics_multiplayer", "prop_hallucination")
 
     def _entity_props(self) -> list:
         """Model entities that stand still in play (``prop_dynamic``, physics props), as
@@ -1722,7 +1732,7 @@ class Converter:
                 self._interactive_props.append(e)
                 continue
             try:
-                solid = int(float(e.get("solid", "6") or 6))
+                solid = 0 if e.classname == "prop_hallucination" else int(float(e.get("solid", "6") or 6))
                 skin = int(float(e.get("skin", "0") or 0))
                 scale = float(e.get("modelscale", "1") or 1)
             except ValueError:
@@ -2005,10 +2015,61 @@ def convert(bsp_path: str, csgo_dir: str, opt: Options) -> Result:
     return Converter(bsp_path, csgo_dir, opt).run()
 
 
+def _open_yaw(m: MapFile, eyes, rays: int = 24, reach: float = 2048.0) -> list:
+    """For each eye point, the yaw (degrees) of its longest clear horizontal sightline through
+    the map's brushes (exact ray/brush clipping: de_rats' vent walls are 2 units thick), or
+    ``None`` when no ray gets 16 units."""
+    import math as _m
+    solids, _ = validate._solids(m)
+    if not solids:
+        return [None] * len(eyes)
+    lo = np.array([s.mins for s in solids])
+    hi = np.array([s.maxs for s in solids])
+
+    def free(e, d) -> float:
+        with np.errstate(divide="ignore", invalid="ignore"):
+            inv = 1.0 / np.where(np.abs(d) < 1e-12, 1e-12, d)
+        t1, t2 = (lo - e) * inv, (hi - e) * inv
+        tn = np.minimum(t1, t2).max(axis=1)
+        tf = np.maximum(t1, t2).min(axis=1)
+        best = reach
+        for i in np.nonzero((tn <= tf) & (tf > 0) & (tn < reach))[0]:
+            t0, t1_ = 0.0, reach
+            for pl in solids[i].planes:
+                n = np.asarray(pl.normal)
+                denom, dist = float(n @ d), float(n @ e) - pl.dist
+                if abs(denom) < 1e-12:
+                    if dist > 0:
+                        t0, t1_ = 1.0, 0.0
+                        break
+                    continue
+                t = -dist / denom
+                if denom < 0:
+                    t0 = max(t0, t)
+                else:
+                    t1_ = min(t1_, t)
+            if t0 <= t1_:
+                best = min(best, t0)
+        return best
+
+    out = []
+    for eye in eyes:
+        e = np.asarray(eye, np.float64)
+        best, best_d = None, 16.0
+        for k in range(rays):
+            a = 2 * _m.pi * k / rays
+            t = free(e, np.array([_m.cos(a), _m.sin(a), 0.0]))
+            if t > best_d:
+                best, best_d = _m.degrees(a), t
+        out.append(best)
+    return out
+
+
 def auto_cameras(m: MapFile, n: int = 9, landmarks=(), spawns: bool = True):
-    """Spread-out cameras: each landmark (e.g. bomb site, looking toward the map centre), then a
-    farthest-point sample of spawn points (eye height, spawn facing), plus one high overview.
-    ``spawns=False`` keeps only the landmarks and the overview."""
+    """Spread-out cameras: each landmark (e.g. bomb site), then a farthest-point sample of spawn
+    points (eye height), each looking down its longest clear sightline (spawns face walls in
+    vents and corners: de_rats), plus one high overview. ``spawns=False`` keeps only the
+    landmarks and the overview."""
     import math as _m
     from .. import game
     spawns = [e for e in m.entities if e.classname in ("info_player_deathmatch", "info_player_allied",
@@ -2022,15 +2083,18 @@ def auto_cameras(m: MapFile, n: int = 9, landmarks=(), spawns: bool = True):
     lm = [((x, y, z), _m.degrees(_m.atan2(my - y, mx - x))) for x, y, z in landmarks]
     spawn_pts = pts
     pts = lm + pts
-    chosen: list = []
-    if not spawns:
-        chosen = list(lm)
-    elif pts:
-        chosen.append(pts[0])
+    chosen: list = list(lm)     # every landmark, then spawns far from what is chosen
+    if spawns and pts:
+        if not chosen:
+            chosen.append(pts[0])
         while len(chosen) < min(n - 1, len(pts)):
             far = max(pts, key=lambda p: min((p[0][0] - c[0][0]) ** 2 + (p[0][1] - c[0][1]) ** 2 for c in chosen))
             chosen.append(far)
-    cams = [game.Shot(f"spawn{i}", (o[0], o[1], o[2] + 82), (5.0, yaw, 0.0)) for i, (o, yaw) in enumerate(chosen)]
+    eyes = [(o[0], o[1], o[2] + 82) for o, _ in chosen]
+    yaws = _open_yaw(m, eyes) if eyes else []
+    cams = [game.Shot(f"site{i}" if i < len(lm) else f"spawn{i - len(lm)}", eye,
+                      (5.0, open_yaw if open_yaw is not None else yaw, 0.0))
+            for i, ((_, yaw), eye, open_yaw) in enumerate(zip(chosen, eyes, yaws))]
     pts = pts if spawns else lm + spawn_pts
     if pts:
         xs, ys, zs = [p[0][0] for p in pts], [p[0][1] for p in pts], [p[0][2] for p in pts]
