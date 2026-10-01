@@ -31,13 +31,15 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
-**State at 06:00:** nothing is running. At 04:40 I found that every converted
+**State at 06:00:** one job is still running: `local/csgo/mirage_rebuild.sh` (started
+05:37) rebuilds Mirage with the spot fix (`-q fastrad`, ~35 min alone), then runs 8 bots
+for 90 s and the ladder probe; everything goes to `local/csgo/mirage_rebuild.log` ("done"
+at the end). Until it finishes, `local/csgo/cs_mirage/cs_mirage.pk3` is the 04:25 build. At 04:40 I found that every converted
 `light_spot` pointed the wrong way (VRAD: z = +sin(pitch); ceiling spots lit ceilings),
 which was why Nuke's radio rooms/lobby and Mirage's shops were dark. Nuke was rebuilt with
-the fix (interiors now lit, `local/csgo/cs_nuke/cs_nuke_shots_3.png`); **Mirage and dust2
-were not**: rebuild them first next session (`python -m mohkit csgo de_mirage -q fastrad`,
-then de_dust2; ~45-60 min each alone). Mirage's folder holds the map/assets of a stopped
-04:44 conversion next to its 04:25 pk3. Earlier packages are backed up in the session
+the fix (interiors now lit, `local/csgo/cs_nuke/cs_nuke_shots_3.png`). Mirage is being
+rebuilt by the job above; **dust2 was not**: rebuild it first next session
+(`python -m mohkit csgo de_dust2 -q fastrad`, ~45 min alone) and check the Mirage log. Earlier packages are backed up in the session
 scratchpad only (`cs_nuke_final_0437.pk3` etc.); they will be lost with it.
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
