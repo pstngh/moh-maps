@@ -20,16 +20,19 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 01:25):**
-- **dust2 done for tonight's time box:** fresh draft (density 32) OK: 1,574 props
-  injected, 459 overlays (graffiti, A/B markings), 32 named cameras look like Dust2,
-  **75 bot kills** in 90 s. `local/csgo/cs_dust2/cs_dust2.pk3`. Shadows are dark (draft
-  light, no bounce); a radiosity build would lift them.
-- **Nuke:** unlit build verified (83 kills; ladders 5/6 by walking, the hanging A-site one
-  should mount with +use: re-test with the updated probe). Lit draft `cs_nuke` (00:24
-  code) light at ~75% at 01:20. Then: rebuild Nuke with every fix, probe ladders, bots,
-  choose the final lighting.
-- **Mirage:** `-q unlit --name cs_mirageu` started 01:17.
+**Live state (update as you go, 01:47):**
+- **dust2:** done for tonight's time box (draft, 75 bot kills, `local/csgo/cs_dust2/`).
+- **Nuke lit draft (00:24 code) results:** light 3,939 s; looks like Nuke but interiors were
+  dark next to over-bright props: MOHlight clamped 473 lights to 60 per leaf ("Num lights
+  per leaf clamped from 473 to 60") while the light grid (prop colours) got them all.
+  Fixed: near-zero lights dropped and pairs merged (473 -> 247), `-blocksize 512`, stronger
+  sky fill. Ladders on it (probe with +use): 5/6; the A-site one hangs 47 units above a
+  ledge with a gap under it: now extended down to the ledge (only ladders hanging 32+).
+- **Running:** `mohkit csgo de_nuke -q fastrad` (new preset: `-fast -bounce 2`, density 32,
+  started 01:39, light from ~01:44) -> `local/csgo/cs_nuke/`; and `scratchpad/unlit_ladders.sh`
+  (unlit `cs_nukeu` + ladder probe) to verify the ladder fix.
+- **Mirage:** unlit `cs_mirageu` looks right (1,469 props, 512 overlays, 85 ropes,
+  3 ladders); lit build next.
 
 Done this run (all committed and pushed):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
