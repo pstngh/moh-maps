@@ -29,10 +29,8 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 - Previous good builds kept as `scratchpad/cs_nuke_fastrad3.pk3` (79 kills),
   `cs_mirage_fastrad3.pk3` (77 kills), `cs_dust2_draft_0119.pk3` (75 kills) in case a final
   build fails.
-- Also running: `de_nuke -q fastrad --texlights --name cs_nuket` (03:18, experiment for
-  next-step 1; `nuke_texlights1.log`). All four share the CPU, so expect ~05:00.
-- Known remaining looks issue: interiors rely on point lights unless `--texlights` is
-  used (opt-in, untuned; next step 1).
+- The `--texlights` Nuke experiment (03:18) was stopped at 03:42: MOHlight estimated ~15 h.
+- Known remaining looks issue: interiors rely on point lights (next step 1).
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
@@ -94,12 +92,12 @@ equal. Conversions are personal-use only.
 de_mirage. HANDOFF edit (23:45): finish de_dust2 first, time-boxed to ~02:00, then Nuke,
 then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-git-backup`).
 
-1. **CS:GO look, next lever: texlights.** `mohkit csgo <map> --texlights` (opt-in, added
-   03:17) turns `lights.rad` emissive materials into `q3map_surfacelight` (brightness x 100,
-   clamp 100-5000) and keeps de_nuke's disabled emitter strips as non-solid emitters. The
-   mechanism is verified on a test room; the scale isn't. Build Nuke with it, compare the
-   radio rooms/lobby and Mirage's shops against the 03:15 builds, tune `texlight_scale`,
-   then make it the default.
+1. **CS:GO look, next lever: texlights.** `--texlights` (opt-in) turns `lights.rad`
+   emissive materials into `q3map_surfacelight`; it works on a test room, but de_nuke's 43
+   emitting surfaces made MOHlight estimate ~15 hours, so it was stopped. Do it as point
+   lights instead: one `light` per emitter face (centre, pushed out along the normal),
+   intensity from the face area x rad brightness, colour from the rad line. Then compare
+   Nuke's radio rooms/lobby and Mirage's shops against the 03:15 builds.
    Other Nuke gaps: vents break like glass; door handles lost; detail grass dropped.
 2. **Structural CS:GO maps:** `--structural` dust2 compiles (61 KB VIS, claim 8 false).
    Try a lit structural build: smaller leaves may light faster and avoid the 60-lights-
