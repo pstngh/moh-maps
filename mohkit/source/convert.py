@@ -468,68 +468,6 @@ class Converter:
                     self.report["water_brushes"] = self.report.get("water_brushes", 0) + 1
         out += self._extra
         self.report["brushes"] = len(out)
-        self._world_brushes = out
-        return out
-
-    def _floor_below(self, x: float, y: float, z: float, drop: float) -> Optional[float]:
-        """Top of the first solid converted brush below (x, y, z) within ``drop`` units (Source
-        units; detail brushes count, which Source's leaf contents don't), or None."""
-        s = self.opt.scale
-        if not hasattr(self, "_brush_boxes"):
-            boxes = []
-            for b in getattr(self, "_world_brushes", []):
-                if any(f.has_parm("nonsolid") for f in b.faces):
-                    continue
-                lo, hi = b.bounds()
-                boxes.append((lo, hi, b))
-            self._brush_boxes = boxes
-        best = None
-        px, py = x * s, y * s
-        for lo, hi, b in self._brush_boxes:
-            if not (lo[0] <= px <= hi[0] and lo[1] <= py <= hi[1] and hi[2] <= z * s + 1 and hi[2] >= (z - drop) * s):
-                continue
-            top = None
-            for f in b.faces:
-                n, d = f.plane.normal, f.plane.dist
-                if n[2] > 0.7:     # an upward face: its height at (x, y)
-                    h = (d - n[0] * px - n[1] * py) / n[2]
-                    top = h if top is None else min(top, h)
-            if top is not None and all(f.plane.normal[0] * px + f.plane.normal[1] * py + f.plane.normal[2] * (top - 0.5)
-                                       <= f.plane.dist + 0.01 for f in b.faces):
-                best = top if best is None else max(best, top)
-        return None if best is None else best / s
-
-    def _is_glass(self, br: Brush) -> bool:
-        """Every drawn material of the brush is glass (``$surfaceprop`` glass)."""
-        seen = False
-        for side in br.real_sides():
-            m = side.material
-            if not m or m.lower().startswith("tools/") or side.nodraw:
-                continue
-            info = material_info(self.fs, self.bsp.original_material(m))
-            if not info.found:
-                info = material_info(self.fs, m)
-            if "glass" not in (info.surfaceprop or "").lower():
-                return False
-            seen = True
-        return seen
-
-    def windows(self) -> list[MEntity]:
-        """Breakable glass brush entities -> ``func_window`` (MOHAA breakable glass,
-        ``fgame/windows.cpp``). CS:GO panes break from one bullet; MOHAA's default health
-        is 250, so they get Source's ``health`` (at least 1) and clear debris."""
-        out = []
-        ents = self.bsp.model_entities
-        for model, brushes in sorted(self._windows.items()):
-            if not brushes:
-                continue
-            ent = ents.get(model)
-            try:
-                hp = max(1, int(float(ent.get("health", "1") or 1))) if ent else 1
-            except ValueError:
-                hp = 1
-            out.append(MEntity({"classname": "func_window", "health": str(hp), "debristype": "0"}, brushes))
-        self.report["windows"] = len(out)
         return out
 
     def _areas(self, br: Brush, geo) -> set[int]:
@@ -972,19 +910,10 @@ class Converter:
             facing[thin] = float(sgn)
             near = lo[thin] if sgn > 0 else hi[thin]     # the climber's side of the Source volume
             far = hi[thin] if sgn > 0 else lo[thin]
-            # trigger: Source volume + 8 units toward the climber, down to the floor when the
-            # Source volume stops short of it (de_nuke's A-site ladder hangs 32 units up: CS
-            # players reach it with their 72-unit hull, MOHAA only mounts from inside the trigger)
+            # trigger: Source volume + 8 units toward the climber. (Extending it down to the
+            # floor stopped a working ladder from mounting: AT_LADDER traces from the eye, and
+            # FuncLadder::CanUseLadder / PositionOnLadder work from absmin, fgame/misc.cpp.)
             t_lo, t_hi = lo.copy(), hi.copy()
-            floors = []
-            for back in (16, 28, 40):   # where a climber stands: the highest floor in front
-                foot = c.copy()
-                foot[thin] = (lo[thin] if sgn > 0 else hi[thin]) - sgn * back
-                f = self._floor_below(foot[0], foot[1], lo[2], 96)
-                if f is not None:
-                    floors.append(f)
-            if floors and max(floors) < lo[2] - 2:
-                t_lo[2] = max(floors) + 1
             if sgn > 0:
                 t_lo[thin] = near - 8
             else:
@@ -1000,7 +929,6 @@ class Converter:
             out.append(e)
             self.report.setdefault("ladders", []).append(
                 {"origin": [round(float(v) * s, 1) for v in org], "angle": yaw, "height": round(float(ext[2]) * s),
-                 "extended_to_floor": round(float(lo[2] - t_lo[2]) * s, 1),
                  "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)})
         return out
 

@@ -411,10 +411,10 @@ def ladder_probe(pk3s: Sequence[Path], map_name: str, ladders: Sequence[dict], c
 
     One game per ladder (a player still on a ladder ignores ``tele``): the local player
     joins a team, is teleported to the foot of the ladder (feet 1 unit above its bottom,
-    28 units back from the climb face), looks 50 degrees up toward the wall and holds
-    +forward for ``climb_ms``; ``viewpos`` before and after gives the climb (walking into
-    a ladder while looking more than 35 degrees up or down mounts it,
-    ``docs/reference/engine.md`` §1.3). Verified on stock mohdm2: 325 units in 4 s."""
+    28 units back from the climb face), looks 50 degrees up toward the wall, holds
+    +forward and taps +use (a ladder whose bottom hangs above the floor is only mounted
+    with use); ``viewpos`` before and after gives the climb (``global/mike_torso.st``
+    USE_LADDER, ``docs/reference/engine.md`` §1.3). Verified on stock mohdm2: 325 units in 4 s."""
     out = []
     for i, l in enumerate(ladders):
         yaw = math.radians(l["angle"])
@@ -424,7 +424,8 @@ def ladder_probe(pk3s: Sequence[Path], map_name: str, ladders: Sequence[dict], c
         cmds = ["auto_join_team", "primarydmweapon rifle", "wait 3000",
                 f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 600",
                 f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 400", "viewpos",
-                "+forward", f"wait {climb_ms}", "viewpos", "-forward", f"saveshot ladder{i:02d}", "wait 300"]
+                "+forward", "wait 300", "+use", "wait 200", "-use", f"wait {climb_ms}", "viewpos", "-forward",
+                f"saveshot ladder{i:02d}", "wait 300"]
         res = run(pk3s, map_name, (), extra_commands=cmds, run_name=f"{run_name or 'ladders'}{i:02d}",
                   timeout=120 + climb_ms / 1000)
         pos = [tuple(int(v) for v in m.groups()[:3]) for m in VIEWPOS_RE.finditer(res.log)]
