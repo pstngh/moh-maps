@@ -12,6 +12,15 @@ compile root, for when a stage was re-run by hand. Drafts use `lightmapdensity 3
 (`--lightmap-density`): MOHlight time is about proportional to lightmap texels, and
 de_nuke has ~1M of them at 16.
 
+`--refresh-assets` re-converts and re-packages the last compile when only textures,
+shaders or models changed: it refuses unless the new `.map` text equals the compiled one.
+
+**Texture resizing trap (fixed 2026-10-01):** Pillow resizes RGBA images with
+premultiplied alpha, so RGB goes black where alpha is 0. Source keeps specular/envmap
+masks in the base texture's alpha, so every such texture over 512 px was written
+darkened, and DecalModulate decals (neutral grey with alpha) came out as black squares.
+Opaque images are now resized as RGB (`Converter._write_image`, `modelconv.convert_texture`).
+
 `-q unlit` compiles BSP and fast VIS only and gives props a flat grey: geometry, props,
 doors and ladders can be checked in minutes (de_nuke's draft light alone takes over an
 hour, even with no light entities and `-notrace`: MOHlight's base cost per lightmap texel
