@@ -37,7 +37,10 @@ Derived minimums (give generous margins, bots are clumsy):
 - **Vertical play.** Upper floors overlooking a square, balconies and stairs
   give the stock maps their character. Keep upper floors reachable from two
   sides where possible.
-- **Size.** Stock DM maps are about 2500–4000 units across for 12–32 players.
+- **Size.** Stock DM maps are about 2500–4000 units across for 12–32 players:
+  10–15 s to run across at 275 u/s. The ±8192 world limit allows at most
+  ~16,000 units, about a minute's run, so "minutes to cross" is not possible;
+  big maps get their scale from routes that wind, not from distance.
 - **Spawns.** Use 16–24 `info_player_deathmatch` spread around the map, plus
   16+ each of `info_player_allied`/`info_player_axis` for team modes (put each
   team on a side). Keep spawns ≥ 64 from walls, facing into the space, and not

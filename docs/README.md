@@ -33,6 +33,7 @@ SHOTS = [Shot.looking_at("yard", (-450, -450, 80), (300, 300, 60)),
 ```
 
 ```sh
+python -m mohkit generate maps/my_first          # .map + validate + dist/my_first_plan.png (seconds)
 python -m mohkit build maps/my_first -q draft     # validate → compile → package → screenshots
 open dist/my_first_shots.png                    # look at it
 python -m mohkit install dist/my_first.pk3        # then in game: g_gametype 1; map dm/my_first
@@ -44,6 +45,8 @@ python -m mohkit install dist/my_first.pk3        # then in game: g_gametype 1; 
    and error message.
 2. [design.md](design.md): player dimensions, layout, the Carver
    construction method, what makes a map look like MOHAA, limits, bots.
+   [api.md](api.md): the `build`/`kit` calls a `build.py` uses, material
+   specs and side conventions.
 3. [map-format.md](map-format.md): the `.map` text format (brushes, texture
    projection, patches, terrain).
 4. [entities.md](entities.md): spawns, lights, props and collision, doors,

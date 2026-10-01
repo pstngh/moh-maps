@@ -32,6 +32,40 @@ Useful families (retail AA):
 | shutters | `central_europe/shutter_set2` (64×128) |
 | mouldings | `general_structure/building_molding` (128×64) |
 
+### North Africa (`algiers/*`, mohdm7, the m1 missions)
+
+What mohdm7 uses most: `algiers/afrik_wall1a` (whitewash), `afrik_wall1b`
+(whitewash with a grimy base), `algierwall1`, `afrik_wall1brick`,
+`interiorwall_afrika1flat`/`1trim`, `algierwall_set5drt`, `algiertrim`,
+`stset_2sand`, `afrika_floor_set1trm`, `jh_corrugate_256` (sheds), `sky/africanight`.
+mk_medina adds, all checked in game:
+
+| role | materials |
+|---|---|
+| house walls, as `[(0, base), (256, upper)]` bands | `afrik_wall1b` / `afrik_wall1a`; `algierwall_set5` / `algierwall_set5wtrim` (blue dado); `walarzset_1trmpc` / `walarzset_1flt` (pink); `algierwall1drk_1flat` / `algierwall1drk_1wthrd` (ochre); `afrik_wall2des1` (brown base); `afrikwall7_set1base` (clean sand) |
+| trim, parapets, steps | `afrik_wall1c`, `doccrtset_1b` (stone), `column_2` (shafts) |
+| streets and squares | `stset_2sand`, `stset_2base`, `grndset_1a` (alleys), `fort_floor_outsidesml` (flagstones), `fort_floor_outside` (roofs) |
+| inside | `whsflrset1_1b`, `afriktile1`, `afrika_floor_set1` (checker), `interiorwall_afrika1trim`, `algier_ceiling` |
+| images on panels | `afrikadoorwrk` (door, 128×256), `afrikwall7_set1doorway` (doorway, 256×256), `window_decor_set1` (grille, 144×128) |
+| cloth | `desertcloth` (awnings, canopies) |
+| hill terrain | `grndset_2af` |
+
+Props that fit: `static/tree_regularpalm`, `tree_squatpalm`, `produce_cart`,
+`wagon`, `wicker_basket_1–3`, `south_africa_ceramic_pot_7`, `basket1`,
+`vehicle_dtruck_rusted`, `vehicle_car_rusted`, sandbags.
+
+Traps:
+
+- `algiers/afrika_windecal` is a **decal** (`blendfunc blend`, `polygonoffset`,
+  surfaceparm `trans`): it blends over what is behind it, so it can't be the
+  wall face itself. Put it on a 1-unit slab in front of the wall, with the image face `+surfaceparm nonsolid` and
+  the other faces `common/nodraw` nonsolid (`decal` in `maps/mk_medina/build.py`).
+- `algiers/tentdsrt` is alpha-tested (`alphaFunc GE128`, `fence`, `cull none`): its
+  underside stayed **black** in both draft and preview lighting. Use the
+  lightmapped `algiers/desertcloth` for awnings.
+- Window and door images need `kit.fit` or a panel; with world projection
+  they tile across the wall.
+
 ## Scale and alignment
 
 - **Scale 1** (one texel per unit) for almost everything, as in the stock maps.

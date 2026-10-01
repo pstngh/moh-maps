@@ -106,6 +106,29 @@ ambient 40). Tested 2026-09-30 with a sealed room holding one `func_detail` box
 and one world box. Mark detail per face with `+surfaceparm detail`, as stock maps
 do. The `detail` entity is editor grouping only.
 
+## 64-vertex faces
+
+The renderer draws a planar face with more than 64 vertices as the default
+checker (`MAX_FACE_POINTS`, `renderergl1/tr_bsp.c`). A brush face starts with 4,
+but Q3map's T-junction fixing adds a vertex wherever the corner of a touching
+face lies on its edge, so a face collects one vertex per neighbouring edge that
+ends on it. Two shapes go over the limit:
+
+- **Long faces** with many neighbours along them. mohkit splits Carver shells,
+  `MapBuilder.box` and `kit.gable_roof` on a 512 grid, which is enough for plain walls.
+- **Narrow faces many detail pieces end on**: a ceiling strip over an arcade,
+  a lintel, a beam. Each arch segment or rib that meets it adds two vertices on
+  each side it touches. mk_medina's first build had an 83-vertex arcade ceiling:
+  the curved arch pieces ran up to the ceiling plane. The fix was to stop them
+  just above the apex and close the gap with one lintel box (`arch_fill` and
+  `arcade` in `maps/mk_medina/build.py`); a test strip with 40 ribs on each side
+  gave two 85-vertex faces (2026-09-30).
+
+So when many small pieces meet one surface, end them short of it and bridge the
+gap with one piece, or split the surface where the pieces are. The compile checks
+this straight after the BSP stage and prints each face's centre (see
+[toolchain.md](toolchain.md#reading-the-output)).
+
 ## Patches (`patchDef2`)
 
 Curved surfaces: a grid of quadratic Bézier control points.
@@ -173,7 +196,14 @@ height ( tokens ) ( tokens )         <- height relative to Z; tokens e.g. nodraw
   when mirroring, reverse the cell-owning controls and keep the sentinel last
   (follows from the layout; not tested in engine).
 - Height resolution is 2 units, and a single 512 × 512 patch may span at most
-  510 units of height; the compiler errors otherwise.
+  510 units of height; the compiler errors otherwise (`kit.terrain` raises first).
+- **Hills around a town**: make height a function of the distance from the town
+  rectangle. With the Euclidean distance the slope across a corner patch is
+  steeper than along the sides and passes 510 there. A p = 4 norm,
+  `(dx**4 + dy**4) ** 0.25` with `dx = max(x0 - x, 0, x - x1)` (same for y),
+  gives rounded-square contours and even slopes in the corners (`dist_out` and
+  `hill` in `maps/mk_medina/build.py`). A ring of playerclip keeps players off
+  the slope.
 - `SIZE` is the texture's repeat size in world units: 256 or 512 with scale 1
   gives stock-looking ground. `0` smears one texel across the whole patch
   (verified in engine).
