@@ -1,42 +1,65 @@
 # HANDOFF: current state and next steps (living file; keep it current)
 
-## Summary (paused 2026-09-30 ~22:25 at the user's request, second session)
+## Overnight run rules (2026-10-01, until 06:00 America/New_York)
 
-All work is committed and pushed to `main`. **Two builds are still running**
-(detached with nohup; they survive the session):
+The user is asleep and authorized an unattended run. These rules override CLAUDE.md's
+"pause at 75% context" rule for this run only:
+
+- Do **not** pause or hand off for context. Let auto-compaction happen as often as needed.
+- Keep this file current at every milestone and commit + push after tests pass, so a
+  compaction loses nothing.
+- Work through "Next steps" in order. Skip a step that's blocked (note why) and keep
+  going. When the list runs out, add worthwhile work toward the Goal and do it.
+- Don't ask questions. Make reasonable decisions and log them under "Decisions made
+  while the user was away".
+- Run long builds in the background and work on something else meanwhile. Never end a
+  turn with nothing running before 06:00 (check `date`). Use a background waiter
+  (`while kill -0 PID; do sleep 30; done`) so you're woken up.
+- At 06:00 ET: finish or park the current step, update this file, commit, push, and stop
+  with a short summary for the user.
+
+## Summary (paused 2026-09-30 ~23:35, third session; overnight run until 06:00 ET next)
+
+All work is committed and pushed to `main` (`68386e0`). One build may still be running:
 
 | build | log | results land in |
 |---|---|---|
-| cs_dust2 draft (`mohkit csgo de_dust2 -q draft`), light started 22:07 | `/private/tmp/claude-501/-Users-pstn-Documents-moh-maps/5245b254-4e68-40bc-9e0d-7ad12bb4c67d/scratchpad/dust2_draft.log` | `local/csgo/cs_dust2/cs_dust2_shots.png`, `report.json` |
-| mk_medina preview + 8 bots 60 s (`mohkit build maps/mk_medina -q preview --bots 8 --seconds 60`), light started 22:06 | `…/scratchpad/medina_preview.log` (same folder) | `dist/mk_medina_shots.png`, `dist/mk_medina_report.json` (kills) |
+| mk_medina preview + 8 bots 60 s (`mohkit build maps/mk_medina -q preview --bots 8 --seconds 60`, pid 69103, started 22:04; static-model lighting at 23:25) | `~/Library/Caches/mohkit/build/roots/dm_mk_medina/light.log` | `dist/mk_medina.pk3`, `dist/mk_medina_shots.png`, `dist/mk_medina_report.json` (kills) |
 
-Each light took ~55 min last time, so both should finish ~23:00–23:20. Check with
-`ps aux | grep -E "[Q]3map|[M]OHlight|[o]penmohaa"` and the result files'
-timestamps. Both passed the new post-BSP 64-vertex check (they reached VIS/light).
+Its screenshots may still use the **old low-detail harness**: Python loaded `game.py`
+before the change. Re-shoot the finished package rather than trust that sheet (step 2).
 
-This session (second):
+This session (third) found why converted props were black, and that **every contact
+sheet so far was shot at low detail**:
 
-- **HANDOFF step 1 done** (mk_medina's doc gaps): `mohkit generate`; 64-vertex
-  check right after BSP with face locations, stopping before VIS/light; band
-  lists on brushes raise `TypeError`; spawn validation uses only player-blocking
-  collision brushes (palm canopies are foliageclip); `Shot.fov` now works
-  (`cg_fov`, engine clamps 65–120; narrower = centre crop); `test --shots
-  <other>` no longer overwrites the map's sheet; draft light is `-fast -bounce 0`
-  (`-fast` alone still ran radiosity, measured). New `docs/api.md`, North African
-  palette, 64-vertex faces, hill rings, light-time breakdown.
-- **cs_dust2 black rubble: cause found, fix unverified.** Runtime `script_model`s
-  are lit from their origin (NOT_SOLID packs no box: `cg_modelanim.c:1064`,
-  `sv_world.c:230`); the rubble's Source pivot is on the floor, so the sun trace
-  starts in solid. `modelconv.convert_model(centre=True)` now moves each converted
-  model's pivot to its bounds centre (mesh and collision), and the converter
-  offsets entity origins (`Converter._prop_origin`). The running dust2 build tests it.
-  Documented in `docs/reference/engine.md` §5.2 (says "renders black": confirm).
-- **mk_medina polish, unverified in game:** `wall_trim` (ornamental
-  `algiers/algiertrim` cornice under the roof edge, beam-end rows, string course
-  at z 256), `balcony` (wooden mashrabiya boxes replacing ~30% of upper windows;
-  upper windows moved to z+280 on tall walls), `sundiffuse 1.6`,
-  `ambientlight 20 18 16`, alley lanterns 190, and 24 DM spawns (4 team-only).
-  `mohkit generate` validates it with 0 errors.
+- **Harness detail (verified in game):** a fresh OpenMoHAA home is near low/safe mode:
+  `r_picmip 2` (quarter-size textures, the blur in old sheets), `r_fastentlight 1`
+  (models lit from the light grid only, so floor props sampling grid points in solid
+  were black), `r_subdivisions 20`. `game.run` now writes retail `high.cfg` values to
+  the run's `autoexec.cfg` (`game.QUALITY_CVARS`), with `cg_shadows 1` because `2`
+  darkens the whole frame about 3× (measured). Keep the command line short: it holds
+  32 `+` commands and silently drops the rest (`+devmap` too). `docs/testing.md`.
+- **Runtime prop lighting (code-read and in-game colour test):** a NOT_SOLID
+  `script_model` is lit from **8 below its origin** (`q_math.c:1652`), with one sun
+  trace. With a pure red `suncolor` and blue `ambientlight`, the rubble went red (sun)
+  and cars and some crates went blue (ambient only: the trace from inside their own
+  multi-brush hull hits another hull brush). `modelconv` now puts the origin 16 above
+  the mesh's top (`LIGHT_ABOVE_TOP`), so the lighting point is 8 above the model.
+  **Unverified in game:** it changed the collision hulls, so it needs a full rebuild
+  (step 1). `docs/reference/engine.md` §5.2.
+- **`mohkit csgo <map> --props-only`** (verified on dust2, 48 s instead of ~45 min):
+  re-converts, refuses if anything but `script_model`s changed
+  (`mapfile.compiled_difference`), and rewrites the entity lump of the last compile
+  (`compile.update_entities`, `Q3map -onlyents`). Useful for any runtime-entity change.
+  `docs/csgo-conversion.md`.
+- dust2 with the new harness (props-only, centre pivots): rubble is lit, crates in shot
+  03 lit, textures sharp. Cars are still dark (ambient only). Sheet:
+  `local/csgo/cs_dust2/cs_dust2_shots.png`.
+
+Trick worth reusing: to see which light reaches a runtime model, copy the compile root,
+set worldspawn `suncolor "255 0 0"` and `ambientlight "0 0 60"` in the `.map`, run
+`compile.update_entities` on the copy and screenshot. Red means sun, blue means ambient
+only. Lightmaps are unchanged because they are baked.
 
 Read `CLAUDE.md` first. Git: GitHub `main` (https://github.com/pstngh/moh-maps).
 The old pre-restart `.git` is backed up at `~/Library/Caches/mohkit/old-git-backup`
@@ -66,35 +89,50 @@ equal. Conversions are personal-use only.
 
 ## Next steps (in order)
 
-1. **Done 2026-09-30 (second session):** mk_medina's doc gaps and toolkit issues.
-   `mohkit generate`; the 64-vertex check runs after BSP and stops the compile with
-   face locations; band lists on brushes raise; prop collision uses the
-   player-blocking brushes (palm canopies no longer block spawns); `Shot.fov` works
-   (`cg_fov`, 65–120, crop below); `test --shots` keeps the map's sheet; draft light
-   is `-fast -bounce 0` (`-fast` alone ran radiosity). Docs: `docs/api.md`, North
-   African palette, 64-vertex faces, hill rings, light-time breakdown.
-2. **Check the two running builds** (table above):
-   - cs_dust2: is the rubble in shots 01/04 lit now? Are props still in the right
-     places (re-centring moves origins: compare with the old sheet)? If good,
-     remove "(says renders black: confirm)" from this file, update
-     `docs/csgo-conversion.md` (its "Known gaps" still says props are pending the
-     model converter; add the pivot note, the measured times from the build summary,
-     and the props report: instances/runtime/dropped), and commit.
-   - Then dust2 bots: `python -m mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 60`.
-   - Dust2 still drops ~848 of 1,509 props in draft (runtime cap 600; engine
-     entity limit 1024 total). Some crates looked washed out (shot 00): check.
-   - mk_medina: look at `dist/mk_medina_shots.png` (alleys 05–07 brighter? cornices,
-     balconies, beam ends look right, nothing floating or z-fighting?) and the bot
-     kills in the build log/report. Fix, rebuild, commit. Light stays `-threads 1`
-     (MT MOHlight crashed at 00433F3A).
-3. **Medina is otherwise done** once the above looks right; update its README if
-   anything changes.
-4. **Claim 8** (VIS overflow without the structural shell): test with
+1. **dust2: verify the above-top pivot.** First check why moving the pivot changed clip
+   hulls by up to 20 units (Hausdorff, old vs new map; e.g. worldspawn brushes
+   6716/6730, 32→35 faces). A convex hull should not depend on translation: look at
+   `modelconv._hull_brush` (plane snapping/rounding relative to the origin?) and fix
+   it if it's a bug. Then do the full draft rebuild: `python -m mohkit csgo de_dust2 -q draft`
+   (~45 min, background it). Check that cars and crates are sunlit, that props are in
+   the same places as `local/csgo/cs_dust2/cs_dust2_shots.png`, and nothing floats.
+   Then bots: `python -m mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 60`.
+   Add the measured stage times and the props report (1,509 instances, 600 runtime,
+   909 dropped) to `docs/csgo-conversion.md`.
+2. **mk_medina:** when pid 69103 is done, re-shoot at high detail:
+   `python -m mohkit test dist/mk_medina.pk3 dm/mk_medina --shots maps/mk_medina --bots 8 --seconds 60`.
+   Check alleys 05–07 brightness, cornices, balconies, beam ends (nothing floating or
+   z-fighting), and kills (the last run had 24). Fix, rebuild, commit, update the README.
+3. **Re-judge the other maps at high detail:** re-shoot `mk_village` and `mk_ref_room`
+   (`mohkit test dist/<x>.pk3 dm/<x> --shots maps/<x>`; build first if `dist/` lacks
+   the pk3). Earlier lighting judgments and `docs/lighting.md` recipes were made at
+   picmip 2 with grid-lit models. Correct any doc claim that no longer holds.
+4. **Multi-threaded MOHlight crash** (medina light is ~55 min on one thread):
+   `~/Library/Caches/mohkit/build/roots/dm_mtx` holds a copy of medina's pre-light
+   BSP/VIS. Run `Toolchain().run("light_mt", "MOHlight.exe", ["-threads", "10", "-fast",
+   "-bounce", "0", "-gamedir", to_tool_path(root), "-moddir", "main", to_tool_path(map)], root, 3600)`
+   on it. Hypothesis: the crash is in static-model lighting (medina has 107 static
+   models; dust2 drafts with 0 static models ran on 10 threads fine). Test by stripping
+   `static_*` entities (or `-nostatic` at BSP), and record the result in
+   `docs/toolchain.md`. If you find a safe MT setup, the driver can use it.
+5. **Claim 8** (VIS overflow without the structural shell):
    `mohkit csgo de_dust2 --structural` when the machine is free (long).
-5. Tell the user: accept the Xcode license, and consider moving the repo out
-   of iCloud (`~/Developer/moh-maps`).
+6. **A second CS:GO map** (e.g. `de_inferno` or `de_mirage`) to exercise the converter
+   on new content. Fix what breaks, then do bots and shots.
+7. **Converter gaps** (`docs/csgo-conversion.md` "Known gaps"): `func_ladder`, water,
+   overlays/decals, blend textures. Do them in order of visual impact on the maps
+   converted so far.
+8. Tell the user: accept the Xcode license (`sudo xcodebuild -license`), and consider
+   moving the repo out of iCloud (`~/Developer/moh-maps`).
 
 ## Decisions made while the user was away
+
+- (third session) Screenshots render at retail's high preset with full-size textures
+  and blob shadows (`game.QUALITY_CVARS`): stock-quality judgments need what a player
+  with a decent PC sees. Stencil shadows are off because they darken OpenMoHAA frames 3×.
+- (third session) Converted models are lit from 8 above their top (pivot 16 above it),
+  not from the centre: self-shadowing by their own hull is worse than an occasional
+  lit-under-an-overhang prop.
 
 - (second session) Draft light became `-fast -bounce 0`: lighting.md already said
   draft has no radiosity, and drafts are for geometry. Draft interiors are darker
