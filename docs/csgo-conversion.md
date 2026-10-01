@@ -70,6 +70,14 @@ the first dust2 drafts was black; from the bounds centre, cars got ambient light
 because the trace from inside their own collision hull entered another hull brush.
 Instances are moved by `R(angles) * pivot` so they stay where Source put them.
 
+Collision hulls (`.phy` pieces → `modelconv._hull_brush`) must not depend on the pivot.
+They did until the near-coplanar face merge compared plane distances from the origin:
+moving car002a's pivot merged two roof faces 2° apart and grew a hull by 20 units.
+The merge now tests the triangle against the kept plane, and every plane is written
+as three points 64 units apart around the hull centre's projection
+(`tests/test_modelconv.py::test_hull_brush_translation_invariant`; dust2 props now
+differ by ≤ 0.2 units between pivots, from near-parallel face conditioning).
+
 ## Known gaps
 
 - Static props: in `-q draft` everything is a runtime `script_model` (600 max; de_dust2

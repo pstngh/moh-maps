@@ -487,7 +487,9 @@ def _hull_brush(points: np.ndarray, tris: np.ndarray, shader: str, min_thickness
             n, d = -n, -d
             pb, pc = pc, pb
         for i, (qn, qd, qa, _q) in enumerate(planes):
-            if qn @ n > 0.999 and abs(qd - d) < 0.25:
+            # Near-coplanar: same facing and this triangle lies on the kept plane. (Comparing
+            # the two plane distances instead made the merge depend on where the origin is.)
+            if qn @ n > 0.999 and max(abs(float(qn @ p) - qd) for p in (pa, pb, pc)) < 0.25:
                 if area > qa:
                     planes[i] = (n, d, area, (pa, pb, pc))
                 break
@@ -500,17 +502,25 @@ def _hull_brush(points: np.ndarray, tris: np.ndarray, shader: str, min_thickness
     if len(good) < 4:
         return None
     faces = []
-    for n, d, _ar, (pa, pb, pc) in good:
-        # (pb - pa) x (pc - pa) is outward; Plane.from_points(a, b, c) = normalize((c - a) x (b - a)),
-        # so the face is written a, c, b. Rounded hull points keep the file tidy unless that tilts
-        # the plane; then fall back to exact construction points.
-        nn = tuple(float(x) for x in n)
+    for n, d, _ar, _q in good:
+        # Each plane is written as three points 64 units apart around the projection of the
+        # hull centre. Using the hull's own triangle corners (small triangles, rounded to the
+        # file's precision) tilted planes by up to a degree depending on where the model sat
+        # relative to its origin, and a tilted plane could then cut another face away: moving
+        # the pivot changed car hulls by up to 20 units.
         if grow:
             d += grow * abs(float(n @ thin_axis))
-            pa, pb, pc = (p + n * (grow * abs(float(n @ thin_axis))) for p in (pa, pb, pc))
-        a, b, c = (tuple(round(float(x), 3) for x in p) for p in (pa, pc, pb))
+        anchor = center - n * (float(n @ center) - d)
+        ref = np.zeros(3)
+        ref[int(np.argmin(np.abs(n)))] = 1.0
+        u = np.cross(n, ref)
+        u /= np.linalg.norm(u)
+        v = np.cross(n, u)
+        # Plane.from_points(a, b, c) = normalize((c - a) x (b - a)); (u x v) = n, so b = +v, c = +u.
+        a, b, c = (tuple(round(float(x), 3) for x in p) for p in (anchor, anchor + 64 * v, anchor + 64 * u))
+        nn = tuple(float(x) for x in n)
         pl = geom.Plane.from_points(a, b, c)
-        if pl.is_degenerate() or geom.dot(pl.normal, nn) < 0.9999 or abs(pl.dist - d) > 0.02:
+        if pl.is_degenerate() or geom.dot(pl.normal, nn) < 0.99999 or abs(pl.dist - d) > 0.01:
             a, b, c = geom.points_for_plane(nn, d)
         faces.append(Face((a, b, c), shader, (0, 0), 0, (1, 1), 0, 0, 0, ["+surfaceparm", "detail"]))
     # Drop planes that do not bound the hull (empty winding) and slivers, until stable.

@@ -234,6 +234,47 @@ def test_hull_brush() -> None:
     assert len(m.worldspawn.brushes()) == 1 and m.worldspawn.brushes()[0].shaders() == {"common/woodclip"}
 
 
+def _brute_hull_tris(pts: np.ndarray) -> np.ndarray:
+    """Triangles of a small point set's convex hull (every triple with all points on one side)."""
+    tris = []
+    n = len(pts)
+    for i in range(n):
+        for j in range(i + 1, n):
+            for k in range(j + 1, n):
+                nrm = np.cross(pts[j] - pts[i], pts[k] - pts[i])
+                if np.linalg.norm(nrm) < 1e-9:
+                    continue
+                side = (pts - pts[i]) @ nrm
+                if side.max() <= 1e-6 or side.min() >= -1e-6:
+                    tris.append((i, j, k))
+    return np.array(tris)
+
+
+def test_hull_brush_translation_invariant() -> None:
+    """Moving a hull's points moves its brush and nothing else.
+
+    A roof ridge whose two slopes are 2.4 degrees apart: merging near-coplanar faces by
+    comparing plane distances from the origin merged them when the ridge sat over y = 0 (the brush
+    then grew over one slope; car hulls changed by 20 units when the pivot moved).
+    """
+    slope = math.tan(math.radians(1.2))
+    pts = [(x, y, 0.0) for x in (0.0, 100.0) for y in (0.0, 60.0)]
+    pts += [(x, 0.0, 40.0) for x in (0.0, 100.0)] + [(x, 60.0, 40.0) for x in (0.0, 100.0)]
+    pts += [(x, 30.0, 40.0 + 30.0 * slope) for x in (0.0, 100.0)]
+    pts = np.array(pts)
+    tris = _brute_hull_tris(pts)
+    ref = mc._hull_brush(pts, tris, "x")
+    assert ref is not None
+    ref_w = [np.array(w) for w in ref.windings()]
+    for shift in ((0, 0, 0), (0, -30, 0), (0, 500, 0), (13.37, -7.123, 91.4567), (-3000, 2500, -800)):
+        b = mc._hull_brush(pts + shift, tris, "x")
+        assert b is not None and len(b.faces) == len(ref.faces), (shift, len(b.faces) if b else None)
+        got = np.concatenate([np.array(w) for w in b.windings()]) - shift
+        want = np.concatenate(ref_w)
+        dist = np.linalg.norm(got[:, None] - want[None], axis=2)
+        assert max(dist.min(1).max(), dist.min(0).max()) < 0.05, shift
+
+
 def test_thin_hull_is_thickened() -> None:
     """Sheet-metal hulls (0.4 units thick in Source) become 1-unit brushes instead of slivers."""
     pos, _nrm, _uv, tris = _cube(1.0)
@@ -501,7 +542,7 @@ def test_phy_matches_mesh() -> None:
 
 
 SYNTHETIC = [test_skd_roundtrip_and_layout, test_skd_limits, test_skc_layout, test_tiki_text, test_weld_and_split,
-             test_hull_brush, test_thin_hull_is_thickened, test_phy_synthetic, test_names_and_surface_types, test_matches_retail_layout]
+             test_hull_brush, test_hull_brush_translation_invariant, test_thin_hull_is_thickened, test_phy_synthetic, test_names_and_surface_types, test_matches_retail_layout]
 GAME = [test_convert_variants, test_partition_over_24_surfaces, test_phy_matches_mesh]
 
 
