@@ -24,10 +24,12 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 - **dust2 final** (`local/csgo/cs_dust2/cs_dust2.pk3`, fastrad, all fixes): 32 named
   shots, **91 bot kills** in 90 s, nothing stuck.
 - **Mirage final** (`local/csgo/cs_mirage/cs_mirage.pk3`): BSP 262 s, light 3,838 s
-  (shared CPU), **81 bot kills**, nothing stuck. Ladders 2/3: the leaning ladder at
-  (448, 652) still doesn't mount, although its mount box is now clear (no "ladder start
-  position is blocked" any more). Next: watch it in game with `developer 2`, try `+use`
-  from closer, and check `Player::CondLadder`'s eye trace there. Shop interiors are dark.
+  (shared CPU), **81 bot kills**, nothing stuck. Ladders 2/3 by the probe; the third is a
+  **leaning** ladder (CS climbs it along its slope to a wall 48+ units behind the
+  volume): it now mounts with +use and climbs, but MOHAA ladders are vertical, so the
+  player steps off at the top short of the wall and falls. Fix idea: for deep ladder
+  volumes, a second func_ladder near the wall or a clip ramp/step at the top. Shop
+  interiors are dark.
 - **Nuke final** (`de_nuke -q fastrad`, started 03:15): in radiosity at 04:28; then
   `postcheck.sh` -> `post_nuke3.log`.
 - The texlight Nuke builds were stopped (surface lights ~15 h; the point-light version
