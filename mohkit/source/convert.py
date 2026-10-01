@@ -481,6 +481,17 @@ class Converter:
         self._world_brushes = out
         return out
 
+    def _world_box_solid(self, lo, hi) -> bool:
+        """Does any solid converted world brush overlap the box (world units)? Brush bounds
+        are a conservative test: a sloped brush may report a near miss as a hit."""
+        if not hasattr(self, "_brush_boxes"):
+            self._brush_boxes = [(*b.bounds(), b) for b in getattr(self, "_world_brushes", [])
+                                 if not any(f.has_parm("nonsolid") for f in b.faces)]
+        for blo, bhi, b in self._brush_boxes:
+            if all(blo[i] < hi[i] - 0.1 and bhi[i] > lo[i] + 0.1 for i in range(3)):
+                return True
+        return False
+
     def _floor_below(self, x: float, y: float, z: float, drop: float) -> Optional[float]:
         """Top of the highest solid converted brush under (x, y) between z - drop and z
         (Source units; detail brushes count, which Source's leaf contents don't), or None."""
@@ -1116,6 +1127,19 @@ class Converter:
                 t_hi[thin] = near + 8
             org = c.copy()
             org[thin] = near
+            # FuncLadder::CanUseLadder refuses when a player box at origin - facing * 29,
+            # absmin + 16 is in solid (mirage's leaning ladder: a Source clip ledge filled it):
+            # slide the origin along the ladder's width to the first clear spot
+            half_w = (hi[wide] - lo[wide]) / 2
+            for off in [0.0] + [d * sgn2 for d in (4.0, 8.0, 12.0, 16.0) if d < half_w for sgn2 in (-1.0, 1.0)]:
+                trial = org.copy()
+                trial[wide] = c[wide] + off
+                mc = (trial - np.array(facing) * 29) * s
+                if not self._world_box_solid((mc[0] - 15, mc[1] - 15, t_lo[2] * s), (mc[0] + 15, mc[1] + 15, t_lo[2] * s + 16 + 94)):
+                    if off:
+                        self.report["warnings"].append(f"ladder at {[round(float(v)) for v in c]}: origin moved {off:+g} along its width (mount box clear)")
+                    org = trial
+                    break
             o_lo, o_hi = org - 1, org + 1
             from ..build import box
             # where FuncLadder::CanUseLadder box-traces the player (origin - facing * 29, from
