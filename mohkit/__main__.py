@@ -15,6 +15,7 @@
     python -m mohkit compare ref.png shot.png [-o out.png] [--region name=x0,y0,x1,y1]   reference | shot | blend
     python -m mohkit install file.pk3            copy a package into the game's main/
     python -m mohkit csgo de_dust2 [--name cs_dust2] [-q draft] [--scale 1.0]   convert a CS:GO map (local/ only)
+    python -m mohkit csgo de_dust2 --props-only                    re-place runtime props without recompiling
 """
 
 from __future__ import annotations
@@ -274,7 +275,7 @@ def cmd_csgo(a) -> int:
     from .source.convert import build_local
     extra = {"props_static_vertices": a.static_verts} if a.static_verts else {}
     rep = build_local(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
-                      detail_all=not a.structural, max_texture=a.max_texture, **extra)
+                      detail_all=not a.structural, max_texture=a.max_texture, props_only=a.props_only, **extra)
     return 0 if rep.get("compile_ok") else 1
 
 
@@ -360,6 +361,8 @@ def main(argv=None) -> int:
     s.add_argument("--max-texture", type=int, default=512)
     s.add_argument("--structural", action="store_true", help="keep Source world brushes structural (better VIS, may overflow)")
     s.add_argument("--static-verts", type=int, help="lit-vertex budget for compiled static props (default 70000; 0 for -q draft)")
+    s.add_argument("--props-only", action="store_true",
+                   help="re-place runtime props in the last compile (Q3map -onlyents, seconds); refuses other changes")
     s.add_argument("--no-test", action="store_true")
     s.set_defaults(fn=cmd_csgo)
     a = ap.parse_args(argv)

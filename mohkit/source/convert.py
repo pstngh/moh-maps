@@ -908,11 +908,15 @@ def auto_cameras(m: MapFile, n: int = 9, landmarks=()):
 
 
 def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft", test: bool = True,
-                shots: int = 9, log=print, **opts) -> dict:
+                shots: int = 9, log=print, props_only: bool = False, **opts) -> dict:
     """Convert ``csgo/maps/<map_name>.bsp``, compile, package and (optionally) screenshot it.
 
     Everything is written under ``local/csgo/<name>/`` (gitignored: it contains
     decoded Valve textures and must not be committed or shared).
+
+    ``props_only`` re-places the runtime props in the last compile (``Q3map -onlyents``,
+    seconds instead of up to an hour) and refuses when anything else in the map changed;
+    the lighting stays that of the last compile.
     """
     import json
     import math as _m
@@ -935,6 +939,12 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
         # hours), so drafts make every prop a runtime script_model unless a budget is given.
         opts.setdefault("props_static_vertices", 0)
     res = convert(str(src), cfg.csgo_dir, Options(name=name, **opts))
+    if props_only:
+        from ..mapfile import MapFile, compiled_difference
+        prev = out / f"{name}.map"
+        diff = compiled_difference(MapFile.load(str(prev)), res.map) if prev.is_file() else "no previous map"
+        if diff:
+            raise SystemExit(f"--props-only: more than runtime props changed ({diff}); run a full build")
     (out / f"{name}.map").write_text(res.map.dumps(), encoding="latin-1")
     for rel, data in res.assets.items():
         p = out / "assets" / rel
@@ -944,8 +954,12 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     issues = [i for i in validate.check(res.map) if i.severity == "error"]
     for i in issues:
         log(f"  {i}")
-    log(f"== compiling ({quality})")
-    cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality=quality)
+    if props_only:
+        log("== updating the entity lump of the last compile (lighting unchanged)")
+        cr = C.update_entities(res.map.dumps(), f"dm/{name}")
+    else:
+        log(f"== compiling ({quality})")
+        cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality=quality)
     log(cr.summary())
     report = {"name": name, "source": str(src), "convert": res.report, "compile_ok": cr.ok, "stats": cr.stats,
               "problems": cr.problems}

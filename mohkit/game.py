@@ -154,6 +154,22 @@ def zoom_crop(fov: float, drawn: float) -> float:
 EYE_HEIGHT = 82.0
 FPS = 60
 
+# Retail's "high" detail preset (Pak0.pk3:high.cfg) with full-size textures and blob shadows
+# (its stencil shadows, cg_shadows 2, darken the whole frame about 3x in OpenMoHAA). A fresh
+# OpenMoHAA home gets low/safe-mode values instead (r_picmip 2: quarter-size textures;
+# r_fastentlight 1: models lit from the light grid, not by the sun and lights, so props near
+# the floor sample grid points in solid and render black; r_subdivisions 20: coarse curves).
+# They go in the home's autoexec.cfg, which Com_Init execs before the renderer starts (retail's
+# own autoexec.cfg is never found there: "couldn't exec autoexec.cfg"). Not as +set: the command
+# line holds at most 32 "+" commands (MAX_CONSOLE_LINES, qcommon/common.c) and silently drops
+# the rest, +devmap included.
+QUALITY_CVARS = {
+    "r_picmip": "0", "r_fastentlight": "0", "r_fastdlights": "0", "r_subdivisions": "4",
+    "r_lodscale": "0.55", "r_lodcap": "0.55", "r_lodviewmodelcap": "0.65", "cg_effectdetail": "0.8",
+    "ter_error": "9", "ter_maxlod": "4", "cg_shadows": "1", "cg_marks_add": "1",
+    "r_drawstaticdecals": "1", "r_colorbits": "32", "r_texturebits": "32",
+}
+
 
 def frames(ms: int) -> list[str]:
     """Harness lines that wait ~``ms`` of frames. A bare ``wait`` holds the buffer for one
@@ -181,6 +197,7 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
     main.mkdir(parents=True)
     for pk3 in pk3s:
         shutil.copy2(pk3, main / Path(pk3).name)
+    (main / "autoexec.cfg").write_text("".join(f'seta {k} "{v}"\n' for k, v in QUALITY_CVARS.items()))
 
     # ui_hud must be issued after the map loads (CG_Init turns it back on). `wait N` subtracts
     # each frame's duration, so one long loading frame can use up the whole wait; bare

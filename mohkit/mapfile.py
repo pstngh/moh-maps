@@ -305,6 +305,56 @@ class MapFile:
         return "".join(out)
 
 
+_NUM_RE = re.compile(NUM)
+
+
+def _loose_diff(x: str, y: str, tol: float) -> bool:
+    """True if two texts differ by more than ``tol`` in any number, or at all elsewhere."""
+    if x == y:
+        return False
+    return _NUM_RE.sub("#", x) != _NUM_RE.sub("#", y) or any(
+        abs(float(p) - float(q)) > tol for p, q in zip(_NUM_RE.findall(x), _NUM_RE.findall(y)))
+
+
+def compiled_difference(old: MapFile, new: MapFile, runtime: tuple[str, ...] = ("script_model",),
+                        tol: float = 0.01) -> Optional[str]:
+    """The first difference between two maps that needs a full compile, or None.
+
+    Entities whose classname is in ``runtime`` are ignored: the game spawns them from the
+    entity lump, which ``Q3map -onlyents`` rewrites without touching geometry, lighting or
+    static models (``compile.update_entities``). Brush faces are compared by plane (the
+    three points may be any three on it) and numbers may differ by ``tol``: re-placed props
+    round their clip brushes differently in the last digit.
+    """
+    ea = [e for e in old.entities if e.classname not in runtime]
+    eb = [e for e in new.entities if e.classname not in runtime]
+    if len(ea) != len(eb):
+        return f"{len(ea)} vs {len(eb)} entities outside {', '.join(runtime)}"
+    for i, (x, y) in enumerate(zip(ea, eb)):
+        where = f"entity {i} ({x.classname})"
+        kx, ky = ("\n".join(f'"{k}" "{v}"' for k, v in e.props.items()) for e in (x, y))
+        if _loose_diff(kx, ky, tol):
+            return f"{where}: keys changed"
+        if len(x.prims) != len(y.prims):
+            return f"{where}: {len(x.prims)} vs {len(y.prims)} primitives"
+        for j, (p, q) in enumerate(zip(x.prims, y.prims)):
+            if type(p) is not type(q):
+                return f"{where} primitive {j}: {type(p).__name__} vs {type(q).__name__}"
+            if isinstance(p, Brush) and isinstance(q, Brush):
+                if len(p.faces) != len(q.faces):
+                    return f"{where} brush {j}: {len(p.faces)} vs {len(q.faces)} faces"
+                for k, (f, g) in enumerate(zip(p.faces, q.faces)):
+                    pf = f.plane
+                    if geom.dot(pf.normal, g.plane.normal) < 0.9999 or max(abs(pf.distance(pt)) for pt in g.points) > tol:
+                        return f"{where} brush {j} face {k}: plane moved"
+                    lf, lg = f.to_line(), g.to_line()
+                    if _loose_diff(lf[lf.rindex(")") + 1:], lg[lg.rindex(")") + 1:], tol):
+                        return f"{where} brush {j} face {k}: surface changed"
+            elif _loose_diff(MapFile([Entity(prims=[p])]).dumps(), MapFile([Entity(prims=[q])]).dumps(), tol):
+                return f"{where} primitive {j} changed"
+    return None
+
+
 class _Parser:
     def __init__(self, text: str, source: str):
         self.lines = text.splitlines()

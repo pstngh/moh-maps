@@ -56,6 +56,29 @@ work. Cover every space at player height (≈ 64–90 above the floor), looking 
 ways along every route, plus interiors, stairs, one overview, and any spot a
 human reported.
 
+## Detail settings
+
+Every run renders at retail's **high** preset (`Pak0.pk3:high.cfg`) with full-size
+textures, written to the run's own `autoexec.cfg` (`game.QUALITY_CVARS`). A fresh
+OpenMoHAA home starts near the low/safe-mode preset instead, and every contact sheet
+before 2026-09-30 was shot that way:
+
+- `r_picmip 2`: textures at a quarter of their size (the blurry look of old sheets);
+- `r_fastentlight 1`: models lit from the light grid only. No sun trace and no
+  `suncolor`/`ambientlight`: a test map with a pure red sun left every runtime model
+  unchanged. Grid samples near a floor sit in solid, so props there rendered black;
+- `r_subdivisions 20`: coarse curves.
+
+Two traps: `cg_shadows 2` (high's stencil shadows) darkens the whole frame about 3×
+in OpenMoHAA (mean brightness 84 → 30, measured), so the harness uses blob shadows
+(1). And the command line holds at most 32 `+` commands (`MAX_CONSOLE_LINES`,
+`qcommon/common.c`): extra `+set`s silently push `+devmap` off the end, and the game
+idles at the console until the timeout.
+
+Players on low/medium still get grid lighting. The CS:GO converter puts each runtime
+prop's lighting point above the model, in open air, so it looks right both ways
+(`docs/reference/engine.md` §5.2).
+
 ## Engine facts the harness depends on
 
 - **Cheat commands need `thereisnomonkey 1`** as well as `cheats 1`; otherwise

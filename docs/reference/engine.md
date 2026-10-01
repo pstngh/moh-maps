@@ -413,13 +413,27 @@ Game side: `World` class (`fgame/worldspawn.cpp:491-543`), defaults in its const
 
 **How a runtime model is lit.** cgame sets `lightingOrigin = origin + centre of the
 box packed into entityState.solid` (`cgame/cg_modelanim.c:1064-1067`). A NOT_SOLID
-entity packs no box (`SOLID_NOT` takes the default branch, `server/sv_world.c:230-257`),
-so it is lit at its **origin**. The sphere lighting traces to the sun and to each light
-from that point (`renderergl1/tr_sphere_shade.cpp:650-652`, `:985-997`), so an origin on
-or under the floor renders the model black. Put the pivot inside the model (the CS:GO
-converter re-centres converted models). A shader's `rgbGen static` (vertex colours
-MOHlight bakes into static models) falls back to this sphere lighting on a runtime model
-(`renderergl1/tr_shade.c:846-856`), so one shader serves both.
+entity packs `solid = 0` (`server/sv_world.c:230-257`), which unpacks to the box
+(0,0,-16)..(0,0,0) (`qcommon/q_math.c:1652`, `zd -= BBOX_MAX_BOTTOM_Z`), so it is lit
+from **8 units below its origin**, with radius 8. With `r_fastentlight 0` (retail high)
+the renderer then traces once from that point to the sun (`CONTENTS_SOLID |
+CONTENTS_FENCE`, sun only if the trace hits a `surfaceparm sky` face), adds the
+sphere lights of the leaves around it, and samples the light grid there for ambient
+(`renderergl1/tr_sphere_shade.cpp:587-700`, `:790-812`). With `r_fastentlight 1`
+(retail low/medium, and a fresh OpenMoHAA config) or a shader that asks for the grid,
+it uses the light grid alone (`renderergl1/tr_backend.c:830-836`).
+
+One trace decides the whole model, so its start point matters. A trace that starts
+inside a brush is not stopped by that brush (`qcommon/cm_trace.c:654-661`), but it is
+stopped by any other brush it enters: a car lit from inside its own multi-brush
+collision hull got ambient light only (seen with a red test sun: cars blue = ambient,
+rubble red = sun). The CS:GO converter puts the lighting point 8 units above the
+mesh's top (`modelconv.LIGHT_ABOVE_TOP`). Patch collision is approximated to within
+16 units of the curve (`qcommon/cm_patch.h:101`), so a point just above a bumpy
+displacement floor can still be under its collision surface. A shader's `rgbGen
+static` (vertex colours MOHlight bakes into static models) falls back to this
+lighting on a runtime model (`renderergl1/tr_shade.c:846-856`), so one shader serves
+both.
 
 ### 5.3 Doors (`fgame/doors.cpp`)
 

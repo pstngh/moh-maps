@@ -142,6 +142,15 @@ class ConvertedModel:
         return self.tik[len("models/"):] if self.tik.startswith("models/") else self.tik
 
 
+# The engine lights a non-solid script_model with one sun trace and one light-grid sample
+# from 8 units below its origin (cg_modelanim.c: lightingOrigin = origin + centre of the
+# packed box, which is (0,0,-16)..(0,0,0) for SOLID_NOT: q_math.c IntegerToBoundingBox).
+# ``convert_model(centre=True)`` puts that point this far above the mesh's top, where
+# neither the model's own collision nor an uneven floor can shadow it.
+LIGHT_ABOVE_TOP = 8.0
+_LIGHT_BELOW_ORIGIN = 8.0
+
+
 # ---------------------------------------------------------------------------
 # Naming
 
@@ -544,12 +553,14 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
     Textures are TGA (32-bit only when the material uses alpha); with
     ``jpeg_quality`` opaque ones are written as JPEG instead.
 
-    ``centre`` moves the model (and its collision) so the TIKI origin is the centre of
-    its bounds; ``pivot`` is where that point was, so place the entity at
-    ``origin + scale * R(angles) * pivot``. The engine lights a non-solid ``script_model``
-    from its origin (``cg_modelanim.c``: lightingOrigin = origin + centre of an empty
-    box), and a Source pivot on or under the floor puts that point in solid: no sun,
-    black model (the rubble in the first dust2 drafts).
+    ``centre`` moves the model (and its collision) so the TIKI origin is over the centre of
+    its bounds and ``LIGHT_ABOVE_TOP + 8`` above its top; ``pivot`` is where that point
+    was, so place the entity at ``origin + scale * R(angles) * pivot``. A non-solid
+    ``script_model`` is lit from 8 units below its origin with a single sun trace: from
+    the Source pivot (on the floor) or the bounds centre (inside a car's own collision
+    hull, or under a bumpy displacement floor) that trace is blocked and the whole model
+    gets ambient light only. The pivot depends on the mesh alone, so the collision
+    variants (``solid`` 6/2/0) still share their mesh files.
     """
     warnings: list[str] = []
     sm: StudioModel = load_studio_model(fs, mdl_path)
@@ -613,6 +624,7 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
     pivot = np.zeros(3)
     if centre:
         pivot = (allp.min(0) + allp.max(0)) / 2
+        pivot[2] = allp[:, 2].max() + LIGHT_ABOVE_TOP + _LIGHT_BELOW_ORIGIN
         for srf in surfaces:
             srf.positions = (srf.positions.astype(np.float64) - pivot).astype(np.float32)
         allp = allp - pivot

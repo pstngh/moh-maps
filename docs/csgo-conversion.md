@@ -3,7 +3,15 @@
 ```sh
 python -m mohkit csgo de_dust2                  # -> local/csgo/cs_dust2/{cs_dust2.map, assets/, cs_dust2.pk3, shots}
 python -m mohkit csgo de_inferno --name cs_inferno -q normal
+python -m mohkit csgo de_dust2 --props-only     # re-place runtime props in the last compile (~1 min)
 ```
+
+`--props-only` re-converts, checks that nothing but `script_model` props changed
+(`mapfile.compiled_difference`: brushes compared by plane, numbers to 0.01), and
+rewrites only the entity lump of the last compile with `Q3map -onlyents`
+(`compile.update_entities`): 48 s on de_dust2 instead of about 45 min. Lighting stays
+that of the last compile, and anything else that changed (a clip brush, a light, a
+static prop) refuses with the first difference: run a full build then.
 
 The converter reads the **compiled** `.bsp` shipped with the game, plus
 materials and models from the VPKs. It needs no decompiler (BSPSource) and
@@ -52,10 +60,21 @@ bit tight, but every CS jump spot that doesn't need a crouch-jump stays
 reachable. `--scale 1.25` gives more natural proportions but lifts many boxes
 out of reach.
 
+## Runtime prop lighting
+
+A converted model's origin sits over its bounds centre, 16 units above its top
+(`modelconv.convert_model(centre=True)`): the engine lights a non-solid
+`script_model` from 8 units below its origin with one sun trace
+(`docs/reference/engine.md` §5.2). From the Source pivot (on the floor), the rubble in
+the first dust2 drafts was black; from the bounds centre, cars got ambient light only,
+because the trace from inside their own collision hull entered another hull brush.
+Instances are moved by `R(angles) * pivot` so they stay where Source put them.
+
 ## Known gaps
 
-- Static props (the cars, boxes, barrels, doors and trim that make CS maps
-  look finished) are pending the model converter.
+- Static props: in `-q draft` everything is a runtime `script_model` (600 max; de_dust2
+  drops 909 of 1,509, smallest first); `-q normal` compiles the largest as lit static
+  models up to `--static-verts`.
 - Overlays and decals (`info_overlay`) aren't converted.
 - Blend textures use the first layer only.
 - No `func_ladder` conversion yet.

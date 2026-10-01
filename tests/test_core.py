@@ -14,7 +14,7 @@ sys.path.insert(0, str(REPO))
 from mohkit import geom  # noqa: E402
 from mohkit.build import Air, Carver, Material, box, grid_split, hull, prism, subtract  # noqa: E402
 from mohkit.kit import fit  # noqa: E402
-from mohkit.mapfile import Brush, MapFile, Patch, Terrain  # noqa: E402
+from mohkit.mapfile import Brush, Entity, MapFile, Patch, Terrain  # noqa: E402
 
 
 def _valid(b: Brush) -> bool:
@@ -201,6 +201,27 @@ def test_disp_simplify_keeps_shared_edges():
     assert sorted(round(float(r[-1, 1])) for r in flat) == [0, 16, 32, 48, 64]
     alone = _simplify_grids([grid(0)], tol=1.0)[0]
     assert alone.shape[:2] == (2, 2)
+
+
+def test_compiled_difference():
+    from mohkit.mapfile import compiled_difference
+    def make(prop_z, clip_x, light=200):
+        m = MapFile()
+        m.worldspawn.prims.append(box((0, 0, 0), (clip_x, 64, 64)))
+        m.entities.append(Entity({"classname": "script_model", "model": "a.tik", "origin": f"0 0 {prop_z}"}))
+        m.entities.append(Entity({"classname": "light", "origin": "0 0 32", "light": str(light)}))
+        return m
+    base = make(6, 64)
+    assert compiled_difference(base, make(16, 64)) is None            # only a runtime prop moved
+    assert compiled_difference(base, make(16, 64.004)) is None        # last-digit rounding
+    assert "plane moved" in compiled_difference(base, make(6, 65))    # geometry moved
+    assert "keys changed" in compiled_difference(base, make(6, 64, 300))  # a baked light changed
+    # the same plane through three other points is the same brush
+    moved = make(6, 64)
+    f = moved.worldspawn.brushes()[0].faces[0]
+    a, b, c = f.points
+    f.points = (b, c, a)
+    assert compiled_difference(base, moved) is None
 
 
 if __name__ == "__main__":

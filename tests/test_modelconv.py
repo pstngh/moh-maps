@@ -453,10 +453,15 @@ def test_convert_variants() -> None:
     jpg = mc.convert_model(fs, mdl, jpeg_quality=85)
     assert any(p.endswith(".jpg") for p in jpg.files) and not any(p.endswith(".tga") for p in jpg.files)
     assert all(".jpg" in t for t in jpg.shaders.values() if "map " in t)
-    # centre: bounds symmetric about the TIKI origin, collision moved with the mesh
+    # centre: bounds symmetric about the TIKI origin in x/y, the origin above the top (the
+    # engine lights the model from 8 below it), collision moved with the mesh
     c = mc.convert_model(fs, mdl, solid=2, centre=True)
     pv = np.array(c.pivot)
-    assert np.allclose(np.array(c.bounds[0]) + np.array(c.bounds[1]), 0, atol=1e-3)
+    assert np.allclose((np.array(c.bounds[0]) + np.array(c.bounds[1]))[:2], 0, atol=1e-3)
+    assert abs(c.bounds[1][2] + mc.LIGHT_ABOVE_TOP + 8) < 1e-3
+    # the pivot comes from the mesh alone: centred variants still share their mesh files
+    c_nc = mc.convert_model(fs, mdl, solid=0, centre=True)
+    assert c_nc.pivot == c.pivot and c_nc.files[skd_path] == c.files[skd_path]
     assert np.allclose(np.array(c.bounds) + pv, np.array(bb.bounds), atol=1e-3)
     from mohkit.mapfile import MapFile
     def clip_box(m):

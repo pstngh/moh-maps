@@ -334,6 +334,33 @@ def compile_map(map_text_or_path: Union[str, Path], name: str,
     return res
 
 
+def update_entities(map_text_or_path: Union[str, Path], name: str, timeout: float = 1800,
+                    cfg: Optional[_config.Config] = None) -> CompileResult:
+    """Rewrite only the entity lump of the last compile of ``name`` (``Q3map -onlyents``).
+
+    Seconds instead of a full compile, for maps whose changes are runtime entities only
+    (``script_model`` props): geometry, lightmaps and the static-model lump are kept as they
+    are, so the caller must check that nothing else changed (``mapfile.compiled_difference``).
+    """
+    cfg = cfg or _config.load()
+    tc = Toolchain(cfg)
+    root = Path(cfg.build_dir) / "roots" / name.replace("/", "_")
+    map_path = root / "main" / "maps" / f"{name}.map"
+    res = CompileResult(name, root, map_path.with_suffix(".bsp"))
+    if not res.bsp.is_file():
+        raise FileNotFoundError(f"{res.bsp}: no previous compile to update")
+    src = Path(map_text_or_path) if not isinstance(map_text_or_path, str) or "\n" not in map_text_or_path else None
+    if src is not None:
+        shutil.copy2(src, map_path)
+    else:
+        map_path.write_text(str(map_text_or_path), encoding="latin-1", newline="\n")
+    game = ["-gamedir", to_tool_path(root), "-moddir", "main"]
+    res.stages.append(tc.run("onlyents", "Q3map.exe", ["-onlyents", *game, to_tool_path(map_path)], root, timeout))
+    res.stages.append(tc.run("info", "Q3map.exe", ["-info", to_tool_path(res.bsp)], root, 300))
+    _collect(res)
+    return res
+
+
 def _collect(res: CompileResult) -> None:
     logs = {s.name: s.log for s in res.stages}
     bsp, vis, light, info = (logs.get(k, "") for k in ("bsp", "vis", "light", "info"))
