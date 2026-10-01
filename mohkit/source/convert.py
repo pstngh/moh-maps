@@ -474,7 +474,31 @@ class Converter:
                     self.report["water_brushes"] = self.report.get("water_brushes", 0) + 1
         out += self._extra
         self.report["brushes"] = len(out)
+        self._world_brushes = out
         return out
+
+    def _floor_below(self, x: float, y: float, z: float, drop: float) -> Optional[float]:
+        """Top of the highest solid converted brush under (x, y) between z - drop and z
+        (Source units; detail brushes count, which Source's leaf contents don't), or None."""
+        s = self.opt.scale
+        if not hasattr(self, "_brush_boxes"):
+            self._brush_boxes = [(*b.bounds(), b) for b in getattr(self, "_world_brushes", [])
+                                 if not any(f.has_parm("nonsolid") for f in b.faces)]
+        best = None
+        px, py = x * s, y * s
+        for lo, hi, b in self._brush_boxes:
+            if not (lo[0] <= px <= hi[0] and lo[1] <= py <= hi[1] and (z - drop) * s <= hi[2] <= z * s + 1):
+                continue
+            top = None
+            for f in b.faces:
+                n, d = f.plane.normal, f.plane.dist
+                if n[2] > 0.7:
+                    h = (d - n[0] * px - n[1] * py) / n[2]
+                    top = h if top is None else min(top, h)
+            if top is not None and all(f.plane.normal[0] * px + f.plane.normal[1] * py + f.plane.normal[2] * (top - 0.5)
+                                       <= f.plane.dist + 0.01 for f in b.faces):
+                best = top if best is None else max(best, top)
+        return None if best is None else best / s
 
     def _is_glass(self, br: Brush) -> bool:
         """Every drawn material of the brush is glass (``$surfaceprop`` glass)."""
@@ -949,10 +973,22 @@ class Converter:
             facing[thin] = float(sgn)
             near = lo[thin] if sgn > 0 else hi[thin]     # the climber's side of the Source volume
             far = hi[thin] if sgn > 0 else lo[thin]
-            # trigger: Source volume + 8 units toward the climber. (Extending it down to the
-            # floor stopped a working ladder from mounting: AT_LADDER traces from the eye, and
-            # FuncLadder::CanUseLadder / PositionOnLadder work from absmin, fgame/misc.cpp.)
+            # trigger: Source volume + 8 units toward the climber. A ladder that hangs 32+
+            # units above where you stand (de_nuke's A-site one, 47 over a ledge with a gap
+            # under it; CS players jump to it) is extended down to that floor: mounting puts
+            # the player at absmin + 2 (FuncLadder::PositionOnLadder, fgame/misc.cpp), in mid-air
+            # otherwise, and the move there is blocked. Ladders that start lower are left alone:
+            # extending one 23 units stopped it from mounting.
             t_lo, t_hi = lo.copy(), hi.copy()
+            floors = []
+            for back in (16, 28, 40):
+                foot = c.copy()
+                foot[thin] = (lo[thin] if sgn > 0 else hi[thin]) - sgn * back
+                f = self._floor_below(foot[0], foot[1], lo[2], 96)
+                if f is not None:
+                    floors.append(f)
+            if floors and max(floors) < lo[2] - 32:
+                t_lo[2] = max(floors) + 1
             if sgn > 0:
                 t_lo[thin] = near - 8
             else:
@@ -968,6 +1004,7 @@ class Converter:
             out.append(e)
             self.report.setdefault("ladders", []).append(
                 {"origin": [round(float(v) * s, 1) for v in org], "angle": yaw, "height": round(float(ext[2]) * s),
+                 "extended_down": round(float(lo[2] - t_lo[2]) * s, 1),
                  "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)})
         return out
 
