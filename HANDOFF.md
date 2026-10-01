@@ -77,65 +77,32 @@ equal. Conversions are personal-use only.
 
 ## Next steps (in order)
 
-**User's priority (2026-09-30, 23:45):** first **finish de_dust2** (it was in
-progress), then **de_nuke, ideally perfect**, then **de_mirage**. Start Nuke **from
-scratch** with the current converter. A Nuke conversion existed before the repo
-restart (7 commits, e.g. "add first playable Nuke conversion", "add local CS2 topology
-pipeline"). It survives only in the pre-restart backup
-`~/Library/Caches/mohkit/old-git-backup`. Don't read, reuse or restore it. Nothing
-from it is in the current repo, `local/` or the build cache.
+**User's priority:** chat (2026-09-30 23:34): de_nuke first, as perfect as possible, then
+de_mirage. HANDOFF edit (23:45): finish de_dust2 first, time-boxed to ~02:00, then Nuke,
+then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-git-backup`).
 
-1. **Converter prerequisite (short):** moving a model's pivot changed its clip hulls by
-   up to 20 units (Hausdorff; dust2 worldspawn brushes 6716/6730, 32→35 faces). A
-   convex hull must not depend on translation. Find the cause in
-   `modelconv._hull_brush` (plane snapping/rounding relative to the origin?), fix it
-   and add a test (hull of translated points == translated hull).
-2. **Finish de_dust2** (time box: park what's left in this file at ~02:00 ET and move on
-   to Nuke).
-   - Full draft rebuild with the new pivots: `python -m mohkit csgo de_dust2 -q draft`
-     (~45 min, background it; do step 1's tests or the Nuke camera loader meanwhile).
-   - Check that cars and crates are now sunlit (they were ambient-only), that props are
-     where `local/csgo/cs_dust2/cs_dust2_shots.png` shows them, and that nothing
-     floats or sinks.
-   - Bots: `python -m mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 90`
-     (kills > 0, no stuck bots).
-   - Fix what the sheet shows. Use `--props-only` for prop-only changes.
-   - Use `de_dust2_cameras.txt` once the camera loader exists (step 3).
-   - Record the props report (1,509 instances, 600 runtime, 909 dropped) and the stage
-     times in `docs/csgo-conversion.md`.
-3. **de_nuke, from scratch, aiming for perfect.** Use
-   `python -m mohkit csgo de_nuke -q draft` (output `local/csgo/cs_nuke/`). Iterate on
-   drafts, with `--props-only` for prop-only changes, then finish at `-q normal`.
-   - **Cameras:** CS:GO ships `csgo/maps/<map>_cameras.txt`, named spectator viewpoints
-     in Source coordinates (`"T Spawn" "-2385.6 -1200.0 -230.2 29.1 151.1"` = x y z
-     pitch yaw). Teach `auto_cameras`/`build_local` to use it when it exists, so the
-     sheet covers every named area. The CS:GO radar (`resource/overviews/de_nuke_radar.*`
-     in the VPKs) is the layout reference.
-   - **"Perfect" means:** every route and spot reachable as in CS:GO (ladders, vents,
-     the hatch and drop between the two sites, jumps), no holes, leaks, black or missing
-     textures; props placed, lit and solid where CS:GO's are; sky and sun mood
-     right; signage/decals present; bots play it (`--bots 8 --seconds 90`, kills > 0,
-     no stuck bots in the log); the contact sheet reads as Nuke at stock MOHAA quality.
-   - **Converter work Nuke needs** (it is multi-level and ladder-heavy): `func_ladder`
-     conversion (`docs/reference/engine.md` §1.3 has the MOHAA ladder rules: origin on
-     the climbable face, `angle`), crouch-only vents (check they're passable at MOHAA
-     crouch height), overlays/decals (`info_overlay`, lots of signage), water if
-     present, doors (`prop_door_rotating`: decide static vs `func_door`), glass.
-     Keep everything generic in `mohkit/source/`: no Nuke-specific hacks.
-   - Measure and record stage times; keep `docs/csgo-conversion.md` current.
-4. **de_mirage**, the same way.
-5. **Multi-threaded MOHlight crash.** `-q normal` conversions with static props may hit
-   it, and medina's light takes ~55 min on one thread.
-   `~/Library/Caches/mohkit/build/roots/dm_mtx` holds a copy of medina's pre-light
-   BSP/VIS. Run `Toolchain().run("light_mt", "MOHlight.exe", ["-threads", "10", "-fast",
-   "-bounce", "0", "-gamedir", to_tool_path(root), "-moddir", "main", to_tool_path(map)], root, 3600)`.
-   Hypothesis: the crash is in static-model lighting (107 static models in medina;
-   dust2 drafts with 0 ran fine on 10 threads). Record the result in `docs/toolchain.md`.
-6. **mk_medina:** the package is built; re-shoot at high detail:
-   `python -m mohkit test dist/mk_medina.pk3 dm/mk_medina --shots maps/mk_medina --bots 8 --seconds 60`.
-   Check alleys, cornices, balconies, beam ends and kills (22 in the 23:28 run). Then
-   re-shoot `mk_village` and `mk_ref_room` at high detail, and correct `docs/lighting.md`
-   claims made at low detail.
+1. **de_nuke** (`python -m mohkit csgo de_nuke`, output `local/csgo/cs_nuke/`; quick checks
+   with `-q unlit --name cs_nukeu`):
+   - Look at the lit draft sheet (`cs_nuke_shots*.png`, 38 named cameras) and fix what it
+     shows; rebuild with every fix since 00:24 (ropes, func_brush, beams, cracks, ladders).
+   - Re-run `game.ladder_probe` (script pattern in `docs/testing.md`): all 6 ladders must climb.
+   - Bots: `python -m mohkit test local/csgo/cs_nuke/cs_nuke.pk3 dm/cs_nuke --bots 8 --seconds 90`.
+   - Final lighting: drafts are `-fast -bounce 0` at lightmap density 32. Decide between
+     `-q preview` (radiosity) at density 32 and the draft, from the time a draft takes alone.
+   - Known gaps: vent slats/breakable vent covers are left open (not converted); door
+     handles are lost; sprites and detail grass are dropped.
+2. **de_dust2**: draft running (fresh, density 32). Look at the sheet (23 named cameras),
+   bots, record stage times in `docs/csgo-conversion.md`.
+3. **de_mirage** the same way (`de_mirage_cameras.txt`; 93 entity props now converted).
+4. From-scratch maps could use `staticlight` too: MapBuilder props compiled as
+   `static_*` cost mk_medina ~55 min of single-threaded MOHlight. Add an opt-in
+   `build --inject-props` (needs a GameFS reader for retail TIKI/SKD in `tiki_mesh`) and
+   compare a sheet against MOHlight's lighting before making it the default.
+5. **Multi-threaded MOHlight crash** (medina's static models): less urgent now that
+   conversions inject props. `~/Library/Caches/mohkit/build/roots/dm_mtx` has the BSP.
+6. **mk_medina** re-shoot at high detail:
+   `python -m mohkit test dist/mk_medina.pk3 dm/mk_medina --shots maps/mk_medina --bots 8 --seconds 60`;
+   then `mk_village`, `mk_ref_room`, and correct `docs/lighting.md` claims made at low detail.
 7. **Claim 8** (VIS overflow without the structural shell): `mohkit csgo de_dust2 --structural`.
 8. Tell the user: accept the Xcode license (`sudo xcodebuild -license`), and consider
    moving the repo out of iCloud (`~/Developer/moh-maps`).
