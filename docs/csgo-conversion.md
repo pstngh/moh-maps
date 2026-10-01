@@ -149,6 +149,7 @@ in all, so only a view of nearly the whole map (the overview shot) can lose some
 |---|---|---|---|---|---|---|---|---|
 | cs_dust2 | draft (density 32) | 1,574 (842k) | 459 | 559 s | 1 s | 1,962 s | 32 named cameras, 47 s | 75 kills |
 | cs_nuke | unlit | 4,801 (5.6M) | 718 | 261–489 s | 1 s | — | 38 named cameras, 59 s | 83 kills |
+| cs_nuke | fastrad (04:43 code, spot fix; alone on the CPU) | 4,801 (5.6M) | 718 | 200 s | 1 s | 2,389 s | 38, 59 s | 70 kills |
 | cs_dust2 | fastrad (03:15 code) | 1,574 (842k) | 459 | 684 s | 2 s | 2,752 s | 32, 47 s | 91 kills |
 | cs_mirage | fastrad (03:13 code) | 1,470 (1.35M) | 512 | 293 s | 1 s | 2,672 s | 30, 45 s | 77 kills |
 

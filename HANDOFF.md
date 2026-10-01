@@ -25,22 +25,20 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 | map | pk3 | build | bots (8, 90 s) | ladders | notes |
 |---|---|---|---|---|---|
-| de_nuke | `local/csgo/cs_nuke/cs_nuke.pk3` | fastrad, BSP 208 s, light 4,550 s (shared CPU) | **83 kills**, none stuck | **6/6** (A-site one: +use from the ledge) | 4,801 props, 718 overlays, 6 doors, 3 breakable vents, 38 glass windows, 70 ropes, 78 glows, water; interiors (radio, lobby) still dark |
-| de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` | fastrad, BSP 262 s, light 3,838 s | **81 kills**, none stuck | 2/3 (leaning ladder: falls off the top) | 1,470 props, 512 overlays, 85 ropes, 35 glows, 3 breakable covers/shutter + 3 windows; shops dark |
-| de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` | fastrad, BSP 684 s, light 2,752 s | **91 kills**, none stuck | — | 1,574 props, 459 overlays |
+| de_nuke | `local/csgo/cs_nuke/cs_nuke.pk3` (05:29, spot fix) | fastrad, BSP 200 s, light 2,389 s | **70 kills**, none stuck | **6/6** (A-site one: +use from the ledge) | 4,801 props, 718 overlays, 6 doors, 3 breakable vents, 38 glass windows, 70 ropes, 78 glows, water; interiors now lit |
+| de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (04:25, before the spot fix) | fastrad, BSP 262 s, light 3,838 s | **81 kills**, none stuck | 2/3 (leaning ladder: falls off the top) | 1,470 props, 512 overlays, 85 ropes, 35 glows, 3 breakable covers/shutter + 3 windows; shops dark |
+| de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (04:14, before the spot fix) | fastrad, BSP 684 s, light 2,752 s | **91 kills**, none stuck | — | 1,574 props, 459 overlays |
 
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
-**Live state (04:45):** found at 04:40 that every converted `light_spot` pointed the wrong
-way (VRAD uses z = +sin(pitch); downward ceiling spots lit ceilings: the dark Nuke
-interiors and Mirage shops). Fixed; rebuilding `de_nuke` (04:43, `-q fastrad`, then `postcheck.sh` ->
-`post_nuke4.log`). The Mirage rebuild was stopped at 04:51 so Nuke finishes before 06:00:
-`local/csgo/cs_mirage/cs_mirage.pk3` is the 04:25 build (spots still wrong), while the
-folder's map/assets are from the stopped 04:44 conversion. **Rebuild Mirage and dust2
-first thing** (`python -m mohkit csgo de_mirage -q fastrad`, same for de_dust2).
-The previous finals are backed up in the scratchpad (`cs_nuke_final_0437.pk3`,
-`cs_mirage_final_0425.pk3`, `cs_dust2_final_0414.pk3`); dust2 (13 spots) was not rebuilt.
-The texlight builds were stopped.
+**State at 06:00:** nothing is running. At 04:40 I found that every converted
+`light_spot` pointed the wrong way (VRAD: z = +sin(pitch); ceiling spots lit ceilings),
+which was why Nuke's radio rooms/lobby and Mirage's shops were dark. Nuke was rebuilt with
+the fix (interiors now lit, `local/csgo/cs_nuke/cs_nuke_shots_3.png`); **Mirage and dust2
+were not**: rebuild them first next session (`python -m mohkit csgo de_mirage -q fastrad`,
+then de_dust2; ~45-60 min each alone). Mirage's folder holds the map/assets of a stopped
+04:44 conversion next to its 04:25 pk3. Earlier packages are backed up in the session
+scratchpad only (`cs_nuke_final_0437.pk3` etc.); they will be lost with it.
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
@@ -66,6 +64,8 @@ Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
   the floor in front, prop collision cleared from ladder volumes and mount boxes, origin
   slid along the width to a clear mount box; OnBreak props and every func_breakable ->
   `func_window`; `--refresh-assets`; `--texlights` (opt-in).
+- **Spot lights:** `light_spot` now points along VRAD's direction (z = +sin(pitch)); every
+  earlier conversion lit ceilings with its downward spots.
 - Findings: claim 8 false for dust2 (structural compiles, 61 KB VIS); MT MOHlight lit
   mk_medina without static models cleanly (static models likely cause the crash).
 - Traps: a scratchpad script named `bisect.py` shadowed the stdlib module (PIL imports it).
