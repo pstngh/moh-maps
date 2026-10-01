@@ -204,7 +204,7 @@ def texture_name(material: str, prefix: str = "csgo") -> str:
     if rel.startswith("models/"):
         rel = rel[len("models/"):]
     name = f"textures/{prefix}/{rel}"
-    if len(name) + 4 <= _skd.MAX_QPATH:
+    if len(name) <= 59:  # + ".tga" fits MAX_QPATH; Q3map mishandles 60-character shader names
         return name
     base = rel.rpartition("/")[2]
     return f"textures/{prefix}/m/{base[:30]}_{_hash(rel)}"

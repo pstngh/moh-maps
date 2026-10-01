@@ -317,6 +317,21 @@ def contact_sheet(images: dict[str, Path], out: Path, cols: int = 3, thumb_w: in
     return out
 
 
+def contact_sheets(images: dict[str, Path], out: Path, per_page: int = 9, cols: int = 3,
+                   thumb_w: int = 640) -> list[Path]:
+    """``contact_sheet`` in pages of ``per_page`` shots: ``out`` holds the first page,
+    later pages are ``<stem>_2.png``, ``<stem>_3.png`` ... (readable at full size)."""
+    items = list(images.items())
+    pages = []
+    for i in range(0, len(items), per_page):
+        k = i // per_page
+        dest = out if k == 0 else out.with_name(f"{out.stem}_{k + 1}{out.suffix}")
+        sheet = contact_sheet(dict(items[i:i + per_page]), dest, cols, thumb_w)
+        if sheet:
+            pages.append(sheet)
+    return pages
+
+
 def compare(reference: Path, shot: Path, out: Path, height: int = 540,
             labels: tuple[str, str] = ("reference", "mohaa")) -> Path:
     """Side-by-side check for recreating a scene from a picture.

@@ -54,6 +54,7 @@ from .vpk import SearchPath, ZipSource
 from .vtf import VTF, load_vtf
 
 CAULK = "common/caulk"
+MAX_SHADER_NAME = 59  # "textures/..." length; Q3map duplicates the BSP shader entry of 60-character names
 
 DROP_KINDS = {"hint", "skip", "areaportal", "occluder", "trigger", "origin", "fog", "skyfog", "blocklight", "blocklos",
               "blockbomb", "team1", "team2", "grenadeclip", "npcclip", "water", "slime", "ladder"}
@@ -61,6 +62,7 @@ KEEP_ENTITY_BRUSHES = {"func_brush", "func_wall", "func_detail", "func_breakable
                        "func_illusionary", "func_door", "func_door_rotating", "func_rotating", "func_movelinear",
                        "func_wall_toggle", "func_physbox", "func_lod"}
 NONSOLID_ENTITIES = {"func_illusionary"}
+BREAKABLE_ENTITIES = {"func_breakable", "func_breakable_surf"}
 
 # $surfaceprop -> MOHAA surfaceparm (footsteps, bullet impacts). "stone" is a no-op in MOHAA; use rock.
 SURFACEPROP = [
@@ -81,11 +83,17 @@ class Options:
     displacements: bool = True
     disp_tolerance: float = 1.0     # drop displacement sample lines within this many units of straight (0 = keep all)
     lights: bool = True
+    overlays: bool = True           # info_overlay decals -> flat blended patches
     light_scale: float = 1.0
     sky_shader: Optional[str] = None  # override (e.g. "sky/mohday2"); default converts the Source sky
     texture_quality: int = 90       # JPEG quality for opaque textures
     split: float = 1024.0           # cut brushes longer than this on a world grid (renderer 64-vertex face limit)
     props: bool = True              # convert static props (mohkit.source.modelconv)
+    # "inject": every prop becomes a static model added to the lit BSP and coloured from its
+    # light grid (mohkit.staticlight; no MOHlight time, no entity cost), with clip brushes.
+    # "compile": the largest props up to props_static_vertices are static_* entities lit by
+    # MOHlight (~190 vertices/s on one thread), the next props_runtime_max are script_models.
+    props_mode: str = "inject"
     props_static_vertices: int = 70000  # MOHlight's static-model lighting buffer crashes above ~75-81k
     props_runtime_max: int = 600    # extra props as script_model (game entities; engine limit 1024)
 
@@ -105,6 +113,8 @@ class Result:
     map: MapFile
     assets: dict[str, bytes] = field(default_factory=dict)
     report: dict = field(default_factory=dict)
+    # props for mohkit.staticlight.inject: (model key, origin, angles, scale), in placement order
+    statics: list = field(default_factory=list)
 
 
 def _norm(v):
@@ -181,9 +191,12 @@ class Converter:
         base = self.bsp.original_material(src).lower().replace("\\", "/")
         base = re.sub(r"[^a-z0-9_/]", "_", base)
         name = f"{self.prefix}/{base}"
-        if len("textures/" + name) > 60:
+        # EA Q3map never matches an existing BSP shader entry whose name (with "textures/")
+        # is 60 characters long, so every brush side using it adds one: de_nuke overflowed
+        # MAX_MAP_SHADERS (1024) with 113 shaders. 59 is safe (docs/toolchain.md).
+        if len("textures/" + name) > MAX_SHADER_NAME:
             h = hashlib.md5(base.encode()).hexdigest()[:6]
-            tail = base.rsplit("/", 1)[-1][: 60 - len("textures/" + self.prefix) - 9]
+            tail = base.rsplit("/", 1)[-1][: MAX_SHADER_NAME - len("textures/" + self.prefix) - 8]
             name = f"{self.prefix}/{tail}_{h}"
         return name
 
@@ -198,6 +211,11 @@ class Converter:
         cm = ConvertedMaterial(shader, None, texdata_size, texdata_size, info)
         tex = info.basetexture if info.found else None
         rgba = None
+        if info.found and info.is_water:
+            cm.kind = "water"
+            cm.image, cm.size = self._write_image(shader, self._water_image(info), True)
+            self.mats[key] = cm
+            return cm
         if tex:
             try:
                 rgba = load_vtf(self.fs, tex).decode()
@@ -211,6 +229,31 @@ class Converter:
         self.assets[f"scripts/{self._script_name()}"] = b""  # placeholder, written in finish()
         self.mats[key] = cm
         return cm
+
+    def _water_image(self, info: MaterialInfo) -> np.ndarray:
+        """Source water has no base texture (it is drawn from refraction, reflection and fog):
+        tint the normal map's relief with ``$fogcolor``, translucent by ``$waterblendfactor``."""
+        from .modelconv import _parse_color
+        fog = _parse_color(info.params.get("$fogcolor")) if isinstance(info.params.get("$fogcolor"), str) else None
+        fog = fog if fog is not None else np.array([0.15, 0.3, 0.35], np.float32)
+        try:
+            alpha = float(info.params.get("$waterblendfactor", 0.75))
+        except (TypeError, ValueError):
+            alpha = 0.75
+        relief = np.full((64, 64), 0.5, np.float32)
+        nm = info.params.get("$normalmap") or info.params.get("$bumpmap")
+        if isinstance(nm, str):
+            try:
+                n = load_vtf(self.fs, nm).decode().astype(np.float32) / 255.0
+                relief = 0.5 * n[..., 0] + 0.5 * n[..., 1]
+            except Exception as e:  # noqa: BLE001
+                self.report["warnings"].append(f"water normal map {nm}: {e}")
+        shade = 0.75 + 0.5 * (relief - relief.mean())
+        rgb = np.clip(fog[None, None, :] * 1.6 * shade[..., None], 0, 1)
+        out = np.empty(relief.shape + (4,), np.uint8)
+        out[..., :3] = (rgb * 255).astype(np.uint8)
+        out[..., 3] = int(round(255 * max(0.4, min(0.9, alpha))))
+        return out
 
     def _write_image(self, shader: str, rgba: np.ndarray, alpha: bool) -> tuple[str, tuple[int, int]]:
         from PIL import Image
@@ -252,6 +295,13 @@ class Converter:
             lines.append(f"\tsurfaceparm {parm}")
         if cm.info and cm.info.nocull:
             lines.append("\tcull none")
+        if cm.kind == "water":  # the visible face of a water volume; its other sides are common/waterskip
+            lines = [f"textures/{cm.shader}", "{", f"\tqer_editorimage {editor_image(cm.image)}", "\tqer_trans .5",
+                     "\tsurfaceparm water", "\tsurfaceparm trans", "\tsurfaceparm nonsolid", "\tsurfaceparm noimpact",
+                     "\tsurfaceparm nolightmap", "\tsurfaceparm nomarks", "\tcull none", "\t{",
+                     f"\t\tmap {cm.image}", "\t\tblendFunc blend", "\t\trgbGen identity",
+                     "\t\ttcMod scroll 0.01 0.012", "\t}", "}"]
+            return "\n".join(lines)
         if cm.kind == "translucent":
             lines += ["\tsurfaceparm trans", "\tsurfaceparm nolightmap", "\tcull none", "\t{",
                       f"\t\tmap {cm.image}", "\t\tblendFunc blend", "\t\trgbGen vertex", "\t}"]
@@ -339,6 +389,8 @@ class Converter:
     def brushes(self) -> list[MBrush]:
         out = []
         self._extra: list[MBrush] = []
+        self._ladder_src: list[Brush] = []
+        self._windows: dict[int, list[MBrush]] = {}
         ents = self.bsp.model_entities
         drop = self.report["dropped"]
         for br in self.bsp.brushes(include_culled=False):
@@ -352,8 +404,23 @@ class Converter:
                     drop[f"entity:{cls}"] = drop.get(f"entity:{cls}", 0) + 1
                     continue
                 nonsolid = cls in NONSOLID_ENTITIES
+                if cls in BREAKABLE_ENTITIES and self._is_glass(br):
+                    # breakable glass -> MOHAA func_window (one entity per Source brush model)
+                    geo = br.geometry()
+                    if len(geo) >= 4:
+                        pieces = [self._brush_piece(br, pc, br.tool_kinds, False) for pc in _split_long(geo, self.opt.split)]
+                        win = self._windows.setdefault(br.model, [])
+                        for pc in pieces:
+                            if pc is not None:
+                                for f in pc.faces:
+                                    f.ext = []
+                                win.append(pc)
+                    continue
             kinds = br.tool_kinds
-            if kinds & DROP_KINDS:
+            if "ladder" in kinds:
+                self._ladder_src.append(br)
+            water = "water" in kinds and not (kinds & (DROP_KINDS - {"water"}))
+            if kinds & DROP_KINDS and not water:
                 k = sorted(kinds & DROP_KINDS)[0]
                 drop[k] = drop.get(k, 0) + 1
                 continue
@@ -366,11 +433,46 @@ class Converter:
                 if areas and areas <= {self.sky_area}:
                     drop["skybox3d"] = drop.get("skybox3d", 0) + 1
                     continue
-            mb = self._brush(br, geo, kinds, nonsolid)
+            mb = self._brush(br, geo, kinds, nonsolid, water)
             if mb:
                 out.append(mb)
+                if water:
+                    self.report["water_brushes"] = self.report.get("water_brushes", 0) + 1
         out += self._extra
         self.report["brushes"] = len(out)
+        return out
+
+    def _is_glass(self, br: Brush) -> bool:
+        """Every drawn material of the brush is glass (``$surfaceprop`` glass)."""
+        seen = False
+        for side in br.real_sides():
+            m = side.material
+            if not m or m.lower().startswith("tools/") or side.nodraw:
+                continue
+            info = material_info(self.fs, self.bsp.original_material(m))
+            if not info.found:
+                info = material_info(self.fs, m)
+            if "glass" not in (info.surfaceprop or "").lower():
+                return False
+            seen = True
+        return seen
+
+    def windows(self) -> list[MEntity]:
+        """Breakable glass brush entities -> ``func_window`` (MOHAA breakable glass,
+        ``fgame/windows.cpp``). CS:GO panes break from one bullet; MOHAA's default health
+        is 250, so they get Source's ``health`` (at least 1) and clear debris."""
+        out = []
+        ents = self.bsp.model_entities
+        for model, brushes in sorted(self._windows.items()):
+            if not brushes:
+                continue
+            ent = ents.get(model)
+            try:
+                hp = max(1, int(float(ent.get("health", "1") or 1))) if ent else 1
+            except ValueError:
+                hp = 1
+            out.append(MEntity({"classname": "func_window", "health": str(hp), "debristype": "0"}, brushes))
+        self.report["windows"] = len(out)
         return out
 
     def _areas(self, br: Brush, geo) -> set[int]:
@@ -383,14 +485,15 @@ class Converter:
                 out.add(a)
         return out
 
-    def _brush(self, br: Brush, geo, kinds: set[str], nonsolid: bool) -> Optional[MBrush]:
-        pieces = [self._brush_piece(br, pc, kinds, nonsolid) for pc in _split_long(geo, self.opt.split)]
+    def _brush(self, br: Brush, geo, kinds: set[str], nonsolid: bool, water: bool = False) -> Optional[MBrush]:
+        pieces = [self._brush_piece(br, pc, kinds, nonsolid, water) for pc in _split_long(geo, self.opt.split)]
         pieces = [p for p in pieces if p is not None]
         self._extra.extend(pieces[1:])
         return pieces[0] if pieces else None
 
-    def _brush_piece(self, br: Brush, geo, kinds: set[str], nonsolid: bool) -> Optional[MBrush]:
+    def _brush_piece(self, br: Brush, geo, kinds: set[str], nonsolid: bool, water: bool = False) -> Optional[MBrush]:
         xf = self._xf(br.model)
+        hidden = "common/waterskip" if water else CAULK   # caulk is solid: it would fill a water volume
         faces = []
         clip = "common/clip" if "clip" in kinds or "invisible" in kinds else (
             "common/playerclip" if "playerclip" in kinds else None)
@@ -409,13 +512,13 @@ class Converter:
                 faces.append(Face(tri, clip, (0, 0), 0, (1, 1), 0, 0, 0, list(ext)))
                 continue
             if side is None:  # cut face created by splitting a long brush
-                faces.append(Face(tri, CAULK, (0, 0), 0, (1, 1), 0, 0, 0, list(ext)))
+                faces.append(Face(tri, hidden, (0, 0), 0, (1, 1), 0, 0, 0, list(ext)))
                 continue
             if side.surface_flags & (Surf.SKY | Surf.SKY2D):
                 faces.append(Face(tri, self.sky_shader, (0, 0), 0, (1, 1), 0, 0, 0, list(ext)))
                 continue
             if side.nodraw or not side.is_drawn or not side.material or side.material.lower().startswith("tools/"):
-                faces.append(Face(tri, CAULK, (0, 0), 0, (1, 1), 0, 0, 0, list(ext)))
+                faces.append(Face(tri, hidden, (0, 0), 0, (1, 1), 0, 0, 0, list(ext)))
                 continue
             td = self.bsp.texdata[self.bsp.texinfo[side.texinfo]["texdata"]]
             cm = self.material(side.material, (int(td["width"]), int(td["height"])))
@@ -448,6 +551,189 @@ class Converter:
         s0 %= cm.size[0]
         t0 %= cm.size[1]
         return (round(s0, 3), round(t0, 3)), round(rot, 4), (round(scs, 6), round(sct, 6))
+
+    # ------------------------------------------------------------------ overlays
+    OVERLAY_DT = np.dtype([("id", "<i4"), ("texinfo", "<i2"), ("faces_order", "<u2"), ("faces", "<i4", 64),
+                           ("u", "<f4", 2), ("v", "<f4", 2), ("uv", "<f4", (4, 3)), ("origin", "<f4", 3),
+                           ("normal", "<f4", 3)])
+
+    def overlays(self) -> list[Patch]:
+        """``info_overlay`` decals (signs, floor markings, stains; LUMP_OVERLAYS) -> flat
+        patches half a unit in front of the surface with a lightmapped blend shader (retail
+        decals do the same: ``algiers/aviation_poster``).
+
+        vbsp stores the overlay's U axis in the z of its first three UV points; V is
+        normal x U, negated when the fourth point's z is 1. Corner i is ``origin + x U + y V``
+        with texture coordinates (u0,v0) (u0,v1) (u1,v1) (u1,v0). Overlays that Source wraps
+        across corners or displacements are placed flat on their own plane."""
+        out: list[Patch] = []
+        if not self.opt.overlays:
+            return out
+        try:
+            raw = self.bsp.lump_bytes(45)
+        except Exception:  # noqa: BLE001
+            return out
+        if not raw or len(raw) % self.OVERLAY_DT.itemsize:
+            return out
+        s = self.opt.scale
+        skipped = 0
+        self._overlay_shaders: dict[str, str] = getattr(self, "_overlay_shaders", {})
+        for r in np.frombuffer(raw, self.OVERLAY_DT):
+            n = np.array(r["normal"], np.float64)
+            o = np.array(r["origin"], np.float64)
+            uvp = np.array(r["uv"], np.float64)
+            U = uvp[:3, 2].copy()
+            if np.linalg.norm(n) < 0.5 or np.linalg.norm(U) < 0.5:
+                skipped += 1
+                continue
+            n /= np.linalg.norm(n)
+            U /= np.linalg.norm(U)
+            V = np.cross(n, U)
+            if uvp[3, 2] == 1.0:
+                V = -V
+            if self.sky_area is not None and self.bsp.point_area(tuple(o + n * 2)) == self.sky_area:
+                self.report["dropped"]["skybox3d_overlay"] = self.report["dropped"].get("skybox3d_overlay", 0) + 1
+                continue
+            ti = int(r["texinfo"])
+            mat = self.bsp.texinfo_material(ti)
+            if not mat:
+                skipped += 1
+                continue
+            td = self.bsp.texdata[self.bsp.texinfo[ti]["texdata"]]
+            cm = self.material(mat, (int(td["width"]), int(td["height"])))
+            shader = self._overlay_shader(cm)
+            corners = [(o + x * U + y * V + n * 0.5) * s for x, y in uvp[:, :2]]
+            (u0, u1), (v0, v1) = r["u"], r["v"]
+            sts = [(u0, v0), (u0, v1), (u1, v1), (u1, v0)]
+            c = [np.concatenate([corners[i], sts[i]]) for i in range(4)]
+            # bilinear 3x3: a runs corner 0 -> 3 (rows), b runs corner 0 -> 1 (columns)
+            if np.dot(np.cross(c[3][:3] - c[0][:3], c[1][:3] - c[0][:3]), n) < 0:
+                c = [c[0], c[3], c[2], c[1]]
+            rows = []
+            for a in (0.0, 0.5, 1.0):
+                row = []
+                for b in (0.0, 0.5, 1.0):
+                    q = (1 - a) * (1 - b) * c[0] + (1 - a) * b * c[1] + a * b * c[2] + a * (1 - b) * c[3]
+                    row.append(tuple(round(float(v), 4) for v in q))
+                rows.append(row)
+            out.append(Patch(shader, rows))
+        self.report["overlays"] = len(out)
+        if skipped:
+            self.report["dropped"]["overlay_bad"] = skipped
+        return out
+
+    def _overlay_shader(self, cm: ConvertedMaterial) -> str:
+        """A decal version of a converted material: non-solid, blended over the surface behind
+        (when the image has alpha) and lightmapped; ``polygonOffset`` against z-fighting."""
+        tail = cm.shader.rsplit("/", 1)[-1]
+        name = f"{self.prefix}/ov_{tail}"
+        if len("textures/" + name) > MAX_SHADER_NAME:
+            h = hashlib.md5(cm.shader.encode()).hexdigest()[:6]
+            name = f"{self.prefix}/ov_{tail[: MAX_SHADER_NAME - len('textures/' + self.prefix) - 11]}_{h}"
+        if name not in self._overlay_shaders:
+            alpha = cm.image is not None and cm.image.endswith(".tga")
+            lines = [f"textures/{name}", "{", f"\tqer_editorimage {editor_image(cm.image)}", "\tsurfaceparm trans",
+                     "\tsurfaceparm nonsolid", "\tsurfaceparm nomarks", "\tpolygonOffset", "\t{", f"\t\tmap {cm.image}"]
+            if alpha:
+                lines.append("\t\tblendFunc blend")
+            lines += ["\tnextbundle", "\t\tmap $lightmap", "\t}", "}"]
+            self._overlay_shaders[name] = "\n".join(lines)
+        return name
+
+    # ------------------------------------------------------------------ ladders
+    def _solid(self, p) -> bool:
+        """Source world contents at ``p`` (Source units) are solid."""
+        return bool(int(self.bsp.leafs[self.bsp.point_leaf(p)]["contents"]) & Contents.SOLID)
+
+    def ladders(self) -> list[MEntity]:
+        """Source ladder volumes (``CONTENTS_LADDER`` brushes) -> MOHAA ``func_ladder``.
+
+        MOHAA climbs a ``func_ladder`` whose ``origin`` is on the climbable face, centred
+        horizontally, with ``angle`` = the direction the climber faces (into the wall); the
+        player is held at ``origin - facing * 16`` (docs/reference/engine.md §1.3). The wall
+        side is the side of the Source volume with solid world contents behind it, else the
+        side a static prop (the visible ladder or its wall supports) is on. Stacked volumes
+        of one ladder are merged. The trigger brush covers the Source volume plus 8 units
+        on the climber's side.
+        """
+        s = self.opt.scale
+        boxes = []
+        for br in self._ladder_src:
+            if br.model != 0:  # brush-entity ladders are in model space; Source compiles func_ladder into the world
+                self.report["warnings"].append(f"ladder brush {br.index} in model {br.model} skipped")
+                continue
+            pts = np.array([p for w in br.windings() for p in w], dtype=np.float64)
+            if len(pts) < 4:
+                continue
+            boxes.append([pts.min(0), pts.max(0)])
+        # merge stacked pieces (same footprint, vertical gap <= 8)
+        boxes.sort(key=lambda b: (round(b[0][0]), round(b[0][1]), b[0][2]))
+        merged: list = []
+        for lo, hi in boxes:
+            for m in merged:
+                if (np.abs(m[0][:2] - lo[:2]).max() < 1 and np.abs(m[1][:2] - hi[:2]).max() < 1
+                        and lo[2] <= m[1][2] + 8 and hi[2] >= m[0][2] - 8):
+                    m[0] = np.minimum(m[0], lo)
+                    m[1] = np.maximum(m[1], hi)
+                    break
+            else:
+                merged.append([lo.copy(), hi.copy()])
+        props = None
+        out: list[MEntity] = []
+        for lo, hi in merged:
+            ext = hi - lo
+            thin = 0 if ext[0] <= ext[1] else 1          # the climb face is perpendicular to the thin axis
+            wide = 1 - thin
+            c = (lo + hi) / 2
+            score = {}
+            for sgn in (-1, 1):
+                hits = 0
+                for d in (2, 4, 8, 12, 16, 24, 32):
+                    for z in np.linspace(lo[2] + 4, hi[2] - 4, 5):
+                        p = c.copy()
+                        p[2] = z
+                        p[thin] = (hi[thin] if sgn > 0 else lo[thin]) + sgn * d
+                        hits += self._solid(p)
+                score[sgn] = hits
+            how = "solid"
+            if score[1] == score[-1]:
+                how = "props"
+                if props is None:
+                    try:
+                        props = [(np.array(p.origin, dtype=np.float64)) for p in self.bsp.static_props().props]
+                    except Exception:  # noqa: BLE001
+                        props = []
+                for sgn in (-1, 1):
+                    face = hi[thin] if sgn > 0 else lo[thin]
+                    score[sgn] = sum(1 for o in props
+                                     if lo[wide] - 8 <= o[wide] <= hi[wide] + 8 and lo[2] - 16 <= o[2] <= hi[2] + 16
+                                     and 0 <= (o[thin] - face) * sgn <= 24)
+                if score[1] == score[-1]:
+                    how = "default"
+            sgn = 1 if score[1] >= score[-1] else -1     # facing: toward the wall
+            facing = [0.0, 0.0, 0.0]
+            facing[thin] = float(sgn)
+            near = lo[thin] if sgn > 0 else hi[thin]     # the climber's side of the Source volume
+            far = hi[thin] if sgn > 0 else lo[thin]
+            # trigger: Source volume + 8 units toward the climber
+            t_lo, t_hi = lo.copy(), hi.copy()
+            if sgn > 0:
+                t_lo[thin] = near - 8
+            else:
+                t_hi[thin] = near + 8
+            org = c.copy()
+            org[thin] = near
+            o_lo, o_hi = org - 1, org + 1
+            from ..build import box
+            trig = box(tuple(t_lo * s), tuple(t_hi * s), "common/trigger")
+            obr = box(tuple(o_lo * s), tuple(o_hi * s), "common/origin")
+            yaw = round(math.degrees(math.atan2(facing[1], facing[0]))) % 360
+            e = MEntity({"classname": "func_ladder", "angle": str(yaw)}, [trig, obr])
+            out.append(e)
+            self.report.setdefault("ladders", []).append(
+                {"origin": [round(float(v) * s, 1) for v in org], "angle": yaw, "height": round(float(ext[2]) * s),
+                 "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)})
+        return out
 
     # ------------------------------------------------------------------ displacements
     def patches(self) -> list[Patch]:
@@ -632,13 +918,21 @@ class Converter:
             size = [(cm.bounds[1][i] - cm.bounds[0][i]) * sc for i in range(3)]
             items.append((size[0] * size[1] * size[2], p, cm, sc))
         items.sort(key=lambda t: -t[0])
-        static_v, runtime, dropped = 0, 0, 0
+        static_v, runtime, dropped, injected = 0, 0, 0, 0
         used: dict[str, object] = {}
+        self.statics = []
         for _, p, cm, sc in items:
             org = " ".join(fmt(round(c, 2)) for c in self._prop_origin(p, cm, sc * s))
             ang = " ".join(fmt(round(a, 3)) for a in p.angles)
             model_keys = [t[len("models/"):] if t.startswith("models/") else t for t in cm.tiks]
-            if static_v + cm.vertices <= self.opt.props_static_vertices:
+            if self.opt.props_mode == "inject":
+                o = tuple(round(c, 2) for c in self._prop_origin(p, cm, sc * s))
+                for mk in model_keys:
+                    self.statics.append((mk, o, tuple(round(a, 3) for a in p.angles), round(sc * s, 4)))
+                clips += self._prop_clips(cm, p, sc * s)
+                injected += 1
+                static_v += cm.vertices
+            elif static_v + cm.vertices <= self.opt.props_static_vertices:
                 static_v += cm.vertices
                 for mk in model_keys:
                     e = MEntity({"classname": "static_" + mk.rsplit("/", 1)[-1][:-4]})
@@ -662,9 +956,9 @@ class Converter:
             used[cm.tik] = cm
         if used:
             self.assets.update(modelconv.bundle(used.values(), prefix="csgo", script=f"scripts/csgo_{self.opt.name}_props.shader"))
-        self.report["props"] = {"instances": len(items), "static": len(items) - runtime - dropped,
-                                "static_vertices": static_v, "runtime": runtime, "dropped": dropped,
-                                "models": len(used)}
+        self.report["props"] = {"instances": len(items), "static": len(items) - runtime - dropped - injected,
+                                "injected": injected, "static_vertices": static_v, "runtime": runtime,
+                                "dropped": dropped, "models": len(used)}
         return out, clips, sorted(set(precache))
 
     def _prop_origin(self, p, cm, scale: float) -> tuple[float, float, float]:
@@ -715,14 +1009,17 @@ class Converter:
     def run(self) -> Result:
         brushes = self.brushes()
         patches = self.patches()
+        overlay_patches = self.overlays()
+        self.statics: list = []
         prop_ents, prop_clips, precache = self.props() if self.opt.props else ([], [], [])
         world = MEntity(self.worldspawn())
-        world.prims = list(brushes) + list(patches) + prop_clips
+        world.prims = list(brushes) + list(patches) + overlay_patches + prop_clips
         if self.opt.detail_all:
             world.prims = self.shell(brushes, patches) + world.prims
-        ents = [world] + self.entities() + prop_ents
+        ents = [world] + self.entities() + self.ladders() + self.windows() + prop_ents
         self.report["precache"] = precache
         scripts = [self._shader_text(cm) for cm in self.mats.values()]
+        scripts += list(getattr(self, "_overlay_shaders", {}).values())
         if getattr(self, "_sky_text", None):
             scripts.insert(0, self._sky_text)
         self.assets[f"scripts/{self._script_name()}"] = ("\n\n".join(scripts) + "\n").encode("latin-1")
@@ -737,7 +1034,7 @@ class Converter:
         self.report["materials"] = len(self.mats)
         self.report["entities"] = len(ents)
         self.report["asset_bytes"] = sum(len(v) for v in self.assets.values())
-        return Result(MapFile(ents), self.assets, self.report)
+        return Result(MapFile(ents), self.assets, self.report, list(self.statics))
 
 
 class _CutWinding(list):
@@ -876,9 +1173,10 @@ def convert(bsp_path: str, csgo_dir: str, opt: Options) -> Result:
     return Converter(bsp_path, csgo_dir, opt).run()
 
 
-def auto_cameras(m: MapFile, n: int = 9, landmarks=()):
+def auto_cameras(m: MapFile, n: int = 9, landmarks=(), spawns: bool = True):
     """Spread-out cameras: each landmark (e.g. bomb site, looking toward the map centre), then a
-    farthest-point sample of spawn points (eye height, spawn facing), plus one high overview."""
+    farthest-point sample of spawn points (eye height, spawn facing), plus one high overview.
+    ``spawns=False`` keeps only the landmarks and the overview."""
     import math as _m
     from .. import game
     spawns = [e for e in m.entities if e.classname in ("info_player_deathmatch", "info_player_allied",
@@ -890,14 +1188,18 @@ def auto_cameras(m: MapFile, n: int = 9, landmarks=()):
     else:
         mx = my = 0.0
     lm = [((x, y, z), _m.degrees(_m.atan2(my - y, mx - x))) for x, y, z in landmarks]
+    spawn_pts = pts
     pts = lm + pts
     chosen: list = []
-    if pts:
+    if not spawns:
+        chosen = list(lm)
+    elif pts:
         chosen.append(pts[0])
         while len(chosen) < min(n - 1, len(pts)):
             far = max(pts, key=lambda p: min((p[0][0] - c[0][0]) ** 2 + (p[0][1] - c[0][1]) ** 2 for c in chosen))
             chosen.append(far)
     cams = [game.Shot(f"spawn{i}", (o[0], o[1], o[2] + 82), (5.0, yaw, 0.0)) for i, (o, yaw) in enumerate(chosen)]
+    pts = pts if spawns else lm + spawn_pts
     if pts:
         xs, ys, zs = [p[0][0] for p in pts], [p[0][1] for p in pts], [p[0][2] for p in pts]
         cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
@@ -905,6 +1207,43 @@ def auto_cameras(m: MapFile, n: int = 9, landmarks=()):
         eye = (min(xs) - span * 0.15, min(ys) - span * 0.15, max(zs) + span * 0.45)
         cams.append(game.Shot.looking_at("overview", eye, (cx, cy, min(zs))))
     return cams
+
+
+def inject_statics(bsp_path, statics, assets: dict, out) -> dict:
+    """Add the converter's props (``Result.statics``) to a lit BSP as static models coloured
+    from its light grid (``mohkit.staticlight``); meshes are read from ``assets``."""
+    from .. import staticlight as SL
+    read = SL.files_reader(assets)
+    meshes: dict = {}
+    inst = []
+    for mk, origin, angles, scale in statics:
+        if mk not in meshes:
+            meshes[mk] = SL.tiki_mesh(read, mk)
+        pos, nrm = meshes[mk]
+        if len(pos):
+            inst.append(SL.StaticInstance(mk, origin, angles, scale, pos, nrm))
+    return SL.inject(bsp_path, inst, out)
+
+
+_CAMERA_RE = re.compile(r'"([^"]+)"\s+"\s*(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s*"')
+
+
+def named_cameras(path, scale: float = 1.0):
+    """Spectator viewpoints from a CS:GO ``maps/<map>_cameras.txt``.
+
+    The file is KeyValues: ``"Cameras" { "T Spawn" "x y z pitch yaw" ... }`` where x y z
+    is the eye position in Source units (``spec_pos`` output) and pitch/yaw follow the
+    Quake convention MOHAA shares (positive pitch looks down). Returns ``game.Shot``s
+    named after the entries, in file order.
+    """
+    from .. import game
+    text = Path(path).read_text(encoding="latin-1", errors="replace")
+    text = re.sub(r"//[^\n]*", "", text)
+    out = []
+    for m in _CAMERA_RE.finditer(text):
+        x, y, z, pitch, yaw = (float(v) for v in m.groups()[1:])
+        out.append(game.Shot(m.group(1).strip(), (x * scale, y * scale, z * scale), (pitch, yaw, 0.0)))
+    return out
 
 
 def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft", test: bool = True,
@@ -936,7 +1275,7 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     log(f"== converting {src.name} -> {name}")
     if quality == "draft":
         # MOHlight lights static-model vertices on one thread (~190/s at best; de_dust2's 70k took
-        # hours), so drafts make every prop a runtime script_model unless a budget is given.
+        # hours), so "compile" drafts make every prop a runtime script_model unless a budget is given.
         opts.setdefault("props_static_vertices", 0)
     res = convert(str(src), cfg.csgo_dir, Options(name=name, **opts))
     if props_only:
@@ -964,18 +1303,34 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     report = {"name": name, "source": str(src), "convert": res.report, "compile_ok": cr.ok, "stats": cr.stats,
               "problems": cr.problems}
     if cr.ok:
+        bsp_bytes = cr.bsp.read_bytes()
+        if res.statics:
+            # the compile root keeps the BSP as compiled (props-only updates re-inject into it)
+            lit = out / f"{name}.bsp"
+            info = inject_statics(cr.bsp, res.statics, res.assets, lit)
+            report["statics"] = info
+            log(f"== static models injected: {json.dumps(info)}")
+            bsp_bytes = lit.read_bytes()
         proj = project.Project(name=name, folder=out, title=src.stem, ambience="mohdm2",
                                precache=list(res.report.get("precache", ())))
-        files = {f"maps/dm/{name}.bsp": cr.bsp.read_bytes(), **proj.scripts(), **res.assets}
+        files = {f"maps/dm/{name}.bsp": bsp_bytes, **proj.scripts(), **res.assets}
         pk3 = out / f"{name}.pk3"
         project.write_pk3(pk3, files)
         report["pk3"] = str(pk3)
         log(f"== packaged {pk3} ({pk3.stat().st_size // 1024} KB)")
         if test:
-            cams = auto_cameras(res.map, shots, res.report.get("landmarks", ()))
-            run = game.run([pk3], f"dm/{name}", cams, run_name=name)
-            sheet = game.contact_sheet(run.screenshots, out / f"{name}_shots.png")
+            # CS:GO ships named spectator viewpoints for most maps (maps/<map>_cameras.txt);
+            # they cover every callout, so prefer them to spawn samples.
+            cam_file = src.with_name(src.stem + "_cameras.txt")
+            named = named_cameras(cam_file, opts.get("scale", 1.0)) if cam_file.is_file() else []
+            cams = auto_cameras(res.map, 1 if named else shots, res.report.get("landmarks", ()),
+                                spawns=not named)
+            cams = named + cams
+            run = game.run([pk3], f"dm/{name}", cams, run_name=name, timeout=300 + 3 * len(cams))
+            sheets = game.contact_sheets(run.screenshots, out / f"{name}_shots.png")
+            sheet = sheets[0] if sheets else None
             report["contact_sheet"] = str(sheet)
+            report["contact_sheets"] = [str(p) for p in sheets]
             report["run_problems"] = run.problems
             log(run.summary())
             log(f"== contact sheet {sheet}")

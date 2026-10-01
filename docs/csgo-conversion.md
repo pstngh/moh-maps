@@ -27,7 +27,12 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | `toolsclip` / `toolsplayerclip` / `toolsinvisible` | `common/clip` / `common/playerclip` | |
 | nodraw faces | `common/caulk` | |
 | sky faces | converted skybox shader (`skyParms env/csgo/<map>/sky`) | Source cubemap faces → `_rt _lf _ft _bk _up _dn` (up/dn rotated) |
-| hint, skip, areaportal, trigger, occluder, fog, blocklos, grenade/NPC clip, water, ladders | dropped (counted in the report) | ladders and water are TODO |
+| hint, skip, areaportal, trigger, occluder, fog, blocklos, grenade/NPC clip | dropped (counted in the report) | |
+| ladder volumes (`CONTENTS_LADDER`) | `func_ladder`: `common/trigger` over the Source volume + 8 units on the climber's side, `common/origin` brush on the climb face, `angle` toward the wall | wall side = solid world contents behind the volume, else the side a static prop (the visible ladder) is on; stacked volumes merged. `Converter.ladders`, report `ladders` |
+| water volumes | the drawn face gets a water shader (`surfaceparm water trans nonsolid`, image = the normal map's relief tinted with `$fogcolor`, alpha `$waterblendfactor`); hidden sides `common/waterskip` (caulk is solid and would fill the volume) | Source water has no base texture |
+| breakable glass (`func_breakable`/`_surf` whose drawn materials are all `$surfaceprop glass`) | `func_window` (MOHAA breakable glass), Source `health` | |
+| overlays (`info_overlay`, LUMP_OVERLAYS) | flat 3×3 patch half a unit off the surface; shader `ov_<material>`: `trans nonsolid nomarks polygonOffset`, `blendFunc blend` + `nextbundle $lightmap` like retail decals | U axis is packed in the z of UV points 0–2, V = N×U (negated if point 3's z is 1); overlays wrapped over corners/displacements are placed flat |
+| spectator cameras (`maps/<map>_cameras.txt`) | contact-sheet shots (eye position, pitch/yaw as given), pages of 9 (`<name>_shots.png`, `_shots_2.png`, …) | `named_cameras` |
 | 3D skybox (the area containing `sky_camera`) | dropped | detected from BSP areas, not bounds |
 | displacements | `patchDef2` meshes | midpoint-expanded so they pass through every kept Source sample; sample rows/columns straight within `disp_tolerance` (1 unit) dropped, consistently across shared edges; split to ≤ 17×17; visible side toward the air |
 | materials | TGA/JPG + generated shader script | `$basetexture` only (blends use the first layer); power-of-two, max 512 px; `$surfaceprop` → MOHAA material surfaceparm; alphatest/translucent/nocull handled |
@@ -35,7 +40,7 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | `info_player_terrorist` / `counterterrorist` / `info_deathmatch_spawn` | `info_player_axis` / `allied` / `deathmatch` | T+CT double as DM spawns when the map has none |
 | `light`, `light_spot` | `light` (+ `info_null` target) | intensity ≈ 0.75 × Source brightness, clamped 40–600 |
 | `light_environment` | worldspawn `suncolor`, `sundirection`, `ambientlight`, `sundiffusecolor` | |
-| static props (`prop_static`) | `mohkit/source/modelconv.py` (MDL → TIKI/SKD/SKC + collision `.map`). Largest first: `static_*` models up to `--static-verts` lit vertices (70k; **0 in `-q draft`**), the next 600 as non-solid `script_model` with baked clip brushes, the rest dropped (reported) | static-prop lighting is single-threaded (~190 verts/s at best), so the budget is compile time |
+| static props (`prop_static`) | `mohkit/source/modelconv.py` (MDL → TIKI/SKD/SKC + collision `.map`). **Default (`props_mode="inject"`): every prop** becomes a static model added to the lit BSP by `mohkit.staticlight` and coloured from its light grid, with its collision as world clip brushes. `props_mode="compile"`: the largest as MOHlight-lit `static_*` up to `--static-verts`, the next 600 as `script_model`s | MOHlight lights static models on one thread (~190 verts/s), so de_nuke's 4,801 props would light for hours; injection takes seconds and costs no entities |
 
 ## Visibility and compile time
 
@@ -78,12 +83,26 @@ as three points 64 units apart around the hull centre's projection
 (`tests/test_modelconv.py::test_hull_brush_translation_invariant`; dust2 props now
 differ by ≤ 0.2 units between pivots, from near-parallel face conditioning).
 
+## Static props without MOHlight (`mohkit.staticlight`)
+
+Static models never collide (the collision loader skips them), so they don't need to
+exist when Q3map runs: the converter adds each prop's clip brushes to the world,
+compiles and lights the map, then `staticlight.inject` appends the props to
+STATICMODELDEF, lists each in the leaves its bounds touch and writes per-vertex
+colours to STATICMODELDATA. A vertex's colour is the light grid (32-unit cells in v19)
+sampled 6 units out along its normal, scaled like MOHlight's own static lighting and
+shaded mildly by facing (`staticlight.shade`). Calibration against MOHlight output:
+ambient-only test map 40.4 vs 40.3 mean over 161k vertices; sunlit mk_medina 129.7 vs
+130.9 over 23k (per-vertex error is larger: MOHlight traces shadows per vertex, the grid
+is 32 units coarse). `tests/test_staticlight.py`.
+
+OpenMoHAA draws every static model whose bounds pass the frustum test (the leaf
+`visCount` check is commented out in `tr_staticmodels.cpp`); at most 8,192 static
+surfaces a frame (`MAX_STATIC_MODELS_SURFS`).
+
 ## Known gaps
 
-- Static props: in `-q draft` everything is a runtime `script_model` (600 max; de_dust2
-  drops 909 of 1,509, smallest first); `-q normal` compiles the largest as lit static
-  models up to `--static-verts`.
-- Overlays and decals (`info_overlay`) aren't converted.
 - Blend textures use the first layer only.
-- No `func_ladder` conversion yet.
-- Water is dropped.
+- Doors (`prop_door_rotating`) and openable/breakable props (`prop_dynamic` vent slats)
+  aren't converted: the doorways and vents are open.
+- Ropes and cables (`keyframe_rope`/`move_rope`), sprites and detail sprites are dropped.
