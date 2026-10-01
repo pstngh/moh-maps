@@ -1,0 +1,20 @@
+{
+ "de_dust2": {
+  "exposure": 2.5322,
+  "ratio": 1.0065,
+  "cameras": 30,
+  "rule": 1.4491
+ },
+ "de_inferno": {
+  "exposure": 2.1569,
+  "ratio": 1.0053,
+  "cameras": 31,
+  "rule": 1.0607
+ },
+ "de_mirage": {
+  "exposure": 1.0789,
+  "ratio": 1.0108,
+  "cameras": 28,
+  "rule": 1.0198
+ }
+}

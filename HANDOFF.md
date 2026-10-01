@@ -17,16 +17,27 @@ Working from the "Next steps" below, in order (no new user request).
   with +forward held; `_probe_start` stands on low solids (pallets). Vertigo rebuilt 16:25:
   ladders **3/3** (128, 179, hatch ladder to the top), 37 bot kills. Nuke/Cache/Rats ladder
   records unchanged except Nuke 0 (z0 on the displacement, 263 tall) and Cache (160).
-- **Cobble rebuild running** (`local/csgo/vc_redo.sh` -> vertigo_final + cbble_final + install).
-- **Exposure fit (code done, not run):** `python -m mohkit csgo <map> --fit-exposure`
-  (`convert.fit_exposure`, needs csgo_ref shots) -> `data/csgo_exposure.json`, used by
-  `lighting.transfer` before the controller rule. Batch: `local/csgo/fit_all.sh` (7 maps).
-- **Blend textures (code done, testing on Mirage):** `$basetexture2` -> shader stage 2 with
-  `alphaGen vertex`; `lighting.blend_alphas` sets drawvert alpha from Source displacement
-  alphas after the compile (both lighting modes); report `convert.blend`. Test:
-  `csgo de_mirage -q fastrad --refresh-assets` (log `local/csgo/mirage_blend.log`; old pk3 and
-  shots in `local/csgo/before/cs_mirage_pre_blend/`). Then refresh dust2/inferno/cbble, full
-  rebuild nuke/cache (their .map changed with the ladder rules), then `fit_all.sh`, install.
+- **Cobble ladders 2/2** (16:50): the 460-unit one failed only because the probe teleported
+  0.5 above a patch and fell through it; probe starts are now floor + 4 (commit f2ba8f6).
+- **Exposure fit (done for 3):** `python -m mohkit csgo <map> --fit-exposure` ->
+  `data/csgo_exposure.json` (committed; used by `lighting.transfer` before the controller
+  rule). dust2 1.45 -> 2.53 (error 17.4 -> 5.6), mirage 1.02 -> ~1.08, inferno 1.06 -> 2.16.
+  Still to fit: nuke, cache, vertigo, cbble (after their final rebuilds).
+- **Blend textures (done, verified on Mirage, 00076bc):** error 6.0 -> 4.4, plaster/blue walls
+  back (`local/csgo/compare/cs_mirage_blend.png`). Installed: mirage (blends + fit), dust2 (fit,
+  no blends yet), cbble (blends). `--refresh-assets` refused dust2/inferno (.map changed since
+  their builds): they need full builds.
+- **3D skybox as a MOHAA portal sky (in progress, uncommitted):** `Options.skybox3d="portal"`:
+  sky-area brushes/patches/props kept (`_sky_prims`, `_sky_statics`), main sky faces ->
+  `common/skyportal`, `_place_sky_room` moves the room beside the map inside +-7900, shrinking
+  it about sky_camera (k 1, 0.5, 0.25: the portal image is unchanged) when it doesn't fit
+  (Vertigo: k 0.5), `script_skyorigin` at sky_camera, `report["sky_room"]` -> `lighting.place`
+  maps the room's luxels/alphas. AA has no sky parallax (skyboxSpeed is protocol 15 only).
+  Also fixed: Vertigo's 2D sky was never converted (LDR $basetexture missing; now falls back to
+  $hdrbasetexture). Test build: `csgo de_vertigo -q fastrad --name cs_vertigo_sky`
+  (log `local/csgo/vertigo_sky.log`). **Next:** check its sheet; if good, commit, then full
+  rebuild of all 7 (blends + sky + ladders), bots, ladder probes, fit nuke/cache/vertigo/cbble,
+  install. `local/csgo/lane_a.sh`/`lane_b.sh` were the earlier batches (lane_b stopped).
 
 ## Previous session (2026-10-01 from 13:20)
 

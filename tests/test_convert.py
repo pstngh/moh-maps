@@ -118,6 +118,38 @@ def test_ladder_facing() -> None:
     assert len(cv._ladder_step_brushes) == 10 + 10 + 10
 
 
+def _st(f, p):
+    """Texture coordinates (texels / scale) of point ``p`` on face ``f`` (Q3 projection)."""
+    import math
+    from mohkit import geom
+    n = geom.cross(geom.sub(f.points[2], f.points[0]), geom.sub(f.points[1], f.points[0]))
+    ln = math.sqrt(geom.dot(n, n))
+    xv, yv = C.texture_axis(tuple(v / ln for v in n))
+    sv = next(i for i in range(3) if xv[i])
+    tv = next(i for i in range(3) if yv[i])
+    r = math.radians(f.rotate)
+    co, si = math.cos(r), math.sin(r)
+    return (xv[sv] * (co * p[sv] + si * p[tv]) / f.scale[0] + f.shift[0],
+            yv[tv] * (-si * p[sv] + co * p[tv]) / f.scale[1] + f.shift[1])
+
+
+def test_scale_face_keeps_texels() -> None:
+    """A face scaled about a point (the 3D skybox room shrunk about sky_camera) shows the same
+    texel at each scaled point, for any rotation and mirrored scales."""
+    from mohkit.mapfile import Face
+    c = (5000.0, -1600.0, 400.0)
+    for pts, rot, sc, sh in [(((0, 0, 64), (0, 64, 64), (64, 0, 64)), 0, (1, 1), (0, 0)),
+                             (((10, 0, 0), (10, 0, 64), (10, 64, 0)), 33, (0.5, -2), (7, -3)),
+                             (((0, 5, 0), (64, 5, 0), (0, 5, 64)), -71, (1.25, 0.75), (12.5, 40))]:
+        f = Face(tuple(tuple(float(v) for v in q) for q in pts), "x", sh, rot, sc)
+        for k in (0.5, 0.25):
+            g = C.scale_face(f, k, c)
+            for p in f.points:
+                q = tuple(c[i] + k * (p[i] - c[i]) for i in range(3))
+                a, b = _st(f, p), _st(g, q)
+                assert abs(a[0] - b[0]) < 1e-3 and abs(a[1] - b[1]) < 1e-3, (a, b, k, rot)
+
+
 def _bare_converter(scale: float = 1.0):
     """A Converter with no BSP behind it, for the geometry helpers."""
     cv = C.Converter.__new__(C.Converter)

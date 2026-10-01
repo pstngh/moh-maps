@@ -493,8 +493,23 @@ def recolour_grid(bsp, field, fill: Sequence[float] = (40.0, 40.0, 40.0)) -> dic
     return _grid_lumps(bsp, field, g.mins, g.cell, g.bounds, g.index != 0, fill)
 
 
+def place(pos: np.ndarray, offset=(0.0, 0.0, 0.0), sky_room: Optional[dict] = None) -> np.ndarray:
+    """Converted-map positions of scaled Source positions: plus the conversion's ``offset``,
+    or, for points in the 3D skybox room (``report["sky_room"]``: its box before the offsets),
+    the room's own move: scaled by ``k`` about ``centre``, plus its ``offset``
+    (``Converter._place_sky_room``)."""
+    out = pos + np.asarray(offset, np.float64)
+    if sky_room:
+        lo, hi = np.asarray(sky_room["box"][0]) - 16, np.asarray(sky_room["box"][1]) + 16
+        inside = np.all((pos >= lo) & (pos <= hi), axis=1)
+        k = float(sky_room.get("k", 1.0))
+        c = np.asarray(sky_room.get("centre", (0.0, 0.0, 0.0)), np.float64)
+        out[inside] = c + k * (pos[inside] - c) + np.asarray(sky_room["offset"], np.float64)
+    return out
+
+
 def transfer(bsp_path, source: SourceBSP, out, scale: float = 1.0, exposure: Optional[float] = None,
-             log=print, gains: Optional[dict] = None, offset=(0.0, 0.0, 0.0)) -> dict:
+             log=print, gains: Optional[dict] = None, offset=(0.0, 0.0, 0.0), sky_room: Optional[dict] = None) -> dict:
     """Replace the lightmaps (and light grid) of a compiled converted map with the Source
     map's own baked lighting. Returns statistics.
 
@@ -511,8 +526,8 @@ def transfer(bsp_path, source: SourceBSP, out, scale: float = 1.0, exposure: Opt
     if exposure is None:
         exposure = fitted_exposure(Path(source.path).stem) or exposure_for(source)
     lux = source_luxels(source, scale)
-    if any(offset):              # the conversion moved the map (``Options.offset``)
-        lux.pos = lux.pos + np.asarray(offset, np.float64)
+    # the conversion moved the map (``Options.offset``) and the 3D skybox room beside it
+    lux.pos = place(lux.pos, offset, sky_room)
     tex = lightmap_texels(bsp, all_texels=True)
     index = LuxelIndex(lux, cell=24.0 * scale)
     rgb, level = lookup(index, tex.pos, tex.nrm)
@@ -655,7 +670,8 @@ def build_grid(bsp, field, fill: Sequence[float] = (40.0, 40.0, 40.0)) -> dict[s
     return _grid_lumps(bsp, field, mins, cell, bounds, open_mask, fill)
 
 
-def blend_alphas(bsp, source: SourceBSP, blends: dict, scale: float = 1.0, offset=(0.0, 0.0, 0.0)) -> bytes:
+def blend_alphas(bsp, source: SourceBSP, blends: dict, scale: float = 1.0, offset=(0.0, 0.0, 0.0),
+                 sky_room: Optional[dict] = None) -> bytes:
     """The drawverts lump with the alpha of every vertex of a two-layer blend surface set from
     the Source displacements of the same material around it (``blends``: converted shader ->
     Source material, ``report["blend"]``; the shader draws layer 2 by ``alphaGen vertex``).
@@ -680,7 +696,7 @@ def blend_alphas(bsp, source: SourceBSP, blends: dict, scale: float = 1.0, offse
         disps = by_mat.get(mat.lower(), [])
         if not disps:
             continue
-        pos = np.concatenate([d.positions.reshape(-1, 3) for d in disps]).astype(np.float64) * scale + off
+        pos = place(np.concatenate([d.positions.reshape(-1, 3) for d in disps]).astype(np.float64) * scale, off, sky_room)
         nrm = np.concatenate([np.repeat(np.asarray(d.normal, np.float64)[None], d.positions.shape[0] * d.positions.shape[1], 0)
                               for d in disps])
         alpha = np.concatenate([d.alphas.reshape(-1) for d in disps]).astype(np.float64)

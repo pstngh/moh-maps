@@ -177,6 +177,10 @@ class Options:
     props_runtime_max: int = 600    # extra props as script_model (game entities; engine limit 1024)
     # translation applied after conversion; None = centre the map when it leaves +-WORLD_LIMIT
     offset: Optional[tuple] = None
+    # the 3D skybox (the area around sky_camera): "portal" keeps it as a MOHAA portal sky (the
+    # room moved next to the map inside +-8192, a script_skyorigin at sky_camera, the map's sky
+    # faces common/skyportal); "drop" leaves only the 2D sky
+    skybox3d: str = "portal"
     # lit textures brightened (up to lighting.HEADROOM_MAX) and their light divided by the same
     # gain, so CS:GO's transferred sunlight can exceed the texture colour (lighting="csgo" only)
     headroom: bool = False
@@ -296,6 +300,43 @@ def translate_map(m: MapFile, T) -> None:
                 prim.ctrl = [[(c[0] + T[0], c[1] + T[1], c[2] + T[2], c[3], c[4]) for c in row] for row in prim.ctrl]
 
 
+def scale_face(f: Face, k: float, c) -> Face:
+    """``f`` scaled by ``k`` about ``c`` with its texture scaled too (the same texels land on
+    the same spots of the smaller face): scale x k, shift + u(c) / scale (1 - 1 / k), u being
+    the projection of ``translate_face``."""
+    pts = [tuple(float(c[i]) + k * (float(p[i]) - float(c[i])) for i in range(3)) for p in f.points]
+    n = geom.cross(geom.sub(f.points[2], f.points[0]), geom.sub(f.points[1], f.points[0]))
+    ln = math.sqrt(geom.dot(n, n))
+    shift, scale = f.shift, f.scale
+    if ln > 1e-9:
+        n = tuple(v / ln for v in n)
+        xv, yv = texture_axis(n)
+        sv = next(i for i in range(3) if xv[i])
+        tv = next(i for i in range(3) if yv[i])
+        a, b = xv[sv], yv[tv]
+        r = math.radians(f.rotate)
+        co, si = math.cos(r), math.sin(r)
+        ss = f.scale[0] or 1.0
+        st = f.scale[1] or 1.0
+        us = a * (co * c[sv] + si * c[tv])
+        ut = b * (-si * c[sv] + co * c[tv])
+        shift = (round(f.shift[0] + us / ss * (1 - 1 / k), 4), round(f.shift[1] + ut / st * (1 - 1 / k), 4))
+        scale = (ss * k, st * k)
+    return Face(tuple(pts), f.shader, shift, f.rotate, scale, f.contents, f.flags, f.value, list(f.ext))
+
+
+def scale_map(m: MapFile, k: float, c) -> None:
+    """Scale every brush and patch of ``m`` by ``k`` about ``c`` (in place), keeping texture
+    alignment (patches carry their own texture coordinates)."""
+    for e in m.entities:
+        for i, prim in enumerate(e.prims):
+            if isinstance(prim, MBrush):
+                e.prims[i] = MBrush([scale_face(f, k, c) for f in prim.faces])
+            elif isinstance(prim, Patch):
+                prim.ctrl = [[(c[0] + k * (q[0] - c[0]), c[1] + k * (q[1] - c[1]), c[2] + k * (q[2] - c[2]), q[3], q[4])
+                              for q in row] for row in prim.ctrl]
+
+
 def _snap(p, eps=0.01):
     return tuple(round(c) if abs(c - round(c)) < eps else round(c, 4) for c in p)
 
@@ -314,6 +355,10 @@ class Converter:
         self.sky_area = self.bsp.skybox_area()
         self.sky_box = self._sky_box()
         self.sky_shader = opt.sky_shader or self._convert_sky()
+        self._portal = opt.skybox3d == "portal" and self.sky_area is not None
+        self._sky_prims: list = []        # 3D skybox brushes and patches (moved in run())
+        self._sky_statics: set[int] = set()   # their props' indexes in self.statics
+        self._in_sky_room = False
 
     def _sky_box(self):
         """Bounds (lo, hi) of the 3D skybox's leaves, or ``None`` (no sky area, or the box
@@ -600,12 +645,20 @@ class Converter:
         for q3, src in faces.items():
             for suffix in ("", "_hdr"):
                 # the face material names its texture ($basetexture); de_nuke's six faces all
-                # use skybox/nukeblankup, and no nukeblankft.vtf exists
+                # use skybox/nukeblankup, and no nukeblankft.vtf exists. de_vertigo's names an
+                # LDR texture it doesn't ship: its $hdrbasetexture (RGBA16161616F) is there
                 info = material_info(self.fs, f"skybox/{name}{suffix}{src}")
-                tex = info.basetexture if info.found and info.basetexture else f"skybox/{name}{suffix}{src}"
-                try:
-                    v = load_vtf(self.fs, tex)
-                except Exception:  # noqa: BLE001
+                cands = [info.basetexture, info.params.get("$hdrcompressedtexture"),
+                         info.params.get("$hdrbasetexture")] if info.found else []
+                cands = [c for c in cands if isinstance(c, str) and c] + [f"skybox/{name}{suffix}{src}"]
+                v = None
+                for tex in cands:
+                    try:
+                        v = load_vtf(self.fs, tex)
+                        break
+                    except Exception:  # noqa: BLE001
+                        continue
+                if v is None:
                     continue
                 rgba = v.decode()
                 im = Image.fromarray(rgba, "RGBA").convert("RGB")
@@ -733,11 +786,14 @@ class Converter:
                     c = np.array(self._apply(tuple(c), self._xf(br.model))) / self.opt.scale
                 areas = self._areas(br, geo) if br.model == 0 else set()
                 if (areas and areas <= {self.sky_area}) or (self.sky_box is not None and self._in_sky(c)):
-                    drop["skybox3d"] = drop.get("skybox3d", 0) + 1
-                    continue
-            if self.opt.texlights:
+                    if not self._portal:
+                        drop["skybox3d"] = drop.get("skybox3d", 0) + 1
+                        continue
+                    self._in_sky_room = True
+            if self.opt.texlights and not self._in_sky_room:
                 self._collect_texlights(br, geo, self._xf(br.model))
             mb = self._brush(br, geo, kinds, nonsolid, water)
+            self._in_sky_room = False
             if mb:
                 out.append(mb)
                 if water:
@@ -881,9 +937,19 @@ class Converter:
         return out
 
     def _brush(self, br: Brush, geo, kinds: set[str], nonsolid: bool, water: bool = False) -> Optional[MBrush]:
-        pieces = [self._brush_piece(br, pc, kinds, nonsolid, water) for pc in _split_long(geo, self.opt.split)]
+        # a sky brush of the map with a portal sky stays whole: common/skyportal faces are never
+        # drawn (no 64-vertex limit), and the renderer only checks the first 32 portal-sky
+        # surfaces of a frame for being on screen (tr_sky_portal.cpp R_Sky_AddSurf): de_vertigo's
+        # 742 split sky brushes (1,817 surfaces) left windows showing no sky
+        sky_only = (self._portal and not self._in_sky_room
+                    and any(sd is not None and sd.surface_flags & Surf.SKY for sd, _ in geo)
+                    and all(sd is None or sd.surface_flags & Surf.SKY or sd.nodraw or not sd.is_drawn for sd, _ in geo))
+        parts = [geo] if sky_only else _split_long(geo, self.opt.split)
+        pieces = [self._brush_piece(br, pc, kinds, nonsolid, water) for pc in parts]
         pieces = [p for p in pieces if p is not None]
         self._extra.extend(pieces[1:])
+        if self._in_sky_room:
+            self._sky_prims.extend(pieces)
         return pieces[0] if pieces else None
 
     def _brush_piece(self, br: Brush, geo, kinds: set[str], nonsolid: bool, water: bool = False) -> Optional[MBrush]:
@@ -910,7 +976,11 @@ class Converter:
                 faces.append(Face(tri, hidden, (0, 0), 0, (1, 1), 0, 0, 0, list(ext)))
                 continue
             if side.surface_flags & (Surf.SKY | Surf.SKY2D):
-                faces.append(Face(tri, self.sky_shader, (0, 0), 0, (1, 1), 0, 0, 0, list(ext)))
+                # with a portal sky the map's sky faces show the 3D skybox room (drawn from the
+                # script_skyorigin), whose own sky faces draw the 2D sky
+                portal = self._portal and side.surface_flags & Surf.SKY and not self._in_sky_room
+                faces.append(Face(tri, "common/skyportal" if portal else self.sky_shader, (0, 0), 0, (1, 1), 0, 0, 0,
+                                  list(ext)))
                 continue
             if side.nodraw or not side.is_drawn or not side.material or side.material.lower().startswith("tools/"):
                 faces.append(Face(tri, hidden, (0, 0), 0, (1, 1), 0, 0, 0, list(ext)))
@@ -1652,14 +1722,18 @@ class Converter:
         if not self.opt.displacements:
             return out
         grids: list[tuple[str, np.ndarray]] = []
+        in_sky: list[bool] = []
         for d in self.bsp.displacements():
             flat = d.flat
             n = d.size
             c = d.positions.reshape(-1, 3).mean(axis=0)
+            sky = False
             if self.sky_area is not None:
                 if self._in_sky(c + np.array(d.normal) * 2.0):
-                    self.report["dropped"]["skybox3d_disp"] = self.report["dropped"].get("skybox3d_disp", 0) + 1
-                    continue
+                    if not self._portal:
+                        self.report["dropped"]["skybox3d_disp"] = self.report["dropped"].get("skybox3d_disp", 0) + 1
+                        continue
+                    sky = True
             td = self.bsp.texdata[self.bsp.texinfo[d.texinfo]["texdata"]]
             cm = self.material(d.material, (int(td["width"]), int(td["height"])))
             ti = self.bsp.texinfo[d.texinfo]
@@ -1673,10 +1747,11 @@ class Converter:
             if np.dot(np.cross(grid[1, 0, :3] - grid[0, 0, :3], grid[0, 1, :3] - grid[0, 0, :3]), d.normal) < 0:
                 grid = grid.transpose(1, 0, 2)  # visible side = cross(row step, column step) faces the air
             grids.append((cm.shader, grid))
+            in_sky.append(sky)
         before = sum((2 * g.shape[0] - 1) * (2 * g.shape[1] - 1) for _, g in grids)
         if self.opt.disp_tolerance > 0:
             grids = [(sh, g) for (sh, _), g in zip(grids, _simplify_grids([g for _, g in grids], self.opt.disp_tolerance))]
-        for shader, grid in grids:
+        for (shader, grid), sky in zip(grids, in_sky):
             # midpoint expansion -> (2r-1)x(2c-1) controls; even indices are the (kept) Source samples
             r, c = grid.shape[:2]
             ctrl = np.zeros((2 * r - 1, 2 * c - 1, 5))
@@ -1688,6 +1763,8 @@ class Converter:
                 rows = [[tuple(round(float(v), 3) for v in piece[i, j]) for j in range(piece.shape[1])]
                         for i in range(piece.shape[0])]
                 out.append(Patch(shader, rows))
+                if sky:
+                    self._sky_prims.append(out[-1])
         after = sum(len(p.ctrl) * len(p.ctrl[0]) for p in out)
         self.report["patch_controls"] = {"before": before, "after": after}
         self.report["patches"] = len(out)
@@ -1836,6 +1913,11 @@ class Converter:
                     pass
 
         fogs = [e for e in self.bsp.find_entities("env_fog_controller") if e.get("fogenable", "0") != "0"]
+        # the map's own fog: the Master one (spawnflags 1), not one only a fog_volume switches
+        # to (de_vertigo's first is "fog_shaft", black at 3000 units, for the elevator shaft:
+        # it had fogged the whole map and its sky black)
+        local = {(v.get("fogname") or "").lower() for v in self.bsp.find_entities("fog_volume")} - {""}
+        fogs.sort(key=lambda e: (not int(e.get("spawnflags", "0") or 0) & 1, (e.get("targetname") or "").lower() in local))
         if fogs:
             # Source fog is linear from fogstart to fogend, capped at fogmaxdensity; MOHAA's
             # farplane fog reaches the full colour at farplane. Put Source's density at fogend.
@@ -1872,11 +1954,14 @@ class Converter:
         items = []
         for p_index, p in enumerate(list(sp.props) + self._entity_props()):
             p_index = p_index if p_index < len(sp.props) else -1
+            sky = False
             if self.sky_area is not None:
                 areas = self.bsp.prop_areas(p) if not getattr(p, "entity", False) else {
                     self.bsp.point_area(p.origin)}
                 if (areas and areas <= {self.sky_area}) or self._in_sky(p.origin):
-                    continue
+                    if not (self._portal and self.opt.props_mode == "inject"):
+                        continue
+                    sky = True
             key = (p.model.lower(), p.skin, p.solid if p.solid in (0, 2, 6) else 6)
             if key not in cache:
                 try:
@@ -1895,13 +1980,13 @@ class Converter:
                 continue
             sc = (p.uniform_scale or 1.0)
             size = [(cm.bounds[1][i] - cm.bounds[0][i]) * sc for i in range(3)]
-            items.append((size[0] * size[1] * size[2], p, cm, sc, p_index))
+            items.append((size[0] * size[1] * size[2], p, cm, sc, p_index, sky))
         items.sort(key=lambda t: -t[0])
         static_v, runtime, dropped, injected = 0, 0, 0, 0
         used: dict[str, object] = {}
         self.statics = []
         self.prop_light = []
-        for _, p, cm, sc, p_index in items:
+        for _, p, cm, sc, p_index, sky in items:
             org = " ".join(fmt(round(c, 2)) for c in self._prop_origin(p, cm, sc * s))
             ang = " ".join(fmt(round(a, 3)) for a in p.angles)
             model_keys = [t[len("models/"):] if t.startswith("models/") else t for t in cm.tiks]
@@ -1911,9 +1996,12 @@ class Converter:
                 # de_nuke's grey pipes and yellow rails are one white model tinted
                 tint = tuple(int(c) for c in getattr(p, "diffuse_modulation", (255, 255, 255, 255))[:3])
                 for part, mk in enumerate(model_keys):
+                    if sky:   # a 3D skybox prop: moved with its room in run(), no collision
+                        self._sky_statics.add(len(self.statics))
                     self.statics.append((mk, o, tuple(round(a, 3) for a in p.angles), round(sc * s, 4), tint))
                     self.prop_light.append(self._prop_light(p_index, cm, part) if p_index >= 0 else None)
-                clips += self._prop_clips(cm, p, sc * s)
+                if not sky:
+                    clips += self._prop_clips(cm, p, sc * s)
                 injected += 1
                 static_v += cm.vertices
             elif static_v + cm.vertices <= self.opt.props_static_vertices:
@@ -2146,6 +2234,88 @@ class Converter:
         self.__dict__.pop("_brush_boxes", None)
         return kept
 
+    def _place_sky_room(self, m: MapFile, world: MEntity, main_lo, main_hi, T) -> None:
+        """Move the 3D skybox room (``self._sky_prims``, its props) beside the map so that,
+        after the map's own offset ``T``, it lies inside +-WORLD_LIMIT (de_vertigo's room
+        reaches x 15,008, de_cache's 10,911): below the map, else above or beside it. The
+        portal sky is drawn from the ``script_skyorigin`` (at ``sky_camera``) wherever the room
+        is. Allied Assault has no sky parallax (``skyboxSpeed`` is a protocol-15 field,
+        ``cg_main.c``), so the room is seen from one point: where Source's skybox camera is for
+        an eye at the spawns' mean. With no room for it, the room is dropped and the map's sky
+        faces get the 2D sky again."""
+        s = self.opt.scale
+        pts = []
+        for q in self._sky_prims:
+            if isinstance(q, MBrush):
+                pts += list(q.bounds())
+            else:
+                pts += [c[:3] for row in q.ctrl for c in row]
+        r_lo, r_hi = np.min(pts, 0), np.max(pts, 0)
+        cam = self.bsp.sky_camera
+        centre = np.asarray(cam.origin, np.float64) * s     # the room is scaled about the camera
+        m_lo, m_hi = main_lo + T, main_hi + T
+        c = (m_lo + m_hi) / 2
+        gap = 512.0
+        rel, k = None, 1.0
+        # a perspective view does not change when the scene is scaled about the eye, so a room
+        # that fits nowhere is shrunk about sky_camera (de_vertigo's 7,360-unit city: half size)
+        for k in (1.0, 0.5, 0.25):
+            lo_k = centre + k * (r_lo - centre)
+            size = (r_hi - r_lo) * k
+            cands = [(c[0] - size[0] / 2, c[1] - size[1] / 2, m_lo[2] - gap - size[2]),
+                     (c[0] - size[0] / 2, c[1] - size[1] / 2, m_hi[2] + gap),
+                     (m_lo[0] - gap - size[0], c[1] - size[1] / 2, c[2] - size[2] / 2),
+                     (m_hi[0] + gap, c[1] - size[1] / 2, c[2] - size[2] / 2),
+                     (c[0] - size[0] / 2, m_lo[1] - gap - size[1], c[2] - size[2] / 2),
+                     (c[0] - size[0] / 2, m_hi[1] + gap, c[2] - size[2] / 2)]
+            for cand in cands:
+                d = np.round((np.asarray(cand) - (lo_k + T)) / 64.0) * 64.0
+                lo = lo_k + T + d
+                if np.all(lo >= -WORLD_LIMIT) and np.all(lo + size <= WORLD_LIMIT):
+                    rel = d
+                    break
+            if rel is not None:
+                break
+        sky = {id(q) for q in self._sky_prims}
+        if rel is None:
+            self.report["warnings"].append("3D skybox: no room for it inside +-8192; dropped")
+            world.prims = [q for q in world.prims if id(q) not in sky]
+            for e, prim in m.iter_prims():
+                if isinstance(prim, MBrush):
+                    for f in prim.faces:
+                        if f.shader == "common/skyportal":
+                            f.shader = self.sky_shader
+            self.statics = [st for k, st in enumerate(self.statics) if k not in self._sky_statics]
+            self.prop_light = [pl for k, pl in enumerate(self.prop_light) if k not in self._sky_statics]
+            self._sky_prims = []
+            return
+        tmp = MapFile([MEntity({"classname": "worldspawn"}, list(self._sky_prims))])
+        if k != 1.0:
+            scale_map(tmp, k, tuple(centre))
+        translate_map(tmp, tuple(rel))
+        moved = tmp.entities[0].prims
+        world.prims = [q for q in world.prims if id(q) not in sky] + moved
+        self._sky_prims = moved
+        self.statics = [(mk, tuple(centre[i] + k * (o[i] - centre[i]) + rel[i] for i in range(3)), ang, round(sc * k, 4),
+                         *rest) if n in self._sky_statics else (mk, o, ang, sc, *rest)
+                        for n, (mk, o, ang, sc, *rest) in enumerate(self.statics)]
+        # Source draws the skybox from sky_camera + eye / scale; AA's portal sky has one fixed
+        # origin, so take the eye at the spawns' mean (de_vertigo is played 11,600 units up:
+        # 725 above sky_camera in the room; at sky_camera itself its city looked street-level)
+        spawns = [e.origin for e in self.bsp.entities
+                  if e.classname in ("info_player_terrorist", "info_player_counterterrorist", "info_deathmatch_spawn")
+                  and e.origin is not None]
+        eye = (np.mean(np.asarray(spawns, np.float64), axis=0) + (0.0, 0.0, 64.0)) if spawns else np.zeros(3)
+        cam_scale = float(cam.get("scale") or 16) or 16.0
+        org = centre + k * eye / cam_scale * s + rel
+        m.entities.append(_ent("script_skyorigin", tuple(float(round(v, 1)) for v in org)))
+        # lighting.place: a room point p (Source x scale) lands on centre + k (p - centre) + offset
+        self.report["sky_room"] = {"box": [[round(float(v), 1) for v in r_lo], [round(float(v), 1) for v in r_hi]],
+                                   "centre": [round(float(v), 2) for v in centre], "k": k,
+                                   "offset": [round(float(T[i] + rel[i]), 1) for i in range(3)],
+                                   "camera_scale": float(cam.get("scale") or 16), "prims": len(moved),
+                                   "props": len(self._sky_statics)}
+
     def run(self) -> Result:
         brushes = self._drop_ladder_rail_clips(self.brushes())
         patches = self.patches()
@@ -2173,8 +2343,6 @@ class Converter:
         world = MEntity(self.worldspawn())
         world.prims = (list(brushes) + list(patches) + overlay_patches + prop_clips + self.sprites()
                        + self._ladder_step_brushes)
-        if self.opt.detail_all:
-            world.prims = self.shell(brushes, patches) + world.prims
         ents = [world] + self.entities() + ladder_ents + self.windows() + self.doors() + self.breakables() + prop_ents
         self.report["precache"] = precache
         scripts = [self._shader_text(cm) for cm in self.mats.values()]
@@ -2194,17 +2362,27 @@ class Converter:
         self.report["entities"] = len(ents)
         self.report["asset_bytes"] = sum(len(v) for v in self.assets.values())
         m = MapFile(ents)
+        sky = {id(p) for p in self._sky_prims}
+        lo, hi = np.full(3, np.inf), np.full(3, -np.inf)
+        for e, prim in m.iter_prims():
+            if isinstance(prim, MBrush) and id(prim) not in sky:
+                b0, b1 = prim.bounds()
+                lo, hi = np.minimum(lo, b0), np.maximum(hi, b1)
+        if self.opt.detail_all:   # the structural shell (below) pads the map by 64 + 16
+            lo, hi = lo - 80, hi + 80
         # de_vertigo plays 11,500 units up: move maps that leave MOHAA's +-8192 to the origin
         T = self.opt.offset
         if T is None:
-            lo, hi = np.full(3, np.inf), np.full(3, -np.inf)
-            for e, prim in m.iter_prims():
-                if isinstance(prim, MBrush):
-                    b0, b1 = prim.bounds()
-                    lo, hi = np.minimum(lo, b0), np.maximum(hi, b1)
             T = (0.0, 0.0, 0.0)
             if np.isfinite(lo).all() and max(np.abs(lo).max(), np.abs(hi).max()) > WORLD_LIMIT:
                 T = tuple(float(-512.0 * round((lo[i] + hi[i]) / 2 / 512.0)) for i in range(3))
+        if self._sky_prims:
+            self._place_sky_room(m, world, lo, hi, np.asarray(T, np.float64))
+        if self.opt.detail_all:
+            room = self._sky_prims    # moved (or dropped) by _place_sky_room
+            world.prims = self.shell([b for b in brushes if id(b) not in sky] + [q for q in room if isinstance(q, MBrush)],
+                                     [q for q in patches if id(q) not in sky] + [q for q in room if isinstance(q, Patch)]
+                                     ) + world.prims
         if any(T):
             translate_map(m, T)
             self.statics = [(mk, tuple(o[i] + T[i] for i in range(3)), *rest) for mk, o, *rest in self.statics]
@@ -2608,7 +2786,8 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
     if lighting == "csgo":
         from . import lighting as _lighting
         info = _lighting.transfer(compiled_bsp, SourceBSP(str(src)), lit, scale=scale, log=log, gains=gains,
-                                  offset=convert_report.get("offset") or (0, 0, 0), exposure=exposure)
+                                  offset=convert_report.get("offset") or (0, 0, 0), exposure=exposure,
+                                  sky_room=convert_report.get("sky_room"))
         divided = info.pop("divided_lightmaps", None)
         report["lighting"] = info
         exposure = info["exposure"]
@@ -2619,7 +2798,8 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
         from .lighting import blend_alphas
         b = _BSP(base)
         write_lumps(b, {"drawverts": blend_alphas(b, SourceBSP(str(src)), convert_report["blend"], scale,
-                                                  convert_report.get("offset") or (0, 0, 0))}, lit)
+                                                  convert_report.get("offset") or (0, 0, 0),
+                                                  convert_report.get("sky_room"))}, lit)
         base = lit
     bsp_bytes = base.read_bytes()
     if statics:
