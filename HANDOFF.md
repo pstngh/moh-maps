@@ -118,9 +118,11 @@ then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-g
    To confirm, re-run MT light on `roots/dm_mtx` (with statics) a few times and on
    `roots/dm_mtnostatic` (without) a few times. If confirmed, mk_medina could drop its
    forced `-threads 1` when built with `--inject-props`.
-5. **mk_medina** re-shoot at high detail:
-   `python -m mohkit test dist/mk_medina.pk3 dm/mk_medina --shots maps/mk_medina --bots 8 --seconds 60`;
-   then `mk_village`, `mk_ref_room`, and correct `docs/lighting.md` claims made at low detail.
+5. **mk_medina re-shot at high detail (05:35):** `dist/mk_medina_shots.png`, 20 shots,
+   **19 bot kills** in 60 s; alleys, arcades, cornices, café and props read well (its props
+   are MOHlight-lit; compare with the injected copy `dist/mk_medinai_shots.png`: nearly the
+   same, MOHlight's props show a little more self-shading). Still to do: re-shoot
+   `mk_village` and `mk_ref_room` and correct `docs/lighting.md` claims made at low detail.
 6. Tell the user: accept the Xcode license (`sudo xcodebuild -license`), and consider
    moving the repo out of iCloud (`~/Developer/moh-maps`).
 
