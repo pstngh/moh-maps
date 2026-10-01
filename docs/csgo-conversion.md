@@ -141,12 +141,14 @@ in all, so only a view of nearly the whole map (the overview shot) can lose some
   into glass debris (`func_window`) instead of opening.
 - Detail sprites (grass) are dropped.
 
-## Measured builds (2026-10-01, Apple Silicon, three builds sharing 10 cores)
+## Measured builds (2026-10-01, Apple Silicon, three or four builds sharing 10 cores)
 
 | map | quality | props injected (vertices) | overlays | BSP | VIS | light | shots | bots (8, 90 s) |
 |---|---|---|---|---|---|---|---|---|
 | cs_dust2 | draft (density 32) | 1,574 (842k) | 459 | 559 s | 1 s | 1,962 s | 32 named cameras, 47 s | 75 kills |
 | cs_nuke | unlit | 4,801 (5.6M) | 718 | 261–489 s | 1 s | — | 38 named cameras, 59 s | 83 kills |
+| cs_dust2 | fastrad (03:15 code) | 1,574 (842k) | 459 | 684 s | 2 s | 2,752 s | 32, 47 s | 91 kills |
+| cs_mirage | fastrad (03:13 code) | 1,470 (1.35M) | 512 | 293 s | 1 s | 2,672 s | 30, 45 s | 77 kills |
 
 de_nuke's draft light at density 16 had reached 1% after 6 minutes; at density 32 the
 first 10% still took ~15 minutes (progress is not linear: the slow part comes first).
