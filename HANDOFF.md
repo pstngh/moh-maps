@@ -106,6 +106,18 @@ then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-g
 
 ## Decisions made while the user was away
 
+- (fourth session) Converted lights: Source lights below brightness 20 are dropped and a
+  light within 32 units of a brighter one is folded into it (de_nuke 473 -> 247). The
+  dropped ones were nearly zero, and the 60-lights-per-leaf cap made them cost real light.
+- (fourth session) Converted maps compile with `-blocksize 512`, drafts light at density 32,
+  and the final Nuke/Mirage builds use the new `fastrad` preset (`-fast -bounce 2`):
+  `preview` would not have finished tonight.
+- (fourth session) The vent slats and breakable vent covers of de_nuke stay unconverted
+  (vents open). Doors are real `func_rotatingdoor`s. Ladders: only ladders hanging 32+
+  units above the floor in front are extended down (one in Nuke).
+- (fourth session) `build --inject-props` for from-scratch maps is opt-in: its prop
+  lighting has no per-vertex shadows, so it isn't the default until a sheet comparison.
+
 - (fourth session) The chat said "de_nuke first"; HANDOFF (edited 23:45, after the run
   started) says finish dust2 first, time-boxed to ~02:00. Did step 1, then built the
   converter features both maps need while Nuke compiled, and started a dust2 rebuild at
