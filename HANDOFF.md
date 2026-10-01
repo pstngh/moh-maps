@@ -15,7 +15,7 @@ update this file, commit and push, then stop and give the user the one-line hand
 |---|---|---|---|---|---|
 | de_nuke | `local/csgo/cs_nuke/cs_nuke.pk3` (05:29, spot fix) | fastrad, BSP 200 s, light 2,389 s | **70 kills**, none stuck | **6/6** (A-site one: +use from the ledge) | 4,801 props, 718 overlays, 6 doors, 3 breakable vents, 38 glass windows, 70 ropes, 78 glows, water; interiors now lit |
 | de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (06:02, spot fix) | fastrad, BSP 242 s, light 1,259 s | **75 kills** | 2/3 (leaning ladder at (444 652 -182): falls off the top) | 1,470 props, 512 overlays, 85 ropes, 35 glows, 3 breakable covers/shutter + 3 windows; shops and palace now lit |
-| de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (04:14, before the spot fix) | fastrad, BSP 684 s, light 2,752 s | **91 kills**, none stuck | — | 1,574 props, 459 overlays |
+| de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (09:12, spot + displacement fixes) | fastrad, BSP 714 s, light 2,692 s (3 builds sharing the CPU) | **88 kills** | — (no ladders) | 1,574 props, 459 overlays; tunnels now lit; to check: two crate stacks in `11_Tunnels4` turned black (lit in the 04:14 build) |
 
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
@@ -28,12 +28,27 @@ layouts). Done: `Options.ladder_style="steps"` (default): invisible clip step co
 Mirage's leaning ladder now faces its ledge (square volume, both axes tried); breakable
 vents/covers get metal or wood debris (`debris_7/8.tik`); `game.ladder_probe` records
 the highest point; `game.ladders_for_probe` includes step ladders from report.json.
-**Running since 08:20:** `local/csgo/dust2_rebuild.sh` (dust2 has no ladders: its result is
-final), `local/csgo/mirage_rebuild.sh` and `local/csgo/nuket_build.sh` (both converted
-before the step ladders: Mirage must be rebuilt again; cs_nuket is only the texlights
-comparison). Logs `local/csgo/{dust2_rebuild,mirage_rebuild,nuket_build}.log` end with
-"done". Earlier packages are backed up in the session
-scratchpad only (`cs_nuke_final_0437.pk3` etc.); they will be lost with it.
+Step ladders verified on an unlit Mirage (`local/csgo/cs_miragel`, 09:20): all 3 climb
+to the top (147/148, 143/160 (one step short under the scaffold's upper floor, above its
+platform), 139/146 onto the ledge). dust2 rebuild done 09:12 (row above).
+**Still running (started 08:20):** `local/csgo/mirage_rebuild.sh` and
+`local/csgo/nuket_build.sh`. Both were converted before the step ladders, so Mirage needs
+one more build; cs_nuket is only the texlights comparison. Logs
+`local/csgo/{mirage_rebuild,nuket_build}.log` end with "done".
+
+**Exact next steps (09:30; shell commands were blocked by a failing permission check):**
+1. Commit `HANDOFF.md` (only uncommitted file).
+2. `python local/csgo/strafe_test.py`: check that strafing off the top of Mirage's scaffold
+   ladders lands on the platforms (expected; hole ladders can't be left backward).
+3. When `mirage_rebuild.log` says done: check its sheets for the fog-coloured walls (should
+   be gone), then rebuild Mirage with step ladders: `local/csgo/mirage_rebuild.sh`
+   (build, 8 bots, `local/csgo/ladprobe.py`).
+4. dust2 `11_Tunnels4`: two crate stacks are black in the 09:12 build (lit at 04:14). Sample
+   `staticlight.LightGrid` at those props in both BSPs (old pk3: session scratchpad
+   `old_dust2/cs_dust2.pk3`, may be gone) to find whether the grid went black there.
+5. When `nuket_build.log` says done: compare `cs_nuket` with `cs_nuke` (old shots backed
+   up in the scratchpad `nuke_0529/`; else re-shoot `cs_nuke.pk3`): radio rooms, lobby, B
+   site. Then the final Nuke build with step ladders (+ `--texlights` if better).
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
