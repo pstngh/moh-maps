@@ -40,6 +40,9 @@ QUALITY = {
     # BSP stage took 23 s instead of 84 s, for 30% more draw surfaces (docs/toolchain.md).
     # MOHlight -fast alone still runs radiosity (its lightmaps match -bounce 2); -bounce 0 skips it.
     "draft": (["-nomerge"], ["-fast"], ["-fast", "-bounce", "0"]),
+    # draft geometry with fast radiosity (2 bounces): lifts the black shadows of draft light
+    # for a fraction of preview's time on big converted maps
+    "fastrad": (["-nomerge"], ["-fast"], ["-fast", "-bounce", "2"]),
     "preview": ([], [], ["-bounce", "2"]),
     "normal": ([], [], []),
     "final": ([], [], ["-final"]),

@@ -54,6 +54,10 @@ from .vpk import SearchPath, ZipSource
 from .vtf import VTF, load_vtf
 
 CAULK = "common/caulk"
+# Q3map chops the BSP into blocks of this size: a converted map is all detail inside one
+# structural shell, so its leaves are these blocks, and MOHlight keeps at most 60 lights per
+# leaf. 512 (default 1024) gave de_nuke ~500 clusters and 31 KB of VIS data.
+BSP_ARGS = ("-blocksize", "512")
 MAX_SHADER_NAME = 59  # "textures/..." length; Q3map duplicates the BSP shader entry of 60-character names
 
 DROP_KINDS = {"hint", "skip", "areaportal", "occluder", "trigger", "origin", "fog", "skyfog", "blocklight", "blocklos",
@@ -83,6 +87,8 @@ class Options:
     displacements: bool = True
     disp_tolerance: float = 1.0     # drop displacement sample lines within this many units of straight (0 = keep all)
     lights: bool = True
+    light_min_brightness: float = 20.0   # Source _light brightness below this: dropped
+    light_merge_distance: float = 32.0   # a light this close to a brighter one is folded into it
     # world units per lightmap texel. MOHlight time is roughly proportional to the texel
     # count (de_nuke: ~1M texels at 16), so drafts use 32 (a quarter of the texels).
     lightmap_density: int = 16
@@ -1031,8 +1037,9 @@ class Converter:
                 if not has_dm and cls != "info_deathmatch_spawn":
                     out.append(_ent("info_player_deathmatch", org, angle=fmt(yaw % 360)))
                 start = start or org
-            elif cls in ("light", "light_spot") and self.opt.lights and o is not None:
-                out += self._light(e, cls)
+        if self.opt.lights:
+            for e, cls, gain in self._kept_lights():
+                out += self._light(e, cls, gain)
         if start:
             out.append(_ent("info_player_start", start, angle="0"))
         # landmarks for cameras: bomb sites and hostage spots
@@ -1049,7 +1056,42 @@ class Converter:
         self.report["landmarks"] = marks
         return out
 
-    def _light(self, e, cls) -> list[MEntity]:
+    @staticmethod
+    def _brightness(e) -> float:
+        v = (e.get("_light") or "255 255 255 200").split()
+        try:
+            return float(v[3]) if len(v) > 3 else 200.0
+        except ValueError:
+            return 200.0
+
+    def _kept_lights(self) -> list:
+        """Source lights worth a MOHAA light: (entity, class, intensity gain).
+
+        CS:GO maps carry many near-zero fill lights (de_nuke: 206 of 473 have brightness
+        <= 53, a quarter <= 4) and pair most fixtures' ``light_spot`` with a weak ``light``
+        a few units away. MOHlight lists at most 60 lights per leaf ("Num lights per leaf
+        clamped from 473 to 60"), so in a converted map's big leaves the extra lights
+        crowded out real fixtures and interiors went dark. Lights below
+        ``light_min_brightness`` are dropped and a light within ``light_merge_distance`` of
+        a brighter one is folded into it (half its intensity added)."""
+        lights = [(e, e.classname, self._brightness(e)) for e in self.bsp.entities
+                  if e.classname in ("light", "light_spot") and e.origin is not None]
+        before = len(lights)
+        lights = [t for t in lights if t[2] >= self.opt.light_min_brightness]
+        lights.sort(key=lambda t: -t[2])
+        kept: list = []
+        for e, cls, br in lights:
+            o = np.array(e.origin, np.float64)
+            for k in kept:
+                if np.linalg.norm(np.array(k[0].origin, np.float64) - o) <= self.opt.light_merge_distance:
+                    k[2] += 0.5 * br / max(self._brightness(k[0]), 1.0)
+                    break
+            else:
+                kept.append([e, cls, 1.0])
+        self.report["lights"] = {"source": before, "kept": len(kept)}
+        return [tuple(k) for k in kept]
+
+    def _light(self, e, cls, gain: float = 1.0) -> list[MEntity]:
         s = self.opt.scale
         v = (e.get("_light") or "255 255 255 200").split()
         try:
@@ -1059,7 +1101,7 @@ class Converter:
             return []
         mx = max(r, g, b, 1e-3)
         color = (r / mx, g / mx, b / mx)
-        intensity = max(40.0, min(600.0, bright * 0.75)) * self.opt.light_scale
+        intensity = max(40.0, min(600.0, bright * 0.75 * gain)) * self.opt.light_scale
         o = e.origin
         org = (o[0] * s, o[1] * s, o[2] * s)
         le = _ent("light", org, light=fmt(round(intensity)), _color=" ".join(f"{c:.3f}" for c in color))
@@ -1103,7 +1145,11 @@ class Converter:
                     ai = float(a[3]) if len(a) > 3 else 20
                     ka = max(6.0, min(20.0, ai / 12.0))
                     ws["ambientlight"] = f"{ar * ka:.1f} {ag * ka:.1f} {ab * ka:.1f}"
-                    ws["sundiffusecolor"] = f"{ar * 60:.0f} {ag * 60:.0f} {ab * 60:.0f}"
+                    # sky fill scaled by Source's ambient brightness (de_nuke 550: a strong blue sky
+                    # that keeps shadows readable), colour normalised to its brightest channel
+                    mx = max(ar, ag, ab, 1e-3)
+                    ks = max(20.0, min(70.0, ai / 8.0))
+                    ws["sundiffusecolor"] = f"{ar / mx * ks:.0f} {ag / mx * ks:.0f} {ab / mx * ks:.0f}"
                     ws["sundiffuse"] = "1"
                 except ValueError:
                     pass
@@ -1641,7 +1687,7 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     out = config.REPO / "local" / "csgo" / name
     out.mkdir(parents=True, exist_ok=True)
     log(f"== converting {src.name} -> {name}")
-    if quality in ("draft", "unlit"):
+    if quality in ("draft", "unlit", "fastrad"):
         # MOHlight lights static-model vertices on one thread (~190/s at best; de_dust2's 70k took
         # hours), so "compile" drafts make every prop a runtime script_model unless a budget is given.
         opts.setdefault("props_static_vertices", 0)
@@ -1669,10 +1715,11 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
         # geometry, props, doors and ladders in minutes: no light stage (the game draws the
         # world fullbright) and props get a flat grey instead of light-grid colours
         log("== compiling (unlit: BSP and fast VIS only)")
-        cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality="draft", light=False)
+        cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality="draft", light=False,
+                           bsp_args=BSP_ARGS)
     else:
         log(f"== compiling ({quality})")
-        cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality=quality)
+        cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality=quality, bsp_args=BSP_ARGS)
     log(cr.summary())
     (out / "statics.json").write_text(json.dumps(res.statics))
     report = {"name": name, "source": str(src), "convert": res.report, "compile_ok": cr.ok, "stats": cr.stats,

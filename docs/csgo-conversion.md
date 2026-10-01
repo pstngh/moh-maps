@@ -53,11 +53,15 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | materials | TGA/JPG + generated shader script | `$basetexture` only (blends use the first layer); power-of-two, max 512 px; `$surfaceprop` → MOHAA material surfaceparm; alphatest/translucent/nocull handled |
 | texture alignment | Q3 shift/rotate/scale | exact for any rotation, scale or mirror (`tests/test_texdef.py`) |
 | `info_player_terrorist` / `counterterrorist` / `info_deathmatch_spawn` | `info_player_axis` / `allied` / `deathmatch` | T+CT double as DM spawns when the map has none |
-| `light`, `light_spot` | `light` (+ `info_null` target) | intensity ≈ 0.75 × Source brightness, clamped 40–600 |
-| `light_environment` | worldspawn `suncolor`, `sundirection`, `ambientlight`, `sundiffusecolor` | |
+| `light`, `light_spot` | `light` (+ `info_null` target) | intensity ≈ 0.75 × Source brightness, clamped 40–600. Lights below brightness 20 are dropped and a light within 32 units of a brighter one is folded into it (de_nuke 473 → 247): MOHlight keeps at most 60 lights per leaf, and in the converted map's big leaves the near-zero fill lights crowded out the fixtures (radio rooms went dark while the light grid, which gets every light, made their props bright) |
+| `light_environment` | worldspawn `suncolor`, `sundirection`, `ambientlight`, `sundiffusecolor` | sky fill = `_ambient` colour normalised to its brightest channel × clamp(brightness / 8, 20, 70) |
 | static props (`prop_static`) | `mohkit/source/modelconv.py` (MDL → TIKI/SKD/SKC + collision `.map`). **Default (`props_mode="inject"`): every prop** becomes a static model added to the lit BSP by `mohkit.staticlight` and coloured from its light grid, with its collision as world clip brushes. `props_mode="compile"`: the largest as MOHlight-lit `static_*` up to `--static-verts`, the next 600 as `script_model`s | MOHlight lights static models on one thread (~190 verts/s), so de_nuke's 4,801 props would light for hours; injection takes seconds and costs no entities |
 
 ## Visibility and compile time
+
+Converted maps compile with Q3map `-blocksize 512` (`convert.BSP_ARGS`): the leaves of an
+all-detail map are the BSP blocks, and smaller blocks mean fewer lights per leaf for
+MOHlight's 60-light cap (de_nuke: ~500 clusters, 31 KB of VIS data).
 
 By default every converted brush is detail inside a structural caulk shell.
 That compiles reliably; a Source layout imported as structural geometry
