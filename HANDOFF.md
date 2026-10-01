@@ -1,28 +1,42 @@
 # HANDOFF: current state and next steps (living file; keep it current)
 
-## Summary (paused 2026-09-30 ~21:40 at the user's request)
+## Summary (paused 2026-09-30 ~22:25 at the user's request, second session)
 
-All work is committed and pushed to `main`; nothing is running. This session:
+All work is committed and pushed to `main`. **Two builds are still running**
+(detached with nohup; they survive the session):
 
-- **Harness fixed** (`mohkit/game.py`): bots join after the cameras; the load
-  wait counts frames; `finishloadingscreen` lets stock maps be shot from any
-  spot. Shots used to be third-person bot views, or all the same spot on stock
-  maps.
-- **CS:GO conversions load in game again** (`.jpg` editor images were read as
-  TGA fence masks). Prop shader scripts now go to `scripts/`. Displacement
-  patches are simplified. Draft conversions compile props as runtime models.
-  **cs_dust2 draft now builds in ~65 min instead of 3+ h, with props
-  everywhere** (BSP 368 s instead of 1,213 s; light 55 min still slow).
-- **Screenshot → map workflow** is done: `docs/from-reference.md`,
-  `mohkit/camera.py`, `mohkit looks-like` / `swatches` / `compare --region`,
-  and the proof map `maps/mk_ref_room`.
-- **Zero-context test passed:** a fresh agent built `maps/mk_medina` (North
-  African town, 24 bot kills/60 s) from the docs alone and reported doc gaps
-  (listed below, not yet fixed).
-- **Inherited claims checked:** 7 of 8 are now tested or verified (see the
-  bottom). The checks also found the real lightmap limit (170), the shader
-  headroom (~1,630), the BSP hotspots, slow single-threaded static-prop
-  lighting, and the multi-threaded MOHlight crash.
+| build | log | results land in |
+|---|---|---|
+| cs_dust2 draft (`mohkit csgo de_dust2 -q draft`), light started 22:07 | `/private/tmp/claude-501/-Users-pstn-Documents-moh-maps/5245b254-4e68-40bc-9e0d-7ad12bb4c67d/scratchpad/dust2_draft.log` | `local/csgo/cs_dust2/cs_dust2_shots.png`, `report.json` |
+| mk_medina preview + 8 bots 60 s (`mohkit build maps/mk_medina -q preview --bots 8 --seconds 60`), light started 22:06 | `…/scratchpad/medina_preview.log` (same folder) | `dist/mk_medina_shots.png`, `dist/mk_medina_report.json` (kills) |
+
+Each light took ~55 min last time, so both should finish ~23:00–23:20. Check with
+`ps aux | grep -E "[Q]3map|[M]OHlight|[o]penmohaa"` and the result files'
+timestamps. Both passed the new post-BSP 64-vertex check (they reached VIS/light).
+
+This session (second):
+
+- **HANDOFF step 1 done** (mk_medina's doc gaps): `mohkit generate`; 64-vertex
+  check right after BSP with face locations, stopping before VIS/light; band
+  lists on brushes raise `TypeError`; spawn validation uses only player-blocking
+  collision brushes (palm canopies are foliageclip); `Shot.fov` now works
+  (`cg_fov`, engine clamps 65–120; narrower = centre crop); `test --shots
+  <other>` no longer overwrites the map's sheet; draft light is `-fast -bounce 0`
+  (`-fast` alone still ran radiosity, measured). New `docs/api.md`, North African
+  palette, 64-vertex faces, hill rings, light-time breakdown.
+- **cs_dust2 black rubble: cause found, fix unverified.** Runtime `script_model`s
+  are lit from their origin (NOT_SOLID packs no box: `cg_modelanim.c:1064`,
+  `sv_world.c:230`); the rubble's Source pivot is on the floor, so the sun trace
+  starts in solid. `modelconv.convert_model(centre=True)` now moves each converted
+  model's pivot to its bounds centre (mesh and collision), and the converter
+  offsets entity origins (`Converter._prop_origin`). The running dust2 build tests it.
+  Documented in `docs/reference/engine.md` §5.2 (says "renders black": confirm).
+- **mk_medina polish, unverified in game:** `wall_trim` (ornamental
+  `algiers/algiertrim` cornice under the roof edge, beam-end rows, string course
+  at z 256), `balcony` (wooden mashrabiya boxes replacing ~30% of upper windows;
+  upper windows moved to z+280 on tall walls), `sundiffuse 1.6`,
+  `ambientlight 20 18 16`, alley lanterns 190, and 24 DM spawns (4 team-only).
+  `mohkit generate` validates it with 0 errors.
 
 Read `CLAUDE.md` first. Git: GitHub `main` (https://github.com/pstngh/moh-maps).
 The old pre-restart `.git` is backed up at `~/Library/Caches/mohkit/old-git-backup`
@@ -52,51 +66,41 @@ equal. Conversions are personal-use only.
 
 ## Next steps (in order)
 
-1. **Fix the doc gaps and toolkit issues mk_medina's agent reported:**
-   - CLAUDE.md says to validate `maps/<name>/<name>.map` before building, but
-     that file only exists after `build`. Add a `mohkit generate maps/<name>`
-     command (write and validate the `.map`), or fix the loop text.
-   - Run the 64-vertex face check right after the BSP stage, and stop before
-     VIS/light (it currently runs after lighting). Report face locations, not
-     just shaders.
-   - Passing a wall-band list to `b.box`/`b.hull` silently writes garbage into
-     the `.map`. Raise a clear error.
-   - Docs need a kit/build API overview: `facade`, `door`, `recess`, `strip`,
-     `shutter`, `terrain`, `cv.solid`, band/side mapping, MatSpec keys.
-   - Docs need a North African palette (`algiers/*`, mohdm7). Traps:
-     `algiers/afrika_windecal` is a decal and needs a non-solid slab;
-     `algiers/tentdsrt` renders black underneath, so use `algiers/desertcloth`.
-   - The cause of >64-vertex faces: arch/detail pieces meeting a narrow
-     ceiling strip add T-junction vertices. Stop them below the ceiling and
-     close the gap with one lintel.
-   - Draft `-fast` light still does radiosity. World size (sky height, hill
-     ring) drives MOHlight time; static props light on one thread.
-   - Terrain hill rings: a Euclidean falloff breaks the 510-unit patch limit at
-     the corners; a p=4 norm works.
-   - design.md: "2–4 min to run across" is impossible within ±8192 (~60 s at
-     275 u/s).
-   - `validate` uses a prop's full bounds for spawn clearance (palm canopies
-     block spawns).
-   - `mohkit test --shots <other>` overwrites `dist/<name>_shots.png`.
-   - Check that `Shot.fov` takes effect in game; the agent saw no change with
-     fov 30.
-2. **cs_dust2** (`local/csgo/cs_dust2/cs_dust2_shots.png`, latest draft build):
-   - Some converted props render **solid black** (rubble/debris in shots 01 and
-     04); some crates look washed out. Check their shaders and models.
-   - Run bots: `python -m mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 60`.
-   - Profile the 55-min light (`Stage.slowest`, `-v`).
-   - 848 of 1,509 props are dropped. Engine entity limit: 600 runtime +
-     others ≤ 1024.
-   - Update the measured results in `docs/csgo-conversion.md`.
-3. **mk_medina polish:** the narrow streets are too dark, and walls are plain
-   and boxy. It has 28 DM spawns where the spec was 16–24, and it lights with
-   `-threads 1` (multi-threaded MOHlight crashed at 00433F3A).
+1. **Done 2026-09-30 (second session):** mk_medina's doc gaps and toolkit issues.
+   `mohkit generate`; the 64-vertex check runs after BSP and stops the compile with
+   face locations; band lists on brushes raise; prop collision uses the
+   player-blocking brushes (palm canopies no longer block spawns); `Shot.fov` works
+   (`cg_fov`, 65–120, crop below); `test --shots` keeps the map's sheet; draft light
+   is `-fast -bounce 0` (`-fast` alone ran radiosity). Docs: `docs/api.md`, North
+   African palette, 64-vertex faces, hill rings, light-time breakdown.
+2. **Check the two running builds** (table above):
+   - cs_dust2: is the rubble in shots 01/04 lit now? Are props still in the right
+     places (re-centring moves origins: compare with the old sheet)? If good,
+     remove "(says renders black: confirm)" from this file, update
+     `docs/csgo-conversion.md` (its "Known gaps" still says props are pending the
+     model converter; add the pivot note, the measured times from the build summary,
+     and the props report: instances/runtime/dropped), and commit.
+   - Then dust2 bots: `python -m mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 60`.
+   - Dust2 still drops ~848 of 1,509 props in draft (runtime cap 600; engine
+     entity limit 1024 total). Some crates looked washed out (shot 00): check.
+   - mk_medina: look at `dist/mk_medina_shots.png` (alleys 05–07 brighter? cornices,
+     balconies, beam ends look right, nothing floating or z-fighting?) and the bot
+     kills in the build log/report. Fix, rebuild, commit. Light stays `-threads 1`
+     (MT MOHlight crashed at 00433F3A).
+3. **Medina is otherwise done** once the above looks right; update its README if
+   anything changes.
 4. **Claim 8** (VIS overflow without the structural shell): test with
    `mohkit csgo de_dust2 --structural` when the machine is free (long).
 5. Tell the user: accept the Xcode license, and consider moving the repo out
    of iCloud (`~/Developer/moh-maps`).
 
 ## Decisions made while the user was away
+
+- (second session) Draft light became `-fast -bounce 0`: lighting.md already said
+  draft has no radiosity, and drafts are for geometry. Draft interiors are darker
+  than before; judge lighting on preview or normal.
+- (second session) mk_medina keeps 14 spawns per team but only 24 DM spawns: four
+  choke-point or crowded spawns are team-only.
 
 - Village accepted as final: the preview build has the latest source and looks
   the same as normal.
