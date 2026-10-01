@@ -20,19 +20,17 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 00:27):**
-- **dust2:** the 00:00 draft's light stage was killed by my own experiments
-  (`kill_stragglers` pkill'd every MOHlight; fixed). Its light is being re-run by hand
-  (`scratchpad/relight.py cs_dust2 10`), and a waiter then runs
-  `python -m mohkit csgo de_dust2 --resume` (inject 1,509 props, package, 23 named
-  cameras). `local/csgo/cs_dust2/statics.json` was regenerated without entity props to
-  match that build's clip brushes. If the waiter died: run the resume by hand once
-  `roots/dm_cs_dust2/light.log` ends.
-- **nuke:** `python -m mohkit csgo de_nuke -q draft` (draft 3, name `cs_nuke`, started
-  00:24): doors, overlays, windows, water, ladders, fog, 4,801 injected props,
-  lightmapdensity 32. Light-time findings: `-blocksize 512/256`, no `sundiffuse` and no
-  light entities all left MOHlight at ~1% after 5 min (under heavy CPU contention), so the
-  per-texel cost is base cost; density 32 cuts texels 4×.
+**Live state (update as you go, 00:37):** three builds running (logs in the session
+scratchpad; outputs in `local/csgo/<name>/`):
+- `mohkit csgo de_nuke -q draft` (name `cs_nuke`, started 00:24, light at density 32 was
+  6% at 00:35 with ~1h15 to go). All converter features.
+- `mohkit csgo de_nuke -q unlit --name cs_nukeu` (00:35): geometry/props/doors check in
+  minutes; then run `game.ladder_probe` on it (`docs/testing.md`).
+- `mohkit csgo de_dust2 -q draft` (00:36, fresh; the earlier dust2 light was killed by my
+  own `pkill` and its density-16 relight would have taken ~3 h).
+Light findings: MOHlight's time is the per-texel base cost (no light entities, `-notrace`,
+`-blocksize 512/256` or no `sundiffuse` made no difference); density 32 made de_nuke
+roughly 5× faster.
 
 Done this run (all committed and pushed):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
