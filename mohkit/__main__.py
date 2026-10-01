@@ -332,7 +332,7 @@ def main(argv=None) -> int:
     s.add_argument("--scale", type=float, default=1.0)
     s.add_argument("--max-texture", type=int, default=512)
     s.add_argument("--structural", action="store_true", help="keep Source world brushes structural (better VIS, may overflow)")
-    s.add_argument("--static-verts", type=int, help="lit-vertex budget for compiled static props (default 70000)")
+    s.add_argument("--static-verts", type=int, help="lit-vertex budget for compiled static props (default 70000; 0 for -q draft)")
     s.add_argument("--no-test", action="store_true")
     s.set_defaults(fn=cmd_csgo)
     a = ap.parse_args(argv)

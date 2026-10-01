@@ -921,6 +921,10 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     out = config.REPO / "local" / "csgo" / name
     out.mkdir(parents=True, exist_ok=True)
     log(f"== converting {src.name} -> {name}")
+    if quality == "draft":
+        # MOHlight lights static-model vertices on one thread (~190/s at best; de_dust2's 70k took
+        # hours), so drafts make every prop a runtime script_model unless a budget is given.
+        opts.setdefault("props_static_vertices", 0)
     res = convert(str(src), cfg.csgo_dir, Options(name=name, **opts))
     (out / f"{name}.map").write_text(res.map.dumps(), encoding="latin-1")
     for rel, data in res.assets.items():
