@@ -85,13 +85,12 @@ equal. Conversions are personal-use only.
 de_mirage. HANDOFF edit (23:45): finish de_dust2 first, time-boxed to ~02:00, then Nuke,
 then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-git-backup`).
 
-1. **CS:GO look, next lever: texlights.** Source lights many interiors with emissive
-   textures listed in `csgo/lights.rad` ("material r g b brightness": de_nuke's office
-   light strips 10, lit windows 325, reactor glow 150). Convert them to
-   `q3map_surfacelight N` in the material's shader (retail uses 1000-3000 for lit windows;
-   MOHlight prints "N light emitting surfaces"), and keep de_nuke's StartDisabled emitter
-   func_brushes (dropped now) as visible non-solid emitters. Then compare the radio rooms
-   and Mirage's shops (both still dark) with the 03:15 builds.
+1. **CS:GO look, next lever: texlights.** `mohkit csgo <map> --texlights` (opt-in, added
+   03:17) turns `lights.rad` emissive materials into `q3map_surfacelight` (brightness x 100,
+   clamp 100-5000) and keeps de_nuke's disabled emitter strips as non-solid emitters. The
+   mechanism is verified on a test room; the scale isn't. Build Nuke with it, compare the
+   radio rooms/lobby and Mirage's shops against the 03:15 builds, tune `texlight_scale`,
+   then make it the default.
    Other Nuke gaps: vents break like glass; door handles lost; detail grass dropped.
 2. **Structural CS:GO maps:** `--structural` dust2 compiles (61 KB VIS, claim 8 false).
    Try a lit structural build: smaller leaves may light faster and avoid the 60-lights-
