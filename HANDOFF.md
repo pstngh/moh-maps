@@ -13,15 +13,13 @@ update this file, commit and push, then stop and give the user the one-line hand
 
 | map | pk3 | build | bots (8, 90 s) | ladders | notes |
 |---|---|---|---|---|---|
-| de_nuke | `local/csgo/cs_nuket/cs_nuket.pk3` (10:05: texlights, displacement fix, lightmap-lit props; old func_ladders) | fastrad, light 6,403 s (3-4 builds sharing the CPU) | **76 kills** | — | Hell, B site, Heaven approach now lit like CS:GO. **Final build running** (`cs_nuke`, below) |
+| de_nuke | `local/csgo/cs_nuke/cs_nuke.pk3` (11:13, **final**: step ladders, texlights (43), displacement + spot fixes, lightmap-lit props, metal debris for 3 vents) | fastrad, BSP 274 s, light 3,172 s | **88 kills** | **6/6** step ladders (250/271, 94/101, 351/360, 125/131, 176/206, 286/290) | B site, Hell, radio rooms, lobby lit like CS:GO; a wall in `25_Lobby2` stays very dark (check) |
 | de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (10:17, **final**: step ladders, displacement + spot fixes, lightmap-lit props) | fastrad, BSP 344 s, light 2,169 s (shared CPU) | **66 kills** | **3/3** step ladders climb to the top | fog-coloured walls gone; shop shelves and litter lit (were black) |
 | de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (09:12, props re-injected 09:45) | fastrad, BSP 714 s, light 2,692 s (shared CPU) | **88 kills** | — (no ladders) | final: spot + displacement fixes, lightmap-lit props (tunnel crates no longer black) |
 
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
-**Running:** `local/csgo/nuke_final.sh` (10:15; Mirage's finished 10:19): a full build with every fix below, then 8 bots for 90 s and the ladder probe
-(`local/csgo/ladprobe.py`, step ladders from report.json). Logs
-`local/csgo/{mirage_rebuild,nuke_final}.log` end with "done".
+**All three final builds are done** (11:13). Scripts: `local/csgo/{dust2_rebuild,mirage_rebuild,nuke_final}.sh` (build, 8 bots, ladder probe); logs beside them.
 
 **Done this session (all committed and pushed):**
 - Displacements whose face has `side` 1 were inside out (back-facing; Mirage's flat
@@ -40,8 +38,7 @@ Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator c
   re-checked at high detail.
 
 **Next steps:**
-1. When the two final builds are done: look at their sheets, record bots and ladders in
-   the table above (Nuke has 6 step ladders, Mirage 3).
+1. Done 11:13: final Mirage and Nuke builds checked (table above).
 2. Checked 10:25: a third-person player under dust2's tunnel spot looks as lit as in the
    sun (run-time light-entity lighting), so the grid needs no rewrite.
 3. The remaining older steps below (structural dust2, MT MOHlight crash, Xcode note).
