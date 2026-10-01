@@ -134,6 +134,7 @@ class ConvertedModel:
     triangles: int = 0
     collision_brushes: int = 0
     source: str = ""                          # the .mdl path
+    pivot: Vec3 = (0.0, 0.0, 0.0)             # Source-model point now at the TIKI origin (``centre``)
 
     @property
     def model_key(self) -> str:
@@ -533,7 +534,8 @@ def collision_map(brushes: Iterable[Brush]) -> str:
 
 
 def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale: float = 1.0,
-                  max_texture: int = 512, solid: int = 6, jpeg_quality: Optional[int] = None) -> ConvertedModel:
+                  max_texture: int = 512, solid: int = 6, jpeg_quality: Optional[int] = None,
+                  centre: bool = False) -> ConvertedModel:
     """Convert one Source model (``models/....mdl``) to MOHAA static-model files.
 
     ``fs`` reads Source files (``try_read``; see :func:`source_fs`). ``solid`` is the
@@ -541,6 +543,13 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
     0 = no collision (writes a ``_nc`` TIKI with an empty collision map).
     Textures are TGA (32-bit only when the material uses alpha); with
     ``jpeg_quality`` opaque ones are written as JPEG instead.
+
+    ``centre`` moves the model (and its collision) so the TIKI origin is the centre of
+    its bounds; ``pivot`` is where that point was, so place the entity at
+    ``origin + scale * R(angles) * pivot``. The engine lights a non-solid ``script_model``
+    from its origin (``cg_modelanim.c``: lightingOrigin = origin + centre of an empty
+    box), and a Source pivot on or under the floor puts that point in solid: no sun,
+    black model (the rubble in the first dust2 drafts).
     """
     warnings: list[str] = []
     sm: StudioModel = load_studio_model(fs, mdl_path)
@@ -601,6 +610,12 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
         raise ValueError(f"{mdl_path}: no drawable geometry")
 
     allp = np.concatenate([s.positions for s in surfaces]).astype(np.float64)
+    pivot = np.zeros(3)
+    if centre:
+        pivot = (allp.min(0) + allp.max(0)) / 2
+        for srf in surfaces:
+            srf.positions = (srf.positions.astype(np.float64) - pivot).astype(np.float32)
+        allp = allp - pivot
     mins = tuple(float(x) for x in allp.min(0))
     maxs = tuple(float(x) for x in allp.max(0))
 
@@ -640,7 +655,7 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
                 kind = surface_type(sp)[1]
                 cname = clip_shader_name(kind, prefix)
                 for pts, tri in zip(s.pieces, s.triangles):
-                    b = _hull_brush(pts * scale, tri, cname)
+                    b = _hull_brush(pts * scale - pivot, tri, cname)
                     if b is None:
                         warnings.append(f"collision piece of {len(pts)} points skipped (degenerate)")
                         continue
@@ -650,8 +665,8 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
     elif solid == 2:
         kind = surface_type(info.surfaceprop)[1]
         cname = clip_shader_name(kind, prefix)
-        hmin = [v * scale for v in info.hull_min]
-        hmax = [v * scale for v in info.hull_max]
+        hmin = [v * scale - pivot[i] for i, v in enumerate(info.hull_min)]
+        hmax = [v * scale - pivot[i] for i, v in enumerate(info.hull_max)]
         b = _box_brush(hmin, hmax, cname)
         if b is not None:
             brushes.append(b)
@@ -686,7 +701,7 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
         tik=tiks[0], files=files, bounds=(mins, maxs), vertices=sum(len(s.positions) for s in surfaces),
         surfaces=len(surfaces), has_collision=bool(brushes), warnings=warnings, tiks=tiks, shaders=shaders,
         materials=[m.name for m in used], triangles=total_tris, collision_brushes=len(brushes),
-        source=normalize_path(mdl_path))
+        source=normalize_path(mdl_path), pivot=tuple(float(x) for x in pivot))
 
 
 def bundle(models: Iterable[ConvertedModel], prefix: str = "csgo", script: Optional[str] = None) -> dict[str, bytes]:

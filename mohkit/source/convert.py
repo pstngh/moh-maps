@@ -620,6 +620,7 @@ class Converter:
             if key not in cache:
                 try:
                     cache[key] = modelconv.convert_model(self.fs, p.model, prefix="csgo", skin=p.skin, solid=key[2],
+                                                         centre=True,
                                                          max_texture=self.opt.max_texture, jpeg_quality=90)
                 except Exception as e:  # noqa: BLE001
                     self.report["warnings"].append(f"prop {p.model}: {e}")
@@ -634,7 +635,7 @@ class Converter:
         static_v, runtime, dropped = 0, 0, 0
         used: dict[str, object] = {}
         for _, p, cm, sc in items:
-            org = " ".join(fmt(round(c * s, 2)) for c in p.origin)
+            org = " ".join(fmt(round(c, 2)) for c in self._prop_origin(p, cm, sc * s))
             ang = " ".join(fmt(round(a, 3)) for a in p.angles)
             model_keys = [t[len("models/"):] if t.startswith("models/") else t for t in cm.tiks]
             if static_v + cm.vertices <= self.opt.props_static_vertices:
@@ -666,13 +667,21 @@ class Converter:
                                 "models": len(used)}
         return out, clips, sorted(set(precache))
 
+    def _prop_origin(self, p, cm, scale: float) -> tuple[float, float, float]:
+        """World origin of the converted model: the Source origin moved to the model's
+        re-centred pivot (``ConvertedModel.pivot``, rotated and scaled)."""
+        R = self._rot(p.angles)
+        pv = getattr(cm, "pivot", (0.0, 0.0, 0.0))
+        return tuple(p.origin[i] * self.opt.scale + scale * sum(R[i][j] * pv[j] for j in range(3))
+                     for i in range(3))  # type: ignore[return-value]
+
     def _prop_clips(self, cm, p, scale: float) -> list[MBrush]:
         """The model's collision .map brushes placed in the world (origin + scale*R(angles)*p)."""
         text = cm.files.get(cm.tik[:-4] + ".map")
         if not text:
             return []
         R = self._rot(p.angles)
-        o = [c * self.opt.scale for c in p.origin]
+        o = self._prop_origin(p, cm, scale)
         out = []
         for b in MapFile.parse(text.decode("latin-1")).worldspawn.brushes():
             faces = []

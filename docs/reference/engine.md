@@ -147,7 +147,7 @@ Ladders are the **`func_ladder`** brush entity. `surfaceparm ladder` is not what
 | `notarget` | EV_CHEAT | toggle FL_NOTARGET; bots ignore you | `fgame/player.cpp:211-218` |
 | `dog [0\|1]` | EV_CHEAT\|EV_CONSOLE | **god mode**. `god` is registered but no event handles it, so it does nothing | `fgame/player.cpp:193-200`, `fgame/gamecmds.cpp:94` |
 | `give <item>` / `wuss` / `fullheal` | EV_CHEAT | items, all weapons, heal | `fgame/player.cpp:292-299,167-174,202-209` |
-| `fov [f]` | EV_CONSOLE | clamped to 1..160 | `fgame/player.cpp:6060-6085` |
+| `fov [f]` | EV_CONSOLE | clamped to 1..160, but it only sets the server-side player fov: **cgame ignores it** unless the player is zoomed or in a script camera, and draws with the client cvar `cg_fov` instead, clamped to 65..120 every frame (OPM addition). Set `cg_fov` for screenshots | `fgame/player.cpp:6060-6085`, `cgame/cg_predict.c:342-362`, `cgame/cg_view.c:870-874` |
 
 - `setviewpos`, `setangles`, `thirdperson` and `toggleviewmode` **do not exist**.
 - `tele` and `face` round-trip through the server, which runs at `sv_fps` 20 (`fgame/gamecvars.cpp:389`). Wait before capturing.
@@ -410,6 +410,16 @@ Game side: `World` class (`fgame/worldspawn.cpp:491-543`), defaults in its const
 | `info_notnull` | persists; script-visible point | `targetname` | `fgame/misc.cpp:110` |
 | `func_group`, `detail`, `vis_leafgroup`, `func_remove` | editor grouping, manual vis, and removal. Stripped by Q3map (func_remove is removed by the game) | — | `entdefs.pk3:code/misc.cpp`, `fgame/misc.cpp:64-71` |
 | `light` | never spawned by the game, but kept in the lump for MOHlight (§6.6) | — | `fgame/g_spawn.cpp:224-233`, `fgame/light.cpp:147-150` |
+
+**How a runtime model is lit.** cgame sets `lightingOrigin = origin + centre of the
+box packed into entityState.solid` (`cgame/cg_modelanim.c:1064-1067`). A NOT_SOLID
+entity packs no box (`SOLID_NOT` takes the default branch, `server/sv_world.c:230-257`),
+so it is lit at its **origin**. The sphere lighting traces to the sun and to each light
+from that point (`renderergl1/tr_sphere_shade.cpp:650-652`, `:985-997`), so an origin on
+or under the floor renders the model black. Put the pivot inside the model (the CS:GO
+converter re-centres converted models). A shader's `rgbGen static` (vertex colours
+MOHlight bakes into static models) falls back to this sphere lighting on a runtime model
+(`renderergl1/tr_shade.c:846-856`), so one shader serves both.
 
 ### 5.3 Doors (`fgame/doors.cpp`)
 

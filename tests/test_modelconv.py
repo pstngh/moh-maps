@@ -453,6 +453,17 @@ def test_convert_variants() -> None:
     jpg = mc.convert_model(fs, mdl, jpeg_quality=85)
     assert any(p.endswith(".jpg") for p in jpg.files) and not any(p.endswith(".tga") for p in jpg.files)
     assert all(".jpg" in t for t in jpg.shaders.values() if "map " in t)
+    # centre: bounds symmetric about the TIKI origin, collision moved with the mesh
+    c = mc.convert_model(fs, mdl, solid=2, centre=True)
+    pv = np.array(c.pivot)
+    assert np.allclose(np.array(c.bounds[0]) + np.array(c.bounds[1]), 0, atol=1e-3)
+    assert np.allclose(np.array(c.bounds) + pv, np.array(bb.bounds), atol=1e-3)
+    from mohkit.mapfile import MapFile
+    def clip_box(m):
+        b = MapFile.parse(m.files[m.tik[:-4] + ".map"].decode()).worldspawn.brushes()[0]
+        pts = np.array([q for w in b.windings() for q in w])
+        return pts.min(0), pts.max(0)
+    assert np.allclose(np.array(clip_box(c)) + pv, np.array(clip_box(bb)), atol=0.5)
 
 
 def test_partition_over_24_surfaces() -> None:
