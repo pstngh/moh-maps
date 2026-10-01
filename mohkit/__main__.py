@@ -17,6 +17,9 @@
     python -m mohkit csgo de_dust2 [--name cs_dust2] [-q draft] [--scale 1.0]   convert a CS:GO map (local/ only)
     python -m mohkit csgo de_dust2 --props-only                    re-place runtime props without recompiling
     python -m mohkit csgo de_dust2 --resume                        inject, package and test the last compile
+    python -m mohkit csgo de_dust2 --shoot                         re-shoot the packaged map (sheets, shots, exposure)
+    python -m mohkit exposure local/csgo/*/shots [--by-map] [--stock] [--mask shot.png]   brightness check
+    python -m mohkit csgo-ref de_dust2 [--name cs_dust2]        CS:GO's own screenshots from the same cameras
 """
 
 from __future__ import annotations
@@ -275,13 +278,18 @@ def cmd_install(a) -> int:
 
 def cmd_csgo(a) -> int:
     from .source.convert import build_local, resume_local
+    if a.shoot:
+        from .source.convert import shoot_local
+        rep = shoot_local(a.map, a.name, scale=a.scale)
+        return 0 if rep.get("contact_sheet") else 1
     if a.resume:
         rep = resume_local(a.map, a.name, test=not a.no_test)
         return 0 if rep.get("pk3") else 1
     if a.refresh_assets:
         from .source.convert import refresh_assets
         rep = refresh_assets(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
-                             detail_all=not a.structural, max_texture=a.max_texture)
+                             detail_all=not a.structural, max_texture=a.max_texture,
+                             lighting="mohlight" if a.mohlight else "csgo")
         return 0 if rep.get("pk3") else 1
     extra = {"props_static_vertices": a.static_verts} if a.static_verts else {}
     if a.lightmap_density:
@@ -289,8 +297,36 @@ def cmd_csgo(a) -> int:
     if a.no_texlights:
         extra["texlights"] = False
     rep = build_local(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
-                      detail_all=not a.structural, max_texture=a.max_texture, props_only=a.props_only, **extra)
+                      detail_all=not a.structural, max_texture=a.max_texture, props_only=a.props_only,
+                      lighting="mohlight" if a.mohlight else "csgo", **extra)
     return 0 if rep.get("compile_ok") else 1
+
+
+def cmd_csgo_ref(a) -> int:
+    from .source.reference import shoot
+    return 0 if shoot(a.map, a.name) else 1
+
+
+def cmd_exposure(a) -> int:
+    from . import exposure as X
+    if a.stock:
+        X.stock_shots(per_map=a.stock_shots)
+        a.paths = list(a.paths) + sorted(str(p) for p in (config.REPO / "dist" / "stock_shots").iterdir() if p.is_dir())
+    if a.mask:
+        for p in a.paths:
+            out = Path(p).with_name(Path(p).stem + "_mask.png")
+            print(X.mask(p, out))
+        return 0
+    groups = {g: X.measure_all(imgs) for g, imgs in X.groups_in(a.paths).items()}
+    if a.by_map:
+        print(X.map_table(groups))
+    else:
+        for g, rows in groups.items():
+            print(f"== {g or 'shots'}: {X.summary(rows, g)}")
+            print(X.table(sorted(rows, key=lambda r: -r.score)[: a.n or None]))
+    if a.json:
+        X.save([r for rows in groups.values() for r in rows], Path(a.json))
+    return 0
 
 
 def main(argv=None) -> int:
@@ -391,7 +427,25 @@ def main(argv=None) -> int:
     s.add_argument("--resume", action="store_true",
                    help="only inject props, package and test what the last build left (after redoing a stage by hand)")
     s.add_argument("--no-test", action="store_true")
+    s.add_argument("--shoot", action="store_true", help="only re-shoot the packaged map (contact sheets, shots, exposure)")
+    s.add_argument("--mohlight", action="store_true",
+                   help="light with MOHlight from converted lights (default: transfer CS:GO's own baked lighting)")
     s.set_defaults(fn=cmd_csgo)
+
+    s = sub.add_parser("csgo-ref", help="screenshots from CS:GO itself at the map's named cameras (local/ only)")
+    s.add_argument("map")
+    s.add_argument("--name")
+    s.set_defaults(fn=cmd_csgo_ref)
+
+    s = sub.add_parser("exposure", help="brightness check of screenshots: mean, blown-out and crushed shares")
+    s.add_argument("paths", nargs="*", help="shot images or folders (local/csgo/<map>/shots)")
+    s.add_argument("--by-map", action="store_true", help="one summary line per folder")
+    s.add_argument("--stock", action="store_true", help="also shoot and measure stock mohdm1-7 (dist/stock_shots)")
+    s.add_argument("--stock-shots", type=int, default=9)
+    s.add_argument("--mask", action="store_true", help="write <shot>_mask.png: red = near-white, blue = near-black")
+    s.add_argument("-n", type=int, default=0, help="only the n worst shots per folder")
+    s.add_argument("--json", help="write all measurements here")
+    s.set_defaults(fn=cmd_exposure)
     a = ap.parse_args(argv)
     return a.fn(a)
 

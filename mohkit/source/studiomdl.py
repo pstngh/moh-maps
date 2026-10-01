@@ -109,6 +109,7 @@ class StudioMesh:
     normals: np.ndarray        # (n, 3) float32
     uvs: np.ndarray            # (n, 2) float32, Source/DirectX convention (v = 0 at the image top)
     triangles: np.ndarray      # (m, 3) int32, counter-clockwise seen from the front (Source winding)
+    ids: Optional[np.ndarray] = None  # (n,) mesh-local vertex id of each vertex (VTX origMeshVertID)
 
 
 @dataclass
@@ -251,8 +252,64 @@ def read_studio_model(mdl: bytes, vvd: bytes, vtx: bytes, lod: int = 0,
             # Source front faces are clockwise in DirectX terms; flip to CCW for OpenGL-style consumers.
             t = inv.reshape(-1, 3).astype(np.int32)[:, [0, 2, 1]]
             meshes.append(StudioMesh(bp, pick, me, skinref, v["pos"].astype(np.float32),
-                                     v["normal"].astype(np.float32), v["uv"].astype(np.float32), t))
+                                     v["normal"].astype(np.float32), v["uv"].astype(np.float32), t,
+                                     used.astype(np.int64)))
     return StudioModel(info, meshes, bodyparts)
+
+
+def _vtx_strip_ids(vtx: bytes, mesh_ofs: int, sg_size: int) -> Optional[list[np.ndarray]]:
+    """origMeshVertID of every vertex of each strip group of one VTX mesh (``None`` if the
+    layout is implausible)."""
+    n_groups, groups_ofs = struct.unpack_from("<ii", vtx, mesh_ofs)
+    if n_groups < 0 or n_groups > 4096:
+        return None
+    out = []
+    for g in range(n_groups):
+        sg = mesh_ofs + groups_ofs + g * sg_size
+        if sg < 0 or sg + 25 > len(vtx):
+            return None
+        nverts, vofs = struct.unpack_from("<2i", vtx, sg)
+        flags = vtx[sg + 24]
+        if nverts < 0 or vofs < 0 or flags > 0x0F or sg + vofs + nverts * 9 > len(vtx):
+            return None
+        out.append(np.frombuffer(vtx, VTX_VERTEX, count=nverts, offset=sg + vofs)["orig"].astype(np.int64))
+    return out
+
+
+def vhv_layout(mdl: bytes, vtx: bytes) -> list[tuple[int, int, int, int, np.ndarray]]:
+    """The vertex streams of a static prop's VRAD lighting file (``sp_[hdr_]N.vhv``), in file
+    order: ``(bodypart, model, lod, mesh, origMeshVertIDs)`` per strip group, looping body
+    parts, their models, VTX LODs, meshes and strip groups (vrad/vradstaticprops.cpp). Each
+    stream holds one colour per strip-group vertex; vertex k lights mesh vertex ids[k]."""
+    nbody, bodyidx = struct.unpack_from("<ii", mdl, 232)
+    version = struct.unpack_from("<i", mdl, 4)[0]
+    vtx_nbody, vtx_bodyofs = struct.unpack_from("<ii", vtx, 28)
+    n_lods = struct.unpack_from("<i", vtx, 20)[0]
+    sg_sizes = (33, 25) if version >= 49 else (25, 33)
+    out = []
+    for bp in range(min(nbody, vtx_nbody)):
+        bpo = bodyidx + 16 * bp
+        _n, nmodels, _b, modelidx = struct.unpack_from("<4i", mdl, bpo)
+        vbp = vtx_bodyofs + 8 * bp
+        vnm, vmofs = struct.unpack_from("<ii", vtx, vbp)
+        for mi in range(min(nmodels, vnm)):
+            mo = bpo + modelidx + 148 * mi
+            nmeshes = struct.unpack_from("<i", mdl, mo + 72)[0]
+            vmo = vbp + vmofs + 8 * mi
+            vnlods, vlodofs = struct.unpack_from("<ii", vtx, vmo)
+            for lod in range(min(n_lods, vnlods)):
+                vlo = vmo + vlodofs + 12 * lod
+                vnmesh, vmeshofs = struct.unpack_from("<ii", vtx, vlo)
+                for me in range(min(nmeshes, vnmesh)):
+                    vmesh = vlo + vmeshofs + 9 * me
+                    groups = None
+                    for sgs in sg_sizes:
+                        groups = _vtx_strip_ids(vtx, vmesh, sgs)
+                        if groups is not None:
+                            break
+                    for ids in groups or []:
+                        out.append((bp, mi, lod, me, ids))
+    return out
 
 
 VTX_SUFFIXES = (".dx90.vtx", ".vtx", ".dx80.vtx", ".sw.vtx")

@@ -175,6 +175,9 @@ class Options:
     props_mode: str = "inject"
     props_static_vertices: int = 70000  # MOHlight's static-model lighting buffer crashes above ~75-81k
     props_runtime_max: int = 600    # extra props as script_model (game entities; engine limit 1024)
+    # lit textures brightened (up to lighting.HEADROOM_MAX) and their light divided by the same
+    # gain, so CS:GO's transferred sunlight can exceed the texture colour (lighting="csgo" only)
+    headroom: bool = False
 
 
 @dataclass
@@ -185,6 +188,7 @@ class ConvertedMaterial:
     size: tuple[int, int]           # written image size
     info: Optional[MaterialInfo] = None
     kind: str = "opaque"            # opaque | alphatest | translucent | sky | tool
+    gain: float = 1.0               # texture brightened by this (``lighting.headroom_gain``)
 
 
 @dataclass
@@ -194,6 +198,8 @@ class Result:
     report: dict = field(default_factory=dict)
     # props for mohkit.staticlight.inject: (model key, origin, angles, scale), in placement order
     statics: list = field(default_factory=list)
+    # per static: CS:GO's own per-vertex prop lighting (``Converter.prop_light``) or None
+    prop_light: list = field(default_factory=list)
 
 
 def _norm(v):
@@ -414,10 +420,21 @@ class Converter:
             f = rgba[..., 3:4].astype(np.float32) / 255.0 if info.translucent else 1.0
             rgba = rgba.copy()
             rgba[..., :3] = np.clip(128.0 + (rgba[..., :3].astype(np.float32) - 128.0) * f + 0.5, 0, 255).astype(np.uint8)
+        if self.opt.headroom and cm.kind in ("opaque", "alphatest"):
+            from .lighting import apply_gain, headroom_gain
+            cm.gain = headroom_gain(rgba)
+            rgba = apply_gain(rgba, cm.gain)
+            self._gain("textures/" + shader, cm.gain)
         cm.image, cm.size = self._write_image(shader, rgba, cm.kind not in ("opaque", "modulate"))
         self.assets[f"scripts/{self._script_name()}"] = b""  # placeholder, written in finish()
         self.mats[key] = cm
         return cm
+
+    def _gain(self, shader: str, gain: float) -> None:
+        """Remember a lit shader's texture gain (``report["texture_gain"]``): the light on
+        its surfaces is divided by it after the transfer (``lighting.transfer``)."""
+        if gain > 1.0001:
+            self.report.setdefault("texture_gain", {})[shader] = round(float(gain), 4)
 
     def _water_image(self, info: MaterialInfo) -> np.ndarray:
         """Source water has no base texture (it is drawn from refraction, reflection and fog):
@@ -910,6 +927,7 @@ class Converter:
                 lines.append("\t\tblendFunc blend")
             lines += ["\tnextbundle", "\t\tmap $lightmap", "\t}", "}"]
             self._overlay_shaders[name] = "\n".join(lines)
+            self._gain("textures/" + name, cm.gain)
         return name
 
     # ------------------------------------------------------------------ ropes
@@ -985,6 +1003,7 @@ class Converter:
                 lines += ["\t\talphaFunc GE128", "\t\tdepthWrite"]
             lines += ["\tnextbundle", "\t\tmap $lightmap", "\t}", "}"]
             self._overlay_shaders[name] = "\n".join(lines)
+            self._gain("textures/" + name, cm.gain)
         return name
 
     # ------------------------------------------------------------------ sprites
@@ -1682,7 +1701,8 @@ class Converter:
             return out, clips, precache
         cache: dict = {}
         items = []
-        for p in list(sp.props) + self._entity_props():
+        for p_index, p in enumerate(list(sp.props) + self._entity_props()):
+            p_index = p_index if p_index < len(sp.props) else -1
             if self.sky_area is not None:
                 areas = self.bsp.prop_areas(p) if not getattr(p, "entity", False) else {
                     self.bsp.point_area(p.origin)}
@@ -1692,8 +1712,12 @@ class Converter:
             if key not in cache:
                 try:
                     cache[key] = modelconv.convert_model(self.fs, p.model, prefix="csgo", skin=p.skin, solid=key[2],
-                                                         centre=True,
+                                                         centre=True, headroom=self.opt.headroom,
                                                          max_texture=self.opt.max_texture, jpeg_quality=90)
+                    for sh, g in (cache[key].gains or {}).items():
+                        self._gain(sh, g)
+                    for sh, w in (cache[key].tint_mask or {}).items():
+                        self.report.setdefault("tint_mask", {})[sh] = w
                 except Exception as e:  # noqa: BLE001
                     self.report["warnings"].append(f"prop {p.model}: {e}")
                     cache[key] = None
@@ -1702,19 +1726,24 @@ class Converter:
                 continue
             sc = (p.uniform_scale or 1.0)
             size = [(cm.bounds[1][i] - cm.bounds[0][i]) * sc for i in range(3)]
-            items.append((size[0] * size[1] * size[2], p, cm, sc))
+            items.append((size[0] * size[1] * size[2], p, cm, sc, p_index))
         items.sort(key=lambda t: -t[0])
         static_v, runtime, dropped, injected = 0, 0, 0, 0
         used: dict[str, object] = {}
         self.statics = []
-        for _, p, cm, sc in items:
+        self.prop_light = []
+        for _, p, cm, sc, p_index in items:
             org = " ".join(fmt(round(c, 2)) for c in self._prop_origin(p, cm, sc * s))
             ang = " ".join(fmt(round(a, 3)) for a in p.angles)
             model_keys = [t[len("models/"):] if t.startswith("models/") else t for t in cm.tiks]
             if self.opt.props_mode == "inject":
                 o = tuple(round(c, 2) for c in self._prop_origin(p, cm, sc * s))
-                for mk in model_keys:
-                    self.statics.append((mk, o, tuple(round(a, 3) for a in p.angles), round(sc * s, 4)))
+                # CS:GO tints props per instance (sprp DiffuseModulation, prop_dynamic rendercolor):
+                # de_nuke's grey pipes and yellow rails are one white model tinted
+                tint = tuple(int(c) for c in getattr(p, "diffuse_modulation", (255, 255, 255, 255))[:3])
+                for part, mk in enumerate(model_keys):
+                    self.statics.append((mk, o, tuple(round(a, 3) for a in p.angles), round(sc * s, 4), tint))
+                    self.prop_light.append(self._prop_light(p_index, cm, part) if p_index >= 0 else None)
                 clips += self._prop_clips(cm, p, sc * s)
                 injected += 1
                 static_v += cm.vertices
@@ -1784,11 +1813,88 @@ class Converter:
                 scale = float(e.get("modelscale", "1") or 1)
             except ValueError:
                 solid, skin, scale = 6, 0, 1.0
+            try:
+                rc = tuple(int(float(v)) for v in (e.get("rendercolor") or "255 255 255").split()[:3])
+                rc = rc if len(rc) == 3 else (255, 255, 255)
+            except ValueError:
+                rc = (255, 255, 255)
             out.append(SimpleNamespace(model=e.get("model"), origin=e.origin,
                                        angles=e.vector("angles", (0.0, 0.0, 0.0)) or (0.0, 0.0, 0.0),
-                                       skin=skin, solid=solid, uniform_scale=scale, entity=True))
+                                       skin=skin, solid=solid, uniform_scale=scale, entity=True,
+                                       diffuse_modulation=rc + (255,)))
         self.report["entity_props"] = {"converted": len(out), "interactive_skipped": skipped}
         return out
+
+    def _prop_light(self, index: int, cm, part: int) -> Optional[np.ndarray]:
+        """CS:GO's baked lighting of static prop ``index`` (``sp_hdr_<index>.vhv`` in the map's
+        pakfile) on the SKD vertices of ``cm``'s TIKI ``part``, as uint8 RGB in VRAD's vertex
+        byte scale (127.5 * linear^(1/2.2)); None when the file or the mesh mapping is missing.
+
+        VRAD writes one stream per (body part, model, LOD, mesh, strip group) of the prop's VTX
+        (``studiomdl.vhv_layout``), 4 bytes per basis direction per vertex: B, G, R as
+        ``255 * 0.5 * linear^(1/2.2)`` (mathlib ``lineartovertex`` with OVERBRIGHT 2), then
+        the sun share. CS:GO bump-lights props with 3 basis directions; a flat normal weighs
+        them equally, so the vertex colour is their mean in linear light."""
+        import struct
+        from .studiomdl import VTX_SUFFIXES, vhv_layout
+        if not hasattr(self, "_vhv"):
+            try:
+                self._vhv = self.bsp.pakfile()
+                self._vhv_names = set(self._vhv.namelist())
+            except Exception:  # noqa: BLE001
+                self._vhv, self._vhv_names = None, set()
+            self._vhv_layouts: dict = {}
+        vs = cm.vertex_source[part] if part < len(getattr(cm, "vertex_source", [])) else None
+        if self._vhv is None or vs is None or not len(vs):
+            return None
+        name = next((n for n in (f"sp_hdr_{index}.vhv", f"sp_{index}.vhv") if n in self._vhv_names), None)
+        if name is None:
+            return None
+        if cm.source not in self._vhv_layouts:
+            mdl = self.fs.try_read(cm.source)
+            base = cm.source[:-4]
+            vtx = next((d for d in (self.fs.try_read(base + x) for x in VTX_SUFFIXES) if d), None)
+            try:
+                self._vhv_layouts[cm.source] = vhv_layout(mdl, vtx) if mdl and vtx else None
+            except (struct.error, ValueError):
+                self._vhv_layouts[cm.source] = None
+        layout = self._vhv_layouts[cm.source]
+        if not layout:
+            return None
+        d = self._vhv.read(name)
+        _ver, _chk, _flags, vsize, _nv, nm = struct.unpack_from("<iIIIIi", d, 0)
+        if nm != len(layout) or vsize % 4 or not vsize:
+            return None
+        table = [struct.unpack_from("<III", d, 40 + 28 * k) for k in range(nm)]
+        streams: dict = {}
+        for (lod, n, off), (bp, mi, lod2, me, ids) in zip(table, layout):
+            if n != len(ids) or lod != lod2:
+                return None
+            if lod != 0 or not n:
+                continue
+            raw = np.frombuffer(d, np.uint8, count=n * vsize, offset=off).reshape(n, vsize // 4, 4)
+            lin = (raw[:, :, [2, 1, 0]].astype(np.float64) / 127.5) ** 2.2   # BGR -> RGB, linear
+            key = (bp, mi, me)
+            if key not in streams:
+                streams[key] = np.full((int(ids.max()) + 1 if len(ids) else 1, 3), np.nan)
+            arr = streams[key]
+            if ids.max() >= len(arr):
+                arr = np.vstack([arr, np.full((int(ids.max()) + 1 - len(arr), 3), np.nan)])
+                streams[key] = arr
+            arr[ids] = lin.mean(1)
+        out = np.full((len(vs), 3), np.nan)
+        for key, arr in streams.items():
+            sel = (vs[:, 0] == key[0]) & (vs[:, 1] == key[1]) & (vs[:, 2] == key[2])
+            if sel.any():
+                ids = vs[sel, 3]
+                ok = ids < len(arr)
+                rows = np.nonzero(sel)[0]
+                out[rows[ok]] = arr[ids[ok]]
+        found = ~np.isnan(out[:, 0])
+        if found.mean() < 0.5:
+            return None
+        out[~found] = np.nanmean(out[found], axis=0)
+        return np.clip(np.round(127.5 * np.power(out, 1 / 2.2)), 0, 255).astype(np.uint8)
 
     def _prop_origin(self, p, cm, scale: float) -> tuple[float, float, float]:
         """World origin of the converted model: the Source origin moved to the model's
@@ -1886,7 +1992,9 @@ class Converter:
         moved = validate.fix_spawns(m)
         if moved:
             self.report["spawns_fixed"] = moved
-        return Result(m, self.assets, self.report, list(self.statics))
+        light = list(getattr(self, "prop_light", []))
+        self.report["prop_light"] = {"vhv": sum(x is not None for x in light), "statics": len(self.statics)}
+        return Result(m, self.assets, self.report, list(self.statics), light)
 
 
 def merge_ladder_boxes(boxes, gap_xy: float = 2.0, gap_z: float = 8.0) -> list:
@@ -2153,27 +2261,80 @@ def auto_cameras(m: MapFile, n: int = 9, landmarks=(), spawns: bool = True):
     return cams
 
 
-def inject_statics(bsp_path, statics, assets: dict, out) -> dict:
-    """Add the converter's props (``Result.statics``) to a lit BSP as static models coloured
-    from its light grid (``mohkit.staticlight``); meshes are read from ``assets``. Over
+def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[list] = None,
+                   exposure: Optional[float] = None, gains: Optional[dict] = None,
+                   tint_mask: Optional[dict] = None) -> dict:
+    """Add the converter's props (``Result.statics``) to a lit BSP as static models
+    (``mohkit.staticlight``); meshes are read from ``assets``. Over
     ``staticmerge.DEFAULT_TARGET`` props, nearby copies of a model are merged into one model
-    (engine limit 4,095); the merged models' files are added to ``assets``."""
+    (engine limit 4,095); the merged models' files are added to ``assets``.
+
+    With ``exposure`` (the BSP carries CS:GO's transferred lightmaps), props with CS:GO's
+    own vertex lighting (``prop_light``, VRAD byte scale) get it through the same tone curve
+    as the lightmaps, and the others are lit from the lightmaps at vertex scale 1.0;
+    otherwise every prop is lit from MOHlight's lightmaps and grid."""
     from .. import staticlight as SL, staticmerge
+    from .lighting import tonemap
     read = SL.files_reader(assets)
     meshes: dict = {}
+    vgain: dict = {}
     inst = []
-    for mk, origin, angles, scale in statics:
+    light = list(prop_light or [])
+    gains = gains or {}
+    used = 0
+    tints = []
+    tint_mask = tint_mask or {}
+    vtint: dict = {}
+    for k, (mk, origin, angles, scale, *_rest) in enumerate(statics):
         if mk not in meshes:
             meshes[mk] = SL.tiki_mesh(read, mk)
+            g = np.ones(len(meshes[mk][0]))
+            w = np.ones(len(g))
+            if gains or tint_mask:
+                try:
+                    parts = staticmerge.tiki_parts(read, mk)
+                    if sum(len(s.positions) for s, _ in parts) == len(g):
+                        g = np.concatenate([np.full(len(s.positions), gains.get(sh, 1.0)) for s, sh in parts])
+                        w = np.concatenate([np.full(len(s.positions), tint_mask.get(sh, 1.0)) for s, sh in parts])
+                except (FileNotFoundError, ValueError):
+                    pass
+            vgain[mk] = g
+            vtint[mk] = w
         pos, nrm = meshes[mk]
-        if len(pos):
-            inst.append(SL.StaticInstance(mk, origin, angles, scale, pos, nrm))
+        if not len(pos):
+            continue
+        col = None
+        if exposure is not None and k < len(light) and light[k] is not None and len(light[k]) == len(pos):
+            lin = (np.asarray(light[k], np.float64) / 127.5) ** 2.2
+            col = tonemap(lin, exposure, ceiling=vgain[mk])
+            used += 1
+        inst.append(SL.StaticInstance(mk, origin, angles, scale, pos, nrm, col))
+        tints.append(_rest[0] if _rest and _rest[0] is not None else None)
+    if exposure is not None:
+        # props without CS:GO's vertex light: the lightmaps at the vertex (texture scale), divided
+        # by the gain of each vertex's texture like the VRAD-lit ones
+        from ..bsp import BSP as _BSP
+        todo = [i for i in inst if i.colors is None]
+        if todo:
+            field = SL.LightmapField(_BSP(Path(bsp_path)))
+            for i, rgb in zip(todo, SL.field_colours(field, todo)):
+                bad = np.isnan(rgb[:, 0])
+                if bad.all():
+                    rgb[:] = 48.0
+                elif bad.any():
+                    rgb[bad] = np.nanmedian(rgb[~bad], axis=0)
+                i.colors = np.clip(rgb / vgain[i.model][:, None], 0, 255)
+        for i, t in zip(inst, tints):
+            if t is not None and tuple(t) != (255, 255, 255) and i.colors is not None:
+                w = vtint[i.model][:, None]
+                i.colors = i.colors * (1.0 - w + w * (np.asarray(t, np.float64) / 255.0)[None, :])
     inst, files, merged = staticmerge.merge(inst, read, f"models/csgo/m_{Path(out).stem}")
     assets.update(files)
     if files:
         merged["pruned"] = staticmerge.prune(assets, {mk for mk, *_ in statics}, {i.model for i in inst}, read)
-    info = SL.inject(bsp_path, inst, out)
+    info = SL.inject(bsp_path, inst, out, field_scale=1.0 if exposure is not None else SL.LIGHTMAP_TO_VERTEX)
     info["merge"] = merged
+    info["csgo_vertex_light"] = used
     return info
 
 
@@ -2199,8 +2360,11 @@ def named_cameras(path, scale: float = 1.0):
 
 
 def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics: list, map_: MapFile,
-                 convert_report: dict, test: bool = True, shots: int = 9, scale: float = 1.0, log=print) -> dict:
-    """After a compile: inject the static props, package ``local/csgo/<name>/<name>.pk3`` and
+                 convert_report: dict, test: bool = True, shots: int = 9, scale: float = 1.0, log=print,
+                 prop_light: Optional[list] = None, lighting: str = "csgo") -> dict:
+    """After a compile: light it (``lighting="csgo"``: CS:GO's own baked lighting moved into
+    the lightmaps, light grid and props, ``mohkit.source.lighting``; ``"mohlight"``: keep
+    MOHlight's), inject the static props, package ``local/csgo/<name>/<name>.pk3`` and
     (optionally) shoot the contact sheet. ``build_local`` calls it; ``resume_local`` runs it on
     the files a build left on disk (after re-running a stage by hand)."""
     import json
@@ -2208,13 +2372,32 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
     from .. import config, game, project
     out = config.REPO / "local" / "csgo" / name
     report: dict = {}
-    bsp_bytes = Path(compiled_bsp).read_bytes()
+    # the compile root keeps the BSP as compiled (props-only updates re-inject into it)
+    lit = out / f"{name}.bsp"
+    exposure = None
+    base = Path(compiled_bsp)
+    gains = dict(convert_report.get("texture_gain") or {})
+    divided = None
+    if lighting == "csgo":
+        from . import lighting as _lighting
+        info = _lighting.transfer(compiled_bsp, SourceBSP(str(src)), lit, scale=scale, log=log, gains=gains)
+        divided = info.pop("divided_lightmaps", None)
+        report["lighting"] = info
+        exposure = info["exposure"]
+        base = lit
+    bsp_bytes = base.read_bytes()
     if statics:
-        # the compile root keeps the BSP as compiled (props-only updates re-inject into it)
-        lit = out / f"{name}.bsp"
-        info = inject_statics(compiled_bsp, statics, assets, lit)
+        info = inject_statics(base, statics, assets, lit, prop_light, exposure, gains,
+                              convert_report.get("tint_mask"))
         report["statics"] = info
         log(f"== static models injected: {json.dumps(info)}")
+        bsp_bytes = lit.read_bytes()
+    if divided is not None:
+        # the BSP so far holds the light at texture scale (the light grid and the props were
+        # sampled from it); surfaces whose texture was brightened get it divided by that gain
+        from ..bsp import BSP as _BSP
+        from ..staticlight import write_lumps
+        write_lumps(_BSP(lit), {"lightmaps": divided}, lit)
         bsp_bytes = lit.read_bytes()
     proj = project.Project(name=name, folder=out, title=src.stem, ambience="mohdm2",
                            precache=list(convert_report.get("precache", ())))
@@ -2226,22 +2409,82 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
     log(f"== packaged {pk3} ({pk3.stat().st_size // 1024} KB)")
     if test:
         # CS:GO ships named spectator viewpoints for most maps (maps/<map>_cameras.txt);
-        # they cover every callout, so prefer them to spawn samples.
-        cam_file = src.with_name(src.stem + "_cameras.txt")
-        named = named_cameras(cam_file, scale) if cam_file.is_file() else []
-        # with named cameras only the overview is added (landmark shots stand inside the
-        # bomb-site props)
-        cams = auto_cameras(map_, 1 if named else shots, () if named else convert_report.get("landmarks", ()),
-                            spawns=not named)
-        cams = named + cams
-        run = game.run([pk3], f"dm/{name}", cams, run_name=name, timeout=300 + 3 * len(cams))
-        sheets = game.contact_sheets(run.screenshots, out / f"{name}_shots.png")
-        report["contact_sheet"] = str(sheets[0]) if sheets else None
-        report["contact_sheets"] = [str(p) for p in sheets]
-        report["run_problems"] = run.problems
-        log(run.summary())
-        log(f"== contact sheet {report['contact_sheet']}")
+        # they cover every callout, so prefer them to spawn samples. With named cameras only
+        # the overview is added (landmark shots stand inside the bomb-site props).
+        cams = map_cameras(src, map_, convert_report.get("landmarks", ()), shots, scale)
+        report.update(shoot(name, pk3, cams, out, log=log))
     return report
+
+
+def shoot(name: str, pk3: Path, cams, out: Path, log=print) -> dict:
+    """Screenshot ``pk3`` from ``cams``: contact sheets ``<out>/<name>_shots*.png``, the
+    full-size shots in ``<out>/shots/`` and their exposure (``mohkit.exposure``) in
+    ``<out>/exposure.json``."""
+    import shutil
+
+    from .. import exposure, game
+    run = game.run([pk3], f"dm/{name}", cams, run_name=name, timeout=300 + 3 * len(cams))
+    sheets = game.contact_sheets(run.screenshots, out / f"{name}_shots.png")
+    shots = out / "shots"
+    if shots.is_dir():
+        shutil.rmtree(shots)
+    shots.mkdir(parents=True)
+    for k, p in run.screenshots.items():
+        shutil.copy2(p, shots / Path(p).name)
+    rows = exposure.measure_all(exposure.groups_in([shots]).get(name, {}))
+    exposure.save(rows, out / "exposure.json", name)
+    log(run.summary())
+    log(exposure.table(rows))
+    log(f"== contact sheet {sheets[0] if sheets else None}")
+    return {"contact_sheet": str(sheets[0]) if sheets else None, "contact_sheets": [str(p) for p in sheets],
+            "run_problems": run.problems, "exposure": exposure.summary(rows, name)}
+
+
+def map_cameras(src: Path, map_: MapFile, landmarks=(), shots: int = 9, scale: float = 1.0) -> list:
+    """The cameras a conversion is shot from: CS:GO's named spectator viewpoints
+    (``maps/<map>_cameras.txt``) plus an overview, or spread-out spawn cameras."""
+    cam_file = src.with_name(src.stem + "_cameras.txt")
+    named = named_cameras(cam_file, scale) if cam_file.is_file() else []
+    return named + auto_cameras(map_, 1 if named else shots, () if named else landmarks, spawns=not named)
+
+
+def shoot_local(map_name: str, name: Optional[str] = None, scale: float = 1.0, log=print) -> dict:
+    """Re-shoot the packaged ``local/csgo/<name>/<name>.pk3`` from its cameras (no rebuild)."""
+    import json
+
+    from .. import config
+    cfg = config.load()
+    src = Path(map_name)
+    if not src.is_file():
+        src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
+    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    out = config.REPO / "local" / "csgo" / name
+    prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
+    cams = map_cameras(src, MapFile.load(str(out / f"{name}.map")), prev.get("convert", {}).get("landmarks", ()),
+                       scale=scale)
+    return shoot(name, out / f"{name}.pk3", cams, out, log=log)
+
+
+def save_prop_light(path: Path, light: list) -> None:
+    """``Result.prop_light`` (per static: uint8 N x 3 or None) as one npz."""
+    starts = np.full(len(light), -1, np.int64)
+    parts, k = [], 0
+    for i, c in enumerate(light):
+        if c is not None:
+            starts[i] = k
+            parts.append(np.asarray(c, np.uint8))
+            k += len(c)
+    lengths = np.array([len(c) if c is not None else 0 for c in light], np.int64)
+    colors = np.concatenate(parts) if parts else np.zeros((0, 3), np.uint8)
+    np.savez_compressed(path, starts=starts, lengths=lengths, colors=colors)
+
+
+def load_prop_light(path: Path) -> Optional[list]:
+    if not Path(path).is_file():
+        return None
+    d = np.load(path)
+    c = d["colors"]
+    return [c[s:s + n] if s >= 0 else None for s, n in zip(d["starts"], d["lengths"])]
 
 
 def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, log=print) -> dict:
@@ -2263,13 +2506,15 @@ def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, l
     prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
     report = dict(prev)
     report.update(finish_local(name, src, root_bsp, assets, statics, MapFile.load(str(out / f"{name}.map")),
-                               prev.get("convert", {}), test=test, log=log))
+                               prev.get("convert", {}), test=test, log=log,
+                               scale=float(prev.get("scale", 1.0)), prop_light=load_prop_light(out / "prop_light.npz"),
+                               lighting=prev.get("lighting_mode", "csgo")))
     (out / "report.json").write_text(json.dumps(report, indent=2))
     return report
 
 
 def refresh_assets(map_name: str, name: Optional[str] = None, quality: str = "draft", test: bool = True,
-                   log=print, **opts) -> dict:
+                   log=print, lighting: str = "csgo", **opts) -> dict:
     """Re-convert and re-package with the last compile's BSP when only assets changed
     (textures, shader scripts, models): refuses unless the new ``.map`` text equals the
     compiled one exactly. Minutes instead of a full compile."""
@@ -2283,6 +2528,10 @@ def refresh_assets(map_name: str, name: Optional[str] = None, quality: str = "dr
     name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
     out = config.REPO / "local" / "csgo" / name
     root_map = Path(cfg.build_dir) / "roots" / f"dm_{name}" / "main" / "maps" / "dm" / f"{name}.map"
+    if lighting == "csgo":
+        opts.setdefault("lightmap_density", 16)
+        opts.setdefault("texlights", False)
+        opts.setdefault("headroom", True)
     if quality in ("draft", "unlit", "fastrad"):
         opts.setdefault("props_static_vertices", 0)
         opts.setdefault("lightmap_density", 32)
@@ -2295,17 +2544,19 @@ def refresh_assets(map_name: str, name: Optional[str] = None, quality: str = "dr
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_bytes(data)
     (out / "statics.json").write_text(json.dumps(res.statics))
+    save_prop_light(out / "prop_light.npz", res.prop_light)
     prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
     report = dict(prev)
     report["convert"] = res.report
     report.update(finish_local(name, src, root_map.with_suffix(".bsp"), res.assets, res.statics, res.map, res.report,
-                               test=test, scale=opts.get("scale", 1.0), log=log))
+                               test=test, scale=opts.get("scale", 1.0), log=log, prop_light=res.prop_light,
+                               lighting=lighting))
     (out / "report.json").write_text(json.dumps(report, indent=2))
     return report
 
 
 def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft", test: bool = True,
-                shots: int = 9, log=print, props_only: bool = False, **opts) -> dict:
+                shots: int = 9, log=print, props_only: bool = False, lighting: str = "csgo", **opts) -> dict:
     """Convert ``csgo/maps/<map_name>.bsp``, compile, package and (optionally) screenshot it.
 
     Everything is written under ``local/csgo/<name>/`` (gitignored: it contains
@@ -2331,11 +2582,20 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     out = config.REPO / "local" / "csgo" / name
     out.mkdir(parents=True, exist_ok=True)
     log(f"== converting {src.name} -> {name}")
+    if quality == "unlit":
+        lighting = "none"
     if quality in ("draft", "unlit", "fastrad"):
         # MOHlight lights static-model vertices on one thread (~190/s at best; de_dust2's 70k took
         # hours), so "compile" drafts make every prop a runtime script_model unless a budget is given.
         opts.setdefault("props_static_vertices", 0)
-        opts.setdefault("lightmap_density", 32)
+        if lighting != "csgo":
+            opts.setdefault("lightmap_density", 32)
+    if lighting == "csgo":
+        # CS:GO's lighting is transferred, not computed: no light entities or texlights for
+        # MOHlight, and the lightmap density costs nothing but pages (Source luxels are ~16 units)
+        opts.setdefault("lightmap_density", 16)
+        opts.setdefault("texlights", False)
+        opts.setdefault("headroom", True)
     res = convert(str(src), cfg.csgo_dir, Options(name=name, **opts))
     if props_only:
         from ..mapfile import MapFile, compiled_difference
@@ -2361,15 +2621,21 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
         log("== compiling (unlit: BSP and fast VIS only)")
         cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality="draft", light=False,
                            bsp_args=BSP_ARGS)
+    elif lighting == "csgo":
+        log(f"== compiling ({quality}: BSP and VIS; lighting transferred from CS:GO)")
+        cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality=quality, light=False,
+                           bsp_args=BSP_ARGS)
     else:
         log(f"== compiling ({quality})")
         cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality=quality, bsp_args=BSP_ARGS)
     log(cr.summary())
     (out / "statics.json").write_text(json.dumps(res.statics))
+    save_prop_light(out / "prop_light.npz", res.prop_light)
     report = {"name": name, "source": str(src), "convert": res.report, "compile_ok": cr.ok, "stats": cr.stats,
-              "problems": cr.problems}
+              "problems": cr.problems, "lighting_mode": lighting, "scale": opts.get("scale", 1.0)}
     if cr.ok:
         report.update(finish_local(name, src, cr.bsp, res.assets, res.statics, res.map, res.report,
-                                   test=test, shots=shots, scale=opts.get("scale", 1.0), log=log))
+                                   test=test, shots=shots, scale=opts.get("scale", 1.0), log=log,
+                                   prop_light=res.prop_light, lighting=lighting))
     (out / "report.json").write_text(json.dumps(report, indent=2))
     return report

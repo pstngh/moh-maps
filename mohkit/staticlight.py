@@ -56,6 +56,9 @@ class StaticInstance:
     scale: float
     positions: np.ndarray
     normals: np.ndarray
+    # vertex colours to use as they are (N x 3, lightmap byte scale; NaN rows are lit from the
+    # BSP like an instance without colours), e.g. CS:GO's own baked prop lighting
+    colors: Optional[np.ndarray] = None
 
 
 # ---------------------------------------------------------------------------- geometry
@@ -158,27 +161,52 @@ DRAWVERT_DT = np.dtype([("xyz", "<f4", 3), ("st", "<f4", 2), ("lm", "<f4", 2), (
 AXES6 = np.array([[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]], np.float64)
 
 
-def lightmap_samples(bsp: BSP) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Every lightmap texel of the world as a sample: world position, unit normal and RGB
-    (N x 3 each). Planar and triangle-soup surfaces give one sample per texel whose centre
-    falls on the surface (positions clamped onto it, so padding texels don't reach through
-    walls); patches give one per control vertex."""
+@dataclass
+class Texels:
+    """Lightmap texels of a BSP's surfaces: world position, unit normal, page and pixel
+    (x right, y down in the 128 x 128 page), and ``inside``: the texel centre lies on the
+    surface (within about half a texel) rather than in the padding around it."""
+    pos: np.ndarray
+    nrm: np.ndarray
+    page: np.ndarray
+    x: np.ndarray
+    y: np.ndarray
+    inside: np.ndarray
+    surf: Optional[np.ndarray] = None   # surface index of each texel
+
+
+def _grid_triangles(w: int, h: int) -> np.ndarray:
+    """Two triangles per cell of a w x h (columns x rows) patch control grid."""
+    t = []
+    for r in range(h - 1):
+        for c in range(w - 1):
+            k = r * w + c
+            t += [(k, k + w, k + 1), (k + 1, k + w, k + w + 1)]
+    return np.array(t, np.int64).reshape(-1, 3)
+
+
+def lightmap_texels(bsp: BSP, all_texels: bool = False) -> Texels:
+    """Every lightmap texel of the world's planar, triangle-soup and patch surfaces.
+
+    Each texel centre is located on the surface's triangles in lightmap space (patches: the
+    triangulated control grid) and given the barycentric world position and normal, clamped
+    onto the surface. By default only texels on the surface are returned; ``all_texels``
+    also returns the padding texels of each surface's rectangle (to write them)."""
     dv = np.frombuffer(bsp.lump("drawverts"), DRAWVERT_DT)
     ix = np.frombuffer(bsp.lump("drawindexes"), "<i4")
-    pages = np.frombuffer(bsp.lump("lightmaps"), np.uint8).reshape(-1, 128, 128, 3)
-    P, N, C = [], [], []
-    for s in bsp.surfaces():
-        if s.lightmap < 0 or s.lightmap >= len(pages) or s.num_verts == 0:
+    P, N, PG, X, Y, IN, SI = [], [], [], [], [], [], []
+    for si, s in enumerate(bsp.surfaces()):
+        if s.lightmap < 0 or s.num_verts == 0 or s.lm_w <= 0 or s.lm_h <= 0:
             continue
         v = dv[s.first_vert:s.first_vert + s.num_verts]
         if s.type == 2:
-            u = np.clip((v["lm"][:, 0] * 128).astype(int), 0, 127)
-            t = np.clip((v["lm"][:, 1] * 128).astype(int), 0, 127)
-            P.append(v["xyz"]), N.append(v["normal"]), C.append(pages[s.lightmap][t, u])
+            if s.patch_w * s.patch_h != s.num_verts or s.patch_w < 2 or s.patch_h < 2:
+                continue
+            tri = _grid_triangles(s.patch_w, s.patch_h)
+        elif s.type in (1, 3) and s.num_indexes >= 3:
+            tri = ix[s.first_index:s.first_index + s.num_indexes].reshape(-1, 3)
+        else:
             continue
-        if s.type not in (1, 3) or s.num_indexes < 3 or s.lm_w <= 0 or s.lm_h <= 0:
-            continue
-        tri = ix[s.first_index:s.first_index + s.num_indexes].reshape(-1, 3)
         uv = v["lm"].astype(np.float64) * 128.0
         gu, gt = np.meshgrid(np.arange(s.lm_x, s.lm_x + s.lm_w) + 0.5, np.arange(s.lm_y, s.lm_y + s.lm_h) + 0.5)
         q = np.stack([gu.ravel(), gt.ravel()], 1)
@@ -198,23 +226,43 @@ def lightmap_samples(bsp: BSP) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
             better = m > best
             best[better], bary[better], tris[better] = m[better], bb[better], (a, b, c)
         # inside, or within about half a texel of the edge (best is in barycentric units)
-        keep = best > -0.5 / max(1.0, min(s.lm_w, s.lm_h))
+        inside = best > -0.5 / max(1.0, min(s.lm_w, s.lm_h))
+        keep = np.isfinite(best) & (inside | all_texels)
         if not keep.any():
             continue
         bb = np.clip(bary[keep], 0.0, None)
-        bb /= bb.sum(1, keepdims=True)
+        bb /= np.maximum(bb.sum(1, keepdims=True), 1e-12)
         t3 = tris[keep]
         xyz = v["xyz"].astype(np.float64)
         nrm = v["normal"].astype(np.float64)
         P.append(np.einsum("nk,nkj->nj", bb, xyz[t3]))
         N.append(np.einsum("nk,nkj->nj", bb, nrm[t3]))
         qi = q[keep].astype(int)
-        C.append(pages[s.lightmap][np.clip(qi[:, 1], 0, 127), np.clip(qi[:, 0], 0, 127)])
+        PG.append(np.full(len(qi), s.lightmap, np.int32))
+        X.append(np.clip(qi[:, 0], 0, 127))
+        Y.append(np.clip(qi[:, 1], 0, 127))
+        IN.append(inside[keep])
+        SI.append(np.full(len(qi), si, np.int32))
     if not P:
-        return np.zeros((0, 3)), np.zeros((0, 3)), np.zeros((0, 3))
-    p, n, c = (np.concatenate(x).astype(np.float64) for x in (P, N, C))
+        z = np.zeros((0, 3))
+        e = np.zeros(0, np.int64)
+        return Texels(z, z, e, e, e, np.zeros(0, bool), e)
+    p, n = (np.concatenate(a).astype(np.float64) for a in (P, N))
     ln = np.linalg.norm(n, axis=1, keepdims=True)
-    return p, n / np.maximum(ln, 1e-6), c
+    return Texels(p, n / np.maximum(ln, 1e-6), np.concatenate(PG), np.concatenate(X), np.concatenate(Y),
+                  np.concatenate(IN), np.concatenate(SI))
+
+
+def lightmap_samples(bsp: BSP) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Every lightmap texel of the world as a sample: world position, unit normal and RGB
+    (N x 3 each), for texels whose centre falls on the surface (positions clamped onto it,
+    so padding texels don't reach through walls). Patches use their triangulated control
+    grid."""
+    pages = np.frombuffer(bsp.lump("lightmaps"), np.uint8).reshape(-1, 128, 128, 3)
+    t = lightmap_texels(bsp)
+    ok = t.page < len(pages)
+    c = pages[t.page[ok], t.y[ok], t.x[ok]].astype(np.float64)
+    return t.pos[ok], t.nrm[ok], c
 
 
 class LightmapField:
@@ -347,7 +395,7 @@ LIGHTMAP_TO_VERTEX = 1.78
 
 def light_instance(grid: LightGrid, inst: StaticInstance, sun: Optional[np.ndarray],
                    offset: float = 6.0, fallback: Optional[np.ndarray] = None,
-                   field_rgb: Optional[np.ndarray] = None) -> np.ndarray:
+                   field_rgb: Optional[np.ndarray] = None, field_scale: float = LIGHTMAP_TO_VERTEX) -> np.ndarray:
     """Vertex colours (N x 3 uint8) for one instance: from ``field_rgb`` (the instance's
     ``LightmapField.sample``) where it found light, else from the light grid."""
     pos, nrm = world_mesh(inst)
@@ -362,8 +410,11 @@ def light_instance(grid: LightGrid, inst: StaticInstance, sun: Optional[np.ndarr
     rgb = shade(rgb, nrm, sun)
     if field_rgb is not None:
         ok = ~np.isnan(field_rgb[:, 0])
-        rgb[ok] = np.clip(field_rgb[ok] * LIGHTMAP_TO_VERTEX, 0, 255)
-    return rgb.round().astype(np.uint8)
+        rgb[ok] = np.clip(field_rgb[ok] * field_scale, 0, 255)
+    if inst.colors is not None:
+        known = ~np.isnan(inst.colors[:, 0])
+        rgb[known] = inst.colors[known]
+    return np.clip(rgb, 0, 255).round().astype(np.uint8)
 
 
 def field_colours(field: "LightmapField", instances: Sequence[StaticInstance], offset: float = 6.0,
@@ -414,8 +465,13 @@ def write_lumps(bsp: BSP, replace: dict[str, bytes], out: Union[str, Path]) -> N
 
 
 def inject(bsp_path: Union[str, Path], instances: Sequence[StaticInstance], out: Optional[Union[str, Path]] = None,
-           light: Optional[Callable[[LightGrid, StaticInstance], np.ndarray]] = None) -> dict:
-    """Add ``instances`` to the static models of a lit BSP (in place unless ``out``)."""
+           light: Optional[Callable[[LightGrid, StaticInstance], np.ndarray]] = None,
+           field_scale: float = LIGHTMAP_TO_VERTEX) -> dict:
+    """Add ``instances`` to the static models of a lit BSP (in place unless ``out``).
+
+    Vertices without ``colors`` take the BSP's lightmaps (``LightmapField``) times
+    ``field_scale``: 1.78 matches MOHlight's own prop lighting; lightmaps transferred from
+    CS:GO (``mohkit.source.lighting``) are in vertex scale already (1.0)."""
     bsp = BSP(Path(bsp_path))
     try:
         grid: Optional[LightGrid] = LightGrid(bsp)
@@ -434,15 +490,19 @@ def inject(bsp_path: Union[str, Path], instances: Sequence[StaticInstance], out:
     placed = unplaced = 0
     # the lit BSP's own lightmaps (the grid ignores spotlight cones); grid where they don't reach
     field = LightmapField(bsp) if grid is not None and light is None and bsp.count("lightmaps") else None
-    fields = field_colours(field, instances) if field is not None and field.count else None
+    need = [i for i in instances if i.colors is None or np.isnan(i.colors[:, 0]).any()]
+    fields = field_colours(field, need) if field is not None and field.count else None
     for k, inst in enumerate(instances):
-        f_rgb = next(fields) if fields is not None else None
-        if grid is None:
+        complete = inst.colors is not None and not np.isnan(inst.colors[:, 0]).any()
+        f_rgb = next(fields) if fields is not None and not complete else None
+        if complete:
+            rgb = np.clip(inst.colors, 0, 255).round().astype(np.uint8)
+        elif grid is None:
             rgb = np.full((len(inst.positions), 3), 160, np.uint8)
         elif light is not None:
             rgb = light(grid, inst)
         else:
-            rgb = light_instance(grid, inst, sun, field_rgb=f_rgb)
+            rgb = light_instance(grid, inst, sun, field_rgb=f_rgb, field_scale=field_scale)
         model = inst.model.encode("latin-1")
         if len(model) >= 128:
             raise ValueError(f"model path too long: {inst.model}")

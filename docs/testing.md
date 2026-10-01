@@ -150,6 +150,28 @@ Checklist for every sheet:
 Also render a plan (`python -m mohkit plan maps/x/x.map`) to check layout,
 spawns and lights from above before compiling.
 
+## Measuring exposure
+
+Judging brightness by eye from sheets misses patterns. `mohkit.exposure` measures each
+shot at 1280 x 720: mean Rec. 709 luma, 5th/50th/95th percentiles, near-white (luma >=
+240) and near-black (<= 16) pixel shares, blown/crushed 32-pixel blocks (mean >= 225 /
+<= 20) and R/B warmth, flags shots outside a band and ranks them by a badness score:
+
+```sh
+python -m mohkit exposure local/csgo/cs_nuke/shots -n 10     # the 10 worst shots
+python -m mohkit exposure local/csgo/*/shots --by-map        # one line per map
+python -m mohkit exposure --stock --by-map                   # + stock mohdm1-7/obj_team1-4 (dist/stock_shots)
+python -m mohkit exposure shot.png --mask                    # shot_mask.png: red near-white, blue near-black
+```
+
+Converted maps save their full-size shots in `local/csgo/<name>/shots/` and
+`exposure.json` (`python -m mohkit csgo <map> --shoot` re-shoots the packaged map);
+`csgo-ref` saves CS:GO's own shots from the same cameras (`docs/csgo-conversion.md`).
+Stock MOHAA DM maps measured this way (spawn cameras, 2026-10-01) are dark and moody:
+mean luma 36-63 per map with 9-25% near-black pixels; the CS:GO maps' own shots are
+94-110 with 1-3%. The thresholds flag what neither does: whole areas at the cap (Nuke's
+radio room, mean 183 with no shading) and crushed interiors.
+
 ## Ladders
 
 `game.ladder_probe(pk3s, map, game.ladders_in_bsp(bsp))` climbs every `func_ladder` as a

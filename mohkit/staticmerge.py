@@ -115,11 +115,12 @@ class _Model:
 
     def add(self, inst: StaticInstance, parts) -> None:
         ax = axes(inst.angles)
+        k = 0      # the instance's vertex colours run over its surfaces in file order
         for srf, shader in parts:
             nv, nt = len(srf.positions), len(srf.triangles)
             b = self._open(shader, nv, nt)
             if b is None:
-                b = {"shader": shader, "nv": 0, "nt": 0, "pos": [], "nrm": [], "uv": [], "tri": []}
+                b = {"shader": shader, "nv": 0, "nt": 0, "pos": [], "nrm": [], "uv": [], "tri": [], "col": []}
                 self.buckets.append(b)
             pos = srf.positions * float(inst.scale) @ ax + np.asarray(inst.origin, np.float64)
             nrm = srf.normals.astype(np.float64) @ ax
@@ -127,6 +128,9 @@ class _Model:
             b["pos"].append(pos)
             b["nrm"].append(nrm)
             b["uv"].append(srf.uvs)
+            col = inst.colors[k:k + nv] if inst.colors is not None and len(inst.colors) >= k + nv else None
+            b["col"].append(col if col is not None else np.full((nv, 3), np.nan))
+            k += nv
             b["nv"] += nv
             b["nt"] += nt
         self.members.append(inst)
@@ -154,8 +158,10 @@ def _write(model: _Model, prefix: str, key: str) -> tuple[StaticInstance, dict[s
                                            comment=f"{len(model.members)} x {model.members[0].model}, "
                                                    "merged by mohkit.staticmerge").encode("latin-1"),
     }
+    cols = np.concatenate([np.concatenate(b["col"]) for b in model.buckets])
     inst = StaticInstance(f"{path}/{h}.tik", tuple(float(v) for v in origin), (0.0, 0.0, 0.0), 1.0,
-                          allp, np.concatenate([s.normals for s in surfaces]).astype(np.float64))
+                          allp, np.concatenate([s.normals for s in surfaces]).astype(np.float64),
+                          None if np.isnan(cols[:, 0]).all() else cols)
     return inst, files
 
 

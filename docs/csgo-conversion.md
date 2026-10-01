@@ -175,8 +175,94 @@ merged-away originals from the pk3. de_inferno: 6,326 models / 301 SKDs -> 3,436
 de_nuke: 4,801 / 1,365 -> 2,917 / 598, pk3 assets 262 -> 267 MB. `staticlight.inject`
 refuses more than 4,095 static models.
 
+## Lighting: CS:GO's own baked light (default since 2026-10-01)
+
+Lit builds no longer run MOHlight. Q3map compiles BSP and VIS only (it allocates the
+lightmap pages), then `mohkit.source.lighting.transfer` fills them from the Source map's
+own VRAD lighting, and the light grid and every prop are lit from the same data. de_inferno
+builds in about 7 minutes instead of 15+ (its light stage alone took 674 s), de_nuke in
+about 20 instead of an hour. `--mohlight` keeps the old path (converted `light` entities,
+texlights and sky fill lit by MOHlight).
+
+**Why.** Converted lights can't reproduce VRAD. MOHlight's point light is
+`7500 * I * cos / d^2` *in display space*, capped at a stored 127 (measured, `docs/lighting.md`);
+VRAD's is `brightness/255 * (100/d)^2` in *linear* space, which the display gamma turns
+into roughly `1/d^0.9`. So converted lamps were flat white near the lamp and dark between
+lamps, texlights stacked more lights on top, and the sky fill was a guess. Measured on
+the same 31 CS:GO cameras of de_inferno (`csgo-ref`, `exposure`): per-camera mean
+brightness correlated with CS:GO's at 0.12 before and 0.75 after; mean error 31 -> 19
+(of 255). Halls went from 107 (blown, flat) to 51 (CS:GO 56), Banana from 45 to 52-60.
+
+**Lightmaps.** Every lit face's style-0 lightmap (`LIGHTING_HDR`, lump 53, addressed by
+`FACES_HDR`, 58; `ColorRGBExp32`: `c / 255 * 2^exp` linear) becomes luxels with a world
+position: planar faces solve the lightmap vectors for `lm_mins + (s, t)`; displacement
+luxel (s, t) sits at grid parameter (s / S, t / T), t along corner 0 -> 1 and s along
+0 -> 3 from the start corner (VBSP `CCoreDispSurface::CalcLuxelCoords` gives the corners
+luxel coords (0,0), (0,T), (S,T), (S,0); checked against seam continuity with flat
+neighbours: 0.35 median log error vs 0.55-0.75 for the 7 other orientations). Bumped faces
+store the flat lightmap first. **A face's lightmap is the rectangle around its polygon and
+VRAD leaves luxels well outside the polygon black**: those are dropped (more than 0.75
+luxel outside an edge); before that, de_inferno's sunlit CT floor had round black
+blotches at face corners. Each MOHAA texel (`staticlight.lightmap_texels`, padding
+included) takes the luxels within 24 units, weighted `facing / (1 + d)^2`: first those on
+its plane facing the same way (88% of de_inferno's texels), then near its plane, then any
+facing within 60 degrees, then anything within 96 units. Lightmap density is 16 (pages:
+de_inferno 87, de_nuke 134 of 170).
+
+**Exposure and tone curve.** CS:GO auto-exposes between the `SetAutoExposureMin/Max` its
+`logic_auto` sends to `env_tonemap_controller` (de_inferno 0.75-1.5, de_nuke 0.75-1.15,
+de_dust2 0.7-3, de_cbble 0-0.9); `exposure_for` takes the geometric mean (half the
+maximum when the minimum is 0). A texel stores `127 * (exposure * L)^(1/2.2)` (MOHAA
+multiplies the sRGB texture by the doubled lightmap, Source the linear albedo by linear
+light), rolled off smoothly from 0.82 so bright areas keep their gradients.
+
+**Headroom.** MOHAA can't show a lit surface brighter than its texture (127 doubled),
+but CS:GO's sunlit floors are lit 1.5-2.5x (displayed ~1.3-1.5x). So every lit texture is
+brightened by `headroom_gain` (up to 1.6, as far as its 99.5th-percentile texel stays
+under 250) and the light on its surfaces is divided by the same gain
+(`report["texture_gain"]`, applied per BSP surface and per prop vertex): shading is
+unchanged below the old cap, and sunlight reaches up to the gain. Additive, unlit,
+translucent world and water materials are not brightened.
+
+**Props.** VRAD bakes every static prop's vertex lighting into the map's pakfile
+(`sp_hdr_<prop index>.vhv`, `HardwareVerts::FileHeader_t`: 40-byte header, 28-byte mesh
+records `lod, vertexes, offset`): one stream per body part, model, VTX LOD, mesh and strip
+group, in that order (`studiomdl.vhv_layout`, matched 400 of 400 sampled de_inferno props);
+CS:GO writes 3 colours per vertex (bump basis), each 4 bytes B, G, R,
+`255 * 0.5 * linear^(1/2.2)` (mathlib `lineartovertex`, OVERBRIGHT 2), then the sun share
+(vradstaticprops.cpp `SerializeLighting`). The converter keeps each SKD vertex's source
+(body part, model, mesh, mesh vertex id) through `modelconv.weld`/`split_surface`
+(`ConvertedModel.vertex_source`), averages the 3 colours in linear light and stores
+`prop_light.npz`; injection puts them through the same tone curve as the lightmaps
+(6,269 of de_inferno's 6,326 props). Sampling the floor under a prop does not work with
+these lightmaps: VRAD bakes the prop's own shadow there, and props went black. Props
+without a `.vhv` (`prop_dynamic`) are lit from the lightmaps at scale 1.0.
+
+**Prop tints.** CS:GO tints props per instance (`sprp` DiffuseModulation; `rendercolor` on
+`prop_dynamic`): 2,569 of de_nuke's 5,002 props (yellow rails, grey 168 pipes, blue-grey
+boxes) and 2,193 of de_inferno's. They were all drawn white. The tint now multiplies the
+vertex colours, weighted per material by how much of it the tint covers: all of it, the
+mean of the base alpha for `$blendtintbybasealpha` (the tint follows that mask; vertex
+colours can't, so the mask's average stands in), none for `$notint`.
+
+**Light grid.** Built without MOHlight (`lighting.build_grid`): 32-unit cells over the
+world model's bounds, a cell is open when its centre's leaf has a cluster
+(`point_leaves`, BSP descent; de_inferno: 94% agreement with MOHlight's own grid), coloured
+with the mean of the light arriving along the six axes and the brightest of them
+(`LightmapField`), quantised to 255 palette entries (k-means), RLE-encoded
+(`encode_grid`; round-trips MOHlight's grid exactly). Drawvert colours (`rgbGen vertex`
+surfaces) come from the luxels too.
+
+**Reference shots.** `python -m mohkit csgo-ref de_nuke` runs the CS:GO client in
+`csgo_dir` windowed, drives it over `-netconport`, and saves `jpeg`s from every named
+camera into `local/csgo/<name>/csgo_ref/` (restoring `config.cfg`/`video.txt`). Compare
+them with the conversion's shots (`local/csgo/<name>/shots/`, same names) using
+`python -m mohkit exposure`.
+
 ## Known gaps
 
+- Prop tints that follow a texture mask (`$blendtintbybasealpha`) are averaged over the
+  material: exact masks need tinted texture variants per tint (TIKI shader overrides).
 - Blend textures use the first layer only.
 - Door handles and other relief of door and vent models are lost (slabs). Vents break
   (`func_window`, metal debris) instead of swinging open.

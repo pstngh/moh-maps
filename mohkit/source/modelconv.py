@@ -135,6 +135,11 @@ class ConvertedModel:
     collision_brushes: int = 0
     source: str = ""                          # the .mdl path
     pivot: Vec3 = (0.0, 0.0, 0.0)             # Source-model point now at the TIKI origin (``centre``)
+    # per TIKI part, per SKD vertex in file order: (bodypart, model, mesh, mesh-local vertex id)
+    # of the Source vertex it came from; VRAD's per-vertex prop lighting is keyed that way
+    vertex_source: list = field(default_factory=list)
+    gains: dict = field(default_factory=dict)  # shader -> texture gain (``headroom``)
+    tint_mask: dict = field(default_factory=dict)  # shader -> share tinted by DiffuseModulation (absent: 1)
 
     @property
     def model_key(self) -> str:
@@ -450,8 +455,10 @@ def shader_text(mat: _Material) -> str:
 # Geometry
 
 
-def weld(pos: np.ndarray, nrm: np.ndarray, uv: np.ndarray, tris: np.ndarray):
-    """Merge vertices with identical position, normal and UV; drop degenerate triangles."""
+def weld(pos: np.ndarray, nrm: np.ndarray, uv: np.ndarray, tris: np.ndarray, extra: Optional[np.ndarray] = None):
+    """Merge vertices with identical position, normal and UV; drop degenerate triangles.
+    ``extra`` (per-vertex data, e.g. source vertex ids) is filtered alongside and returned
+    as a fifth value."""
     key = np.ascontiguousarray(np.concatenate([pos, nrm, uv], axis=1).astype(np.float32))
     _, first, inv = np.unique(key.view(np.dtype((np.void, key.dtype.itemsize * key.shape[1]))).ravel(),
                               return_index=True, return_inverse=True)
@@ -462,14 +469,17 @@ def weld(pos: np.ndarray, nrm: np.ndarray, uv: np.ndarray, tris: np.ndarray):
     keep = first[order]
     t = new_idx[tris]
     ok = (t[:, 0] != t[:, 1]) & (t[:, 1] != t[:, 2]) & (t[:, 2] != t[:, 0])
+    if extra is not None:
+        return pos[keep], nrm[keep], uv[keep], t[ok], extra[keep]
     return pos[keep], nrm[keep], uv[keep], t[ok]
 
 
 def split_surface(pos, nrm, uv, tris, max_verts: int = _skd.MAX_SURFACE_VERTS,
-                  max_tris: int = _skd.MAX_SURFACE_TRIS) -> list[tuple[np.ndarray, ...]]:
-    """Greedy split of a triangle list into chunks under the SKD per-surface limits."""
+                  max_tris: int = _skd.MAX_SURFACE_TRIS, extra: Optional[np.ndarray] = None) -> list[tuple[np.ndarray, ...]]:
+    """Greedy split of a triangle list into chunks under the SKD per-surface limits. With
+    ``extra`` (per-vertex data) each chunk has a fifth element, its rows of ``extra``."""
     if len(pos) <= max_verts and len(tris) <= max_tris:
-        return [(pos, nrm, uv, tris)]
+        return [(pos, nrm, uv, tris) + ((extra,) if extra is not None else ())]
     chunks = []
     local: dict[int, int] = {}
     cur: list[tuple[int, int, int]] = []
@@ -479,7 +489,7 @@ def split_surface(pos, nrm, uv, tris, max_verts: int = _skd.MAX_SURFACE_VERTS,
             return
         idx = np.fromiter(local.keys(), np.int64, len(local))
         t = np.array(cur, np.int32)
-        chunks.append((pos[idx], nrm[idx], uv[idx], t))
+        chunks.append((pos[idx], nrm[idx], uv[idx], t) + ((extra[idx],) if extra is not None else ()))
         local.clear()
         cur.clear()
 
@@ -594,7 +604,7 @@ def collision_map(brushes: Iterable[Brush]) -> str:
 
 def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale: float = 1.0,
                   max_texture: int = 512, solid: int = 6, jpeg_quality: Optional[int] = None,
-                  centre: bool = False) -> ConvertedModel:
+                  centre: bool = False, headroom: bool = False) -> ConvertedModel:
     """Convert one Source model (``models/....mdl``) to MOHAA static-model files.
 
     ``fs`` reads Source files (``try_read``; see :func:`source_fs`). ``solid`` is the
@@ -639,6 +649,8 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
         groups[mat.shader].append((mat, mesh))
 
     surfaces: list[_skd.SkdSurface] = []
+    surface_src: list[np.ndarray] = []      # per surface: (mesh ordinal in sm.meshes, mesh-local vertex id)
+    mesh_order = {id(m): i for i, m in enumerate(sm.meshes)}
     bindings: list[tuple[str, str]] = []
     used: list[_Material] = []
     total_tris = 0
@@ -646,25 +658,28 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
         items = groups[shader]
         mat = items[0][0]
         used.append(mat)
-        pos, nrm, uv, tris, off = [], [], [], [], 0
+        pos, nrm, uv, tris, src, off = [], [], [], [], [], 0
         for _m, mesh in items:
             pos.append(mesh.positions)
             nrm.append(mesh.normals)
             uv.append(mesh.uvs)
             tris.append(mesh.triangles + off)
+            ids = mesh.ids if mesh.ids is not None else np.full(len(mesh.positions), -1, np.int64)
+            src.append(np.stack([np.full(len(ids), mesh_order[id(mesh)], np.int64), ids], 1))
             off += len(mesh.positions)
         p = np.concatenate(pos).astype(np.float64) * scale
         n = np.concatenate(nrm).astype(np.float64)
         ln = np.linalg.norm(n, axis=1, keepdims=True)
         n = np.where(ln > 1e-8, n / np.maximum(ln, 1e-8), np.array([0.0, 0.0, 1.0]))
-        p, n, u, t = weld(p.astype(np.float32), n.astype(np.float32), np.concatenate(uv).astype(np.float32),
-                          np.concatenate(tris))
+        p, n, u, t, sv = weld(p.astype(np.float32), n.astype(np.float32), np.concatenate(uv).astype(np.float32),
+                              np.concatenate(tris), np.concatenate(src))
         if not len(t):
             continue
         slug = re.sub(r"[^a-z0-9_]", "_", mat.name.rpartition("/")[2].lower())[:22] or "mat"
-        for cp, cn, cu, ct in split_surface(p, n, u, t):
+        for cp, cn, cu, ct, cs in split_surface(p, n, u, t, extra=sv):
             sname = f"{slug}_{len(surfaces):02d}"
             surfaces.append(_skd.SkdSurface(sname, cp, cn, cu, ct))
+            surface_src.append(cs)
             bindings.append((sname, shader))
             total_tris += len(ct)
     if not surfaces:
@@ -684,6 +699,8 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
     files: dict[str, bytes] = {}
     # --- textures and shaders ------------------------------------------------------
     shaders: dict[str, str] = {}
+    gains: dict[str, float] = {}
+    tint_mask: dict[str, float] = {}
     for mat in used:
         keep_alpha = mat.alphatest or mat.translucent or mat.additive
         if mat.info is not None:
@@ -691,6 +708,20 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
         else:
             rgba = np.full((8, 8, 4), 160, np.uint8)
             rgba[..., 3] = 255
+        unlit = mat.info is not None and (mat.info.shader or "").lower() == "unlitgeneric"
+        # how much of the texture a prop's per-instance tint colours (DiffuseModulation):
+        # $blendtintbybasealpha tints only where the base alpha says, $notint never
+        params = mat.info.params if mat.info is not None else {}
+        if str(params.get("$notint", "0")).strip() not in ("0", ""):
+            tint_mask[mat.shader] = 0.0
+        elif str(params.get("$blendtintbybasealpha", "0")).strip() not in ("0", "") and rgba.shape[-1] == 4:
+            tint_mask[mat.shader] = round(float(rgba[..., 3].mean()) / 255.0, 3)
+        if headroom and not (unlit or mat.additive):
+            from .lighting import apply_gain, headroom_gain
+            g = headroom_gain(rgba)
+            rgba = apply_gain(rgba, g)
+            if g > 1.0001:
+                gains[mat.shader] = round(g, 4)
         if jpeg_quality and not keep_alpha:
             from PIL import Image
             buf = io.BytesIO()
@@ -738,6 +769,9 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
 
     # --- SKD / SKC / TIKI (partitioned at 24 surfaces) ------------------------------
     parts = [surfaces[i : i + _skd.MAX_TIKI_SURFACES] for i in range(0, len(surfaces), _skd.MAX_TIKI_SURFACES)]
+    part_src = [np.concatenate(surface_src[i : i + _skd.MAX_TIKI_SURFACES]).astype(np.int32)
+                for i in range(0, len(surface_src), _skd.MAX_TIKI_SURFACES)]
+    mesh_keys = [(m.bodypart, m.model, m.mesh) for m in sm.meshes]
     part_bind = [bindings[i : i + _skd.MAX_TIKI_SURFACES] for i in range(0, len(bindings), _skd.MAX_TIKI_SURFACES)]
     if len(parts) > 1:
         warnings.append(f"{len(surfaces)} surfaces: partitioned into {len(parts)} TIKIs")
@@ -763,7 +797,9 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
         tik=tiks[0], files=files, bounds=(mins, maxs), vertices=sum(len(s.positions) for s in surfaces),
         surfaces=len(surfaces), has_collision=bool(brushes), warnings=warnings, tiks=tiks, shaders=shaders,
         materials=[m.name for m in used], triangles=total_tris, collision_brushes=len(brushes),
-        source=normalize_path(mdl_path), pivot=tuple(float(x) for x in pivot))
+        source=normalize_path(mdl_path), pivot=tuple(float(x) for x in pivot), gains=gains, tint_mask=tint_mask,
+        vertex_source=[np.column_stack([np.array(mesh_keys, np.int32).reshape(-1, 3)[ps[:, 0]], ps[:, 1]])
+                       if len(ps) else np.zeros((0, 4), np.int32) for ps in part_src])
 
 
 def bundle(models: Iterable[ConvertedModel], prefix: str = "csgo", script: Optional[str] = None) -> dict[str, bytes]:

@@ -66,6 +66,18 @@ Match the sky shader to the mood: `sky/mohday1`/`mohday2` (day), `sky/m5l2`,
 | spotlight | `target` an `info_null`, or `angles` + `radius`; `spot_angle` = cone (default 45) |
 | `overbright_range` | 0.01–2.5, default 1 |
 
+**Falloff (measured, MOHlight 1.48, 2026-10-01):** one light per closed room at height h
+above the floor, `-fast -bounce 0`, floor lightmap read straight below and along the floor:
+stored value = `7500 * light * cos(angle) / d^2`, capped at **127** (light 50 at 64 units:
+94 measured, 91.5 predicted; 150 at 128: 69 vs 68.7; 300 at 256: 34 vs 34.3; 800 at 512:
+22 vs 22.9). That is Q3map's point light (`pointScale` 7500) in **display space**: the
+renderer doubles lightmaps (`r_mapOverBrightBits 1` minus `r_overBrightBits 0`,
+`R_ColorShiftLightingBytes`), so 127 = the texture's own colour and nothing is brighter.
+`light 300` reaches full brightness at about 130 units and a quarter at 265. The linear
+flag (`spawnflags 1`) ends abruptly (`300` lights 0 past ~190 units). Static-model
+vertex colours and the light grid are doubled the same way (`tr_staticmodels.cpp`
+`R_InitStaticModels`, `R_GetLightingForDecal`).
+
 Placement: just under or in front of the fixture model, never inside a wall
 (`validate` warns). Budget ≤ 60 lights reaching any spot. MOHlight clamps
 beyond that ("Num lights per leaf clamped"), so cluster dense fixture fields.
@@ -113,7 +125,11 @@ with fill lights until you have seen a normal build.
   injected props use the lightmaps instead (`docs/csgo-conversion.md`). Players are not
   affected in practice: the engine also lights them from the light entities at run time
   (`r_fastentlight 0`), and one under that spot looked as lit as one in the sun.
-- **Converted Source lights.** `light_spot` aims along VRAD's direction (z = +sin(pitch));
+- **CS:GO conversions don't use MOHlight any more** (2026-10-01): their lightmaps, grid and
+  prop colours are CS:GO's own baked light (`docs/csgo-conversion.md`, "Lighting"). Source
+  light falls off with d^2 in linear space (about 1/d^0.9 on screen), which no MOHlight
+  light can match.
+- **Converted Source lights** (`--mohlight` only). `light_spot` aims along VRAD's direction (z = +sin(pitch));
   an earlier converter aimed ceiling spots at the ceilings and Nuke's interiors were dark.
   MOHAA's `light` value is roughly its reach in units, so converted lights use 1.5 x the
   Source brightness, and MOHlight keeps at most 60 lights per leaf.
