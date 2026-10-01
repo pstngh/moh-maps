@@ -20,13 +20,17 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 02:44):**
-- Running: `de_nuke -q fastrad` (initial light done, radiosity), `de_mirage -q fastrad`
-  (radiosity), `de_dust2 -q fastrad` (started 02:42; the 01:19 draft pk3 is backed up as
-  `scratchpad/cs_dust2_draft_0119.pk3`). `scratchpad/postcheck.sh` waits for Nuke and
-  Mirage and then runs bots (8, 90 s) and the ladder probe (`post_nuke.log`, `post_mirage.log`).
-- Done since 02:06: from-scratch `--inject-props` tried on a mk_medina copy (works,
-  `dist/mk_medinai_shots.png`); MT MOHlight lit that copy (no static models) cleanly.
+**Live state (update as you go, 03:03):**
+- **Mirage fastrad done:** `local/csgo/cs_mirage/cs_mirage.pk3`. BSP 293 s, light 2,672 s
+  (shared CPU), 1,470 props injected (1.35M vertices), 30 named-camera shots read as Mirage.
+  **77 bot kills** in 90 s, nothing stuck. Ladders 2/3: the leaning one's mount box was
+  blocked by a door model's collision; fixed in the converter (prop clips in ladder mount
+  boxes dropped), being verified by `scratchpad/mirage_ladcheck.sh` (unlit + probe); the
+  pk3 needs a rebuild to get the fix. Shop interiors are very dark.
+- **Nuke fastrad:** in radiosity (initial light 2,036 s). `postcheck.sh` then runs bots
+  and the ladder probe (`post_nuke.log`).
+- **dust2 fastrad:** light ~10% (started 02:42).
+- Claim 8 tested: structural de_dust2 compiles with 61 KB of VIS data (no overflow).
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
