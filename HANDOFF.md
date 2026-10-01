@@ -31,8 +31,8 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
   build fails.
 - The surface-light `--texlights` experiment (03:18) was stopped at 03:42 (MOHlight
   estimated ~15 h). `--texlights` now makes one point light per emitter face (43 on Nuke);
-  `de_nuke -q fastrad --texlights --name cs_nuket` started 03:43 (`nuke_texlights2.log`)
-  to compare with the final `cs_nuke` build.
+  `de_nuke -q fastrad --texlights --name cs_nuket` (03:43) was stopped at 04:15 at 10% of
+  its light (it would have ended after 06:00 and slowed the final builds): untested.
 - Known remaining looks issue: interiors rely on point lights (next step 1).
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
@@ -96,9 +96,9 @@ de_mirage. HANDOFF edit (23:45): finish de_dust2 first, time-boxed to ~02:00, th
 then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-git-backup`).
 
 1. **CS:GO look, next lever: texlights.** `--texlights` (opt-in) adds one point light per
-   `lights.rad` emitter face (surface lights were ~15 h of MOHlight on Nuke). Compare
-   `local/csgo/cs_nuket` (if its build finished) with `cs_nuke`: radio rooms, lobby, B
-   site. If better, make it the default; Mirage has no texlights.
+   `lights.rad` emitter face (surface lights were ~15 h of MOHlight on Nuke). Build
+   `mohkit csgo de_nuke -q fastrad --texlights --name cs_nuket` (~70 min alone) and compare
+   with `cs_nuke`: radio rooms, lobby, B site. If better, make it the default; Mirage has no texlights.
    Other Nuke gaps: vents break like glass; door handles lost; detail grass dropped.
 2. **Structural CS:GO maps:** `--structural` dust2 compiles (61 KB VIS, claim 8 false).
    Try a lit structural build: smaller leaves may light faster and avoid the 60-lights-
