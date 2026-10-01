@@ -117,6 +117,53 @@ def test_ladder_facing() -> None:
                    (0, [454.0, 668.0], -258.0, -112.0)], got
     assert len(cv._ladder_step_brushes) == 10 + 10 + 10
 
+
+def _bare_converter(scale: float = 1.0):
+    """A Converter with no BSP behind it, for the geometry helpers."""
+    cv = C.Converter.__new__(C.Converter)
+    cv.opt = C.Options(name="t", scale=scale)
+    cv.report = {"warnings": [], "dropped": {}}
+    return cv
+
+
+def test_ladder_rail_clips() -> None:
+    """Clips flanking a 24-wide ladder (de_vertigo's rails) go; a clip block under it, a cap
+    on top and the backing clip of a 6-deep ladder stay (de_rats, de_nuke)."""
+    import numpy as np
+    from mohkit.build import box
+    cv = _bare_converter()
+    cv._ladder_box_cache = [[np.array([0.0, 0.0, 0.0]), np.array([26.0, 24.0, 186.0])],     # vertigo-like
+                            [np.array([500.0, 0.0, 0.0]), np.array([546.0, 6.6, 172.0])]]   # rats-like, 6.6 deep
+    rails = [box((-30, 24, 0), (26, 56, 186), "common/clip"), box((-30, -32, 0), (26, 0, 186), "common/clip")]
+    keep = [box((13, -12, -94), (110, 92, 0), "common/clip"),           # a block under the ladder
+            box((0, 0, 186), (26, 24, 190), "common/playerclip"),       # a cap
+            box((499, 6.6, 0), (548, 11, 170), "common/clip"),          # backing of the 6.6-deep one
+            box((498, -4, 0), (502, 1, 172), "common/clip"),            # a post at its front corner
+            box((-30, -32, 0), (26, 0, 186), "csgo/wall")]              # drawn: not a clip
+    out = cv._drop_ladder_rail_clips(rails + keep)
+    assert out == keep and cv.report["ladder_rail_clips_dropped"] == 2, cv.report
+
+
+def test_displacement_heights() -> None:
+    """Floor heights over displacement triangles (de_cbble's ground in front of a ladder);
+    walls and ceilings don't count."""
+    import numpy as np
+    from types import SimpleNamespace
+    xs = np.linspace(0, 64, 3)
+    floor = np.stack(list(np.meshgrid(xs, xs, indexing="ij")) + [np.zeros((3, 3))], -1)
+    floor[..., 2] = -140 - floor[..., 0] / 16      # slopes down 4 units over 64 along x
+    ceiling = floor.copy()
+    ceiling[..., 2] = 100
+    cv = _bare_converter()
+    cv.bsp = SimpleNamespace(displacements=lambda: [SimpleNamespace(positions=floor, normal=(0.0, 0.0, 1.0)),
+                                                    SimpleNamespace(positions=ceiling, normal=(0.0, 0.0, -1.0))])
+    hs = cv._displacement_heights(40, 10)
+    assert len(hs) == 1 and abs(hs[0] - (-142.5)) < 1e-6, hs
+    assert cv._displacement_heights(80, 10) == []
+    cv._world_brushes = []
+    assert abs(cv._floor_below(48, 50, -100, 96) - (-143)) < 1e-6
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

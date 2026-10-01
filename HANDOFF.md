@@ -6,7 +6,29 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## NEXT SESSION: start here (session 2026-10-01 from 13:20)
+## Current session (2026-10-01 from 16:05): ladders, exposure fit, blend textures
+
+Working from the "Next steps" below, in order (no new user request).
+- **Ladders (done in code, verified on Vertigo):** rail-clip drop narrowed to *pairs* flanking a
+  16-32 wide axis (`Converter._drop_ladder_rail_clips`, before `ladders()`); near-square volumes
+  switch axis only for 1.5x wall; floors count displacements (`_displacement_heights`) and the
+  column starts at the lowest floor within 32 of the highest; `hang` in report entries (floor
+  in front > 40 below, prop clips count); `game.ladder_probe` starts hanging ones in the air
+  with +forward held; `_probe_start` stands on low solids (pallets). Vertigo rebuilt 16:25:
+  ladders **3/3** (128, 179, hatch ladder to the top), 37 bot kills. Nuke/Cache/Rats ladder
+  records unchanged except Nuke 0 (z0 on the displacement, 263 tall) and Cache (160).
+- **Cobble rebuild running** (`local/csgo/vc_redo.sh` -> vertigo_final + cbble_final + install).
+- **Exposure fit (code done, not run):** `python -m mohkit csgo <map> --fit-exposure`
+  (`convert.fit_exposure`, needs csgo_ref shots) -> `data/csgo_exposure.json`, used by
+  `lighting.transfer` before the controller rule. Batch: `local/csgo/fit_all.sh` (7 maps).
+- **Blend textures (code done, testing on Mirage):** `$basetexture2` -> shader stage 2 with
+  `alphaGen vertex`; `lighting.blend_alphas` sets drawvert alpha from Source displacement
+  alphas after the compile (both lighting modes); report `convert.blend`. Test:
+  `csgo de_mirage -q fastrad --refresh-assets` (log `local/csgo/mirage_blend.log`; old pk3 and
+  shots in `local/csgo/before/cs_mirage_pre_blend/`). Then refresh dust2/inferno/cbble, full
+  rebuild nuke/cache (their .map changed with the ladder rules), then `fit_all.sh`, install.
+
+## Previous session (2026-10-01 from 13:20)
 
 **User (chat 13:20):** P1 lighting of the six conversions ("doesn't feel cozy; some rooms
 and textures extremely bright, other places too dark"): measure first, trace causes, fix

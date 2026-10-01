@@ -189,8 +189,9 @@ class ConvertedMaterial:
     src_size: tuple[int, int]       # Source texture size (texinfo units)
     size: tuple[int, int]           # written image size
     info: Optional[MaterialInfo] = None
-    kind: str = "opaque"            # opaque | alphatest | translucent | sky | tool
+    kind: str = "opaque"            # opaque | alphatest | translucent | blend | sky | tool
     gain: float = 1.0               # texture brightened by this (``lighting.headroom_gain``)
+    image2: Optional[str] = None    # blend: the second layer's image (``$basetexture2``)
 
 
 @dataclass
@@ -462,12 +463,30 @@ class Converter:
             f = rgba[..., 3:4].astype(np.float32) / 255.0 if info.translucent else 1.0
             rgba = rgba.copy()
             rgba[..., :3] = np.clip(128.0 + (rgba[..., :3].astype(np.float32) - 128.0) * f + 0.5, 0, 255).astype(np.uint8)
-        if self.opt.headroom and cm.kind in ("opaque", "alphatest"):
+        # two-layer blends (WorldVertexTransition: $basetexture2 shown by the displacement's
+        # vertex alpha; Mirage's and Dust2's ground is about 65% layer 2): a second stage drawn
+        # by vertex alpha, which lighting.blend_alphas fills in after the compile
+        rgba2 = None
+        if (cm.kind == "opaque" and info.basetexture2
+                and (info.shader or "").lower() not in ("lightmapped_4wayblend", "decalmodulate")):
+            try:
+                rgba2 = load_vtf(self.fs, info.basetexture2).decode()
+                cm.kind = "blend"
+            except Exception as e:  # noqa: BLE001
+                self.report["warnings"].append(f"texture {info.basetexture2}: {e}")
+        if self.opt.headroom and cm.kind in ("opaque", "alphatest", "blend"):
             from .lighting import apply_gain, headroom_gain
-            cm.gain = headroom_gain(rgba)
+            cm.gain = headroom_gain(rgba) if rgba2 is None else min(headroom_gain(rgba), headroom_gain(rgba2))
             rgba = apply_gain(rgba, cm.gain)
+            if rgba2 is not None:
+                rgba2 = apply_gain(rgba2, cm.gain)
             self._gain("textures/" + shader, cm.gain)
-        cm.image, cm.size = self._write_image(shader, rgba, cm.kind not in ("opaque", "modulate"))
+        cm.image, cm.size = self._write_image(shader, rgba, cm.kind not in ("opaque", "modulate", "blend"))
+        if rgba2 is not None:
+            # a short name: image paths must stay under MAX_QPATH (64, tr_image.c)
+            h = hashlib.md5(shader.encode()).hexdigest()[:10]
+            cm.image2, _ = self._write_image(f"{self.prefix}/l2_{h}", rgba2, False)
+            self.report.setdefault("blend", {})["textures/" + shader] = src.lower()
         self.assets[f"scripts/{self._script_name()}"] = b""  # placeholder, written in finish()
         self.mats[key] = cm
         return cm
@@ -562,6 +581,10 @@ class Converter:
         elif cm.kind == "alphatest":
             lines += ["\tsurfaceparm trans", "\tsurfaceparm alphashadow", "\tcull none", "\t{", f"\t\tmap {cm.image}",
                       "\t\talphaFunc GE128", "\t\tdepthWrite", "\tnextbundle", "\t\tmap $lightmap", "\t}"]
+        elif cm.kind == "blend":   # layer 2 over layer 1 by vertex alpha (lighting.blend_alphas)
+            lines += ["\t{", f"\t\tmap {cm.image}", "\tnextbundle", "\t\tmap $lightmap", "\t}",
+                      "\t{", f"\t\tmap {cm.image2}", "\t\tblendFunc blend", "\t\talphaGen vertex",
+                      "\tnextbundle", "\t\tmap $lightmap", "\t}"]
         else:
             lines += ["\t{", f"\t\tmap {cm.image}", "\tnextbundle", "\t\tmap $lightmap", "\t}"]
         lines.append("}")
@@ -735,16 +758,22 @@ class Converter:
                 return True
         return False
 
-    def _floor_below(self, x: float, y: float, z: float, drop: float) -> Optional[float]:
+    def _floor_below(self, x: float, y: float, z: float, drop: float, props: bool = False) -> Optional[float]:
         """Top of the highest solid converted brush under (x, y) between z - drop and z
-        (Source units; detail brushes count, which Source's leaf contents don't), or None."""
+        (Source units; detail brushes count, which Source's leaf contents don't), or None.
+        ``props``: prop collision brushes count too (de_rats' floors are mostly furniture)."""
         s = self.opt.scale
         if not hasattr(self, "_brush_boxes"):
             self._brush_boxes = [(*b.bounds(), b) for b in getattr(self, "_world_brushes", [])
                                  if not any(f.has_parm("nonsolid") for f in b.faces)]
+        boxes = self._brush_boxes
+        if props:
+            if not hasattr(self, "_prop_clip_boxes"):
+                self._prop_clip_boxes = [(*b.bounds(), b) for b in getattr(self, "_prop_clip_brushes", [])]
+            boxes = boxes + self._prop_clip_boxes
         best = None
         px, py = x * s, y * s
-        for lo, hi, b in self._brush_boxes:
+        for lo, hi, b in boxes:
             if not (lo[0] <= px <= hi[0] and lo[1] <= py <= hi[1] and (z - drop) * s <= hi[2] <= z * s + 1):
                 continue
             top = None
@@ -756,7 +785,51 @@ class Converter:
             if top is not None and all(f.plane.normal[0] * px + f.plane.normal[1] * py + f.plane.normal[2] * (top - 0.5)
                                        <= f.plane.dist + 0.01 for f in b.faces):
                 best = top if best is None else max(best, top)
-        return None if best is None else best / s
+        best = None if best is None else best / s
+        for h in self._displacement_heights(x, y):
+            if z - drop <= h <= z + 1 / s and (best is None or h > best):
+                best = h
+        return best
+
+    def _displacement_heights(self, x: float, y: float) -> list[float]:
+        """Heights of the upward-facing displacement triangles over (x, y) (Source units).
+        Displacements become solid patches; de_cbble's ground in front of a ladder is one
+        (4 units under the ledge the ladder stands on, more than a step from its first step)."""
+        if not hasattr(self, "_disp_tris"):
+            tris = []
+            try:
+                disps = list(self.bsp.displacements())
+            except Exception:  # noqa: BLE001
+                disps = []
+            for d in disps:
+                if d.normal[2] <= 0.3:  # walls and ceilings
+                    continue
+                P = np.asarray(d.positions, np.float64)
+                a, b, c, e = P[:-1, :-1], P[1:, :-1], P[1:, 1:], P[:-1, 1:]
+                t = np.concatenate([np.stack([a, b, c], -2).reshape(-1, 3, 3),
+                                    np.stack([a, c, e], -2).reshape(-1, 3, 3)])
+                n = np.cross(t[:, 1] - t[:, 0], t[:, 2] - t[:, 0])
+                ln = np.linalg.norm(n, axis=1)
+                ok = ln > 1e-6
+                t, n = t[ok], n[ok] / ln[ok, None]
+                up = np.abs(n[:, 2]) > 0.7
+                tris.append((t[up], n[up]))
+            T = np.concatenate([t for t, _ in tris]) if tris else np.zeros((0, 3, 3))
+            N = np.concatenate([n for _, n in tris]) if tris else np.zeros((0, 3))
+            self._disp_tris = (T, N, T[:, :, :2].min(1), T[:, :, :2].max(1))
+        T, N, lo, hi = self._disp_tris
+        m = (lo[:, 0] <= x) & (x <= hi[:, 0]) & (lo[:, 1] <= y) & (y <= hi[:, 1])
+        out = []
+        for t, n in zip(T[m], N[m]):
+            (x0, y0), (x1, y1), (x2, y2) = t[0, :2], t[1, :2], t[2, :2]
+            det = (y1 - y2) * (x0 - x2) + (x2 - x1) * (y0 - y2)
+            if abs(det) < 1e-9:
+                continue
+            l0 = ((y1 - y2) * (x - x2) + (x2 - x1) * (y - y2)) / det
+            l1 = ((y2 - y0) * (x - x2) + (x0 - x2) * (y - y2)) / det
+            if min(l0, l1, 1 - l0 - l1) >= -1e-6:
+                out.append(float(l0 * t[0, 2] + l1 * t[1, 2] + (1 - l0 - l1) * t[2, 2]))
+        return out
 
     def _is_glass(self, br: Brush) -> bool:
         """Every drawn material of the brush is glass (``$surfaceprop`` glass)."""
@@ -1355,8 +1428,13 @@ class Converter:
             c = (lo + hi) / 2
             # the climb face is perpendicular to the thin axis; a square volume tries both axes
             # (mirage's leaning ladder is 32.0001 x 32: float noise picked the wrong one, facing
-            # a wall 44 units away instead of the ledge it leads to)
-            axes = [0, 1] if abs(ext[0] - ext[1]) < 2 else [0 if ext[0] < ext[1] else 1]
+            # a wall 44 units away instead of the ledge it leads to). A near-square one takes
+            # the other axis only when it has clearly more wall (a de_vertigo ladder is 26.7
+            # deep and 24 wide, its wall on a 24-unit side; a 22 x 17.6 de_rats shaft ladder
+            # climbs fine facing its 22-unit side, with about as much wall on both axes).
+            thin_first = 0 if ext[0] < ext[1] else 1
+            square = abs(ext[0] - ext[1]) < 2
+            axes = [0, 1] if square or min(ext[0], ext[1]) > 0.75 * max(ext[0], ext[1]) else [thin_first]
             walls = {}
             for ax in axes:
                 for sgn in (-1, 1):
@@ -1370,6 +1448,10 @@ class Converter:
                     walls[(ax, sgn)] = hits
             best = max(walls.values())
             thin = max((k for k in walls if walls[k] == best), key=lambda k: (k[0] == axes[0], k[1]))[0]
+            if len(axes) == 2 and not square and thin != thin_first:
+                own = max(walls[(thin_first, -1)], walls[(thin_first, 1)])
+                if best < 1.5 * own:
+                    thin = thin_first
             wide = 1 - thin
             score = {sgn: walls[(thin, sgn)] for sgn in (-1, 1)}
             how = "solid"
@@ -1409,7 +1491,12 @@ class Converter:
             if floors and max(floors) < lo[2] - 32:
                 t_lo[2] = max(floors) + 1
             if self.opt.ladder_style == "steps":
-                z0 = max(floors) if floors and max(floors) >= lo[2] - 96 else lo[2]
+                z0 = lo[2]
+                if floors and max(floors) >= lo[2] - 96:
+                    # from the lowest floor a step or two under the highest: the climber may
+                    # stand lower than the ledge the ladder rises from (de_cbble: displacement
+                    # ground 4 units down, so the first step was 20 up, over STEPSIZE 18)
+                    z0 = min(f for f in floors if f >= max(floors) - 32)
                 front = self._ladder_steps(lo, hi, thin, sgn, far, z0)
                 org = c.copy()
                 org[thin] = front
@@ -1417,7 +1504,21 @@ class Converter:
                 rec = {"origin": [round(float(v) * s, 1) for v in org], "angle": yaw, "height": round(float(hi[2] - z0) * s),
                        "zmin": round(float(z0) * s, 1), "zmax": round(float(hi[2]) * s, 1), "style": "steps",
                        "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)}
-                start = self._probe_start(org * s, np.array(facing), wide, (hi[wide] - lo[wide]) * s / 2, z0 * s)
+                # a ladder hanging over the floor in front, more than a jump (56) below its first
+                # step, is climbed down or caught from a jump, as in CS:GO (de_vertigo's hatch
+                # ladder hangs 135 up; a CS:GO player reaches 72 + 57). game.ladder_probe starts
+                # such a ladder in the air right at the column, which a player steps onto.
+                deep = []
+                for back in (16, 28, 40):   # a narrow ledge counts (a de_rats shaft ladder)
+                    foot = c.copy()
+                    foot[thin] = near - sgn * back
+                    f = self._floor_below(foot[0], foot[1], z0, 2048, props=True)
+                    if f is not None:
+                        deep.append(f)
+                if deep and z0 - max(deep) > 2:
+                    rec["hang"] = round(float(z0 - max(deep)) * s, 1)
+                start = self._probe_start(org * s, np.array(facing), wide, (hi[wide] - lo[wide]) * s / 2, z0 * s,
+                                          backs=(16.0, 22.0, 28.0) if rec.get("hang", 0) > 40 else (28.0, 22.0, 16.0, 36.0))
                 if start is not None:
                     rec["probe_start"] = start
                 self.report.setdefault("ladders", []).append(rec)
@@ -1463,24 +1564,32 @@ class Converter:
                  "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)})
         return out
 
-    def _probe_start(self, front, facing, wide: int, half_w: float, z0: float):
+    def _probe_start(self, front, facing, wide: int, half_w: float, z0: float, backs=(28.0, 22.0, 16.0, 36.0)):
         """Where ``game.ladder_probe`` stands a player to climb a step ladder (world units):
-        28 units in front of the column (a short run-up, as before), else 22, 16 or 36, slid
-        along its width: the first spot where a standing player box is clear of world and
-        prop-clip brushes (de_rats: a clip strip beside a cable ladder, an overhang 28 units
-        out). ``None`` if there is none."""
+        28 units in front of the column (a short run-up, as before), else 22, 16 or 36
+        (``backs``; a hanging ladder: 16 first, in the air), slid along its width: the first
+        spot where a standing player box is clear of world and prop-clip brushes (de_rats: a
+        clip strip beside a cable ladder, an overhang 28 units out), standing on a solid up
+        to a step (16) above the floor if that is what is there (de_vertigo: a pallet in
+        front of a ladder). ``None`` if there is none."""
         if not hasattr(self, "_probe_solids"):
             ents = [MEntity({"classname": "worldspawn"}, list(getattr(self, "_world_brushes", []))
                             + list(getattr(self, "_prop_clip_brushes", [])))]
             self._probe_solids = [v for v in validate._solids(MapFile(ents))[0]]
         offs = [0.0] + [d * k for d in (4.0, 8.0, 12.0, 16.0, 20.0) if d <= max(half_w, 4.0) for k in (-1.0, 1.0)]
-        for back in (28.0, 22.0, 16.0, 36.0):
+        for back in backs:
             for off in offs:
                 c = np.asarray(front, np.float64) - facing * back
                 c[wide] += off
-                lo, hi = (c[0] - 15, c[1] - 15, z0 + 1), (c[0] + 15, c[1] + 15, z0 + 96)
-                if not any(validate.box_hits_brush(lo, hi, q) for q in self._probe_solids):
-                    return [round(float(c[0]), 1), round(float(c[1]), 1), round(z0 + 1, 1)]
+                z = z0 + 1
+                hits = [q for q in self._probe_solids
+                        if validate.box_hits_brush((c[0] - 15, c[1] - 15, z), (c[0] + 15, c[1] + 15, z + 95), q)]
+                if hits and max(q.maxs[2] for q in hits) <= z0 + 16:
+                    z = max(q.maxs[2] for q in hits) + 1
+                    hits = [q for q in self._probe_solids
+                            if validate.box_hits_brush((c[0] - 15, c[1] - 15, z), (c[0] + 15, c[1] + 15, z + 95), q)]
+                if not hits:
+                    return [round(float(c[0]), 1), round(float(c[1]), 1), round(float(z), 1)]
         return None
 
     STEP_RISE = 16.0    # under MOHAA's STEPSIZE 18: one step up per move (bg_slidemove.cpp)
@@ -1999,8 +2108,44 @@ class Converter:
             ((x0 - t, y0 - t, z0), (x0, y1 + t, z1)), ((x1, y0 - t, z0), (x1 + t, y1 + t, z1)),
             ((x0, y0 - t, z0), (x1, y0, z1)), ((x0, y1, z0), (x1, y1 + t, z1)))]
 
+    def _drop_ladder_rail_clips(self, brushes: list[MBrush]) -> list[MBrush]:
+        """CS:GO rails ladders with player clips 24 units apart (de_vertigo, de_nuke): a
+        channel narrower than the 32-wide step column and than a player, who got wedged
+        between the rails. A pair of clip-only brushes flanking a ladder volume (touching
+        opposite sides of a 16-32 unit wide axis, each beside at least half its height) goes,
+        before the ladders are placed: counted as walls, they had turned a 26.7 x 24
+        de_vertigo ladder away from its wall. Clips above, below or behind a ladder (ledges,
+        caps, the wall it leans on) stay."""
+        s = self.opt.scale
+        vols = [(lo * s, hi * s) for lo, hi in self._ladder_boxes()]
+        clip_only = ("common/clip", "common/playerclip")
+        clips = [(i, *map(np.array, b.bounds())) for i, b in enumerate(brushes)
+                 if all(f.shader in clip_only for f in b.faces)]
+        drop: set[int] = set()
+        for lo, hi in vols:
+            for a in (0, 1):
+                if not 16 <= hi[a] - lo[a] < 32:
+                    continue
+                o = 1 - a
+                sides: dict[int, list[int]] = {-1: [], 1: []}
+                for i, blo, bhi in clips:
+                    if (min(bhi[2], hi[2]) - max(blo[2], lo[2]) < 0.5 * (hi[2] - lo[2])
+                            or not (blo[o] < hi[o] and bhi[o] > lo[o])):
+                        continue
+                    if lo[a] - 2 < bhi[a] <= lo[a] + 2:
+                        sides[-1].append(i)
+                    elif hi[a] - 2 <= blo[a] < hi[a] + 2:
+                        sides[1].append(i)
+                if sides[-1] and sides[1]:
+                    drop.update(sides[-1] + sides[1])
+        kept = [b for i, b in enumerate(brushes) if i not in drop]
+        self.report["ladder_rail_clips_dropped"] = len(drop)
+        self._world_brushes = kept
+        self.__dict__.pop("_brush_boxes", None)
+        return kept
+
     def run(self) -> Result:
-        brushes = self.brushes()
+        brushes = self._drop_ladder_rail_clips(self.brushes())
         patches = self.patches()
         overlay_patches = self.overlays() + self.ropes()
         self.statics: list = []
@@ -2023,20 +2168,6 @@ class Converter:
                 kept.append(b)
             self.report["ladder_prop_clips_dropped"] = len(prop_clips) - len(kept)
             prop_clips = kept
-            # CS:GO rails ladders with player clips 24 units apart (de_vertigo): narrower than a
-            # player, who climbs the step columns here instead of floating in the volume and
-            # got wedged between them. Clip-only brushes touching a ladder volume go.
-            clip_only = ("common/clip", "common/playerclip")
-            kept_b = []
-            for b in brushes:
-                if all(f.shader in clip_only for f in b.faces):
-                    blo, bhi = b.bounds()
-                    if any(all(blo[i] < hi[i] + 2 and bhi[i] > lo[i] - 2 for i in range(3))
-                           for lo, hi in lboxes[:len(self._ladder_boxes())]):
-                        continue
-                kept_b.append(b)
-            self.report["ladder_rail_clips_dropped"] = len(brushes) - len(kept_b)
-            brushes = kept_b
         world = MEntity(self.worldspawn())
         world.prims = (list(brushes) + list(patches) + overlay_patches + prop_clips + self.sprites()
                        + self._ladder_step_brushes)
@@ -2480,6 +2611,14 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
         report["lighting"] = info
         exposure = info["exposure"]
         base = lit
+    if convert_report.get("blend"):
+        from ..bsp import BSP as _BSP
+        from ..staticlight import write_lumps
+        from .lighting import blend_alphas
+        b = _BSP(base)
+        write_lumps(b, {"drawverts": blend_alphas(b, SourceBSP(str(src)), convert_report["blend"], scale,
+                                                  convert_report.get("offset") or (0, 0, 0))}, lit)
+        base = lit
     bsp_bytes = base.read_bytes()
     if statics:
         info = inject_statics(base, statics, assets, lit, prop_light, exposure, gains,
@@ -2611,6 +2750,74 @@ def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, l
                                lighting=prev.get("lighting_mode", "csgo"), exposure=exposure))
     (out / "report.json").write_text(json.dumps(report, indent=2))
     return report
+
+
+def _ref_ratio(ref_dir: Path, shots_dir: Path) -> tuple[float, int]:
+    """Median over the cameras both folders share of reference mean / shot mean (display
+    brightness), and the number of cameras. The median ignores a camera or two that look
+    at something the conversion lacks (de_inferno's "Construct": the 3D skybox)."""
+    from .. import exposure as X
+    imgs = (".png", ".jpg", ".tga")
+    ref = {p.stem: X.measure(p).mean for p in sorted(ref_dir.iterdir()) if p.suffix.lower() in imgs}
+    got = {p.stem: X.measure(p).mean for p in sorted(shots_dir.iterdir()) if p.suffix.lower() in imgs}
+    logs = [math.log(ref[k] / got[k]) for k in ref if k in got and ref[k] > 2 and got[k] > 2]
+    if not logs:
+        raise SystemExit(f"no cameras shared by {ref_dir} and {shots_dir}")
+    return math.exp(float(np.median(logs))), len(logs)
+
+
+def fit_exposure(map_name: str, name: Optional[str] = None, tol: float = 0.02, rounds: int = 3,
+                 log=print) -> dict:
+    """Fit the exposure of a converted map (CS:GO lighting) to CS:GO's own screenshots of the
+    same cameras (``mohkit csgo-ref``): re-light the last build (``resume_local``) until the
+    median per-camera brightness ratio is within ``tol`` of 1, and keep the exposure in
+    ``data/csgo_exposure.json``, which later builds use instead of the tonemap-controller
+    rule (``lighting.exposure_for``). Brightness ~ exposure^(1/2.2) below the roll-off, so
+    the first step is ratio^2.2; then secant steps in log space. CS:GO auto-exposes per view
+    within the controller's range, so no single value is exact; all seven maps measured
+    0.83-0.95x CS:GO's brightness at the range's geometric mean."""
+    import json
+
+    from .. import config
+    cfg = config.load()
+    src = Path(map_name)
+    if not src.is_file():
+        src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
+    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    out = config.REPO / "local" / "csgo" / name
+    ref_dir, shots_dir = out / "csgo_ref", out / "shots"
+    if not ref_dir.is_dir():
+        raise SystemExit(f"no CS:GO reference shots in {ref_dir} (python -m mohkit csgo-ref {src.stem})")
+    rep = json.loads((out / "report.json").read_text())
+    e0 = float(rep.get("lighting", {}).get("exposure") or 1.0)
+    r0, n = _ref_ratio(ref_dir, shots_dir)
+    steps = [{"exposure": e0, "ratio": round(r0, 4)}]
+    log(f"== fit exposure {name}: exposure {e0:.3f}, CS:GO / MOHAA brightness {r0:.3f} (median of {n} cameras)")
+    e, r = e0, r0
+    slope = -1 / 2.2                      # d log(ratio) / d log(exposure)
+    for _ in range(rounds):
+        if abs(math.log(r)) <= math.log1p(tol):
+            break
+        e_new = math.exp(math.log(e) - math.log(r) / slope)
+        e_new = min(max(e_new, e / 3), e * 3)
+        resume_local(str(src), name, test=True, log=lambda *_: None, exposure=e_new)
+        r_new, n = _ref_ratio(ref_dir, shots_dir)
+        log(f"   exposure {e_new:.3f}: brightness ratio {r_new:.3f}")
+        steps.append({"exposure": round(e_new, 4), "ratio": round(r_new, 4)})
+        if abs(math.log(e_new) - math.log(e)) > 1e-6:
+            s = (math.log(r_new) - math.log(r)) / (math.log(e_new) - math.log(e))
+            slope = min(max(s, -1.0), -0.1)
+        e, r = e_new, r_new
+    best = min(steps, key=lambda st: abs(math.log(st["ratio"])))
+    if best["exposure"] != e:         # the last step overshot: re-light with the best one
+        resume_local(str(src), name, test=True, log=lambda *_: None, exposure=best["exposure"])
+    from .lighting import FITTED_EXPOSURE, exposure_for
+    table = json.loads(FITTED_EXPOSURE.read_text()) if FITTED_EXPOSURE.is_file() else {}
+    table[src.stem] = {"exposure": round(best["exposure"], 4), "ratio": best["ratio"], "cameras": n,
+                       "rule": round(exposure_for(SourceBSP(str(src))), 4)}
+    FITTED_EXPOSURE.write_text(json.dumps(dict(sorted(table.items())), indent=1) + "\n")
+    log(f"== {name}: exposure {best['exposure']:.3f} (ratio {best['ratio']:.3f}), saved in {FITTED_EXPOSURE}")
+    return {"name": name, "steps": steps, "best": best}
 
 
 def refresh_assets(map_name: str, name: Optional[str] = None, quality: str = "draft", test: bool = True,

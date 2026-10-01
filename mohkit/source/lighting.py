@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Optional, Sequence
 
 import numpy as np
@@ -335,6 +336,20 @@ def lookup(index: LuxelIndex, pts: np.ndarray, nrm: np.ndarray, batch: int = 40_
     return out, level
 
 
+FITTED_EXPOSURE = Path(__file__).resolve().parents[2] / "data" / "csgo_exposure.json"
+
+
+def fitted_exposure(map_stem: str) -> Optional[float]:
+    """The exposure fitted to CS:GO's own screenshots of this map at its named cameras
+    (``convert.fit_exposure``, kept in ``data/csgo_exposure.json``), or None."""
+    import json
+    try:
+        rec = json.loads(FITTED_EXPOSURE.read_text()).get(map_stem)
+    except (OSError, ValueError):
+        return None
+    return float(rec["exposure"]) if rec else None
+
+
 def exposure_for(bsp: SourceBSP) -> float:
     """Tonemap scale for a map: the middle of its ``env_tonemap_controller`` auto-exposure
     range when the map sets one (keyvalues or logic_auto outputs), else 1."""
@@ -488,13 +503,13 @@ def transfer(bsp_path, source: SourceBSP, out, scale: float = 1.0, exposure: Opt
     127 where a gain allows it; the light grid and props are sampled from it) and
     ``stats["divided_lightmaps"]`` the final lump, each surface divided by its gain."""
     import time
-    from pathlib import Path
 
     from ..bsp import BSP
     from ..staticlight import LightmapField, lightmap_texels, write_lumps
     t0 = time.time()
     bsp = BSP(Path(bsp_path))
-    exposure = exposure_for(source) if exposure is None else exposure
+    if exposure is None:
+        exposure = fitted_exposure(Path(source.path).stem) or exposure_for(source)
     lux = source_luxels(source, scale)
     if any(offset):              # the conversion moved the map (``Options.offset``)
         lux.pos = lux.pos + np.asarray(offset, np.float64)
@@ -638,6 +653,54 @@ def build_grid(bsp, field, fill: Sequence[float] = (40.0, 40.0, 40.0)) -> dict[s
     leaf = point_leaves(bsp, mins + ii * cell)
     open_mask = (leafs["cluster"][leaf] >= 0).reshape(tuple(bounds))
     return _grid_lumps(bsp, field, mins, cell, bounds, open_mask, fill)
+
+
+def blend_alphas(bsp, source: SourceBSP, blends: dict, scale: float = 1.0, offset=(0.0, 0.0, 0.0)) -> bytes:
+    """The drawverts lump with the alpha of every vertex of a two-layer blend surface set from
+    the Source displacements of the same material around it (``blends``: converted shader ->
+    Source material, ``report["blend"]``; the shader draws layer 2 by ``alphaGen vertex``).
+    Displacement vertices within 48 units facing the same side are weighted 1 / (0.5 + d)^2,
+    so a patch control point on a Source vertex takes its alpha and a midpoint the mean of
+    its two. Vertices with none (brush faces) get 0: Source draws those with layer 1."""
+    from ..staticlight import DRAWVERT_DT
+    dv = np.frombuffer(bsp.lump("drawverts"), DRAWVERT_DT).copy()
+    names = [sh.name.lower() for sh in bsp.shaders()]
+    by_mat: dict[str, list] = {}
+    for d in source.displacements():
+        by_mat.setdefault(d.material.lower(), []).append(d)
+    off = np.asarray(offset, np.float64)
+    surfs = bsp.surfaces()
+    for shader, mat in blends.items():
+        si = {i for i, n in enumerate(names) if n == shader.lower()}
+        vi = [np.arange(s.first_vert, s.first_vert + s.num_verts) for s in surfs if s.shader in si and s.num_verts]
+        if not vi:
+            continue
+        vi = np.concatenate(vi)
+        dv["rgba"][vi, 3] = 0
+        disps = by_mat.get(mat.lower(), [])
+        if not disps:
+            continue
+        pos = np.concatenate([d.positions.reshape(-1, 3) for d in disps]).astype(np.float64) * scale + off
+        nrm = np.concatenate([np.repeat(np.asarray(d.normal, np.float64)[None], d.positions.shape[0] * d.positions.shape[1], 0)
+                              for d in disps])
+        alpha = np.concatenate([d.alphas.reshape(-1) for d in disps]).astype(np.float64)
+        index = LuxelIndex(Luxels(pos, nrm, np.repeat(alpha[:, None], 3, 1), np.zeros(len(pos), np.int64)), cell=48.0)
+        for s in range(0, len(vi), 20_000):
+            v = vi[s:s + 20_000]
+            p = dv["xyz"][v].astype(np.float64)
+            n = dv["normal"][v].astype(np.float64)
+            n /= np.maximum(np.linalg.norm(n, axis=1, keepdims=True), 1e-6)
+            pi, li = _pairs(index, p)
+            if not len(pi):
+                continue
+            d = np.sqrt(((pos[li] - p[pi]) ** 2).sum(1))
+            ok = (d <= 48.0) & ((nrm[li] * n[pi]).sum(1) >= 0.3)
+            w = 1.0 / (0.5 + d[ok]) ** 2
+            ws = np.bincount(pi[ok], weights=w, minlength=len(p))
+            acc = np.bincount(pi[ok], weights=w * alpha[li[ok]], minlength=len(p))
+            got = ws > 0
+            dv["rgba"][v[got], 3] = np.clip(np.round(acc[got] / ws[got]), 0, 255).astype(np.uint8)
+    return dv.tobytes()
 
 
 def vertex_colours(bsp, index: "LuxelIndex", exposure: float) -> bytes:

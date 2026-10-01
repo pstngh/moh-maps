@@ -117,6 +117,32 @@ def test_exposure_measure():
     assert abs(e.blown - 0.5) < 0.01 and "BLOWN" in e.flags and "CRUSHED" in e.flags
 
 
+def test_fitted_exposure_and_ratio():
+    """The fitted-exposure table overrides the controller rule; the reference ratio is the
+    median over shared cameras (one odd camera doesn't move it)."""
+    import json
+    from PIL import Image
+    from mohkit.source import convert as C
+    with tempfile.TemporaryDirectory() as d:
+        d = Path(d)
+        old = L.FITTED_EXPOSURE
+        try:
+            L.FITTED_EXPOSURE = d / "fit.json"
+            assert L.fitted_exposure("de_x") is None
+            L.FITTED_EXPOSURE.write_text(json.dumps({"de_x": {"exposure": 1.7}}))
+            assert L.fitted_exposure("de_x") == 1.7 and L.fitted_exposure("de_y") is None
+        finally:
+            L.FITTED_EXPOSURE = old
+        (d / "ref").mkdir()
+        (d / "shots").mkdir()
+        for i, (r, s) in enumerate([(120, 100), (60, 50), (90, 75), (100, 200)]):
+            Image.new("RGB", (64, 36), (r, r, r)).save(d / "ref" / f"{i:02d}_cam.png")
+            Image.new("RGB", (64, 36), (s, s, s)).save(d / "shots" / f"{i:02d}_cam.png")
+        Image.new("RGB", (64, 36), (9, 9, 9)).save(d / "shots" / "99_extra.png")   # no reference
+        ratio, n = C._ref_ratio(d / "ref", d / "shots")
+    assert n == 4 and abs(ratio - 1.2) < 0.02, (ratio, n)
+
+
 def test_translate_keeps_texture_alignment():
     """Maps moved into MOHAA's +-8192 (de_vertigo) keep every texel in place."""
     import math

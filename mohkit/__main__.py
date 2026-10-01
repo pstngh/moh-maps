@@ -18,6 +18,7 @@
     python -m mohkit csgo de_dust2 --props-only                    re-place runtime props without recompiling
     python -m mohkit csgo de_dust2 --resume                        inject, package and test the last compile
     python -m mohkit csgo de_dust2 --shoot                         re-shoot the packaged map (sheets, shots, exposure)
+    python -m mohkit csgo de_dust2 --fit-exposure                  match CS:GO's brightness (needs csgo-ref shots)
     python -m mohkit exposure local/csgo/*/shots [--by-map] [--stock] [--mask shot.png]   brightness check
     python -m mohkit csgo-ref de_dust2 [--name cs_dust2]        CS:GO's own screenshots from the same cameras
 """
@@ -282,6 +283,10 @@ def cmd_csgo(a) -> int:
         from .source.convert import shoot_local
         rep = shoot_local(a.map, a.name, scale=a.scale)
         return 0 if rep.get("contact_sheet") else 1
+    if a.fit_exposure:
+        from .source.convert import fit_exposure
+        fit_exposure(a.map, a.name)
+        return 0
     if a.resume:
         rep = resume_local(a.map, a.name, test=not a.no_test, exposure=a.exposure)
         return 0 if rep.get("pk3") else 1
@@ -433,6 +438,9 @@ def main(argv=None) -> int:
     s.add_argument("--no-test", action="store_true")
     s.add_argument("--shoot", action="store_true", help="only re-shoot the packaged map (contact sheets, shots, exposure)")
     s.add_argument("--exposure", type=float, help="with --resume: tone-map CS:GO's light with this exposure")
+    s.add_argument("--fit-exposure", action="store_true",
+                   help="re-light the last build until it matches CS:GO's own shots (csgo-ref) and keep that "
+                        "exposure in data/csgo_exposure.json")
     s.add_argument("--mohlight", action="store_true",
                    help="light with MOHlight from converted lights (default: transfer CS:GO's own baked lighting)")
     s.set_defaults(fn=cmd_csgo)

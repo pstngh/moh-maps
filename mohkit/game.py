@@ -430,7 +430,9 @@ def ladder_probe(pk3s: Sequence[Path], map_name: str, ladders: Sequence[dict], c
     while climbing gives the climb: the highest point reached, since a player who gets off
     at the top walks on and may leave the ledge (mirage's leaning ladder: on the upper floor
     after 2.2 s, back at floor level 4 s in). ``global/mike_torso.st`` USE_LADDER,
-    ``docs/reference/engine.md`` §1.3. Verified on stock mohdm2: 325 units in 4 s."""
+    ``docs/reference/engine.md`` §1.3. Verified on stock mohdm2: 325 units in 4 s.
+    A step ladder that hangs over the floor (``hang`` > 40 in its report entry: climbed
+    down, or caught from a jump) starts in the air at the column with +forward already held."""
     out = []
     for i, l in enumerate(ladders):
         yaw = math.radians(l["angle"])
@@ -440,9 +442,14 @@ def ladder_probe(pk3s: Sequence[Path], map_name: str, ladders: Sequence[dict], c
         if l.get("probe_start"):   # a converted step ladder's clear spot in front of it
             x, y, z = l["probe_start"]
         cmds = ["auto_join_team", "primarydmweapon rifle", "wait 3000",
-                f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 600",
-                f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 400", "viewpos",
-                "+use", "wait 300", "-use", "+forward"]
+                f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 600"]
+        if (l.get("hang") or 0) > 40:
+            # a step ladder hanging over the floor (report ``hang``): the start is in the air
+            # at the column, so push into it from the teleport on (a falling player steps up)
+            cmds += ["+forward", f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 150", "viewpos"]
+        else:
+            cmds += [f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 400", "viewpos",
+                     "+use", "wait 300", "-use", "+forward"]
         for _ in range(max(1, round(climb_ms / 500))):
             cmds += ["wait 500", "viewpos"]
         cmds += ["-forward", f"saveshot ladder{i:02d}", "wait 300"]
