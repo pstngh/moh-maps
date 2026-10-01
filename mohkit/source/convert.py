@@ -2023,6 +2023,20 @@ class Converter:
                 kept.append(b)
             self.report["ladder_prop_clips_dropped"] = len(prop_clips) - len(kept)
             prop_clips = kept
+            # CS:GO rails ladders with player clips 24 units apart (de_vertigo): narrower than a
+            # player, who climbs the step columns here instead of floating in the volume and
+            # got wedged between them. Clip-only brushes touching a ladder volume go.
+            clip_only = ("common/clip", "common/playerclip")
+            kept_b = []
+            for b in brushes:
+                if all(f.shader in clip_only for f in b.faces):
+                    blo, bhi = b.bounds()
+                    if any(all(blo[i] < hi[i] + 2 and bhi[i] > lo[i] - 2 for i in range(3))
+                           for lo, hi in lboxes[:len(self._ladder_boxes())]):
+                        continue
+                kept_b.append(b)
+            self.report["ladder_rail_clips_dropped"] = len(brushes) - len(kept_b)
+            brushes = kept_b
         world = MEntity(self.worldspawn())
         world.prims = (list(brushes) + list(patches) + overlay_patches + prop_clips + self.sprites()
                        + self._ladder_step_brushes)

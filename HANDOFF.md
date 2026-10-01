@@ -29,16 +29,20 @@ Old pk3s/shots kept in `local/csgo/before/<name>/`. Builds: `local/csgo/all_fina
   127) vs VRAD's linear d^2; texlights; the texture-colour cap; props at 1.78x and CS:GO's
   per-prop tints ignored (thousands of props drawn white).
 
-**P2 status:** **de_vertigo DONE** (`local/csgo/cs_vertigo/`, installed; `map dm/cs_vertigo`):
-moved into +-8192 by (-512, 512, -6656) (`Options.offset`, auto), 40 bot kills, error vs
-CS:GO 10 (corr 0.88), 48 lightmap pages (per-face `surfaceDensity` from Source luxel size).
-**Open: its 3 ladders fail the probe** (climb 0, -83 at the right positions now): check the
-step columns near (-1528, -836, 5056) (translated coords) in game / in the .map.
-**de_cbble DONE** (installed; `map dm/cs_cbble`): 53 bot kills, error 10 (corr 0.99),
-ladders 1/2 (the 460-tall one at (-1120, 2461, 90) climbs 0), 190 lightmap pages (fine:
-renderer limit 256; 170 was MOHlight's). Scripts `local/csgo/{vertigo,cbble}_final.sh`.
+**P2 status:** both converted, final-built and installed (16:02); `map dm/cs_vertigo`, `map dm/cs_cbble`.
+- **de_vertigo**: moved into +-8192 by (-512, 512, -6656) (`Options.offset`, auto), 52 bot
+  kills, error vs CS:GO 10 (corr 0.88), 48 lightmap pages (per-face `surfaceDensity` from
+  Source luxel size). Ladders **1/3**: CS:GO rails ladders with player clips 24 units apart
+  (narrower than a player); those rails are now dropped (commit after f4df496), which fixed
+  the first. **Open:** ladder 2 at (-1520, -302, 5027) (no `probe_start`, climbs 0) and
+  ladder 3 at (-1216, 883, 5044) (falls 83): look at the step columns and clips there
+  (`local/csgo/cs_vertigo/cs_vertigo.map`, report.json `convert.ladders`).
+- **de_cbble**: 40 bot kills, error 10 (corr 0.99), 190 lightmap pages (fine: renderer limit
+  256; 170 was MOHlight's). Ladders **1/2**: the 460-tall one at (-1120, 2461, 90) climbs 0.
+- Scripts: `local/csgo/{vertigo,cbble}_final.sh`, `vc_redo.sh`. The other six maps were built
+  before the rail-clip change (their ladders all pass), so they don't need a rebuild for it.
 
-**Next steps (suggested):** (1) Vertigo's 3 ladders and Cobble's tall ladder; (2) maps
+**Next steps (suggested):** (1) Vertigo's 2 and Cobble's 1 failing ladders; (2) maps
 still read ~10-15% darker than CS:GO (dust2 96 vs 113, inferno 79 vs 95): try
 `--resume --exposure` sweeps per map, or a rule nearer the top of the auto-exposure range;
 (3) masked prop tints exact (tinted texture variants); (4) blend textures (Nuke's red radio

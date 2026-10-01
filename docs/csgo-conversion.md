@@ -69,6 +69,12 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | `light_environment` | worldspawn `suncolor`, `sundirection`, `ambientlight`, `sundiffusecolor` | sky fill = `_ambient` colour normalised to its brightest channel × clamp(brightness / 8, 20, 70) |
 | static props (`prop_static`) | `mohkit/source/modelconv.py` (MDL → TIKI/SKD/SKC + collision `.map`). **Default (`props_mode="inject"`): every prop** becomes a static model added to the lit BSP by `mohkit.staticlight` and coloured from its light grid, with its collision as world clip brushes. `props_mode="compile"`: the largest as MOHlight-lit `static_*` up to `--static-verts`, the next 600 as `script_model`s | MOHlight lights static models on one thread (~190 verts/s), so de_nuke's 4,801 props would light for hours; injection takes seconds and costs no entities |
 
+**Ladder rails (2026-10-01):** CS:GO often flanks a ladder volume with two player-clip
+brushes 24 units apart (de_vertigo), narrower than the 32-unit player: harmless when the
+engine moves you in the volume, but a MOHAA player climbing the step columns got wedged
+between them and the probe climbed 0. Clip-only brushes touching a ladder volume are
+dropped (`report["ladder_rail_clips_dropped"]`: de_vertigo 6, de_cbble 1).
+
 ## Visibility and compile time
 
 Converted maps compile with Q3map `-blocksize 512` (`convert.BSP_ARGS`): the leaves of an
