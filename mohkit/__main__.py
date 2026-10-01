@@ -16,6 +16,7 @@
     python -m mohkit install file.pk3            copy a package into the game's main/
     python -m mohkit csgo de_dust2 [--name cs_dust2] [-q draft] [--scale 1.0]   convert a CS:GO map (local/ only)
     python -m mohkit csgo de_dust2 --props-only                    re-place runtime props without recompiling
+    python -m mohkit csgo de_dust2 --resume                        inject, package and test the last compile
 """
 
 from __future__ import annotations
@@ -272,8 +273,13 @@ def cmd_install(a) -> int:
 
 
 def cmd_csgo(a) -> int:
-    from .source.convert import build_local
+    from .source.convert import build_local, resume_local
+    if a.resume:
+        rep = resume_local(a.map, a.name, test=not a.no_test)
+        return 0 if rep.get("pk3") else 1
     extra = {"props_static_vertices": a.static_verts} if a.static_verts else {}
+    if a.lightmap_density:
+        extra["lightmap_density"] = a.lightmap_density
     rep = build_local(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
                       detail_all=not a.structural, max_texture=a.max_texture, props_only=a.props_only, **extra)
     return 0 if rep.get("compile_ok") else 1
@@ -363,6 +369,9 @@ def main(argv=None) -> int:
     s.add_argument("--static-verts", type=int, help="lit-vertex budget for compiled static props (default 70000; 0 for -q draft)")
     s.add_argument("--props-only", action="store_true",
                    help="re-place runtime props in the last compile (Q3map -onlyents, seconds); refuses other changes")
+    s.add_argument("--lightmap-density", type=int, help="units per lightmap texel (default 16; 32 for -q draft)")
+    s.add_argument("--resume", action="store_true",
+                   help="only inject props, package and test what the last build left (after redoing a stage by hand)")
     s.add_argument("--no-test", action="store_true")
     s.set_defaults(fn=cmd_csgo)
     a = ap.parse_args(argv)

@@ -6,6 +6,12 @@ python -m mohkit csgo de_inferno --name cs_inferno -q normal
 python -m mohkit csgo de_dust2 --props-only     # re-place runtime props in the last compile (~1 min)
 ```
 
+`--resume` skips conversion and compiling: it injects the props, packages and tests
+what the last build left in `local/csgo/<name>/` (map, assets, `statics.json`) and its
+compile root, for when a stage was re-run by hand. Drafts use `lightmapdensity 32`
+(`--lightmap-density`): MOHlight time is about proportional to lightmap texels, and
+de_nuke has ~1M of them at 16.
+
 `--props-only` re-converts, checks that nothing but `script_model` props changed
 (`mapfile.compiled_difference`: brushes compared by plane, numbers to 0.01), and
 rewrites only the entity lump of the last compile with `Q3map -onlyents`

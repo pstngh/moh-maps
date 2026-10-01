@@ -83,6 +83,9 @@ class Options:
     displacements: bool = True
     disp_tolerance: float = 1.0     # drop displacement sample lines within this many units of straight (0 = keep all)
     lights: bool = True
+    # world units per lightmap texel. MOHlight time is roughly proportional to the texel
+    # count (de_nuke: ~1M texels at 16), so drafts use 32 (a quarter of the texels).
+    lightmap_density: int = 16
     overlays: bool = True           # info_overlay decals -> flat blended patches
     light_scale: float = 1.0
     sky_shader: Optional[str] = None  # override (e.g. "sky/mohday2"); default converts the Source sky
@@ -973,7 +976,7 @@ class Converter:
 
     def worldspawn(self) -> dict[str, str]:
         ws: dict[str, str] = {"classname": "worldspawn", "message": self.mapname,
-                              "ambientlight": "10 10 12", "lightmapdensity": "16"}
+                              "ambientlight": "10 10 12", "lightmapdensity": fmt(self.opt.lightmap_density)}
         envs = self.bsp.find_entities("light_environment")
         if envs:
             e = envs[0]
@@ -1439,6 +1442,72 @@ def named_cameras(path, scale: float = 1.0):
     return out
 
 
+def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics: list, map_: MapFile,
+                 convert_report: dict, test: bool = True, shots: int = 9, scale: float = 1.0, log=print) -> dict:
+    """After a compile: inject the static props, package ``local/csgo/<name>/<name>.pk3`` and
+    (optionally) shoot the contact sheet. ``build_local`` calls it; ``resume_local`` runs it on
+    the files a build left on disk (after re-running a stage by hand)."""
+    import json
+
+    from .. import config, game, project
+    out = config.REPO / "local" / "csgo" / name
+    report: dict = {}
+    bsp_bytes = Path(compiled_bsp).read_bytes()
+    if statics:
+        # the compile root keeps the BSP as compiled (props-only updates re-inject into it)
+        lit = out / f"{name}.bsp"
+        info = inject_statics(compiled_bsp, statics, assets, lit)
+        report["statics"] = info
+        log(f"== static models injected: {json.dumps(info)}")
+        bsp_bytes = lit.read_bytes()
+    proj = project.Project(name=name, folder=out, title=src.stem, ambience="mohdm2",
+                           precache=list(convert_report.get("precache", ())))
+    files = {f"maps/dm/{name}.bsp": bsp_bytes, **proj.scripts(), **assets}
+    pk3 = out / f"{name}.pk3"
+    project.write_pk3(pk3, files)
+    report["pk3"] = str(pk3)
+    log(f"== packaged {pk3} ({pk3.stat().st_size // 1024} KB)")
+    if test:
+        # CS:GO ships named spectator viewpoints for most maps (maps/<map>_cameras.txt);
+        # they cover every callout, so prefer them to spawn samples.
+        cam_file = src.with_name(src.stem + "_cameras.txt")
+        named = named_cameras(cam_file, scale) if cam_file.is_file() else []
+        cams = auto_cameras(map_, 1 if named else shots, convert_report.get("landmarks", ()), spawns=not named)
+        cams = named + cams
+        run = game.run([pk3], f"dm/{name}", cams, run_name=name, timeout=300 + 3 * len(cams))
+        sheets = game.contact_sheets(run.screenshots, out / f"{name}_shots.png")
+        report["contact_sheet"] = str(sheets[0]) if sheets else None
+        report["contact_sheets"] = [str(p) for p in sheets]
+        report["run_problems"] = run.problems
+        log(run.summary())
+        log(f"== contact sheet {report['contact_sheet']}")
+    return report
+
+
+def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, log=print) -> dict:
+    """Finish a build from what it left on disk: ``local/csgo/<name>/`` (map, assets,
+    ``statics.json``, ``report.json``) and the compile root's BSP. Use it after re-running
+    a stage of the compile by hand (e.g. a light stage that was killed)."""
+    import json
+
+    from .. import config
+    cfg = config.load()
+    src = Path(map_name)
+    if not src.is_file():
+        src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
+    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    out = config.REPO / "local" / "csgo" / name
+    root_bsp = Path(cfg.build_dir) / "roots" / f"dm_{name}" / "main" / "maps" / "dm" / f"{name}.bsp"
+    assets = {str(p.relative_to(out / "assets")): p for p in (out / "assets").rglob("*") if p.is_file()}
+    statics = [tuple(x) for x in json.loads((out / "statics.json").read_text())]
+    prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
+    report = dict(prev)
+    report.update(finish_local(name, src, root_bsp, assets, statics, MapFile.load(str(out / f"{name}.map")),
+                               prev.get("convert", {}), test=test, log=log))
+    (out / "report.json").write_text(json.dumps(report, indent=2))
+    return report
+
+
 def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft", test: bool = True,
                 shots: int = 9, log=print, props_only: bool = False, **opts) -> dict:
     """Convert ``csgo/maps/<map_name>.bsp``, compile, package and (optionally) screenshot it.
@@ -1470,6 +1539,7 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
         # MOHlight lights static-model vertices on one thread (~190/s at best; de_dust2's 70k took
         # hours), so "compile" drafts make every prop a runtime script_model unless a budget is given.
         opts.setdefault("props_static_vertices", 0)
+        opts.setdefault("lightmap_density", 32)
     res = convert(str(src), cfg.csgo_dir, Options(name=name, **opts))
     if props_only:
         from ..mapfile import MapFile, compiled_difference
@@ -1493,39 +1563,11 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
         log(f"== compiling ({quality})")
         cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality=quality)
     log(cr.summary())
+    (out / "statics.json").write_text(json.dumps(res.statics))
     report = {"name": name, "source": str(src), "convert": res.report, "compile_ok": cr.ok, "stats": cr.stats,
               "problems": cr.problems}
     if cr.ok:
-        bsp_bytes = cr.bsp.read_bytes()
-        if res.statics:
-            # the compile root keeps the BSP as compiled (props-only updates re-inject into it)
-            lit = out / f"{name}.bsp"
-            info = inject_statics(cr.bsp, res.statics, res.assets, lit)
-            report["statics"] = info
-            log(f"== static models injected: {json.dumps(info)}")
-            bsp_bytes = lit.read_bytes()
-        proj = project.Project(name=name, folder=out, title=src.stem, ambience="mohdm2",
-                               precache=list(res.report.get("precache", ())))
-        files = {f"maps/dm/{name}.bsp": bsp_bytes, **proj.scripts(), **res.assets}
-        pk3 = out / f"{name}.pk3"
-        project.write_pk3(pk3, files)
-        report["pk3"] = str(pk3)
-        log(f"== packaged {pk3} ({pk3.stat().st_size // 1024} KB)")
-        if test:
-            # CS:GO ships named spectator viewpoints for most maps (maps/<map>_cameras.txt);
-            # they cover every callout, so prefer them to spawn samples.
-            cam_file = src.with_name(src.stem + "_cameras.txt")
-            named = named_cameras(cam_file, opts.get("scale", 1.0)) if cam_file.is_file() else []
-            cams = auto_cameras(res.map, 1 if named else shots, res.report.get("landmarks", ()),
-                                spawns=not named)
-            cams = named + cams
-            run = game.run([pk3], f"dm/{name}", cams, run_name=name, timeout=300 + 3 * len(cams))
-            sheets = game.contact_sheets(run.screenshots, out / f"{name}_shots.png")
-            sheet = sheets[0] if sheets else None
-            report["contact_sheet"] = str(sheet)
-            report["contact_sheets"] = [str(p) for p in sheets]
-            report["run_problems"] = run.problems
-            log(run.summary())
-            log(f"== contact sheet {sheet}")
+        report.update(finish_local(name, src, cr.bsp, res.assets, res.statics, res.map, res.report,
+                                   test=test, shots=shots, scale=opts.get("scale", 1.0), log=log))
     (out / "report.json").write_text(json.dumps(report, indent=2))
     return report

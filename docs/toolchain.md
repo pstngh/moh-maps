@@ -121,6 +121,11 @@ reads worldspawn `farplane`, `farplane_cull`, `vis_derived`.
 **MOHlight with no arguments waits for a keypress.** The driver runs every tool
 with stdin closed so this can't hang a build.
 
+**Never kill tools by name.** A timed-out stage used to run `pkill -f MOHlight.exe`,
+which also killed the light stage of another map compiling at the same time (the dust2
+build of 2026-10-01 failed that way twice). `Toolchain.kill_stragglers` now kills only
+processes whose command line names the timed-out run's own compile root.
+
 ## Reading the output
 
 `mohkit.compile.CompileResult` collects stats and every warning/error line. Right

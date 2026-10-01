@@ -167,7 +167,7 @@ class Toolchain:
                     p.kill()
                     p.wait()
         if to:
-            self.kill_stragglers(exe)
+            self.kill_stragglers(exe, cwd)
         log = log_path.read_bytes().decode("latin-1", "replace")
         return Stage(name, argv, time.time() - t0, rc, clean_log(log), to, timeline)
 
@@ -223,9 +223,21 @@ class Toolchain:
         os.close(master)
         return (None if to else rc), to, timeline
 
-    def kill_stragglers(self, exe: str) -> None:
-        if platform.system() != "Windows":
-            subprocess.run(["pkill", "-f", exe], check=False)
+    def kill_stragglers(self, exe: str, cwd: Optional[Path] = None) -> None:
+        """Kill what is left of a timed-out tool. Only processes whose command line names
+        this run's compile root are touched: a plain ``pkill -f MOHlight.exe`` also killed
+        the light stage of another map compiling at the same time."""
+        if platform.system() == "Windows":
+            return
+        root = to_tool_path(cwd) if cwd is not None else None
+        out = subprocess.run(["ps", "-axo", "pid=,command="], capture_output=True, text=True, check=False).stdout
+        for line in out.splitlines():
+            pid, _, cmd = line.strip().partition(" ")
+            if exe in cmd and (root is None or root + "\\" in cmd or cmd.rstrip().endswith(root)):
+                try:
+                    os.kill(int(pid), 9)
+                except (ValueError, OSError):
+                    pass
 
 
 def prepare_root(name: str, assets: Optional[Mapping[str, Union[bytes, str, Path]]] = None,
