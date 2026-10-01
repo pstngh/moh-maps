@@ -424,7 +424,7 @@ def ladder_probe(pk3s: Sequence[Path], map_name: str, ladders: Sequence[dict], c
 
     One game per ladder (a player still on a ladder ignores ``tele``): the local player
     joins a team, is teleported to the foot of the ladder (feet 1 unit above its bottom,
-    28 units back from the climb face), looks 50 degrees up toward the wall, taps +use
+    28 units back from the climb face, or a step ladder's ``probe_start``), looks 50 degrees up toward the wall, taps +use
     (mounts any ladder the view hits, including one hanging over a gap, which walking
     into it never does) and holds +forward to climb; ``viewpos`` before and every 500 ms
     while climbing gives the climb: the highest point reached, since a player who gets off
@@ -437,6 +437,8 @@ def ladder_probe(pk3s: Sequence[Path], map_name: str, ladders: Sequence[dict], c
         x = l["origin"][0] - math.cos(yaw) * 28
         y = l["origin"][1] - math.sin(yaw) * 28
         z = l["zmin"] + 1
+        if l.get("probe_start"):   # a converted step ladder's clear spot in front of it
+            x, y, z = l["probe_start"]
         cmds = ["auto_join_team", "primarydmweapon rifle", "wait 3000",
                 f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 600",
                 f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 400", "viewpos",

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import math
 import shutil
+import re
 import sys
 import tempfile
 from pathlib import Path
@@ -80,6 +81,36 @@ def test_take_statics_moves_collision() -> None:
     lo, hi = clips[0].bounds()
     # yaw 90 turns +x into +y: x 0..32, y 0..16 (x2) -> x -32..0, y 0..64 around (100, 200)
     assert np.allclose(lo, (68, 200, 0), atol=0.01) and np.allclose(hi, (100, 264, 16), atol=0.01), (lo, hi)
+
+
+def test_staticmerge_under_limit() -> None:
+    """5,000 copies of a one-triangle prop merge into fewer than 3,500 rigid models whose
+    meshes are the instances' world-space triangles (engine limit 4,095, mohkit/staticmerge.py)."""
+    from mohkit import staticmerge
+    from mohkit.source import skd
+    tri = skd.SkdSurface("a", np.array([[0, 0, 0], [8, 0, 0], [0, 8, 0]], np.float32),
+                         np.array([[0, 0, 1]] * 3, np.float32), np.zeros((3, 2), np.float32), np.array([[0, 1, 2]]))
+    files = {"models/t/p.skd": skd.build_skd("p.skd", [tri]),
+             "models/t/p.tik": skd.build_tiki("models/t", "p.skd", "p.skc", [("a", "textures/x")], scale=2).encode()}
+    read = SL.files_reader(files)
+    pos, nrm = SL.tiki_mesh(read, "t/p.tik")
+    rng = np.random.default_rng(1)
+    inst = [SL.StaticInstance("t/p.tik", tuple(rng.uniform(-3000, 3000, 3)), (0.0, float(rng.uniform(0, 360)), 0.0),
+                              1.0, pos, nrm) for _ in range(5000)]
+    out, new, info = staticmerge.merge(inst, read, "models/csgo/m_test")
+    assert info["merged"] and len(out) < 3500, info
+    assert sum(1 if not o.model.startswith("models/csgo/m_test") else
+               int(re.search(r"// (\d+) x", new[o.model].decode()).group(1)) for o in out) == 5000
+    m = next(o for o in out if o.model.startswith("models/csgo/m_test"))
+    mpos, _ = SL.tiki_mesh(SL.files_reader(new), m.model)
+    assert len(mpos) == len(m.positions) and np.allclose(mpos, m.positions, atol=1e-3)
+    # every merged vertex is some instance's world-space vertex
+    world = np.concatenate([SL.world_mesh(i)[0] for i in inst])
+    w = SL.world_mesh(m)[0]
+    d = np.min(np.linalg.norm(world[None, :, :] - w[:20, None, :], axis=2), axis=1)
+    assert d.max() < 0.05, d.max()
+    small, files2, info2 = staticmerge.merge(inst[:100], read, "models/csgo/m_test")
+    assert not info2["merged"] and small == inst[:100] and not files2
 
 
 def _reference_grid(bsp: BSP, grid: SL.LightGrid, x: int, y: int) -> list[int]:

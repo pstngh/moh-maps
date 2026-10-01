@@ -1337,10 +1337,13 @@ class Converter:
                 org = c.copy()
                 org[thin] = front
                 yaw = round(math.degrees(math.atan2(facing[1], facing[0]))) % 360
-                self.report.setdefault("ladders", []).append(
-                    {"origin": [round(float(v) * s, 1) for v in org], "angle": yaw, "height": round(float(hi[2] - z0) * s),
-                     "zmin": round(float(z0) * s, 1), "zmax": round(float(hi[2]) * s, 1), "style": "steps",
-                     "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)})
+                rec = {"origin": [round(float(v) * s, 1) for v in org], "angle": yaw, "height": round(float(hi[2] - z0) * s),
+                       "zmin": round(float(z0) * s, 1), "zmax": round(float(hi[2]) * s, 1), "style": "steps",
+                       "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)}
+                start = self._probe_start(org * s, np.array(facing), wide, (hi[wide] - lo[wide]) * s / 2, z0 * s)
+                if start is not None:
+                    rec["probe_start"] = start
+                self.report.setdefault("ladders", []).append(rec)
                 continue
             if sgn > 0:
                 t_lo[thin] = near - 8
@@ -1383,8 +1386,28 @@ class Converter:
                  "facing_from": how, "wall_side": [score[-1], score[1]], "far": round(float(far) * s, 1)})
         return out
 
+    def _probe_start(self, front, facing, wide: int, half_w: float, z0: float):
+        """Where ``game.ladder_probe`` stands a player to climb a step ladder (world units):
+        28 units in front of the column (a short run-up, as before), else 22, 16 or 36, slid
+        along its width: the first spot where a standing player box is clear of world and
+        prop-clip brushes (de_rats: a clip strip beside a cable ladder, an overhang 28 units
+        out). ``None`` if there is none."""
+        if not hasattr(self, "_probe_solids"):
+            ents = [MEntity({"classname": "worldspawn"}, list(getattr(self, "_world_brushes", []))
+                            + list(getattr(self, "_prop_clip_brushes", [])))]
+            self._probe_solids = [v for v in validate._solids(MapFile(ents))[0]]
+        offs = [0.0] + [d * k for d in (4.0, 8.0, 12.0, 16.0, 20.0) if d <= max(half_w, 4.0) for k in (-1.0, 1.0)]
+        for back in (28.0, 22.0, 16.0, 36.0):
+            for off in offs:
+                c = np.asarray(front, np.float64) - facing * back
+                c[wide] += off
+                lo, hi = (c[0] - 15, c[1] - 15, z0 + 1), (c[0] + 15, c[1] + 15, z0 + 96)
+                if not any(validate.box_hits_brush(lo, hi, q) for q in self._probe_solids):
+                    return [round(float(c[0]), 1), round(float(c[1]), 1), round(z0 + 1, 1)]
+        return None
+
     STEP_RISE = 16.0    # under MOHAA's STEPSIZE 18: one step up per move (bg_slidemove.cpp)
-    STEP_DEPTH = 1.0
+    STEP_DEPTH = 0.5
 
     def _ladder_steps(self, lo, hi, thin: int, sgn: int, far: float, z0: float) -> float:
         """A CS-style ladder: invisible ``common/clip`` slices from ``z0`` to the top of the
@@ -1794,6 +1817,7 @@ class Converter:
         overlay_patches = self.overlays() + self.ropes()
         self.statics: list = []
         prop_ents, prop_clips, precache = self.props() if self.opt.props else ([], [], [])
+        self._prop_clip_brushes = prop_clips
         # A ladder model's own collision (mirage's leaning ladderwood) stands inside the ladder
         # volume and stops the view trace that mounts a func_ladder (Player::CondLadder), and a
         # door model beside that ladder filled the box FuncLadder::CanUseLadder checks: drop
@@ -2107,8 +2131,10 @@ def auto_cameras(m: MapFile, n: int = 9, landmarks=(), spawns: bool = True):
 
 def inject_statics(bsp_path, statics, assets: dict, out) -> dict:
     """Add the converter's props (``Result.statics``) to a lit BSP as static models coloured
-    from its light grid (``mohkit.staticlight``); meshes are read from ``assets``."""
-    from .. import staticlight as SL
+    from its light grid (``mohkit.staticlight``); meshes are read from ``assets``. Over
+    ``staticmerge.DEFAULT_TARGET`` props, nearby copies of a model are merged into one model
+    (engine limit 4,095); the merged models' files are added to ``assets``."""
+    from .. import staticlight as SL, staticmerge
     read = SL.files_reader(assets)
     meshes: dict = {}
     inst = []
@@ -2118,7 +2144,11 @@ def inject_statics(bsp_path, statics, assets: dict, out) -> dict:
         pos, nrm = meshes[mk]
         if len(pos):
             inst.append(SL.StaticInstance(mk, origin, angles, scale, pos, nrm))
-    return SL.inject(bsp_path, inst, out)
+    inst, files, merged = staticmerge.merge(inst, read, f"models/csgo/m_{Path(out).stem}")
+    assets.update(files)
+    info = SL.inject(bsp_path, inst, out)
+    info["merge"] = merged
+    return info
 
 
 _CAMERA_RE = re.compile(r'"([^"]+)"\s+"\s*(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)\s*"')

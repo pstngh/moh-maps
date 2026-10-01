@@ -465,6 +465,9 @@ def inject(bsp_path: Union[str, Path], instances: Sequence[StaticInstance], out:
         placed += bool(len(hit))
         unplaced += not len(hit)
     all_defs = np.concatenate([defs, new])
+    if len(all_defs) > 4095:
+        # staticModelNumIndexes[4095] and the 12-bit sort-key field (mohkit/staticmerge.py)
+        raise ValueError(f"{len(all_defs)} static models: the engine draws at most 4095 (use staticmerge.merge)")
     idx_out: list[int] = []
     for li, lst in enumerate(lists):
         leafs[li]["first_static"] = len(idx_out)
