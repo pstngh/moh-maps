@@ -158,6 +158,17 @@ OpenMoHAA draws every static model whose bounds pass the frustum test (the leaf
 surfaces a frame (`MAX_STATIC_MODELS_SURFS`). de_nuke's 4,801 props have 9,071 surfaces
 in all, so only a view of nearly the whole map (the overview shot) can lose some.
 
+**At most 4,095 static models per map.** The renderer adds each drawn static model's
+triangle count to `staticModelNumIndexes[4095]` (`renderergl1/tr_model.cpp:33`, `:1560`),
+indexed by static model number, and packs that number into 12 sort-key bits
+(`R_DecomposeSort`, `tr_main.c:1241`: `& 4095`). Model 4,095 and up write past the array
+every frame and draw with another model's transform. de_inferno's 6,326 injected props
+crashed the game 16 s into an 8-bot match (`R_PrintInfoWorldtris`, called on corrupted
+state); de_nuke's 4,801 had survived its tests by luck. `mohkit.staticmerge` merges
+copies of one model in a grid cell (512 units, larger if needed) into one rigid model
+when a map has more than 3,500 props (de_inferno: 6,326 -> about 2,900), and
+`staticlight.inject` refuses more than 4,095.
+
 ## Known gaps
 
 - Blend textures use the first layer only.

@@ -11,11 +11,18 @@ frustum-culled (the vis test is commented out, ``tr_staticmodels.cpp``), and at 
 of their surfaces are drawn per frame (``MAX_STATIC_MODELS_SURFS``), so fewer, larger models
 also help there.
 
-``merge`` groups instances of one model by a world grid cell and writes each group of two
-or more as one rigid model (TIKI + SKD + SKC) whose surfaces are the instances' surfaces in
-world orientation, packed into buckets within the SKD limits (999 vertices, 1,999 triangles
-per surface, 24 surfaces per TIKI). It uses the smallest cell that brings the count under
-``target``; maps already under it are left alone.
+The skeleton cache holds 1,024 SKDs (``TIKI_MAX_SKELCACHE``, ``tiki/tiki_shared.h:79``):
+props past it never load ("No free spots open in skel cache"; de_nuke's 1,365 prop SKDs
+lost hundreds of props). Players, weapons and effects share that cache.
+
+``merge`` keeps a map within ``max_models`` static models and ``max_skd`` distinct SKDs.
+It picks models to merge (``_choose``): rarely used ones first when SKDs are over budget
+(merging a one-off model duplicates nothing), then the cheapest to duplicate (fewest
+vertices) while instances are over budget. Their instances are merged per world grid cell
+into rigid models whose surfaces are the instances' surfaces in world orientation, packed
+into one bucket per shader within the SKD limits (999 vertices, 1,999 triangles per
+surface, 24 surfaces per TIKI). Other models stay instanced. Maps within both budgets are
+left alone.
 """
 
 from __future__ import annotations
@@ -31,8 +38,9 @@ from .source import skd as _skd
 from .staticlight import StaticInstance, axes
 
 MAX_STATIC_MODELS = 4095
-DEFAULT_TARGET = 3500
-CELLS = (512.0, 1024.0, 2048.0, 4096.0)
+DEFAULT_TARGET = 3500          # static models (instances)
+DEFAULT_MAX_SKD = 600          # distinct prop SKDs, leaving ~400 of the cache for the game
+CELL = 1024.0
 
 _SETUP = re.compile(r"^\s*(scale|path|skelmodel)\s+(\S+)", re.M)
 _SURFACE = re.compile(r"^\s*surface\s+(\S+)\s+shader\s+(\S+)", re.M)
@@ -72,32 +80,46 @@ def tiki_parts(read: Callable[[str], Optional[bytes]], tik: str) -> list[tuple[_
 
 
 class _Model:
-    """Buckets of one merged model being filled: per bucket the source part index, shader
-    and the accumulated vertices/triangles."""
+    """A merged model being filled: one bucket per shader (more when one fills up), each
+    accumulating vertices and triangles."""
 
     def __init__(self) -> None:
         self.buckets: list[dict] = []
         self.members: list[StaticInstance] = []
 
-    def fits(self, parts) -> bool:
-        need = 0
-        for pi, (srf, _) in enumerate(parts):
-            b = self._open(pi, len(srf.positions), len(srf.triangles))
-            need += b is None
-        return len(self.buckets) + need <= _skd.MAX_TIKI_SURFACES
-
-    def _open(self, pi: int, nv: int, nt: int) -> Optional[dict]:
+    def _open(self, shader: str, nv: int, nt: int) -> Optional[dict]:
         for b in self.buckets:
-            if b["part"] == pi and b["nv"] + nv <= _skd.MAX_SURFACE_VERTS and b["nt"] + nt <= _skd.MAX_SURFACE_TRIS:
+            if b["shader"] == shader and b["nv"] + nv <= _skd.MAX_SURFACE_VERTS and b["nt"] + nt <= _skd.MAX_SURFACE_TRIS:
                 return b
         return None
 
+    def fits(self, parts) -> bool:
+        """Would one more instance fit in 24 surfaces? Simulates ``add``'s first-fit."""
+        load: dict = {}
+        pending: list[dict] = []
+        for srf, shader in parts:
+            nv, nt = len(srf.positions), len(srf.triangles)
+            target = None
+            for b in self.buckets + pending:
+                av, at = load.get(id(b), (0, 0))
+                if (b["shader"] == shader and b["nv"] + av + nv <= _skd.MAX_SURFACE_VERTS
+                        and b["nt"] + at + nt <= _skd.MAX_SURFACE_TRIS):
+                    target = b
+                    break
+            if target is None:
+                target = {"shader": shader, "nv": 0, "nt": 0}
+                pending.append(target)
+            av, at = load.get(id(target), (0, 0))
+            load[id(target)] = (av + nv, at + nt)
+        return len(self.buckets) + len(pending) <= _skd.MAX_TIKI_SURFACES
+
     def add(self, inst: StaticInstance, parts) -> None:
         ax = axes(inst.angles)
-        for pi, (srf, shader) in enumerate(parts):
-            b = self._open(pi, len(srf.positions), len(srf.triangles))
+        for srf, shader in parts:
+            nv, nt = len(srf.positions), len(srf.triangles)
+            b = self._open(shader, nv, nt)
             if b is None:
-                b = {"part": pi, "shader": shader, "nv": 0, "nt": 0, "pos": [], "nrm": [], "uv": [], "tri": []}
+                b = {"shader": shader, "nv": 0, "nt": 0, "pos": [], "nrm": [], "uv": [], "tri": []}
                 self.buckets.append(b)
             pos = srf.positions * float(inst.scale) @ ax + np.asarray(inst.origin, np.float64)
             nrm = srf.normals.astype(np.float64) @ ax
@@ -105,8 +127,8 @@ class _Model:
             b["pos"].append(pos)
             b["nrm"].append(nrm)
             b["uv"].append(srf.uvs)
-            b["nv"] += len(srf.positions)
-            b["nt"] += len(srf.triangles)
+            b["nv"] += nv
+            b["nt"] += nt
         self.members.append(inst)
 
 
@@ -137,22 +159,94 @@ def _write(model: _Model, prefix: str, key: str) -> tuple[StaticInstance, dict[s
     return inst, files
 
 
-def _group(instances: Sequence[StaticInstance], cell: float) -> dict:
-    groups: dict = {}
-    for i, inst in enumerate(instances):
-        key = (inst.model,) + tuple(int(np.floor(float(c) / cell)) for c in inst.origin)
-        groups.setdefault(key, []).append(i)
-    return groups
+def _skd_key(read, model: str) -> tuple:
+    """The SKD files a TIKI loads (skins of one mesh share them)."""
+    name = model if model.startswith("models/") else "models/" + model
+    text = read(name)
+    if text is None:
+        return (name,)
+    t = text.decode("latin-1")
+    path = (re.findall(r"^\s*path\s+(\S+)", t, re.M) or [str(Path(name).parent)])[0]
+    return tuple(s if "/" in s else f"{path}/{s}" for s in re.findall(r"^\s*skelmodel\s+(\S+)", t, re.M)) or (name,)
+
+
+def _pack(instances: Sequence[StaticInstance], parts: Callable, cell: float) -> list[_Model]:
+    """Merged models for ``instances`` (all mergeable): per grid cell, instances sorted by
+    shader set, packed until a model would exceed 24 surfaces."""
+    cells: dict = {}
+    for inst in instances:
+        cells.setdefault(tuple(int(np.floor(float(c) / cell)) for c in inst.origin), []).append(inst)
+    out = []
+    for key in sorted(cells):
+        group = sorted(cells[key], key=lambda i: (tuple(sorted({sh for _, sh in parts(i.model)})), i.model,
+                                                  tuple(i.origin)))
+        cur = _Model()
+        for inst in group:
+            pr = parts(inst.model)
+            if cur.members and not cur.fits(pr):
+                out.append(cur)
+                cur = _Model()
+            cur.add(inst, pr)
+        if cur.members:
+            out.append(cur)
+    return out
+
+
+def _choose(instances, parts, skd_of, max_models: int, max_skd: int, cell: float) -> tuple[set, list]:
+    """Models to merge and the packed result: a greedy pick, re-packed until both budgets hold."""
+    count: dict = {}
+    for i in instances:
+        count[i.model] = count.get(i.model, 0) + 1
+    mergeable = [m for m in count if parts(m)]
+    verts = {m: sum(len(s.positions) for s, _ in parts(m)) for m in mergeable}
+    # SKD budget: rarest first (merging a one-off model duplicates nothing), then smallest
+    by_rarity = sorted(mergeable, key=lambda m: ((count[m] - 1) * verts[m], m))
+    # instance budget: cheapest to duplicate first (fewest vertices per instance)
+    by_cost = sorted(mergeable, key=lambda m: (verts[m], -count[m], m))
+    chosen: set = set()
+    packed: list = []
+    for _ in range(64):
+        kept = [i for i in instances if i.model not in chosen]
+        packed = _pack([i for i in instances if i.model in chosen], parts, cell) if chosen else []
+        n_models = len(kept) + len(packed)
+        n_skd = len({skd_of(i.model) for i in kept}) + len(packed)
+        if n_models <= max_models and n_skd <= max_skd:
+            return chosen, packed
+        add = []
+        if n_skd > max_skd:
+            add += [m for m in by_rarity if m not in chosen][: max(8, (n_skd - max_skd) // 2)]
+        if n_models > max_models:
+            need = n_models - max_models
+            for m in by_cost:
+                if m in chosen or m in add:
+                    continue
+                add.append(m)
+                need -= count[m]
+                if need <= 0:
+                    break
+        if not add:
+            break
+        chosen |= set(add)
+    return chosen, packed
 
 
 def merge(instances: Sequence[StaticInstance], read: Callable[[str], Optional[bytes]], prefix: str,
-          target: int = DEFAULT_TARGET, cells: Sequence[float] = CELLS) -> tuple[list[StaticInstance], dict[str, bytes], dict]:
-    """Instances under ``target`` models (unchanged when already under it), the merged models'
-    files (``{game path: bytes}``, under ``prefix`` such as ``models/csgo/m_cs_inferno``)
-    and a summary. Instances whose TIKI cannot be read stay as they are."""
+          target: int = DEFAULT_TARGET, max_skd: int = DEFAULT_MAX_SKD,
+          cell: float = CELL) -> tuple[list[StaticInstance], dict[str, bytes], dict]:
+    """Instances within ``target`` models and ``max_skd`` SKDs (unchanged when already
+    within both), the merged models' files (``{game path: bytes}`` under ``prefix``, such as
+    ``models/csgo/m_cs_inferno``) and a summary. Unreadable TIKIs are never merged."""
     instances = list(instances)
-    if len(instances) <= target:
-        return instances, {}, {"merged": False, "models": len(instances)}
+    skd_cache: dict = {}
+
+    def skd_of(model: str) -> tuple:
+        if model not in skd_cache:
+            skd_cache[model] = _skd_key(read, model)
+        return skd_cache[model]
+
+    n_skd = len({skd_of(i.model) for i in instances})
+    if len(instances) <= target and n_skd <= max_skd:
+        return instances, {}, {"merged": False, "models": len(instances), "skd": n_skd}
     parts_cache: dict = {}
 
     def parts(model: str):
@@ -163,33 +257,43 @@ def merge(instances: Sequence[StaticInstance], read: Callable[[str], Optional[by
                 parts_cache[model] = None
         return parts_cache[model]
 
-    cell = cells[-1]
-    for c in cells:  # the smallest cell whose group count is under the target (rough: buckets may split)
-        if len(_group(instances, c)) <= target * 0.9:
-            cell = c
-            break
-    out: list[StaticInstance] = []
+    chosen, packed = _choose(instances, parts, skd_of, target, max_skd, cell)
+    out = [i for i in instances if i.model not in chosen]
     files: dict[str, bytes] = {}
-    merged_from = 0
-    for key, idx in sorted(_group(instances, cell).items(), key=lambda kv: (kv[0][0], kv[0][1:])):
-        group = [instances[i] for i in idx]
-        pr = parts(group[0].model) if len(group) > 1 else None
-        if not pr:
-            out += group
-            continue
-        models: list[_Model] = [_Model()]
-        for inst in group:
-            if not models[-1].fits(pr):
-                models.append(_Model())
-            models[-1].add(inst, pr)
-        for n, mdl in enumerate(models):
-            if len(mdl.members) == 1:
-                out.append(mdl.members[0])
-                continue
-            k = f"{key}/{n}/" + ";".join(f"{m.origin}" for m in mdl.members)
-            inst, f = _write(mdl, prefix, k)
-            out.append(inst)
-            files.update(f)
-            merged_from += len(mdl.members)
-    return out, files, {"merged": True, "cell": cell, "models": len(out), "from": len(instances),
-                        "merged_instances": merged_from, "files": len(files)}
+    for mdl in packed:
+        k = mdl.members[0].model + ";" + ";".join(f"{m.model}@{tuple(m.origin)}" for m in mdl.members)
+        inst, f = _write(mdl, prefix, k)
+        out.append(inst)
+        files.update(f)
+    kept_skd = len({skd_of(i.model) for i in instances if i.model not in chosen})
+    return out, files, {"merged": True, "models": len(out), "from": len(instances), "skd": kept_skd + len(packed),
+                        "skd_from": n_skd, "merged_models": len(chosen), "merged_instances":
+                        sum(len(m.members) for m in packed), "files": len(files)}
+
+
+def prune(files: dict, models: set, used: set, read: Callable[[str], Optional[bytes]]) -> int:
+    """Delete from ``files`` ({game path: data}) the TIKI, SKD and SKC of each model in
+    ``models`` that no instance in ``used`` loads any more (merged away); SKDs and SKCs
+    shared with a used TIKI (skins) stay. Returns the number of files removed."""
+    def tik_path(m: str) -> str:
+        return m if m.startswith("models/") else "models/" + m
+
+    def deps(m: str) -> set:
+        text = read(tik_path(m))
+        if text is None:
+            return set()
+        t = text.decode("latin-1")
+        path = (re.findall(r"^\s*path\s+(\S+)", t, re.M) or [str(Path(tik_path(m)).parent)])[0]
+        names = re.findall(r"^\s*skelmodel\s+(\S+)", t, re.M) + re.findall(r"^\s*\w+\s+(\S+\.skc)\s*$", t, re.M)
+        return {n if "/" in n else f"{path}/{n}" for n in names}
+
+    keep = set()
+    for m in used:
+        keep |= deps(m) | {tik_path(m)}
+    removed = 0
+    for m in models - used:
+        for f in deps(m) | {tik_path(m)}:
+            if f not in keep and f in files:
+                del files[f]
+                removed += 1
+    return removed

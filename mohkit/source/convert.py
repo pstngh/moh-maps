@@ -1407,7 +1407,8 @@ class Converter:
         return None
 
     STEP_RISE = 16.0    # under MOHAA's STEPSIZE 18: one step up per move (bg_slidemove.cpp)
-    STEP_DEPTH = 0.5
+    STEP_DEPTH = 1.0
+    MIN_STEP_DEPTH = 0.5
 
     def _ladder_steps(self, lo, hi, thin: int, sgn: int, far: float, z0: float) -> float:
         """A CS-style ladder: invisible ``common/clip`` slices from ``z0`` to the top of the
@@ -1425,14 +1426,37 @@ class Converter:
             w0, w1 = m - 16, m + 16
         top = hi[2]
         n = max(1, math.ceil((top - z0) / self.STEP_RISE - 1e-6))
+        depth = self._step_depth(lo, hi, thin, sgn, far, z0, n)
         for k in range(1, n + 1):
             za, zb = z0 + (k - 1) * self.STEP_RISE, min(z0 + k * self.STEP_RISE, top)
-            out = (n - k + 1) * self.STEP_DEPTH
+            out = (n - k + 1) * depth
             a, b = sorted((far, far - sgn * out))
             bl, bh = [0.0, 0.0, za], [0.0, 0.0, zb]
             bl[thin], bh[thin], bl[wide], bh[wide] = a, b, w0, w1
             self._ladder_step_brushes.append(box(tuple(v * s for v in bl), tuple(v * s for v in bh), "common/clip", True))
-        return far - sgn * n * self.STEP_DEPTH
+        return far - sgn * n * depth
+
+    def _step_depth(self, lo, hi, thin: int, sgn: int, far: float, z0: float, n: int) -> float:
+        """Set-back per step: ``STEP_DEPTH`` (1 unit), less where the column would leave no
+        room for a climber (30 wide) before the next solid in front of it, down to
+        ``MIN_STEP_DEPTH``. de_rats' shaft ladders (893 and 519 tall, 62-96 units between
+        the walls) need half-unit steps; on open walls half-unit ledges climbed less well
+        (17-53 units instead of 71-88 on four rats ladders)."""
+        c = (lo + hi) / 2
+        depth = self.STEP_DEPTH
+        for k in range(1, n + 1, max(1, n // 12)):
+            z = z0 + (k - 0.5) * self.STEP_RISE
+            room = 0.0
+            while room < 160:
+                p = c.copy()
+                p[2] = z + 40  # around the climber's head when standing on step k
+                p[thin] = far - sgn * (room + 1)
+                if self._ladder_solid(p):
+                    break
+                room += 2
+            if room < 160:
+                depth = min(depth, (room - 32) / (n - k + 1))
+        return max(self.MIN_STEP_DEPTH, depth)
 
     # ------------------------------------------------------------------ displacements
     def patches(self) -> list[Patch]:
@@ -2146,6 +2170,8 @@ def inject_statics(bsp_path, statics, assets: dict, out) -> dict:
             inst.append(SL.StaticInstance(mk, origin, angles, scale, pos, nrm))
     inst, files, merged = staticmerge.merge(inst, read, f"models/csgo/m_{Path(out).stem}")
     assets.update(files)
+    if files:
+        merged["pruned"] = staticmerge.prune(assets, {mk for mk, *_ in statics}, {i.model for i in inst}, read)
     info = SL.inject(bsp_path, inst, out)
     info["merge"] = merged
     return info

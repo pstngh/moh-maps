@@ -113,9 +113,8 @@ def test_ladder_facing() -> None:
     cv.brushes()
     assert cv.ladders() == []
     got = [(r["angle"], r["origin"][:2], r["zmin"], r["zmax"]) for r in cv.report["ladders"]]
-    # (column fronts: 10 steps x STEP_DEPTH 0.5 out from the wall)
-    assert got == [(270, [-992.0, -225.0], -168.0, -20.0), (0, [163.0, -1972.0], -168.0, -8.0),
-                   (0, [459.0, 668.0], -258.0, -112.0)], got
+    assert got == [(270, [-992.0, -220.0], -168.0, -20.0), (0, [158.0, -1972.0], -168.0, -8.0),
+                   (0, [454.0, 668.0], -258.0, -112.0)], got
     assert len(cv._ladder_step_brushes) == 10 + 10 + 10
 
 if __name__ == "__main__":

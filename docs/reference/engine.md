@@ -411,6 +411,16 @@ Game side: `World` class (`fgame/worldspawn.cpp:491-543`), defaults in its const
 | `func_group`, `detail`, `vis_leafgroup`, `func_remove` | editor grouping, manual vis, and removal. Stripped by Q3map (func_remove is removed by the game) | — | `entdefs.pk3:code/misc.cpp`, `fgame/misc.cpp:64-71` |
 | `light` | never spawned by the game, but kept in the lump for MOHlight (§6.6) | — | `fgame/g_spawn.cpp:224-233`, `fgame/light.cpp:147-150` |
 
+**Static model limit: 4,095 per map.** Per-frame triangle counts live in
+`staticModelNumIndexes[4095]` (`renderergl1/tr_model.cpp:33`), written for every drawn
+static model by its number (`:1560`, `:1582`), and the draw sort key keeps that number in
+12 bits (`(sort >> QSORT_ENTITYNUM_SHIFT) & 4095`, `renderergl1/tr_main.c:1241`; static
+flag bit 20, shader from bit 21, `tr_local.h:1212-1216`). Larger counts corrupt memory
+and draw the extra models with the wrong transform (de_inferno with 6,326: crash in
+`R_PrintInfoWorldtris` during a bot match). Static models are frustum-culled only (the
+leaf `visCount` test is commented out, `tr_staticmodels.cpp`) and at most 8,192 of their
+surfaces are drawn per frame (`MAX_STATIC_MODELS_SURFS`, same file).
+
 **How a runtime model is lit.** cgame sets `lightingOrigin = origin + centre of the
 box packed into entityState.solid` (`cgame/cg_modelanim.c:1064-1067`). A NOT_SOLID
 entity packs `solid = 0` (`server/sv_world.c:230-257`), which unpacks to the box
