@@ -358,6 +358,7 @@ class Converter:
         self._portal = opt.skybox3d == "portal" and self.sky_area is not None
         self._sky_prims: list = []        # 3D skybox brushes and patches (moved in run())
         self._sky_statics: set[int] = set()   # their props' indexes in self.statics
+        self._sky_whole: list = []            # the map's unsplit sky brushes and their Source sides
         self._in_sky_room = False
 
     def _sky_box(self):
@@ -947,6 +948,8 @@ class Converter:
         parts = [geo] if sky_only else _split_long(geo, self.opt.split)
         pieces = [self._brush_piece(br, pc, kinds, nonsolid, water) for pc in parts]
         pieces = [p for p in pieces if p is not None]
+        if sky_only and pieces:   # split after all if the room is dropped (_place_sky_room)
+            self._sky_whole.append((pieces[0], br, geo, kinds, nonsolid, water))
         self._extra.extend(pieces[1:])
         if self._in_sky_room:
             self._sky_prims.extend(pieces)
@@ -958,7 +961,10 @@ class Converter:
         faces = []
         clip = "common/clip" if "clip" in kinds or "invisible" in kinds or br.model in self._invisible_models else (
             "common/playerclip" if "playerclip" in kinds else None)
-        detail = self.opt.detail_all or br.is_detail or br.model > 0
+        # the 3D skybox room keeps Source's structural brushes: sealed by them, it is a VIS region
+        # of its own, so the portal sky drawn from inside it does not also draw the map (sky
+        # faces don't occlude: de_dust2's buildings hung upside down in its sky)
+        detail = (self.opt.detail_all and not self._in_sky_room) or br.is_detail or br.model > 0
         for side, w in geo:
             pts = [_snap(self._apply(p, xf)) for p in w]
             n = self._apply_vec(side.normal if side is not None else w.normal, xf)
@@ -2244,6 +2250,60 @@ class Converter:
         an eye at the spawns' mean. With no room for it, the room is dropped and the map's sky
         faces get the 2D sky again."""
         s = self.opt.scale
+        cam = self.bsp.sky_camera
+        centre = np.asarray(cam.origin, np.float64) * s     # the room is scaled about the camera
+        # Source draws the skybox from sky_camera + eye / scale; AA's portal sky has one fixed
+        # origin, so take the eye at the spawns' mean (de_vertigo is played 11,600 units up:
+        # 725 above sky_camera in the room; at sky_camera itself its city looked street-level)
+        spawns = np.asarray([e.origin for e in self.bsp.entities
+                             if e.classname in ("info_player_terrorist", "info_player_counterterrorist",
+                                                "info_deathmatch_spawn") and e.origin is not None], np.float64)
+        eye = (spawns.mean(axis=0) + (0.0, 0.0, 64.0)) if len(spawns) else np.zeros(3)
+        cam_scale = float(cam.get("scale") or 16) or 16.0
+        eye_room = centre + eye / cam_scale * s
+        # Seen from that one point, room objects near it land far from where a player elsewhere
+        # would see them (de_dust2's houses past the walls hung huge over DD): an object closer
+        # than 8 x the spawns' spread / scale (angle error over ~7 degrees at the far spawn)
+        # goes, and the room goes when under a quarter of it is left. de_vertigo (all 11 far:
+        # played 732 above its city, spawns 800 apart) keeps it; de_nuke would keep 27 of 303,
+        # de_cbble 5 of 41, the others none: their skyboxes are rooms built around the map
+        spread = float(np.max(np.linalg.norm(spawns[:, :2] - spawns[:, :2].mean(axis=0), axis=1))) if len(spawns) else 0.0
+        near = 8.0 * spread / cam_scale * s
+
+        def dist(lo, hi):
+            return float(np.linalg.norm(np.maximum(np.maximum(lo - eye_room, eye_room - hi), 0.0)))
+
+        keep, dropped, objects = [], 0, len(self._sky_statics)
+        for q in self._sky_prims:
+            if isinstance(q, MBrush):
+                lo, hi = (np.asarray(v, np.float64) for v in q.bounds())
+                shell = any(f.shader == self.sky_shader for f in q.faces)
+            else:
+                P = np.asarray([c[:3] for row in q.ctrl for c in row], np.float64)
+                lo, hi, shell = P.min(0), P.max(0), False
+            objects += not shell
+            if not shell and dist(lo, hi) < near:
+                dropped += 1
+                continue
+            keep.append(q)
+        far = {id(q) for q in keep}
+        world.prims = [q for q in world.prims if id(q) in far or id(q) not in {id(x) for x in self._sky_prims}]
+        statics, lights, sky_statics = [], [], set()
+        for n, (st, pl) in enumerate(zip(self.statics, self.prop_light)):
+            if n in self._sky_statics:
+                if dist(np.asarray(st[1], np.float64), np.asarray(st[1], np.float64)) < near:
+                    dropped += 1
+                    continue
+                sky_statics.add(len(statics))
+            statics.append(st)
+            lights.append(pl)
+        self.statics, self.prop_light, self._sky_statics = statics, lights, sky_statics
+        self._sky_prims = keep
+        self.report["sky_near_dropped"] = [dropped, objects]
+        nothing_left = dropped > 0.75 * objects
+        if nothing_left:
+            self.report["warnings"].append(f"3D skybox: {dropped} of {objects} objects nearer than {near:.0f} to its eye; "
+                                           "2D sky only")
         pts = []
         for q in self._sky_prims:
             if isinstance(q, MBrush):
@@ -2251,15 +2311,13 @@ class Converter:
             else:
                 pts += [c[:3] for row in q.ctrl for c in row]
         r_lo, r_hi = np.min(pts, 0), np.max(pts, 0)
-        cam = self.bsp.sky_camera
-        centre = np.asarray(cam.origin, np.float64) * s     # the room is scaled about the camera
         m_lo, m_hi = main_lo + T, main_hi + T
         c = (m_lo + m_hi) / 2
         gap = 512.0
         rel, k = None, 1.0
         # a perspective view does not change when the scene is scaled about the eye, so a room
         # that fits nowhere is shrunk about sky_camera (de_vertigo's 7,360-unit city: half size)
-        for k in (1.0, 0.5, 0.25):
+        for k in () if nothing_left else (1.0, 0.5, 0.25):
             lo_k = centre + k * (r_lo - centre)
             size = (r_hi - r_lo) * k
             cands = [(c[0] - size[0] / 2, c[1] - size[1] / 2, m_lo[2] - gap - size[2]),
@@ -2278,8 +2336,21 @@ class Converter:
                 break
         sky = {id(q) for q in self._sky_prims}
         if rel is None:
-            self.report["warnings"].append("3D skybox: no room for it inside +-8192; dropped")
+            if not nothing_left:
+                self.report["warnings"].append("3D skybox: no room for it inside +-8192; dropped")
             world.prims = [q for q in world.prims if id(q) not in sky]
+            # the 2D sky is drawn: its brushes are split like the rest (64-vertex face limit)
+            self._portal = False
+            whole = {id(w[0]): w for w in self._sky_whole}
+            prims = []
+            for q in world.prims:
+                if id(q) in whole:
+                    _, br, geo, kinds, nonsolid, water = whole[id(q)]
+                    prims += [pc for pc in (self._brush_piece(br, g, kinds, nonsolid, water)
+                                            for g in _split_long(geo, self.opt.split)) if pc is not None]
+                else:
+                    prims.append(q)
+            world.prims = prims
             for e, prim in m.iter_prims():
                 if isinstance(prim, MBrush):
                     for f in prim.faces:
@@ -2299,15 +2370,7 @@ class Converter:
         self.statics = [(mk, tuple(centre[i] + k * (o[i] - centre[i]) + rel[i] for i in range(3)), ang, round(sc * k, 4),
                          *rest) if n in self._sky_statics else (mk, o, ang, sc, *rest)
                         for n, (mk, o, ang, sc, *rest) in enumerate(self.statics)]
-        # Source draws the skybox from sky_camera + eye / scale; AA's portal sky has one fixed
-        # origin, so take the eye at the spawns' mean (de_vertigo is played 11,600 units up:
-        # 725 above sky_camera in the room; at sky_camera itself its city looked street-level)
-        spawns = [e.origin for e in self.bsp.entities
-                  if e.classname in ("info_player_terrorist", "info_player_counterterrorist", "info_deathmatch_spawn")
-                  and e.origin is not None]
-        eye = (np.mean(np.asarray(spawns, np.float64), axis=0) + (0.0, 0.0, 64.0)) if spawns else np.zeros(3)
-        cam_scale = float(cam.get("scale") or 16) or 16.0
-        org = centre + k * eye / cam_scale * s + rel
+        org = centre + k * (eye_room - centre) + rel
         m.entities.append(_ent("script_skyorigin", tuple(float(round(v, 1)) for v in org)))
         # lighting.place: a room point p (Source x scale) lands on centre + k (p - centre) + offset
         self.report["sky_room"] = {"box": [[round(float(v), 1) for v in r_lo], [round(float(v), 1) for v in r_hi]],
