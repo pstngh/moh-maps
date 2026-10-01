@@ -20,17 +20,20 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 00:37):** three builds running (logs in the session
-scratchpad; outputs in `local/csgo/<name>/`):
-- `mohkit csgo de_nuke -q draft` (name `cs_nuke`, started 00:24, light at density 32 was
-  6% at 00:35 with ~1h15 to go). All converter features.
-- `mohkit csgo de_nuke -q unlit --name cs_nukeu` (00:35): geometry/props/doors check in
-  minutes; then run `game.ladder_probe` on it (`docs/testing.md`).
-- `mohkit csgo de_dust2 -q draft` (00:36, fresh; the earlier dust2 light was killed by my
-  own `pkill` and its density-16 relight would have taken ~3 h).
-Light findings: MOHlight's time is the per-texel base cost (no light entities, `-notrace`,
-`-blocksize 512/256` or no `sundiffuse` made no difference); density 32 made de_nuke
-roughly 5× faster.
+**Live state (update as you go, 00:52):**
+- Nuke **unlit** build `cs_nukeu` (00:35-00:43; BSP 261 s, VIS 1 s, 4,801 props injected,
+  38 named-camera shots): reads clearly as Nuke (layout, props, overlays/signage, B-site
+  reactor and pool under the glass grid, doors, open vents). **Bots: 83 kills in 90 s**
+  with 8 bots, navmesh built in 10 s, nothing stuck. **Ladders (`game.ladder_probe`): 5 of
+  6 climbed**; the A-site one hangs 47 units above the box you climb from: fixed (trigger
+  extended down to the floor in front), not yet re-verified. Sheet bugs fixed since:
+  light-shaft cards drawn solid white (additive now alpha-weighted, unlit materials
+  `rgbGen identity`), asphalt cracks as grey squares (DecalModulate -> modulate decal).
+- Running: Nuke lit draft `cs_nuke` (started 00:24, light 39% at 00:49, built from code
+  before those fixes and before ropes/func_brush handling), dust2 draft (light started
+  ~00:46, slow first %), both in the session scratchpad logs.
+- Next: look at the lit Nuke sheet, then a fresh Nuke build with every fix (unlit first
+  for ladders/geometry, then lit), bots, then the final-quality decision.
 
 Done this run (all committed and pushed):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
