@@ -470,6 +470,39 @@ class Converter:
         self.report["brushes"] = len(out)
         return out
 
+    def _is_glass(self, br: Brush) -> bool:
+        """Every drawn material of the brush is glass (``$surfaceprop`` glass)."""
+        seen = False
+        for side in br.real_sides():
+            m = side.material
+            if not m or m.lower().startswith("tools/") or side.nodraw:
+                continue
+            info = material_info(self.fs, self.bsp.original_material(m))
+            if not info.found:
+                info = material_info(self.fs, m)
+            if "glass" not in (info.surfaceprop or "").lower():
+                return False
+            seen = True
+        return seen
+
+    def windows(self) -> list[MEntity]:
+        """Breakable glass brush entities -> ``func_window`` (MOHAA breakable glass,
+        ``fgame/windows.cpp``). CS:GO panes break from one bullet; MOHAA's default health
+        is 250, so they get Source's ``health`` (at least 1) and clear debris."""
+        out = []
+        ents = self.bsp.model_entities
+        for model, brushes in sorted(self._windows.items()):
+            if not brushes:
+                continue
+            ent = ents.get(model)
+            try:
+                hp = max(1, int(float(ent.get("health", "1") or 1))) if ent else 1
+            except ValueError:
+                hp = 1
+            out.append(MEntity({"classname": "func_window", "health": str(hp), "debristype": "0"}, brushes))
+        self.report["windows"] = len(out)
+        return out
+
     def _areas(self, br: Brush, geo) -> set[int]:
         out = set()
         for side, w in geo:

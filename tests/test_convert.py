@@ -39,6 +39,16 @@ def test_shader_names_fit_q3map() -> None:
     assert len(mc.texture_name("metal/hr_metal/hr_metal_corrugated_001x")) <= 59
 
 
+def test_converter_methods_exist() -> None:
+    """Every ``self.x(...)`` call in the converter names something the class defines (a
+    cleanup once deleted ``_is_glass``/``windows`` and only a full conversion noticed)."""
+    import re
+    src = Path(C.__file__).read_text()
+    called = set(re.findall(r"self\.([A-Za-z_]\w*)\(", src))
+    missing = sorted(n for n in called if not hasattr(C.Converter, n))
+    assert not missing, missing
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):
