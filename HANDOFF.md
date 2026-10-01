@@ -1,5 +1,29 @@
 # HANDOFF: current state and next steps (living file; keep it current)
 
+## Summary (paused 2026-09-30 ~21:40 at the user's request)
+
+All work is committed and pushed to `main`; nothing is running. This session:
+
+- **Harness fixed** (`mohkit/game.py`): bots join after the cameras; the load
+  wait counts frames; `finishloadingscreen` lets stock maps be shot from any
+  spot. Shots used to be third-person bot views, or all the same spot on stock
+  maps.
+- **CS:GO conversions load in game again** (`.jpg` editor images were read as
+  TGA fence masks). Prop shader scripts now go to `scripts/`. Displacement
+  patches are simplified. Draft conversions compile props as runtime models.
+  **cs_dust2 draft now builds in ~65 min instead of 3+ h, with props
+  everywhere** (BSP 368 s instead of 1,213 s; light 55 min still slow).
+- **Screenshot → map workflow** is done: `docs/from-reference.md`,
+  `mohkit/camera.py`, `mohkit looks-like` / `swatches` / `compare --region`,
+  and the proof map `maps/mk_ref_room`.
+- **Zero-context test passed:** a fresh agent built `maps/mk_medina` (North
+  African town, 24 bot kills/60 s) from the docs alone and reported doc gaps
+  (listed below, not yet fixed).
+- **Inherited claims checked:** 7 of 8 are now tested or verified (see the
+  bottom). The checks also found the real lightmap limit (170), the shader
+  headroom (~1,630), the BSP hotspots, slow single-threaded static-prop
+  lighting, and the multi-threaded MOHlight crash.
+
 Read `CLAUDE.md` first. Git: GitHub `main` (https://github.com/pstngh/moh-maps).
 The old pre-restart `.git` is backed up at `~/Library/Caches/mohkit/old-git-backup`
 (the user may delete it).
@@ -7,130 +31,110 @@ The old pre-restart `.git` is backed up at `~/Library/Caches/mohkit/old-git-back
 **Goal (confirmed by the user):** (1) convert CS:GO maps to MOHAA; (2) create
 any map from scratch, whether invented, described, or **recreated from a
 screenshot the user sends**, bug-free and at stock quality. Both priorities are
-equal. It works through verified knowledge + mohkit + the automated
-compile → screenshot → bot-test loop. Conversions are personal-use only.
+equal. Conversions are personal-use only.
 
 ## Environment notes
 
 - Python: `~/Documents/moh-toolchain/venv/bin/python` (Pillow, numpy, dulwich).
 - **System `git` is blocked** by an unaccepted Xcode license (`sudo xcodebuild
-  -license`; the user must do that). Use the dulwich helper:
-  `~/Documents/moh-toolchain/venv/bin/python ~/Documents/moh-toolchain/gitc.py status|commit "msg" [paths…]|log|push main`.
-  **Always pass paths to `commit`**: without them it stages everything,
-  including a background agent's half-written files (that happened once:
-  `maps/mk_medina` scaffold landed in commit ac8066e). Push needs
-  `GH_TOKEN=$(gh auth token)`.
-- EA tools: `.toolchain/MOHTools` (gitignored). CrossOver Wine, bottle "Steam".
-  Game at `~/Documents/Games/moh`, CS:GO at `~/Documents/Games/csgo`,
-  OpenMoHAA source at `~/Documents/moh-toolchain/openmohaa-src` (cite it).
-- **`~/Documents` is iCloud-synced.** Build scratch lives in
-  `~/Library/Caches/mohkit/build`.
-- Tool stages run on a pseudo-terminal, so logs (`<build>/roots/<name>/*.log`)
-  are live and timestamped (`Stage.timeline`, `Stage.slowest()`). Q3map's
-  "Merging faces" is most of a BSP compile; `-nomerge` is ~3.6x faster.
-- No `timeout` binary on this Mac.
-
-## Done this session (all committed and pushed)
-
-- Village normal build: 31 kills/60 s with 8 bots; `-q preview` (2 bounces)
-  looks the same as 8 bounces. Latest source (facade doors, fountain water,
-  spawns out of props) is built and verified in `dist/mk_village_shots.png`.
-- **Harness fixes** (`mohkit/game.py`, docs/testing.md):
-  - bots join *after* the cameras (the spectator was following bots, so shots
-    were third-person views of random bots);
-  - load wait counts frames (bare `wait` = one Cbuf pass, two per frame),
-    because `wait N` is consumed by one long loading frame;
-  - `finishloadingscreen` after load: maps with their own loading menu (stock
-    mohdm1) fake-pause the server until "continue" (`UI_EndLoad`), so `tele`
-    was lost. Stock maps can now be shot from any spot.
-  - `Shot.fov`, `game.fov_from_vertical`, `game.vertical_fov`, `game.compare`
-    (reference | shot | blend), CLI `mohkit compare`, `mohkit test --shots maps/x`.
-- `-q preview` quality (full VIS, MOHlight `-bounce 2`).
-- **cs_dust2 failed to load in engine** (`LoadTGA: Only type 2…`): Q3map
-  copies `qer_editorimage` into the BSP fence-mask field, and the engine reads
-  it as a TGA by exact name; our shaders named `.jpg`. Fixed with
-  `shaders.editor_image` (always `.tga`, like 205 retail shaders), a
-  `bsp_checks` error, docs (materials.md, toolchain.md). Verified by patching
-  the old BSP: dust2 loads and renders (draft light, shots looked right).
-- `build_local` passes the runtime-prop precache list to the Project.
-- Harness: `finishloadingscreen` (stock maps with their own loading menu
-  fake-pause the server, so `tele` was lost); two bare `wait`s per frame.
-- **Screenshot → map workflow done**: `docs/from-reference.md`,
-  `mohkit/camera.py` (pinhole maths), `mohkit/lookalike.py` + CLI
-  `looks-like`/`swatches`, `game.measure` + `compare --region`, proof map
-  `maps/mk_ref_room` (mohdm1 room rebuilt from one screenshot; comparison in
-  `docs/images/ref_room_compare.jpg`).
-
-## Running now (2026-09-30 ~18:30)
-
-1. `mohkit csgo de_dust2 --name cs_dust2 -q draft` **with props**, started
-   17:18 before the props-shader fix (so prop shaders are missing in this
-   build; rebuild after). Log: session scratch `dust2_props.log`. Output
-   `local/csgo/cs_dust2/`.
-2. Background agent: zero-context one-shot `maps/mk_medina` test (writes only
-   under `maps/mk_medina/`; its scaffold was committed in ac8066e by mistake).
-3. Scratch tests: static-model limit (`smtest.py 14 16 18 22`: 14 tanks =
-   69,412 lit verts compiled fine) and dust2 BSP with `-nomerge` (root
-   `dm_cs_dust2_nm`) to measure the speed-up on a big map.
+  -license`; the user must do that). Use the dulwich helper and **always pass
+  paths**: `~/Documents/moh-toolchain/venv/bin/python ~/Documents/moh-toolchain/gitc.py commit "msg" path1 path2…`,
+  then `GH_TOKEN=$(gh auth token) … gitc.py push main`. (`status`, `log` also work.)
+- EA tools: `.toolchain/MOHTools` (gitignored), CrossOver Wine bottle "Steam".
+  Game `~/Documents/Games/moh`, CS:GO `~/Documents/Games/csgo`, OpenMoHAA
+  source `~/Documents/moh-toolchain/openmohaa-src` (cite it for engine facts).
+- `~/Documents` is iCloud-synced; build scratch is `~/Library/Caches/mohkit/build`.
+- Tool stages run on a pseudo-terminal: logs (`<build>/roots/<name>/*.log`)
+  are live and timestamped (`Stage.timeline`, `Stage.slowest()`; summary lists
+  the longest silences). No `timeout` binary on this Mac.
+- Quality presets: `draft` (BSP `-nomerge`, fast VIS/light), `preview`
+  (`-bounce 2`, looks like normal), `normal`, `final`.
 
 ## Next steps (in order)
 
-1. **Rebuild dust2** after the running build (default `--static-verts`; draft BSP should now be ~8 min: `-nomerge` + displacement simplification): the props' shader script was
-   written to the package root instead of `scripts/` (fixed in convert.py;
-   alpha-tested prop textures rendered opaque before). When dust2 finishes: look at `local/csgo/cs_dust2/cs_dust2_shots.png`
-   (props placed/oriented right? floating? missing textures?), run bots on it
-   (`mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 60`),
-   update `docs/csgo-conversion.md` with measured results (remove "in
-   progress" for props). Consider why BSP takes 20 min (experiment: `-notjunc`?
-   fewer splits? `detail_all` vs structural) and why 848 props are dropped.
-2. When the medina agent reports: fix every doc gap / toolkit bug it lists;
-   judge its map; commit `maps/mk_medina` only if it's good (else delete it
-   from the repo in a normal commit; its scaffold landed in ac8066e).
-3. More README screenshots in `docs/images/` (village, dust2 is local-only:
-   don't publish converted Valve content).
-4. Verify the "unverified inherited claims" below (small controlled tests).
-5. Tell the user: accept the Xcode license; consider moving the repo out of
-   iCloud (`~/Developer/moh-maps`).
+1. **Fix the doc gaps and toolkit issues mk_medina's agent reported:**
+   - CLAUDE.md says to validate `maps/<name>/<name>.map` before building, but
+     that file only exists after `build`. Add a `mohkit generate maps/<name>`
+     command (write and validate the `.map`), or fix the loop text.
+   - Run the 64-vertex face check right after the BSP stage, and stop before
+     VIS/light (it currently runs after lighting). Report face locations, not
+     just shaders.
+   - Passing a wall-band list to `b.box`/`b.hull` silently writes garbage into
+     the `.map`. Raise a clear error.
+   - Docs need a kit/build API overview: `facade`, `door`, `recess`, `strip`,
+     `shutter`, `terrain`, `cv.solid`, band/side mapping, MatSpec keys.
+   - Docs need a North African palette (`algiers/*`, mohdm7). Traps:
+     `algiers/afrika_windecal` is a decal and needs a non-solid slab;
+     `algiers/tentdsrt` renders black underneath, so use `algiers/desertcloth`.
+   - The cause of >64-vertex faces: arch/detail pieces meeting a narrow
+     ceiling strip add T-junction vertices. Stop them below the ceiling and
+     close the gap with one lintel.
+   - Draft `-fast` light still does radiosity. World size (sky height, hill
+     ring) drives MOHlight time; static props light on one thread.
+   - Terrain hill rings: a Euclidean falloff breaks the 510-unit patch limit at
+     the corners; a p=4 norm works.
+   - design.md: "2–4 min to run across" is impossible within ±8192 (~60 s at
+     275 u/s).
+   - `validate` uses a prop's full bounds for spawn clearance (palm canopies
+     block spawns).
+   - `mohkit test --shots <other>` overwrites `dist/<name>_shots.png`.
+   - Check that `Shot.fov` takes effect in game; the agent saw no change with
+     fov 30.
+2. **cs_dust2** (`local/csgo/cs_dust2/cs_dust2_shots.png`, latest draft build):
+   - Some converted props render **solid black** (rubble/debris in shots 01 and
+     04); some crates look washed out. Check their shaders and models.
+   - Run bots: `python -m mohkit test local/csgo/cs_dust2/cs_dust2.pk3 dm/cs_dust2 --bots 8 --seconds 60`.
+   - Profile the 55-min light (`Stage.slowest`, `-v`).
+   - 848 of 1,509 props are dropped. Engine entity limit: 600 runtime +
+     others ≤ 1024.
+   - Update the measured results in `docs/csgo-conversion.md`.
+3. **mk_medina polish:** the narrow streets are too dark, and walls are plain
+   and boxy. It has 28 DM spawns where the spec was 16–24, and it lights with
+   `-threads 1` (multi-threaded MOHlight crashed at 00433F3A).
+4. **Claim 8** (VIS overflow without the structural shell): test with
+   `mohkit csgo de_dust2 --structural` when the machine is free (long).
+5. Tell the user: accept the Xcode license, and consider moving the repo out
+   of iCloud (`~/Developer/moh-maps`).
 
 ## Decisions made while the user was away
 
-- Kept the pre-fix dust2 build running (2h+, single-threaded prop lighting) to see
-  prop placement rather than kill it; rebuild with fixes afterwards.
-- Displacement simplification tolerance: 1 unit (2 would be faster, but the
-  remaining BSP phases dominate and 1 unit is safer for curved walls).
-- Draft quality skips Q3map face merging (-nomerge); T-junction fixing kept so
-  64-vertex face problems still show up in drafts.
+- Village accepted as final: the preview build has the latest source and looks
+  the same as normal.
+- Dust2's grey look in draft is the cool fill light in shadow, not the textures.
+- Screenshot proof: a stock mohdm1 screenshot is the reference.
+  `docs/images/ref_room_compare.jpg` (60 KB) and `mk_village.jpg` are
+  committed; no retail files are.
+- `mk_ref_room` was left with its door 2× too bright and slightly red walls.
+  It's good enough to prove the workflow.
+- `looks-like`: tiling textures to the crop's world size made every test
+  worse, so that option was removed.
+- Displacement simplification tolerance is 1 unit. 2 would be faster, but the
+  remaining BSP phases dominate.
+- Draft skips Q3map face merging but keeps T-junction fixing, so 64-vertex
+  problems still show up in drafts.
+- Draft conversions use 0 static-prop vertices: static-prop lighting took
+  hours.
+- The 160k static-vertex test on full dust2 was skipped (hours of
+  single-threaded lighting).
+- The pre-fix dust2 build was stopped after 2 h 47 min in prop lighting; the
+  fixed draft replaced it.
+- mk_medina was committed as the agent left it, a good second example. Its
+  scaffold had landed earlier in ac8066e by mistake.
 
-- Village: accepted as final at `normal` quality (no rebuild needed; the
-  preview build contains the latest source and looks the same).
-- Dust2 colour: left as is. Textures are the right sandstone colour; the grey
-  look in draft shots is the cool fill light in shadow, not a converter bug.
-- Screenshot proof: used a stock mohdm1 screenshot as the "reference" and
-  committed a small comparison JPG of it (`docs/images/ref_room_compare.jpg`,
-  60 KB) for the doc. Retail textures appear in every MOHAA screenshot; no
-  retail files are committed.
-- mk_ref_room left with its door 2x brighter than the reference (texture
-  choice) and slightly redder walls: good enough to prove the workflow.
-- `looks-like` ranking: tiling textures to the crop's world size made results
-  worse on every test, so that option was removed.
-- Git helper `gitc.py commit` now takes paths; always pass them.
+## Inherited claims (status)
 
-## Unverified inherited claims (verify with a test, or delete)
-
-The user trusts nothing from the previous (pre-mohkit) attempt. Verify each
-with a small controlled compile or engine test (evidence into the doc), or
-delete it:
-
-1. ~~`func_detail` is stripped by Q3map~~ **Tested: wrong.** It compiles as a brush model, spawns as a generic Object and renders black. Docs fixed.
-2. ~~Lightmap page limit 180~~ **Tested: 170** (170 pages compile, 172 fail = 0x800000/49152). Docs, CLAUDE.md, bsp_checks fixed.
-3. Static-model limits: **24 surfaces per TIKI and 1000 verts / 2000 tris per
-   surface verified in source**. The ~75k lit-vertex MOHlight crash was **not
-   reproduced** (109k stock, 1,200 instances, 161k converted props all lit in small
-   maps). Found instead: MOHlight lights static-model vertices **single-threaded at
-   ~190 verts/s** (one-light room), so the budget is compile time. Not re-testing
-   160k on full dust2 (hours); docs updated.
-4. ~~`MAX_SURFACE_INFO`~~ **Tested:** ~1,632 extra script shaders fit on top of retail, 1,639 fail. toolchain.md updated. (Consider a converter warning near 1,500 shaders.)
-5. "Multi-threaded MOHlight access-violated once": now instrumented (a crash keeps `light_mt.log`; no retry after a reported ERROR). Still unverified.
-6. ~~`-notjunc` fallback~~ **Tested:** halves draw indexes on mk_village (63,195 → 30,486). toolchain.md updated.
-7. ~~Terrain mirroring~~ **Layout verified** on 15,747 stock terrains (sentinel row/column present, usually a copy of its neighbour); the mirroring advice follows from it. map-format.md updated.
-8. VIS overflow fixed by structural shell + detail (the 2 MB limit is verified).
+1. `func_detail`: **tested.** It isn't stripped. It becomes an unlit, black
+   generic Object. Docs fixed.
+2. Lightmap pages: **tested, the limit is 170** (170 compile, 172 fail). Docs
+   and bsp_checks fixed.
+3. Static models: TIKI limits **verified in source**. The ~75k crash was **not
+   reproduced** (161k converted props lit fine in a small map). Prop lighting is
+   single-threaded at ~190 verts/s.
+4. `MAX_SURFACE_INFO`: **tested.** About 1,632 shaders fit beyond retail. The
+   converter warns above 1,500.
+5. Multi-threaded MOHlight crash: **verified on mk_medina** (page fault at
+   00433F3A, both MT runs). The driver disables winedbg (it used to hang the
+   build) and retries on one thread.
+6. `-notjunc`: **tested.** It halves draw indexes.
+7. Terrain control layout: **verified** on 15,747 stock terrains.
+8. VIS overflow without the shell: still unverified (step 4 above).
