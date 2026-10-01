@@ -86,6 +86,9 @@ WINDOW = "algiers/afrika_windecal"
 DOORWAY = "algiers/afrikwall7_set1doorway"
 GRILLE = "algiers/window_decor_set1"
 HILL = "algiers/grndset_2af"
+FRIEZE = "algiers/algiertrim"          # 64x64 ornamental band, for cornices
+PLANKS = M("algiers/jh_portarz_bk")    # dark wood boards (balconies)
+BALC_TRIM = M("algiers/wdtrimbal")
 
 LAMP = (1.0, 0.8, 0.55)
 
@@ -269,8 +272,8 @@ def hill(x, y):
 
 # --------------------------------------------------------------------------- the map
 def build():
-    b = MapBuilder("Medina", suncolor="160 140 104", sundirection="-55 225 0", sundiffuse="1.25",
-                   sundiffusecolor="84 92 116", ambientlight="16 15 15", farplane="9000",
+    b = MapBuilder("Medina", suncolor="160 140 104", sundirection="-55 225 0", sundiffuse="1.6",
+                   sundiffusecolor="84 92 116", ambientlight="20 18 16", farplane="9000",
                    farplane_color="0.74 0.68 0.58", farplane_cull="0")
     cv = Carver(16, sky_shader=SKY)
     b.carve(cv)
@@ -495,7 +498,7 @@ def build():
     for x, y, z, wall in ((-1216, -700, 200, "west"), (-1216, 0, 200, "west"), (-860, -352, 200, "north"),
                           (-1536, -900, 200, "east"), (1088, -600, 220, "west"), (1728, 150, 200, "east"),
                           (-1400, 896, UP + 200, "north"), (1500, 640, UP + 200, "south")):
-        kit.wall_lantern(b, x, y, z, wall, 150)
+        kit.wall_lantern(b, x, y, z, wall, 190)
 
     # ---------------------------------------------------------------- hillside dressing
     for x, y, yaw, big in ((-2300, -1500, 30, 1), (-2450, -900, 120, 0), (-2600, 400, 200, 1), (-2350, 900, 10, 0),
@@ -523,6 +526,9 @@ def build():
     rng2 = random.Random(11)
     for a in open_air:
         dress_facades(b, cv, a, rng2, SKIP.get(a.name, {}))
+    rng3 = random.Random(5)
+    for a in open_air:
+        wall_trim(b, cv, a, rng3, SKIP.get(a.name, {}))
     for y in (-704, -448, -192):          # souk hall windows above the east arcade
         decal(b, "west", 640, y - 40, y + 40, 250, 340, WINDOW, (128, 144))
 
@@ -533,11 +539,16 @@ def build():
     north = [(-1850, 768, 0), (-1000, 830, 0), (-300, 760, 0), (320, 770, 180), (1200, 780, 180), (1850, 768, 180),
              (-150, 1180, 0), (150, 1080, 180), (0, 1424, 270), (300, 160, 180), (-1600, 100, 0), (1380, -420, 180),
              (1664, 0, 90), (-1152, 100, 90)]
-    for i, (x, y, yaw) in enumerate(south):
-        b.spawn((x, y, 1), yaw, kinds=("deathmatch", "allied"))
+    # 24 DM spawns (stock DM maps use 16-24); these four are team-only (a choke point, or
+    # too close to a neighbour), so each team still has 14
+    team_only = {(0, -1000), (736, -560), (300, 160), (1380, -420)}
+    for x, y, yaw in south:
+        dm = ("deathmatch",) if (x, y) not in team_only else ()
+        b.spawn((x, y, 1), yaw, kinds=dm + ("allied",))
     for x, y, yaw in north:
         z = UP + 1 if y > 600 or (y > 64 and -640 < x < 640) else 1
-        b.spawn((x, y, z), yaw, kinds=("deathmatch", "axis"))
+        dm = ("deathmatch",) if (x, y) not in team_only else ()
+        b.spawn((x, y, z), yaw, kinds=dm + ("axis",))
     b.entity("info_player_start", (0, -600, 1), angle="90")
     b.entity("info_player_intermission", (-500, -700, 420), angles="18 40 0")
     return b
@@ -705,10 +716,72 @@ def dress_facades(b, cv, a, rng, skip):
                     kit.door(cv, a, side, c, z, 56, 112, DOOR, (128, 256), STONE, depth=8)
                 elif r < 0.7:
                     decal(b, facing, plane, c - 28, c + 28, z + 96, z + 159, WINDOW, (128, 144))
-                # upper floor windows where the wall is tall enough
-                if h >= 256 and any(u0 + 40 <= c <= u1 - 40 for u0, u1 in upper) and rng.random() < 0.8:
-                    wz = z + 200 if h > 300 else z + 150
-                    decal(b, facing, plane, c - 40, c + 40, wz, wz + 90, WINDOW, (128, 144))
+                # upper floor windows where the wall is tall enough; on the tall lower-town walls
+                # they sit above the string course (z + 256) and some are wooden balconies
+                if h >= 256 and any(u0 + 64 <= c <= u1 - 64 for u0, u1 in upper) and rng.random() < 0.8:
+                    if h > 300 and rng.random() < 0.3:
+                        balcony(b, side, plane, c, z + 272)
+                    else:
+                        wz = z + 280 if h > 300 else z + 150
+                        decal(b, facing, plane, c - 40, c + 40, wz, wz + 90, WINDOW, (128, 144))
+
+
+_OUT = {"north": -1, "south": 1, "east": -1, "west": 1}     # street side of a wall, along its normal axis
+
+
+def _wall_box(b, side, plane, u0, u1, z0, z1, d0, d1, m):
+    """Box against the wall on ``side`` of a street, ``d0..d1`` out from the wall plane."""
+    s = _OUT[side]
+    a, c = sorted((plane + s * d0, plane + s * d1))
+    if side in ("north", "south"):
+        b.box((u0, a, z0), (u1, c, z1), m)
+    else:
+        b.box((a, u0, z0), (c, u1, z1), m)
+
+
+def balcony(b, side, plane, c, z):
+    """Enclosed wooden balcony (a mashrabiya box) on an upper storey: plank box with a
+    grille front, corbels below and a thin roof slab."""
+    facing = {"north": "south", "south": "north", "east": "west", "west": "east"}[side]
+    _wall_box(b, side, plane, c - 56, c + 56, z, z + 100, 0, 28, {"down": BALC_TRIM, "up": BEAM, "default": PLANKS})
+    for u in (c - 48, c + 40):
+        _wall_box(b, side, plane, u, u + 8, z - 16, z, 0, 22, BEAM)
+    _wall_box(b, side, plane, c - 62, c + 62, z + 100, z + 106, 0, 34, {"up": ROOFM, "default": STONE})
+    decal(b, facing, plane + _OUT[side] * 28, c - 44, c + 44, z + 12, z + 92, GRILLE, (144, 128))
+
+
+def wall_trim(b, cv, a, rng, skip):
+    """Break up the tall plain street walls: an ornamental cornice under the roof edge,
+    rows of beam ends (vigas) under it, and a string course hiding the texture seam at
+    z 256 on the lower-town walls. Pieces stop short of each other (no shared faces, so
+    no T-junction pile-ups) and skip the stair spans."""
+    (x0, y0, z), (x1, y1, _) = a.bounds
+    h = ROOF - z
+    if h < 200:
+        return
+    tall = h > 300
+    ch = 24 if tall else 12                                  # cornice height
+    for side in ("north", "south", "east", "west"):
+        plane = {"north": y1, "south": y0, "east": x1, "west": x0}[side]
+        lo, hi = (x0, x1) if side in ("north", "south") else (y0, y1)
+        front = {"north": "south", "south": "north", "east": "west", "west": "east"}[side]
+        frieze = M(FRIEZE, (ch / 64, ch / 64), 0.0, (0.0, ROOF / (ch / 64)))
+        for s0, s1 in _solid_spans(cv, a, side, ROOF - ch / 2, lo, hi):
+            if s1 - s0 < 64:
+                continue
+            _wall_box(b, side, plane, s0, s1, ROOF - ch, ROOF, 0, 6, {front: frieze, "default": STONE})
+            if tall and rng.random() < 0.7:
+                for u in range(int(s0) + 40, int(s1) - 32, 64):
+                    _wall_box(b, side, plane, u - 5, u + 5, ROOF - ch - 40, ROOF - ch - 30, 0, 16, BEAM)
+        if not (tall and z == 0):
+            continue
+        for span in _solid_spans(cv, a, side, 256, lo, hi):
+            pieces = [span]
+            for k0, k1 in skip.get(side, ()):                # stairs against the wall: no course over them
+                pieces = [q for p0, p1 in pieces for q in ((p0, min(p1, k0 - 16)), (max(p0, k1 + 16), p1))]
+            for s0, s1 in pieces:
+                if s1 - s0 >= 64:
+                    _wall_box(b, side, plane, s0, s1, 252, 260, 0, 4, STONE)
 
 
 def _behind(side, plane, u, z, d=40):
