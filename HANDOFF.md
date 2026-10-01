@@ -6,52 +6,49 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## Summary (overnight run 2026-10-01, fourth session; ended 06:00 ET)
+## Summary (morning session 2026-10-01, from 08:00)
 
 **Results (local only, `local/` is gitignored; install with
 `python -m mohkit install local/csgo/cs_nuke/cs_nuke.pk3`, then `map dm/cs_nuke`):**
 
 | map | pk3 | build | bots (8, 90 s) | ladders | notes |
 |---|---|---|---|---|---|
-| de_nuke | `local/csgo/cs_nuke/cs_nuke.pk3` (05:29, spot fix) | fastrad, BSP 200 s, light 2,389 s | **70 kills**, none stuck | **6/6** (A-site one: +use from the ledge) | 4,801 props, 718 overlays, 6 doors, 3 breakable vents, 38 glass windows, 70 ropes, 78 glows, water; interiors now lit |
-| de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (06:02, spot fix) | fastrad, BSP 242 s, light 1,259 s | **75 kills** | 2/3 (leaning ladder at (444 652 -182): falls off the top) | 1,470 props, 512 overlays, 85 ropes, 35 glows, 3 breakable covers/shutter + 3 windows; shops and palace now lit |
-| de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (09:12, spot + displacement fixes) | fastrad, BSP 714 s, light 2,692 s (3 builds sharing the CPU) | **88 kills** | — (no ladders) | 1,574 props, 459 overlays; tunnels now lit; props re-injected (`--resume`, 09:45) with lightmap-based colours: the black tunnel crates are fixed |
+| de_nuke | `local/csgo/cs_nuket/cs_nuket.pk3` (10:05: texlights, displacement fix, lightmap-lit props; old func_ladders) | fastrad, light 6,403 s (3-4 builds sharing the CPU) | **76 kills** | — | Hell, B site, Heaven approach now lit like CS:GO. **Final build running** (`cs_nuke`, below) |
+| de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (09:22: spot + displacement fixes; grid-lit props, old func_ladders) | fastrad, light 3,858 s (shared CPU) | **83 kills** | old func_ladders | fog-coloured walls gone. **Final build running** (below) |
+| de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (09:12, props re-injected 09:45) | fastrad, BSP 714 s, light 2,692 s (shared CPU) | **88 kills** | — (no ladders) | final: spot + displacement fixes, lightmap-lit props (tunnel crates no longer black) |
 
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
-**Morning session (2026-10-01, 08:00):** the Mirage spot-fix rebuild finished at 06:05
-(75 kills; shops and palace lit). Its sheets showed flat `farplane_color` walls:
-displacements whose face has `side` 1 were turned inside out (back-facing patches; dust2
-176, Mirage 143, Nuke 77). Fixed in `SourceBSP.displacement` (docs/csgo-conversion.md).
-**User (chat, 08:50): CS-style ladders you run up are fine** (MOHAA ladders fight CS
-layouts). Done: `Options.ladder_style="steps"` (default): invisible clip step columns;
-Mirage's leaning ladder now faces its ledge (square volume, both axes tried); breakable
-vents/covers get metal or wood debris (`debris_7/8.tik`); `game.ladder_probe` records
-the highest point; `game.ladders_for_probe` includes step ladders from report.json.
-Step ladders verified on an unlit Mirage (`local/csgo/cs_miragel`, 09:20): all 3 climb
-to the top (147/148, 143/160 (one step short under the scaffold's upper floor, above its
-platform), 139/146 onto the ledge). dust2 rebuild done 09:12 (row above).
-**Still running (started 08:20):** `local/csgo/mirage_rebuild.sh` and
-`local/csgo/nuket_build.sh`. Both were converted before the step ladders, so Mirage needs
-one more build; cs_nuket is only the texlights comparison. Logs
-`local/csgo/{mirage_rebuild,nuket_build}.log` end with "done".
+**Running:** `local/csgo/mirage_rebuild.sh` (started 09:35) and `local/csgo/nuke_final.sh`
+(10:15): full builds with every fix below, then 8 bots for 90 s and the ladder probe
+(`local/csgo/ladprobe.py`, step ladders from report.json). Logs
+`local/csgo/{mirage_rebuild,nuke_final}.log` end with "done".
 
-**Exact next steps (09:30; shell commands were blocked by a failing permission check):**
-1. Commit `HANDOFF.md` (only uncommitted file).
-2. `python local/csgo/strafe_test.py`: check that strafing off the top of Mirage's scaffold
-   ladders lands on the platforms (expected; hole ladders can't be left backward).
-3. When `mirage_rebuild.log` says done: check its sheets for the fog-coloured walls (should
-   be gone), then rebuild Mirage with step ladders: `local/csgo/mirage_rebuild.sh`
-   (build, 8 bots, `local/csgo/ladprobe.py`).
-4. Done 09:45: injected props are lit from the lightmaps (`staticlight.LightmapField`);
-   MOHlight's light grid ignores spotlight cones (docs/csgo-conversion.md). Open question:
-   players are still lit from that grid, so under CS:GO spots they may look dark. A fix
-   would rewrite the grid lump from the lightmap field (palette + RLE re-encode).
-5. When `nuket_build.log` says done: compare `cs_nuket` with `cs_nuke` (old shots backed
-   up in the scratchpad `nuke_0529/`; else re-shoot `cs_nuke.pk3`): radio rooms, lobby, B
-   site. Then the final Nuke build with step ladders (+ `--texlights` if better).
+**Done this session (all committed and pushed):**
+- Displacements whose face has `side` 1 were inside out (back-facing; Mirage's flat
+  fog-coloured walls): `SourceBSP.displacement` uses the stored plane.
+- **User (chat, 08:50): CS-style ladders you run up are fine.** Ladders are invisible clip
+  step columns by default (`Options.ladder_style`); verified on an unlit Mirage (all 3
+  climb; strafing off the scaffold ladders lands on their platforms). Square ladder
+  volumes try both axes (Mirage's leaning ladder faced a far wall).
+- Breakables get metal/wood debris (`debris_7/8.tik`), not glass.
+- **Injected props are lit from the lightmaps** (`staticlight.LightmapField`): MOHlight's
+  light grid ignores spotlight cones (test room), which blackened dust2's tunnel crates.
+- **`build` injects static props by default** (A/B on mk_medina: same look, all shots
+  within 1%); `--mohlight-props` opts out.
+- **Texlights on by default** for conversions (Nuke compared on the same cameras).
+- `game.ladder_probe` records the highest point; docs/lighting.md preview vs normal
+  re-checked at high detail.
 
-Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
+**Next steps:**
+1. When the two final builds are done: look at their sheets, record bots and ladders in
+   the table above (Nuke has 6 step ladders, Mirage 3).
+2. Open question: players are lit from MOHlight's grid (plus light entities at run time),
+   which ignores spot cones; check a bot under a CS:GO spot in game, and if dark, rewrite
+   the grid lump from `LightmapField` (palette + RLE re-encode).
+3. The remaining older steps below (structural dust2, MT MOHlight crash, Xcode note).
+
+Done in the overnight run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
 - **MAX_MAP_SHADERS:** EA Q3map never de-duplicates BSP shader entries whose name (with
   `textures/`) is exactly 60 characters. Names are capped at 59. docs/toolchain.md.
@@ -113,11 +110,9 @@ equal. Conversions are personal-use only.
 de_mirage. HANDOFF edit (23:45): finish de_dust2 first, time-boxed to ~02:00, then Nuke,
 then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-git-backup`).
 
-1. **CS:GO look, next lever: texlights.** `--texlights` (opt-in) adds one point light per
-   `lights.rad` emitter face (surface lights were ~15 h of MOHlight on Nuke). Build
-   `mohkit csgo de_nuke -q fastrad --texlights --name cs_nuket` (~70 min alone) and compare
-   with `cs_nuke`: radio rooms, lobby, B site. If better, make it the default; Mirage has no texlights.
-   Other Nuke gaps: vents break like glass; door handles lost; detail grass dropped.
+1. **Done (10:15): texlights are the conversion default** (Nuke compared on the same
+   cameras). Other Nuke gaps: vents break (metal debris now) instead of opening; door
+   handles lost; detail grass dropped; blend textures use the first layer only.
 2. **Structural CS:GO maps:** `--structural` dust2 compiles (61 KB VIS, claim 8 false).
    Try a lit structural build: smaller leaves may light faster and avoid the 60-lights-
    per-leaf cap, and VIS would cull. If it holds up, make it the default.
