@@ -175,6 +175,8 @@ class Options:
     props_mode: str = "inject"
     props_static_vertices: int = 70000  # MOHlight's static-model lighting buffer crashes above ~75-81k
     props_runtime_max: int = 600    # extra props as script_model (game entities; engine limit 1024)
+    # translation applied after conversion; None = centre the map when it leaves +-WORLD_LIMIT
+    offset: Optional[tuple] = None
     # lit textures brightened (up to lighting.HEADROOM_MAX) and their light divided by the same
     # gain, so CS:GO's transferred sunlight can exceed the texture colour (lighting="csgo" only)
     headroom: bool = False
@@ -251,6 +253,46 @@ def quake_texdef(normal, dist, svec, tvec) -> tuple[tuple[float, float], float, 
     scale_s = a / proj_a if abs(proj_a) > 1e-9 else 1.0
     scale_t = b / proj_b if abs(proj_b) > 1e-9 else 1.0
     return (s_off, t_off), math.degrees(theta), (scale_s, scale_t)
+
+
+WORLD_LIMIT = 7900.0   # Q3map skips entities and the engine clips beyond +-8192 (CLAUDE.md)
+
+
+def translate_face(f: Face, T) -> Face:
+    """``f`` moved by ``T`` with its texture shift corrected so every texel stays where it was
+    (the Q3 projection of ``quake_texdef``: s = a (cos r p[sv] + sin r p[tv]) / scale_s + shift_s)."""
+    pts = [tuple(float(p[i]) + float(T[i]) for i in range(3)) for p in f.points]
+    n = geom.cross(geom.sub(f.points[2], f.points[0]), geom.sub(f.points[1], f.points[0]))
+    ln = math.sqrt(geom.dot(n, n))
+    shift = f.shift
+    if ln > 1e-9:
+        n = tuple(c / ln for c in n)
+        xv, yv = texture_axis(n)
+        sv = next(i for i in range(3) if xv[i])
+        tv = next(i for i in range(3) if yv[i])
+        a, b = xv[sv], yv[tv]
+        r = math.radians(f.rotate)
+        c, si = math.cos(r), math.sin(r)
+        ss = f.scale[0] or 1.0
+        st = f.scale[1] or 1.0
+        ds = a * (c * T[sv] + si * T[tv]) / ss
+        dt = b * (-si * T[sv] + c * T[tv]) / st
+        shift = (round(f.shift[0] - ds, 4), round(f.shift[1] - dt, 4))
+    return Face(tuple(pts), f.shader, shift, f.rotate, f.scale, f.contents, f.flags, f.value, list(f.ext))
+
+
+def translate_map(m: MapFile, T) -> None:
+    """Move every brush, patch and entity origin of ``m`` by ``T`` (in place), keeping
+    texture alignment."""
+    for e in m.entities:
+        o = e.origin()
+        if o is not None:
+            e["origin"] = " ".join(fmt(round(o[i] + T[i], 3)) for i in range(3))
+        for k, prim in enumerate(e.prims):
+            if isinstance(prim, MBrush):
+                e.prims[k] = MBrush([translate_face(f, T) for f in prim.faces])
+            elif isinstance(prim, Patch):
+                prim.ctrl = [[(c[0] + T[0], c[1] + T[1], c[2] + T[2], c[3], c[4]) for c in row] for row in prim.ctrl]
 
 
 def _snap(p, eps=0.01):
@@ -1989,6 +2031,22 @@ class Converter:
         self.report["entities"] = len(ents)
         self.report["asset_bytes"] = sum(len(v) for v in self.assets.values())
         m = MapFile(ents)
+        # de_vertigo plays 11,500 units up: move maps that leave MOHAA's +-8192 to the origin
+        T = self.opt.offset
+        if T is None:
+            lo, hi = np.full(3, np.inf), np.full(3, -np.inf)
+            for e, prim in m.iter_prims():
+                if isinstance(prim, MBrush):
+                    b0, b1 = prim.bounds()
+                    lo, hi = np.minimum(lo, b0), np.maximum(hi, b1)
+            T = (0.0, 0.0, 0.0)
+            if np.isfinite(lo).all() and max(np.abs(lo).max(), np.abs(hi).max()) > WORLD_LIMIT:
+                T = tuple(float(-512.0 * round((lo[i] + hi[i]) / 2 / 512.0)) for i in range(3))
+        if any(T):
+            translate_map(m, T)
+            self.statics = [(mk, tuple(o[i] + T[i] for i in range(3)), *rest) for mk, o, *rest in self.statics]
+            self.report["landmarks"] = [[c + T[i] for i, c in enumerate(p)] for p in self.report.get("landmarks", [])]
+        self.report["offset"] = list(T)
         moved = validate.fix_spawns(m)
         if moved:
             self.report["spawns_fixed"] = moved
@@ -2361,7 +2419,7 @@ def named_cameras(path, scale: float = 1.0):
 
 def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics: list, map_: MapFile,
                  convert_report: dict, test: bool = True, shots: int = 9, scale: float = 1.0, log=print,
-                 prop_light: Optional[list] = None, lighting: str = "csgo") -> dict:
+                 prop_light: Optional[list] = None, lighting: str = "csgo", exposure: Optional[float] = None) -> dict:
     """After a compile: light it (``lighting="csgo"``: CS:GO's own baked lighting moved into
     the lightmaps, light grid and props, ``mohkit.source.lighting``; ``"mohlight"``: keep
     MOHlight's), inject the static props, package ``local/csgo/<name>/<name>.pk3`` and
@@ -2374,13 +2432,13 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
     report: dict = {}
     # the compile root keeps the BSP as compiled (props-only updates re-inject into it)
     lit = out / f"{name}.bsp"
-    exposure = None
     base = Path(compiled_bsp)
     gains = dict(convert_report.get("texture_gain") or {})
     divided = None
     if lighting == "csgo":
         from . import lighting as _lighting
-        info = _lighting.transfer(compiled_bsp, SourceBSP(str(src)), lit, scale=scale, log=log, gains=gains)
+        info = _lighting.transfer(compiled_bsp, SourceBSP(str(src)), lit, scale=scale, log=log, gains=gains,
+                                  offset=convert_report.get("offset") or (0, 0, 0), exposure=exposure)
         divided = info.pop("divided_lightmaps", None)
         report["lighting"] = info
         exposure = info["exposure"]
@@ -2411,7 +2469,8 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
         # CS:GO ships named spectator viewpoints for most maps (maps/<map>_cameras.txt);
         # they cover every callout, so prefer them to spawn samples. With named cameras only
         # the overview is added (landmark shots stand inside the bomb-site props).
-        cams = map_cameras(src, map_, convert_report.get("landmarks", ()), shots, scale)
+        cams = map_cameras(src, map_, convert_report.get("landmarks", ()), shots, scale,
+                           convert_report.get("offset") or (0, 0, 0))
         report.update(shoot(name, pk3, cams, out, log=log))
     return report
 
@@ -2440,11 +2499,14 @@ def shoot(name: str, pk3: Path, cams, out: Path, log=print) -> dict:
             "run_problems": run.problems, "exposure": exposure.summary(rows, name)}
 
 
-def map_cameras(src: Path, map_: MapFile, landmarks=(), shots: int = 9, scale: float = 1.0) -> list:
+def map_cameras(src: Path, map_: MapFile, landmarks=(), shots: int = 9, scale: float = 1.0, offset=(0, 0, 0)) -> list:
     """The cameras a conversion is shot from: CS:GO's named spectator viewpoints
-    (``maps/<map>_cameras.txt``) plus an overview, or spread-out spawn cameras."""
+    (``maps/<map>_cameras.txt``, moved by the conversion's ``offset``) plus an overview, or
+    spread-out spawn cameras."""
     cam_file = src.with_name(src.stem + "_cameras.txt")
     named = named_cameras(cam_file, scale) if cam_file.is_file() else []
+    for c in named:
+        c.origin = tuple(c.origin[i] + float(offset[i]) for i in range(3))
     return named + auto_cameras(map_, 1 if named else shots, () if named else landmarks, spawns=not named)
 
 
@@ -2461,7 +2523,7 @@ def shoot_local(map_name: str, name: Optional[str] = None, scale: float = 1.0, l
     out = config.REPO / "local" / "csgo" / name
     prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
     cams = map_cameras(src, MapFile.load(str(out / f"{name}.map")), prev.get("convert", {}).get("landmarks", ()),
-                       scale=scale)
+                       scale=scale, offset=prev.get("convert", {}).get("offset") or (0, 0, 0))
     return shoot(name, out / f"{name}.pk3", cams, out, log=log)
 
 
@@ -2487,7 +2549,8 @@ def load_prop_light(path: Path) -> Optional[list]:
     return [c[s:s + n] if s >= 0 else None for s, n in zip(d["starts"], d["lengths"])]
 
 
-def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, log=print) -> dict:
+def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, log=print,
+                 exposure: Optional[float] = None) -> dict:
     """Finish a build from what it left on disk: ``local/csgo/<name>/`` (map, assets,
     ``statics.json``, ``report.json``) and the compile root's BSP. Use it after re-running
     a stage of the compile by hand (e.g. a light stage that was killed)."""
@@ -2508,7 +2571,7 @@ def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, l
     report.update(finish_local(name, src, root_bsp, assets, statics, MapFile.load(str(out / f"{name}.map")),
                                prev.get("convert", {}), test=test, log=log,
                                scale=float(prev.get("scale", 1.0)), prop_light=load_prop_light(out / "prop_light.npz"),
-                               lighting=prev.get("lighting_mode", "csgo")))
+                               lighting=prev.get("lighting_mode", "csgo"), exposure=exposure))
     (out / "report.json").write_text(json.dumps(report, indent=2))
     return report
 

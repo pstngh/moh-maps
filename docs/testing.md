@@ -162,7 +162,12 @@ python -m mohkit exposure local/csgo/cs_nuke/shots -n 10     # the 10 worst shot
 python -m mohkit exposure local/csgo/*/shots --by-map        # one line per map
 python -m mohkit exposure --stock --by-map                   # + stock mohdm1-7/obj_team1-4 (dist/stock_shots)
 python -m mohkit exposure shot.png --mask                    # shot_mask.png: red near-white, blue near-black
+python -m mohkit exposure --ref local/csgo/cs_nuke/csgo_ref local/csgo/before/cs_nuke/shots local/csgo/cs_nuke/shots
 ```
+
+`--ref` compares each folder's cameras with CS:GO's own shots of the same cameras: mean
+brightness, mean absolute error and correlation of the per-camera means
+(`exposure.against`); `exposure.triple_sheet` lays them side by side.
 
 Converted maps save their full-size shots in `local/csgo/<name>/shots/` and
 `exposure.json` (`python -m mohkit csgo <map> --shoot` re-shoots the packaged map);

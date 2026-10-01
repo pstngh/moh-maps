@@ -245,3 +245,48 @@ def stock_shots(maps: Sequence[str] = STOCK_MAPS, per_map: int = 9, out_dir: Opt
             shutil.copy2(p, dst)
             res[m][k] = dst
     return res
+
+
+def against(ref: Path, runs: Sequence[Path]) -> tuple[list[dict], str]:
+    """Shots of each run (folders) against reference shots of the same cameras (``ref``,
+    e.g. ``local/csgo/<name>/csgo_ref`` from ``mohkit csgo-ref``; matched by file stem).
+    Returns per-run summaries (mean brightness, mean absolute error and correlation of
+    per-camera means with the reference) and a printable table."""
+    import numpy as np
+    refs = {p.stem: measure(p) for p in sorted(Path(ref).iterdir()) if p.suffix.lower() in (".png", ".jpg", ".tga")}
+    rows = [{p.stem: measure(p) for p in sorted(Path(r).iterdir()) if p.suffix.lower() in (".png", ".jpg", ".tga")}
+            for r in runs]
+    names = [k for k in refs if all(k in r for r in rows)]
+    lines = [f"{'camera':22s} {'ref':>5s} " + " ".join(f"{Path(r).parent.name[:10]:>10s}" for r in runs)]
+    for k in names:
+        lines.append(f"{k[:22]:22s} {refs[k].mean:5.0f} " + " ".join(f"{r[k].mean:10.0f}" for r in rows))
+    out = []
+    R = np.array([refs[k].mean for k in names])
+    for r, path in zip(rows, runs):
+        M = np.array([r[k].mean for k in names])
+        out.append({"run": str(path), "cameras": len(names), "ref_mean": round(float(R.mean()), 1) if len(R) else 0,
+                    "mean": round(float(M.mean()), 1) if len(M) else 0,
+                    "mae": round(float(np.abs(M - R).mean()), 1) if len(R) else 0,
+                    "corr": round(float(np.corrcoef(R, M)[0, 1]), 2) if len(R) > 2 else 0.0})
+    lines += [f"== {o['run']}: mean {o['mean']} (ref {o['ref_mean']}), mean |error| {o['mae']}, "
+              f"corr {o['corr']} over {o['cameras']} cameras" for o in out]
+    return out, "\n".join(lines)
+
+
+def triple_sheet(folders: Sequence[tuple[str, Path]], cameras: Sequence[str], out: Path,
+                 width: int = 560) -> Path:
+    """Side-by-side rows, one per camera (stem prefix such as ``05_``), one column per
+    labelled folder (e.g. CS:GO / before / after)."""
+    from PIL import Image, ImageDraw
+    h = round(width * 9 / 16)
+    sheet = Image.new("RGB", (len(folders) * width, len(cameras) * (h + 18)), (20, 20, 20))
+    d = ImageDraw.Draw(sheet)
+    for r, cam in enumerate(cameras):
+        for c, (label, folder) in enumerate(folders):
+            p = next((q for q in sorted(Path(folder).glob(f"{cam}*")) if q.suffix.lower() in (".png", ".jpg")), None)
+            x, y = c * width, r * (h + 18)
+            if p is not None:
+                sheet.paste(Image.open(p).convert("RGB").resize((width, h)), (x, y + 18))
+            d.text((x + 4, y + 3), f"{label} {p.stem if p else cam}", fill=(255, 220, 120))
+    sheet.save(out)
+    return Path(out)

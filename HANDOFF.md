@@ -6,34 +6,45 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## NEXT SESSION: start here (user, chat 2026-10-01 ~13:05)
+## NEXT SESSION: start here (session 2026-10-01 from 13:20)
 
-**User's priorities, in order:**
-1. **Lighting quality of the conversions (main complaint).** User's words: "some things are
-   very, very, very high brightness. Sometimes it's a room, sometimes it's specific textures,
-   but the lighting is not cozy at all in a lot of the maps. It can be either too dark or way
-   too bright." Treat it as a systematic exposure problem across all converted maps
-   (cs_dust2, cs_mirage, cs_nuke, cs_inferno, cs_cache, cs_rats), not a single bug.
-   Suspects to measure first (each was changed or tuned recently):
-   - texlights on by default (one point light per emitting face: whole rooms can blow out);
-   - `$additive` world materials now `blendFunc add` (commit bcaca59): bright textures;
-   - converted lights at 1.5x Source brightness, merging of near lights, `light_spot` cones;
-   - `$selfillum` / unlit model materials drawn fullbright; rgbGen identity on overlays;
-   - injected prop colours (`staticlight.LIGHTMAP_TO_VERTEX` 1.78 scale) vs the lightmaps;
-   - sun/ambient/sky fill from `light_environment` (HDR vs LDR values), `-fast -bounce 2`.
-   Method: build a measurable check before tuning: per contact-sheet shot, the share of
-   blown-out (near 255) and crushed (near 0) pixels and mean luminance, per map; find the
-   worst shots and trace each to its cause (a light, a shader, a prop); compare with CS:GO's
-   own look (the `.jpg` loading images in csgo/maps, or CS:GO screenshots if it can be run)
-   and with stock MOHAA maps (mohdm1-7). Fix in mohkit, rebuild, re-measure, then rebuild and
-   reinstall all six maps. Judge on `-q fastrad` or better.
-2. **de_vertigo** (`de_vertigo.bsp`, 28 MB, cameras file present), then **de_cbble**
-   (Cobblestone, 83 MB, cameras file present). Same treatment as Inferno/Cache: `-q unlit`
-   first (geometry, ladders, props, spawns), then `-q fastrad` with `local/csgo/<x>_final.sh`
-   (copy `cache_final.sh`), sheets checked, 8 bots, `ladprobe.py`, then `mohkit install`.
-   Vertigo: skyscraper (falls, scaffolds, ladders, 3D city skybox below); Cobblestone: big
-   castle map with long sightlines.
-3. Keep all six existing maps installed and working (re-run `mohkit install` after rebuilds).
+**User (chat 13:20):** P1 lighting of the six conversions ("doesn't feel cozy; some rooms
+and textures extremely bright, other places too dark"): measure first, trace causes, fix
+in mohkit, rebuild + reinstall all six, show before/after. P2: de_vertigo then de_cbble,
+final quality like Inferno/Cache (unlit pass, full build, 8 bots, ladder probe, sheets,
+install). Keep going until done; pause rule at 75%.
+
+**P1 status: fixed in mohkit (commit 1320404), final rebuild of all six running.**
+- Measuring: `mohkit.exposure` (`python -m mohkit exposure <shots dirs> [--by-map] [-n 10]`),
+  converted maps keep full-size shots in `local/csgo/<name>/shots/` + `exposure.json`,
+  `python -m mohkit csgo <map> --shoot` re-shoots. **CS:GO reference shots:**
+  `python -m mohkit csgo-ref de_nuke` runs the CS:GO port in `~/Documents/Games/csgo`
+  (netcon, spectator `spec_goto`, `jpeg`), saves `local/csgo/<name>/csgo_ref/NN_<cam>.jpg`,
+  restores its config. Done for dust2, mirage, nuke, inferno, cache (rats is a workshop map,
+  no refs). Stock: `dist/stock_shots/<map>/` (mohdm1-3,5-7, obj_team1-4).
+- Causes found: (1) MOHlight light falloff is 7500*I*cos/d^2 in display space, capped at
+  127 (measured), vs VRAD's linear-space d^2 (~1/d^0.9 on screen): flat white near lamps,
+  dark between (Nuke radio 183 vs CS:GO 94, Inferno halls 107 vs 56); texlights stacked
+  more; (2) props: 1.78x lightmap scale, and CS:GO's per-prop tints (DiffuseModulation)
+  ignored: thousands of grey/yellow/blue props drawn white; (3) the lightmap cap (texture
+  colour) made white rooms flat.
+- Fix: lit conversions no longer run MOHlight: BSP+VIS, then `mohkit.source.lighting.transfer`
+  moves CS:GO's own baked lighting (LIGHTING_HDR) into the lightmaps, grid, drawverts;
+  props get VRAD's per-vertex light (`sp_hdr_N.vhv`) + tints; per-texture "headroom" gain
+  lets sunlight exceed the texture colour. `--mohlight` keeps the old path. Details and
+  numbers: docs/csgo-conversion.md "Lighting". Before/after vs CS:GO (same cameras):
+  Nuke mean error 38 -> 7, corr -0.05 -> 0.95; Inferno 31 -> 19, 0.12 -> 0.75.
+- **Running (started 14:57):** `local/csgo/all_final.sh` (log `local/csgo/all_final.log`):
+  inferno refresh, nuke resume, dust2/mirage/cache/rats full builds, each with 8 bots
+  (`<name>_bots.png`) and ladder probes. Old pk3s + shots are kept in `local/csgo/before/<name>/`.
+  When done: `python -m mohkit exposure --ref local/csgo/<name>/csgo_ref
+  local/csgo/before/<name>/shots local/csgo/<name>/shots` per map, side-by-side sheets with
+  `exposure.triple_sheet`; install all six
+  (`python -m mohkit install local/csgo/<name>/<name>.pk3`), make a before/after page
+  for the user, commit, update this file.
+- Also started 15:05: `python -m mohkit csgo de_vertigo -q unlit` (log `local/csgo/vertigo_unlit.log`).
+- Known gaps left: masked prop tints averaged; blend textures first layer only (Nuke radio
+  walls are red in CS:GO, pink-white here); CS:GO is still ~15% brighter in sunlit shots.
 
 ## Current session (2026-10-01, from 11:25): de_inferno, de_cache, de_rats_1337_v2
 

@@ -474,7 +474,7 @@ def recolour_grid(bsp, field, fill: Sequence[float] = (40.0, 40.0, 40.0)) -> dic
 
 
 def transfer(bsp_path, source: SourceBSP, out, scale: float = 1.0, exposure: Optional[float] = None,
-             log=print, gains: Optional[dict] = None) -> dict:
+             log=print, gains: Optional[dict] = None, offset=(0.0, 0.0, 0.0)) -> dict:
     """Replace the lightmaps (and light grid) of a compiled converted map with the Source
     map's own baked lighting. Returns statistics.
 
@@ -491,6 +491,8 @@ def transfer(bsp_path, source: SourceBSP, out, scale: float = 1.0, exposure: Opt
     bsp = BSP(Path(bsp_path))
     exposure = exposure_for(source) if exposure is None else exposure
     lux = source_luxels(source, scale)
+    if any(offset):              # the conversion moved the map (``Options.offset``)
+        lux.pos = lux.pos + np.asarray(offset, np.float64)
     tex = lightmap_texels(bsp, all_texels=True)
     index = LuxelIndex(lux, cell=24.0 * scale)
     rgb, level = lookup(index, tex.pos, tex.nrm)

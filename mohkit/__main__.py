@@ -283,7 +283,7 @@ def cmd_csgo(a) -> int:
         rep = shoot_local(a.map, a.name, scale=a.scale)
         return 0 if rep.get("contact_sheet") else 1
     if a.resume:
-        rep = resume_local(a.map, a.name, test=not a.no_test)
+        rep = resume_local(a.map, a.name, test=not a.no_test, exposure=a.exposure)
         return 0 if rep.get("pk3") else 1
     if a.refresh_assets:
         from .source.convert import refresh_assets
@@ -316,6 +316,10 @@ def cmd_exposure(a) -> int:
         for p in a.paths:
             out = Path(p).with_name(Path(p).stem + "_mask.png")
             print(X.mask(p, out))
+        return 0
+    if a.ref:
+        _, text = X.against(Path(a.ref), [Path(p) for p in a.paths])
+        print(text)
         return 0
     groups = {g: X.measure_all(imgs) for g, imgs in X.groups_in(a.paths).items()}
     if a.by_map:
@@ -428,6 +432,7 @@ def main(argv=None) -> int:
                    help="only inject props, package and test what the last build left (after redoing a stage by hand)")
     s.add_argument("--no-test", action="store_true")
     s.add_argument("--shoot", action="store_true", help="only re-shoot the packaged map (contact sheets, shots, exposure)")
+    s.add_argument("--exposure", type=float, help="with --resume: tone-map CS:GO's light with this exposure")
     s.add_argument("--mohlight", action="store_true",
                    help="light with MOHlight from converted lights (default: transfer CS:GO's own baked lighting)")
     s.set_defaults(fn=cmd_csgo)
@@ -445,6 +450,7 @@ def main(argv=None) -> int:
     s.add_argument("--mask", action="store_true", help="write <shot>_mask.png: red = near-white, blue = near-black")
     s.add_argument("-n", type=int, default=0, help="only the n worst shots per folder")
     s.add_argument("--json", help="write all measurements here")
+    s.add_argument("--ref", help="reference shots (local/csgo/<name>/csgo_ref): compare each folder's cameras with them")
     s.set_defaults(fn=cmd_exposure)
     a = ap.parse_args(argv)
     return a.fn(a)

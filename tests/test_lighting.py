@@ -117,6 +117,34 @@ def test_exposure_measure():
     assert abs(e.blown - 0.5) < 0.01 and "BLOWN" in e.flags and "CRUSHED" in e.flags
 
 
+def test_translate_keeps_texture_alignment():
+    """Maps moved into MOHAA's +-8192 (de_vertigo) keep every texel in place."""
+    import math
+    from mohkit.mapfile import Face
+    from mohkit.source.convert import texture_axis, translate_face
+
+    def tex(f, p):
+        pts = np.array(f.points, float)
+        n = np.cross(pts[2] - pts[0], pts[1] - pts[0])
+        xv, yv = texture_axis(tuple(n / np.linalg.norm(n)))
+        sv = next(i for i in range(3) if xv[i])
+        tv = next(i for i in range(3) if yv[i])
+        r = math.radians(f.rotate)
+        c, s = math.cos(r), math.sin(r)
+        return (xv[sv] * (c * p[sv] + s * p[tv]) / f.scale[0] + f.shift[0],
+                yv[tv] * (-s * p[sv] + c * p[tv]) / f.scale[1] + f.shift[1])
+
+    T = (512.0, -1024.0, -11264.0)
+    for pts, rot, sc in ((((0, 0, 64), (64, 0, 64), (0, 64, 64)), 0, (1, 1)),
+                         (((0, 0, 0), (0, 64, 0), (0, 0, 64)), 33, (0.5, 2)),
+                         (((0, 0, 0), (64, 64, 0), (0, 0, 64)), -70, (0.25, 0.75))):
+        f = Face(pts, "x", (13.0, -7.0), rot, sc)
+        g = translate_face(f, T)
+        for p in pts:
+            q = tuple(p[i] + T[i] for i in range(3))
+            assert np.allclose(tex(f, p), tex(g, q), atol=1e-3)
+
+
 def _csgo_map(name: str):
     from mohkit.source.bsp import SourceBSP
     csgo = config.load().csgo_dir
