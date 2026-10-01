@@ -31,8 +31,8 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
   build fails.
 - Also running: `de_nuke -q fastrad --texlights --name cs_nuket` (03:18, experiment for
   next-step 1; `nuke_texlights1.log`). All four share the CPU, so expect ~05:00.
-- Known remaining looks issue: Source texlights (`lights.rad`: office light strips, lit
-  windows) aren't converted (`q3map_surfacelight` would do it); interiors rely on point lights.
+- Known remaining looks issue: interiors rely on point lights unless `--texlights` is
+  used (opt-in, untuned; next step 1).
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
@@ -53,6 +53,13 @@ Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
   drafts at lightmap density 32, new `fastrad` preset (`-fast -bounce 2`).
 - Pipeline: `csgo -q unlit` (minutes), `--resume`, `--lightmap-density`;
   `kill_stragglers` no longer kills other maps' tools (it had killed a dust2 light stage).
+- Later fixes: Pillow's premultiplied RGBA resize had darkened masked textures (decals
+  black); converted lights reach 1.5x Source brightness; ladders: hanging ones extended to
+  the floor in front, prop collision cleared from ladder volumes and mount boxes, origin
+  slid along the width to a clear mount box; OnBreak props and every func_breakable ->
+  `func_window`; `--refresh-assets`; `--texlights` (opt-in).
+- Findings: claim 8 false for dust2 (structural compiles, 61 KB VIS); MT MOHlight lit
+  mk_medina without static models cleanly (static models likely cause the crash).
 - Traps: a scratchpad script named `bisect.py` shadowed the stdlib module (PIL imports it).
 
 Read `CLAUDE.md` first. Git: GitHub `main` (https://github.com/pstngh/moh-maps).
