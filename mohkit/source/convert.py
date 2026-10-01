@@ -231,6 +231,11 @@ class Converter:
         cm.kind = "translucent" if info.translucent or info.additive else ("alphatest" if info.alphatest else "opaque")
         if (info.shader or "").lower() == "decalmodulate":
             cm.kind = "modulate"   # multiplies what is under it by 2 x texture (grey 128 = no change)
+            # its alpha (when $translucent) says where it applies: fold it into the colour as
+            # neutral grey, since the modulate blend has no alpha (black where alpha was 0)
+            f = rgba[..., 3:4].astype(np.float32) / 255.0 if info.translucent else 1.0
+            rgba = rgba.copy()
+            rgba[..., :3] = np.clip(128.0 + (rgba[..., :3].astype(np.float32) - 128.0) * f + 0.5, 0, 255).astype(np.uint8)
         cm.image, cm.size = self._write_image(shader, rgba, cm.kind not in ("opaque", "modulate"))
         self.assets[f"scripts/{self._script_name()}"] = b""  # placeholder, written in finish()
         self.mats[key] = cm
