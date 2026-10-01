@@ -322,8 +322,12 @@ class Converter:
         written = 0
         for q3, src in faces.items():
             for suffix in ("", "_hdr"):
+                # the face material names its texture ($basetexture); de_nuke's six faces all
+                # use skybox/nukeblankup, and no nukeblankft.vtf exists
+                info = material_info(self.fs, f"skybox/{name}{suffix}{src}")
+                tex = info.basetexture if info.found and info.basetexture else f"skybox/{name}{suffix}{src}"
                 try:
-                    v = load_vtf(self.fs, f"skybox/{name}{suffix}{src}")
+                    v = load_vtf(self.fs, tex)
                 except Exception:  # noqa: BLE001
                     continue
                 rgba = v.decode()
@@ -640,6 +644,126 @@ class Converter:
             self._overlay_shaders[name] = "\n".join(lines)
         return name
 
+    # ------------------------------------------------------------------ doors
+    def doors(self) -> list[MEntity]:
+        """``prop_door_rotating`` -> ``func_rotatingdoor``: a brush slab spanning the door
+        model's two largest opposite faces, textured with the model's own material (the
+        texdef of each brush face reproduces the UVs of the largest mesh triangle on it),
+        with an origin brush on the hinge (the model origin). Handles and other relief are
+        lost. MOHAA opens it for players and bots that walk into it (``alwaysaway`` for
+        Source's two-way doors); double doors link because their brushes touch."""
+        from .modelconv import _resolve_material, load_studio_model
+        out: list[MEntity] = []
+        s = self.opt.scale
+        for e in self.bsp.find_entities("prop_door_rotating"):
+            mdl, o = e.get("model"), e.origin
+            if not mdl or o is None:
+                continue
+            ang = e.vector("angles", (0.0, 0.0, 0.0)) or (0.0, 0.0, 0.0)
+            try:
+                sm = load_studio_model(self.fs, mdl)
+            except Exception as ex:  # noqa: BLE001
+                self.report["warnings"].append(f"door {mdl}: {ex}")
+                continue
+            skin = int(float(e.get("skin", "0") or 0))
+            P, UV, M, names = [], [], [], []
+            for mesh in sm.meshes:
+                mat = _resolve_material(self.fs, sm.info, sm.material_for(mesh.skinref, skin), "csgo",
+                                        sm.info.surfaceprop)
+                if mat.skip or not len(mesh.triangles):
+                    continue
+                if mat.name not in names:
+                    names.append(mat.name)
+                t = mesh.triangles
+                P.append(mesh.positions[t].astype(np.float64))
+                UV.append(mesh.uvs[t].astype(np.float64))
+                M.append(np.full(len(t), names.index(mat.name)))
+            if not P:
+                continue
+            P, UV, M = np.concatenate(P), np.concatenate(UV), np.concatenate(M)
+            # Door models carry a rotated root bone: the mesh can lie 90 degrees off the frame
+            # the entity angles apply to (metal_door_001_br: mesh along +x, hull and the
+            # double-door frames along +y). Turn the mesh so its bounds match the MDL hull.
+            P = P @ _yaw_to_hull(P.reshape(-1, 3), sm.info.hull_min, sm.info.hull_max).T
+            nrm = np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0])
+            area = np.linalg.norm(nrm, axis=1) / 2
+            nrm = nrm / np.maximum(2 * area, 1e-9)[:, None]
+            best = None
+            for ax in range(3):
+                plus, minus = nrm[:, ax] > 0.95, nrm[:, ax] < -0.95
+                score = min(area[plus].sum(), area[minus].sum())
+                if best is None or score > best[0]:
+                    best = (score, ax, plus, minus)
+            _, ax, plus, minus = best
+            if not plus.any() or not minus.any():
+                continue
+            lo = P[plus | minus].reshape(-1, 3).min(0)
+            hi = P[plus | minus].reshape(-1, 3).max(0)
+            lo[ax] = float(np.median(P[minus][:, :, ax]))
+            hi[ax] = float(np.median(P[plus][:, :, ax]))
+            if hi[ax] - lo[ax] < 1.0:
+                c = (hi[ax] + lo[ax]) / 2
+                lo[ax], hi[ax] = c - 0.5, c + 0.5
+            R = np.array(self._rot(ang))
+            ow = np.array(o, np.float64)
+            faces = []
+            for fax in range(3):
+                for sgn in (-1, 1):
+                    n = np.zeros(3)
+                    n[fax] = sgn
+                    sel = (nrm @ n) > 0.9
+                    pick = int(np.argmax(np.where(sel, area, -1.0))) if sel.any() else int(np.argmax(np.where(plus, area, -1.0)))
+                    mname = names[int(M[pick])]
+                    cm = self.material(mname, (256, 256))
+                    w, h = cm.size
+                    # texture vectors (texels of the written image) of the picked triangle, in plane
+                    tn = np.cross(P[pick, 1] - P[pick, 0], P[pick, 2] - P[pick, 0])
+                    tn /= max(np.linalg.norm(tn), 1e-9)
+                    A = np.vstack([np.hstack([P[pick], np.ones((3, 1))]), np.append(tn, 0.0)])
+                    try:
+                        sv = np.linalg.solve(A, np.append(UV[pick, :, 0] * w, 0.0))
+                        tv = np.linalg.solve(A, np.append(UV[pick, :, 1] * h, 0.0))
+                    except np.linalg.LinAlgError:
+                        sv, tv = np.array([1.0, 0, 0, 0]), np.array([0, 0, 1.0, 0])
+                    # to world space: S_w = R S / s, offset - (R S) . o
+                    svw, tvw = R @ sv[:3], R @ tv[:3]
+                    sv4 = (*(svw / s), sv[3] - svw @ ow)
+                    tv4 = (*(tvw / s), tv[3] - tvw @ ow)
+                    corners = []
+                    for a in (0, 1):
+                        for b in (0, 1):
+                            q = lo.copy() if sgn < 0 else hi.copy()
+                            q[fax] = lo[fax] if sgn < 0 else hi[fax]
+                            u_ax, v_ax = [i for i in range(3) if i != fax]
+                            q[u_ax] = (lo, hi)[a][u_ax]
+                            q[v_ax] = (lo, hi)[b][v_ax]
+                            corners.append(tuple(float(x) for x in (R @ q + ow) * s))
+                    nw = R @ n
+                    tri = _tri_for(tuple(nw), [_snap(c) for c in corners])
+                    pl = geom.Plane.from_points(*tri)
+                    (s0, t0), rot, (scs, sct) = quake_texdef(pl.normal, pl.dist, sv4, tv4)
+                    faces.append(Face(tri, cm.shader, (round(s0 % w, 3), round(t0 % h, 3)), round(rot, 4),
+                                      (round(scs, 6), round(sct, 6)), 0, 0, 0, []))
+            from ..build import box
+            hinge = np.array([0.0, 0.0, (lo[2] + hi[2]) / 2])
+            hw = (R @ hinge + ow) * s
+            origin = box(tuple(hw - 2), tuple(hw + 2), "common/origin")
+            mid = R @ ((lo + hi) / 2 * np.array([1, 1, 0]))
+            yaw = round(math.degrees(math.atan2(mid[1], mid[0]))) % 360
+            try:
+                dist = float(e.get("distance", "90") or 90)
+                speed = float(e.get("speed", "100") or 100)
+            except ValueError:
+                dist, speed = 90.0, 100.0
+            keys = {"classname": "func_rotatingdoor", "angle": str(yaw), "openangle": fmt(round(dist)),
+                    "time": fmt(round(max(0.2, dist / max(speed, 1.0)), 2)), "wait": "-1" if e.get("returndelay") == "-1" else "3",
+                    "doortype": "metal" if "metal" in (sm.info.surfaceprop or "").lower() + mdl.lower() else "wood"}
+            if e.get("opendir", "0") == "0":
+                keys["alwaysaway"] = "1"
+            out.append(MEntity(keys, [MBrush(faces), origin]))
+        self.report["doors"] = len(out)
+        return out
+
     # ------------------------------------------------------------------ ladders
     def _solid(self, p) -> bool:
         """Source world contents at ``p`` (Source units) are solid."""
@@ -877,6 +1001,22 @@ class Converter:
                     ws["sundiffuse"] = "1"
                 except ValueError:
                     pass
+
+        fogs = [e for e in self.bsp.find_entities("env_fog_controller") if e.get("fogenable", "0") != "0"]
+        if fogs:
+            # Source fog is linear from fogstart to fogend, capped at fogmaxdensity; MOHAA's
+            # farplane fog reaches the full colour at farplane. Put Source's density at fogend.
+            e = fogs[0]
+            try:
+                end = float(e.get("fogend", "0") or 0) * self.opt.scale
+                dens = float(e.get("fogmaxdensity", "1") or 1)
+                col = [float(x) / 255 for x in (e.get("fogcolor") or "").split()[:3]]
+            except ValueError:
+                end, col = 0, []
+            if end > 0 and len(col) == 3 and dens > 0.05:
+                ws["farplane"] = fmt(round(end / min(1.0, dens)))
+                ws["farplane_color"] = " ".join(f"{c:.3f}" for c in col)
+                ws["farplane_cull"] = "0"  # keep the sky; Source draws it unfogged too
         return ws
 
     # ------------------------------------------------------------------ props
@@ -1016,7 +1156,7 @@ class Converter:
         world.prims = list(brushes) + list(patches) + overlay_patches + prop_clips
         if self.opt.detail_all:
             world.prims = self.shell(brushes, patches) + world.prims
-        ents = [world] + self.entities() + self.ladders() + self.windows() + prop_ents
+        ents = [world] + self.entities() + self.ladders() + self.windows() + self.doors() + prop_ents
         self.report["precache"] = precache
         scripts = [self._shader_text(cm) for cm in self.mats.values()]
         scripts += list(getattr(self, "_overlay_shaders", {}).values())
@@ -1084,6 +1224,23 @@ def _split_long(geo, grid: float):
                     nxt.append(piece)
         pieces = nxt
     return pieces
+
+
+def _yaw_to_hull(pts: np.ndarray, hull_min, hull_max) -> np.ndarray:
+    """Rotation about Z (a multiple of 90 degrees) that best maps the bounds of ``pts`` onto
+    the MDL hull box; identity unless a turn fits clearly better."""
+    hmin, hmax = np.array(hull_min, np.float64), np.array(hull_max, np.float64)
+    if not np.all(hmax > hmin):
+        return np.eye(3)
+    best, best_err = np.eye(3), None
+    for k in range(4):
+        c, s = [(1, 0), (0, 1), (-1, 0), (0, -1)][k]
+        R = np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]], np.float64)
+        q = pts @ R.T
+        err = float(np.abs(q.min(0) - hmin).sum() + np.abs(q.max(0) - hmax).sum())
+        if best_err is None or err < best_err - 4.0:
+            best, best_err = R, err
+    return best
 
 
 def _keep_lines(g: np.ndarray, tol: float) -> list[int]:

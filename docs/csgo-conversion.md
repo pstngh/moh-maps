@@ -32,6 +32,9 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | water volumes | the drawn face gets a water shader (`surfaceparm water trans nonsolid`, image = the normal map's relief tinted with `$fogcolor`, alpha `$waterblendfactor`); hidden sides `common/waterskip` (caulk is solid and would fill the volume) | Source water has no base texture |
 | breakable glass (`func_breakable`/`_surf` whose drawn materials are all `$surfaceprop glass`) | `func_window` (MOHAA breakable glass), Source `health` | |
 | overlays (`info_overlay`, LUMP_OVERLAYS) | flat 3×3 patch half a unit off the surface; shader `ov_<material>`: `trans nonsolid nomarks polygonOffset`, `blendFunc blend` + `nextbundle $lightmap` like retail decals | U axis is packed in the z of UV points 0–2, V = N×U (negated if point 3's z is 1); overlays wrapped over corners/displacements are placed flat |
+| doors (`prop_door_rotating`) | `func_rotatingdoor`: a brush slab between the model's two largest opposite faces, textured with the model's material (each face's texdef reproduces the UVs of the largest mesh triangle on it), origin brush on the hinge, `openangle` = `distance`, `time` = distance/speed, `alwaysaway` for two-way doors | door meshes can lie 90° off the frame their angles apply to (rotated root bone): the mesh is turned to match the MDL hull box (`_yaw_to_hull`); no static prop in de_nuke needs it |
+| `env_fog_controller` | worldspawn `farplane` = fogend / fogmaxdensity, `farplane_color`, `farplane_cull 0` | |
+| sky (`skyname`) | six faces from each face material's `$basetexture` | de_nuke's `nukeblank` faces all use `skybox/nukeblankup` (plain 90 134 186 blue) |
 | spectator cameras (`maps/<map>_cameras.txt`) | contact-sheet shots (eye position, pitch/yaw as given), pages of 9 (`<name>_shots.png`, `_shots_2.png`, …) | `named_cameras` |
 | 3D skybox (the area containing `sky_camera`) | dropped | detected from BSP areas, not bounds |
 | displacements | `patchDef2` meshes | midpoint-expanded so they pass through every kept Source sample; sample rows/columns straight within `disp_tolerance` (1 unit) dropped, consistently across shared edges; split to ≤ 17×17; visible side toward the air |
@@ -103,6 +106,6 @@ surfaces a frame (`MAX_STATIC_MODELS_SURFS`).
 ## Known gaps
 
 - Blend textures use the first layer only.
-- Doors (`prop_door_rotating`) and openable/breakable props (`prop_dynamic` vent slats)
-  aren't converted: the doorways and vents are open.
+- Openable/breakable props (`prop_dynamic` vent slats opened by `func_button` or `OnBreak`)
+  aren't converted: those vents are open. Door handles and other relief are lost.
 - Ropes and cables (`keyframe_rope`/`move_rope`), sprites and detail sprites are dropped.
