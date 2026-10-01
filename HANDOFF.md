@@ -106,7 +106,9 @@ then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-g
 6. **mk_medina** re-shoot at high detail:
    `python -m mohkit test dist/mk_medina.pk3 dm/mk_medina --shots maps/mk_medina --bots 8 --seconds 60`;
    then `mk_village`, `mk_ref_room`, and correct `docs/lighting.md` claims made at low detail.
-7. **Claim 8** (VIS overflow without the structural shell): `mohkit csgo de_dust2 --structural`.
+7. **Claim 8 is false for de_dust2:** `--structural` compiled (unlit) with 691 clusters and
+   61 KB of VIS data (docs/csgo-conversion.md). Next: a lit `--structural` dust2 to compare
+   light time and look; if good, consider making structural the default for CS:GO maps.
 8. Tell the user: accept the Xcode license (`sudo xcodebuild -license`), and consider
    moving the repo out of iCloud (`~/Developer/moh-maps`).
 

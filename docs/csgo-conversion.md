@@ -65,11 +65,13 @@ Converted maps compile with Q3map `-blocksize 512` (`convert.BSP_ARGS`): the lea
 all-detail map are the BSP blocks, and smaller blocks mean fewer lights per leaf for
 MOHlight's 60-light cap (de_nuke: ~500 clusters, 31 KB of VIS data).
 
-By default every converted brush is detail inside a structural caulk shell.
-That compiles reliably; a Source layout imported as structural geometry
-overflows MOHAA's 2 MB VIS buffer. The price is no VIS culling and a slow
-BSP stage on big maps: tens of thousands of faces share one leaf. `--structural`
-keeps Source's own world/detail split instead; try it on small maps.
+By default every converted brush is detail inside a structural caulk shell. The price
+is no VIS culling and a slow BSP stage on big maps: tens of thousands of faces share one
+leaf. `--structural` keeps Source's own world/detail split instead. The old claim that
+this overflows MOHAA's 2 MB VIS buffer is **false for de_dust2** (tested 2026-10-01 with
+`-blocksize 512`, fast VIS): BSP 919 s (559 s all-detail), 691 clusters, 1,663 portals,
+60,816 bytes of VIS data, no leak (a few lights inside walls "leaked" harmlessly). Not
+yet compared: lit result, full VIS time, and whether it lights faster (smaller leaves).
 
 **Displacements cost BSP time quadratically.** Q3map groups patches for LOD by
 comparing every control point of every patch with every control point of every
