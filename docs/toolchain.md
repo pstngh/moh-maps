@@ -88,6 +88,12 @@ access to … at address 00433F3A`); one thread always worked. Wine then started
 its crash debugger, which parked the process (the build hung ~20 min); the driver
 now sets `WINEDLLOVERRIDES=winedbg.exe=d` so a crash fails fast and the retry runs.
 
+**Static models are the likely trigger (2026-10-01):** the same mk_medina geometry with
+its 107 `static_*` props held back (`build --inject-props`) lit on 10 threads without a
+crash (463 s, `-fast -bounce 0`), and every converted CS:GO map (no static models since
+props are injected) lit on 10 threads all night. One clean run is not proof, but it fits:
+the crash was seen only on maps with MOHlight-lit static models.
+
 ### Q3map 1.34 options (BSP stage)
 
 `-v -threads N -info -vis -nowater -nofill -nodetail -nohint -fulldetail

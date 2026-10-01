@@ -102,8 +102,11 @@ then Mirage. Don't use the pre-restart Nuke work (`~/Library/Caches/mohkit/old-g
    `static_*` cost mk_medina ~55 min of single-threaded MOHlight. Add an opt-in
    `build --inject-props` (needs a GameFS reader for retail TIKI/SKD in `tiki_mesh`) and
    compare a sheet against MOHlight's lighting before making it the default.
-5. **Multi-threaded MOHlight crash** (medina's static models): less urgent now that
-   conversions inject props. `~/Library/Caches/mohkit/build/roots/dm_mtx` has the BSP.
+5. **Multi-threaded MOHlight crash:** evidence now points at static models: mk_medina
+   without its static props (`--inject-props`) lit on 10 threads cleanly (docs/toolchain.md).
+   To confirm, re-run MT light on `roots/dm_mtx` (with statics) a few times and on
+   `roots/dm_mtnostatic` (without) a few times. If confirmed, mk_medina could drop its
+   forced `-threads 1` when built with `--inject-props`.
 6. **mk_medina** re-shoot at high detail:
    `python -m mohkit test dist/mk_medina.pk3 dm/mk_medina --shots maps/mk_medina --bots 8 --seconds 60`;
    then `mk_village`, `mk_ref_room`, and correct `docs/lighting.md` claims made at low detail.
