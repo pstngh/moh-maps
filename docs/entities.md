@@ -94,7 +94,10 @@ MOHlight lights `static_*` props per vertex on one thread at about 190 vertices 
 Q3map would have baked them), the map compiles and lights without them, and
 `mohkit.staticlight` adds them to the BSP afterwards with vertex colours sampled from the
 light grid. The colours match MOHlight's on average but have no per-vertex shadows, so
-compare a sheet before preferring it for a finished map.
+compare a sheet before preferring it for a finished map. Tried on a copy of mk_medina
+(2026-10-01, draft): 107 props injected with 501 collision brushes, every TIKI read, and
+the sheet showed palms, carts, the car and café chairs lit in keeping with the walls
+around them (`dist/mk_medinai_shots.png`).
 
 ## Ladders
 
