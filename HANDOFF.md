@@ -20,20 +20,17 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 03:14):**
-- **Found and fixed:** Pillow resizes RGBA with premultiplied alpha, so every texture over
-  512 px with a Source alpha mask came out darkened (Nuke's asphalt cracks were black
-  squares). Opaque textures are now resized as RGB. `csgo --refresh-assets` re-packages the
-  last compile when only assets changed (refuses if the map text differs).
-- **Nuke fastrad3** (03:08, before that fix): 79 bot kills, nothing stuck, ladders 5/6 by
-  the probe (the hanging A-site one mounts with +use from the ledge: verified by hand).
-  Backed up as `scratchpad/cs_nuke_fastrad3.pk3`. Lighting much better than the draft.
-- **Running (final builds):** `de_nuke -q fastrad` (03:11, `nuke_fastrad4.log`) and
-  `de_mirage -q fastrad` (03:13, `mirage_fastrad4.log`; ladder origin slid clear of a clip
-  ledge), each followed by `postcheck.sh` (bots + ladders -> `post_nuke2.log`,
-  `post_mirage2.log`); `de_dust2 -q fastrad` (02:42, old textures: afterwards run
-  `python -m mohkit csgo de_dust2 -q fastrad --refresh-assets`).
-- Mirage fastrad3 (backup `scratchpad/cs_mirage_fastrad3.pk3`): 77 bot kills.
+**Live state (update as you go, 03:16):**
+- **Final builds running (started 03:15)**, every fix in (texture resize, light reach 1.5x,
+  ladder origin slide, breakables, sprites): `de_nuke`, `de_mirage`, `de_dust2`, all
+  `-q fastrad`; logs `scratchpad/{nuke_fastrad5,mirage_fastrad5,dust2_fastrad2}.log`. Each
+  is followed by `postcheck.sh` (8 bots 90 s + ladder probe) -> `post_nuke3.log`,
+  `post_mirage3.log`, `post_dust2.log`. Expected done ~04:45.
+- Previous good builds kept as `scratchpad/cs_nuke_fastrad3.pk3` (79 kills),
+  `cs_mirage_fastrad3.pk3` (77 kills), `cs_dust2_draft_0119.pk3` (75 kills) in case a final
+  build fails.
+- Known remaining looks issue: Source texlights (`lights.rad`: office light strips, lit
+  windows) aren't converted (`q3map_surfacelight` would do it); interiors rely on point lights.
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
