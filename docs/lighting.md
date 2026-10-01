@@ -109,9 +109,10 @@ with fill lights until you have seen a normal build.
 - **The light grid ignores spotlight cones** (MOHlight 1.48; test room, 2026-10-01):
   below a spot aimed at the floor the grid ramps up with depth at any distance
   off-axis (11 just under the lamp, 58 at the floor), while the lightmaps show the
-  cone. Players and dynamic models are lit from the grid, so under spotlights they can
-  look darker or brighter than the room. Prefer point lights near where players stand;
-  injected props use the lightmaps instead (`docs/csgo-conversion.md`).
+  cone. Static props lit from the grid went black next to a CS:GO ceiling spot, so
+  injected props use the lightmaps instead (`docs/csgo-conversion.md`). Players are not
+  affected in practice: the engine also lights them from the light entities at run time
+  (`r_fastentlight 0`), and one under that spot looked as lit as one in the sun.
 - **Converted Source lights.** `light_spot` aims along VRAD's direction (z = +sin(pitch));
   an earlier converter aimed ceiling spots at the ceilings and Nuke's interiors were dark.
   MOHAA's `light` value is roughly its reach in units, so converted lights use 1.5 x the

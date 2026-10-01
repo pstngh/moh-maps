@@ -149,8 +149,9 @@ below the lamp at any distance off-axis: 11 just under it, 58 at the floor (the 
 lightmap's peak is 59), even outside the cone. A point light's grid is uneven too
 (113-254 above the lamp, 51-131 near the floor, brighter on one side of a symmetric room). dust2's tunnel crates near a ceiling spot got
 grid values of 13-21 (black) while the floor around them was lit; the lightmap field
-gives them 130-190. Players and other dynamic models are still lit from the grid, so
-they can look darker than the room under spotlights. `tests/test_staticlight.py`.
+gives them 130-190. Players are fine: with `r_fastentlight 0` (the default) the engine
+also lights them from the light entities at run time, and a third-person player under
+that tunnel spot looked as lit as one in the sun. `tests/test_staticlight.py`.
 
 OpenMoHAA draws every static model whose bounds pass the frustum test (the leaf
 `visCount` check is commented out in `tr_staticmodels.cpp`); at most 8,192 static

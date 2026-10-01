@@ -43,9 +43,8 @@ Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator c
 **Next steps:**
 1. When the two final builds are done: look at their sheets, record bots and ladders in
    the table above (Nuke has 6 step ladders, Mirage 3).
-2. Open question: players are lit from MOHlight's grid (plus light entities at run time),
-   which ignores spot cones; check a bot under a CS:GO spot in game, and if dark, rewrite
-   the grid lump from `LightmapField` (palette + RLE re-encode).
+2. Checked 10:25: a third-person player under dust2's tunnel spot looks as lit as in the
+   sun (run-time light-entity lighting), so the grid needs no rewrite.
 3. The remaining older steps below (structural dust2, MT MOHlight crash, Xcode note).
 
 Done in the overnight run (all committed and pushed; details in `docs/csgo-conversion.md`):
