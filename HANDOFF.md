@@ -25,7 +25,7 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
   If time allows at the end: a `fastrad` rebuild with the newer converter.
 - **Running (02:05):** `mohkit csgo de_nuke -q fastrad` and `mohkit csgo de_mirage -q
   fastrad` with every feature (sprites, breakable vents, ladder fixes, light pruning);
-  logs `scratchpad/nuke_fastrad3.log`, `mirage_fastrad2.log`. Then: sheets, bots, ladder
+  logs `scratchpad/nuke_fastrad3.log`, `mirage_fastrad3.log` (Mirage restarted 02:07 for the breakable rules). Then: sheets, bots, ladder
   probe (`scratchpad/ladprobe2.py <pk3> <bsp> dm/<name>`), record times.
 - Also running: `mohkit build <scratchpad>/mk_medinai -q draft --inject-props` (a renamed
   copy of mk_medina, testing prop injection for from-scratch maps; its light is
