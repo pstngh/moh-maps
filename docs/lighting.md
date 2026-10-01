@@ -99,7 +99,14 @@ with fill lights until you have seen a normal build.
   in a one-light test room with `-fast` (timestamped log), and far slower on a big
   map with many lights. Budget static-prop vertices for compile time. Props as
   `script_model` cost nothing at compile time (the engine lights them from the
-  light grid at run time).
+  light grid at run time). Alternative: `build --inject-props` (and every CS:GO
+  conversion) adds the props after the light stage with light-grid vertex colours
+  (`mohkit.staticlight`): seconds instead of MOHlight's static phase, on average the
+  same brightness, less self-shading (`docs/entities.md`).
+- **Converted Source lights.** `light_spot` aims along VRAD's direction (z = +sin(pitch));
+  an earlier converter aimed ceiling spots at the ceilings and Nuke's interiors were dark.
+  MOHAA's `light` value is roughly its reach in units, so converted lights use 1.5 x the
+  Source brightness, and MOHlight keeps at most 60 lights per leaf.
 - **Where light time goes on a big map.** mk_medina (one thread, 2 bounces,
   2026-09-30) took 3,215 s: initial (direct) lighting 1,020 s + 111 s, one radiosity
   pass 584 s, light grids 9 s, and about 1,450 s in the static-model phase (107
