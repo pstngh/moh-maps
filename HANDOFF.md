@@ -20,20 +20,18 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
 
 ## Summary (overnight run in progress, 2026-10-01; fourth session)
 
-**Live state (update as you go, 03:16):**
-- **Final builds running (started 03:15)**, every fix in (texture resize, light reach 1.5x,
-  ladder origin slide, breakables, sprites): `de_nuke`, `de_mirage`, `de_dust2`, all
-  `-q fastrad`; logs `scratchpad/{nuke_fastrad5,mirage_fastrad5,dust2_fastrad2}.log`. Each
-  is followed by `postcheck.sh` (8 bots 90 s + ladder probe) -> `post_nuke3.log`,
-  `post_mirage3.log`, `post_dust2.log`. Expected done ~04:45.
-- Previous good builds kept as `scratchpad/cs_nuke_fastrad3.pk3` (79 kills),
-  `cs_mirage_fastrad3.pk3` (77 kills), `cs_dust2_draft_0119.pk3` (75 kills) in case a final
-  build fails.
-- The surface-light `--texlights` experiment (03:18) was stopped at 03:42 (MOHlight
-  estimated ~15 h). `--texlights` now makes one point light per emitter face (43 on Nuke);
-  `de_nuke -q fastrad --texlights --name cs_nuket` (03:43) was stopped at 04:15 at 10% of
-  its light (it would have ended after 06:00 and slowed the final builds): untested.
-- Known remaining looks issue: interiors rely on point lights (next step 1).
+**Live state (update as you go, 04:30):**
+- **dust2 final** (`local/csgo/cs_dust2/cs_dust2.pk3`, fastrad, all fixes): 32 named
+  shots, **91 bot kills** in 90 s, nothing stuck.
+- **Mirage final** (`local/csgo/cs_mirage/cs_mirage.pk3`): BSP 262 s, light 3,838 s
+  (shared CPU), **81 bot kills**, nothing stuck. Ladders 2/3: the leaning ladder at
+  (448, 652) still doesn't mount, although its mount box is now clear (no "ladder start
+  position is blocked" any more). Next: watch it in game with `developer 2`, try `+use`
+  from closer, and check `Player::CondLadder`'s eye trace there. Shop interiors are dark.
+- **Nuke final** (`de_nuke -q fastrad`, started 03:15): in radiosity at 04:28; then
+  `postcheck.sh` -> `post_nuke3.log`.
+- The texlight Nuke builds were stopped (surface lights ~15 h; the point-light version
+  would have ended after 06:00).
 
 Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
