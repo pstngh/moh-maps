@@ -119,7 +119,8 @@ is 32 units coarse). `tests/test_staticlight.py`.
 
 OpenMoHAA draws every static model whose bounds pass the frustum test (the leaf
 `visCount` check is commented out in `tr_staticmodels.cpp`); at most 8,192 static
-surfaces a frame (`MAX_STATIC_MODELS_SURFS`).
+surfaces a frame (`MAX_STATIC_MODELS_SURFS`). de_nuke's 4,801 props have 9,071 surfaces
+in all, so only a view of nearly the whole map (the overview shot) can lose some.
 
 ## Known gaps
 
