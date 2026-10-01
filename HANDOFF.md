@@ -30,14 +30,20 @@ Working from the "Next steps" below, in order (no new user request).
 - **3D skybox as a MOHAA portal sky (done, 457024b):** verified on a Vertigo test build
   (`local/csgo/compare/cs_vertigo_sky.png`: T spawn window, B2, stairs show the city like
   CS:GO). Also fixed: Master fog controller (Vertigo was fogged black), HDR sky fallback.
-- **RUNNING (started ~17:10): final rebuild of all 8** with everything above:
+- **3D skybox rules (b857580):** the room is its own VIS region (structural brushes), objects
+  nearer the eye than 8 x spawn spread / 16 are dropped, and a room losing > 3/4 falls back to
+  the 2D sky. Net effect: only Vertigo keeps a portal sky (its city); the other maps' skyboxes
+  are rooms around the map that one fixed eye can't show (AA has no sky parallax).
+- **RUNNING (restarted 17:50): final rebuild of all 8** with everything above:
   `local/csgo/final2.sh` in two lanes, logs `local/csgo/final2_a.log` (dust2, inferno, cache,
   vertigo) and `final2_b.log` (mirage, nuke, cbble, rats); per map: fastrad build
   (`<name>_final2.log`), 8 bots, ladder probe, `--fit-exposure` (if csgo_ref), install.
-  Previous pk3s/shots: `local/csgo/before/<name>_pre_final2/`.
-  **Next:** read both lane logs (kills, ladders True/False, exposure errors), look at each
-  map's sheet (`local/csgo/<name>/<name>_shots*.png`) for sky-portal views and blends, fix
-  regressions, update the results table in docs/csgo-conversion.md, commit `data/csgo_exposure.json`.
+  Baseline pk3s/shots: `local/csgo/before/<name>_pre_final2/`; before/after sheets:
+  `python <scratch>/cmp3.py <name>` (copy in HANDOFF below if lost: triple_sheet of csgo_ref,
+  before/<name>_pre_final2/shots, <name>/shots for the cameras that changed most).
+  **Next:** read both lane logs (kills, ladders True/False, exposure errors), check sheets,
+  update the results table in docs/csgo-conversion.md, commit `data/csgo_exposure.json`, stop
+  and summarize for the user.
 
 ## Previous session (2026-10-01 from 13:20)
 
