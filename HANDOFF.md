@@ -32,19 +32,26 @@ The user is asleep and authorized an unattended run. These rules override CLAUDE
   record times.
 - Mirage unlit (`cs_mirageu`) looked right.
 
-Done this run (all committed and pushed):
+Done this run (all committed and pushed; details in `docs/csgo-conversion.md`):
 - Step 1: `modelconv._hull_brush` is translation-invariant (merge test was origin-relative).
-- **MAX_MAP_SHADERS on de_nuke:** EA Q3map never de-duplicates BSP shader entries whose
-  name (with `textures/`) is exactly 60 characters: one entry per brush side. Names are
-  now capped at 59 (`convert.MAX_SHADER_NAME`, `modelconv.texture_name`). docs/toolchain.md.
-- **`mohkit.staticlight`**: static models injected into the lit BSP, vertex colours from
-  the BSP light grid (calibrated to MOHlight means). The converter's default
-  `props_mode="inject"` makes all 4,801 Nuke props static models (no MOHlight time, no
-  entities) with clip brushes. `tests/test_staticlight.py`.
-- Converter: ladders → `func_ladder`; water → water shader + `common/waterskip`; glass
-  `func_breakable` → `func_window`; `info_overlay` → decal patches (`ov_*` shaders);
-  contact sheets from `maps/<map>_cameras.txt` (36 Nuke cameras), pages of 9.
-- Trap: a scratchpad script named `bisect.py` shadowed the stdlib module (PIL imports it).
+- **MAX_MAP_SHADERS:** EA Q3map never de-duplicates BSP shader entries whose name (with
+  `textures/`) is exactly 60 characters. Names are capped at 59. docs/toolchain.md.
+- **`mohkit.staticlight`**: static models injected into the lit BSP with light-grid vertex
+  colours (calibrated to MOHlight's means). Converted maps inject every prop
+  (`props_mode="inject"`, no entity or MOHlight cost); stationary `prop_dynamic`/physics
+  props count too. From-scratch maps: `build --inject-props` (opt-in).
+- Converter features: ladders -> `func_ladder` (verified in game with the new
+  `game.ladder_probe`), water, breakable glass -> `func_window`, `info_overlay` decals
+  (incl. DecalModulate), doors -> `func_rotatingdoor` (mesh turned to the MDL hull), ropes
+  -> ribbon patches, `env_sprite` -> autosprite glows, fog -> farplane, sky via VMTs,
+  func_brush StartDisabled/Solidity/rendermode, alpha-weighted additive and unlit model
+  materials, named cameras (`maps/<map>_cameras.txt`) in sheet pages of 9.
+- Lighting: near-zero lights dropped and pairs merged (MOHlight's 60-lights-per-leaf cap
+  had darkened Nuke's interiors), `-blocksize 512`, sky fill from Source's ambient,
+  drafts at lightmap density 32, new `fastrad` preset (`-fast -bounce 2`).
+- Pipeline: `csgo -q unlit` (minutes), `--resume`, `--lightmap-density`;
+  `kill_stragglers` no longer kills other maps' tools (it had killed a dust2 light stage).
+- Traps: a scratchpad script named `bisect.py` shadowed the stdlib module (PIL imports it).
 
 Read `CLAUDE.md` first. Git: GitHub `main` (https://github.com/pstngh/moh-maps).
 The old pre-restart `.git` is backed up at `~/Library/Caches/mohkit/old-git-backup`
