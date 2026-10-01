@@ -46,6 +46,7 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | doors (`prop_door_rotating`) | `func_rotatingdoor`: a brush slab between the model's two largest opposite faces, textured with the model's material (each face's texdef reproduces the UVs of the largest mesh triangle on it), origin brush on the hinge, `openangle` = `distance`, `time` = distance/speed, `alwaysaway` for two-way doors | door meshes can lie 90° off the frame their angles apply to (rotated root bone): the mesh is turned to match the MDL hull box (`_yaw_to_hull`); no static prop in de_nuke needs it |
 | ropes (`move_rope` → `keyframe_rope` via `NextKey`) | two crossed ribbon patches per segment, `Width` wide, `rope_*` shader (nonsolid, `cull none`, alpha-tested, lightmapped) | sag ≈ sqrt(3·span·Slack/8): a parabola, exact as one 3-column patch row (quadratic Bezier) |
 | `env_sprite` (lamp glows) | a thin `common/nodraw` brush whose east face is a quad with an additive `deformVertexes autosprite` shader (`spr_*`), image fitted to the quad, `rendercolor` × `renderamt` baked in; 0.75 × texture size × `scale`, 8–96 units | autosprite needs a 4-vertex surface: the brush floats free so nothing T-junctions it |
+| interactive props (`prop_dynamic` targeted by another entity's outputs or with outputs of its own: de_nuke's vent slats and breakable vent cover) | `func_window` slab of the model (same slab as doors), health from Source or 25: the vent is shut until shot | bots don't use crouch-only vents anyway (the navmesh is built at standing height) |
 | `env_fog_controller` | worldspawn `farplane` = fogend / fogmaxdensity, `farplane_color`, `farplane_cull 0` | |
 | sky (`skyname`) | six faces from each face material's `$basetexture` | de_nuke's `nukeblank` faces all use `skybox/nukeblankup` (plain 90 134 186 blue) |
 | spectator cameras (`maps/<map>_cameras.txt`) | contact-sheet shots (eye position, pitch/yaw as given), pages of 9 (`<name>_shots.png`, `_shots_2.png`, …) | `named_cameras` |
@@ -123,8 +124,8 @@ surfaces a frame (`MAX_STATIC_MODELS_SURFS`).
 ## Known gaps
 
 - Blend textures use the first layer only.
-- Openable/breakable props (`prop_dynamic` vent slats opened by `func_button` or `OnBreak`)
-  aren't converted: those vents are open. Door handles and other relief are lost.
+- Door handles and other relief of door and vent models are lost (slabs). Vents break
+  into glass debris (`func_window`) instead of opening.
 - Detail sprites (grass) are dropped.
 
 ## Measured builds (2026-10-01, Apple Silicon, three builds sharing 10 cores)
