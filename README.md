@@ -79,3 +79,47 @@ Map sources in `reference/` are EA's released SDK sources. The EA compilers are
 downloaded separately, not stored here. Nothing derived from Valve content
 (textures, models, converted BSPs) is committed. Converter output goes to
 `local/` (gitignored) and is for personal use.
+
+## CS:GO conversions side by side
+
+Each pair below is the same camera (CS:GO's own named spectator viewpoints, same position,
+angles and field of view): left, CS:GO itself (`python -m mohkit csgo-ref`); right, the
+converted map in OpenMoHAA. The converted maps use CS:GO's own baked lighting and an exposure
+fitted to these screenshots (`--fit-exposure`). Converted maps and their assets stay local
+(personal use); only these screenshots are in the repo.
+
+| map | brightness error vs CS:GO (0-255, all cameras) | ladders climbable | bot kills (8 bots, 90 s) |
+|---|---|---|---|
+| de_dust2 | 5.3 | none | 73 |
+| de_mirage | 4.1 | 3/3 | 68 |
+| de_nuke | 5.3 | 6/6 | 81 |
+| de_inferno | 6.0 | none | 26 |
+| de_cache | 9.6 | 1/1 | 28 |
+| de_vertigo | 10.6 | 3/3 | 48 |
+| de_cbble | 5.0 | 2/2 | 49 |
+
+What still differs is mostly the engine: MOHAA has no bump maps, specular highlights,
+reflections or bloom, so surfaces look flatter. Only de_vertigo keeps CS:GO's 3D skybox (its
+city, drawn as a portal sky); the other maps show the 2D sky where CS:GO shows distant scenery.
+Details: `docs/csgo-conversion.md`.
+
+### de_dust2
+![de_dust2: CS:GO vs MOHAA](docs/images/csgo/de_dust2.jpg)
+
+### de_mirage
+![de_mirage: CS:GO vs MOHAA](docs/images/csgo/de_mirage.jpg)
+
+### de_nuke
+![de_nuke: CS:GO vs MOHAA](docs/images/csgo/de_nuke.jpg)
+
+### de_inferno
+![de_inferno: CS:GO vs MOHAA](docs/images/csgo/de_inferno.jpg)
+
+### de_cache
+![de_cache: CS:GO vs MOHAA](docs/images/csgo/de_cache.jpg)
+
+### de_vertigo
+![de_vertigo: CS:GO vs MOHAA](docs/images/csgo/de_vertigo.jpg)
+
+### de_cbble
+![de_cbble: CS:GO vs MOHAA](docs/images/csgo/de_cbble.jpg)

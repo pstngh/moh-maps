@@ -62,6 +62,11 @@ Working from the "Next steps" below, in order (no new user request).
      RB_StageIteratorSky: boxSize = zFar / 1.75, `tr.farclip`), or give the room's sky walls
      the haze colour; also bake CS:GO's sky_camera fog (143 172 186) into the room.
   3. Cache's pk3 carries unused skybox prop models when the room is dropped (bloat only).
+- **User (chat ~19:05): README section comparing each map in MOHAA vs CS:GO with identical
+  screenshots** -> done: README "CS:GO conversions side by side", images
+  `docs/images/csgo/<map>.jpg` (3 evenly spaced named cameras, CS:GO | MOHAA) from the installed
+  builds' shots (snapshot in `local/csgo/readme_shots/`). Re-make them when the five rebuilds
+  are installed (same recipe; update the table numbers from the lane logs).
 
 ## Previous session (2026-10-01 from 13:20)
 
