@@ -1535,7 +1535,7 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     out = config.REPO / "local" / "csgo" / name
     out.mkdir(parents=True, exist_ok=True)
     log(f"== converting {src.name} -> {name}")
-    if quality == "draft":
+    if quality in ("draft", "unlit"):
         # MOHlight lights static-model vertices on one thread (~190/s at best; de_dust2's 70k took
         # hours), so "compile" drafts make every prop a runtime script_model unless a budget is given.
         opts.setdefault("props_static_vertices", 0)
@@ -1559,6 +1559,11 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     if props_only:
         log("== updating the entity lump of the last compile (lighting unchanged)")
         cr = C.update_entities(res.map.dumps(), f"dm/{name}")
+    elif quality == "unlit":
+        # geometry, props, doors and ladders in minutes: no light stage (the game draws the
+        # world fullbright) and props get a flat grey instead of light-grid colours
+        log("== compiling (unlit: BSP and fast VIS only)")
+        cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality="draft", light=False)
     else:
         log(f"== compiling ({quality})")
         cr = C.compile_map(res.map.dumps(), f"dm/{name}", assets=res.assets, quality=quality)

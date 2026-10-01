@@ -362,7 +362,8 @@ def main(argv=None) -> int:
     s = sub.add_parser("csgo", help="convert a CS:GO map (output in local/, never commit it)")
     s.add_argument("map", help="map name in csgo/maps (de_dust2) or a .bsp path")
     s.add_argument("--name", help="MOHAA map name (default cs_<name>)")
-    s.add_argument("-q", "--quality", default="draft", choices=["draft", "preview", "normal", "final"])
+    s.add_argument("-q", "--quality", default="draft", choices=["unlit", "draft", "preview", "normal", "final"],
+                   help="unlit: BSP + fast VIS only, for geometry/prop/ladder checks in minutes")
     s.add_argument("--scale", type=float, default=1.0)
     s.add_argument("--max-texture", type=int, default=512)
     s.add_argument("--structural", action="store_true", help="keep Source world brushes structural (better VIS, may overflow)")

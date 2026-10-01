@@ -226,7 +226,10 @@ def inject(bsp_path: Union[str, Path], instances: Sequence[StaticInstance], out:
            light: Optional[Callable[[LightGrid, StaticInstance], np.ndarray]] = None) -> dict:
     """Add ``instances`` to the static models of a lit BSP (in place unless ``out``)."""
     bsp = BSP(Path(bsp_path))
-    grid = LightGrid(bsp)
+    try:
+        grid: Optional[LightGrid] = LightGrid(bsp)
+    except ValueError:
+        grid = None  # an unlit compile (geometry checks): every vertex gets a flat grey
     sun = sun_direction(bsp)
     defs = np.frombuffer(bsp.lump("staticmodeldef"), STATIC_DT).copy()
     data = bytearray(bsp.lump("staticmodeldata"))
@@ -239,7 +242,9 @@ def inject(bsp_path: Union[str, Path], instances: Sequence[StaticInstance], out:
     new = np.zeros(len(instances), STATIC_DT)
     placed = unplaced = 0
     for k, inst in enumerate(instances):
-        if light is not None:
+        if grid is None:
+            rgb = np.full((len(inst.positions), 3), 160, np.uint8)
+        elif light is not None:
             rgb = light(grid, inst)
         else:
             rgb = light_instance(grid, inst, sun)

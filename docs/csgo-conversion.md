@@ -12,6 +12,11 @@ compile root, for when a stage was re-run by hand. Drafts use `lightmapdensity 3
 (`--lightmap-density`): MOHlight time is about proportional to lightmap texels, and
 de_nuke has ~1M of them at 16.
 
+`-q unlit` compiles BSP and fast VIS only and gives props a flat grey: geometry, props,
+doors and ladders can be checked in minutes (de_nuke's draft light alone takes over an
+hour, even with no light entities and `-notrace`: MOHlight's base cost per lightmap texel
+dominates, and texel count is what `lightmap_density` controls).
+
 `--props-only` re-converts, checks that nothing but `script_model` props changed
 (`mapfile.compiled_difference`: brushes compared by plane, numbers to 0.01), and
 rewrites only the entity lump of the last compile with `Q3map -onlyents`
