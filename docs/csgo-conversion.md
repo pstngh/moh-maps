@@ -131,12 +131,26 @@ Static models never collide (the collision loader skips them), so they don't nee
 exist when Q3map runs: the converter adds each prop's clip brushes to the world,
 compiles and lights the map, then `staticlight.inject` appends the props to
 STATICMODELDEF, lists each in the leaves its bounds touch and writes per-vertex
-colours to STATICMODELDATA. A vertex's colour is the light grid (32-unit cells in v19)
-sampled 6 units out along its normal, scaled like MOHlight's own static lighting and
-shaded mildly by facing (`staticlight.shade`). Calibration against MOHlight output:
-ambient-only test map 40.4 vs 40.3 mean over 161k vertices; sunlit mk_medina 129.7 vs
-130.9 over 23k (per-vertex error is larger: MOHlight traces shadows per vertex, the grid
-is 32 units coarse). `tests/test_staticlight.py`.
+colours to STATICMODELDATA. A vertex's colour comes from the map's own lightmaps
+(`staticlight.LightmapField`, since 2026-10-01): every lightmap texel is binned into
+16-unit cells by facing (six axis slots), and each vertex marches against each slot's
+direction to the first texels facing that way (the floor under a crate lights its top),
+blended by its normal and scaled by 1.78 (`LIGHTMAP_TO_VERTEX`). Against MOHlight's
+own static-model colours on mk_medina (21k vertices): correlation 0.56 (light grid
+0.41), mean error 45 (grid 51), and the quantiles match at 1.8-2.1x throughout.
+Vertices that find no texel within 256 units fall back to the light grid (32-unit
+cells, sampled 6 units out, `staticlight.shade`; means within 2% of MOHlight on an
+ambient-only map and on mk_medina).
+
+**Why not the light grid:** MOHlight fills the grid without spotlight cones. A spot
+aimed at the floor of a closed test room (`target` or `angles`, 60 degree cone) lights
+a lit pool in the lightmaps, but the grid is a flat ramp that brightens with depth
+below the lamp at any distance off-axis: 11 just under it, 58 at the floor (the floor
+lightmap's peak is 59), even outside the cone. A point light's grid is uneven too
+(113-254 above the lamp, 51-131 near the floor, brighter on one side of a symmetric room). dust2's tunnel crates near a ceiling spot got
+grid values of 13-21 (black) while the floor around them was lit; the lightmap field
+gives them 130-190. Players and other dynamic models are still lit from the grid, so
+they can look darker than the room under spotlights. `tests/test_staticlight.py`.
 
 OpenMoHAA draws every static model whose bounds pass the frustum test (the leaf
 `visCount` check is commented out in `tr_staticmodels.cpp`); at most 8,192 static

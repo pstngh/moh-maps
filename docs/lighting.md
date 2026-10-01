@@ -103,9 +103,15 @@ with fill lights until you have seen a normal build.
   map with many lights. Budget static-prop vertices for compile time. Props as
   `script_model` cost nothing at compile time (the engine lights them from the
   light grid at run time). Alternative: `build --inject-props` (and every CS:GO
-  conversion) adds the props after the light stage with light-grid vertex colours
-  (`mohkit.staticlight`): seconds instead of MOHlight's static phase, on average the
-  same brightness, less self-shading (`docs/entities.md`).
+  conversion) adds the props after the light stage with vertex colours from the
+  lightmaps (`mohkit.staticlight`): seconds instead of MOHlight's static phase, on
+  average the same brightness, less self-shading (`docs/entities.md`).
+- **The light grid ignores spotlight cones** (MOHlight 1.48; test room, 2026-10-01):
+  below a spot aimed at the floor the grid ramps up with depth at any distance
+  off-axis (11 just under the lamp, 58 at the floor), while the lightmaps show the
+  cone. Players and dynamic models are lit from the grid, so under spotlights they can
+  look darker or brighter than the room. Prefer point lights near where players stand;
+  injected props use the lightmaps instead (`docs/csgo-conversion.md`).
 - **Converted Source lights.** `light_spot` aims along VRAD's direction (z = +sin(pitch));
   an earlier converter aimed ceiling spots at the ceilings and Nuke's interiors were dark.
   MOHAA's `light` value is roughly its reach in units, so converted lights use 1.5 x the

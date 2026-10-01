@@ -15,7 +15,7 @@ update this file, commit and push, then stop and give the user the one-line hand
 |---|---|---|---|---|---|
 | de_nuke | `local/csgo/cs_nuke/cs_nuke.pk3` (05:29, spot fix) | fastrad, BSP 200 s, light 2,389 s | **70 kills**, none stuck | **6/6** (A-site one: +use from the ledge) | 4,801 props, 718 overlays, 6 doors, 3 breakable vents, 38 glass windows, 70 ropes, 78 glows, water; interiors now lit |
 | de_mirage | `local/csgo/cs_mirage/cs_mirage.pk3` (06:02, spot fix) | fastrad, BSP 242 s, light 1,259 s | **75 kills** | 2/3 (leaning ladder at (444 652 -182): falls off the top) | 1,470 props, 512 overlays, 85 ropes, 35 glows, 3 breakable covers/shutter + 3 windows; shops and palace now lit |
-| de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (09:12, spot + displacement fixes) | fastrad, BSP 714 s, light 2,692 s (3 builds sharing the CPU) | **88 kills** | — (no ladders) | 1,574 props, 459 overlays; tunnels now lit; to check: two crate stacks in `11_Tunnels4` turned black (lit in the 04:14 build) |
+| de_dust2 | `local/csgo/cs_dust2/cs_dust2.pk3` (09:12, spot + displacement fixes) | fastrad, BSP 714 s, light 2,692 s (3 builds sharing the CPU) | **88 kills** | — (no ladders) | 1,574 props, 459 overlays; tunnels now lit; props re-injected (`--resume`, 09:45) with lightmap-based colours: the black tunnel crates are fixed |
 
 Contact sheets: `local/csgo/<name>/<name>_shots*.png` (CS:GO's named spectator cameras).
 
@@ -43,9 +43,10 @@ one more build; cs_nuket is only the texlights comparison. Logs
 3. When `mirage_rebuild.log` says done: check its sheets for the fog-coloured walls (should
    be gone), then rebuild Mirage with step ladders: `local/csgo/mirage_rebuild.sh`
    (build, 8 bots, `local/csgo/ladprobe.py`).
-4. dust2 `11_Tunnels4`: two crate stacks are black in the 09:12 build (lit at 04:14). Sample
-   `staticlight.LightGrid` at those props in both BSPs (old pk3: session scratchpad
-   `old_dust2/cs_dust2.pk3`, may be gone) to find whether the grid went black there.
+4. Done 09:45: injected props are lit from the lightmaps (`staticlight.LightmapField`);
+   MOHlight's light grid ignores spotlight cones (docs/csgo-conversion.md). Open question:
+   players are still lit from that grid, so under CS:GO spots they may look dark. A fix
+   would rewrite the grid lump from the lightmap field (palette + RLE re-encode).
 5. When `nuket_build.log` says done: compare `cs_nuket` with `cs_nuke` (old shots backed
    up in the scratchpad `nuke_0529/`; else re-shoot `cs_nuke.pk3`): radio rooms, lobby, B
    site. Then the final Nuke build with step ladders (+ `--texlights` if better).

@@ -150,6 +150,158 @@ class LightGrid:
         return out
 
 
+# ---------------------------------------------------------------------------- lightmap field
+
+
+DRAWVERT_DT = np.dtype([("xyz", "<f4", 3), ("st", "<f4", 2), ("lm", "<f4", 2), ("normal", "<f4", 3),
+                        ("rgba", "u1", 4)])
+AXES6 = np.array([[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]], np.float64)
+
+
+def lightmap_samples(bsp: BSP) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Every lightmap texel of the world as a sample: world position, unit normal and RGB
+    (N x 3 each). Planar and triangle-soup surfaces give one sample per texel whose centre
+    falls on the surface (positions clamped onto it, so padding texels don't reach through
+    walls); patches give one per control vertex."""
+    dv = np.frombuffer(bsp.lump("drawverts"), DRAWVERT_DT)
+    ix = np.frombuffer(bsp.lump("drawindexes"), "<i4")
+    pages = np.frombuffer(bsp.lump("lightmaps"), np.uint8).reshape(-1, 128, 128, 3)
+    P, N, C = [], [], []
+    for s in bsp.surfaces():
+        if s.lightmap < 0 or s.lightmap >= len(pages) or s.num_verts == 0:
+            continue
+        v = dv[s.first_vert:s.first_vert + s.num_verts]
+        if s.type == 2:
+            u = np.clip((v["lm"][:, 0] * 128).astype(int), 0, 127)
+            t = np.clip((v["lm"][:, 1] * 128).astype(int), 0, 127)
+            P.append(v["xyz"]), N.append(v["normal"]), C.append(pages[s.lightmap][t, u])
+            continue
+        if s.type not in (1, 3) or s.num_indexes < 3 or s.lm_w <= 0 or s.lm_h <= 0:
+            continue
+        tri = ix[s.first_index:s.first_index + s.num_indexes].reshape(-1, 3)
+        uv = v["lm"].astype(np.float64) * 128.0
+        gu, gt = np.meshgrid(np.arange(s.lm_x, s.lm_x + s.lm_w) + 0.5, np.arange(s.lm_y, s.lm_y + s.lm_h) + 0.5)
+        q = np.stack([gu.ravel(), gt.ravel()], 1)
+        best = np.full(len(q), -np.inf)
+        bary = np.zeros((len(q), 3))
+        tris = np.zeros((len(q), 3), int)
+        for a, b, c in tri:
+            e1, e2 = uv[b] - uv[a], uv[c] - uv[a]
+            det = e1[0] * e2[1] - e1[1] * e2[0]
+            if abs(det) < 1e-9:
+                continue
+            d = q - uv[a]
+            l1 = (d[:, 0] * e2[1] - d[:, 1] * e2[0]) / det
+            l2 = (e1[0] * d[:, 1] - e1[1] * d[:, 0]) / det
+            bb = np.stack([1 - l1 - l2, l1, l2], 1)
+            m = bb.min(1)
+            better = m > best
+            best[better], bary[better], tris[better] = m[better], bb[better], (a, b, c)
+        # inside, or within about half a texel of the edge (best is in barycentric units)
+        keep = best > -0.5 / max(1.0, min(s.lm_w, s.lm_h))
+        if not keep.any():
+            continue
+        bb = np.clip(bary[keep], 0.0, None)
+        bb /= bb.sum(1, keepdims=True)
+        t3 = tris[keep]
+        xyz = v["xyz"].astype(np.float64)
+        nrm = v["normal"].astype(np.float64)
+        P.append(np.einsum("nk,nkj->nj", bb, xyz[t3]))
+        N.append(np.einsum("nk,nkj->nj", bb, nrm[t3]))
+        qi = q[keep].astype(int)
+        C.append(pages[s.lightmap][np.clip(qi[:, 1], 0, 127), np.clip(qi[:, 0], 0, 127)])
+    if not P:
+        return np.zeros((0, 3)), np.zeros((0, 3)), np.zeros((0, 3))
+    p, n, c = (np.concatenate(x).astype(np.float64) for x in (P, N, C))
+    ln = np.linalg.norm(n, axis=1, keepdims=True)
+    return p, n / np.maximum(ln, 1e-6), c
+
+
+class LightmapField:
+    """Light at any point from the BSP's own lightmaps, per facing direction.
+
+    MOHlight's light grid is no stand-in for its lightmaps under spotlights: it ignores the
+    cone and ramps up with depth below the lamp (docs/lighting.md), so props near a CS:GO
+    ceiling spot came out black. The lightmaps are right (cones, shadows, bounce). Each texel
+    is splatted 4 units out from its surface into 16-unit cells, into six axis slots
+    weighted by its normal (like Source's ambient cubes). For each slot ``sample`` marches
+    from the vertex against the slot's direction (down for the up slot, toward -x for +x,
+    ...) to the first cells with texels facing that way: the floor under a crate lights its
+    top, the wall behind it the side facing away from that wall. Props have no lightmaps,
+    so the march passes through them. Slots that find nothing within ``reach`` units take
+    the mean of the slots that did."""
+
+    CELL = 16.0
+
+    def __init__(self, bsp: BSP, reach: float = 256.0):
+        p, n, c = lightmap_samples(bsp)
+        self.count = len(p)
+        self.steps = int(reach // self.CELL) + 1
+        w = np.clip(n @ AXES6.T, 0.0, None) ** 2
+        keys = self._keys(np.floor((p + n * 4.0) / self.CELL).astype(np.int64))
+        self.uniq, inv = np.unique(keys, return_inverse=True)
+        self.sums = np.zeros((len(self.uniq), 6, 3))
+        self.wts = np.zeros((len(self.uniq), 6))
+        np.add.at(self.sums, inv, w[:, :, None] * c[:, None, :])
+        np.add.at(self.wts, inv, w)
+
+    @staticmethod
+    def _keys(g: np.ndarray) -> np.ndarray:
+        g = g + (1 << 20)
+        return (g[:, 0] << 42) | (g[:, 1] << 21) | g[:, 2]
+
+    def _lookup(self, cells: np.ndarray, slot: int) -> tuple[np.ndarray, np.ndarray]:
+        k = self._keys(cells)
+        i = np.clip(np.searchsorted(self.uniq, k), 0, len(self.uniq) - 1)
+        hit = self.uniq[i] == k
+        S = np.where(hit[:, None], self.sums[i, slot], 0.0)
+        W = np.where(hit, self.wts[i, slot], 0.0)
+        return S, W
+
+    def slots(self, points: np.ndarray) -> np.ndarray:
+        """Slot colours (N x 6 x 3, NaN where nothing was found) at points."""
+        base = np.floor(np.asarray(points, np.float64) / self.CELL).astype(np.int64)
+        cells, inv = np.unique(base, axis=0, return_inverse=True)
+        inv = inv.ravel()
+        out = np.full((len(cells), 6, 3), np.nan)
+        for slot in range(6):
+            d = AXES6[slot].astype(np.int64)
+            lat = [np.array(o, np.int64) for o in
+                   ((a, b, 0) if d[2] else (a, 0, b) if d[1] else (0, a, b) for a in (-1, 0, 1) for b in (-1, 0, 1))]
+            todo = np.arange(len(cells))
+            for step in range(self.steps):
+                if not len(todo):
+                    break
+                at = cells[todo] - d * step
+                S = np.zeros((len(todo), 3))
+                W = np.zeros(len(todo))
+                for o in lat:
+                    s_, w_ = self._lookup(at + o, slot)
+                    S += s_
+                    W += w_
+                found = W > 1e-6
+                out[todo[found], slot] = S[found] / W[found][:, None]
+                todo = todo[~found]
+        return out[inv]
+
+    def sample(self, points: np.ndarray, normals: np.ndarray) -> np.ndarray:
+        """Lightmap-scale colour (N x 3) for points with unit normals: their slots blended by
+        the squared normal components. NaN where no slot found anything."""
+        points = np.asarray(points, np.float64)
+        normals = np.asarray(normals, np.float64)
+        if not self.count or not len(points):
+            return np.full((len(points), 3), np.nan)
+        sl = self.slots(points)
+        known = ~np.isnan(sl[:, :, 0])
+        n_known = known.sum(1)
+        iso = np.where(known[:, :, None], sl, 0.0).sum(1) / np.maximum(n_known, 1)[:, None]
+        val = np.where(known[:, :, None], sl, iso[:, None, :])
+        a = np.clip(normals @ AXES6.T, 0.0, None) ** 2
+        out = (a[:, :, None] * val).sum(1) / np.maximum(a.sum(1), 1e-6)[:, None]
+        out[n_known == 0] = np.nan
+        return out
+
+
 # ---------------------------------------------------------------------------- shading
 
 
@@ -187,9 +339,17 @@ def shade(grid_rgb: np.ndarray, normals: np.ndarray, sun: Optional[np.ndarray],
     return np.clip(grid_rgb * k * (1.0 + f)[:, None], 0, 255)
 
 
+# MOHlight static-model vertex colour per lightmap texel value: least-squares fit over
+# mk_medina's 21k MOHlight-lit prop vertices that ``LightmapField`` reaches (lightmaps are
+# stored at about half brightness, overbright).
+LIGHTMAP_TO_VERTEX = 1.78
+
+
 def light_instance(grid: LightGrid, inst: StaticInstance, sun: Optional[np.ndarray],
-                   offset: float = 6.0, fallback: Optional[np.ndarray] = None) -> np.ndarray:
-    """Vertex colours (N x 3 uint8) for one instance."""
+                   offset: float = 6.0, fallback: Optional[np.ndarray] = None,
+                   field_rgb: Optional[np.ndarray] = None) -> np.ndarray:
+    """Vertex colours (N x 3 uint8) for one instance: from ``field_rgb`` (the instance's
+    ``LightmapField.sample``) where it found light, else from the light grid."""
     pos, nrm = world_mesh(inst)
     rgb = grid.sample(pos + nrm * offset)
     bad = np.isnan(rgb[:, 0])
@@ -199,7 +359,38 @@ def light_instance(grid: LightGrid, inst: StaticInstance, sun: Optional[np.ndarr
         if np.isnan(alt[0]):
             alt = fallback if fallback is not None else np.array([96.0, 96.0, 96.0])
         rgb[bad] = alt
-    return shade(rgb, nrm, sun).round().astype(np.uint8)
+    rgb = shade(rgb, nrm, sun)
+    if field_rgb is not None:
+        ok = ~np.isnan(field_rgb[:, 0])
+        rgb[ok] = np.clip(field_rgb[ok] * LIGHTMAP_TO_VERTEX, 0, 255)
+    return rgb.round().astype(np.uint8)
+
+
+def field_colours(field: "LightmapField", instances: Sequence[StaticInstance], offset: float = 6.0,
+                  batch: int = 300_000):
+    """``LightmapField.sample`` for every vertex of every instance, in batches of about
+    ``batch`` vertices; yields one array per instance, in order."""
+    group: list = []
+    size = 0
+
+    def flush(group):
+        meshes = [world_mesh(i) for i in group]
+        pos = np.concatenate([m[0] for m in meshes])
+        nrm = np.concatenate([m[1] for m in meshes])
+        rgb = field.sample(pos + nrm * offset, nrm)
+        k = 0
+        for m in meshes:
+            yield rgb[k:k + len(m[0])]
+            k += len(m[0])
+
+    for inst in instances:
+        group.append(inst)
+        size += len(inst.positions)
+        if size >= batch:
+            yield from flush(group)
+            group, size = [], 0
+    if group:
+        yield from flush(group)
 
 
 # ---------------------------------------------------------------------------- BSP writing
@@ -241,13 +432,17 @@ def inject(bsp_path: Union[str, Path], instances: Sequence[StaticInstance], out:
     lmaxs = leafs["maxs"].astype(np.float64)
     new = np.zeros(len(instances), STATIC_DT)
     placed = unplaced = 0
+    # the lit BSP's own lightmaps (the grid ignores spotlight cones); grid where they don't reach
+    field = LightmapField(bsp) if grid is not None and light is None and bsp.count("lightmaps") else None
+    fields = field_colours(field, instances) if field is not None and field.count else None
     for k, inst in enumerate(instances):
+        f_rgb = next(fields) if fields is not None else None
         if grid is None:
             rgb = np.full((len(inst.positions), 3), 160, np.uint8)
         elif light is not None:
             rgb = light(grid, inst)
         else:
-            rgb = light_instance(grid, inst, sun)
+            rgb = light_instance(grid, inst, sun, field_rgb=f_rgb)
         model = inst.model.encode("latin-1")
         if len(model) >= 128:
             raise ValueError(f"model path too long: {inst.model}")

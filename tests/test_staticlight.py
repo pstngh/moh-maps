@@ -175,6 +175,82 @@ def test_matches_mohlight_means() -> None:
         assert abs(g - w) / w < tol, (name, g, w)
 
 
+def _field(samples) -> SL.LightmapField:
+    """A LightmapField from (position, normal, colour) samples, without a BSP."""
+    f = SL.LightmapField.__new__(SL.LightmapField)
+    p = np.array([s[0] for s in samples], float)
+    n = np.array([s[1] for s in samples], float)
+    c = np.array([s[2] for s in samples], float)
+    f.count, f.steps = len(p), 17
+    w = np.clip(n @ SL.AXES6.T, 0.0, None) ** 2
+    keys = f._keys(np.floor((p + n * 4.0) / f.CELL).astype(np.int64))
+    f.uniq, inv = np.unique(keys, return_inverse=True)
+    f.sums = np.zeros((len(f.uniq), 6, 3))
+    f.wts = np.zeros((len(f.uniq), 6))
+    np.add.at(f.sums, inv, w[:, :, None] * c[:, None, :])
+    np.add.at(f.wts, inv, w)
+    return f
+
+
+def test_lightmap_field_marches_to_facing_texels() -> None:
+    """An up-facing vertex takes the first up-facing texels below it (a crate top over the
+    floor), a side-facing one the wall behind it; slots that find nothing use the mean of
+    those that did, and nothing in reach gives NaN."""
+    floor = [((x, y, 0.0), (0, 0, 1), (100, 80, 60)) for x in range(-64, 65, 16) for y in range(-64, 65, 16)]
+    shelf = [((x, y, 120.0), (0, 0, 1), (10, 10, 10)) for x in range(200, 300, 16) for y in range(-16, 17, 16)]
+    wall = [((-96.0, y, z), (1, 0, 0), (40, 40, 40)) for y in range(-64, 65, 16) for z in range(0, 129, 16)]
+    f = _field(floor + shelf + wall)
+    pts = np.array([[0, 0, 100], [0, 0, 100], [0, 0, 100], [250, 0, 200], [5000, 0, 0]], float)
+    nrm = np.array([[0, 0, 1], [1, 0, 0], [0, 1, 0], [0, 0, 1], [0, 0, 1]], float)
+    got = f.sample(pts, nrm)
+    assert np.allclose(got[0], (100, 80, 60))            # floor 100 units below
+    assert np.allclose(got[1], (40, 40, 40))             # the wall 96 units behind (-x)
+    assert np.allclose(got[2], ((100 + 40) / 2, (80 + 40) / 2, (60 + 40) / 2))   # no +y texels: mean
+    assert np.allclose(got[3], (10, 10, 10))             # the shelf is the first thing below
+    assert np.isnan(got[4]).all()
+
+
+def test_lightmap_field_beats_grid_on_medina() -> None:
+    """On mk_medina (MOHlight-lit static props), lightmap-field colours correlate better with
+    MOHlight's own vertex colours than the light grid's, at a scale near LIGHTMAP_TO_VERTEX."""
+    from mohkit.pak import GameFS
+    p = _bsp("dm_mk_medina", "mk_medina")
+    bsp = BSP(p)
+    field, grid, sun = SL.LightmapField(bsp), SL.LightGrid(bsp), SL.sun_direction(bsp)
+    fs = GameFS(config.load().game_dir, loose=False)
+
+    def rd(path):
+        try:
+            return fs.read(path)
+        except Exception:  # noqa: BLE001
+            return None
+    local = SL.files_reader(ROOTS / "dm_mk_medina" / "main")
+    read = lambda q: local(q) or rd(q)  # noqa: E731
+    data = np.frombuffer(bsp.lump("staticmodeldata"), np.uint8).reshape(-1, 3).astype(float)
+    F, G, W = [], [], []
+    for sm in bsp.static_models():
+        try:
+            pos, nrm = SL.tiki_mesh(read, sm.model)
+        except FileNotFoundError:
+            continue
+        if len(pos) != sm.num_vertex_data:
+            continue
+        inst = SL.StaticInstance(sm.model, sm.origin, sm.angles, sm.scale, pos, nrm)
+        wp, wn = SL.world_mesh(inst)
+        F.append(field.sample(wp + wn * 6, wn))
+        G.append(SL.light_instance(grid, inst, sun).astype(float))
+        W.append(data[sm.first_vertex_data // 3:sm.first_vertex_data // 3 + len(pos)])
+    if not F:
+        raise SkipTest("mk_medina: no readable static models")
+    F, G, W = (np.concatenate(x) for x in (F, G, W))
+    ok = ~np.isnan(F[:, 0])
+    assert ok.mean() > 0.6, ok.mean()
+    f, g, w = F[ok].mean(1), G[ok].mean(1), W[ok].mean(1)
+    assert np.corrcoef(f, w)[0, 1] > np.corrcoef(g, w)[0, 1] + 0.05
+    k = (w * f).sum() / (f * f).sum()
+    assert abs(k - SL.LIGHTMAP_TO_VERTEX) < 0.1, k
+
+
 if __name__ == "__main__":
     failed = 0
     for name, fn in list(globals().items()):
