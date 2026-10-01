@@ -229,7 +229,9 @@ class Converter:
             rgba = np.full((64, 64, 4), (128, 128, 128, 255), np.uint8)
             self.report["warnings"].append(f"material {src}: no texture, grey placeholder")
         cm.kind = "translucent" if info.translucent or info.additive else ("alphatest" if info.alphatest else "opaque")
-        cm.image, cm.size = self._write_image(shader, rgba, cm.kind != "opaque")
+        if (info.shader or "").lower() == "decalmodulate":
+            cm.kind = "modulate"   # multiplies what is under it by 2 x texture (grey 128 = no change)
+        cm.image, cm.size = self._write_image(shader, rgba, cm.kind not in ("opaque", "modulate"))
         self.assets[f"scripts/{self._script_name()}"] = b""  # placeholder, written in finish()
         self.mats[key] = cm
         return cm
@@ -655,6 +657,11 @@ class Converter:
             alpha = cm.image is not None and cm.image.endswith(".tga")
             lines = [f"textures/{name}", "{", f"\tqer_editorimage {editor_image(cm.image)}", "\tsurfaceparm trans",
                      "\tsurfaceparm nonsolid", "\tsurfaceparm nomarks", "\tpolygonOffset", "\t{", f"\t\tmap {cm.image}"]
+            if cm.kind == "modulate":
+                # Source DecalModulate (cracks, grime): dst * 2 * src, lit by the surface below
+                lines += ["\t\tblendFunc GL_DST_COLOR GL_SRC_COLOR", "\t\trgbGen identity", "\t}", "}"]
+                self._overlay_shaders[name] = "\n".join(lines)
+                return name
             if alpha:
                 lines.append("\t\tblendFunc blend")
             lines += ["\tnextbundle", "\t\tmap $lightmap", "\t}", "}"]
@@ -1561,7 +1568,10 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
         # they cover every callout, so prefer them to spawn samples.
         cam_file = src.with_name(src.stem + "_cameras.txt")
         named = named_cameras(cam_file, scale) if cam_file.is_file() else []
-        cams = auto_cameras(map_, 1 if named else shots, convert_report.get("landmarks", ()), spawns=not named)
+        # with named cameras only the overview is added (landmark shots stand inside the
+        # bomb-site props)
+        cams = auto_cameras(map_, 1 if named else shots, () if named else convert_report.get("landmarks", ()),
+                            spawns=not named)
         cams = named + cams
         run = game.run([pk3], f"dm/{name}", cams, run_name=name, timeout=300 + 3 * len(cams))
         sheets = game.contact_sheets(run.screenshots, out / f"{name}_shots.png")

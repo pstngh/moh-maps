@@ -399,10 +399,15 @@ def shader_text(mat: _Material) -> str:
     if mat.alphatest:
         lines += ["\t\talphaFunc GE128", "\t\tdepthWrite"]
     elif mat.additive:
-        lines.append("\t\tblendFunc add")
+        # Source $additive with $translucent adds src * alpha (de_nuke's skylight beams are a
+        # white image shaped by alpha); a plain add would draw the whole card white
+        translucent = mat.info is not None and mat.info.translucent
+        lines.append("\t\tblendFunc GL_SRC_ALPHA GL_ONE" if translucent else "\t\tblendFunc add")
     elif mat.translucent:
         lines.append("\t\tblendFunc blend")
-    lines += ["\t\trgbGen static", "\t}", "}"]
+    # UnlitGeneric (glows, beams, screens) is drawn at full brightness, not lit
+    unlit = mat.info is not None and (mat.info.shader or "").lower() == "unlitgeneric"
+    lines += ["\t\trgbGen identity" if unlit else "\t\trgbGen static", "\t}", "}"]
     return "\n".join(lines) + "\n"
 
 
