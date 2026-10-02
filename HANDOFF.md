@@ -29,6 +29,19 @@ whether another session runs: none does; only lane A (`final2.sh`, NOINSTALL) fr
   squares). Fix: `convert.write_assets` prunes + `assets.json` manifest; `saved_assets` keeps
   the newer of a pair for old folders; packaging warns on pairs. Those maps need re-packaging
   (`--resume`) before install.
+- **Bug found and fixed: the test harness was not isolated** (79031b5). OpenMoHAA also searches
+  `fs_apppath` (the binary's folder = the user's game dir with all installed pk3s); with
+  jpg-before-tga, the installed linear-blend `l2_*.jpg` hid each rebuilt map's alpha-tested
+  `l2_*.tga` in every test (de_dust2 "all sand"; proven by red/blue layer swaps). So today's
+  **exposure fits and shots of dust2/mirage/inferno/nuke/cbble were contaminated**. Harness now
+  sets fs_apppath/steampath/gogpath to the base; `mohkit install` warns on jpg/tga clashes
+  (`pak.image_clashes`; installed folder: only cs_nuke's own 3).
+- **Done 20:05:** all six (dust2 mirage inferno nuke cbble vertigo) re-packaged with LOD
+  (`local/csgo/lod_resume.sh`, logs `lod_a/b.log`). **Running 20:10:** clean re-shoot + re-fit
+  (`local/csgo/refit.sh`, `refit_a.log`: dust2 inferno vertigo cache; `refit_b.log`: mirage nuke
+  cbble). **Then:** `local/csgo/perf_ab.sh de_x ...` (installed vs new fps, `perf_ab.log`), look
+  at sheets vs CS:GO, install all, README images. Threshold blends have hard edges where CS:GO
+  is soft (dust2 mask r ~0.39): possible 2-stage dither later (costs a pass).
 
 ## Session (2026-10-01 from 16:05): ladders, exposure fit, blend textures
 

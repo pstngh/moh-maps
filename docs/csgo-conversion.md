@@ -198,6 +198,19 @@ merged-away originals from the pk3. de_inferno: 6,326 models / 301 SKDs -> 3,436
 de_nuke: 4,801 / 1,365 -> 2,917 / 598, pk3 assets 262 -> 267 MB. `staticlight.inject`
 refuses more than 4,095 static models.
 
+**Props carry progressive LOD (`mohkit.lod`, since 2026-10-01).** With no VIS culling for
+static models, a converted map drew its props at full detail at any distance: on de_cache
+0.3-1.3 M prop vertices per frame, 70-85% of the frame time (`mohkit csgo de_cache --perf
+2000 --toggle r_drawstaticmodels=0`; the cost follows vertices, ~19 ns each, not draw
+calls). After `staticmerge`, `inject_statics` gives every prop SKD quadric-error collapse
+tables and a `.lod` curve (engine rules: docs/reference/engine.md §5.2) and permutes each
+instance's vertex colours to the new vertex order. The curve keeps the error under
+`lod.TAU_PX` = 2 pixels at 1920 wide with retail's high preset (`r_lodscale`/`r_lodcap`
+0.55); a player's lower presets simplify more. de_cache at 1280x720: mean 174 -> 268 fps,
+worst camera 68 -> 138; shots differ from the full-detail build by under 1/255 (1 px) and
+3/255 at the overview (2 px). Foliage cards keep their open edges, so trees and bushes
+are now the largest remaining prop cost. `--resume --no-lod` builds without it.
+
 ## Lighting: CS:GO's own baked light (default since 2026-10-01)
 
 Lit builds no longer run MOHlight. Q3map compiles BSP and VIS only (it allocates the

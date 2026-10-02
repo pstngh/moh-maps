@@ -164,8 +164,14 @@ FPS = 60
 # own autoexec.cfg is never found there: "couldn't exec autoexec.cfg"). Not as +set: the command
 # line holds at most 32 "+" commands (MAX_CONSOLE_LINES, qcommon/common.c) and silently drops
 # the rest, +devmap included.
+#
+# r_primitives 2 draws each batch with one glDrawElements. The default 0 picks it only with
+# GL_EXT_compiled_vertex_array, which Apple's GL (2.1 on Metal) lacks, and otherwise sends
+# every triangle strip as its own glBegin/glEnd (R_DrawElements, renderergl1/tr_shade.c):
+# one Metal draw per strip, ~150 ns per prop vertex, so de_inferno ran at 6 fps instead of
+# 84 (same image). Players' configs usually have it (the owner's omconfig.cfg does).
 QUALITY_CVARS = {
-    "r_picmip": "0", "r_fastentlight": "0", "r_fastdlights": "0", "r_subdivisions": "4",
+    "r_primitives": "2", "r_picmip": "0", "r_fastentlight": "0", "r_fastdlights": "0", "r_subdivisions": "4",
     "r_lodscale": "0.55", "r_lodcap": "0.55", "r_lodviewmodelcap": "0.65", "cg_effectdetail": "0.8",
     "ter_error": "9", "ter_maxlod": "4", "cg_shadows": "1", "cg_marks_add": "1",
     "r_drawstaticdecals": "1", "r_colorbits": "32", "r_texturebits": "32",

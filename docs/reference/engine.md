@@ -444,6 +444,17 @@ maxMetric. Without a surface whose first and last `collapseIndex` differ there i
 de_cache drew 0.3-0.9 M prop vertices per frame and props were 70-85% of the frame time
 (`mohkit test --perf --toggle r_drawstaticmodels=0`).
 
+**`r_primitives` decides how every batch is drawn** (`R_DrawElements`,
+`renderergl1/tr_shade.c:163-197`): 2 is one `glDrawElements` per batch; 1 (and 0 without
+`GL_EXT_compiled_vertex_array`) walks the indexes into triangle strips and sends each strip
+as `glBegin`/`glArrayElement`/`glEnd` (`R_DrawStripElements`). Apple's OpenGL 2.1-on-Metal
+has no compiled vertex arrays ("...GL_EXT_compiled_vertex_array not found" in the log), so a
+fresh macOS config (0) takes the strip path, and `sample` shows the frame inside
+`glEnd_Exec` -> Metal `drawPrimitives`: one GPU draw per strip. de_inferno (converted) ran
+at 6 fps mean with 0 and 84 with 2, same image, same resolution (resolution made no
+difference: it is draw-call bound). Players should have `seta r_primitives "2"` (the
+owner's `omconfig.cfg` does); the test harness sets it (`game.QUALITY_CVARS`).
+
 **How a runtime model is lit.** cgame sets `lightingOrigin = origin + centre of the
 box packed into entityState.solid` (`cgame/cg_modelanim.c:1064-1067`). A NOT_SOLID
 entity packs `solid = 0` (`server/sv_world.c:230-257`), which unpacks to the box
