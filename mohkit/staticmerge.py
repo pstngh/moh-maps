@@ -23,6 +23,13 @@ into rigid models whose surfaces are the instances' surfaces in world orientatio
 into one bucket per shader within the SKD limits (999 vertices, 1,999 triangles per
 surface, 24 surfaces per TIKI). Other models stay instanced. Maps within both budgets are
 left alone.
+
+With ``split_radius``, instances of models bigger than that (radius about the pivot) are cut
+into pieces first and the pieces always merge (``_split``): CS:GO's ``_autocombine_`` meshes
+cover whole buildings (de_nuke's roof trusses, ducts and wires: radius 800-1,300), so one
+model was drawn whenever any part of it was in view, at the detail of its nearest part, and
+never vanished where it should. Static models have no VIS test, only the frustum and the
+LOD curve, both per model: small models are what makes them work.
 """
 
 from __future__ import annotations
@@ -179,6 +186,81 @@ def _write(model: _Model, prefix: str, key: str) -> tuple[StaticInstance, dict[s
     return inst, files
 
 
+def _split(inst: StaticInstance, parts, chunk: float) -> list[tuple[StaticInstance, list]]:
+    """``inst`` cut into pieces of at most about ``chunk`` units: its triangles (in world
+    space) grouped by connected component (positions welded), each component in the grid
+    cell of its centre, or triangle by triangle when the component is bigger than a cell.
+    Returns (piece, its parts) with the piece at its vertices' centre, unrotated; pieces keep
+    the instance's colours and fade."""
+    ax = axes(inst.angles)
+    surfs, k = [], 0
+    for srf, shader in parts:
+        nv = len(srf.positions)
+        pos = srf.positions * float(inst.scale) @ ax + np.asarray(inst.origin, np.float64)
+        col = inst.colors[k:k + nv] if inst.colors is not None and len(inst.colors) >= k + nv else None
+        surfs.append((srf, shader, pos, np.asarray(srf.normals, np.float64) @ ax, col))
+        k += nv
+    # components over all surfaces by welded position
+    allpos = np.concatenate([p for _, _, p, _, _ in surfs])
+    _, weld = np.unique(np.round(allpos, 2), axis=0, return_inverse=True)
+    weld = weld.reshape(-1)
+    parent = np.arange(int(weld.max()) + 1 if len(weld) else 0)
+
+    def find(a: int) -> int:
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+    base = 0
+    tri_w = []
+    for srf, _, pos, _, _ in surfs:
+        t = weld[np.asarray(srf.triangles) + base]
+        tri_w.append(t)
+        for a, b, c in t:
+            ra, rb, rc = find(a), find(b), find(c)
+            parent[rb] = ra
+            parent[find(rc)] = ra
+        base += len(pos)
+    roots = np.array([find(i) for i in range(len(parent))]) if len(parent) else np.zeros(0, int)
+    # component boxes, then each triangle's cell
+    lo = np.full((len(parent), 3), np.inf)
+    hi = np.full((len(parent), 3), -np.inf)
+    wpos = np.zeros((len(parent), 3))
+    wpos[weld] = allpos
+    np.minimum.at(lo, roots, wpos)
+    np.maximum.at(hi, roots, wpos)
+    pieces: dict = {}
+    for si, ((srf, shader, pos, nrm, col), t) in enumerate(zip(surfs, tri_w)):
+        r = roots[t[:, 0]]
+        small = (hi[r] - lo[r]).max(axis=1) <= chunk
+        centre = np.where(small[:, None], (lo[r] + hi[r]) / 2, pos[np.asarray(srf.triangles)].mean(axis=1))
+        cells = np.floor(centre / chunk).astype(np.int64)
+        for key in sorted({tuple(c) for c in cells}):
+            sel = np.all(cells == key, axis=1)
+            pieces.setdefault(key, []).append((si, np.asarray(srf.triangles)[sel]))
+    out = []
+    for n, key in enumerate(sorted(pieces)):
+        sub, cols = [], []
+        for si, tris in pieces[key]:
+            srf, shader, pos, nrm, col = surfs[si]
+            used = np.unique(tris)
+            remap = np.full(len(pos), -1, np.int64)
+            remap[used] = np.arange(len(used))
+            sub.append((_skd.SkdSurface(srf.name, pos[used], nrm[used], np.asarray(srf.uvs)[used], remap[tris]),
+                        shader))
+            cols.append(col[used] if col is not None else np.full((len(used), 3), np.nan))
+        allp = np.concatenate([s_.positions for s_, _ in sub])
+        origin = np.round(allp.mean(axis=0), 1)
+        for s_, _ in sub:
+            s_.positions = s_.positions - origin
+        c = np.concatenate(cols)
+        piece = StaticInstance(f"{inst.model}#{n}@{tuple(inst.origin)}", tuple(float(v) for v in origin),
+                               (0.0, 0.0, 0.0), 1.0, allp - origin, np.concatenate([s_.normals for s_, _ in sub]),
+                               None if np.isnan(c[:, 0]).all() else c, fade=inst.fade)
+        out.append((piece, sub))
+    return out
+
+
 def _skd_key(read, model: str) -> tuple:
     """The SKD files a TIKI loads (skins of one mesh share them)."""
     name = model if model.startswith("models/") else "models/" + model
@@ -190,12 +272,15 @@ def _skd_key(read, model: str) -> tuple:
     return tuple(s if "/" in s else f"{path}/{s}" for s in re.findall(r"^\s*skelmodel\s+(\S+)", t, re.M)) or (name,)
 
 
-def _pack(instances: Sequence[StaticInstance], parts: Callable, cell: float) -> list[_Model]:
+def _pack(instances: Sequence[StaticInstance], parts: Callable, cell: float,
+          small: Optional[tuple] = None) -> list[_Model]:
     """Merged models for ``instances`` (all mergeable): per grid cell, instances sorted by
-    shader set, packed until a model would exceed 24 surfaces."""
+    shader set, packed until a model would exceed 24 surfaces. ``small`` = (models, cell):
+    those models (split pieces) merge in grids of that smaller cell instead."""
     cells: dict = {}
     for inst in instances:
-        key = tuple(int(np.floor(float(c) / cell)) for c in inst.origin) + (fade_class(inst.fade),)
+        c = small[1] if small and inst.model in small[0] else cell
+        key = (c,) + tuple(int(np.floor(float(v) / c)) for v in inst.origin) + (fade_class(inst.fade),)
         cells.setdefault(key, []).append(inst)
     out = []
     for key in sorted(cells):
@@ -213,8 +298,10 @@ def _pack(instances: Sequence[StaticInstance], parts: Callable, cell: float) -> 
     return out
 
 
-def _choose(instances, parts, skd_of, max_models: int, max_skd: int, cell: float) -> tuple[set, list]:
-    """Models to merge and the packed result: a greedy pick, re-packed until both budgets hold."""
+def _choose(instances, parts, skd_of, max_models: int, max_skd: int, cell: float,
+            forced: frozenset = frozenset(), small_cell: float = 0.0) -> tuple[set, list]:
+    """Models to merge and the packed result: a greedy pick, re-packed until both budgets
+    hold. ``forced`` models are always merged."""
     count: dict = {}
     for i in instances:
         count[i.model] = count.get(i.model, 0) + 1
@@ -224,11 +311,12 @@ def _choose(instances, parts, skd_of, max_models: int, max_skd: int, cell: float
     by_rarity = sorted(mergeable, key=lambda m: ((count[m] - 1) * verts[m], m))
     # instance budget: cheapest to duplicate first (fewest vertices per instance)
     by_cost = sorted(mergeable, key=lambda m: (verts[m], -count[m], m))
-    chosen: set = set()
+    chosen: set = set(forced)
     packed: list = []
     for _ in range(64):
         kept = [i for i in instances if i.model not in chosen]
-        packed = _pack([i for i in instances if i.model in chosen], parts, cell) if chosen else []
+        packed = _pack([i for i in instances if i.model in chosen], parts, cell,
+                       (forced, small_cell) if forced and small_cell else None) if chosen else []
         n_models = len(kept) + len(packed)
         n_skd = len({skd_of(i.model) for i in kept}) + len(packed)
         if n_models <= max_models and n_skd <= max_skd:
@@ -253,10 +341,13 @@ def _choose(instances, parts, skd_of, max_models: int, max_skd: int, cell: float
 
 def merge(instances: Sequence[StaticInstance], read: Callable[[str], Optional[bytes]], prefix: str,
           target: int = DEFAULT_TARGET, max_skd: int = DEFAULT_MAX_SKD,
-          cell: float = CELL) -> tuple[list[StaticInstance], dict[str, bytes], dict]:
+          cell: float = CELL, split_radius: float = 0.0,
+          split_cell: float = 512.0) -> tuple[list[StaticInstance], dict[str, bytes], dict]:
     """Instances within ``target`` models and ``max_skd`` SKDs (unchanged when already
-    within both), the merged models' files (``{game path: bytes}`` under ``prefix``, such as
-    ``models/csgo/m_cs_inferno``) and a summary. Unreadable TIKIs are never merged."""
+    within both and nothing is split), the merged models' files (``{game path: bytes}``
+    under ``prefix``, such as ``models/csgo/m_cs_inferno``) and a summary. Unreadable TIKIs
+    are never merged. With ``split_radius``, instances of bigger models are cut into pieces
+    of about ``split_cell`` (``_split``) that merge in cells of ``split_cell``."""
     instances = list(instances)
     skd_cache: dict = {}
 
@@ -266,8 +357,6 @@ def merge(instances: Sequence[StaticInstance], read: Callable[[str], Optional[by
         return skd_cache[model]
 
     n_skd = len({skd_of(i.model) for i in instances})
-    if len(instances) <= target and n_skd <= max_skd:
-        return instances, {}, {"merged": False, "models": len(instances), "skd": n_skd}
     parts_cache: dict = {}
 
     def parts(model: str):
@@ -278,7 +367,29 @@ def merge(instances: Sequence[StaticInstance], read: Callable[[str], Optional[by
                 parts_cache[model] = None
         return parts_cache[model]
 
-    chosen, packed = _choose(instances, parts, skd_of, target, max_skd, cell)
+    split_info = {}
+    forced: set = set()
+    if split_radius > 0:
+        radius: dict = {}
+        out_i, n_big = [], 0
+        for i in instances:
+            if i.model not in radius:
+                pr = parts(i.model)
+                radius[i.model] = _skd.bounds_radius(*_bounds(pr)) * 1.0 if pr else 0.0
+            if radius[i.model] * float(i.scale) > split_radius:
+                n_big += 1
+                for piece, sub in _split(i, parts(i.model), split_cell):
+                    parts_cache[piece.model] = sub
+                    forced.add(piece.model)
+                    out_i.append(piece)
+            else:
+                out_i.append(i)
+        split_info = {"split_instances": n_big, "pieces": len(forced)}
+        instances = out_i
+    if not forced and len(instances) <= target and n_skd <= max_skd:
+        return instances, {}, {"merged": False, "models": len(instances), "skd": n_skd}
+
+    chosen, packed = _choose(instances, parts, skd_of, target, max_skd, cell, frozenset(forced), split_cell)
     out = [i for i in instances if i.model not in chosen]
     files: dict[str, bytes] = {}
     for mdl in packed:
@@ -289,7 +400,12 @@ def merge(instances: Sequence[StaticInstance], read: Callable[[str], Optional[by
     kept_skd = len({skd_of(i.model) for i in instances if i.model not in chosen})
     return out, files, {"merged": True, "models": len(out), "from": len(instances), "skd": kept_skd + len(packed),
                         "skd_from": n_skd, "merged_models": len(chosen), "merged_instances":
-                        sum(len(m.members) for m in packed), "files": len(files)}
+                        sum(len(m.members) for m in packed), "files": len(files), **split_info}
+
+
+def _bounds(parts) -> tuple:
+    p = np.concatenate([np.asarray(s.positions, np.float64) for s, _ in parts])
+    return tuple(p.min(0)), tuple(p.max(0))
 
 
 def prune(files: dict, models: set, used: set, read: Callable[[str], Optional[bytes]]) -> int:

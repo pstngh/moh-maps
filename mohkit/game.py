@@ -213,9 +213,10 @@ def parse_perf(log: str) -> dict[str, dict]:
     """``{camera: {tag: stats}}`` from the frames ``perf_commands`` timed. Stats: frame count,
     ``fps`` (frames per second of measured frame time; Sys_Milliseconds is whole ms, so a
     mean over many frames), ``wall_fps`` (frames in the window: includes the 1 ms floor
-    between frames, so it tops out near 1000), ``ms`` mean, ``p90_ms``, ``rf``/``bk`` renderer front/back end ms,
-    and the mean ``surfs``, ``leafs``, ``verts``, ``tris`` drawn. The first and last two
-    frames of each window are dropped (the toggling frames)."""
+    between frames, so it tops out near 1000), ``ms`` mean, ``p90_ms``, ``rf``/``bk`` renderer
+    front/back end ms (``bk`` is only the last flush, the swap: docs/testing.md), and the mean
+    ``surfs``, ``leafs``, ``verts``, ``tris`` drawn. The first and last two frames of each
+    window are dropped (the toggling frames)."""
     out: dict[str, dict] = {}
     cur, frames, speeds = None, [], []
     for line in log.splitlines():

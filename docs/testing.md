@@ -34,6 +34,11 @@ leafs, vertices and triangles drawn (`game.perf_commands`, `parse_perf`). `--tog
 r_drawstaticmodels=0` (repeatable) times each camera again with a cvar changed: what the
 props cost. Close other GPU and CPU work first; compare builds in the same conditions.
 
+Judge by the frame ms (`all`), not the `rf`/`bk` split: every 2D draw (HUD, fonts) flushes
+the pending 3D commands (`R_IssuePendingRenderCommands`, `renderergl1/tr_draw.c:58` and on),
+and each flush overwrites `backEnd.pc.msec` (`tr_backend.c:1492`, `=` not `+=`), so `bk`
+holds only the last flush (the swap). The 3D scene's back end lands in `cl`.
+
 ## Cameras
 
 Define `SHOTS` in `maps/<name>/build.py`:

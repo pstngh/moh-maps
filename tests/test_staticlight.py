@@ -113,6 +113,51 @@ def test_staticmerge_under_limit() -> None:
     assert not info2["merged"] and small == inst[:100] and not files2
 
 
+def test_staticmerge_splits_big_models() -> None:
+    """A model spanning 3,000 units (two far-apart quads and a long strip) is cut into
+    pieces no bigger than about a cell; together they hold every triangle, in world space,
+    with the instance's colours and fade."""
+    from mohkit import staticmerge
+    from mohkit.source import skd
+    pos, tris = [], []
+    for x0 in (0.0, 3000.0):                       # two separate 32-unit quads
+        b = len(pos)
+        pos += [(x0, 0, 0), (x0 + 32, 0, 0), (x0 + 32, 32, 0), (x0, 32, 0)]
+        tris += [(b, b + 1, b + 2), (b, b + 2, b + 3)]
+    b = len(pos)                                   # one connected 2,000-unit strip
+    for i in range(11):
+        pos += [(i * 200.0, 100, 0), (i * 200.0, 116, 0)]
+    for i in range(10):
+        a = b + 2 * i
+        tris += [(a, a + 2, a + 3), (a, a + 3, a + 1)]
+    n = len(pos)
+    srf = skd.SkdSurface("a", np.array(pos, np.float32), np.array([[0, 0, 1]] * n, np.float32),
+                         np.zeros((n, 2), np.float32), np.array(tris))
+    files = {"models/t/big.skd": skd.build_skd("big.skd", [srf]),
+             "models/t/big.tik": skd.build_tiki("models/t", "big.skd", "big.skc", [("a", "textures/x")]).encode()}
+    read = SL.files_reader(files)
+    p, nrm = SL.tiki_mesh(read, "t/big.tik")
+    col = np.arange(n * 3, dtype=np.float64).reshape(n, 3)
+    inst = SL.StaticInstance("t/big.tik", (10.0, 20.0, 30.0), (0.0, 90.0, 0.0), 1.0, p, nrm, col, fade=1000.0)
+    out, new, info = staticmerge.merge([inst], read, "models/csgo/m_test", split_radius=384, split_cell=512)
+    assert info["split_instances"] == 1 and info["pieces"] == 5, info   # the first quad shares a cell with the strip
+    world, cols = [], []
+    for o in out:
+        mpos, _ = SL.tiki_mesh(SL.files_reader(new), o.model)
+        assert np.ptp(mpos, axis=0).max() <= 512 + 200, np.ptp(mpos, axis=0)
+        world.append(SL.world_mesh(o)[0])
+        cols.append(o.colors)
+        assert o.fade >= 1000.0
+    w = np.concatenate(world)
+    ref = SL.world_mesh(inst)[0]
+    # every original vertex is in some piece, at the same place, with its colour
+    for v, c in zip(ref, col):
+        d = np.linalg.norm(w - v, axis=1)
+        assert d.min() < 0.05
+    allc = np.concatenate(cols)
+    assert {tuple(c) for c in allc} == {tuple(c) for c in col}
+
+
 def _reference_grid(bsp: BSP, grid: SL.LightGrid, x: int, y: int) -> list[int]:
     """Palette indices of one grid column, walked exactly like R_GetLightingGridValue."""
     offs = np.frombuffer(bsp.lump("lightgridoffsets"), "<u2")

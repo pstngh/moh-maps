@@ -8,7 +8,10 @@ update this file, commit and push, then stop and give the user the one-line hand
 
 ## User request (chat ~22:30): "lite" conversions for really high fps, like stock maps
 
-**Paused 23:15 at the user's request (shutting down; continue tomorrow).** Nothing is running.
+**Resumed 2026-10-02 07:20. User (chat ~07:35): "for now only do nuke and mirage"**: the
+profile work and the FFA rebuild cover de_nuke and de_mirage only; leave the other maps as
+installed.
+
 All seven full-detail builds with LOD + fades are installed and are what the user plays now.
 
 **User (chat 23:20): when the maps are redone, make them FFA: DM spawns spread everywhere.**

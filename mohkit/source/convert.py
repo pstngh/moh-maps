@@ -38,9 +38,10 @@ import hashlib
 import io
 import math
 import re
+import struct
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Sequence
 
 import numpy as np
 
@@ -187,6 +188,9 @@ class Options:
     # how much prop detail to keep (PROP_PROFILES): "full" as CS:GO; "balanced" and "stock" trade
     # small props and mesh detail for frame rate
     prop_profile: str = "full"
+    # free-for-all spawns spread over the map (``mohkit.source.nav``: from the bot nav mesh,
+    # with CS:GO's own deathmatch spawns first) instead of copies of the T and CT spawns
+    ffa_spawns: bool = True
 
 
 # mesh_lod: the CS:GO VTX LOD converted (its artists' simpler meshes: but of de_nuke's 1,378 prop
@@ -367,6 +371,7 @@ class Converter:
     def __init__(self, bsp_path: str, csgo_dir: str, opt: Options):
         self.opt = opt
         self.bsp = SourceBSP(bsp_path)
+        self.bsp_path = Path(bsp_path)
         game = Path(csgo_dir) / "csgo" if (Path(csgo_dir) / "csgo").is_dir() else Path(csgo_dir)
         self.fs = SearchPath(ZipSource(self.bsp.pakfile()), SearchPath.for_game(game))
         self.mapname = Path(bsp_path).stem
@@ -1825,16 +1830,22 @@ class Converter:
                   "info_deathmatch_spawn": "info_player_deathmatch"}
         has_dm = bool(self.bsp.find_entities("info_deathmatch_spawn"))
         start = None
+        team, dm = [], []
         for e in self.bsp.entities:
             cls = e.classname
             o = e.origin
             if cls in spawns and o is not None:
                 yaw = (e.vector("angles", (0, 0, 0)) or (0, 0, 0))[1]
+                if cls == "info_deathmatch_spawn":
+                    dm.append((tuple(o), yaw))
+                else:
+                    team.append((tuple(o), yaw))
                 org = (o[0] * s, o[1] * s, o[2] * s + 1)
-                out.append(_ent(spawns[cls], org, angle=fmt(yaw % 360)))
-                if not has_dm and cls != "info_deathmatch_spawn":
-                    out.append(_ent("info_player_deathmatch", org, angle=fmt(yaw % 360)))
+                if cls != "info_deathmatch_spawn":
+                    out.append(_ent(spawns[cls], org, angle=fmt(yaw % 360)))
                 start = start or org
+        for (o, yaw), z in self._dm_spawns(dm, team):
+            out.append(_ent("info_player_deathmatch", (o[0] * s, o[1] * s, o[2] * s + z), angle=fmt(yaw % 360)))
         if self.opt.lights:
             for e, cls, gain in self._kept_lights():
                 out += self._light(e, cls, gain)
@@ -1854,6 +1865,40 @@ class Converter:
             if e.origin:
                 marks.append([v * s for v in e.origin])
         self.report["landmarks"] = marks
+        return out
+
+    def _nav(self):
+        """The map's bot nav mesh (``maps/<map>.nav`` beside the BSP, else in its pakfile)."""
+        from . import nav
+        side = self.bsp_path.with_suffix(".nav")
+        try:
+            if side.is_file():
+                return nav.read_nav(side.read_bytes())
+            z = self.bsp.pakfile()
+            name = next((n for n in z.namelist() if n.lower() == f"maps/{self.mapname.lower()}.nav"), None)
+            return nav.read_nav(z.read(name)) if name else None
+        except (ValueError, struct.error, OSError):
+            return None
+
+    def _dm_spawns(self, dm: list, team: list) -> list:
+        """Deathmatch spawns as ``((pos, yaw), z lift)`` in Source units. With
+        ``Options.ffa_spawns`` and a nav mesh: ``nav.spawn_count`` spots spread by walking
+        distance, CS:GO's own deathmatch spawns first (thinned when they are more); without a
+        mesh, CS:GO's deathmatch spawns (thinned to 48), else copies of the team spawns."""
+        from . import nav
+        mesh = self._nav() if self.opt.ffa_spawns else None
+        if not self.opt.ffa_spawns or (mesh is None and not dm):
+            self.report["dm_spawns"] = {"source": "team spawns" if not dm else "csgo", "count": len(dm or team)}
+            return [(t, 1.0) for t in (dm or team)]
+        count = nav.spawn_count(mesh) if mesh is not None else min(len(dm), 48)
+        keep = _spread([p for p, _ in dm], count)
+        kept = [dm[i] for i in keep]
+        out = [(t, 1.0) for t in kept]
+        if mesh is not None and len(kept) < count:
+            # nav floors are bilinear over an area's corners: start 12 up and let the player drop
+            out += [((p, y), 12.0) for p, y in nav.ffa_spawns(mesh, count, [p for p, _ in kept])[len(kept):]]
+        self.report["dm_spawns"] = {"source": "nav" if mesh is not None else "csgo", "count": len(out),
+                                    "csgo_dm": len(dm), "csgo_dm_kept": len(kept)}
         return out
 
     @staticmethod
@@ -2001,6 +2046,8 @@ class Converter:
         items = []
         self.report["prop_profile"] = self.opt.prop_profile
         self.report["lod_tau"] = self._profile["lod_tau"]
+        if self._profile.get("split_radius"):
+            self.report["merge_split"] = [self._profile["split_radius"], self._profile["split_cell"]]
         self.report["lod_base_error"] = self._profile["base_error"]
         for p_index, p in enumerate(list(sp.props) + self._entity_props()):
             p_index = p_index if p_index < len(sp.props) else -1
@@ -2702,6 +2749,21 @@ def _split_patch(ctrl: np.ndarray, maxn: int) -> list[np.ndarray]:
     return [ctrl[r0:r1, c0:c1] for r0, r1 in spans(ctrl.shape[0]) for c0, c1 in spans(ctrl.shape[1])]
 
 
+def _spread(points: Sequence, count: int) -> list[int]:
+    """Indexes of ``count`` of ``points`` spread apart (farthest-point sampling from the
+    first), in file order; all of them when there are no more than ``count``."""
+    if len(points) <= count:
+        return list(range(len(points)))
+    p = np.asarray(points, np.float64)
+    pick = [0]
+    d = np.linalg.norm(p - p[0], axis=1)
+    while len(pick) < count:
+        i = int(np.argmax(d))
+        pick.append(i)
+        d = np.minimum(d, np.linalg.norm(p - p[i], axis=1))
+    return sorted(pick)
+
+
 def _ent(cls: str, origin, **keys) -> MEntity:
     e = MEntity({"classname": cls})
     e["origin"] = " ".join(fmt(round(c, 2)) for c in origin)
@@ -2818,7 +2880,7 @@ def fade_distance(p) -> float:
 def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[list] = None,
                    exposure: Optional[float] = None, gains: Optional[dict] = None,
                    tint_mask: Optional[dict] = None, lod: bool = True, lod_tau: Optional[float] = None,
-                   lod_base_error: Optional[float] = None) -> dict:
+                   lod_base_error: Optional[float] = None, merge_split: Optional[Sequence[float]] = None) -> dict:
     """Add the converter's props (``Result.statics``) to a lit BSP as static models
     (``mohkit.staticlight``); meshes are read from ``assets``. Over
     ``staticmerge.DEFAULT_TARGET`` props, nearby copies of a model are merged into one model
@@ -2829,7 +2891,8 @@ def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[li
     as the lightmaps, and the others are lit from the lightmaps at vertex scale 1.0;
     otherwise every prop is lit from MOHlight's lightmaps and grid. With ``lod``, every SKD
     the final props load gets progressive LOD (``mohkit.lod``; vertex colours follow the new
-    vertex order)."""
+    vertex order). ``merge_split`` = (radius, cell): instances of models bigger than radius are
+    cut into pieces merged in cells of that size (``staticmerge.merge`` split_radius)."""
     from .. import staticlight as SL, staticmerge
     from .lighting import tonemap
     read = SL.files_reader(assets)
@@ -2886,7 +2949,8 @@ def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[li
             if t is not None and tuple(t) != (255, 255, 255) and i.colors is not None:
                 w = vtint[i.model][:, None]
                 i.colors = i.colors * (1.0 - w + w * (np.asarray(t, np.float64) / 255.0)[None, :])
-    inst, files, merged = staticmerge.merge(inst, read, f"models/csgo/m_{Path(out).stem}")
+    split = dict(split_radius=float(merge_split[0]), split_cell=float(merge_split[1])) if merge_split else {}
+    inst, files, merged = staticmerge.merge(inst, read, f"models/csgo/m_{Path(out).stem}", **split)
     assets.update(files)
     if files:
         merged["pruned"] = staticmerge.prune(assets, {mk for mk, *_ in statics}, {i.model for i in inst}, read)
@@ -2974,7 +3038,8 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
     if statics:
         info = inject_statics(base, statics, assets, lit, prop_light, exposure, gains,
                               convert_report.get("tint_mask"), lod=lod, lod_tau=convert_report.get("lod_tau"),
-                              lod_base_error=convert_report.get("lod_base_error"))
+                              lod_base_error=convert_report.get("lod_base_error"),
+                              merge_split=convert_report.get("merge_split"))
         report["statics"] = info
         log(f"== static models injected: {json.dumps(info)}")
         bsp_bytes = lit.read_bytes()
