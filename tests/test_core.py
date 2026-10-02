@@ -129,6 +129,36 @@ def test_plan_underlay():
         assert sum(im.getpixel((200, 100))) > 60 and sum(im.getpixel((10, 190))) == 0
 
 
+def test_check_air_flags_entities_outside_air():
+    # a spawn in a solid mass and a brush entity centred in solid both leak the compile (mk_summit)
+    from mohkit import validate
+    from mohkit.build import MapBuilder
+    b = MapBuilder("t")
+    cv = Carver(16)
+    cv.room(0, 0, 0, 512, 512, 128)
+    cv.room(1024, 0, 0, 1536, 512, 128)
+    b.carve(cv)
+    b.spawn((256, 256, 1), 0, kinds=("deathmatch",))           # in air: fine
+    b.spawn((768, 256, 1), 0, kinds=("deathmatch",))           # between the rooms: solid
+    t = b.entity("trigger_hurt", None)
+    t.prims.append(box((0, 0, 0), (1536, 512, 64), Material("common/trigger")))   # centre (768, 256, 32)
+    msgs = [i.message for i in validate.check_air(b) if i.severity == "error"]
+    assert len(msgs) == 2 and "info_player_deathmatch" in msgs[0] and "trigger_hurt" in msgs[1], msgs
+
+
+def test_validate_rejects_non_aa_props():
+    # Spearhead/Breakthrough models are in the catalog but not in the retail AA paks (mk_summit)
+    from mohkit import props, validate
+    from mohkit.build import MapBuilder
+    if props.get("static/snowycrate") is None:
+        return
+    b = MapBuilder("t")
+    b.prop("static/snowycrate", 0, 0, 0)
+    b.prop("static/indycrate", 128, 0, 0)
+    errs = [i.message for i in validate.check(b.to_map()) if i.severity == "error" and "retail AA" in i.message]
+    assert len(errs) == 1 and "snowycrate" in errs[0], errs
+
+
 def test_brush_rejects_band_list():
     stone, plaster = Material("general_structure/stonebricks1"), Material("general_structure/plaster_wall2")
     for spec in ([(0, stone), (32, plaster)], {"sides": [(0, stone)]}):

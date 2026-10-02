@@ -148,7 +148,7 @@ def cmd_generate(a) -> int:
     proj = project.Project.load(Path(a.folder))
     m = proj.generate()
     out = proj.folder / f"{proj.name}.map"
-    issues = validate.check(m, validate.load_shader_index())
+    issues = validate.check(m, validate.load_shader_index()) + validate.check_air(getattr(proj, "builder", None))
     for i in issues:
         if a.all or i.severity != "info":
             print(i)

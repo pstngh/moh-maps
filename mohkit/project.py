@@ -114,6 +114,7 @@ class Project:
         mod = getattr(self, "_module", None)
         if mod is not None and hasattr(mod, "build"):
             result = mod.build()
+            self.builder = result if hasattr(result, "carver") else None  # type: ignore[attr-defined]
             m = result.to_map() if hasattr(result, "to_map") else result
             out = self.folder / f"{self.name}.map"
             m.save(str(out))
@@ -193,7 +194,7 @@ def build(folder: Path, quality: str = "normal", test: bool = True, bots: int = 
     log(f"== {proj.game_path}: generating")
     m = proj.generate()
     from . import validate as _validate
-    issues = _validate.check(m, _validate.load_shader_index())
+    issues = _validate.check(m, _validate.load_shader_index()) + _validate.check_air(getattr(proj, "builder", None))
     for i in issues:
         log(f"  {i}")
     if any(i.severity == "error" for i in issues):

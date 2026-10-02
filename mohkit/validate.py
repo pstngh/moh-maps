@@ -213,6 +213,39 @@ def fix_spawns(m: MapFile, shaders=None, reach: float = 48.0) -> list[str]:
     return notes
 
 
+def check_air(builder) -> list[Issue]:
+    """Point entities of a Carver-built map that lie outside every air box: inside a building
+    mass or the hollow under a plateau. A spawn there leaks the compile (mk_summit's first
+    build: a spawn in a solid shed); a light there lights nothing. Static props are skipped
+    (they are injected after the compile)."""
+    cv = getattr(builder, "carver", None)
+    if cv is None:
+        return []
+    out = []
+    for ei, e in enumerate(builder.entities, start=1):
+        o = e.origin()
+        cn = e.classname
+        if e.prims and o is None:
+            # q3map floods from a brush entity's bounding-box centre: outside air, it leaks
+            # (mk_summit: one trigger_hurt under the whole map centred in the hollow plateau)
+            pts = [pt for pr in e.prims if hasattr(pr, "windings") for w in pr.windings() for pt in w]
+            if pts:
+                lo, hi = geom.bounds_of(pts)
+                o = tuple((lo[i] + hi[i]) / 2 for i in range(3))
+                if not cv.contains(o):
+                    out.append(Issue("error", f"{cn} brush entity centred at {tuple(round(c) for c in o)}, "
+                                              "outside every air box: q3map floods from there and leaks "
+                                              "(split it so each piece is centred in air)", f"entity {ei}"))
+            continue
+        if o is None or cn.startswith("static_"):
+            continue
+        if not cv.contains(o):
+            sev = "error" if cn.startswith("info_player") else "warning"
+            out.append(Issue(sev, f"{cn} at {tuple(round(c) for c in o)} is outside every air box "
+                                  "(inside a solid mass or hollow: leaks / lights nothing)", f"entity {ei}"))
+    return out
+
+
 def check(m: MapFile, shaders=None, min_dm_spawns: int = 8) -> list[Issue]:
     issues: list[Issue] = []
     if not m.entities or m.entities[0].classname != "worldspawn":
@@ -261,6 +294,14 @@ def check(m: MapFile, shaders=None, min_dm_spawns: int = 8) -> list[Issue]:
                                and pb[0][2] - 8 <= o[2] <= pb[1][2] + 40 for pb in patch_boxes)
             if not grounded:
                 issues.append(Issue("warning", f"{cn} at {o} has no floor within 40 units", f"entity {ei}"))
+        elif "static" in cn and e.get("model"):
+            from . import props as _props
+            info = _props.get(e.get("model"))
+            if info is not None and info.game != "aa":
+                # mk_summit: snowycrate, fuel_tank and generator are Spearhead/Breakthrough
+                # models; retail AA logs "Couldn't load" and draws nothing
+                issues.append(Issue("error", f"{e.get('model')} is a {info.game} model, not in the retail AA "
+                                             "paks (nothing is drawn)", f"entity {ei}"))
         elif cn == "light" and o is not None:
             hit = next((s for s in brush_solids if point_in_brush(o, s)), None)
             if hit:
