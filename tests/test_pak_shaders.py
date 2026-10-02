@@ -21,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from mohkit.pak import GameFS, normalize, path_clashes, probe_image, write_pk3  # noqa: E402
+from mohkit.pak import GameFS, normalize, path_clashes, probe_image, unowned_paths, write_pk3  # noqa: E402
 from mohkit.shaders import ShaderIndex, parse_shader_text  # noqa: E402
 
 GAME_DIR = Path(os.environ.get("MOHKIT_GAME_DIR", os.path.expanduser("~/Documents/Games/moh")))
@@ -109,6 +109,17 @@ def test_path_clashes_across_installed_maps() -> None:
         write_pk3(str(Path(d) / "cs_b.pk3"), {"models/csgo/X.lod": b"b", "models/csgo/same.skd": b"s"})
         write_pk3(str(Path(d) / "Pak0.pk3"), {"models/csgo/x.lod": b"retail"})
         assert path_clashes(d) == [("models/csgo/x.lod", ["cs_b.pk3", "cs_a.pk3"])]
+
+
+def test_unowned_paths() -> None:
+    # a map's package must keep its files under its own name, or another map's can replace them
+    own = ["maps/dm/cs_cache.bsp", "maps/dm/cs_cache.scr", "models/csgo/cs_cache/props/x.skd",
+           "textures/csgo/cs_cache_p/props/x.jpg", "models/csgo/m_cs_cache/m0.tik",
+           "scripts/csgo_cs_cache_props.shader", "env/csgo/cs_cache/sky_ft.jpg"]
+    foreign = ["models/csgo/props/x.skd", "textures/csgo/props/x.jpg", "models/csgo/cs_cache2/x.skd",
+               "textures/csgo/xcs_cache/x.jpg"]
+    assert unowned_paths(own + foreign, "cs_cache") == sorted(foreign)
+    assert unowned_paths(["Models/FX/windows/debris_7.tik"], "cs_cache", ("models/fx/windows/debris_",)) == []
 
 
 def test_gamefs_order_and_case() -> None:

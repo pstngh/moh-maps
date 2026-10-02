@@ -176,12 +176,16 @@ def _hash(s: str, n: int = 6) -> str:
     return hashlib.sha1(s.encode("utf-8")).hexdigest()[:n]
 
 
-def model_names(mdl_path: str, prefix: str = "csgo", skin: int = 0, scale: float = 1.0) -> tuple[str, str]:
+def model_names(mdl_path: str, prefix: str = "csgo", skin: int = 0, scale: float = 1.0,
+                lod: int = 0) -> tuple[str, str]:
     """(directory, base name) of the converted files, e.g. ``("models/csgo/props/de_dust", "dust_rusty_barrel")``.
 
-    Every game path must fit ``MAX_QPATH`` (63 characters) with room for the
-    ``_p2``/``_nc`` suffixes, otherwise the directory is shortened to
-    ``models/<prefix>/x`` and the name gets a hash of the full path.
+    A conversion passes its own prefix (``csgo/<map>``): the files' contents are map-specific
+    (LOD tables, vertex order, texture gain), and installed pk3s sharing a path override
+    each other (``pak.path_clashes``). Every game path must fit ``MAX_QPATH`` (63
+    characters) with room for the ``_p10``/``_nc`` suffixes, otherwise the directory is
+    shortened to ``models/<prefix>/<hash>`` and the name gets a hash of the full path.
+    ``lod`` > 0 adds ``_l<lod>`` (the model's simpler VTX mesh, ``convert_model``).
     """
     rel = _slug(normalize_path(mdl_path))
     if rel.startswith("models/"):
@@ -193,18 +197,26 @@ def model_names(mdl_path: str, prefix: str = "csgo", skin: int = 0, scale: float
         base += f"_skin{skin}"
     if abs(scale - 1.0) > 1e-6:
         base += "_x" + f"{scale:g}".replace(".", "p").replace("-", "m")
+    if lod:
+        base += f"_l{lod}"
     directory = f"models/{prefix}/{d}" if d else f"models/{prefix}"
-    reserve = len("_p2_nc.tik")
+    reserve = len("_p10_nc.tik")
     if len(directory) + 1 + len(base) + reserve > _skd.MAX_QPATH:
         directory = f"models/{prefix}/{_hash(d, 4)}"    # directory hash keeps same-named models apart
         room = _skd.MAX_QPATH - len(directory) - 1 - reserve
+        if room < 12:
+            raise ValueError(f"model prefix {prefix!r} leaves no room for names under MAX_QPATH")
         if len(base) > room:
             base = f"{base[:room - 7]}_{_hash(rel + base)}"
     return directory, base
 
 
 def texture_name(material: str, prefix: str = "csgo") -> str:
-    """Shader / image name (no extension) for a Source material, <= 59 characters."""
+    """Shader / image name (no extension) for a Source material, <= 59 characters.
+
+    A conversion's prop textures use ``csgo/<map>_p``: map-specific (headroom gain), and
+    apart from the world's ``textures/csgo/<map>/<material path>``, which keeps any
+    material's full path (a world material and a prop material can share a name)."""
     rel = _slug(material)
     if rel.startswith("models/"):
         rel = rel[len("models/"):]
@@ -212,7 +224,10 @@ def texture_name(material: str, prefix: str = "csgo") -> str:
     if len(name) <= 59:  # + ".tga" fits MAX_QPATH; Q3map mishandles 60-character shader names
         return name
     base = rel.rpartition("/")[2]
-    return f"textures/{prefix}/m/{base[:30]}_{_hash(rel)}"
+    room = 59 - len(f"textures/{prefix}/m/") - 7
+    if room < 8:
+        raise ValueError(f"texture prefix {prefix!r} leaves no room for names under 59 characters")
+    return f"textures/{prefix}/m/{base[:min(30, room)]}_{_hash(rel)}"
 
 
 # ---------------------------------------------------------------------------
@@ -604,14 +619,18 @@ def collision_map(brushes: Iterable[Brush]) -> str:
 
 def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale: float = 1.0,
                   max_texture: int = 512, solid: int = 6, jpeg_quality: Optional[int] = None,
-                  centre: bool = False, headroom: bool = False, lod: int = 0) -> ConvertedModel:
+                  centre: bool = False, headroom: bool = False, lod: int = 0,
+                  texture_prefix: Optional[str] = None) -> ConvertedModel:
     """Convert one Source model (``models/....mdl``) to MOHAA static-model files.
 
     ``fs`` reads Source files (``try_read``; see :func:`source_fs`). ``solid`` is the
     Source static-prop solidity: 6 = ``.phy`` hulls (default), 2 = MDL hull box,
     0 = no collision (writes a ``_nc`` TIKI with an empty collision map).
     Textures are TGA (32-bit only when the material uses alpha); with
-    ``jpeg_quality`` opaque ones are written as JPEG instead.
+    ``jpeg_quality`` opaque ones are written as JPEG instead. Models go under
+    ``models/<prefix>/``, textures and clip shaders under ``textures/<texture_prefix>/``
+    (default: ``prefix``); a map conversion passes ``csgo/<map>`` and ``csgo/<map>_p``
+    (``model_names``, ``texture_name``).
 
     ``centre`` moves the model (and its collision) so the TIKI origin is over the centre of
     its bounds and ``LIGHT_ABOVE_TOP + 8`` above its top; ``pivot`` is where that point
@@ -624,15 +643,14 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
     """
     warnings: list[str] = []
     # ``lod`` > 0: the model's own simpler VTX mesh (clamped to its last LOD); the files get an
-    # ``_l<lod>`` suffix so they never replace the full mesh of another installed map
+    # ``_l<lod>`` suffix (``model_names``) so they never replace the full mesh
     sm: StudioModel = load_studio_model(fs, mdl_path, lod=lod)
     info = sm.info
     if skin and not (0 <= skin < max(1, len(info.skins))):
         warnings.append(f"skin {skin} not in 0..{len(info.skins) - 1}; using 0")
         skin = 0
-    directory, base = model_names(mdl_path, prefix, skin, scale)
-    if lod:
-        base = f"{base}_l{lod}"
+    directory, base = model_names(mdl_path, prefix, skin, scale, lod)
+    tprefix = texture_prefix or prefix
 
     # --- materials and grouped geometry ---------------------------------------------
     mats: dict[int, _Material] = {}
@@ -641,7 +659,7 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
     for mesh in sm.meshes:
         ti = sm.material_for(mesh.skinref, skin)
         if ti not in mats:
-            mats[ti] = _resolve_material(fs, info, ti, prefix, info.surfaceprop)
+            mats[ti] = _resolve_material(fs, info, ti, tprefix, info.surfaceprop)
             if mats[ti].info is None:
                 warnings.append(f"material {mats[ti].name} not found")
         mat = mats[ti]
@@ -750,7 +768,7 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
             for si, s in enumerate(phy.solids):
                 sp = kv_props[si] if si < len(kv_props) else info.surfaceprop
                 kind = surface_type(sp)[1]
-                cname = clip_shader_name(kind, prefix)
+                cname = clip_shader_name(kind, tprefix)
                 for pts, tri in zip(s.pieces, s.triangles):
                     b = _hull_brush(pts * scale - pivot, tri, cname)
                     if b is None:
@@ -758,17 +776,17 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
                         continue
                     brushes.append(b)
                     if not kind.startswith("common/"):
-                        shaders["textures/" + cname] = clip_shader_text(kind, prefix) or ""
+                        shaders["textures/" + cname] = clip_shader_text(kind, tprefix) or ""
     elif solid == 2:
         kind = surface_type(info.surfaceprop)[1]
-        cname = clip_shader_name(kind, prefix)
+        cname = clip_shader_name(kind, tprefix)
         hmin = [v * scale - pivot[i] for i, v in enumerate(info.hull_min)]
         hmax = [v * scale - pivot[i] for i, v in enumerate(info.hull_max)]
         b = _box_brush(hmin, hmax, cname)
         if b is not None:
             brushes.append(b)
             if not kind.startswith("common/"):
-                shaders["textures/" + cname] = clip_shader_text(kind, prefix) or ""
+                shaders["textures/" + cname] = clip_shader_text(kind, tprefix) or ""
     tik_suffix = {6: "", 2: "_bb", 0: "_nc"}.get(solid, f"_s{solid}")
 
     # --- SKD / SKC / TIKI (partitioned at 24 surfaces) ------------------------------

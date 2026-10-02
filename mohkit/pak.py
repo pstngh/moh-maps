@@ -448,3 +448,16 @@ def path_clashes(main_dir: Union[str, "os.PathLike[str]"]) -> list[tuple[str, li
             continue
     return [(path, sorted(w, key=lambda n: n.lower(), reverse=True)) for path, w in sorted(seen.items())
             if len(set(w.values())) > 1]
+
+
+def unowned_paths(paths: Iterable[str], name: str, shared: tuple[str, ...] = ()) -> list[str]:
+    """Paths of a map's package that another map's package could also hold: those with no
+    path segment naming the map (``name`` as a whole word of a segment, ``_.-`` as word
+    breaks: ``maps/dm/cs_cache.bsp``, ``models/csgo/cs_cache/...``, ``textures/csgo/cs_cache_p/...``,
+    ``models/csgo/m_cs_cache/...``, ``scripts/csgo_cs_cache_props.shader``). Any such path
+    can override, or be overridden by, another installed map's file (``path_clashes``):
+    CS:GO conversions shared ``models/csgo/props/...`` until 2026-10-02. ``shared``: path
+    prefixes the engine looks up by a fixed name (content must not depend on the map)."""
+    word = re.compile(r"(?:^|[_.\-])" + re.escape(name.lower()) + r"(?:$|[_.\-])")
+    return sorted(p for p in paths if not p.lower().startswith(tuple(x.lower() for x in shared))
+                  and not any(word.search(seg) for seg in p.lower().split("/")))

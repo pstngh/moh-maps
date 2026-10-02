@@ -332,12 +332,16 @@ def test_names_and_surface_types() -> None:
     d, b = mc.model_names("models/props/de_dust/dust_rusty_barrel.mdl", skin=1, scale=1.5)
     assert b == "dust_rusty_barrel_skin1_x1p5"
     long = "models/props_fortifications/some_really_long_model_name_that_goes_on_and_on_forever.mdl"
-    for pre in ("csgo", "csgo/de_dust2"):
-        d, b = mc.model_names(long, pre)
-        assert len(f"{d}/{b}_p2_nc.tik") <= skd.MAX_QPATH
+    for pre in ("csgo", "csgo/de_dust2", "csgo/cs_vertigo"):
+        for kw in ({}, {"lod": 1, "skin": 2, "scale": 1.25}):
+            d, b = mc.model_names(long, pre, **kw)
+            assert len(f"{d}/{b}_p10_nc.tik") <= skd.MAX_QPATH and d.startswith(f"models/{pre}/"), (d, b)
+    assert mc.model_names("models/props/a/crate.mdl", lod=2) == ("models/csgo/props/a", "crate_l2")
     assert mc.model_names(long)[1] != mc.model_names(long.replace("forever", "forevex"))[1]
-    t = mc.texture_name("models/props/de_dust/hr_dust/dust_crates/dust_crate_style_01_72x36x87_a_really_long")
-    assert len(t) + 4 <= skd.MAX_QPATH and t.startswith("textures/csgo/")
+    crate = "models/props/de_dust/hr_dust/dust_crates/dust_crate_style_01_72x36x87_a_really_long"
+    for pre in ("csgo", "csgo/cs_inferno_p", "csgo/cs_rats_1337_p"):
+        t = mc.texture_name(crate, pre)
+        assert len(t) <= 59 and t.startswith(f"textures/{pre}/"), t
     assert mc.surface_type("metal_sand_barrel") == ("metal", "common/metalclip")
     assert mc.surface_type("wood_crate") == ("wood", "common/woodclip")
     assert mc.surface_type("concrete") == ("rock", "rock")

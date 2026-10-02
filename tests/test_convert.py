@@ -118,6 +118,33 @@ def test_ladder_facing() -> None:
     assert len(cv._ladder_step_brushes) == 10 + 10 + 10
 
 
+def test_prop_assets_are_per_map() -> None:
+    """Every prop file a conversion writes is under the map's own name: installed pk3s that
+    share a path override each other (cs_cache's trucks were drawn with another map's LOD
+    and vertex order, 2026-10-02). A few de_dust2 props, if CS:GO is installed."""
+    import os
+    from types import SimpleNamespace
+    from mohkit.pak import unowned_paths
+    root = Path(os.environ.get("CSGO_DIR", "/Users/pstn/Documents/Games/csgo"))
+    bsp = root / "csgo" / "maps" / "de_dust2.bsp"
+    if not bsp.is_file():
+        print("skip test_prop_assets_are_per_map: no de_dust2.bsp")
+        return
+    cv = C.Converter(str(bsp), str(root), C.Options(name="cs_pertest"))
+    props = cv.bsp.static_props().props
+    pick = {}
+    for p in sorted(props, key=lambda p: p.model):    # a few models, one with collision
+        pick.setdefault(p.model, p)
+    few = [pick[m] for m in sorted(pick)[:4]]
+    cv.bsp.static_props = lambda: SimpleNamespace(props=few)
+    cv._entity_props = lambda: []
+    cv.props()
+    assert any(k.endswith(".skd") for k in cv.assets) and any(k.endswith((".jpg", ".tga")) for k in cv.assets)
+    assert unowned_paths(cv.assets, "cs_pertest", C.SHARED_PATHS) == []
+    assert all(k.startswith(("models/csgo/cs_pertest/", "textures/csgo/cs_pertest_p/"))
+               for k in cv.assets if k.startswith(("models/", "textures/"))), sorted(cv.assets)
+
+
 def _st(f, p):
     """Texture coordinates (texels / scale) of point ``p`` on face ``f`` (Q3 projection)."""
     import math

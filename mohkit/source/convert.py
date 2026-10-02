@@ -84,6 +84,9 @@ SURFACEPROP = [
 # CGM_MAKE_WINDOW_DEBRIS). Retail's debris_0..3 are all glass shards, so converted maps ship
 # their own metal and wood debris built from retail effect models and sound aliases.
 DEBRIS_GLASS, DEBRIS_METAL, DEBRIS_WOOD = 0, 7, 8
+# Files every conversion ships at the same, engine-fixed path: their content must not depend
+# on the map (installed pk3s sharing a path override each other, pak.path_clashes).
+SHARED_PATHS = ("models/fx/windows/debris_",)
 
 
 def _debris_piece(model: str, count: int, scale: float, life: str) -> str:
@@ -2065,10 +2068,13 @@ class Converter:
             key = (p.model.lower(), p.skin, p.solid if p.solid in (0, 2, 6) else 6)
             if key not in cache:
                 try:
-                    cache[key] = modelconv.convert_model(self.fs, p.model, prefix="csgo", skin=p.skin, solid=key[2],
-                                                         centre=True, headroom=self.opt.headroom,
+                    # per-map names: the files are map-specific (LOD, vertex order, texture
+                    # gain), and installed pk3s sharing a path override each other
+                    cache[key] = modelconv.convert_model(self.fs, p.model, prefix=self.prefix, skin=p.skin,
+                                                         solid=key[2], centre=True, headroom=self.opt.headroom,
                                                          max_texture=self.opt.max_texture, jpeg_quality=90,
-                                                         lod=self._profile["mesh_lod"])
+                                                         lod=self._profile["mesh_lod"],
+                                                         texture_prefix=f"{self.prefix}_p")
                     for sh, g in (cache[key].gains or {}).items():
                         self._gain(sh, g)
                     for sh, w in (cache[key].tint_mask or {}).items():
@@ -2134,7 +2140,7 @@ class Converter:
                 continue
             used[cm.tik] = cm
         if used:
-            self.assets.update(modelconv.bundle(used.values(), prefix="csgo", script=f"scripts/csgo_{self.opt.name}_props.shader"))
+            self.assets.update(modelconv.bundle(used.values(), script=f"scripts/csgo_{self.opt.name}_props.shader"))
         self.report["props"] = {"instances": len(items), "static": len(items) - runtime - dropped - injected,
                                 "injected": injected, "static_vertices": static_v, "runtime": runtime,
                                 "dropped": dropped, "models": len(used)}
@@ -3069,6 +3075,14 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
     files = {f"maps/dm/{name}.bsp": bsp_bytes, **proj.scripts(),
              **{k: (v if isinstance(v, bytes) else Path(v).read_bytes()) for k, v in assets.items()}}
     pk3 = out / f"{name}.pk3"
+    from ..pak import unowned_paths
+    shared = unowned_paths(files, name, SHARED_PATHS)
+    if shared:
+        # another installed map can hold the same path with other contents: one copy wins
+        # for every map (pak.path_clashes; builds before 2026-10-02 shared all prop files)
+        report["unowned_paths"] = len(shared)
+        log(f"== WARNING: {len(shared)} packaged files are not under the map's name and can clash with"
+            f" another installed map's (rebuild without --resume): {shared[:5]}")
     pairs = sorted({k[:-4] for k in files if k.lower().endswith(".jpg")} & {k[:-4] for k in files if k.lower().endswith(".tga")})
     if pairs:
         log(f"== WARNING: {len(pairs)} images exist as both .jpg and .tga (the .jpg wins in game): {pairs[:5]}")
