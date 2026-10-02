@@ -6,13 +6,16 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-02 16:45 ET)
+## State (2026-10-02 17:00 ET)
 
-- **Nothing is running.** Nothing was installed this session: `~/Documents/Games/moh/main/`
-  still holds the 2026-10-01 builds of cs_dust2, cs_mirage, cs_nuke, cs_inferno, cs_cache,
-  cs_cbble, cs_vertigo (shared prop paths, old LOD with shards, T/CT-copy spawns) and cs_rats
-  (on hold). The user may play MOHAA on this Mac: ask before game runs (memory note).
-- **Rebuilt, waiting for the user's install OK** (`local/csgo/<name>/<name>.pk3`; old local
+- **Nothing is running.** **Installed 2026-10-02 ~16:50 ET (user's OK), locally and on the
+  user's VPS (details in the agent's memory note, not in this public repo):** the rebuilt
+  cs_cache, cs_dust2, cs_cbble, cs_mirage, cs_inferno. The VPS server was restarted to load
+  them (user OK'd the telemetry reset). Local clashes: 252 -> 4 (old cs_rats loses 4 files to old
+  cs_vertigo). The replaced local builds are in `local/csgo/before/installed_2026-10-01/`.
+  Still old in the local game folder: cs_nuke, cs_vertigo, cs_rats (on hold). The user may
+  play MOHAA on this Mac: ask before game runs (memory note).
+- **The rebuilds** (`local/csgo/<name>/<name>.pk3`; old local
   builds in `local/csgo/before/<name>_pre_repath/`): cs_cache, cs_dust2, cs_cbble, cs_mirage,
   cs_inferno, all full conversions with per-map prop paths (no clashes), the fixed LOD and
   FFA spawns from the nav mesh. Bots 27-32 kills (cbble 18), every ladder climbs.
@@ -36,16 +39,11 @@ update this file, commit and push, then stop and give the user the one-line hand
 
 ## NEXT (the user picks the order)
 
-### A. Install the rebuilt conversions (user's decision)
+### A. Prop clash: done
 
-Code fix done and verified in game (9c045d9; cs_cache with the 7 other installed pk3s:
-18 of 19 cameras identical, the 19th = run noise). Options per map: install the rebuild
-(`python -m mohkit install local/csgo/<name>/<name>.pk3`; `install` lists any clash left);
-keep the installed build (it keeps clashing with the other old builds); rebuild with
-`--props balanced` for fps (cbble lost the most: -25%); or write a pk3 path-rename tool for
-the installed builds (clash fixed, look and fps unchanged, shards kept; ~1-2 h, not written).
-Not rebuilt: cs_vertigo (loses no files), cs_nuke (see B), cs_rats (on hold). Once the other
-maps are reinstalled, the old cs_nuke/cs_vertigo/cs_rats clash only among themselves.
+Fixed (9c045d9), verified in game, and the five affected maps reinstalled (above). Left, for
+the user: cbble lost the most fps (-25%): a `--props balanced` rebuild could win it back;
+cs_vertigo and cs_nuke still carry the old shared names (harmless once alone).
 
 ### B. Lean rebuild of de_nuke (user, 2026-10-02), then de_mirage
 
