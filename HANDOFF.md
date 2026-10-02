@@ -11,6 +11,18 @@ update this file, commit and push, then stop and give the user the one-line hand
 **Paused 23:15 at the user's request (shutting down; continue tomorrow).** Nothing is running.
 All seven full-detail builds with LOD + fades are installed and are what the user plays now.
 
+**User (chat 23:20): when the maps are redone, make them FFA: DM spawns spread everywhere.**
+Today `Converter.entities()` (convert.py ~1824) maps T/CT spawns to axis/allied and uses CS:GO's
+`info_deathmatch_spawn` for `info_player_deathmatch` when the map has them, else copies the
+T/CT spawns (two clusters at the map ends: bad for FFA). CS:GO DM spawns exist only on
+de_inferno (67) and de_cache (25). The others ship bot nav meshes:
+`~/Documents/Games/csgo/csgo/maps/de_{dust2,mirage,nuke,cbble,vertigo}.nav` (no de_cache.nav).
+Plan: read the .nav (Source nav mesh: areas with corner heights and attribute flags), drop
+crouch/jump/ladder/tiny areas, farthest-point sample ~32-48 spread DM spawns (yaw toward open
+space, `validate.fix_spawns` for clearance), keep CS:GO DM spawns where present (thin them if
+crowded), and test with 8 bots (kills, spread of spawn kills). Do it with the next rebuild of
+each map (the profile work below needs full builds anyway).
+
 User picked "Both, compare": build a balanced and a stock-like profile on Nuke, show
 screenshots + fps side by side, then the user picks.
 - Stock maps (same harness, spawn views): mohdm1-4 ~1,200-1,700 fps mean, 6-19k verts and
