@@ -96,6 +96,7 @@ part of the definition of done. Human feedback outranks both.
 | need | read |
 |---|---|
 | start here / index | `docs/README.md` |
+| a shot looks wrong: known symptoms, causes, fixes | `docs/symptoms.md` |
 | design, dimensions, layout, budgets | `docs/design.md` |
 | `build.py` API: MapBuilder, Carver, kit, material specs, side conventions | `docs/api.md` |
 | `.map` syntax, texture projection, patches, terrain | `docs/map-format.md` |
@@ -114,6 +115,11 @@ part of the definition of done. Human feedback outranks both.
 When you learn something new about the engine or tools, put it in the right
 doc (with evidence: a source line, a binary string or an in-game test), not in
 a log.
+
+When a build shows a bug (visual or gameplay) and you fix it, add a row to
+`docs/symptoms.md` (what it looks like, cause, fix, guard) and, wherever you can, a guard
+that catches it next time without anyone looking: a test, a `validate` or compile check, or
+a harness check. A bug fixed without a row or a guard will be paid for again.
 
 ## Repo layout
 

@@ -61,6 +61,8 @@ python -m mohkit install dist/my_first.pk3        # then in game: g_gametype 1; 
 9. [csgo-conversion.md](csgo-conversion.md): converting CS:GO maps.
 10. [from-reference.md](from-reference.md): recreating a scene from a screenshot or
     photo (camera maths, texture look-alikes, side-by-side comparison).
+11. [symptoms.md](symptoms.md): a shot or a match looks wrong? Every bug seen in a build so
+    far: what it looks like, the cause, the fix and what guards against it now.
 
 ## Reference
 
