@@ -147,8 +147,8 @@ again (`bsp_checks`: limits, fence masks, lightmap pages).
 
 | message | meaning | fix |
 |---|---|---|
-| `******* leaked *******`, `.lin` file written | the playable space reaches the void | seal it; the `.lin` file traces the path; use the Carver so leaks can't happen |
-| `WARNING: Entity N of type 'light' leaked` | only that entity is outside the hull (stock maps have these) | harmless, but the light is wasted |
+| `******* leaked *******`, `.lin` file written | the playable space reaches the void | seal it; the `.lin` file traces the path (its last point is the entity it started from). With the Carver the hull is sealed, so look for an entity outside every air box: a spawn inside a solid building mass, or a brush entity whose bounding-box **centre** is in solid (q3map floods from that centre: mk_summit's single trigger_hurt under the whole map was centred inside the plateau). `mohkit generate` reports both (`validate.check_air`) |
+| `WARNING: Entity N of type 'light' leaked` | the light is within 16 units of a structural ceiling (mk_summit, 2026-10-02: every light at 16 below a structural ceiling got it, lights 32 below the same ceilings and 16 below a detail gallery floor did not; the rooms were still lit), or the entity really is outside the hull (stock maps have some) | hang lights 24+ units below structural ceilings |
 | `Entity N, Brush M: degenerate plane` | collinear face points | fix the generator |
 | `LoadPortals: NumVisBytes X exceeds 2097152` | too many structural splits for VIS | make interior brushes detail; keep a simple structural hull |
 | `Entity N origin is out of bounds, skipping!` for every entity (BSP), then `LoadPortals: couldn't read <map>.prt` (VIS) | the map lies outside ±8192 (de_vertigo is played 11,500 units up) | move it inside; CS:GO conversions do it automatically (`Options.offset`) |

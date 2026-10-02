@@ -79,6 +79,26 @@ are just more air boxes overlapping walls or floors. Wall thickness is the gap
 between two air boxes: leave 16–32 units between a street and the room behind
 it.
 
+### Cliff-top and island maps (drops on every side)
+
+`maps/mk_summit` sits on a plateau with real drops. The outdoor air is the outer box minus
+the plateau (footprint rectangles from the valley floor up to the ground) minus every
+building mass (ground to roof): `merge_boxes(subtract_all([outer], solids))`, each piece a
+sky `Air` whose floor/walls are functions of position (api.md). The cliffs are then shell
+faces, the hull stays sealed, and building rooms are carved inside the masses as usual.
+Details that mattered:
+
+- The hollow inside the plateau is outside the hull. Nothing may stand in it: one
+  `trigger_hurt` per void column (a single one under the whole map is centred inside the
+  plateau and leaks), and no spawn inside a solid mass (`validate.check_air` catches both).
+- A fall of 625+ units kills; Summit's valley floor is 1,536 below the rim, with the
+  trigger as a backstop.
+- Trees below the rim need ground: `rock_spur` stacks three widening 7-gon prisms from the
+  valley floor to the tree's base.
+- With `farplane_cull 1` a 2D sky is drawn unfogged (mk_summit's first draft: `sky/m5l2`
+  stayed dark grey under pale fog `.74 .77 .82` at 3,800). Pick a sky whose horizon matches
+  the fog colour: `sky/d-day2` (grey overcast over a pale band) with `.71 .71 .73`.
+
 ### Detail that makes it look like MOHAA
 
 Compare with stock `reference/aa/mohdm1.map`, `mohdm6.map`, `obj_team2.map`:

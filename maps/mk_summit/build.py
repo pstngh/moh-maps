@@ -212,13 +212,20 @@ def opening(cv, bl, side, u, w, z0, z1, reveal=CONC, floor=CFLOOR, name="door"):
     return cv.room(*bb, floor=floor, walls=reveal, ceiling=reveal, name=name)
 
 
-def door(cv, bl, side, u, w=80, h=128, frame=FRAME, **kw):
-    """Doorway with a steel frame round it."""
+def door(cv, bl, side, u, w=80, h=128, frame=FRAME, lamp=True, **kw):
+    """Doorway with a steel frame round it and a cool wall lamp over it (outside)."""
     a = opening(cv, bl, side, u, w, G, G + h, **kw)
-    if frame is not None and _B is not None:
-        x0, y0, x1, y1 = bl.rect
+    if _B is None:
+        return a
+    x0, y0, x1, y1 = bl.rect
+    if frame is not None:
         axis, plane = {"south": ("y", y0), "north": ("y", y1 - T), "west": ("x", x0), "east": ("x", x1 - T)}[side]
         kit.opening_frame(_B, axis, plane, T, u - w / 2, u + w / 2, G, G + h, frame, width=6)
+    if lamp:
+        # the lantern stands outside the wall; ``wall`` is where the wall is, seen from it
+        at = {"south": (u, y0, "north"), "north": (u, y1, "south"), "west": (x0, u, "east"), "east": (x1, u, "west")}
+        lx, ly, wall = at[side]
+        kit.wall_lantern(_B, lx, ly, G + h + 40, wall, 170, (0.92, 0.95, 1.0))
     return a
 
 
@@ -336,7 +343,7 @@ def radio(b, cv):
     b.prop("static/metaldesk", X(258), Y(85), G, 0)
     b.prop("furniture/bunkerchair", X(258), Y(80), G, 270)
     b.prop("static/static_subradio1", X(256), Y(85), G + 30, 270)
-    b.prop("static/worktable", X(240), Y(90), G, 0)
+    b.prop("static/worktable", X(282), Y(92), G, 180)
     b.prop("static/cabinet_tall", x1 - 4, Y(70), G, 180)
     b.prop("static/bigfilecabinet", x0 + 24, y0 + 40, G, 0)
     for u in (242, 262, 282):
@@ -418,6 +425,16 @@ def control(b, cv):
     door(cv, bl, "east", Y(296), w=96)
     door(cv, bl, "north", X(232), w=112)
     door(cv, bl, "north", X(288), w=112)
+    for u in (250, 270, 300):
+        window(cv, bl, "north", X(u), w=128, z0=56, z1=136)
+    for u in (222, 266):
+        window(cv, bl, "south", X(u), w=128, z0=56, z1=136)
+    # string course at the gallery level round the tall mass
+    cap = {"top": ROOFSNOW, "default": CONC_PLAIN}
+    b.box((x0 - 6, y0 - 6, 200), (x1 + 6, y0, 216), cap)
+    b.box((x0 - 6, y1, 200), (x1 + 6, y1 + 6, 216), cap)
+    b.box((x0 - 6, y0, 200), (x0, y1, 216), cap)
+    b.box((x1, y0, 200), (x1 + 6, y1, 216), cap)
     door(cv, bl, "south", X(240), w=112)
     door(cv, bl, "south", X(292), w=112)
     # galleries: north and south, each with a stair from the hall floor

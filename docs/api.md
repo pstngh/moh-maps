@@ -86,6 +86,13 @@ rooms touch the same shell face, the larger contact wins, then the higher
 | `cv.solid(x0, y0, z0, x1, y1, z1, spec)` | extra **structural** box not derived from air (a pillar mass); the spec uses brush keys, and nothing is caulked for you |
 | `cv.contains(point)` | is the point in any air |
 
+`floor`, `walls` and `ceiling` may also be **functions** `(inward_normal, face_centre) ->
+material`: for air computed by subtraction (`subtract_all` + `merge_boxes`), whose faces
+belong to many buildings, the function looks up what is behind the face (`mk_summit`'s
+`wall_fn`: sky at the outer box, the building's facade above ground, cliff rock below).
+Shell pieces are cut only at band heights, so pass `cuts=(z, ...)` to cut them where the
+function's answer changes with height (ground level between cliff and facade).
+
 A wall between two rooms is as thick as the gap between them. Each room's
 shell is `thickness` deep, so a gap wider than 2 × `thickness` is hollow (and
 caulked). Niches cut into that gap: keep `depth + thickness` at or below it.
@@ -133,5 +140,6 @@ see [testing.md](testing.md#cameras).
 
 ```sh
 python -m mohkit generate maps/<name>          # .map + validate + dist/<name>_plan.png, seconds
+                                               # (+ dist/<name>_underlay.png with META["underlay"], see from-reference.md)
 python -m mohkit build maps/<name> -q draft    # compile, package, screenshots
 ```

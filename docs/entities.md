@@ -67,6 +67,12 @@ editor-only.
   the *bottom* of the shade. `MapBuilder.prop(..., hang=True)` handles it.
 - Use `python -m mohkit.propview static/wagon lights/hanglamp` to render any
   props in a test room with a +X arrow and a 64-unit ruler.
+- **Only `game == "aa"` props exist in retail Allied Assault.** The catalog also lists
+  Spearhead/Breakthrough models (`static/snowycrate`, `snow_crate`, `fuel_tank`,
+  `generator`): AA logs `Couldn't load models/static/...` and draws nothing (mk_summit,
+  2026-10-02). `mohkit.props.search(..., game="aa")` lists the usable ones; `validate`
+  rejects the others. Winter set in AA: `tree_winter_*pine`, `rock_winter_*`,
+  `sandbag_*_winter`, `lightpost_*_winter`; crates `indycrate`, `30cal_crate`, `exp_crate1`.
 - `script_model` is a runtime (scriptable, animated) model. It must be
   precached (`cache models/x.tik` in `_precache.scr`).
 

@@ -114,3 +114,27 @@ texture is slightly redder than the original. Regenerate the reference with:
 from mohkit import game
 game.run([], "dm/mohdm1", [game.Shot("ref", (-288, 1240, 130), (0, 0, 0))], run_name="ref_c8")
 ```
+
+## A whole map from another game (overhead map + screenshots)
+
+Worked example: `maps/mk_summit` (Summit, *Call of Duty: Black Ops*), 2026-10-02.
+References: the game's minimap, a bird's-eye shot and a few gameplay screenshots from the
+game's wiki (downloaded with the user's OK into `local/`, never committed).
+
+1. **Orient the references.** Rotate the bird's-eye shot until its landmarks sit where the
+   minimap has them (Summit's bird's-eye is the minimap turned 90° clockwise: the dome is
+   NE on the minimap, bottom-right on the shot). A side-by-side image settles it.
+2. **Scale.** Measure objects of known size on the bird's-eye shot (a truck 2.4 m wide, a
+   gondola about 3 m), convert to minimap pixels, then to the source game's units, then to
+   MOHAA: a CoD player is 72 units tall, a MOHAA player 94, so **CoD units x 1.3** keeps
+   doorways, cover heights and running time alike (MOHAA runs 275 u/s, CoD 190 u/s: the same
+   route takes 0.9x as long). Summit: ~9.8 CoD units per minimap pixel -> 12 MOHAA units.
+3. **Write positions in minimap pixels** in `build.py` (`X(u)`, `Y(v)`, `R(u0, v0, u1, v1)`
+   helpers that snap to 16), so every number can be checked against the picture.
+4. **Underlay.** `META["underlay"] = {"image": "local/<ref>/minimap.png", "origin_px": [u, v],
+   "units_per_px": 12, "alpha": 0.5, "zmin": -64}` makes `mohkit generate` draw the plan over
+   the minimap (`dist/<name>_underlay.png`): footprint edges on the minimap's walls mean the
+   layout matches. `zmin` hides what lies below the playable ground (a valley floor).
+5. **What the references don't show** (interiors, floor heights) is a guess: say so to the
+   user, who has usually played the original, and ask for corrections early: send the first
+   draft sheet and the underlay before polishing.
