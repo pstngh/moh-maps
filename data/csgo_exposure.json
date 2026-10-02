@@ -6,38 +6,38 @@
   "rule": 1.2247
  },
  "de_cbble": {
-  "exposure": 0.813,
-  "ratio": 0.9968,
+  "exposure": 0.857,
+  "ratio": 1.0028,
   "cameras": 21,
   "rule": 0.6364
  },
  "de_dust2": {
-  "exposure": 1.8762,
-  "ratio": 0.9985,
+  "exposure": 2.3221,
+  "ratio": 1.0009,
   "cameras": 30,
   "rule": 1.4491
  },
  "de_inferno": {
-  "exposure": 2.8259,
-  "ratio": 1.0,
+  "exposure": 2.6926,
+  "ratio": 0.9896,
   "cameras": 31,
   "rule": 1.0607
  },
  "de_mirage": {
-  "exposure": 1.0234,
-  "ratio": 0.9968,
+  "exposure": 1.0889,
+  "ratio": 1.0119,
   "cameras": 28,
   "rule": 1.0198
  },
  "de_nuke": {
-  "exposure": 1.065,
-  "ratio": 1.014,
+  "exposure": 1.1145,
+  "ratio": 1.0075,
   "cameras": 36,
   "rule": 0.9287
  },
  "de_vertigo": {
-  "exposure": 1.5586,
-  "ratio": 1.0105,
+  "exposure": 1.559,
+  "ratio": 1.015,
   "cameras": 10,
   "rule": 1.4142
  }

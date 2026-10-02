@@ -36,12 +36,31 @@ whether another session runs: none does; only lane A (`final2.sh`, NOINSTALL) fr
   **exposure fits and shots of dust2/mirage/inferno/nuke/cbble were contaminated**. Harness now
   sets fs_apppath/steampath/gogpath to the base; `mohkit install` warns on jpg/tga clashes
   (`pak.image_clashes`; installed folder: only cs_nuke's own 3).
-- **Done 20:05:** all six (dust2 mirage inferno nuke cbble vertigo) re-packaged with LOD
-  (`local/csgo/lod_resume.sh`, logs `lod_a/b.log`). **Running 20:10:** clean re-shoot + re-fit
-  (`local/csgo/refit.sh`, `refit_a.log`: dust2 inferno vertigo cache; `refit_b.log`: mirage nuke
-  cbble). **Then:** `local/csgo/perf_ab.sh de_x ...` (installed vs new fps, `perf_ab.log`), look
-  at sheets vs CS:GO, install all, README images. Threshold blends have hard edges where CS:GO
-  is soft (dust2 mask r ~0.39): possible 2-stage dither later (costs a pass).
+- **Harness drew with r_primitives 0** (fd6ac3f): Apple GL has no compiled vertex arrays, so 0
+  sends each triangle strip as glBegin/glEnd = one Metal draw per strip (`sample` profile);
+  de_inferno 6 fps vs 84 with 2, same image. The owner's omconfig.cfg already has
+  `r_primitives 2`; the harness now sets it. All numbers below use it (1280x720, no bots).
+- **fps A/B, installed -> LOD (mean / worst camera):** dust2 206/99 -> 325/187, mirage 199/64
+  -> 337/168, inferno 82/27 -> 181/92, nuke 39/22 -> 88/65, cache 174/67 -> 270/141, cbble
+  93/40 -> 218/130, vertigo 153/82 -> 240/171 (`local/csgo/perf_ab.log`). Runs vary ~+-30% per
+  camera: compare interleaved, repeated.
+- **Prop fades (09b112a):** CS:GO's per-prop fade distances -> LOD vanish steps (docs). Inferno
+  181/91 -> 250/152 (two interleaved runs), nuke 88 -> 95 (its cost is merged `_autocombine_`
+  clusters, radius 800-1300; splitting them would need SKD budget). Renderer limit found: 2,048
+  shaders per level (sort key), so no per-fade shaders.
+- **Exposures re-fitted with clean shots (20:10-20:28):** dust2 2.32, mirage 1.09, inferno 2.69,
+  nuke 1.115, cbble 0.857, vertigo 1.56, cache 2.02. Errors vs CS:GO: mirage 4.1, cbble 4.8,
+  dust2 5.0, nuke 5.4, inferno 6.3, cache 9.6, vertigo 9.8.
+- **Done 22:20: all seven installed** (dust2 mirage inferno nuke cache cbble vertigo: LOD + fades,
+  clean exposure fits, threshold blends). Final fps (mean / worst, installed-before -> now):
+  dust2 206/99 -> 305/193, mirage 199/64 -> 342/168, inferno 82/27 -> 229/141, nuke 39/22 ->
+  98/64, cache 174/67 -> 308/239, cbble 93/40 -> 229/141, vertigo 153/82 -> 235/178. README
+  table + images updated (`local/csgo/readme_img.py`). Rats untouched (user: stop on rats).
+- **Next (suggested):** nuke's merged `_autocombine_` clusters (split spatially for LOD/fade,
+  within the 600-SKD budget); soft threshold-blend edges; Vertigo's dark portal sky above the
+  city; real VIS for world surfaces (~2 ms of the frame now).
+- Threshold blends have hard edges where CS:GO's are soft (dust2 mask r ~0.39); a 2-stage
+  dither would cost a pass. Not done.
 
 ## Session (2026-10-01 from 16:05): ladders, exposure fit, blend textures
 

@@ -88,15 +88,20 @@ converted map in OpenMoHAA. The converted maps use CS:GO's own baked lighting an
 fitted to these screenshots (`--fit-exposure`). Converted maps and their assets stay local
 (personal use); only these screenshots are in the repo.
 
-| map | brightness error vs CS:GO (0-255, all cameras) | ladders climbable | bot kills (8 bots, 90 s) |
-|---|---|---|---|
-| de_dust2 | 5.3 | none | 73 |
-| de_mirage | 4.1 | 3/3 | 68 |
-| de_nuke | 5.3 | 6/6 | 81 |
-| de_inferno | 6.0 | none | 26 |
-| de_cache | 9.6 | 1/1 | 28 |
-| de_vertigo | 10.6 | 3/3 | 48 |
-| de_cbble | 5.0 | 2/2 | 49 |
+| map | brightness error vs CS:GO (0-255, all cameras) | ladders climbable | bot kills (8 bots, 90 s) | fps mean / worst camera (before -> now) |
+|---|---|---|---|---|
+| de_dust2 | 4.9 | none | 87 | 206 / 99 -> 305 / 193 |
+| de_mirage | 4.1 | 3/3 | 72 | 199 / 64 -> 342 / 168 |
+| de_nuke | 5.6 | 6/6 | 78 | 39 / 22 -> 98 / 64 |
+| de_inferno | 6.4 | none | 26 | 82 / 27 -> 229 / 141 |
+| de_cache | 9.6 | 1/1 | 28 | 174 / 67 -> 308 / 239 |
+| de_vertigo | 10.7 | 3/3 | 48 | 153 / 82 -> 235 / 178 |
+| de_cbble | 4.8 | 2/2 | 47 | 93 / 40 -> 229 / 141 |
+
+fps: OpenMoHAA on an Apple M4, 1280x720, retail high detail, `r_primitives 2`, at every
+camera (`python -m mohkit csgo <map> --perf 2000`); "before" is the build installed until
+2026-10-01 evening, "now" adds prop LOD and CS:GO's prop fade distances. Keep
+`seta r_primitives "2"` in your config: on macOS the default draws these maps about 10x slower.
 
 What still differs is mostly the engine: MOHAA has no bump maps, specular highlights,
 reflections or bloom, so surfaces look flatter. Only de_vertigo keeps CS:GO's 3D skybox (its
