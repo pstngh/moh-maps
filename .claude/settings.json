@@ -5,9 +5,20 @@
         "hooks": [
           {
             "type": "command",
-            "command": "f=\"$CLAUDE_PROJECT_DIR/HANDOFF.md\"; if [ -f \"$f\" ]; then echo \"=== HANDOFF.md: current project state. Continue from its next steps unless the user asks otherwise. ===\"; cat \"$f\"; fi",
+            "command": "f=\"$CLAUDE_PROJECT_DIR/HANDOFF.md\"; if [ -f \"$f\" ]; then echo \"=== HANDOFF.md: current project state. Continue from its next steps unless the user asks otherwise. ===\"; cat \"$f\"; fi; echo \"=== Learning loop (CLAUDE.md): make every lesson permanent when it is learned (code > topic doc > docs/symptoms.md > memory); harvest before any handoff. ===\"",
             "timeout": 10,
             "statusMessage": "Loading HANDOFF.md"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/learning_loop_stop.sh\"",
+            "timeout": 10
           }
         ]
       }

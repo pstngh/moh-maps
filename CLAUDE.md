@@ -137,6 +137,9 @@ Where each lesson goes, strongest first:
 `HANDOFF.md` is in-flight state (what runs, what's next), not knowledge: anything durable
 in it moves to 1-3 before the session ends (the harvest step in "Pause before the context
 fills"). A lesson left only in HANDOFF, a commit message or the chat is lost.
+Enforced by hooks in `.claude/settings.json`: the session-start output ends with this rule,
+and `.claude/hooks/learning_loop_stop.sh` blocks a turn that hands the session off once,
+until the harvest is done or confirmed.
 
 ## Repo layout
 
