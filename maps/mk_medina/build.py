@@ -22,9 +22,10 @@ from __future__ import annotations
 
 import math
 import random
+from functools import partial
 
-from mohkit import kit
-from mohkit.build import Carver, MapBuilder, Material as M, aabb, overlaps
+from mohkit import kit, site
+from mohkit.build import Carver, MapBuilder, Material as M
 from mohkit.game import Shot
 
 META = {"name": "mk_medina", "title": "Medina", "mode": "dm", "ambience": "mohdm7",
@@ -92,165 +93,17 @@ BALC_TRIM = M("algiers/wdtrimbal")
 
 LAMP = (1.0, 0.8, 0.55)
 
+# kit techniques in this map's palette
+arcade = partial(kit.arcade, stone=STONE, column=COLM)
+parapet = partial(kit.coped_wall, m=TRIM, cap=STONE)
+dome = partial(kit.masonry_dome, stone=STONE, trim=TRIM)
+balcony = partial(kit.mashrabiya, wood=PLANKS, trim=BALC_TRIM, beam=BEAM, roof=ROOFM, stone=STONE, grille=GRILLE)
+
 
 # --------------------------------------------------------------------------- helpers
-def octagon(cx, cy, r, n=8, phase=22.5):
-    return [(round(cx + r * math.cos(math.radians(phase + 360 * i / n))),
-             round(cy + r * math.sin(math.radians(phase + 360 * i / n)))) for i in range(n)]
-
-
-def arch_fill(b, axis, t0, t1, u0, u1, zs, ztop, m, k=0.72, segs=5, cap=True):
-    """Masonry between a pointed-arch intrados (span u0..u1 springing at zs) and ztop.
-
-    ``axis`` is the axis the span runs along ("x" or "y"); t0..t1 is the wall thickness
-    on the other axis. k = radius / span (0.5 = round arch). The curved voussoir pieces stop
-    just above the apex (``z_mid``, returned); one plain block (``cap``) fills z_mid..ztop.
-    Keeping the many curve vertices off the ceiling plane avoids > 64-vertex ceiling faces
-    after T-junction fixing (seen on the first build: 83 vertices on an arcade ceiling)."""
-    span = u1 - u0
-    r = k * span
-    cx = u0 + r
-    th_m = math.acos((span / 2 - r) / r)
-    left = []
-    for i in range(segs + 1):
-        th = math.pi + (th_m - math.pi) * i / segs
-        left.append((cx + r * math.cos(th), zs + r * math.sin(th)))
-    left[-1] = ((u0 + u1) / 2, left[-1][1])
-    right = [(u0 + u1 - u, z) for u, z in reversed(left)]
-    curve = left + right[1:]
-    curve = [(round(u), round(z)) for u, z in curve]
-    apex = max(z for _, z in curve)
-    z_mid = int(math.ceil((apex + 6) / 4.0) * 4)
-    assert z_mid <= ztop, "arch apex above ztop"
-
-    def P(u, t, z):
-        return (u, t, z) if axis == "x" else (t, u, z)
-
-    seg_m = {"up": CAULK, "default": m}
-    for (ua, za), (ub, zb) in zip(curve, curve[1:]):
-        if ub - ua < 1:
-            continue
-        pts = []
-        for t in (t0, t1):
-            pts += [P(ua, t, za), P(ub, t, zb), P(ub, t, z_mid), P(ua, t, z_mid)]
-        b.hull(pts, seg_m)
-    if cap and z_mid < ztop:
-        lo, hi = P(u0, t0, z_mid), P(u1, t1, ztop)
-        b.box(lo, hi, {"down": CAULK, "default": m})
-    return z_mid
-
-
-def arcade(b, axis, tc, posts, z0, zs, ztop, wall_m, k=0.72, depth=32, skip=()):
-    """Pillars at ``posts`` (coordinates along ``axis``) on the line ``tc`` with arches
-    between them: octagonal shafts, plinths and capitals, then one lintel up to ``ztop``."""
-    h = depth / 2
-
-    def B(ua, ub, ta, tb, za, zb, m):
-        if axis == "x":
-            b.box((ua, ta, za), (ub, tb, zb), m)
-        else:
-            b.box((ta, ua, za), (tb, ub, zb), m)
-
-    z_mid = ztop
-    for a, c in zip(posts, posts[1:]):
-        z_mid = arch_fill(b, axis, tc - h, tc + h, a + h, c - h, zs, ztop, wall_m, k=k, cap=False)
-    for u in posts:
-        if u in skip:
-            continue
-        B(u - 18, u + 18, tc - 18, tc + 18, z0, z0 + 14, STONE)                  # plinth
-        cx, cy = (u, tc) if axis == "x" else (tc, u)
-        b.prism(octagon(cx, cy, 13), z0 + 14, zs - 10, COLM)                     # shaft
-        B(u - 18, u + 18, tc - 18, tc + 18, zs - 10, zs, STONE)                  # capital
-        B(u - h, u + h, tc - h, tc + h, zs, z_mid, {"up": CAULK, "default": wall_m})   # pier
-    lo, hi = min(posts) - h, max(posts) + h
-    if z_mid < ztop:
-        B(lo, hi, tc - h, tc + h, z_mid, ztop, {"down": CAULK, "default": wall_m})  # lintel
-    # cornice on the open (front) side: the square side is the lower coordinate
-    B(lo, hi, tc - h - 6, tc - h, ztop - 4, ztop + 16, STONE)
-
-
-def parapet(b, x0, y0, x1, y1, z, h=40, m=TRIM, cap=STONE):
-    b.box((x0, y0, z), (x1, y1, z + h), m)
-    b.box((x0 - 3, y0 - 3, z + h), (x1 + 3, y1 + 3, z + h + 5), cap)
-
-
-def decal(b, facing, plane, u0, u1, z0, z1, image, px, proud=1.0):
-    """Blended/alpha image on a thin non-solid slab in front of a wall. ``facing`` is the
-    compass direction the wall face looks toward; ``plane`` its coordinate."""
-    n = {"north": (0, 1, 0), "south": (0, -1, 0), "east": (1, 0, 0), "west": (-1, 0, 0)}[facing]
-    img = kit.fit(image, n, u0, u1, z1, scale=(u1 - u0) / px[0], scale_t=(z1 - z0) / px[1])
-    img = img(parms=("nonsolid",))
-    other = NODRAW(parms=("nonsolid",))
-    spec = {facing: img, "default": other}
-    if facing == "north":
-        b.box((u0, plane, z0), (u1, plane + proud, z1), spec, grid=0)
-    elif facing == "south":
-        b.box((u0, plane - proud, z0), (u1, plane, z1), spec, grid=0)
-    elif facing == "east":
-        b.box((plane, u0, z0), (plane + proud, u1, z1), spec, grid=0)
-    else:
-        b.box((plane - proud, u0, z0), (plane, u1, z1), spec, grid=0)
-
-
-def panel(b, facing, plane, u0, u1, z0, z1, image, px, edge, proud=2):
-    """Solid image panel standing ``proud`` in front of a wall (doorway pictures)."""
-    n = {"north": (0, 1, 0), "south": (0, -1, 0), "east": (1, 0, 0), "west": (-1, 0, 0)}[facing]
-    img = kit.fit(image, n, u0, u1, z1, scale=(u1 - u0) / px[0], scale_t=(z1 - z0) / px[1])
-    spec = {facing: img, "default": edge}
-    if facing == "north":
-        b.box((u0, plane, z0), (u1, plane + proud, z1), spec, grid=0)
-    elif facing == "south":
-        b.box((u0, plane - proud, z0), (u1, plane, z1), spec, grid=0)
-    elif facing == "east":
-        b.box((plane, u0, z0), (plane + proud, u1, z1), spec, grid=0)
-    else:
-        b.box((plane - proud, u0, z0), (plane, u1, z1), spec, grid=0)
-
-
-def awning(b, facing, plane, u0, u1, z_wall, depth=80, drop=28):
-    """Opaque cloth awning sloping away from a wall, with a wooden batten on its edge.
-
-    (The first version used the alpha-tested algiers/tentdsrt; its underside stayed black in
-    both draft and preview lighting, so the lightmapped algiers/desertcloth is used.)"""
-    cloth = M("algiers/desertcloth")
-    zin, zout = z_wall, z_wall - drop
-    pts = []
-    if facing in ("north", "south"):
-        out = plane + (depth if facing == "north" else -depth)
-        for x in (u0, u1):
-            pts += [(x, plane, zin), (x, plane, zin + 2), (x, out, zout), (x, out, zout + 2)]
-        ya, yb = sorted((out, out + (-4 if facing == "north" else 4)))
-        b.box((u0, ya, zout - 4), (u1, yb, zout + 2), BEAM, grid=0)
-    else:
-        out = plane + (depth if facing == "east" else -depth)
-        for y in (u0, u1):
-            pts += [(plane, y, zin), (plane, y, zin + 2), (out, y, zout), (out, y, zout + 2)]
-        xa, xb = sorted((out, out + (-4 if facing == "east" else 4)))
-        b.box((xa, u0, zout - 4), (xb, u1, zout + 2), BEAM, grid=0)
-    b.hull(pts, cloth)
-
-
-def canopy(b, axis, a0, a1, c0, c1, z, sag):
-    """Sagging cloth stretched across a street: spans a0..a1 along ``axis`` (the street
-    direction), wall to wall c0..c1 across it, hung at z with its middle ``sag`` lower."""
-    cm = (c0 + c1) / 2
-    cloth = {"up": M("algiers/desertcloth"), "down": M("algiers/desertcloth"), "default": NODRAW}
-
-    def P(a, c, zz):
-        return (a, c, zz) if axis == "x" else (c, a, zz)
-
-    for ca, cb, za, zb in ((c0, cm, z, z - sag), (cm, c1, z - sag, z)):
-        pts = []
-        for a in (a0, a1):
-            pts += [P(a, ca, za), P(a, ca, za + 2), P(a, cb, zb), P(a, cb, zb + 2)]
-        b.hull(pts, cloth)
-
-
 # --------------------------------------------------------------------------- hills
 def dist_out(x, y):
-    dx = max(TX0 - x, 0, x - TX1)
-    dy = max(TY0 - y, 0, y - TY1)
-    return (dx ** 4 + dy ** 4) ** 0.25          # rounded-square contours: even slopes in the corners
+    return site.outside_distance(x, y, (TX0, TY0, TX1, TY1))   # rounded-square contours
 
 
 def ground_base(y):
@@ -358,11 +211,11 @@ def build():
     b.prop("static/wicker_basket_1", 200, 232, UP, 0)
     b.prop("static/basket1", 230, 228, UP, 90)
     # fountain
-    b.prism(octagon(0, -384, 144), 0, 28, {"up": STONE, "default": TILE})
-    b.prism(octagon(0, -384, 120), 28, 32, TILE)          # dry basin floor (raised)
-    b.prism(octagon(0, -384, 26), 32, 96, TILE)
-    b.prism(octagon(0, -384, 48), 96, 108, STONE)
-    b.prism(octagon(0, -384, 16), 108, 140, TILE)
+    b.prism(kit.polygon(0, -384, 144, 8, 22.5), 0, 28, {"up": STONE, "default": TILE})
+    b.prism(kit.polygon(0, -384, 120, 8, 22.5), 28, 32, TILE)          # dry basin floor (raised)
+    b.prism(kit.polygon(0, -384, 26, 8, 22.5), 32, 96, TILE)
+    b.prism(kit.polygon(0, -384, 48, 8, 22.5), 96, 108, STONE)
+    b.prism(kit.polygon(0, -384, 16, 8, 22.5), 108, 140, TILE)
     # palms and market clutter
     for x, y, yaw in ((-430, -640, 20), (430, -640, 140), (-430, -140, 250), (440, -120, 75)):
         b.prop("static/tree_regularpalm", x, y, 0, yaw)
@@ -380,32 +233,32 @@ def build():
         kit.lamp(b, 736, y, 176, 90)
     # shop doorways on the arcade back walls
     for x in (-440, -150, 136, 424):
-        panel(b, "south", 256, x - 72, x + 72, 0, 144, DOORWAY, (256, 256), WE)
+        kit.image_panel(b, "south", 256, x - 72, x + 72, 0, 144, DOORWAY, (256, 256), WE)
     for y in (-760, -472, -184):
-        panel(b, "west", 832, y - 64, y + 64, 0, 128, DOORWAY, (256, 256), WE)
+        kit.image_panel(b, "west", 832, y - 64, y + 64, 0, 128, DOORWAY, (256, 256), WE)
 
     # ---------------------------------------------------------------- gate and passage arches
     for yy in (-1088 + 16, -832 - 16):
-        arch_fill(b, "x", yy - 16, yy + 16, -96, 96, 100, 224, M("algiers/afrik_wall1a"), k=0.6)
+        kit.arch_fill(b, "x", yy - 16, yy + 16, -96, 96, 100, 224, M("algiers/afrik_wall1a"), k=0.6)
     for yy in (256 + 16, 640 - 16):
-        arch_fill(b, "x", yy - 16, yy + 16, -96, 96, UP + 32, 352, UA, k=0.6)
+        kit.arch_fill(b, "x", yy - 16, yy + 16, -96, 96, UP + 32, 352, UA, k=0.6)
     for xx in (640 + 16, 896 - 16):
-        arch_fill(b, "y", xx - 16, xx + 16, 640, 896, UP + 48, 384, UA, k=0.5)
-    arch_fill(b, "x", 896, 928, -96, 96, UP + 80, 400, UD, k=0.6)
+        kit.arch_fill(b, "y", xx - 16, xx + 16, 640, 896, UP + 48, 384, UA, k=0.5)
+    kit.arch_fill(b, "x", 896, 928, -96, 96, UP + 80, 400, UD, k=0.6)
     kit.lamp(b, 0, -960, 224, 110)
     kit.lamp(b, 0, 448, 352, 110)
     kit.lamp(b, 768, 768, 384, 120)
 
     # ---------------------------------------------------------------- mosque
     arcade(b, "x", 1344, [-448, -320, -192, -64, 64, 192, 320, 448], UP, UP + 96, 368, UA)
-    b.prism(octagon(0, 1136, 80), UP, UP + 24, {"up": STONE, "default": TILE})
-    b.prism(octagon(0, 1136, 20), UP + 24, UP + 64, TILE)
+    b.prism(kit.polygon(0, 1136, 80, 8, 22.5), UP, UP + 24, {"up": STONE, "default": TILE})
+    b.prism(kit.polygon(0, 1136, 20, 8, 22.5), UP + 24, UP + 64, TILE)
     for x, y, yaw in ((-300, 1040, 0), (300, 1230, 90)):
         b.prop("static/tree_regularpalm", x, y, UP, yaw)
     for x, y in ((-330, 1250), (330, 1030)):
         b.prop("static/tree_squatpalm", x, y, UP, rng.randrange(360))
     for x in (-256, 0, 256):
-        panel(b, "south", 1504, x - 64, x + 64, UP, UP + 128, DOORWAY, (256, 256), TRIM)
+        kit.image_panel(b, "south", 1504, x - 64, x + 64, UP, UP + 128, DOORWAY, (256, 256), TRIM)
     b.prop("static/sandbag_large_semicircle", 0, 730, UP, 90)
     b.prop("static/sandbag_small_semicircle", 1300, -1150, 0, 180)
     b.prop("static/sandbag_large_semicircle", -1650, 700, UP, 0)
@@ -422,8 +275,8 @@ def build():
     b.hull([(mx0 + 16, my0 + 16, ROOF + 530), (mx0 + 112, my0 + 16, ROOF + 530), (mx0 + 16, my0 + 112, ROOF + 530),
             (mx0 + 112, my0 + 112, ROOF + 530), (mx0 + 64, my0 + 64, ROOF + 600)], TILE)
     for x0, x1 in ((mx0 + 8, mx0 + 56), (mx0 + 72, mx0 + 120)):
-        decal(b, "south", my0, x0, x1, ROOF + 250, ROOF + 316, GRILLE, (144, 128))
-        decal(b, "west", mx0, my0 + (x0 - mx0), my0 + (x1 - mx0), ROOF + 250, ROOF + 316, GRILLE, (144, 128))
+        kit.decal(b, "south", my0, x0, x1, ROOF + 250, ROOF + 316, GRILLE, (144, 128))
+        kit.decal(b, "west", mx0, my0 + (x0 - mx0), my0 + (x1 - mx0), ROOF + 250, ROOF + 316, GRILLE, (144, 128))
     # dome over the prayer hall west of the court
     dome(b, -704, 1216, ROOF, 176)
 
@@ -431,7 +284,7 @@ def build():
     kit.stairs(b, -1152, 256, 0, "north", 128, UP, STONE, RISER)
     b.prop("static/tree_regularpalm", -1760, -600, 0, 60)
     b.prop("static/tree_squatpalm", -1420, -180, 0, 10)
-    b.prism(octagon(-1600, -416, 44), 0, 36, {"up": STONE, "default": M("algiers/afrik_wall1brick")})
+    b.prism(kit.polygon(-1600, -416, 44, 8, 22.5), 0, 36, {"up": STONE, "default": M("algiers/afrik_wall1brick")})
     b.box((-1640, -420, 36), (-1632, -412, 110), BEAM)
     b.box((-1568, -420, 36), (-1560, -412, 110), BEAM)
     b.box((-1644, -424, 110), (-1556, -408, 118), BEAM)
@@ -482,17 +335,17 @@ def build():
     b.prop("static/wicker_basket_1", -1000, -600, 0)
     # awnings along the market street
     for x0, x1 in ((-1900, -1760), (-1500, -1300), (-980, -760), (-500, -200), (240, 560), (800, 1000), (1360, 1720)):
-        awning(b, "south", -1088, x0, x1, 150)
+        kit.awning(b, "south", -1088, x0, x1, 150)
     for x0, x1 in ((-1800, -1560), (-1040, -800), (400, 600), (1100, 1300), (1560, 1900)):
-        awning(b, "north", -1344, x0, x1, 150)
+        kit.awning(b, "north", -1344, x0, x1, 150)
     for y0, y1 in ((-860, -560), (-20, 200)):
-        awning(b, "west", 1280, y0, y1, 150)
+        kit.awning(b, "west", 1280, y0, y1, 150)
 
     # souk canopies across the market street and the east street
     for x0, x1 in ((-1400, -1240), (-520, -300), (180, 420), (1380, 1560)):
-        canopy(b, "x", x0, x1, -1344, -1088, 300, 28)
+        kit.canopy(b, "x", x0, x1, -1344, -1088, 300, 28)
     for y0, y1 in ((-760, -600), (-300, -140)):
-        canopy(b, "y", y0, y1, 1088, 1280, 290, 24)
+        kit.canopy(b, "y", y0, y1, 1088, 1280, 290, 24)
 
     # bracket lanterns in the narrow alleys (fixtures, so the shady lanes are not black)
     for x, y, z, wall in ((-1216, -700, 200, "west"), (-1216, 0, 200, "west"), (-860, -352, 200, "north"),
@@ -514,23 +367,26 @@ def build():
 
     # ---------------------------------------------------------------- roofscape
     open_air = [a for a in cv.air if a.bounds[1][2] == ROOF and a.name not in ("skyvol",)]
-    roof_parapets(b, open_air)
+    kit.roof_edges(b, open_air, ROOF, (TX0, TY0, TX1, TY1), STONE, TRIM)
     for x0, y0, x1, y1, h, m in ROOF_BLOCKS:
-        add_storey(b, cv, open_air, x0, y0, x1, y1, h, m)
+        kit.roof_storey(b, cv, x0, y0, x1, y1, ROOF, h, m, ROOFM, BEAM, parapet, (WINDOW, (128, 144)),
+                        avoid=[a.bounds for a in open_air])
     for x, y, face in STAIR_HOUSES:
-        stair_house(b, cv, open_air, x, y, face)
+        kit.stair_house(b, cv, x, y, face, ROOF, sh("algiers/afrik_wall1a", 0), ROOFM, (DOOR, (128, 256)), STONE,
+                        parapet, avoid=[a.bounds for a in open_air])
     for x, y, r in SMALL_DOMES:
         dome(b, x, y, ROOF, r, rings=3, sides=10)
 
     # ---------------------------------------------------------------- facades
     rng2 = random.Random(11)
     for a in open_air:
-        dress_facades(b, cv, a, rng2, SKIP.get(a.name, {}))
+        kit.dress_walls(b, cv, a, rng2, SKIP.get(a.name, {}), ROOF, (DOOR, (128, 256)), (WINDOW, (128, 144)), STONE,
+                        balcony=balcony)
     rng3 = random.Random(5)
     for a in open_air:
-        wall_trim(b, cv, a, rng3, SKIP.get(a.name, {}))
+        kit.wall_trim(b, cv, a, rng3, SKIP.get(a.name, {}), ROOF, FRIEZE, STONE, BEAM)
     for y in (-704, -448, -192):          # souk hall windows above the east arcade
-        decal(b, "west", 640, y - 40, y + 40, 250, 340, WINDOW, (128, 144))
+        kit.decal(b, "west", 640, y - 40, y + 40, 250, 340, WINDOW, (128, 144))
 
     # ---------------------------------------------------------------- spawns
     south = [(-1850, -1216, 0), (-1350, -1180, 0), (-560, -1180, 0), (420, -1250, 180), (1400, -1180, 180),
@@ -554,21 +410,6 @@ def build():
     return b
 
 
-def dome(b, cx, cy, z, r, rings=4, sides=12):
-    b.prism(octagon(cx, cy, r + 8, sides, 15), z, z + 48, {"up": STONE, "default": TRIM})
-    z += 48
-    prev_r, prev_z = r, z
-    for i in range(1, rings + 1):
-        a = math.pi / 2 * i / rings
-        rr, zz = r * math.cos(a), z + r * 0.8 * math.sin(a)
-        ring0 = [(x, y, prev_z) for x, y in octagon(cx, cy, prev_r, sides, 15)]
-        ring1 = [(x, y, round(zz)) for x, y in octagon(cx, cy, rr, sides, 15)] if rr > 8 else [(cx, cy, round(zz))]
-        b.hull(ring0 + ring1, TRIM)
-        prev_r, prev_z = rr, round(zz)
-    b.prism(octagon(cx, cy, 6), prev_z, prev_z + 40, STONE)
-
-
-# rooftop extra storeys (x0, y0, x1, y1, height above the roof, wall material)
 ROOF_BLOCKS = [
     (-1072, -320, -832, -64, 128, sh("algiers/afrik_wall1a", 0)),
     (-2032, -1520, -1728, -1360, 96, sh("algiers/walarzset_1flt", 0)),
@@ -589,209 +430,10 @@ STAIR_HOUSES = [(-900, -800, "south"), (400, -980, "north"), (-1700, 100, "east"
 SMALL_DOMES = [(-1380, -900, 64), (1600, 1380, 80), (560, -960, 56)]
 
 
-def stair_house(b, cv, open_air, x, y, face, w=96, h=112):
-    x0, y0, x1, y1 = x - w / 2, y - w / 2, x + w / 2, y + w / 2
-    bb = aabb(x0 - 8, y0 - 8, ROOF - 1, x1 + 8, y1 + 8, ROOF + h)
-    for a in open_air:
-        fp = ((a.bounds[0][0] - 16, a.bounds[0][1] - 16, ROOF - 1), (a.bounds[1][0] + 16, a.bounds[1][1] + 16, ROOF + 1))
-        assert not overlaps(bb, fp), f"stair house {x, y} overlaps {a.name}"
-    cv.solid(x0, y0, ROOF, x1, y1, ROOF + h, {"up": ROOFM, "down": CAULK, "sides": sh("algiers/afrik_wall1a", 0)})
-    parapet(b, x0 - 4, y0 - 4, x1 + 4, y1 + 4, ROOF + h, h=8)
-    plane = {"south": y0, "north": y1, "west": x0, "east": x1}[face]
-    u = x if face in ("south", "north") else y
-    panel(b, face, plane, u - 28, u + 28, ROOF, ROOF + 104, DOOR, (128, 256), STONE)
-
-
-def roof_parapets(b, open_air):
-    """Low walls on the roof along every street edge, broken where streets meet."""
-    fps = [a.bounds for a in open_air]
-    strips = []
-    for a in open_air:
-        (x0, y0, _), (x1, y1, _) = a.bounds
-        strips += [((x0 - 16, y1, ROOF), (x1 + 16, y1 + 16, ROOF + 32)), ((x0 - 16, y0 - 16, ROOF), (x1 + 16, y0, ROOF + 32)),
-                   ((x0 - 16, y0, ROOF), (x0, y1, ROOF + 32)), ((x1, y0, ROOF), (x1 + 16, y1, ROOF + 32))]
-    # the town's outer roof edge, seen against the hills
-    strips += [((TX0, TY0, ROOF), (TX0 + 16, TY1, ROOF + 32)), ((TX1 - 16, TY0, ROOF), (TX1, TY1, ROOF + 32)),
-               ((TX0 + 16, TY0, ROOF), (TX1 - 16, TY0 + 16, ROOF + 32)), ((TX0 + 16, TY1 - 16, ROOF), (TX1 - 16, TY1, ROOF + 32))]
-    if True:
-        for lo, hi in strips:
-            pieces = [(lo, hi)]
-            for f in fps:
-                hole = ((f[0][0], f[0][1], ROOF - 1), (f[1][0], f[1][1], ROOF + 64))
-                nxt = []
-                for p in pieces:
-                    nxt += _sub(p, hole)
-                pieces = nxt
-            for p in pieces:
-                # clip to the town footprint
-                l = (max(p[0][0], TX0), max(p[0][1], TY0), p[0][2])
-                h = (min(p[1][0], TX1), min(p[1][1], TY1), p[1][2])
-                if all(h[i] - l[i] >= 8 for i in range(3)):
-                    b.box(l, h, {"up": STONE, "default": TRIM})
-
-
-def _sub(a, h):
-    from mohkit.build import subtract
-    return subtract(a, h)
-
-
-def add_storey(b, cv, open_air, x0, y0, x1, y1, h, m):
-    bb = aabb(x0, y0, ROOF - 1, x1, y1, ROOF + h)
-    for a in open_air:
-        fp = ((a.bounds[0][0] - 16, a.bounds[0][1] - 16, ROOF - 1), (a.bounds[1][0] + 16, a.bounds[1][1] + 16, ROOF + 1))
-        assert not overlaps(bb, fp), f"roof block {x0, y0, x1, y1} overlaps {a.name}"
-    cv.solid(x0, y0, ROOF, x1, y1, ROOF + h, {"up": ROOFM, "down": CAULK, "sides": m})
-    parapet(b, x0, y0, x1, y0 + 12, ROOF + h, h=24)
-    parapet(b, x0, y1 - 12, x1, y1, ROOF + h, h=24)
-    parapet(b, x0, y0 + 12, x0 + 12, y1 - 12, ROOF + h, h=24)
-    parapet(b, x1 - 12, y0 + 12, x1, y1 - 12, ROOF + h, h=24)
-    # beam ends (vigas) below the roof line on the long sides
-    for x in range(int(x0) + 32, int(x1) - 16, 64):
-        b.box((x - 4, y0 - 14, ROOF + h - 24), (x + 4, y0, ROOF + h - 16), BEAM)
-        b.box((x - 4, y1, ROOF + h - 24), (x + 4, y1 + 14, ROOF + h - 16), BEAM)
-    # a window each side
-    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
-    z0 = ROOF + h - 100
-    if z0 > ROOF + 8:
-        decal(b, "south", y0, cx - 36, cx + 36, z0, z0 + 81, WINDOW, (128, 144))
-        decal(b, "north", y1, cx - 36, cx + 36, z0, z0 + 81, WINDOW, (128, 144))
-
-
-def _solid_spans(cv, a, side, z, lo, hi, step=16):
-    """Intervals along a wall of air ``a`` (at height z) that are really wall, not openings."""
-    (x0, y0, _), (x1, y1, _) = a.bounds
-    spans, cur = [], None
-    u = lo
-    while u <= hi:
-        if side == "north":
-            p = (u, y1 + 8, z)
-        elif side == "south":
-            p = (u, y0 - 8, z)
-        elif side == "east":
-            p = (x1 + 8, u, z)
-        else:
-            p = (x0 - 8, u, z)
-        wall = not cv.contains(p)
-        if wall and cur is None:
-            cur = u
-        elif not wall and cur is not None:
-            spans.append((cur, u - step))
-            cur = None
-        u += step
-    if cur is not None:
-        spans.append((cur, hi))
-    return spans
-
-
-# wall spans (along the wall) where no doors/grilles go: stairs against the wall
 SKIP = {"square": {"west": [(-340, 80)]}, "al_w": {"east": [(230, 640)], "west": [(230, 640)]},
         "st_e": {"east": [(230, 640)], "west": [(230, 640)]}, "al_e3": {"east": [(230, 640)], "west": [(230, 640)]}}
 
 
-def dress_facades(b, cv, a, rng, skip):
-    """Windows, doors, grilles and beam ends on the walls of a street/plaza air box."""
-    (x0, y0, z), (x1, y1, _) = a.bounds
-    h = ROOF - z
-    for side in ("north", "south", "east", "west"):
-        facing = {"north": "south", "south": "north", "east": "west", "west": "east"}[side]
-        plane = {"north": y1, "south": y0, "east": x1, "west": x0}[side]
-        lo, hi = (x0, x1) if side in ("north", "south") else (y0, y1)
-        for s0, s1 in _solid_spans(cv, a, side, z + 60, lo, hi):
-            if s1 - s0 < 160:
-                continue
-            upper = [(u0, u1) for u0, u1 in _solid_spans(cv, a, side, z + 280, s0, s1) if u1 - u0 >= 160]
-            n = int((s1 - s0) // 224)
-            if n < 1:
-                continue
-            step = (s1 - s0) / n
-            for i in range(n):
-                c = round(s0 + step * (i + 0.5))
-                r = rng.random()
-                # ground floor: door niche, grilled window, or blank wall
-                behind = _behind(side, plane, c, z + 60)
-                thick = not cv.contains(behind)
-                if any(k0 - 48 <= c <= k1 + 48 for k0, k1 in skip.get(side, ())):
-                    r = 1.0
-                if r < 0.35 and thick and h >= 256:
-                    kit.door(cv, a, side, c, z, 56, 112, DOOR, (128, 256), STONE, depth=8)
-                elif r < 0.7:
-                    decal(b, facing, plane, c - 28, c + 28, z + 96, z + 159, WINDOW, (128, 144))
-                # upper floor windows where the wall is tall enough; on the tall lower-town walls
-                # they sit above the string course (z + 256) and some are wooden balconies
-                if h >= 256 and any(u0 + 64 <= c <= u1 - 64 for u0, u1 in upper) and rng.random() < 0.8:
-                    if h > 300 and rng.random() < 0.3:
-                        balcony(b, side, plane, c, z + 272)
-                    else:
-                        wz = z + 280 if h > 300 else z + 150
-                        decal(b, facing, plane, c - 40, c + 40, wz, wz + 90, WINDOW, (128, 144))
-
-
-_OUT = {"north": -1, "south": 1, "east": -1, "west": 1}     # street side of a wall, along its normal axis
-
-
-def _wall_box(b, side, plane, u0, u1, z0, z1, d0, d1, m):
-    """Box against the wall on ``side`` of a street, ``d0..d1`` out from the wall plane."""
-    s = _OUT[side]
-    a, c = sorted((plane + s * d0, plane + s * d1))
-    if side in ("north", "south"):
-        b.box((u0, a, z0), (u1, c, z1), m)
-    else:
-        b.box((a, u0, z0), (c, u1, z1), m)
-
-
-def balcony(b, side, plane, c, z):
-    """Enclosed wooden balcony (a mashrabiya box) on an upper storey: plank box with a
-    grille front, corbels below and a thin roof slab."""
-    facing = {"north": "south", "south": "north", "east": "west", "west": "east"}[side]
-    _wall_box(b, side, plane, c - 56, c + 56, z, z + 100, 0, 28, {"down": BALC_TRIM, "up": BEAM, "default": PLANKS})
-    for u in (c - 48, c + 40):
-        _wall_box(b, side, plane, u, u + 8, z - 16, z, 0, 22, BEAM)
-    _wall_box(b, side, plane, c - 62, c + 62, z + 100, z + 106, 0, 34, {"up": ROOFM, "default": STONE})
-    decal(b, facing, plane + _OUT[side] * 28, c - 44, c + 44, z + 12, z + 92, GRILLE, (144, 128))
-
-
-def wall_trim(b, cv, a, rng, skip):
-    """Break up the tall plain street walls: an ornamental cornice under the roof edge,
-    rows of beam ends (vigas) under it, and a string course hiding the texture seam at
-    z 256 on the lower-town walls. Pieces stop short of each other (no shared faces, so
-    no T-junction pile-ups) and skip the stair spans."""
-    (x0, y0, z), (x1, y1, _) = a.bounds
-    h = ROOF - z
-    if h < 200:
-        return
-    tall = h > 300
-    ch = 24 if tall else 12                                  # cornice height
-    for side in ("north", "south", "east", "west"):
-        plane = {"north": y1, "south": y0, "east": x1, "west": x0}[side]
-        lo, hi = (x0, x1) if side in ("north", "south") else (y0, y1)
-        front = {"north": "south", "south": "north", "east": "west", "west": "east"}[side]
-        frieze = M(FRIEZE, (ch / 64, ch / 64), 0.0, (0.0, ROOF / (ch / 64)))
-        for s0, s1 in _solid_spans(cv, a, side, ROOF - ch / 2, lo, hi):
-            if s1 - s0 < 64:
-                continue
-            _wall_box(b, side, plane, s0, s1, ROOF - ch, ROOF, 0, 6, {front: frieze, "default": STONE})
-            if tall and rng.random() < 0.7:
-                for u in range(int(s0) + 40, int(s1) - 32, 64):
-                    _wall_box(b, side, plane, u - 5, u + 5, ROOF - ch - 40, ROOF - ch - 30, 0, 16, BEAM)
-        if not (tall and z == 0):
-            continue
-        for span in _solid_spans(cv, a, side, 256, lo, hi):
-            pieces = [span]
-            for k0, k1 in skip.get(side, ()):                # stairs against the wall: no course over them
-                pieces = [q for p0, p1 in pieces for q in ((p0, min(p1, k0 - 16)), (max(p0, k1 + 16), p1))]
-            for s0, s1 in pieces:
-                if s1 - s0 >= 64:
-                    _wall_box(b, side, plane, s0, s1, 252, 260, 0, 4, STONE)
-
-
-def _behind(side, plane, u, z, d=40):
-    if side == "north":
-        return (u, plane + d, z)
-    if side == "south":
-        return (u, plane - d, z)
-    if side == "east":
-        return (plane + d, u, z)
-    return (plane - d, u, z)
 
 
 SHOTS = [

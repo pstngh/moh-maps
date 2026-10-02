@@ -60,7 +60,7 @@ Traps:
 - `algiers/afrika_windecal` is a **decal** (`blendfunc blend`, `polygonoffset`,
   surfaceparm `trans`): it blends over what is behind it, so it can't be the
   wall face itself. Put it on a 1-unit slab in front of the wall, with the image face `+surfaceparm nonsolid` and
-  the other faces `common/nodraw` nonsolid (`decal` in `maps/mk_medina/build.py`).
+  the other faces `common/nodraw` nonsolid (`kit.decal` does this).
 - `algiers/tentdsrt` is alpha-tested (`alphaFunc GE128`, `fence`, `cull none`): its
   underside stayed **black** in both draft and preview lighting. Use the
   lightmapped `algiers/desertcloth` for awnings.

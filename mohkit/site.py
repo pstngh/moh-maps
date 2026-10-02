@@ -238,3 +238,13 @@ def boulders_outside(b: MapBuilder, points: Sequence[tuple[float, float]], footp
         while any(x0 - rad < x < x1 + rad and y0 - rad < y < y1 + rad for x0, y0, x1, y1 in footprint):
             x, y = x + 32 * dx / d, y + 32 * dy / d          # out from the centre until clear of the plateau
         b.prop(model, round(x), round(y), rim - 48 - height * sc - (i % 3) * 64, (i * 67) % 360, sc)
+
+
+def outside_distance(x: float, y: float, rect: Rect, p: float = 4) -> float:
+    """Distance from (x, y) to the rect (0 inside) in the p-norm. p = 4 gives rounded-square
+    contours: hills shaped by it slope evenly at the corners (with p = 2 a corner patch passes
+    the 510 relief limit first). Use it in a ``kit.terrain`` height function."""
+    x0, y0, x1, y1 = rect
+    dx = max(x0 - x, 0, x - x1)
+    dy = max(y0 - y, 0, y - y1)
+    return (dx ** p + dy ** p) ** (1 / p)

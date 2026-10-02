@@ -15,7 +15,6 @@ All playable space is described as air boxes (mohkit.build.Carver), so the hull 
 sealed by construction. Facades, windows, roofs and props are detail.
 """
 
-import math
 
 from mohkit.build import Carver, MapBuilder, Material
 from mohkit import kit
@@ -185,7 +184,7 @@ def build():
                        m if axis == "x" else m(rotate=90), PLASTER_OLD, overhang=16)
 
     # --- square: fountain, cover, lamps -------------------------------------------
-    fountain(b, 0, 0)
+    kit.fountain(b, 0, 0, GROUND, STONE)
     b.prop("static/produce_cart", -400, 250, GROUND, 200)
     b.prop("static/indycrate", 380, -240, GROUND, 10)
     b.prop("static/nazi_crate", 380, -200, 47, 80)
@@ -228,24 +227,6 @@ def decorate(b, cv, air, side, u0, u1, storeys, skip, doors=()):
     kit.facade(b, cv, air, side, u0, u1, storeys, skip, window_image=WIN[0], window_px=WIN[1], reveal=STONE,
                shutters=BEAM, moulding=MOLDING, moulding_z=STOREY, doors=doors,
                door_image=DOOR_B[0] if len(doors) % 2 else DOOR[0])
-
-
-def fountain(b, cx, cy):
-    """Octagonal basin (8 convex segments), rim, and a central pedestal."""
-    r_out, r_in, h = 112, 96, 32
-    for i in range(8):
-        a0, a1 = math.radians(i * 45 + 22.5), math.radians(i * 45 + 67.5)
-        poly = [(cx + r_in * math.cos(a0), cy + r_in * math.sin(a0)), (cx + r_out * math.cos(a0), cy + r_out * math.sin(a0)),
-                (cx + r_out * math.cos(a1), cy + r_out * math.sin(a1)), (cx + r_in * math.cos(a1), cy + r_in * math.sin(a1))]
-        poly = [(round(x), round(y)) for x, y in poly]
-        b.prism(poly, GROUND, h, STONE)
-    octo = [(round(cx + r_in * math.cos(math.radians(i * 45 + 22.5))), round(cy + r_in * math.sin(math.radians(i * 45 + 22.5))))
-            for i in range(8)]
-    b.prism(octo, GROUND, 12, M("general_structure/jh_conc512bw"))
-    b.prism(octo, 12, 24, {"top": M("misc_outside/pond", (0.5, 0.5)), "default": M("common/waterskip")})
-    b.prism([(cx - 24, cy - 24), (cx + 24, cy - 24), (cx + 24, cy + 24), (cx - 24, cy + 24)], 12, 96, STONE)
-    b.prism([(cx - 36, cy - 36), (cx + 36, cy - 36), (cx + 36, cy + 36), (cx - 36, cy + 36)], 96, 108, STONE)
-    b.light((cx, cy, 160), 120, (1.0, 0.95, 0.85))
 
 
 SHOTS = [

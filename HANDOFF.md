@@ -31,10 +31,12 @@ fps at the user's settings (`local/summit/perf_user_settings.log`): mean 4,043, 
 user said "locally"). Nothing is running.
 
 Next, in order: (1) the user's corrections (then rebuild, compare sheets with the installed
-build on the same cameras, reinstall on OK); (2) move mk_summit's reusable helpers into
-mohkit.kit (railing, fence, dish, billboard, catwalk, rock_spur, wedge peaks, door with frame
-+ lamp, Bldg/footprint/outdoor-air-by-subtraction) so the next map gets them; (3) fidelity:
-more interior furniture, rock dressing on the cliff faces; (4) the older queue below.
+build on the same cameras, reinstall on OK); (2) fidelity: more interior furniture, rock
+dressing on the cliff faces; (3) the older queue below.
+Done 2026-10-02 ~20:00 ET (user's rule, now in CLAUDE.md): every reusable helper of mk_summit,
+mk_medina and mk_village moved into `mohkit.kit` / `mohkit.site` (docs/api.md tables); the maps
+regenerate byte-identical (mk_summit: one gondola clip box 9 lower, a latent bug fixed);
+`tests/test_maps_regenerate.py` guards it.
 Interiors and floor levels are guesses (the references show little of them).
 
 ## State (2026-10-02 17:00 ET)

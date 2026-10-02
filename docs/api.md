@@ -137,6 +137,25 @@ is. `u0..u1` runs along that wall: **x for north/south walls, y for east/west**.
 | `gondola(b, x, y, z0, (xa, za, xb, zb), hanger_top, body, trim, glass)` | cable-car cabin with its hanger and two cables along x (add a clip box) |
 | `antenna_mast(b, x, y, base, top, paint, steel, ring, mesh)` | tapered mast with brace rings, mesh antenna panel, coils, clipped |
 
+Street walls, arches, cloth and roofscapes (`side` = compass side of the street air box where
+the wall is; `facing` = the way a wall face looks; `plane` = its coordinate):
+
+| call | makes |
+|---|---|
+| `solid_spans(cv, air, side, z, lo, hi, step=16)` | intervals along a wall of an air box that are wall, not openings |
+| `wall_box(b, side, plane, u0, u1, z0, z1, d0, d1, m)` / `behind_wall(side, plane, u, z, d=40)` | box against a street wall `d0..d1` out from it / a point inside the building |
+| `decal(b, facing, plane, u0, u1, z0, z1, image, px, proud=1)` | blended/alpha image on a thin non-solid slab (windows, grilles, signs) |
+| `image_panel(b, facing, plane, u0, u1, z0, z1, image, px, edge, proud=2)` | solid image panel (doorway pictures) |
+| `arch_fill(b, axis, t0, t1, u0, u1, zs, ztop, m, k=0.72)` / `arcade(b, axis, tc, posts, z0, zs, ztop, wall_m, stone, column)` | pointed or round arch masonry under the 64-vertex limit / a row of columns with arches, lintel, cornice |
+| `coped_wall(b, x0, y0, x1, y1, z, h=40, m, cap)` | low wall with a coping slab |
+| `awning(b, facing, plane, u0, u1, z_wall)` / `canopy(b, axis, a0, a1, c0, c1, z, sag)` | cloth awning off a wall / sagging cloth across a street |
+| `masonry_dome(b, cx, cy, z, r, stone, trim, rings=4, sides=12)` | drum, hulled dome, finial |
+| `mashrabiya(b, side, plane, c, z, wood, trim, beam, roof, stone, grille)` | enclosed wooden balcony |
+| `dress_walls(b, cv, air, rng, skip, roof_z, door_img, window_img, reveal, balcony=None)` | doors, windows and balconies bay by bay on every wall of a street air box |
+| `wall_trim(b, cv, air, rng, skip, roof_z, frieze, stone, beam)` | cornice, beam ends and string course on tall street walls |
+| `roof_storey(...)` / `stair_house(...)` / `roof_edges(b, open_air, roof_z, town, top, m)` | rooftop storey blocks, stair huts, low walls along the roofscape's edges |
+| `fountain(b, cx, cy, z, stone, base, water)` | octagonal basin with water, pedestal and a soft light |
+
 Fixture materials default to stock AA winter/industrial textures (`kit.STEEL_V`, `STEEL_H`,
 `CHAIN_LINK`, `GRATE`, `SIGN_RED`, ...); pass the map's palette to change them.
 
@@ -156,11 +175,11 @@ Fixture materials default to stock AA winter/industrial textures (`kit.STEEL_V`,
 | `mountain_ring(b, m, base, n=16, rx=3800, ry=4800, r=1450, low=-400, span=850)` | broad peaks on an ellipse, each 7 wedges under the brush-length limit |
 | `boulders_outside(b, points, footprint, center, rim)` | rock props pushed off the plateau, sunk below the rim |
 | `in_rects(x, y, rects)` | point in any rect |
+| `outside_distance(x, y, rect, p=4)` | p-norm distance to a rect: rounded-square hill contours for `kit.terrain` |
 
 Recipes that worked: an arcade is pillars (`prism`) plus arch pieces (`hull`)
-that stop just above the apex and one lintel box to the ceiling (see
-[map-format.md](map-format.md#64-vertex-faces); the code is still `arch_fill`/`arcade` in
-`maps/mk_medina/build.py`, to move into kit);
+that stop just above the apex and one lintel box to the ceiling (`kit.arcade`, see
+[map-format.md](map-format.md#64-vertex-faces));
 a decal or alpha image goes on a thin non-solid slab 1 unit off the wall (see
 [materials.md](materials.md)).
 

@@ -120,8 +120,8 @@ ends on it. Two shapes go over the limit:
   a lintel, a beam. Each arch segment or rib that meets it adds two vertices on
   each side it touches. mk_medina's first build had an 83-vertex arcade ceiling:
   the curved arch pieces ran up to the ceiling plane. The fix was to stop them
-  just above the apex and close the gap with one lintel box (`arch_fill` and
-  `arcade` in `maps/mk_medina/build.py`); a test strip with 40 ribs on each side
+  just above the apex and close the gap with one lintel box (`kit.arch_fill` and
+  `kit.arcade` do this); a test strip with 40 ribs on each side
   gave two 85-vertex faces (2026-09-30).
 
 So when many small pieces meet one surface, end them short of it and bridge the
@@ -201,8 +201,8 @@ height ( tokens ) ( tokens )         <- height relative to Z; tokens e.g. nodraw
   rectangle. With the Euclidean distance the slope across a corner patch is
   steeper than along the sides and passes 510 there. A p = 4 norm,
   `(dx**4 + dy**4) ** 0.25` with `dx = max(x0 - x, 0, x - x1)` (same for y),
-  gives rounded-square contours and even slopes in the corners (`dist_out` and
-  `hill` in `maps/mk_medina/build.py`). A ring of playerclip keeps players off
+  gives rounded-square contours and even slopes in the corners
+  (`site.outside_distance`; mk_medina's `hill` uses it). A ring of playerclip keeps players off
   the slope.
 - `SIZE` is the texture's repeat size in world units: 256 or 512 with scale 1
   gives stock-looking ground. `0` smears one texel across the whole patch

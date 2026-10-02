@@ -12,7 +12,7 @@ from __future__ import annotations
 import math
 from typing import Optional, Sequence
 
-from .build import CAULK_M, Carver, Air, MapBuilder, Material, MatLike, aabb, mat
+from .build import CAULK_M, Carver, Air, MapBuilder, Material, MatLike, aabb, mat, overlaps
 
 DIRS = {"north": (0, 1), "south": (0, -1), "east": (1, 0), "west": (-1, 0)}
 YAW = {"east": 0, "north": 90, "west": 180, "south": 270}
@@ -566,3 +566,406 @@ def antenna_mast(b: MapBuilder, x: float, y: float, base: float, top: float, pai
     for dx in (-60, 60):
         b.prism(polygon(x + dx, y + 12, 20, 8), top + 40, top + 136, ring)
     clip_box(b, x - 128, y - 32, base, x + 128, y + 32, top + 200)
+
+
+# ---------------------------------------------------------------------------
+# Street walls, arches, cloth and roofscapes (first built for mk_medina; generic). ``side`` is
+# the compass side of the street air box where the wall is; ``facing`` is the direction a
+# wall face looks toward; ``plane`` is the wall face's coordinate.
+
+NODRAW = Material("common/nodraw")
+CLOTH = Material("algiers/desertcloth")      # lightmapped (alpha-tested tentdsrt stayed black underneath)
+BEAM = Material("general_structure/beam_wood1")
+_OUT = {"north": -1, "south": 1, "east": -1, "west": 1}     # street side of a wall, along its normal axis
+_FACING = {"north": "south", "south": "north", "east": "west", "west": "east"}
+
+
+def wall_box(b: MapBuilder, side: str, plane: float, u0, u1, z0, z1, d0, d1, m) -> None:
+    """Box against the wall on ``side`` of a street, ``d0..d1`` out from the wall plane."""
+    s = _OUT[side]
+    a, c = sorted((plane + s * d0, plane + s * d1))
+    if side in ("north", "south"):
+        b.box((u0, a, z0), (u1, c, z1), m)
+    else:
+        b.box((a, u0, z0), (c, u1, z1), m)
+
+
+def behind_wall(side: str, plane: float, u: float, z: float, d: float = 40) -> tuple[float, float, float]:
+    """A point ``d`` behind the wall on ``side`` (inside the building)."""
+    if side == "north":
+        return (u, plane + d, z)
+    if side == "south":
+        return (u, plane - d, z)
+    if side == "east":
+        return (plane + d, u, z)
+    return (plane - d, u, z)
+
+
+def solid_spans(cv: Carver, a: Air, side: str, z: float, lo: float, hi: float, step: float = 16):
+    """Intervals along a wall of air ``a`` (at height z) that are really wall, not openings."""
+    (x0, y0, _), (x1, y1, _) = a.bounds
+    spans, cur = [], None
+    u = lo
+    while u <= hi:
+        if side == "north":
+            p = (u, y1 + 8, z)
+        elif side == "south":
+            p = (u, y0 - 8, z)
+        elif side == "east":
+            p = (x1 + 8, u, z)
+        else:
+            p = (x0 - 8, u, z)
+        wall = not cv.contains(p)
+        if wall and cur is None:
+            cur = u
+        elif not wall and cur is not None:
+            spans.append((cur, u - step))
+            cur = None
+        u += step
+    if cur is not None:
+        spans.append((cur, hi))
+    return spans
+
+
+def decal(b: MapBuilder, facing: str, plane: float, u0, u1, z0, z1, image: str, px, proud: float = 1.0,
+          hidden: MatLike = NODRAW) -> None:
+    """Blended/alpha image (window, grille, sign) on a thin non-solid slab ``proud`` in front of
+    a wall, fitted to u0..u1 x z0..z1 (``px`` = the image's pixel size)."""
+    n = {"north": (0, 1, 0), "south": (0, -1, 0), "east": (1, 0, 0), "west": (-1, 0, 0)}[facing]
+    img = fit(image, n, u0, u1, z1, scale=(u1 - u0) / px[0], scale_t=(z1 - z0) / px[1])
+    img = img(parms=("nonsolid",))
+    other = mat(hidden)(parms=("nonsolid",))
+    spec = {facing: img, "default": other}
+    if facing == "north":
+        b.box((u0, plane, z0), (u1, plane + proud, z1), spec, grid=0)
+    elif facing == "south":
+        b.box((u0, plane - proud, z0), (u1, plane, z1), spec, grid=0)
+    elif facing == "east":
+        b.box((plane, u0, z0), (plane + proud, u1, z1), spec, grid=0)
+    else:
+        b.box((plane - proud, u0, z0), (plane, u1, z1), spec, grid=0)
+
+
+def image_panel(b: MapBuilder, facing: str, plane: float, u0, u1, z0, z1, image: str, px, edge: MatLike,
+                proud: float = 2) -> None:
+    """Solid image panel (a doorway picture) standing ``proud`` in front of a wall."""
+    n = {"north": (0, 1, 0), "south": (0, -1, 0), "east": (1, 0, 0), "west": (-1, 0, 0)}[facing]
+    img = fit(image, n, u0, u1, z1, scale=(u1 - u0) / px[0], scale_t=(z1 - z0) / px[1])
+    spec = {facing: img, "default": edge}
+    if facing == "north":
+        b.box((u0, plane, z0), (u1, plane + proud, z1), spec, grid=0)
+    elif facing == "south":
+        b.box((u0, plane - proud, z0), (u1, plane, z1), spec, grid=0)
+    elif facing == "east":
+        b.box((plane, u0, z0), (plane + proud, u1, z1), spec, grid=0)
+    else:
+        b.box((plane - proud, u0, z0), (plane, u1, z1), spec, grid=0)
+
+
+def arch_fill(b: MapBuilder, axis: str, t0, t1, u0, u1, zs, ztop, m: MatLike, k: float = 0.72, segs: int = 5,
+              cap: bool = True) -> int:
+    """Masonry between a pointed-arch intrados (span u0..u1 springing at zs) and ztop.
+
+    ``axis`` is the axis the span runs along ("x" or "y"); t0..t1 is the wall thickness on the
+    other axis. k = radius / span (0.5 = round arch). The curved voussoir pieces stop just above
+    the apex (``z_mid``, returned); one plain block (``cap``) fills z_mid..ztop. Keeping the many
+    curve vertices off the ceiling plane avoids > 64-vertex ceiling faces after T-junction
+    fixing (mk_medina's first build: 83 vertices on an arcade ceiling)."""
+    span = u1 - u0
+    r = k * span
+    cx = u0 + r
+    th_m = math.acos((span / 2 - r) / r)
+    left = []
+    for i in range(segs + 1):
+        th = math.pi + (th_m - math.pi) * i / segs
+        left.append((cx + r * math.cos(th), zs + r * math.sin(th)))
+    left[-1] = ((u0 + u1) / 2, left[-1][1])
+    right = [(u0 + u1 - u, z) for u, z in reversed(left)]
+    curve = left + right[1:]
+    curve = [(round(u), round(z)) for u, z in curve]
+    apex = max(z for _, z in curve)
+    z_mid = int(math.ceil((apex + 6) / 4.0) * 4)
+    assert z_mid <= ztop, "arch apex above ztop"
+
+    def P(u, t, z):
+        return (u, t, z) if axis == "x" else (t, u, z)
+
+    seg_m = {"up": CAULK_M, "default": m}
+    for (ua, za), (ub, zb) in zip(curve, curve[1:]):
+        if ub - ua < 1:
+            continue
+        pts = []
+        for t in (t0, t1):
+            pts += [P(ua, t, za), P(ub, t, zb), P(ub, t, z_mid), P(ua, t, z_mid)]
+        b.hull(pts, seg_m)
+    if cap and z_mid < ztop:
+        lo, hi = P(u0, t0, z_mid), P(u1, t1, ztop)
+        b.box(lo, hi, {"down": CAULK_M, "default": m})
+    return z_mid
+
+
+def arcade(b: MapBuilder, axis: str, tc, posts, z0, zs, ztop, wall_m: MatLike, stone: MatLike, column: MatLike,
+           k: float = 0.72, depth: float = 32, skip=()) -> None:
+    """Pillars at ``posts`` (coordinates along ``axis``) on the line ``tc`` with arches between
+    them: octagonal shafts (``column``), plinths and capitals (``stone``), then one lintel up to
+    ``ztop`` and a cornice on the open (lower-coordinate) side."""
+    h = depth / 2
+
+    def B(ua, ub, ta, tb, za, zb, m):
+        if axis == "x":
+            b.box((ua, ta, za), (ub, tb, zb), m)
+        else:
+            b.box((ta, ua, za), (tb, ub, zb), m)
+
+    z_mid = ztop
+    for a, c in zip(posts, posts[1:]):
+        z_mid = arch_fill(b, axis, tc - h, tc + h, a + h, c - h, zs, ztop, wall_m, k=k, cap=False)
+    for u in posts:
+        if u in skip:
+            continue
+        B(u - 18, u + 18, tc - 18, tc + 18, z0, z0 + 14, stone)                  # plinth
+        cx, cy = (u, tc) if axis == "x" else (tc, u)
+        b.prism(polygon(cx, cy, 13, 8, 22.5), z0 + 14, zs - 10, column)          # shaft
+        B(u - 18, u + 18, tc - 18, tc + 18, zs - 10, zs, stone)                  # capital
+        B(u - h, u + h, tc - h, tc + h, zs, z_mid, {"up": CAULK_M, "default": wall_m})   # pier
+    lo, hi = min(posts) - h, max(posts) + h
+    if z_mid < ztop:
+        B(lo, hi, tc - h, tc + h, z_mid, ztop, {"down": CAULK_M, "default": wall_m})  # lintel
+    B(lo, hi, tc - h - 6, tc - h, ztop - 4, ztop + 16, stone)                   # cornice
+
+
+def coped_wall(b: MapBuilder, x0, y0, x1, y1, z, h: float = 40, m: MatLike = "algiers/afrik_wall1c",
+               cap: MatLike = "algiers/doccrtset_1b") -> None:
+    """A low wall box with a coping slab 3 wider on each side (roof edges, terrace walls)."""
+    b.box((x0, y0, z), (x1, y1, z + h), m)
+    b.box((x0 - 3, y0 - 3, z + h), (x1 + 3, y1 + 3, z + h + 5), cap)
+
+
+def awning(b: MapBuilder, facing: str, plane: float, u0, u1, z_wall, depth: float = 80, drop: float = 28,
+           cloth: MatLike = CLOTH, batten: MatLike = BEAM) -> None:
+    """Opaque cloth awning sloping away from a wall, with a wooden batten on its edge. (The
+    alpha-tested algiers/tentdsrt stayed black underneath in draft and preview lighting.)"""
+    zin, zout = z_wall, z_wall - drop
+    pts = []
+    if facing in ("north", "south"):
+        out = plane + (depth if facing == "north" else -depth)
+        for x in (u0, u1):
+            pts += [(x, plane, zin), (x, plane, zin + 2), (x, out, zout), (x, out, zout + 2)]
+        ya, yb = sorted((out, out + (-4 if facing == "north" else 4)))
+        b.box((u0, ya, zout - 4), (u1, yb, zout + 2), batten, grid=0)
+    else:
+        out = plane + (depth if facing == "east" else -depth)
+        for y in (u0, u1):
+            pts += [(plane, y, zin), (plane, y, zin + 2), (out, y, zout), (out, y, zout + 2)]
+        xa, xb = sorted((out, out + (-4 if facing == "east" else 4)))
+        b.box((xa, u0, zout - 4), (xb, u1, zout + 2), batten, grid=0)
+    b.hull(pts, mat(cloth))
+
+
+def canopy(b: MapBuilder, axis: str, a0, a1, c0, c1, z, sag, cloth: MatLike = CLOTH,
+           hidden: MatLike = NODRAW) -> None:
+    """Sagging cloth across a street: spans a0..a1 along ``axis`` (the street direction), wall to
+    wall c0..c1 across it, hung at z with its middle ``sag`` lower (two slabs)."""
+    cm = (c0 + c1) / 2
+    spec = {"up": mat(cloth), "down": mat(cloth), "default": mat(hidden)}
+
+    def P(a, c, zz):
+        return (a, c, zz) if axis == "x" else (c, a, zz)
+
+    for ca, cb, za, zb in ((c0, cm, z, z - sag), (cm, c1, z - sag, z)):
+        pts = []
+        for a in (a0, a1):
+            pts += [P(a, ca, za), P(a, ca, za + 2), P(a, cb, zb), P(a, cb, zb + 2)]
+        b.hull(pts, spec)
+
+
+def masonry_dome(b: MapBuilder, cx, cy, z, r, stone: MatLike, trim: MatLike, rings: int = 4, sides: int = 12) -> None:
+    """Drum (48 tall), a dome of hulled rings (0.8 x r high) and a finial (mosques, tombs)."""
+    b.prism(polygon(cx, cy, r + 8, sides, 15), z, z + 48, {"up": stone, "default": trim})
+    z += 48
+    prev_r, prev_z = r, z
+    for i in range(1, rings + 1):
+        a = math.pi / 2 * i / rings
+        rr, zz = r * math.cos(a), z + r * 0.8 * math.sin(a)
+        ring0 = [(x, y, prev_z) for x, y in polygon(cx, cy, prev_r, sides, 15)]
+        ring1 = [(x, y, round(zz)) for x, y in polygon(cx, cy, rr, sides, 15)] if rr > 8 else [(cx, cy, round(zz))]
+        b.hull(ring0 + ring1, trim)
+        prev_r, prev_z = rr, round(zz)
+    b.prism(polygon(cx, cy, 6, 8, 22.5), prev_z, prev_z + 40, stone)
+
+
+def mashrabiya(b: MapBuilder, side: str, plane: float, c: float, z: float, wood: MatLike, trim: MatLike,
+               beam: MatLike, roof: MatLike, stone: MatLike, grille: str, grille_px=(144, 128)) -> None:
+    """Enclosed wooden balcony on an upper storey: plank box with a grille front, corbels below
+    and a thin roof slab, centred at ``c`` along the wall on ``side`` of a street, floor at z."""
+    facing = _FACING[side]
+    wall_box(b, side, plane, c - 56, c + 56, z, z + 100, 0, 28, {"down": trim, "up": beam, "default": wood})
+    for u in (c - 48, c + 40):
+        wall_box(b, side, plane, u, u + 8, z - 16, z, 0, 22, beam)
+    wall_box(b, side, plane, c - 62, c + 62, z + 100, z + 106, 0, 34, {"up": roof, "default": stone})
+    decal(b, facing, plane + _OUT[side] * 28, c - 44, c + 44, z + 12, z + 92, grille, grille_px)
+
+
+def dress_walls(b: MapBuilder, cv: Carver, a: Air, rng, skip, roof_z: float, door_img: tuple, window_img: tuple,
+                reveal: MatLike, balcony=None) -> None:
+    """Windows, doors and balconies on the walls of a street/plaza air box, bay by bay (224).
+
+    Ground floor: a door niche (``door_img`` = (image, px)) where the wall is thick, a window
+    decal (``window_img`` = (image, px)) or blank wall; upper floor windows where the wall is tall, some
+    of them ``balcony(b, side, plane, c, z)``. ``skip`` = {side: [(u0, u1)]} spans to leave
+    blank (stairs against the wall). ``rng`` drives the choices (deterministic per seed)."""
+    (x0, y0, z), (x1, y1, _) = a.bounds
+    h = roof_z - z
+    for side in ("north", "south", "east", "west"):
+        facing = _FACING[side]
+        plane = {"north": y1, "south": y0, "east": x1, "west": x0}[side]
+        lo, hi = (x0, x1) if side in ("north", "south") else (y0, y1)
+        for s0, s1 in solid_spans(cv, a, side, z + 60, lo, hi):
+            if s1 - s0 < 160:
+                continue
+            upper = [(u0, u1) for u0, u1 in solid_spans(cv, a, side, z + 280, s0, s1) if u1 - u0 >= 160]
+            n = int((s1 - s0) // 224)
+            if n < 1:
+                continue
+            step = (s1 - s0) / n
+            for i in range(n):
+                c = round(s0 + step * (i + 0.5))
+                r = rng.random()
+                behind = behind_wall(side, plane, c, z + 60)
+                thick = not cv.contains(behind)
+                if any(k0 - 48 <= c <= k1 + 48 for k0, k1 in skip.get(side, ())):
+                    r = 1.0
+                if r < 0.35 and thick and h >= 256:
+                    door(cv, a, side, c, z, 56, 112, door_img[0], door_img[1], reveal, depth=8)
+                elif r < 0.7:
+                    decal(b, facing, plane, c - 28, c + 28, z + 96, z + 159, window_img[0], window_img[1])
+                if h >= 256 and any(u0 + 64 <= c <= u1 - 64 for u0, u1 in upper) and rng.random() < 0.8:
+                    if h > 300 and rng.random() < 0.3 and balcony is not None:
+                        balcony(b, side, plane, c, z + 272)
+                    else:
+                        wz = z + 280 if h > 300 else z + 150
+                        decal(b, facing, plane, c - 40, c + 40, wz, wz + 90, window_img[0], window_img[1])
+
+
+def wall_trim(b: MapBuilder, cv: Carver, a: Air, rng, skip, roof_z: float, frieze: str, stone: MatLike,
+              beam: MatLike) -> None:
+    """Break up tall plain street walls: an ornamental cornice (``frieze``, a 64x64 band) under
+    the roof edge, rows of beam ends (vigas) under it on tall walls, and a string course at z 256
+    on ground-level walls over 300 tall (hides the texture seam). Pieces stop short of each other
+    (no shared faces, no T-junction pile-ups) and skip the ``skip`` spans."""
+    (x0, y0, z), (x1, y1, _) = a.bounds
+    h = roof_z - z
+    if h < 200:
+        return
+    tall = h > 300
+    ch = 24 if tall else 12                                  # cornice height
+    for side in ("north", "south", "east", "west"):
+        plane = {"north": y1, "south": y0, "east": x1, "west": x0}[side]
+        lo, hi = (x0, x1) if side in ("north", "south") else (y0, y1)
+        front = _FACING[side]
+        fr = Material(frieze, (ch / 64, ch / 64), 0.0, (0.0, roof_z / (ch / 64)))
+        for s0, s1 in solid_spans(cv, a, side, roof_z - ch / 2, lo, hi):
+            if s1 - s0 < 64:
+                continue
+            wall_box(b, side, plane, s0, s1, roof_z - ch, roof_z, 0, 6, {front: fr, "default": stone})
+            if tall and rng.random() < 0.7:
+                for u in range(int(s0) + 40, int(s1) - 32, 64):
+                    wall_box(b, side, plane, u - 5, u + 5, roof_z - ch - 40, roof_z - ch - 30, 0, 16, beam)
+        if not (tall and z == 0):
+            continue
+        for span in solid_spans(cv, a, side, 256, lo, hi):
+            pieces = [span]
+            for k0, k1 in skip.get(side, ()):                # stairs against the wall: no course over them
+                pieces = [q for p0, p1 in pieces for q in ((p0, min(p1, k0 - 16)), (max(p0, k1 + 16), p1))]
+            for s0, s1 in pieces:
+                if s1 - s0 >= 64:
+                    wall_box(b, side, plane, s0, s1, 252, 260, 0, 4, stone)
+
+
+def fountain(b: MapBuilder, cx, cy, z: float, stone: MatLike, base: MatLike = "general_structure/jh_conc512bw",
+             water: MatLike = Material("misc_outside/pond", (0.5, 0.5)), light: bool = True) -> None:
+    """Octagonal basin (8 convex rim segments), water surface, central pedestal, and a soft light."""
+    r_out, r_in, h = 112, 96, 32
+    for i in range(8):
+        a0, a1 = math.radians(i * 45 + 22.5), math.radians(i * 45 + 67.5)
+        poly = [(cx + r_in * math.cos(a0), cy + r_in * math.sin(a0)), (cx + r_out * math.cos(a0), cy + r_out * math.sin(a0)),
+                (cx + r_out * math.cos(a1), cy + r_out * math.sin(a1)), (cx + r_in * math.cos(a1), cy + r_in * math.sin(a1))]
+        poly = [(round(x), round(y)) for x, y in poly]
+        b.prism(poly, z, z + h, stone)
+    octo = [(round(cx + r_in * math.cos(math.radians(i * 45 + 22.5))), round(cy + r_in * math.sin(math.radians(i * 45 + 22.5))))
+            for i in range(8)]
+    b.prism(octo, z, z + 12, mat(base))
+    b.prism(octo, z + 12, z + 24, {"top": mat(water), "default": Material("common/waterskip")})
+    b.prism([(cx - 24, cy - 24), (cx + 24, cy - 24), (cx + 24, cy + 24), (cx - 24, cy + 24)], z + 12, z + 96, stone)
+    b.prism([(cx - 36, cy - 36), (cx + 36, cy - 36), (cx + 36, cy + 36), (cx - 36, cy + 36)], z + 96, z + 108, stone)
+    if light:
+        b.light((cx, cy, z + 160), 120, (1.0, 0.95, 0.85))
+
+
+def _clear_of(bb, avoid, what: str) -> None:
+    for fp in avoid:
+        grown = ((fp[0][0] - 16, fp[0][1] - 16, bb[0][2]), (fp[1][0] + 16, fp[1][1] + 16, bb[0][2] + 2))
+        assert not overlaps(bb, grown), f"{what} overlaps open air {fp}"
+
+
+def roof_storey(b: MapBuilder, cv: Carver, x0, y0, x1, y1, roof_z: float, h: float, m: MatLike, roof: MatLike,
+                beam: MatLike, coping, window_img: tuple, avoid=()) -> None:
+    """An extra storey on a flat roof (structural, ``cv.solid``): ``m`` walls, ``roof`` top, a
+    coping round its edge (``coping(b, x0, y0, x1, y1, z, h=24)``, e.g. ``coped_wall``), beam ends
+    (vigas) on the long sides and a window decal each side when tall enough. ``avoid`` = open-air
+    footprints (AABBs) it must stay 16 clear of (asserted)."""
+    _clear_of(aabb(x0, y0, roof_z - 1, x1, y1, roof_z + h), avoid, f"roof block {x0, y0, x1, y1}")
+    cv.solid(x0, y0, roof_z, x1, y1, roof_z + h, {"up": roof, "down": CAULK_M, "sides": m})
+    coping(b, x0, y0, x1, y0 + 12, roof_z + h, h=24)
+    coping(b, x0, y1 - 12, x1, y1, roof_z + h, h=24)
+    coping(b, x0, y0 + 12, x0 + 12, y1 - 12, roof_z + h, h=24)
+    coping(b, x1 - 12, y0 + 12, x1, y1 - 12, roof_z + h, h=24)
+    for x in range(int(x0) + 32, int(x1) - 16, 64):
+        b.box((x - 4, y0 - 14, roof_z + h - 24), (x + 4, y0, roof_z + h - 16), beam)
+        b.box((x - 4, y1, roof_z + h - 24), (x + 4, y1 + 14, roof_z + h - 16), beam)
+    cx = (x0 + x1) / 2
+    z0 = roof_z + h - 100
+    if z0 > roof_z + 8:
+        decal(b, "south", y0, cx - 36, cx + 36, z0, z0 + 81, window_img[0], window_img[1])
+        decal(b, "north", y1, cx - 36, cx + 36, z0, z0 + 81, window_img[0], window_img[1])
+
+
+def stair_house(b: MapBuilder, cv: Carver, x, y, face: str, roof_z: float, wall: MatLike, roof: MatLike,
+                door_img: tuple, edge: MatLike, coping, w: float = 96, h: float = 112, avoid=()) -> None:
+    """Small roof hut over a stairwell (structural) with a door picture on ``face`` and a coping."""
+    x0, y0, x1, y1 = x - w / 2, y - w / 2, x + w / 2, y + w / 2
+    _clear_of(aabb(x0 - 8, y0 - 8, roof_z - 1, x1 + 8, y1 + 8, roof_z + h), avoid, f"stair house {x, y}")
+    cv.solid(x0, y0, roof_z, x1, y1, roof_z + h, {"up": roof, "down": CAULK_M, "sides": wall})
+    coping(b, x0 - 4, y0 - 4, x1 + 4, y1 + 4, roof_z + h, h=8)
+    plane = {"south": y0, "north": y1, "west": x0, "east": x1}[face]
+    u = x if face in ("south", "north") else y
+    image_panel(b, face, plane, u - 28, u + 28, roof_z, roof_z + 104, door_img[0], door_img[1], edge)
+
+
+def roof_edges(b: MapBuilder, open_air, roof_z: float, town, top: MatLike, m: MatLike) -> None:
+    """Low walls (32) on a flat roofscape along every edge of the open air below (streets,
+    plazas) and round the ``town`` rect (x0, y0, x1, y1), broken where open air meets the
+    roof and clipped to the town."""
+    from .build import subtract
+    tx0, ty0, tx1, ty1 = town
+    fps = [a.bounds for a in open_air]
+    strips = []
+    for a in open_air:
+        (x0, y0, _), (x1, y1, _) = a.bounds
+        strips += [((x0 - 16, y1, roof_z), (x1 + 16, y1 + 16, roof_z + 32)), ((x0 - 16, y0 - 16, roof_z), (x1 + 16, y0, roof_z + 32)),
+                   ((x0 - 16, y0, roof_z), (x0, y1, roof_z + 32)), ((x1, y0, roof_z), (x1 + 16, y1, roof_z + 32))]
+    strips += [((tx0, ty0, roof_z), (tx0 + 16, ty1, roof_z + 32)), ((tx1 - 16, ty0, roof_z), (tx1, ty1, roof_z + 32)),
+               ((tx0 + 16, ty0, roof_z), (tx1 - 16, ty0 + 16, roof_z + 32)), ((tx0 + 16, ty1 - 16, roof_z), (tx1 - 16, ty1, roof_z + 32))]
+    for lo, hi in strips:
+        pieces = [(lo, hi)]
+        for f in fps:
+            hole = ((f[0][0], f[0][1], roof_z - 1), (f[1][0], f[1][1], roof_z + 64))
+            nxt = []
+            for q in pieces:
+                nxt += subtract(q, hole)
+            pieces = nxt
+        for q in pieces:
+            lo2 = (max(q[0][0], tx0), max(q[0][1], ty0), q[0][2])
+            hi2 = (min(q[1][0], tx1), min(q[1][1], ty1), q[1][2])
+            if all(hi2[i] - lo2[i] >= 8 for i in range(3)):
+                b.box(lo2, hi2, {"up": top, "default": m})

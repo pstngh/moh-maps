@@ -173,7 +173,7 @@ Where each lesson goes, strongest first:
    (`kit`, `site`, `build`) with a test before the session ends, and the docs name the
    mohkit function, never a map file, as where it lives (the user, 2026-10-02: "the 21st map
    shouldn't have to read the first 20"). Proof the move changed nothing: the map
-   regenerates to the same `.map` bytes.
+   regenerates to the same `.map` bytes (`tests/test_maps_regenerate.py` checks every map).
 2. **The topic doc** (table above), with evidence: a source line, a binary string, an
    in-game test, before/after numbers. Include "tried and rejected" results there too.
 3. **`docs/symptoms.md`** for anything that looked or played wrong in a build: what it
