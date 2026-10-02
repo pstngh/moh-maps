@@ -392,7 +392,8 @@ def _fit_under(xs: np.ndarray, true: np.ndarray, idx: Sequence[int]) -> np.ndarr
     return np.array(vals)
 
 
-def lod_control(errors: np.ndarray, radius: float, tau: float = TAU_PX, vanish: float = 0.0) -> Optional[bytes]:
+def lod_control(errors: np.ndarray, radius: float, tau: float = TAU_PX, vanish: float = 0.0,
+                base_error: float = FREE_ERROR) -> Optional[bytes]:
     """``.lod`` bytes (lodControl_t) for a model's collapse errors, or None when nothing
     collapses. The curve keeps error <= ``tau`` pixels at its points, starts at full detail
     (only the error-free collapses, < ``FREE_ERROR`` units) where the high preset's cap lands
@@ -404,13 +405,13 @@ def lod_control(errors: np.ndarray, radius: float, tau: float = TAU_PX, vanish: 
     if K == 0 or radius <= 0:
         return None
     P, k, s = metric_scale(), 100.0 / REF_FOV, REF_LODSCALE
-    free = 1.0 + float(np.searchsorted(errors, FREE_ERROR, side="right"))
+    free = 1.0 + float(np.searchsorted(errors, base_error, side="right"))
     m_far = radius * k / MAX_DISTANCE
     m_v = radius * (100.0 / VANISH_FOV) / vanish if vanish > 0 else 0.0
     if m_v <= m_far:
         m_v = 0.0                                     # vanishes beyond any view: ignore
     m_end = m_v * 1.02 if m_v else m_far
-    nz = errors[errors > FREE_ERROR]
+    nz = errors[errors > base_error]
     m_first = tau * radius / (P * nz[0]) if len(nz) else m_end * 4   # the first real collapse shows here
     m_first = max(m_first, m_end * 1.5)
     grid = np.exp(np.linspace(math.log(m_first), math.log(m_end), 32))
@@ -513,7 +514,8 @@ def _cache_dir() -> Path:
     return d
 
 
-def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True, vanish: float = 0.0) -> LodResult:
+def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True, vanish: float = 0.0,
+            tau: float = TAU_PX, base_error: float = FREE_ERROR) -> LodResult:
     """Simplify an SKD's surfaces: new SKD bytes (vertices reordered, collapse data filled),
     its ``.lod`` (with a ``vanish`` distance, see ``lod_control``) and the vertex permutation.
     Already-simplified SKDs come back unchanged. The simplification is cached (it doesn't
@@ -538,7 +540,7 @@ def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True,
         perm = res.perm if steps else np.arange(n)
         if cf is not None:
             np.savez(cf, skd=np.frombuffer(skd_bytes, np.uint8), perm=perm, errors=errors, radius=radius, steps=steps)
-    lod = lod_control(errors, radius, vanish=vanish) if steps else None
+    lod = lod_control(errors, radius, tau=tau, vanish=vanish, base_error=base_error) if steps else None
     if lod is None:
         return LodResult(data, None, np.arange(n), steps)
     return LodResult(skd_bytes, lod, perm, steps)
@@ -558,7 +560,8 @@ def vanish_by_tiki(instances) -> dict[str, float]:
 
 
 def apply_to_assets(assets: dict, tikis: Sequence[str], read: Callable[[str], Optional[bytes]],
-                    log: Optional[Callable] = None, vanish: Optional[dict] = None) -> dict[str, np.ndarray]:
+                    log: Optional[Callable] = None, vanish: Optional[dict] = None,
+                    tau: float = TAU_PX, base_error: float = FREE_ERROR) -> dict[str, np.ndarray]:
     """Simplify every SKD the ``tikis`` load, in place in ``assets`` (``<skd>`` replaced,
     ``<skd minus 'skd'>lod`` added). Returns ``{tiki: permutation}`` over the TIKI's
     vertices in ``staticlight.tiki_mesh`` order, for TIKIs whose vertices moved; apply it
@@ -602,7 +605,8 @@ def apply_to_assets(assets: dict, tikis: Sequence[str], read: Callable[[str], Op
                 if blob is None or path not in assets:
                     done[path] = None
                 else:
-                    r = lod_skd(path, blob, float(kv["scale"]), vanish=skd_vanish.get(path, 0.0))
+                    r = lod_skd(path, blob, float(kv["scale"]), vanish=skd_vanish.get(path, 0.0), tau=tau,
+                                base_error=base_error)
                     done[path] = r
                     if r.lod is not None:
                         assets[path] = r.skd

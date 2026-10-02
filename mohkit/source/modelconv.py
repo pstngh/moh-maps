@@ -604,7 +604,7 @@ def collision_map(brushes: Iterable[Brush]) -> str:
 
 def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale: float = 1.0,
                   max_texture: int = 512, solid: int = 6, jpeg_quality: Optional[int] = None,
-                  centre: bool = False, headroom: bool = False) -> ConvertedModel:
+                  centre: bool = False, headroom: bool = False, lod: int = 0) -> ConvertedModel:
     """Convert one Source model (``models/....mdl``) to MOHAA static-model files.
 
     ``fs`` reads Source files (``try_read``; see :func:`source_fs`). ``solid`` is the
@@ -623,12 +623,16 @@ def convert_model(fs, mdl_path: str, prefix: str = "csgo", skin: int = 0, scale:
     variants (``solid`` 6/2/0) still share their mesh files.
     """
     warnings: list[str] = []
-    sm: StudioModel = load_studio_model(fs, mdl_path)
+    # ``lod`` > 0: the model's own simpler VTX mesh (clamped to its last LOD); the files get an
+    # ``_l<lod>`` suffix so they never replace the full mesh of another installed map
+    sm: StudioModel = load_studio_model(fs, mdl_path, lod=lod)
     info = sm.info
     if skin and not (0 <= skin < max(1, len(info.skins))):
         warnings.append(f"skin {skin} not in 0..{len(info.skins) - 1}; using 0")
         skin = 0
     directory, base = model_names(mdl_path, prefix, skin, scale)
+    if lod:
+        base = f"{base}_l{lod}"
 
     # --- materials and grouped geometry ---------------------------------------------
     mats: dict[int, _Material] = {}

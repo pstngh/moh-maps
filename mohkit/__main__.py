@@ -318,6 +318,8 @@ def cmd_csgo(a) -> int:
         extra["lightmap_density"] = a.lightmap_density
     if a.no_texlights:
         extra["texlights"] = False
+    if a.props != "full":
+        extra["prop_profile"] = a.props
     rep = build_local(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
                       detail_all=not a.structural, max_texture=a.max_texture, props_only=a.props_only,
                       lighting="mohlight" if a.mohlight else "csgo", **extra)
@@ -465,6 +467,9 @@ def main(argv=None) -> int:
                         "exposure in data/csgo_exposure.json")
     s.add_argument("--mohlight", action="store_true",
                    help="light with MOHlight from converted lights (default: transfer CS:GO's own baked lighting)")
+    s.add_argument("--props", default="full", choices=["full", "balanced", "stock"],
+                   help="prop detail (convert.PROP_PROFILES): balanced/stock drop small props, use CS:GO's "
+                        "simpler meshes and shorter fades for frame rate (use with --name)")
     s.add_argument("--perf", type=int, default=0, metavar="MS",
                    help="only time MS of uncapped frames at each camera of the packaged map (<label>.json)")
     s.add_argument("--toggle", action="append", metavar="CVAR=VALUE",

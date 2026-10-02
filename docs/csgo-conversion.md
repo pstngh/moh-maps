@@ -229,6 +229,17 @@ CS:GO unchanged (6.3 / 6.4). de_nuke gained less (88 -> 95): its cost is merged 
 clusters (CS:GO's own `_autocombine_*` meshes, radius 800-1,300) that are near relative to
 their size, so neither LOD nor the fade cuts much.
 
+**Prop profiles (`--props balanced|stock`, `convert.PROP_PROFILES`; build with `--name`).**
+Stock maps draw 6-19k vertices and 800-1,700 surfaces per view (mohdm1-4: 1,200-1,700 fps on
+the harness); converted maps draw 100-900k and 2-11k, and the converted world alone (props off)
+already runs at 700-950 fps on de_nuke. The profiles drop small props (by largest dimension;
+bigger limits for props without collision and for foliage), give small never-fading props a
+fade and cap all fades, collapse detail below `base_error` even up close, and raise the LOD
+screen error. CS:GO's own mesh LODs don't help: 2 of de_nuke's 1,378 prop models ship more
+than one. de_nuke (two interleaved runs): full 97 / 65 fps (mean / worst camera), balanced
+133 / 98 (871 props dropped), stock 210 / 155 (2,198 dropped); error vs CS:GO 5.6 / 5.5 / 5.7.
+Most of what remains is the merged `_autocombine_` clusters.
+
 ## Lighting: CS:GO's own baked light (default since 2026-10-01)
 
 Lit builds no longer run MOHlight. Q3map compiles BSP and VIS only (it allocates the

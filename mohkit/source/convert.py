@@ -184,6 +184,27 @@ class Options:
     # lit textures brightened (up to lighting.HEADROOM_MAX) and their light divided by the same
     # gain, so CS:GO's transferred sunlight can exceed the texture colour (lighting="csgo" only)
     headroom: bool = False
+    # how much prop detail to keep (PROP_PROFILES): "full" as CS:GO; "balanced" and "stock" trade
+    # small props and mesh detail for frame rate
+    prop_profile: str = "full"
+
+
+# mesh_lod: the CS:GO VTX LOD converted (its artists' simpler meshes: but of de_nuke's 1,378 prop
+# models only 2 ship more than one LOD, so 0 everywhere); base_error: geometric detail below this
+# (units) is collapsed even up close (mohkit.lod); drop / drop_nonsolid /
+# foliage: props whose largest dimension (Source units) is below this are left out (all /
+# without collision / foliage models); fade_cap: a fading prop vanishes by this distance at the
+# latest; fade_small: non-fading props smaller than this fade at fade_cap too; lod_tau: the
+# LOD curve's screen error (pixels, mohkit.lod)
+PROP_PROFILES = {
+    "full": dict(mesh_lod=0, base_error=0.01, drop=0, drop_nonsolid=0, foliage=0, fade_cap=0, fade_small=0,
+                 lod_tau=2.0),
+    "balanced": dict(mesh_lod=0, base_error=0.5, drop=12, drop_nonsolid=24, foliage=0, fade_cap=2048,
+                     fade_small=48, lod_tau=3.0),
+    "stock": dict(mesh_lod=0, base_error=2.0, drop=32, drop_nonsolid=64, foliage=128, fade_cap=1536,
+                  fade_small=128, lod_tau=6.0),
+}
+FOLIAGE_WORDS = ("foliage", "bush", "shrub", "grass", "weed", "plant", "ivy", "flower", "leaves", "hedge", "vine")
 
 
 @dataclass
@@ -1978,6 +1999,9 @@ class Converter:
             return out, clips, precache
         cache: dict = {}
         items = []
+        self.report["prop_profile"] = self.opt.prop_profile
+        self.report["lod_tau"] = self._profile["lod_tau"]
+        self.report["lod_base_error"] = self._profile["base_error"]
         for p_index, p in enumerate(list(sp.props) + self._entity_props()):
             p_index = p_index if p_index < len(sp.props) else -1
             sky = False
@@ -1993,7 +2017,8 @@ class Converter:
                 try:
                     cache[key] = modelconv.convert_model(self.fs, p.model, prefix="csgo", skin=p.skin, solid=key[2],
                                                          centre=True, headroom=self.opt.headroom,
-                                                         max_texture=self.opt.max_texture, jpeg_quality=90)
+                                                         max_texture=self.opt.max_texture, jpeg_quality=90,
+                                                         lod=self._profile["mesh_lod"])
                     for sh, g in (cache[key].gains or {}).items():
                         self._gain(sh, g)
                     for sh, w in (cache[key].tint_mask or {}).items():
@@ -2006,6 +2031,11 @@ class Converter:
                 continue
             sc = (p.uniform_scale or 1.0)
             size = [(cm.bounds[1][i] - cm.bounds[0][i]) * sc for i in range(3)]
+            pf, big = self._profile, max(size)
+            if not sky and (big < pf["drop"] or (big < pf["drop_nonsolid"] and not cm.has_collision)
+                            or (big < pf["foliage"] and any(w in p.model.lower() for w in FOLIAGE_WORDS))):
+                self.report["profile_dropped"] = self.report.get("profile_dropped", 0) + 1
+                continue
             items.append((size[0] * size[1] * size[2], p, cm, sc, p_index, sky))
         items.sort(key=lambda t: -t[0])
         static_v, runtime, dropped, injected = 0, 0, 0, 0
@@ -2021,7 +2051,7 @@ class Converter:
                 # CS:GO tints props per instance (sprp DiffuseModulation, prop_dynamic rendercolor):
                 # de_nuke's grey pipes and yellow rails are one white model tinted
                 tint = tuple(int(c) for c in getattr(p, "diffuse_modulation", (255, 255, 255, 255))[:3])
-                fade = 0.0 if sky else round(fade_distance(p) * s, 1)
+                fade = 0.0 if sky else self._fade(p, cm, sc) * s
                 for part, mk in enumerate(model_keys):
                     if sky:   # a 3D skybox prop: moved with its room in run(), no collision
                         self._sky_statics.add(len(self.statics))
@@ -2114,6 +2144,22 @@ class Converter:
         self.report["entity_props"] = {"converted": len(out), "interactive_skipped": skipped}
         return out
 
+    @property
+    def _profile(self) -> dict:
+        return PROP_PROFILES[self.opt.prop_profile]
+
+    def _fade(self, p, cm, sc: float) -> float:
+        """The prop's vanish distance (Source units, 0: never) under the prop profile."""
+        f = fade_distance(p)
+        cap, small = self._profile["fade_cap"], self._profile["fade_small"]
+        if cap:
+            big = max((cm.bounds[1][i] - cm.bounds[0][i]) * sc for i in range(3))
+            if f > 0:
+                f = min(f, cap)
+            elif big < small:
+                f = cap
+        return round(f, 1)
+
     def _prop_light(self, index: int, cm, part: int) -> Optional[np.ndarray]:
         """CS:GO's baked lighting of static prop ``index`` (``sp_hdr_<index>.vhv`` in the map's
         pakfile) on the SKD vertices of ``cm``'s TIKI ``part``, as uint8 RGB in VRAD's vertex
@@ -2155,11 +2201,13 @@ class Converter:
         if nm != len(layout) or vsize % 4 or not vsize:
             return None
         table = [struct.unpack_from("<III", d, 40 + 28 * k) for k in range(nm)]
+        # the stream of the LOD the mesh was converted from (studiomdl clamps to the last one)
+        want = min(self._profile["mesh_lod"], max((l for l, *_ in table), default=0))
         streams: dict = {}
         for (lod, n, off), (bp, mi, lod2, me, ids) in zip(table, layout):
             if n != len(ids) or lod != lod2:
                 return None
-            if lod != 0 or not n:
+            if lod != want or not n:
                 continue
             raw = np.frombuffer(d, np.uint8, count=n * vsize, offset=off).reshape(n, vsize // 4, 4)
             lin = (raw[:, :, [2, 1, 0]].astype(np.float64) / 127.5) ** 2.2   # BGR -> RGB, linear
@@ -2769,7 +2817,8 @@ def fade_distance(p) -> float:
 
 def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[list] = None,
                    exposure: Optional[float] = None, gains: Optional[dict] = None,
-                   tint_mask: Optional[dict] = None, lod: bool = True) -> dict:
+                   tint_mask: Optional[dict] = None, lod: bool = True, lod_tau: Optional[float] = None,
+                   lod_base_error: Optional[float] = None) -> dict:
     """Add the converter's props (``Result.statics``) to a lit BSP as static models
     (``mohkit.staticlight``); meshes are read from ``assets``. Over
     ``staticmerge.DEFAULT_TARGET`` props, nearby copies of a model are merged into one model
@@ -2845,7 +2894,8 @@ def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[li
     if lod:
         from .. import lod as _lod
         perms = _lod.apply_to_assets(assets, [i.model for i in inst], SL.files_reader(assets),
-                                     vanish=_lod.vanish_by_tiki(inst))
+                                     vanish=_lod.vanish_by_tiki(inst), tau=lod_tau or _lod.TAU_PX,
+                                     base_error=lod_base_error or _lod.FREE_ERROR)
         for i in inst:
             pm = perms.get(i.model)
             if pm is not None and len(pm) == len(i.positions):
@@ -2923,7 +2973,8 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
     bsp_bytes = base.read_bytes()
     if statics:
         info = inject_statics(base, statics, assets, lit, prop_light, exposure, gains,
-                              convert_report.get("tint_mask"), lod=lod)
+                              convert_report.get("tint_mask"), lod=lod, lod_tau=convert_report.get("lod_tau"),
+                              lod_base_error=convert_report.get("lod_base_error"))
         report["statics"] = info
         log(f"== static models injected: {json.dumps(info)}")
         bsp_bytes = lit.read_bytes()

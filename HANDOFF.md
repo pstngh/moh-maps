@@ -6,6 +6,25 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
+## User request (chat ~22:30): "lite" conversions for really high fps, like stock maps
+
+User picked "Both, compare": build a balanced and a stock-like profile on Nuke, show
+screenshots + fps side by side, then the user picks.
+- Stock maps (same harness, spawn views): mohdm1-4 ~1,200-1,700 fps mean, 6-19k verts and
+  800-1,700 surfaces per view; conversions draw 100-900k verts, 2-11k surfaces. World alone
+  (props off) is ~700-950 fps on nuke, so props are the gap.
+- `convert.PROP_PROFILES` + `mohkit csgo <map> --props {full,balanced,stock} --name X`:
+  clutter dropped by size (all / no collision / foliage), fade cap + fades for small non-fading
+  props, base decimation (`lod_control(base_error=)`: detail below 0.5 / 2 units collapsed even
+  up close), LOD tau 3 / 6 px. CS:GO's own mesh LODs are useless: 2 of 1,378 nuke models ship
+  more than one LOD (`mesh_lod` stays 0).
+- **Done 23:05:** de_nuke full 97/65 fps (mean/worst), balanced (`cs_nukeb`) 133/98, stock
+  (`cs_nukes`) 210/155, two interleaved runs; CS:GO error 5.6/5.5/5.7; sheet
+  `local/csgo/compare/cs_nuke_profiles.png` sent to the user. Not installed. **Waiting for the
+  user's pick.** Ideas to go further: bigger base_error/tau for stock, split `_autocombine_`
+  clusters, real VIS for the world (~1.2 ms on nuke). Spotted: a stray grey slanted panel in
+  nuke's B ramp stairwell (camera Ramp3) in every MOHAA build.
+
 ## Current session (2026-10-01 from 19:17): frame rate (prop LOD), stale-asset bug
 
 Working on the user's FPS complaint (chat ~19:10), no new request since. User asked (~19:35)
