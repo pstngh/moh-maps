@@ -8,6 +8,9 @@ update this file, commit and push, then stop and give the user the one-line hand
 
 ## User request (chat ~22:30): "lite" conversions for really high fps, like stock maps
 
+**Paused 23:15 at the user's request (shutting down; continue tomorrow).** Nothing is running.
+All seven full-detail builds with LOD + fades are installed and are what the user plays now.
+
 User picked "Both, compare": build a balanced and a stock-like profile on Nuke, show
 screenshots + fps side by side, then the user picks.
 - Stock maps (same harness, spawn views): mohdm1-4 ~1,200-1,700 fps mean, 6-19k verts and
@@ -20,10 +23,25 @@ screenshots + fps side by side, then the user picks.
   more than one LOD (`mesh_lod` stays 0).
 - **Done 23:05:** de_nuke full 97/65 fps (mean/worst), balanced (`cs_nukeb`) 133/98, stock
   (`cs_nukes`) 210/155, two interleaved runs; CS:GO error 5.6/5.5/5.7; sheet
-  `local/csgo/compare/cs_nuke_profiles.png` sent to the user. Not installed. **Waiting for the
-  user's pick.** Ideas to go further: bigger base_error/tau for stock, split `_autocombine_`
-  clusters, real VIS for the world (~1.2 ms on nuke). Spotted: a stray grey slanted panel in
-  nuke's B ramp stairwell (camera Ramp3) in every MOHAA build.
+  `local/csgo/compare/cs_nuke_profiles.png` sent to the user. Not installed.
+- **User's pick (23:10): "Push further first"**: a more aggressive stock-like profile on Nuke,
+  aiming for 400+ fps, then show the user again (sheet + fps) before rebuilding other maps.
+  Diagnosis so far (stock build `cs_nukes`, `perf_cmp2.json`): slowest cameras UpToSite, Hell,
+  UpToHut, RadioBend at ~6 ms (155-165 fps) with 250-330k vertices and 9-11k surfaces drawn;
+  world alone ~1.2 ms. At HeavenCat ~248k prop vertices are drawn (3.8M at full detail); the
+  top items are merged clusters `models/csgo/m_cs_nukes/*` (5-17k each) and the silos.
+  **Plan, in order (measure each with interleaved `--perf 2000`, look at a sheet):**
+  1. Fast try without rebuilding: edit `local/csgo/cs_nukes/report.json` convert.lod_tau
+     (6 -> 10) and convert.lod_base_error (2 -> 4), then `mohkit csgo de_nuke --name cs_nukes
+     --resume` (re-injects with LOD; ~4 min). See how far simplification alone goes.
+  2. Merged clusters: smaller merge cells for fading props (`staticmerge.CELL` 1024 -> 512 for
+     classed members) so vanish padding and LOD radius shrink; watch the 600-SKD budget
+     (`DEFAULT_MAX_SKD`); maybe split `_autocombine_*` meshes by connected component.
+  3. Shorter fades in the stock profile (fade_cap 1536 -> 1024, fade_small 128 -> 256).
+  4. World: try `--structural` (real VIS) on nuke for the ~1.2 ms world part.
+  Then update `convert.PROP_PROFILES["stock"]`, rebuild `cs_nukes`, show the user.
+- Spotted: a stray grey slanted panel in nuke's B ramp stairwell (camera Ramp3) in every
+  MOHAA build (all profiles); not investigated.
 
 ## Current session (2026-10-01 from 19:17): frame rate (prop LOD), stale-asset bug
 
