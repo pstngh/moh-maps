@@ -121,6 +121,10 @@ Worked example: `maps/mk_summit` (Summit, *Call of Duty: Black Ops*), 2026-10-02
 References: the game's minimap, a bird's-eye shot and a few gameplay screenshots from the
 game's wiki (downloaded with the user's OK into `local/`, never committed).
 
+0. **Get the references.** Ask before downloading (filenames, source, size). The CoD wiki
+   (Fandom) answers 403 to a browser hotlink of `static.wikia.nocookie.net/.../File.png`;
+   `curl -A "Mozilla/5.0" ".../File.png/revision/latest"` returns the image (as WebP: convert
+   with Pillow). The page's `figure img` / gallery `data-src` attributes list every image.
 1. **Orient the references.** Rotate the bird's-eye shot until its landmarks sit where the
    minimap has them (Summit's bird's-eye is the minimap turned 90° clockwise: the dome is
    NE on the minimap, bottom-right on the shot). A side-by-side image settles it.

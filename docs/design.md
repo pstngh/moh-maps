@@ -95,6 +95,12 @@ Details that mattered:
   trigger as a backstop.
 - Trees below the rim need ground: `rock_spur` stacks three widening 7-gon prisms from the
   valley floor to the tree's base.
+- Distant mountains: steep cones close to the edge read as white pyramids (mk_summit's first
+  try: base radius 700, 2,300 tall, 1,000 units off the path). What worked: broad peaks
+  (radius 1,450, apex -400..+450 around a plateau at 0, about 50°) on an ellipse 3,800 x
+  4,800 from the centre, inside the farplane (3,800) so the fog leaves soft silhouettes; each
+  peak is 7 pie-slice wedges (hull of centre, two rim points, apex), so no brush passes the
+  validator's 1,536-unit length warning. Give them `Material(..., density=256)`.
 - With `farplane_cull 1` a 2D sky is drawn unfogged (mk_summit's first draft: `sky/m5l2`
   stayed dark grey under pale fog `.74 .77 .82` at 3,800). Pick a sky whose horizon matches
   the fog colour: `sky/d-day2` (grey overcast over a pale band) with `.71 .71 .73`.
