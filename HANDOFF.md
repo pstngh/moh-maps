@@ -19,9 +19,13 @@ home (CLAUDE.md "The learning loop"). Sources, all local (GitHub has the same gi
 3. **Claude Code transcripts:** 11 files, 283 MB, `~/.claude/projects/-Users-pstn-Documents-moh-maps/*.jsonl`
    (2026-09-30 .. 10-02). User corrections, failed attempts, calibrations. Too big to read
    whole: one subagent per transcript extracting candidate lessons (with quotes and
-   numbers), then verify each against the code and docs before writing it down. **They are
-   deleted after `cleanupPeriodDays` (default 30 days: the oldest around 2026-10-30)**;
-   suggest raising it in the user's settings first.
+   numbers), then verify each against the code and docs before writing it down. Retention:
+   transcripts made in the Claude desktop app are exempt from the 30-day `cleanupPeriodDays`
+   sweep unless `desktopSessionCleanupPeriodDays` is set (settings schema); archiving a session
+   may start a grace period after which normal cleanup applies (schema wording, not verified).
+   On 2026-10-02 archived sessions from 2026-09-18 (other projects) still had their
+   transcripts. None of the moh-maps sessions are archived. Safest: copy them before
+   archiving or deleting sessions.
 4. `~/Library/Caches/mohkit/old-git-backup` (319 MB, pre-restart repo): only for engine and
    tool facts; the user said not to reuse pre-restart map work.
 Output: rows in `docs/symptoms.md`, paragraphs (with evidence, tried-and-rejected tables) in
