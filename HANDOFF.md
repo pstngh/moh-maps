@@ -8,15 +8,27 @@ update this file, commit and push, then stop and give the user the one-line hand
 
 ## State (2026-10-02 13:50 ET)
 
-- **Running (detached, pid 20875, started 13:46 ET, ~2 h):** `local/csgo/repath_queue.sh`:
-  `mohkit ab de_cache` installed vs rebuilt (shots + interleaved fps, 2 rounds), then
-  `local/csgo/repath_all.sh de_dust2 de_cbble de_mirage de_inferno`: per map a backup in
-  `local/csgo/before/<name>_pre_repath/`, a full `-q fastrad` conversion, 8 bots, the ladder
-  probe and `mohkit ab` against the installed build. Summary log `local/csgo/repath_all.log`
-  (markers `<name> BUILD_DONE`, `<name> AB_DONE`, `ALL_DONE`); per map
-  `local/csgo/<name>_repath.log`, `<name>_ab.log`, A/B images in `local/csgo/<name>/ab/`.
-  Never installs. Check that it still runs: `ps -p 20875`. Progress: cs_cache A/B done
-  (13:51), cs_dust2 built 14:02 (24 FFA spawns from the nav mesh, spread over the map).
+- **Done 15:15 ET:** `local/csgo/repath_queue.sh` rebuilt cs_dust2, cs_cbble, cs_mirage, cs_inferno
+  (per-map prop paths, fixed LOD, FFA spawns) and A/B'd them against the installed builds;
+  logs `local/csgo/repath_all.log`, `local/csgo/<name>_repath.log`, `<name>_ab.log`, images
+  `local/csgo/<name>/ab/`. Backups of the old local builds: `local/csgo/before/<name>_pre_repath/`.
+- **Running (detached, pid 23712, since 15:15 ET):** `local/csgo/after_queue.sh`: installed-vs-new
+  fps at the user's LOD settings for the five maps (`local/csgo/<name>/ab_user/`), then the lean
+  de_nuke build as cs_nukes (`--props lean --structural -q fastrad --final`, log
+  `local/csgo/cs_nukes_lean.log`) and its A/B against s8 (`local/csgo/cs_nukes/ab_lean/`).
+  Summary log `local/csgo/after_queue.log` (markers `USER_AB_DONE`, `LEAN_BUILD_DONE`,
+  `LEAN_AB_DONE`, `ALL_DONE`).
+- **A/B so far (installed -> rebuilt, harness settings, 2 interleaved rounds):** cs_cache 296 ->
+  275 fps mean (worst 241 -> 205); cs_dust2 305 -> 277 (worst 168 -> 165); cs_cbble 241 -> 180
+  (worst 161 -> 112, vertices ~2x: foliage under the fixed LOD); cs_mirage 295 -> 269 (worst
+  159 -> 145); cs_inferno 233 -> 189 (worst 145 -> 116). Shots: small changes, except that the
+  installed inferno draws a grey LOD shard band across APit that the rebuild fixes
+  (`local/csgo/cs_inferno/ab/22_APit_ab.png`). Bots: cache 32/27, dust2 27, cbble 18, mirage
+  31, inferno 29 kills; ladders all climb (cbble 2/2, mirage 3/3, cache 1/1).
+  For the user: the rebuilds trade fps for the LOD fixes (no shards / dark panels) and FFA
+  spawns. Options per map: install the rebuild; keep the installed build (still clashing);
+  rebuild with `--props balanced` (fps back, small props gone); or a pk3 path-rename tool
+  for the installed builds (clash fixed, look and fps unchanged; not written, ~1-2 h).
 - **cs_cache rebuilt (13:39 ET)** with per-map prop paths: 0 clashes with the installed pk3s;
   in game, with the 7 other installed pk3s vs alone, 18 of 19 cameras identical (overview =
   run noise); 32 bot kills, ladder climbs 161. Old local build in
