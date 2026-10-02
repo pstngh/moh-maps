@@ -77,13 +77,19 @@ Facts to start from:
 - Nuke world alone (props off, current `detail_all` build without real VIS): ~770 fps
   (`perf_s1_split.json`); props are the rest. Best prop build so far: s8 200 / 150 fps,
   s9 (fades 768, no wires) 266 / 194 but the A silo vanished (fade cap applied to a landmark).
-- Static models are never VIS-culled in OpenMoHAA; world surfaces are. **Idea to verify
-  first (cheap):** inject props as world *triangle-soup* surfaces instead of static models
-  (the renderer loads `MST_TRIANGLE_SOUP`, `renderergl1/tr_bsp.c:1634`): assign each to the
-  leaves it touches (`leafsurfaces`), vertex colours from CS:GO's prop lighting, so VIS and
-  per-surface culling apply and the look is kept. Check in the source how a vertex-lit soup
-  surface is shaded (lightmap -1, rgbGen) and test on a small map before Nuke. If it works,
-  it could replace most of the proxy-brush work.
+- Static models are never VIS-culled in OpenMoHAA (leaf test commented out); world surfaces
+  are. **The triangle-soup idea is blocked (source read 2026-10-02, engine.md 7.7):** soups
+  are VIS- and farplane-culled, but `RB_SurfaceTriangles` never sets `tess.vertexColorValid`,
+  so with `r_vertexLight 0` their baked vertex colours are not drawn (stale colours). Optional
+  5-minute confirmation in game (a test map with one soup) after the queue; otherwise go
+  with the proxy-brush plan above (brushes get VIS; their light must come from somewhere:
+  check how `lighting.transfer` lights faces with no Source counterpart).
+- Where Nuke's prop vertices are (csgo-conversion.md census): `_autocombine_` 37%, crates 10%,
+  chainlink fences 9% (brush candidates: 3,707 vertices per 256-unit segment), doors 5%,
+  lights 4%. Proxy-brush light: add each prop's CS:GO vertex light (`prop_light`) as extra
+  luxels in `lighting.transfer`'s `LuxelIndex`, else the faces borrow nearby walls' light.
+- cs_cache's rebuild (LOD fixes) timed 7% slower than the installed build with the shard
+  LOD (275 vs 296 fps mean, worst 205 vs 241): expected (the fixes keep more vertices).
 - Real VIS: `--structural` keeps Source's structural brushes structural (dust2 compiled
   with 61 KB VIS on 2026-10-01; untested lit, untested on Nuke). Watch leaks, compile time,
   VIS overflow, and the 3D-skybox room rules.

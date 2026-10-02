@@ -370,7 +370,12 @@ vertices alone (`mohkit.propcost`). Static models are never VIS-culled, so props
 floors and behind walls draw whenever they are in the frustum and inside their fade. About
 60% of the prop geometry in view is CS:GO `_autocombine_` meshes (pipes 19%, wires 18%, roof
 trusses 12.5%, ducts 6.5%); they are boxy, so only 9-30% of their vertices collapse under
-8 units: LOD can't shrink them. Tried, with interleaved timings (same machine, same run):
+8 units: LOD can't shrink them. Whole-map census of the s9 props (2,455 instances, 1,044 models,
+4.24M vertices, before merging): `_autocombine_` 37%, crates 10%, chainlink fences 9% (3,707
+vertices per 256-unit segment, which a thin alpha-tested brush draws with a few), doors 5%,
+light fixtures 4% (141 fluorescent tubes x 509), trucks 2%, silos 2%; by largest dimension
+props over 512 units hold 26%, under 64 units 5%. Tried, with interleaved timings (same
+machine, same run):
 
 | change | prop verts / view (est.) | fps mean / worst | look |
 |---|---|---|---|

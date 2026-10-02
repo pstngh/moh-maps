@@ -591,6 +591,7 @@ def perf_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequence
     out.mkdir(parents=True, exist_ok=True)
     tag = map_name.replace("/", "_")
     ms_by: list[dict[str, list[float]]] = [{}, {}]
+    verts_by: list[dict[str, list[int]]] = [{}, {}]
     for r in range(rounds):
         for i, pk3s in enumerate((a, b)):
             res = run([Path(x) for x in pk3s], map_name, shots, run_name=f"perfab_{tag}_{i}", perf_ms=ms,
@@ -599,6 +600,7 @@ def perf_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequence
             for cam, tags in res.perf.items():
                 if "base" in tags:
                     ms_by[i].setdefault(cam, []).append(tags["base"]["ms"])
+                    verts_by[i].setdefault(cam, []).append(tags["base"].get("verts", 0))
     cams = [c for c in ms_by[0] if c in ms_by[1]]
     summary = {}
     for i in (0, 1):
@@ -607,11 +609,13 @@ def perf_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequence
                               "worst": round(1000 / per[-1], 1) if per else None,
                               "median": round(1000 / per[len(per) // 2], 1) if per else None}
     table = {c: [round(1000 * len(ms_by[i][c]) / sum(ms_by[i][c]), 1) for i in (0, 1)] for c in cams}
+    verts = {c: [round(sum(verts_by[i][c]) / len(verts_by[i][c])) for i in (0, 1)] for c in cams}
     (out / "perf_ab.json").write_text(json.dumps({"labels": list(labels), "rounds": rounds, "ms": ms,
-                                                  "cvars": cvars or {}, "summary": summary, "cameras": table},
-                                                 indent=1))
+                                                  "cvars": cvars or {}, "summary": summary, "cameras": table,
+                                                  "verts": verts}, indent=1))
     for c, (fa, fb) in table.items():
-        log(f"{c:32s} {labels[0]} {fa:7.1f}   {labels[1]} {fb:7.1f}   {fb / fa:5.2f}x")
+        log(f"{c:32s} {labels[0]} {fa:7.1f}   {labels[1]} {fb:7.1f}   {fb / fa:5.2f}x"
+            f"   verts {verts[c][0]:>8d} {verts[c][1]:>8d}")
     for lab, st in summary.items():
         log(f"== {lab}: {st['fps']} fps (frame-time mean over {len(cams)} cameras), worst {st['worst']},"
             f" median {st['median']}")
