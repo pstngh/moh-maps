@@ -259,6 +259,31 @@ than one. de_nuke (two interleaved runs): full 97 / 65 fps (mean / worst camera)
 133 / 98 (871 props dropped), stock 210 / 155 (2,198 dropped); error vs CS:GO 5.6 / 5.5 / 5.7.
 Most of what remains is the merged `_autocombine_` clusters.
 
+**Where a converted map's frame goes, and what was tried (de_nuke, 2026-10-02).** Stock-profile
+build at 1280x720, mean over 38 cameras: world 1.3 ms, prop surfaces (culling, sorting,
+per-surface calls) 0.4 ms, prop vertices 2.0 ms (`--toggle r_drawstaticmodelpoly=0` /
+`r_drawstaticmodels=0`); stock maps draw 6-19k vertices per view, this build ~120-280k prop
+vertices alone (`mohkit.propcost`). Static models are never VIS-culled, so props on other
+floors and behind walls draw whenever they are in the frustum and inside their fade. About
+60% of the prop geometry in view is CS:GO `_autocombine_` meshes (pipes 19%, wires 18%, roof
+trusses 12.5%, ducts 6.5%); they are boxy, so only 9-30% of their vertices collapse under
+8 units: LOD can't shrink them. Tried, with interleaved timings (same machine, same run):
+
+| change | prop verts / view (est.) | fps mean / worst | look |
+|---|---|---|---|
+| stock profile (fades 1536, tau 6, base error 2) | 213k | 233 / 175 | shards, dark panels (LOD bugs, fixed since) |
+| LOD tau 10, base error 4 | 125k | 272 / 208 | same bugs, worse |
+| + split big models into 768 cells (`merge_split`) | 120k | not timed | barely helps: pieces still visible from everywhere |
+| + fades 1024, then the LOD fixes (s8, now `--props stock`) | 277k | 200 / 150 vs 202 / 145 for row 1 | matches a no-LOD build |
+| s8 + fades 768 + overhead wire meshes dropped (s9) | 166k | 266 / 194 vs 200 / 150 | A-site silo vanishes (cap hit a landmark), power lines gone |
+
+Not done, with the reason: per-shader `alphaGen tikiDistFade` culling skips surfaces before
+sorting, but only the 0.4 ms surface part (and costs shaders, 2,048 max); counting texture and
+shading in the LOD distance curve kept 3.5x the vertices. Next idea: props as world
+triangle-soup surfaces (the renderer loads `MST_TRIANGLE_SOUP`, `tr_bsp.c:1634`) so VIS culls
+them, with real VIS for the world (`--structural`); untested. A fade cap must scale with prop
+size, or landmarks vanish.
+
 ## Lighting: CS:GO's own baked light (default since 2026-10-01)
 
 Lit builds no longer run MOHlight. Q3map compiles BSP and VIS only (it allocates the

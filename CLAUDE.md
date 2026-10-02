@@ -23,10 +23,12 @@ generators or format code. Extend mohkit instead.**
   (context `percentUsed`; auto-compact starts near 97%) after each milestone.
   At **75%** or more:
   1. finish the current step;
-  2. update `HANDOFF.md`;
-  3. commit and push to `main`;
-  4. stop and give the user a one-line handoff to paste into a fresh chat
+  2. harvest the session's lessons into their permanent homes (see "The learning loop");
+  3. update `HANDOFF.md`;
+  4. commit and push to `main`;
+  5. stop and give the user a one-line handoff to paste into a fresh chat
      ("Read CLAUDE.md and HANDOFF.md, then continue").
+  Do the same whenever the user ends or moves work to a fresh session.
 - **Git**: push small commits straight to `main` after tests pass. Never
   force-push or rewrite history without asking.
 
@@ -112,14 +114,29 @@ part of the definition of done. Human feedback outranks both.
 | stock data (materials, entities, props, lighting) | `data/*.json` (regenerate: `python -m mohkit.catalog`) |
 | real examples | `reference/aa/*.map` (mohdm1–7, obj_team1–4), `reference/sh`, `reference/bt`; `maps/mk_village/build.py`; `maps/mk_ref_room/build.py` (from a screenshot) |
 
-When you learn something new about the engine or tools, put it in the right
-doc (with evidence: a source line, a binary string or an in-game test), not in
-a log.
+## The learning loop (the point of this repo)
 
-When a build shows a bug (visual or gameplay) and you fix it, add a row to
-`docs/symptoms.md` (what it looks like, cause, fix, guard) and, wherever you can, a guard
-that catches it next time without anyone looking: a test, a `validate` or compile check, or
-a harness check. A bug fixed without a row or a guard will be paid for again.
+The repo must get better with every map until it can one-shot any map: a CS:GO conversion,
+a description, a photo. Agents don't remember between sessions; only what is written down
+or coded survives. So **everything learned is made permanent, at the moment it is learned**,
+not only bugs: a calibration or threshold that worked, a technique, an engine or tool fact,
+a look that was wrong against the reference and what fixed it, an approach that was tried
+and failed (with the numbers, so nobody tries it blind again), a user preference.
+
+Where each lesson goes, strongest first:
+
+1. **Code**: a better default, a converter/kit feature, a `validate` or compile check, a
+   test. The tool then does it right without anyone remembering. Prefer this.
+2. **The topic doc** (table above), with evidence: a source line, a binary string, an
+   in-game test, before/after numbers. Include "tried and rejected" results there too.
+3. **`docs/symptoms.md`** for anything that looked or played wrong in a build: what it
+   looked like, cause, fix, guard (none yet = a guard is worth writing).
+4. **Memory** (`~/.claude/.../memory/`) only for facts about the user: preferences, how
+   they decide.
+
+`HANDOFF.md` is in-flight state (what runs, what's next), not knowledge: anything durable
+in it moves to 1-3 before the session ends (the harvest step in "Pause before the context
+fills"). A lesson left only in HANDOFF, a commit message or the chat is lost.
 
 ## Repo layout
 
