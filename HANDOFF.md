@@ -12,12 +12,24 @@ The user asked for a replica of Black Ops' Summit; modes DM + TDM (their pick). 
 (9 images from the CoD wiki, downloaded with the user's OK; never commit them):
 `local/summit_ref/` (minimap `Map_Summit_BO.png`, bird's-eye, loading screen, gameplay
 shots). `maps/mk_summit/build.py` places everything in minimap pixels at 12 u/px;
-`mohkit generate` draws `dist/mk_summit_underlay.png` (plan over the minimap). v1 = the
-footprint, building masses, rooms with doors/windows, the control hall (galleries, consoles,
-skylight), dome, gondola, drops to a valley at z -1536 (trigger_hurt). Logs and sheets:
-`local/summit/`. Next: draft sheet -> fix -> bots -> preview lighting -> sheet for the user.
-Interiors and levels are guesses (the references show little of them): ask the user, who
-played it, for corrections and screenshots.
+`mohkit generate` draws `dist/mk_summit_underlay.png` (plan over the minimap). Logs:
+`local/summit/build_*.log`.
+
+Done (all pushed): footprint and buildings traced from the minimap; plateau on cliffs over
+a valley at z -1536 (trigger_hurt per void column); control hall (galleries, stairs,
+consoles, skylight, glazed high windows); radar dome, gondola + cables, antenna mast,
+power line, fences, rooftop parapets/dishes/billboards, door frames and lamps; AA-only
+props. Draft + 8 bots: 31 kills in 90 s. The user got the first draft sheet + underlay
+(~17:35 ET) and was asked for corrections; no reply yet.
+
+Running at 17:55 ET: `-q preview --bots 8 --seconds 90` (log `local/summit/build_preview1.log`).
+
+Next, in order: (1) look at the preview sheet (lighting: cozy, no blown snow, no dark
+rooms); send it to the user with the open questions; (2) the user's corrections;
+(3) fidelity: glass hip skylight on the hall, barracks roof skylights, more interior
+furniture, east catwalk over a real drop, terrain/rock dressing on the cliffs; (4) install
+only with the user's OK (it is a new map, nothing to regress).
+Interiors and floor levels are guesses (the references show little of them).
 
 ## State (2026-10-02 17:00 ET)
 

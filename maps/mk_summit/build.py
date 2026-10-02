@@ -65,7 +65,7 @@ T = 16               # wall thickness (carver)
 ST = 176             # one-storey ceiling
 VOID = -1536         # valley floor
 SKYTOP = 1280
-OUTER = (-2816, -4096, 2816, 4224)
+OUTER = (-5376, -6400, 5376, 6656)          # far: room for the distant peaks
 
 # --------------------------------------------------------------------------- materials
 SKY = "sky/d-day2"            # grey overcast over a pale haze band
@@ -137,7 +137,7 @@ FOOT_PX = [
     (156, 255, 199, 302),    # west path, middle
     (159, 295, 200, 337),    # west path, south bend
     (171, 328, 232, 352),    # west path end
-    (198, 228, 346, 320),    # control building and the east catwalk
+    (198, 228, 320, 320),    # control building (the east catwalk hangs over the drop)
     (195, 318, 334, 398),    # south yard
     (222, 396, 318, 432),    # guardhouse, road top
     (236, 428, 322, 482),    # south plaza
@@ -157,7 +157,8 @@ BLDGS = [
 B = {bl.name: bl for bl in BLDGS}
 
 
-OVERLAYS_PX = [(230, 322, 300, 396), (266, 398, 318, 480), (321, 200, 346, 320)]   # 2-unit floor plates
+OVERLAYS_PX = [(230, 322, 300, 396), (266, 398, 318, 480)]   # 2-unit floor plates
+CATWALK = (768, 960)          # east catwalk x span (world), from the control building's east wall
 
 
 def foot_rects():
@@ -312,6 +313,7 @@ def build():
     guardhouse(b, cv)
     yards(b)
     cable_car(b)
+    mountains(b)
     edges(b)
     roofs(b)
     antenna_mast(b, *P(200, 112))
@@ -368,6 +370,10 @@ def barracks(b, cv):
     b.prop("static/bunkertable", X(236), Y(176), G + 38, 0)
     b.prop("furniture/bunkerchair", X(232), Y(176), G, 0)
     b.prop("static/metaldesk", X(250), Y(186), G, 0)
+    for v in (154, 178):          # glass pyramids on the roof (bird's-eye view)
+        px, py = P(238, v)
+        b.hull([(px - 48, py - 48, bl.top), (px + 48, py - 48, bl.top), (px - 48, py + 48, bl.top),
+                (px + 48, py + 48, bl.top), (px, py, bl.top + 56)], GLASS)
     for v in (152, 178):
         b.light((X(241), Y(v), ST - 32), 220, FLUO)
         b.prop("static/static_cagelight", X(241), Y(v), ST, 0, hang=True)
@@ -411,9 +417,13 @@ def control(b, cv):
     # skylight over the centre
     sk = R(250, 258, 290, 292)
     cv.room(sk[0], sk[1], 400, sk[2], sk[3], bl.top + 8, floor=CAULK, walls=STEEL, ceiling=CAULK, name="skylight")
-    b.box((sk[0], sk[1], 404), (sk[2], sk[3], 408), GLASS)
-    for x in range(sk[0] + 128, sk[2], 128):
-        b.box((x - 4, sk[1], 396), (x + 4, sk[3], 404), STEEL_H)
+    # raised glass hip over the opening (the bird's-eye view's skylight), steel bars under it
+    gx0, gy0, gx1, gy1 = sk[0] - 8, sk[1] - 8, sk[2] + 8, sk[3] + 8
+    half = (gy1 - gy0) // 2
+    b.hull([(gx0, gy0, bl.top), (gx1, gy0, bl.top), (gx0, gy1, bl.top), (gx1, gy1, bl.top),
+            (gx0 + half, gy0 + half, bl.top + 112), (gx1 - half, gy0 + half, bl.top + 112)], GLASS)
+    for x in range(sk[0] + 96, sk[2], 96):
+        b.box((x - 4, sk[1], 392), (x + 4, sk[3], 400), STEEL_H)
     # doors and windows: corridors <-> hall, corridors <-> outside
     for v in (245, 272, 300):
         cv.room(x0 + 144 - 8, Y(v) - 48, G, hx0 + 8, Y(v) + 48, 128, floor=TILE, walls=CONC, ceiling=CONC, name="c_wdoor")
@@ -466,6 +476,23 @@ def control(b, cv):
         b.prop("static/metaldesk", X(u), hy0 + 300, G, 90)
     for i, u in enumerate((228, 244, 276, 292)):
         b.prop(f"static/static_radiostation{1 + i % 4}", X(u), hy1 - 24, GAL, 270)
+    # upper office on the north gallery, a big window onto the hall (the gameplay screenshot)
+    ox0, ox1, oy0, oy1, oz0, oz1 = cx - 192, cx + 192, hy1 - 160, hy1, GAL, 368
+    wallm = {"default": INWALL_HI}
+    for a, b_ in ((ox0, ox0 + 48), (ox0 + 112, ox0 + 128), (ox1 - 32, ox1)):
+        b.box((a, oy0, oz0), (b_, oy0 + 8, oz1), wallm)
+    b.box((ox0 + 48, oy0, 320), (ox0 + 112, oy0 + 8, oz1), wallm)                      # over the door
+    b.box((ox0 + 128, oy0, oz0), (ox1 - 32, oy0 + 8, 232), wallm)                      # under the window
+    b.box((ox0 + 128, oy0, 312), (ox1 - 32, oy0 + 8, oz1), wallm)                      # over the window
+    b.box((ox0, oy0 + 8, oz0), (ox0 + 8, oy1, oz1), wallm)
+    b.box((ox1 - 8, oy0 + 8, oz0), (ox1, oy1, oz1), wallm)
+    b.box((ox0, oy0, oz1), (ox1, oy1, oz1 + 8), {"bottom": CEIL, "default": INWALL_HI})
+    b.prop("static/metaldesk", cx + 40, oy1 - 48, GAL, 270)
+    b.prop("static/bigfilecabinet", ox1 - 40, oy1 - 24, GAL, 270)
+    b.light((cx, (oy0 + oy1) / 2, oz1 - 32), 200, FLUO)
+    # a bank of file cabinets under the south gallery
+    for i in range(5):
+        b.prop("static/bigfilecabinet", cx - 160 + i * 40, hy0 + 40, G, 90)
     # pillars holding the galleries
     for xx in range(hx0 + 256, hx1 - 128, 320):
         for yy in (hy1 - 256, hy0 + 224):
@@ -553,9 +580,7 @@ def yards(b):
     # road
     rx0, ry0, rx1, ry1 = R(*OVERLAYS_PX[1])
     b.box((rx0, ry0, G), (rx1, ry1, G + 2), {"top": ROAD(rotate=90), "default": CAULK})
-    # east catwalk deck plates
-    ex0, ey0, ex1, ey1 = R(*OVERLAYS_PX[2])
-    b.box((ex0, ey0, G), (ex1, ey1, G + 2), {"top": GRATE, "default": CAULK})
+    catwalk(b)
     # trees on the slopes below the edges (tops visible over the rim)
     for u, v, sc in ((200, 70, 1.4), (190, 110, 1.2), (350, 160, 1.3), (353, 240, 1.5), (172, 362, 1.4),
                      (214, 452, 1.2), (330, 422, 1.3), (300, 48, 1.1), (148, 230, 1.2)):
@@ -573,6 +598,52 @@ def rock_spur(b, x, y, top, r=120):
     b.prism(polygon(x, y, r, 7, rnd), top - 192, top, {"top": SNOW, "default": CLIFF})
     b.prism(polygon(x, y, r * 1.5, 7, rnd + 20), top - 640, top - 192, {"top": SNOW, "default": CLIFF})
     b.prism(polygon(x, y, r * 2.2, 7, rnd + 40), VOID, top - 640, {"top": SNOW, "default": CLIFF})
+
+
+def catwalk(b):
+    """Steel-grate walkway along the control building's east wall, over the drop, on legs."""
+    x0, x1 = CATWALK
+    y0, y1 = Y(318), Y(232)
+    b.box((x0, y0, G - 8), (x1, y1, G), {"top": GRATE, "bottom": GRATE, "default": STEEL_H})
+    for y in range(y0 + 64, y1, 256):
+        b.box((x0 + 8, y - 6, G - 24), (x1, y + 6, G - 8), STEEL_H)                   # cross beam
+        b.box((x1 - 24, y - 8, VOID), (x1 - 8, y + 8, G - 24), STEEL)                 # leg to the rock
+        b.hull([(x1 - 24, y - 4, G - 24), (x1 - 8, y - 4, G - 24), (x1 - 24, y + 4, G - 24), (x1 - 8, y + 4, G - 24),
+                (x0 + 16, y - 4, G - 216), (x0, y - 4, G - 216), (x0 + 16, y + 4, G - 216), (x0, y + 4, G - 216)], STEEL)
+    railing(b, x1 - 6, y0, x1 - 6, y1, G)
+
+
+def mountains(b):
+    """Snowy peaks round the plateau, far enough for the fog to turn them into pale silhouettes,
+    and boulders down the cliff faces just below the rim."""
+    # a ring of broad peaks (base radius 1,450, apex 400 below to 450 above the plateau) on
+    # an ellipse 3,800 x 4,800 out: the fog (farplane 3,800) leaves soft silhouettes. Each
+    # peak is 7 pie-slice wedges, so no brush is wider than the renderer's face limits like.
+    PEAK_SNOW = M("norway/norsnow_med256ns")
+    for i in range(16):
+        a = 2 * math.pi * i / 16 + 0.2
+        x, y = 3800 * math.cos(a), 4800 * math.sin(a)
+        r = 1450
+        top = -400 + 850 * abs(math.sin(2.3 * i + 0.5))
+        apex = (round(x + 300 * math.cos(1.9 * i)), round(y + 300 * math.sin(1.9 * i)), round(top))
+        ring = [(round(x + r * math.cos(2 * math.pi * (k + 0.37 * i) / 7)),
+                 round(y + r * math.sin(2 * math.pi * (k + 0.37 * i) / 7)), VOID) for k in range(7)]
+        for k in range(7):
+            b.hull([(round(x), round(y), VOID), ring[k], ring[(k + 1) % 7], apex], PEAK_SNOW)
+    # boulders on the cliff faces below the rim, along the plateau's outline
+    rnd = [(158, 240), (157, 285), (165, 330), (186, 140), (205, 60), (296, 52), (348, 100), (344, 180),
+           (334, 330), (322, 470), (238, 480), (226, 430), (190, 360), (352, 130)]
+    feet = foot_rects()
+    cx0, cy0 = P(256, 272)
+    for i, (u, v) in enumerate(rnd):
+        sc = 2.5 + (i % 2)
+        rad = 70 * sc
+        x, y = P(u, v)
+        dx, dy = x - cx0, y - cy0
+        d = math.hypot(dx, dy) or 1.0
+        while any(x0 - rad < x < x1 + rad and y0 - rad < y < y1 + rad for x0, y0, x1, y1 in feet):
+            x, y = x + 32 * dx / d, y + 32 * dy / d          # out from the centre until clear of the plateau
+        b.prop("static/rock_winter_large", round(x), round(y), G - 48 - 114 * sc - (i % 3) * 64, (i * 67) % 360, sc)
 
 
 def cable_car(b):
@@ -608,8 +679,6 @@ def edges(b):
     fence(b, x0 + 16, y0 + 12, x1 - 16, y0 + 12)                      # south plaza
     x0, y0, x1, y1 = R(297, 57, 350, 120)
     fence(b, x1 - 12, y0 + 32, x1 - 12, y1 - 16)                      # dome yard, east
-    x0, y0, x1, y1 = R(321, 200, 346, 320)
-    railing(b, x1 - 8, y0, x1 - 8, y1, G)
     for (u0, v0, u1, v1) in ((161, 215, 161, 262), (156, 255, 156, 302), (159, 295, 159, 337)):
         xa, ya, _, yb = R(u0, v0, u1 + 1, v1)
         railing(b, xa + 8, ya + 32, xa + 8, yb - 32, G)
@@ -717,7 +786,7 @@ def spawns(b):
         (312, 100, 250, "x"), (196, 140, 270, "x"), (276, 150, 270, "x"), (240, 168, 0, ""),
         (322, 158, 180, "x"), (200, 210, 300, "x"),
         (170, 250, 270, ""), (165, 300, 90, ""), (185, 340, 0, ""), (230, 260, 0, ""),
-        (280, 280, 180, ""), (335, 260, 270, ""), (290, 222, 0, ""),
+        (280, 280, 180, ""), (328, 262, 270, ""), (290, 222, 0, ""),
         (210, 365, 90, "a"), (265, 330, 90, "a"), (275, 385, 135, "a"), (325, 350, 90, "a"),
         (236, 412, 90, "a"), (250, 455, 90, "a"), (290, 470, 120, "a"), (310, 440, 135, "a"),
         (285, 410, 90, "a"), (320, 455, 135, "a"),
@@ -753,6 +822,9 @@ SHOTS = [
     Shot.looking_at("hall_gallery", _eye(220, 237, 274), _eye(300, 300, 60)),
     Shot.looking_at("hall_corridor", _eye(206, 312), _eye(206, 236)),
     Shot.looking_at("east_catwalk", _eye(334, 318), _eye(334, 205)),
+    Shot.looking_at("catwalk_drop", (X(318), Y(214), 150), (X(338), Y(300), -260)),
+    Shot.looking_at("view_west", _eye(165, 280), (X(60), Y(260), -200)),
+    Shot.looking_at("hall_office", _eye(270, 300, 274), _eye(266, 245, 260)),
     Shot.looking_at("south_yard", _eye(300, 395), _eye(240, 330, 60)),
     Shot.looking_at("south_plaza", _eye(290, 475), _eye(260, 380, 120)),
     Shot.looking_at("radio_inside", _eye(236, 94), _eye(286, 70)),
