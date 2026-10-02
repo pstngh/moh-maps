@@ -12,18 +12,16 @@ update this file, commit and push, then stop and give the user the one-line hand
   (per-map prop paths, fixed LOD, FFA spawns) and A/B'd them against the installed builds;
   logs `local/csgo/repath_all.log`, `local/csgo/<name>_repath.log`, `<name>_ab.log`, images
   `local/csgo/<name>/ab/`. Backups of the old local builds: `local/csgo/before/<name>_pre_repath/`.
-- **The user is playing MOHAA (15:33 ET): no game runs until they say they're done** (harness
-  windows steal focus; fps taken meanwhile is skewed). `after_queue.sh` was stopped after two
-  of its user-settings A/Bs: cs_cache 360 -> 326 fps mean (worst 248 -> 242), cs_dust2 372 ->
-  321 (worst 225 -> 188) at `r_lodscale 0.45`, `r_lodcap 0.35`.
-- **Running (nice 15, pid 27009, since 15:34 ET):** lean de_nuke build, compile only:
-  `mohkit csgo de_nuke --name cs_nukes --props lean --structural -q fastrad --no-test`, log
-  `local/csgo/cs_nukes_lean.log` (s9 backed up in `local/csgo/before/cs_nukes_s9/`).
-- **When the user is done playing:** (1) `mohkit csgo de_nuke --name cs_nukes --shoot`, then
-  `final_checks` (python: `convert.final_checks('de_nuke', 'cs_nukes')`); (2) `mohkit ab de_nuke
-  --name cs_nukes --a local/csgo/before/cs_nukes_s8/cs_nukes.pk3 --b local/csgo/cs_nukes/cs_nukes.pk3
-  --label-a s8 --label-b lean --perf 2000`; (3) the user-settings A/B for cbble, mirage, inferno
-  (the loop in `local/csgo/after_queue.sh`).
+- **Running (detached, since 15:47 ET; pids 27612 then 28454):** `local/csgo/after_play.sh`
+  (user-settings A/B for cbble, mirage, inferno into `local/csgo/<name>/ab_user/`) then
+  `after_play2.sh` (lean Nuke vs s8 at the user's settings, `local/csgo/cs_nukes/ab_lean_user/`).
+  Summary log `local/csgo/after_queue.log`, last line `ALL_DONE`. Never installs.
+- **Lean de_nuke built (15:52 ET) as `local/csgo/cs_nukes/`** (`--props lean --structural -q
+  fastrad`): 30 bot kills, 6/6 ladders; vs s8 215 / 150 fps (mean / worst) against 198 / 135
+  at harness settings; shots fine (A silo stays, no broken brushes). s9 is in
+  `local/csgo/before/cs_nukes_s9/`. Recorded in csgo-conversion.md's Nuke table.
+- The user played MOHAA 15:33-15:45 ET: game runs were paused (harness windows steal focus).
+  Ask before game runs when the user may be playing.
 - **A/B so far (installed -> rebuilt, harness settings, 2 interleaved rounds):** cs_cache 296 ->
   275 fps mean (worst 241 -> 205); cs_dust2 305 -> 277 (worst 168 -> 165); cs_cbble 241 -> 180
   (worst 161 -> 112, vertices ~2x: foliage under the fixed LOD); cs_mirage 295 -> 269 (worst

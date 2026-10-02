@@ -328,7 +328,13 @@ around and hundreds along (about 20x their vertices kept). Counting texture and 
 everywhere is what drew the dark sheets. de_nuke stock profile (s8): ~277k vertices per view
 estimated (`mohkit.propcost`), fps level with the old stock build (two interleaved runs:
 200 vs 202 mean, 148 vs 145 worst), shots match a no-LOD build. Every conversion before this
-also drew shards: docs/reference/engine.md §5.2 (index-degenerate rule).
+also drew shards: docs/reference/engine.md §5.2 (index-degenerate rule). What the fixes cost
+(2026-10-02 rebuilds against the installed 2026-10-01 builds, `mohkit ab --perf 2000`, two
+interleaved rounds, harness settings; fps mean / worst camera): cs_cache 296 / 241 -> 275 / 205,
+cs_dust2 305 / 168 -> 277 / 165, cs_cbble 241 / 161 -> 180 / 112 (foliage: ~2x the vertices),
+cs_mirage 295 / 159 -> 269 / 145, cs_inferno 233 / 145 -> 189 / 116; at the owner's `r_lodscale
+0.45` / `r_lodcap 0.35`: cs_cache 360 / 248 -> 326 / 242, cs_dust2 372 / 225 -> 321 / 188. In
+return the old LOD's shards are gone (the installed de_inferno drew a grey band across APit).
 
 **Props vanish where CS:GO fades them (since 2026-10-01).** CS:GO fades most props out
 by distance (sprp flag 1, `fademindist`..`fademaxdist`; `prop_dynamic` keys of the same
@@ -386,6 +392,7 @@ machine, same run):
 | + split big models into 768 cells (`merge_split`) | 120k | not timed | barely helps: pieces still visible from everywhere |
 | + fades 1024, then the LOD fixes (s8, now `--props stock`) | 277k | 200 / 150 vs 202 / 145 for row 1 | matches a no-LOD build |
 | s8 + fades 768 + overhead wire meshes dropped (s9) | 166k | 266 / 194 vs 200 / 150 | A-site silo vanishes (cap hit a landmark), power lines gone |
+| `--props lean --structural` (2026-10-02): stock + wires dropped + fade cap >= 8 x prop size + 334 box-like props as brushes (454k vertices), real VIS (1,326 clusters, ~715 visible on average, VIS 11 s) | 3.79M in the map (s9: 4.24M) | 215 / 150 vs 198 / 135 for s8 | A silo stays; indoor cameras +35-50% (VIS), T-spawn outdoor views up to -34% (big props fade later); 30 bot kills, 6/6 ladders |
 
 Not done, with the reason: per-shader `alphaGen tikiDistFade` culling skips surfaces before
 sorting, but only the 0.4 ms surface part (shaders aren't the obstacle: de_nuke's props use
