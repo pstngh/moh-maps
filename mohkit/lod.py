@@ -13,8 +13,9 @@ How the engine draws a static model surface (``renderergl1/tr_model.cpp`` RB_Sta
 * Every vertex has a ``collapseIndex``; vertices are sorted so it never increases, and the
   ones with ``collapseIndex >= cutoff`` (a prefix) are drawn. A dropped vertex follows
   ``collapse[i]`` (always a lower index) until it reaches a drawn one; triangles are drawn
-  in file order until the first one that became degenerate, so triangles are sorted by the
-  step at which they vanish. A surface whose ``collapseIndex[2] < cutoff`` is not drawn.
+  in file order until the first one that became degenerate (two equal indices: one whose
+  corners are different vertices at one position is drawn on), so triangles are sorted by
+  the step at which they vanish. A surface whose ``collapseIndex[2] < cutoff`` is not drawn.
 * The engine only builds a LOD table when a surface's first and last ``collapseIndex``
   differ; otherwise the whole mesh is always drawn (our converted props until now).
 
@@ -46,7 +47,7 @@ import numpy as np
 
 from .source import skd as _skd
 
-VERSION = 2                   # bump when the output changes (cache key)
+VERSION = 3                   # bump when the output changes (cache key)
 TAU_PX = 2.0                  # target screen error (pixels)
 REF_WIDTH = 1920.0            # ... at this screen width
 REF_FOV = 80.0                # ... and this fovX
@@ -309,18 +310,23 @@ def simplify(surfaces: Sequence[_skd.SkdSurface]) -> Simplified:
                 pfaces[q].add(f)
         pfaces[p] = set()
         # vertices no triangle uses any more are dropped at this step too (else every part
-        # that collapsed away would leave its last vertices drawn forever); they point at
-        # vertex 0, which no drawn triangle can then reach through them
-        for s, v in orphans:
+        # that collapsed away would leave its last vertices drawn forever). Each points at
+        # another live copy of its position in the surface: the engine keeps drawing a dead
+        # triangle whose vertices coincide only in position (a seam: different indices) until
+        # it meets an index-degenerate one, so its vertices must stay together. Pointed at
+        # vertex 0 instead, such a sliver stretched into a shard across the model (de_nuke's
+        # grey panels). With no copy left they go to vertex 0, all together.
+        for s, v in sorted(orphans):
             if step_of[s][v] < 0:
                 step_of[s][v] = k
-                target[s][v] = -2
                 r = pos_of[s][v]
                 cs = copies[r].get(s)
                 if cs is not None:
                     cs.discard(v)
                     if not cs:
                         del copies[r][s]
+                cs = copies[r].get(s)
+                target[s][v] = min(cs) if cs else -2
         qq, qp = Ql[q], Ql[p]
         Ql[q] = [qq[i] + qp[i] for i in range(10)]
         Wl[q] += Wl[p]
@@ -341,7 +347,13 @@ def simplify(surfaces: Sequence[_skd.SkdSurface]) -> Simplified:
         newi[perm] = np.arange(n)
         tg = np.array(target[s], np.int64)
         # a vertex whose target was dropped at the same step (its triangles all vanished with
-        # that collapse) is referenced by nothing: it points at vertex 0 like other orphans
+        # that collapse) follows the target's own target, so it stays where its target goes
+        for _ in range(64):
+            stale = (tg >= 0) & (cidx[np.maximum(tg, 0)] <= cidx)
+            if not stale.any():
+                break
+            nxt = tg[np.maximum(tg, 0)]
+            tg = np.where(stale, nxt, tg)
         stale = (tg >= 0) & (cidx[np.maximum(tg, 0)] <= cidx)
         tg[stale] = -2
         col = np.zeros(n, np.int64)
@@ -352,8 +364,13 @@ def simplify(surfaces: Sequence[_skd.SkdSurface]) -> Simplified:
         nt = len(srf.triangles)
         fd = death[face_off:face_off + nt]
         face_off += nt
-        torder = np.array(sorted(range(nt), key=lambda f: (-fd[f], f)), np.int64)
-        tris = newi[np.asarray(srf.triangles, np.int64).reshape(-1, 3)[torder]]
+        # triangles of no area from the start (two corners at one position: strip leftovers)
+        # are left out: the engine only stops at index-degenerate triangles, so it could reach
+        # one whose lone vertex was dropped (pointing at vertex 0) and draw it as a shard
+        keep = [f for f in range(nt) if fd[f] != 0] or list(range(nt))
+        torder = np.array(sorted(keep, key=lambda f: (-fd[f], f)), np.int64)
+        tris = newi[np.asarray(srf.triangles, np.int64).reshape(-1, 3)[torder]] if len(torder) else \
+            np.zeros((0, 3), np.int64)
         ns_ = _skd.SkdSurface(srf.name, np.asarray(srf.positions)[perm], np.asarray(srf.normals)[perm],
                               np.asarray(srf.uvs)[perm], tris)
         ns_.collapse = col.astype(np.int32)

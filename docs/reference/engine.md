@@ -431,7 +431,13 @@ off the SKD's LOD curve. `RB_StaticMesh` (`tr_model.cpp:1494-1590`) then draws o
 vertices whose `collapseIndex >= cutoff` (a prefix: the file sorts vertices by
 non-increasing `collapseIndex`), maps each dropped vertex through `collapse[]` (always a
 lower index) to a drawn one (`:1567`), and draws triangles in file order until the first
-degenerate one, so triangles are sorted by the step at which they vanish. A surface with
+degenerate one, so triangles are sorted by the step at which they vanish. Degenerate means
+two equal vertex *indices* (`:1572-1576`): a dead triangle whose corners are different
+vertices at one position (a texture seam, or a zero-area strip leftover in the source mesh)
+is drawn on, so every vertex it uses must keep following that position. Before 2026-10-02
+`mohkit.lod` pointed vertices that had lost their last triangle at vertex 0, and such
+triangles became shards across the model at some distances (de_nuke's grey slanted panels,
+every conversion; `tests/test_lod.py` test_no_shards_from_seams_or_slivers). A surface with
 `collapseIndex[2] < cutoff` is not drawn at all (`:1512`). The curve comes from
 `<skd path up to the first "skd">lod` (`GetLODFile`, `tiki/tiki_skel.cpp:751`, `:778`): a
 96-byte `lodControl_t` (minMetric, maxMetric, five `(pos, val)` points, four constants that
