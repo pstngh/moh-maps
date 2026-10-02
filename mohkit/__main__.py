@@ -497,9 +497,10 @@ def main(argv=None) -> int:
                         "exposure in data/csgo_exposure.json")
     s.add_argument("--mohlight", action="store_true",
                    help="light with MOHlight from converted lights (default: transfer CS:GO's own baked lighting)")
-    s.add_argument("--props", default="full", choices=["full", "balanced", "stock"],
+    s.add_argument("--props", default="full", choices=["full", "balanced", "stock", "lean"],
                    help="prop detail (convert.PROP_PROFILES): balanced/stock drop small props, use CS:GO's "
-                        "simpler meshes and shorter fades for frame rate (use with --name)")
+                        "simpler meshes and shorter fades for frame rate; lean also drops overhead wires and "
+                        "draws box-like props as VIS-culled brushes (use with --name, --structural)")
     s.add_argument("--perf", type=int, default=0, metavar="MS",
                    help="only time MS of uncapped frames at each camera of the packaged map (<label>.json)")
     s.add_argument("--toggle", action="append", metavar="CVAR=VALUE",

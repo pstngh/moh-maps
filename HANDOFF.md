@@ -90,6 +90,15 @@ Facts to start from:
   luxels in `lighting.transfer`'s `LuxelIndex`, else the faces borrow nearby walls' light.
 - cs_cache's rebuild (LOD fixes) timed 7% slower than the installed build with the shard
   LOD (275 vs 296 fps mean, worst 205 vs 241): expected (the fixes keep more vertices).
+- **Expectation check (2026-10-02, tell the user before building B):** only ~9% of Nuke's
+  full-profile prop vertices are box-like enough for brush proxies (score >= 0.8: share of
+  triangle area on the model's box faces; 17% at >= 0.6; chainlink fences lead with 174k),
+  and soups are out, so the `_autocombine_` clusters (37%) stay unculled static models.
+  Realistic lean recipe: `--structural` VIS for the world, brush proxies for boxy props
+  (VIS-culled), no wires, fades capped by prop size so landmarks stay (s9 lost the A silo),
+  clutter dropped. 500-650 fps looks out of reach; the user's bar is a worst camera
+  above 250 at their settings. Scoring script (to become code if reused):
+  `local/csgo/boxfit.py`.
 - Real VIS: `--structural` keeps Source's structural brushes structural (dust2 compiled
   with 61 KB VIS on 2026-10-01; untested lit, untested on Nuke). Watch leaks, compile time,
   VIS overflow, and the 3D-skybox room rules.

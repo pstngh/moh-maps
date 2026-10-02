@@ -118,6 +118,35 @@ def test_ladder_facing() -> None:
     assert len(cv._ladder_step_brushes) == 10 + 10 + 10
 
 
+def test_box_fit_and_wires() -> None:
+    """Lean profile helpers: crates and fence panels are box-like, cylinders are not; wire
+    meshes are found by a whole word of the model path (s9's hand edit: 141 of 141)."""
+    import numpy as np
+
+    def box(lo, hi):
+        (x0, y0, z0), (x1, y1, z1) = lo, hi
+        q = [((x0, y0, z0), (x0, y1, z0), (x1, y1, z0), (x1, y0, z0)), ((x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1)),
+             ((x0, y0, z0), (x1, y0, z0), (x1, y0, z1), (x0, y0, z1)), ((x0, y1, z0), (x0, y1, z1), (x1, y1, z1), (x1, y1, z0)),
+             ((x0, y0, z0), (x0, y0, z1), (x0, y1, z1), (x0, y1, z0)), ((x1, y0, z0), (x1, y1, z0), (x1, y1, z1), (x1, y0, z1))]
+        return np.array([t for a, b, c, d in q for t in ((a, b, c), (a, c, d))], float)
+
+    assert C.box_fit(box((0, 0, 0), (64, 48, 32))) == 1.0
+    assert C.box_fit(box((0, 0, 0), (256, 2, 128))) == 1.0            # a fence panel
+    k = np.linspace(0, 2 * np.pi, 33)[:-1]
+    ring = np.stack([np.cos(k) * 16, np.sin(k) * 16], 1)
+    tube = []
+    for i in range(32):
+        a, b = ring[i], ring[(i + 1) % 32]
+        tube += [((*a, 0), (*b, 0), (*b, 128)), ((*a, 0), (*b, 128), (*a, 128))]
+    assert C.box_fit(np.array(tube)) <= 0.5 + 1e-9                  # a pipe: the facets facing the box sides count
+    assert C.box_fit(np.concatenate([box((0, 0, 0), (64, 64, 64)), np.array(tube) + 100])) < 1.0
+    assert C.is_wire_model("models/props/de_nuke/_autocombine_wires_541.mdl")
+    assert C.is_wire_model("models/props/de_nuke/hr_nuke/wires/wires_005a_512.mdl")
+    assert C.is_wire_model("models/props/de_nuke/substation_wire_system_02.mdl")
+    assert not C.is_wire_model("models/props/de_nuke/hr_nuke/chainlink_fence_001/chainlink_fence_barbwire_001_256.mdl")
+    assert "lean" in C.PROP_PROFILES and not C.PROP_PROFILES["stock"].get("brush_box")
+
+
 def test_prop_assets_are_per_map() -> None:
     """Every prop file a conversion writes is under the map's own name: installed pk3s that
     share a path override each other (cs_cache's trucks were drawn with another map's LOD

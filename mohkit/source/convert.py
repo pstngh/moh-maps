@@ -213,7 +213,44 @@ PROP_PROFILES = {
     # _autocombine_ meshes cut into pieces before merging (split_radius / split_cell)
     "stock": dict(mesh_lod=0, base_error=4.0, drop=32, drop_nonsolid=64, foliage=128, fade_cap=1024,
                   fade_small=256, lod_tau=10.0, split_radius=384.0, split_cell=768.0),
+    # lean: stock, plus overhead wires dropped (is_wire_model), fades capped at no less than
+    # fade_size x the prop's largest dimension (landmarks stay: s9's 768 cap lost the A silo),
+    # and box-like props (box_fit >= brush_box, at least brush_min units) drawn as world brushes
+    # with the model's own materials, which VIS culls (static models it never does)
+    "lean": dict(mesh_lod=0, base_error=4.0, drop=32, drop_nonsolid=64, foliage=128, fade_cap=1024,
+                 fade_small=256, lod_tau=10.0, split_radius=384.0, split_cell=768.0, drop_wires=True,
+                 fade_size=8.0, brush_box=0.8, brush_min=32.0),
 }
+
+
+def is_wire_model(mdl: str) -> bool:
+    """Overhead wire and power-line meshes (de_nuke's ``_autocombine_wires_*``, ``wires_*``,
+    ``substation_wire_system``): "wire" or "wires" as a word of the model path. 18% of
+    de_nuke's prop geometry in view; the s9 build without them ran 266 / 194 fps against
+    200 / 150 (csgo-conversion.md). "barbwire" on fences is not a match."""
+    return bool(set(re.split(r"[_/.\\]", mdl.lower())) & {"wire", "wires"})
+
+
+def box_fit(tris: np.ndarray) -> float:
+    """How box-like a mesh is: the share of its triangles' area (``tris``: N x 3 x 3, model
+    space) lying on the faces of its bounding box (normal within ~18 degrees of the face's,
+    centroid within max(1, 3% of the largest dimension) of its plane). 1 for a crate or a
+    flat fence panel, 0.5 for a pipe or barrel (its facets facing the box sides). A brush box of the model's own faces
+    (``Converter._model_slab``) draws such a prop nearly as it was."""
+    tris = np.asarray(tris, np.float64).reshape(-1, 3, 3)
+    if not len(tris):
+        return 0.0
+    n = np.cross(tris[:, 1] - tris[:, 0], tris[:, 2] - tris[:, 0])
+    area = np.linalg.norm(n, axis=1) / 2
+    n = n / np.maximum(2 * area, 1e-12)[:, None]
+    lo, hi = tris.reshape(-1, 3).min(0), tris.reshape(-1, 3).max(0)
+    tol = max(1.0, 0.03 * float((hi - lo).max()))
+    c = tris.mean(1)
+    on = np.zeros(len(tris), bool)
+    for ax in range(3):
+        on |= (n[:, ax] > 0.95) & (np.abs(c[:, ax] - hi[ax]) < tol)
+        on |= (n[:, ax] < -0.95) & (np.abs(c[:, ax] - lo[ax]) < tol)
+    return float(area[on].sum() / max(area.sum(), 1e-12))
 FOLIAGE_WORDS = ("foliage", "bush", "shrub", "grass", "weed", "plant", "ivy", "flower", "leaves", "hedge", "vine")
 
 
@@ -1370,7 +1407,7 @@ class Converter:
             self.report["debris"][kind] = self.report["debris"].get(kind, 0) + 1
 
     # ------------------------------------------------------------------ doors
-    def _model_slab(self, e, mdl: str, o, ang):
+    def _model_slab(self, e, mdl: str, o, ang, hull_align: bool = True):
         """A brush slab spanning a model's two largest opposite faces, in world space, its
         faces textured with the model's own material (each face's texdef reproduces the UVs
         of the largest mesh triangle on it). Returns (brush, lo, hi, R, origin, studiomodel)
@@ -1401,7 +1438,8 @@ class Converter:
         # Door models carry a rotated root bone: the mesh can lie 90 degrees off the frame
         # the entity angles apply to (metal_door_001_br: mesh along +x, hull and the
         # double-door frames along +y). Turn the mesh so its bounds match the MDL hull.
-        P = P @ _yaw_to_hull(P.reshape(-1, 3), sm.info.hull_min, sm.info.hull_max).T
+        if hull_align:
+            P = P @ _yaw_to_hull(P.reshape(-1, 3), sm.info.hull_min, sm.info.hull_max).T
         nrm = np.cross(P[:, 1] - P[:, 0], P[:, 2] - P[:, 0])
         area = np.linalg.norm(nrm, axis=1) / 2
         nrm = nrm / np.maximum(2 * area, 1e-9)[:, None]
@@ -2050,6 +2088,8 @@ class Converter:
             return out, clips, precache
         cache: dict = {}
         items = []
+        self._prop_draw_brushes: list[MBrush] = []    # box-like props drawn as world brushes
+        fits: dict = {}
         self.report["prop_profile"] = self.opt.prop_profile
         self.report["lod_tau"] = self._profile["lod_tau"]
         if self._profile.get("split_radius"):
@@ -2091,6 +2131,13 @@ class Converter:
             if not sky and (big < pf["drop"] or (big < pf["drop_nonsolid"] and not cm.has_collision)
                             or (big < pf["foliage"] and any(w in p.model.lower() for w in FOLIAGE_WORDS))):
                 self.report["profile_dropped"] = self.report.get("profile_dropped", 0) + 1
+                continue
+            if not sky and pf.get("drop_wires") and is_wire_model(p.model):
+                self.report["wires_dropped"] = self.report.get("wires_dropped", 0) + 1
+                continue
+            if (not sky and pf.get("brush_box") and abs(sc - 1.0) < 1e-6 and big >= pf.get("brush_min", 0.0)
+                    and self._prop_brush(p, cm, fits, pf["brush_box"])):
+                clips += self._prop_clips(cm, p, sc * s)
                 continue
             items.append((size[0] * size[1] * size[2], p, cm, sc, p_index, sky))
         items.sort(key=lambda t: -t[0])
@@ -2145,6 +2192,35 @@ class Converter:
                                 "injected": injected, "static_vertices": static_v, "runtime": runtime,
                                 "dropped": dropped, "models": len(used)}
         return out, clips, sorted(set(precache))
+
+    def _prop_brush(self, p, cm, fits: dict, threshold: float) -> bool:
+        """Draw static prop ``p`` as a world brush when its mesh is box-like (``box_fit`` of
+        the Source mesh >= ``threshold``, cached per model and skin in ``fits``): the box of
+        its two largest opposite faces, textured with its own materials (``_model_slab``),
+        detail and non-solid (the prop's clip hulls stay its collision). World faces are
+        VIS-culled and lightmapped; static models are neither. Returns whether it did."""
+        from .modelconv import load_studio_model
+        key = (p.model.lower(), p.skin)
+        if key not in fits:
+            try:
+                sm = load_studio_model(self.fs, p.model)
+                tris = [m.positions[m.triangles] for m in sm.meshes if len(m.triangles)]
+                fits[key] = box_fit(np.concatenate(tris)) if tris else 0.0
+            except Exception as e:  # noqa: BLE001
+                self.report["warnings"].append(f"box fit {p.model}: {e}")
+                fits[key] = 0.0
+        if fits[key] < threshold:
+            return False
+        slab = self._model_slab({"skin": str(p.skin)}, p.model, p.origin, p.angles, hull_align=False)
+        if slab is None:
+            return False
+        for f in slab[0].faces:
+            f.ext = ["+surfaceparm", "detail", "+surfaceparm", "nonsolid"]
+        self._prop_draw_brushes.append(slab[0])
+        r = self.report.setdefault("brush_props", {"instances": 0, "vertices": 0})
+        r["instances"] += 1
+        r["vertices"] += cm.vertices
+        return True
 
     # prop_hallucination: a never-solid prop; de_rats_1337_v2 draws its ladders and lamps with 97
     PROP_ENTITIES = ("prop_dynamic", "prop_dynamic_override", "prop_physics", "prop_physics_override",
@@ -2210,6 +2286,7 @@ class Converter:
         cap, small = self._profile["fade_cap"], self._profile["fade_small"]
         if cap:
             big = max((cm.bounds[1][i] - cm.bounds[0][i]) * sc for i in range(3))
+            cap = max(cap, self._profile.get("fade_size", 0.0) * big)
             if f > 0:
                 f = min(f, cap)
             elif big < small:
@@ -2535,7 +2612,7 @@ class Converter:
             prop_clips = kept
         world = MEntity(self.worldspawn())
         world.prims = (list(brushes) + list(patches) + overlay_patches + prop_clips + self.sprites()
-                       + self._ladder_step_brushes)
+                       + self._ladder_step_brushes + list(getattr(self, "_prop_draw_brushes", [])))
         ents = [world] + self.entities() + ladder_ents + self.windows() + self.doors() + self.breakables() + prop_ents
         self.report["precache"] = precache
         scripts = [self._shader_text(cm) for cm in self.mats.values()]

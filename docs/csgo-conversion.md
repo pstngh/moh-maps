@@ -388,10 +388,11 @@ machine, same run):
 Not done, with the reason: per-shader `alphaGen tikiDistFade` culling skips surfaces before
 sorting, but only the 0.4 ms surface part (shaders aren't the obstacle: de_nuke's props use
 151, its world 314, of 2,048); counting texture and
-shading in the LOD distance curve kept 3.5x the vertices. Next idea: props as world
-triangle-soup surfaces (the renderer loads `MST_TRIANGLE_SOUP`, `tr_bsp.c:1634`) so VIS culls
-them, with real VIS for the world (`--structural`); untested. A fade cap must scale with prop
-size, or landmarks vanish.
+shading in the LOD distance curve kept 3.5x the vertices; props as world triangle-soup
+surfaces (VIS-culled) can't keep their vertex light in OpenMoHAA (engine.md 7.7). Left:
+real VIS for the world (`--structural`), box-like props as brushes (only ~9% of de_nuke's
+prop vertices score as box-like; chainlink fences most), and a fade cap that scales with
+prop size, or landmarks vanish.
 
 ## Lighting: CS:GO's own baked light (default since 2026-10-01)
 
