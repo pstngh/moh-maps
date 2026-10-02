@@ -36,7 +36,16 @@ BENIGN = (
     "LOCALIZATION ERROR", "NET_JoinMulticast6", "Loaded symbol", "TIKI_InitTiki: Couldn't load models/player/",
     "Tiki:LoadFile Couldn't load models/player/", "callvote.cfg", "radar_allies", "radar_axis",
 )
-PROBLEM_RE = re.compile(r"warning|error|couldn't|could not|can't|cannot|missing|not found|\^~\^~\^|failed", re.I)
+# "No free spots open in skel cache": more than 1,024 SKDs, props past it never load
+# (staticmerge keeps prop SKDs at 600); it matched none of the other words.
+PROBLEM_RE = re.compile(r"warning|error|couldn't|could not|can't|cannot|missing|not found|\^~\^~\^|failed"
+                        r"|no free spots|server crashed|backtrace", re.I)
+# The harness player's join line: absent when the map never loaded (an ERR_DROP back to the
+# menu exits 0 after ~16 s with every shot of the menu or one spot: 2026-09-30, cs_dust2's
+# "Server crashed: LoadTGA: Only type 2 ...").
+JOINED_RE = re.compile(r"has entered the battle")
+# Kill messages only: falls ("bot4 cratered") and other self-inflicted deaths are not counted,
+# so maps with drops read low (de_rats: 13 counted, ~19 deaths).
 KILL_RE = re.compile(r" was (?:killed|shot|blown|sniped|bashed|gunned)| killed | died|was .* by ", re.I)
 
 
@@ -46,7 +55,7 @@ class Shot:
 
     ``fov`` is the game's fov value (default 80): the horizontal field of view of a
     4:3 view. Wider screens keep the same vertical angle and see more at the sides
-    (``cgame/cg_view.c`` CG_CalcFov), so fov 80 is 64.6° vertical at any aspect.
+    (``cgame/cg_view.c`` CG_CalcFov), so fov 80 is 64.4° vertical at any aspect.
     Use ``fov_from_vertical`` to match a photo. The engine draws 65..120 only (OpenMoHAA
     clamps ``cg_fov``); a narrower ``fov`` is rendered at 65 and centre-cropped (a digital
     zoom, so it is softer), and a wider one is drawn at 120.
@@ -85,10 +94,13 @@ class RunResult:
     exit_code: Optional[int] = None
     timed_out: bool = False
     perf: dict[str, dict] = field(default_factory=dict)   # camera -> parse_perf() (run(perf_ms=...))
+    loaded: bool = True       # the harness player entered the game (JOINED_RE)
 
     def summary(self) -> str:
+        crashed = self.exit_code is not None and self.exit_code < 0
         lines = [f"run {self.home.name}: {self.seconds:.0f}s exit={self.exit_code}"
-                 f"{' TIMEOUT' if self.timed_out else ''} shots={len(self.screenshots)} kills={self.kills}"]
+                 f"{' TIMEOUT' if self.timed_out else ''}{' CRASHED' if crashed else ''}"
+                 f"{'' if self.loaded else ' NOT-LOADED'} shots={len(self.screenshots)} kills={self.kills}"]
         for p in self.problems[:30]:
             lines.append(f"  ! {p}")
         return "\n".join(lines)
@@ -154,6 +166,7 @@ def zoom_crop(fov: float, drawn: float) -> float:
 
 EYE_HEIGHT = 82.0
 FPS = 60
+MAX_PLUS_COMMANDS = 32   # MAX_CONSOLE_LINES, qcommon/common.c
 
 # Retail's "high" detail preset (Pak0.pk3:high.cfg) with full-size textures and blob shadows
 # (its stencil shadows, cg_shadows 2, darken the whole frame about 3x in OpenMoHAA). A fresh
@@ -348,7 +361,10 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
         "fs_apppath": str(base), "fs_steampath": str(base), "fs_gogpath": str(base),
         "fs_microsoftstorepath": str(base),
     }
-    sets.update(cvars or {})
+    sets, moved = fit_command_line(sets, cvars or {})
+    if moved:
+        with open(main / "autoexec.cfg", "a") as f:
+            f.write("".join(f'set {k} "{v}"\n' for k, v in moved.items()))
     argv = [cfg.openmohaa]
     for k, v in sets.items():
         argv += ["+set", k, v]
@@ -379,10 +395,32 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
             crop = zoom_crop(s.fov, FOV_MIN) if s is not None and s.fov is not None and s.fov < FOV_MIN else 1.0
             res.screenshots[nm] = _to_png(f, nm, crop)
     res.problems = triage(res.log)
+    res.loaded = bool(JOINED_RE.search(res.log))
+    if not res.loaded:
+        res.problems.insert(0, "the map never loaded (no 'has entered the battle' in the log)")
+    if rc is not None and rc < 0:
+        res.problems.insert(0, f"the game crashed (signal {-rc}); see the Backtrace in {home / 'stdout.txt'}")
     res.kills = sum(1 for line in res.log.splitlines() if KILL_RE.search(line))
     if perf_ms:
         res.perf = parse_perf(res.log)
     return res
+
+
+def fit_command_line(sets: dict[str, str], cvars: dict[str, str], extra: int = 2) -> tuple[dict, dict]:
+    """(``+set`` cvars, cvars for autoexec.cfg): ``sets`` updated with ``cvars``, minus the
+    caller cvars that don't fit. At most 32 "+" commands fit the command line
+    (MAX_CONSOLE_LINES, qcommon/common.c, counting ``extra`` for +devmap and +exec); the rest
+    are dropped silently, +devmap included, and the game idles at the console until the
+    timeout. autoexec.cfg runs before the renderer starts, so render cvars still apply there;
+    ``fs_*`` paths must stay on the command line."""
+    sets = {**sets, **cvars}
+    overflow = len(sets) + extra - MAX_PLUS_COMMANDS
+    if overflow <= 0:
+        return sets, {}
+    movable = [k for k in cvars if not k.startswith("fs_")][-overflow:]
+    if len(movable) < overflow:
+        raise ValueError(f"{len(sets) + extra} '+' commands; the engine keeps {MAX_PLUS_COMMANDS}")
+    return {k: v for k, v in sets.items() if k not in movable}, {k: sets[k] for k in movable}
 
 
 def _to_png(tga: Path, name: str, crop: float = 1.0) -> Path:

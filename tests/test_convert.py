@@ -196,6 +196,44 @@ def test_displacement_heights() -> None:
     assert abs(cv._floor_below(48, 50, -100, 96) - (-143)) < 1e-6
 
 
+def test_light_spot_points_along_vrad() -> None:
+    """A ceiling spot (pitch -90) aims at the floor: VRAD's z = +sin(pitch). With -sin every
+    converted ceiling spot lit the ceiling (de_nuke's dark radio rooms, 2026-10-01)."""
+    from mohkit.source.bsp import Entity
+    cv = _bare_converter()
+    e = Entity([("classname", "light_spot"), ("origin", "0 0 100"), ("angles", "-90 0 0"),
+                ("_light", "255 255 255 200"), ("_cone", "30")])
+    light, target = cv._light(e, "light_spot")
+    assert light["target"] == target["targetname"]
+    assert float(target["origin"].split()[2]) < 100 - 60, target["origin"]
+
+
+def test_opaque_resize_keeps_colour() -> None:
+    """Pillow resizes RGBA premultiplied: an opaque texture whose alpha is a Source specular
+    mask (alpha 0) came out black (decals as black squares, darkened props, 2026-10-01)."""
+    import io
+    import numpy as np
+    from PIL import Image
+    rgba = np.zeros((1024, 1024, 4), np.uint8)
+    rgba[..., :3] = 200
+    rgba[::7, ::7, 3] = 255                 # a sparse mask, mostly 0
+    cv = _bare_converter()
+    cv.opt.max_texture = 512
+    cv.assets = {}
+    path, size = cv._write_image("t/x", rgba, False)
+    assert size == (512, 512)
+    got = np.asarray(Image.open(io.BytesIO(cv.assets[path])).convert("RGB"), np.float32)
+    assert abs(got.mean() - 200) < 3, got.mean()
+
+
+def test_debris_type_by_surfaceprop() -> None:
+    """Retail func_window debris 0-3 are all glass: metal and wood breakables need their own."""
+    assert C.debris_type(["glass"]) == C.DEBRIS_GLASS
+    assert C.debris_type(["Wood_Panel"]) == C.DEBRIS_WOOD
+    assert C.debris_type(["metalvent"]) == C.DEBRIS_METAL
+    assert "metal_section" in C.debris_tiki(C.DEBRIS_METAL) and "crate-jib" in C.debris_tiki(C.DEBRIS_WOOD)
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

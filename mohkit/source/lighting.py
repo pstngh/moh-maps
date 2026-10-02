@@ -40,6 +40,7 @@ from .bsp import FACE_DT, Lump, SourceBSP, Surf
 GAMMA = 2.2
 CAP = 127.0          # MOHlight never stores more (the renderer doubles it: texture colour)
 SHOULDER = 0.82      # start of the soft roll-off, as a share of CAP
+MAX_LIGHTMAPS = 256  # renderer limit (renderergl1/tr_local.h:1182); 170 is only MOHlight's
 
 
 @dataclass
@@ -542,6 +543,12 @@ def transfer(bsp_path, source: SourceBSP, out, scale: float = 1.0, exposure: Opt
     stored[~found] = 24.0 / g[~found, None]
     old = np.frombuffer(bsp.lump("lightmaps"), np.uint8).reshape(-1, 128, 128, 3)
     npages = max(int(tex.page.max()) + 1 if len(tex.page) else 0, len(old))
+    # Without MOHlight the 170-page limit (its 8 MB buffer) doesn't apply, but the renderer
+    # keeps tr.lightmaps[MAX_LIGHTMAPS = 256] and R_LoadLightmaps doesn't check the count
+    # (renderergl1/tr_local.h:1182, tr_bsp.c:213): page 257 would write past the array.
+    if npages > MAX_LIGHTMAPS:
+        raise ValueError(f"{npages} lightmap pages; the renderer loads at most {MAX_LIGHTMAPS}: "
+                         f"raise the lightmap density (--lightmap-density)")
     pages = np.zeros((npages, 128, 128, 3), np.uint8)
     pages[:len(old)] = old
     divided = pages.copy()

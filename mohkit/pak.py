@@ -425,3 +425,26 @@ def image_clashes(main_dir: Union[str, "os.PathLike[str]"]) -> list[tuple[str, l
             continue
     return [(s, sorted(w)) for s, w in sorted(seen.items())
             if {x[-3:] for x in w} == {"jpg", "tga"} and not all(is_retail_pak(x.split(":")[0]) for x in w)]
+
+
+def path_clashes(main_dir: Union[str, "os.PathLike[str]"]) -> list[tuple[str, list[str]]]:
+    """Files at the same path in several non-retail pk3s of a game folder, with different
+    contents (CRC). The engine searches the pk3s of a folder from the last name down
+    (``FS_AddGameDirectory`` pushes each sorted pk3 onto the front of the search path), so
+    one map's copy is used by every map: on 2026-10-02 the eight installed CS:GO conversions
+    had 252 such files (prop ``.lod``/``.skd`` from LOD and staticmerge, prop textures with
+    another map's headroom gain); cs_cache.pk3, first by name, lost all 208 of its own.
+    Returns ``[(path, [pk3 names, highest priority first])]``."""
+    seen: dict[str, dict[str, int]] = {}
+    for name in sorted(os.listdir(main_dir), key=lambda n: n.lower()):
+        if not name.lower().endswith(".pk3") or is_retail_pak(name):
+            continue
+        try:
+            with zipfile.ZipFile(os.path.join(main_dir, name)) as z:
+                for i in z.infolist():
+                    if not i.is_dir():
+                        seen.setdefault(i.filename.lower(), {})[name] = i.CRC
+        except zipfile.BadZipFile:
+            continue
+    return [(path, sorted(w, key=lambda n: n.lower(), reverse=True)) for path, w in sorted(seen.items())
+            if len(set(w.values())) > 1]

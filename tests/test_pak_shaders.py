@@ -21,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from mohkit.pak import GameFS, normalize, probe_image, write_pk3  # noqa: E402
+from mohkit.pak import GameFS, normalize, path_clashes, probe_image, write_pk3  # noqa: E402
 from mohkit.shaders import ShaderIndex, parse_shader_text  # noqa: E402
 
 GAME_DIR = Path(os.environ.get("MOHKIT_GAME_DIR", os.path.expanduser("~/Documents/Games/moh")))
@@ -99,6 +99,16 @@ def test_write_pk3_deterministic() -> None:
             except ValueError:
                 continue
             raise AssertionError(f"accepted {bad}")
+
+
+def test_path_clashes_across_installed_maps() -> None:
+    # Two installed conversions with the same prop path but different bytes: the game uses
+    # the later pk3's copy for both maps (FS_AddGameDirectory), so install must warn.
+    with tempfile.TemporaryDirectory() as d:
+        write_pk3(str(Path(d) / "cs_a.pk3"), {"models/csgo/x.lod": b"a", "models/csgo/same.skd": b"s"})
+        write_pk3(str(Path(d) / "cs_b.pk3"), {"models/csgo/X.lod": b"b", "models/csgo/same.skd": b"s"})
+        write_pk3(str(Path(d) / "Pak0.pk3"), {"models/csgo/x.lod": b"retail"})
+        assert path_clashes(d) == [("models/csgo/x.lod", ["cs_b.pk3", "cs_a.pk3"])]
 
 
 def test_gamefs_order_and_case() -> None:

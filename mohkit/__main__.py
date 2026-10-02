@@ -281,6 +281,12 @@ def cmd_install(a) -> int:
     print(f"installed {dst}")
     for stem, where in pak.image_clashes(cfg.main_dir)[:10]:
         print(f"  ! {stem}: {', '.join(where)} (the game loads the .jpg)")
+    clashes = pak.path_clashes(cfg.main_dir)
+    if clashes:
+        print(f"  ! {len(clashes)} files have the same path but different contents in several pk3s;"
+              f" the game uses the first pk3 listed for every map:")
+        for path, where in clashes[:10]:
+            print(f"    {path}: {', '.join(where)}")
     return 0
 
 
@@ -494,6 +500,13 @@ def main(argv=None) -> int:
     s.add_argument("--ref", help="reference shots (local/csgo/<name>/csgo_ref): compare each folder's cameras with them")
     s.set_defaults(fn=cmd_exposure)
     a = ap.parse_args(argv)
+    # A redirected stdout is block-buffered: a backgrounded `mohkit build > log &` wrote nothing
+    # until it exited (2026-09-30), so the log couldn't tell which stage was running.
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(line_buffering=True)
+        except AttributeError:
+            pass
     return a.fn(a)
 
 

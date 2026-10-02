@@ -252,6 +252,30 @@ def test_compiled_difference():
     assert compiled_difference(base, moved) is None
 
 
+def test_compile_ok_after_light_retry():
+    # A crashed multi-threaded MOHlight run that was retried on one thread must not fail the
+    # build (it did after cfd8983: FAILED, nothing packaged, after a 55-minute build).
+    import tempfile
+    from mohkit.compile import CompileResult, Stage
+    with tempfile.TemporaryDirectory() as d:
+        bsp = Path(d) / "x.bsp"
+        bsp.write_bytes(b"IBSP")
+        st = lambda n, rc: Stage(n, [], 1.0, rc, "")  # noqa: E731
+        res = CompileResult("x", Path(d), bsp, [st("bsp", 0), st("vis", 0), st("light_mt", 0x54), st("light", 0), st("info", 1)])
+        assert res.ok
+        res.stages[3] = st("light", 0x54)
+        assert not res.ok
+
+
+def test_plus_command_limit():
+    # more than 32 "+" commands drop +devmap: the game idles at the console until the timeout
+    from mohkit import game
+    base = {f"b{i}": "1" for i in range(25)}
+    kept, moved = game.fit_command_line(base, {"r_a": "1", "fs_x": "p", "r_b": "2", "r_c": "3", "r_d": "4", "r_e": "5"})
+    assert len(kept) + 2 == game.MAX_PLUS_COMMANDS and "fs_x" in kept and list(moved) == ["r_e"]
+    assert game.fit_command_line(base, {"r_a": "1"}) == ({**base, "r_a": "1"}, {})
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

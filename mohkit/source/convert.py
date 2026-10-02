@@ -3048,6 +3048,14 @@ def finish_local(name: str, src: Path, compiled_bsp: Path, assets: dict, statics
                               merge_split=convert_report.get("merge_split"))
         report["statics"] = info
         log(f"== static models injected: {json.dumps(info)}")
+        from ..staticmerge import DEFAULT_MAX_SKD
+        skd = (info.get("merge") or {}).get("skd", 0)
+        if skd > DEFAULT_MAX_SKD:
+            # split pieces always merge, so the budget can't pull them back: de_nuke with
+            # 512-unit piece cells had 678 prop SKDs (768: 597); past the 1,024-SKD skeleton
+            # cache (shared with players and weapons) props never load
+            log(f"!! {skd} prop SKDs, over the {DEFAULT_MAX_SKD} budget: props may not load"
+                f" ('No free spots open in skel cache'); use a larger split cell (merge_split)")
         bsp_bytes = lit.read_bytes()
     if divided is not None:
         # the BSP so far holds the light at texture scale (the light grid and the props were
