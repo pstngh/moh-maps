@@ -22,17 +22,18 @@ power line, fences, rooftop parapets/dishes/billboards, door frames and lamps; A
 props. Draft + 8 bots: 31 kills in 90 s. The user got the first draft sheet + underlay
 (~17:35 ET) and was asked for corrections; no reply yet.
 
-Since then: catwalk over the drop, glass skylights, hall office, distant peaks (wedge-split
-cones far out in the haze), cliff boulders; v3 preview sheet sent to the user ~18:00 ET
-(no reply yet). Running from ~18:20 ET: `-q normal --bots 8 --seconds 120` (log
-`local/summit/build_normal1.log`); then `mohkit test dist/mk_summit.pk3 dm/mk_summit --shots
-maps/mk_summit --perf 2000` at the user's LOD settings.
+Since then: catwalk over the drop, glass skylights, hall office, distant peaks, cliff
+boulders, coarse backdrop lightmaps. **Normal build done 19:25 ET** (light 1,549 s; 8 bots 43
+kills in 120 s): `dist/mk_summit.pk3`, sheet `dist/mk_summit_shots.png` (sent to the user).
+fps at the user's settings (`local/summit/perf_user_settings.log`): mean 4,043, worst 2,222
+(~30k tris per view). **Not installed**: waiting for the user's OK (local, and ask about the
+VPS). Nothing is running.
 
-Next, in order: (1) look at the preview sheet (lighting: cozy, no blown snow, no dark
-rooms); send it to the user with the open questions; (2) the user's corrections;
+Next, in order: (1) install on the user's OK; (2) the user's corrections;
 (3) fidelity: glass hip skylight on the hall, barracks roof skylights, more interior
-furniture, east catwalk over a real drop, terrain/rock dressing on the cliffs; (4) install
-only with the user's OK (it is a new map, nothing to regress).
+furniture, terrain/rock dressing on the cliffs; (4) move mk_summit's reusable helpers into
+mohkit.kit (railing, fence, dish, billboard, catwalk, rock_spur, wedge peaks, door with
+frame + lamp, Bldg/footprint/outdoor-air-by-subtraction) so the next map gets them.
 Interiors and floor levels are guesses (the references show little of them).
 
 ## State (2026-10-02 17:00 ET)
