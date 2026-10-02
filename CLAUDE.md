@@ -80,8 +80,9 @@ jobs and the shell".
 1. **Author**: `python -m mohkit new <name>` scaffolds `maps/<name>/build.py`
    (a working yard + hall to replace). It defines `build()` → `MapBuilder`,
    plus `META` and `SHOTS`. Use the `Carver` for all playable space (sealed by
-   construction), `kit` for stairs, windows, doors, roofs and lamps, and
-   `MapBuilder.prop()` for stock props.
+   construction), `kit` for stairs, windows, doors, roofs, lamps and fixtures, `site` for
+   reference grids, building masses and open/cliff-top sites, and `MapBuilder.prop()` for
+   stock props. Read docs/api.md's tables before writing any helper.
 2. **Check**: `python -m mohkit generate maps/<name>` writes
    `maps/<name>/<name>.map` from `build.py`, validates it and draws the top-down
    plan `dist/<name>_plan.png` (seconds, no compile). Look at the plan.
@@ -167,6 +168,12 @@ Where each lesson goes, strongest first:
 
 1. **Code**: a better default, a converter/kit feature, a `validate` or compile check, a
    test. The tool then does it right without anyone remembering. Prefer this.
+   **A map's `build.py` holds only that map** (its layout, palette, placements). Any helper
+   a second map could use (a fixture, a technique, a site setup) moves into `mohkit`
+   (`kit`, `site`, `build`) with a test before the session ends, and the docs name the
+   mohkit function, never a map file, as where it lives (the user, 2026-10-02: "the 21st map
+   shouldn't have to read the first 20"). Proof the move changed nothing: the map
+   regenerates to the same `.map` bytes.
 2. **The topic doc** (table above), with evidence: a source line, a binary string, an
    in-game test, before/after numbers. Include "tried and rejected" results there too.
 3. **`docs/symptoms.md`** for anything that looked or played wrong in a build: what it

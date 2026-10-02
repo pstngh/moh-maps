@@ -36625,12 +36625,12 @@
 }
 // brush 4042
 {
-( -1192 1036 161 ) ( -1192 1100 161 ) ( -1192 1036 225 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
-( -1048 1036 161 ) ( -1048 1036 225 ) ( -1048 1100 161 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
-( -1192 1036 161 ) ( -1192 1036 225 ) ( -1128 1036 161 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
-( -1192 1140 161 ) ( -1128 1140 161 ) ( -1192 1140 225 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
-( -1192 1036 161 ) ( -1128 1036 161 ) ( -1192 1100 161 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
-( -1192 1036 489 ) ( -1192 1100 489 ) ( -1128 1036 489 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1192 1036 152 ) ( -1192 1100 152 ) ( -1192 1036 216 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1048 1036 152 ) ( -1048 1036 216 ) ( -1048 1100 152 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1192 1036 152 ) ( -1192 1036 216 ) ( -1128 1036 152 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1192 1140 152 ) ( -1128 1140 152 ) ( -1192 1140 216 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1192 1036 152 ) ( -1128 1036 152 ) ( -1192 1100 152 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1192 1036 480 ) ( -1192 1100 480 ) ( -1128 1036 480 ) common/playerclip 0 0 0 1 1 0 0 0 +surfaceparm detail
 }
 // brush 4043
 {

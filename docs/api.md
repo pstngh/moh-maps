@@ -123,10 +123,44 @@ is. `u0..u1` runs along that wall: **x for north/south walls, y for east/west**.
 | `crate_stack(b, x, y, z, m, size=48, layout="L")` | brush crates as cover |
 | `terrain(b, x0, y0, z0, patches_x, patches_y, height_fn, shader, texture_size=512)` | LOD terrain, 512×512 per patch, ≤ 510 relief per patch (see [map-format.md](map-format.md#terrain-terraindef)) |
 | `fit(shader, normal, u0, u1, top, scale)` | material that puts an image's top-left on a panel's top-left, unmirrored |
+| `polygon(cx, cy, r, n=16, phase=0)` | integer n-gon for `b.prism` |
+| `dome(b, cx, cy, z0, r, m, rings=5)` | hemisphere of stacked 16-gon slices (radar domes) |
+| `clip_box(b, x0, y0, z0, x1, y1, z1)` | playerclip block |
+| `railing(b, x0, y0, x1, y1, z, h=40, rail, post)` | steel rail with posts every 128 along an axis-aligned run |
+| `fence(b, x0, y0, x1, y1, z=0, h=112, mesh, post)` | chain-link fence (nonsolid mesh that clips players) with posts every ~192 |
+| `parapet(b, x0, y0, x1, y1, z, h=24, t=8, m, top=None)` | low wall round a flat roof's edge |
+| `console(b, x0, y0, x1, y1, z=0, h=72, panel, top)` | control-cabinet block (panel texture all round) |
+| `dish(b, x, y, z, r, yaw, tilt=35, m, post)` | satellite dish on a post (`static/dish.tik` is a 31-unit bowl) |
+| `billboard(b, x, y, z, w, axis="x", panel, frame, leg)` | sign panel on two legs |
+| `catwalk(b, x0, y0, x1, y1, z, legs_to, outer="east", deck, beam, leg)` | steel-grate walkway off a wall: beams, legs to `legs_to`, braces, railing |
+| `power_line(b, posts, z=0, h=320, pole, wire, sag=48, spread=40)` | wooden poles with crossarms and two sagging wires |
+| `gondola(b, x, y, z0, (xa, za, xb, zb), hanger_top, body, trim, glass)` | cable-car cabin with its hanger and two cables along x (add a clip box) |
+| `antenna_mast(b, x, y, base, top, paint, steel, ring, mesh)` | tapered mast with brace rings, mesh antenna panel, coils, clipped |
+
+Fixture materials default to stock AA winter/industrial textures (`kit.STEEL_V`, `STEEL_H`,
+`CHAIN_LINK`, `GRATE`, `SIGN_RED`, ...); pass the map's palette to change them.
+
+## site (reference grids, building masses, open and cliff-top sites)
+
+`mohkit.site` holds what a whole site needs; `maps/mk_summit/build.py` uses all of it.
+
+| call | does |
+|---|---|
+| `RefGrid(units_per_px, origin_px, snap=16)` | `.x(u)`, `.y(v)`, `.rect(u0, v0, u1, v1)`, `.point(u, v)`: positions written in a reference image's pixels (v down), snapped |
+| `Building(name, rect, top, face, ground=0, thickness=16, reveal, sill, frame, lamp_color, lamp_intensity)` | a solid mass; `.room(cv, z0, z1, floor, walls, ceiling)`, `.opening(cv, side, u, w, z0, z1)`, `.door(b, cv, side, u, w=80, h=128, lamp=True)` (frame + wall lantern), `.window(cv, side, u, w=96, z0=64, z1=136)` |
+| `plateau_solids(footprint, buildings, ground, void)` | the boxes that are not outdoor air: ground under each footprint rect, every building mass |
+| `outdoor_air(cv, outer_box, solids, floor, walls, cuts=())` | sky-topped air = outer box minus solids (real drops, sealed hull) |
+| `walls(outer, buildings, sky, below, ground=0)` / `floors(void, ground, valley, roof, ground_m)` | position functions for `outdoor_air`: sky at the outer box, each building's `face`, cliff `below`; valley / roof / ground floors |
+| `void_triggers(b, outer, void, solids, height=256)` | trigger_hurt per void column above the valley floor (one big trigger leaks) |
+| `rock_spur(b, x, y, top, bottom, top_m, side_m, r=120)` | rock outcrop from the valley to `top` (trees, masts below a rim) |
+| `mountain_ring(b, m, base, n=16, rx=3800, ry=4800, r=1450, low=-400, span=850)` | broad peaks on an ellipse, each 7 wedges under the brush-length limit |
+| `boulders_outside(b, points, footprint, center, rim)` | rock props pushed off the plateau, sunk below the rim |
+| `in_rects(x, y, rects)` | point in any rect |
 
 Recipes that worked: an arcade is pillars (`prism`) plus arch pieces (`hull`)
 that stop just above the apex and one lintel box to the ceiling (see
-[map-format.md](map-format.md#64-vertex-faces) and `maps/mk_medina/build.py`);
+[map-format.md](map-format.md#64-vertex-faces); the code is still `arch_fill`/`arcade` in
+`maps/mk_medina/build.py`, to move into kit);
 a decal or alpha image goes on a thin non-solid slab 1 unit off the wall (see
 [materials.md](materials.md)).
 

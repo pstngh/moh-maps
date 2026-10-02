@@ -371,3 +371,198 @@ def door(cv: Carver, air: Air, side: str, u: float, z: float = 0, width: float =
     """A closed (decorative) door: a niche centred at ``u`` on the wall with a door image."""
     return window(cv, air, side, u - width / 2, u + width / 2, z, z + height, image, image_px, reveal,
                   sill=reveal, depth=depth)
+
+
+# ---------------------------------------------------------------------------
+# Fixtures and site furniture (first built for mk_summit; generic). Materials default to
+# stock AA winter/industrial textures; pass your own palette.
+
+STEEL_V = Material("central_europe_winter/ibeam_vertwnter")      # posts, legs
+STEEL_H = Material("central_europe_winter/ibeam_horizwnter")     # rails, beams
+CHAIN_LINK = Material("central_europe_winter/secfence1_wntr")    # nonsolid texture, clips players
+GRATE = Material("general_industrial/deckgrate_set1b")           # see-through steel deck
+PANEL_GREY = Material("norway/nor_panelflat")
+CONTROL_PANEL = Material("norway/nor_panel2_v2")
+SIGN_RED = Material("general_structure/jh_corrugate4c")
+MESH = Material("general_industrial/industrialgrate1")
+GLASS = Material("common/dglass")
+WOOD_POLE = Material("general_structure/beam_wood1")
+PLAYERCLIP = Material("common/playerclip")
+
+
+def polygon(cx: float, cy: float, r: float, n: int = 16, phase: float = 0.0) -> list[tuple[int, int]]:
+    """Regular n-gon (integer points) for ``b.prism``; ``phase`` in degrees."""
+    return [(round(cx + r * math.cos(math.radians(phase + 360 * i / n))),
+             round(cy + r * math.sin(math.radians(phase + 360 * i / n)))) for i in range(n)]
+
+
+def dome(b: MapBuilder, cx: float, cy: float, z0: float, r: float, m: MatLike, rings: int = 5) -> None:
+    """Hemisphere of stacked 16-gon slices standing on z0 (radar domes, observatory caps)."""
+    for i in range(rings):
+        a0 = math.radians(90 * i / rings)
+        a1 = math.radians(90 * (i + 1) / rings)
+        rr = r * math.cos((a0 + a1) / 2)
+        b.prism(polygon(cx, cy, max(rr, 8), 16, 11.25), z0 + r * math.sin(a0), z0 + r * math.sin(a1), m)
+
+
+def clip_box(b: MapBuilder, x0, y0, z0, x1, y1, z1) -> None:
+    """Playerclip block (keeps players off props without collision, masts, roofs)."""
+    b.box((x0, y0, z0), (x1, y1, z1), PLAYERCLIP)
+
+
+def railing(b: MapBuilder, x0, y0, x1, y1, z: float, h: float = 40, rail: MatLike = STEEL_H,
+            post: MatLike = STEEL_V) -> None:
+    """Thin steel rail with posts every 128 along a straight axis-aligned run (x0..x1 at y0, or
+    y0..y1 at x0, whichever is longer). Waist high (40): players can't fall past it by walking."""
+    if x1 - x0 >= y1 - y0:
+        b.box((x0, y0 - 2, z + h - 4), (x1, y0 + 2, z + h), rail)
+        n = max(1, int((x1 - x0) // 128))
+        for i in range(n + 1):
+            x = x0 + (x1 - x0) * i / n
+            b.box((x - 2, y0 - 2, z), (x + 2, y0 + 2, z + h - 4), post)
+    else:
+        b.box((x0 - 2, y0, z + h - 4), (x0 + 2, y1, z + h), rail)
+        n = max(1, int((y1 - y0) // 128))
+        for i in range(n + 1):
+            y = y0 + (y1 - y0) * i / n
+            b.box((x0 - 2, y - 2, z), (x0 + 2, y + 2, z + h - 4), post)
+
+
+def fence(b: MapBuilder, x0, y0, x1, y1, z: float = 0, h: float = 112, mesh: MatLike = CHAIN_LINK,
+          post: MatLike = STEEL_V) -> None:
+    """Chain-link fence along an axis-aligned run with posts every ~192. The mesh shader is
+    nonsolid but clips players (``secfence1_wntr``), so bullets pass and people don't."""
+    if x1 - x0 >= y1 - y0:
+        b.box((x0, y0 - 1, z), (x1, y0 + 1, z + h), {"north": mesh, "south": mesh, "default": CAULK_M})
+        n = max(1, int((x1 - x0) // 192))
+        pts = [(x0 + (x1 - x0) * i / n, y0) for i in range(n + 1)]
+    else:
+        b.box((x0 - 1, y0, z), (x0 + 1, y1, z + h), {"east": mesh, "west": mesh, "default": CAULK_M})
+        n = max(1, int((y1 - y0) // 192))
+        pts = [(x0, y0 + (y1 - y0) * i / n) for i in range(n + 1)]
+    for x, y in pts:
+        b.box((x - 3, y - 3, z), (x + 3, y + 3, z + h + 8), post)
+
+
+def dish(b: MapBuilder, x: float, y: float, z: float, r: float, yaw: float, tilt: float = 35,
+         m: MatLike = PANEL_GREY, post: MatLike = STEEL_V) -> None:
+    """Satellite dish on a post standing on z: a shallow cone (convex hull of a tilted 8-point rim
+    and a back point) facing ``yaw``, tilted ``tilt`` degrees up. ``static/dish.tik`` is a tiny
+    bowl (31 units), not a satellite dish."""
+    a, t = math.radians(yaw), math.radians(tilt)
+    fx, fy, fz = math.cos(a) * math.cos(t), math.sin(a) * math.cos(t), math.sin(t)   # facing
+    ux, uy, uz = -math.cos(a) * math.sin(t), -math.sin(a) * math.sin(t), math.cos(t)  # rim "up"
+    sx, sy = -math.sin(a), math.cos(a)                                                # rim "side"
+    cz = z + r + 24
+    rim = [(x + r * (math.cos(k * math.pi / 4) * sx + math.sin(k * math.pi / 4) * ux),
+            y + r * (math.cos(k * math.pi / 4) * sy + math.sin(k * math.pi / 4) * uy),
+            cz + r * math.sin(k * math.pi / 4) * uz) for k in range(8)]
+    back = (x - fx * r * 0.45, y - fy * r * 0.45, cz - fz * r * 0.45)
+    b.hull([tuple(round(c, 1) for c in q) for q in rim] + [back], m)
+    b.box((x - 4, y - 4, z), (x + 4, y + 4, cz - r * 0.3), post)
+
+
+def billboard(b: MapBuilder, x: float, y: float, z: float, w: float, axis: str = "x",
+              panel: MatLike = SIGN_RED, frame: MatLike = STEEL_H, leg: MatLike = STEEL_V) -> None:
+    """Sign panel (96 tall) on two 64-unit legs standing on z, ``w`` wide along ``axis``."""
+    if axis == "x":
+        b.box((x - w / 2, y - 3, z + 64), (x + w / 2, y + 3, z + 160), {"sides": panel, "default": frame})
+        for dx in (-w / 2 + 16, w / 2 - 24):
+            b.box((x + dx, y - 4, z), (x + dx + 8, y + 4, z + 64), leg)
+    else:
+        b.box((x - 3, y - w / 2, z + 64), (x + 3, y + w / 2, z + 160), {"sides": panel, "default": frame})
+        for dy in (-w / 2 + 16, w / 2 - 24):
+            b.box((x - 4, y + dy, z), (x + 4, y + dy + 8, z + 64), leg)
+
+
+def console(b: MapBuilder, x0, y0, x1, y1, z: float = 0, h: float = 72, panel: MatLike = CONTROL_PANEL,
+            top: MatLike = STEEL_H) -> None:
+    """A bank of control cabinets: panel texture on every side, a steel top (solid cover)."""
+    b.box((x0, y0, z), (x1, y1, z + h), {"sides": panel, "top": top, "default": CAULK_M})
+
+
+def parapet(b: MapBuilder, x0, y0, x1, y1, z: float, h: float = 24, t: float = 8,
+            m: MatLike = "norway/norcrete1", top: Optional[MatLike] = None) -> None:
+    """Low wall round a flat roof's edge (outer rect x0..x1, y0..y1) standing on z, ``t`` thick."""
+    cap = {"top": top, "default": m} if top is not None else m
+    b.box((x0, y0, z), (x1, y0 + t, z + h), cap)
+    b.box((x0, y1 - t, z), (x1, y1, z + h), cap)
+    b.box((x0, y0 + t, z), (x0 + t, y1 - t, z + h), cap)
+    b.box((x1 - t, y0 + t, z), (x1, y1 - t, z + h), cap)
+
+
+def catwalk(b: MapBuilder, x0, y0, x1, y1, z: float, legs_to: float, outer: str = "east",
+            deck: MatLike = GRATE, beam: MatLike = STEEL_H, leg: MatLike = STEEL_V) -> None:
+    """Steel-grate walkway running north-south (x0..x1 wide) with its deck top at z, hanging off
+    a wall on the side opposite ``outer``: cross beams every 256, a leg on the ``outer`` edge
+    down to ``legs_to`` and a brace back to the wall, a railing on the ``outer`` edge."""
+    b.box((x0, y0, z - 8), (x1, y1, z), {"top": deck, "bottom": deck, "default": beam})
+    for y in range(int(y0) + 64, int(y1), 256):
+        if outer == "east":
+            b.box((x0 + 8, y - 6, z - 24), (x1, y + 6, z - 8), beam)
+            b.box((x1 - 24, y - 8, legs_to), (x1 - 8, y + 8, z - 24), leg)
+            b.hull([(x1 - 24, y - 4, z - 24), (x1 - 8, y - 4, z - 24), (x1 - 24, y + 4, z - 24), (x1 - 8, y + 4, z - 24),
+                    (x0 + 16, y - 4, z - 216), (x0, y - 4, z - 216), (x0 + 16, y + 4, z - 216), (x0, y + 4, z - 216)], leg)
+        else:
+            b.box((x0, y - 6, z - 24), (x1 - 8, y + 6, z - 8), beam)
+            b.box((x0 + 8, y - 8, legs_to), (x0 + 24, y + 8, z - 24), leg)
+            b.hull([(x0 + 8, y - 4, z - 24), (x0 + 24, y - 4, z - 24), (x0 + 8, y + 4, z - 24), (x0 + 24, y + 4, z - 24),
+                    (x1 - 16, y - 4, z - 216), (x1, y - 4, z - 216), (x1 - 16, y + 4, z - 216), (x1, y + 4, z - 216)], leg)
+    railing(b, (x1 - 6) if outer == "east" else (x0 + 6), y0, (x1 - 6) if outer == "east" else (x0 + 6), y1, z)
+
+
+def power_line(b: MapBuilder, posts: Sequence[tuple[float, float]], z: float = 0, h: float = 320,
+               pole: MatLike = WOOD_POLE, wire: MatLike = STEEL_H, sag: float = 48, spread: float = 40) -> None:
+    """Wooden poles with a crossarm at each point and two sagging wires (two straight segments
+    per span) between consecutive poles."""
+    for x, y in posts:
+        b.box((x - 6, y - 6, z), (x + 6, y + 6, z + h), {"sides": pole, "default": CAULK_M})
+        b.box((x - 48, y - 4, z + h - 32), (x + 48, y + 4, z + h - 20), pole)
+    for (xa, ya), (xb, yb) in zip(posts, posts[1:]):
+        for off in (-spread, spread):
+            za, zb = z + h - 32, z + h - 32
+            mid = ((xa + xb) / 2 + off, (ya + yb) / 2, za - sag)
+            for (p0, p1) in (((xa + off, ya, za), mid), (mid, (xb + off, yb, zb))):
+                b.hull([(p0[0] - 1, p0[1], p0[2]), (p0[0] + 1, p0[1], p0[2]), (p0[0], p0[1], p0[2] + 2),
+                        (p1[0] - 1, p1[1], p1[2]), (p1[0] + 1, p1[1], p1[2]), (p1[0], p1[1], p1[2] + 2)], wire)
+
+
+def gondola(b: MapBuilder, x: float, y: float, z0: float, cable: tuple[float, float, float, float],
+            hanger_top: float, body: MatLike = SIGN_RED, trim: MatLike = STEEL_H, glass: MatLike = GLASS,
+            segments: int = 4) -> None:
+    """Cable-car cabin (128 long on x, 88 wide, 112 tall, windows on both long sides) with its
+    floor at z0, hung from ``hanger_top``, and two cables 48 apart running along x from
+    (xa, za) to (xb, zb) = ``cable`` in ``segments`` pieces (each under the 1,536-unit brush
+    limit). Not enterable: add a clip box."""
+    gx, gy = x, y
+    sides = {"sides": body, "top": trim, "bottom": trim}
+    b.box((gx - 64, gy - 44, z0), (gx + 64, gy + 44, z0 + 24), sides)                 # skirt
+    b.box((gx - 64, gy - 44, z0 + 72), (gx + 64, gy + 44, z0 + 112), sides)           # roof band
+    for sx in (-64, 60):
+        b.box((gx + sx, gy - 44, z0 + 24), (gx + sx + 4, gy + 44, z0 + 72), body)
+    b.box((gx - 60, gy - 44, z0 + 24), (gx + 60, gy - 40, z0 + 72), glass)
+    b.box((gx - 60, gy + 40, z0 + 24), (gx + 60, gy + 44, z0 + 72), glass)
+    b.box((gx - 4, gy - 4, z0 + 112), (gx + 4, gy + 4, hanger_top), STEEL_V)          # hanger
+    xa, za, xb, zb = cable
+    for dy in (-24, 24):
+        cy = gy + dy
+        for i in range(segments):
+            x0, x1 = xa + (xb - xa) * i / segments, xa + (xb - xa) * (i + 1) / segments
+            c0, c1 = za + (zb - za) * i / segments, za + (zb - za) * (i + 1) / segments
+            b.hull([(x0, cy - 2, c0), (x0, cy + 2, c0), (x0, cy - 2, c0 + 4), (x0, cy + 2, c0 + 4),
+                    (x1, cy - 2, c1), (x1, cy + 2, c1), (x1, cy - 2, c1 + 4), (x1, cy + 2, c1 + 4)], trim)
+
+
+def antenna_mast(b: MapBuilder, x: float, y: float, base: float, top: float, paint: MatLike = SIGN_RED,
+                 steel: MatLike = STEEL_V, ring: MatLike = STEEL_H, mesh: MatLike = MESH) -> None:
+    """Tapered steel mast from ``base`` to ``top`` with brace rings every 96, a mesh antenna panel
+    (240 x 176, facing north/south) and two coil cylinders on top, all wrapped in playerclip."""
+    b.hull([(x - 24, y - 24, base), (x + 24, y - 24, base), (x - 24, y + 24, base), (x + 24, y + 24, base),
+            (x - 10, y - 10, top), (x + 10, y - 10, top), (x - 10, y + 10, top), (x + 10, y + 10, top)],
+           {"sides": paint, "default": steel})
+    for z in range(int(base) + 128, int(top), 96):
+        b.box((x - 26, y - 26, z), (x + 26, y + 26, z + 8), ring)
+    b.box((x - 120, y - 4, top), (x + 120, y + 4, top + 176), {"north": mesh, "south": mesh, "default": ring})
+    for dx in (-60, 60):
+        b.prism(polygon(x + dx, y + 12, 20, 8), top + 40, top + 136, ring)
+    clip_box(b, x - 128, y - 32, base, x + 128, y + 32, top + 200)

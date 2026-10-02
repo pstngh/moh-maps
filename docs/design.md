@@ -81,11 +81,11 @@ it.
 
 ### Cliff-top and island maps (drops on every side)
 
-`maps/mk_summit` sits on a plateau with real drops. The outdoor air is the outer box minus
-the plateau (footprint rectangles from the valley floor up to the ground) minus every
-building mass (ground to roof): `merge_boxes(subtract_all([outer], solids))`, each piece a
-sky `Air` whose floor/walls are functions of position (api.md). The cliffs are then shell
-faces, the hull stays sealed, and building rooms are carved inside the masses as usual.
+Use `mohkit.site` (api.md): `plateau_solids` (ground under the footprint, building masses),
+`outdoor_air` (the outer box minus those, sky-topped, with `site.walls`/`site.floors` picking
+facade, cliff and ground materials by position), `Building.room/door/window` for interiors,
+`void_triggers`, `rock_spur`, `mountain_ring`, `boulders_outside`. The drops are real, the
+cliffs are shell faces and the hull stays sealed. Worked example: `maps/mk_summit`.
 Details that mattered:
 
 - The hollow inside the plateau is outside the hull. Nothing may stand in it: one
@@ -93,14 +93,15 @@ Details that mattered:
   plateau and leaks), and no spawn inside a solid mass (`validate.check_air` catches both).
 - A fall of 625+ units kills; Summit's valley floor is 1,536 below the rim, with the
   trigger as a backstop.
-- Trees below the rim need ground: `rock_spur` stacks three widening 7-gon prisms from the
-  valley floor to the tree's base.
+- Trees below the rim need ground: `site.rock_spur` stacks three widening 7-gon prisms from
+  the valley floor to the tree's base.
 - Distant mountains: steep cones close to the edge read as white pyramids (mk_summit's first
   try: base radius 700, 2,300 tall, 1,000 units off the path). What worked: broad peaks
   (radius 1,450, apex -400..+450 around a plateau at 0, about 50°) on an ellipse 3,800 x
   4,800 from the centre, inside the farplane (3,800) so the fog leaves soft silhouettes; each
   peak is 7 pie-slice wedges (hull of centre, two rim points, apex), so no brush passes the
-  validator's 1,536-unit length warning. Give them `Material(..., density=256)`.
+  validator's 1,536-unit length warning (`site.mountain_ring`). Give them
+  `Material(..., density=256)`.
 - With `farplane_cull 1` a 2D sky is drawn unfogged (mk_summit's first draft: `sky/m5l2`
   stayed dark grey under pale fog `.74 .77 .82` at 3,800). Pick a sky whose horizon matches
   the fog colour: `sky/d-day2` (grey overcast over a pale band) with `.71 .71 .73`.

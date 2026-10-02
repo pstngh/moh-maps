@@ -133,8 +133,9 @@ game's wiki (downloaded with the user's OK into `local/`, never committed).
    MOHAA: a CoD player is 72 units tall, a MOHAA player 94, so **CoD units x 1.3** keeps
    doorways, cover heights and running time alike (MOHAA runs 275 u/s, CoD 190 u/s: the same
    route takes 0.9x as long). Summit: ~9.8 CoD units per minimap pixel -> 12 MOHAA units.
-3. **Write positions in minimap pixels** in `build.py` (`X(u)`, `Y(v)`, `R(u0, v0, u1, v1)`
-   helpers that snap to 16), so every number can be checked against the picture.
+3. **Write positions in minimap pixels** with `site.RefGrid(units_per_px, origin_px)`
+   (`.x(u)`, `.y(v)`, `.rect(u0, v0, u1, v1)`, `.point(u, v)`, snapped to 16), so every
+   number in build.py can be checked against the picture.
 4. **Underlay.** `META["underlay"] = {"image": "local/<ref>/minimap.png", "origin_px": [u, v],
    "units_per_px": 12, "alpha": 0.5, "zmin": -64}` makes `mohkit generate` draw the plan over
    the minimap (`dist/<name>_underlay.png`): footprint edges on the minimap's walls mean the
