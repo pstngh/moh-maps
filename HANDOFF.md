@@ -22,7 +22,11 @@ power line, fences, rooftop parapets/dishes/billboards, door frames and lamps; A
 props. Draft + 8 bots: 31 kills in 90 s. The user got the first draft sheet + underlay
 (~17:35 ET) and was asked for corrections; no reply yet.
 
-Running at 17:55 ET: `-q preview --bots 8 --seconds 90` (log `local/summit/build_preview1.log`).
+Since then: catwalk over the drop, glass skylights, hall office, distant peaks (wedge-split
+cones far out in the haze), cliff boulders; v3 preview sheet sent to the user ~18:00 ET
+(no reply yet). Running from ~18:20 ET: `-q normal --bots 8 --seconds 120` (log
+`local/summit/build_normal1.log`); then `mohkit test dist/mk_summit.pk3 dm/mk_summit --shots
+maps/mk_summit --perf 2000` at the user's LOD settings.
 
 Next, in order: (1) look at the preview sheet (lighting: cozy, no blown snow, no dark
 rooms); send it to the user with the open questions; (2) the user's corrections;

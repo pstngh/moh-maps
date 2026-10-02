@@ -9,7 +9,7 @@
     python -m mohkit validate file.map
     python -m mohkit plan file.map [-o out.png] [--zmin Z --zmax Z]
     python -m mohkit inspect file.map|file.bsp
-    python -m mohkit test file.pk3 dm/name [--shots maps/<name>] [--bots N --seconds S]
+    python -m mohkit test file.pk3 dm/name [--shots maps/<name>] [--bots N --seconds S] [--perf MS --cvar k=v]
     python -m mohkit swatches stone brick [-o sheet.png]     stock materials by name, as a picture sheet
     python -m mohkit looks-like ref.png --box x0,y0,x1,y1 [--where wall] [--word stone]   texture look-alikes
     python -m mohkit compare ref.png shot.png [-o out.png] [--region name=x0,y0,x1,y1]   reference | shot | blend
@@ -237,7 +237,8 @@ def cmd_test(a) -> int:
         if Path(a.shots).resolve().name != stem:
             stem += "_" + Path(a.shots).resolve().name   # don't overwrite the map's own contact sheet
     r = game.run([Path(a.pk3)], a.map, shots, bots=a.bots, match_seconds=a.seconds,
-                 perf_ms=a.perf, perf_toggles=_toggles(a.toggle), screenshots=not a.perf)
+                 perf_ms=a.perf, perf_toggles=_toggles(a.toggle), screenshots=not a.perf,
+                 cvars=dict(_toggles(a.cvar)) or None)
     print(r.summary())
     if a.perf:
         print(game.perf_table(r.perf))
@@ -449,6 +450,8 @@ def main(argv=None) -> int:
                    help="time MS of uncapped frames at each camera instead of screenshots (fps, r_speeds)")
     s.add_argument("--toggle", action="append", metavar="CVAR=VALUE",
                    help="with --perf: also time each camera with this cvar set (e.g. r_drawstaticmodels=0)")
+    s.add_argument("--cvar", action="append", metavar="NAME=VALUE",
+                   help="set for the whole run (e.g. r_lodscale=0.45, the user's settings)")
     s.set_defaults(fn=cmd_test)
     s = sub.add_parser("swatches", help="sheet of stock materials whose name contains a word")
     s.add_argument("words", nargs="+")
