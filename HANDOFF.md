@@ -26,10 +26,12 @@ Since then: catwalk over the drop, glass skylights, hall office, distant peaks, 
 boulders, coarse backdrop lightmaps. **Normal build done 19:25 ET** (light 1,549 s; 8 bots 43
 kills in 120 s): `dist/mk_summit.pk3`, sheet `dist/mk_summit_shots.png` (sent to the user).
 fps at the user's settings (`local/summit/perf_user_settings.log`): mean 4,043, worst 2,222
-(~30k tris per view). **Not installed**: waiting for the user's OK (local, and ask about the
-VPS). Nothing is running.
+(~30k tris per view). **Installed locally 2026-10-02 ~19:35 ET (user's OK)**: `main/mk_summit.pk3`
+(sha1 2e3e118bf03b, map + scripts only; clashes unchanged at the old 4). Not on the VPS (the
+user said "locally"). Nothing is running.
 
-Next, in order: (1) install on the user's OK; (2) the user's corrections;
+Next, in order: (1) the user's corrections (then rebuild, compare sheets, reinstall on OK);
+(2)
 (3) fidelity: glass hip skylight on the hall, barracks roof skylights, more interior
 furniture, terrain/rock dressing on the cliffs; (4) move mk_summit's reusable helpers into
 mohkit.kit (railing, fence, dish, billboard, catwalk, rock_spur, wedge peaks, door with
