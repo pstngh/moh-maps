@@ -6,6 +6,28 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
+## NEXT SESSIONS (the user picks the order): history harvest, then/or the lean Nuke rebuild
+
+### History harvest (user, chat 2026-10-02 ~13:30): recover lessons from past work
+
+Goal: everything earlier sessions learned but never wrote into docs/code gets its permanent
+home (CLAUDE.md "The learning loop"). Sources, all local (GitHub has the same git history):
+1. **HANDOFF.md history:** 93 of 163 commits since 2026-09-30 change it, and old versions hold
+   session notes later trimmed. Extract every version (dulwich: walk `main`, read
+   `HANDOFF.md` at each commit) and diff.
+2. **Commit messages** (163): many record causes and numbers.
+3. **Claude Code transcripts:** 11 files, 283 MB, `~/.claude/projects/-Users-pstn-Documents-moh-maps/*.jsonl`
+   (2026-09-30 .. 10-02). User corrections, failed attempts, calibrations. Too big to read
+   whole: one subagent per transcript extracting candidate lessons (with quotes and
+   numbers), then verify each against the code and docs before writing it down. **They are
+   deleted after `cleanupPeriodDays` (default 30 days: the oldest around 2026-10-30)**;
+   suggest raising it in the user's settings first.
+4. `~/Library/Caches/mohkit/old-git-backup` (319 MB, pre-restart repo): only for engine and
+   tool facts; the user said not to reuse pre-restart map work.
+Output: rows in `docs/symptoms.md`, paragraphs (with evidence, tried-and-rejected tables) in
+the topic docs, defaults/checks/tests where cheap, memory notes about the user; a short
+report to the user of what was added and what was already documented.
+
 ## NEXT SESSION: "lean" rebuild of de_nuke (user, chat 2026-10-02 ~12:40)
 
 **User: "do the lean rebuild on nuke, but in a fresh session".** Nothing is running.
