@@ -318,6 +318,8 @@ When a shot looks wrong and the data "checks out on paper", test what the game r
   `ab_sheet.png`). It found installed CS:GO conversions overriding each other's props
   (cs_cache's Ttruck camera: 3% of the pixels; `pak.path_clashes` lists such files). The
   same command with the installed and the new build is the regression check before an install.
+  Both sets must hold the same map name (`dm/<name>`): to compare variants, build them under
+  one `--name` and keep the older pk3 in `local/csgo/before/`.
   Shots repeat exactly run to run except a conversion's overview camera (two runs of one
   pk3: mean 1.0, the top ~15 rows holding the previous frame and one sky face flickering), so
   check a surprising change against an A-vs-A run first.
@@ -349,7 +351,11 @@ When a shot looks wrong and the data "checks out on paper", test what the game r
   restart. Put each one's command, log and ETA in HANDOFF; the next session finds them with
   `ps aux | grep -E "[Q]3map|[M]OHlight|[o]penmohaa"` (the bracket keeps grep from matching
   its own command line). Keep anything a later session needs (backup pk3s, logs) under
-  `local/`, never in the session scratchpad.
+  `local/`, never in the session scratchpad. The agent's own background-task runner stops a
+  job at its timeout (2 h at most), so a queue of several conversions must be detached too.
+- A queue that starts `python -m mohkit` once per step imports mohkit afresh at each step:
+  edits made while it runs reach its later steps. Keep such edits opt-in (a new profile or
+  flag) until the queue ends, or the rebuilt maps silently mix two versions of the code.
 - Wait in the background: a foreground `sleep` is blocked and a foreground command is cut at
   600 s (it then keeps running unseen). Use one `until grep -q "^done" log; do sleep 30;
   done` or `while kill -0 PID; do sleep 30; done` with `run_in_background`, one watcher per
