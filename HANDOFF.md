@@ -6,6 +6,35 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
+## NEXT SESSION: "lean" rebuild of de_nuke (user, chat 2026-10-02 ~12:40)
+
+**User: "do the lean rebuild on nuke, but in a fresh session".** Nothing is running.
+Agreed plan (from chat): keep CS:GO's world brushes, textures and baked lighting (they carry
+most of the look); compile so walls block visibility (real VIS); replace the ~2,500 props
+with a small set: big gameplay pieces (containers, crates, silos, trucks) as simple textured
+brush boxes/cylinders that VIS can cull, a few hundred decorative static models, clutter
+dropped. Expected 500-650 fps (rough guess; stock maps 1,200-1,700 on the harness).
+Then the same for Mirage (also with FFA spawns, `Options.ffa_spawns`).
+
+Facts to start from:
+- Nuke world alone (props off, current `detail_all` build without real VIS): ~770 fps
+  (`perf_s1_split.json`); props are the rest. Best prop build so far: s8 200 / 150 fps,
+  s9 (fades 768, no wires) 266 / 194 but the A silo vanished (fade cap applied to a landmark).
+- Static models are never VIS-culled in OpenMoHAA; world surfaces are. **Idea to verify
+  first (cheap):** inject props as world *triangle-soup* surfaces instead of static models
+  (the renderer loads `MST_TRIANGLE_SOUP`, `renderergl1/tr_bsp.c:1634`): assign each to the
+  leaves it touches (`leafsurfaces`), vertex colours from CS:GO's prop lighting, so VIS and
+  per-surface culling apply and the look is kept. Check in the source how a vertex-lit soup
+  surface is shaded (lightmap -1, rgbGen) and test on a small map before Nuke. If it works,
+  it could replace most of the proxy-brush work.
+- Real VIS: `--structural` keeps Source's structural brushes structural (dust2 compiled
+  with 61 KB VIS on 2026-10-01; untested lit, untested on Nuke). Watch leaks, compile time,
+  VIS overflow, and the 3D-skybox room rules.
+- Measure with `mohkit csgo de_nuke --perf 2000 [--toggle r_drawstaticmodels=0]` interleaved
+  against `local/csgo/before/cs_nukes_s8/cs_nukes.pk3`; `mohkit.propcost` for prop vertices.
+- Restore before a new `--resume` on cs_nukes: `local/csgo/cs_nukes/statics.json` and
+  `prop_light.npz` hold the s9 hand edit; s8's copies are in `local/csgo/before/cs_nukes_s8/`.
+
 ## User request (chat ~22:30): "lite" conversions for really high fps, like stock maps
 
 **Resumed 2026-10-02 07:20. User (chat ~07:35): "for now only do nuke and mirage"**: the

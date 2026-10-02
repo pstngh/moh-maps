@@ -86,6 +86,10 @@ part of the definition of done. Human feedback outranks both.
 - Keep the map within ±8192; ≤ 170 lightmap pages; ≤ 60 lights per leaf.
 - Converted CS:GO content (textures, models, BSPs) is local-only: write it under
   `local/` (gitignored) and never commit it.
+- Shell wait loops: `pgrep -f "pattern"` also matches the shell running the loop, so it
+  never ends. Wait on a marker line in a log, or a pid. Kill your leftover heredoc
+  scripts (`python -`) before timing anything.
+- fps numbers only compare within one interleaved run (docs/testing.md "Frame rate").
 
 ## Where knowledge lives
 

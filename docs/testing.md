@@ -39,6 +39,21 @@ the pending 3D commands (`R_IssuePendingRenderCommands`, `renderergl1/tr_draw.c:
 and each flush overwrites `backEnd.pc.msec` (`tr_backend.c:1492`, `=` not `+=`), so `bk`
 holds only the last flush (the swap). The 3D scene's back end lands in `cl`.
 
+Compare builds **interleaved** (A B A B, `local/csgo/perf_nukes.sh` pattern) and only
+against each other: the same build measured 233 fps at 07:30 and 166 at 09:20 on
+2026-10-02 (a leftover CPU-bound process; a remote-desktop session like RustDesk also costs
+~15-25%). Split the frame with `--toggle r_drawstaticmodelpoly=0` (prop vertex work off,
+surfaces still sorted and visited) and `--toggle r_drawstaticmodels=0` (props off).
+`mohkit.propcost.estimate` predicts drawn prop vertices per camera offline in seconds
+(within ~15% of r_speeds) for comparing prop settings before a build.
+
+**Prop LOD artifacts:** shoot the same cameras with `cvars={"r_staticlod": "0"}`; if an
+artifact goes away it is the LOD. Then bisect by packaging copies of the pk3 without the
+`.lod` files of a group of models (no `.lod` = full detail) until one model is left; replay
+that model's surfaces at the engine's cutoff (`lod.engine_cutoff`, `RB_StaticMesh` loop) to
+see why. Geometry checks alone missed two of the three 2026-10-02 bugs (texture smear and
+lost vertex lighting were on-surface).
+
 ## Cameras
 
 Define `SHOTS` in `maps/<name>/build.py`:
