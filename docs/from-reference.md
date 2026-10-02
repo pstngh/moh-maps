@@ -63,7 +63,10 @@ measurement in the build.py docstring (see `maps/mk_ref_room/build.py`).
 4. Check colour against the light: reference colour ÷ light colour ≈ albedo.
    A mismatch is often the texture (too red, too grey), not the lighting.
 5. Resolution matters: a 64-px texture magnified to fit shows as smeared blobs.
-   If the reference is crisp, the original was higher-resolution.
+   If the reference is crisp, the original was higher-resolution. (**UNVERIFIED** at full
+   detail: this, the look-alike weights and the mk_ref_room results below were judged on
+   sheets shot at `r_picmip 2`, quarter-size textures, before 2026-10-01; re-check on a
+   full-detail build.)
 
 ## 5. Build it
 

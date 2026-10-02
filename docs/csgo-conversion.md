@@ -15,6 +15,48 @@ de_nuke has ~1M of them at 16.
 `--refresh-assets` re-converts and re-packages the last compile when only textures,
 shaders or models changed: it refuses unless the new `.map` text equals the compiled one.
 
+`--resume` re-injects with the prop settings of the last conversion, not `--props`: the
+`report.json` `convert` keys `lod_tau`, `lod_base_error`, `merge_split`, and the per-prop
+fades and drops already in `statics.json` (6th field = fade). To try a prop setting without
+converting again, edit those (and `prop_light.npz` in the same order whenever `statics.json`
+gains or loses entries; keep copies, the next `--resume` uses whatever is there). On de_nuke
+it takes ~4 min with LOD cached (`<build dir>/lod/`, keyed by SKD bytes, `lod.VERSION`,
+scale and instance colours), ~15 min after a `lod.VERSION` bump.
+
+**When a conversion is done** (the user asks for it as "the same way as Inferno and
+Cache"): every CS:GO route is walkable (every ladder passes `game.ladder_probe`, jumps and
+drops work); the named-camera sheet has no holes, leaks, black or missing textures; props
+sit, light and collide where CS:GO's do; sky, sun and fog read like CS:GO; decals and
+signage are there; 8 bots for 90 s get kills; the brightness error against CS:GO's own shots
+(`csgo-ref`, `exposure --ref`) is low (the 2026-10-01 finals: 4-11 of 255) after
+`--fit-exposure`; fps is measured. When a whole class of converted things looks wrong the
+same way (every interior dark), check the conversion's sign and axis conventions against the
+Source tool's code with a one-entity test before tuning intensities: three light-count and
+intensity fixes went in before the `light_spot` pitch sign was found. Order: `-q unlit` first (minutes: geometry, props, doors,
+ladders, spawns), fix and batch the converter fixes, then one lit build. A lit build started
+before a fix has to be redone (de_mirage was lit-built three times on 2026-10-01, 45-65 min
+each). Converter fixes stay generic (no per-map branches). Before a rebuild meant to change
+the look, keep the old build in `local/csgo/before/<name>/`; install only after the new
+sheet was compared with the installed one on the same cameras (sky band included) and the
+user agreed: batch scripts must never install. The steps exist only as gitignored scripts
+in `local/csgo/` (`*_final.sh`, `ladprobe.py`, `cmp3.py`, `perf_nukes.sh`) until a
+`mohkit csgo --final` command replaces them.
+
+To check a converter change without compiling, run the stages involved in-process:
+`cv = Converter(bsp, csgo_dir, Options(name="x", props=False)); cv.brushes(); cv.ladders()`
+(about 5 s a map) and compare `cv.report` before and after on several maps (a `> 24`
+threshold also moved de_mirage's 24.0000x-wide ladder; caught before any build).
+
+**Workshop maps** aren't in the CS:GO install. A public item downloads without Steam: POST
+`itemcount=1&publishedfileids[0]=<id>` to
+`https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/` (no key)
+and fetch `file_url`. The file is a zip holding the `.bsp` (named `.bsp` anyway); the last
+component of the CDN URL is its SHA-1. Keep it in `local/workshop/` and convert it by path
+(`mohkit csgo local/workshop/x.bsp --name cs_x`): custom models and materials come from the
+BSP's own pakfile (de_rats_1337_v2, item 741136461: 253 files), and a map without
+`<stem>_cameras.txt` gets automatic cameras. Use the Workshop file even when a copy is
+lying around (the ~/Downloads de_rats was another version).
+
 **Texture resizing trap (fixed 2026-10-01):** Pillow resizes RGBA images with
 premultiplied alpha, so RGB goes black where alpha is 0. Source keeps specular/envmap
 masks in the base texture's alpha, so every such texture over 512 px was written
@@ -23,8 +65,13 @@ Opaque images are now resized as RGB (`Converter._write_image`, `modelconv.conve
 
 `-q unlit` compiles BSP and fast VIS only and gives props a flat grey: geometry, props,
 doors and ladders can be checked in minutes (de_nuke's draft light alone takes over an
-hour, even with no light entities and `-notrace`: MOHlight's base cost per lightmap texel
-dominates, and texel count is what `lightmap_density` controls).
+hour: MOHlight's base cost per lightmap texel dominates, and texel count is what
+`lightmap_density` controls; density 32 instead of 16 was ~5x faster). Removing the light
+entities, `-notrace`, `-blocksize 512/256` and `sundiffuse 0` all read 0-1% after 150-300 s,
+but that is no test: the slow part comes first, so compare MOHlight variants only at the
+end of "Initial Lighting", alone on the CPU. Full builds suggest fewer lights and
+`-blocksize 512` did shorten de_nuke's initial pass (65 min vs ~28-34 min), with CPU load
+uncontrolled.
 
 `--props-only` re-converts, checks that nothing but `script_model` props changed
 (`mapfile.compiled_difference`: brushes compared by plane, numbers to 0.01), and
@@ -42,13 +89,14 @@ Valve's files, so it's for personal use only: don't commit or share it.
 
 | Source | MOHAA | notes |
 |---|---|---|
-| world brushes, `func_detail` | world brushes (`+surfaceparm detail`) | bevel planes pruned; face points snapped to the grid |
-| `func_brush`, `func_wall`, `func_breakable`, `func_illusionary` (non-solid), doors | world brushes, transformed to world space | doors become static |
+| world brushes, `func_detail` | world brushes (`+surfaceparm detail`) | bevel planes pruned; face points snapped to the grid; cut on a 1,024 grid in X/Y (`Options.split`) and 512 in Z (de_rats' 672-tall, 24-wide wall strip collected 65 T-junction vertices) |
+| `func_brush`, `func_wall`, `func_breakable`, `func_illusionary` (non-solid), doors | world brushes, transformed to world space | doors become static. `func_brush` keys: `StartDisabled 1` = not there at spawn: dropped (de_nuke's 32 office-light strips VRAD used only for baking; with `--mohlight` texlights their faces still become lights); `Solidity 1` = non-solid; `rendermode 10` = not drawn: clip when solid, dropped otherwise |
+| map position | moved inside ±7,900 when any brush is outside (`Options.offset`, on a 512 grid; de_vertigo by (-512, 512, -6656)) | `translate_map` moves brushes, patches and origins and corrects each face's texture shift; statics, landmarks, cameras, ladder records, luxels and the sky room follow `report["offset"]` (anything new that stores world coordinates in the report must too: ladder records once didn't, and 3 probes failed at the old place) |
 | `toolsclip` / `toolsplayerclip` / `toolsinvisible` | `common/clip` / `common/playerclip` | |
 | nodraw faces | `common/caulk` | |
 | sky faces | converted skybox shader (`skyParms env/csgo/<map>/sky`) | Source cubemap faces → `_rt _lf _ft _bk _up _dn` (up/dn rotated) |
 | hint, skip, areaportal, trigger, occluder, fog, blocklos, grenade/NPC clip | dropped (counted in the report) | |
-| ladder volumes (`CONTENTS_LADDER`) | **CS-style step columns** (default, `Options.ladder_style="steps"`): invisible `common/clip` slices against the wall face of the Source volume, 16 units high, each 1 unit shallower than the one below (less, down to 0.5, where the room in front would not fit a climber beside the column: de_rats' 893-unit shaft ladder climbs 809 with that, 0 without; half-unit steps on open walls climbed less, 17-53 instead of 71-88 units), from the floor (when one is within 96 units below the volume; brushes or displacements, the lowest within 32 units of the highest in front) to the volume top. Running into it climbs it, backing off climbs down, and the player can step off sideways or onto the ledge at the top, as in CS. `ladder_style="func_ladder"`: MOHAA ladders (`common/trigger` over the volume + 8 units toward the climber, `common/origin` on the climb face, `angle` toward the wall) | Facing: the side of the volume with solid (Source contents, or converted detail and clip brushes) behind it; a square volume tries both axes (mirage's leaning ladder is 32.0001 × 32, and float noise had picked the wrong axis), a near-square one too (see Ladder facing below). Why steps: MOHAA's `func_ladder` only lets a player off forward at the top, after a 98-unit clear rise (`Player::CondCanGetOffLadderTop`), and the jump-off is weak (`jumpxy -70 0 150`, `global/mike_torso.st`). CS scaffold and hole ladders (mirage's two at the scaffolds: platform behind and beside, upper floor 96 units above) hung the player near the top. Climb speed: MOHAA steps up at most 18 units per move (`STEPSIZE`, `bg_slidemove.cpp`), so a column climbs at ~600 units/s at 60 fps (8-unit steps were no slower; it depends on frame rate). Walking backward off the top just walks down the column, so a hole ladder is left by strafing onto the platform beside it (verified 2026-10-01 on an unlit Mirage: all 3 ladders climb to the top; strafing off the two scaffold ladders lands on their platforms at z -40 and -58). Probe: `game.ladder_probe(pk3s, map, game.ladders_for_probe(bsp))`; a step ladder's report entry has a `probe_start` clear of solids (28 units out, else 22/16/36, slid along the width), since starting inside a clip strip or under an overhang made working ladders fail. Touching ladder volumes are one ladder (`merge_ladder_boxes`: de_cache's A ladder is two rails and a brush per rung). `func_ladder` notes: a hanging ladder's trigger is extended down to the floor (mounting puts the player at absmin + 2, `FuncLadder::PositionOnLadder`); a volume deeper than 28 units climbs 8 units off its far face; prop collision in a ladder volume or its mount box is dropped (it blocks `Player::CondLadder`/`CanUseLadder`). `Converter.ladders`, report `ladders` |
+| ladder volumes (`CONTENTS_LADDER`) | **CS-style step columns** (default, `Options.ladder_style="steps"`): invisible `common/clip` slices against the wall face of the Source volume, 16 units high, each 1 unit shallower than the one below (less, down to 0.5, where the room in front would not fit a climber beside the column: de_rats' 893-unit shaft ladder climbs 809 with that, 0 without; half-unit steps on open walls climbed less, 17-53 instead of 71-88 units), from the floor (when one is within 96 units below the volume; brushes or displacements, the lowest within 32 units of the highest in front) to the volume top. Running into it climbs it, backing off climbs down, and the player can step off sideways or onto the ledge at the top, as in CS. `ladder_style="func_ladder"`: MOHAA ladders (`common/trigger` over the volume + 8 units toward the climber, `common/origin` on the climb face, `angle` toward the wall) | Facing: the side of the volume with solid (Source contents, or converted detail and clip brushes) behind it; a square volume tries both axes (mirage's leaning ladder is 32.0001 × 32, and float noise had picked the wrong axis), a near-square one too (see Ladder facing below). Why steps: MOHAA's `func_ladder` only lets a player off forward at the top, after a 98-unit clear rise (`Player::CondCanGetOffLadderTop`), and the jump-off is weak (`jumpxy -70 0 150`, `global/mike_torso.st`). CS scaffold and hole ladders (mirage's two at the scaffolds: platform behind and beside, upper floor 96 units above) hung the player near the top. Climb speed: MOHAA steps up at most 18 units per move (`STEPSIZE`, `bg_slidemove.cpp`), so a column climbs at ~600 units/s at 60 fps (8-unit steps were no slower; it depends on frame rate). Walking backward off the top just walks down the column, so a hole ladder is left by strafing onto the platform beside it (verified 2026-10-01 on an unlit Mirage: all 3 ladders climb to the top; strafing off the two scaffold ladders lands on their platforms at z -40 and -58). Probe: `game.ladder_probe(pk3s, map, game.ladders_for_probe(bsp))`; a step ladder's report entry has a `probe_start` clear of solids (28 units out, else 22/16/36, slid along the width), since starting inside a clip strip or under an overhang made working ladders fail. Touching ladder volumes are one ladder (`merge_ladder_boxes`: de_cache's A ladder is two rails and a brush per rung). `func_ladder` notes: a hanging ladder's trigger is extended down to the floor (only when it hangs 32+ units above the floor in front: extending one whose bottom was 23 up stopped it mounting, it climbed 0 instead of 234) (mounting puts the player at absmin + 2, `FuncLadder::PositionOnLadder`); a volume deeper than 28 units climbs 8 units off its far face; prop collision in a ladder volume or its mount box is dropped (it blocks `Player::CondLadder`/`CanUseLadder`). `Converter.ladders`, report `ladders` |
 | water volumes | the drawn face gets a water shader (`surfaceparm water trans nonsolid`, image = the normal map's relief tinted with `$fogcolor`, alpha `$waterblendfactor`); hidden sides `common/waterskip` (caulk is solid and would fill the volume) | Source water has no base texture |
 | `func_breakable`/`_surf` (glass panes, mirage's wall-hole covers) | `func_window` (MOHAA's breakable brush), Source `health`, glass debris for glass, coloured otherwise | |
 | overlays (`info_overlay`, LUMP_OVERLAYS) | flat 3×3 patch half a unit off the surface; shader `ov_<material>`: `trans nonsolid nomarks polygonOffset`, `blendFunc blend` + `nextbundle $lightmap` like retail decals | U axis is packed in the z of UV points 0–2, V = N×U (negated if point 3's z is 1); overlays wrapped over corners/displacements are placed flat |
@@ -56,17 +104,18 @@ Valve's files, so it's for personal use only: don't commit or share it.
 | ropes (`move_rope` → `keyframe_rope` via `NextKey`) | two crossed ribbon patches per segment, `Width` wide, `rope_*` shader (nonsolid, `cull none`, alpha-tested, lightmapped) | sag ≈ sqrt(3·span·Slack/8): a parabola, exact as one 3-column patch row (quadratic Bezier) |
 | `env_sprite` (lamp glows) | a thin `common/nodraw` brush whose east face is a quad with an additive `deformVertexes autosprite` shader (`spr_*`), image fitted to the quad, `rendercolor` × `renderamt` baked in; 0.75 × texture size × `scale`, 8–96 units | autosprite needs a 4-vertex surface: the brush floats free so nothing T-junctions it |
 | props with an `OnBreak` output (de_nuke's vent slats and vent cover, mirage's shutter and sheet-metal wall covers) | `func_window` slab of the model (same slab as doors), health from Source or 25: the vent is shut until shot. Debris by `$surfaceprop`: glass 0 (retail), metal 7, wood 8. Retail's `models/fx/windows/debris_0..3.tik` are all glass shards, so converted maps ship `debris_7.tik` (sparks from `bh_metal_fastpiece` + `metal_section` chunks, `snd_bodyfall_metal1`) and `debris_8.tik` (crate planks and splinters, `snd_crate_wood`) (`convert.debris_tiki`; verified in a test room) | bots don't use crouch-only vents anyway (the navmesh is built at standing height) |
-| texlights (`lights.rad`: emissive materials, e.g. de_nuke's office-light strips, lit windows, reactor glow) | default (`--no-texlights` turns it off): one point `light` per emitting face (de_nuke: 43, incl. the faces of its disabled emitter func_brushes), 8 units out along the normal, intensity sqrt(area × brightness) × 4 (40–600), colour from the rad line | `q3map_surfacelight` works (test room) but de_nuke's 43 emitting surfaces made `fastrad` light estimate ~15 hours. Compared on de_nuke (2026-10-01, same cameras): Hell 1.8x brighter, B site 1.4-1.7x, the Heaven approach 1.5x, lit like CS:GO instead of dim; B site's upper walls take the warm white of `window_illum_001` (252 239 209). dust2 and mirage have no texlights |
+| texlights (`lights.rad`: emissive materials, e.g. de_nuke's office-light strips, lit windows, reactor glow) | with `--mohlight` only (on by default there, `--no-texlights` turns it off; CS:GO-lit builds carry the light in the transferred lightmaps): one point `light` per emitting face (de_nuke: 43, incl. the faces of its disabled emitter func_brushes), 8 units out along the normal, intensity sqrt(area × brightness) × 4 (40–600), colour from the rad line | `q3map_surfacelight` works (test room) but de_nuke's 43 emitting surfaces made `fastrad` light estimate ~15 hours. Compared on de_nuke (2026-10-01, same cameras): Hell 1.8x brighter, B site 1.4-1.7x, the Heaven approach 1.5x, lit like CS:GO instead of dim; B site's upper walls take the warm white of `window_illum_001` (252 239 209). dust2 and mirage have no texlights |
 | `env_fog_controller` | worldspawn `farplane` = fogend / fogmaxdensity, `farplane_color`, `farplane_cull 0` | the Master controller (spawnflags 1), not one only a `fog_volume` switches to: de_vertigo's first is `fog_shaft` (black, 3,000 units, the elevator shaft), which had fogged the whole map and its sky black |
 | sky (`skyname`) | six faces from each face material's `$basetexture`, else its `$hdrcompressedtexture` / `$hdrbasetexture` (de_vertigo ships no LDR sky: it had the stock `sky/mohday2`) | de_nuke's `nukeblank` faces all use `skybox/nukeblankup` (plain 90 134 186 blue) |
-| spectator cameras (`maps/<map>_cameras.txt`) | contact-sheet shots (eye position, pitch/yaw as given), pages of 9 (`<name>_shots.png`, `_shots_2.png`, …) | `named_cameras` |
-| 3D skybox (the area containing `sky_camera`) | **MOHAA portal sky** (`Options.skybox3d="portal"`; `"drop"` keeps only the 2D sky): the room's brushes, displacements and props are kept, moved beside the map inside +-7,900 (`Converter._place_sky_room`: below, above, then beside it) and shrunk about `sky_camera` by 1/2 or 1/4 when it fits nowhere at full size (a perspective view is unchanged by scaling the scene about the eye; de_vertigo's 7,360-unit city: 1/2, `scale_face` keeps its texels); a `script_skyorigin` at `sky_camera + spawn mean / scale` (where Source's skybox camera is for a player there: de_vertigo is played 11,600 up, and from `sky_camera` itself its city looked street-level); the map's sky faces become `common/skyportal` (AA's `common.shader`), the room's own sky faces the converted 2D sky; `report["sky_room"]` tells `lighting.place` where the room's luxels and alphas went | detected from BSP areas, not bounds. Allied Assault has no sky parallax (`skyboxSpeed` comes with protocol 15, `cg_main.c` `CG_ParseFogInfo_ver_6`), so the room is seen from one point. Portal-sky faces are never drawn; the renderer checks only the first 32 of a frame for being on screen (`tr_sky_portal.cpp` `R_Sky_AddSurf`) and draws no sky when all are off it, so the map's pure sky brushes are not split at 1,024 (de_vertigo: 742 split brushes, 1,817 surfaces, windows showing flat haze). The room keeps Source's structural brushes (everything else is detail inside one structural shell): sealed by them it is a VIS region of its own. Sky faces don't occlude, so when the room shared the map's region the portal view, drawn from inside it, drew the map too: de_dust2's buildings hung upside down in its sky. Seen from one fixed point, room objects near it land far from where a player elsewhere would see them (error angle ~ (player offset / scale) / distance): objects closer to the eye than 8 x the spawns' horizontal spread / scale (over ~7 degrees off at the far spawn) are dropped, and when over three quarters of the room goes the map gets the 2D sky only, its sky brushes split again (`report["sky_near_dropped"]` = [dropped, objects]). Kept share at that cut: de_vertigo 11 of 11 (played 732 above its city, spawns 800 apart), de_nuke 27 of 303, de_cbble 5 of 41, de_inferno 1 of 150, de_dust2/de_mirage/de_cache 0: their skyboxes are rooms built around the map, which one fixed eye can't show (de_dust2's houses past its walls hung huge over DD, its own buildings upside down before the room was its own VIS region). So only de_vertigo has a portal sky |
+| spectator cameras (`maps/<map>_cameras.txt`) | contact-sheet shots (eye position, pitch/yaw as given), pages of 9 (`<name>_shots.png`, `_shots_2.png`, …) | `named_cameras`. Shot at MOHAA's fov 80, while CS:GO draws them at 90 (both 4:3-basis): the converted shot is narrower, so `--ref` and `--fit-exposure` compare slightly different framings (a fix: `fov=90` for named cameras, then re-fit). Without a cameras file (workshop maps) the converter shoots one camera per bomb site, spread spawn cameras and an overview, each looking down its longest clear horizontal sightline (24 rays, exact ray/brush clipping: 16-unit ray marching skipped de_rats' 2-unit vent walls) |
+| 3D skybox (the area containing `sky_camera`) | **MOHAA portal sky** (`Options.skybox3d="portal"`; `"drop"` keeps only the 2D sky): the room's brushes, displacements and props are kept, moved beside the map inside +-7,900 (`Converter._place_sky_room`: below, above, then beside it) and shrunk about `sky_camera` by 1/2 or 1/4 when it fits nowhere at full size (a perspective view is unchanged by scaling the scene about the eye; de_vertigo's 7,360-unit city: 1/2, `scale_face` keeps its texels); a `script_skyorigin` at `sky_camera + spawn mean / scale` (where Source's skybox camera is for a player there: de_vertigo is played 11,600 up, and from `sky_camera` itself its city looked street-level); the map's sky faces become `common/skyportal` (AA's `common.shader`), the room's own sky faces the converted 2D sky; `report["sky_room"]` tells `lighting.place` where the room's luxels and alphas went | detected from the area containing `sky_camera`, plus everything inside that area's leaf bounding box when the box is clear of the other areas' leaves (`Converter._sky_box`; disjoint on all five Valve maps checked): de_cache's skybox brushes whose faces all touch solid, and its func_brushes, have no area of their own; kept, they pushed the caulk shell to x = 9,879 and the compile leaked (207 skybox brushes dropped instead of 182). Allied Assault has no sky parallax (`skyboxSpeed` comes with protocol 15, `cg_main.c` `CG_ParseFogInfo_ver_6`), so the room is seen from one point. Portal-sky faces are never drawn; the renderer checks only the first 32 of a frame for being on screen (`tr_sky_portal.cpp` `R_Sky_AddSurf`) and draws no sky when all are off it, so the map's pure sky brushes are not split at 1,024 (de_vertigo: 742 split brushes, 1,817 surfaces, windows showing flat haze). The room keeps Source's structural brushes (everything else is detail inside one structural shell): sealed by them it is a VIS region of its own. Sky faces don't occlude, so when the room shared the map's region the portal view, drawn from inside it, drew the map too: de_dust2's buildings hung upside down in its sky. Seen from one fixed point, room objects near it land far from where a player elsewhere would see them (error angle ~ (player offset / scale) / distance): objects closer to the eye than 8 x the spawns' horizontal spread / scale (over ~7 degrees off at the far spawn) are dropped, and when over three quarters of the room goes the map gets the 2D sky only, its sky brushes split again (`report["sky_near_dropped"]` = [dropped, objects]). Kept share at that cut: de_vertigo 11 of 11 (played 732 above its city, spawns 800 apart), de_nuke 27 of 303, de_cbble 5 of 41, de_inferno 1 of 150, de_dust2/de_mirage/de_cache 0: their skyboxes are rooms built around the map, which one fixed eye can't show (de_dust2's houses past its walls hung huge over DD, its own buildings upside down before the room was its own VIS region). So only de_vertigo has a portal sky |
 | displacements | `patchDef2` meshes | midpoint-expanded so they pass through every kept Source sample; sample rows/columns straight within `disp_tolerance` (1 unit) dropped, consistently across shared edges; split to ≤ 17×17; visible side toward the air |
-| materials | TGA/JPG + generated shader script | `$basetexture`; two-layer blends (`$basetexture2`, WorldVertexTransition on displacements) get a second stage `blendFunc blend` + `alphaGen vertex` (layer 2 x lightmap over layer 1) and `lighting.blend_alphas` sets each drawvert's alpha after the compile from the Source displacement alphas of the same material within 48 units (weights 1 / (0.5 + d)^2; none: 0, as Source draws brush faces); layer-2 images are named `l2_<md5>` (image paths must stay under 64 characters, `tr_image.c`); 4-way blends keep the first layer. de_mirage: mean error against CS:GO 6.0 -> 4.4, its plaster and blue walls back. With `$blendmodulatetexture` (all of de_cache's) CS:GO switches layers where the vertex alpha passes a per-pixel threshold (`smoothstep(g - r, g + r, alpha)` of the mask, lightmappedgeneric_ps2_3_x.h); a linear blend washed de_cache's ivy walls out to bare panels (greenness error against CS:GO 0.57 -> 0.99). Those are alpha-tested: layer 2's alpha = 255 / (1 + g), vertex alpha = (1 + a) / 2, `alphaFunc GE128`, so layer 2 shows exactly where a >= g (hard edges; `$blendmasktransform` ignored); power-of-two, max 512 px; `$surfaceprop` → MOHAA material surfaceparm; alphatest/translucent/nocull handled |
+| materials | TGA/JPG + generated shader script | `$basetexture`; two-layer blends (`$basetexture2`, WorldVertexTransition on displacements) get a second stage `blendFunc blend` + `alphaGen vertex` (layer 2 x lightmap over layer 1) and `lighting.blend_alphas` sets each drawvert's alpha after the compile from the Source displacement alphas of the same material within 48 units (weights 1 / (0.5 + d)^2; none: 0, as Source draws brush faces); layer-2 images are named `l2_<md5>` (image paths must stay under 64 characters, `tr_image.c`); 4-way blends keep the first layer. de_mirage: mean error against CS:GO 6.0 -> 4.4, its plaster and blue walls back. With `$blendmodulatetexture` (all of de_cache's) CS:GO switches layers where the vertex alpha passes a per-pixel threshold (`smoothstep(g - r, g + r, alpha)` of the mask, lightmappedgeneric_ps2_3_x.h); a linear blend washed de_cache's ivy walls out to bare panels (greenness error against CS:GO 0.57 -> 0.99). Those are alpha-tested: layer 2's alpha = 255 / (1 + g), vertex alpha = (1 + a) / 2, `alphaFunc GE128`, so layer 2 shows exactly where a >= g (hard edges; `$blendmasktransform` ignored); power-of-two, max 512 px; `$surfaceprop` → MOHAA material surfaceparm; alphatest/translucent/nocull handled. `$additive` world materials and overlays → `blendFunc add` (as a blend, de_cache's dark `effects/trainsky` glow drew two black panes over B site); model materials with `$additive` + `$translucent` → `blendFunc GL_SRC_ALPHA GL_ONE` (a plain add drew de_nuke's light-shaft cards solid white); `UnlitGeneric` → `rgbGen identity`; DecalModulate overlays → `blendFunc GL_DST_COLOR GL_SRC_COLOR` (grey 128 = no change) with the alpha folded into neutral grey, `128 + (rgb - 128) * a`, since that blend has none; `Refract`/`Water` without `$basetexture` (glass, de_inferno's fountain sheet) → a faint translucent tint from `$refracttint`/`$fogcolor` and the normal map's relief (`modelconv.see_through_image`; the grey placeholder hid the statue). Every two-layer blend on the seven Valve maps is a displacement (no brush faces): inferno 1,826, nuke 538, mirage 430, cbble 406, cache 278 (all modulated), dust2 149, vertigo 0 |
 | texture alignment | Q3 shift/rotate/scale | exact for any rotation, scale or mirror (`tests/test_texdef.py`) |
-| `info_player_terrorist` / `counterterrorist` / `info_deathmatch_spawn` | `info_player_axis` / `allied` / `deathmatch` | T+CT double as DM spawns when the map has none |
+| `info_player_terrorist` / `counterterrorist` / `info_deathmatch_spawn` | `info_player_axis` / `allied` / `deathmatch` | DM spawns are spread for FFA (`Options.ffa_spawns`, default): CS:GO's own `info_deathmatch_spawn`s first (only de_inferno 67 and de_cache 25 have them), then `nav.spawn_count` spots from the bot nav mesh (`maps/<map>.nav` v16, `mohkit.source.nav`: one per 640 x 640 units of walkable floor, 24-48; stock DM maps have 11-25), picked by walking distance and facing the longest open run, 12 units up (nav floors are only bilinear over an area's corners). Without a mesh (de_cache) CS:GO's DM spawns thinned to 48, else T+CT copies (the old behaviour: two clusters). Entities, so a full conversion is needed, not `--resume` |
 | `light`, `light_spot` | `light` (+ `info_null` target along VRAD's spot direction: z = +sin(pitch), so pitch -90 points down; until 2026-10-01 04:40 the converter used -sin and every ceiling spot lit the ceiling) | intensity ≈ 1.5 × Source brightness, clamped 40–800 (0.75× left interiors dark: MOHAA's `light` is about its reach in units, and a 175-brightness ceiling spot barely reached the floor). Lights below brightness 20 are dropped and a light within 32 units of a brighter one is folded into it (de_nuke 473 → 247): MOHlight keeps at most 60 lights per leaf, and in the converted map's big leaves the near-zero fill lights crowded out the fixtures (radio rooms went dark while the light grid, which gets every light, made their props bright) |
 | `light_environment` | worldspawn `suncolor`, `sundirection`, `ambientlight`, `sundiffusecolor` | sky fill = `_ambient` colour normalised to its brightest channel × clamp(brightness / 8, 20, 70) |
+| `prop_dynamic(_override)`, `prop_physics(_override)`, `prop_physics_multiplayer`, `prop_hallucination` that stand still in play | static props like `prop_static` (de_mirage: 94; `prop_hallucination` is never solid: de_rats draws its 97 ladders and lamps with it) | interactive ones are not: an `OnBreak` output, `StartDisabled`, or the target of an Enable/Disable/Toggle/Break/Kill/SetAnimation/TurnOn/TurnOff output (vents, shutters: see the `func_window` row). Props only re-skinned by outputs (de_mirage's TVs) stay ordinary props |
 | static props (`prop_static`) | `mohkit/source/modelconv.py` (MDL → TIKI/SKD/SKC + collision `.map`). **Default (`props_mode="inject"`): every prop** becomes a static model added to the lit BSP by `mohkit.staticlight` and coloured from its light grid, with its collision as world clip brushes. `props_mode="compile"`: the largest as MOHlight-lit `static_*` up to `--static-verts`, the next 600 as `script_model`s | MOHlight lights static models on one thread (~190 verts/s), so de_nuke's 4,801 props would light for hours; injection takes seconds and costs no entities |
 
 **Ladder rails (2026-10-01):** CS:GO often flanks a ladder volume with two player-clip
@@ -111,7 +160,8 @@ comparing every control point of every patch with every control point of every
 other patch (`PatchMapDrawSurfs`, q3map `patch.c`). de_dust2's 619 patches
 (118k control points) spent 673 s there, measured with timestamped logs.
 Dropping straight sample lines halves the control points and cuts that work
-3.9× (`Options.disp_tolerance`, default 1 unit; 2 units: 6.8×).
+3.9× (`Options.disp_tolerance`, default 1 unit; 2 units: 6.8×, not taken: the remaining
+BSP phases dominate by then).
 
 **A face's plane is `planes[planenum]` as stored; ignore `side`.** On every face of
 de_dust2, de_mirage and de_nuke the stored plane agrees with the face winding, whatever
@@ -122,13 +172,22 @@ in game as flat `farplane_color` walls (Mirage's mid and B site). Found by casti
 camera's rays through both BSPs (every ray hit the patch; the patch faced away).
 `tests/test_source_readers.py` now checks that displacements face the air.
 
+**Source leaf contents know only structural brushes.** `func_detail` (merged into model 0
+with `CONTENTS_DETAIL`) and clip brushes are not in the BSP tree, so a point inside them
+reads as air in `leafs[point_leaf(p)].contents`. Test player solidity against the brushes
+themselves (`Converter._ladder_solid` uses the converted brushes), not the leaf.
+
 ## Scale
 
 CS players are 72 units tall, MOHAA's are 94, but jump height (56 vs about 55)
 and step height (18) are nearly equal. At the default `--scale 1` rooms feel a
 bit tight, but every CS jump spot that doesn't need a crouch-jump stays
 reachable. `--scale 1.25` gives more natural proportions but lifts many boxes
-out of reach.
+out of reach. Maps built tight around CS's player can be too low for MOHAA's 94: de_rats'
+vents are 88-96 tall, and at `--scale 1` `validate.fix_spawns` removed at least 4 spawns
+(all CT spawns) with no standing room; `--scale 1.1` keeps all of them. Read
+`report["spawns_fixed"]` after a conversion: removals are listed there and nowhere else.
+Scale is applied per prop instance, so TIKIs stay at scale 1.
 
 ## Runtime prop lighting
 
@@ -138,6 +197,9 @@ A converted model's origin sits over its bounds centre, 16 units above its top
 (`docs/reference/engine.md` §5.2). From the Source pivot (on the floor), the rubble in
 the first dust2 drafts was black; from the bounds centre, cars got ambient light only,
 because the trace from inside their own collision hull entered another hull brush.
+(The rubble stayed black after the re-centring because those sheets were shot at
+`r_fastentlight 1`, grid only; at retail high the centred rubble was lit. The pivot rule
+matters for the sun trace, and for players on low/medium.)
 Instances are moved by `R(angles) * pivot` so they stay where Source put them.
 
 Collision hulls (`.phy` pieces → `modelconv._hull_brush`) must not depend on the pivot.
@@ -165,15 +227,18 @@ Vertices that find no texel within 256 units fall back to the light grid (32-uni
 cells, sampled 6 units out, `staticlight.shade`; means within 2% of MOHlight on an
 ambient-only map and on mk_medina).
 
-**Why not the light grid:** MOHlight fills the grid without spotlight cones. A spot
+**Why not the light grid:** on cs_inferno (MOHlight-lit) the grid was far flatter than the
+lightmaps: 4x brighter where they are darkest, 0.87x where they are brightest, so
+grid-lit props lose contrast both ways. And MOHlight fills the grid without spotlight cones. A spot
 aimed at the floor of a closed test room (`target` or `angles`, 60 degree cone) lights
 a lit pool in the lightmaps, but the grid is a flat ramp that brightens with depth
 below the lamp at any distance off-axis: 11 just under it, 58 at the floor (the floor
 lightmap's peak is 59), even outside the cone. A point light's grid is uneven too
 (113-254 above the lamp, 51-131 near the floor, brighter on one side of a symmetric room). dust2's tunnel crates near a ceiling spot got
 grid values of 13-21 (black) while the floor around them was lit; the lightmap field
-gives them 130-190. Players are fine: with `r_fastentlight 0` (the default) the engine
-also lights them from the light entities at run time, and a third-person player under
+gives them 130-190. Players are fine at `r_fastentlight 0` (the engine default and retail high; the owner's
+configs and a fresh home have 1, grid only): the engine also lights them from the light
+entities at run time, and a third-person player under
 that tunnel spot looked as lit as one in the sun. `tests/test_staticlight.py`.
 
 OpenMoHAA draws every static model whose bounds pass the frustum test (the leaf
@@ -196,7 +261,15 @@ models first (no geometry is duplicated), then the models cheapest to duplicate,
 1,024-unit cell, into rigid models with one surface bucket per shader; `prune` drops the
 merged-away originals from the pk3. de_inferno: 6,326 models / 301 SKDs -> 3,436 / 253;
 de_nuke: 4,801 / 1,365 -> 2,917 / 598, pk3 assets 262 -> 267 MB. `staticlight.inject`
-refuses more than 4,095 static models.
+refuses more than 4,095 static models; `finish_local` warns above 600 SKDs. Tried and
+rejected first: merging the copies of each model per 512-unit cell (de_inferno 6,326 ->
+2,920 models) turned 301 SKDs into about 1,600, since every merged model is an SKD of its
+own: 1,236 "No free spots open in skel cache" in the shot run. Split pieces of big meshes
+(`merge_split`) always merge, so the budget can't pull them back: on de_nuke 512-unit piece
+cells gave 678 SKDs, 768 gave 597 (ordinary props keep 1,024-unit cells; `merge()` defaults
+to 512, the stock profile uses 768). No console command lists the skeleton cache
+(`code/tiki/` registers none), so the 600 budget (leaving ~400 for players, weapons and
+effects) is a margin, not a measured figure.
 
 **Props carry progressive LOD (`mohkit.lod`, since 2026-10-01).** With no VIS culling for
 static models, a converted map drew its props at full detail at any distance: on de_cache
@@ -222,8 +295,15 @@ levels costs the collapse's length, less in proportion; up to 8 instances' colou
 from `inject_statics`), both added up along collapse chains. The free level (collapses made
 at every distance, `base_error`) must respect that full cost; the distance curve uses the
 geometric error (`lod.ATTR_FAR` = 0), measured after simplifying by replaying 16 levels like
-the engine (`lod.measured_errors`: open objects like railings close their gaps at zero plane
-error). Counting texture and shading in the distance curve too kept 3.5x the vertices
+the engine (`lod.measured_errors`, ~0.6 s a mesh: a safety net for open objects that might
+close gaps at zero plane error; on every model checked, the merged railing and two wire
+clusters, it returned exactly the quadric errors. What fixed the railing, drawn in its
+coarsest form everywhere because all 1,631 of its collapses cost under base error 4, was the
+texture-slide term: free collapses at 4 units 1,631 -> 1,230). Tried and dropped: a flat
+0.25 units per colour level kept nearly everything (576k prop vertices per view instead of
+115k; 124 vs 168 fps interleaved); 0.5 x move length x change/255 let the fence covers
+darken again; an isotropic texture-slide scale mis-weighted wires, which map ~6 units
+around and hundreds along (about 20x their vertices kept). Counting texture and shading in the distance curve too kept 3.5x the vertices
 (de_nuke 397k prop vertices per view instead of 115k); counting only the geometry
 everywhere is what drew the dark sheets. de_nuke stock profile (s8): ~277k vertices per view
 estimated (`mohkit.propcost`), fps level with the old stock build (two interleaved runs:
@@ -250,13 +330,18 @@ their size, so neither LOD nor the fade cuts much.
 
 **Prop profiles (`--props balanced|stock`, `convert.PROP_PROFILES`; build with `--name`).**
 Stock maps draw 6-19k vertices and 800-1,700 surfaces per view (mohdm1-4: 1,200-1,700 fps on
-the harness); converted maps draw 100-900k and 2-11k, and the converted world alone (props off)
-already runs at 700-950 fps on de_nuke. The profiles drop small props (by largest dimension;
+the harness, worst camera 513-1,042; the small mohdm6/7: 9,000-12,000 fps, 3-7k vertices);
+converted maps draw 100-900k and 2-11k, and the converted world alone (props off)
+already runs at 700-950 fps on de_nuke. The owner plays with `com_maxfps 250`, so "stock-like"
+means a worst camera above 250 at their settings, not 1,200 (testing.md "Frame rate"). The profiles drop small props (by largest dimension;
 bigger limits for props without collision and for foliage), give small never-fading props a
 fade and cap all fades, collapse detail below `base_error` even up close, and raise the LOD
 screen error. CS:GO's own mesh LODs don't help: 2 of de_nuke's 1,378 prop models ship more
-than one. de_nuke (two interleaved runs): full 97 / 65 fps (mean / worst camera), balanced
-133 / 98 (871 props dropped), stock 210 / 155 (2,198 dropped); error vs CS:GO 5.6 / 5.5 / 5.7.
+than one. de_nuke with the profiles as they were on 2026-10-01 (stock: fades 1536, tau 6,
+base error 2, the LOD before the shard and dark-panel fixes; two interleaved runs): full
+97 / 65 fps (mean / worst camera), balanced 133 / 98 (871 props dropped), stock 210 / 155
+(2,198 dropped); error vs CS:GO 5.6 / 5.5 / 5.7. `--props stock` is now the s8 row of the
+table below (fades 1024 / 256, tau 10, base error 4, split 384 / 768).
 Most of what remains is the merged `_autocombine_` clusters.
 
 **Where a converted map's frame goes, and what was tried (de_nuke, 2026-10-02).** Stock-profile
@@ -278,7 +363,8 @@ trusses 12.5%, ducts 6.5%); they are boxy, so only 9-30% of their vertices colla
 | s8 + fades 768 + overhead wire meshes dropped (s9) | 166k | 266 / 194 vs 200 / 150 | A-site silo vanishes (cap hit a landmark), power lines gone |
 
 Not done, with the reason: per-shader `alphaGen tikiDistFade` culling skips surfaces before
-sorting, but only the 0.4 ms surface part (and costs shaders, 2,048 max); counting texture and
+sorting, but only the 0.4 ms surface part (shaders aren't the obstacle: de_nuke's props use
+151, its world 314, of 2,048); counting texture and
 shading in the LOD distance curve kept 3.5x the vertices. Next idea: props as world
 triangle-soup surfaces (the renderer loads `MST_TRIANGLE_SOUP`, `tr_bsp.c:1634`) so VIS culls
 them, with real VIS for the world (`--structural`); untested. A fade cap must scale with prop
@@ -315,13 +401,33 @@ luxel outside an edge); before that, de_inferno's sunlit CT floor had round blac
 blotches at face corners. Each MOHAA texel (`staticlight.lightmap_texels`, padding
 included) takes the luxels within 24 units, weighted `facing / (1 + d)^2`: first those on
 its plane facing the same way (88% of de_inferno's texels), then near its plane, then any
-facing within 60 degrees, then anything within 96 units. Lightmap density is 16 (pages:
-de_inferno 87, de_nuke 134 of 170).
+facing within 60 degrees, then anything within 96 units, then (coarse Source lightmaps) any
+luxel within 192 units. Lightmap density is 16 (pages: de_inferno 87, de_nuke 134; the
+renderer takes 256 and the transfer refuses more). A face whose Source luxels are coarser
+than 1.5x the map's density gets `surfaceDensity` = its luxel size (at most 256,
+`Converter._density`): finer MOHAA texels would only interpolate the same CS:GO light and
+cost pages (de_vertigo's 128-unit facade luxels: 1.25M texels / 151 pages -> 382k / 48).
+Maps compiled without HDR (de_rats_1337_v2, 2016) have no lump 53: the transfer reads
+`LIGHTING` (lump 8) with the normal face lump, and prop light from `sp_<index>.vhv`.
+Correlating luxel brightness with a displacement's sun facing was no test of the luxel
+orientation (all 8 orientations within -0.09..0.18: cast shadows dominate); seam
+continuity with flat neighbours was. To debug a transferred lightmap, splat the Source
+luxels top-down next to the MOHAA texels of the same box, project the bad pixel's ray back
+onto the luxels and dump the source face's raw luxel rectangle (that showed de_inferno's
+black luxels outside the polygon).
 
 **Exposure and tone curve.** CS:GO auto-exposes between the `SetAutoExposureMin/Max` its
 `logic_auto` sends to `env_tonemap_controller` (de_inferno 0.75-1.5, de_nuke 0.75-1.15,
 de_dust2 0.7-3, de_cbble 0-0.9); `exposure_for` takes the geometric mean (half the
-maximum when the minimum is 0). A texel stores `127 * (exposure * L)^(1/2.2)` (MOHAA
+maximum when the minimum is 0). That rule left every map 5-17% darker than CS:GO's own
+shots, so `python -m mohkit csgo <map> --fit-exposure` re-lights the last build
+(`resume_local`, ~1 min plus re-shooting per step) until the median per-camera brightness
+ratio against the `csgo-ref` shots is within 2% (first step ratio^2.2, then secant steps;
+2-3 in all) and keeps the value in `data/csgo_exposure.json`, which `lighting.transfer`
+uses before the rule. Fitted values are 1.07-2.5x the rule (de_inferno 2.69 vs 1.06,
+de_dust2 2.32 vs 1.45, de_mirage 1.09 vs 1.02). Fit last, after every texture or lighting
+change (de_dust2's blends moved it from 2.53 to 2.37), and only from clean shots: the first
+fits were made while installed pk3s leaked into the test game and had to be redone. A texel stores `127 * (exposure * L)^(1/2.2)` (MOHAA
 multiplies the sRGB texture by the doubled lightmap, Source the linear albedo by linear
 light), rolled off smoothly from 0.82 so bright areas keep their gradients.
 
@@ -359,7 +465,11 @@ world model's bounds, a cell is open when its centre's leaf has a cluster
 (`point_leaves`, BSP descent; de_inferno: 94% agreement with MOHlight's own grid), coloured
 with the mean of the light arriving along the six axes and the brightest of them
 (`LightmapField`), quantised to 255 palette entries (k-means), RLE-encoded
-(`encode_grid`; round-trips MOHlight's grid exactly). Drawvert colours (`rgbGen vertex`
+(`encode_grid`; round-trips MOHlight's grid exactly, but shares nothing across columns, so
+its data lump is ~2.4x MOHlight's: 1.40 MB vs 585 KB on cs_inferno). Only open cells within
+3 cells (96 units) of a lightmap texel are sampled; the rest take their sampled neighbours'
+mean, then the median (players and models are always near surfaces): de_nuke's grid 469 s ->
+47 s. Drawvert colours (`rgbGen vertex`
 surfaces) come from the luxels too.
 
 **Results (2026-10-01, all maps rebuilt this way, same cameras as CS:GO's own shots):**
@@ -375,8 +485,9 @@ per-camera mean brightness, mean absolute error against CS:GO (0-255) and correl
 | de_vertigo | 92 | (new) | 86, error 10, corr 0.88 | 4 min |
 | de_cbble | 75 | (new) | 65, error 10, corr 0.99 | 9 min |
 
-All still read a little darker than CS:GO (its bloom, detail textures and phong are not
-converted); raise `--exposure` on a `--resume` to brighten one. Lightmap pages may pass
+These are before the exposure fit; after it the errors are 4.1-10.7 (README table: mirage
+4.1, cbble 4.8, dust2 4.9, nuke 5.6, inferno 6.4, cache 9.6, vertigo 10.7). What remains is
+mostly CS:GO's bloom, detail textures and phong, which are not converted. Lightmap pages may pass
 170 now (de_cbble: 190): that limit was MOHlight's buffer; the renderer takes 256
 (`MAX_LIGHTMAPS`, `renderergl1/tr_local.h:1182`) and de_cbble loads and plays.
 
@@ -384,7 +495,17 @@ converted); raise `--exposure` on a `--resume` to brighten one. Lightmap pages m
 `csgo_dir` windowed, drives it over `-netconport`, and saves `jpeg`s from every named
 camera into `local/csgo/<name>/csgo_ref/` (restoring `config.cfg`/`video.txt`). Compare
 them with the conversion's shots (`local/csgo/<name>/shots/`, same names) using
-`python -m mohkit exposure`.
+`python -m mohkit exposure`. Run one CS:GO process per map (a `map` command over netcon
+closes the client) and never start one while another `csgo_osx64` lives: launches that never
+opened the netcon port sat at ~120% CPU and needed `kill -9` (2026-10-01; with stdout logged
+to a file and 5 s between maps every run loaded in ~12 s). `-condebug` appends to the game's
+own `csgo/console.log`, `screenshot` (not `jpeg`) leaves TGAs in `csgo/screenshots`, and
+the launcher's `mac_launcher.cfg` sets `bot_quota 18` (bots are kicked). Workshop maps ship
+no cameras file, so they get no reference shots. Source's own code for encodings is on this
+Mac: `~/source-engine/` (VRAD `utils/vrad/lightmap.cpp`, `vradstaticprops.cpp`,
+`mathlib/color_conversion.cpp`, `public/builddisp.cpp` `CalcLuxelCoords`) and the Kisak
+CS:GO tree under `~/Documents/Codex/2026-09-21/https-github-com-swagsoftware-kisak-strike/work/source/`
+(missing some definitions); find files with `mdfind -name <file>.cpp`.
 
 ## Known gaps
 
@@ -392,8 +513,30 @@ them with the conversion's shots (`local/csgo/<name>/shots/`, same names) using
   material: exact masks need tinted texture variants per tint (TIKI shader overrides). Only
   two materials in the seven maps have a partial mask (de_inferno's flower sets, 65%;
   de_cache's plants, 12%); the rest are fully tinted or untinted, which is exact.
-- 4-way blends (`Lightmapped_4WayBlend`) use the first layer only; two-layer blends have no
-  `$blendmodulatetexture` (their transitions are softer than CS:GO's).
+- 4-way blends (`Lightmapped_4WayBlend`) use the first layer only. `$blendmodulatetexture`
+  blends are alpha-tested, so their edges are hard where CS:GO's `smoothstep(g - r, g + r)`
+  band is soft: visible on de_dust2 and de_cache masks (r ~0.39), near exact on de_inferno
+  (r 0.03-0.08); the vertex alphas are right (corr 0.995 with the Source displacement
+  alphas, dust2); `$blendmasktransform` is ignored. A dithered second stage would cost a
+  pass per blend surface: not done.
+- Installed conversions share prop asset paths (`models/csgo/...`, prop textures) whose
+  contents are map-specific since LOD and headroom gain: the game uses one pk3's copy for
+  every map (252 such files among the eight installed on 2026-10-02). `mohkit install`
+  warns; the fix is per-map prop asset names.
+- Bots never climb the step-column ladders (the navmesh links only `func_ladder`s), so on
+  ladder-heavy maps (de_rats: 30) bots stay on their floor. Untested idea: a `func_ladder`
+  in front of each column as the bots' link.
+- de_rats_1337_v2: 25 of 30 ladders climb. Ladder 25's volume hangs ~600 units above any
+  floor, 14 has no model and no clear start, 6, 9 and 15 stop ~53 up under overhangs.
+- de_vertigo's portal sky is dark navy above the city in some views (T spawn window,
+  overview) where CS:GO is light blue, and by the numbers it matches CS:GO worse than its 2D
+  sky did (error 9.9 -> 10.6, corr 0.88 -> 0.79, 10 cameras). It began when the sky room
+  became structural; suspects: the 2D sky box size in the portal view (`tr_sky.c`,
+  boxSize = zFar / 1.75) and the missing sky_camera fog (143 172 186). Open.
+- The other six 3D skyboxes are lost (one fixed eye can't show them). Untested idea: shoot
+  CS:GO's skybox as a cubemap (six square 90-degree `csgo-ref` shots from the skybox eye) and
+  use it as the 2D sky. When a room falls back to the 2D sky its props' models still ship
+  in the pk3 (de_cache: bloat only).
 - Door handles and other relief of door and vent models are lost (slabs). Vents break
   (`func_window`, metal debris) instead of swinging open.
 - Detail sprites (grass) are dropped.

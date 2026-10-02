@@ -276,6 +276,23 @@ def test_plus_command_limit():
     assert game.fit_command_line(base, {"r_a": "1"}) == ({**base, "r_a": "1"}, {})
 
 
+def test_harvest_condense():
+    # user words kept whole, harness notes and tool output not shown as user messages
+    import json
+    from mohkit.harvest import condense_lines
+    recs = [{"type": "user", "timestamp": "2026-10-01T02:21:00Z", "message": {"role": "user", "content": "Are we done?"}},
+            {"type": "assistant", "timestamp": "2026-10-01T02:22:00Z", "message": {"content": [
+                {"type": "thinking", "thinking": ""}, {"type": "text", "text": "Not done."},
+                {"type": "tool_use", "name": "Bash", "input": {"command": "ps aux"}}]}},
+            {"type": "user", "timestamp": "2026-10-01T02:22:01Z", "message": {"content": [
+                {"type": "tool_result", "content": "x" * 5000}, {"type": "text", "text": "[Image: original 10x10]"}]}},
+            {"type": "user", "isMeta": True, "timestamp": "2026-10-01T02:22:02Z", "message": {"content": "[Image: 1x1]"}},
+            {"type": "user", "isSidechain": True, "message": {"content": "subagent"}}]
+    out = "".join(condense_lines(json.dumps(r) for r in recs))
+    assert out.count("USER:") == 1 and "Are we done?" in out and "TOOL Bash: ps aux" in out
+    assert "META: [Image: 1x1]" in out and "subagent" not in out and len(out) < 1500
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

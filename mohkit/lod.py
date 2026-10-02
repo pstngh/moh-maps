@@ -556,9 +556,13 @@ def measured_errors(surfaces: Sequence[_skd.SkdSurface], errors: np.ndarray, lev
     sampling slack); steps in between take the next measured one. The quadric error is the
     distance to the original *planes*, so collapses that close the gaps of a flat open object
     (a railing, a fence, a grate) or slide along a crease past where the surface ends cost
-    nothing; measured, they cost the size of what they cover. Without this, a railing's
-    coarsest form (a few triangles spanning it, its grate texture smeared grey) was drawn at
-    every distance."""
+    nothing; measured, they cost the size of what they cover. A safety net: on every model
+    checked (2026-10-02: a merged railing, two wire clusters) it returned exactly the quadric
+    errors. The railing that was drawn in its coarsest form at every distance (a few
+    triangles, its grate smeared grey) was fixed by the texture-slide cost instead (free
+    collapses at base error 4: 1,631 -> 1,230). Dense interior sampling (h = sqrt(area /
+    60000)) took minutes per mesh; edge + Halton samples of moved triangles, capped at 20k
+    queries a level, take ~0.6 s."""
     K = len(errors)
     if K == 0:
         return errors

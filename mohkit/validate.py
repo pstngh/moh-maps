@@ -56,6 +56,8 @@ def _solids(m: MapFile, shaders=None) -> tuple[list[_Solid], list[Issue]]:
                 issues.append(Issue("error", "brush has no volume (inside-out or empty)", where))
                 continue
             if bad:
+                # info, not a warning: stock EA brushes have thousands (MP_Holland_DM: ~3,500 brushes
+                # with 1-6 faces clipped away by slanted planes), and Q3map ignores them
                 issues.append(Issue("info", f"{len(bad)} redundant face(s)", where))
             if e.classname.startswith("trigger"):
                 continue

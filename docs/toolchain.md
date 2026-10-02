@@ -68,19 +68,24 @@ Q3map.exe   -info <root>\main\maps\dm\x.bsp                                     
 
 | mohkit quality | VIS | MOHlight | use |
 |---|---|---|---|
-| `draft` | `-fast` (BSP: `-nomerge`) | `-fast` | iterating on geometry (seconds to minutes) |
+| `draft` | `-fast` (BSP: `-nomerge`) | `-fast -bounce 0` (`-fast` alone still runs 2 radiosity bounces: the light.log header says `Number of radiosity bounces = 2`, and its lightmaps match `-bounce 2` within 0.07 of 255) | iterating on geometry (seconds to minutes) |
+| `fastrad` (`mohkit csgo` only) | `-fast` (BSP: `-nomerge`) | `-fast -bounce 2` | draft geometry with cheap bounce light, for big maps where `preview` won't finish in time (de_nuke 2,389 s of light alone, 2026-10-01) |
+| `unlit` (`mohkit csgo` only) | `-fast` | none | geometry, props, doors and ladders in minutes; props flat grey |
 | `preview` | full | `-bounce 2` | judging lighting faster than normal |
 | `normal` | full | default (radiosity, 8 bounces) | real lighting |
 | `final` | full | `-final` | release |
 
-The driver passes `-threads <cpu count>` to every stage. Full lighting is the
-slow part (radiosity), so iterate on geometry with `draft`. If multi-threaded
-MOHlight crashes (an access violation was seen once on a large map), the
-driver retries with `-threads 1`, keeps the failed run's output as
-`light_mt.log` and reports the exit code as a problem. It doesn't retry when
-MOHlight printed an `ERROR` (e.g. `MAX_MAP_LIGHTING`): those fail the same way
-on one thread. (**UNVERIFIED**: whether multi-threading itself ever causes a
-crash. The single report predates these logs.)
+Draft keeps T-junction fixing although `FixTJunctions` was 281 s of a dust2 BSP: the
+64-vertex face limit counts after it, so `-notjunc` drafts would hide checkerboard faces
+until the release build.
+
+The driver passes `-threads <cpu count>` to every stage, so two builds at once slow each
+other about 2x: time stages only on an idle machine (testing.md "Long builds"). Full
+lighting is the slow part (radiosity), so iterate on geometry with `draft`. If
+multi-threaded MOHlight crashes, the driver retries with `-threads 1`, keeps the failed
+run's output as `light_mt.log` and reports the exit code as a problem; the retried build
+still counts as OK (`test_compile_ok_after_light_retry`). It doesn't retry when MOHlight
+printed an `ERROR` (e.g. `MAX_MAP_LIGHTING`): those fail the same way on one thread.
 
 **Verified 2026-09-30 on mk_medina:** multi-threaded MOHlight crashed on both
 multi-threaded runs at the same instruction (`wine: Unhandled page fault on write
@@ -146,6 +151,7 @@ again (`bsp_checks`: limits, fence masks, lightmap pages).
 | `WARNING: Entity N of type 'light' leaked` | only that entity is outside the hull (stock maps have these) | harmless, but the light is wasted |
 | `Entity N, Brush M: degenerate plane` | collinear face points | fix the generator |
 | `LoadPortals: NumVisBytes X exceeds 2097152` | too many structural splits for VIS | make interior brushes detail; keep a simple structural hull |
+| `Entity N origin is out of bounds, skipping!` for every entity (BSP), then `LoadPortals: couldn't read <map>.prt` (VIS) | the map lies outside ±8192 (de_vertigo is played 11,500 units up) | move it inside; CS:GO conversions do it automatically (`Options.offset`) |
 | `MAX_MAP_DRAWINDEXES` | too many triangles after T-junction fixing | reduce detail; `-notjunc` as a last resort (risks cracks at T-junctions). Measured on mk_village: `-notjunc` cut draw indexes from 63,195 to 30,486 and draw verts from 30,644 to 20,244, same faces |
 | `MAX_MAP_LIGHTING exceeded from N lightmaps` | more than 170 lightmap pages of 128×128 (the 8 MB `MAX_MAP_LIGHTING` buffer; 170 compiled, 172 failed in a test) | raise `lightmapdensity`/`surfaceDensity` on large surfaces, remove junk geometry |
 | `MAX_MAP_SHADERS` (BSP stage, after writing the `.prt`) | more than 1,024 BSP shader entries. Q3map writes one entry per (shader name, surface flags, content flags), and the surface flags of every side of a brush are OR-ed together (a caulk side of a metal brush gets `metal`), so a map has 2–3 entries per shader. **But a shader name of exactly 60 characters (with `textures/`) is never matched again: every brush side using it adds an entry.** Measured on cs_nuke halves: every name of length 60 was duplicated (10 and 11 names, up to 149 entries each), no name of 51–59 was | keep shader names ≤ 59 characters (`mohkit.source.convert.MAX_SHADER_NAME`, `modelconv.texture_name`) |
@@ -163,10 +169,19 @@ Typical times on an Apple Silicon Mac through Wine:
 | test room | 11 | 5 s | 5 s | 6 s |
 | mk_village (draft) | 5,000 | 58 s | 5 s | 225 s |
 | mk_village (normal, 8 bounces) | 5,000 | 56 s | 5 s | 1,380 s |
-| cs_dust2 (draft, detail in a caulk shell) | 18,200 | 1,213 s | 1 s | 3,090 s |
+| cs_dust2 (draft, detail in a caulk shell, 2026-09-30) | 18,200 | 1,213 s | 1 s | 3,090 s |
+| cs_dust2 (draft, `-nomerge` + displacement simplification, 2026-10-01) | 18,200 | 368 s | 1 s | ~55 min |
 | stock mohdm6 (normal) | 5,250 | 31 s | 110 s | 400 s |
 
-About 5 s of each stage is Wine start-up.
+About 5 s of each stage is Wine start-up when no wineserver is running; with another Wine
+process alive in the bottle, small-map stages took 0.4-1.1 s (2026-09-30), so a persistent
+wineserver (`wineserver -p`) would save ~15 s a build (untested). A compile's root, logs and
+BSP are keyed by its name (`<build dir>/roots/dm_<name>/{bsp,vis,light,info}.log`): give
+every variant of an A/B its own name. To test a MOHlight flag, compile one small, brightly
+lit room per variant and compare `np.frombuffer(BSP(bsp).lump("lightmaps"), np.uint8)`
+(mean absolute difference under 0.1 of 255 = the same result); light.log line 2 prints the
+bounce count, and each phase banner (`====== Radiosity Lighting ======`) is followed by its
+`(N) seconds.` line.
 
 **Where BSP time goes.** The driver runs each tool on a pseudo-terminal, so
 logs are live (Wine's C runtime buffers output to files and pipes until
@@ -180,8 +195,10 @@ iteration on big maps; keep merging for release builds (`-q draft` uses it).
 cs_dust2 (23k faces, 619 patches), 1,360 s under load: `PatchMapDrawSurfs` 673 s
 (patch LOD grouping compares every control point pair: see csgo-conversion.md),
 "Merging faces" 374 s, `FixTJunctions` 281 s, everything else ~30 s. Draft skips
-merging and patch simplification cuts the grouping work 3.9×, so a draft BSP
-should take about a third of that.
+merging and patch simplification cuts the grouping work 3.9×: the draft BSP took 368 s.
+Merging gains little on converted maps, whose Source faces are already merged: de_cache with
+merging went from 11,763 faces to 11,538 (-2%), draw indexes 100,032 -> 98,703 (mk_village:
+-30%).
 
 ## Packaging
 

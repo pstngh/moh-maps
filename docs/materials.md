@@ -49,6 +49,7 @@ mk_medina adds, all checked in game:
 | images on panels | `afrikadoorwrk` (door, 128×256), `afrikwall7_set1doorway` (doorway, 256×256), `window_decor_set1` (grille, 144×128) |
 | cloth | `desertcloth` (awnings, canopies) |
 | hill terrain | `grndset_2af` |
+| facade trim | `algiertrim` (64×64 ornamental band: cornice under the roof edge, scaled to its 12-24 height), `jh_portarz_bk` (balcony planks), `wdtrimbal` (balcony undersides), `general_structure/beam_wood1` (beam ends, corbels) |
 
 Props that fit: `static/tree_regularpalm`, `tree_squatpalm`, `produce_cart`,
 `wagon`, `wicker_basket_1–3`, `south_africa_ceramic_pot_7`, `basket1`,
@@ -113,10 +114,12 @@ puddle always let bullets through; wood lets through weapons with
   opaque squares on de_nuke. Conversions now prune their `assets/` folder on every
   build (`convert.write_assets`), and packaging warns about `.jpg`/`.tga` pairs.
 - Path `textures/<folder>/<name>.jpg`, referenced in the `.map` as
-  `<folder>/<name>`. Without a shader script the image is used directly
+  `<folder>/<name>`. Image paths must be shorter than 64 characters (`MAX_QPATH`,
+  `renderergl1/tr_image.c:856`); shader names at most 59 for Q3map (toolchain.md). Without a shader script the image is used directly
   (texture × lightmap, rock material).
 - A shader script `scripts/<anything>.shader` in the PK3 adds surfaceparms and
-  blending. The MOHAA idiom for an opaque lightmapped surface:
+  blending. Only `scripts/*.shader` is read: a `.shader` anywhere else is ignored without a
+  warning (the converter's prop shaders once sat at the pk3 root and drew opaque). The MOHAA idiom for an opaque lightmapped surface:
 
 ```text
 textures/mymap/wall_plaster

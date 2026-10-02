@@ -84,6 +84,8 @@ def features(im) -> list[float]:
 # colour (2), brightness, contrast, roughness, orientation (4), LBP (10). Tuned on crops
 # of mk_village screenshots with known materials; a radial power spectrum and heavier
 # LBP weights made the ranking worse (blur and perspective change fine structure).
+# Those screenshots were shot at r_picmip 2 (quarter-size textures, before 2026-10-01):
+# re-tune on full-detail crops before trusting the fine-structure terms.
 WEIGHTS = [4.0, 4.0, 0.3, 1.5, 1.5] + [2.0] * 4 + [1.0] * 10
 
 

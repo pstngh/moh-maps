@@ -51,6 +51,7 @@ Per face: `surfaceDensity N` in the `.map` overrides lightmap density.
 | interior-heavy daylight | 85 85 85 | -90 90 0 | 1 / 85 85 85 | 20 19 18 (+ `ambient 50`) | — | mohdm6 |
 | night | 25–35 (bluish 30 30 45) | -30 300 0 | — | 5 5 6 | 2400–3000 / .03 .05 .09 | MP_Flughafen_TOW, mp_ship_lib |
 | snow night | 30 30 38 | -70 110 0 | — | 3 3 4 | 1500 / .1 .1 .12 | MP_Verschneit_DM |
+| hot afternoon, narrow lanes (mohkit) | 160 140 104 | -55 225 0 | 1.6 / 84 92 116 | 20 18 16 | 9000 / .74 .68 .58 | mk_medina (sundiffuse 1.25 and ambient 16 15 15 left its lanes too dark on a preview sheet; alley `kit.wall_lantern` 190) |
 
 Match the sky shader to the mood: `sky/mohday1`/`mohday2` (day), `sky/m5l2`,
 `sky/norway_dawn`, `sky/d-day2`, `sky/africanight`, `sky/mohnightfog`,
@@ -102,7 +103,7 @@ with fill lights until you have seen a normal build.
 
 ## Limits
 
-- 170 lightmap pages of 128×128 per map (tested 2026-09-30: 170 pages compile, 172 fail; 0x800000 / 49152 = 170.7). Exceeding it is a hard failure. Use
+- 170 lightmap pages of 128×128 per map when MOHlight lights it (its 8 MB buffer; tested 2026-09-30: 170 pages compile, 172 fail; 0x800000 / 49152 = 170.7). Exceeding it is a hard failure. The renderer itself takes 256 (`MAX_LIGHTMAPS`), which maps lit without MOHlight may use (de_cbble's transferred light: 190). Use
   coarser `lightmapdensity` (32 or 64) on big maps and big faces rather than
   making surfaces `nolightmap` (unlit detail looks fullbright).
 - Radiosity needs VIS data. A map whose only structure is a shell still gets
@@ -123,8 +124,9 @@ with fill lights until you have seen a normal build.
   off-axis (11 just under the lamp, 58 at the floor), while the lightmaps show the
   cone. Static props lit from the grid went black next to a CS:GO ceiling spot, so
   injected props use the lightmaps instead (`docs/csgo-conversion.md`). Players are not
-  affected in practice: the engine also lights them from the light entities at run time
-  (`r_fastentlight 0`), and one under that spot looked as lit as one in the sun.
+  affected in practice: at `r_fastentlight 0` (retail high) the engine also lights them from
+  the light entities at run time, and one under that spot looked as lit as one in the sun.
+  At 1 (a fresh home's value, and the owner's) they are lit from the grid only.
 - **CS:GO conversions don't use MOHlight any more** (2026-10-01): their lightmaps, grid and
   prop colours are CS:GO's own baked light (`docs/csgo-conversion.md`, "Lighting"). Source
   light falls off with d^2 in linear space (about 1/d^0.9 on screen), which no MOHlight
@@ -139,4 +141,11 @@ with fill lights until you have seen a normal build.
   models, 28,193 vertices; MOHlight prints no time for it). Direct and bounce time
   grow with the lightmapped area: the hill-terrain ring and the building backs
   seen from it are a large share of medina's surfaces, so keep the backdrop
-  small and give it a coarse `surfaceDensity` (32–64) rather than `nolightmap`.
+  small and give it a coarse `surfaceDensity` (32–64) rather than `nolightmap`. On
+  mk_medina, shrinking the hill ring from 1,536 to 1,024 units and the sky top from 1,664 to
+  1,088 cut direct lighting from 955 s to 574 s (one thread).
+- **Surface lights are very slow.** `q3map_surfacelight N` in a shader makes its faces emit
+  (retail: 24 shaders, 100-4,000, median 2,000, mostly lit windows). de_nuke's 43 emitting
+  surfaces made a `-fast -bounce 2` light estimate ~15 hours. Use a point `light` per
+  fixture instead (the converter puts one 8 units out from each emitting face, intensity
+  sqrt(area x brightness) x 4).

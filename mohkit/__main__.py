@@ -492,7 +492,7 @@ def main(argv=None) -> int:
     s = sub.add_parser("exposure", help="brightness check of screenshots: mean, blown-out and crushed shares")
     s.add_argument("paths", nargs="*", help="shot images or folders (local/csgo/<map>/shots)")
     s.add_argument("--by-map", action="store_true", help="one summary line per folder")
-    s.add_argument("--stock", action="store_true", help="also shoot and measure stock mohdm1-7 (dist/stock_shots)")
+    s.add_argument("--stock", action="store_true", help="also shoot and measure stock mohdm1-3, 5-7 and obj_team1-4 (dist/stock_shots)")
     s.add_argument("--stock-shots", type=int, default=9)
     s.add_argument("--mask", action="store_true", help="write <shot>_mask.png: red = near-white, blue = near-black")
     s.add_argument("-n", type=int, default=0, help="only the n worst shots per folder")

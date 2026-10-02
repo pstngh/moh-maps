@@ -82,8 +82,9 @@ downloaded separately, not stored here. Nothing derived from Valve content
 
 ## CS:GO conversions side by side
 
-Each pair below is the same camera (CS:GO's own named spectator viewpoints, same position,
-angles and field of view): left, CS:GO itself (`python -m mohkit csgo-ref`); right, the
+Each pair below is the same camera (CS:GO's own named spectator viewpoints, same position
+and angles; CS:GO draws them at fov 90, the MOHAA shots at 80, so the right image is a little
+narrower): left, CS:GO itself (`python -m mohkit csgo-ref`); right, the
 converted map in OpenMoHAA. The converted maps use CS:GO's own baked lighting and an exposure
 fitted to these screenshots (`--fit-exposure`). Converted maps and their assets stay local
 (personal use); only these screenshots are in the repo.

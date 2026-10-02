@@ -174,7 +174,7 @@ class Options:
     # "compile": the largest props up to props_static_vertices are static_* entities lit by
     # MOHlight (~190 vertices/s on one thread), the next props_runtime_max are script_models.
     props_mode: str = "inject"
-    props_static_vertices: int = 70000  # MOHlight's static-model lighting buffer crashes above ~75-81k
+    props_static_vertices: int = 70000  # budget only: one unexplained crash near ~81k on full de_dust2; 161k lit fine in a small map
     props_runtime_max: int = 600    # extra props as script_model (game entities; engine limit 1024)
     # translation applied after conversion; None = centre the map when it leaves +-WORLD_LIMIT
     offset: Optional[tuple] = None

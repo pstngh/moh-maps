@@ -227,7 +227,7 @@ origin brush on the hinge (see [entities.md](entities.md)).
 ## Static models (props)
 
 `static_*` entities (`"model" "static/indycrate.tik"`) are baked into the BSP by
-Q3map and lit per-vertex by MOHlight. They are removed from the entity list, so
+Q3map and lit per-vertex by MOHlight (unless injected after the compile, the `build` default: lit from the lightmaps, docs/entities.md). They are removed from the entity list, so
 scripts can't see them. See [entities.md](entities.md#props) for collision.
 
 ## Tools

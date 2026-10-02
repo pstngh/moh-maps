@@ -45,7 +45,8 @@ Derived minimums (give generous margins, bots are clumsy):
   16+ each of `info_player_allied`/`info_player_axis` for team modes (put each
   team on a side). Keep spawns ≥ 64 from walls, facing into the space, and not
   in view of each other when possible. Add one `info_player_start` and one
-  `info_player_intermission`.
+  `info_player_intermission`. Team spawns may outnumber DM spawns: mk_medina keeps 14 per
+  team but 24 DM spawns, leaving four choke-point or crowded spots team-only.
 
 ## Construction
 
@@ -113,13 +114,13 @@ from corner points.
 | limit | value | what happens |
 |---|---|---|
 | vertices per planar face (after T-junctions) | **64** | the face renders as the default checker. Split long brushes (≤ 512) |
-| lightmap pages | 170 × 128² (tested 2026-09-30: 170 pages compile, 172 fail; 0x800000 / 49152 = 170.7) | MOHlight aborts. Coarser `lightmapdensity` on big areas |
+| lightmap pages | 170 × 128² when MOHlight lights the map (tested 2026-09-30: 170 pages compile, 172 fail; 0x800000 / 49152 = 170.7); the renderer takes 256 (`MAX_LIGHTMAPS`), which maps lit without MOHlight may use (de_cbble's transferred light: 190) | MOHlight aborts. Coarser `lightmapdensity` on big areas |
 | lights reaching one leaf | 60 | clamped; lights go missing |
 | VIS data | 2 MB | VIS fails. More detail, less structure |
 | brushes / brush sides / planes | 32768 / 131072 / 131072 | |
 | draw verts / indexes | 524288 each | `MAX_MAP_DRAWINDEXES`. Reduce detail |
-| entities | 8192 (OpenMoHAA), fewer in AA | |
-| statically lit prop vertices | no limit found up to 161k | MOHlight crashed once near ~81k on full de_dust2; not reproduced in small test maps in small maps (22 stock tanks = 109k, 102 converted props = 162k, 1,200 instances) |
+| game entities | 1,024 incl. up to 64 clients (`MAX_GENTITIES` = 1 << `GENTITYNUM_BITS` 10, `qcommon/q_shared.h:1662`) | `static_*` props compile to static models and don't count; `script_model`s, brush entities and spawned effects do (the CS:GO converter injects props as static models for this reason) |
+| statically lit prop vertices | no limit found up to 161k | MOHlight crashed once near ~81k on full de_dust2; not reproduced in small test maps (22 stock tanks = 109k, 102 converted props = 162k, 1,200 instances) |
 | props per model TIKI | ≤ 24 surfaces; < 1000 verts and ≤ 2000 tris per surface | the TIKI setup array is `loadsurfaces[24]` with no bounds check (`tiki/tiki_files.cpp:310`, `tiki_parse.cpp:878-894`); `TIKI_MAX_VERTEXES` 1000 / `TIKI_MAX_TRIANGLES` 2000 (`tiki/tiki_shared.h:77-78`, enforced `tiki_skel.cpp:610-618`). Stock maxima: 24 surfaces (uboat), 913 verts |
 | world extent | ±8192 | origins wrap, navmesh ends |
 

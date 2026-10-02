@@ -35,7 +35,7 @@ BLOWN_BLOCK = 225
 CRUSHED_BLOCK = 20
 
 # Target band, from stock MOHAA maps shot the same way (``stock_shots``; docs/lighting.md):
-# shots outside it are flagged. Set from the mohdm1-7 measurements (2026-10-01).
+# shots outside it are flagged. Set from the mohdm1-3/5-7 measurements (2026-10-01).
 MEAN_LOW, MEAN_HIGH = 55.0, 150.0
 WHITE_MAX = 0.03     # share of near-white pixels
 BLACK_MAX = 0.08     # share of near-black pixels

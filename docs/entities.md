@@ -109,7 +109,10 @@ without static models also lit on 10 threads where MOHlight-lit statics had cras
 `func_ladder` is a brush entity that covers the climbable face, with an origin
 brush **on the face, horizontally centred**. `angle` points into the wall (the
 direction the climber faces). Stock ladders are 28–64 wide. `surfaceparm
-ladder` does nothing.
+ladder` does nothing. A `func_ladder` lets the player off at the top only forward, onto a
+clear spot (engine.md §1.3), so a ladder under a floor hole or beside a platform hangs
+players near the top; there, CS-style invisible clip step columns work (the CS:GO
+converter's default, docs/csgo-conversion.md), but bots can't climb them.
 
 ## Triggers, breakables, sound
 

@@ -82,6 +82,13 @@ Ladders are the **`func_ladder`** brush entity. `surfaceparm ladder` is not what
   - The player must stand on the non-wall side.
   - A box trace at `origin − facing·29`, `absmin.z + 16` must be clear (`fgame/misc.cpp:2875-2946`).
 - Getting on at the top needs the player's head above `absmax.z` and a clear box at `origin + facing·26`, `absmax.z + 16`.
+- When the box trace at `origin − facing·29` fails, the game prints "ladder start position is blocked by a solid object" (`gi.DPrintf`, `fgame/misc.cpp:2944`) to qconsole.log: grep a probe's log for it (de_mirage's leaning ladder; a door model's collision in that box blocked another).
+
+**How a player gets off** (`fgame/player_conditionals.cpp:1511-1560`)
+- At the top only forward: a 40-unit trace ahead at head height must leave the ladder, a box must rise 98 units clear above the origin, then move 16 forward (`CondCanGetOffLadderTop`).
+- At the bottom when a 40-unit box trace down hits the world (`CondCanGetOffLadderBottom`).
+- Jumping off is weak: `jumpxy -70 0 150` (`global/mike_torso.st`), backward and low, too little to reach a platform beside or above. So a ladder under a floor hole or beside a scaffold hangs the player near the top (de_mirage's scaffold ladders stalled at 72/136 and 87/160).
+- The alternative used for CS:GO conversions: invisible `common/clip` slices 16 units high against the wall, each 1 unit deeper than the one above. Pmove steps up at most 18 per move (`STEPSIZE`), so running into the column climbs it (~600 units/s at 60 fps, frame-rate dependent; 8-unit steps were no faster), backing off climbs down, and strafing steps off (docs/csgo-conversion.md). Bots can't use them (§3: off-mesh links exist only for `func_ladder`).
 
 **While climbing**
 - The player is placed at `origin − facing·16`, with z snapped to 16-u steps (`(z+8) & ~15`) (`fgame/misc.cpp:2948-3018`).
@@ -204,7 +211,7 @@ Other cvars:
 - It only prints to the console.
 - Quality is `r_screenshotJpegQuality` 90 (`:1588`).
 
-Files go under the home path. On macOS that is `~/Library/Application Support/openmohaa/<game dir, main>/` (`sys/sys_unix.c:124-139`). The exact subdirectory is **UNVERIFIED**.
+Files go under the home path. On macOS that is `~/Library/Application Support/openmohaa/<game dir, main>/` (`sys/sys_unix.c:124-139`). Observed on the owner's Mac (2026-10-01): `~/Library/Application Support/openmohaa/main/{configs,screenshots}/`; a second `configs/omconfig.cfg` also sits in the game folder's `main/`, and which one a normal launch reads was not checked.
 
 ### 2.6 `wait` in command buffers (`qcommon/cmd.c:62-70`, `:196-205`)
 
@@ -368,7 +375,7 @@ Game side: `World` class (`fgame/worldspawn.cpp:491-543`), defaults in its const
 | `farplane_bias`, `skybox_farplane`, `skybox_speed`, `render_terrain`, `farclipoverride`, `farplaneclipcolor` | **not sent to AA-protocol clients**. For protocol 8 the fog configstring is only `cull dist r g b` | `:651-681` |
 | `animated_farplane*` | varies farplane with player z; single-player only | `:788-856` |
 | `skyalpha` | default 1 | `:597`, `:952-956` |
-| `skyportal` | default 1. The portal sky needs a `script_skyorigin` entity | `:598`, `fgame/scriptslave.cpp:2237-2250` |
+| `skyportal` | default 1. The portal sky needs a `script_skyorigin` entity. The renderer keeps only the first 32 portal-sky surfaces of a frame (`R_Sky_AddSurf`, `renderergl1/tr_sky_portal.cpp:80`) and draws no portal view when those are off screen, so keep `common/skyportal` brushes unsplit (they are never drawn, so the 64-vertex limit doesn't apply; de_vertigo: 1,817 -> 113 surfaces, windows showed haze before). Sky faces don't occlude: the portal view, drawn from the `script_skyorigin`, draws whatever that point's cluster sees, so the sky room must be a sealed VIS region of its own | `:598`, `fgame/scriptslave.cpp:2237-2250` |
 | `northyaw`, `ai_visiondistance` (2048), `watercolor`/`wateralpha`, `lavacolor`/`lavaalpha`, `numarenas` | misc | `:978-1011` |
 | spawnflag 1 `CINEMATIC` | sets `sv_cinematic` | `:603-609` |
 | `script` | **not a script file**: a list of inline commands, the generic mechanism available to any entity | `fgame/g_spawn.cpp:493-517` |
@@ -446,7 +453,7 @@ maxMetric. Without a surface whose first and last `collapseIndex` differ there i
 (`:766`) and the whole mesh is always drawn. Retail ships 275 `models/static/*.lod`
 (Pak0.pk3; `alarmbell.lod`: 0.5 0.012, curve (0,0) (0.5,15) (0.8,28.8) (0.95,45) (1,58),
 `collapseIndex` 58 for the base vertices down to 1). Converted props now carry LOD from
-`mohkit.lod` (quadric half-edge collapses, curve for ~1 px error at 1920 wide); before it
+`mohkit.lod` (quadric half-edge collapses, curve for `lod.TAU_PX` = 2 px error at 1920 wide (the `--props` profiles raise it to 3 / 10)); before it
 de_cache drew 0.3-0.9 M prop vertices per frame and props were 70-85% of the frame time
 (`mohkit test --perf --toggle r_drawstaticmodels=0`).
 
@@ -545,7 +552,7 @@ both.
   - Retail example: `health 50`, `debristype 0`.
 - **`func_barrel`** (`fgame/barrels.cpp:74-178`): sf 1 INDESTRUCTABLE. `barreltype oil|water|gas|<empty>`; health is always 75, and `gas` clears INDESTRUCTABLE.
 - **`func_window`** (`fgame/windows.cpp:47-175`): `health` 250.
-  - `debristype`: 0 clear, 1 coloured.
+  - `debristype`: sent as a byte; the client spawns `models/fx/windows/debris_<n>.tik` for any n (`fgame/windows.cpp:161`, `cgame/cg_parsemsg.cpp:1462`). Retail ships 0-3, all glass shards (0 clear, 1 coloured). A map can ship its own `debris_<n>.tik` for metal or wood (mohkit: 7 metal, 8 wood, `convert.debris_tiki`; verified in a test room 2026-10-01: metal chunks at scale 0.2 were specks, 0.35 x 4 read well).
   - `target`: a `script_object` that becomes the broken version.
   - sf 1 WINDOW_BROKEN_BLOCK.
 - **`func_explodingwall`** (`fgame/misc.cpp:115-230`) and **`func_exploder`** / **`func_multi_exploder`** / **`func_explodeobject`** (`fgame/explosion.cpp:145-380`). Retail instead uses `script_object`s named `exploder`/`explodersmashed`/`exploderchunk` sharing `#set`, run through `thread global/exploder.scr::main` (`Pak0.pk3:global/exploder.scr:1-28`).
