@@ -159,6 +159,16 @@ def test_validate_rejects_non_aa_props():
     assert len(errs) == 1 and "snowycrate" in errs[0], errs
 
 
+def test_material_density_writes_surface_density():
+    from mohkit.mapfile import MapFile as _MF
+    b = box((0, 0, 0), (64, 64, 64), Material("norway/norsnow_lite256", density=256))
+    m = _MF([Entity({"classname": "worldspawn"}, [b])])
+    text = m.dumps() if hasattr(m, "dumps") else None
+    assert all(f.ext[-2:] == ["surfaceDensity", "256"] for f in b.faces), b.faces[0].ext
+    if text is not None:
+        assert "surfaceDensity 256" in text
+
+
 def test_brush_rejects_band_list():
     stone, plaster = Material("general_structure/stonebricks1"), Material("general_structure/plaster_wall2")
     for spec in ([(0, stone), (32, plaster)], {"sides": [(0, stone)]}):
