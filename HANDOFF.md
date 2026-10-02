@@ -15,7 +15,8 @@ update this file, commit and push, then stop and give the user the one-line hand
   probe and `mohkit ab` against the installed build. Summary log `local/csgo/repath_all.log`
   (markers `<name> BUILD_DONE`, `<name> AB_DONE`, `ALL_DONE`); per map
   `local/csgo/<name>_repath.log`, `<name>_ab.log`, A/B images in `local/csgo/<name>/ab/`.
-  Never installs. Check that it still runs: `ps -p 20875`.
+  Never installs. Check that it still runs: `ps -p 20875`. Progress: cs_cache A/B done
+  (13:51), cs_dust2 built 14:02 (24 FFA spawns from the nav mesh, spread over the map).
 - **cs_cache rebuilt (13:39 ET)** with per-map prop paths: 0 clashes with the installed pk3s;
   in game, with the 7 other installed pk3s vs alone, 18 of 19 cameras identical (overview =
   run noise); 32 bot kills, ladder climbs 161. Old local build in
@@ -97,8 +98,16 @@ Facts to start from:
   Realistic lean recipe: `--structural` VIS for the world, brush proxies for boxy props
   (VIS-culled), no wires, fades capped by prop size so landmarks stay (s9 lost the A silo),
   clutter dropped. 500-650 fps looks out of reach; the user's bar is a worst camera
-  above 250 at their settings. Scoring script (to become code if reused):
-  `local/csgo/boxfit.py`.
+  above 250 at their settings.
+- **Lean profile is in code (8686431): `--props lean`** = stock + wires dropped (s9's rule) +
+  fade cap >= 8 x prop size + box-like props (`box_fit` >= 0.8, >= 32 units) as detail,
+  non-solid brushes of their own materials. Dry run on Nuke OK (fences -> 2-unit
+  alpha-tested slabs). **Next B step (after the queue): `mohkit csgo de_nuke --name cs_nukes
+  --props lean --structural -q fastrad --final`** (s9 = current cs_nukes is backed up in
+  `local/csgo/before/cs_nukes_s9/`, s8 in `.../cs_nukes_s8/`), then `mohkit ab de_nuke --name
+  cs_nukes --a local/csgo/before/cs_nukes_s8/cs_nukes.pk3 --b local/csgo/cs_nukes/cs_nukes.pk3
+  --perf 2000` (`ab` needs both pk3s to hold the same map name). Watch: VIS compile time /
+  overflow, leaks, proxy-brush light (nearby luxels; idea: prop_light as extra luxels).
 - Real VIS: `--structural` keeps Source's structural brushes structural (dust2 compiled
   with 61 KB VIS on 2026-10-01; untested lit, untested on Nuke). Watch leaks, compile time,
   VIS overflow, and the 3D-skybox room rules.
