@@ -158,6 +158,16 @@ def cmd_generate(a) -> int:
     plan.parent.mkdir(parents=True, exist_ok=True)
     render.plan(m, str(plan))
     print(f"plan {plan}")
+    if proj.underlay:
+        u = dict(proj.underlay)
+        image = next((p for p in (proj.folder / u["image"], config.REPO / u["image"]) if p.is_file()), None)
+        if image is None:
+            print(f"underlay {u['image']} not found (a local reference?): skipped")
+        else:
+            out_u = project.DIST / f"{proj.name}_underlay.png"
+            render.underlay(m, str(out_u), str(image), tuple(u["origin_px"]), u["units_per_px"],
+                            alpha=u.get("alpha", 0.5), zmin=u.get("zmin"), zmax=u.get("zmax"))
+            print(f"underlay {out_u}")
     return 1 if any(i.severity == "error" for i in issues) else 0
 
 

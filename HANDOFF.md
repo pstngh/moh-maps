@@ -6,6 +6,19 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
+## In progress: mk_summit, Summit from CoD Black Ops (user, 2026-10-02 ~17:10 ET)
+
+The user asked for a replica of Black Ops' Summit; modes DM + TDM (their pick). References
+(9 images from the CoD wiki, downloaded with the user's OK; never commit them):
+`local/summit_ref/` (minimap `Map_Summit_BO.png`, bird's-eye, loading screen, gameplay
+shots). `maps/mk_summit/build.py` places everything in minimap pixels at 12 u/px;
+`mohkit generate` draws `dist/mk_summit_underlay.png` (plan over the minimap). v1 = the
+footprint, building masses, rooms with doors/windows, the control hall (galleries, consoles,
+skylight), dome, gondola, drops to a valley at z -1536 (trigger_hurt). Logs and sheets:
+`local/summit/`. Next: draft sheet -> fix -> bots -> preview lighting -> sheet for the user.
+Interiors and levels are guesses (the references show little of them): ask the user, who
+played it, for corrections and screenshots.
+
 ## State (2026-10-02 17:00 ET)
 
 - **Nothing is running.** **Installed 2026-10-02 ~16:50 ET (user's OK), locally and on the

@@ -82,6 +82,7 @@ class Project:
     script_extra: str = ""
     shots: list[_game.Shot] = field(default_factory=list)
     compile_args: dict = field(default_factory=dict)
+    underlay: dict = field(default_factory=dict)   # reference overhead for the plan (render.underlay)
 
     @property
     def game_path(self) -> str:
@@ -102,7 +103,7 @@ class Project:
         p = cls(name=meta.get("name", folder.name), folder=folder, mode=meta.get("mode", "dm"),
                 title=meta.get("title", folder.name), ambience=meta.get("ambience", "mohdm2"),
                 precache=list(meta.get("precache", [])), script_extra=meta.get("script_extra", ""),
-                compile_args=dict(meta.get("compile", {})))
+                compile_args=dict(meta.get("compile", {})), underlay=dict(meta.get("underlay", {})))
         p._module = mod  # type: ignore[attr-defined]
         if mod is not None:
             p.shots = list(getattr(mod, "SHOTS", []))

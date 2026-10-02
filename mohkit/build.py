@@ -324,11 +324,16 @@ def _merge2(a: AABB, b: AABB) -> Optional[AABB]:
 # Carver
 
 Bands = Sequence[tuple[float, MatLike]]
-WallSpec = Union[MatLike, Bands, Mapping[str, Union[MatLike, Bands]]]
+FaceFn = Callable[[Vec3, Vec3], MatLike]
+WallSpec = Union[MatLike, Bands, Mapping[str, Union[MatLike, Bands]], FaceFn]
 
 
 def _is_bands(v) -> bool:
     return isinstance(v, (list, tuple)) and bool(v) and isinstance(v[0], (list, tuple))
+
+
+def _is_fn(v) -> bool:
+    return callable(v) and not isinstance(v, Material)
 
 
 @dataclass
@@ -341,25 +346,33 @@ class Air:
     ``default``) to either. The side name is the compass side of *this* air box.
     """
     bounds: AABB
-    floor: MatLike = CAULK_M
+    floor: Union[MatLike, FaceFn] = CAULK_M
     walls: WallSpec = CAULK_M
-    ceiling: MatLike = CAULK_M
+    ceiling: Union[MatLike, FaceFn] = CAULK_M
     sky: bool = False
     name: str = ""
     priority: int = 0
+    cuts: Sequence[float] = ()     # extra heights where the shell is cut (e.g. ground level for walls=fn)
 
     def band_levels(self) -> set[float]:
         specs = list(self.walls.values()) if isinstance(self.walls, Mapping) else [self.walls]
-        return {float(z) for sp in specs if _is_bands(sp) for z, _ in sp}
+        return {float(z) for sp in specs if _is_bands(sp) for z, _ in sp} | {float(z) for z in self.cuts}
 
-    def material_for(self, inward_normal: Vec3, z: float = 0.0) -> Material:
+    def material_for(self, inward_normal: Vec3, z: float = 0.0, center: Optional[Vec3] = None) -> Material:
         """Material of the shell face whose normal (pointing into this air) is given;
-        ``z`` is the face centre height, used to pick a wall band."""
+        ``z`` is the face centre height, used to pick a wall band. ``floor``, ``ceiling``
+        and ``walls`` may also be functions ``(inward_normal, face_centre) -> material``
+        (for air computed by subtraction, whose faces belong to many buildings)."""
         nz = inward_normal[2]
+        c = center if center is not None else (0.0, 0.0, z)
         if nz > 0.5:
-            return mat(self.floor)
+            return mat(self.floor(inward_normal, c)) if _is_fn(self.floor) else mat(self.floor)
         if nz < -0.5:
-            return SKY_M if self.sky else mat(self.ceiling)
+            if self.sky:
+                return SKY_M
+            return mat(self.ceiling(inward_normal, c)) if _is_fn(self.ceiling) else mat(self.ceiling)
+        if _is_fn(self.walls):
+            return mat(self.walls(inward_normal, c))
         spec = self.walls
         if isinstance(spec, Mapping):
             chosen = spec.get("default", CAULK_M)
@@ -454,7 +467,8 @@ class Carver:
             if best is None:
                 mats[name] = CAULK_M
             else:
-                m = best.material_for(n, zc)
+                fc = tuple(coord if i == ax else (piece[0][i] + piece[1][i]) / 2 for i in range(3))
+                m = best.material_for(n, zc, fc)
                 mats[name] = self.sky if m.shader == SKY else m
         return mats
 

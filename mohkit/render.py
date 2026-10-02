@@ -23,10 +23,8 @@ SPAWN_COLORS = {
 }
 
 
-def plan(m: MapFile, out: str, size: int = 1600, zmin: Optional[float] = None, zmax: Optional[float] = None,
-         margin: int = 24, title: str = "") -> str:
-    from PIL import Image, ImageDraw
-
+def _floor_polys(m: MapFile) -> list[tuple[float, list[tuple[float, float]], bool]]:
+    """Every upward-facing surface as (top z, xy outline, is_tool), skipping caulk and sky."""
     polys: list[tuple[float, list[tuple[float, float]], bool]] = []
     for _, p in m.iter_prims():
         if isinstance(p, Brush):
@@ -47,6 +45,37 @@ def plan(m: MapFile, out: str, size: int = 1600, zmin: Optional[float] = None, z
                     h = oz + p.samples[r * p.width + c].height
                     polys.append((h, [(ox + c * 64, oy + r * 64), (ox + c * 64 + 64, oy + r * 64),
                                       (ox + c * 64 + 64, oy + r * 64 + 64), (ox + c * 64, oy + r * 64 + 64)], False))
+    return polys
+
+
+def _shade(t: float) -> tuple[int, int, int]:
+    return (int(60 + 160 * t), int(70 + 150 * t), int(90 + 120 * t))
+
+
+def _draw_entities(d, m: MapFile, tx) -> None:
+    for e in m.entities:
+        o = e.origin()
+        if o is None:
+            continue
+        cn = e.classname
+        px, py = tx(o[0], o[1])
+        if cn in SPAWN_COLORS:
+            yaw = math.radians(float(e.get("angle", "0") or 0))
+            col = SPAWN_COLORS[cn]
+            r = 7
+            d.ellipse((px - r, py - r, px + r, py + r), outline=col, width=2)
+            d.line((px, py, px + math.cos(yaw) * 14, py - math.sin(yaw) * 14), fill=col, width=2)
+        elif cn == "light":
+            d.ellipse((px - 2, py - 2, px + 2, py + 2), fill=(255, 220, 90))
+        elif cn.startswith("static_"):
+            d.rectangle((px - 2, py - 2, px + 2, py + 2), outline=(170, 120, 60))
+
+
+def plan(m: MapFile, out: str, size: int = 1600, zmin: Optional[float] = None, zmax: Optional[float] = None,
+         margin: int = 24, title: str = "") -> str:
+    from PIL import Image, ImageDraw
+
+    polys = _floor_polys(m)
     if zmin is not None:
         polys = [q for q in polys if q[0] >= zmin]
     if zmax is not None:
@@ -68,28 +97,53 @@ def plan(m: MapFile, out: str, size: int = 1600, zmin: Optional[float] = None, z
     lo, hi = min(zs), max(zs)
     for z, pts, tool in sorted(polys, key=lambda q: q[0]):
         t = 0.0 if hi == lo else (z - lo) / (hi - lo)
-        base = (int(60 + 160 * t), int(70 + 150 * t), int(90 + 120 * t))
+        base = _shade(t)
         if tool:
             base = (70, 40, 70)
         d.polygon([tx(x, y) for x, y in pts], fill=base, outline=(30, 30, 36))
-    for e in m.entities:
-        o = e.origin()
-        if o is None:
-            continue
-        cn = e.classname
-        px, py = tx(o[0], o[1])
-        if cn in SPAWN_COLORS:
-            yaw = math.radians(float(e.get("angle", "0") or 0))
-            col = SPAWN_COLORS[cn]
-            r = 7
-            d.ellipse((px - r, py - r, px + r, py + r), outline=col, width=2)
-            d.line((px, py, px + math.cos(yaw) * 14, py - math.sin(yaw) * 14), fill=col, width=2)
-        elif cn == "light":
-            d.ellipse((px - 2, py - 2, px + 2, py + 2), fill=(255, 220, 90))
-        elif cn.startswith("static_"):
-            d.rectangle((px - 2, py - 2, px + 2, py + 2), outline=(170, 120, 60))
+    _draw_entities(d, m, tx)
     label = title or m.worldspawn.get("message", "")
     d.text((8, 4), f"{label}  x[{x0:.0f},{x1:.0f}] y[{y0:.0f},{y1:.0f}] z[{lo:.0f},{hi:.0f}]  {1/s:.1f} u/px",
            fill=(220, 220, 220))
     img.save(out)
+    return out
+
+
+def underlay(m: MapFile, out: str, image: str, origin_px: tuple[float, float], units_per_px: float,
+             size: int = 1600, alpha: float = 0.5, zmin: Optional[float] = None,
+             zmax: Optional[float] = None) -> str:
+    """The plan drawn over a reference overhead image (a game's minimap, a satellite photo).
+
+    ``origin_px`` is the image pixel where world (0, 0) lies and ``units_per_px`` the world
+    size of one image pixel; image rows run south (world -Y). The frame is the whole image,
+    so successive versions of a map line up. ``alpha`` is the plan's opacity: edges that
+    match the image's walls mean the layout matches."""
+    from PIL import Image, ImageDraw
+
+    ref = Image.open(image).convert("RGBA")
+    k = size / max(ref.size)
+    ref = ref.resize((round(ref.width * k), round(ref.height * k)), Image.LANCZOS)
+    ox, oy = origin_px
+
+    def tx(x, y):
+        return ((x / units_per_px + ox) * k, (oy - y / units_per_px) * k)
+
+    polys = _floor_polys(m)
+    if zmin is not None:
+        polys = [q for q in polys if q[0] >= zmin]
+    if zmax is not None:
+        polys = [q for q in polys if q[0] <= zmax]
+    layer = Image.new("RGBA", ref.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    zs = [q[0] for q in polys] or [0.0]
+    lo, hi = min(zs), max(zs)
+    a = round(255 * alpha)
+    for z, pts, _ in sorted(polys, key=lambda q: q[0]):
+        t = 0.0 if hi == lo else (z - lo) / (hi - lo)
+        d.polygon([tx(x, y) for x, y in pts], fill=_shade(t) + (a,), outline=(255, 170, 40, 200))
+    _draw_entities(d, m, tx)
+    img = Image.alpha_composite(ref, layer)
+    ImageDraw.Draw(img).text((8, 4), f"{units_per_px:g} u/px, origin {origin_px}, z[{lo:.0f},{hi:.0f}]",
+                             fill=(255, 255, 255, 255))
+    img.convert("RGB").save(out)
     return out

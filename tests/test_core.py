@@ -93,6 +93,42 @@ def test_carver_bands():
     assert {"general_structure/stonebricks1", "general_structure/plaster_wall2"} <= shaders
 
 
+def test_carver_face_functions():
+    # walls/floor given as functions of (inward normal, face centre): per-position facades
+    cv = Carver(16)
+    stone, plaster = Material("general_structure/stonebricks1"), Material("general_structure/plaster_wall2")
+    snow = Material("norway/norsnow_lite256")
+    cv.add(Air(((0.0, 0.0, 0.0), (512.0, 256.0, 256.0)),
+               walls=lambda n, c: stone if c[0] < 256 else plaster, floor=lambda n, c: snow))
+    faces = [(f.shader, b) for b in cv.brushes() for f in b.faces]
+    west = {f.shader for b in cv.brushes() for f, w in zip(b.faces, b.windings())
+            if f.plane.normal[0] > 0.5 and max(p[0] for p in w) <= 0}
+    east = {f.shader for b in cv.brushes() for f, w in zip(b.faces, b.windings())
+            if f.plane.normal[0] < -0.5 and min(p[0] for p in w) >= 512}
+    west.discard("common/caulk"), east.discard("common/caulk")   # slab ends no air sees
+    assert west == {"general_structure/stonebricks1"} and east == {"general_structure/plaster_wall2"}, (west, east)
+    assert "norway/norsnow_lite256" in {s for s, _ in faces}
+
+
+def test_plan_underlay():
+    import tempfile
+    from PIL import Image
+    from mohkit import render
+    from mohkit.build import MapBuilder
+    b = MapBuilder("t")
+    cv = Carver(16)
+    cv.room(-256, -256, 0, 256, 256, 128, floor=Material("norway/norsnow_lite256"))
+    b.carve(cv)
+    with tempfile.TemporaryDirectory() as d:
+        ref = Path(d) / "ref.png"
+        Image.new("RGB", (100, 50), (0, 0, 0)).save(ref)
+        out = render.underlay(b.to_map(), str(Path(d) / "u.png"), str(ref), (50, 25), 8.0, size=400, alpha=1.0)
+        im = Image.open(out).convert("RGB")
+        assert im.size == (400, 200)
+        # world (0, 0) is image (50, 25) -> output (200, 100): the room floor is drawn there, not the black ref
+        assert sum(im.getpixel((200, 100))) > 60 and sum(im.getpixel((10, 190))) == 0
+
+
 def test_brush_rejects_band_list():
     stone, plaster = Material("general_structure/stonebricks1"), Material("general_structure/plaster_wall2")
     for spec in ([(0, stone), (32, plaster)], {"sides": [(0, stone)]}):
