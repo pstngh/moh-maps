@@ -11,7 +11,12 @@ automatically, from the command line.
 2. Makes a fresh home, `<build dir>/homes/<name>/main/`, with only the candidate PK3
    and a generated `harness.cfg`.
 3. Launches `openmohaa +set fs_basepath … +set fs_homepath … +set cheats 1
-   +set thereisnomonkey 1 … +devmap dm/<name> +exec harness.cfg`.
+   +set thereisnomonkey 1 … +devmap dm/<name> +exec harness.cfg`. It also sets
+   `fs_apppath`, `fs_steampath`, `fs_gogpath` and `fs_microsoftstorepath` to the base:
+   by default the engine searches the binary's own folder too (your game folder with
+   every installed pk3, `qcommon/files.cpp` FS_InitPathVars), and until 2026-10-01 files
+   missing from the candidate, or a `.jpg` twin of its `.tga` (tried first), came from
+   installed maps. Check the "Current search path" lines in `qconsole.log`.
 4. The harness waits ~3.5 s of rendered frames, hides the HUD, then for each
    camera does `tele`, `face`, `cg_fov`, `wait`, `saveshot <name>`. Bots (if any)
    join only after the last camera, then the match runs and the harness quits.
@@ -19,6 +24,15 @@ automatically, from the command line.
    (`dist/<name>_shots.png`). The console log is triaged for problems.
 
 A 9-shot run takes about 20 seconds.
+
+## Frame rate
+
+`python -m mohkit test <pk3> <map> --perf 3000` (or `mohkit csgo <map> --perf 3000` for a
+conversion's cameras) times 3 s of uncapped frames at each camera instead of taking
+screenshots: `com_speeds 1` gives each frame's milliseconds, `r_speeds 1` the surfaces,
+leafs, vertices and triangles drawn (`game.perf_commands`, `parse_perf`). `--toggle
+r_drawstaticmodels=0` (repeatable) times each camera again with a cvar changed: what the
+props cost. Close other GPU and CPU work first; compare builds in the same conditions.
 
 ## Cameras
 

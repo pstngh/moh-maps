@@ -332,6 +332,14 @@ def run(pk3s: Sequence[Path], map_name: str, shots: Sequence[Shot] = (), *, game
         "cl_playintro": "0", "logfile": "2", "developer": "1", "cheats": "1", "thereisnomonkey": "1", "g_gametype": str(gametype),
         "sv_maxbots": str(bots), "sv_numbots": "0", "name": "mohkit", "com_maxfps": str(FPS),
         "s_volume": "0", "s_musicvolume": "0",
+        # The engine also searches the binary's own folder (fs_apppath, Sys_DefaultAppPath:
+        # the player's game dir with every installed pk3) and Steam/GOG installs, after the
+        # base path (qcommon/files.cpp FS_InitPathVars). A file the candidate lacks then comes
+        # from an installed map, and since x.jpg is tried before x.tga, an installed build's
+        # opaque layer-2 JPG hid the candidate's alpha-tested TGA (de_dust2 drew sand
+        # everywhere). Pointing them at the base path drops them (duplicates are skipped).
+        "fs_apppath": str(base), "fs_steampath": str(base), "fs_gogpath": str(base),
+        "fs_microsoftstorepath": str(base),
     }
     sets.update(cvars or {})
     argv = [cfg.openmohaa]

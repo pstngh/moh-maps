@@ -274,10 +274,13 @@ def cmd_compare(a) -> int:
 
 
 def cmd_install(a) -> int:
+    from . import pak
     cfg = config.load()
     dst = cfg.main_dir / Path(a.pk3).name
     shutil.copy2(a.pk3, dst)
     print(f"installed {dst}")
+    for stem, where in pak.image_clashes(cfg.main_dir)[:10]:
+        print(f"  ! {stem}: {', '.join(where)} (the game loads the .jpg)")
     return 0
 
 

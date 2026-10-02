@@ -404,3 +404,24 @@ def write_pk3(out_path: str, files: dict[str, Union[bytes, str, "os.PathLike[str
 def _read_file(src: Union[str, "os.PathLike[str]"]) -> bytes:
     with open(src, "rb") as fh:
         return fh.read()
+
+
+def image_clashes(main_dir: Union[str, "os.PathLike[str]"]) -> list[tuple[str, list[str]]]:
+    """Images that exist as both ``x.jpg`` and ``x.tga`` among the pk3s of a game folder
+    (in one pk3 or across several): the renderer tries the ``.jpg`` first for either name
+    (``renderergl1/tr_image.c`` R_LoadImage), so a stale or foreign JPG hides a TGA with
+    alpha. Returns ``[(stem, ["pk3:ext", ...])]``."""
+    seen: dict[str, set] = {}
+    for name in sorted(os.listdir(main_dir)):
+        if not name.lower().endswith(".pk3"):
+            continue
+        try:
+            with zipfile.ZipFile(os.path.join(main_dir, name)) as z:
+                for n in z.namelist():
+                    stem, ext = n[:-4].lower(), n[-4:].lower()
+                    if ext in (".jpg", ".tga"):
+                        seen.setdefault(stem, set()).add(f"{name}:{ext[1:]}")
+        except zipfile.BadZipFile:
+            continue
+    return [(s, sorted(w)) for s, w in sorted(seen.items())
+            if {x[-3:] for x in w} == {"jpg", "tga"} and not all(is_retail_pak(x.split(":")[0]) for x in w)]
