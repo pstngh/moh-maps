@@ -41,6 +41,16 @@ MAX_STATIC_MODELS = 4095
 DEFAULT_TARGET = 3500          # static models (instances)
 DEFAULT_MAX_SKD = 600          # distinct prop SKDs, leaving ~400 of the cache for the game
 CELL = 1024.0
+# CS:GO fade distances are rounded up to these when merging: a merged model only holds props of
+# one class, so it can vanish (mohkit.lod) once the farthest member would have
+FADE_CLASSES = (768.0, 1024.0, 1536.0, 2048.0, 3072.0, 4096.0, 6144.0)
+
+
+def fade_class(fade: float) -> float:
+    """``fade`` rounded up to a ``FADE_CLASSES`` step; 0 (never fades) beyond the last."""
+    if not fade or fade <= 0:
+        return 0.0
+    return next((c for c in FADE_CLASSES if fade <= c), 0.0)
 
 _SETUP = re.compile(r"^\s*(scale|path|skelmodel)\s+(\S+)", re.M)
 _SURFACE = re.compile(r"^\s*surface\s+(\S+)\s+shader\s+(\S+)", re.M)
@@ -159,9 +169,13 @@ def _write(model: _Model, prefix: str, key: str) -> tuple[StaticInstance, dict[s
                                                    "merged by mohkit.staticmerge").encode("latin-1"),
     }
     cols = np.concatenate([np.concatenate(b["col"]) for b in model.buckets])
+    # it may vanish only where every member has: its class plus the member's offset
+    fades = [fade_class(m.fade) for m in model.members]
+    fade = 0.0 if not all(fades) else max(
+        f + float(np.linalg.norm(np.asarray(m.origin, np.float64) - origin)) for f, m in zip(fades, model.members))
     inst = StaticInstance(f"{path}/{h}.tik", tuple(float(v) for v in origin), (0.0, 0.0, 0.0), 1.0,
                           allp, np.concatenate([s.normals for s in surfaces]).astype(np.float64),
-                          None if np.isnan(cols[:, 0]).all() else cols)
+                          None if np.isnan(cols[:, 0]).all() else cols, fade=round(fade, 1))
     return inst, files
 
 
@@ -181,7 +195,8 @@ def _pack(instances: Sequence[StaticInstance], parts: Callable, cell: float) -> 
     shader set, packed until a model would exceed 24 surfaces."""
     cells: dict = {}
     for inst in instances:
-        cells.setdefault(tuple(int(np.floor(float(c) / cell)) for c in inst.origin), []).append(inst)
+        key = tuple(int(np.floor(float(c) / cell)) for c in inst.origin) + (fade_class(inst.fade),)
+        cells.setdefault(key, []).append(inst)
     out = []
     for key in sorted(cells):
         group = sorted(cells[key], key=lambda i: (tuple(sorted({sh for _, sh in parts(i.model)})), i.model,

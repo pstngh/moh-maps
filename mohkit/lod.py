@@ -46,12 +46,13 @@ import numpy as np
 
 from .source import skd as _skd
 
-VERSION = 1                   # bump when the output changes (cache key)
+VERSION = 2                   # bump when the output changes (cache key)
 TAU_PX = 2.0                  # target screen error (pixels)
 REF_WIDTH = 1920.0            # ... at this screen width
 REF_FOV = 80.0                # ... and this fovX
 REF_LODSCALE = 0.55           # retail high preset r_lodscale
 REF_LODCAP = 0.55             # retail high preset r_lodcap
+VANISH_FOV = 90.0             # fovX for vanish distances (80 at 4:3, ~96 at 16:9 with cg_fov 80)
 MAX_DISTANCE = 12000.0        # farther than any view in a +-8192 map: the curve ends here
 WELD = 1e-3                   # positions closer than this (units) are one position
 SEAM_WEIGHT = 1.0             # penalty plane weight (x edge length^2) on open and seam edges
@@ -363,75 +364,80 @@ def simplify(surfaces: Sequence[_skd.SkdSurface]) -> Simplified:
 
 
 def metric_scale() -> float:
-    """Screen pixels per unit of (error / R) per unit of engine metric m', at the reference view."""
+    """Screen pixels per unit of (error / R) per unit of the engine's raw metric ``m``
+    (``ProjectRadius``: m = R * (100 / fovX) / distance), at the reference view."""
     px_per_rad = (REF_WIDTH / 2) / math.tan(math.radians(REF_FOV) / 2)
-    # m = R * (100 / fov) / d  ->  1/d = m / (R * 100 / fov); m' ~ lodscale * m
-    return px_per_rad / (100.0 / REF_FOV) / REF_LODSCALE
+    return px_per_rad / (100.0 / REF_FOV)
 
 
 def cutoff_at(errors: np.ndarray, radius: float, m: float, tau: float = TAU_PX) -> float:
-    """Highest cutoff (1 + steps made) whose error stays under ``tau`` pixels at metric ``m``."""
+    """Highest cutoff (1 + steps made) whose error stays under ``tau`` pixels at raw metric ``m``."""
     allowed = tau * radius / (metric_scale() * max(m, 1e-9))
     return 1.0 + float(np.searchsorted(errors, allowed, side="right"))
 
 
-def _fit_under(grid: np.ndarray, true: np.ndarray, idx: Sequence[int]) -> np.ndarray:
-    """Values at the curve points ``grid[idx]`` (near to far) whose straight segments (in
-    metric, as the engine interpolates) stay at or under ``true`` on every grid point: each
+def _fit_under(xs: np.ndarray, true: np.ndarray, idx: Sequence[int]) -> np.ndarray:
+    """Values at the curve points ``xs[idx]`` (near to far) whose straight segments (in the
+    engine's metric, as it interpolates) stay at or under ``true`` on every grid point: each
     point's value is lowered until the segment before it fits."""
     vals = [float(true[idx[0]])]
     for a, b in zip(idx, idx[1:]):
-        xa, xb, va = grid[a], grid[b], vals[-1]
+        xa, xb, va = xs[a], xs[b], vals[-1]
         vb = float(true[b])
         g = np.arange(a + 1, b)
         if len(g):
-            t = (xa - grid[g]) / (xa - xb)
+            t = (xa - xs[g]) / (xa - xb)
             vb = min(vb, float(np.min(va + (true[g] - va) / t)))
         vals.append(max(vb, va))
     return np.array(vals)
 
 
-def lod_control(errors: np.ndarray, radius: float, tau: float = TAU_PX) -> Optional[bytes]:
+def lod_control(errors: np.ndarray, radius: float, tau: float = TAU_PX, vanish: float = 0.0) -> Optional[bytes]:
     """``.lod`` bytes (lodControl_t) for a model's collapse errors, or None when nothing
     collapses. The curve keeps error <= ``tau`` pixels at its points, starts at full detail
     (only the error-free collapses, < ``FREE_ERROR`` units) where the high preset's cap lands
-    for near objects, and ends at ``MAX_DISTANCE``."""
+    for near objects, and ends at ``MAX_DISTANCE``. With ``vanish`` (an eye distance, e.g. a
+    CS:GO prop fade) its last point drops every surface from there on: the engine pivots
+    ``r_lodscale`` on maxMetric (m' = (m - maxM) * lodscale + maxM), so maxMetric = R * (100 /
+    fovX) / vanish holds at any detail preset (fovX ``VANISH_FOV``)."""
     K = len(errors)
     if K == 0 or radius <= 0:
         return None
-    S = metric_scale()
+    P, k, s = metric_scale(), 100.0 / REF_FOV, REF_LODSCALE
     free = 1.0 + float(np.searchsorted(errors, FREE_ERROR, side="right"))
+    m_far = radius * k / MAX_DISTANCE
+    m_v = radius * (100.0 / VANISH_FOV) / vanish if vanish > 0 else 0.0
+    if m_v <= m_far:
+        m_v = 0.0                                     # vanishes beyond any view: ignore
+    m_end = m_v * 1.02 if m_v else m_far
     nz = errors[errors > FREE_ERROR]
-    m_far = radius * (100.0 / REF_FOV) / MAX_DISTANCE * REF_LODSCALE
-    if not len(nz):
-        m_first = m_far * 4
-    else:
-        m_first = tau * radius / (S * nz[0])          # beyond this, the first real collapse shows
-    m_first = max(m_first, m_far * 1.5)
-    # metrics where the curve is evaluated (log spaced, near -> far)
-    grid = np.exp(np.linspace(math.log(m_first), math.log(m_far), 32))
-    true = np.array([cutoff_at(errors, radius, m, tau) for m in grid])
-    true = np.maximum(true, free)
-    best, best_pts, best_vals = -1.0, None, None
-    for i in range(1, len(grid) - 2):
-        for j in range(i + 1, len(grid) - 1):
-            idx = [0, i, j, len(grid) - 1]
-            vals = _fit_under(grid, true, idx)
-            curve = np.interp(grid[::-1], grid[idx][::-1], vals[::-1])[::-1]
-            area = curve.sum()
-            if area > best:
-                best, best_pts, best_vals = area, idx, vals
-    m1, m2, m3, m4 = (float(grid[i]) for i in best_pts)
-    v1, v2, v3, v4 = (float(v) for v in best_vals)
-    if v4 <= 1.0:
+    m_first = tau * radius / (P * nz[0]) if len(nz) else m_end * 4   # the first real collapse shows here
+    m_first = max(m_first, m_end * 1.5)
+    grid = np.exp(np.linspace(math.log(m_first), math.log(m_end), 32))
+    true = np.maximum([cutoff_at(errors, radius, m, tau) for m in grid], free)
+    maxm = m_v if m_v else m_end
+    xs = (grid - maxm) * s + maxm                    # where the engine evaluates the curve
+    best, best_idx, best_vals = -1.0, None, None
+    inner = [(i,) for i in range(1, len(grid) - 1)] if m_v else \
+            [(i, j) for i in range(1, len(grid) - 2) for j in range(i + 1, len(grid) - 1)]
+    for mid in inner:
+        idx = [0, *mid, len(grid) - 1]
+        vals = _fit_under(xs, true, idx)
+        area = np.interp(xs[::-1], xs[idx][::-1], vals[::-1]).sum()
+        if area > best:
+            best, best_idx, best_vals = area, idx, vals
+    px = [float(xs[i]) for i in best_idx]
+    pv = [float(v) for v in best_vals]
+    if m_v:
+        px.append(m_v)
+        pv.append(float(K + 2))                      # above every collapseIndex: nothing drawn
+    elif pv[-1] <= 1.0:
         return None
-    # minMetric so that the high preset's cap (maxM + cap * (minM - maxM)) lands on m1
-    minm = m4 + (m1 - m4) / REF_LODCAP
-    maxm = m4
-    pos = [0.0] + [(minm - m) / (minm - maxm) for m in (m1, m2, m3)] + [1.0]
-    val = [free, v1, v2, v3, v4]
+    minm = maxm + (px[0] - maxm) / REF_LODCAP         # the high preset's cap lands on the first point
+    pos = [0.0] + [(minm - x) / (minm - maxm) for x in px]
+    val = [free] + pv
     for i in range(1, 5):
-        pos[i] = max(pos[i], pos[i - 1] + 1e-4)
+        pos[i] = max(pos[i], pos[i - 1] + 1e-5)
         val[i] = max(val[i], val[i - 1])
     pos[4] = 1.0
     consts = []
@@ -441,7 +447,7 @@ def lod_control(errors: np.ndarray, radius: float, tau: float = TAU_PX) -> Optio
         scale = common / (maxm - minm)
         cutoff = minm + (maxm - minm) * pos[i]
         consts += [base, scale, cutoff]
-    data = [minm, maxm] + [x for pv in zip(pos, val) for x in pv] + consts
+    data = [minm, maxm] + [x for pv_ in zip(pos, val) for x in pv_] + consts
     return struct.pack("<24f", *data)
 
 
@@ -507,35 +513,52 @@ def _cache_dir() -> Path:
     return d
 
 
-def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True) -> LodResult:
+def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True, vanish: float = 0.0) -> LodResult:
     """Simplify an SKD's surfaces: new SKD bytes (vertices reordered, collapse data filled),
-    its ``.lod`` and the vertex permutation. Already-simplified SKDs come back unchanged."""
+    its ``.lod`` (with a ``vanish`` distance, see ``lod_control``) and the vertex permutation.
+    Already-simplified SKDs come back unchanged. The simplification is cached (it doesn't
+    depend on the curve); the curve is made each time."""
     info = _skd.read_skd(data)
     n = sum(len(s.positions) for s in info.surfaces)
     if any(len(ci) and ci[0] != ci[-1] for _, ci in info.collapse):
         return LodResult(data, None, np.arange(n))
-    key = hashlib.md5(data + struct.pack("<if", VERSION, tiki_scale) + struct.pack("<3f", TAU_PX, REF_WIDTH, REF_FOV)
-                      ).hexdigest()
+    key = hashlib.md5(data + struct.pack("<if", VERSION, tiki_scale)).hexdigest()
     cf = _cache_dir() / f"{key}.npz" if cache else None
     if cf is not None and cf.is_file():
         z = np.load(cf)
-        lod = z["lod"].tobytes() if len(z["lod"]) else None
-        return LodResult(z["skd"].tobytes(), lod, z["perm"], int(z["steps"]))
-    surfs = [_skd.SkdSurface(s.name, s.positions, s.normals, s.uvs, s.triangles) for s in info.surfaces]
-    res = simplify(surfs)
-    allp = np.concatenate([np.asarray(s.positions, np.float64) for s in surfs]) * tiki_scale
-    radius = _skd.bounds_radius(allp.min(0), allp.max(0))
-    lod = lod_control(res.errors / 1.0 * tiki_scale, radius) if res.steps else None
-    skd_bytes = _skd.build_skd(info.name, res.surfaces) if lod else data
-    perm = res.perm if lod else np.arange(n)
-    if cf is not None:
-        np.savez(cf, skd=np.frombuffer(skd_bytes, np.uint8), lod=np.frombuffer(lod or b"", np.uint8), perm=perm,
-                 steps=res.steps)
-    return LodResult(skd_bytes, lod, perm, res.steps)
+        skd_bytes, perm, errors, radius, steps = (z["skd"].tobytes(), z["perm"], z["errors"], float(z["radius"]),
+                                                  int(z["steps"]))
+    else:
+        surfs = [_skd.SkdSurface(s.name, s.positions, s.normals, s.uvs, s.triangles) for s in info.surfaces]
+        res = simplify(surfs)
+        allp = np.concatenate([np.asarray(s.positions, np.float64) for s in surfs]) * tiki_scale
+        radius = _skd.bounds_radius(allp.min(0), allp.max(0))
+        errors, steps = res.errors * tiki_scale, res.steps
+        skd_bytes = _skd.build_skd(info.name, res.surfaces) if steps else data
+        perm = res.perm if steps else np.arange(n)
+        if cf is not None:
+            np.savez(cf, skd=np.frombuffer(skd_bytes, np.uint8), perm=perm, errors=errors, radius=radius, steps=steps)
+    lod = lod_control(errors, radius, vanish=vanish) if steps else None
+    if lod is None:
+        return LodResult(data, None, np.arange(n), steps)
+    return LodResult(skd_bytes, lod, perm, steps)
+
+
+def vanish_by_tiki(instances) -> dict[str, float]:
+    """Per model, the eye distance from which none of its instances needs drawing: the
+    largest instance ``fade``, or 0 when any instance never fades."""
+    out: dict[str, float] = {}
+    for i in instances:
+        f = float(getattr(i, "fade", 0.0) or 0.0)
+        if i.model not in out:
+            out[i.model] = f
+        elif out[i.model] > 0:
+            out[i.model] = 0.0 if f <= 0 else max(out[i.model], f)
+    return out
 
 
 def apply_to_assets(assets: dict, tikis: Sequence[str], read: Callable[[str], Optional[bytes]],
-                    log: Optional[Callable] = None) -> dict[str, np.ndarray]:
+                    log: Optional[Callable] = None, vanish: Optional[dict] = None) -> dict[str, np.ndarray]:
     """Simplify every SKD the ``tikis`` load, in place in ``assets`` (``<skd>`` replaced,
     ``<skd minus 'skd'>lod`` added). Returns ``{tiki: permutation}`` over the TIKI's
     vertices in ``staticlight.tiki_mesh`` order, for TIKIs whose vertices moved; apply it
@@ -544,6 +567,21 @@ def apply_to_assets(assets: dict, tikis: Sequence[str], read: Callable[[str], Op
     keys = re.compile(r"^\s*(scale|path|skelmodel)\s+(\S+)", re.M)
     done: dict[str, LodResult] = {}
     out: dict[str, np.ndarray] = {}
+    vanish = vanish or {}
+    # an SKD vanishes where every TIKI that loads it has (skins of one mesh share it)
+    skd_vanish: dict[str, float] = {}
+    for tik in sorted(set(tikis)):
+        name = tik if tik.startswith("models/") else "models/" + tik
+        text = read(name)
+        if text is None:
+            continue
+        t = text.decode("latin-1")
+        path = (re.findall(r"^\s*path\s+(\S+)", t, re.M) or [str(Path(name).parent)])[0]
+        v = float(vanish.get(tik, 0.0) or 0.0)
+        for sk in re.findall(r"^\s*skelmodel\s+(\S+)", t, re.M):
+            sp = sk if "/" in sk else f"{path.rstrip('/')}/{sk}"
+            prev = skd_vanish.get(sp)
+            skd_vanish[sp] = v if prev is None else (0.0 if min(prev, v) <= 0 else max(prev, v))
     for tik in sorted(set(tikis)):
         name = tik if tik.startswith("models/") else "models/" + tik
         text = read(name)
@@ -564,7 +602,7 @@ def apply_to_assets(assets: dict, tikis: Sequence[str], read: Callable[[str], Op
                 if blob is None or path not in assets:
                     done[path] = None
                 else:
-                    r = lod_skd(path, blob, float(kv["scale"]))
+                    r = lod_skd(path, blob, float(kv["scale"]), vanish=skd_vanish.get(path, 0.0))
                     done[path] = r
                     if r.lod is not None:
                         assets[path] = r.skd

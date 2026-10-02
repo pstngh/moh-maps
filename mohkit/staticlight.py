@@ -59,6 +59,9 @@ class StaticInstance:
     # vertex colours to use as they are (N x 3, lightmap byte scale; NaN rows are lit from the
     # BSP like an instance without colours), e.g. CS:GO's own baked prop lighting
     colors: Optional[np.ndarray] = None
+    # eye distance beyond which the model need not be drawn (CS:GO prop fade; 0: always drawn);
+    # mohkit.lod turns it into a vanish step of the model's LOD curve
+    fade: float = 0.0
 
 
 # ---------------------------------------------------------------------------- geometry

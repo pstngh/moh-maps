@@ -211,6 +211,24 @@ worst camera 68 -> 138; shots differ from the full-detail build by under 1/255 (
 3/255 at the overview (2 px). Foliage cards keep their open edges, so trees and bushes
 are now the largest remaining prop cost. `--resume --no-lod` builds without it.
 
+**Props vanish where CS:GO fades them (since 2026-10-01).** CS:GO fades most props out
+by distance (sprp flag 1, `fademindist`..`fademaxdist`; `prop_dynamic` keys of the same
+name): de_nuke 4,814 of 5,002 (median 1,578 units), de_inferno 5,893 of 6,379 (1,350), so
+50-85% of the props in a view's frustum are ones CS:GO doesn't draw. The converter keeps
+each prop's cut (the fade midpoint, `convert.fade_distance`; 6th field of `statics.json`),
+and the LOD curve's last point becomes a vanish step: maxMetric = R x (100 / fovX) / cut,
+where the engine pivots `r_lodscale`, so the distance holds at every detail preset
+(`lod.lod_control(vanish=...)`, `tests/test_lod.py`). Per model the cut is the largest of its
+instances' (none if any instance never fades); `staticmerge` merges only props of one fade
+class (`FADE_CLASSES`) and a merged model vanishes at its class plus its farthest member's
+offset. No shader per fade distance: OpenMoHAA has `alphaGen tikiDistFade near range`, but
+the draw sort key holds 11 bits of shader number (`QSORT_SHADERNUM_SHIFT` 21 in a 32-bit
+key, `tr_local.h`), so a level can use at most 2,048 shaders (de_cache loads 1,168 at spawn).
+de_inferno 181 -> 250 fps mean, worst 91 -> 152 (two interleaved runs each), error vs
+CS:GO unchanged (6.3 / 6.4). de_nuke gained less (88 -> 95): its cost is merged one-off
+clusters (CS:GO's own `_autocombine_*` meshes, radius 800-1,300) that are near relative to
+their size, so neither LOD nor the fade cuts much.
+
 ## Lighting: CS:GO's own baked light (default since 2026-10-01)
 
 Lit builds no longer run MOHlight. Q3map compiles BSP and VIS only (it allocates the

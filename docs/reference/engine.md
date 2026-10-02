@@ -455,6 +455,16 @@ at 6 fps mean with 0 and 84 with 2, same image, same resolution (resolution made
 difference: it is draw-call bound). Players should have `seta r_primitives "2"` (the
 owner's `omconfig.cfg` does); the test harness sets it (`game.QUALITY_CVARS`).
 
+**At most 2,048 shaders per level in practice.** `MAX_SHADERS` is 16,384
+(`renderergl1/tr_local.h:70`), but the draw-surface sort key is a 32-bit `unsigned` with the
+sorted shader index in bits 21-31 (`QSORT_SHADERNUM_SHIFT` 21, `tr_local.h:1212`;
+`R_DecomposeSort` reads `(sort >> 21) & (MAX_SHADERS - 1)`), so sorted index 2,048 and up
+wraps onto low indexes. Loaded at spawn (`shaderlist`): converted de_cache 1,168, de_nuke 894,
+de_inferno 698. Static model surfaces whose single-pass shader has `alphaGen tikiDistFade
+<near> <range>` are skipped beyond near + range from the model origin
+(`tr_staticmodels.cpp`, `tr_shade.c` AGEN_TIKI_DIST_FADE); mohkit uses LOD vanish steps instead
+(no extra shaders).
+
 **How a runtime model is lit.** cgame sets `lightingOrigin = origin + centre of the
 box packed into entityState.solid` (`cgame/cg_modelanim.c:1064-1067`). A NOT_SOLID
 entity packs `solid = 0` (`server/sv_world.c:230-257`), which unpacks to the box

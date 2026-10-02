@@ -96,9 +96,24 @@ def test_lod_curve():
     minm, maxm = c["minMetric"], c["maxMetric"]
     cap = maxm + (minm - maxm) * L.REF_LODCAP
     for m in np.exp(np.linspace(np.log(5.0), np.log(1e-3), 200)):
-        mp = min((m - maxm) * L.REF_LODSCALE + maxm, cap)
+        x = min((m - maxm) * L.REF_LODSCALE + maxm, cap)        # where the engine reads the curve
+        m_eff = (x - maxm) / L.REF_LODSCALE + maxm              # the raw metric that x stands for
         cut = int(L.engine_cutoff(lod, m))
-        assert cut <= max(L.cutoff_at(res.errors, R, mp * 0.75), val[0]), (m, cut)
+        assert cut <= max(L.cutoff_at(res.errors, R, m_eff * 0.75), val[0]), (m, cut)
+
+
+def test_vanish_distance():
+    """A vanish distance drops every surface from there on, at any r_lodscale."""
+    res = L.simplify([_grid(bump=20.0)])
+    s = res.surfaces[0]
+    R = 100.0
+    lod = L.lod_control(res.errors, R, vanish=1500.0)
+    k = 100.0 / L.VANISH_FOV
+    for lodscale in (0.35, 0.45, 0.55, 1.1):
+        near = int(L.engine_cutoff(lod, R * k / 1450.0, lodscale=lodscale))
+        far = int(L.engine_cutoff(lod, R * k / 1550.0, lodscale=lodscale))
+        assert L.drawn(s, near)[1] > 0 and L.drawn(s, far) == (0, 0), (lodscale, near, far)
+    assert L.lod_control(res.errors, R, vanish=1e6) == L.lod_control(res.errors, R)   # beyond any view
 
 
 if __name__ == "__main__":

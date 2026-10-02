@@ -2021,10 +2021,11 @@ class Converter:
                 # CS:GO tints props per instance (sprp DiffuseModulation, prop_dynamic rendercolor):
                 # de_nuke's grey pipes and yellow rails are one white model tinted
                 tint = tuple(int(c) for c in getattr(p, "diffuse_modulation", (255, 255, 255, 255))[:3])
+                fade = 0.0 if sky else round(fade_distance(p) * s, 1)
                 for part, mk in enumerate(model_keys):
                     if sky:   # a 3D skybox prop: moved with its room in run(), no collision
                         self._sky_statics.add(len(self.statics))
-                    self.statics.append((mk, o, tuple(round(a, 3) for a in p.angles), round(sc * s, 4), tint))
+                    self.statics.append((mk, o, tuple(round(a, 3) for a in p.angles), round(sc * s, 4), tint, fade))
                     self.prop_light.append(self._prop_light(p_index, cm, part) if p_index >= 0 else None)
                 if not sky:
                     clips += self._prop_clips(cm, p, sc * s)
@@ -2101,10 +2102,15 @@ class Converter:
                 rc = rc if len(rc) == 3 else (255, 255, 255)
             except ValueError:
                 rc = (255, 255, 255)
+            try:
+                fmin, fmax = float(e.get("fademindist") or -1), float(e.get("fademaxdist") or 0)
+            except ValueError:
+                fmin, fmax = -1.0, 0.0
             out.append(SimpleNamespace(model=e.get("model"), origin=e.origin,
                                        angles=e.vector("angles", (0.0, 0.0, 0.0)) or (0.0, 0.0, 0.0),
                                        skin=skin, solid=solid, uniform_scale=scale, entity=True,
-                                       diffuse_modulation=rc + (255,)))
+                                       diffuse_modulation=rc + (255,), flags=1 if fmax > 0 else 0,
+                                       fade_min=fmin, fade_max=fmax))
         self.report["entity_props"] = {"converted": len(out), "interactive_skipped": skipped}
         return out
 
@@ -2750,6 +2756,17 @@ def auto_cameras(m: MapFile, n: int = 9, landmarks=(), spawns: bool = True):
     return cams
 
 
+def fade_distance(p) -> float:
+    """Where a CS:GO prop stops being drawn, in Source units (0: never). Source fades a prop
+    (flag 1, ``fademindist``/``fademaxdist``) from opaque at the min distance to gone at the
+    max, by its distance from the eye; MOHAA cuts it at the midpoint (``mohkit.lod`` vanish)."""
+    fmax = float(getattr(p, "fade_max", 0) or 0)
+    if not (int(getattr(p, "flags", 0) or 0) & 1) or fmax <= 0:
+        return 0.0
+    fmin = float(getattr(p, "fade_min", -1) or -1)
+    return (fmin + fmax) / 2 if 0 < fmin < fmax else fmax
+
+
 def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[list] = None,
                    exposure: Optional[float] = None, gains: Optional[dict] = None,
                    tint_mask: Optional[dict] = None, lod: bool = True) -> dict:
@@ -2799,7 +2816,8 @@ def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[li
             lin = (np.asarray(light[k], np.float64) / 127.5) ** 2.2
             col = tonemap(lin, exposure, ceiling=vgain[mk])
             used += 1
-        inst.append(SL.StaticInstance(mk, origin, angles, scale, pos, nrm, col))
+        inst.append(SL.StaticInstance(mk, origin, angles, scale, pos, nrm, col,
+                                      fade=float(_rest[1]) if len(_rest) > 1 and _rest[1] else 0.0))
         tints.append(_rest[0] if _rest and _rest[0] is not None else None)
     if exposure is not None:
         # props without CS:GO's vertex light: the lightmaps at the vertex (texture scale), divided
@@ -2826,14 +2844,16 @@ def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[li
     lod_info = None
     if lod:
         from .. import lod as _lod
-        perms = _lod.apply_to_assets(assets, [i.model for i in inst], SL.files_reader(assets))
+        perms = _lod.apply_to_assets(assets, [i.model for i in inst], SL.files_reader(assets),
+                                     vanish=_lod.vanish_by_tiki(inst))
         for i in inst:
             pm = perms.get(i.model)
             if pm is not None and len(pm) == len(i.positions):
                 i.positions, i.normals = i.positions[pm], i.normals[pm]
                 if i.colors is not None:
                     i.colors = np.asarray(i.colors)[pm]
-        lod_info = {"skds": sum(1 for k in assets if k.endswith(".lod")), "tikis_reordered": len(perms)}
+        lod_info = {"skds": sum(1 for k in assets if k.endswith(".lod")), "tikis_reordered": len(perms),
+                    "fading_instances": sum(1 for i in inst if i.fade > 0)}
     info = SL.inject(bsp_path, inst, out, field_scale=1.0 if exposure is not None else SL.LIGHTMAP_TO_VERTEX)
     info["merge"] = merged
     info["lod"] = lod_info
