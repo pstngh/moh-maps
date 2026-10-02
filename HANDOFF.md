@@ -48,6 +48,22 @@ Results (all committed and pushed):
   by dropping .lod files), attrfar.py.
 - Builds kept: `local/csgo/before/cs_nukes_{v1,s1..s8}/` (s1-s7 are superseded experiments).
 
+**User (chat ~10:50): "run the fades + wires check".** Running `local/csgo/nukes_s9.sh`:
+s9 = s8 + all fades capped at 768 (small never-fading props < 256 too) + 148 overhead wire
+meshes dropped (`_autocombine_wires_*`, `wires_0*`, `substation_wire_system*`; barbed wire,
+lamp and wall cables kept), by editing `local/csgo/cs_nukes/statics.json` and `prop_light.npz`
+(s8's copies saved in `before/cs_nukes_s8/`). Then estimate and interleaved timing s8 vs s9
+(`perf_nukes.log`). Offline estimate before: 57% of s8's drawn prop vertices are beyond 768.
+If the user likes it, make it a profile (`fade_cap` 768 + a drop-by-name list) instead of the
+hand edit.
+**Result (12:17):** s9 266 fps mean / 194 worst vs s8 200 / 150 (two interleaved runs), est.
+166k vs 277k prop vertices per view. Sheet `local/csgo/compare/cs_nuke_s9.png` (CS:GO | s8 |
+s9). Look cost: **the big white silo outside A vanishes** in Outside1/Outside2 (its fade got
+capped at 768; its shadow stays), power lines at CT spawn gone, far window strips differ.
+Suggested next: size-scaled cap (big props keep their CS:GO fade, e.g. cap = max(768,
+4 x size)) so landmarks stay; asked the user. `local/csgo/cs_nukes/statics.json` and
+`prop_light.npz` currently hold the s9 edit (s8's copies in `before/cs_nukes_s8/`).
+
 **Next (fresh session; ask the user first which way):**
 1. The user picks a direction for Nuke fps: (a) accept s8-level (~2x the installed full build,
    correct look); (b) stronger levers with visible cost: shorter fades (768), drop CS:GO
