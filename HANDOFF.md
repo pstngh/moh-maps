@@ -6,147 +6,66 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-02 13:50 ET)
+## State (2026-10-02 16:45 ET)
 
-- **Done 15:15 ET:** `local/csgo/repath_queue.sh` rebuilt cs_dust2, cs_cbble, cs_mirage, cs_inferno
-  (per-map prop paths, fixed LOD, FFA spawns) and A/B'd them against the installed builds;
-  logs `local/csgo/repath_all.log`, `local/csgo/<name>_repath.log`, `<name>_ab.log`, images
-  `local/csgo/<name>/ab/`. Backups of the old local builds: `local/csgo/before/<name>_pre_repath/`.
-- **Running (detached, since 15:47 ET; pids 27612 then 28454):** `local/csgo/after_play.sh`
-  (user-settings A/B for cbble, mirage, inferno into `local/csgo/<name>/ab_user/`) then
-  `after_play2.sh` (lean Nuke vs s8 at the user's settings, `local/csgo/cs_nukes/ab_lean_user/`).
-  Summary log `local/csgo/after_queue.log`, last line `ALL_DONE`. Never installs.
-- **Lean de_nuke built (15:52 ET) as `local/csgo/cs_nukes/`** (`--props lean --structural -q
-  fastrad`): 30 bot kills, 6/6 ladders; vs s8 215 / 150 fps (mean / worst) against 198 / 135
-  at harness settings; shots fine (A silo stays, no broken brushes). s9 is in
-  `local/csgo/before/cs_nukes_s9/`. Recorded in csgo-conversion.md's Nuke table.
-- The user played MOHAA 15:33-15:45 ET: game runs were paused (harness windows steal focus).
-  Ask before game runs when the user may be playing.
-- **A/B so far (installed -> rebuilt, harness settings, 2 interleaved rounds):** cs_cache 296 ->
-  275 fps mean (worst 241 -> 205); cs_dust2 305 -> 277 (worst 168 -> 165); cs_cbble 241 -> 180
-  (worst 161 -> 112, vertices ~2x: foliage under the fixed LOD); cs_mirage 295 -> 269 (worst
-  159 -> 145); cs_inferno 233 -> 189 (worst 145 -> 116). Shots: small changes, except that the
-  installed inferno draws a grey LOD shard band across APit that the rebuild fixes
-  (`local/csgo/cs_inferno/ab/22_APit_ab.png`). Bots: cache 32/27, dust2 27, cbble 18, mirage
-  31, inferno 29 kills; ladders all climb (cbble 2/2, mirage 3/3, cache 1/1).
-  For the user: the rebuilds trade fps for the LOD fixes (no shards / dark panels) and FFA
-  spawns. Options per map: install the rebuild; keep the installed build (still clashing);
-  rebuild with `--props balanced` (fps back, small props gone); or a pk3 path-rename tool
-  for the installed builds (clash fixed, look and fps unchanged; not written, ~1-2 h).
-- **cs_cache rebuilt (13:39 ET)** with per-map prop paths: 0 clashes with the installed pk3s;
-  in game, with the 7 other installed pk3s vs alone, 18 of 19 cameras identical (overview =
-  run noise); 32 bot kills, ladder climbs 161. Old local build in
-  `local/csgo/before/cs_cache_pre_repath/`.
-- Installed in `~/Documents/Games/moh/main/`: cs_dust2, cs_mirage,
-  cs_nuke, cs_inferno, cs_cache, cs_cbble, cs_vertigo (2026-10-01 builds: LOD + fades, fitted
-  exposure, threshold blends; old LOD with shards/dark panels; old T/CT-copy DM spawns) and
-  cs_rats (on hold, user 2026-10-01). All still use the shared prop paths.
-- **History harvest done (2026-10-02):** 11 transcripts, 95 HANDOFF.md versions and 166
-  commits went through `mohkit.harvest` + one subagent each; the lessons are now in code
-  (guards + tests in 2eb121e), docs (symptoms.md ~40 rows, testing.md, toolchain.md,
-  csgo-conversion.md, engine.md, CLAUDE.md) and memory (11 new notes about the user). Old
-  session notes were dropped from this file: they are in git (`3ea41e4:HANDOFF.md`) and the
-  transcripts (copies in `~/Library/Caches/mohkit/transcripts-backup/`).
+- **Nothing is running.** Nothing was installed this session: `~/Documents/Games/moh/main/`
+  still holds the 2026-10-01 builds of cs_dust2, cs_mirage, cs_nuke, cs_inferno, cs_cache,
+  cs_cbble, cs_vertigo (shared prop paths, old LOD with shards, T/CT-copy spawns) and cs_rats
+  (on hold). The user may play MOHAA on this Mac: ask before game runs (memory note).
+- **Rebuilt, waiting for the user's install OK** (`local/csgo/<name>/<name>.pk3`; old local
+  builds in `local/csgo/before/<name>_pre_repath/`): cs_cache, cs_dust2, cs_cbble, cs_mirage,
+  cs_inferno, all full conversions with per-map prop paths (no clashes), the fixed LOD and
+  FFA spawns from the nav mesh. Bots 27-32 kills (cbble 18), every ladder climbs.
+  A/B against the installed builds (`mohkit ab`, 2 interleaved rounds; fps mean / worst):
+
+  | map | harness settings | user's settings (r_lodscale 0.45, r_lodcap 0.35) |
+  |---|---|---|
+  | cs_cache | 296 / 241 -> 275 / 205 | 360 / 248 -> 326 / 242 |
+  | cs_dust2 | 305 / 168 -> 277 / 165 | 372 / 225 -> 321 / 188 |
+  | cs_cbble | 241 / 161 -> 180 / 112 | 229 / 149 -> 173 / 107 |
+  | cs_mirage | 295 / 159 -> 269 / 145 | 345 / 184 -> 269 / 146 |
+  | cs_inferno | 233 / 145 -> 189 / 116 | 210 / 134 -> 182 / 109 |
+
+  (Absolute fps differ between runs; compare within a row.) Shots barely change, except
+  inferno's APit, where the installed build draws a grey LOD shard band
+  (`local/csgo/cs_inferno/ab/22_APit_ab.png`). Logs: `local/csgo/repath_all.log`,
+  `local/csgo/after_queue.log`, `local/csgo/<name>_ab.log`, `<name>_ab_user.log`.
+- **Lean de_nuke** (`local/csgo/cs_nukes/`, built as cs_nukes with `--props lean --structural
+  -q fastrad`): 30 kills, 6/6 ladders, shots fine; vs s8 215 / 150 -> harness, 210 / 144 vs
+  190 / 130 at the user's settings (+8-11%). s8 and s9 in `local/csgo/before/cs_nukes_s8|s9/`.
 
 ## NEXT (the user picks the order)
 
-### A. Installed conversions override each other's prop files (found by the harvest)
+### A. Install the rebuilt conversions (user's decision)
 
-`pak.path_clashes(~/Documents/Games/moh/main)`: 252 files sit at the same path in several
-installed `cs_*.pk3` with different contents (154 `.lod`, 52 `.skd`, 17 collision `.map`,
-14 `.jpg`, 7 `.skc`, 5 `.tik`, 3 `.tga`). The engine searches a folder's pk3s from the last
-name down (`FS_AddGameDirectory`, checked), so every map uses one pk3's copy: cs_cache lost
-all 208 of its shared files (another map's LOD tables and vanish distances, an SKD vertex
-order its STATICMODELDATA colours weren't permuted for, other texture gains). Not yet seen in
-game at first; **verified 2026-10-02 13:15 ET**: cs_cache shot with all eight installed pk3s vs
-cs_cache.pk3 alone, same 17 cameras: both trucks' cabs mangled and flat-shaded, a rock a dark
-blob (Ttruck 3% of the pixels changed, LongABoost 1.6%; sheets and script in
-`local/csgo/compare/cache_clash/`). Cause: prop models and their textures use shared names (`modelconv.model_names` /
-`texture_name` with `prefix="csgo"`), while their content is map-specific since LOD,
-headroom gain and staticmerge. `mohkit install` now warns.
-1. Done (above). Files lost per map: cs_cache 208, cs_dust2 67 (53 to cs_mirage), cs_cbble
-   32, cs_mirage 26, cs_inferno 12, cs_rats 4; cs_nuke and cs_vertigo lose none
-   (`pak.path_clashes` lists the winner of each file).
-2. **Code fix done (9c045d9, pushed):** props under `models/csgo/<name>/`, their textures and
-   clip shaders under `textures/csgo/<name>_p/`; packaging warns on files outside the map's
-   name (`pak.unowned_paths`); test fails on the old code. Takes effect only on a full
-   conversion. New tool (uncommitted until it has run once): `mohkit ab <map> --a .. --b ..
-   [--perf 2000 --rounds 2] [--cvar r_lodscale=0.45]`: same cameras, per-camera change, A | B
-   images, interleaved fps.
-3. **Verified in game** (cs_cache, above). **Now:** the queue rebuilds dust2, cbble, mirage,
-   inferno (nuke gets its lean rebuild in B; vertigo loses none; rats on hold). When it ends:
-   read each `AB_DONE` line and `ab/ab_sheet.png`, look at the shots, then show the user
-   installed | new sheets and the interleaved fps and ask to install (`mohkit install`).
-   Full rebuilds also bring the fixed LOD and FFA spawns (check spawn spread in the plan).
+Code fix done and verified in game (9c045d9; cs_cache with the 7 other installed pk3s:
+18 of 19 cameras identical, the 19th = run noise). Options per map: install the rebuild
+(`python -m mohkit install local/csgo/<name>/<name>.pk3`; `install` lists any clash left);
+keep the installed build (it keeps clashing with the other old builds); rebuild with
+`--props balanced` for fps (cbble lost the most: -25%); or write a pk3 path-rename tool for
+the installed builds (clash fixed, look and fps unchanged, shards kept; ~1-2 h, not written).
+Not rebuilt: cs_vertigo (loses no files), cs_nuke (see B), cs_rats (on hold). Once the other
+maps are reinstalled, the old cs_nuke/cs_vertigo/cs_rats clash only among themselves.
 
-### B. "Lean" rebuild of de_nuke (user, chat 2026-10-02 ~12:40), then de_mirage
+### B. Lean rebuild of de_nuke (user, 2026-10-02), then de_mirage
 
-**User: "do the lean rebuild on nuke, but in a fresh session".** Agreed plan: keep CS:GO's
-world brushes, textures and baked lighting (they carry most of the look); compile so walls
-block visibility (real VIS); replace the ~2,500 props with a small set: big gameplay pieces
-(containers, crates, silos, trucks) as simple textured brush boxes/cylinders that VIS can
-cull, a few hundred decorative static models, clutter dropped. Expected 500-650 fps (rough
-guess; stock maps 1,200-1,700 on the harness; the user's own cap is `com_maxfps 250`). Then
-the same for Mirage (with FFA spawns, `Options.ffa_spawns`). User (2026-10-02 07:35): "for
-now only do nuke and mirage".
-
-Facts to start from:
-- Nuke world alone (props off, current `detail_all` build without real VIS): ~770 fps
-  (`perf_s1_split.json`); props are the rest. Best prop build so far: s8 200 / 150 fps,
-  s9 (fades 768, no wires) 266 / 194 but the A silo vanished (fade cap applied to a landmark).
-- Static models are never VIS-culled in OpenMoHAA (leaf test commented out); world surfaces
-  are. **The triangle-soup idea is blocked (source read 2026-10-02, engine.md 7.7):** soups
-  are VIS- and farplane-culled, but `RB_SurfaceTriangles` never sets `tess.vertexColorValid`,
-  so with `r_vertexLight 0` their baked vertex colours are not drawn (stale colours). Optional
-  5-minute confirmation in game (a test map with one soup) after the queue; otherwise go
-  with the proxy-brush plan above (brushes get VIS; their light must come from somewhere:
-  check how `lighting.transfer` lights faces with no Source counterpart).
-- Where Nuke's prop vertices are (csgo-conversion.md census): `_autocombine_` 37%, crates 10%,
-  chainlink fences 9% (brush candidates: 3,707 vertices per 256-unit segment), doors 5%,
-  lights 4%. Proxy-brush light: add each prop's CS:GO vertex light (`prop_light`) as extra
-  luxels in `lighting.transfer`'s `LuxelIndex`, else the faces borrow nearby walls' light.
-- cs_cache's rebuild (LOD fixes) timed 7% slower than the installed build with the shard
-  LOD (275 vs 296 fps mean, worst 205 vs 241): expected (the fixes keep more vertices).
-- **Expectation check (2026-10-02, tell the user before building B):** only ~9% of Nuke's
-  full-profile prop vertices are box-like enough for brush proxies (score >= 0.8: share of
-  triangle area on the model's box faces; 17% at >= 0.6; chainlink fences lead with 174k),
-  and soups are out, so the `_autocombine_` clusters (37%) stay unculled static models.
-  Realistic lean recipe: `--structural` VIS for the world, brush proxies for boxy props
-  (VIS-culled), no wires, fades capped by prop size so landmarks stay (s9 lost the A silo),
-  clutter dropped. 500-650 fps looks out of reach; the user's bar is a worst camera
-  above 250 at their settings.
-- **Lean profile is in code (8686431): `--props lean`** = stock + wires dropped (s9's rule) +
-  fade cap >= 8 x prop size + box-like props (`box_fit` >= 0.8, >= 32 units) as detail,
-  non-solid brushes of their own materials. Dry run on Nuke OK (fences -> 2-unit
-  alpha-tested slabs). **Next B step (after the queue): `mohkit csgo de_nuke --name cs_nukes
-  --props lean --structural -q fastrad --final`** (s9 = current cs_nukes is backed up in
-  `local/csgo/before/cs_nukes_s9/`, s8 in `.../cs_nukes_s8/`), then `mohkit ab de_nuke --name
-  cs_nukes --a local/csgo/before/cs_nukes_s8/cs_nukes.pk3 --b local/csgo/cs_nukes/cs_nukes.pk3
-  --perf 2000` (`ab` needs both pk3s to hold the same map name). Watch: VIS compile time /
-  overflow, leaks, proxy-brush light (nearby luxels; idea: prop_light as extra luxels).
-- Real VIS: `--structural` keeps Source's structural brushes structural (dust2 compiled
-  with 61 KB VIS on 2026-10-01; untested lit, untested on Nuke). Watch leaks, compile time,
-  VIS overflow, and the 3D-skybox room rules.
-- Measure with `mohkit csgo de_nuke --perf 2000 [--toggle r_drawstaticmodels=0]` interleaved
-  against `local/csgo/before/cs_nukes_s8/cs_nukes.pk3`; `mohkit.propcost` for prop vertices.
-  Also shoot once at the user's settings (`r_lodscale 0.45`, `r_lodcap 0.35`, memory
-  user-game-config).
-- Restore before a new `--resume` on cs_nukes: `local/csgo/cs_nukes/statics.json` and
-  `prop_light.npz` hold the s9 hand edit; s8's copies are in `local/csgo/before/cs_nukes_s8/`.
-
-Other open choices from 2026-10-02 (ask the user): (a) accept s8-level fps for the other maps;
-(b) re-inject every installed conversion with the fixed LOD (`--resume`, ~15 min each, then
-reinstall); (c) full rebuilds with FFA spawns (they need a full conversion; untested with
-bots: check kills and spawn spread).
+Done for Nuke: `--props lean` (8686431: stock + wires dropped + fade cap >= 8 x prop size +
+box-like props as VIS-culled brushes) with `--structural` (real VIS: 1,326 clusters, VIS 11 s).
+Gain over s8 only +8-11% (csgo-conversion.md Nuke table): props as triangle soups can't keep
+their light (engine.md 7.7), only ~9% of prop vertices are box-like, and the `_autocombine_`
+clusters (37%) remain unculled static models. To install it as the map players know, rebuild
+with `--name cs_nuke`. Open: whether to do Mirage the same way (expect a similar small gain),
+and further levers: drop more autocombine clusters by kind (pipes, trusses), `prop_light`
+as extra luxels for the brush proxies' light, and the 500-650 fps guess is out of reach.
 
 ### C. Local scripts that should be mohkit commands
 
-The conversion finish (`local/csgo/*_final.sh`: fastrad build, 8 bots, `ladprobe.py`,
-`--fit-exposure`, install unless `NOINSTALL=1`), the before/after sheets (`cmp3.py`,
-`compare.py`), interleaved timing (`perf_nukes.sh`) and README images (`readme_img.py`) exist
-only in gitignored `local/csgo/`. Make them `mohkit csgo <map> --final` (never installs),
-`mohkit perf-ab A.pk3 B.pk3 --rounds 2`, `mohkit exposure --changed BEFORE AFTER [--ref]`
-and a README image builder; then point testing.md / csgo-conversion.md at them.
+Done 2026-10-02: `mohkit csgo <map> --final` (bots + ladder probe into report.json, never
+installs), `mohkit ab <map> --a .. --b .. [--perf MS --rounds N --cvar k=v]` (same-camera
+change + A | B images + interleaved fps; replaces `perf_nukes.sh` and the A/B part of
+`cmp3.py`/`compare.py`). Left: the CS:GO | before | after sheet (`local/csgo/cmp3.py`),
+`mohkit exposure --changed BEFORE AFTER [--ref]` and the README image builder
+(`readme_img.py`); then point csgo-conversion.md at them.
 
 ### Open items found by the harvest (not started; small unless noted)
 

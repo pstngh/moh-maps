@@ -111,6 +111,21 @@ def test_path_clashes_across_installed_maps() -> None:
         assert path_clashes(d) == [("models/csgo/x.lod", ["cs_b.pk3", "cs_a.pk3"])]
 
 
+def test_ab_sets_need_the_map() -> None:
+    from mohkit.game import _check_set
+    with tempfile.TemporaryDirectory() as d:
+        a, b = Path(d) / "cs_x.pk3", Path(d) / "cs_y.pk3"
+        write_pk3(str(a), {"maps/dm/cs_x.bsp": b"x"})
+        write_pk3(str(b), {"maps/dm/cs_y.bsp": b"y"})
+        _check_set([a], "dm/cs_x")
+        for bad in ([b], [a, a]):
+            try:
+                _check_set(bad, "dm/cs_x")
+            except ValueError:
+                continue
+            raise AssertionError(f"accepted {bad}")
+
+
 def test_unowned_paths() -> None:
     # a map's package must keep its files under its own name, or another map's can replace them
     own = ["maps/dm/cs_cache.bsp", "maps/dm/cs_cache.scr", "models/csgo/cs_cache/props/x.skd",

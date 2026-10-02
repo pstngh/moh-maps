@@ -539,7 +539,7 @@ def shots_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequenc
 
     import numpy as np
     from PIL import Image
-    _check_set(a), _check_set(b)
+    _check_set(a, map_name), _check_set(b, map_name)
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     tag = map_name.replace("/", "_")
@@ -572,10 +572,16 @@ def shots_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequenc
     return res
 
 
-def _check_set(pk3s: Sequence[Path]) -> None:
+def _check_set(pk3s: Sequence[Path], map_name: str) -> None:
+    """A pk3 set for ``shots_ab``/``perf_ab``: unique file names (the test home copies them by
+    name) and ``maps/<map_name>.bsp`` inside (else the game loads nothing comparable)."""
+    import zipfile
     names = [Path(x).name.lower() for x in pk3s]
     if len(set(names)) != len(names):
         raise ValueError(f"two pk3s with the same name in one set (one would replace the other): {names}")
+    want = f"maps/{map_name}.bsp".lower()
+    if not any(want in (n.lower() for n in zipfile.ZipFile(x).namelist()) for x in pk3s):
+        raise ValueError(f"no {want} in {names}: both sets must hold the same map name (build variants under one --name)")
 
 
 def perf_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequence[Shot], out: Path,
@@ -586,7 +592,7 @@ def perf_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequence
     the frame-time mean over all cameras and rounds as fps, the worst and the median camera;
     per camera both sets' fps. Writes ``<out>/perf_ab.json``."""
     import json
-    _check_set(a), _check_set(b)
+    _check_set(a, map_name), _check_set(b, map_name)
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     tag = map_name.replace("/", "_")
