@@ -74,8 +74,8 @@ CAULK = M("common/caulk")
 SNOW = M("norway/norsnow_lite256")              # plain snow
 SNOWCONC = M("norway/csnowconc")               # trodden snow over concrete (yards)
 ROOFSNOW = M("norway/norsnowmedium")
-VALLEY = M("central_europe_winter/snow_bumpy_1")
-CLIFF = M("central_europe_winter/forstsnow_rock256")
+VALLEY = M("central_europe_winter/snow_bumpy_1", density=256)   # fogged out: coarse lightmap
+CLIFF = M("central_europe_winter/forstsnow_rock256", density=64)
 ROAD = M("norway/norroad_snow1")
 GRIT = M("central_europe_winter/stset_1awinter")
 GRATE = M("general_industrial/deckgrate_set1b")
@@ -619,7 +619,7 @@ def mountains(b):
     # a ring of broad peaks (base radius 1,450, apex 400 below to 450 above the plateau) on
     # an ellipse 3,800 x 4,800 out: the fog (farplane 3,800) leaves soft silhouettes. Each
     # peak is 7 pie-slice wedges, so no brush is wider than the renderer's face limits like.
-    PEAK_SNOW = M("norway/norsnow_med256ns")
+    PEAK_SNOW = M("norway/norsnow_med256ns", density=256)
     for i in range(16):
         a = 2 * math.pi * i / 16 + 0.2
         x, y = 3800 * math.cos(a), 4800 * math.sin(a)

@@ -40,12 +40,15 @@ class Material:
     ``scale`` is world units per texel (Q3 convention). Stock MOHAA textures are laid
     at 1.0 (a 256 px texture repeats every 256 units); only use smaller values for
     deliberately finer detail. ``parms`` are extra ``+surfaceparm`` names written on the face.
+    ``density`` writes ``surfaceDensity N`` (units per lightmap texel for these faces):
+    coarse values (64-256) for big backdrop surfaces nobody sees up close cut light time.
     """
     shader: str
     scale: tuple[float, float] = (1.0, 1.0)
     rotate: float = 0.0
     shift: tuple[float, float] = (0.0, 0.0)
     parms: tuple[str, ...] = ()
+    density: Optional[int] = None
 
     def __call__(self, **kw) -> "Material":
         return replace(self, **kw)
@@ -54,6 +57,8 @@ class Material:
         ext: list[str] = []
         for p in self.parms + (("detail",) if detail else ()):
             ext += ["+surfaceparm", p]
+        if self.density:
+            ext += ["surfaceDensity", str(int(self.density))]
         return Face(pts, self.shader, self.shift, self.rotate, self.scale, 0, 0, 0, ext)
 
 

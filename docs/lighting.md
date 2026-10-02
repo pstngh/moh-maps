@@ -143,7 +143,10 @@ with fill lights until you have seen a normal build.
   seen from it are a large share of medina's surfaces, so keep the backdrop
   small and give it a coarse `surfaceDensity` (32–64) rather than `nolightmap`. On
   mk_medina, shrinking the hill ring from 1,536 to 1,024 units and the sky top from 1,664 to
-  1,088 cut direct lighting from 955 s to 574 s (one thread).
+  1,088 cut direct lighting from 955 s to 574 s (one thread). `Material(..., density=N)`
+  writes `surfaceDensity N` on every face of that material: mk_summit's fogged-out valley
+  floor and distant peaks at 256 and its cliffs at 64 cut a draft light from 339 s to 136 s
+  and the lightmaps from 65 to 25 pages (2026-10-02, idle machine, same map otherwise).
 - **Surface lights are very slow.** `q3map_surfacelight N` in a shader makes its faces emit
   (retail: 24 shaders, 100-4,000, median 2,000, mostly lit windows). de_nuke's 43 emitting
   surfaces made a `-fast -bounce 2` light estimate ~15 hours. Use a point `light` per

@@ -353,6 +353,10 @@ When a shot looks wrong and the data "checks out on paper", test what the game r
   its own command line). Keep anything a later session needs (backup pk3s, logs) under
   `local/`, never in the session scratchpad. The agent's own background-task runner stops a
   job at its timeout (2 h at most), so a queue of several conversions must be detached too.
+  Its **default is 30 minutes**: a `-q normal` build of a new map (mk_summit, 2026-10-02) was
+  killed mid-light and left MOHlight running as an orphan (PPID 1) whose result nothing would
+  package. Pass `timeout: 7200000` for any build that may light longer than half an hour, and
+  kill the orphan by pid when it happens.
 - A queue that starts `python -m mohkit` once per step imports mohkit afresh at each step:
   edits made while it runs reach its later steps. Keep such edits opt-in (a new profile or
   flag) until the queue ends, or the rebuilt maps silently mix two versions of the code.
