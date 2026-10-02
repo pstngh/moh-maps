@@ -6,7 +6,7 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-02 evening)
+## State (2026-10-02 13:20 ET)
 
 - **Nothing is running.** Installed in `~/Documents/Games/moh/main/`: cs_dust2, cs_mirage,
   cs_nuke, cs_inferno, cs_cache, cs_cbble, cs_vertigo (2026-10-01 builds: LOD + fades, fitted
@@ -29,11 +29,15 @@ installed `cs_*.pk3` with different contents (154 `.lod`, 52 `.skd`, 17 collisio
 name down (`FS_AddGameDirectory`, checked), so every map uses one pk3's copy: cs_cache lost
 all 208 of its shared files (another map's LOD tables and vanish distances, an SKD vertex
 order its STATICMODELDATA colours weren't permuted for, other texture gains). Not yet seen in
-game. Cause: prop models and their textures use shared names (`modelconv.model_names` /
+game at first; **verified 2026-10-02 13:15 ET**: cs_cache shot with all eight installed pk3s vs
+cs_cache.pk3 alone, same 17 cameras: both trucks' cabs mangled and flat-shaded, a rock a dark
+blob (Ttruck 3% of the pixels changed, LongABoost 1.6%; sheets and script in
+`local/csgo/compare/cache_clash/`). Cause: prop models and their textures use shared names (`modelconv.model_names` /
 `texture_name` with `prefix="csgo"`), while their content is map-specific since LOD,
 headroom gain and staticmerge. `mohkit install` now warns.
-1. Verify the effect (cheap): shoot cs_cache's cameras with only cs_cache.pk3 vs with all
-   installed pk3s (copy them into the run's home `main/`), compare the sheets.
+1. Done (above). Files lost per map: cs_cache 208, cs_dust2 67 (53 to cs_mirage), cs_cbble
+   32, cs_mirage 26, cs_inferno 12, cs_rats 4; cs_nuke and cs_vertigo lose none
+   (`pak.path_clashes` lists the winner of each file).
 2. Fix: per-map prop asset paths (e.g. `models/csgo/<name>/...`, `textures/csgo/<name>_p/...`;
    watch the 63-character `MAX_QPATH`, the hash fallback in `model_names`, and collisions
    with the world's `textures/csgo/<name>/...`). Takes effect only on a full conversion

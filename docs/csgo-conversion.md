@@ -521,8 +521,13 @@ CS:GO tree under `~/Documents/Codex/2026-09-21/https-github-com-swagsoftware-kis
   pass per blend surface: not done.
 - Installed conversions share prop asset paths (`models/csgo/...`, prop textures) whose
   contents are map-specific since LOD and headroom gain: the game uses one pk3's copy for
-  every map (252 such files among the eight installed on 2026-10-02). `mohkit install`
-  warns; the fix is per-map prop asset names.
+  every map (252 such files among the eight installed on 2026-10-02). Seen in game: cs_cache
+  shot with all eight pk3s loaded draws its trucks with mangled, flat-shaded cabs and a rock as
+  a dark blob, against the same cameras with cs_cache.pk3 alone (Ttruck: mean diff 2.9, 3% of
+  the pixels over 40; 12 of 17 cameras under 0.4). Files lost per map: cs_cache 208,
+  cs_dust2 67, cs_cbble 32, cs_mirage 26, cs_inferno 12, cs_rats 4, cs_nuke and cs_vertigo
+  none. `mohkit install` warns; the fix is per-map
+  prop asset names.
 - Bots never climb the step-column ladders (the navmesh links only `func_ladder`s), so on
   ladder-heavy maps (de_rats: 30) bots stay on their floor. Untested idea: a `func_ladder`
   in front of each column as the bots' link.
