@@ -117,6 +117,25 @@ def test_no_shards_from_seams_or_slivers():
         assert area(P, t) <= full * 1.02, (cut, area(P, t), full)
 
 
+def test_vertex_colours_are_kept():
+    """A flat grid lit dark in the middle (baked vertex lighting) simplifies for free without
+    colours; with them, the free collapses (under 0.5 units) keep the dark spot."""
+    g = _grid(12, 64.0)
+    r = np.linalg.norm(np.asarray(g.positions, np.float64)[:, :2], axis=1)
+    col = np.where(r < 20, 20.0, 200.0)[None, :, None] * np.ones((1, 1, 3))
+    plain = L.simplify([g])
+    lit = L.simplify([g], [col])
+    free_plain = int(np.searchsorted(plain.errors, 0.5, "right"))
+    free_lit = int(np.searchsorted(lit.errors, 0.5, "right"))
+    assert free_lit < free_plain, (free_lit, free_plain)
+    # at the free level, the vertices drawn near the middle are still the dark ones
+    s = lit.surfaces[0]
+    keep = np.asarray(s.collapse_index) >= free_lit + 1
+    perm = lit.perms[0]
+    dark = r[perm] < 20
+    assert (keep & dark).sum() >= 1
+
+
 def test_two_surfaces_share_a_seam():
     a = _grid(8, 32.0, name="a")
     b = _grid(8, 32.0, name="b")

@@ -47,7 +47,7 @@ import numpy as np
 
 from .source import skd as _skd
 
-VERSION = 3                   # bump when the output changes (cache key)
+VERSION = 6                   # bump when the output changes (cache key)
 TAU_PX = 2.0                  # target screen error (pixels)
 REF_WIDTH = 1920.0            # ... at this screen width
 REF_FOV = 80.0                # ... and this fovX
@@ -59,6 +59,8 @@ WELD = 1e-3                   # positions closer than this (units) are one posit
 SEAM_WEIGHT = 1.0             # penalty plane weight (x edge length^2) on open and seam edges
 FLIP_DOT = 0.2                # refuse collapses that turn a triangle more than ~78 degrees
 FREE_ERROR = 0.01             # collapses below this error (units) are made even at full detail
+COLOR_SCALE = 0.5             # a full-range vertex-colour change over a collapse of length L costs this x L units
+COLOR_INSTANCES = 8           # instances whose vertex colours a shared mesh's collapses must keep
 
 
 @dataclass
@@ -86,9 +88,16 @@ def _quadrics(pts: np.ndarray, n: np.ndarray, w: np.ndarray) -> np.ndarray:
     return np.stack([a * a, a * b, a * c, a * d, b * b, b * c, b * d, c * c, c * d, d * d], 1) * w[:, None]
 
 
-def simplify(surfaces: Sequence[_skd.SkdSurface]) -> Simplified:
+def simplify(surfaces: Sequence[_skd.SkdSurface], colors: Optional[Sequence[np.ndarray]] = None,
+             color_scale: float = COLOR_SCALE) -> Simplified:
     """Collapse sequence for a model's surfaces (one global step numbering, as the engine
-    compares every surface's ``collapseIndex`` with one cutoff)."""
+    compares every surface's ``collapseIndex`` with one cutoff). ``colors``: per surface, the
+    vertex colours of the instances drawn with it (instances x vertices x 3, 0-255): a
+    collapse that changes how a surviving triangle shades costs ``color_scale`` x the move's
+    length x the change (as a fraction of 255), like the texture slide: a wrong shade shows
+    in proportion to the area it spreads over (converted props carry CS:GO's baked per-vertex
+    lighting, and a flat panel collapsed to a few triangles spread its darkest corners over
+    all of it)."""
     ns = len(surfaces)
     counts = [len(s.positions) for s in surfaces]
     allpos = np.concatenate([np.asarray(s.positions, np.float64) for s in surfaces])
@@ -179,6 +188,16 @@ def simplify(surfaces: Sequence[_skd.SkdSurface]) -> Simplified:
             vfaces[s][v].add(f)
             pfaces[pos_of[s][v]].add(f)
     uvs = [np.asarray(srf.uvs, np.float64).tolist() for srf in surfaces]
+    # per surface, per vertex: the instances' colours flattened (r, g, b, r, g, b, ...)
+    cols = None
+    if colors is not None and len(colors) == ns:
+        cols = []
+        for s_, c in enumerate(colors):
+            c = np.asarray(c, np.float64)
+            if c.ndim != 3 or c.shape[1] != counts[s_] or not c.shape[0]:
+                cols = None
+                break
+            cols.append(np.transpose(c, (1, 0, 2)).reshape(counts[s_], -1).tolist())
     stamp = [0] * npos
     alive = [True] * npos
     step_of = [[-1] * c for c in counts]     # -1: never removed; 0: in no triangle at all
@@ -257,6 +276,68 @@ def simplify(surfaces: Sequence[_skd.SkdSurface]) -> Simplified:
                 return False
         return True
 
+    def pick(s: int, a: int, q: int) -> int:
+        """The copy of position q in surface s that vertex a moves onto: the one it shares a
+        triangle with, else the nearest in texture space."""
+        po = pos_of[s]
+        for f in vfaces[s][a]:
+            for v in fvl[f]:
+                if po[v] == q:
+                    return v
+        uv = uvs[s]
+        ua = uv[a]
+        return min(copies[q][s], key=lambda v: (uv[v][0] - ua[0]) ** 2 + (uv[v][1] - ua[1]) ** 2)
+
+    def uv_slide(p: int, q: int) -> float:
+        """How far (world units) the texture slides on the triangles that survive moving p
+        onto q: each keeps its corners' texture coordinates, so the moved corner takes q's
+        copy's, where the triangle's old mapping would have put another (planar collapses
+        cost no geometric error but smear tiled or atlased textures)."""
+        worst = 0.0
+        X = Pl[q]
+        move = math.dist(Pl[p], X)
+        for s, vs in copies[p].items():
+            po = pos_of[s]
+            uv = uvs[s]
+            for a in vs:
+                bv = pick(s, a, q)
+                ub = uv[bv]
+                for f in vfaces[s][a]:
+                    vv = fvl[f]
+                    if po[vv[0]] == q or po[vv[1]] == q or po[vv[2]] == q:
+                        continue            # the triangle dies
+                    i = vv.index(a)
+                    o1, o2 = vv[(i + 1) % 3], vv[(i + 2) % 3]
+                    A, B, C = Pl[p], Pl[po[o1]], Pl[po[o2]]
+                    e0 = (B[0] - A[0], B[1] - A[1], B[2] - A[2])
+                    e1 = (C[0] - A[0], C[1] - A[1], C[2] - A[2])
+                    e2 = (X[0] - A[0], X[1] - A[1], X[2] - A[2])
+                    d00 = e0[0] * e0[0] + e0[1] * e0[1] + e0[2] * e0[2]
+                    d01 = e0[0] * e1[0] + e0[1] * e1[1] + e0[2] * e1[2]
+                    d11 = e1[0] * e1[0] + e1[1] * e1[1] + e1[2] * e1[2]
+                    den = d00 * d11 - d01 * d01
+                    ua, u1, u2 = uv[a], uv[o1], uv[o2]
+                    uva = abs((u1[0] - ua[0]) * (u2[1] - ua[1]) - (u1[1] - ua[1]) * (u2[0] - ua[0]))
+                    if den <= 1e-12:
+                        continue
+                    d20 = e2[0] * e0[0] + e2[1] * e0[1] + e2[2] * e0[2]
+                    d21 = e2[0] * e1[0] + e2[1] * e1[1] + e2[2] * e1[2]
+                    wb = (d11 * d20 - d01 * d21) / den
+                    wc = (d00 * d21 - d01 * d20) / den
+                    wa = 1.0 - wb - wc
+                    du = wa * ua[0] + wb * u1[0] + wc * u2[0] - ub[0]
+                    dv = wa * ua[1] + wb * u1[1] + wc * u2[1] - ub[1]
+                    if uva > 1e-12:
+                        # world units per texture unit on this triangle
+                        scale = math.sqrt(math.sqrt(den) / uva)
+                        worst = max(worst, math.sqrt(du * du + dv * dv) * scale)
+                    if cols is not None:
+                        cs_ = cols[s]
+                        ca, c1, c2, cb = cs_[a], cs_[o1], cs_[o2], cs_[bv]
+                        dc = max(abs(wa * x + wb * y + wc * z - w) for x, y, z, w in zip(ca, c1, c2, cb))
+                        worst = max(worst, dc / 255.0 * color_scale * move)
+        return worst
+
     k = 0
     while heap:
         c, p, q, sp, sq = heapq.heappop(heap)
@@ -264,26 +345,19 @@ def simplify(surfaces: Sequence[_skd.SkdSurface]) -> Simplified:
             continue
         if not valid(p, q):
             continue
+        # the texture slide counts like geometric error: raise the cost and requeue
+        slide = uv_slide(p, q)
+        if slide > 1e-3:                    # below: float32 noise of exact mappings
+            need = slide * slide * max(Wl[p], 1e-12)
+            if need > c * (1.0 + 1e-9) + 1e-12:
+                heapq.heappush(heap, (need, p, q, sp, sq))
+                continue
         k += 1
         errors.append(math.sqrt(max(c, 0.0) / max(Wl[p], 1e-12)))
-        # move every copy of p onto a copy of q in the same surface: the one it shares a
-        # triangle with, else the nearest in texture space
+        # move every copy of p onto a copy of q in the same surface (``pick``)
         for s, vs in copies[p].items():
-            qs = copies[q][s]
-            po = pos_of[s]
-            uv = uvs[s]
             for a in vs:
-                b = -1
-                for f in vfaces[s][a]:
-                    for v in fvl[f]:
-                        if po[v] == q:
-                            b = v
-                            break
-                    if b >= 0:
-                        break
-                if b < 0:
-                    ua = uv[a]
-                    b = min(qs, key=lambda v: (uv[v][0] - ua[0]) ** 2 + (uv[v][1] - ua[1]) ** 2)
+                b = pick(s, a, q)
                 target[s][a] = b
                 step_of[s][a] = k
                 for f in vfaces[s][a]:
@@ -378,6 +452,148 @@ def simplify(surfaces: Sequence[_skd.SkdSurface]) -> Simplified:
         out.append(ns_)
         perms.append(perm)
     return Simplified(out, perms, err, K)
+
+
+# --------------------------------------------------------------------------- measured error
+
+
+def _surface_samples(pos: np.ndarray, tris: np.ndarray, h: float) -> np.ndarray:
+    """Points on triangles: along each edge about ``h`` apart, and inside, one per ``h``
+    squared of area (a Halton pattern), so thin triangles are covered by their edges."""
+    if not len(tris):
+        return np.zeros((0, 3))
+    a, b, c = pos[tris[:, 0]], pos[tris[:, 1]], pos[tris[:, 2]]
+    out = []
+    for p0, p1 in ((a, b), (b, c), (c, a)):
+        n = np.clip(np.ceil(np.linalg.norm(p1 - p0, axis=1) / h).astype(np.int64), 1, 4096)
+        idx = np.repeat(np.arange(len(n)), n)
+        t = (np.arange(n.sum()) - np.repeat(np.cumsum(n) - n, n)) / np.repeat(n, n)
+        out.append(p0[idx] + (p1[idx] - p0[idx]) * t[:, None])
+    area = 0.5 * np.linalg.norm(np.cross(b - a, c - a), axis=1)
+    m = np.clip(np.floor(area / (h * h)).astype(np.int64), 0, 1 << 16)
+    if m.sum():
+        idx = np.repeat(np.arange(len(m)), m)
+        j = np.arange(m.sum()) - np.repeat(np.cumsum(m) - m, m) + 1
+        r1, r2 = _halton(j, 2), _halton(j, 3)
+        sq = np.sqrt(r1)[:, None]
+        out.append(a[idx] * (1 - sq) + b[idx] * (sq * (1 - r2[:, None])) + c[idx] * (sq * r2[:, None]))
+    return np.concatenate(out)
+
+
+def _halton(i: np.ndarray, base: int) -> np.ndarray:
+    f, r, i = 1.0, np.zeros(len(i)), i.copy()
+    while i.any():
+        f /= base
+        r += f * (i % base)
+        i //= base
+    return r
+
+
+class _NearIndex:
+    """Distance from query points to a point set, exact up to ``cell`` (27 neighbouring grid
+    cells), ``cell`` or more beyond it."""
+
+    def __init__(self, pts: np.ndarray, cell: float):
+        self.cell = float(cell)
+        self.pts = pts
+        keys = self._keys(np.floor(pts / self.cell).astype(np.int64))
+        self.order = np.argsort(keys, kind="stable")
+        self.sorted = keys[self.order]
+
+    @staticmethod
+    def _keys(ijk: np.ndarray) -> np.ndarray:
+        ijk = ijk + (1 << 20)
+        return (ijk[:, 0] << 42) | (ijk[:, 1] << 21) | ijk[:, 2]
+
+    def distance(self, q: np.ndarray, chunk: int = 4096) -> np.ndarray:
+        out = np.full(len(q), self.cell)
+        offs = np.array([(i, j, k) for i in (-1, 0, 1) for j in (-1, 0, 1) for k in (-1, 0, 1)], np.int64)
+        for s0 in range(0, len(q), chunk):
+            qq = q[s0:s0 + chunk]
+            base = np.floor(qq / self.cell).astype(np.int64)
+            best = np.full(len(qq), np.inf)
+            for o in offs:
+                k = self._keys(base + o)
+                lo = np.searchsorted(self.sorted, k, "left")
+                hi = np.searchsorted(self.sorted, k, "right")
+                cnt = hi - lo
+                if not cnt.any():
+                    continue
+                qi = np.repeat(np.arange(len(qq)), cnt)
+                starts = np.repeat(lo - np.concatenate([[0], np.cumsum(cnt)[:-1]]), cnt)
+                si = self.order[starts + np.arange(cnt.sum())]
+                d2 = ((qq[qi] - self.pts[si]) ** 2).sum(1)
+                np.minimum.at(best, qi, d2)
+            out[s0:s0 + chunk] = np.minimum(np.sqrt(best), self.cell)
+        return out
+
+
+def measured_errors(surfaces: Sequence[_skd.SkdSurface], errors: np.ndarray, levels: int = 16) -> np.ndarray:
+    """``errors`` (one per collapse step, non-decreasing) raised to what the engine would
+    really draw: at ``levels`` steps the surfaces are replayed like ``RB_StaticMesh`` and
+    sampled, and the farthest sample from the original surface is that step's error (less the
+    sampling slack); steps in between take the next measured one. The quadric error is the
+    distance to the original *planes*, so collapses that close the gaps of a flat open object
+    (a railing, a fence, a grate) or slide along a crease past where the surface ends cost
+    nothing; measured, they cost the size of what they cover. Without this, a railing's
+    coarsest form (a few triangles spanning it, its grate texture smeared grey) was drawn at
+    every distance."""
+    K = len(errors)
+    if K == 0:
+        return errors
+    full = []
+    for srf in surfaces:
+        full.append((np.asarray(srf.positions, np.float64), np.asarray(srf.triangles, np.int64)))
+    area = sum(0.5 * np.linalg.norm(np.cross(p[t[:, 1]] - p[t[:, 0]], p[t[:, 2]] - p[t[:, 0]]), axis=1).sum()
+               for p, t in full if len(t))
+    perimeter = sum(sum(np.linalg.norm(p[t[:, (k + 1) % 3]] - p[t[:, k]], axis=1).sum() for k in range(3))
+                    for p, t in full if len(t))
+    h = max(1.0, math.sqrt(max(area, 1e-9) / 20000.0), perimeter / 60000.0)
+    orig = np.concatenate([_surface_samples(p, t, h) for p, t in full])
+    if not len(orig):
+        return errors
+    # exact to 3h on all samples; beyond, on one sample per 8h cell (slack 7h), up to 48h,
+    # and beyond that the error is just "large" (48h)
+    fine = _NearIndex(orig, 3 * h)
+    _, one = np.unique(np.floor(orig / (8 * h)).astype(np.int64), axis=0, return_index=True)
+    coarse = _NearIndex(orig[np.sort(one)], 48 * h)
+    slack = 0.75 * h          # original samples are about h apart
+    steps = np.unique(np.round(np.geomspace(1, K, levels)).astype(np.int64))
+    meas = np.zeros(len(steps))
+    for n, k in enumerate(steps):
+        cut = k + 1                       # steps 1..k made
+        pts = []
+        for srf, (p, _) in zip(surfaces, full):
+            ci = np.asarray(srf.collapse_index)
+            if not len(ci) or ci[2] < cut:
+                continue
+            rc = int((ci >= cut).sum())
+            m = np.arange(len(ci))
+            col = np.asarray(srf.collapse)
+            for i in range(rc, len(ci)):
+                m[i] = m[col[i]]
+            t0 = np.asarray(srf.triangles, np.int64)
+            t = m[t0]
+            bad = (t[:, 0] == t[:, 1]) | (t[:, 1] == t[:, 2]) | (t[:, 2] == t[:, 0])
+            end = int(np.argmax(bad)) if bad.any() else len(t)
+            moved = (t[:end] != t0[:end]).any(axis=1)     # untouched triangles are on the surface
+            if moved.any():
+                pts.append(_surface_samples(p, t[:end][moved], 2 * h))
+        if not pts:
+            continue
+        q = np.concatenate(pts)
+        if len(q) > 20000:
+            q = q[:: int(math.ceil(len(q) / 20000))]
+        d = fine.distance(q) - slack
+        far = d >= fine.cell - slack
+        if far.any():
+            d[far] = np.maximum(coarse.distance(q[far]) - 7 * h, fine.cell - slack)
+        meas[n] = max(0.0, float(d.max()))
+    # each step takes the next measured step's error (an upper bound when error grows)
+    nxt = np.searchsorted(steps, np.arange(1, K + 1), side="left")
+    nxt = np.minimum(nxt, len(steps) - 1)
+    meas_steps = np.maximum.accumulate(meas)[nxt]
+    return np.maximum.accumulate(np.maximum(np.asarray(errors, np.float64), meas_steps))
 
 
 def metric_scale() -> float:
@@ -532,7 +748,8 @@ def _cache_dir() -> Path:
 
 
 def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True, vanish: float = 0.0,
-            tau: float = TAU_PX, base_error: float = FREE_ERROR) -> LodResult:
+            tau: float = TAU_PX, base_error: float = FREE_ERROR,
+            colors: Optional[Sequence[np.ndarray]] = None) -> LodResult:
     """Simplify an SKD's surfaces: new SKD bytes (vertices reordered, collapse data filled),
     its ``.lod`` (with a ``vanish`` distance, see ``lod_control``) and the vertex permutation.
     Already-simplified SKDs come back unchanged. The simplification is cached (it doesn't
@@ -541,7 +758,16 @@ def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True,
     n = sum(len(s.positions) for s in info.surfaces)
     if any(len(ci) and ci[0] != ci[-1] for _, ci in info.collapse):
         return LodResult(data, None, np.arange(n))
-    key = hashlib.md5(data + struct.pack("<if", VERSION, tiki_scale)).hexdigest()
+    # colours: the instances' vertex colours over the SKD's vertices (file order), n x 3 each
+    surf_cols = None
+    if colors:
+        cs = np.stack([np.nan_to_num(np.asarray(c, np.float64), nan=128.0) for c in colors])   # inst x n x 3
+        if cs.shape[1] == n:
+            q = np.clip(np.round(cs), 0, 255).astype(np.uint8)
+            offs = np.cumsum([0] + [len(x.positions) for x in info.surfaces])
+            surf_cols = [q[:, offs[i]:offs[i + 1]] for i in range(len(info.surfaces))]
+    key = hashlib.md5(data + struct.pack("<if", VERSION, tiki_scale)
+                      + (b"".join(c.tobytes() for c in surf_cols) if surf_cols else b"")).hexdigest()
     cf = _cache_dir() / f"{key}.npz" if cache else None
     if cf is not None and cf.is_file():
         z = np.load(cf)
@@ -549,10 +775,10 @@ def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True,
                                                   int(z["steps"]))
     else:
         surfs = [_skd.SkdSurface(s.name, s.positions, s.normals, s.uvs, s.triangles) for s in info.surfaces]
-        res = simplify(surfs)
+        res = simplify(surfs, surf_cols)
         allp = np.concatenate([np.asarray(s.positions, np.float64) for s in surfs]) * tiki_scale
         radius = _skd.bounds_radius(allp.min(0), allp.max(0))
-        errors, steps = res.errors * tiki_scale, res.steps
+        errors, steps = measured_errors(res.surfaces, res.errors) * tiki_scale, res.steps
         skd_bytes = _skd.build_skd(info.name, res.surfaces) if steps else data
         perm = res.perm if steps else np.arange(n)
         if cf is not None:
@@ -578,16 +804,41 @@ def vanish_by_tiki(instances) -> dict[str, float]:
 
 def apply_to_assets(assets: dict, tikis: Sequence[str], read: Callable[[str], Optional[bytes]],
                     log: Optional[Callable] = None, vanish: Optional[dict] = None,
-                    tau: float = TAU_PX, base_error: float = FREE_ERROR) -> dict[str, np.ndarray]:
+                    tau: float = TAU_PX, base_error: float = FREE_ERROR,
+                    colors: Optional[dict] = None) -> dict[str, np.ndarray]:
     """Simplify every SKD the ``tikis`` load, in place in ``assets`` (``<skd>`` replaced,
     ``<skd minus 'skd'>lod`` added). Returns ``{tiki: permutation}`` over the TIKI's
     vertices in ``staticlight.tiki_mesh`` order, for TIKIs whose vertices moved; apply it
-    to per-vertex data (instance colours) made before."""
+    to per-vertex data (instance colours) made before. ``colors``: ``{tiki: [instance
+    colours over the TIKI's vertices (n x 3) or None, ...]}``; an SKD's collapses keep the
+    shading of up to ``COLOR_INSTANCES`` of the instances that draw it (``simplify``)."""
     import re
     keys = re.compile(r"^\s*(scale|path|skelmodel)\s+(\S+)", re.M)
     done: dict[str, LodResult] = {}
     out: dict[str, np.ndarray] = {}
     vanish = vanish or {}
+    skd_colors: dict[str, list] = {}
+    nv_cache: dict[str, int] = {}
+    for tik in sorted(set(tikis)) if colors else ():
+        insts = [c for c in colors.get(tik) or () if c is not None]
+        name = tik if tik.startswith("models/") else "models/" + tik
+        text = read(name) if insts else None
+        if text is None:
+            continue
+        t = text.decode("latin-1")
+        path = (re.findall(r"^\s*path\s+(\S+)", t, re.M) or [str(Path(name).parent)])[0]
+        base = 0
+        for sk in re.findall(r"^\s*skelmodel\s+(\S+)", t, re.M):
+            sp = sk if "/" in sk else f"{path.rstrip('/')}/{sk}"
+            if sp not in nv_cache:
+                blob = read(sp)
+                nv_cache[sp] = sum(len(x.positions) for x in _skd.read_skd(blob).surfaces) if blob else 0
+            nv = nv_cache[sp]
+            skd_colors.setdefault(sp, []).extend(np.asarray(c)[base:base + nv] for c in insts if len(c) >= base + nv)
+            base += nv
+    for sp, lst in skd_colors.items():
+        if len(lst) > COLOR_INSTANCES:
+            skd_colors[sp] = [lst[i] for i in np.linspace(0, len(lst) - 1, COLOR_INSTANCES).round().astype(int)]
     # an SKD vanishes where every TIKI that loads it has (skins of one mesh share it)
     skd_vanish: dict[str, float] = {}
     for tik in sorted(set(tikis)):
@@ -623,7 +874,7 @@ def apply_to_assets(assets: dict, tikis: Sequence[str], read: Callable[[str], Op
                     done[path] = None
                 else:
                     r = lod_skd(path, blob, float(kv["scale"]), vanish=skd_vanish.get(path, 0.0), tau=tau,
-                                base_error=base_error)
+                                base_error=base_error, colors=skd_colors.get(path))
                     done[path] = r
                     if r.lod is not None:
                         assets[path] = r.skd

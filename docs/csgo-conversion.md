@@ -211,6 +211,21 @@ worst camera 68 -> 138; shots differ from the full-detail build by under 1/255 (
 3/255 at the overview (2 px). Foliage cards keep their open edges, so trees and bushes
 are now the largest remaining prop cost. `--resume --no-lod` builds without it.
 
+**What a collapse costs (2026-10-02).** The quadric error is the distance to the original
+*planes*, so on flat parts it is zero for collapses that still change what you see. de_nuke's
+chain-link fence covers (flat panels with CS:GO's baked vertex lighting) went from 304
+triangles to 8 "for free" and drew as dark grey sheets: their darkest corner colours spread
+over the whole panel. A collapse now also costs (largest wins): the texture slide on each
+surviving triangle (how far its old mapping would put the moved corner's texture
+coordinate from the one it gets, in world units), and the vertex-colour change there
+(`lod.COLOR_SCALE` 0.5 x the move's length x the change as a fraction of 255, for up to 8
+instances drawn with the mesh; their colours come from `inject_statics`). A flat 0.25 units
+per colour level kept nearly everything (de_nuke: 576k prop vertices per view instead of
+115k, 124 fps instead of 168). After simplifying, `lod.measured_errors` replays 16
+levels like the engine and raises each level's error to the farthest drawn point from the
+original surface (open objects like railings close their gaps at zero plane error). Before,
+every conversion also drew shards: see docs/reference/engine.md §5.2 (index-degenerate rule).
+
 **Props vanish where CS:GO fades them (since 2026-10-01).** CS:GO fades most props out
 by distance (sprp flag 1, `fademindist`..`fademaxdist`; `prop_dynamic` keys of the same
 name): de_nuke 4,814 of 5,002 (median 1,578 units), de_inferno 5,893 of 6,379 (1,350), so

@@ -14,6 +14,41 @@ installed.
 
 All seven full-detail builds with LOD + fades are installed and are what the user plays now.
 
+### Session 2026-10-02 (from 07:20): Nuke "push further", LOD bugs, FFA spawns
+
+Done (committed 74f1053, d8ca23d; later work below not yet committed unless noted):
+- **FFA spawns**: `mohkit/source/nav.py` (CS:GO nav v16 reader, farthest-point spawns by walking
+  distance, yaw to the longest open run), `Options.ffa_spawns` (default on) in
+  `Converter._dm_spawns`; nuke and mirage get 24 each over 16-17 named places (plots looked good).
+  Not yet in any build: needs a full conversion (rebuild), then 8 bots.
+- **LOD shard bug fixed** (74f1053): the grey slanted shards in every conversion (Ramp3 etc.)
+  were seam slivers / zero-area strip leftovers drawn to vertex 0 (engine stops only at
+  index-degenerate triangles). docs/reference/engine.md has the rule.
+- **More LOD bugs found (uncommitted, `mohkit/lod.py` VERSION 5):** flat panels (fence covers)
+  collapsed to a few triangles at "no geometric error" smeared their texture and CS:GO's baked
+  vertex lighting (dark grey sheets). Collapse cost now also counts texture slide (world units)
+  and vertex-colour change (`COLOR_UNITS` 0.25 per level, up to 8 instances per SKD, passed
+  from `inject_statics`), and `measured_errors` raises each level's error to the measured
+  distance from the original surface. Tests in tests/test_lod.py. Building s5 to verify.
+- **Perf diagnosis (Nuke stock build):** world 1.29 ms, per-surface prop overhead 0.38 ms,
+  prop vertex work 2.0 ms (55%) per frame (`--toggle r_drawstaticmodelpoly=0 /
+  r_drawstaticmodels=0`). `bk` in com_speeds is meaningless (docs/testing.md). 400 fps needs
+  ~45k prop verts/view; we draw ~120k. Most are merged clusters of CS:GO `_autocombine_`
+  meshes (pipes, wires, joists, ducts: ~60% of in-view prop geometry) that LOD can't simplify
+  (boxy) and that static models can't VIS-cull. `mohkit/propcost.py` estimates drawn prop
+  vertices per camera offline (matches r_speeds within ~15%).
+- Variants measured (interleaved, 2 runs): v1 (stock profile) 233 mean / 175 worst; s1 (LOD
+  tau 10, base_error 4) 272 / 208. s2 = s1 + `merge_split` [384, 768] (staticmerge cuts big
+  models into pieces): estimate 125k -> 120k verts/view only. s3/s4 = + fades capped at 1024
+  (statics.json post-processed by hand; `fade_cap` 1024, `fade_small` 256): not timed yet.
+  Builds kept in `local/csgo/before/cs_nukes_{v1,s1,s2,s3,s4,s5}/`.
+- Scratch tools (session scratchpad, not in repo): shoot_cams.py (named cameras, cvars),
+  cost.py (propcost per camera), nolod.py (pk3 minus chosen .lod files, for bisecting).
+
+Next: check s5 shots (Troof Silo2 fence covers, Ramp3, Troof Silo), time s5 vs v1, then decide
+the stock profile (fade cap, split, LOD tau) and show the user sheet + fps; then full rebuilds
+of nuke and mirage only (user 07:35) with FFA spawns, bots, install after the user's OK.
+
 **User (chat 23:20): when the maps are redone, make them FFA: DM spawns spread everywhere.**
 Today `Converter.entities()` (convert.py ~1824) maps T/CT spawns to axis/allied and uses CS:GO's
 `info_deathmatch_spawn` for `info_player_deathmatch` when the map has them, else copies the

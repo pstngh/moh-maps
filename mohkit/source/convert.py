@@ -2957,9 +2957,12 @@ def inject_statics(bsp_path, statics, assets: dict, out, prop_light: Optional[li
     lod_info = None
     if lod:
         from .. import lod as _lod
+        cols: dict = {}
+        for i in inst:
+            cols.setdefault(i.model, []).append(i.colors)
         perms = _lod.apply_to_assets(assets, [i.model for i in inst], SL.files_reader(assets),
                                      vanish=_lod.vanish_by_tiki(inst), tau=lod_tau or _lod.TAU_PX,
-                                     base_error=lod_base_error or _lod.FREE_ERROR)
+                                     base_error=lod_base_error or _lod.FREE_ERROR, colors=cols)
         for i in inst:
             pm = perms.get(i.model)
             if pm is not None and len(pm) == len(i.positions):
