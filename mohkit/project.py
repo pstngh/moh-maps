@@ -153,6 +153,13 @@ class Project:
         files.update(self.scripts())
         for rel, p in self.assets().items():
             files[rel] = p.read_bytes()
+        from .pak import unowned_paths
+        shared = unowned_paths(files, self.name)
+        if shared:
+            # another installed map can ship the same path with other contents, and one
+            # copy wins for every map (pak.path_clashes): keep assets under the map's name
+            print(f"  ! {len(shared)} packaged files are not under the map's name '{self.name}'"
+                  f" (another map's pk3 can replace them): {shared[:5]}")
         write_pk3(out, files)
         return out
 

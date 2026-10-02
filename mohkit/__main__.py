@@ -21,6 +21,7 @@
     python -m mohkit csgo de_dust2 --fit-exposure                  match CS:GO's brightness (needs csgo-ref shots)
     python -m mohkit exposure local/csgo/*/shots [--by-map] [--stock] [--mask shot.png]   brightness check
     python -m mohkit csgo-ref de_dust2 [--name cs_dust2]        CS:GO's own screenshots from the same cameras
+    python -m mohkit ab de_cache --a INSTALLED.pk3 --b NEW.pk3 [--perf 2000]   same cameras, two pk3 sets: changes, fps
 """
 
 from __future__ import annotations
@@ -273,6 +274,14 @@ def cmd_compare(a) -> int:
     return 0
 
 
+def cmd_ab(a) -> int:
+    from .source.convert import ab_local
+    ab_local(a.map, [Path(x) for x in a.a], [Path(x) for x in a.b], a.name, a.scale,
+             (a.label_a, a.label_b), Path(a.out) if a.out else None, shots=not a.no_shots,
+             perf_ms=a.perf, rounds=a.rounds, cvars=dict(_toggles(a.cvar)) or None)
+    return 0
+
+
 def cmd_install(a) -> int:
     from . import pak
     cfg = config.load()
@@ -442,6 +451,21 @@ def main(argv=None) -> int:
     s.add_argument("-o", "--out", default="dist/compare.png")
     s.add_argument("--region", action="append", help="name=x0,y0,x1,y1: print mean colours and the brightness ratio")
     s.set_defaults(fn=cmd_compare)
+    s = sub.add_parser("ab", help="shoot a CS:GO conversion's cameras with two pk3 sets and measure what changed")
+    s.add_argument("map", help="CS:GO map (cameras of local/csgo/<name>), e.g. de_cache")
+    s.add_argument("--a", nargs="+", required=True, help="pk3s of set A (e.g. the installed build)")
+    s.add_argument("--b", nargs="+", required=True, help="pk3s of set B (e.g. the new build)")
+    s.add_argument("--name", help="converted map name (default cs_<map>)")
+    s.add_argument("--scale", type=float, default=1.0)
+    s.add_argument("--label-a", default="A")
+    s.add_argument("--label-b", default="B")
+    s.add_argument("-o", "--out", help="output folder (default local/csgo/<name>/ab)")
+    s.add_argument("--perf", type=int, default=0, metavar="MS", help="also time each camera for MS, A/B interleaved")
+    s.add_argument("--rounds", type=int, default=2, help="with --perf: interleaved rounds")
+    s.add_argument("--no-shots", action="store_true", help="only --perf")
+    s.add_argument("--cvar", action="append", metavar="NAME=VALUE",
+                   help="set for both sets (e.g. r_lodscale=0.45, the user's settings)")
+    s.set_defaults(fn=cmd_ab)
     s = sub.add_parser("install")
     s.add_argument("pk3")
     s.set_defaults(fn=cmd_install)

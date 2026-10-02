@@ -522,6 +522,102 @@ def compare(reference: Path, shot: Path, out: Path, height: int = 540,
     return out
 
 
+def shots_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequence[Shot], out: Path,
+             labels: tuple[str, str] = ("A", "B"), threshold: int = 40, cvars: Optional[dict[str, str]] = None,
+             log=print) -> dict[str, dict]:
+    """Shoot ``map_name`` with two pk3 sets from the same cameras and measure what changed:
+    per camera the mean of the largest channel difference (0-255) and the share of pixels
+    that differ by more than ``threshold``. Writes ``<out>/<camera>_ab.png`` (A | B), a
+    contact sheet of the most changed cameras (``ab_sheet.png``) and ``ab.json``. Use it
+    for regression checks (an install against the installed build) and for cross-map
+    effects (a pk3 alone against all installed ones: 2026-10-02's prop path clash showed
+    as 3% changed pixels on cs_cache's truck camera; after the fix 18 of 19 cameras were
+    identical). Judge a change against an A-vs-A run of the same set: a conversion's
+    overview camera differs between two runs of one pk3 (mean 1.0: the top ~15 rows still
+    hold the previous frame, a sky face flickers); the other cameras repeat exactly."""
+    import json
+
+    import numpy as np
+    from PIL import Image
+    _check_set(a), _check_set(b)
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    tag = map_name.replace("/", "_")
+    runs = [run([Path(x) for x in pk3s], map_name, shots, run_name=f"ab_{tag}_{i}", timeout=300 + 3 * len(shots),
+                cvars=cvars) for i, pk3s in enumerate((a, b))]
+    for r in runs:
+        log(r.summary())
+    res: dict[str, dict] = {}
+    pairs: dict[str, Path] = {}
+    for k in runs[0].screenshots:
+        if k not in runs[1].screenshots:
+            continue
+        ia = np.asarray(Image.open(runs[0].screenshots[k]).convert("RGB"), np.float32)
+        ib = np.asarray(Image.open(runs[1].screenshots[k]).convert("RGB"), np.float32)
+        if ia.shape != ib.shape:
+            continue
+        d = np.abs(ia - ib).max(2)
+        res[k] = {"mean": round(float(d.mean()), 2), "changed_pct": round(float((d > threshold).mean() * 100), 2)}
+        pairs[k] = out / f"{k}_ab.png"
+        Image.fromarray(np.concatenate([ia, ib], 1).astype(np.uint8)).save(pairs[k])
+    res = dict(sorted(res.items(), key=lambda kv: -kv[1]["mean"]))
+    (out / "ab.json").write_text(json.dumps({"labels": list(labels), "threshold": threshold,
+                                             "a": [str(x) for x in a], "b": [str(x) for x in b],
+                                             "cameras": res}, indent=1))
+    worst = {f"{k} ({labels[0]} | {labels[1]})": pairs[k] for k in list(res)[:9]}
+    if worst:
+        contact_sheet(worst, out / "ab_sheet.png", cols=1, thumb_w=1280)
+    for k, v in res.items():
+        log(f"{k:32s} mean|d| {v['mean']:6.2f}   px>{threshold} {v['changed_pct']:6.2f}%")
+    return res
+
+
+def _check_set(pk3s: Sequence[Path]) -> None:
+    names = [Path(x).name.lower() for x in pk3s]
+    if len(set(names)) != len(names):
+        raise ValueError(f"two pk3s with the same name in one set (one would replace the other): {names}")
+
+
+def perf_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequence[Shot], out: Path,
+            labels: tuple[str, str] = ("A", "B"), rounds: int = 2, ms: int = 2000,
+            cvars: Optional[dict[str, str]] = None, log=print) -> dict:
+    """Frame rate of two pk3 sets at the same cameras, interleaved A B A B ... for ``rounds``
+    (fps only compare within one interleaved run: docs/testing.md "Frame rate"). Per set:
+    the frame-time mean over all cameras and rounds as fps, the worst and the median camera;
+    per camera both sets' fps. Writes ``<out>/perf_ab.json``."""
+    import json
+    _check_set(a), _check_set(b)
+    out = Path(out)
+    out.mkdir(parents=True, exist_ok=True)
+    tag = map_name.replace("/", "_")
+    ms_by: list[dict[str, list[float]]] = [{}, {}]
+    for r in range(rounds):
+        for i, pk3s in enumerate((a, b)):
+            res = run([Path(x) for x in pk3s], map_name, shots, run_name=f"perfab_{tag}_{i}", perf_ms=ms,
+                      screenshots=False, cvars=cvars, timeout=300 + (3 + ms / 1000) * len(shots))
+            log(f"{labels[i]} round {r + 1}: " + res.summary().splitlines()[0])
+            for cam, tags in res.perf.items():
+                if "base" in tags:
+                    ms_by[i].setdefault(cam, []).append(tags["base"]["ms"])
+    cams = [c for c in ms_by[0] if c in ms_by[1]]
+    summary = {}
+    for i in (0, 1):
+        per = sorted(sum(ms_by[i][c]) / len(ms_by[i][c]) for c in cams)
+        summary[labels[i]] = {"fps": round(1000 * len(per) / sum(per), 1) if per else None,
+                              "worst": round(1000 / per[-1], 1) if per else None,
+                              "median": round(1000 / per[len(per) // 2], 1) if per else None}
+    table = {c: [round(1000 * len(ms_by[i][c]) / sum(ms_by[i][c]), 1) for i in (0, 1)] for c in cams}
+    (out / "perf_ab.json").write_text(json.dumps({"labels": list(labels), "rounds": rounds, "ms": ms,
+                                                  "cvars": cvars or {}, "summary": summary, "cameras": table},
+                                                 indent=1))
+    for c, (fa, fb) in table.items():
+        log(f"{c:32s} {labels[0]} {fa:7.1f}   {labels[1]} {fb:7.1f}   {fb / fa:5.2f}x")
+    for lab, st in summary.items():
+        log(f"== {lab}: {st['fps']} fps (frame-time mean over {len(cams)} cameras), worst {st['worst']},"
+            f" median {st['median']}")
+    return {"summary": summary, "cameras": table}
+
+
 def measure(reference: Path, shot: Path, regions: dict[str, tuple[int, int, int, int]]) -> dict[str, dict]:
     """Mean colour of named pixel boxes (x0, y0, x1, y1) in both images, and the brightness
     ratio reference/shot: > 1 means the shot is too dark there. Use it to tune lights and

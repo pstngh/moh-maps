@@ -6,12 +6,24 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-02 13:20 ET)
+## State (2026-10-02 13:50 ET)
 
-- **Nothing is running.** Installed in `~/Documents/Games/moh/main/`: cs_dust2, cs_mirage,
+- **Running (detached, pid 20875, started 13:46 ET, ~2 h):** `local/csgo/repath_queue.sh`:
+  `mohkit ab de_cache` installed vs rebuilt (shots + interleaved fps, 2 rounds), then
+  `local/csgo/repath_all.sh de_dust2 de_cbble de_mirage de_inferno`: per map a backup in
+  `local/csgo/before/<name>_pre_repath/`, a full `-q fastrad` conversion, 8 bots, the ladder
+  probe and `mohkit ab` against the installed build. Summary log `local/csgo/repath_all.log`
+  (markers `<name> BUILD_DONE`, `<name> AB_DONE`, `ALL_DONE`); per map
+  `local/csgo/<name>_repath.log`, `<name>_ab.log`, A/B images in `local/csgo/<name>/ab/`.
+  Never installs. Check that it still runs: `ps -p 20875`.
+- **cs_cache rebuilt (13:39 ET)** with per-map prop paths: 0 clashes with the installed pk3s;
+  in game, with the 7 other installed pk3s vs alone, 18 of 19 cameras identical (overview =
+  run noise); 32 bot kills, ladder climbs 161. Old local build in
+  `local/csgo/before/cs_cache_pre_repath/`.
+- Installed in `~/Documents/Games/moh/main/`: cs_dust2, cs_mirage,
   cs_nuke, cs_inferno, cs_cache, cs_cbble, cs_vertigo (2026-10-01 builds: LOD + fades, fitted
   exposure, threshold blends; old LOD with shards/dark panels; old T/CT-copy DM spawns) and
-  cs_rats (on hold, user 2026-10-01).
+  cs_rats (on hold, user 2026-10-01). All still use the shared prop paths.
 - **History harvest done (2026-10-02):** 11 transcripts, 95 HANDOFF.md versions and 166
   commits went through `mohkit.harvest` + one subagent each; the lessons are now in code
   (guards + tests in 2eb121e), docs (symptoms.md ~40 rows, testing.md, toolchain.md,
@@ -38,11 +50,17 @@ headroom gain and staticmerge. `mohkit install` now warns.
 1. Done (above). Files lost per map: cs_cache 208, cs_dust2 67 (53 to cs_mirage), cs_cbble
    32, cs_mirage 26, cs_inferno 12, cs_rats 4; cs_nuke and cs_vertigo lose none
    (`pak.path_clashes` lists the winner of each file).
-2. Fix: per-map prop asset paths (e.g. `models/csgo/<name>/...`, `textures/csgo/<name>_p/...`;
-   watch the 63-character `MAX_QPATH`, the hash fallback in `model_names`, and collisions
-   with the world's `textures/csgo/<name>/...`). Takes effect only on a full conversion
-   (`--resume` reuses the converted assets): do it before the lean rebuilds, then rebuild and
-   reinstall each map after the user's OK.
+2. **Code fix done (9c045d9, pushed):** props under `models/csgo/<name>/`, their textures and
+   clip shaders under `textures/csgo/<name>_p/`; packaging warns on files outside the map's
+   name (`pak.unowned_paths`); test fails on the old code. Takes effect only on a full
+   conversion. New tool (uncommitted until it has run once): `mohkit ab <map> --a .. --b ..
+   [--perf 2000 --rounds 2] [--cvar r_lodscale=0.45]`: same cameras, per-camera change, A | B
+   images, interleaved fps.
+3. **Verified in game** (cs_cache, above). **Now:** the queue rebuilds dust2, cbble, mirage,
+   inferno (nuke gets its lean rebuild in B; vertigo loses none; rats on hold). When it ends:
+   read each `AB_DONE` line and `ab/ab_sheet.png`, look at the shots, then show the user
+   installed | new sheets and the interleaved fps and ask to install (`mohkit install`).
+   Full rebuilds also bring the fixed LOD and FFA spawns (check spawn spread in the plan).
 
 ### B. "Lean" rebuild of de_nuke (user, chat 2026-10-02 ~12:40), then de_mirage
 

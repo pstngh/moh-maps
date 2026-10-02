@@ -943,6 +943,7 @@ Typical measured values: resolution 32 (the lightmapdensity), backsplashFraction
 
 - **Lightmaps** are 128×128 RGB pages. Brush and patch surfaces use `lightmapNum/X/Y/Width/Height`. Terrain patches use `iLightMap` and `s,t` (§8).
 - **Static-model vertex colours**: `STATICMODELDATA[firstVertexData + 3·i]` = RGB for vertex i, in the order of the TIKI's surfaces and vertices.
+- **Triangle-soup surfaces** (`MST_TRIANGLE_SOUP`, `renderergl1/tr_bsp.c:808-860` `ParseTriSurf`): the shader is looked up with `LIGHTMAP_BY_VERTEX` (no lightmap whatever `lightmapNum` says), the drawvert colours pass `R_ColorShiftLightingBytesAlpha` (the same overbright shift as lightmaps), and the surface is a world surface, drawn only through the `leafsurfaces` of visible leaves. Static models are never culled by VIS (§5.2). Not yet tried as a carrier for converted props (HANDOFF B).
 - **Entity lump**:
   - Static models (`static_*` classnames) are **removed** from it and moved to STATICMODELDEF.
   - `light`, `info_pathnode` and similar entities stay (measured).

@@ -312,6 +312,15 @@ When a shot looks wrong and the data "checks out on paper", test what the game r
   lists, changed files by type, `.jpg`/`.tga` pairs, then the BSP lump by lump) and re-shoot
   the old package with the same cameras. A "LOD broke the blends" scare was 48 stale
   `l2_*.jpg` files the package had gained.
+- **What another package does to it:** `mohkit ab <map> --a X.pk3 --b X.pk3 <others>`
+  shoots the same cameras with both sets and ranks them by change (`game.shots_ab`: mean
+  largest-channel difference, share of pixels off by more than 40, A | B images,
+  `ab_sheet.png`). It found installed CS:GO conversions overriding each other's props
+  (cs_cache's Ttruck camera: 3% of the pixels; `pak.path_clashes` lists such files). The
+  same command with the installed and the new build is the regression check before an install.
+  Shots repeat exactly run to run except a conversion's overview camera (two runs of one
+  pk3: mean 1.0, the top ~15 rows holding the previous frame and one sky face flickering), so
+  check a surprising change against an A-vs-A run first.
 - **What a pixel shows:** cast that camera's rays (eye, angles, fov) through the `.map` or
   both BSPs (Source and compiled) and list the first face hit with its shader and facing. A
   Source hit with no MOHAA hit is a missing face; the same hit facing away is an inside-out

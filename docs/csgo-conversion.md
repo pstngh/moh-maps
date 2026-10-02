@@ -23,6 +23,24 @@ gains or loses entries; keep copies, the next `--resume` uses whatever is there)
 it takes ~4 min with LOD cached (`<build dir>/lod/`, keyed by SKD bytes, `lod.VERSION`,
 scale and instance colours), ~15 min after a `lod.VERSION` bump.
 
+**File names are per map.** Everything a conversion packages is under its own name: world
+textures `textures/csgo/<name>/<material path>`, prop models `models/csgo/<name>/...`, prop
+textures and clip shaders `textures/csgo/<name>_p/...` (a world material and a prop material
+can share a path, with different shaders), merged props `models/csgo/m_<name>/`, sky
+`env/csgo/<name>/`. Only the engine-fixed `models/fx/windows/debris_<n>.tik` are shared
+(`convert.SHARED_PATHS`, the same bytes in every map). Prop files are map-specific (LOD
+tables, vertex order, headroom gain), and installed pk3s that share a path override each
+other: the game searches a folder's pk3s from the last name down (`FS_AddGameDirectory`), so
+until 2026-10-02 every map drew one pk3's copy of `models/csgo/props/...` (252 files among
+the eight installed; cs_cache lost all 208 of its own, its trucks' cabs mangled and
+flat-shaded). Verified after the fix: the rebuilt cs_cache with the seven other installed
+pk3s against alone, same 19 cameras: 18 pixel-identical (Ttruck had 3% of its pixels changed
+before), the overview differing no more than two runs of one pk3 do. Older builds and
+`--resume` of them keep the shared names: packaging warns
+(`pak.unowned_paths`), `mohkit install` lists clashes (`pak.path_clashes`), and `mohkit ab
+<map> --a X.pk3 --b X.pk3 <other installed pk3s>` shows what another installed map does to
+this one (same cameras, per-camera change).
+
 **When a conversion is done** (the user asks for it as "the same way as Inferno and
 Cache"): every CS:GO route is walkable (every ladder passes `game.ladder_probe`, jumps and
 drops work); the named-camera sheet has no holes, leaks, black or missing textures; props
@@ -519,15 +537,6 @@ CS:GO tree under `~/Documents/Codex/2026-09-21/https-github-com-swagsoftware-kis
   (r 0.03-0.08); the vertex alphas are right (corr 0.995 with the Source displacement
   alphas, dust2); `$blendmasktransform` is ignored. A dithered second stage would cost a
   pass per blend surface: not done.
-- Installed conversions share prop asset paths (`models/csgo/...`, prop textures) whose
-  contents are map-specific since LOD and headroom gain: the game uses one pk3's copy for
-  every map (252 such files among the eight installed on 2026-10-02). Seen in game: cs_cache
-  shot with all eight pk3s loaded draws its trucks with mangled, flat-shaded cabs and a rock as
-  a dark blob, against the same cameras with cs_cache.pk3 alone (Ttruck: mean diff 2.9, 3% of
-  the pixels over 40; 12 of 17 cameras under 0.4). Files lost per map: cs_cache 208,
-  cs_dust2 67, cs_cbble 32, cs_mirage 26, cs_inferno 12, cs_rats 4, cs_nuke and cs_vertigo
-  none. `mohkit install` warns; the fix is per-map
-  prop asset names.
 - Bots never climb the step-column ladders (the navmesh links only `func_ladder`s), so on
   ladder-heavy maps (de_rats: 30) bots stay on their floor. Untested idea: a `func_ladder`
   in front of each column as the bots' link.

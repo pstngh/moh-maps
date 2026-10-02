@@ -165,4 +165,8 @@ Sky: `surfaceparm sky`, `surfaceparm noimpact`, `surfaceparm nolightmap`,
   `env/…`). `mohkit build` copies them into the compile root (the compiler needs
   them for lightmap sizing and flags) and into the PK3.
 - Duplicate shader names: the first-loaded script wins. Prefix everything with
-  your map name.
+  your map name, file paths too (`textures/<name>/…`, `scripts/<name>.shader`): the game
+  searches the pk3s of `main/` from the last name down, so a path two installed maps both
+  ship is drawn from one pk3 on both (CS:GO conversions overrode each other's props this
+  way until 2026-10-02). `mohkit build` warns about packaged files outside the map's name
+  (`pak.unowned_paths`).

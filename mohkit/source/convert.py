@@ -3134,8 +3134,8 @@ def map_cameras(src: Path, map_: MapFile, landmarks=(), shots: int = 9, scale: f
     return named + auto_cameras(map_, 1 if named else shots, () if named else landmarks, spawns=not named)
 
 
-def shoot_local(map_name: str, name: Optional[str] = None, scale: float = 1.0, log=print) -> dict:
-    """Re-shoot the packaged ``local/csgo/<name>/<name>.pk3`` from its cameras (no rebuild)."""
+def _local_cameras(map_name: str, name: Optional[str] = None, scale: float = 1.0) -> tuple[str, Path, list]:
+    """(name, ``local/csgo/<name>``, cameras) of the last conversion of ``map_name``."""
     import json
 
     from .. import config
@@ -3148,7 +3148,30 @@ def shoot_local(map_name: str, name: Optional[str] = None, scale: float = 1.0, l
     prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
     cams = map_cameras(src, MapFile.load(str(out / f"{name}.map")), prev.get("convert", {}).get("landmarks", ()),
                        scale=scale, offset=prev.get("convert", {}).get("offset") or (0, 0, 0))
+    return name, out, cams
+
+
+def shoot_local(map_name: str, name: Optional[str] = None, scale: float = 1.0, log=print) -> dict:
+    """Re-shoot the packaged ``local/csgo/<name>/<name>.pk3`` from its cameras (no rebuild)."""
+    name, out, cams = _local_cameras(map_name, name, scale)
     return shoot(name, out / f"{name}.pk3", cams, out, log=log)
+
+
+def ab_local(map_name: str, a: list, b: list, name: Optional[str] = None, scale: float = 1.0,
+             labels: tuple[str, str] = ("A", "B"), out: Optional[Path] = None, shots: bool = True,
+             perf_ms: int = 0, rounds: int = 2, cvars: Optional[dict] = None, log=print) -> dict:
+    """Two pk3 sets at a conversion's cameras, into ``local/csgo/<name>/ab/`` unless ``out``:
+    what changed in the shots (``game.shots_ab``) and, with ``perf_ms``, interleaved frame
+    rates (``game.perf_ab``)."""
+    from .. import game
+    name, base, cams = _local_cameras(map_name, name, scale)
+    out = Path(out) if out else base / "ab"
+    res: dict = {}
+    if shots:
+        res["shots"] = game.shots_ab(a, b, f"dm/{name}", cams, out, labels, cvars=cvars, log=log)
+    if perf_ms:
+        res["perf"] = game.perf_ab(a, b, f"dm/{name}", cams, out, labels, rounds, perf_ms, cvars=cvars, log=log)
+    return res
 
 
 def perf_local(map_name: str, name: Optional[str] = None, scale: float = 1.0, ms: int = 3000,
