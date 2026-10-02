@@ -3370,6 +3370,35 @@ def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, l
     return report
 
 
+def final_checks(map_name: str, name: Optional[str] = None, bots: int = 8, seconds: float = 90,
+                 log=print) -> dict:
+    """The play checks of a finished conversion (csgo-conversion.md "When a conversion is
+    done"), on ``local/csgo/<name>/<name>.pk3``: ``bots`` bots for ``seconds`` (kills), then
+    every ladder climbed by ``game.ladder_probe``. Stored as ``report.json["final"]``.
+    Never installs."""
+    import json
+
+    from .. import game
+    name, out, _ = _local_cameras(map_name, name)
+    pk3, bsp = out / f"{name}.pk3", out / f"{name}.bsp"
+    run = game.run([pk3], f"dm/{name}", (), bots=bots, match_seconds=seconds, run_name=f"{name}_bots",
+                   timeout=300 + seconds)
+    log(run.summary())
+    lads = game.ladder_probe([pk3], f"dm/{name}", game.ladders_for_probe(bsp), run_name=f"ladp_{name}_")
+    for r in lads:
+        log(f"ladder {r['ok']} climbed {r['climbed']} at {r['origin']} angle {r['angle']}")
+    res = {"kills": run.kills, "bots": bots, "seconds": seconds, "bot_run": run.summary().splitlines()[0],
+           "ladders": len(lads), "ladders_ok": sum(1 for r in lads if r["ok"]),
+           "ladders_failed": [[r["origin"], r["climbed"]] for r in lads if not r["ok"]]}
+    rp = out / "report.json"
+    rep = json.loads(rp.read_text()) if rp.is_file() else {}
+    rep["final"] = res
+    rp.write_text(json.dumps(rep, indent=2))
+    log(f"== final checks {name}: {res['kills']} kills ({bots} bots, {seconds:g} s), "
+        f"ladders {res['ladders_ok']}/{res['ladders']} climb")
+    return res
+
+
 def _ref_ratio(ref_dir: Path, shots_dir: Path) -> tuple[float, int]:
     """Median over the cameras both folders share of reference mean / shot mean (display
     brightness), and the number of cameras. The median ignores a camera or two that look

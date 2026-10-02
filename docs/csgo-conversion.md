@@ -4,6 +4,8 @@
 python -m mohkit csgo de_dust2                  # -> local/csgo/cs_dust2/{cs_dust2.map, assets/, cs_dust2.pk3, shots}
 python -m mohkit csgo de_inferno --name cs_inferno -q normal
 python -m mohkit csgo de_dust2 --props-only     # re-place runtime props in the last compile (~1 min)
+python -m mohkit csgo de_dust2 -q fastrad --final   # + 8 bots for 90 s and every ladder probed (report.json "final")
+python -m mohkit ab de_dust2 --a INSTALLED.pk3 --b local/csgo/cs_dust2/cs_dust2.pk3 --perf 2000   # before installing
 ```
 
 `--resume` skips conversion and compiling: it injects the props, packages and tests

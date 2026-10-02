@@ -19,6 +19,7 @@
     python -m mohkit csgo de_dust2 --resume                        inject, package and test the last compile
     python -m mohkit csgo de_dust2 --shoot                         re-shoot the packaged map (sheets, shots, exposure)
     python -m mohkit csgo de_dust2 --fit-exposure                  match CS:GO's brightness (needs csgo-ref shots)
+    python -m mohkit csgo de_dust2 -q fastrad --final              build, then 8 bots and the ladder probe (no install)
     python -m mohkit exposure local/csgo/*/shots [--by-map] [--stock] [--mask shot.png]   brightness check
     python -m mohkit csgo-ref de_dust2 [--name cs_dust2]        CS:GO's own screenshots from the same cameras
     python -m mohkit ab de_cache --a INSTALLED.pk3 --b NEW.pk3 [--perf 2000]   same cameras, two pk3 sets: changes, fps
@@ -321,7 +322,7 @@ def cmd_csgo(a) -> int:
         return 0
     if a.resume:
         rep = resume_local(a.map, a.name, test=not a.no_test, exposure=a.exposure, lod=not a.no_lod)
-        return 0 if rep.get("pk3") else 1
+        return _final(a) if rep.get("pk3") else 1
     if a.refresh_assets:
         from .source.convert import refresh_assets
         rep = refresh_assets(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
@@ -338,7 +339,15 @@ def cmd_csgo(a) -> int:
     rep = build_local(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
                       detail_all=not a.structural, max_texture=a.max_texture, props_only=a.props_only,
                       lighting="mohlight" if a.mohlight else "csgo", **extra)
-    return 0 if rep.get("compile_ok") else 1
+    return _final(a) if rep.get("compile_ok") else 1
+
+
+def _final(a) -> int:
+    """``--final``: the play checks after a build (bots, ladders); never installs."""
+    if getattr(a, "final", False):
+        from .source.convert import final_checks
+        final_checks(a.map, a.name)
+    return 0
 
 
 def cmd_csgo_ref(a) -> int:
@@ -489,6 +498,8 @@ def main(argv=None) -> int:
     s.add_argument("--resume", action="store_true",
                    help="only inject props, package and test what the last build left (after redoing a stage by hand)")
     s.add_argument("--no-test", action="store_true")
+    s.add_argument("--final", action="store_true",
+                   help="after the build: 8 bots for 90 s and every ladder probed (report.json 'final'); never installs")
     s.add_argument("--no-lod", action="store_true", help="with --resume: props without progressive LOD (A/B tests)")
     s.add_argument("--shoot", action="store_true", help="only re-shoot the packaged map (contact sheets, shots, exposure)")
     s.add_argument("--exposure", type=float, help="with --resume: tone-map CS:GO's light with this exposure")
