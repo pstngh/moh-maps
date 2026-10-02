@@ -14,40 +14,53 @@ installed.
 
 All seven full-detail builds with LOD + fades are installed and are what the user plays now.
 
-### Session 2026-10-02 (from 07:20): Nuke "push further", LOD bugs, FFA spawns
+### Session 2026-10-02 (07:20-10:45): Nuke "push further", LOD bugs, FFA spawns. PAUSED
 
-Done (committed 74f1053, d8ca23d; later work below not yet committed unless noted):
-- **FFA spawns**: `mohkit/source/nav.py` (CS:GO nav v16 reader, farthest-point spawns by walking
-  distance, yaw to the longest open run), `Options.ffa_spawns` (default on) in
-  `Converter._dm_spawns`; nuke and mirage get 24 each over 16-17 named places (plots looked good).
-  Not yet in any build: needs a full conversion (rebuild), then 8 bots.
-- **LOD shard bug fixed** (74f1053): the grey slanted shards in every conversion (Ramp3 etc.)
-  were seam slivers / zero-area strip leftovers drawn to vertex 0 (engine stops only at
-  index-degenerate triangles). docs/reference/engine.md has the rule.
-- **More LOD bugs found (uncommitted, `mohkit/lod.py` VERSION 5):** flat panels (fence covers)
-  collapsed to a few triangles at "no geometric error" smeared their texture and CS:GO's baked
-  vertex lighting (dark grey sheets). Collapse cost now also counts texture slide (world units)
-  and vertex-colour change (`COLOR_UNITS` 0.25 per level, up to 8 instances per SKD, passed
-  from `inject_statics`), and `measured_errors` raises each level's error to the measured
-  distance from the original surface. Tests in tests/test_lod.py. Building s5 to verify.
-- **Perf diagnosis (Nuke stock build):** world 1.29 ms, per-surface prop overhead 0.38 ms,
-  prop vertex work 2.0 ms (55%) per frame (`--toggle r_drawstaticmodelpoly=0 /
-  r_drawstaticmodels=0`). `bk` in com_speeds is meaningless (docs/testing.md). 400 fps needs
-  ~45k prop verts/view; we draw ~120k. Most are merged clusters of CS:GO `_autocombine_`
-  meshes (pipes, wires, joists, ducts: ~60% of in-view prop geometry) that LOD can't simplify
-  (boxy) and that static models can't VIS-cull. `mohkit/propcost.py` estimates drawn prop
-  vertices per camera offline (matches r_speeds within ~15%).
-- Variants measured (interleaved, 2 runs): v1 (stock profile) 233 mean / 175 worst; s1 (LOD
-  tau 10, base_error 4) 272 / 208. s2 = s1 + `merge_split` [384, 768] (staticmerge cuts big
-  models into pieces): estimate 125k -> 120k verts/view only. s3/s4 = + fades capped at 1024
-  (statics.json post-processed by hand; `fade_cap` 1024, `fade_small` 256): not timed yet.
-  Builds kept in `local/csgo/before/cs_nukes_{v1,s1,s2,s3,s4,s5}/`.
-- Scratch tools (session scratchpad, not in repo): shoot_cams.py (named cameras, cvars),
-  cost.py (propcost per camera), nolod.py (pk3 minus chosen .lod files, for bisecting).
+**User (chat ~10:10): "stop before starting mirage, we will do it in a fresh session".**
+Nothing is running. Nothing new is installed (installed maps are still last night's builds).
 
-Next: check s5 shots (Troof Silo2 fence covers, Ramp3, Troof Silo), time s5 vs v1, then decide
-the stock profile (fade cap, split, LOD tau) and show the user sheet + fps; then full rebuilds
-of nuke and mirage only (user 07:35) with FFA spawns, bots, install after the user's OK.
+Results (all committed and pushed):
+- **FFA spawns** (`mohkit/source/nav.py`, `Options.ffa_spawns` default on, `Converter._dm_spawns`):
+  CS:GO nav mesh (v16) -> 24 spread DM spawns by walking distance on nuke and mirage (CS:GO's
+  own DM spawns kept first where they exist). Only takes effect in a full conversion.
+- **LOD fixes, every conversion was affected** (`mohkit/lod.py` VERSION 10):
+  1. shards (grey slanted triangles, e.g. Nuke Ramp3): seam slivers / zero-area leftovers drawn
+     to vertex 0 (engine stops only at index-degenerate triangles; docs/reference/engine.md);
+  2. flat vertex-lit panels collapsed "for free" (fence covers as dark grey sheets, window
+     glass, ladders, railings gone): collapse order now counts texture slide + shade change
+     (accumulated), the free level must respect them, the distance curve is geometric
+     (`ATTR_FAR` 0) and measured (`measured_errors`). docs/csgo-conversion.md "What a collapse
+     costs". Sheet: `local/csgo/compare/cs_nuke_lodfix.png` (old LOD | fixed | no LOD).
+- **`convert.PROP_PROFILES["stock"]` updated** to the s8 settings: fade_cap 1024, fade_small
+  256, lod_tau 10, base_error 4, split_radius 384 / split_cell 768 (staticmerge cuts big CS:GO
+  `_autocombine_` meshes into pieces). Build s8 = `local/csgo/before/cs_nukes_s8/cs_nukes.pk3`
+  (stock profile via `--resume` on the cs_nukes compile; old spawns, not installed).
+  Sheet: `local/csgo/compare/cs_nuke_stock2.png` (CS:GO | installed full | s8).
+- **fps (1280x720, interleaved, 2 runs, RustDesk running so all numbers ~15% low):** s8 200 mean
+  / 148 worst vs the old stock build v1 202 / 145; the installed full build was ~98/64 last
+  night. 400+ is not reachable by LOD: per frame on Nuke the world is 1.3 ms, prop surfaces
+  0.4 ms, prop vertices ~2 ms; static models have no VIS test, so props behind walls/floors
+  draw whenever in the frustum and within fade range. ~60% of in-view prop geometry is CS:GO
+  `_autocombine_` pipes/wires/trusses/ducts that barely simplify (boxy).
+- Tools: `mohkit/propcost.py` (offline drawn prop vertices per camera, ~15% of r_speeds),
+  `--toggle r_drawstaticmodelpoly=0` (vertex work vs surface overhead). Scratch harnesses in
+  the session scratchpad (gone next session): shoot_cams.py, cost.py, nolod.py (bisect a pk3
+  by dropping .lod files), attrfar.py.
+- Builds kept: `local/csgo/before/cs_nukes_{v1,s1..s8}/` (s1-s7 are superseded experiments).
+
+**Next (fresh session; ask the user first which way):**
+1. The user picks a direction for Nuke fps: (a) accept s8-level (~2x the installed full build,
+   correct look); (b) stronger levers with visible cost: shorter fades (768), drop CS:GO
+   `_autocombine_wires_*` (18% of in-view prop geometry) or other categories, `--structural`
+   VIS for the world part; (c) a real occlusion scheme for props (not available in the engine:
+   static models are never VIS-culled).
+2. Full rebuilds with FFA spawns + fixed LOD: Nuke, then Mirage (the user wants Mirage in the
+   fresh session): `python -m mohkit csgo de_<map> -q fastrad --props <profile> [--name X]`,
+   then 8 bots (kills, spawn spread), ladder probe, sheets vs CS:GO, show the user, install
+   after their OK. Note: `--props stock` now means the s8 settings.
+3. Every installed conversion still has the old LOD (shards, dark panels): re-inject each with
+   `python -m mohkit csgo de_<map> --resume` (LOD ~15 min per map now, cached afterwards) and
+   reinstall, when the user agrees.
 
 **User (chat 23:20): when the maps are redone, make them FFA: DM spawns spread everywhere.**
 Today `Converter.entities()` (convert.py ~1824) maps T/CT spawns to axis/allied and uses CS:GO's

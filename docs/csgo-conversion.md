@@ -214,17 +214,21 @@ are now the largest remaining prop cost. `--resume --no-lod` builds without it.
 **What a collapse costs (2026-10-02).** The quadric error is the distance to the original
 *planes*, so on flat parts it is zero for collapses that still change what you see. de_nuke's
 chain-link fence covers (flat panels with CS:GO's baked vertex lighting) went from 304
-triangles to 8 "for free" and drew as dark grey sheets: their darkest corner colours spread
-over the whole panel. A collapse now also costs (largest wins): the texture slide on each
-surviving triangle (how far its old mapping would put the moved corner's texture
-coordinate from the one it gets, in world units), and the vertex-colour change there
-(`lod.COLOR_SCALE` 0.5 x the move's length x the change as a fraction of 255, for up to 8
-instances drawn with the mesh; their colours come from `inject_statics`). A flat 0.25 units
-per colour level kept nearly everything (de_nuke: 576k prop vertices per view instead of
-115k, 124 fps instead of 168). After simplifying, `lod.measured_errors` replays 16
-levels like the engine and raises each level's error to the farthest drawn point from the
-original surface (open objects like railings close their gaps at zero plane error). Before,
-every conversion also drew shards: see docs/reference/engine.md §5.2 (index-degenerate rule).
+triangles to 8 "for free" and drew as dark grey sheets (their darkest corner colours spread
+over the panel); window glass, ladders and railings vanished the same way. Collapses are now
+ordered by a cost that also counts the texture slide on each surviving triangle (back through
+the triangle's own mapping, in world units) and the shade change there (`lod.COLOR_STEP` = 12
+levels costs the collapse's length, less in proportion; up to 8 instances' colours per SKD,
+from `inject_statics`), both added up along collapse chains. The free level (collapses made
+at every distance, `base_error`) must respect that full cost; the distance curve uses the
+geometric error (`lod.ATTR_FAR` = 0), measured after simplifying by replaying 16 levels like
+the engine (`lod.measured_errors`: open objects like railings close their gaps at zero plane
+error). Counting texture and shading in the distance curve too kept 3.5x the vertices
+(de_nuke 397k prop vertices per view instead of 115k); counting only the geometry
+everywhere is what drew the dark sheets. de_nuke stock profile (s8): ~277k vertices per view
+estimated (`mohkit.propcost`), fps level with the old stock build (two interleaved runs:
+200 vs 202 mean, 148 vs 145 worst), shots match a no-LOD build. Every conversion before this
+also drew shards: docs/reference/engine.md §5.2 (index-degenerate rule).
 
 **Props vanish where CS:GO fades them (since 2026-10-01).** CS:GO fades most props out
 by distance (sprp flag 1, `fademindist`..`fademaxdist`; `prop_dynamic` keys of the same

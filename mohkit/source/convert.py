@@ -199,14 +199,17 @@ class Options:
 # foliage: props whose largest dimension (Source units) is below this are left out (all /
 # without collision / foliage models); fade_cap: a fading prop vanishes by this distance at the
 # latest; fade_small: non-fading props smaller than this fade at fade_cap too; lod_tau: the
-# LOD curve's screen error (pixels, mohkit.lod)
+# LOD curve's screen error (pixels, mohkit.lod); split_radius / split_cell: models bigger than
+# split_radius are cut into pieces merged in cells of split_cell (mohkit.staticmerge)
 PROP_PROFILES = {
     "full": dict(mesh_lod=0, base_error=0.01, drop=0, drop_nonsolid=0, foliage=0, fade_cap=0, fade_small=0,
                  lod_tau=2.0),
     "balanced": dict(mesh_lod=0, base_error=0.5, drop=12, drop_nonsolid=24, foliage=0, fade_cap=2048,
                      fade_small=48, lod_tau=3.0),
-    "stock": dict(mesh_lod=0, base_error=2.0, drop=32, drop_nonsolid=64, foliage=128, fade_cap=1536,
-                  fade_small=128, lod_tau=6.0),
+    # stock: 2026-10-02 de_nuke experiments (s7): shorter fades, coarser LOD, big CS:GO
+    # _autocombine_ meshes cut into pieces before merging (split_radius / split_cell)
+    "stock": dict(mesh_lod=0, base_error=4.0, drop=32, drop_nonsolid=64, foliage=128, fade_cap=1024,
+                  fade_small=256, lod_tau=10.0, split_radius=384.0, split_cell=768.0),
 }
 FOLIAGE_WORDS = ("foliage", "bush", "shrub", "grass", "weed", "plant", "ivy", "flower", "leaves", "hedge", "vine")
 

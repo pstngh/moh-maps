@@ -47,7 +47,7 @@ import numpy as np
 
 from .source import skd as _skd
 
-VERSION = 6                   # bump when the output changes (cache key)
+VERSION = 10                  # bump when the output changes (cache key)
 TAU_PX = 2.0                  # target screen error (pixels)
 REF_WIDTH = 1920.0            # ... at this screen width
 REF_FOV = 80.0                # ... and this fovX
@@ -59,8 +59,9 @@ WELD = 1e-3                   # positions closer than this (units) are one posit
 SEAM_WEIGHT = 1.0             # penalty plane weight (x edge length^2) on open and seam edges
 FLIP_DOT = 0.2                # refuse collapses that turn a triangle more than ~78 degrees
 FREE_ERROR = 0.01             # collapses below this error (units) are made even at full detail
-COLOR_SCALE = 0.5             # a full-range vertex-colour change over a collapse of length L costs this x L units
+COLOR_STEP = 12.0             # a vertex-colour change of this many levels (0-255) costs a collapse its length
 COLOR_INSTANCES = 8           # instances whose vertex colours a shared mesh's collapses must keep
+ATTR_FAR = 0.0                # how much texture slide and shade change count in the distance curve
 
 
 @dataclass
@@ -69,6 +70,7 @@ class Simplified:
     perms: list[np.ndarray]             # per surface: new vertex i was old vertex perm[i]
     errors: np.ndarray                  # error (units) of collapse steps 1..K, non-decreasing
     steps: int = 0
+    geometric: Optional[np.ndarray] = None   # the same without texture slide and shade change
 
     @property
     def perm(self) -> np.ndarray:
@@ -89,15 +91,15 @@ def _quadrics(pts: np.ndarray, n: np.ndarray, w: np.ndarray) -> np.ndarray:
 
 
 def simplify(surfaces: Sequence[_skd.SkdSurface], colors: Optional[Sequence[np.ndarray]] = None,
-             color_scale: float = COLOR_SCALE) -> Simplified:
+             color_step: float = COLOR_STEP) -> Simplified:
     """Collapse sequence for a model's surfaces (one global step numbering, as the engine
     compares every surface's ``collapseIndex`` with one cutoff). ``colors``: per surface, the
     vertex colours of the instances drawn with it (instances x vertices x 3, 0-255): a
-    collapse that changes how a surviving triangle shades costs ``color_scale`` x the move's
-    length x the change (as a fraction of 255), like the texture slide: a wrong shade shows
-    in proportion to the area it spreads over (converted props carry CS:GO's baked per-vertex
-    lighting, and a flat panel collapsed to a few triangles spread its darkest corners over
-    all of it)."""
+    collapse that changes how a surviving triangle shades by ``color_step`` levels costs the
+    move's length (less in proportion), like the texture slide: a visibly wrong shade is
+    wrong wherever the patch it covers is a pixel or more (converted props carry CS:GO's
+    baked per-vertex lighting, and a flat panel collapsed to a few triangles spread its
+    darkest corners over all of it). Slides and shade changes add up along collapse chains."""
     ns = len(surfaces)
     counts = [len(s.positions) for s in surfaces]
     allpos = np.concatenate([np.asarray(s.positions, np.float64) for s in surfaces])
@@ -213,6 +215,7 @@ def simplify(surfaces: Sequence[_skd.SkdSurface], colors: Optional[Sequence[np.n
                     if not cs:
                         del copies[pos_of[s][v]][s]
     errors: list[float] = []
+    geo: list[float] = []
 
     def cost(p: int, q: int) -> float:
         a, b = Ql[p], Ql[q]
@@ -328,16 +331,28 @@ def simplify(surfaces: Sequence[_skd.SkdSurface], colors: Optional[Sequence[np.n
                     du = wa * ua[0] + wb * u1[0] + wc * u2[0] - ub[0]
                     dv = wa * ua[1] + wb * u1[1] + wc * u2[1] - ub[1]
                     if uva > 1e-12:
-                        # world units per texture unit on this triangle
-                        scale = math.sqrt(math.sqrt(den) / uva)
-                        worst = max(worst, math.sqrt(du * du + dv * dv) * scale)
+                        # the texture offset back through the triangle's own mapping (texture
+                        # space -> its two edges), so stretched mappings (around a wire vs
+                        # along it) weigh each direction right
+                        d0x, d0y = u1[0] - ua[0], u1[1] - ua[1]
+                        d1x, d1y = u2[0] - ua[0], u2[1] - ua[1]
+                        det = d0x * d1y - d1x * d0y
+                        sx = (d1y * du - d1x * dv) / det
+                        tx = (d0x * dv - d0y * du) / det
+                        wx = sx * e0[0] + tx * e1[0]
+                        wy = sx * e0[1] + tx * e1[1]
+                        wz = sx * e0[2] + tx * e1[2]
+                        worst = max(worst, math.sqrt(wx * wx + wy * wy + wz * wz))
                     if cols is not None:
                         cs_ = cols[s]
                         ca, c1, c2, cb = cs_[a], cs_[o1], cs_[o2], cs_[bv]
                         dc = max(abs(wa * x + wb * y + wc * z - w) for x, y, z, w in zip(ca, c1, c2, cb))
-                        worst = max(worst, dc / 255.0 * color_scale * move)
+                        worst = max(worst, min(1.0, dc / color_step) * move)
         return worst
 
+    # texture slide and shade change accumulated at each position: each collapse is judged
+    # against the mesh as it is, so small changes would add up unseen along a chain
+    acc = [0.0] * npos
     k = 0
     while heap:
         c, p, q, sp, sq = heapq.heappop(heap)
@@ -347,13 +362,18 @@ def simplify(surfaces: Sequence[_skd.SkdSurface], colors: Optional[Sequence[np.n
             continue
         # the texture slide counts like geometric error: raise the cost and requeue
         slide = uv_slide(p, q)
-        if slide > 1e-3:                    # below: float32 noise of exact mappings
-            need = slide * slide * max(Wl[p], 1e-12)
+        if slide <= 1e-3:                   # float32 noise of exact mappings
+            slide = 0.0
+        drift = max(acc[p] + slide, acc[q]) if (slide or acc[p]) else acc[q]
+        if drift > 0.0:
+            need = drift * drift * max(Wl[p], 1e-12)
             if need > c * (1.0 + 1e-9) + 1e-12:
                 heapq.heappush(heap, (need, p, q, sp, sq))
                 continue
+        acc[q] = max(acc[q], acc[p] + slide)
         k += 1
         errors.append(math.sqrt(max(c, 0.0) / max(Wl[p], 1e-12)))
+        geo.append(math.sqrt(max(cost(p, q), 0.0) / max(Wl[p], 1e-12)))
         # move every copy of p onto a copy of q in the same surface (``pick``)
         for s, vs in copies[p].items():
             for a in vs:
@@ -410,6 +430,7 @@ def simplify(surfaces: Sequence[_skd.SkdSurface], colors: Optional[Sequence[np.n
 
     K = k
     err = np.maximum.accumulate(np.asarray(errors, np.float64)) if errors else np.zeros(0)
+    geo_err = np.maximum.accumulate(np.asarray(geo, np.float64)) if geo else np.zeros(0)
     death[death < 0] = K + 1
     out, perms = [], []
     face_off = 0
@@ -451,7 +472,7 @@ def simplify(surfaces: Sequence[_skd.SkdSurface], colors: Optional[Sequence[np.n
         ns_.collapse_index = cidx[perm].astype(np.int32)
         out.append(ns_)
         perms.append(perm)
-    return Simplified(out, perms, err, K)
+    return Simplified(out, perms, err, K, geo_err)
 
 
 # --------------------------------------------------------------------------- measured error
@@ -626,7 +647,7 @@ def _fit_under(xs: np.ndarray, true: np.ndarray, idx: Sequence[int]) -> np.ndarr
 
 
 def lod_control(errors: np.ndarray, radius: float, tau: float = TAU_PX, vanish: float = 0.0,
-                base_error: float = FREE_ERROR) -> Optional[bytes]:
+                base_error: float = FREE_ERROR, free_errors: Optional[np.ndarray] = None) -> Optional[bytes]:
     """``.lod`` bytes (lodControl_t) for a model's collapse errors, or None when nothing
     collapses. The curve keeps error <= ``tau`` pixels at its points, starts at full detail
     (only the error-free collapses, < ``FREE_ERROR`` units) where the high preset's cap lands
@@ -638,7 +659,9 @@ def lod_control(errors: np.ndarray, radius: float, tau: float = TAU_PX, vanish: 
     if K == 0 or radius <= 0:
         return None
     P, k, s = metric_scale(), 100.0 / REF_FOV, REF_LODSCALE
-    free = 1.0 + float(np.searchsorted(errors, base_error, side="right"))
+    # the free level (made at every distance) may differ from the curve's errors: up close
+    # nothing may change that shows, texture and shading included (``free_errors``)
+    free = 1.0 + float(np.searchsorted(errors if free_errors is None else free_errors, base_error, side="right"))
     m_far = radius * k / MAX_DISTANCE
     m_v = radius * (100.0 / VANISH_FOV) / vanish if vanish > 0 else 0.0
     if m_v <= m_far:
@@ -773,17 +796,24 @@ def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True,
         z = np.load(cf)
         skd_bytes, perm, errors, radius, steps = (z["skd"].tobytes(), z["perm"], z["errors"], float(z["radius"]),
                                                   int(z["steps"]))
+        geometric = z["geometric"]
     else:
         surfs = [_skd.SkdSurface(s.name, s.positions, s.normals, s.uvs, s.triangles) for s in info.surfaces]
         res = simplify(surfs, surf_cols)
         allp = np.concatenate([np.asarray(s.positions, np.float64) for s in surfs]) * tiki_scale
         radius = _skd.bounds_radius(allp.min(0), allp.max(0))
-        errors, steps = measured_errors(res.surfaces, res.errors) * tiki_scale, res.steps
+        geometric = measured_errors(res.surfaces, res.geometric) * tiki_scale
+        errors, steps = np.maximum(res.errors * tiki_scale, geometric), res.steps
         skd_bytes = _skd.build_skd(info.name, res.surfaces) if steps else data
         perm = res.perm if steps else np.arange(n)
         if cf is not None:
-            np.savez(cf, skd=np.frombuffer(skd_bytes, np.uint8), perm=perm, errors=errors, radius=radius, steps=steps)
-    lod = lod_control(errors, radius, tau=tau, vanish=vanish, base_error=base_error) if steps else None
+            np.savez(cf, skd=np.frombuffer(skd_bytes, np.uint8), perm=perm, errors=errors, geometric=geometric,
+                     radius=radius, steps=steps)
+    # with distance, geometric error decides (shading and texture detail go with the pixels;
+    # counting them there kept 3.5x the vertices on de_nuke); the free level keeps them
+    curve = np.maximum(geometric, ATTR_FAR * errors) if ATTR_FAR else geometric
+    lod = lod_control(curve, radius, tau=tau, vanish=vanish, base_error=base_error,
+                      free_errors=errors) if steps else None
     if lod is None:
         return LodResult(data, None, np.arange(n), steps)
     return LodResult(skd_bytes, lod, perm, steps)
