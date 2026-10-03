@@ -89,40 +89,54 @@ with `--name cs_nuke`. Open: whether to do Mirage the same way (expect a similar
 and further levers: drop more autocombine clusters by kind (pipes, trusses), `prop_light`
 as extra luxels for the brush proxies' light, and the 500-650 fps guess is out of reach.
 
-### C. Local scripts that should be mohkit commands
+### C. Knowledge still outside mohkit (audit of local/ + harvest items, 2026-10-02 ~20:15 ET)
 
-Done 2026-10-02: `mohkit csgo <map> --final` (bots + ladder probe into report.json, never
-installs), `mohkit ab <map> --a .. --b .. [--perf MS --rounds N --cvar k=v]` (same-camera
-change + A | B images + interleaved fps; replaces `perf_nukes.sh` and the A/B part of
-`cmp3.py`/`compare.py`). Left: the CS:GO | before | after sheet (`local/csgo/cmp3.py`),
-`mohkit exposure --changed BEFORE AFTER [--ref]` and the README image builder
-(`readme_img.py`); then point csgo-conversion.md at them.
+The user asked that everything learned live in the repo's build machinery. A read-only audit
+of all 40 scripts in `local/` found 35 covered or one-off queues; fixed the same evening:
+spawn-removal warning, validate checks (60-char shader names, `.shader` outside `scripts/`),
+stale docs (csgo-conversion.md, testing.md), wait-loop stale-"done" trap. **Still open, in
+order (all small unless noted):**
 
-### Open items found by the harvest (not started; small unless noted)
+1. `mohkit exposure --changed BEFORE AFTER [--ref REF] [-n K] [-o sheet]`: rank cameras by
+   pixel difference (local/csgo/cmp3.py) or by improvement toward the CS:GO reference
+   (compare.py), draw with `triple_sheet`, print the `against` summary. The user decides
+   installs from these sheets.
+2. `mohkit csgo <map> --final` alone rebuilds a draft first (overwrites the fastrad build) and
+   `--refresh-assets --final` skips the checks: add a checks-only path in `cmd_csgo`.
+3. `--keep-before TAG` / `convert.snapshot`: copy pk3, report.json, exposure.json,
+   statics.json, prop_light.npz and shots/ to `local/csgo/before/<name>_<tag>/` (three scripts
+   did it by hand, each differently).
+4. `propcost` CLI (`python -m mohkit.propcost <pk3> <map>`): drawn prop vertices per camera,
+   offline; replaces the lost scratchpad `cost.py`.
+5. README image builder (local/csgo/readme_img.py: first/middle/last reference camera, 480 px,
+   q85 -> docs/images/csgo/de_<m>.jpg) as a mohkit command; mention in csgo-conversion.md.
+6. `--final` stores the `exposure --ref` numbers in `report["final"]` when references exist.
+7. (medium) Commit local/laddertest, spottest, debristest as `tests/rooms/` evidence (no Valve
+   content) with a testing.md recipe; `kit.step_ladder` (reuse `Converter._ladder_steps`; bots
+   can't use step ladders: idea, a `func_ladder` link per column, untested) and
+   `kit.breakable(..., debris=)` reusing `convert.debris_tiki`.
+8. `ladder_probe`: optional exit check (strafe off the top onto the platform, like
+   local/csgo/strafe_test.py).
 
-- CS:GO named cameras are shot at fov 80, CS:GO's references at 90: pass `fov=90` in
-  `convert.named_cameras`, then re-shoot and re-fit the exposures (changes every sheet).
-- Converter: warn in the log when `validate.fix_spawns` removes spawns (de_rats lost 4 at
-  scale 1; suggest `--scale 1.1`).
+Harvest items still open (checked against the code 2026-10-02):
+- CS:GO named cameras at fov 80 vs CS:GO's references at 90: `fov=90` in
+  `convert.named_cameras`, then re-shoot and re-fit exposures (changes every sheet).
 - Carver / `MapBuilder.box` split only X/Y at 512; the converter also splits Z (a 672-tall
-  strip had 65 vertices). Changes generated maps' bytes: re-check mk_* after.
-- `validate`: warn on 60-character shader names (only the converter caps them) and on
-  `.shader` files outside `scripts/` in a project's assets.
+  strip had 65 vertices). Changes generated maps' bytes: `tests/test_maps_regenerate.py`
+  will fail until the maps are regenerated, re-shot and committed.
 - LOD self-check at build time: replay each SKD and drop its LOD when the drawn area passes
-  1.02x the full area (the `test_lod` criterion) at any level.
-- Fade cap scaled with prop size so landmarks stay (s9's A silo).
-- `kit.step_ladder` for from-scratch maps (reuse `Converter._ladder_steps`); bots can't use
-  step ladders (idea: a `func_ladder` link in front of each column; untested).
+  1.02x the full area at any level (the `test_lod` criterion).
+- Fade cap scaled with prop size: done for `--props lean` only (`fade_size=8.0`), not
+  balanced/stock.
 - mk_medina still forces `-threads 1` (`maps/mk_medina/build.py`); with props injected after
   lighting MOHlight no longer lights its static models (the suspected crash trigger): run MT
   light a few times; drop the override if it holds, record it in toolchain.md.
 - Re-check `docs/lighting.md` and `docs/from-reference.md` claims and the `lookalike` weights
-  that were judged on `r_picmip 2` sheets (marked UNVERIFIED in from-reference.md).
+  judged on `r_picmip 2` sheets (marked UNVERIFIED in from-reference.md).
 - When the 3D-skybox room falls back to the 2D sky, prune its props' models from the pk3.
 - de_vertigo's portal sky is dark navy above the city (csgo-conversion.md Known gaps).
 - Two `--resume` builds of de_cache differing only in SKDs had different light grids
-  (573,827 vs 575,503 bytes) and 164 world vertex colours off by 1: find the
-  nondeterminism (CLAUDE.md: deterministic outputs).
+  (573,827 vs 575,503 bytes) and 164 world vertex colours off by 1: find the nondeterminism.
 - Offline check for runtime props lit from inside solid / with no sun (`BSP.trace` against
   brushes, `SOLID|FENCE`), as a compile warning.
 - Persistent wineserver (`wineserver -p`) to save ~15 s a build (untested).
