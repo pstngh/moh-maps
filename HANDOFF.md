@@ -14,25 +14,25 @@ awake. Delete this paragraph when the run ends.
 
 - 22:47 ET: "fully done" read as the two in-flight items above, not the whole open-ended
   harvest list (several items there are the user's calls: fov 90 re-shoot, rebuilds).
+- 00:45 ET: added a one-thread mk_medina build to the scope: the MT test left its compile
+  root unlit (test_staticlight's fixture) and run 0's failure was unexplained.
 
 The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer apply.
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-02 22:46 ET)
+## State (2026-10-03 00:47 ET)
 
-**Running (no game window, nice 19): the mk_medina multi-threaded light test**, pid in
-`local/medina_mt/pid`, log `local/medina_mt/runs.log` (script in the session scratchpad: it
-loads the project, clears `compile_args` (the `-threads 1` override), holds the 107 props back
-as `project.build` does, and compiles 3x at `-q preview`, printing `RUN i: ok=… retried=…`;
-`retried=True` means MOHlight crashed multi-threaded and the driver fell back to one thread).
-Started 22:42 ET, expected done ~23:15 ET; touches neither `dist/` nor the game folder.
-**Next when it ends:** all three `retried=False` -> drop `light_args` from
-`maps/mk_medina/build.py` META (the map's bytes don't change) and record the result in
-docs/toolchain.md "Static models are the likely trigger" (3 clean MT runs with props injected);
-any `retried=True` -> keep the override and record that the crash happens without MOHlight-lit
-props too. The user may be playing (asked "are u almost done" at 22:44 ET): no game-window
-steps until they say they're done.
+**Running (no game window): `mohkit build maps/mk_medina -q preview --no-test`** (one-thread
+light, as its META says), log `local/medina_mt/build_1thread.log` (ends with `BUILD_EXIT`).
+Why: the multi-threaded light test is over (run 0 FAILED for an unknown reason after 436 s,
+run 1 crashed at 99% and Wine's debugger parked it 1 h 45; killed 00:43 ET; the fix, a runner
+that kills tools at Wine's "starting debugger", is pushed). This build checks that mk_medina
+builds at all with props held back (never done before) and restores the compile root
+`tests/test_staticlight.py` reads. It overwrites `dist/mk_medina.pk3` (copy of the old one:
+`local/medina_mt/mk_medina_dist_before.pk3`); nothing is installed. **When it ends:** if OK,
+re-run `tests/test_staticlight.py`; if FAILED, read the problems and record them (toolchain.md
+/ symptoms.md). Then harvest, push, summary at the top of this file, shut down.
 
 Next after that, in order: (1) the user's Summit corrections if any; (2) prune 3D-skybox prop
 models when the room falls back to the 2D sky: in `Converter._place_sky_room` (fallback
