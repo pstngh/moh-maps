@@ -145,6 +145,14 @@ fixed by then) and **stops before VIS and light** if any face is over 64, so a b
 face costs seconds instead of a full light. After lighting it inspects the BSP
 again (`bsp_checks`: limits, fence masks, lightmap pages).
 
+**Progress of a running light stage**: `<build dir>/roots/<dm_name>/light.log` (written live).
+Each pass prints its own 0-100% meter: the initial (direct) lighting, then one per radiosity
+bounce (`normal` = 8, `preview`/`fastrad` = 2), so `grep -c " 1% complete" light.log` is the
+current pass. Its "N minutes remaining" covers only the current pass and swings widely: on
+mk_summit (`-q normal`, 2026-10-02) it read ~7 minutes per pass, but the whole stage took
+1,549 s (direct 147 s; the later bounces ran faster), so estimate the end from the pass count
+and the time per finished pass, not from that line.
+
 | message | meaning | fix |
 |---|---|---|
 | `******* leaked *******`, `.lin` file written | the playable space reaches the void | seal it; the `.lin` file traces the path (its last point is the entity it started from). With the Carver the hull is sealed, so look for an entity outside every air box: a spawn inside a solid building mass, or a brush entity whose bounding-box **centre** is in solid (q3map floods from that centre: mk_summit's single trigger_hurt under the whole map was centred inside the plateau). `mohkit generate` reports both (`validate.check_air`) |
