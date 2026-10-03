@@ -6,11 +6,27 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-02 22:50 ET)
+## State (2026-10-02 22:46 ET)
 
-**Nothing is running; all pushed.** The user played 21:25-22:25 ET and said "done playing,
-continue": game runs are allowed again. Their own openmohaa process, when there is one, is
-theirs: leave it alone.
+**Running (no game window, nice 19): the mk_medina multi-threaded light test**, pid in
+`local/medina_mt/pid`, log `local/medina_mt/runs.log` (script in the session scratchpad: it
+loads the project, clears `compile_args` (the `-threads 1` override), holds the 107 props back
+as `project.build` does, and compiles 3x at `-q preview`, printing `RUN i: ok=… retried=…`;
+`retried=True` means MOHlight crashed multi-threaded and the driver fell back to one thread).
+Started 22:42 ET, expected done ~23:15 ET; touches neither `dist/` nor the game folder.
+**Next when it ends:** all three `retried=False` -> drop `light_args` from
+`maps/mk_medina/build.py` META (the map's bytes don't change) and record the result in
+docs/toolchain.md "Static models are the likely trigger" (3 clean MT runs with props injected);
+any `retried=True` -> keep the override and record that the crash happens without MOHlight-lit
+props too. The user may be playing (asked "are u almost done" at 22:44 ET): no game-window
+steps until they say they're done.
+
+Next after that, in order: (1) the user's Summit corrections if any; (2) prune 3D-skybox prop
+models when the room falls back to the 2D sky: in `Converter._place_sky_room` (fallback
+branch, ~convert.py:2517) and the near-object drop (~:2451), call
+`staticmerge.prune(self.assets, dropped_models, remaining_models, read)` (it already prunes
+merged-away models; textures used only by them stay); de_cache drops 245 of 247 sky objects;
+(3) the rest of the harvest list below.
 
 Session of 21:05-21:26 ET, queue C below (no Summit corrections from the user yet). Done:
 C.1 `exposure --changed`, C.2 checks-only `--final`, C.3 `--keep-before`, C.4 `mohkit
@@ -118,8 +134,11 @@ order (all small unless noted):**
    tests/rooms/laddertest's scaffold tower).
 
 Harvest items still open (checked against the code 2026-10-02):
-- CS:GO named cameras at fov 80 vs CS:GO's references at 90: `fov=90` in
-  `convert.named_cameras`, then re-shoot and re-fit exposures (changes every sheet).
+- CS:GO named cameras at fov 80 vs CS:GO's references at 90: measured 2026-10-02, only ~2%
+  brightness effect (csgo-conversion.md "spectator cameras"); matching it fixes the sheets'
+  zoom difference but needs every map re-shot. The user's call.
+- Offline check for runtime props lit from inside solid / with no sun: needs a BSP brush
+  trace mohkit doesn't have yet (medium).
 - Done 2026-10-02 22:50 ET: LOD self-check (`lod.safe_cutoff` caps a curve below any level
   drawing over 1.10x a surface's area). The installed cs_dust2/cache/cbble/mirage/inferno
   still carry ~5 such models each (far levels; not yet seen in a shot): a rebuild fixes them,
@@ -135,8 +154,6 @@ Harvest items still open (checked against the code 2026-10-02):
 - de_vertigo's portal sky is dark navy above the city (csgo-conversion.md Known gaps).
 - Two `--resume` builds of de_cache differing only in SKDs had different light grids
   (573,827 vs 575,503 bytes) and 164 world vertex colours off by 1: find the nondeterminism.
-- Offline check for runtime props lit from inside solid / with no sun (`BSP.trace` against
-  brushes, `SOLID|FENCE`), as a compile warning.
 - Persistent wineserver (`wineserver -p`) to save ~15 s a build (untested).
 - Untested idea for the six lost 3D skyboxes: CS:GO cubemap shots as the 2D sky.
 - User question left unanswered (2026-10-01 ~23:39 ET, "will mastering cs go maps ... help
