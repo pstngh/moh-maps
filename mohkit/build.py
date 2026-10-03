@@ -508,6 +508,8 @@ class MapBuilder:
             self.world[k] = v
         self.entities: list[Entity] = []
         self.carver: Optional[Carver] = None
+        self.files: dict[str, bytes] = {}   # generated files for the pk3 (kit.breakable's debris)
+        self.ladders: list[dict] = []       # step ladders for game.ladder_probe (kit.step_ladder)
 
     # geometry -----------------------------------------------------------------
     def add(self, *prims) -> None:

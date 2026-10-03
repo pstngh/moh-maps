@@ -153,10 +153,12 @@ class Project:
         out.parent.mkdir(parents=True, exist_ok=True)
         files: dict[str, bytes] = {f"maps/{self.game_path}.bsp": Path(bsp).read_bytes()}
         files.update(self.scripts())
+        files.update(getattr(getattr(self, "builder", None), "files", None) or {})
         for rel, p in self.assets().items():
             files[rel] = p.read_bytes()
+        from .kit import SHARED_PATHS
         from .pak import unowned_paths
-        shared = unowned_paths(files, self.name)
+        shared = unowned_paths(files, self.name, SHARED_PATHS)
         if shared:
             # another installed map can ship the same path with other contents, and one
             # copy wins for every map (pak.path_clashes): keep assets under the map's name
@@ -181,7 +183,7 @@ def write_pk3(out: Path, files: dict[str, bytes]) -> None:
 
 
 def build(folder: Path, quality: str = "normal", test: bool = True, bots: int = 0, match_seconds: float = 0,
-          log=print, inject_props: bool = True) -> dict:
+          log=print, inject_props: bool = True, ladders: bool = False) -> dict:
     """Full pipeline for one project folder. Returns a report dict (also written to dist/).
 
     ``inject_props`` (default): compile without the ``static_*`` props (their collision
@@ -245,6 +247,15 @@ def build(folder: Path, quality: str = "normal", test: bool = True, bots: int = 
             sheet = _game.contact_sheet(run.screenshots, DIST / f"{proj.name}_shots.png")
             report["contact_sheet"] = str(sheet)
             log(f"== contact sheet {sheet}")
+    if ladders:
+        # every func_ladder in the BSP and every kit.step_ladder, climbed by a player
+        lads = _game.ladders_in_bsp(bsp) + list(getattr(getattr(proj, "builder", None), "ladders", []))
+        res_l = _game.ladder_probe([pk3], proj.game_path, lads, run_name=f"ladp_{proj.name}_")
+        for r in res_l:
+            log(f"ladder {r.get('style', 'func_ladder')} at {[round(v) for v in r['origin']]}: "
+                f"climbed {r['climbed']} of {r['zmax'] - r['zmin']:g} ({'ok' if r['ok'] else 'FAIL'})")
+        report["ladders"] = [{k: r[k] for k in ("origin", "angle", "zmin", "zmax", "climbed", "ok", "shot")}
+                             | {"style": r.get("style", "func_ladder")} for r in res_l]
     report["seconds"] = round(time.time() - t0, 1)
     DIST.mkdir(parents=True, exist_ok=True)
     rp = DIST / f"{proj.name}_report.json"

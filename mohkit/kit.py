@@ -12,7 +12,7 @@ from __future__ import annotations
 import math
 from typing import Optional, Sequence
 
-from .build import CAULK_M, Carver, Air, MapBuilder, Material, MatLike, aabb, mat, overlaps
+from .build import CAULK_M, Carver, Air, MapBuilder, Material, MatLike, aabb, box, mat, overlaps
 
 DIRS = {"north": (0, 1), "south": (0, -1), "east": (1, 0), "west": (-1, 0)}
 YAW = {"east": 0, "north": 90, "west": 180, "south": 270}
@@ -388,6 +388,7 @@ MESH = Material("general_industrial/industrialgrate1")
 GLASS = Material("common/dglass")
 WOOD_POLE = Material("general_structure/beam_wood1")
 PLAYERCLIP = Material("common/playerclip")
+CLIP_M = Material("common/clip")             # players and bots (ladder faces and steps)
 
 
 def polygon(cx: float, cy: float, r: float, n: int = 16, phase: float = 0.0) -> list[tuple[int, int]]:
@@ -408,6 +409,144 @@ def dome(b: MapBuilder, cx: float, cy: float, z0: float, r: float, m: MatLike, r
 def clip_box(b: MapBuilder, x0, y0, z0, x1, y1, z1) -> None:
     """Playerclip block (keeps players off props without collision, masts, roofs)."""
     b.box((x0, y0, z0), (x1, y1, z1), PLAYERCLIP)
+
+
+# ---------------------------------------------------------------------------- ladders
+
+def _span(side: str, plane: float, u0, u1, z0, z1, d0, d1):
+    """(mins, maxs) of a box ``d0..d1`` out from the wall on ``side`` (toward the street)."""
+    s = _OUT[side]
+    a, c = sorted((plane + s * d0, plane + s * d1))
+    if side in ("north", "south"):
+        return (u0, a, z0), (u1, c, z1)
+    return (a, u0, z0), (c, u1, z1)
+
+
+def ladder(b: MapBuilder, side: str, plane: float, u: float, z0: float, z1: float, width: float = 32,
+           depth: float = 4, rails: Optional[MatLike] = None, rung: float = 16) -> None:
+    """A MOHAA ladder on the wall on ``side`` (the climber faces that way), centred at ``u``,
+    from the floor ``z0`` to ``z1``, the top of the ledge the player steps off onto: a
+    ``func_ladder`` (a ``common/trigger`` over the ladder and 8 units in front, a
+    ``common/origin`` brush on the climb face, ``angle`` into the wall), the ladder's rails
+    and rungs (``rails``; none: the wall's own texture is the ladder) and a clip face over
+    them so nothing snags. The player gets off at the top only forward onto clear floor
+    (docs/entities.md "Ladders"); bots climb ``func_ladder`` (their navmesh links it).
+    tests/rooms/laddertest: climbed 170 onto a 160 ledge (2026-10-02)."""
+    h = width / 2
+    if rails is not None:
+        for e in (-h, h - 2):
+            b.box(*_span(side, plane, u + e, u + e + 2, z0, z1, 0, depth), rails)
+        z = z0 + rung
+        while z < z1 - 4:
+            b.box(*_span(side, plane, u - h + 2, u + h - 2, z - 1, z + 1, 1, depth - 1), rails)
+            z += rung
+    b.box(*_span(side, plane, u - h, u + h, z0, z1, 0, depth), CLIP_M)
+    face = plane + _OUT[side] * depth
+    org = (u, face, (z0 + z1) / 2) if side in ("north", "south") else (face, u, (z0 + z1) / 2)
+    e = b.entity("func_ladder", angle=str(YAW[side]))
+    e.prims.append(box(*_span(side, plane, u - h, u + h, z0, z1, 0, depth + 8), "common/trigger"))
+    e.prims.append(box(tuple(v - 1 for v in org), tuple(v + 1 for v in org), "common/origin"))
+
+
+STEP_RISE, STEP_DEPTH = 16.0, 1.0
+
+
+def step_count(z0: float, top: float, rise: float = STEP_RISE) -> int:
+    return max(1, math.ceil((top - z0) / rise - 1e-6))
+
+
+def step_slices(z0: float, top: float, rise: float = STEP_RISE, depth: float = STEP_DEPTH):
+    """A CS-style ladder's clip slices, bottom first: ``(z_bottom, z_top, out)``, each
+    ``rise`` high and ``depth`` shallower than the one below (``out``: how far it reaches
+    from the wall), so running into the column climbs it (shared with the CS:GO converter)."""
+    n = step_count(z0, top, rise)
+    return [(z0 + (k - 1) * rise, min(z0 + k * rise, top), (n - k + 1) * depth) for k in range(1, n + 1)]
+
+
+def step_ladder(b: MapBuilder, side: str, plane: float, u0: float, u1: float, z0: float, z1: float,
+                rise: float = STEP_RISE, depth: float = STEP_DEPTH) -> None:
+    """A CS-style ladder: invisible ``common/clip`` slices against the wall on ``side`` from
+    ``z0`` to ``z1``. Running into it climbs it, backing off climbs down, and the player
+    can step off sideways or onto a ledge at any side of the top, where a ``func_ladder``
+    lets them off only forward (use it under floor holes and beside platforms). Bots can't
+    climb it. The CS:GO converter's ladders (csgo-conversion.md); in tests/rooms/laddertest
+    16 x 1, 8 x 1 and 8 x 2 unit columns each climbed 162 onto a 160 ledge (2026-10-02)."""
+    slices = step_slices(z0, z1, rise, depth)
+    for za, zb, out in slices:
+        b.box(*_span(side, plane, u0, u1, za, zb, 0, out), CLIP_M)
+    front, uc = plane + _OUT[side] * slices[0][2], (u0 + u1) / 2
+    at = lambda d, z: [uc, front + _OUT[side] * d, z] if side in ("north", "south") else [front + _OUT[side] * d, uc, z]  # noqa: E731
+    b.ladders.append({"style": "steps", "origin": at(0, z0), "angle": YAW[side], "zmin": z0, "zmax": z1,
+                      "probe_start": at(28, z0 + 1)})
+
+
+# ------------------------------------------------------------------------- breakables
+
+# func_window debris: the game sends the window's debristype and the client spawns
+# models/fx/windows/debris_<n>.tik (fgame/windows.cpp WindowKilled, cgame/cg_parsemsg.cpp
+# CGM_MAKE_WINDOW_DEBRIS). Retail's debris_0..3 are all glass shards, so maps ship their own
+# metal and wood debris built from retail effect models and sound aliases.
+DEBRIS_GLASS, DEBRIS_METAL, DEBRIS_WOOD = 0, 7, 8
+DEBRIS = {"glass": DEBRIS_GLASS, "metal": DEBRIS_METAL, "wood": DEBRIS_WOOD}
+# Files shipped at the same, engine-fixed path by every map that uses them: their content
+# must not depend on the map (installed pk3s sharing a path override each other,
+# pak.path_clashes).
+SHARED_PATHS = ("models/fx/windows/debris_",)
+
+
+def _debris_piece(model: str, count: int, scale: float, life: str) -> str:
+    return f"""\t\toriginspawn
+\t\t(
+\t\t\tmodel {model}
+\t\t\tcount {count}
+\t\t\toffset crandom 12 crandom 12 crandom 12
+\t\t\tradialvelocity 2 0 64
+\t\t\trandvel 0 0 32
+\t\t\taccel 0 0 -800
+\t\t\tfriction 0.25
+\t\t\tangles crandom 90 crandom 180 crandom 180
+\t\t\tavelocity 0 0 crandom 360
+\t\t\tlife {life}
+\t\t\tfadedelay 4
+\t\t\tcollision
+\t\t\tbouncefactor 0.25
+\t\t\tscale {scale}
+\t\t)
+"""
+
+
+def debris_tiki(kind: int) -> str:
+    """Client effect for a broken ``func_window`` of ``debristype`` ``kind`` (metal or wood)."""
+    if kind == DEBRIS_METAL:
+        models = ["models/fx/metal_section.tik", "models/fx/bh_metal_fastpiece.tik"]
+        body = (_debris_piece(models[0], 4, 0.35, "5 1")
+                + "\t\toriginspawn\n\t\t(\n\t\t\tmodel models/fx/bh_metal_fastpiece.tik\n\t\t\tcount 12\n"
+                  "\t\t\tvelocity 150\n\t\t\trandvelaxis random 150 crandom 100 crandom 100\n"
+                  "\t\t\taccel 0 0 -800\n\t\t\tlife 0.1 0.4\n\t\t\tscalemin 0.8\n\t\t\tscalemax 1.4\n"
+                  "\t\t\tscalerate -1.0\n\t\t)\n")
+        sound = "snd_bodyfall_metal1"
+    elif kind == DEBRIS_WOOD:
+        models = ["models/fx/crates/crate-jib-plank.tik", "models/fx/crates/crate-jib-smallplank.tik",
+                  "models/fx/crates/crate-jib-splinter.tik"]
+        body = "".join(_debris_piece(m, n, 0.5, "5 1") for m, n in zip(models, (3, 4, 6)))
+        sound = "snd_crate_wood"
+    else:
+        raise ValueError(kind)
+    cache = "".join(f"\t\tcache {m}\n" for m in models)
+    return ("TIKI\nsetup\n{\n\tscale 1.0\n\tpath models/fx/dummy\n\tskelmodel dummy2.skd\n}\n\ninit\n{\n"
+            f"\tclient\n\t{{\n{cache}\t\tsound {sound}\n{body}\t}}\n}}\n")
+
+
+def breakable(b: MapBuilder, mins, maxs, m: MatLike, kind: str = "glass", health: int = 5):
+    """A ``func_window`` that breaks when shot (``health``), with ``kind`` debris: glass
+    (retail shards), metal or wood (``debris_tiki``, packaged through ``b.files``; the CS:GO
+    converter's, checked in game in tests/rooms/debristest, csgo-conversion.md)."""
+    k = DEBRIS[kind]
+    if k != DEBRIS_GLASS:
+        b.files[f"models/fx/windows/debris_{k}.tik"] = debris_tiki(k).encode()
+    e = b.entity("func_window", health=str(health), debristype=str(k))
+    e.prims.append(box(mins, maxs, m))
+    return e
 
 
 def railing(b: MapBuilder, x0, y0, x1, y1, z: float, h: float = 40, rail: MatLike = STEEL_H,

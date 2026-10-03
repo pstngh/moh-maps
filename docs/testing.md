@@ -287,7 +287,9 @@ radio room, mean 183 with no shading) and crushed interiors.
 ## Ladders
 
 `game.ladder_probe(pk3s, map, game.ladders_for_probe(bsp))` climbs every ladder as a
-player, one game per ladder (a player still on a ladder ignores `tele`).
+player, one game per ladder (a player still on a ladder ignores `tele`). For a `build.py`
+map, `mohkit build maps/<name> --ladders` probes the BSP's `func_ladder`s and every
+`kit.step_ladder` (`b.ladders`) and writes the results to the report's `ladders`.
 `ladders_for_probe` returns the BSP's `func_ladder`s plus the CS-style step ladders listed
 in the `report.json` beside a converted BSP (`convert.ladders`). The probe joins a team,
 `tele`s to the foot (28 units back from the climb face, or a step ladder's `probe_start`:
@@ -310,6 +312,21 @@ recompute every converted map's ladder records without compiling (`Converter(bsp
 Options(props=False))`, then `brushes()`, `_drop_ladder_rail_clips()`, `ladders()`; ~8 s a
 map) and diff them with each `report.json`: only the ladders you meant to change may move
 (the first rail-clip rule also moved a de_nuke ladder 11.5 units).
+
+## Test rooms
+
+`tests/rooms/<name>/build.py` are small `build.py` maps that settle one question in game
+each, kept as evidence and re-run when the code behind them changes
+(`tests/test_maps_regenerate.py` guards their `.map`s too):
+
+| room | question | run |
+|---|---|---|
+| `laddertest` | do `kit.ladder` and `kit.step_ladder` (16 x 1, 8 x 1, 8 x 2 unit steps) climb onto a 160 ledge? Yes (2026-10-02): func_ladder 170, the three columns 162 each | `mohkit build tests/rooms/laddertest -q draft --ladders` |
+| `debristest` | do `kit.breakable`'s metal and wood windows break into their debris? | build, then shoot both in game |
+| `spottest` | which way does MOHlight light a spotlight (`SPOT=target`, `angles`, `point`)? | `SPOT=angles mohkit build tests/rooms/spottest -q preview` |
+
+A new question about engine or tool behaviour gets a new room here, not a script in
+`local/` (those are invisible to a fresh clone).
 
 ## Diagnosing a wrong look
 

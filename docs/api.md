@@ -60,6 +60,8 @@ b = MapBuilder("Title", suncolor=..., sundirection=..., ambientlight=..., farpla
 | `b.light(origin, intensity, color=(r, g, b), **keys)` | point light |
 | `b.spawn(origin, yaw, kinds=("deathmatch", "allied", "axis"))` | one entity per kind at the feet position (z = floor + 1) |
 | `b.entity(classname, origin, **keys)` | any entity; `__` in a key becomes `$` |
+| `b.files` | generated files packaged into the pk3 (`kit.breakable`'s debris TIKIs) |
+| `b.ladders` | step ladders `mohkit build --ladders` climbs besides the BSP's `func_ladder`s |
 
 Detail is the default for `box`/`prism`/`hull` (`+surfaceparm detail`); never
 use `func_detail`. Props have no collision unless `mohkit.props.get(x).collision`;
@@ -126,6 +128,9 @@ is. `u0..u1` runs along that wall: **x for north/south walls, y for east/west**.
 | `polygon(cx, cy, r, n=16, phase=0)` | integer n-gon for `b.prism` |
 | `dome(b, cx, cy, z0, r, m, rings=5)` | hemisphere of stacked 16-gon slices (radar domes) |
 | `clip_box(b, x0, y0, z0, x1, y1, z1)` | playerclip block |
+| `ladder(b, side, plane, u, z0, z1, width=32, depth=4, rails=None, rung=16)` | MOHAA `func_ladder` on the wall at `plane` from the floor `z0` to the ledge top `z1` (off at the top only forward; bots climb it), optional rails and rungs, clip face |
+| `step_ladder(b, side, plane, u0, u1, z0, z1, rise=16, depth=1)` | CS-style invisible clip step column (off sideways or at any side of the top; bots can't climb it); recorded in `b.ladders` for `build --ladders` |
+| `breakable(b, mins, maxs, m, kind="glass", health=5)` | `func_window` that breaks when shot; `kind` glass, metal or wood debris (metal/wood ship a TIKI through `b.files`) |
 | `railing(b, x0, y0, x1, y1, z, h=40, rail, post)` | steel rail with posts every 128 along an axis-aligned run |
 | `fence(b, x0, y0, x1, y1, z=0, h=112, mesh, post)` | chain-link fence (nonsolid mesh that clips players) with posts every ~192 |
 | `parapet(b, x0, y0, x1, y1, z, h=24, t=8, m, top=None)` | low wall round a flat roof's edge |

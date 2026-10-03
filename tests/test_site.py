@@ -78,6 +78,42 @@ def test_kit_fixtures_build_valid_brushes():
     assert not issues, issues
 
 
+
+def _bounds(br):
+    pts = [p for w in br.windings() for p in w]
+    return tuple(round(min(p[i] for p in pts), 3) for i in range(3)), tuple(round(max(p[i] for p in pts), 3) for i in range(3))
+
+
+def test_ladders_and_breakables():
+    """``kit.ladder``: a func_ladder whose origin brush sits on the climb face, angle into the
+    wall, trigger 8 units in front; ``kit.step_ladder``: clip slices 1 unit shallower per
+    step; ``kit.breakable``: metal/wood debris TIKIs go into ``b.files``."""
+    b = MapBuilder("t")
+    kit.ladder(b, "east", 0, -260, 0, 160, rails=kit.STEEL_H)          # wall at x = 0, climber west
+    lad = [e for e in b.to_map().entities if e.get("classname") == "func_ladder"]
+    assert len(lad) == 1 and lad[0]["angle"] == "0"
+    boxes = {br.faces[0].shader: _bounds(br) for br in lad[0].brushes()}
+    (olo, ohi), (tlo, thi) = boxes["common/origin"], boxes["common/trigger"]
+    assert [(a + c) / 2 for a, c in zip(olo, ohi)] == [-4, -260, 80], (olo, ohi)   # on the face (depth 4)
+    assert tlo == (-12, -276, 0) and thi == (0, -244, 160), (tlo, thi)
+    kit.ladder(b, "north", 512, 100, 0, 128)
+    assert [e for e in b.entities if e.get("classname") == "func_ladder"][-1]["angle"] == "90"
+    b2 = MapBuilder("t")
+    kit.step_ladder(b2, "west", 64, 0, 40, 0, 40, rise=16, depth=1)    # wall at x = 64, climber east
+    slabs = sorted(_bounds(br) for br in b2.world.prims)
+    assert [(lo[0], hi[0], lo[2], hi[2]) for lo, hi in slabs] == [(64, 67, 0, 16), (64, 66, 16, 32), (64, 65, 32, 40)], slabs
+    assert [z for z in kit.step_slices(0, 40)] == [(0, 16, 3), (16, 32, 2), (32, 40, 1)]
+    b3 = MapBuilder("t")
+    kit.breakable(b3, (0, 0, 0), (8, 64, 64), "mohtest/flrwood1_rep", "wood")
+    kit.breakable(b3, (0, 96, 0), (8, 160, 64), "glass/glass_clear", "glass")
+    assert sorted(b3.files) == ["models/fx/windows/debris_8.tik"]
+    assert [e["debristype"] for e in b3.entities] == ["8", "0"]
+    for bb in (b, b2, b3):
+        for e in bb.to_map().entities:
+            for br in e.brushes():
+                assert len(br.windings()) == len(br.faces)
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

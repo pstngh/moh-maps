@@ -4,7 +4,7 @@
     python -m mohkit new <name>                 scaffold maps/<name>/build.py from a working template
     python -m mohkit setup                      download the EA compilers (MOHTools) into .toolchain/
     python -m mohkit generate maps/<name>       write maps/<name>/<name>.map from build.py, validate it, draw its plan
-    python -m mohkit build maps/<name> [-q draft|preview|normal|final] [--no-test] [--bots N --seconds S]
+    python -m mohkit build maps/<name> [-q draft|preview|normal|final] [--no-test] [--bots N --seconds S] [--ladders]
     python -m mohkit compile file.map --name dm/x [-q draft]
     python -m mohkit validate file.map
     python -m mohkit plan file.map [-o out.png] [--zmin Z --zmax Z]
@@ -180,7 +180,7 @@ def cmd_generate(a) -> int:
 def cmd_build(a) -> int:
     from . import project
     rep = project.build(Path(a.folder), quality=a.quality, test=not a.no_test, bots=a.bots, match_seconds=a.seconds,
-                        inject_props=not a.mohlight_props)
+                        inject_props=not a.mohlight_props, ladders=a.ladders)
     return 0 if rep.get("compile_ok") else 1
 
 
@@ -461,6 +461,8 @@ def main(argv=None) -> int:
                    help="(the default) add static_* props after the light stage, lit from the lightmaps")
     s.add_argument("--mohlight-props", action="store_true",
                    help="let MOHlight light static_* props per vertex (one thread, ~190 vertices/s)")
+    s.add_argument("--ladders", action="store_true",
+                   help="climb every ladder as a player (func_ladders and kit.step_ladder columns; report 'ladders')")
     s.set_defaults(fn=cmd_build)
     s = sub.add_parser("compile")
     s.add_argument("map")

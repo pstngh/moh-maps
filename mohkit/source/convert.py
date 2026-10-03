@@ -79,57 +79,9 @@ SURFACEPROP = [
 ]
 
 
-# func_window debris: the game sends the window's debristype and the client spawns
-# models/fx/windows/debris_<n>.tik (fgame/windows.cpp WindowKilled, cgame/cg_parsemsg.cpp
-# CGM_MAKE_WINDOW_DEBRIS). Retail's debris_0..3 are all glass shards, so converted maps ship
-# their own metal and wood debris built from retail effect models and sound aliases.
-DEBRIS_GLASS, DEBRIS_METAL, DEBRIS_WOOD = 0, 7, 8
-# Files every conversion ships at the same, engine-fixed path: their content must not depend
-# on the map (installed pk3s sharing a path override each other, pak.path_clashes).
-SHARED_PATHS = ("models/fx/windows/debris_",)
-
-
-def _debris_piece(model: str, count: int, scale: float, life: str) -> str:
-    return f"""\t\toriginspawn
-\t\t(
-\t\t\tmodel {model}
-\t\t\tcount {count}
-\t\t\toffset crandom 12 crandom 12 crandom 12
-\t\t\tradialvelocity 2 0 64
-\t\t\trandvel 0 0 32
-\t\t\taccel 0 0 -800
-\t\t\tfriction 0.25
-\t\t\tangles crandom 90 crandom 180 crandom 180
-\t\t\tavelocity 0 0 crandom 360
-\t\t\tlife {life}
-\t\t\tfadedelay 4
-\t\t\tcollision
-\t\t\tbouncefactor 0.25
-\t\t\tscale {scale}
-\t\t)
-"""
-
-
-def debris_tiki(kind: int) -> str:
-    """Client effect for a broken ``func_window`` of ``debristype`` ``kind`` (metal or wood)."""
-    if kind == DEBRIS_METAL:
-        models = ["models/fx/metal_section.tik", "models/fx/bh_metal_fastpiece.tik"]
-        body = (_debris_piece(models[0], 4, 0.35, "5 1")
-                + "\t\toriginspawn\n\t\t(\n\t\t\tmodel models/fx/bh_metal_fastpiece.tik\n\t\t\tcount 12\n"
-                  "\t\t\tvelocity 150\n\t\t\trandvelaxis random 150 crandom 100 crandom 100\n"
-                  "\t\t\taccel 0 0 -800\n\t\t\tlife 0.1 0.4\n\t\t\tscalemin 0.8\n\t\t\tscalemax 1.4\n"
-                  "\t\t\tscalerate -1.0\n\t\t)\n")
-        sound = "snd_bodyfall_metal1"
-    elif kind == DEBRIS_WOOD:
-        models = ["models/fx/crates/crate-jib-plank.tik", "models/fx/crates/crate-jib-smallplank.tik",
-                  "models/fx/crates/crate-jib-splinter.tik"]
-        body = "".join(_debris_piece(m, n, 0.5, "5 1") for m, n in zip(models, (3, 4, 6)))
-        sound = "snd_crate_wood"
-    else:
-        raise ValueError(kind)
-    cache = "".join(f"\t\tcache {m}\n" for m in models)
-    return ("TIKI\nsetup\n{\n\tscale 1.0\n\tpath models/fx/dummy\n\tskelmodel dummy2.skd\n}\n\ninit\n{\n"
-            f"\tclient\n\t{{\n{cache}\t\tsound {sound}\n{body}\t}}\n}}\n")
+# func_window debris (DEBRIS_*, debris_tiki) and the engine-fixed shared paths live in kit
+# (authored maps use them too: kit.breakable).
+from ..kit import DEBRIS_GLASS, DEBRIS_METAL, DEBRIS_WOOD, SHARED_PATHS, debris_tiki  # noqa: E402
 
 
 def debris_type(surfaceprops) -> int:
@@ -1778,12 +1730,11 @@ class Converter:
         if w1 - w0 < 32:  # at least a player's width
             m = (w0 + w1) / 2
             w0, w1 = m - 16, m + 16
+        from ..kit import step_count, step_slices
         top = hi[2]
-        n = max(1, math.ceil((top - z0) / self.STEP_RISE - 1e-6))
+        n = step_count(z0, top, self.STEP_RISE)
         depth = self._step_depth(lo, hi, thin, sgn, far, z0, n)
-        for k in range(1, n + 1):
-            za, zb = z0 + (k - 1) * self.STEP_RISE, min(z0 + k * self.STEP_RISE, top)
-            out = (n - k + 1) * depth
+        for za, zb, out in step_slices(z0, top, self.STEP_RISE, depth):
             a, b = sorted((far, far - sgn * out))
             bl, bh = [0.0, 0.0, za], [0.0, 0.0, zb]
             bl[thin], bh[thin], bl[wide], bh[wide] = a, b, w0, w1

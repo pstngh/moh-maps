@@ -1,0 +1,991 @@
+// entity 0
+{
+"classname" "worldspawn"
+"message" "Ladder Test"
+"ambientlight" "40 40 40"
+"suncolor" "70 70 70"
+"sundirection" "315 210 0"
+// brush 0
+{
+( -528 -336 -16 ) ( -528 -272 -16 ) ( -528 -336 48 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 -16 ) ( -512 -336 48 ) ( -512 -272 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 -336 -16 ) ( -528 -336 48 ) ( -464 -336 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 -16 ) ( -464 0 -16 ) ( -528 0 48 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 -336 -16 ) ( -464 -336 -16 ) ( -528 -272 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 -336 0 ) ( -528 -272 0 ) ( -464 -336 0 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 1
+{
+( -528 0 -16 ) ( -528 64 -16 ) ( -528 0 48 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 -16 ) ( -512 0 48 ) ( -512 64 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 -16 ) ( -528 0 48 ) ( -464 0 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 336 -16 ) ( -464 336 -16 ) ( -528 336 48 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 -16 ) ( -464 0 -16 ) ( -528 64 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 0 ) ( -528 64 0 ) ( -464 0 0 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 2
+{
+( -512 -336 -16 ) ( -512 -272 -16 ) ( -512 -336 48 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 -16 ) ( 0 -336 48 ) ( 0 -272 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 -16 ) ( -512 -336 48 ) ( -448 -336 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 -16 ) ( -448 0 -16 ) ( -512 0 48 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 -16 ) ( -448 -336 -16 ) ( -512 -272 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 0 ) ( -512 -272 0 ) ( -448 -336 0 ) mohtest/brickstreet1 0 0 0 1 1 0 0 0
+}
+// brush 3
+{
+( -512 0 -16 ) ( -512 64 -16 ) ( -512 0 48 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 0 -16 ) ( 0 0 48 ) ( 0 64 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 -16 ) ( -512 0 48 ) ( -448 0 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 336 -16 ) ( -448 336 -16 ) ( -512 336 48 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 -16 ) ( -448 0 -16 ) ( -512 64 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 0 ) ( -512 64 0 ) ( -448 0 0 ) mohtest/brickstreet1 0 0 0 1 1 0 0 0
+}
+// brush 4
+{
+( 0 -336 -16 ) ( 0 -272 -16 ) ( 0 -336 48 ) common/caulk 0 0 0 1 1 0 0 0
+( 272 -336 -16 ) ( 272 -336 48 ) ( 272 -272 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 -16 ) ( 0 -336 48 ) ( 64 -336 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 0 -16 ) ( 64 0 -16 ) ( 0 0 48 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 -16 ) ( 64 -336 -16 ) ( 0 -272 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 0 ) ( 0 -272 0 ) ( 64 -336 0 ) mohtest/brickstreet1 0 0 0 1 1 0 0 0
+}
+// brush 5
+{
+( 0 0 -16 ) ( 0 64 -16 ) ( 0 0 48 ) common/caulk 0 0 0 1 1 0 0 0
+( 272 0 -16 ) ( 272 0 48 ) ( 272 64 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 0 -16 ) ( 0 0 48 ) ( 64 0 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 336 -16 ) ( 64 336 -16 ) ( 0 336 48 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 0 -16 ) ( 64 0 -16 ) ( 0 64 -16 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 0 0 ) ( 0 64 0 ) ( 64 0 0 ) mohtest/brickstreet1 0 0 0 1 1 0 0 0
+}
+// brush 6
+{
+( -528 -336 384 ) ( -528 -272 384 ) ( -528 -336 448 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 384 ) ( -512 -336 448 ) ( -512 -272 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 -336 384 ) ( -528 -336 448 ) ( -464 -336 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 384 ) ( -464 0 384 ) ( -528 0 448 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 -336 384 ) ( -464 -336 384 ) ( -528 -272 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 -336 400 ) ( -528 -272 400 ) ( -464 -336 400 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 7
+{
+( -528 0 384 ) ( -528 64 384 ) ( -528 0 448 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 384 ) ( -512 0 448 ) ( -512 64 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 384 ) ( -528 0 448 ) ( -464 0 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 336 384 ) ( -464 336 384 ) ( -528 336 448 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 384 ) ( -464 0 384 ) ( -528 64 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 400 ) ( -528 64 400 ) ( -464 0 400 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 8
+{
+( -512 -336 384 ) ( -512 -272 384 ) ( -512 -336 448 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 384 ) ( 0 -336 448 ) ( 0 -272 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 384 ) ( -512 -336 448 ) ( -448 -336 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 384 ) ( -448 0 384 ) ( -512 0 448 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 384 ) ( -448 -336 384 ) ( -512 -272 384 ) mohtest/flrwood1_rep 0 0 0 1 1 0 0 0
+( -512 -336 400 ) ( -512 -272 400 ) ( -448 -336 400 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 9
+{
+( -512 0 384 ) ( -512 64 384 ) ( -512 0 448 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 0 384 ) ( 0 0 448 ) ( 0 64 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 384 ) ( -512 0 448 ) ( -448 0 384 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 336 384 ) ( -448 336 384 ) ( -512 336 448 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 384 ) ( -448 0 384 ) ( -512 64 384 ) mohtest/flrwood1_rep 0 0 0 1 1 0 0 0
+( -512 0 400 ) ( -512 64 400 ) ( -448 0 400 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 10
+{
+( 0 -336 384 ) ( 0 -272 384 ) ( 0 -336 448 ) common/caulk 0 0 0 1 1 0 0 0
+( 272 -336 384 ) ( 272 -336 448 ) ( 272 -272 384 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 384 ) ( 0 -336 448 ) ( 64 -336 384 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 0 384 ) ( 64 0 384 ) ( 0 0 448 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 384 ) ( 64 -336 384 ) ( 0 -272 384 ) mohtest/flrwood1_rep 0 0 0 1 1 0 0 0
+( 0 -336 400 ) ( 0 -272 400 ) ( 64 -336 400 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 11
+{
+( 0 0 384 ) ( 0 64 384 ) ( 0 0 448 ) common/caulk 0 0 0 1 1 0 0 0
+( 272 0 384 ) ( 272 0 448 ) ( 272 64 384 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 0 384 ) ( 0 0 448 ) ( 64 0 384 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 336 384 ) ( 64 336 384 ) ( 0 336 448 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 0 384 ) ( 64 0 384 ) ( 0 64 384 ) mohtest/flrwood1_rep 0 0 0 1 1 0 0 0
+( 0 0 400 ) ( 0 64 400 ) ( 64 0 400 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 12
+{
+( -528 -336 0 ) ( -528 -272 0 ) ( -528 -336 64 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 0 ) ( -512 -336 64 ) ( -512 -272 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0
+( -528 -336 0 ) ( -528 -336 64 ) ( -464 -336 0 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 0 ) ( -464 0 0 ) ( -528 0 64 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 -336 0 ) ( -464 -336 0 ) ( -528 -272 0 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 -336 384 ) ( -528 -272 384 ) ( -464 -336 384 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 13
+{
+( -528 0 0 ) ( -528 64 0 ) ( -528 0 64 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 0 0 ) ( -512 0 64 ) ( -512 64 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0
+( -528 0 0 ) ( -528 0 64 ) ( -464 0 0 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 336 0 ) ( -464 336 0 ) ( -528 336 64 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 0 ) ( -464 0 0 ) ( -528 64 0 ) common/caulk 0 0 0 1 1 0 0 0
+( -528 0 384 ) ( -528 64 384 ) ( -464 0 384 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 14
+{
+( 256 -336 0 ) ( 256 -272 0 ) ( 256 -336 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0
+( 272 -336 0 ) ( 272 -336 64 ) ( 272 -272 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 -336 0 ) ( 256 -336 64 ) ( 320 -336 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 0 0 ) ( 320 0 0 ) ( 256 0 64 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 -336 0 ) ( 320 -336 0 ) ( 256 -272 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 -336 384 ) ( 256 -272 384 ) ( 320 -336 384 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 15
+{
+( 256 0 0 ) ( 256 64 0 ) ( 256 0 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0
+( 272 0 0 ) ( 272 0 64 ) ( 272 64 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 0 0 ) ( 256 0 64 ) ( 320 0 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 336 0 ) ( 320 336 0 ) ( 256 336 64 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 0 0 ) ( 320 0 0 ) ( 256 64 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 0 384 ) ( 256 64 384 ) ( 320 0 384 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 16
+{
+( -512 -336 0 ) ( -512 -272 0 ) ( -512 -336 64 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 0 ) ( 0 -336 64 ) ( 0 -272 0 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 0 ) ( -512 -336 64 ) ( -448 -336 0 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -320 0 ) ( -448 -320 0 ) ( -512 -320 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0
+( -512 -336 0 ) ( -448 -336 0 ) ( -512 -272 0 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 -336 384 ) ( -512 -272 384 ) ( -448 -336 384 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 17
+{
+( 0 -336 0 ) ( 0 -272 0 ) ( 0 -336 64 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 -336 0 ) ( 256 -336 64 ) ( 256 -272 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 0 ) ( 0 -336 64 ) ( 64 -336 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -320 0 ) ( 64 -320 0 ) ( 0 -320 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0
+( 0 -336 0 ) ( 64 -336 0 ) ( 0 -272 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 -336 384 ) ( 0 -272 384 ) ( 64 -336 384 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 18
+{
+( -512 320 0 ) ( -512 384 0 ) ( -512 320 64 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 320 0 ) ( 0 320 64 ) ( 0 384 0 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 320 0 ) ( -512 320 64 ) ( -448 320 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0
+( -512 336 0 ) ( -448 336 0 ) ( -512 336 64 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 320 0 ) ( -448 320 0 ) ( -512 384 0 ) common/caulk 0 0 0 1 1 0 0 0
+( -512 320 384 ) ( -512 384 384 ) ( -448 320 384 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 19
+{
+( 0 320 0 ) ( 0 384 0 ) ( 0 320 64 ) common/caulk 0 0 0 1 1 0 0 0
+( 256 320 0 ) ( 256 320 64 ) ( 256 384 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 320 0 ) ( 0 320 64 ) ( 64 320 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0
+( 0 336 0 ) ( 64 336 0 ) ( 0 336 64 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 320 0 ) ( 64 320 0 ) ( 0 384 0 ) common/caulk 0 0 0 1 1 0 0 0
+( 0 320 384 ) ( 0 384 384 ) ( 64 320 384 ) common/caulk 0 0 0 1 1 0 0 0
+}
+// brush 20
+{
+( 0 -320 0 ) ( 0 -256 0 ) ( 0 -320 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 256 -320 0 ) ( 256 -320 64 ) ( 256 -256 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -320 0 ) ( 0 -320 64 ) ( 64 -320 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 0 ) ( 64 0 0 ) ( 0 0 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -320 0 ) ( 64 -320 0 ) ( 0 -256 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -320 160 ) ( 0 -256 160 ) ( 64 -320 160 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 21
+{
+( 0 0 0 ) ( 0 64 0 ) ( 0 0 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 256 0 0 ) ( 256 0 64 ) ( 256 64 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 0 ) ( 0 0 64 ) ( 64 0 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 320 0 ) ( 64 320 0 ) ( 0 320 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 0 ) ( 64 0 0 ) ( 0 64 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 160 ) ( 0 64 160 ) ( 64 0 160 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 22
+{
+( -10 -180 0 ) ( -10 -116 0 ) ( -10 -180 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 0 ) ( 0 -180 64 ) ( 0 -116 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 -180 0 ) ( -10 -180 64 ) ( 54 -180 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 -140 0 ) ( 54 -140 0 ) ( -10 -140 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 -180 0 ) ( 54 -180 0 ) ( -10 -116 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 -180 16 ) ( -10 -116 16 ) ( 54 -180 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 23
+{
+( -9 -180 16 ) ( -9 -116 16 ) ( -9 -180 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 16 ) ( 0 -180 80 ) ( 0 -116 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 -180 16 ) ( -9 -180 80 ) ( 55 -180 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 -140 16 ) ( 55 -140 16 ) ( -9 -140 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 -180 16 ) ( 55 -180 16 ) ( -9 -116 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 -180 32 ) ( -9 -116 32 ) ( 55 -180 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 24
+{
+( -8 -180 32 ) ( -8 -116 32 ) ( -8 -180 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 32 ) ( 0 -180 96 ) ( 0 -116 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 -180 32 ) ( -8 -180 96 ) ( 56 -180 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 -140 32 ) ( 56 -140 32 ) ( -8 -140 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 -180 32 ) ( 56 -180 32 ) ( -8 -116 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 -180 48 ) ( -8 -116 48 ) ( 56 -180 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 25
+{
+( -7 -180 48 ) ( -7 -116 48 ) ( -7 -180 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 48 ) ( 0 -180 112 ) ( 0 -116 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 -180 48 ) ( -7 -180 112 ) ( 57 -180 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 -140 48 ) ( 57 -140 48 ) ( -7 -140 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 -180 48 ) ( 57 -180 48 ) ( -7 -116 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 -180 64 ) ( -7 -116 64 ) ( 57 -180 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 26
+{
+( -6 -180 64 ) ( -6 -116 64 ) ( -6 -180 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 64 ) ( 0 -180 128 ) ( 0 -116 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 -180 64 ) ( -6 -180 128 ) ( 58 -180 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 -140 64 ) ( 58 -140 64 ) ( -6 -140 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 -180 64 ) ( 58 -180 64 ) ( -6 -116 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 -180 80 ) ( -6 -116 80 ) ( 58 -180 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 27
+{
+( -5 -180 80 ) ( -5 -116 80 ) ( -5 -180 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 80 ) ( 0 -180 144 ) ( 0 -116 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 -180 80 ) ( -5 -180 144 ) ( 59 -180 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 -140 80 ) ( 59 -140 80 ) ( -5 -140 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 -180 80 ) ( 59 -180 80 ) ( -5 -116 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 -180 96 ) ( -5 -116 96 ) ( 59 -180 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 28
+{
+( -4 -180 96 ) ( -4 -116 96 ) ( -4 -180 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 96 ) ( 0 -180 160 ) ( 0 -116 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -180 96 ) ( -4 -180 160 ) ( 60 -180 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -140 96 ) ( 60 -140 96 ) ( -4 -140 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -180 96 ) ( 60 -180 96 ) ( -4 -116 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -180 112 ) ( -4 -116 112 ) ( 60 -180 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 29
+{
+( -3 -180 112 ) ( -3 -116 112 ) ( -3 -180 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 112 ) ( 0 -180 176 ) ( 0 -116 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -180 112 ) ( -3 -180 176 ) ( 61 -180 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -140 112 ) ( 61 -140 112 ) ( -3 -140 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -180 112 ) ( 61 -180 112 ) ( -3 -116 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -180 128 ) ( -3 -116 128 ) ( 61 -180 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 30
+{
+( -2 -180 128 ) ( -2 -116 128 ) ( -2 -180 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 128 ) ( 0 -180 192 ) ( 0 -116 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 -180 128 ) ( -2 -180 192 ) ( 62 -180 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 -140 128 ) ( 62 -140 128 ) ( -2 -140 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 -180 128 ) ( 62 -180 128 ) ( -2 -116 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 -180 144 ) ( -2 -116 144 ) ( 62 -180 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 31
+{
+( -1 -180 144 ) ( -1 -116 144 ) ( -1 -180 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -180 144 ) ( 0 -180 208 ) ( 0 -116 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -180 144 ) ( -1 -180 208 ) ( 63 -180 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -140 144 ) ( 63 -140 144 ) ( -1 -140 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -180 144 ) ( 63 -180 144 ) ( -1 -116 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -180 160 ) ( -1 -116 160 ) ( 63 -180 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 32
+{
+( -20 -20 0 ) ( -20 44 0 ) ( -20 -20 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 0 ) ( 0 -20 64 ) ( 0 44 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 -20 0 ) ( -20 -20 64 ) ( 44 -20 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 0 0 ) ( 44 0 0 ) ( -20 0 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 -20 0 ) ( 44 -20 0 ) ( -20 44 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 -20 8 ) ( -20 44 8 ) ( 44 -20 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 33
+{
+( -20 0 0 ) ( -20 64 0 ) ( -20 0 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 0 ) ( 0 0 64 ) ( 0 64 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 0 0 ) ( -20 0 64 ) ( 44 0 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 20 0 ) ( 44 20 0 ) ( -20 20 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 0 0 ) ( 44 0 0 ) ( -20 64 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 0 8 ) ( -20 64 8 ) ( 44 0 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 34
+{
+( -19 -20 8 ) ( -19 44 8 ) ( -19 -20 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 8 ) ( 0 -20 72 ) ( 0 44 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -19 -20 8 ) ( -19 -20 72 ) ( 45 -20 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -19 0 8 ) ( 45 0 8 ) ( -19 0 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -19 -20 8 ) ( 45 -20 8 ) ( -19 44 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -19 -20 16 ) ( -19 44 16 ) ( 45 -20 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 35
+{
+( -19 0 8 ) ( -19 64 8 ) ( -19 0 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 8 ) ( 0 0 72 ) ( 0 64 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -19 0 8 ) ( -19 0 72 ) ( 45 0 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -19 20 8 ) ( 45 20 8 ) ( -19 20 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -19 0 8 ) ( 45 0 8 ) ( -19 64 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -19 0 16 ) ( -19 64 16 ) ( 45 0 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 36
+{
+( -18 -20 16 ) ( -18 44 16 ) ( -18 -20 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 16 ) ( 0 -20 80 ) ( 0 44 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 -20 16 ) ( -18 -20 80 ) ( 46 -20 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 0 16 ) ( 46 0 16 ) ( -18 0 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 -20 16 ) ( 46 -20 16 ) ( -18 44 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 -20 24 ) ( -18 44 24 ) ( 46 -20 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 37
+{
+( -18 0 16 ) ( -18 64 16 ) ( -18 0 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 16 ) ( 0 0 80 ) ( 0 64 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 0 16 ) ( -18 0 80 ) ( 46 0 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 20 16 ) ( 46 20 16 ) ( -18 20 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 0 16 ) ( 46 0 16 ) ( -18 64 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 0 24 ) ( -18 64 24 ) ( 46 0 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 38
+{
+( -17 -20 24 ) ( -17 44 24 ) ( -17 -20 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 24 ) ( 0 -20 88 ) ( 0 44 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -17 -20 24 ) ( -17 -20 88 ) ( 47 -20 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -17 0 24 ) ( 47 0 24 ) ( -17 0 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -17 -20 24 ) ( 47 -20 24 ) ( -17 44 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -17 -20 32 ) ( -17 44 32 ) ( 47 -20 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 39
+{
+( -17 0 24 ) ( -17 64 24 ) ( -17 0 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 24 ) ( 0 0 88 ) ( 0 64 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -17 0 24 ) ( -17 0 88 ) ( 47 0 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -17 20 24 ) ( 47 20 24 ) ( -17 20 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -17 0 24 ) ( 47 0 24 ) ( -17 64 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -17 0 32 ) ( -17 64 32 ) ( 47 0 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 40
+{
+( -16 -20 32 ) ( -16 44 32 ) ( -16 -20 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 32 ) ( 0 -20 96 ) ( 0 44 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 -20 32 ) ( -16 -20 96 ) ( 48 -20 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 0 32 ) ( 48 0 32 ) ( -16 0 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 -20 32 ) ( 48 -20 32 ) ( -16 44 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 -20 40 ) ( -16 44 40 ) ( 48 -20 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 41
+{
+( -16 0 32 ) ( -16 64 32 ) ( -16 0 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 32 ) ( 0 0 96 ) ( 0 64 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 0 32 ) ( -16 0 96 ) ( 48 0 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 20 32 ) ( 48 20 32 ) ( -16 20 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 0 32 ) ( 48 0 32 ) ( -16 64 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 0 40 ) ( -16 64 40 ) ( 48 0 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 42
+{
+( -15 -20 40 ) ( -15 44 40 ) ( -15 -20 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 40 ) ( 0 -20 104 ) ( 0 44 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -15 -20 40 ) ( -15 -20 104 ) ( 49 -20 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -15 0 40 ) ( 49 0 40 ) ( -15 0 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -15 -20 40 ) ( 49 -20 40 ) ( -15 44 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -15 -20 48 ) ( -15 44 48 ) ( 49 -20 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 43
+{
+( -15 0 40 ) ( -15 64 40 ) ( -15 0 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 40 ) ( 0 0 104 ) ( 0 64 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -15 0 40 ) ( -15 0 104 ) ( 49 0 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -15 20 40 ) ( 49 20 40 ) ( -15 20 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -15 0 40 ) ( 49 0 40 ) ( -15 64 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -15 0 48 ) ( -15 64 48 ) ( 49 0 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 44
+{
+( -14 -20 48 ) ( -14 44 48 ) ( -14 -20 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 48 ) ( 0 -20 112 ) ( 0 44 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 -20 48 ) ( -14 -20 112 ) ( 50 -20 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 0 48 ) ( 50 0 48 ) ( -14 0 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 -20 48 ) ( 50 -20 48 ) ( -14 44 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 -20 56 ) ( -14 44 56 ) ( 50 -20 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 45
+{
+( -14 0 48 ) ( -14 64 48 ) ( -14 0 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 48 ) ( 0 0 112 ) ( 0 64 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 0 48 ) ( -14 0 112 ) ( 50 0 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 20 48 ) ( 50 20 48 ) ( -14 20 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 0 48 ) ( 50 0 48 ) ( -14 64 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 0 56 ) ( -14 64 56 ) ( 50 0 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 46
+{
+( -13 -20 56 ) ( -13 44 56 ) ( -13 -20 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 56 ) ( 0 -20 120 ) ( 0 44 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -13 -20 56 ) ( -13 -20 120 ) ( 51 -20 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -13 0 56 ) ( 51 0 56 ) ( -13 0 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -13 -20 56 ) ( 51 -20 56 ) ( -13 44 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -13 -20 64 ) ( -13 44 64 ) ( 51 -20 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 47
+{
+( -13 0 56 ) ( -13 64 56 ) ( -13 0 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 56 ) ( 0 0 120 ) ( 0 64 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -13 0 56 ) ( -13 0 120 ) ( 51 0 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -13 20 56 ) ( 51 20 56 ) ( -13 20 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -13 0 56 ) ( 51 0 56 ) ( -13 64 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -13 0 64 ) ( -13 64 64 ) ( 51 0 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 48
+{
+( -12 -20 64 ) ( -12 44 64 ) ( -12 -20 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 64 ) ( 0 -20 128 ) ( 0 44 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 -20 64 ) ( -12 -20 128 ) ( 52 -20 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 0 64 ) ( 52 0 64 ) ( -12 0 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 -20 64 ) ( 52 -20 64 ) ( -12 44 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 -20 72 ) ( -12 44 72 ) ( 52 -20 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 49
+{
+( -12 0 64 ) ( -12 64 64 ) ( -12 0 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 64 ) ( 0 0 128 ) ( 0 64 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 0 64 ) ( -12 0 128 ) ( 52 0 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 20 64 ) ( 52 20 64 ) ( -12 20 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 0 64 ) ( 52 0 64 ) ( -12 64 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 0 72 ) ( -12 64 72 ) ( 52 0 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 50
+{
+( -11 -20 72 ) ( -11 44 72 ) ( -11 -20 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 72 ) ( 0 -20 136 ) ( 0 44 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -11 -20 72 ) ( -11 -20 136 ) ( 53 -20 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -11 0 72 ) ( 53 0 72 ) ( -11 0 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -11 -20 72 ) ( 53 -20 72 ) ( -11 44 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -11 -20 80 ) ( -11 44 80 ) ( 53 -20 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 51
+{
+( -11 0 72 ) ( -11 64 72 ) ( -11 0 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 72 ) ( 0 0 136 ) ( 0 64 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -11 0 72 ) ( -11 0 136 ) ( 53 0 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -11 20 72 ) ( 53 20 72 ) ( -11 20 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -11 0 72 ) ( 53 0 72 ) ( -11 64 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -11 0 80 ) ( -11 64 80 ) ( 53 0 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 52
+{
+( -10 -20 80 ) ( -10 44 80 ) ( -10 -20 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 80 ) ( 0 -20 144 ) ( 0 44 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 -20 80 ) ( -10 -20 144 ) ( 54 -20 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 0 80 ) ( 54 0 80 ) ( -10 0 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 -20 80 ) ( 54 -20 80 ) ( -10 44 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 -20 88 ) ( -10 44 88 ) ( 54 -20 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 53
+{
+( -10 0 80 ) ( -10 64 80 ) ( -10 0 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 80 ) ( 0 0 144 ) ( 0 64 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 0 80 ) ( -10 0 144 ) ( 54 0 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 20 80 ) ( 54 20 80 ) ( -10 20 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 0 80 ) ( 54 0 80 ) ( -10 64 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 0 88 ) ( -10 64 88 ) ( 54 0 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 54
+{
+( -9 -20 88 ) ( -9 44 88 ) ( -9 -20 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 88 ) ( 0 -20 152 ) ( 0 44 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 -20 88 ) ( -9 -20 152 ) ( 55 -20 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 0 88 ) ( 55 0 88 ) ( -9 0 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 -20 88 ) ( 55 -20 88 ) ( -9 44 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 -20 96 ) ( -9 44 96 ) ( 55 -20 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 55
+{
+( -9 0 88 ) ( -9 64 88 ) ( -9 0 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 88 ) ( 0 0 152 ) ( 0 64 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 0 88 ) ( -9 0 152 ) ( 55 0 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 20 88 ) ( 55 20 88 ) ( -9 20 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 0 88 ) ( 55 0 88 ) ( -9 64 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -9 0 96 ) ( -9 64 96 ) ( 55 0 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 56
+{
+( -8 -20 96 ) ( -8 44 96 ) ( -8 -20 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 96 ) ( 0 -20 160 ) ( 0 44 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 -20 96 ) ( -8 -20 160 ) ( 56 -20 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 0 96 ) ( 56 0 96 ) ( -8 0 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 -20 96 ) ( 56 -20 96 ) ( -8 44 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 -20 104 ) ( -8 44 104 ) ( 56 -20 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 57
+{
+( -8 0 96 ) ( -8 64 96 ) ( -8 0 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 96 ) ( 0 0 160 ) ( 0 64 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 0 96 ) ( -8 0 160 ) ( 56 0 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 20 96 ) ( 56 20 96 ) ( -8 20 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 0 96 ) ( 56 0 96 ) ( -8 64 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 0 104 ) ( -8 64 104 ) ( 56 0 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 58
+{
+( -7 -20 104 ) ( -7 44 104 ) ( -7 -20 168 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 104 ) ( 0 -20 168 ) ( 0 44 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 -20 104 ) ( -7 -20 168 ) ( 57 -20 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 0 104 ) ( 57 0 104 ) ( -7 0 168 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 -20 104 ) ( 57 -20 104 ) ( -7 44 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 -20 112 ) ( -7 44 112 ) ( 57 -20 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 59
+{
+( -7 0 104 ) ( -7 64 104 ) ( -7 0 168 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 104 ) ( 0 0 168 ) ( 0 64 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 0 104 ) ( -7 0 168 ) ( 57 0 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 20 104 ) ( 57 20 104 ) ( -7 20 168 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 0 104 ) ( 57 0 104 ) ( -7 64 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -7 0 112 ) ( -7 64 112 ) ( 57 0 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 60
+{
+( -6 -20 112 ) ( -6 44 112 ) ( -6 -20 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 112 ) ( 0 -20 176 ) ( 0 44 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 -20 112 ) ( -6 -20 176 ) ( 58 -20 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 0 112 ) ( 58 0 112 ) ( -6 0 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 -20 112 ) ( 58 -20 112 ) ( -6 44 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 -20 120 ) ( -6 44 120 ) ( 58 -20 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 61
+{
+( -6 0 112 ) ( -6 64 112 ) ( -6 0 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 112 ) ( 0 0 176 ) ( 0 64 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 0 112 ) ( -6 0 176 ) ( 58 0 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 20 112 ) ( 58 20 112 ) ( -6 20 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 0 112 ) ( 58 0 112 ) ( -6 64 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 0 120 ) ( -6 64 120 ) ( 58 0 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 62
+{
+( -5 -20 120 ) ( -5 44 120 ) ( -5 -20 184 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 120 ) ( 0 -20 184 ) ( 0 44 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 -20 120 ) ( -5 -20 184 ) ( 59 -20 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 0 120 ) ( 59 0 120 ) ( -5 0 184 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 -20 120 ) ( 59 -20 120 ) ( -5 44 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 -20 128 ) ( -5 44 128 ) ( 59 -20 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 63
+{
+( -5 0 120 ) ( -5 64 120 ) ( -5 0 184 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 120 ) ( 0 0 184 ) ( 0 64 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 0 120 ) ( -5 0 184 ) ( 59 0 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 20 120 ) ( 59 20 120 ) ( -5 20 184 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 0 120 ) ( 59 0 120 ) ( -5 64 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -5 0 128 ) ( -5 64 128 ) ( 59 0 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 64
+{
+( -4 -20 128 ) ( -4 44 128 ) ( -4 -20 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 128 ) ( 0 -20 192 ) ( 0 44 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -20 128 ) ( -4 -20 192 ) ( 60 -20 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 0 128 ) ( 60 0 128 ) ( -4 0 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -20 128 ) ( 60 -20 128 ) ( -4 44 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -20 136 ) ( -4 44 136 ) ( 60 -20 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 65
+{
+( -4 0 128 ) ( -4 64 128 ) ( -4 0 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 128 ) ( 0 0 192 ) ( 0 64 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 0 128 ) ( -4 0 192 ) ( 60 0 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 20 128 ) ( 60 20 128 ) ( -4 20 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 0 128 ) ( 60 0 128 ) ( -4 64 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 0 136 ) ( -4 64 136 ) ( 60 0 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 66
+{
+( -3 -20 136 ) ( -3 44 136 ) ( -3 -20 200 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 136 ) ( 0 -20 200 ) ( 0 44 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -20 136 ) ( -3 -20 200 ) ( 61 -20 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 0 136 ) ( 61 0 136 ) ( -3 0 200 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -20 136 ) ( 61 -20 136 ) ( -3 44 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -20 144 ) ( -3 44 144 ) ( 61 -20 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 67
+{
+( -3 0 136 ) ( -3 64 136 ) ( -3 0 200 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 136 ) ( 0 0 200 ) ( 0 64 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 0 136 ) ( -3 0 200 ) ( 61 0 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 20 136 ) ( 61 20 136 ) ( -3 20 200 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 0 136 ) ( 61 0 136 ) ( -3 64 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 0 144 ) ( -3 64 144 ) ( 61 0 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 68
+{
+( -2 -20 144 ) ( -2 44 144 ) ( -2 -20 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 144 ) ( 0 -20 208 ) ( 0 44 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 -20 144 ) ( -2 -20 208 ) ( 62 -20 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 0 144 ) ( 62 0 144 ) ( -2 0 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 -20 144 ) ( 62 -20 144 ) ( -2 44 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 -20 152 ) ( -2 44 152 ) ( 62 -20 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 69
+{
+( -2 0 144 ) ( -2 64 144 ) ( -2 0 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 144 ) ( 0 0 208 ) ( 0 64 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 0 144 ) ( -2 0 208 ) ( 62 0 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 20 144 ) ( 62 20 144 ) ( -2 20 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 0 144 ) ( 62 0 144 ) ( -2 64 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 0 152 ) ( -2 64 152 ) ( 62 0 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 70
+{
+( -1 -20 152 ) ( -1 44 152 ) ( -1 -20 216 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -20 152 ) ( 0 -20 216 ) ( 0 44 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -20 152 ) ( -1 -20 216 ) ( 63 -20 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 0 152 ) ( 63 0 152 ) ( -1 0 216 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -20 152 ) ( 63 -20 152 ) ( -1 44 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -20 160 ) ( -1 44 160 ) ( 63 -20 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 71
+{
+( -1 0 152 ) ( -1 64 152 ) ( -1 0 216 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 0 152 ) ( 0 0 216 ) ( 0 64 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 0 152 ) ( -1 0 216 ) ( 63 0 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 20 152 ) ( 63 20 152 ) ( -1 20 216 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 0 152 ) ( 63 0 152 ) ( -1 64 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 0 160 ) ( -1 64 160 ) ( 63 0 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 72
+{
+( -40 140 0 ) ( -40 204 0 ) ( -40 140 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 0 ) ( 0 140 64 ) ( 0 204 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -40 140 0 ) ( -40 140 64 ) ( 24 140 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -40 180 0 ) ( 24 180 0 ) ( -40 180 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -40 140 0 ) ( 24 140 0 ) ( -40 204 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -40 140 8 ) ( -40 204 8 ) ( 24 140 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 73
+{
+( -38 140 8 ) ( -38 204 8 ) ( -38 140 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 8 ) ( 0 140 72 ) ( 0 204 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -38 140 8 ) ( -38 140 72 ) ( 26 140 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -38 180 8 ) ( 26 180 8 ) ( -38 180 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -38 140 8 ) ( 26 140 8 ) ( -38 204 8 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -38 140 16 ) ( -38 204 16 ) ( 26 140 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 74
+{
+( -36 140 16 ) ( -36 204 16 ) ( -36 140 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 16 ) ( 0 140 80 ) ( 0 204 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -36 140 16 ) ( -36 140 80 ) ( 28 140 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -36 180 16 ) ( 28 180 16 ) ( -36 180 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -36 140 16 ) ( 28 140 16 ) ( -36 204 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -36 140 24 ) ( -36 204 24 ) ( 28 140 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 75
+{
+( -34 140 24 ) ( -34 204 24 ) ( -34 140 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 24 ) ( 0 140 88 ) ( 0 204 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -34 140 24 ) ( -34 140 88 ) ( 30 140 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -34 180 24 ) ( 30 180 24 ) ( -34 180 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -34 140 24 ) ( 30 140 24 ) ( -34 204 24 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -34 140 32 ) ( -34 204 32 ) ( 30 140 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 76
+{
+( -32 140 32 ) ( -32 204 32 ) ( -32 140 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 32 ) ( 0 140 96 ) ( 0 204 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -32 140 32 ) ( -32 140 96 ) ( 32 140 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -32 180 32 ) ( 32 180 32 ) ( -32 180 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -32 140 32 ) ( 32 140 32 ) ( -32 204 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -32 140 40 ) ( -32 204 40 ) ( 32 140 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 77
+{
+( -30 140 40 ) ( -30 204 40 ) ( -30 140 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 40 ) ( 0 140 104 ) ( 0 204 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -30 140 40 ) ( -30 140 104 ) ( 34 140 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -30 180 40 ) ( 34 180 40 ) ( -30 180 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -30 140 40 ) ( 34 140 40 ) ( -30 204 40 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -30 140 48 ) ( -30 204 48 ) ( 34 140 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 78
+{
+( -28 140 48 ) ( -28 204 48 ) ( -28 140 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 48 ) ( 0 140 112 ) ( 0 204 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -28 140 48 ) ( -28 140 112 ) ( 36 140 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -28 180 48 ) ( 36 180 48 ) ( -28 180 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -28 140 48 ) ( 36 140 48 ) ( -28 204 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -28 140 56 ) ( -28 204 56 ) ( 36 140 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 79
+{
+( -26 140 56 ) ( -26 204 56 ) ( -26 140 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 56 ) ( 0 140 120 ) ( 0 204 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -26 140 56 ) ( -26 140 120 ) ( 38 140 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -26 180 56 ) ( 38 180 56 ) ( -26 180 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -26 140 56 ) ( 38 140 56 ) ( -26 204 56 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -26 140 64 ) ( -26 204 64 ) ( 38 140 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 80
+{
+( -24 140 64 ) ( -24 204 64 ) ( -24 140 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 64 ) ( 0 140 128 ) ( 0 204 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -24 140 64 ) ( -24 140 128 ) ( 40 140 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -24 180 64 ) ( 40 180 64 ) ( -24 180 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -24 140 64 ) ( 40 140 64 ) ( -24 204 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -24 140 72 ) ( -24 204 72 ) ( 40 140 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 81
+{
+( -22 140 72 ) ( -22 204 72 ) ( -22 140 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 72 ) ( 0 140 136 ) ( 0 204 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -22 140 72 ) ( -22 140 136 ) ( 42 140 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -22 180 72 ) ( 42 180 72 ) ( -22 180 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -22 140 72 ) ( 42 140 72 ) ( -22 204 72 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -22 140 80 ) ( -22 204 80 ) ( 42 140 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 82
+{
+( -20 140 80 ) ( -20 204 80 ) ( -20 140 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 80 ) ( 0 140 144 ) ( 0 204 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 140 80 ) ( -20 140 144 ) ( 44 140 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 180 80 ) ( 44 180 80 ) ( -20 180 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 140 80 ) ( 44 140 80 ) ( -20 204 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -20 140 88 ) ( -20 204 88 ) ( 44 140 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 83
+{
+( -18 140 88 ) ( -18 204 88 ) ( -18 140 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 88 ) ( 0 140 152 ) ( 0 204 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 140 88 ) ( -18 140 152 ) ( 46 140 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 180 88 ) ( 46 180 88 ) ( -18 180 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 140 88 ) ( 46 140 88 ) ( -18 204 88 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -18 140 96 ) ( -18 204 96 ) ( 46 140 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 84
+{
+( -16 140 96 ) ( -16 204 96 ) ( -16 140 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 96 ) ( 0 140 160 ) ( 0 204 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 140 96 ) ( -16 140 160 ) ( 48 140 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 180 96 ) ( 48 180 96 ) ( -16 180 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 140 96 ) ( 48 140 96 ) ( -16 204 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -16 140 104 ) ( -16 204 104 ) ( 48 140 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 85
+{
+( -14 140 104 ) ( -14 204 104 ) ( -14 140 168 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 104 ) ( 0 140 168 ) ( 0 204 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 140 104 ) ( -14 140 168 ) ( 50 140 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 180 104 ) ( 50 180 104 ) ( -14 180 168 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 140 104 ) ( 50 140 104 ) ( -14 204 104 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -14 140 112 ) ( -14 204 112 ) ( 50 140 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 86
+{
+( -12 140 112 ) ( -12 204 112 ) ( -12 140 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 112 ) ( 0 140 176 ) ( 0 204 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 140 112 ) ( -12 140 176 ) ( 52 140 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 180 112 ) ( 52 180 112 ) ( -12 180 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 140 112 ) ( 52 140 112 ) ( -12 204 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -12 140 120 ) ( -12 204 120 ) ( 52 140 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 87
+{
+( -10 140 120 ) ( -10 204 120 ) ( -10 140 184 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 120 ) ( 0 140 184 ) ( 0 204 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 140 120 ) ( -10 140 184 ) ( 54 140 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 180 120 ) ( 54 180 120 ) ( -10 180 184 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 140 120 ) ( 54 140 120 ) ( -10 204 120 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -10 140 128 ) ( -10 204 128 ) ( 54 140 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 88
+{
+( -8 140 128 ) ( -8 204 128 ) ( -8 140 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 128 ) ( 0 140 192 ) ( 0 204 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 140 128 ) ( -8 140 192 ) ( 56 140 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 180 128 ) ( 56 180 128 ) ( -8 180 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 140 128 ) ( 56 140 128 ) ( -8 204 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -8 140 136 ) ( -8 204 136 ) ( 56 140 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 89
+{
+( -6 140 136 ) ( -6 204 136 ) ( -6 140 200 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 136 ) ( 0 140 200 ) ( 0 204 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 140 136 ) ( -6 140 200 ) ( 58 140 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 180 136 ) ( 58 180 136 ) ( -6 180 200 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 140 136 ) ( 58 140 136 ) ( -6 204 136 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -6 140 144 ) ( -6 204 144 ) ( 58 140 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 90
+{
+( -4 140 144 ) ( -4 204 144 ) ( -4 140 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 144 ) ( 0 140 208 ) ( 0 204 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 140 144 ) ( -4 140 208 ) ( 60 140 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 180 144 ) ( 60 180 144 ) ( -4 180 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 140 144 ) ( 60 140 144 ) ( -4 204 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 140 152 ) ( -4 204 152 ) ( 60 140 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 91
+{
+( -2 140 152 ) ( -2 204 152 ) ( -2 140 216 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 140 152 ) ( 0 140 216 ) ( 0 204 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 140 152 ) ( -2 140 216 ) ( 62 140 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 180 152 ) ( 62 180 152 ) ( -2 180 216 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 140 152 ) ( 62 140 152 ) ( -2 204 152 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -2 140 160 ) ( -2 204 160 ) ( 62 140 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 92
+{
+( -4 -276 0 ) ( -4 -212 0 ) ( -4 -276 64 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -276 0 ) ( 0 -276 64 ) ( 0 -212 0 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -276 0 ) ( -4 -276 64 ) ( 60 -276 0 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -274 0 ) ( 60 -274 0 ) ( -4 -274 64 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -276 0 ) ( 60 -276 0 ) ( -4 -212 0 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -276 160 ) ( -4 -212 160 ) ( 60 -276 160 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 93
+{
+( -4 -246 0 ) ( -4 -182 0 ) ( -4 -246 64 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -246 0 ) ( 0 -246 64 ) ( 0 -182 0 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -246 0 ) ( -4 -246 64 ) ( 60 -246 0 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -244 0 ) ( 60 -244 0 ) ( -4 -244 64 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -246 0 ) ( 60 -246 0 ) ( -4 -182 0 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -246 160 ) ( -4 -182 160 ) ( 60 -246 160 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 94
+{
+( -3 -274 15 ) ( -3 -210 15 ) ( -3 -274 79 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -274 15 ) ( -1 -274 79 ) ( -1 -210 15 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 15 ) ( -3 -274 79 ) ( 61 -274 15 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -246 15 ) ( 61 -246 15 ) ( -3 -246 79 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 15 ) ( 61 -274 15 ) ( -3 -210 15 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 17 ) ( -3 -210 17 ) ( 61 -274 17 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 95
+{
+( -3 -274 31 ) ( -3 -210 31 ) ( -3 -274 95 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -274 31 ) ( -1 -274 95 ) ( -1 -210 31 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 31 ) ( -3 -274 95 ) ( 61 -274 31 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -246 31 ) ( 61 -246 31 ) ( -3 -246 95 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 31 ) ( 61 -274 31 ) ( -3 -210 31 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 33 ) ( -3 -210 33 ) ( 61 -274 33 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 96
+{
+( -3 -274 47 ) ( -3 -210 47 ) ( -3 -274 111 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -274 47 ) ( -1 -274 111 ) ( -1 -210 47 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 47 ) ( -3 -274 111 ) ( 61 -274 47 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -246 47 ) ( 61 -246 47 ) ( -3 -246 111 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 47 ) ( 61 -274 47 ) ( -3 -210 47 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 49 ) ( -3 -210 49 ) ( 61 -274 49 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 97
+{
+( -3 -274 63 ) ( -3 -210 63 ) ( -3 -274 127 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -274 63 ) ( -1 -274 127 ) ( -1 -210 63 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 63 ) ( -3 -274 127 ) ( 61 -274 63 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -246 63 ) ( 61 -246 63 ) ( -3 -246 127 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 63 ) ( 61 -274 63 ) ( -3 -210 63 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 65 ) ( -3 -210 65 ) ( 61 -274 65 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 98
+{
+( -3 -274 79 ) ( -3 -210 79 ) ( -3 -274 143 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -274 79 ) ( -1 -274 143 ) ( -1 -210 79 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 79 ) ( -3 -274 143 ) ( 61 -274 79 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -246 79 ) ( 61 -246 79 ) ( -3 -246 143 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 79 ) ( 61 -274 79 ) ( -3 -210 79 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 81 ) ( -3 -210 81 ) ( 61 -274 81 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 99
+{
+( -3 -274 95 ) ( -3 -210 95 ) ( -3 -274 159 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -274 95 ) ( -1 -274 159 ) ( -1 -210 95 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 95 ) ( -3 -274 159 ) ( 61 -274 95 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -246 95 ) ( 61 -246 95 ) ( -3 -246 159 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 95 ) ( 61 -274 95 ) ( -3 -210 95 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 97 ) ( -3 -210 97 ) ( 61 -274 97 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 100
+{
+( -3 -274 111 ) ( -3 -210 111 ) ( -3 -274 175 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -274 111 ) ( -1 -274 175 ) ( -1 -210 111 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 111 ) ( -3 -274 175 ) ( 61 -274 111 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -246 111 ) ( 61 -246 111 ) ( -3 -246 175 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 111 ) ( 61 -274 111 ) ( -3 -210 111 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 113 ) ( -3 -210 113 ) ( 61 -274 113 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 101
+{
+( -3 -274 127 ) ( -3 -210 127 ) ( -3 -274 191 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -274 127 ) ( -1 -274 191 ) ( -1 -210 127 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 127 ) ( -3 -274 191 ) ( 61 -274 127 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -246 127 ) ( 61 -246 127 ) ( -3 -246 191 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 127 ) ( 61 -274 127 ) ( -3 -210 127 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 129 ) ( -3 -210 129 ) ( 61 -274 129 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 102
+{
+( -3 -274 143 ) ( -3 -210 143 ) ( -3 -274 207 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -1 -274 143 ) ( -1 -274 207 ) ( -1 -210 143 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 143 ) ( -3 -274 207 ) ( 61 -274 143 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -246 143 ) ( 61 -246 143 ) ( -3 -246 207 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 143 ) ( 61 -274 143 ) ( -3 -210 143 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -3 -274 145 ) ( -3 -210 145 ) ( 61 -274 145 ) central_europe_winter/ibeam_horizwnter 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 103
+{
+( -4 -276 0 ) ( -4 -212 0 ) ( -4 -276 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( 0 -276 0 ) ( 0 -276 64 ) ( 0 -212 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -276 0 ) ( -4 -276 64 ) ( 60 -276 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -244 0 ) ( 60 -244 0 ) ( -4 -244 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -276 0 ) ( 60 -276 0 ) ( -4 -212 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -4 -276 160 ) ( -4 -212 160 ) ( 60 -276 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+}
+// entity 1
+{
+"classname" "info_player_deathmatch"
+"origin" "-300 0 1"
+"angle" "0"
+}
+// entity 2
+{
+"classname" "info_player_allied"
+"origin" "-300 0 1"
+"angle" "0"
+}
+// entity 3
+{
+"classname" "info_player_axis"
+"origin" "-300 0 1"
+"angle" "0"
+}
+// entity 4
+{
+"classname" "func_ladder"
+"angle" "0"
+// brush 0
+{
+( -12 -276 0 ) ( -12 -212 0 ) ( -12 -276 64 ) common/trigger 0 0 0 1 1 0 0 0
+( 0 -276 0 ) ( 0 -276 64 ) ( 0 -212 0 ) common/trigger 0 0 0 1 1 0 0 0
+( -12 -276 0 ) ( -12 -276 64 ) ( 52 -276 0 ) common/trigger 0 0 0 1 1 0 0 0
+( -12 -244 0 ) ( 52 -244 0 ) ( -12 -244 64 ) common/trigger 0 0 0 1 1 0 0 0
+( -12 -276 0 ) ( 52 -276 0 ) ( -12 -212 0 ) common/trigger 0 0 0 1 1 0 0 0
+( -12 -276 160 ) ( -12 -212 160 ) ( 52 -276 160 ) common/trigger 0 0 0 1 1 0 0 0
+}
+// brush 1
+{
+( -5 -261 79 ) ( -5 -197 79 ) ( -5 -261 143 ) common/origin 0 0 0 1 1 0 0 0
+( -3 -261 79 ) ( -3 -261 143 ) ( -3 -197 79 ) common/origin 0 0 0 1 1 0 0 0
+( -5 -261 79 ) ( -5 -261 143 ) ( 59 -261 79 ) common/origin 0 0 0 1 1 0 0 0
+( -5 -259 79 ) ( 59 -259 79 ) ( -5 -259 143 ) common/origin 0 0 0 1 1 0 0 0
+( -5 -261 79 ) ( 59 -261 79 ) ( -5 -197 79 ) common/origin 0 0 0 1 1 0 0 0
+( -5 -261 81 ) ( -5 -197 81 ) ( 59 -261 81 ) common/origin 0 0 0 1 1 0 0 0
+}
+}
+// entity 5
+{
+"classname" "light"
+"origin" "-200 0 300"
+"light" "400"
+}

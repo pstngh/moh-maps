@@ -118,7 +118,9 @@ direction the climber faces). Stock ladders are 28–64 wide. `surfaceparm
 ladder` does nothing. A `func_ladder` lets the player off at the top only forward, onto a
 clear spot (engine.md §1.3), so a ladder under a floor hole or beside a platform hangs
 players near the top; there, CS-style invisible clip step columns work (the CS:GO
-converter's default, docs/csgo-conversion.md), but bots can't climb them.
+converter's default, docs/csgo-conversion.md), but bots can't climb them. In `build.py`:
+`kit.ladder` (func_ladder) and `kit.step_ladder`; `mohkit build --ladders` climbs every
+ladder as a player and reports how far each got (`tests/rooms/laddertest`).
 
 ## Triggers, breakables, sound
 
@@ -127,7 +129,8 @@ converter's default, docs/csgo-conversion.md), but bots can't climb them.
   label` (runs a script thread), `target`, `wait`, `delay`, `cnt`, `message`.
   Spawnflag 128 = shoot to fire.
 - `func_crate` (`health`, `debristype` 0–3), `func_barrel` (`barreltype
-  water|oil|gas`), `func_window` (`health`, `debristype`).
+  water|oil|gas`), `func_window` (`health`, `debristype`). Retail's window debris 0–3
+  are all glass shards: `kit.breakable(..., kind="metal"|"wood")` ships debris 7/8.
 - Stock MP maps make ambient sound in script (`loopsound` on a `script_origin`)
   rather than with `sound_speaker`.
 

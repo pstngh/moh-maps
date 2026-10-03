@@ -1,4 +1,4 @@
-"""Every generated map in maps/ still produces its committed .map: a mohkit change that alters a
+"""Every generated map in maps/ and tests/rooms/ still produces its committed .map: a mohkit change that alters a
 map's geometry shows up here (moving helpers into mohkit must not; the proof of the
 "reusable code lives in mohkit" rule in CLAUDE.md). When a change is meant to alter a map,
 regenerate it with ``python -m mohkit generate maps/<name>`` and commit the new .map."""
@@ -22,7 +22,7 @@ def _generated(folder: Path) -> str:
 
 def test_maps_regenerate_identically():
     checked = 0
-    for folder in sorted((ROOT / "maps").iterdir()):
+    for folder in sorted([*(ROOT / "maps").iterdir(), *(ROOT / "tests" / "rooms").iterdir()]):
         name = folder.name
         src = folder / f"{name}.map"
         if not (folder / "build.py").is_file() or not src.is_file():
