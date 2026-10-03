@@ -117,6 +117,40 @@ def test_exposure_measure():
     assert abs(e.blown - 0.5) < 0.01 and "BLOWN" in e.flags and "CRUSHED" in e.flags
 
 
+def test_exposure_changed():
+    """``mohkit exposure --changed``: cameras ranked by pixel change, or by change of distance
+    to the reference (gains and losses both first), and a ref | before | after sheet."""
+    from PIL import Image
+    grey = {"00_same": (100, 100, 100), "01_small": (100, 100, 100), "02_big": (100, 100, 100),
+            "03_worse": (100, 100, 100)}
+    after = {"00_same": (100, 100, 100), "01_small": (110, 110, 110), "02_big": (180, 180, 180),
+             "03_worse": (70, 70, 70)}
+    ref = {"00_same": (100, 100, 100), "01_small": (110, 110, 110), "02_big": (150, 150, 150),
+           "03_worse": (110, 110, 110)}
+    with tempfile.TemporaryDirectory() as d:
+        dirs = {k: Path(d) / k for k in ("before", "after", "ref")}
+        for k, colours in zip(dirs, (grey, after, ref)):
+            dirs[k].mkdir()
+            for cam, c in colours.items():
+                size = (640, 360) if k == "ref" else (1280, 720)            # CS:GO refs differ in size
+                Image.new("RGB", size, c).save(dirs[k] / f"{cam}.{'jpg' if k == 'ref' else 'png'}")
+        Image.new("RGB", (1280, 720)).save(dirs["after"] / "04_new_only.png")  # no before: skipped
+        Image.new("RGB", (1280, 720), (255, 0, 0)).save(dirs["before"] / "02_big 2.png")  # iCloud copy
+        assert "02_big 2" not in exposure.shot_files(dirs["before"])
+        rows = exposure.changed(dirs["before"], dirs["after"])
+        assert [x["camera"] for x in rows] == ["02_big", "03_worse", "01_small", "00_same"], rows
+        assert rows[0]["change"] == 80 and rows[0]["changed_pct"] == 100 and rows[-1]["change"] == 0
+        out = Path(d) / "sheet.png"
+        rows, text = exposure.changed_sheet(dirs["before"], dirs["after"], out, dirs["ref"], n=2, rank="ref")
+        by = {x["camera"]: x for x in rows}
+        assert by["01_small"]["closer"] == 10 and by["03_worse"]["closer"] == -30, by
+        assert by["02_big"]["closer"] == 20                         # 50 off -> 30 off
+        assert [x["camera"] for x in rows[:2]] == ["03_worse", "02_big"], rows
+        assert Image.open(out).size == (3 * 480, 2 * (270 + 18))
+        assert Image.open(out).getpixel((480 + 240, 288 + 18 + 135)) == (100, 100, 100)  # not the copy
+        assert "mean |error|" in text and "03_worse" in text
+
+
 def test_fitted_exposure_and_ratio():
     """The fitted-exposure table overrides the controller rule; the reference ratio is the
     median over shared cameras (one odd camera doesn't move it)."""

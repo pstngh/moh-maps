@@ -10,6 +10,7 @@ ranked, compared with stock maps (``stock_shots``), and re-measured after a fix:
     python -m mohkit exposure local/csgo/cs_nuke/shots          # one map, worst shots first
     python -m mohkit exposure local/csgo/*/shots --by-map       # one line per map
     python -m mohkit exposure a.png --mask out.png              # red = blown, blue = crushed
+    python -m mohkit exposure --changed BEFORE AFTER --ref REF  # most changed cameras, ref | before | after
 
 Luminance is Rec. 709 luma of the 8-bit sRGB values (what the eye reads as brightness on
 screen). Thresholds:
@@ -24,6 +25,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Iterable, Optional, Sequence
@@ -123,6 +125,23 @@ def mask(image, out: Path) -> Path:
     return Path(out)
 
 
+IMAGES = (".png", ".jpg", ".tga")
+
+
+def shot_files(folder: Path) -> dict[str, Path]:
+    """Shot name -> image in a folder, without sync copies: iCloud Drive keeps the old file
+    as ``<name> 2.png`` when a re-shoot replaces it during an upload (the repo is under
+    ``~/Documents``). 2026-10-02: 390 such copies in local/csgo, 17 in cs_nuke's current
+    shots; tables counted them as cameras and ``triple_sheet`` showed them as "before"."""
+    files = {p.stem: p for p in sorted(Path(folder).iterdir()) if p.suffix.lower() in IMAGES}
+    return {k: p for k, p in files.items() if not _sync_copy(k, files)}
+
+
+def _sync_copy(stem: str, stems) -> bool:
+    m = re.fullmatch(r"(.+) \d+", stem)
+    return bool(m) and m.group(1) in stems
+
+
 def groups_in(paths: Iterable) -> dict[str, dict[str, Path]]:
     """Shot images under ``paths`` (folders of .png/.jpg/.tga, or single images), grouped by
     map: ``local/csgo/cs_nuke/shots`` is group ``cs_nuke``, ``dist/stock_shots/mohdm1`` is
@@ -131,7 +150,7 @@ def groups_in(paths: Iterable) -> dict[str, dict[str, Path]]:
     for p in map(Path, paths):
         if p.is_dir():
             group = p.parent.name if p.name == "shots" else p.name
-            files = sorted(f for f in p.iterdir() if f.suffix.lower() in (".png", ".jpg", ".tga"))
+            files = list(shot_files(p).values())
         else:
             group, files = "", [p]
         for f in files:
@@ -253,9 +272,8 @@ def against(ref: Path, runs: Sequence[Path]) -> tuple[list[dict], str]:
     Returns per-run summaries (mean brightness, mean absolute error and correlation of
     per-camera means with the reference) and a printable table."""
     import numpy as np
-    refs = {p.stem: measure(p) for p in sorted(Path(ref).iterdir()) if p.suffix.lower() in (".png", ".jpg", ".tga")}
-    rows = [{p.stem: measure(p) for p in sorted(Path(r).iterdir()) if p.suffix.lower() in (".png", ".jpg", ".tga")}
-            for r in runs]
+    refs = {k: measure(p) for k, p in shot_files(ref).items()}
+    rows = [{k: measure(p) for k, p in shot_files(r).items()} for r in runs]
     names = [k for k in refs if all(k in r for r in rows)]
     lines = [f"{'camera':22s} {'ref':>5s} " + " ".join(f"{Path(r).parent.name[:10]:>10s}" for r in runs)]
     for k in names:
@@ -267,26 +285,104 @@ def against(ref: Path, runs: Sequence[Path]) -> tuple[list[dict], str]:
         out.append({"run": str(path), "cameras": len(names), "ref_mean": round(float(R.mean()), 1) if len(R) else 0,
                     "mean": round(float(M.mean()), 1) if len(M) else 0,
                     "mae": round(float(np.abs(M - R).mean()), 1) if len(R) else 0,
-                    "corr": round(float(np.corrcoef(R, M)[0, 1]), 2) if len(R) > 2 else 0.0})
+                    "corr": round(float(np.corrcoef(R, M)[0, 1]), 2) if len(R) > 2 and R.std() and M.std() else 0.0})
     lines += [f"== {o['run']}: mean {o['mean']} (ref {o['ref_mean']}), mean |error| {o['mae']}, "
               f"corr {o['corr']} over {o['cameras']} cameras" for o in out]
     return out, "\n".join(lines)
 
 
+def pixel_change(a, b, threshold: int = 40) -> tuple[float, float]:
+    """How much two shots of one camera differ: the mean of each pixel's largest channel
+    difference (0-255) and the share (%) of pixels that differ by more than ``threshold``.
+    ``a`` and ``b`` are H x W x 3 arrays or image paths; paths of different sizes are
+    compared at 1280 x 720."""
+    import numpy as np
+    from PIL import Image
+    if isinstance(a, (str, Path)) or isinstance(b, (str, Path)):
+        ia, ib = (Image.open(x).convert("RGB") for x in (a, b))
+        if ia.size != ib.size:
+            ia, ib = (x.resize((1280, 720), Image.BILINEAR) for x in (ia, ib))
+        a, b = ia, ib
+    d = np.abs(np.asarray(a, np.float32) - np.asarray(b, np.float32)).max(2)
+    return round(float(d.mean()), 2), round(float((d > threshold).mean() * 100), 2)
+
+
+def changed(before: Path, after: Path, ref: Optional[Path] = None, rank: str = "pixels") -> list[dict]:
+    """Cameras of two shot folders of one map (matched by file stem), most changed first.
+
+    Each row: ``camera``, ``change`` / ``changed_pct`` (``pixel_change`` before -> after),
+    ``before`` / ``after`` (mean luma) and, with reference shots of the same cameras
+    (``ref``, e.g. ``local/csgo/<name>/csgo_ref``), ``ref`` and ``closer`` (how much nearer
+    the reference's mean luma the after shot is: positive = better). ``rank="pixels"``
+    sorts by ``change``; ``rank="ref"`` by ``abs(closer)``, so the biggest gains and the
+    biggest losses against the reference both come first."""
+    b, a = shot_files(before), shot_files(after)
+    r = shot_files(ref) if ref else {}
+    rows = []
+    for k in a:
+        if k not in b or (r and k not in r):
+            continue
+        mb, ma = measure(b[k]).mean, measure(a[k]).mean
+        ch, pct = pixel_change(b[k], a[k])
+        row = {"camera": k, "change": ch, "changed_pct": pct, "before": mb, "after": ma}
+        if r:
+            mr = measure(r[k]).mean
+            row.update(ref=mr, closer=round(abs(mb - mr) - abs(ma - mr), 1))
+        rows.append(row)
+    if rank == "ref" and r:
+        rows.sort(key=lambda x: (-abs(x["closer"]), x["camera"]))
+    else:
+        rows.sort(key=lambda x: (-x["change"], x["camera"]))
+    return rows
+
+
+def changed_table(rows: Sequence[dict]) -> str:
+    ref = bool(rows) and "ref" in rows[0]
+    out = [f"{'camera':34s} {'change':>6s} {'px>40%':>6s} {'mean before -> after':>20s}"
+           + (f" {'ref':>5s} {'closer':>6s}" if ref else "")]
+    for x in rows:
+        out.append(f"{x['camera'][:34]:34s} {x['change']:6.2f} {x['changed_pct']:6.2f} "
+                   f"{x['before']:9.0f} -> {x['after']:5.0f}" + (f" {x['ref']:5.0f} {x['closer']:+6.1f}" if ref else ""))
+    return "\n".join(out)
+
+
+def changed_sheet(before: Path, after: Path, out: Path, ref: Optional[Path] = None, n: int = 6,
+                  rank: str = "pixels", width: int = 480) -> tuple[list[dict], str]:
+    """The ``n`` most changed cameras (``changed``) side by side, [reference |] before |
+    after (``triple_sheet``), each row labelled with its numbers; with ``ref`` the table
+    ends with the ``against`` summary of both folders. Returns all rows and the table.
+    This is the sheet the user decides installs from (``mohkit exposure --changed``)."""
+    rows = changed(before, after, ref, rank)
+    top = rows[:n]
+    cols = ([("reference", Path(ref))] if ref else []) + [("before", Path(before)), ("after", Path(after))]
+    notes = {(x["camera"], "after"): f"mean {x['before']:.0f} -> {x['after']:.0f}, change {x['change']:.1f}"
+             + (f", ref {x['ref']:.0f} ({x['closer']:+.0f} closer)" if ref else "") for x in top}
+    if top:
+        triple_sheet(cols, [x["camera"] for x in top], out, width=width, notes=notes)
+    text = changed_table(rows)
+    if ref and rows:
+        text += "\n" + "\n".join(against(Path(ref), [Path(before), Path(after)])[1].splitlines()[-2:])
+    return rows, text
+
+
 def triple_sheet(folders: Sequence[tuple[str, Path]], cameras: Sequence[str], out: Path,
-                 width: int = 560) -> Path:
+                 width: int = 560, notes: Optional[dict[tuple[str, str], str]] = None) -> Path:
     """Side-by-side rows, one per camera (stem prefix such as ``05_``), one column per
-    labelled folder (e.g. CS:GO / before / after)."""
+    labelled folder (e.g. CS:GO / before / after); ``notes[(camera, label)]`` is added to
+    that tile's label."""
     from PIL import Image, ImageDraw
     h = round(width * 9 / 16)
     sheet = Image.new("RGB", (len(folders) * width, len(cameras) * (h + 18)), (20, 20, 20))
     d = ImageDraw.Draw(sheet)
+    listed = [shot_files(folder) for _, folder in folders]
     for r, cam in enumerate(cameras):
-        for c, (label, folder) in enumerate(folders):
-            p = next((q for q in sorted(Path(folder).glob(f"{cam}*")) if q.suffix.lower() in (".png", ".jpg")), None)
+        for c, ((label, _), files) in enumerate(zip(folders, listed)):
+            p = files.get(cam) or next((q for k, q in files.items() if k.startswith(cam)), None)
             x, y = c * width, r * (h + 18)
             if p is not None:
                 sheet.paste(Image.open(p).convert("RGB").resize((width, h)), (x, y + 18))
-            d.text((x + 4, y + 3), f"{label} {p.stem if p else cam}", fill=(255, 220, 120))
+            note = (notes or {}).get((cam, label))
+            d.text((x + 4, y + 3), f"{label} {p.stem if p else cam}" + (f"  {note}" if note else ""),
+                   fill=(255, 220, 120))
     sheet.save(out)
     return Path(out)

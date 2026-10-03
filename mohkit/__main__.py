@@ -21,6 +21,7 @@
     python -m mohkit csgo de_dust2 --fit-exposure                  match CS:GO's brightness (needs csgo-ref shots)
     python -m mohkit csgo de_dust2 -q fastrad --final              build, then 8 bots and the ladder probe (no install)
     python -m mohkit exposure local/csgo/*/shots [--by-map] [--stock] [--mask shot.png]   brightness check
+    python -m mohkit exposure --changed BEFORE AFTER [--ref REF] [-n 6] [--rank ref] [-o x.png]   what a rebuild changed
     python -m mohkit csgo-ref de_dust2 [--name cs_dust2]        CS:GO's own screenshots from the same cameras
     python -m mohkit ab de_cache --a INSTALLED.pk3 --b NEW.pk3 [--perf 2000]   same cameras, two pk3 sets: changes, fps
 """
@@ -377,6 +378,17 @@ def cmd_exposure(a) -> int:
             out = Path(p).with_name(Path(p).stem + "_mask.png")
             print(X.mask(p, out))
         return 0
+    if a.changed:
+        before, after = map(Path, a.changed)
+        out = Path(a.out) if a.out else (after.parent / "changed.png" if after.name == "shots"
+                                         else after.with_name(after.name + "_changed.png"))
+        rows, text = X.changed_sheet(before, after, out, Path(a.ref) if a.ref else None, a.n or 6, a.rank)
+        print(text)
+        if not rows:
+            print(f"no camera in both {before} and {after}" + (f" and {a.ref}" if a.ref else ""))
+            return 1
+        print(out)
+        return 0
     if a.ref:
         _, text = X.against(Path(a.ref), [Path(p) for p in a.paths])
         print(text)
@@ -548,6 +560,12 @@ def main(argv=None) -> int:
     s.add_argument("-n", type=int, default=0, help="only the n worst shots per folder")
     s.add_argument("--json", help="write all measurements here")
     s.add_argument("--ref", help="reference shots (local/csgo/<name>/csgo_ref): compare each folder's cameras with them")
+    s.add_argument("--changed", nargs=2, metavar=("BEFORE", "AFTER"),
+                   help="two shot folders of one map: the -n (default 6) most changed cameras as a "
+                        "[ref |] before | after sheet, with numbers")
+    s.add_argument("--rank", choices=("pixels", "ref"), default="pixels",
+                   help="with --changed: order by pixel change, or (needs --ref) by change of distance to the reference")
+    s.add_argument("-o", "--out", help="with --changed: the sheet (default <AFTER's map folder>/changed.png)")
     s.set_defaults(fn=cmd_exposure)
     a = ap.parse_args(argv)
     # A redirected stdout is block-buffered: a backgrounded `mohkit build > log &` wrote nothing

@@ -62,8 +62,10 @@ user agreed: batch scripts must never install. The steps are mohkit commands:
 `mohkit csgo <map> -q fastrad --final` (build, then 8 bots and the ladder probe into
 `report.json`; never installs) and `mohkit ab <map> --a INSTALLED.pk3 --b NEW.pk3 --perf 2000
 --rounds 2 --cvar r_lodscale=0.45 --cvar r_lodcap=0.35` (same cameras, A | B images, interleaved
-fps at the user's settings). Not yet a command (HANDOFF queue): the CS:GO | before | after
-sheet of the most-changed cameras, a before-snapshot flag, and `--final` without rebuilding.
+fps at the user's settings), and `mohkit exposure --changed local/csgo/before/<name>/shots
+local/csgo/<name>/shots --ref local/csgo/<name>/csgo_ref` (the CS:GO | before | after sheet of
+the most-changed cameras, with numbers; testing.md "Measuring exposure"). Not yet a command
+(HANDOFF queue): a before-snapshot flag, and `--final` without rebuilding.
 
 To check a converter change without compiling, run the stages involved in-process:
 `cv = Converter(bsp, csgo_dir, Options(name="x", props=False)); cv.brushes(); cv.ladders()`

@@ -241,14 +241,25 @@ python -m mohkit exposure local/csgo/*/shots --by-map        # one line per map
 python -m mohkit exposure --stock --by-map                   # + stock mohdm1-3, 5-7, obj_team1-4 (no mohdm4 source; dist/stock_shots)
 python -m mohkit exposure shot.png --mask                    # shot_mask.png: red near-white, blue near-black
 python -m mohkit exposure --ref local/csgo/cs_nuke/csgo_ref local/csgo/before/cs_nuke/shots local/csgo/cs_nuke/shots
+python -m mohkit exposure --changed local/csgo/before/cs_nuke/shots local/csgo/cs_nuke/shots \
+    --ref local/csgo/cs_nuke/csgo_ref [-n 6] [--rank ref] [-o sheet.png]
 ```
 
 `--ref` compares each folder's cameras with CS:GO's own shots of the same cameras: mean
 brightness, mean absolute error and correlation of the per-camera means
-(`exposure.against`); `exposure.triple_sheet` lays them side by side. Before a rebuild meant
-to change the look, copy the build's `shots/`, `exposure.json` and pk3 to
-`local/csgo/before/<name>/`; afterwards show CS:GO | before | after for the cameras that
-changed most, with the `--ref` numbers.
+(`exposure.against`). Before a rebuild meant to change the look, copy the build's `shots/`,
+`exposure.json` and pk3 to `local/csgo/before/<name>/`; afterwards `--changed` draws
+reference | before | after for the `-n` cameras that changed most (`exposure.changed_sheet`;
+default `local/csgo/<name>/changed.png`) and prints every camera's pixel change (mean of the
+largest channel difference, as `mohkit ab`), mean luma before -> after, the reference's and
+how much closer to it the new shot is, then the `--ref` summary of both folders. `--rank ref`
+orders by that last column (gains and losses alike) instead of pixel change. On
+de_dust2's 2026-10-01 final rebuild the top camera changed 17.0 (T_to_Long: the ground's pale patches
+appeared) and the mean |error| against CS:GO went 5.6 -> 5.0; the tunnels changed < 3.
+
+Shot folders under `~/Documents` collect iCloud Drive conflict copies (`<name> 2.png`) when a
+re-shoot replaces files during an upload (390 in local/csgo on 2026-10-02): every folder
+reader goes through `exposure.shot_files`, which drops them.
 
 Numbers find the bad shots; images decide. A single scalar can rank the wrong build first:
 de_cache's mean greenness error against CS:GO was 0.57 for layer 1 only, 0.99 for a linear

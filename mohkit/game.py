@@ -539,6 +539,8 @@ def shots_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequenc
 
     import numpy as np
     from PIL import Image
+
+    from .exposure import pixel_change
     _check_set(a, map_name), _check_set(b, map_name)
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
@@ -556,8 +558,8 @@ def shots_ab(a: Sequence[Path], b: Sequence[Path], map_name: str, shots: Sequenc
         ib = np.asarray(Image.open(runs[1].screenshots[k]).convert("RGB"), np.float32)
         if ia.shape != ib.shape:
             continue
-        d = np.abs(ia - ib).max(2)
-        res[k] = {"mean": round(float(d.mean()), 2), "changed_pct": round(float((d > threshold).mean() * 100), 2)}
+        mean, pct = pixel_change(ia, ib, threshold)
+        res[k] = {"mean": mean, "changed_pct": pct}
         pairs[k] = out / f"{k}_ab.png"
         Image.fromarray(np.concatenate([ia, ib], 1).astype(np.uint8)).save(pairs[k])
     res = dict(sorted(res.items(), key=lambda kv: -kv[1]["mean"]))

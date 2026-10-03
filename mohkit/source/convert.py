@@ -3404,9 +3404,8 @@ def _ref_ratio(ref_dir: Path, shots_dir: Path) -> tuple[float, int]:
     brightness), and the number of cameras. The median ignores a camera or two that look
     at something the conversion lacks (de_inferno's "Construct": the 3D skybox)."""
     from .. import exposure as X
-    imgs = (".png", ".jpg", ".tga")
-    ref = {p.stem: X.measure(p).mean for p in sorted(ref_dir.iterdir()) if p.suffix.lower() in imgs}
-    got = {p.stem: X.measure(p).mean for p in sorted(shots_dir.iterdir()) if p.suffix.lower() in imgs}
+    ref = {k: X.measure(p).mean for k, p in X.shot_files(ref_dir).items()}
+    got = {k: X.measure(p).mean for k, p in X.shot_files(shots_dir).items()}
     logs = [math.log(ref[k] / got[k]) for k in ref if k in got and ref[k] > 2 and got[k] > 2]
     if not logs:
         raise SystemExit(f"no cameras shared by {ref_dir} and {shots_dir}")
