@@ -6,7 +6,16 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## In progress: mk_summit, Summit from CoD Black Ops (user, 2026-10-02 ~17:10 ET)
+## State (2026-10-02 20:20 ET, end of session)
+
+**Nothing is running; all pushed.** Done this session: mk_summit (Black Ops' Summit) built
+and **installed locally** (not on the VPS); every reusable helper of mk_summit, mk_medina and
+mk_village moved into `mohkit.kit` / `mohkit.site` (rule now in CLAUDE.md, guarded by
+`tests/test_maps_regenerate.py`); audit of `local/` scripts and harvest items, quick gaps
+fixed. Next: section C below (ordered queue), and the user's Summit corrections if they send
+any. Summit details: next section.
+
+## mk_summit, Summit from CoD Black Ops (user, 2026-10-02 ~17:10 ET)
 
 The user asked for a replica of Black Ops' Summit; modes DM + TDM (their pick). References
 (9 images from the CoD wiki, downloaded with the user's OK; never commit them):
