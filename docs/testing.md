@@ -46,8 +46,12 @@ CPU-bound process: a heredoc `python -` script that had outlived its tool call; 
 remote-desktop session like RustDesk also costs ~15-25%). Before timing, list the busiest
 processes (`ps -Ao pid,pcpu,etime,command -r | head`) and kill strays by pid. Split the frame with `--toggle r_drawstaticmodelpoly=0` (prop vertex work off,
 surfaces still sorted and visited) and `--toggle r_drawstaticmodels=0` (props off).
-`mohkit.propcost.estimate` predicts drawn prop vertices per camera offline in seconds
-(within ~15% of r_speeds) for comparing prop settings before a build. Binned by distance it
+`mohkit propcost maps/<name> | de_dust2 [--player] [--pk3 X.pk3]` (`propcost.estimate`)
+predicts drawn prop vertices per camera offline in seconds (within ~15% of r_speeds) for
+comparing prop settings before a build; `--player` uses the owner's r_lodscale 0.45 /
+r_lodcap 0.35. Stock models are read from the retail paks under the map (before
+2026-10-02 they counted 0: mk_summit, all stock props, showed none; now 9.5k vertices per
+camera on average, 17.5k at most). Binned by distance it
 also tells what a fade cap buys: on de_nuke 57% of the drawn prop vertices were beyond 768
 units, and capping fades there gave +33% fps.
 

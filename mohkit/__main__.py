@@ -26,6 +26,7 @@
     python -m mohkit exposure --changed BEFORE AFTER [--ref REF] [-n 6] [--rank ref] [-o x.png]   what a rebuild changed
     python -m mohkit csgo-ref de_dust2 [--name cs_dust2]        CS:GO's own screenshots from the same cameras
     python -m mohkit ab de_cache --a INSTALLED.pk3 --b NEW.pk3 [--perf 2000]   same cameras, two pk3 sets: changes, fps
+    python -m mohkit propcost maps/<name> | de_dust2 [--player] [--pk3 X.pk3]   drawn prop vertices per camera, offline
 """
 
 from __future__ import annotations
@@ -298,6 +299,19 @@ def cmd_ab(a) -> int:
     return 0
 
 
+def cmd_propcost(a) -> int:
+    from . import lod, propcost
+    pk3, shots = propcost.target(a.target, a.name)
+    pk3 = Path(a.pk3) if a.pk3 else pk3
+    if not shots:
+        print(f"no cameras for {a.target}")
+        return 1
+    scale, cap = (lod.PLAYER_LODSCALE, lod.PLAYER_LODCAP) if a.player else (lod.REF_LODSCALE, lod.REF_LODCAP)
+    print(f"{pk3} at r_lodscale {scale} r_lodcap {cap}")
+    print(propcost.table(propcost.estimate(pk3, shots, fov=a.fov, lodscale=scale, lodcap=cap), a.top))
+    return 0
+
+
 def cmd_install(a) -> int:
     from . import pak
     cfg = config.load()
@@ -512,6 +526,14 @@ def main(argv=None) -> int:
     s.add_argument("--cvar", action="append", metavar="NAME=VALUE",
                    help="set for both sets (e.g. r_lodscale=0.45, the user's settings)")
     s.set_defaults(fn=cmd_ab)
+    s = sub.add_parser("propcost", help="offline estimate of drawn static-model vertices per camera")
+    s.add_argument("target", help="map project folder (maps/<name>) or CS:GO map (de_dust2)")
+    s.add_argument("--name", help="CS:GO conversion name (default cs_<name>)")
+    s.add_argument("--pk3", help="estimate this package instead of the target's")
+    s.add_argument("--player", action="store_true", help="the owner's LOD settings (r_lodscale 0.45, r_lodcap 0.35)")
+    s.add_argument("--fov", type=float, default=80.0)
+    s.add_argument("--top", type=int, default=3, help="models listed per camera")
+    s.set_defaults(fn=cmd_propcost)
     s = sub.add_parser("install")
     s.add_argument("pk3")
     s.set_defaults(fn=cmd_install)

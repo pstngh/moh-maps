@@ -53,6 +53,8 @@ REF_WIDTH = 1920.0            # ... at this screen width
 REF_FOV = 80.0                # ... and this fovX
 REF_LODSCALE = 0.55           # retail high preset r_lodscale
 REF_LODCAP = 0.55             # retail high preset r_lodcap
+PLAYER_LODSCALE = 0.45        # the owner's own settings (r_lodscale, r_lodcap): installs must look
+PLAYER_LODCAP = 0.35          # and run right there too (``propcost --player``, ``ab --cvar``)
 VANISH_FOV = 90.0             # fovX for vanish distances (80 at 4:3, ~96 at 16:9 with cg_fov 80)
 MAX_DISTANCE = 12000.0        # farther than any view in a +-8192 map: the curve ends here
 WELD = 1e-3                   # positions closer than this (units) are one position
@@ -713,16 +715,40 @@ def lod_control(errors: np.ndarray, radius: float, tau: float = TAU_PX, vanish: 
 
 
 def read_lod(data: bytes) -> dict:
-    f = struct.unpack("<24f", data[:96])
+    f = struct.unpack("<12f", data[:48])
     return {"minMetric": f[0], "maxMetric": f[1], "curve": [(f[2 + 2 * i], f[3 + 2 * i]) for i in range(5)]}
 
 
-def engine_cutoff(lod: bytes, m: float, lodscale: float = REF_LODSCALE, lodcap: float = REF_LODCAP) -> float:
-    """The cutoff ``GetLodCutoff`` returns for metric ``m`` (for tests and tables)."""
-    f = struct.unpack("<24f", lod[:96])
-    minm, maxm = f[0], f[1]
-    curve = [(f[2 + 2 * i], f[3 + 2 * i]) for i in range(5)]
-    consts = [(f[12 + 3 * i], f[13 + 3 * i], f[14 + 3 * i]) for i in range(4)]
+EngineTable = tuple[float, float, list]     # (minMetric, maxMetric, 5 curve points (pos, val))
+
+
+def engine_table(lod: Optional[bytes], lod_index: Sequence[int] = ()) -> EngineTable:
+    """The LOD table ``GetLODFile`` (``tiki/tiki_skel.cpp``) builds for a model that can
+    simplify: a ``.lod`` file's first 48 bytes (minMetric, maxMetric, 5 curve points: all a
+    stock file holds; mohkit's files and some stock ones append the constants, which the
+    engine recomputes anyway), else a default curve from the SKD's ``lodIndex``."""
+    if lod:
+        c = read_lod(lod)
+        return c["minMetric"], c["maxMetric"], c["curve"]
+    li = list(lod_index) + [0] * (11 - len(lod_index))
+    # The engine walks down from lodIndex[10], one past the array: it reads the next field
+    # (numBoxes, 0 for a static model), so the loop stops at once and the far value is 0.
+    i = 10
+    while li[i] > li[3] and i > 2:
+        i -= 1
+    v = float(li[1])
+    return 1.0, 0.2, [(0.0, 0.0), (0.5, v), (0.8, v), (0.95, v), (1.0, float(li[i]))]
+
+
+def engine_cutoff(lod, m: float, lodscale: float = REF_LODSCALE, lodcap: float = REF_LODCAP) -> float:
+    """The cutoff ``GetLodCutoff`` returns for metric ``m``; ``lod`` is a ``.lod`` file's bytes
+    or an ``engine_table``. Constants as ``TIKI_CalcLodConsts`` computes them at load."""
+    minm, maxm, curve = engine_table(lod) if isinstance(lod, (bytes, bytearray)) else lod
+    consts = []
+    for i in range(4):
+        common = (curve[i + 1][1] - curve[i][1]) / (curve[i + 1][0] - curve[i][0])
+        consts.append((curve[i][1] + (minm / (minm - maxm) - curve[i][0]) * common, common / (maxm - minm),
+                       minm + (maxm - minm) * curve[i][0]))
     cap = (minm - maxm) * lodcap + maxm
     x = min((m - maxm) * lodscale + maxm, cap)
     if x >= minm:
@@ -733,6 +759,12 @@ def engine_cutoff(lod: bytes, m: float, lodscale: float = REF_LODSCALE, lodcap: 
         if x <= consts[i][2]:
             return x * consts[i][1] + consts[i][0]
     return x * consts[0][1] + consts[0][0]
+
+
+def can_lod(surfaces) -> bool:
+    """``GetLODFile`` builds a table only when a surface's collapse index changes."""
+    return any(getattr(s, "collapse_index", None) is not None and len(s.collapse_index)
+               and s.collapse_index[0] != s.collapse_index[-1] for s in surfaces)
 
 
 def drawn(srf: _skd.SkdSurface, cutoff: float) -> tuple[int, int]:

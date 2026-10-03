@@ -447,10 +447,17 @@ triangles became shards across the model at some distances (de_nuke's grey slant
 every conversion; `tests/test_lod.py` test_no_shards_from_seams_or_slivers). A surface with
 `collapseIndex[2] < cutoff` is not drawn at all (`:1512`). The curve comes from
 `<skd path up to the first "skd">lod` (`GetLODFile`, `tiki/tiki_skel.cpp:751`, `:778`): a
-96-byte `lodControl_t` (minMetric, maxMetric, five `(pos, val)` points, four constants that
-`TIKI_CalcLodConsts` recomputes, `:838`), linear in `m'` with `pos` 0 at minMetric and 1 at
-maxMetric. Without a surface whose first and last `collapseIndex` differ there is no LOD
-(`:766`) and the whole mesh is always drawn. Retail ships 275 `models/static/*.lod`
+`lodControl_t` (minMetric, maxMetric, five `(pos, val)` points, four constants), linear in
+`m'` with `pos` 0 at minMetric and 1 at maxMetric. The file is copied for its own length
+(`memcpy(LOD, buf, length)`, `:784`) and the constants are always recomputed
+(`TIKI_CalcLodConsts`, `:829`, `:838`), so the first 48 bytes are all that count: many stock
+files hold only those (static/30cal_crate, cabinet_tall), others and mohkit's the full 96.
+A model that can simplify but has no `.lod` gets a default curve (`:800-826`): metrics 1.0
+to 0.2, values 0, `lodIndex[1]` at 0.5/0.8/0.95, and at 1.0 `lodIndex[i]` from a downward
+search that starts at `lodIndex[10]`, one past the array (it reads `numBoxes`, 0 for a static
+model, so the far end draws everything; source reading, not checked in game;
+`lod.engine_table`). Without a surface whose first and last `collapseIndex` differ there is
+no LOD (`:766`) and the whole mesh is always drawn. Retail ships 275 `models/static/*.lod`
 (Pak0.pk3; `alarmbell.lod`: 0.5 0.012, curve (0,0) (0.5,15) (0.8,28.8) (0.95,45) (1,58),
 `collapseIndex` 58 for the base vertices down to 1). Converted props now carry LOD from
 `mohkit.lod` (quadric half-edge collapses, curve for `lod.TAU_PX` = 2 px error at 1920 wide (the `--props` profiles raise it to 3 / 10)); before it

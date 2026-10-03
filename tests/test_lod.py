@@ -172,6 +172,43 @@ def test_lod_curve():
         assert cut <= max(L.cutoff_at(res.errors, R, m_eff * 0.75), val[0]), (m, cut)
 
 
+def test_engine_table_like_the_engine():
+    """``GetLODFile`` copies only the curve (48 bytes: all many stock .lod files hold, e.g.
+    static/30cal_crate) and recomputes the constants; with no .lod file a collapsing model
+    gets a default curve from ``lodIndex``. engine_cutoff read stored constants and raised
+    on stock files before 2026-10-02."""
+    res = L.simplify([_grid(bump=20.0)])
+    lod = L.lod_control(res.errors, 100.0)
+    for m in (5.0, 0.3, 0.05, 1e-3):
+        assert abs(L.engine_cutoff(lod[:48], m) - L.engine_cutoff(lod, m)) < 1e-3, m
+    t = L.engine_table(None, (40, 30, 20, 10, 0, 0, 0, 0, 0, 0))
+    assert t == (1.0, 0.2, [(0.0, 0.0), (0.5, 30.0), (0.8, 30.0), (0.95, 30.0), (1.0, 0.0)]), t
+    # near: r_lodcap keeps x <= 0.64, in the first segment (val 0 -> 30 over metric 1.0 -> 0.6):
+    # 75 - 75 x = 27; far (x <= maxMetric): the last value, 0
+    assert abs(L.engine_cutoff(t, 10.0) - 27.0) < 1e-6 and L.engine_cutoff(t, 1e-4) == 0.0
+    assert L.can_lod(res.surfaces) and not L.can_lod([_grid()])
+
+
+def test_propcost_reads_stock_models_under_the_map():
+    """``propcost`` reads models from the map's pk3, then the retail paks under it (the map
+    wins; later paks win, as the game loads them)."""
+    import tempfile
+    import zipfile
+
+    from mohkit import propcost
+    with tempfile.TemporaryDirectory() as d:
+        paks = [Path(d) / f"{n}.pk3" for n in ("pak0", "pak1", "map")]
+        for p, files in zip(paks, ({"a.tik": b"0", "b.tik": b"0", "c.tik": b"0"}, {"b.tik": b"1", "c.tik": b"1"},
+                                   {"c.tik": b"map", "maps/x.bsp": b"bsp"})):
+            with zipfile.ZipFile(p, "w") as z:
+                for k, v in files.items():
+                    z.writestr(k, v)
+        read, bsp = propcost.pk3_reader(paks[2], paks[:2])
+        assert (read("A.tik"), read("b.tik"), read("c.tik"), read("d.tik"), bsp) == (b"0", b"1", b"map", None, b"bsp")
+    vc = propcost.ViewCost(verts=10, tris=5, models=1, by_model={"static/x.tik": 10})
+    assert "x 10" in propcost.table({"cam": vc}) and "mean 10 vertices" in propcost.table({"cam": vc})
+
+
 def test_vanish_distance():
     """A vanish distance drops every surface from there on, at any r_lodscale."""
     res = L.simplify([_grid(bump=20.0)])

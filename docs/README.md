@@ -97,7 +97,7 @@ python -m mohkit install dist/my_first.pk3        # then in game: g_gametype 1; 
 | `staticlight` | inject static models into a lit BSP, light them from its lightmaps |
 | `staticmerge` | keep static models (4,095) and prop SKDs (600) within engine limits; split big meshes |
 | `lod` | progressive LOD for static models (collapse tables, `.lod` curves, fades) |
-| `propcost` | offline estimate of drawn prop vertices per camera |
+| `propcost` | offline estimate of drawn prop vertices per camera (`mohkit propcost`) |
 | `exposure` | brightness metrics of shots, `--ref` against CS:GO's own shots, side-by-side sheets |
 | `camera`, `lookalike` | recreating a scene from a photo: camera fit, texture look-alikes |
 | `source/` | CS:GO: VPK, VTF, VMT, BSP, MDL readers; converter; `nav` (bot nav mesh, FFA spawns); `lighting` (CS:GO light transfer); `reference` (CS:GO reference shots) |

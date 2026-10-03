@@ -35,7 +35,7 @@ _KEYS = re.compile(r"^\s*(scale|path|skelmodel)\s+(\S+)", re.M)
 class _Mesh:
     radius: float                          # model radius (TIKI scale applied), as the SKC holds it
     surfaces: list                         # SkdSurface with collapse data
-    lod: Optional[bytes]                   # the .lod curve, None: always full detail
+    lod: Optional[tuple]                   # the LOD table (``lod.engine_table``), None: always full detail
     full: int = 0                          # vertices at full detail
 
 
@@ -74,24 +74,38 @@ def _meshes(read: Callable[[str], Optional[bytes]], tiki: str, cache: dict) -> l
                 srf.collapse, srf.collapse_index = np.asarray(col), np.asarray(cidx)
             allp = np.concatenate([np.asarray(s_.positions, np.float64) for s_ in info.surfaces]) * scale \
                 if info.surfaces else np.zeros((1, 3))
-            lod = read(path[: path.find("skd")] + "lod") if "skd" in path else None
+            lod = None
+            if _lod.can_lod(info.surfaces):
+                lod = _lod.engine_table(read(path[: path.find("skd")] + "lod") if "skd" in path else None, info.lod_index)
             out.append(_Mesh(_skd.bounds_radius(allp.min(0), allp.max(0)), info.surfaces, lod,
                              sum(len(s_.positions) for s_ in info.surfaces)))
     cache[tiki] = out
     return out
 
 
-def pk3_reader(pk3: Path) -> tuple[Callable[[str], Optional[bytes]], bytes]:
-    """``read(game_path)`` over a pk3, and its (first) BSP's bytes."""
-    z = zipfile.ZipFile(pk3)
-    names = {n.lower(): n for n in z.namelist()}
+def pk3_reader(pk3: Path, under: Sequence[Path] = ()) -> tuple[Callable[[str], Optional[bytes]], bytes]:
+    """``read(game_path)`` over a pk3, then over the ``under`` paks (later ones win, as the
+    game loads them), and the pk3's (first) BSP's bytes."""
+    zips = [zipfile.ZipFile(x) for x in [*under, pk3]]
+    names = {}
+    for z in zips:
+        names.update({n.lower(): (z, n) for n in z.namelist()})
 
     def read(p: str) -> Optional[bytes]:
-        n = names.get(p.lower())
-        return z.read(n) if n else None
+        hit = names.get(p.lower())
+        return hit[0].read(hit[1]) if hit else None
 
+    z = zips[-1]
     bsp = next(n for n in z.namelist() if n.lower().endswith(".bsp"))
     return read, z.read(bsp)
+
+
+def _retail() -> list[Path]:
+    from . import config
+    try:
+        return config.load().retail_paks()
+    except RuntimeError:                    # no game dir: only the map's own models count
+        return []
 
 
 def frustum(origin, angles, fov_x: float, fov_y: float) -> list[tuple[np.ndarray, float]]:
@@ -115,9 +129,12 @@ def view_fov(fov: float = 80.0, width: int = 1280, height: int = 720) -> tuple[f
 
 
 def estimate(pk3: Path, shots: Sequence, width: int = 1280, height: int = 720, fov: float = 80.0,
-             lodscale: float = _lod.REF_LODSCALE, lodcap: float = _lod.REF_LODCAP) -> dict[str, ViewCost]:
-    """``{shot name: ViewCost}`` for ``game.Shot``s (origin, angles) over a packaged map."""
-    read, bsp_bytes = pk3_reader(Path(pk3))
+             lodscale: float = _lod.REF_LODSCALE, lodcap: float = _lod.REF_LODCAP,
+             retail: bool = True) -> dict[str, ViewCost]:
+    """``{shot name: ViewCost}`` for ``game.Shot``s (origin, angles) over a packaged map.
+    Stock models come from the retail paks (``retail``; before 2026-10-02 only the map's
+    pk3 was read, so a map of stock props such as mk_summit cost 0)."""
+    read, bsp_bytes = pk3_reader(Path(pk3), _retail() if retail else ())
     models = BSP(bsp_bytes).static_models()
     cache: dict = {}
     fx, fy = view_fov(fov, width, height)
@@ -157,3 +174,29 @@ def estimate(pk3: Path, shots: Sequence, width: int = 1280, height: int = 720, f
                 vc.by_model[sm.model] = vc.by_model.get(sm.model, 0) + got
         out[shot.name] = vc
     return out
+
+
+def table(costs: dict[str, ViewCost], top: int = 3) -> str:
+    """Cameras, most drawn prop vertices first, with the ``top`` models by vertices."""
+    out = [f"{'camera':28s} {'models':>6s} {'verts':>7s} {'tris':>7s}  top models (vertices)"]
+    for k, v in sorted(costs.items(), key=lambda kv: -kv[1].verts):
+        best = sorted(v.by_model.items(), key=lambda kv: -kv[1])[:top]
+        out.append(f"{k[:28]:28s} {v.models:6d} {v.verts:7d} {v.tris:7d}  "
+                   + ", ".join(f"{Path(m).stem} {n}" for m, n in best))
+    if costs:
+        vs = [v.verts for v in costs.values()]
+        out.append(f"== {len(vs)} cameras: mean {sum(vs) / len(vs):.0f} vertices, max {max(vs)}")
+    return "\n".join(out)
+
+
+def target(where: str, name: Optional[str] = None) -> tuple[Path, list]:
+    """(pk3, shots) of a map project folder (``dist/<name>.pk3`` and its ``SHOTS``) or of a
+    CS:GO conversion (``local/csgo/<name>/<name>.pk3`` and its named cameras)."""
+    from . import config
+    if (Path(where) / "build.py").is_file() or Path(where).is_dir():
+        from .project import Project
+        pr = Project.load(Path(where))
+        return config.REPO / "dist" / f"{pr.name}.pk3", list(pr.shots)
+    from .source.convert import _local_cameras
+    name, out, cams = _local_cameras(where, name)
+    return out / f"{name}.pk3", cams
