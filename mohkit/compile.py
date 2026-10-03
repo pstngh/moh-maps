@@ -150,13 +150,18 @@ class Toolchain:
         argv = self._argv(exe, list(args))
         env = dict(os.environ)
         env.setdefault("WINEDEBUG", "-all")
-        # A crashing tool would otherwise start Wine's debugger (winedbg --auto), which parks
-        # the process: the build hangs instead of failing and retrying (seen with MOHlight).
+        # A crashing tool starts Wine's debugger (winedbg --auto), which parks the process: the
+        # build hangs instead of failing and retrying (MOHlight on mk_medina: 1 h 45 at 0% CPU,
+        # 2026-10-02). This override does not stop CrossOver's wine from starting it; the
+        # runner kills the tool when Wine prints CRASH_LINE instead (_run_pty).
         env.setdefault("WINEDLLOVERRIDES", "winedbg.exe=d")
         t0 = time.time()
         log_path = Path(cwd) / f"{name}.log"
         if os.name == "posix":
             rc, to, timeline = self._run_pty(argv, cwd, env, log_path, timeout, t0)
+            if rc == CRASH_RC:
+                self.kill_stragglers(exe, cwd)
+                kill_crash_debuggers()
         else:
             timeline = []
             rc, to = None, False
@@ -186,6 +191,7 @@ class Toolchain:
         fcntl.ioctl(slave, termios.TIOCSWINSZ, struct.pack("HHHH", 50, 4000, 0, 0))
         timeline: list[tuple[float, str]] = []
         to = False
+        crashed = False
         with open(log_path, "w", encoding="latin-1", errors="replace") as fh:
             p = subprocess.Popen(argv, cwd=cwd, env=env, stdin=subprocess.DEVNULL, stdout=slave, stderr=slave,
                                  start_new_session=True)
@@ -214,17 +220,24 @@ class Toolchain:
                     if not data:
                         break
                     buf += data
+                    hit = CRASH_LINE in buf          # before the cut: the line may span two reads
                     cut = max(buf.rfind(b"\n"), buf.rfind(b"\r"))
                     if cut >= 0:
                         emit(buf[:cut])
                         buf = buf[cut + 1:]
+                    if hit:
+                        crashed = True
+                        p.kill()
+                        break
                 elif p.poll() is not None:
                     break
             if buf:
                 emit(buf)
             rc = p.wait()
+            if crashed:
+                fh.write(f"[mohkit] killed at Wine's crash debugger: reported as exit {CRASH_RC:#x}\n")
         os.close(master)
-        return (None if to else rc), to, timeline
+        return (CRASH_RC if crashed else None if to else rc), to, timeline
 
     def kill_stragglers(self, exe: str, cwd: Optional[Path] = None) -> None:
         """Kill what is left of a timed-out tool. Only processes whose command line names
@@ -241,6 +254,25 @@ class Toolchain:
                     os.kill(int(pid), 9)
                 except (ValueError, OSError):
                     pass
+
+
+CRASH_LINE = b"starting debugger"   # wine: "Unhandled page fault ... starting debugger..."
+CRASH_RC = 0xC0000005                # what a crashed tool returns when no debugger parks it
+
+
+def kill_crash_debuggers() -> None:
+    """Kill Wine crash debuggers (``winedbg --auto <pid> <event>``): one exists only while a
+    crashed Wine program is parked, which never ends by itself."""
+    if platform.system() == "Windows":
+        return
+    out = subprocess.run(["ps", "-axo", "pid=,command="], capture_output=True, text=True, check=False).stdout
+    for line in out.splitlines():
+        pid, _, cmd = line.strip().partition(" ")
+        if "winedbg" in cmd and "--auto" in cmd:
+            try:
+                os.kill(int(pid), 9)
+            except (ValueError, OSError):
+                pass
 
 
 def prepare_root(name: str, assets: Optional[Mapping[str, Union[bytes, str, Path]]] = None,

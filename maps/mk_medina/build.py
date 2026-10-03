@@ -30,7 +30,8 @@ from mohkit.game import Shot
 
 META = {"name": "mk_medina", "title": "Medina", "mode": "dm", "ambience": "mohdm7",
         # MOHlight 1.48 access-violates at 0x00433F3A with several threads on this map (twice, in
-        # different phases) and Wine then parks it in winedbg; a trailing -threads 1 wins.
+        # different phases), and again with the props held back (2026-10-02, at 99% of a pass:
+        # docs/toolchain.md); a trailing -threads 1 wins.
         "compile": {"light_args": ["-threads", "1"]}}
 
 # --------------------------------------------------------------------------- levels

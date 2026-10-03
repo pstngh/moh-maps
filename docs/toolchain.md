@@ -90,14 +90,23 @@ printed an `ERROR` (e.g. `MAX_MAP_LIGHTING`): those fail the same way on one thr
 **Verified 2026-09-30 on mk_medina:** multi-threaded MOHlight crashed on both
 multi-threaded runs at the same instruction (`wine: Unhandled page fault on write
 access to … at address 00433F3A`); one thread always worked. Wine then started
-its crash debugger, which parked the process (the build hung ~20 min); the driver
-now sets `WINEDLLOVERRIDES=winedbg.exe=d` so a crash fails fast and the retry runs.
+its crash debugger, which parked the process (the build hung ~20 min). The driver also
+sets `WINEDLLOVERRIDES=winedbg.exe=d`, but that does **not** stop CrossOver's wine: on
+2026-10-02 `winedbg --auto` attached anyway and parked MOHlight for 1 h 45 at 0% CPU. What
+works: the runner watches the tool's console for Wine's "starting debugger" line, kills the
+tool and the debugger and reports exit 0xC0000005 (`compile.CRASH_RC`), so the one-thread
+retry runs at once (`test_tool_parked_in_crash_debugger_is_killed`).
 
 **Static models are the likely trigger (2026-10-01):** the same mk_medina geometry with
 its 107 `static_*` props held back (`build --inject-props`) lit on 10 threads without a
 crash (463 s, `-fast -bounce 0`), and every converted CS:GO map (no static models since
 props are injected) lit on 10 threads all night. One clean run is not proof, but it fits:
-the crash was seen only on maps with MOHlight-lit static models.
+the crash was seen only on maps with MOHlight-lit static models. **Refuted 2026-10-02:** with
+the props held back again (`-q preview`, 10 threads) MOHlight crashed at 99% of a light pass
+(`Unhandled page fault on write access to E697EEE9 at address 7BF8F40B`). So mk_medina's
+geometry alone can crash multi-threaded MOHlight; its `-threads 1` override stays. (A first
+run of that test reported FAILED after 436 s for a reason its logs no longer show: the next
+run reused the compile root. Print `res.problems` in such loops.)
 
 ### Q3map 1.34 options (BSP stage)
 

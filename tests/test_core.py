@@ -355,6 +355,30 @@ def test_compile_ok_after_light_retry():
         assert not res.ok
 
 
+def test_tool_parked_in_crash_debugger_is_killed():
+    # Wine's crash debugger parked a multi-threaded MOHlight on mk_medina for 1 h 45 at 0% CPU
+    # (2026-10-02; WINEDLLOVERRIDES=winedbg.exe=d did not stop CrossOver's wine starting it):
+    # on "starting debugger" the runner kills the tool and reports a crash, so the retry runs.
+    import os
+    import sys as _sys
+    import tempfile
+    import time
+    from mohkit import compile as C
+    if os.name != "posix":
+        return
+    fake = ("import sys, time; sys.stdout.write('99% complete.\\nwine: Unhandled page fault at 7BF8F40B, starting deb');"
+            "sys.stdout.flush(); time.sleep(0.3); sys.stdout.write('ugger...\\n'); sys.stdout.flush(); time.sleep(60)")
+    tc = C.Toolchain.__new__(C.Toolchain)
+    tc._argv = lambda exe, args: [_sys.executable, "-c", fake]
+    with tempfile.TemporaryDirectory() as d:
+        t0 = time.time()
+        st = tc.run("light", "fake_tool_xyz.exe", [], Path(d), timeout=50)
+        assert time.time() - t0 < 15, time.time() - t0
+        assert st.returncode == C.CRASH_RC and not st.timed_out, st.returncode
+        raw = (Path(d) / "light.log").read_text()      # (clean_log drops the wine: line)
+        assert "starting debugger" in raw and "killed at Wine's crash debugger" in st.log
+
+
 def test_plus_command_limit():
     # more than 32 "+" commands drop +devmap: the game idles at the console until the timeout
     from mohkit import game
