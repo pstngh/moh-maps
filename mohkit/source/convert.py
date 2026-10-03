@@ -3557,6 +3557,12 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     (out / f"{name}.map").write_text(res.map.dumps(), encoding="latin-1")
     write_assets(out, res.assets)
     log(json.dumps({k: v for k, v in res.report.items() if k != "warnings"}))
+    removed = [n for n in res.report.get("spawns_fixed", []) if "removed" in n]
+    if removed:
+        # validate.fix_spawns drops spawns with no clear spot within 48 units; a tight map at
+        # this scale loses some silently otherwise (de_rats lost 4 at --scale 1.0)
+        log(f"  WARNING {len(removed)} spawn(s) removed, no clear spot near them: the map may be too "
+            f"tight at this scale (try --scale 1.1). " + "; ".join(removed[:4]))
     issues = [i for i in validate.check(res.map) if i.severity == "error"]
     for i in issues:
         log(f"  {i}")

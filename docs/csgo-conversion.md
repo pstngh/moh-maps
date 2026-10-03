@@ -58,9 +58,12 @@ before a fix has to be redone (de_mirage was lit-built three times on 2026-10-01
 each). Converter fixes stay generic (no per-map branches). Before a rebuild meant to change
 the look, keep the old build in `local/csgo/before/<name>/`; install only after the new
 sheet was compared with the installed one on the same cameras (sky band included) and the
-user agreed: batch scripts must never install. The steps exist only as gitignored scripts
-in `local/csgo/` (`*_final.sh`, `ladprobe.py`, `cmp3.py`, `perf_nukes.sh`) until a
-`mohkit csgo --final` command replaces them.
+user agreed: batch scripts must never install. The steps are mohkit commands:
+`mohkit csgo <map> -q fastrad --final` (build, then 8 bots and the ladder probe into
+`report.json`; never installs) and `mohkit ab <map> --a INSTALLED.pk3 --b NEW.pk3 --perf 2000
+--rounds 2 --cvar r_lodscale=0.45 --cvar r_lodcap=0.35` (same cameras, A | B images, interleaved
+fps at the user's settings). Not yet a command (HANDOFF queue): the CS:GO | before | after
+sheet of the most-changed cameras, a before-snapshot flag, and `--final` without rebuilding.
 
 To check a converter change without compiling, run the stages involved in-process:
 `cv = Converter(bsp, csgo_dir, Options(name="x", props=False)); cv.brushes(); cv.ladders()`

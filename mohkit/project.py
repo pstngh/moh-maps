@@ -194,7 +194,8 @@ def build(folder: Path, quality: str = "normal", test: bool = True, bots: int = 
     log(f"== {proj.game_path}: generating")
     m = proj.generate()
     from . import validate as _validate
-    issues = _validate.check(m, _validate.load_shader_index()) + _validate.check_air(getattr(proj, "builder", None))
+    issues = (_validate.check(m, _validate.load_shader_index()) + _validate.check_air(getattr(proj, "builder", None))
+              + _validate.check_assets(proj.assets()))
     for i in issues:
         log(f"  {i}")
     if any(i.severity == "error" for i in issues):

@@ -39,9 +39,9 @@ the pending 3D commands (`R_IssuePendingRenderCommands`, `renderergl1/tr_draw.c:
 and each flush overwrites `backEnd.pc.msec` (`tr_backend.c:1492`, `=` not `+=`), so `bk`
 holds only the last flush (the swap). The 3D scene's back end lands in `cl`.
 
-Compare builds **interleaved** and only against each other: run `--perf 2000 --pk3 A
---label a1`, then B, then A and B again, in one background script, and compare within that
-run. The same build measured 233 fps at 07:30 and 166 at 09:20 on 2026-10-02 (a leftover
+Compare builds **interleaved** and only against each other: `mohkit ab <map> --a A.pk3 --b B.pk3
+--no-shots --perf 2000 --rounds 2` times A, B, A, B in one run (add `--cvar r_lodscale=0.45
+--cvar r_lodcap=0.35` for the user's settings); compare only within that run. The same build measured 233 fps at 07:30 and 166 at 09:20 on 2026-10-02 (a leftover
 CPU-bound process: a heredoc `python -` script that had outlived its tool call; a
 remote-desktop session like RustDesk also costs ~15-25%). Before timing, list the busiest
 processes (`ps -Ao pid,pcpu,etime,command -r | head`) and kill strays by pid. Split the frame with `--toggle r_drawstaticmodelpoly=0` (prop vertex work off,
@@ -364,7 +364,9 @@ When a shot looks wrong and the data "checks out on paper", test what the game r
   600 s (it then keeps running unseen). Use one `until grep -q "^done" log; do sleep 30;
   done` or `while kill -0 PID; do sleep 30; done` with `run_in_background`, one watcher per
   job (two on one file report everything twice; Monitors expired after 5-30 minutes and had
-  to be re-armed 6-15 times per long build). Stop your watchers before a handoff.
+  to be re-armed 6-15 times per long build). Stop your watchers before a handoff. A log that
+  is appended to across runs still holds the last run's "done": truncate it when the job
+  starts (`> log`), or wait with `until grep -q "^done" log && [ log -nt script ]`.
 - `pgrep -f` / `pkill -f pattern` also match your own wait loops whose command line contains
   the pattern (a `pkill -f "dm_cs_nukei"` killed the loop waiting on it), while a heredoc's
   command line is just `python -`, so `pkill -f` on words from its code never matches it.

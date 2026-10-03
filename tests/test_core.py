@@ -169,6 +169,18 @@ def test_material_density_writes_surface_density():
         assert "surfaceDensity 256" in text
 
 
+def test_validate_long_shader_names_and_misplaced_shader_files():
+    from mohkit import validate
+    from mohkit.mapfile import MapFile as _MF
+    name = "x" * (60 - len("textures/"))                       # exactly 60 with textures/
+    m = _MF([Entity({"classname": "worldspawn"}, [box((0, 0, 0), (64, 64, 64), Material(name))])])
+    assert any("60" in i.message and i.severity == "warning" for i in validate.check(m))
+    ok = _MF([Entity({"classname": "worldspawn"}, [box((0, 0, 0), (64, 64, 64), Material(name[:-1]))])])
+    assert not any("characters" in i.message for i in validate.check(ok))
+    bad = validate.check_assets(["textures/a/b.tga", "maps/a.shader", "scripts/ok.shader"])
+    assert len(bad) == 1 and "maps/a.shader" in bad[0].message
+
+
 def test_brush_rejects_band_list():
     stone, plaster = Material("general_structure/stonebricks1"), Material("general_structure/plaster_wall2")
     for spec in ([(0, stone), (32, plaster)], {"sides": [(0, stone)]}):

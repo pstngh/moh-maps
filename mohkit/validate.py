@@ -246,6 +246,16 @@ def check_air(builder) -> list[Issue]:
     return out
 
 
+def check_assets(paths) -> list[Issue]:
+    """Package paths of a project's assets: a ``.shader`` file outside ``scripts/`` is never read
+    by the game (its shaders render as checkerboards or fall back to the image)."""
+    out = []
+    for path in paths:
+        if path.lower().endswith(".shader") and not path.lower().startswith("scripts/"):
+            out.append(Issue("error", f"{path}: shader files must be in scripts/ to be loaded", "assets"))
+    return out
+
+
 def check(m: MapFile, shaders=None, min_dm_spawns: int = 8) -> list[Issue]:
     issues: list[Issue] = []
     if not m.entities or m.entities[0].classname != "worldspawn":
@@ -271,6 +281,13 @@ def check(m: MapFile, shaders=None, min_dm_spawns: int = 8) -> list[Issue]:
                     missing[n] = missing.get(n, 0) + 1
         for n, c in sorted(missing.items()):
             issues.append(Issue("error", f"unknown shader/texture '{n}' on {c} face(s) (renders as checkerboard)"))
+    long_names = sorted({f.shader for _, p in m.iter_prims() if isinstance(p, Brush) for f in p.faces
+                         if len("textures/" + f.shader) >= 60})
+    for n in long_names:
+        # EA Q3map never matches a 60-character name again: one BSP shader entry per brush side
+        # until MAX_MAP_SHADERS (toolchain.md); the converter caps names at 59 for this
+        issues.append(Issue("warning", f"shader name 'textures/{n}' is {len('textures/' + n)} characters: Q3map "
+                                       "duplicates names of 60+ per brush side (MAX_MAP_SHADERS); keep them <= 59"))
 
     counts: dict[str, int] = {}
     for ei, e in enumerate(m.entities):

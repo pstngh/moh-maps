@@ -69,7 +69,7 @@ something no row explains, the tracing methods are in testing.md "Diagnosing a w
 |---|---|---|---|
 | Q3map prints "Entity N origin is out of bounds, skipping!" for every entity, then VIS "LoadPortals: couldn't read <map>.prt" (de_vertigo) | the map lies outside ±8192 (de_vertigo is played 11,500 units up) | converter moves the map (`Options.offset`, `translate_map`; textures and report coordinates follow) | converter (automatic) |
 | Compile leaks from a spawn to the void; the caulk shell crosses ±8192 (de_cache) | 3D-skybox brushes and func_brushes with no area of their own were kept far from the map | sky box = the sky area plus its leaf bounding box (`Converter._sky_box`) | none |
-| Spawns missing after conversion (de_rats: at least 4, all CT spawns) | the map is built for CS's 72-unit player; `validate.fix_spawns` removes spawns with no standing room for 94 | `--scale 1.1` (csgo-conversion.md "Scale") | report `spawns_fixed` lists removals; no warning |
+| Spawns missing after conversion (de_rats: at least 4, all CT spawns) | the map is built for CS's 72-unit player; `validate.fix_spawns` removes spawns with no standing room for 94 | `--scale 1.1` (csgo-conversion.md "Scale") | report `spawns_fixed` lists removals; the conversion log prints a WARNING with the count |
 | A transferred map would need more than 256 lightmap pages | renderer array `tr.lightmaps[256]`, no bounds check | raise the lightmap density | `lighting.transfer` refuses |
 
 ## Gameplay
