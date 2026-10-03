@@ -696,7 +696,10 @@ def ladder_probe(pk3s: Sequence[Path], map_name: str, ladders: Sequence[dict], c
     after 2.2 s, back at floor level 4 s in). ``global/mike_torso.st`` USE_LADDER,
     ``docs/reference/engine.md`` §1.3. Verified on stock mohdm2: 325 units in 4 s.
     A step ladder that hangs over the floor (``hang`` > 40 in its report entry: climbed
-    down, or caught from a jump) starts in the air at the column with +forward already held."""
+    down, or caught from a jump) starts in the air at the column with +forward already held.
+    A ladder with ``exit`` ("forward", "left", "right") is then left at the top that way
+    (strafing, still pressing on, as a player leaves a scaffold ladder for the platform
+    beside it); ``exited``: the view ends 60+ above the ladder top (standing on it)."""
     out = []
     for i, l in enumerate(ladders):
         yaw = math.radians(l["angle"])
@@ -714,15 +717,31 @@ def ladder_probe(pk3s: Sequence[Path], map_name: str, ladders: Sequence[dict], c
         else:
             cmds += [f"tele {x:.0f} {y:.0f} {z:.0f}", f"face -50 {l['angle']:.0f} 0", "wait 400", "viewpos",
                      "+use", "wait 300", "-use", "+forward"]
-        for _ in range(max(1, round(climb_ms / 500))):
+        n_climb = 1 + max(1, round(climb_ms / 500))
+        for _ in range(n_climb - 1):
             cmds += ["wait 500", "viewpos"]
+        ex = l.get("exit")
+        if ex in ("left", "right"):
+            # strafe off the top (a hole or scaffold ladder: platform beside it), still pressing on
+            cmds += [f"+move{ex}", "wait 300", "viewpos", "wait 400", "viewpos", "wait 600", "viewpos",
+                     f"-move{ex}", "-forward", "wait 500", "viewpos"]
+        elif ex == "forward":
+            cmds += ["wait 1000", "viewpos", "-forward", "wait 500", "viewpos"]
         cmds += ["-forward", f"saveshot ladder{i:02d}", "wait 300"]
         res = run(pk3s, map_name, (), extra_commands=cmds, run_name=f"{run_name or 'ladders'}{i:02d}",
                   timeout=120 + climb_ms / 1000)
         pos = [tuple(int(v) for v in m.groups()[:3]) for m in VIEWPOS_RE.finditer(res.log)]
-        before, after = (pos[0], max(pos[1:], key=lambda q: q[2])) if len(pos) >= 2 else (None, None)
+        climb = pos[:n_climb]
+        before, after = (climb[0], max(climb[1:], key=lambda q: q[2])) if len(climb) >= 2 else (None, None)
         climbed = (after[2] - before[2]) if before and after else None
         shot = next(iter(res.screenshots.values()), None)
-        out.append({**l, "before": before, "after": after, "climbed": climbed, "shot": str(shot) if shot else None,
-                    "ok": climbed is not None and climbed >= min(64.0, (l["zmax"] - l["zmin"]) * 0.5)})
+        rec = {**l, "before": before, "after": after, "climbed": climbed, "shot": str(shot) if shot else None,
+               "ok": climbed is not None and climbed >= min(64.0, (l["zmax"] - l["zmin"]) * 0.5)}
+        if ex:
+            # off at the top: the view ends standing on something near the top (eye ~82 above it),
+            # not back down the ladder or on the floor
+            end = pos[-1] if len(pos) > n_climb else None
+            rec["exit_pos"] = end
+            rec["exited"] = end is not None and end[2] >= l["zmax"] + 60
+        out.append(rec)
     return out

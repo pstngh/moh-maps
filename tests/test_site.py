@@ -103,6 +103,10 @@ def test_ladders_and_breakables():
     slabs = sorted(_bounds(br) for br in b2.world.prims)
     assert [(lo[0], hi[0], lo[2], hi[2]) for lo, hi in slabs] == [(64, 67, 0, 16), (64, 66, 16, 32), (64, 65, 32, 40)], slabs
     assert [z for z in kit.step_slices(0, 40)] == [(0, 16, 3), (16, 32, 2), (32, 40, 1)]
+    rec = b2.ladders[0]                        # what `mohkit build --ladders` climbs
+    assert rec["exit"] == "forward" and rec["angle"] == 180 and rec["probe_start"] == [64 + 3 + 28, 20.0, 1]
+    kit.step_ladder(b2, "west", 64, 0, 40, 0, 40, exit=None)
+    assert "exit" not in b2.ladders[1]
     b3 = MapBuilder("t")
     kit.breakable(b3, (0, 0, 0), (8, 64, 64), "mohtest/flrwood1_rep", "wood")
     kit.breakable(b3, (0, 96, 0), (8, 160, 64), "glass/glass_clear", "glass")

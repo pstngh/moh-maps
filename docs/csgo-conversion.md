@@ -349,6 +349,15 @@ cs_dust2 305 / 168 -> 277 / 165, cs_cbble 241 / 161 -> 180 / 112 (foliage: ~2x t
 cs_mirage 295 / 159 -> 269 / 145, cs_inferno 233 / 145 -> 189 / 116; at the owner's `r_lodscale
 0.45` / `r_lodcap 0.35`: cs_cache 360 / 248 -> 326 / 242, cs_dust2 372 / 225 -> 321 / 188. In
 return the old LOD's shards are gone (the installed de_inferno drew a grey band across APit).
+Not all: replaying every drawn level of the 2026-10-02 builds' LOD'd SKDs
+(`lod.shard_ratio`; only levels where the collapse index changes are ever drawn, since seam
+copies collapse in one step) still found surfaces drawing more than their full area at far
+levels: 35 of 619 in dust2, mirage and cbble (de_cbble's fountain 15x, dust2's metal crate
+4.2x, a roll-up door 2.2x). Since then `lod_skd` caps a curve below its first level over
+`lod.SHARD_MAX` (1.10; `safe_cutoff`, `cap_lod`, cached with the simplification): 16 of
+the 619 (about 5 a map) simplify less far; the local cs_nuke, whose LOD predates the first
+shard fix, 232 of 598. The check costs ~66 s on de_nuke once (then cached). The installed
+builds keep their shards until rebuilt.
 
 **Props vanish where CS:GO fades them (since 2026-10-01).** CS:GO fades most props out
 by distance (sprp flag 1, `fademindist`..`fademaxdist`; `prop_dynamic` keys of the same

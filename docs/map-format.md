@@ -115,7 +115,11 @@ face lies on its edge, so a face collects one vertex per neighbouring edge that
 ends on it. Two shapes go over the limit:
 
 - **Long faces** with many neighbours along them. mohkit splits Carver shells,
-  `MapBuilder.box` and `kit.gable_roof` on a 512 grid, which is enough for plain walls.
+  `MapBuilder.box` and `kit.gable_roof` on a 512 grid in X and Y, which is enough for plain
+  walls. Not in Z: the CS:GO converter also splits Z (a 672-tall converted strip had 65
+  vertices), but the authored maps' tall brushes (mk_summit 412 over 512 high, mk_medina 84,
+  mk_village 24, mk_ref_room 16) never tripped the check, and a Z split would rewrite every
+  map's bytes for nothing (decided 2026-10-02). Split a tall brush when the check names it.
 - **Narrow faces many detail pieces end on**: a ceiling strip over an arcade,
   a lintel, a beam. Each arch segment or rib that meets it adds two vertices on
   each side it touches. mk_medina's first build had an 83-vertex arcade ceiling:

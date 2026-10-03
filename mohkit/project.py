@@ -249,13 +249,17 @@ def build(folder: Path, quality: str = "normal", test: bool = True, bots: int = 
             log(f"== contact sheet {sheet}")
     if ladders:
         # every func_ladder in the BSP and every kit.step_ladder, climbed by a player
-        lads = _game.ladders_in_bsp(bsp) + list(getattr(getattr(proj, "builder", None), "ladders", []))
+        # (a func_ladder lets the player off at the top only forward)
+        lads = ([{**l, "exit": "forward"} for l in _game.ladders_in_bsp(bsp)]
+                + list(getattr(getattr(proj, "builder", None), "ladders", [])))
         res_l = _game.ladder_probe([pk3], proj.game_path, lads, run_name=f"ladp_{proj.name}_")
         for r in res_l:
+            off = f", off {r['exit']} {'ok' if r['exited'] else 'FAIL'} at {r['exit_pos']}" if r.get("exit") else ""
             log(f"ladder {r.get('style', 'func_ladder')} at {[round(v) for v in r['origin']]}: "
-                f"climbed {r['climbed']} of {r['zmax'] - r['zmin']:g} ({'ok' if r['ok'] else 'FAIL'})")
-        report["ladders"] = [{k: r[k] for k in ("origin", "angle", "zmin", "zmax", "climbed", "ok", "shot")}
-                             | {"style": r.get("style", "func_ladder")} for r in res_l]
+                f"climbed {r['climbed']} of {r['zmax'] - r['zmin']:g} ({'ok' if r['ok'] else 'FAIL'}){off}")
+        keys = ("origin", "angle", "zmin", "zmax", "climbed", "ok", "shot", "exit", "exit_pos", "exited")
+        report["ladders"] = [{k: r[k] for k in keys if k in r} | {"style": r.get("style", "func_ladder")}
+                             for r in res_l]
     report["seconds"] = round(time.time() - t0, 1)
     DIST.mkdir(parents=True, exist_ok=True)
     rp = DIST / f"{proj.name}_report.json"

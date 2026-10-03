@@ -941,6 +941,114 @@
 ( -4 -276 0 ) ( 60 -276 0 ) ( -4 -212 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
 ( -4 -276 160 ) ( -4 -212 160 ) ( 60 -276 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
 }
+// brush 104
+{
+( -400 200 0 ) ( -400 264 0 ) ( -400 200 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -300 200 0 ) ( -300 200 64 ) ( -300 264 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 200 0 ) ( -400 200 64 ) ( -336 200 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 320 0 ) ( -336 320 0 ) ( -400 320 64 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 200 0 ) ( -336 200 0 ) ( -400 264 0 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 200 384 ) ( -400 264 384 ) ( -336 200 384 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 105
+{
+( -464 260 144 ) ( -464 324 144 ) ( -464 260 208 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 260 144 ) ( -400 260 208 ) ( -400 324 144 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -464 260 144 ) ( -464 260 208 ) ( -400 260 144 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -464 320 144 ) ( -400 320 144 ) ( -464 320 208 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -464 260 144 ) ( -400 260 144 ) ( -464 324 144 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -464 260 160 ) ( -464 324 160 ) ( -400 260 160 ) algiers/fort_floor_cobbleflttile 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 106
+{
+( -410 220 0 ) ( -410 284 0 ) ( -410 220 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 0 ) ( -400 220 64 ) ( -400 284 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -410 220 0 ) ( -410 220 64 ) ( -346 220 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -410 260 0 ) ( -346 260 0 ) ( -410 260 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -410 220 0 ) ( -346 220 0 ) ( -410 284 0 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -410 220 16 ) ( -410 284 16 ) ( -346 220 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 107
+{
+( -409 220 16 ) ( -409 284 16 ) ( -409 220 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 16 ) ( -400 220 80 ) ( -400 284 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -409 220 16 ) ( -409 220 80 ) ( -345 220 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -409 260 16 ) ( -345 260 16 ) ( -409 260 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -409 220 16 ) ( -345 220 16 ) ( -409 284 16 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -409 220 32 ) ( -409 284 32 ) ( -345 220 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 108
+{
+( -408 220 32 ) ( -408 284 32 ) ( -408 220 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 32 ) ( -400 220 96 ) ( -400 284 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -408 220 32 ) ( -408 220 96 ) ( -344 220 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -408 260 32 ) ( -344 260 32 ) ( -408 260 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -408 220 32 ) ( -344 220 32 ) ( -408 284 32 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -408 220 48 ) ( -408 284 48 ) ( -344 220 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 109
+{
+( -407 220 48 ) ( -407 284 48 ) ( -407 220 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 48 ) ( -400 220 112 ) ( -400 284 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -407 220 48 ) ( -407 220 112 ) ( -343 220 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -407 260 48 ) ( -343 260 48 ) ( -407 260 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -407 220 48 ) ( -343 220 48 ) ( -407 284 48 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -407 220 64 ) ( -407 284 64 ) ( -343 220 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 110
+{
+( -406 220 64 ) ( -406 284 64 ) ( -406 220 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 64 ) ( -400 220 128 ) ( -400 284 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -406 220 64 ) ( -406 220 128 ) ( -342 220 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -406 260 64 ) ( -342 260 64 ) ( -406 260 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -406 220 64 ) ( -342 220 64 ) ( -406 284 64 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -406 220 80 ) ( -406 284 80 ) ( -342 220 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 111
+{
+( -405 220 80 ) ( -405 284 80 ) ( -405 220 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 80 ) ( -400 220 144 ) ( -400 284 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -405 220 80 ) ( -405 220 144 ) ( -341 220 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -405 260 80 ) ( -341 260 80 ) ( -405 260 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -405 220 80 ) ( -341 220 80 ) ( -405 284 80 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -405 220 96 ) ( -405 284 96 ) ( -341 220 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 112
+{
+( -404 220 96 ) ( -404 284 96 ) ( -404 220 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 96 ) ( -400 220 160 ) ( -400 284 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -404 220 96 ) ( -404 220 160 ) ( -340 220 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -404 260 96 ) ( -340 260 96 ) ( -404 260 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -404 220 96 ) ( -340 220 96 ) ( -404 284 96 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -404 220 112 ) ( -404 284 112 ) ( -340 220 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 113
+{
+( -403 220 112 ) ( -403 284 112 ) ( -403 220 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 112 ) ( -400 220 176 ) ( -400 284 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -403 220 112 ) ( -403 220 176 ) ( -339 220 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -403 260 112 ) ( -339 260 112 ) ( -403 260 176 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -403 220 112 ) ( -339 220 112 ) ( -403 284 112 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -403 220 128 ) ( -403 284 128 ) ( -339 220 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 114
+{
+( -402 220 128 ) ( -402 284 128 ) ( -402 220 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 128 ) ( -400 220 192 ) ( -400 284 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -402 220 128 ) ( -402 220 192 ) ( -338 220 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -402 260 128 ) ( -338 260 128 ) ( -402 260 192 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -402 220 128 ) ( -338 220 128 ) ( -402 284 128 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -402 220 144 ) ( -402 284 144 ) ( -338 220 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
+// brush 115
+{
+( -401 220 144 ) ( -401 284 144 ) ( -401 220 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -400 220 144 ) ( -400 220 208 ) ( -400 284 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -401 220 144 ) ( -401 220 208 ) ( -337 220 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -401 260 144 ) ( -337 260 144 ) ( -401 260 208 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -401 220 144 ) ( -337 220 144 ) ( -401 284 144 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+( -401 220 160 ) ( -401 284 160 ) ( -337 220 160 ) common/clip 0 0 0 1 1 0 0 0 +surfaceparm detail
+}
 }
 // entity 1
 {

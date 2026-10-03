@@ -767,6 +767,119 @@ def can_lod(surfaces) -> bool:
                and s.collapse_index[0] != s.collapse_index[-1] for s in surfaces)
 
 
+def engine_tris(srf: _skd.SkdSurface, cutoff: float) -> np.ndarray:
+    """Triangles ``RB_StaticMesh`` draws of a simplified surface at ``cutoff`` (vertex index
+    triples, dropped vertices mapped through ``collapse``, cut at the first degenerate one)."""
+    ci = np.asarray(srf.collapse_index)
+    if len(ci) > 3 and ci[2] < cutoff:
+        return np.zeros((0, 3), int)
+    rc = int((ci >= cutoff).sum())
+    m = np.arange(len(ci))
+    for i in range(rc, len(ci)):
+        m[i] = m[srf.collapse[i]]
+    t = m[np.asarray(srf.triangles)]
+    bad = (t[:, 0] == t[:, 1]) | (t[:, 1] == t[:, 2]) | (t[:, 2] == t[:, 0])
+    return t[: int(np.argmax(bad)) if bad.any() else len(t)]
+
+
+# Drawn area / full area of a surface at any drawn level above which a level is a shard and
+# the curve is capped below it (lod_skd). Six conversions (2026-10-02, 1,929 LOD'd SKDs):
+# 9 surfaces 1.02-1.05, 10 1.05-1.10 (telephone poles 1.06-1.08: small folds), 11 1.10-2,
+# 5 over 2 (de_cbble's fountain 15x, dust2's metal crate 4.2x); de_nuke's visible shards
+# were +35%. tests/test_lod.py holds the simplifier itself to 1.02.
+SHARD_MAX = 1.10
+
+
+def _area(p: np.ndarray, t: np.ndarray) -> float:
+    t = np.asarray(t).reshape(-1, 3)
+    return float(0.5 * np.linalg.norm(np.cross(p[t[:, 1]] - p[t[:, 0]], p[t[:, 2]] - p[t[:, 0]]), axis=1).sum())
+
+
+def level_areas(srf: _skd.SkdSurface, levels=None) -> tuple[float, np.ndarray]:
+    """(full area, area drawn with the first ``rc`` vertices kept, at each rc in ``levels``
+    (default all; others stay 0)), as ``engine_tris`` draws them, walked from all vertices
+    down in one pass: dropping vertex ``v`` moves everything mapped to it onto
+    ``collapse[v]`` (always lower, still kept)."""
+    p = np.asarray(srf.positions, np.float64)
+    tris = np.asarray(srf.triangles).reshape(-1, 3)
+    n = len(p)
+    tri_area = 0.5 * np.linalg.norm(np.cross(p[tris[:, 1]] - p[tris[:, 0]], p[tris[:, 2]] - p[tris[:, 0]]), axis=1)
+    full = float(tri_area.sum())
+    col = np.asarray(srf.collapse)
+    m = np.arange(n)
+    out = np.zeros(n + 1)
+    out[n] = full
+    want = set(range(3, n)) if levels is None else set(levels)
+    for rc in range(n - 1, 2, -1):           # keep vertices [0, rc): vertex rc is dropped
+        m[m == rc] = m[col[rc]]
+        if rc not in want:
+            continue
+        t = m[tris]
+        bad = (t[:, 0] == t[:, 1]) | (t[:, 1] == t[:, 2]) | (t[:, 2] == t[:, 0])
+        k = int(np.argmax(bad)) if bad.any() else len(t)
+        t = t[:k]
+        out[rc] = float(0.5 * np.linalg.norm(np.cross(p[t[:, 1]] - p[t[:, 0]], p[t[:, 2]] - p[t[:, 0]]), axis=1).sum())
+    return full, out
+
+
+def drawn_levels(ci: np.ndarray) -> list[int]:
+    """The kept-vertex counts a cutoff can produce, most first: ``count(ci >= c)`` lands only
+    where the collapse index changes (seam copies of one position share an index and go in
+    one step; the states between them are never drawn)."""
+    ci = np.asarray(ci)
+    return [rc for rc in range(len(ci) - 1, 2, -1) if ci[rc] != ci[rc - 1]]
+
+
+def safe_cutoff(skd: bytes, limit: float = SHARD_MAX) -> float:
+    """The highest cutoff at which no surface of a simplified SKD draws more than ``limit``
+    times its full area (a shard), ``inf`` when none does at any level. A cutoff ``c`` keeps
+    the vertices with ``collapse_index >= c``; ``cap_lod`` keeps a curve below it."""
+    info = _skd.read_skd(skd)
+    best = math.inf
+    for srf, (col, cidx) in zip(info.surfaces, info.collapse):
+        srf.collapse, srf.collapse_index = np.asarray(col), np.asarray(cidx)
+        ci = srf.collapse_index
+        if len(ci) <= 3:
+            continue
+        lv = drawn_levels(ci)
+        full, areas = level_areas(srf, lv)
+        if full < 1e-6:
+            continue
+        over = [rc for rc in lv if areas[rc] > limit * full]
+        if over:
+            # rc kept vertices <=> cutoff in (ci[rc], ci[rc - 1]]: up to ci[rc] keeps one more
+            best = min(best, float(ci[over[0]]))
+    return best
+
+
+def shard_ratio(skd: bytes) -> float:
+    """Largest drawn area / full area of any surface of a simplified SKD at any level."""
+    info = _skd.read_skd(skd)
+    worst = 1.0
+    for srf, (col, cidx) in zip(info.surfaces, info.collapse):
+        srf.collapse, srf.collapse_index = np.asarray(col), np.asarray(cidx)
+        if len(srf.collapse_index) <= 3:
+            continue
+        lv = drawn_levels(srf.collapse_index)
+        full, areas = level_areas(srf, lv)
+        if full >= 1e-6 and lv:
+            worst = max(worst, float(areas[lv].max()) / full)
+    return worst
+
+
+def cap_lod(lod: bytes, cmax: float) -> bytes:
+    """A ``.lod`` whose curve never asks for a cutoff above ``cmax`` (constants recomputed)."""
+    minm, maxm, curve = engine_table(lod)
+    pos = [q for q, _ in curve]
+    val = [min(v, cmax) for _, v in curve]
+    consts = []
+    for i in range(4):
+        common = (val[i + 1] - val[i]) / (pos[i + 1] - pos[i])
+        consts += [val[i] + (minm / (minm - maxm) - pos[i]) * common, common / (maxm - minm),
+                   minm + (maxm - minm) * pos[i]]
+    return struct.pack("<24f", minm, maxm, *[x for pv in zip(pos, val) for x in pv], *consts)
+
+
 def drawn(srf: _skd.SkdSurface, cutoff: float) -> tuple[int, int]:
     """(vertices, triangles) the engine draws of a simplified surface at ``cutoff``."""
     ci = srf.collapse_index
@@ -833,6 +946,11 @@ def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True,
         skd_bytes, perm, errors, radius, steps = (z["skd"].tobytes(), z["perm"], z["errors"], float(z["radius"]),
                                                   int(z["steps"]))
         geometric = z["geometric"]
+        if "cmax" in z.files:
+            cmax = float(z["cmax"])
+        else:   # a cache entry from before the shard check: add it once
+            cmax = safe_cutoff(skd_bytes) if steps else math.inf
+            np.savez(cf, **{k: z[k] for k in z.files}, cmax=cmax)
     else:
         surfs = [_skd.SkdSurface(s.name, s.positions, s.normals, s.uvs, s.triangles) for s in info.surfaces]
         res = simplify(surfs, surf_cols)
@@ -842,9 +960,10 @@ def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True,
         errors, steps = np.maximum(res.errors * tiki_scale, geometric), res.steps
         skd_bytes = _skd.build_skd(info.name, res.surfaces) if steps else data
         perm = res.perm if steps else np.arange(n)
+        cmax = safe_cutoff(skd_bytes) if steps else math.inf
         if cf is not None:
             np.savez(cf, skd=np.frombuffer(skd_bytes, np.uint8), perm=perm, errors=errors, geometric=geometric,
-                     radius=radius, steps=steps)
+                     radius=radius, steps=steps, cmax=cmax)
     # with distance, geometric error decides (shading and texture detail go with the pixels;
     # counting them there kept 3.5x the vertices on de_nuke); the free level keeps them
     curve = np.maximum(geometric, ATTR_FAR * errors) if ATTR_FAR else geometric
@@ -852,6 +971,9 @@ def lod_skd(name: str, data: bytes, tiki_scale: float = 1.0, cache: bool = True,
                       free_errors=errors) if steps else None
     if lod is None:
         return LodResult(data, None, np.arange(n), steps)
+    if cmax < math.inf:
+        # some level draws a shard (a triangle across the model): never simplify that far
+        return LodResult(skd_bytes, cap_lod(lod, cmax), perm, steps, {"shard_cap": cmax})
     return LodResult(skd_bytes, lod, perm, steps)
 
 
@@ -960,5 +1082,7 @@ def apply_to_assets(assets: dict, tikis: Sequence[str], read: Callable[[str], Op
             out[tik] = np.concatenate(perms)
     if log:
         made = [r for r in done.values() if r is not None and r.lod is not None]
-        log(f"== LOD: {len(made)} of {len(done)} SKDs simplified")
+        shards = [k for k, r in done.items() if r is not None and "shard_cap" in r.stats]
+        log(f"== LOD: {len(made)} of {len(done)} SKDs simplified"
+            + (f"; {len(shards)} capped below a level that drew shards: {shards[:4]}" if shards else ""))
     return out

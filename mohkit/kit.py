@@ -464,20 +464,23 @@ def step_slices(z0: float, top: float, rise: float = STEP_RISE, depth: float = S
 
 
 def step_ladder(b: MapBuilder, side: str, plane: float, u0: float, u1: float, z0: float, z1: float,
-                rise: float = STEP_RISE, depth: float = STEP_DEPTH) -> None:
+                rise: float = STEP_RISE, depth: float = STEP_DEPTH, exit: Optional[str] = "forward") -> None:
     """A CS-style ladder: invisible ``common/clip`` slices against the wall on ``side`` from
     ``z0`` to ``z1``. Running into it climbs it, backing off climbs down, and the player
     can step off sideways or onto a ledge at any side of the top, where a ``func_ladder``
     lets them off only forward (use it under floor holes and beside platforms). Bots can't
-    climb it. The CS:GO converter's ladders (csgo-conversion.md); in tests/rooms/laddertest
+    climb it. ``exit`` is how a player leaves it at the top ("forward" onto a ledge, "left" /
+    "right" onto a platform beside it, as the climber sees it; None: not checked), which
+    ``mohkit build --ladders`` tries. The CS:GO converter's ladders (csgo-conversion.md); in tests/rooms/laddertest
     16 x 1, 8 x 1 and 8 x 2 unit columns each climbed 162 onto a 160 ledge (2026-10-02)."""
     slices = step_slices(z0, z1, rise, depth)
     for za, zb, out in slices:
         b.box(*_span(side, plane, u0, u1, za, zb, 0, out), CLIP_M)
     front, uc = plane + _OUT[side] * slices[0][2], (u0 + u1) / 2
     at = lambda d, z: [uc, front + _OUT[side] * d, z] if side in ("north", "south") else [front + _OUT[side] * d, uc, z]  # noqa: E731
-    b.ladders.append({"style": "steps", "origin": at(0, z0), "angle": YAW[side], "zmin": z0, "zmax": z1,
-                      "probe_start": at(28, z0 + 1)})
+    rec = {"style": "steps", "origin": at(0, z0), "angle": YAW[side], "zmin": z0, "zmax": z1,
+           "probe_start": at(28, z0 + 1)}
+    b.ladders.append({**rec, "exit": exit} if exit else rec)
 
 
 # ------------------------------------------------------------------------- breakables

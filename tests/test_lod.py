@@ -67,17 +67,7 @@ def test_triangles_vanish_in_order():
 
 
 def _engine_tris(srf, cutoff):
-    """Triangles RB_StaticMesh draws at ``cutoff`` (with its break), as index triples."""
-    ci = np.asarray(srf.collapse_index)
-    if ci[2] < cutoff:
-        return np.zeros((0, 3), int)
-    rc = int((ci >= cutoff).sum())
-    m = np.arange(len(ci))
-    for i in range(rc, len(ci)):
-        m[i] = m[srf.collapse[i]]
-    t = m[np.asarray(srf.triangles)]
-    bad = (t[:, 0] == t[:, 1]) | (t[:, 1] == t[:, 2]) | (t[:, 2] == t[:, 0])
-    return t[: int(np.argmax(bad)) if bad.any() else len(t)]
+    return L.engine_tris(srf, cutoff)
 
 
 def test_no_shards_from_seams_or_slivers():
@@ -207,6 +197,36 @@ def test_propcost_reads_stock_models_under_the_map():
         assert (read("A.tik"), read("b.tik"), read("c.tik"), read("d.tik"), bsp) == (b"0", b"1", b"map", None, b"bsp")
     vc = propcost.ViewCost(verts=10, tris=5, models=1, by_model={"static/x.tik": 10})
     assert "x 10" in propcost.table({"cam": vc}) and "mean 10 vertices" in propcost.table({"cam": vc})
+
+
+def test_shard_check_caps_the_curve():
+    """``level_areas`` matches the engine's triangles at every drawn level; a corrupted
+    collapse (a vertex pulled across the sheet: a shard) is found and the curve capped
+    below it (``safe_cutoff``, ``cap_lod``), so the far levels never draw it."""
+    res = L.simplify([_grid(bump=20.0)])
+    s = res.surfaces[0]
+    P = np.asarray(s.positions, np.float64)
+    lv = L.drawn_levels(s.collapse_index)
+    full, areas = L.level_areas(s, lv)
+    ci = np.asarray(s.collapse_index)
+    for rc in lv[::7]:
+        assert abs(areas[rc] - L._area(P, L.engine_tris(s, float(ci[rc - 1])))) < 1e-6 * full, rc
+    good = skd.build_skd("g", res.surfaces)
+    assert L.safe_cutoff(good, 1.02) == float("inf") and L.shard_ratio(good) <= 1.02
+    # shard: send the vertex dropped at a mid level to the far corner instead of its neighbour
+    rc = lv[len(lv) // 2]
+    far = int(np.argmax(np.linalg.norm(P - P[rc], axis=1)))
+    far = min(far, rc - 1) if far >= rc else far
+    col = np.asarray(s.collapse).copy()
+    col[rc] = far
+    s.collapse = col
+    bad = skd.build_skd("g", [s])
+    cmax = L.safe_cutoff(bad, 1.02)
+    assert cmax < float("inf") and L.shard_ratio(bad) > 1.02, cmax
+    lod = L.lod_control(res.errors, 100.0)
+    capped = L.cap_lod(lod, cmax)
+    for m in (5.0, 0.3, 0.05, 1e-3, 1e-5):
+        assert L.engine_cutoff(capped, m) <= min(cmax, L.engine_cutoff(lod, m)) + 1e-3, m
 
 
 def test_vanish_distance():

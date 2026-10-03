@@ -289,7 +289,10 @@ radio room, mean 183 with no shading) and crushed interiors.
 `game.ladder_probe(pk3s, map, game.ladders_for_probe(bsp))` climbs every ladder as a
 player, one game per ladder (a player still on a ladder ignores `tele`). For a `build.py`
 map, `mohkit build maps/<name> --ladders` probes the BSP's `func_ladder`s and every
-`kit.step_ladder` (`b.ladders`) and writes the results to the report's `ladders`.
+`kit.step_ladder` (`b.ladders`) and writes the results to the report's `ladders`. A ladder
+with an `exit` (`kit.step_ladder(..., exit="left")`; `func_ladder`s always "forward") is then
+left at the top that way, strafing with `+forward` still held as a player leaves a scaffold
+ladder; `exited` = the view ends 60+ above the ladder top.
 `ladders_for_probe` returns the BSP's `func_ladder`s plus the CS-style step ladders listed
 in the `report.json` beside a converted BSP (`convert.ladders`). The probe joins a team,
 `tele`s to the foot (28 units back from the climb face, or a step ladder's `probe_start`:
@@ -321,7 +324,7 @@ each, kept as evidence and re-run when the code behind them changes
 
 | room | question | run |
 |---|---|---|
-| `laddertest` | do `kit.ladder` and `kit.step_ladder` (16 x 1, 8 x 1, 8 x 2 unit steps) climb onto a 160 ledge? Yes (2026-10-02): func_ladder 170, the three columns 162 each | `mohkit build tests/rooms/laddertest -q draft --ladders` |
+| `laddertest` | do `kit.ladder` and `kit.step_ladder` (16 x 1, 8 x 1, 8 x 2 unit steps) climb onto a 160 ledge, and does the exit check tell a scaffold's platform side from its open side? Yes (2026-10-02): func_ladder 170, columns 161-162, all off forward with the eye at 241; scaffold left onto the deck (241), right FAIL (fell, eye at 81) | `mohkit build tests/rooms/laddertest -q draft --ladders` |
 | `debristest` | do `kit.breakable`'s metal and wood windows break into their debris? | build, then shoot both in game |
 | `spottest` | which way does MOHlight light a spotlight (`SPOT=target`, `angles`, `point`)? | `SPOT=angles mohkit build tests/rooms/spottest -q preview` |
 
