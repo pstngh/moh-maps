@@ -247,8 +247,9 @@ python -m mohkit exposure --changed local/csgo/before/cs_nuke/shots local/csgo/c
 
 `--ref` compares each folder's cameras with CS:GO's own shots of the same cameras: mean
 brightness, mean absolute error and correlation of the per-camera means
-(`exposure.against`). Before a rebuild meant to change the look, copy the build's `shots/`,
-`exposure.json` and pk3 to `local/csgo/before/<name>/`; afterwards `--changed` draws
+(`exposure.against`). Before a rebuild meant to change the look, keep the build
+(`mohkit csgo <map> --keep-before TAG`: pk3, reports and `shots/` to
+`local/csgo/before/<name>_<TAG>/`); afterwards `--changed` draws
 reference | before | after for the `-n` cameras that changed most (`exposure.changed_sheet`;
 default `local/csgo/<name>/changed.png`) and prints every camera's pixel change (mean of the
 largest channel difference, as `mohkit ab`), mean luma before -> after, the reference's and

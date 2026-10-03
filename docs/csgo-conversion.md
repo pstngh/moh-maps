@@ -6,6 +6,7 @@ python -m mohkit csgo de_inferno --name cs_inferno -q normal
 python -m mohkit csgo de_dust2 --props-only     # re-place runtime props in the last compile (~1 min)
 python -m mohkit csgo de_dust2 -q fastrad --final   # + 8 bots for 90 s, every ladder probed, brightness vs csgo-ref (report.json "final")
 python -m mohkit csgo de_dust2 --final          # only those checks, on the packaged map (no -q: nothing is rebuilt)
+python -m mohkit csgo de_dust2 --keep-before pre_x -q fastrad   # keep the current build in local/csgo/before/cs_dust2_pre_x/ first
 python -m mohkit ab de_dust2 --a INSTALLED.pk3 --b local/csgo/cs_dust2/cs_dust2.pk3 --perf 2000   # before installing
 ```
 
@@ -57,7 +58,9 @@ intensity fixes went in before the `light_spot` pitch sign was found. Order: `-q
 ladders, spawns), fix and batch the converter fixes, then one lit build. A lit build started
 before a fix has to be redone (de_mirage was lit-built three times on 2026-10-01, 45-65 min
 each). Converter fixes stay generic (no per-map branches). Before a rebuild meant to change
-the look, keep the old build in `local/csgo/before/<name>/`; install only after the new
+the look, keep the old build: `--keep-before TAG` copies the pk3, reports, perf logs,
+contact sheets and shots to `local/csgo/before/<name>_<TAG>/` first (`convert.snapshot`;
+refuses an existing tag); install only after the new
 sheet was compared with the installed one on the same cameras (sky band included) and the
 user agreed: batch scripts must never install. The steps are mohkit commands:
 `mohkit csgo <map> -q fastrad --final` (build, then 8 bots and the ladder probe into
@@ -67,8 +70,7 @@ fps at the user's settings), and `mohkit exposure --changed local/csgo/before/<n
 local/csgo/<name>/shots --ref local/csgo/<name>/csgo_ref` (the CS:GO | before | after sheet of
 the most-changed cameras, with numbers; testing.md "Measuring exposure"). `--final` without
 `-q`, `--resume` or `--refresh-assets` checks the packaged map without rebuilding (before
-2026-10-02 it built a draft over the fastrad build first). Not yet a command (HANDOFF
-queue): a before-snapshot flag.
+2026-10-02 it built a draft over the fastrad build first).
 
 To check a converter change without compiling, run the stages involved in-process:
 `cv = Converter(bsp, csgo_dir, Options(name="x", props=False)); cv.brushes(); cv.ladders()`

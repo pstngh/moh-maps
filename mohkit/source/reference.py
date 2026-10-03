@@ -71,6 +71,7 @@ def shoot(map_name: str, name: Optional[str] = None, csgo_dir: Optional[str] = N
           settle: float = 2.5) -> list[Path]:
     """Reference shots of ``map_name`` (e.g. ``de_nuke``); returns the saved files."""
     from .. import config
+    from .convert import local_name
     cfg = config.load()
     root = Path(csgo_dir or cfg.csgo_dir)
     game = root / "csgo"
@@ -78,7 +79,7 @@ def shoot(map_name: str, name: Optional[str] = None, csgo_dir: Optional[str] = N
     if not exe.is_file():
         raise SystemExit(f"no CS:GO client at {exe}")
     cams = cameras(game / "maps" / f"{map_name}_cameras.txt")
-    name = name or ("cs_" + map_name.split("_", 1)[-1] if map_name.startswith("de_") else map_name)
+    name = local_name(map_name, name)
     out = config.REPO / "local" / "csgo" / name / "csgo_ref"
     out.mkdir(parents=True, exist_ok=True)
     keep = {p: p.read_bytes() for p in (game / "cfg" / "config.cfg", game / "cfg" / "video.txt") if p.is_file()}

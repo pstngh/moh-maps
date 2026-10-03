@@ -3211,6 +3211,46 @@ def map_cameras(src: Path, map_: MapFile, landmarks=(), shots: int = 9, scale: f
     return named + auto_cameras(map_, 1 if named else shots, () if named else landmarks, spawns=not named)
 
 
+def local_name(map_name: str, name: Optional[str] = None) -> str:
+    """The MOHAA name of a conversion: ``name``, else de_dust2 (or a path to it) -> cs_dust2;
+    other prefixes stay (cs_office, ar_shoots)."""
+    stem = Path(map_name).stem
+    return name or ("cs_" + stem.split("_", 1)[-1] if stem.startswith("de_") else stem)
+
+
+SNAPSHOT_FILES = ("{name}.pk3", "report.json", "exposure.json", "statics.json", "prop_light.npz", "assets.json",
+                  "perf_*.json", "{name}_shots*.png")
+
+
+def snapshot(map_name: str, tag: str, name: Optional[str] = None, log=print) -> Path:
+    """Keep the current build of a conversion as ``local/csgo/before/<name>_<tag>/`` before a
+    rebuild replaces it: the pk3, report, exposure, static-prop and prop-light data, perf
+    logs, contact sheets and ``shots/`` (iCloud copies skipped), i.e. what ``mohkit ab``,
+    ``exposure --changed`` and a ``--resume`` A/B need afterwards. Refuses to overwrite."""
+    import shutil
+
+    from .. import config
+    from .. import exposure as X
+    name = local_name(map_name, name)
+    src = config.REPO / "local" / "csgo" / name
+    dst = config.REPO / "local" / "csgo" / "before" / f"{name}_{tag}"
+    if not (src / f"{name}.pk3").is_file():
+        raise SystemExit(f"nothing to keep: no {src / (name + '.pk3')}")
+    if dst.exists():
+        raise SystemExit(f"{dst} exists: pick another tag")
+    dst.mkdir(parents=True)
+    files = sorted({f for pat in SNAPSHOT_FILES for f in src.glob(pat.format(name=name))})
+    for f in files:
+        shutil.copy2(f, dst / f.name)
+    shots = X.shot_files(src / "shots") if (src / "shots").is_dir() else {}
+    if shots:
+        (dst / "shots").mkdir()
+        for f in shots.values():
+            shutil.copy2(f, dst / "shots" / f.name)
+    log(f"kept {len(files)} files and {len(shots)} shots of {name} in {dst}")
+    return dst
+
+
 def _local_cameras(map_name: str, name: Optional[str] = None, scale: float = 1.0) -> tuple[str, Path, list]:
     """(name, ``local/csgo/<name>``, cameras) of the last conversion of ``map_name``."""
     import json
@@ -3220,7 +3260,7 @@ def _local_cameras(map_name: str, name: Optional[str] = None, scale: float = 1.0
     src = Path(map_name)
     if not src.is_file():
         src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
-    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    name = local_name(map_name, name)
     out = config.REPO / "local" / "csgo" / name
     prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
     cams = map_cameras(src, MapFile.load(str(out / f"{name}.map")), prev.get("convert", {}).get("landmarks", ()),
@@ -3262,7 +3302,7 @@ def perf_local(map_name: str, name: Optional[str] = None, scale: float = 1.0, ms
     src = Path(map_name)
     if not src.is_file():
         src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
-    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    name = local_name(map_name, name)
     out = config.REPO / "local" / "csgo" / name
     prev = json.loads((out / "report.json").read_text()) if (out / "report.json").is_file() else {}
     cams = map_cameras(src, MapFile.load(str(out / f"{name}.map")), prev.get("convert", {}).get("landmarks", ()),
@@ -3355,7 +3395,7 @@ def resume_local(map_name: str, name: Optional[str] = None, test: bool = True, l
     src = Path(map_name)
     if not src.is_file():
         src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
-    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    name = local_name(map_name, name)
     out = config.REPO / "local" / "csgo" / name
     root_bsp = Path(cfg.build_dir) / "roots" / f"dm_{name}" / "main" / "maps" / "dm" / f"{name}.bsp"
     assets = saved_assets(out, log)
@@ -3439,7 +3479,7 @@ def fit_exposure(map_name: str, name: Optional[str] = None, tol: float = 0.02, r
     src = Path(map_name)
     if not src.is_file():
         src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
-    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    name = local_name(map_name, name)
     out = config.REPO / "local" / "csgo" / name
     ref_dir, shots_dir = out / "csgo_ref", out / "shots"
     if not ref_dir.is_dir():
@@ -3488,7 +3528,7 @@ def refresh_assets(map_name: str, name: Optional[str] = None, quality: str = "dr
     src = Path(map_name)
     if not src.is_file():
         src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
-    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    name = local_name(map_name, name)
     out = config.REPO / "local" / "csgo" / name
     root_map = Path(cfg.build_dir) / "roots" / f"dm_{name}" / "main" / "maps" / "dm" / f"{name}.map"
     if lighting == "csgo":
@@ -3538,7 +3578,7 @@ def build_local(map_name: str, name: Optional[str] = None, quality: str = "draft
     src = Path(map_name)
     if not src.is_file():
         src = Path(cfg.csgo_dir) / "csgo" / "maps" / f"{map_name}.bsp"
-    name = name or ("cs_" + src.stem.split("_", 1)[-1] if src.stem.startswith("de_") else src.stem)
+    name = local_name(map_name, name)
     out = config.REPO / "local" / "csgo" / name
     out.mkdir(parents=True, exist_ok=True)
     log(f"== converting {src.name} -> {name}")

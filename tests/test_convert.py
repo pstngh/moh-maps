@@ -348,6 +348,38 @@ def test_final_checks_store_exposure() -> None:
         assert ex == res["exposure_ref"] and ex["cameras"] == 3 and abs(ex["mae"] - 10) < 0.6, ex
 
 
+
+def test_snapshot_keeps_build() -> None:
+    """``mohkit csgo <map> --keep-before TAG``: the build's files and shots (no iCloud copies)
+    go to local/csgo/before/<name>_<TAG>/; a second snapshot with the same tag is refused."""
+    from mohkit import __main__ as M
+    from mohkit import config
+    assert C.local_name("de_dust2") == "cs_dust2" and C.local_name("/x/de_nuke.bsp") == "cs_nuke"
+    assert C.local_name("cs_office") == "cs_office" and C.local_name("de_x", "cs_y") == "cs_y"
+    saved = config.REPO
+    with tempfile.TemporaryDirectory() as d:
+        try:
+            config.REPO = Path(d)
+            src = Path(d) / "local" / "csgo" / "cs_x"
+            (src / "shots").mkdir(parents=True)
+            for f in ("cs_x.pk3", "report.json", "statics.json", "perf_new.json", "cs_x_shots_2.png",
+                      "cs_x.map", "shots/00_a.png", "shots/00_a 2.png", "shots/01_b.png"):
+                (src / f).write_bytes(f.encode())
+            assert M.main(["csgo", "de_x", "--keep-before", "pre_t"]) == 0      # alone: no build
+            dst = Path(d) / "local" / "csgo" / "before" / "cs_x_pre_t"
+            got = sorted(str(p.relative_to(dst)) for p in dst.rglob("*") if p.is_file())
+            assert got == ["cs_x.pk3", "cs_x_shots_2.png", "perf_new.json", "report.json", "shots/00_a.png",
+                           "shots/01_b.png", "statics.json"], got
+            assert (dst / "shots" / "00_a.png").read_bytes() == b"shots/00_a.png"
+            try:
+                C.snapshot("de_x", "pre_t", log=lambda *a: None)
+                raise AssertionError("overwrote a snapshot")
+            except SystemExit:
+                pass
+        finally:
+            config.REPO = saved
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

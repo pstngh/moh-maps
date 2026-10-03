@@ -21,6 +21,7 @@
     python -m mohkit csgo de_dust2 --fit-exposure                  match CS:GO's brightness (needs csgo-ref shots)
     python -m mohkit csgo de_dust2 -q fastrad --final              build, then 8 bots and the ladder probe (no install)
     python -m mohkit csgo de_dust2 --final                         only the checks, on the packaged map
+    python -m mohkit csgo de_dust2 --keep-before pre_x -q fastrad  keep the current build in local/csgo/before/, then build
     python -m mohkit exposure local/csgo/*/shots [--by-map] [--stock] [--mask shot.png]   brightness check
     python -m mohkit exposure --changed BEFORE AFTER [--ref REF] [-n 6] [--rank ref] [-o x.png]   what a rebuild changed
     python -m mohkit csgo-ref de_dust2 [--name cs_dust2]        CS:GO's own screenshots from the same cameras
@@ -321,6 +322,12 @@ def _toggles(specs) -> list[tuple[str, str]]:
 
 def cmd_csgo(a) -> int:
     from .source.convert import build_local, resume_local
+    builds = a.quality or a.resume or a.refresh_assets or a.props_only
+    if a.keep_before:
+        from .source.convert import snapshot
+        snapshot(a.map, a.keep_before, a.name)
+        if not (builds or a.shoot or a.perf or a.fit_exposure or a.final):
+            return 0
     if a.shoot:
         from .source.convert import shoot_local
         rep = shoot_local(a.map, a.name, scale=a.scale)
@@ -334,7 +341,6 @@ def cmd_csgo(a) -> int:
         from .source.convert import fit_exposure
         fit_exposure(a.map, a.name)
         return 0
-    builds = a.quality or a.resume or a.refresh_assets or a.props_only
     if a.final and not builds:
         return _final(a)   # checks only: the packaged map stays as it is
     a.quality = a.quality or "draft"
@@ -533,6 +539,9 @@ def main(argv=None) -> int:
                    help="8 bots for 90 s, every ladder probed and the brightness against csgo-ref (report.json "
                         "'final'); never installs. After the build when one is asked for (-q, --resume, "
                         "--refresh-assets), else on the packaged map alone")
+    s.add_argument("--keep-before", metavar="TAG",
+                   help="first keep the current build in local/csgo/before/<name>_<TAG>/ (pk3, reports, shots); "
+                        "alone: only that")
     s.add_argument("--no-lod", action="store_true", help="with --resume: props without progressive LOD (A/B tests)")
     s.add_argument("--shoot", action="store_true", help="only re-shoot the packaged map (contact sheets, shots, exposure)")
     s.add_argument("--exposure", type=float, help="with --resume: tone-map CS:GO's light with this exposure")
