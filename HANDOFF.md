@@ -2,44 +2,38 @@
 
 ## Session rules
 
-**Unattended run in progress (user, 2026-10-02 22:47 ET: "can you shutdown the computer when
-ur fully done").** Scope (decided by the agent, logged below): (1) the mk_medina MT light test
-and its follow-up, (2) prune 3D-skybox prop models on the 2D-sky fallback, then harvest,
-update this file, push, and shut the Mac down (`osascript -e 'tell application "System
-Events" to shut down'`; access checked at 22:48 ET). No questions; no 75% pause; push after
-each verified step; nothing irreversible; no installs. `caffeinate` (pid 44950, 3 h) keeps it
-awake. Delete this paragraph when the run ends.
-
 ### Decisions made while the user was away (2026-10-02 run)
 
-- 22:47 ET: "fully done" read as the two in-flight items above, not the whole open-ended
+- 22:47 ET: "fully done" read as the two in-flight items (the medina MT test, the skybox prune), not the whole open-ended
   harvest list (several items there are the user's calls: fov 90 re-shoot, rebuilds).
 - 00:45 ET: added a one-thread mk_medina build to the scope: the MT test left its compile
   root unlit (test_staticlight's fixture) and run 0's failure was unexplained.
+- 01:32 ET: did not run the ~1 h `--mohlight-props` build for the two skipping tests (left
+  for the next session) so the Mac could shut down as asked.
 
 The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer apply.
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-03 00:47 ET)
+## State (2026-10-03 01:33 ET, end of the unattended run; the Mac was shut down)
 
-**Running (no game window): `mohkit build maps/mk_medina -q preview --no-test`** (one-thread
-light, as its META says), log `local/medina_mt/build_1thread.log` (ends with `BUILD_EXIT`).
-Why: the multi-threaded light test is over (run 0 FAILED for an unknown reason after 436 s,
-run 1 crashed at 99% and Wine's debugger parked it 1 h 45; killed 00:43 ET; the fix, a runner
-that kills tools at Wine's "starting debugger", is pushed). This build checks that mk_medina
-builds at all with props held back (never done before) and restores the compile root
-`tests/test_staticlight.py` reads. It overwrites `dist/mk_medina.pk3` (copy of the old one:
-`local/medina_mt/mk_medina_dist_before.pk3`); nothing is installed. **When it ends:** if OK,
-re-run `tests/test_staticlight.py`; if FAILED, read the problems and record them (toolchain.md
-/ symptoms.md). Then harvest, push, summary at the top of this file, shut down.
+**Summary of the run (user asked 22:47 ET to shut down when done):** nothing is running; all
+pushed. Done 2026-10-02/03: queue C 1-8 (exposure --changed, checks-only --final,
+--keep-before, propcost CLI with stock models, --readme-image, kit.ladder / step_ladder /
+breakable, build --ladders with exit checks, tests/rooms); LOD curves capped below levels
+that draw shards (about 5 models a map; installed maps keep theirs until rebuilt); a dropped
+3D skybox's prop models pruned (de_cache 33 files); fov 80 vs 90 measured (~2%); Z split
+decided against. mk_medina: multi-threaded MOHlight still crashes with the props held back,
+so its `-threads 1` stays; the runner now kills a tool parked in Wine's crash debugger (that
+hung the test 1 h 45); a one-thread preview build is OK (light 2,505 s) and is in
+`dist/mk_medina.pk3` (the older one: `local/medina_mt/mk_medina_dist_before.pk3`; nothing
+installed). `tests/test_staticlight.py`: 9 ok, 2 skip (their fixture needs a
+`--mohlight-props` mk_medina build, ~1 h: testing.md).
 
-Next after that, in order: (1) the user's Summit corrections if any; (2) prune 3D-skybox prop
-models when the room falls back to the 2D sky: in `Converter._place_sky_room` (fallback
-branch, ~convert.py:2517) and the near-object drop (~:2451), call
-`staticmerge.prune(self.assets, dropped_models, remaining_models, read)` (it already prunes
-merged-away models; textures used only by them stay); de_cache drops 245 of 247 sky objects;
-(3) the rest of the harvest list below.
+Next, in order: (1) the user's Summit corrections if any; (2) the user's calls: rebuild the
+installed conversions for the LOD shard cap (sheet + fps first), fov 90 for CS:GO cameras
+(re-shoot every map); (3) restore test_staticlight's fixture (`--mohlight-props` mk_medina
+build, ~1 h); (4) the rest of the harvest list below.
 
 Session of 21:05-21:26 ET, queue C below (no Summit corrections from the user yet). Done:
 C.1 `exposure --changed`, C.2 checks-only `--final`, C.3 `--keep-before`, C.4 `mohkit

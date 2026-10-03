@@ -377,6 +377,10 @@ When a shot looks wrong and the data "checks out on paper", test what the game r
 `tests/test_staticlight.py` reads compiled BSPs from the build cache's compile roots
 (`dm_mk_medina`, ...): a build running in that root at the same time makes it fail with "BSP
 has no usable light grid" (the root holds the half-built BSP). Re-run it after the build.
+Two of its tests (`test_matches_mohlight_means`, `test_lightmap_field_beats_grid_on_medina`)
+need a root where MOHlight lit the props itself: after a default (props injected) mk_medina
+build they skip; `mohkit build maps/mk_medina -q preview --no-test --mohlight-props` (~1 h,
+one thread) restores it.
 
 - Compile and light times only compare on an otherwise idle machine: every stage runs with
   `-threads <cpu count>`, so concurrent builds slow each other about 2x (de_nuke's fastrad

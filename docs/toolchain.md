@@ -106,7 +106,9 @@ the props held back again (`-q preview`, 10 threads) MOHlight crashed at 99% of 
 (`Unhandled page fault on write access to E697EEE9 at address 7BF8F40B`). So mk_medina's
 geometry alone can crash multi-threaded MOHlight; its `-threads 1` override stays. (A first
 run of that test reported FAILED after 436 s for a reason its logs no longer show: the next
-run reused the compile root. Print `res.problems` in such loops.)
+run reused the compile root. Print `res.problems` in such loops.) What the override costs:
+the one-thread `-q preview` light of mk_medina took 2,505 s (2026-10-03), the 10-thread run
+that crashed got to 99% in ~5 min; the build itself is fine (OK, 107 props injected).
 
 ### Q3map 1.34 options (BSP stage)
 
