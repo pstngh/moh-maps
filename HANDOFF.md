@@ -6,14 +6,15 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-02 20:20 ET, end of session)
+## State (2026-10-02 21:45 ET)
 
-**Nothing is running; all pushed.** Done this session: mk_summit (Black Ops' Summit) built
-and **installed locally** (not on the VPS); every reusable helper of mk_summit, mk_medina and
-mk_village moved into `mohkit.kit` / `mohkit.site` (rule now in CLAUDE.md, guarded by
-`tests/test_maps_regenerate.py`); audit of `local/` scripts and harvest items, quick gaps
-fixed. Next: section C below (ordered queue), and the user's Summit corrections if they send
-any. Summit details: next section.
+**Nothing is running; all pushed.** Session of 21:05 ET: working through queue C below (the
+user sent no Summit corrections). Done: C.1 `exposure --changed`, C.2 checks-only `--final`,
+C.3 `--keep-before`, C.6 exposure in `report["final"]`; also `exposure.shot_files` skips the
+390 iCloud conflict copies (`<name> 2.png`) in local/csgo shot folders (left on disk; deleting
+them needs the user's OK). Earlier today: mk_summit built and **installed locally** (not on
+the VPS); reusable helpers moved into `mohkit.kit` / `mohkit.site`. Summit details: next
+section.
 
 ## mk_summit, Summit from CoD Black Ops (user, 2026-10-02 ~17:10 ET)
 
@@ -106,20 +107,13 @@ spawn-removal warning, validate checks (60-char shader names, `.shader` outside 
 stale docs (csgo-conversion.md, testing.md), wait-loop stale-"done" trap. **Still open, in
 order (all small unless noted):**
 
-1. `mohkit exposure --changed BEFORE AFTER [--ref REF] [-n K] [-o sheet]`: rank cameras by
-   pixel difference (local/csgo/cmp3.py) or by improvement toward the CS:GO reference
-   (compare.py), draw with `triple_sheet`, print the `against` summary. The user decides
-   installs from these sheets.
-2. `mohkit csgo <map> --final` alone rebuilds a draft first (overwrites the fastrad build) and
-   `--refresh-assets --final` skips the checks: add a checks-only path in `cmd_csgo`.
-3. `--keep-before TAG` / `convert.snapshot`: copy pk3, report.json, exposure.json,
-   statics.json, prop_light.npz and shots/ to `local/csgo/before/<name>_<tag>/` (three scripts
-   did it by hand, each differently).
+1-3, 6: done 2026-10-02 21:05-21:45 ET (`mohkit exposure --changed`, `mohkit csgo <map> --final`
+   without `-q` = checks only, `--keep-before TAG` / `convert.snapshot`, `report["final"]
+   ["exposure_ref"]`).
 4. `propcost` CLI (`python -m mohkit.propcost <pk3> <map>`): drawn prop vertices per camera,
    offline; replaces the lost scratchpad `cost.py`.
 5. README image builder (local/csgo/readme_img.py: first/middle/last reference camera, 480 px,
    q85 -> docs/images/csgo/de_<m>.jpg) as a mohkit command; mention in csgo-conversion.md.
-6. `--final` stores the `exposure --ref` numbers in `report["final"]` when references exist.
 7. (medium) Commit local/laddertest, spottest, debristest as `tests/rooms/` evidence (no Valve
    content) with a testing.md recipe; `kit.step_ladder` (reuse `Converter._ladder_steps`; bots
    can't use step ladders: idea, a `func_ladder` link per column, untested) and
