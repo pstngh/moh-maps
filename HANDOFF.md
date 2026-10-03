@@ -6,11 +6,11 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-02 21:26 ET)
+## State (2026-10-02 22:50 ET)
 
-**Nothing is running; all pushed. The user is playing MOHAA on this Mac (asked at 21:25 ET):
-no game-window steps (shots, bots, ladder probes, fps) until they say they're done.** Their
-own openmohaa process (connected to their server) is theirs: leave it alone.
+**Nothing is running; all pushed.** The user played 21:25-22:25 ET and said "done playing,
+continue": game runs are allowed again. Their own openmohaa process, when there is one, is
+theirs: leave it alone.
 
 Session of 21:05-21:26 ET, queue C below (no Summit corrections from the user yet). Done:
 C.1 `exposure --changed`, C.2 checks-only `--final`, C.3 `--keep-before`, C.4 `mohkit
@@ -114,18 +114,16 @@ spawn-removal warning, validate checks (60-char shader names, `.shader` outside 
 stale docs (csgo-conversion.md, testing.md), wait-loop stale-"done" trap. **Still open, in
 order (all small unless noted):**
 
-1-7: done 2026-10-02 21:05-21:26 ET (see State).
-8. `ladder_probe`: optional exit check (strafe off the top onto the platform, like
-   local/csgo/strafe_test.py).
+1-8: done 2026-10-02 (8, the ladder exit check, at 22:45 ET: `exit` in a ladder record,
+   tests/rooms/laddertest's scaffold tower).
 
 Harvest items still open (checked against the code 2026-10-02):
 - CS:GO named cameras at fov 80 vs CS:GO's references at 90: `fov=90` in
   `convert.named_cameras`, then re-shoot and re-fit exposures (changes every sheet).
-- Carver / `MapBuilder.box` split only X/Y at 512; the converter also splits Z (a 672-tall
-  strip had 65 vertices). Changes generated maps' bytes: `tests/test_maps_regenerate.py`
-  will fail until the maps are regenerated, re-shot and committed.
-- LOD self-check at build time: replay each SKD and drop its LOD when the drawn area passes
-  1.02x the full area at any level (the `test_lod` criterion).
+- Done 2026-10-02 22:50 ET: LOD self-check (`lod.safe_cutoff` caps a curve below any level
+  drawing over 1.10x a surface's area). The installed cs_dust2/cache/cbble/mirage/inferno
+  still carry ~5 such models each (far levels; not yet seen in a shot): a rebuild fixes them,
+  costing a little fps where the curves are capped. The user's call (sheet + fps first).
 - Fade cap scaled with prop size: done for `--props lean` only (`fade_size=8.0`), not
   balanced/stock.
 - mk_medina still forces `-threads 1` (`maps/mk_medina/build.py`); with props injected after
