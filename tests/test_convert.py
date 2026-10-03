@@ -380,6 +380,35 @@ def test_snapshot_keeps_build() -> None:
             config.REPO = saved
 
 
+
+def test_readme_image() -> None:
+    """``mohkit csgo <map> --readme-image``: first, middle and last camera with a CS:GO
+    reference, CS:GO | MOHAA, into docs/images/csgo/<map>.jpg; the shots kept beside."""
+    from PIL import Image
+
+    from mohkit import config
+    saved = config.REPO
+    with tempfile.TemporaryDirectory() as d:
+        try:
+            config.REPO = Path(d)
+            base = Path(d) / "local" / "csgo" / "cs_x"
+            for sub in ("csgo_ref", "shots"):
+                (base / sub).mkdir(parents=True)
+            for i in range(5):
+                Image.new("RGB", (64, 36), (50 * i, 0, 0)).save(base / "shots" / f"0{i}_c.png")
+                if i != 4:                                            # camera 04 has no reference
+                    Image.new("RGB", (64, 36), (0, 50 * i, 0)).save(base / "csgo_ref" / f"0{i}_c.jpg")
+            Image.new("RGB", (64, 36)).save(base / "shots" / "03_c 2.png")             # iCloud copy
+            logs = []
+            out = C.readme_image("de_x", log=logs.append)
+            assert out == Path(d) / "docs" / "images" / "csgo" / "de_x.jpg"
+            assert Image.open(out).size == (960, 3 * (270 + 18)) and "00_c, 01_c, 03_c" in logs[0], logs
+            kept = sorted(p.name for p in (Path(d) / "local" / "csgo" / "readme_shots" / "cs_x").iterdir())
+            assert kept == [f"0{i}_c.png" for i in range(5)], kept
+        finally:
+            config.REPO = saved
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

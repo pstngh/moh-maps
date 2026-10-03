@@ -3251,6 +3251,42 @@ def snapshot(map_name: str, tag: str, name: Optional[str] = None, log=print) -> 
     return dst
 
 
+def readme_image(map_name: str, name: Optional[str] = None, width: int = 480, log=print) -> Path:
+    """The README's CS:GO | MOHAA picture of a conversion: the first, middle and last camera
+    that has a CS:GO reference shot, ``width`` px per tile, JPEG q85 in
+    ``docs/images/csgo/<map>.jpg``; the shots it shows are kept in
+    ``local/csgo/readme_shots/<name>/`` (replacing the last copy) so the picture can be
+    traced back."""
+    import shutil
+    import tempfile
+
+    from PIL import Image
+
+    from .. import config
+    from .. import exposure as X
+    name = local_name(map_name, name)
+    base = config.REPO / "local" / "csgo" / name
+    ref, shots = X.shot_files(base / "csgo_ref"), X.shot_files(base / "shots")
+    cams = sorted(k for k in shots if k in ref)
+    if not cams:
+        raise SystemExit(f"no camera has both a shot and a CS:GO reference in {base} (mohkit csgo-ref)")
+    pick = [cams[0], cams[(len(cams) - 1) // 2], cams[-1]]
+    out = config.REPO / "docs" / "images" / "csgo" / f"{Path(map_name).stem}.jpg"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory() as d:
+        sheet = X.triple_sheet([("CS:GO", base / "csgo_ref"), ("MOHAA", base / "shots")], pick,
+                               Path(d) / "sheet.png", width=width)
+        Image.open(sheet).convert("RGB").save(out, "JPEG", quality=85, optimize=True)
+    snap = config.REPO / "local" / "csgo" / "readme_shots" / name
+    if snap.exists():
+        shutil.rmtree(snap)
+    snap.mkdir(parents=True)
+    for f in shots.values():
+        shutil.copy2(f, snap / f.name)
+    log(f"{out}: {', '.join(pick)} ({out.stat().st_size // 1024} KB)")
+    return out
+
+
 def _local_cameras(map_name: str, name: Optional[str] = None, scale: float = 1.0) -> tuple[str, Path, list]:
     """(name, ``local/csgo/<name>``, cameras) of the last conversion of ``map_name``."""
     import json

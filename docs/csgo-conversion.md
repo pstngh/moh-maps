@@ -7,6 +7,7 @@ python -m mohkit csgo de_dust2 --props-only     # re-place runtime props in the 
 python -m mohkit csgo de_dust2 -q fastrad --final   # + 8 bots for 90 s, every ladder probed, brightness vs csgo-ref (report.json "final")
 python -m mohkit csgo de_dust2 --final          # only those checks, on the packaged map (no -q: nothing is rebuilt)
 python -m mohkit csgo de_dust2 --keep-before pre_x -q fastrad   # keep the current build in local/csgo/before/cs_dust2_pre_x/ first
+python -m mohkit csgo de_dust2 --readme-image  # README picture: CS:GO | MOHAA at 3 cameras -> docs/images/csgo/de_dust2.jpg
 python -m mohkit ab de_dust2 --a INSTALLED.pk3 --b local/csgo/cs_dust2/cs_dust2.pk3 --perf 2000   # before installing
 ```
 
@@ -51,7 +52,10 @@ drops work); the named-camera sheet has no holes, leaks, black or missing textur
 sit, light and collide where CS:GO's do; sky, sun and fog read like CS:GO; decals and
 signage are there; 8 bots for 90 s get kills; the brightness error against CS:GO's own shots
 (`csgo-ref`, `exposure --ref`) is low (the 2026-10-01 finals: 4-11 of 255) after
-`--fit-exposure`; fps is measured. When a whole class of converted things looks wrong the
+`--fit-exposure`; fps is measured. Once installed, refresh the repo README's picture
+(`--readme-image`: first, middle and last referenced camera, CS:GO | MOHAA, into
+`docs/images/csgo/<map>.jpg`; the shots shown are kept in `local/csgo/readme_shots/<name>/`)
+and its fps row. When a whole class of converted things looks wrong the
 same way (every interior dark), check the conversion's sign and axis conventions against the
 Source tool's code with a one-entity test before tuning intensities: three light-count and
 intensity fixes went in before the `light_spot` pitch sign was found. Order: `-q unlit` first (minutes: geometry, props, doors,
