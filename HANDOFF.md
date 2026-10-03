@@ -145,6 +145,3 @@ Harvest items still open (checked against the code 2026-10-02):
   it one shot maps too?"): proposal was to measure converted maps' layout numbers into
   design.md targets, use converted areas as recreate-from-screenshot benchmarks scored by
   `mohkit compare`, and turn recurring structures into `kit` prefabs.
-- Tell the user once (never delivered): accepting the Xcode license (`sudo xcodebuild
-  -license`) restores system git/clang; moving the repo out of iCloud-synced `~/Documents`
-  (e.g. `~/Developer/moh-maps`) would avoid file-provider surprises.
