@@ -2,6 +2,19 @@
 
 ## Session rules
 
+**Unattended run in progress (user, 2026-10-02 22:47 ET: "can you shutdown the computer when
+ur fully done").** Scope (decided by the agent, logged below): (1) the mk_medina MT light test
+and its follow-up, (2) prune 3D-skybox prop models on the 2D-sky fallback, then harvest,
+update this file, push, and shut the Mac down (`osascript -e 'tell application "System
+Events" to shut down'`; access checked at 22:48 ET). No questions; no 75% pause; push after
+each verified step; nothing irreversible; no installs. `caffeinate` (pid 44950, 3 h) keeps it
+awake. Delete this paragraph when the run ends.
+
+### Decisions made while the user was away (2026-10-02 run)
+
+- 22:47 ET: "fully done" read as the two in-flight items above, not the whole open-ended
+  harvest list (several items there are the user's calls: fov 90 re-shoot, rebuilds).
+
 The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer apply.
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
