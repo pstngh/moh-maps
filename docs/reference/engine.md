@@ -445,7 +445,11 @@ is drawn on, so every vertex it uses must keep following that position. Before 2
 `mohkit.lod` pointed vertices that had lost their last triangle at vertex 0, and such
 triangles became shards across the model at some distances (de_nuke's grey slanted panels,
 every conversion; `tests/test_lod.py` test_no_shards_from_seams_or_slivers). A surface with
-`collapseIndex[2] < cutoff` is not drawn at all (`:1512`). The curve comes from
+`collapseIndex[2] < cutoff` is not drawn at all (`:1512`). Since the kept prefix is
+`count(collapseIndex >= cutoff)`, vertices sharing one `collapseIndex` (seam copies of one
+position) always go together: the states between them are never drawn, so an offline replay
+must step only where the index changes (`lod.drawn_levels`; counting the in-between states
+flagged 429 false shards in six conversions). The curve comes from
 `<skd path up to the first "skd">lod` (`GetLODFile`, `tiki/tiki_skel.cpp:751`, `:778`): a
 `lodControl_t` (minMetric, maxMetric, five `(pos, val)` points, four constants), linear in
 `m'` with `pos` 0 at minMetric and 1 at maxMetric. The file is copied for its own length

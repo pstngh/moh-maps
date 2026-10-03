@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from mohkit.source import convert as C  # noqa: E402
 from mohkit.source import modelconv as mc  # noqa: E402
+from mohkit.mapfile import Entity as MEntity  # noqa: E402
 
 
 def test_named_cameras() -> None:
@@ -407,6 +408,24 @@ def test_readme_image() -> None:
             assert kept == [f"0{i}_c.png" for i in range(5)], kept
         finally:
             config.REPO = saved
+
+
+
+def test_prune_dropped_sky_models() -> None:
+    """When a 3D skybox room is dropped, its props' models leave the pk3 unless another
+    static, a skin sharing the SKD, or an entity still uses them."""
+    def tik(skd):
+        return f"TIKI\nsetup\n{{\n\tscale 1\n\tpath models/csgo/x\n\tskelmodel {skd}\n}}\n".encode()
+    assets = {"models/csgo/x/a.tik": tik("a.skd"), "models/csgo/x/a.skd": b"A",
+              "models/csgo/x/b.tik": tik("shared.skd"), "models/csgo/x/c.tik": tik("shared.skd"),
+              "models/csgo/x/shared.skd": b"S", "models/csgo/x/d.tik": tik("d.skd"), "models/csgo/x/d.skd": b"D",
+              "textures/csgo/x/a.jpg": b"T"}
+    st = lambda mk: (mk, (0, 0, 0), (0, 0, 0), 1.0)  # noqa: E731
+    before = [st("csgo/x/a.tik"), st("csgo/x/b.tik"), st("csgo/x/c.tik"), st("csgo/x/d.tik")]
+    n = C.prune_dropped_models(assets, before, [st("csgo/x/c.tik")], [MEntity({"model": "csgo/x/d.tik"})])
+    assert n == 3 and sorted(assets) == ["models/csgo/x/c.tik", "models/csgo/x/d.skd", "models/csgo/x/d.tik",
+                                         "models/csgo/x/shared.skd", "textures/csgo/x/a.jpg"], (n, sorted(assets))
+    assert C.prune_dropped_models(assets, [st("csgo/x/c.tik")], [st("csgo/x/c.tik")]) == 0
 
 
 if __name__ == "__main__":

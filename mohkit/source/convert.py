@@ -84,6 +84,27 @@ SURFACEPROP = [
 from ..kit import DEBRIS_GLASS, DEBRIS_METAL, DEBRIS_WOOD, SHARED_PATHS, debris_tiki  # noqa: E402
 
 
+def prune_dropped_models(assets: dict, before: Sequence, after: Sequence, entities: Sequence = ()) -> int:
+    """Delete from ``assets`` the TIKI/SKD/SKC files of models some statics in ``before`` used
+    and none in ``after`` (nor an entity's ``model``) uses any more: a 3D skybox's props when
+    its room is dropped (de_cache: 245 of 247 sky objects). Shared SKDs (skins) stay; textures
+    stay (``staticmerge.prune``). Returns the number of files removed."""
+    from .. import staticmerge
+
+    def key(mk: str) -> str:
+        return mk[len("models/"):] if mk.startswith("models/") else mk
+    used = {key(st[0]) for st in after} | {key(e.get("model", "")) for e in entities
+                                          if str(e.get("model", "")).endswith(".tik")}
+    gone = {key(st[0]) for st in before} - used
+    if not gone:
+        return 0
+
+    def read(path: str):
+        data = assets.get(path)
+        return data.encode("latin-1") if isinstance(data, str) else data
+    return staticmerge.prune(assets, gone, used, read)
+
+
 def debris_type(surfaceprops) -> int:
     """``debristype`` for a breakable made of these Source ``$surfaceprop`` values."""
     sp = " ".join(x.lower() for x in surfaceprops if x)
@@ -2455,9 +2476,12 @@ class Converter:
                 sky_statics.add(len(statics))
             statics.append(st)
             lights.append(pl)
+        pruned = prune_dropped_models(self.assets, self.statics, statics, m.entities)
         self.statics, self.prop_light, self._sky_statics = statics, lights, sky_statics
         self._sky_prims = keep
         self.report["sky_near_dropped"] = [dropped, objects]
+        if pruned:
+            self.report["sky_models_pruned"] = pruned
         nothing_left = dropped > 0.75 * objects
         if nothing_left:
             self.report["warnings"].append(f"3D skybox: {dropped} of {objects} objects nearer than {near:.0f} to its eye; "
@@ -2514,7 +2538,11 @@ class Converter:
                     for f in prim.faces:
                         if f.shader == "common/skyportal":
                             f.shader = self.sky_shader
-            self.statics = [st for k, st in enumerate(self.statics) if k not in self._sky_statics]
+            kept = [st for k, st in enumerate(self.statics) if k not in self._sky_statics]
+            pruned = prune_dropped_models(self.assets, self.statics, kept, m.entities)
+            if pruned:
+                self.report["sky_models_pruned"] = self.report.get("sky_models_pruned", 0) + pruned
+            self.statics = kept
             self.prop_light = [pl for k, pl in enumerate(self.prop_light) if k not in self._sky_statics]
             self._sky_prims = []
             return

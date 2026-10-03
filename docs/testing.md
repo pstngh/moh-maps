@@ -374,6 +374,10 @@ When a shot looks wrong and the data "checks out on paper", test what the game r
 
 ## Long builds, background jobs and the shell
 
+`tests/test_staticlight.py` reads compiled BSPs from the build cache's compile roots
+(`dm_mk_medina`, ...): a build running in that root at the same time makes it fail with "BSP
+has no usable light grid" (the root holds the half-built BSP). Re-run it after the build.
+
 - Compile and light times only compare on an otherwise idle machine: every stage runs with
   `-threads <cpu count>`, so concurrent builds slow each other about 2x (de_nuke's fastrad
   light 2,389 s alone, 4,550 s with three other builds; a texlit one 3,172 s vs 6,403 s).

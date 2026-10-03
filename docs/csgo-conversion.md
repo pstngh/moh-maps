@@ -587,8 +587,9 @@ CS:GO tree under `~/Documents/Codex/2026-09-21/https-github-com-swagsoftware-kis
   boxSize = zFar / 1.75) and the missing sky_camera fog (143 172 186). Open.
 - The other six 3D skyboxes are lost (one fixed eye can't show them). Untested idea: shoot
   CS:GO's skybox as a cubemap (six square 90-degree `csgo-ref` shots from the skybox eye) and
-  use it as the 2D sky. When a room falls back to the 2D sky its props' models still ship
-  in the pk3 (de_cache: bloat only).
+  use it as the 2D sky. When a room falls back to the 2D sky its props' TIKI/SKD/SKC files
+  are pruned (`prune_dropped_models`, report `sky_models_pruned`; de_cache: 33 files, since
+  2026-10-02); their textures still ship (bloat only).
 - Door handles and other relief of door and vent models are lost (slabs). Vents break
   (`func_window`, metal debris) instead of swinging open.
 - Detail sprites (grass) are dropped.
