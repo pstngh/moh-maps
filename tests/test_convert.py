@@ -290,6 +290,64 @@ def test_debris_type_by_surfaceprop() -> None:
     assert "metal_section" in C.debris_tiki(C.DEBRIS_METAL) and "crate-jib" in C.debris_tiki(C.DEBRIS_WOOD)
 
 
+
+def test_csgo_final_dispatch() -> None:
+    """``mohkit csgo <map> --final`` alone checks the packaged map (it rebuilt a draft over the
+    fastrad build before); with -q, --resume or --refresh-assets the checks follow the build."""
+    from mohkit import __main__ as M
+    calls = []
+    saved = {k: getattr(C, k) for k in ("build_local", "resume_local", "refresh_assets", "final_checks")}
+    try:
+        C.build_local = lambda m, n, quality, **kw: calls.append(("build", quality)) or {"compile_ok": True}
+        C.resume_local = lambda *a, **kw: calls.append(("resume",)) or {"pk3": "x"}
+        C.refresh_assets = lambda m, n, quality, **kw: calls.append(("refresh", quality)) or {"pk3": "x"}
+        C.final_checks = lambda m, n: calls.append(("final",)) or {}
+        for argv, want in ((["--final"], [("final",)]),
+                           (["-q", "fastrad", "--final"], [("build", "fastrad"), ("final",)]),
+                           ([], [("build", "draft")]),
+                           (["--refresh-assets", "--final"], [("refresh", "draft"), ("final",)]),
+                           (["--resume", "--final"], [("resume",), ("final",)])):
+            calls.clear()
+            assert M.main(["csgo", "de_x", *argv]) == 0
+            assert calls == want, (argv, calls)
+    finally:
+        for k, v in saved.items():
+            setattr(C, k, v)
+
+
+def test_final_checks_store_exposure() -> None:
+    """``final_checks`` keeps the ``exposure --ref`` numbers next to bots and ladders."""
+    import json
+
+    from PIL import Image
+
+    from mohkit import game
+    saved = (C._local_cameras, game.run, game.ladder_probe, game.ladders_for_probe)
+
+    class Run:
+        kills = 30
+
+        def summary(self):
+            return "30 kills"
+    with tempfile.TemporaryDirectory() as d:
+        out = Path(d)
+        (out / "cs_x.pk3").write_bytes(b"")
+        for sub, grey in (("csgo_ref", 100), ("shots", 90)):
+            (out / sub).mkdir()
+            for i in range(3):
+                Image.new("RGB", (64, 36), (grey + i, grey + i, grey + i)).save(out / sub / f"0{i}_cam.png")
+        try:
+            C._local_cameras = lambda m, n=None, scale=1.0: ("cs_x", out, [])
+            game.run = lambda *a, **kw: Run()
+            game.ladder_probe = lambda *a, **kw: []
+            game.ladders_for_probe = lambda bsp: []
+            res = C.final_checks("de_x", log=lambda *a: None)
+        finally:
+            C._local_cameras, game.run, game.ladder_probe, game.ladders_for_probe = saved
+        ex = json.loads((out / "report.json").read_text())["final"]["exposure_ref"]
+        assert ex == res["exposure_ref"] and ex["cameras"] == 3 and abs(ex["mae"] - 10) < 0.6, ex
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

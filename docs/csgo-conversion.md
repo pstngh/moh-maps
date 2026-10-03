@@ -4,7 +4,8 @@
 python -m mohkit csgo de_dust2                  # -> local/csgo/cs_dust2/{cs_dust2.map, assets/, cs_dust2.pk3, shots}
 python -m mohkit csgo de_inferno --name cs_inferno -q normal
 python -m mohkit csgo de_dust2 --props-only     # re-place runtime props in the last compile (~1 min)
-python -m mohkit csgo de_dust2 -q fastrad --final   # + 8 bots for 90 s and every ladder probed (report.json "final")
+python -m mohkit csgo de_dust2 -q fastrad --final   # + 8 bots for 90 s, every ladder probed, brightness vs csgo-ref (report.json "final")
+python -m mohkit csgo de_dust2 --final          # only those checks, on the packaged map (no -q: nothing is rebuilt)
 python -m mohkit ab de_dust2 --a INSTALLED.pk3 --b local/csgo/cs_dust2/cs_dust2.pk3 --perf 2000   # before installing
 ```
 
@@ -64,8 +65,10 @@ user agreed: batch scripts must never install. The steps are mohkit commands:
 --rounds 2 --cvar r_lodscale=0.45 --cvar r_lodcap=0.35` (same cameras, A | B images, interleaved
 fps at the user's settings), and `mohkit exposure --changed local/csgo/before/<name>/shots
 local/csgo/<name>/shots --ref local/csgo/<name>/csgo_ref` (the CS:GO | before | after sheet of
-the most-changed cameras, with numbers; testing.md "Measuring exposure"). Not yet a command
-(HANDOFF queue): a before-snapshot flag, and `--final` without rebuilding.
+the most-changed cameras, with numbers; testing.md "Measuring exposure"). `--final` without
+`-q`, `--resume` or `--refresh-assets` checks the packaged map without rebuilding (before
+2026-10-02 it built a draft over the fastrad build first). Not yet a command (HANDOFF
+queue): a before-snapshot flag.
 
 To check a converter change without compiling, run the stages involved in-process:
 `cv = Converter(bsp, csgo_dir, Options(name="x", props=False)); cv.brushes(); cv.ladders()`

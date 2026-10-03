@@ -3374,13 +3374,17 @@ def final_checks(map_name: str, name: Optional[str] = None, bots: int = 8, secon
                  log=print) -> dict:
     """The play checks of a finished conversion (csgo-conversion.md "When a conversion is
     done"), on ``local/csgo/<name>/<name>.pk3``: ``bots`` bots for ``seconds`` (kills), then
-    every ladder climbed by ``game.ladder_probe``. Stored as ``report.json["final"]``.
-    Never installs."""
+    every ladder climbed by ``game.ladder_probe``, and, when CS:GO's own shots exist
+    (``mohkit csgo-ref``), the build's shots against them (``exposure.against``). Stored as
+    ``report.json["final"]``. Never installs."""
     import json
 
+    from .. import exposure as X
     from .. import game
     name, out, _ = _local_cameras(map_name, name)
     pk3, bsp = out / f"{name}.pk3", out / f"{name}.bsp"
+    if not pk3.is_file():
+        raise SystemExit(f"no {pk3}: build first (mohkit csgo {map_name} -q fastrad --final)")
     run = game.run([pk3], f"dm/{name}", (), bots=bots, match_seconds=seconds, run_name=f"{name}_bots",
                    timeout=300 + seconds)
     log(run.summary())
@@ -3390,6 +3394,12 @@ def final_checks(map_name: str, name: Optional[str] = None, bots: int = 8, secon
     res = {"kills": run.kills, "bots": bots, "seconds": seconds, "bot_run": run.summary().splitlines()[0],
            "ladders": len(lads), "ladders_ok": sum(1 for r in lads if r["ok"]),
            "ladders_failed": [[r["origin"], r["climbed"]] for r in lads if not r["ok"]]}
+    ref, shots = out / "csgo_ref", out / "shots"
+    if ref.is_dir() and shots.is_dir():
+        (ex,), text = X.against(ref, [shots])
+        if ex["cameras"]:
+            res["exposure_ref"] = {k: ex[k] for k in ("cameras", "mean", "ref_mean", "mae", "corr")}
+            log(text.splitlines()[-1])
     rp = out / "report.json"
     rep = json.loads(rp.read_text()) if rp.is_file() else {}
     rep["final"] = res

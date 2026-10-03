@@ -20,6 +20,7 @@
     python -m mohkit csgo de_dust2 --shoot                         re-shoot the packaged map (sheets, shots, exposure)
     python -m mohkit csgo de_dust2 --fit-exposure                  match CS:GO's brightness (needs csgo-ref shots)
     python -m mohkit csgo de_dust2 -q fastrad --final              build, then 8 bots and the ladder probe (no install)
+    python -m mohkit csgo de_dust2 --final                         only the checks, on the packaged map
     python -m mohkit exposure local/csgo/*/shots [--by-map] [--stock] [--mask shot.png]   brightness check
     python -m mohkit exposure --changed BEFORE AFTER [--ref REF] [-n 6] [--rank ref] [-o x.png]   what a rebuild changed
     python -m mohkit csgo-ref de_dust2 [--name cs_dust2]        CS:GO's own screenshots from the same cameras
@@ -333,6 +334,10 @@ def cmd_csgo(a) -> int:
         from .source.convert import fit_exposure
         fit_exposure(a.map, a.name)
         return 0
+    builds = a.quality or a.resume or a.refresh_assets or a.props_only
+    if a.final and not builds:
+        return _final(a)   # checks only: the packaged map stays as it is
+    a.quality = a.quality or "draft"
     if a.resume:
         rep = resume_local(a.map, a.name, test=not a.no_test, exposure=a.exposure, lod=not a.no_lod)
         return _final(a) if rep.get("pk3") else 1
@@ -341,7 +346,7 @@ def cmd_csgo(a) -> int:
         rep = refresh_assets(a.map, a.name, quality=a.quality, test=not a.no_test, scale=a.scale,
                              detail_all=not a.structural, max_texture=a.max_texture,
                              lighting="mohlight" if a.mohlight else "csgo")
-        return 0 if rep.get("pk3") else 1
+        return _final(a) if rep.get("pk3") else 1
     extra = {"props_static_vertices": a.static_verts} if a.static_verts else {}
     if a.lightmap_density:
         extra["lightmap_density"] = a.lightmap_density
@@ -507,8 +512,8 @@ def main(argv=None) -> int:
     s = sub.add_parser("csgo", help="convert a CS:GO map (output in local/, never commit it)")
     s.add_argument("map", help="map name in csgo/maps (de_dust2) or a .bsp path")
     s.add_argument("--name", help="MOHAA map name (default cs_<name>)")
-    s.add_argument("-q", "--quality", default="draft", choices=["unlit", "draft", "fastrad", "preview", "normal", "final"],
-                   help="unlit: BSP + fast VIS only, for geometry/prop/ladder checks in minutes")
+    s.add_argument("-q", "--quality", choices=["unlit", "draft", "fastrad", "preview", "normal", "final"],
+                   help="default draft; unlit: BSP + fast VIS only, for geometry/prop/ladder checks in minutes")
     s.add_argument("--scale", type=float, default=1.0)
     s.add_argument("--max-texture", type=int, default=512)
     s.add_argument("--structural", action="store_true", help="keep Source world brushes structural (better VIS, may overflow)")
@@ -525,7 +530,9 @@ def main(argv=None) -> int:
                    help="only inject props, package and test what the last build left (after redoing a stage by hand)")
     s.add_argument("--no-test", action="store_true")
     s.add_argument("--final", action="store_true",
-                   help="after the build: 8 bots for 90 s and every ladder probed (report.json 'final'); never installs")
+                   help="8 bots for 90 s, every ladder probed and the brightness against csgo-ref (report.json "
+                        "'final'); never installs. After the build when one is asked for (-q, --resume, "
+                        "--refresh-assets), else on the packaged map alone")
     s.add_argument("--no-lod", action="store_true", help="with --resume: props without progressive LOD (A/B tests)")
     s.add_argument("--shoot", action="store_true", help="only re-shoot the packaged map (contact sheets, shots, exposure)")
     s.add_argument("--exposure", type=float, help="with --resume: tone-map CS:GO's light with this exposure")
