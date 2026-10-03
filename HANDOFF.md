@@ -6,15 +6,22 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
-## State (2026-10-02 21:45 ET)
+## State (2026-10-02 21:26 ET)
 
-**Nothing is running; all pushed.** Session of 21:05 ET: working through queue C below (the
-user sent no Summit corrections). Done: C.1 `exposure --changed`, C.2 checks-only `--final`,
-C.3 `--keep-before`, C.6 exposure in `report["final"]`; also `exposure.shot_files` skips the
-390 iCloud conflict copies (`<name> 2.png`) in local/csgo shot folders (left on disk; deleting
-them needs the user's OK). Earlier today: mk_summit built and **installed locally** (not on
-the VPS); reusable helpers moved into `mohkit.kit` / `mohkit.site`. Summit details: next
-section.
+**Nothing is running; all pushed. The user is playing MOHAA on this Mac (asked at 21:25 ET):
+no game-window steps (shots, bots, ladder probes, fps) until they say they're done.** Their
+own openmohaa process (connected to their server) is theirs: leave it alone.
+
+Session of 21:05-21:26 ET, queue C below (no Summit corrections from the user yet). Done:
+C.1 `exposure --changed`, C.2 checks-only `--final`, C.3 `--keep-before`, C.4 `mohkit
+propcost` (stock models now read from the retail paks; `lod.engine_table` builds LOD tables as
+`GetLODFile` does), C.5 `--readme-image`, C.6 exposure in `report["final"]`, C.7 `kit.ladder`,
+`kit.step_ladder`, `kit.breakable`, `mohkit build --ladders`, `tests/rooms/` (laddertest
+probed in game: func_ladder 170, three step columns 162 each onto a 160 ledge). Also
+`exposure.shot_files` skips the 390 iCloud conflict copies (`<name> 2.png`) in local/csgo shot
+folders (left on disk; deleting them needs the user's OK). Earlier today: mk_summit built and
+**installed locally** (not on the VPS); reusable helpers moved into `mohkit.kit` /
+`mohkit.site`. Summit details: next section.
 
 ## mk_summit, Summit from CoD Black Ops (user, 2026-10-02 ~17:10 ET)
 
@@ -107,17 +114,7 @@ spawn-removal warning, validate checks (60-char shader names, `.shader` outside 
 stale docs (csgo-conversion.md, testing.md), wait-loop stale-"done" trap. **Still open, in
 order (all small unless noted):**
 
-1-3, 6: done 2026-10-02 21:05-21:45 ET (`mohkit exposure --changed`, `mohkit csgo <map> --final`
-   without `-q` = checks only, `--keep-before TAG` / `convert.snapshot`, `report["final"]
-   ["exposure_ref"]`).
-4. `propcost` CLI (`python -m mohkit.propcost <pk3> <map>`): drawn prop vertices per camera,
-   offline; replaces the lost scratchpad `cost.py`.
-5. README image builder (local/csgo/readme_img.py: first/middle/last reference camera, 480 px,
-   q85 -> docs/images/csgo/de_<m>.jpg) as a mohkit command; mention in csgo-conversion.md.
-7. (medium) Commit local/laddertest, spottest, debristest as `tests/rooms/` evidence (no Valve
-   content) with a testing.md recipe; `kit.step_ladder` (reuse `Converter._ladder_steps`; bots
-   can't use step ladders: idea, a `func_ladder` link per column, untested) and
-   `kit.breakable(..., debris=)` reusing `convert.debris_tiki`.
+1-7: done 2026-10-02 21:05-21:26 ET (see State).
 8. `ladder_probe`: optional exit check (strafe off the top onto the platform, like
    local/csgo/strafe_test.py).
 
