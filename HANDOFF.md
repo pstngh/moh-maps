@@ -21,9 +21,13 @@ update this file, commit and push, then stop and give the user the one-line hand
 maps (`maps/<name>/build.py`: Carver, kit, site, stock MOHAA textures and props), using the
 CS:GO data only as reference (layout, heights, sightlines, look), so they are light and run
 at high fps instead of being straight conversions. The user will **not work on this Mac any
-more**: the next session is on a new machine, so anything below that points at `local/` or
-the build cache may be missing there (the user was told what to copy; see "Moving machines"
-in docs/csgo-conversion.md). Conversion follow-ups (rebuild for the LOD shard cap, fov 90
+more**: the next session is on a new **Linux** machine (user, 2026-10-04), so anything below
+that points at `local/`, the build cache, CrossOver or `~/Documents/moh-toolchain` is missing
+there. Start with `python -m mohkit doctor` / `setup` (the EA tools run under plain Wine on
+Linux; OpenMoHAA has Linux builds); CLAUDE.md's Mac-only notes (CrossOver, `gitc.py`, the
+Xcode-blocked git) don't apply. The user's USB stick `MOHMAPS` (exFAT) holds the CS:GO
+install, the csgo_ref shots, the conversion pk3s, the Summit refs, the Rats workshop map and
+the old Mac's Claude memory notes; its README.txt says where each goes. Conversion follow-ups (rebuild for the LOD shard cap, fov 90
 re-shoot, `--mohlight-props` fixture build) are dropped unless the user revives them.
 
 ## State (2026-10-03 01:33 ET, end of the unattended run; the Mac was shut down)
