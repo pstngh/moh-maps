@@ -2,6 +2,12 @@
 
 Sources and how they are cited:
 - **Engine source.** Paths are relative to `openmohaa-src/code/`, e.g. `fgame/bg_public.h:39`.
+  Line numbers are for the snapshot taken 2026-09-30: OpenMoHAA master just after 0.82.1 (its
+  CHANGELOG's newest release); the `entities.def` generated from it the same day names commit
+  `a2f340195975f4f042e28a60b62561dd9a0b2700`, most likely the same tree. A newer checkout
+  shifts the lines: fetch that commit
+  (`https://github.com/openmohaa/openmohaa/archive/a2f340195975f4f042e28a60b62561dd9a0b2700.tar.gz`)
+  or re-find a cited function by name.
 - **Retail data.** Cited as `PakN.pk3:path`; the paks are in `~/Documents/Games/moh/main/`.
 - **EA material.**
   - Original QUAKED entity defs: `entdefs.pk3:code/X.cpp`, i.e. `MOHTools/entdefs.pk3`.
