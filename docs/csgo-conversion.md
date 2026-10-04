@@ -1,5 +1,17 @@
 # Converting CS:GO maps
 
+> **Status 2026-10-04:** conversions are stopped (the user's call); the CS:GO maps are being
+> recreated from scratch as authored maps instead. This page stays as the record of what the
+> converter does and what was measured. **Moving machines:** none of the CS:GO data is in git
+> (Valve content). What a from-scratch recreation needs from the old machine: the CS:GO
+> install (the native macOS client may not be downloadable again), or at least per map
+> `csgo/maps/<map>.bsp`, `<map>_cameras.txt`, `<map>.nav` and
+> `csgo/resource/overviews/<map>.txt` + `<map>_radar.dds` (the radar with its `pos_x`,
+> `pos_y`, `scale`: an exact-scale underlay, like Summit's minimap); the reference shots
+> `local/csgo/<name>/csgo_ref/` (re-shooting needs the CS:GO client); the installed conversion
+> pk3s as fps and look baselines. Build folders, `before/` snapshots and the LOD cache are
+> conversion-only.
+
 ```sh
 python -m mohkit csgo de_dust2                  # -> local/csgo/cs_dust2/{cs_dust2.map, assets/, cs_dust2.pk3, shots}
 python -m mohkit csgo de_inferno --name cs_inferno -q normal

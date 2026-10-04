@@ -15,6 +15,17 @@ The overnight run (2026-10-01, until 06:00 ET) is over, and its rules no longer 
 CLAUDE.md's rules hold again, including **pause at 75% context**: finish the step,
 update this file, commit and push, then stop and give the user the one-line handoff.
 
+## Direction (user, 2026-10-04)
+
+**CS:GO conversions stop.** Next: recreate the CS:GO maps **from scratch** as authored mohkit
+maps (`maps/<name>/build.py`: Carver, kit, site, stock MOHAA textures and props), using the
+CS:GO data only as reference (layout, heights, sightlines, look), so they are light and run
+at high fps instead of being straight conversions. The user will **not work on this Mac any
+more**: the next session is on a new machine, so anything below that points at `local/` or
+the build cache may be missing there (the user was told what to copy; see "Moving machines"
+in docs/csgo-conversion.md). Conversion follow-ups (rebuild for the LOD shard cap, fov 90
+re-shoot, `--mohlight-props` fixture build) are dropped unless the user revives them.
+
 ## State (2026-10-03 01:33 ET, end of the unattended run; the Mac was shut down)
 
 **Summary of the run (user asked 22:47 ET to shut down when done):** nothing is running; all
@@ -30,10 +41,9 @@ hung the test 1 h 45); a one-thread preview build is OK (light 2,505 s) and is i
 installed). `tests/test_staticlight.py`: 9 ok, 2 skip (their fixture needs a
 `--mohlight-props` mk_medina build, ~1 h: testing.md).
 
-Next, in order: (1) the user's Summit corrections if any; (2) the user's calls: rebuild the
-installed conversions for the LOD shard cap (sheet + fps first), fov 90 for CS:GO cameras
-(re-shoot every map); (3) restore test_staticlight's fixture (`--mohlight-props` mk_medina
-build, ~1 h); (4) the rest of the harvest list below.
+Next, in order: (1) the user's from-scratch CS:GO recreations (see Direction) when they ask;
+(2) the user's Summit corrections if any; (3) the non-conversion items of the harvest list
+below.
 
 Session of 21:05-21:26 ET, queue C below (no Summit corrections from the user yet). Done:
 C.1 `exposure --changed`, C.2 checks-only `--final`, C.3 `--keep-before`, C.4 `mohkit
