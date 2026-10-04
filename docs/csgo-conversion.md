@@ -10,7 +10,10 @@
 > `pos_y`, `scale`: an exact-scale underlay, like Summit's minimap); the reference shots
 > `local/csgo/<name>/csgo_ref/` (re-shooting needs the CS:GO client); the installed conversion
 > pk3s as fps and look baselines. Build folders, `before/` snapshots and the LOD cache are
-> conversion-only.
+> conversion-only. Copying off a Mac (2026-10-04, to the USB stick `MOHMAPS`): files under
+> `~/Documents` can be iCloud placeholders (`find -flags +dataless`; `brctl download` before,
+> `brctl evict` after); an NTFS stick mounts read-only; exFAT gets a `._` file per copied file
+> (2,808), and one `find -delete` pass on exFAT missed 105 of them; `rsync -rt` skips symlinks.
 
 ```sh
 python -m mohkit csgo de_dust2                  # -> local/csgo/cs_dust2/{cs_dust2.map, assets/, cs_dust2.pk3, shots}
